@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Le e-invoicing | E-Invoicing Academy</title>
+    <link rel="icon" href="./assets/favicon-Fluxym-V2.png" sizes="32x32" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/pages.css">
+</head>
+<body>
+
+    <nav id="main-nav"></nav>
+
+    <header class="page-hero">
+        <div class="page-hero-content">
+            <div class="breadcrumb">
+                <a href="./index.html">Accueil</a> <span>/</span> <span>Niveau 2 — Écosystème</span>
+            </div>
+            <span class="hero-badge">Niveau 2 — Écosystème</span>
+            <h1>Le e-invoicing</h1>
+            <p>La facturation électronique entre entreprises : périmètre, mécanisme, formats et obligations.</p>
+        </div>
+    </header>
+
+    <main class="page-main">
+        <div class="page-container page-layout">
+
+            <aside class="page-sidebar">
+                <div class="sidebar-sticky">
+                    <h4>Sur cette page</h4>
+                    <ul class="sidebar-nav">
+                        <li><a href="#definition" class="sidebar-link active">Définition</a></li>
+                        <li><a href="#perimetre" class="sidebar-link">Le périmètre</a></li>
+                        <li><a href="#parcours" class="sidebar-link">Les 5 étapes</a></li>
+                        <li><a href="#obligations" class="sidebar-link">Obligations par acteur</a></li>
+                        <li><a href="#calendrier" class="sidebar-link">Calendrier</a></li>
+                        <li><a href="#formats" class="sidebar-link">Les formats</a></li>
+                        <li><a href="#faq" class="sidebar-link">FAQ</a></li>
+                    </ul>
+                    <div class="sidebar-nav-pages">
+                        <h4>Parcours Niveau 2</h4>
+                        <a href="./acteurs.html" class="sidebar-page">👥 Les acteurs</a>
+                        <a href="./e-invoicing.html" class="sidebar-page active">📨 E-invoicing</a>
+                        <a href="./e-reporting.html" class="sidebar-page">📊 E-reporting</a>
+                        <a href="./chorus-pro.html" class="sidebar-page">🏛️ Chorus Pro</a>
+                    </div>
+                </div>
+            </aside>
+
+            <article class="page-content">
+
+                <section id="definition" class="content-section">
+                    <h2>Qu'est-ce que le e-invoicing exactement ?</h2>
+                    <p>Le <strong>e-invoicing</strong> désigne l'obligation d'émettre, transmettre et recevoir des factures sous <strong>format électronique structuré</strong> pour les transactions entre entreprises assujetties à la TVA établies en France.</p>
+                    <p>Une facture électronique au sens de la réforme, c'est :</p>
+                    <ul class="styled-list">
+                        <li>Un fichier dans un <strong>format structuré</strong> (données lisibles par une machine)</li>
+                        <li>Qui transite par une <strong>Plateforme Agréée</strong> (PA)</li>
+                        <li>Dont les <strong>données réglementaires</strong> sont transmises à l'administration via le PPF</li>
+                        <li>Qui fait l'objet d'un <strong>suivi de statuts</strong> (cycle de vie)</li>
+                    </ul>
+                    <div class="callout callout--warning">
+                        <div class="callout-icon">⚠️</div>
+                        <div class="callout-content">Fini les factures PDF envoyées par mail sans traçabilité. Place à un circuit <strong>encadré, contrôlé et automatisé</strong>.</div>
+                    </div>
+                </section>
+
+                <section id="perimetre" class="content-section">
+                    <h2>Le périmètre exact</h2>
+
+                    <h3>✅ DANS le périmètre du e-invoicing</h3>
+                    <ul class="styled-list">
+                        <li><strong>Ventes B2B domestiques</strong> entre assujettis TVA établis en France</li>
+                        <li><strong>Factures B2G</strong> (entreprises → sphère publique, via Chorus Pro)</li>
+                        <li><strong>Factures G2B</strong> (entités publiques → entreprises)</li>
+                        <li>Tous types : factures, avoirs, acomptes, rectificatives, auto-facturées</li>
+                    </ul>
+
+                    <h3>❌ HORS périmètre</h3>
+                    <div class="comparison-table">
+                        <table>
+                            <thead>
+                                <tr><th>Situation</th><th>Pourquoi c'est hors périmètre</th><th>Ce qui s'applique</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td><strong>B2C</strong></td><td>Le particulier n'est pas assujetti TVA</td><td>→ <a href="./e-reporting.html" style="color:var(--cyan)">E-reporting</a></td></tr>
+                                <tr><td><strong>B2B international</strong></td><td>Une des parties n'est pas en France</td><td>→ <a href="./e-reporting.html" style="color:var(--cyan)">E-reporting</a></td></tr>
+                                <tr><td><strong>Non-assujettis</strong></td><td>Le destinataire n'est pas assujetti</td><td>→ <a href="./e-reporting.html" style="color:var(--cyan)">E-reporting</a></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <section id="parcours" class="content-section">
+                    <h2>Comment une e-facture circule : les 5 étapes</h2>
+                    <div class="numbered-blocks">
+                        <div class="nb-item"><span class="nb-num">1</span><div><strong>📝 Création</strong> — L'émetteur crée la facture dans son logiciel, dans l'un des 3 formats du socle, avec toutes les mentions obligatoires.</div></div>
+                        <div class="nb-item"><span class="nb-num">2</span><div><strong>📤 Dépôt sur la PA émettrice</strong> — La facture est transmise à la PA qui effectue des contrôles techniques et réglementaires.</div></div>
+                        <div class="nb-item"><span class="nb-num">3</span><div><strong>🔀 Routage et transmission</strong> — La PA consulte l'annuaire PPF, transmet à la PA du récepteur. En parallèle, elle extrait les données → PPF (Flux 1).</div></div>
+                        <div class="nb-item"><span class="nb-num">4</span><div><strong>📥 Réception et traitement</strong> — La PA réceptrice met la facture à disposition du destinataire (conversion de format si besoin).</div></div>
+                        <div class="nb-item"><span class="nb-num">5</span><div><strong>🔄 Cycle de vie et archivage</strong> — L'acheteur renvoie des statuts (acceptée, refusée). Archivage conforme pendant 10 ans.</div></div>
+                    </div>
+                </section>
+
+                <section id="obligations" class="content-section">
+                    <h2>Obligations par acteur</h2>
+                    <div class="role-dual">
+                        <div class="role-card">
+                            <h4>📤 L'émetteur (fournisseur)</h4>
+                            <ul>
+                                <li>Émettre dans l'un des <strong>3 formats structurés</strong></li>
+                                <li>Transmettre <strong>via une PA</strong></li>
+                                <li>Indiquer le <strong>cadre de facturation</strong></li>
+                                <li>Renseigner toutes les <strong>mentions obligatoires</strong></li>
+                                <li>Suivre les <strong>statuts de cycle de vie</strong></li>
+                            </ul>
+                        </div>
+                        <div class="role-card">
+                            <h4>📥 Le récepteur (acheteur)</h4>
+                            <ul>
+                                <li>Désigner une <strong>PA de réception</strong></li>
+                                <li>S'inscrire dans l'<strong>annuaire central</strong></li>
+                                <li>Traiter les factures dans les <strong>formats du socle</strong></li>
+                                <li>Renvoyer les <strong>statuts obligatoires</strong></li>
+                                <li>Signer un <strong>accord formel</strong> de désignation PA</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="calendrier" class="content-section">
+                    <h2>Le calendrier du e-invoicing</h2>
+                    <div class="comparison-table">
+                        <table>
+                            <thead><tr><th>Date</th><th>Obligation</th></tr></thead>
+                            <tbody>
+                                <tr><td><strong>Juil. 2025</strong></td><td>Échanges volontaires possibles</td></tr>
+                                <tr><td><strong>1er sept. 2026</strong></td><td><strong>Réception obligatoire</strong> pour TOUTES les entreprises</td></tr>
+                                <tr><td><strong>1er sept. 2026</strong></td><td><strong>Émission obligatoire</strong> pour GE et ETI</td></tr>
+                                <tr><td><strong>1er sept. 2027</strong></td><td><strong>Émission obligatoire</strong> pour PME, TPE, micro</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="callout callout--warning">
+                        <div class="callout-icon">⚠️</div>
+                        <div class="callout-content">Même si une PME n'est obligée d'émettre qu'en sept. 2027, elle doit être <strong>capable de recevoir</strong> dès sept. 2026. C'est le point le plus souvent sous-estimé !</div>
+                    </div>
+                </section>
+
+                <section id="formats" class="content-section">
+                    <h2>Les formats acceptés</h2>
+                    <p>3 formats syntaxiques normalisés par l'AFNOR (norme XP Z12-012) :</p>
+                    <div class="comparison-table">
+                        <table>
+                            <thead><tr><th>Format</th><th>Norme</th><th>Caractéristique</th></tr></thead>
+                            <tbody>
+                                <tr><td><strong>UBL 2.1</strong></td><td>OASIS</td><td>XML pur. Standard européen (Peppol). Schémas Invoice + CreditNote.</td></tr>
+                                <tr><td><strong>CII D22B</strong></td><td>UN/CEFACT</td><td>XML pur. France + Allemagne. Schéma unique CrossIndustryInvoice.</td></tr>
+                                <tr><td><strong>Factur-X</strong></td><td>Franco-allemand</td><td>Hybride PDF/A-3 + XML CII. Lisible humain ET machine.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="callout callout--warning">
+                        <div class="callout-icon">⚠️</div>
+                        <div class="callout-content">Pour Factur-X, le profil minimum est <strong>BASIC WL</strong>. Les profils « MINIMUM » et « BASIC » ne contiennent pas toutes les données réglementaires exigées par la réforme.</div>
+                    </div>
+                </section>
+
+                <section id="faq" class="content-section">
+                    <h2>FAQ rapide</h2>
+                    <div class="faq-list">
+                        <div class="faq-item">
+                            <h4>❓ Un PDF envoyé par email est-il une e-facture ?</h4>
+                            <p>Non. Un PDF (même signé) ne constitue PAS une facture électronique au sens de la réforme. Il faut un format structuré transmis via une PA.</p>
+                        </div>
+                        <div class="faq-item">
+                            <h4>❓ Mon fournisseur est allemand. Ses factures passent par le e-invoicing ?</h4>
+                            <p>Non. Le e-invoicing ne couvre que les transactions entre assujettis <strong>établis en France</strong>. Les factures d'un fournisseur étranger relèvent du <strong>e-reporting</strong>.</p>
+                        </div>
+                        <div class="faq-item">
+                            <h4>❓ Je suis micro-entrepreneur, suis-je concerné ?</h4>
+                            <p>Oui ! Dès le 1er sept. 2026, vous devez pouvoir <strong>recevoir</strong>. À partir du 1er sept. 2027, vous devrez <strong>émettre</strong> via une PA.</p>
+                        </div>
+                        <div class="faq-item">
+                            <h4>❓ Puis-je utiliser plusieurs PA ?</h4>
+                            <p>Oui. Vous pouvez avoir une PA pour l'émission et une autre pour la réception. Mais <strong>une seule PA de réception</strong> par adresse d'adressage dans l'annuaire.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <nav class="page-nav-bottom">
+                    <a href="./acteurs.html" class="nav-prev">
+                        <span class="nav-label">Page précédente</span>
+                        <span class="nav-title">← 👥 Les acteurs</span>
+                    </a>
+                    <a href="./e-reporting.html" class="nav-next">
+                        <span class="nav-label">Page suivante</span>
+                        <span class="nav-title">📊 E-reporting →</span>
+                    </a>
+                </nav>
+            </article>
+        </div>
+    </main>
+
+    <footer id="main-footer"></footer>
+    <script src="./js/nav.js"></script>
+    <script src="./js/animations.js"></script>
+</body>
+</html>

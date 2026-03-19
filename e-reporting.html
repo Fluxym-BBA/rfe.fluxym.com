@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Le e-reporting | E-Invoicing Academy</title>
+    <link rel="icon" href="./assets/favicon-Fluxym-V2.png" sizes="32x32" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/pages.css">
+</head>
+<body>
+
+    <nav id="main-nav"></nav>
+
+    <header class="page-hero">
+        <div class="page-hero-content">
+            <div class="breadcrumb">
+                <a href="./index.html">Accueil</a> <span>/</span> <span>Niveau 2 — Écosystème</span>
+            </div>
+            <span class="hero-badge">Niveau 2 — Écosystème</span>
+            <h1>Le e-reporting</h1>
+            <p>Déclarer ce que le e-invoicing ne couvre pas : B2C, international, paiements.</p>
+        </div>
+    </header>
+
+    <main class="page-main">
+        <div class="page-container page-layout">
+
+            <aside class="page-sidebar">
+                <div class="sidebar-sticky">
+                    <h4>Sur cette page</h4>
+                    <ul class="sidebar-nav">
+                        <li><a href="#intro" class="sidebar-link active">Pourquoi le e-reporting</a></li>
+                        <li><a href="#difference" class="sidebar-link">vs E-invoicing</a></li>
+                        <li><a href="#flux101" class="sidebar-link">Flux 10.1 — B2B international</a></li>
+                        <li><a href="#flux102" class="sidebar-link">Flux 10.2 — Paiements</a></li>
+                        <li><a href="#flux103" class="sidebar-link">Flux 10.3 — Transactions agrégées</a></li>
+                        <li><a href="#flux104" class="sidebar-link">Flux 10.4 — Paiements agrégés</a></li>
+                        <li><a href="#mecanisme" class="sidebar-link">Le mécanisme</a></li>
+                        <li><a href="#calendrier" class="sidebar-link">Calendrier</a></li>
+                        <li><a href="#recap" class="sidebar-link">Récapitulatif</a></li>
+                    </ul>
+                    <div class="sidebar-nav-pages">
+                        <h4>Parcours Niveau 2</h4>
+                        <a href="./acteurs.html" class="sidebar-page">👥 Les acteurs</a>
+                        <a href="./e-invoicing.html" class="sidebar-page">📨 E-invoicing</a>
+                        <a href="./e-reporting.html" class="sidebar-page active">📊 E-reporting</a>
+                        <a href="./chorus-pro.html" class="sidebar-page">🏛️ Chorus Pro</a>
+                    </div>
+                </div>
+            </aside>
+
+            <article class="page-content">
+
+                <section id="intro" class="content-section">
+                    <h2>Pourquoi le e-reporting existe</h2>
+                    <p>Le e-invoicing couvre les factures B2B domestiques. Mais il reste des « trous » : ventes aux particuliers, export, paiements… Si l'État ne capte que le B2B domestique, il lui manque une part significative des données pour piloter la TVA.</p>
+                    <p>Le <strong>e-reporting</strong> comble ces trous en transmettant à l'administration des <strong>données déclaratives</strong> sur toutes les opérations qui échappent au e-invoicing.</p>
+                </section>
+
+                <section id="difference" class="content-section">
+                    <h2>E-invoicing vs. E-reporting</h2>
+                    <div class="comparison-table">
+                        <table>
+                            <thead><tr><th>Critère</th><th>E-invoicing</th><th>E-reporting</th></tr></thead>
+                            <tbody>
+                                <tr><td><strong>Ce qui circule</strong></td><td>La facture complète (fichier structuré)</td><td>Des données déclaratives uniquement</td></tr>
+                                <tr><td><strong>Périmètre</strong></td><td>B2B domestique France</td><td>B2C + B2B international + paiements</td></tr>
+                                <tr><td><strong>Destinataire final</strong></td><td>L'entreprise cliente (via sa PA)</td><td>L'administration (via le PPF)</td></tr>
+                                <tr><td><strong>Format</strong></td><td>UBL, CII, Factur-X</td><td>Flux 10 (XML spécifique)</td></tr>
+                                <tr><td><strong>Cycle de vie</strong></td><td>Oui (statuts interentreprises)</td><td>Non (juste un accusé technique)</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="callout callout--info">
+                        <div class="callout-icon">💡</div>
+                        <div class="callout-content">Avec le e-invoicing, la <strong>facture entière</strong> voyage. Avec le e-reporting, seules les <strong>données</strong> remontent — aucune facture ne circule.</div>
+                    </div>
+                </section>
+
+                <section id="flux101" class="content-section">
+                    <h2>📋 Flux 10.1 — Transactions B2B internationales</h2>
+                    <p>Toutes les ventes (ou achats) entre un assujetti en France et une entreprise <strong>non établie en France</strong> : exports, livraisons intra-UE, prestations internationales, acquisitions intra-UE.</p>
+                    <p>Données transmises au format structuré vers le PPF : identifiants vendeur/acheteur, montants HT, TVA, codes catégorie TVA.</p>
+                    <div class="callout callout--info">
+                        <div class="callout-icon">💡</div>
+                        <div class="callout-content"><strong>Concrètement :</strong> vous vendez des machines-outils à un client italien. Vous émettez votre facture normalement (email, Peppol…), et en parallèle votre PA transmet les données au PPF via le Flux 10.1.</div>
+                    </div>
+                </section>
+
+                <section id="flux102" class="content-section">
+                    <h2>📋 Flux 10.2 — Données de paiement (individuelles)</h2>
+                    <p>Informations de <strong>paiement facture par facture</strong>. Concerne les situations où la TVA est exigible à l'encaissement :</p>
+                    <ul class="styled-list">
+                        <li><strong>Prestations de services</strong> (sauf option TVA sur les débits)</li>
+                        <li><strong>Factures d'acompte</strong></li>
+                        <li><strong>Opérations agricoles</strong></li>
+                    </ul>
+                    <p>Pour chaque facture : numéro, date de paiement, montant encaissé, ventilation TVA.</p>
+                </section>
+
+                <section id="flux103" class="content-section">
+                    <h2>📋 Flux 10.3 — Transactions agrégées (cumuls quotidiens)</h2>
+                    <p>Pour les opérations <strong>B2C</strong>, il serait irréaliste de déclarer chaque ticket individuellement. Le Flux 10.3 transmet des <strong>cumuls quotidiens</strong> par catégorie :</p>
+
+                    <div class="comparison-table">
+                        <table>
+                            <thead><tr><th>Code</th><th>Nom</th><th>Exemples</th></tr></thead>
+                            <tbody>
+                                <tr><td><strong>TPS1</strong></td><td>Prestations de services</td><td>Restaurant, coiffeur, consultant, plombier</td></tr>
+                                <tr><td><strong>TLB1</strong></td><td>Livraisons de biens</td><td>Boulangerie, magasin, épicerie</td></tr>
+                                <tr><td><strong>TNT1</strong></td><td>Non soumises en France</td><td>Ventes à distance intra-UE sous seuil</td></tr>
+                                <tr><td><strong>TMA1</strong></td><td>TVA sur la marge</td><td>Agences de voyage, biens d'occasion</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="callout callout--info">
+                        <div class="callout-icon">💡</div>
+                        <div class="callout-content"><strong>Exemple :</strong> une boulangerie avec 200 ventes/jour transmet un cumul : « TLB1 — 200 transactions — 1 500 € HT — 150 € TVA (5,5%) + 200 € HT — 40 € TVA (20%) ».</div>
+                    </div>
+                </section>
+
+                <section id="flux104" class="content-section">
+                    <h2>📋 Flux 10.4 — Paiements agrégés (cumuls quotidiens)</h2>
+                    <p>Le pendant « paiement » du Flux 10.3. Pour les <strong>prestations de services B2C</strong> (TPS1), les encaissements sont transmis en cumuls quotidiens.</p>
+                    <div class="callout callout--warning">
+                        <div class="callout-icon">📌</div>
+                        <div class="callout-content">Les flux 10.3 et 10.4 sont toujours transmis <strong>séparément</strong>. Une transmission contenant les deux sera rejetée.</div>
+                    </div>
+                </section>
+
+                <section id="mecanisme" class="content-section">
+                    <h2>Le mécanisme de transmission</h2>
+                    <p>Le circuit est plus simple que le e-invoicing car aucune facture ne circule entre entreprises :</p>
+                    <div class="schema-y-simple">
+                        <div class="sy-step"><span class="sy-num">1</span><p>L'entreprise <strong>collecte ses données</strong> (caisse, ERP, facturation…)</p></div>
+                        <div class="sy-step"><span class="sy-num">2</span><p>Les données sont <strong>transmises à sa PA</strong> (directement ou via une SC)</p></div>
+                        <div class="sy-step"><span class="sy-num">3</span><p>La PA les convertit au <strong>format Flux 10</strong> et les transmet au <strong>PPF</strong></p></div>
+                        <div class="sy-step"><span class="sy-num">4</span><p>Le PPF <strong>contrôle</strong> et transmet à la <strong>DGFiP</strong></p></div>
+                    </div>
+                </section>
+
+                <section id="calendrier" class="content-section">
+                    <h2>Calendrier</h2>
+                    <p>Aligné sur le e-invoicing :</p>
+                    <div class="comparison-table">
+                        <table>
+                            <thead><tr><th>Date</th><th>Obligation</th></tr></thead>
+                            <tbody>
+                                <tr><td><strong>1er sept. 2026</strong></td><td>E-reporting obligatoire pour <strong>GE et ETI</strong></td></tr>
+                                <tr><td><strong>1er sept. 2027</strong></td><td>E-reporting obligatoire pour <strong>toutes les entreprises</strong></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <section id="recap" class="content-section">
+                    <h2>Tableau récapitulatif des 4 sous-flux</h2>
+                    <div class="comparison-table">
+                        <table>
+                            <thead><tr><th>Sous-flux</th><th>Contenu</th><th>Type</th><th>Périmètre</th></tr></thead>
+                            <tbody>
+                                <tr><td><strong>Flux 10.1</strong></td><td>Factures B2B internationales</td><td>Individuelles</td><td>Export, intra-UE</td></tr>
+                                <tr><td><strong>Flux 10.2</strong></td><td>Données de paiement</td><td>Individuelles</td><td>TVA à l'encaissement</td></tr>
+                                <tr><td><strong>Flux 10.3</strong></td><td>Transactions agrégées</td><td>Cumuls quotidiens</td><td>B2C (TPS1, TLB1, TNT1, TMA1)</td></tr>
+                                <tr><td><strong>Flux 10.4</strong></td><td>Paiements agrégés</td><td>Cumuls quotidiens</td><td>Encaissements B2C (TPS1)</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <nav class="page-nav-bottom">
+                    <a href="./e-invoicing.html" class="nav-prev">
+                        <span class="nav-label">Page précédente</span>
+                        <span class="nav-title">← 📨 E-invoicing</span>
+                    </a>
+                    <a href="./chorus-pro.html" class="nav-next">
+                        <span class="nav-label">Page suivante</span>
+                        <span class="nav-title">🏛️ Chorus Pro →</span>
+                    </a>
+                </nav>
+            </article>
+        </div>
+    </main>
+
+    <footer id="main-footer"></footer>
+    <script src="./js/nav.js"></script>
+    <script src="./js/animations.js"></script>
+</body>
+</html>

@@ -2002,6 +2002,226 @@ body {
     letter-spacing: -0.5px;
 }
 
+/* === ROLE DUAL (2 colonnes) === */
+.role-dual {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin: 24px 0;
+}
+
+.role-card {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    border: 1px solid var(--gray-100);
+    box-shadow: var(--shadow-sm);
+    border-top: 4px solid var(--cyan);
+    transition: all 0.3s ease;
+}
+
+.role-card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-3px);
+}
+
+.role-card h4 {
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--gray-900);
+    margin-bottom: 12px;
+}
+
+.role-card ul {
+    padding-left: 18px;
+    font-size: 14px;
+    color: var(--gray-600);
+    line-height: 1.8;
+}
+
+@media (max-width: 600px) {
+    .role-dual { grid-template-columns: 1fr; }
+}
+
+/* === NUMBERED BLOCKS === */
+.numbered-blocks { margin: 24px 0; }
+
+.nb-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--gray-100);
+    transition: all 0.2s ease;
+}
+
+.nb-item:last-child { border-bottom: none; }
+.nb-item:hover { padding-left: 8px; }
+
+.nb-num {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--cyan), var(--navy));
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    font-size: 14px;
+    flex-shrink: 0;
+    box-shadow: var(--shadow-cyan);
+}
+
+.nb-item div {
+    font-size: 14px;
+    color: var(--gray-600);
+    line-height: 1.7;
+    padding-top: 8px;
+}
+
+.nb-item strong { color: var(--gray-900); }
+
+/* === STAT HIGHLIGHT === */
+.stat-highlight {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 30px;
+    background: linear-gradient(135deg, var(--navy), var(--navy-light));
+    border-radius: var(--radius-xl);
+    margin: 24px 0;
+    box-shadow: var(--shadow-navy);
+}
+
+.stat-big {
+    font-size: 56px;
+    font-weight: 900;
+    color: var(--cyan);
+    letter-spacing: -2px;
+    line-height: 1;
+    flex-shrink: 0;
+}
+
+.stat-desc {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+/* === NOT LIST === */
+.not-list { margin: 16px 0; }
+
+.not-item {
+    padding: 12px 16px;
+    background: rgba(239, 68, 68, 0.05);
+    border-left: 3px solid var(--danger);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: var(--gray-600);
+    font-weight: 500;
+}
+
+/* === SCHEMA Y VISUAL === */
+.schema-y-visual {
+    margin: 30px 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.sy-branch, .sy-stem {
+    padding: 24px;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--gray-100);
+    box-shadow: var(--shadow-sm);
+}
+
+.sy-branch--left {
+    background: linear-gradient(135deg, rgba(0, 167, 225, 0.05), rgba(0, 167, 225, 0.02));
+    border-left: 4px solid var(--cyan);
+}
+
+.sy-branch--right {
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.05), rgba(99, 102, 241, 0.02));
+    border-left: 4px solid var(--purple);
+}
+
+.sy-stem {
+    grid-column: 1 / -1;
+    background: linear-gradient(135deg, var(--navy), var(--navy-light));
+    color: white;
+    text-align: center;
+}
+
+.sy-branch-label {
+    font-size: 13px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+    opacity: 0.8;
+}
+
+.sy-flow {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.7;
+}
+
+.sy-stem .sy-branch-label { color: rgba(255,255,255,0.7); }
+.sy-stem .sy-flow { color: rgba(255,255,255,0.9); }
+
+@media (max-width: 600px) {
+    .schema-y-visual { grid-template-columns: 1fr; }
+    .sy-stem { grid-column: auto; }
+}
+
+/* === TRIPLE GRID (3 cards) === */
+.triple-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin: 24px 0;
+}
+
+@media (max-width: 800px) {
+    .triple-grid { grid-template-columns: 1fr; }
+}
+
+/* === FAQ === */
+.faq-list { margin: 24px 0; }
+
+.faq-item {
+    padding: 20px 24px;
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--gray-100);
+    box-shadow: var(--shadow-sm);
+    margin-bottom: 12px;
+    transition: all 0.3s ease;
+}
+
+.faq-item:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+}
+
+.faq-item h4 {
+    font-size: 15px;
+    font-weight: 800;
+    color: var(--gray-900);
+    margin-bottom: 8px;
+}
+
+.faq-item p {
+    font-size: 14px;
+    color: var(--gray-600);
+    margin-bottom: 0;
+    line-height: 1.7;
+}
+
 
 /* ==========================================================================
    SCROLL ANIMATIONS
