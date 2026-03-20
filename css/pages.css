@@ -4239,3 +4239,169 @@ a.cu-card:hover {
     box-shadow: var(--shadow-lg);
     border-color: var(--cyan);
 }
+
+/* ═══ CAS D'USAGE CARDS — Enhanced ═══ */
+.cu-card {
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.cu-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    border-radius: 8px 0 0 8px;
+    transition: width 0.3s ease;
+}
+
+.cu-simple::before { background: #10b981; }
+.cu-medium::before { background: #f59e0b; }
+.cu-complex::before { background: #ef4444; }
+
+.cu-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(11, 32, 70, 0.12);
+}
+
+.cu-card:hover::before {
+    width: 6px;
+}
+
+.cu-num {
+    display: inline-block;
+    background: #f1f5f9;
+    padding: 2px 10px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 800;
+    color: #0b2046;
+    letter-spacing: 0.5px;
+}
+
+.cu-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: auto;
+    padding-top: 12px;
+}
+
+.cu-cadre {
+    background: #0b2046;
+    color: white;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+/* Complexity dots au lieu d'emoji */
+.cu-complexity {
+    display: flex;
+    gap: 3px;
+}
+
+
+/* ═══ DIAGRAM — Expand Button ═══ */
+.cudet-expand-btn {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    top: auto;
+    background: #0b2046;
+    color: white;
+    border: none;
+    padding: 6px 14px;
+    border-radius: 8px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    font-family: 'Inter', sans-serif;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: all 0.2s ease;
+    z-index: 5;
+}
+
+.cudet-expand-btn:hover {
+    opacity: 1;
+    transform: scale(1.05);
+}
+
+
+/* ═══ DIAGRAM — Fullscreen Overlay ═══ */
+.cudet-fullscreen-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: rgba(11, 32, 70, 0.95);
+    backdrop-filter: blur(12px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.cudet-fullscreen-overlay.cudet-fs-active {
+    opacity: 1;
+}
+
+.cudet-fs-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1200px;
+    margin-bottom: 20px;
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.cudet-fs-close {
+    background: rgba(255,255,255,0.15);
+    color: white;
+    border: 1px solid rgba(255,255,255,0.2);
+    padding: 8px 18px;
+    border-radius: 10px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.cudet-fs-close:hover {
+    background: rgba(255,255,255,0.25);
+}
+
+.cudet-fs-svg {
+    width: 100%;
+    max-width: 1200px;
+    background: white;
+    border-radius: 16px;
+    padding: 16px;
+    box-shadow: 0 24px 64px rgba(0,0,0,0.3);
+    overflow-x: auto;
+}
+
+.cudet-fs-svg svg {
+    width: 100%;
+    height: auto;
+}
+
+.cudet-fs-legend {
+    display: flex;
+    gap: 16px;
+    margin-top: 16px;
+    color: rgba(255,255,255,0.8);
+    font-size: 0.8rem;
+    font-weight: 600;
+}

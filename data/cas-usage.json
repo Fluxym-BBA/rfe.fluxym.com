@@ -633,6 +633,885 @@
       ],
       "statuses": ["Déposée", "Émise", "Reçue", "Acceptée"],
       "relatedCases": ["cas-11", "cas-12"]
+    },
+    {
+      "id": "cas-16",
+      "num": "16",
+      "title": "Facture de débours",
+      "subtitle": "Remboursement d'une dépense avancée pour le compte du client, sans marge.",
+      "category": "intermediaire",
+      "tags": ["debours", "remboursement", "tva"],
+      "complexity": 2,
+      "inScope": true,
+      "principle": "<p>Un intermédiaire (avocat, notaire, transitaire…) avance des frais <strong>pour le compte de son client</strong> et se fait rembourser à l'euro près, sans marge. Les débours sont <strong>hors du champ de la TVA</strong> pour l'intermédiaire.</p><p>La facture de débours est distincte de la facture d'honoraires. L'intermédiaire ne refacture pas : il transmet le justificatif original au client.</p>",
+      "actors": ["Vendeur initial", "Intermédiaire", "PA-E", "PPF", "PA-R", "Client"],
+      "steps": [
+        {"f": 0, "t": 1, "l": "Facture initiale (fournisseur → intermédiaire)", "c": "doc"},
+        {"f": 1, "t": 2, "l": "Facture de débours au client", "c": "doc"},
+        {"f": 2, "t": 3, "l": "F1 — Données réglementaires", "c": "flux"},
+        {"f": 2, "t": 4, "l": "F2 — Facture complète", "c": "flux"},
+        {"f": 4, "t": 5, "l": "Mise à disposition", "c": "status"}
+      ],
+      "attentionPoints": [
+        "Les débours ne sont <strong>pas soumis à la TVA</strong> pour l'intermédiaire",
+        "L'intermédiaire doit transmettre le justificatif original au client",
+        "Ne pas confondre débours et refacturation de frais (avec marge)"
+      ],
+      "btFields": [
+        {"bt": "BT-22", "name": "Note de facture", "note": "Mention « débours » et référence du justificatif original"}
+      ],
+      "statuses": ["Déposée", "Émise", "Reçue", "Acceptée"],
+      "relatedCases": ["cas-12", "cas-15"]
+    },
+    {
+      "id": "cas-17a",
+      "num": "17a",
+      "title": "Marketplace — Intermédiaire de paiement",
+      "subtitle": "La marketplace collecte le paiement pour le compte du vendeur. La facture reste émise par le vendeur.",
+      "category": "marketplace",
+      "tags": ["marketplace", "paiement", "intermediaire"],
+      "complexity": 2,
+      "inScope": true,
+      "principle": "<p>La marketplace agit comme <strong>intermédiaire de paiement</strong> uniquement. Le vendeur émet sa facture directement à l'acheteur via le circuit normal (PA-E → PPF → PA-R).</p><p>Le paiement transite par la marketplace qui reverse au vendeur. La marketplace émet <strong>sa propre facture de commission</strong> au vendeur.</p>",
+      "actors": ["Vendeur", "PA-E", "PPF", "PA-R", "Acheteur", "Marketplace"],
+      "steps": [
+        {"f": 0, "t": 1, "l": "Facture vendeur → acheteur", "c": "doc"},
+        {"f": 1, "t": 2, "l": "F1 — Données réglementaires", "c": "flux"},
+        {"f": 1, "t": 3, "l": "F2 — Facture complète", "c": "flux"},
+        {"f": 3, "t": 4, "l": "Mise à disposition", "c": "status"},
+        {"f": 4, "t": 5, "l": "Paiement via marketplace", "c": "pay"},
+        {"f": 5, "t": 0, "l": "Reversement au vendeur", "c": "pay"},
+        {"f": 5, "t": 0, "l": "Facture de commission", "c": "doc"}
+      ],
+      "attentionPoints": [
+        "La facture de vente est émise par le <strong>vendeur</strong>, pas par la marketplace",
+        "La marketplace émet sa propre facture de commission au vendeur",
+        "Le vendeur doit être en mesure de réconcilier paiement marketplace et facture"
+      ],
+      "btFields": [
+        {"bt": "BT-10", "name": "Référence acheteur", "note": "Numéro de commande marketplace éventuel"}
+      ],
+      "statuses": ["Déposée", "Émise", "Reçue", "Acceptée", "Encaissée"],
+      "relatedCases": ["cas-17b", "cas-3"]
+    },
+    {
+      "id": "cas-17b",
+      "num": "17b",
+      "title": "Marketplace + Mandat de facturation",
+      "subtitle": "La marketplace émet la facture au nom et pour le compte du vendeur (mandat de facturation).",
+      "category": "marketplace",
+      "tags": ["marketplace", "mandat", "agent"],
+      "complexity": 3,
+      "inScope": true,
+      "principle": "<p>La marketplace dispose d'un <strong>mandat de facturation</strong> : elle émet la facture <strong>au nom et pour le compte du vendeur</strong>. Elle agit comme « Agent de vendeur » (BG-11).</p><p>Le vendeur reste le fournisseur légal. La marketplace dépose la facture sur la PA-E du vendeur ou sur sa propre PA si elle en est mandataire.</p>",
+      "actors": ["Vendeur", "Marketplace (Agent)", "PA-E", "PPF", "PA-R", "Acheteur"],
+      "steps": [
+        {"f": 1, "t": 2, "l": "Crée facture au nom du vendeur", "c": "doc"},
+        {"f": 2, "t": 3, "l": "F1 — Données réglementaires", "c": "flux"},
+        {"f": 2, "t": 4, "l": "F2 — Facture (vendeur = fournisseur)", "c": "flux"},
+        {"f": 3, "t": 4, "l": "F3 — Données complémentaires", "c": "flux"},
+        {"f": 4, "t": 5, "l": "Mise à disposition", "c": "status"},
+        {"f": 5, "t": 1, "l": "Paiement via marketplace", "c": "pay"},
+        {"f": 1, "t": 0, "l": "Reversement au vendeur", "c": "pay"}
+      ],
+      "attentionPoints": [
+        "Le bloc <strong>BG-11 Agent de vendeur</strong> identifie la marketplace comme mandataire",
+        "Le vendeur reste le fournisseur légal mentionné dans la facture",
+        "Un contrat de mandat de facturation doit exister entre le vendeur et la marketplace"
+      ],
+      "btFields": [
+        {"bt": "BG-11", "name": "Agent de vendeur", "note": "SIREN et identité de la marketplace"},
+        {"bt": "BT-23", "name": "Cadre de facturation", "note": "B1/S1 selon la nature"}
+      ],
+      "statuses": ["Déposée", "Émise", "Reçue", "Acceptée", "Encaissée"],
+      "relatedCases": ["cas-17a", "cas-19a"]
+    },
+    {
+      "id": "cas-18",
+      "num": "18",
+      "title": "Notes de débit",
+      "subtitle": "Ajustement à la hausse d'une facture existante : pénalités, frais additionnels, compléments.",
+      "category": "special",
+      "tags": ["note-debit", "ajustement", "complement"],
+      "complexity": 2,
+      "inScope": true,
+      "principle": "<p>La note de débit est un <strong>complément de facturation</strong> qui ajuste à la hausse le montant d'une facture existante. Cas courants : pénalités de retard, frais de stockage supplémentaires, compléments de prix.</p><p>Elle est traitée comme une facture classique, avec référence à la facture d'origine.</p>",
+      "actors": ["Vendeur", "PA-E", "PPF", "PA-R", "Acheteur"],
+      "steps": [
+        {"f": 0, "t": 1, "l": "Crée la note de débit", "c": "doc"},
+        {"f": 1, "t": 2, "l": "F1 — Données réglementaires", "c": "flux"},
+        {"f": 1, "t": 3, "l": "F2 — Note de débit", "c": "flux"},
+        {"f": 3, "t": 4, "l": "Mise à disposition", "c": "status"}
+      ],
+      "attentionPoints": [
+        "La note de débit référence la facture d'origine (BG-3)",
+        "Codes types possibles : 383 (note de débit), 384 (facture rectificative)"
+      ],
+      "btFields": [
+        {"bt": "BG-3", "name": "Référence facture antérieure", "note": "Numéro de la facture complétée"},
+        {"bt": "BT-3", "name": "Code type de facture", "note": "383 (note de débit) ou 384 (rectificative)"}
+      ],
+      "statuses": ["Déposée", "Émise", "Reçue", "Acceptée"],
+      "relatedCases": ["nominal-litige-avoir", "nominal-litige-rectificative"]
+    },
+    {
+      "id": "cas-19a",
+      "num": "19a",
+      "title": "Mandat de facturation — Tiers facturant",
+      "subtitle": "Un mandataire (tiers ≠ acheteur) émet la facture pour le compte du vendeur.",
+      "category": "mandat",
+      "tags": ["mandat", "tiers", "agent"],
+      "complexity": 2,
+      "inScope": true,
+      "principle": "<p>Un <strong>tiers mandataire</strong> (distinct de l'acheteur) émet la facture <strong>au nom et pour le compte du vendeur</strong>. Le vendeur reste le fournisseur légal.</p><p>Le mandataire est identifié dans le bloc <strong>BG-11 (Agent de vendeur)</strong>. Un contrat de mandat doit exister entre le vendeur et le mandataire.</p>",
+      "actors": ["Vendeur", "Mandataire (Agent)", "PA-E", "PPF", "PA-R", "Acheteur"],
+      "steps": [
+        {"f": 0, "t": 1, "l": "Mandat de facturation", "c": "info"},
+        {"f": 1, "t": 2, "l": "Crée facture au nom du vendeur", "c": "doc"},
+        {"f": 2, "t": 3, "l": "F1 — Données réglementaires", "c": "flux"},
+        {"f": 2, "t": 4, "l": "F2 — Facture complète", "c": "flux"},
+        {"f": 4, "t": 5, "l": "Mise à disposition", "c": "status"},
+        {"f": 5, "t": 4, "l": "Statut « Acceptée »", "c": "status"}
+      ],
+      "attentionPoints": [
+        "Le bloc <strong>BG-11</strong> identifie le mandataire",
+        "Le vendeur est responsable fiscalement de la facture même si le mandataire l'émet",
+        "Un contrat de mandat de facturation écrit est <strong>obligatoire</strong>"
+      ],
+      "btFields": [
+        {"bt": "BG-11", "name": "Agent de vendeur", "note": "SIREN, nom et coordonnées du mandataire"},
+        {"bt": "BT-23", "name": "Cadre de facturation", "note": "B1/S1 selon la nature de l'opération"}
+      ],
+      "statuses": ["Déposée", "Émise", "Reçue", "Acceptée", "Encaissée"],
+      "relatedCases": ["cas-19b", "cas-17b"]
+    },
+    {
+      "id": "cas-19b",
+      "num": "19b",
+      "title": "Auto-facturation (Self-billing)",
+      "subtitle": "L'acheteur émet lui-même la facture pour le compte du vendeur. Code type 389.",
+      "category": "mandat",
+      "tags": ["auto-facturation", "self-billing", "389"],
+      "complexity": 2,
+      "inScope": true,
+      "principle": "<p>L'<strong>acheteur</strong> émet la facture <strong>pour le compte du vendeur</strong> (self-billing). C'est un cas particulier de mandat de facturation où le mandataire EST l'acheteur.</p><p>Le code type de facture est <strong>389</strong> (auto-facturation). L'acheteur est identifié dans le bloc BG-11 comme Agent de vendeur.</p>",
+      "actors": ["Vendeur", "PA-E (Acheteur)", "PPF", "PA-R (Vendeur)", "Acheteur"],
+      "steps": [
+        {"f": 4, "t": 1, "l": "Crée facture au nom du vendeur (code 389)", "c": "doc"},
+        {"f": 1, "t": 2, "l": "F1 — Données réglementaires", "c": "flux"},
+        {"f": 1, "t": 3, "l": "F2 — Facture complète", "c": "flux"},
+        {"f": 3, "t": 0, "l": "Mise à disposition au vendeur", "c": "status"},
+        {"f": 0, "t": 3, "l": "Statut « Acceptée »", "c": "status"}
+      ],
+      "attentionPoints": [
+        "Le code type <strong>389</strong> est obligatoire pour l'auto-facturation",
+        "Le vendeur est en position de <strong>récepteur</strong> de sa propre facture",
+        "L'acheteur agit comme PA-E et comme Agent de vendeur",
+        "Le vendeur peut refuser la facture émise en son nom"
+      ],
+      "btFields": [
+        {"bt": "BT-3", "name": "Code type de facture", "note": "389 — Auto-facturation"},
+        {"bt": "BG-11", "name": "Agent de vendeur", "note": "L'acheteur lui-même"}
+      ],
+      "statuses": ["Déposée", "Émise", "Reçue", "Acceptée", "Encaissée"],
+      "relatedCases": ["cas-19a", "cas-23"]
+    },
+    {
+      "id": "cas-20",
+      "num": "20",
+      "title": "Facture d'acompte",
+      "subtitle": "Acompte versé avant livraison complète. TVA exigible dès l'encaissement de l'acompte.",
+      "category": "acompte",
+      "tags": ["acompte", "prepaiement", "tva"],
+      "complexity": 2,
+      "inScope": true,
+      "principle": "<p>Un <strong>acompte</strong> est un paiement partiel anticipé sur une commande. La TVA est <strong>exigible dès l'encaissement</strong> de l'acompte pour les services, et dès la livraison pour les biens (sauf option).</p><p>La facture d'acompte est une facture à part entière avec son propre numéro. Code type <strong>386</strong> (facture d'acompte) ou <strong>500</strong> (pré-facturation d'acompte).</p>",
+      "actors": ["Vendeur", "PA-E", "PPF", "PA-R", "Acheteur"],
+      "steps": [
+        {"f": 4, "t": 0, "l": "Versement de l'acompte", "c": "pay"},
+        {"f": 0, "t": 1, "l": "Facture d'acompte (code 386)", "c": "doc"},
+        {"f": 1, "t": 2, "l": "F1 — Données réglementaires", "c": "flux"},
+        {"f": 1, "t": 3, "l": "F2 — Facture d'acompte", "c": "flux"},
+        {"f": 3, "t": 4, "l": "Mise à disposition", "c": "status"},
+        {"f": 0, "t": 1, "l": "Statut « Encaissée »", "c": "pay"}
+      ],
+      "attentionPoints": [
+        "La facture d'acompte est un document fiscal à part entière",
+        "Code type <strong>386</strong> (acompte classique) ou <strong>500</strong> (pré-facturation)",
+        "La TVA est exigible dès l'encaissement pour les prestations de services",
+        "La facture définitive devra reprendre les acomptes en déduction (cas n°21)"
+      ],
+      "btFields": [
+        {"bt": "BT-3", "name": "Code type de facture", "note": "386 ou 500"},
+        {"bt": "BT-23", "name": "Cadre de facturation", "note": "B1/S1/M1 selon la nature"}
+      ],
+      "statuses": ["Déposée", "Émise", "Reçue", "Acceptée", "Encaissée"],
+      "relatedCases": ["cas-21", "cas-2"]
+    },
+    {
+      "id": "cas-21",
+      "num": "21",
+      "title": "Facture définitive après acompte(s)",
+      "subtitle": "Facture de solde reprenant les acomptes en lignes négatives. Cadre B4/S4/M4.",
+      "category": "acompte",
+      "tags": ["solde", "definitif", "acompte", "cadre-4"],
+      "complexity": 2,
+      "inScope": true,
+      "principle": "<p>La facture définitive clôt l'opération après un ou plusieurs acomptes. Elle reprend le <strong>montant total</strong> de l'opération et déduit les acomptes déjà facturés en <strong>lignes négatives</strong>.</p><p>Le cadre de facturation est <strong>B4/S4/M4</strong> (facture définitive après acompte). Chaque ligne négative référence la facture d'acompte correspondante.</p>",
+      "actors": ["Vendeur", "PA-E", "PPF", "PA-R", "Acheteur"],
+      "steps": [
+        {"f": 0, "t": 1, "l": "Facture définitive (cadre S4/B4/M4)", "c": "doc"},
+        {"f": 1, "t": 2, "l": "F1 — Données réglementaires", "c": "flux"},
+        {"f": 1, "t": 3, "l": "F2 — Facture définitive", "c": "flux"},
+        {"f": 3, "t": 4, "l": "Mise à disposition", "c": "status"},
+        {"f": 4, "t": 3, "l": "Statut « Acceptée »", "c": "status"}
+      ],
+      "attentionPoints": [
+        "Cadre de facturation : <strong>B4/S4/M4</strong>",
+        "Les acomptes sont repris en <strong>lignes négatives</strong> référençant les factures d'acompte",
+        "Le net à payer = montant total − somme des acomptes",
+        "Chaque facture d'acompte doit être référencée par son numéro"
+      ],
+      "btFields": [
+        {"bt": "BT-23", "name": "Cadre de facturation", "note": "B4, S4 ou M4"},
+        {"bt": "BT-25", "name": "Référence facture précédente", "note": "Numéro(s) des factures d'acompte"},
+        {"bt": "BT-3", "name": "Code type de facture", "note": "380 (facture standard)"}
+      ],
+      "statuses": ["Déposée", "Émise", "Reçue", "Acceptée", "Encaissée"],
+      "relatedCases": ["cas-20"]
+    },
+    {
+      "id": "cas-22a",
+      "num": "22a",
+      "title": "Escompte — TVA à l'encaissement (services)",
+      "subtitle": "Escompte pour paiement anticipé sur une prestation de services. Impact TVA à l'encaissement.",
+      "category": "acompte",
+      "tags": ["escompte", "encaissement", "services", "avoir"],
+      "complexity": 3,
+      "inScope": true,
+      "principle": "<p>L'acheteur bénéficie d'un <strong>escompte</strong> pour paiement anticipé d'une facture de services. Comme la TVA est exigible <strong>à l'encaissement</strong>, le traitement est complexe :</p><p><strong>Option 1 :</strong> L'acheteur paie le montant escompté → le vendeur émet un avoir <strong>sans TVA</strong> (la TVA est calculée sur l'encaissement réel).</p><p><strong>Option 2 :</strong> L'acheteur paie le montant escompté → le vendeur émet un avoir <strong>avec TVA</strong> si la TVA a déjà été déclarée sur le montant total.</p>",
+      "actors": ["Vendeur", "PA-E", "PPF", "PA-R", "Acheteur"],
+      "steps": [
+        {"f": 0, "t": 1, "l": "Facture initiale (mention escompte)", "c": "doc"},
+        {"f": 1, "t": 3, "l": "F2 — Facture complète", "c": "flux"},
+        {"f": 3, "t": 4, "l": "Mise à disposition", "c": "status"},
+        {"f": 4, "t": 0, "l": "Paiement anticipé (montant escompté)", "c": "pay"},
+        {"f": 0, "t": 1, "l": "Avoir d'escompte (avec ou sans TVA)", "c": "doc"},
+        {"f": 1, "t": 2, "l": "F1 — Avoir", "c": "flux"},
+        {"f": 1, "t": 3, "l": "F2 — Avoir", "c": "flux"}
+      ],
+      "attentionPoints": [
+        "La mention d'escompte doit figurer sur la facture initiale (BT-20)",
+        "L'avoir d'escompte peut être <strong>avec ou sans TVA</strong> selon que la TVA a été déclarée ou non",
+        "TVA à l'encaissement : la base TVA = montant effectivement encaissé",
+        "Complexité accrue si paiement partiel avec escompte partiel"
+      ],
+      "btFields": [
+        {"bt": "BT-20", "name": "Conditions de paiement", "note": "Mention de l'escompte (taux, délai)"},
+        {"bt": "BT-23", "name": "Cadre de facturation", "note": "S1 (facture) puis S1 (avoir)"}
+      ],
+      "statuses": ["Déposée", "Émise", "Reçue", "Acceptée", "Encaissée", "Avoir émis"],
+      "relatedCases": ["cas-22b", "cas-34"]
+    },
+    {
+      "id": "cas-22b",
+      "num": "22b",
+      "title": "Escompte — TVA sur les débits (biens)",
+      "subtitle": "Escompte pour paiement anticipé sur une livraison de biens. TVA ajustée par avoir.",
+      "category": "acompte",
+      "tags": ["escompte", "debits", "biens", "avoir"],
+      "complexity": 2,
+      "inScope": true,
+      "principle": "<p>L'acheteur bénéficie d'un <strong>escompte</strong> pour paiement anticipé d'une facture de biens. La TVA ayant été collectée sur les débits (à l'émission), le vendeur émet un <strong>avoir avec TVA</strong> pour ajuster le montant.</p><p>L'avoir d'escompte rectifie la base HT et la TVA collectée initialement.</p>",
+      "actors": ["Vendeur", "PA-E", "PPF", "PA-R", "Acheteur"],
+      "steps": [
+        {"f": 0, "t": 1, "l": "Facture initiale (mention escompte)", "c": "doc"},
+        {"f": 1, "t": 3, "l": "F2 — Facture complète", "c": "flux"},
+        {"f": 4, "t": 0, "l": "Paiement anticipé (montant escompté)", "c": "pay"},
+        {"f": 0, "t": 1, "l": "Avoir d'escompte AVEC TVA", "c": "doc"},
+        {"f": 1, "t": 2, "l": "F1 — Avoir", "c": "flux"},
+        {"f": 1, "t": 3, "l": "F2 — Avoir", "c": "flux"}
+      ],
+      "attentionPoints": [
+        "L'avoir d'escompte sur biens inclut <strong>toujours la TVA</strong> (TVA sur les débits)",
+        "La mention d'escompte doit figurer sur la facture initiale"
+      ],
+      "btFields": [
+        {"bt": "BT-20", "name": "Conditions de paiement", "note": "Mention escompte"},
+        {"bt": "BT-23", "name": "Cadre de facturation", "note": "B1"}
+      ],
+      "statuses": ["Déposée", "Émise", "Reçue", "Acceptée", "Avoir émis", "Encaissée"],
+      "relatedCases": ["cas-22a"]
+    },
+    {
+      "id": "cas-23",
+      "num": "23",
+      "title": "Auto-facturation particulier → professionnel",
+      "subtitle": "Un professionnel rachète un bien à un particulier et émet la facture au nom du particulier.",
+      "category": "mandat",
+      "tags": ["auto-facturation", "particulier", "occasion", "b2c"],
+      "complexity": 2,
+      "inScope": true,
+      "principle": "<p>Un professionnel (brocanteur, concessionnaire auto d'occasion…) achète un bien à un <strong>particulier</strong>. Le particulier ne pouvant pas émettre de facture, le professionnel émet un document d'achat.</p><p>Ce cas est souvent lié à la <strong>TVA sur la marge</strong> (cas n°33). Le document n'est pas une facture au sens fiscal classique.</p>",
+      "actors": ["Particulier", "Professionnel (Acheteur)", "PA-E", "PPF"],
+      "steps": [
+        {"f": 0, "t": 1, "l": "Vente du bien par le particulier", "c": "doc"},
+        {"f": 1, "t": 2, "l": "Document d'achat (auto-facturation)", "c": "doc"},
+        {"f": 2, "t": 3, "l": "E-reporting si applicable", "c": "flux"}
+      ],
+      "attentionPoints": [
+        "Le document d'achat est émis par le <strong>professionnel</strong> (l'acheteur)",
+        "Souvent lié à la TVA sur la marge (cas n°33)",
+        "Le particulier ne peut pas émettre de facture"
+      ],
+      "btFields": [],
+      "statuses": [],
+      "relatedCases": ["cas-33", "cas-19b"]
+    },
+    {
+      "id": "cas-24",
+      "num": "24",
+      "title": "Gestion des arrhes",
+      "subtitle": "Arrhes versées à la commande — non remboursables si annulation. Traitement fiscal spécifique.",
+      "category": "special",
+      "tags": ["arrhes", "prepaiement", "annulation"],
+      "complexity": 2,
+      "inScope": true,
+      "principle": "<p>Les <strong>arrhes</strong> sont des sommes versées à la commande qui, contrairement aux acomptes, permettent à chaque partie de <strong>se désister</strong> : l'acheteur perd les arrhes, le vendeur doit rembourser le double.</p><p>Fiscalement, les arrhes constituent une <strong>indemnité</strong> et non un paiement. Elles ne sont donc pas soumises à TVA tant que la vente n'est pas réalisée.</p>",
+      "actors": ["Vendeur", "PA-E", "PPF", "PA-R", "Acheteur"],
+      "steps": [
+        {"f": 4, "t": 0, "l": "Versement des arrhes", "c": "pay"},
+        {"f": 0, "t": 1, "l": "Facture (si vente réalisée)", "c": "doc"},
+        {"f": 1, "t": 2, "l": "F1 — Données réglementaires", "c": "flux"},
+        {"f": 1, "t": 3, "l": "F2 — Facture complète", "c": "flux"}
+      ],
+      "attentionPoints": [
+        "Les arrhes ne sont <strong>pas des acomptes</strong> — traitement fiscal différent",
+        "Pas de TVA sur les arrhes tant que la vente n'est pas réalisée",
+        "En cas d'annulation : pas de facture, pas de e-invoicing"
+      ],
+      "btFields": [],
+      "statuses": ["Déposée", "Émise", "Reçue", "Acceptée", "Encaissée"],
+      "relatedCases": ["cas-20"]
+    },
+    {
+      "id": "cas-25",
+      "num": "25",
+      "title": "Bons & cartes cadeaux (BUU / BUM)",
+      "subtitle": "Bons à usage unique (TVA à l'émission) vs bons à usages multiples (TVA à l'utilisation).",
+      "category": "special",
+      "tags": ["bon", "cadeau", "buu", "bum", "tva"],
+      "complexity": 3,
+      "inScope": true,
+      "principle": "<p>Deux régimes de TVA selon le type de bon :</p><p><strong>BUU (Bon à Usage Unique) :</strong> le lieu de livraison, le taux de TVA et le fournisseur sont connus à l'émission → TVA exigible <strong>à chaque transfert</strong> du bon. Chaque vente de BUU = fait générateur TVA.</p><p><strong>BUM (Bon à Usages Multiples) :</strong> au moins un de ces éléments est inconnu à l'émission → TVA exigible uniquement <strong>à l'utilisation</strong> du bon. La vente du BUM n'est pas soumise à TVA.</p>",
+      "actors": ["Émetteur du bon", "PA-E", "PPF", "PA-R", "Utilisateur"],
+      "steps": [
+        {"f": 0, "t": 1, "l": "Émission du bon (BUU: avec TVA / BUM: sans TVA)", "c": "doc"},
+        {"f": 1, "t": 2, "l": "E-reporting ou E-invoicing selon le cas", "c": "flux"},
+        {"f": 4, "t": 0, "l": "Utilisation du bon", "c": "info"},
+        {"f": 0, "t": 1, "l": "BUM uniquement: TVA à l'utilisation", "c": "doc"}
+      ],
+      "attentionPoints": [
+        "<strong>BUU :</strong> TVA à chaque transfert du bon (émission, revente…)",
+        "<strong>BUM :</strong> TVA uniquement à l'utilisation finale",
+        "La qualification BUU/BUM dépend de la connaissance du lieu, du taux TVA et du fournisseur à l'émission",
+        "Les bons BUM non utilisés ne génèrent <strong>aucune TVA</strong>"
+      ],
+      "btFields": [],
+      "statuses": [],
+      "relatedCases": []
+    },
+    {
+      "id": "cas-26",
+      "num": "26",
+      "title": "Clause de réserve contractuelle",
+      "subtitle": "Facture émise avec des conditions non encore remplies (réserve de propriété, garantie…).",
+      "category": "special",
+      "tags": ["reserve", "contractuel", "condition"],
+      "complexity": 2,
+      "inScope": true,
+      "principle": "<p>La facture est émise alors que certaines <strong>conditions contractuelles</strong> ne sont pas encore remplies (réserve de propriété, levée de réserves en BTP, validation d'une étape projet…).</p><p>La facture circule normalement dans le système. La clause de réserve est une information <strong>métier</strong> gérée entre les parties, transparente pour le PPF.</p>",
+      "actors": ["Vendeur", "PA-E", "PPF", "PA-R", "Acheteur"],
+      "steps": [
+        {"f": 0, "t": 1, "l": "Facture + mention réserve contractuelle", "c": "doc"},
+        {"f": 1, "t": 2, "l": "F1 — Données réglementaires", "c": "flux"},
+        {"f": 1, "t": 3, "l": "F2 — Facture complète", "c": "flux"},
+        {"f": 3, "t": 4, "l": "Mise à disposition", "c": "status"},
+        {"f": 4, "t": 3, "l": "Statut « Suspendue » ou « Acceptée »", "c": "status"}
+      ],
+      "attentionPoints": [
+        "La clause de réserve est transparente pour le PPF",
+        "Le statut « Suspendue » peut être utilisé en attente de la levée des conditions",
+        "La TVA est exigible selon les règles normales (pas impactée par la réserve)"
+      ],
+      "btFields": [
+        {"bt": "BT-22", "name": "Note de facture", "note": "Mention de la clause de réserve"}
+      ],
+      "statuses": ["Déposée", "Émise", "Reçue", "Suspendue", "Acceptée", "Encaissée"],
+      "relatedCases": []
+    },
+    {
+      "id": "cas-27",
+      "num": "27",
+      "title": "Tickets de péage",
+      "subtitle": "Facturation B2B par les sociétés d'autoroute aux entreprises abonnées. Tolérance spécifique.",
+      "category": "special",
+      "tags": ["peage", "autoroute", "tolerance", "b2b"],
+      "complexity": 1,
+      "inScope": true,
+      "principle": "<p>Les sociétés d'autoroute émettent des <strong>factures récapitulatives mensuelles</strong> aux entreprises abonnées (badge télépéage). C'est une facturation B2B classique avec une tolérance sur le regroupement des transactions.</p><p>Chaque passage n'est pas facturé individuellement — la facture mensuelle regroupe tous les passages du mois.</p>",
+      "actors": ["Société autoroute", "PA-E", "PPF", "PA-R", "Entreprise abonnée"],
+      "steps": [
+        {"f": 0, "t": 1, "l": "Facture récapitulative mensuelle", "c": "doc"},
+        {"f": 1, "t": 2, "l": "F1 — Données réglementaires", "c": "flux"},
+        {"f": 1, "t": 3, "l": "F2 — Facture complète", "c": "flux"},
+        {"f": 3, "t": 4, "l": "Mise à disposition", "c": "status"}
+      ],
+      "attentionPoints": [
+        "Tolérance sur la facturation récapitulative mensuelle",
+        "Les passages individuels sont détaillés en lignes de la facture"
+      ],
+      "btFields": [
+        {"bt": "BT-23", "name": "Cadre de facturation", "note": "S1"}
+      ],
+      "statuses": ["Déposée", "Émise", "Reçue", "Acceptée", "Encaissée"],
+      "relatedCases": ["cas-28"]
+    },
+    {
+      "id": "cas-28",
+      "num": "28",
+      "title": "Notes de restaurant",
+      "subtitle": "Repas B2C (e-reporting) puis potentiellement B2B a posteriori si le client demande une facture.",
+      "category": "special",
+      "tags": ["restaurant", "b2c", "b2b", "cadre-7"],
+      "complexity": 2,
+      "inScope": true,
+      "principle": "<p>Un repas au restaurant est initialement une opération <strong>B2C</strong> (ticket de caisse → e-reporting flux 10.3). Si le client professionnel demande ensuite une <strong>facture B2B</strong>, le restaurateur doit l'émettre avec le cadre <strong>S7/B7</strong> (TVA déjà collectée via e-reporting).</p>",
+      "actors": ["Restaurant", "PA-E", "PPF", "PA-R", "Client entreprise"],
+      "steps": [
+        {"f": 0, "t": 2, "l": "E-reporting B2C (flux 10.3)", "c": "flux"},
+        {"f": 4, "t": 0, "l": "Demande facture B2B a posteriori", "c": "info"},
+        {"f": 0, "t": 1, "l": "Facture B2B cadre S7", "c": "doc"},
+        {"f": 1, "t": 2, "l": "F1 — TVA déjà collectée (S7)", "c": "flux"},
+        {"f": 1, "t": 3, "l": "F2 — Facture complète", "c": "flux"},
+        {"f": 3, "t": 4, "l": "Mise à disposition", "c": "status"}
+      ],
+      "attentionPoints": [
+        "Le cadre <strong>S7/B7/M7</strong> évite la double collecte de TVA (e-reporting + e-invoicing)",
+        "Le restaurateur ne doit pas comptabiliser 2 fois la vente",
+        "Le client doit demander la facture B2B avant la clôture de l'exercice"
+      ],
+      "btFields": [
+        {"bt": "BT-23", "name": "Cadre de facturation", "note": "S7 — TVA déjà collectée via e-reporting"}
+      ],
+      "statuses": ["Déposée", "Émise", "Reçue", "Acceptée"],
+      "relatedCases": ["cas-6", "cas-30"]
+    },
+    {
+      "id": "cas-29",
+      "num": "29",
+      "title": "Assujetti unique (Art. 256 C du CGI)",
+      "subtitle": "Flux intra-groupe au sein d'un assujetti unique : hors champ TVA mais dans le champ e-invoicing.",
+      "category": "special",
+      "tags": ["assujetti-unique", "groupe", "tva", "hors-champ"],
+      "complexity": 3,
+      "inScope": true,
+      "principle": "<p>L'<strong>assujetti unique</strong> (art. 256 C du CGI) est un groupe TVA : les opérations entre membres du groupe sont <strong>hors champ TVA</strong>. Cependant, elles restent dans le <strong>champ du e-invoicing</strong>.</p><p>Le SIREN de l'assujetti unique est renseigné dans le champ <strong>BT-29</strong> avec le schéma d'identification <strong>0231</strong>. Les factures intra-groupe portent un montant de TVA à 0.</p>",
+      "actors": ["Membre A (Vendeur)", "PA-E", "PPF", "PA-R", "Membre B (Acheteur)"],
+      "steps": [
+        {"f": 0, "t": 1, "l": "Facture intra-groupe (TVA = 0)", "c": "doc"},
+        {"f": 1, "t": 2, "l": "F1 — Données (SIREN AU en BT-29)", "c": "flux"},
+        {"f": 1, "t": 3, "l": "F2 — Facture complète", "c": "flux"},
+        {"f": 3, "t": 4, "l": "Mise à disposition", "c": "status"}
+      ],
+      "attentionPoints": [
+        "Opérations <strong>hors champ TVA</strong> mais <strong>dans le champ e-invoicing</strong>",
+        "Le SIREN de l'AU est renseigné dans <strong>BT-29</strong> (schéma 0231)",
+        "TVA = 0 sur les factures intra-groupe",
+        "Le régime d'assujetti unique doit être déclaré auprès de la DGFiP"
+      ],
+      "btFields": [
+        {"bt": "BT-29", "name": "Identifiant fiscal vendeur", "note": "SIREN de l'assujetti unique (schéma 0231)"},
+        {"bt": "BT-48", "name": "Identifiant fiscal acheteur", "note": "SIREN de l'assujetti unique (schéma 0231)"}
+      ],
+      "statuses": ["Déposée", "Émise", "Reçue", "Acceptée"],
+      "relatedCases": ["cas-37"]
+    },
+    {
+      "id": "cas-30",
+      "num": "30",
+      "title": "TVA déjà collectée (B2C → B2B)",
+      "subtitle": "Facture B2B émise après un e-reporting B2C. Cadre B7/S7/M7 pour éviter la double collecte.",
+      "category": "special",
+      "tags": ["tva", "b2c", "b2b", "cadre-7", "double-collecte"],
+      "complexity": 2,
+      "inScope": true,
+      "principle": "<p>Cas générique du « cadre 7 » : une opération initialement déclarée en <strong>e-reporting B2C</strong> fait ensuite l'objet d'une <strong>facture B2B</strong> (le client s'avère être un professionnel).</p><p>Le cadre de facturation <strong>B7/S7/M7</strong> signale au PPF que la TVA a <strong>déjà été collectée</strong> via l'e-reporting. Cela évite la double imposition.</p>",
+      "actors": ["Vendeur", "PA-E", "PPF", "PA-R", "Acheteur"],
+      "steps": [
+        {"f": 0, "t": 2, "l": "E-reporting B2C initial (flux 10.3)", "c": "flux"},
+        {"f": 4, "t": 0, "l": "Client s'identifie comme professionnel", "c": "info"},
+        {"f": 0, "t": 1, "l": "Facture B2B cadre B7/S7/M7", "c": "doc"},
+        {"f": 1, "t": 2, "l": "F1 — TVA déjà collectée", "c": "flux"},
+        {"f": 1, "t": 3, "l": "F2 — Facture complète", "c": "flux"},
+        {"f": 3, "t": 4, "l": "Mise à disposition", "c": "status"}
+      ],
+      "attentionPoints": [
+        "Le cadre <strong>B7/S7/M7</strong> est le seul mécanisme pour éviter la double collecte TVA",
+        "Le vendeur doit corriger son e-reporting B2C en conséquence",
+        "La facture B2B porte le montant TTC mais la TVA ne sera <strong>pas recollectée</strong>"
+      ],
+      "btFields": [
+        {"bt": "BT-23", "name": "Cadre de facturation", "note": "B7, S7 ou M7 selon la nature"}
+      ],
+      "statuses": ["Déposée", "Émise", "Reçue", "Acceptée"],
+      "relatedCases": ["cas-6", "cas-28"]
+    },
+    {
+      "id": "cas-31",
+      "num": "31",
+      "title": "Factures mixtes (biens + services)",
+      "subtitle": "Facture comprenant des biens ET des services non accessoires. Cadre « M » (Mixed).",
+      "category": "standard",
+      "tags": ["mixte", "biens", "services", "cadre-m"],
+      "complexity": 2,
+      "inScope": true,
+      "principle": "<p>Une facture <strong>mixte</strong> contient à la fois des livraisons de biens et des prestations de services <strong>non accessoires</strong> (chacune a sa propre nature fiscale). Le cadre de facturation est <strong>M1</strong> (ou M2, M4, M7, M8 selon le contexte).</p><p>Si le service est <strong>accessoire</strong> au bien (ex : livraison d'un meuble + montage), on utilise B1. Si le bien est accessoire au service, on utilise S1.</p>",
+      "actors": ["Vendeur", "PA-E", "PPF", "PA-R", "Acheteur"],
+      "steps": [
+        {"f": 0, "t": 1, "l": "Facture mixte (cadre M1)", "c": "doc"},
+        {"f": 1, "t": 2, "l": "F1 — Données réglementaires", "c": "flux"},
+        {"f": 1, "t": 3, "l": "F2 — Facture complète", "c": "flux"},
+        {"f": 3, "t": 4, "l": "Mise à disposition", "c": "status"}
+      ],
+      "attentionPoints": [
+        "Cadre <strong>M</strong> uniquement si biens ET services sont <strong>non accessoires</strong>",
+        "Si un élément est accessoire à l'autre → utiliser B1 ou S1",
+        "Chaque ligne porte sa propre catégorie TVA"
+      ],
+      "btFields": [
+        {"bt": "BT-23", "name": "Cadre de facturation", "note": "M1, M2, M4, M7 ou M8 selon le contexte"}
+      ],
+      "statuses": ["Déposée", "Émise", "Reçue", "Acceptée", "Encaissée"],
+      "relatedCases": ["cas-3", "cas-4"]
+    },
+    {
+      "id": "cas-32",
+      "num": "32",
+      "title": "Paiements mensuels avant facturation",
+      "subtitle": "Mensualités versées avant facture (énergie, télécom). Acomptes B2B ou e-reporting B2C.",
+      "category": "special",
+      "tags": ["mensualite", "energie", "telecom", "acompte"],
+      "complexity": 3,
+      "inScope": true,
+      "principle": "<p>Cas courant dans l'<strong>énergie et les télécoms</strong> : le client paie des mensualités (estimées) avant de recevoir la facture de régularisation.</p><p><strong>En B2B :</strong> chaque mensualité = facture d'acompte (cas n°20). La facture de régularisation = facture définitive (cas n°21).</p><p><strong>En B2C :</strong> chaque mensualité = e-reporting. La facture de régularisation ajuste via e-reporting correctif.</p>",
+      "actors": ["Fournisseur (énergie/télécom)", "PA-E", "PPF", "PA-R", "Client"],
+      "steps": [
+        {"f": 0, "t": 1, "l": "Factures d'acompte mensuelles", "c": "doc"},
+        {"f": 1, "t": 2, "l": "F1 — Acomptes mensuels", "c": "flux"},
+        {"f": 0, "t": 1, "l": "Facture de régularisation (cadre B4/S4)", "c": "doc"},
+        {"f": 1, "t": 2, "l": "F1 — Régularisation", "c": "flux"},
+        {"f": 1, "t": 3, "l": "F2 — Facture définitive", "c": "flux"}
+      ],
+      "attentionPoints": [
+        "Chaque mensualité est une facture d'acompte à part entière",
+        "La facture de régularisation déduit tous les acomptes en lignes négatives",
+        "Volume potentiellement très élevé (millions de factures/mois pour un énergéticien)"
+      ],
+      "btFields": [
+        {"bt": "BT-23", "name": "Cadre de facturation", "note": "S1 (acomptes) puis S4 (régularisation)"},
+        {"bt": "BT-3", "name": "Code type", "note": "386/500 (acompte) puis 380 (régularisation)"}
+      ],
+      "statuses": ["Déposée", "Émise", "Reçue", "Acceptée", "Encaissée"],
+      "relatedCases": ["cas-20", "cas-21"]
+    },
+    {
+      "id": "cas-33",
+      "num": "33",
+      "title": "TVA sur la marge",
+      "subtitle": "Régime de TVA sur la marge : biens d'occasion, œuvres d'art, agences de voyage.",
+      "category": "special",
+      "tags": ["marge", "occasion", "tma1", "agence-voyage"],
+      "complexity": 3,
+      "inScope": true,
+      "principle": "<p>Le régime de <strong>TVA sur la marge</strong> s'applique aux revendeurs de biens d'occasion, aux agences de voyage et aux commissaires-priseurs. La TVA est calculée sur la <strong>marge</strong> (prix de vente − prix d'achat) et non sur le prix total.</p><p><strong>En B2B :</strong> facture e-invoicing avec mention « TVA sur la marge » et catégorie TVA spécifique.</p><p><strong>En B2C :</strong> e-reporting avec la catégorie <strong>TMA1</strong>.</p>",
+      "actors": ["Vendeur (marge)", "PA-E", "PPF", "PA-R", "Acheteur"],
+      "steps": [
+        {"f": 0, "t": 1, "l": "Facture avec TVA sur la marge", "c": "doc"},
+        {"f": 1, "t": 2, "l": "F1 — Données (mention marge)", "c": "flux"},
+        {"f": 1, "t": 3, "l": "F2 — Facture complète", "c": "flux"},
+        {"f": 3, "t": 4, "l": "Mise à disposition", "c": "status"}
+      ],
+      "attentionPoints": [
+        "La TVA est calculée sur la <strong>marge</strong>, pas sur le prix total",
+        "La mention « TVA sur la marge » est obligatoire sur la facture",
+        "L'acheteur ne peut <strong>pas déduire la TVA</strong> sur une facture à la marge",
+        "En e-reporting B2C : catégorie <strong>TMA1</strong>"
+      ],
+      "btFields": [
+        {"bt": "BT-151", "name": "Code catégorie TVA", "note": "Catégorie spécifique marge"},
+        {"bt": "BT-22", "name": "Note de facture", "note": "Mention obligatoire « TVA sur la marge »"}
+      ],
+      "statuses": ["Déposée", "Émise", "Reçue", "Acceptée", "Encaissée"],
+      "relatedCases": ["cas-23"]
+    },
+    {
+      "id": "cas-34",
+      "num": "34",
+      "title": "Encaissement partiel & annulation",
+      "subtitle": "Paiements en plusieurs fois avec statuts d'encaissement intermédiaires. Annulation possible.",
+      "category": "special",
+      "tags": ["encaissement", "partiel", "annulation", "statut-212"],
+      "complexity": 2,
+      "inScope": true,
+      "principle": "<p>Le client paie une facture en <strong>plusieurs fois</strong>. Chaque encaissement partiel génère un statut « Encaissée partiellement » (code 212). Quand le solde est atteint, le statut passe à « Encaissée ».</p><p>En cas d'<strong>annulation</strong> d'un encaissement (erreur bancaire, rejet de prélèvement), le statut revient à l'état précédent.</p>",
+      "actors": ["Vendeur", "PA-E", "PPF", "PA-R", "Acheteur"],
+      "steps": [
+        {"f": 0, "t": 1, "l": "Facture initiale", "c": "doc"},
+        {"f": 1, "t": 3, "l": "F2 — Facture complète", "c": "flux"},
+        {"f": 4, "t": 0, "l": "1er paiement partiel", "c": "pay"},
+        {"f": 0, "t": 1, "l": "Statut 212 (encaissée partiellement)", "c": "status"},
+        {"f": 4, "t": 0, "l": "2ème paiement partiel", "c": "pay"},
+        {"f": 0, "t": 1, "l": "Statut 212 (mise à jour)", "c": "status"},
+        {"f": 4, "t": 0, "l": "Paiement final (solde)", "c": "pay"},
+        {"f": 0, "t": 1, "l": "Statut « Encaissée » (total)", "c": "pay"}
+      ],
+      "attentionPoints": [
+        "Chaque paiement partiel = nouveau statut 212 avec le montant cumulé encaissé",
+        "Le statut « Encaissée » final est atteint quand le solde est à 0",
+        "En cas d'annulation d'encaissement, un nouveau statut 212 avec montant corrigé est transmis",
+        "Important pour la TVA à l'encaissement : chaque 212 peut déclencher une exigibilité partielle"
+      ],
+      "btFields": [],
+      "statuses": ["Déposée", "Émise", "Reçue", "Acceptée", "Encaissée partiellement", "Encaissée"],
+      "relatedCases": ["cas-22a"]
+    },
+    {
+      "id": "cas-35",
+      "num": "35",
+      "title": "Notes d'auteur",
+      "subtitle": "Facturation des droits d'auteur par un auteur personne physique à un éditeur/producteur.",
+      "category": "special",
+      "tags": ["auteur", "droits", "personne-physique"],
+      "complexity": 2,
+      "inScope": true,
+      "principle": "<p>Un <strong>auteur personne physique</strong> (écrivain, compositeur, artiste…) facture des droits d'auteur à un éditeur ou producteur. Les notes d'auteur bénéficient d'un régime fiscal spécifique.</p><p>L'auteur peut être assujetti non redevable (franchise en base) ou assujetti redevable. Le traitement TVA dépend de son régime.</p>",
+      "actors": ["Auteur", "PA-E", "PPF", "PA-R", "Éditeur/Producteur"],
+      "steps": [
+        {"f": 0, "t": 1, "l": "Note d'auteur (facture)", "c": "doc"},
+        {"f": 1, "t": 2, "l": "F1 — Données réglementaires", "c": "flux"},
+        {"f": 1, "t": 3, "l": "F2 — Note d'auteur", "c": "flux"},
+        {"f": 3, "t": 4, "l": "Mise à disposition", "c": "status"}
+      ],
+      "attentionPoints": [
+        "Régime spécifique pour les auteurs personnes physiques",
+        "Vérifier le régime TVA de l'auteur (franchise en base ou redevable)"
+      ],
+      "btFields": [],
+      "statuses": ["Déposée", "Émise", "Reçue", "Acceptée", "Encaissée"],
+      "relatedCases": []
+    },
+    {
+      "id": "cas-36",
+      "num": "36",
+      "title": "Secret professionnel & données sensibles",
+      "subtitle": "Avocats, médecins — protection des données sensibles dans les factures électroniques.",
+      "category": "special",
+      "tags": ["secret", "avocat", "medecin", "confidentiel", "bt-153"],
+      "complexity": 3,
+      "inScope": true,
+      "principle": "<p>Les professions soumises au <strong>secret professionnel</strong> (avocats, médecins, notaires…) doivent protéger certaines données dans leurs factures. Les lignes contenant des informations sensibles (nature de la prestation, identité du patient…) peuvent être <strong>masquées</strong>.</p><p>Les champs <strong>BT-153</strong> et <strong>BT-154</strong> permettent de classifier les lignes comme « confidentielles ». Le PPF ne transmet que les données agrégées à la DGFiP.</p>",
+      "actors": ["Professionnel (avocat/médecin)", "PA-E", "PPF", "PA-R", "Client"],
+      "steps": [
+        {"f": 0, "t": 1, "l": "Facture avec lignes confidentielles", "c": "doc"},
+        {"f": 1, "t": 2, "l": "F1 — Données agrégées (sans détail sensible)", "c": "flux"},
+        {"f": 1, "t": 3, "l": "F2 — Facture complète (avec lignes masquées)", "c": "flux"},
+        {"f": 3, "t": 4, "l": "Mise à disposition", "c": "status"}
+      ],
+      "attentionPoints": [
+        "Les champs <strong>BT-153/BT-154</strong> classifient les lignes comme confidentielles",
+        "Le PPF reçoit les données <strong>agrégées</strong> (montant total TVA) sans le détail des lignes sensibles",
+        "Le client reçoit la facture complète via sa PA-R",
+        "Obligatoire pour les professions réglementées soumises au secret professionnel"
+      ],
+      "btFields": [
+        {"bt": "BT-153", "name": "Type de donnée confidentielle", "note": "Classification de la ligne"},
+        {"bt": "BT-154", "name": "Description de l'article", "note": "Peut être masquée si confidentielle"}
+      ],
+      "statuses": ["Déposée", "Émise", "Reçue", "Acceptée", "Encaissée"],
+      "relatedCases": []
+    },
+    {
+      "id": "cas-37",
+      "num": "37",
+      "title": "Sociétés en Participation (SEP)",
+      "subtitle": "Le gérant de la SEP facture pour le compte de la société. Chaque associé accède aux données.",
+      "category": "special",
+      "tags": ["sep", "societe-participation", "gerant", "associe"],
+      "complexity": 3,
+      "inScope": true,
+      "principle": "<p>La <strong>Société en Participation</strong> (SEP) n'a pas de personnalité morale. Le <strong>gérant</strong> de la SEP émet et reçoit les factures pour le compte de la société.</p><p>Chaque associé de la SEP doit pouvoir accéder aux données de facturation qui le concernent pour ses propres déclarations fiscales.</p>",
+      "actors": ["Gérant SEP", "PA-E", "PPF", "PA-R", "Client", "Associés SEP"],
+      "steps": [
+        {"f": 0, "t": 1, "l": "Facture au nom du gérant (pour la SEP)", "c": "doc"},
+        {"f": 1, "t": 2, "l": "F1 — Données réglementaires", "c": "flux"},
+        {"f": 1, "t": 3, "l": "F2 — Facture complète", "c": "flux"},
+        {"f": 3, "t": 4, "l": "Mise à disposition", "c": "status"},
+        {"f": 0, "t": 5, "l": "Partage des données aux associés", "c": "info"}
+      ],
+      "attentionPoints": [
+        "La SEP n'a <strong>pas de personnalité morale</strong> → pas de SIREN propre",
+        "Le gérant est le seul interlocuteur vis-à-vis du PPF",
+        "Chaque associé doit accéder aux données pour sa quote-part fiscale"
+      ],
+      "btFields": [],
+      "statuses": ["Déposée", "Émise", "Reçue", "Acceptée", "Encaissée"],
+      "relatedCases": ["cas-29"]
+    },
+    {
+      "id": "cas-38",
+      "num": "38",
+      "title": "Sous-lignes & regroupements",
+      "subtitle": "Kits, compositions de produits, lignes hiérarchiques avec sous-détail.",
+      "category": "special",
+      "tags": ["sous-lignes", "kit", "regroupement", "hierarchie"],
+      "complexity": 2,
+      "inScope": true,
+      "principle": "<p>Certaines factures nécessitent une <strong>hiérarchie de lignes</strong> : un kit avec ses composants, un regroupement de prestations avec sous-détail. Les champs <strong>EXT-FR-FE-162</strong> (identifiant parent) et <strong>EXT-FR-FE-163</strong> (type de sous-ligne) permettent de structurer cette hiérarchie.</p><p>Seules les lignes « parents » portent les montants TVA. Les sous-lignes sont informatives.</p>",
+      "actors": ["Vendeur", "PA-E", "PPF", "PA-R", "Acheteur"],
+      "steps": [
+        {"f": 0, "t": 1, "l": "Facture avec sous-lignes structurées", "c": "doc"},
+        {"f": 1, "t": 2, "l": "F1 — Données réglementaires", "c": "flux"},
+        {"f": 1, "t": 3, "l": "F2 — Facture avec hiérarchie", "c": "flux"},
+        {"f": 3, "t": 4, "l": "Mise à disposition", "c": "status"}
+      ],
+      "attentionPoints": [
+        "Seules les lignes <strong>parents</strong> portent les montants TVA",
+        "Les sous-lignes sont <strong>informatives</strong> (détail du kit/composition)",
+        "La PA-R doit être capable d'interpréter la hiérarchie"
+      ],
+      "btFields": [
+        {"bt": "EXT-FR-FE-162", "name": "Identifiant ligne parent", "note": "Référence vers la ligne parente"},
+        {"bt": "EXT-FR-FE-163", "name": "Type de sous-ligne", "note": "Composant, détail, regroupement…"}
+      ],
+      "statuses": ["Déposée", "Émise", "Reçue", "Acceptée", "Encaissée"],
+      "relatedCases": []
+    },
+    {
+      "id": "cas-39",
+      "num": "39",
+      "title": "Facture multi-vendeurs (intermédiaire transparent)",
+      "subtitle": "Plusieurs vendeurs sur une même facture. Ex : eau + assainissement. Cadre B8/S8/M8.",
+      "category": "special",
+      "tags": ["multi-vendeurs", "intermediaire", "cadre-8", "eau"],
+      "complexity": 3,
+      "inScope": true,
+      "principle": "<p>Un intermédiaire émet une <strong>facture unique</strong> pour le compte de <strong>plusieurs vendeurs</strong>. Cas typique : la facture d'eau qui inclut l'eau (vendeur A) et l'assainissement (vendeur B).</p><p>Le cadre de facturation est <strong>B8/S8/M8</strong>. Chaque ligne de la facture identifie son vendeur réel. L'intermédiaire est Agent de vendeur pour chaque fournisseur.</p>",
+      "actors": ["Vendeur A", "Vendeur B", "Intermédiaire (Agent)", "PA-E", "PPF", "PA-R", "Acheteur"],
+      "steps": [
+        {"f": 2, "t": 3, "l": "Facture multi-vendeurs (cadre B8)", "c": "doc"},
+        {"f": 3, "t": 4, "l": "F1 — Données par vendeur", "c": "flux"},
+        {"f": 3, "t": 5, "l": "F2 — Facture complète", "c": "flux"},
+        {"f": 5, "t": 6, "l": "Mise à disposition", "c": "status"}
+      ],
+      "attentionPoints": [
+        "Cadre de facturation : <strong>B8/S8/M8</strong>",
+        "Chaque ligne identifie son <strong>vendeur réel</strong>",
+        "L'intermédiaire doit avoir un <strong>mandat de facturation</strong> de chaque vendeur",
+        "Le PPF doit être capable de ventiler la TVA par vendeur"
+      ],
+      "btFields": [
+        {"bt": "BT-23", "name": "Cadre de facturation", "note": "B8, S8 ou M8"},
+        {"bt": "BG-11", "name": "Agent de vendeur", "note": "L'intermédiaire (pour chaque vendeur)"}
+      ],
+      "statuses": ["Déposée", "Émise", "Reçue", "Acceptée", "Encaissée"],
+      "relatedCases": ["cas-12", "cas-17b"]
+    },
+    {
+      "id": "cas-40",
+      "num": "40",
+      "title": "Netting / Compensation",
+      "subtitle": "Compensation de créances réciproques entre deux entreprises. Solde seul payé.",
+      "category": "special",
+      "tags": ["netting", "compensation", "reciproque"],
+      "complexity": 2,
+      "inScope": true,
+      "principle": "<p>Deux entreprises ont des <strong>créances réciproques</strong> : A doit 1 000 € à B, et B doit 700 € à A. Par <strong>compensation</strong> (netting), seul le solde de 300 € est payé.</p><p>Chaque facture suit le circuit normal de e-invoicing. La compensation est un mécanisme de <strong>paiement</strong>, pas de facturation. Les statuts d'encaissement reflètent le paiement net effectif.</p>",
+      "actors": ["Entreprise A", "PA-E", "PPF", "PA-R", "Entreprise B"],
+      "steps": [
+        {"f": 0, "t": 1, "l": "Facture A → B (1 000 €)", "c": "doc"},
+        {"f": 4, "t": 1, "l": "Facture B → A (700 €)", "c": "doc"},
+        {"f": 1, "t": 2, "l": "F1+F2 — Les deux factures circulent", "c": "flux"},
+        {"f": 0, "t": 4, "l": "Accord de compensation", "c": "info"},
+        {"f": 4, "t": 0, "l": "Paiement du solde (300 €)", "c": "pay"},
+        {"f": 0, "t": 1, "l": "Statuts « Encaissée » sur les deux factures", "c": "pay"}
+      ],
+      "attentionPoints": [
+        "Les deux factures circulent <strong>normalement</strong> dans le système",
+        "La compensation est un mécanisme de <strong>paiement</strong>, pas de facturation",
+        "Le statut « Encaissée » est transmis pour <strong>les deux factures</strong> après compensation",
+        "Un accord de compensation doit exister entre les parties"
+      ],
+      "btFields": [],
+      "statuses": ["Déposée", "Émise", "Reçue", "Acceptée", "Encaissée"],
+      "relatedCases": ["cas-41"]
+    },
+    {
+      "id": "cas-41",
+      "num": "41",
+      "title": "Sociétés de Barter (échange commercial)",
+      "subtitle": "Échange de biens ou services entre entreprises sans flux monétaire (ou avec soulte).",
+      "category": "special",
+      "tags": ["barter", "echange", "troc"],
+      "complexity": 3,
+      "inScope": true,
+      "principle": "<p>Le <strong>barter</strong> est un échange commercial de biens ou services entre entreprises, avec ou sans soulte (complément en argent). Chaque partie émet une facture pour sa prestation.</p><p>Le traitement est proche du netting (cas n°40) : les deux factures circulent normalement, et la compensation s'effectue au niveau du paiement. Si une société de barter organise l'échange, elle agit comme intermédiaire.</p>",
+      "actors": ["Entreprise A", "PA-E", "PPF", "PA-R", "Entreprise B", "Société Barter"],
+      "steps": [
+        {"f": 0, "t": 1, "l": "Facture A → B (prestation A)", "c": "doc"},
+        {"f": 4, "t": 1, "l": "Facture B → A (prestation B)", "c": "doc"},
+        {"f": 1, "t": 2, "l": "F1+F2 — Circulation normale", "c": "flux"},
+        {"f": 5, "t": 0, "l": "Orchestration de l'échange", "c": "info"},
+        {"f": 0, "t": 1, "l": "Statuts « Encaissée » (compensation)", "c": "pay"}
+      ],
+      "attentionPoints": [
+        "Chaque partie émet une facture pour sa prestation → <strong>deux factures</strong>",
+        "La TVA s'applique sur la valeur vénale de chaque prestation",
+        "Si soulte : paiement du différentiel en numéraire",
+        "La société de barter peut facturer sa commission en plus"
+      ],
+      "btFields": [],
+      "statuses": ["Déposée", "Émise", "Reçue", "Acceptée", "Encaissée"],
+      "relatedCases": ["cas-40"]
+    },
+    {
+      "id": "cas-42",
+      "num": "42",
+      "title": "Gestion de la détaxe (touristes étrangers)",
+      "subtitle": "Remboursement de TVA aux touristes non-UE. Correction e-reporting B2C → TNT1 puis B7.",
+      "category": "special",
+      "tags": ["detaxe", "touriste", "remboursement", "tnt1", "cadre-7"],
+      "complexity": 3,
+      "inScope": true,
+      "principle": "<p>Un touriste <strong>non résident UE</strong> achète des biens en France et bénéficie de la <strong>détaxe</strong> (remboursement de TVA à la sortie du territoire). Trois schémas possibles :</p><p><strong>Schéma 1 :</strong> Le vendeur facture TTC (e-reporting B2C classique) puis corrige l'e-reporting en TNT1 après validation de la détaxe.</p><p><strong>Schéma 2 :</strong> Le vendeur facture directement HT (le touriste ne paie pas la TVA) → e-reporting en TNT1 dès le départ.</p><p><strong>Schéma 3 :</strong> Intervention d'un opérateur de détaxe tiers qui gère le remboursement.</p>",
+      "actors": ["Vendeur", "PA-E", "PPF", "Opérateur détaxe", "Touriste"],
+      "steps": [
+        {"f": 0, "t": 4, "l": "Vente au touriste (TTC ou HT)", "c": "doc"},
+        {"f": 0, "t": 1, "l": "E-reporting initial (B2C ou TNT1)", "c": "flux"},
+        {"f": 1, "t": 2, "l": "Transmission au PPF", "c": "flux"},
+        {"f": 4, "t": 3, "l": "Validation détaxe à la frontière", "c": "info"},
+        {"f": 3, "t": 0, "l": "Confirmation détaxe", "c": "info"},
+        {"f": 0, "t": 1, "l": "Correction e-reporting → TNT1", "c": "flux"}
+      ],
+      "attentionPoints": [
+        "La détaxe n'est possible que pour les résidents <strong>hors UE</strong>",
+        "Le montant minimum d'achat est de <strong>100,01 € TTC</strong> dans un même magasin le même jour",
+        "La correction d'e-reporting est nécessaire si la TVA avait été initialement déclarée",
+        "Les opérateurs de détaxe (Global Blue, Planet…) peuvent intervenir comme tiers"
+      ],
+      "btFields": [],
+      "statuses": [],
+      "relatedCases": ["cas-30"]
     }
   ]
 }

@@ -34,7 +34,7 @@
                     <ul class="sidebar-nav">
                         <li><a href="#intro" class="sidebar-link active">Introduction</a></li>
                         <li><a href="#cat-a" class="sidebar-link">A — Cas standards</a></li>
-                        <li><a href="#cat-b" class="sidebar-link">B — Frais & dépenses</a></li>
+                        <li><a href="#cat-b" class="sidebar-link">B — Paiements & frais</a></li>
                         <li><a href="#cat-c" class="sidebar-link">C — Affacturage & tiers</a></li>
                         <li><a href="#cat-d" class="sidebar-link">D — Intermédiaires</a></li>
                         <li><a href="#cat-e" class="sidebar-link">E — Sous-traitance</a></li>
@@ -75,31 +75,19 @@
                 <!-- CAT A — Cas standards -->
                 <section id="cat-a" class="content-section">
                     <h2>A — Cas standards</h2>
-                    <p>Les transactions B2B et B2C domestiques les plus courantes.</p>
+                    <p>Le flux de référence et les transactions B2B domestiques les plus courantes.</p>
                     <div class="cu-grid">
+                        <a href="./cas-detail.html?id=nominal" class="cu-card cu-simple">
+                            <div class="cu-num">Nominal</div>
+                            <h4>Flux standard B2B</h4>
+                            <p>Le cas de référence. Vendeur émet une facture à un acheteur via PA-E → PPF → PA-R.</p>
+                            <div class="cu-meta"><span class="cu-cadre">B1/S1/M1</span><span class="cu-complexity">🟢</span></div>
+                        </a>
                         <a href="./cas-detail.html?id=cas-1" class="cu-card cu-simple">
                             <div class="cu-num">N°1</div>
-                            <h4>E-reporting B2C domestique</h4>
-                            <p>Vente à un particulier en France. E-reporting flux 10.3 + 10.4.</p>
-                            <div class="cu-meta"><span class="cu-cadre">E-reporting</span><span class="cu-complexity">🟢</span></div>
-                        </a>
-                        <a href="./cas-detail.html?id=cas-2" class="cu-card cu-medium">
-                            <div class="cu-num">N°2</div>
-                            <h4>E-reporting international</h4>
-                            <p>Transactions avec opérateurs étrangers (intracom, export, import de services). Flux 10.1 / 10.2.</p>
-                            <div class="cu-meta"><span class="cu-cadre">E-reporting</span><span class="cu-complexity">🟡</span></div>
-                        </a>
-                        <a href="./cas-detail.html?id=cas-3" class="cu-card cu-simple">
-                            <div class="cu-num">N°3</div>
-                            <h4>Facture B2B biens</h4>
-                            <p>Le cas le plus courant. Vente de biens entre assujettis en France.</p>
-                            <div class="cu-meta"><span class="cu-cadre">B1</span><span class="cu-complexity">🟢</span></div>
-                        </a>
-                        <a href="./cas-detail.html?id=cas-4" class="cu-card cu-simple">
-                            <div class="cu-num">N°4</div>
-                            <h4>Facture B2B services</h4>
-                            <p>Prestation de service B2B. TVA potentiellement à l'encaissement.</p>
-                            <div class="cu-meta"><span class="cu-cadre">S1</span><span class="cu-complexity">🟢</span></div>
+                            <h4>Multi-commande / Multi-livraison</h4>
+                            <p>Facture regroupant plusieurs commandes et/ou plusieurs livraisons.</p>
+                            <div class="cu-meta"><span class="cu-cadre">B1/S1</span><span class="cu-complexity">🟢</span></div>
                         </a>
                         <a href="./cas-detail.html?id=cas-31" class="cu-card cu-medium">
                             <div class="cu-num">N°31</div>
@@ -110,11 +98,29 @@
                     </div>
                 </section>
 
-                <!-- CAT B — Frais & dépenses -->
+                <!-- CAT B — Paiements, frais & tiers payeurs -->
                 <section id="cat-b" class="content-section">
-                    <h2>B — Frais & dépenses</h2>
-                    <p>Notes de frais, cartes logées et dépenses collaborateurs.</p>
+                    <h2>B — Paiements, frais & tiers payeurs</h2>
+                    <p>Factures déjà payées, tiers payeurs, notes de frais et cartes logées.</p>
                     <div class="cu-grid">
+                        <a href="./cas-detail.html?id=cas-2" class="cu-card cu-medium">
+                            <div class="cu-num">N°2</div>
+                            <h4>Facture déjà payée</h4>
+                            <p>Facture émise après le paiement. Le vendeur envoie le statut « Encaissée ».</p>
+                            <div class="cu-meta"><span class="cu-cadre">B2/S2</span><span class="cu-complexity">🟡</span></div>
+                        </a>
+                        <a href="./cas-detail.html?id=cas-3" class="cu-card cu-medium">
+                            <div class="cu-num">N°3</div>
+                            <h4>Tiers payeur connu</h4>
+                            <p>Le paiement sera effectué par un tiers identifié (centrale de paiement, société mère).</p>
+                            <div class="cu-meta"><span class="cu-cadre">B1/S1</span><span class="cu-complexity">🟡</span></div>
+                        </a>
+                        <a href="./cas-detail.html?id=cas-4" class="cu-card cu-medium">
+                            <div class="cu-num">N°4</div>
+                            <h4>Prise en charge partielle (assurance)</h4>
+                            <p>L'acheteur paie une partie, un tiers (assureur, subventionneur) paie le reste.</p>
+                            <div class="cu-meta"><span class="cu-cadre">B1/S1</span><span class="cu-complexity">🟡</span></div>
+                        </a>
                         <a href="./cas-detail.html?id=cas-5" class="cu-card cu-simple">
                             <div class="cu-num">N°5</div>
                             <h4>Frais collaborateur avec facture entreprise</h4>
@@ -124,7 +130,7 @@
                         <a href="./cas-detail.html?id=cas-6" class="cu-card cu-medium">
                             <div class="cu-num">N°6</div>
                             <h4>Frais collaborateur sans facture</h4>
-                            <p>Ticket de caisse au nom du collaborateur. E-reporting B2C puis éventuellement B2B a posteriori (B7/S7).</p>
+                            <p>Ticket de caisse au nom du collaborateur. E-reporting B2C puis B2B a posteriori (B7/S7).</p>
                             <div class="cu-meta"><span class="cu-cadre">E-rep → B7/S7</span><span class="cu-complexity">🟡</span></div>
                         </a>
                         <a href="./cas-detail.html?id=cas-7" class="cu-card cu-medium">
@@ -136,27 +142,27 @@
                     </div>
                 </section>
 
-                <!-- CAT C — Affacturage & tiers payeurs -->
+                <!-- CAT C — Affacturage & tiers bénéficiaires -->
                 <section id="cat-c" class="content-section">
-                    <h2>C — Affacturage & tiers payeurs</h2>
-                    <p>Gestion des factors, centrales de trésorerie et tiers bénéficiaires.</p>
+                    <h2>C — Affacturage & tiers bénéficiaires</h2>
+                    <p>Gestion des factors, centrales de trésorerie et subrogation.</p>
                     <div class="cu-grid">
                         <a href="./cas-detail.html?id=cas-8" class="cu-card cu-medium">
                             <div class="cu-num">N°8</div>
-                            <h4>Affacturage / centralisation trésorerie</h4>
-                            <p>Bénéficiaire du paiement connu (factor). Code type 393, mention subrogation BT-21=ACC.</p>
-                            <div class="cu-meta"><span class="cu-cadre">B1/S1 + 393</span><span class="cu-complexity">🟡</span></div>
+                            <h4>Affacturage connu à la facturation</h4>
+                            <p>Bénéficiaire du paiement connu (factor). IBAN du factor dans la facture.</p>
+                            <div class="cu-meta"><span class="cu-cadre">B1/S1</span><span class="cu-complexity">🟡</span></div>
                         </a>
                         <a href="./cas-detail.html?id=cas-9" class="cu-card cu-medium">
                             <div class="cu-num">N°9</div>
                             <h4>Distributeur / dépositaire</h4>
-                            <p>Tiers qui gère commande et paiement pour le compte de l'acheteur.</p>
+                            <p>Tiers qui gère commande et paiement pour le compte du vendeur.</p>
                             <div class="cu-meta"><span class="cu-cadre">B1/S1</span><span class="cu-complexity">🟡</span></div>
                         </a>
                         <a href="./cas-detail.html?id=cas-10" class="cu-card cu-complex">
                             <div class="cu-num">N°10</div>
-                            <h4>Subrogation (bénéficiaire inconnu)</h4>
-                            <p>Bénéficiaire inconnu à l'émission. Changement notifié ultérieurement via CDAR.</p>
+                            <h4>Affacturage inconnu — Subrogation</h4>
+                            <p>Le factor est inconnu à l'émission. Changement de bénéficiaire via statut « Affacturée ».</p>
                             <div class="cu-meta"><span class="cu-cadre">B1/S1 + CDAR</span><span class="cu-complexity">🔴</span></div>
                         </a>
                     </div>
@@ -165,7 +171,7 @@
                 <!-- CAT D — Intermédiaires & mandataires -->
                 <section id="cat-d" class="content-section">
                     <h2>D — Intermédiaires & mandataires</h2>
-                    <p>Tiers gestionnaires, marketplaces et intermédiaires transparents.</p>
+                    <p>Tiers gestionnaires, marketplaces, débours et intermédiaires transparents.</p>
                     <div class="cu-grid">
                         <a href="./cas-detail.html?id=cas-11" class="cu-card cu-medium">
                             <div class="cu-num">N°11</div>
@@ -181,14 +187,14 @@
                         </a>
                         <a href="./cas-detail.html?id=cas-15" class="cu-card cu-medium">
                             <div class="cu-num">N°15</div>
-                            <h4>Commande par un tiers</h4>
-                            <p>Un tiers passe commande pour l'acheteur final. Facturation à l'acheteur.</p>
+                            <h4>Achat par un tiers pour le compte de l'acheteur</h4>
+                            <p>Un agent d'acheteur commande, réceptionne et valide pour l'acheteur.</p>
                             <div class="cu-meta"><span class="cu-cadre">B1/S1</span><span class="cu-complexity">🟡</span></div>
                         </a>
                         <a href="./cas-detail.html?id=cas-16" class="cu-card cu-medium">
                             <div class="cu-num">N°16</div>
                             <h4>Facture de débours</h4>
-                            <p>Remboursement d'une dépense avancée, sans marge.</p>
+                            <p>Remboursement d'une dépense avancée pour le client, sans marge.</p>
                             <div class="cu-meta"><span class="cu-cadre">S1</span><span class="cu-complexity">🟡</span></div>
                         </a>
                         <a href="./cas-detail.html?id=cas-17a" class="cu-card cu-medium">
@@ -217,13 +223,13 @@
                         <a href="./cas-detail.html?id=cas-13" class="cu-card cu-complex">
                             <div class="cu-num">N°13</div>
                             <h4>Sous-traitance avec paiement direct</h4>
-                            <p>Sous-traitant facture le maître d'ouvrage. Cadre S5 (B2B) ou S3 (B2G).</p>
+                            <p>Sous-traitant facture le titulaire, le maître d'ouvrage paie directement. Cadre S5/S3.</p>
                             <div class="cu-meta"><span class="cu-cadre">S5 / S3</span><span class="cu-complexity">🔴</span></div>
                         </a>
                         <a href="./cas-detail.html?id=cas-14" class="cu-card cu-complex">
                             <div class="cu-num">N°14</div>
                             <h4>Co-traitance B2B</h4>
-                            <p>Groupement d'entreprises, chacun facture avec le cadre S6.</p>
+                            <p>Groupement d'entreprises, chacun facture avec le cadre S6. Visa du mandataire.</p>
                             <div class="cu-meta"><span class="cu-cadre">S6</span><span class="cu-complexity">🔴</span></div>
                         </a>
                     </div>
@@ -237,7 +243,7 @@
                         <a href="./cas-detail.html?id=cas-19a" class="cu-card cu-medium">
                             <div class="cu-num">N°19a</div>
                             <h4>Tiers facturant sous mandat</h4>
-                            <p>Un mandataire émet la facture pour le compte du vendeur.</p>
+                            <p>Un mandataire émet la facture pour le compte du vendeur. Bloc BG-11.</p>
                             <div class="cu-meta"><span class="cu-cadre">B1/S1</span><span class="cu-complexity">🟡</span></div>
                         </a>
                         <a href="./cas-detail.html?id=cas-19b" class="cu-card cu-medium">
@@ -248,7 +254,7 @@
                         </a>
                         <a href="./cas-detail.html?id=cas-23" class="cu-card cu-medium">
                             <div class="cu-num">N°23</div>
-                            <h4>Auto-facturation particulier↔professionnel</h4>
+                            <h4>Auto-facturation particulier → professionnel</h4>
                             <p>Rachat d'occasion à un particulier par un professionnel.</p>
                             <div class="cu-meta"><span class="cu-cadre">Variable</span><span class="cu-complexity">🟡</span></div>
                         </a>
@@ -258,8 +264,20 @@
                 <!-- CAT G — Notes de débit & rectificatives -->
                 <section id="cat-g" class="content-section">
                     <h2>G — Notes de débit & rectificatives</h2>
-                    <p>Ajustements, corrections et notes de débit.</p>
+                    <p>Ajustements, corrections, avoirs et notes de débit.</p>
                     <div class="cu-grid">
+                        <a href="./cas-detail.html?id=nominal-litige-avoir" class="cu-card cu-medium">
+                            <div class="cu-num">nominal-litige-avoir</div>
+                            <h4>Litige suivi d'un avoir</h4>
+                            <p>L'acheteur conteste, un litige est ouvert, puis le vendeur émet un avoir.</p>
+                            <div class="cu-meta"><span class="cu-cadre">B1/S1</span><span class="cu-complexity">🟡</span></div>
+                        </a>
+                        <a href="./cas-detail.html?id=nominal-litige-rectificative" class="cu-card cu-medium">
+                            <div class="cu-num">nominal-litige-rectificative</div>
+                            <h4>Litige suivi d'une rectificative</h4>
+                            <p>Le vendeur émet une facture rectificative qui remplace l'originale.</p>
+                            <div class="cu-meta"><span class="cu-cadre">B1/S1</span><span class="cu-complexity">🟡</span></div>
+                        </a>
                         <a href="./cas-detail.html?id=cas-18" class="cu-card cu-medium">
                             <div class="cu-num">N°18</div>
                             <h4>Notes de débit</h4>
@@ -326,8 +344,8 @@
                         </a>
                         <a href="./cas-detail.html?id=cas-25" class="cu-card cu-complex">
                             <div class="cu-num">N°25</div>
-                            <h4>Bons & cartes cadeaux</h4>
-                            <p>SPV (TVA à l'émission) vs MPV (TVA à l'utilisation).</p>
+                            <h4>Bons & cartes cadeaux (BUU / BUM)</h4>
+                            <p>BUU (TVA à l'émission) vs BUM (TVA à l'utilisation).</p>
                             <div class="cu-meta"><span class="cu-cadre">Variable</span><span class="cu-complexity">🔴</span></div>
                         </a>
                         <a href="./cas-detail.html?id=cas-26" class="cu-card cu-medium">
@@ -339,7 +357,7 @@
                         <a href="./cas-detail.html?id=cas-27" class="cu-card cu-simple">
                             <div class="cu-num">N°27</div>
                             <h4>Tickets de péage</h4>
-                            <p>Factures B2B des sociétés d'autoroute aux entreprises abonnées.</p>
+                            <p>Factures récapitulatives mensuelles des sociétés d'autoroute.</p>
                             <div class="cu-meta"><span class="cu-cadre">S1</span><span class="cu-complexity">🟢</span></div>
                         </a>
                         <a href="./cas-detail.html?id=cas-28" class="cu-card cu-medium">
@@ -386,10 +404,16 @@
                             <p>Paiements en plusieurs fois. Chaque encaissement = statut 212.</p>
                             <div class="cu-meta"><span class="cu-cadre">S1</span><span class="cu-complexity">🟡</span></div>
                         </a>
+                        <a href="./cas-detail.html?id=cas-35" class="cu-card cu-medium">
+                            <div class="cu-num">N°35</div>
+                            <h4>Notes d'auteur</h4>
+                            <p>Facturation des droits d'auteur par un auteur personne physique.</p>
+                            <div class="cu-meta"><span class="cu-cadre">S1</span><span class="cu-complexity">🟡</span></div>
+                        </a>
                         <a href="./cas-detail.html?id=cas-36" class="cu-card cu-complex">
                             <div class="cu-num">N°36</div>
                             <h4>Secret professionnel</h4>
-                            <p>Avocats, médecins — données sensibles, protection renforcée.</p>
+                            <p>Avocats, médecins — données sensibles, protection renforcée (BT-153/154).</p>
                             <div class="cu-meta"><span class="cu-cadre">S1</span><span class="cu-complexity">🔴</span></div>
                         </a>
                         <a href="./cas-detail.html?id=cas-37" class="cu-card cu-complex">
@@ -409,6 +433,18 @@
                             <h4>Multi-vendeurs (facture globale)</h4>
                             <p>Plusieurs vendeurs sur une facture (ex : eau + assainissement). Cadre B8/S8/M8.</p>
                             <div class="cu-meta"><span class="cu-cadre">B8/S8/M8</span><span class="cu-complexity">🔴</span></div>
+                        </a>
+                        <a href="./cas-detail.html?id=cas-40" class="cu-card cu-medium">
+                            <div class="cu-num">N°40</div>
+                            <h4>Netting / Compensation</h4>
+                            <p>Compensation de créances réciproques. Seul le solde est payé.</p>
+                            <div class="cu-meta"><span class="cu-cadre">B1/S1</span><span class="cu-complexity">🟡</span></div>
+                        </a>
+                        <a href="./cas-detail.html?id=cas-41" class="cu-card cu-complex">
+                            <div class="cu-num">N°41</div>
+                            <h4>Sociétés de Barter</h4>
+                            <p>Échange commercial de biens/services entre entreprises avec ou sans soulte.</p>
+                            <div class="cu-meta"><span class="cu-cadre">B1/S1</span><span class="cu-complexity">🔴</span></div>
                         </a>
                         <a href="./cas-detail.html?id=cas-42" class="cu-card cu-complex">
                             <div class="cu-num">N°42</div>

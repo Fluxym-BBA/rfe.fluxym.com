@@ -143,7 +143,7 @@ const SiteNav = {
                         <h4>Sources officielles</h4>
                         <ul>
                             <li><a href="https://www.impots.gouv.fr/professionnel/facturation-electronique" target="_blank">DGFiP ↗</a></li>
-                            <li><a href="https://norminfo.afnor.org/norme/xp-z12-012" target="_blank">AFNOR ↗</a></li>
+                            <li><a href="https://www.boutique.afnor.org/fr-fr/norme/xp-z12012/formats-et-profils-des-messages-factures-et-statuts-de-cycle-de-vie-constit/fa212486/444122" target="_blank">AFNOR ↗</a></li>
                             <li><a href="https://chorus-pro.gouv.fr" target="_blank">Chorus Pro ↗</a></li>
                             <li><a href="https://www.fnfe-mpe.org" target="_blank">FNFE-MPE ↗</a></li>
                             <li><a href="https://piste.gouv.fr" target="_blank">PISTE ↗</a></li>

@@ -141,7 +141,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // =====================
-    // SVG SEQUENCE DIAGRAM
+    // SVG SEQUENCE DIAGRAM — Original + Fullscreen
     // =====================
     function renderDiagram(actors, steps) {
         var wrap = document.getElementById('diagram-wrap');
@@ -166,22 +166,16 @@ document.addEventListener('DOMContentLoaded', function() {
         };
 
         var svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 ' + totalH + '" class="cudet-svg">';
-
-        // Background
         svg += '<rect width="960" height="' + totalH + '" rx="16" fill="#fafbfc" stroke="#e5e7eb" stroke-width="1"/>';
 
-        // Actor columns
         actors.forEach(function(actor, i) {
             var x = pad + i * colW;
-            // Lifeline
             svg += '<line x1="' + x + '" y1="' + (headerH + 5) + '" x2="' + x + '" y2="' + (totalH - 20) + '" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4,4"/>';
-            // Header box
             var boxW = Math.min(colW - 10, 120);
             svg += '<rect x="' + (x - boxW/2) + '" y="12" width="' + boxW + '" height="40" rx="10" fill="#0b2046"/>';
             svg += '<text x="' + x + '" y="38" text-anchor="middle" fill="white" font-size="11" font-weight="700" font-family="Inter, sans-serif">' + actor + '</text>';
         });
 
-        // Steps
         steps.forEach(function(step, i) {
             var y = headerH + 15 + i * stepH;
             var x1 = pad + step.f * colW;
@@ -191,26 +185,83 @@ document.addEventListener('DOMContentLoaded', function() {
             var dir = x2 > x1 ? 1 : -1;
             var arrowX = x2 - dir * 8;
 
-            // Arrow line
             svg += '<g class="cudet-step" data-step="' + i + '">';
             svg += '<line x1="' + x1 + '" y1="' + y + '" x2="' + arrowX + '" y2="' + y + '" stroke="' + color + '" stroke-width="2.5" ' + (dash ? 'stroke-dasharray="' + dash + '"' : '') + ' stroke-linecap="round"/>';
-
-            // Arrowhead
             svg += '<polygon points="' + x2 + ',' + y + ' ' + (x2 - dir * 10) + ',' + (y - 5) + ' ' + (x2 - dir * 10) + ',' + (y + 5) + '" fill="' + color + '"/>';
 
-            // Step number circle
             var circleX = (x1 + x2) / 2;
             svg += '<circle cx="' + circleX + '" cy="' + y + '" r="12" fill="white" stroke="' + color + '" stroke-width="2"/>';
             svg += '<text x="' + circleX + '" y="' + (y + 4) + '" text-anchor="middle" fill="' + color + '" font-size="10" font-weight="800" font-family="Inter, sans-serif">' + (i + 1) + '</text>';
 
-            // Label
             var labelY = y - 16;
             svg += '<text x="' + circleX + '" y="' + labelY + '" text-anchor="middle" fill="#374151" font-size="10" font-weight="600" font-family="Inter, sans-serif">' + step.l + '</text>';
-
             svg += '</g>';
         });
 
         svg += '</svg>';
         wrap.innerHTML = svg;
+
+        // ═══ FULLSCREEN ═══
+        // Bouton expand
+        var expandBtn = document.createElement('button');
+        expandBtn.className = 'cudet-expand-btn';
+        expandBtn.innerHTML = '⛶ Plein écran';
+        expandBtn.title = 'Voir en plein écran';
+        wrap.style.position = 'relative';
+        wrap.appendChild(expandBtn);
+
+        expandBtn.addEventListener('click', function() {
+            // Créer l'overlay
+            var overlay = document.createElement('div');
+            overlay.className = 'cudet-fullscreen-overlay';
+
+            // Header avec titre + bouton fermer
+            var header = document.createElement('div');
+            header.className = 'cudet-fs-header';
+            header.innerHTML = '<span>📐 Diagramme de séquence</span><button class="cudet-fs-close">✕ Fermer</button>';
+            overlay.appendChild(header);
+
+            // Container SVG
+            var svgContainer = document.createElement('div');
+            svgContainer.className = 'cudet-fs-svg';
+            svgContainer.innerHTML = svg;
+            overlay.appendChild(svgContainer);
+
+            // Légende
+            var legend = document.createElement('div');
+            legend.className = 'cudet-fs-legend';
+            legend.innerHTML =
+                '<span class="cudet-leg cudet-leg--doc">📄 Document</span>' +
+                '<span class="cudet-leg cudet-leg--flux">📡 Flux</span>' +
+                '<span class="cudet-leg cudet-leg--status">🔄 Statut</span>' +
+                '<span class="cudet-leg cudet-leg--pay">💰 Paiement</span>' +
+                '<span class="cudet-leg cudet-leg--reject">❌ Rejet</span>';
+            overlay.appendChild(legend);
+
+            document.body.appendChild(overlay);
+            document.body.style.overflow = 'hidden';
+
+            // Animation d'entrée
+            requestAnimationFrame(function() {
+                overlay.classList.add('cudet-fs-active');
+            });
+
+            // Fermer
+            function closeFs() {
+                overlay.classList.remove('cudet-fs-active');
+                setTimeout(function() {
+                    document.body.removeChild(overlay);
+                    document.body.style.overflow = '';
+                }, 300);
+            }
+
+            overlay.querySelector('.cudet-fs-close').addEventListener('click', closeFs);
+            overlay.addEventListener('click', function(e) {
+                if (e.target === overlay) closeFs();
+            });
+            document.addEventListener('keydown', function handler(e) {
+                if (e.key === 'Escape') { closeFs(); document.removeEventListener('keydown', handler); }
+            });
+        });
     }
 });
