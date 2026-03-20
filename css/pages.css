@@ -3936,3 +3936,306 @@ body {
     .erp-table { font-size: 12px; }
     .erp-example { max-width: 180px; }
 }
+
+
+/* ==========================================================================
+   CAS D'USAGE — Hub + Detail + Diagramme
+   ========================================================================== */
+
+/* ========== HUB — Stats ========== */
+.cuhub-stats {
+    display: flex;
+    gap: 16px;
+    margin: -20px 0 28px;
+}
+.cuhub-stat {
+    flex: 1;
+    text-align: center;
+    padding: 20px;
+    background: var(--white);
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--gray-100);
+    box-shadow: var(--shadow-sm);
+}
+.cuhub-stat-val {
+    display: block;
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--navy);
+    letter-spacing: -1px;
+}
+.cuhub-stat-label {
+    font-size: 12px;
+    color: var(--gray-500);
+    font-weight: 600;
+}
+
+/* ========== HUB — Toolbar ========== */
+.cuhub-toolbar {
+    margin-bottom: 24px;
+}
+.cuhub-search-wrap {
+    position: relative;
+    margin-bottom: 16px;
+}
+.cuhub-search-icon {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 16px;
+}
+.cuhub-search {
+    width: 100%;
+    padding: 14px 16px 14px 48px;
+    border: 2px solid var(--gray-200);
+    border-radius: var(--radius-full);
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    background: var(--white);
+}
+.cuhub-search:focus {
+    outline: none;
+    border-color: var(--cyan);
+    box-shadow: 0 0 0 4px rgba(0, 167, 225, 0.1);
+}
+.cuhub-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+.cuhub-filter {
+    padding: 7px 16px;
+    border: 1.5px solid var(--gray-200);
+    border-radius: var(--radius-full);
+    background: var(--white);
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--gray-500);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+.cuhub-filter:hover { border-color: var(--cyan); color: var(--cyan); }
+.cuhub-filter.active {
+    background: linear-gradient(135deg, var(--cyan), var(--navy));
+    color: white;
+    border-color: transparent;
+    box-shadow: var(--shadow-cyan);
+}
+
+/* ========== HUB — Card Grid ========== */
+.cuhub-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+}
+.cuhub-card {
+    display: flex;
+    flex-direction: column;
+    padding: 22px;
+    background: var(--white);
+    border: 1px solid var(--gray-100);
+    border-radius: var(--radius-xl);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow-sm);
+}
+.cuhub-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--cyan);
+}
+.cuhub-card--hors { opacity: 0.55; }
+.cuhub-card--hors:hover { opacity: 0.85; }
+.cuhub-card-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+.cuhub-card-num {
+    font-size: 13px;
+    font-weight: 900;
+    color: var(--navy);
+    background: rgba(0, 167, 225, 0.08);
+    padding: 3px 10px;
+    border-radius: var(--radius-full);
+}
+.cuhub-card-cat {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--gray-400);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.cuhub-card-title {
+    font-size: 15px;
+    font-weight: 800;
+    color: var(--gray-900);
+    margin-bottom: 6px;
+    line-height: 1.3;
+}
+.cuhub-card-sub {
+    font-size: 13px;
+    color: var(--gray-500);
+    line-height: 1.6;
+    flex: 1;
+    margin-bottom: 12px;
+}
+.cuhub-card-foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 12px;
+    border-top: 1px solid var(--gray-100);
+}
+.cuhub-card-complex { display: flex; gap: 4px; }
+.cuhub-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--gray-200);
+}
+.cuhub-dot--on { background: var(--cyan); }
+.cuhub-scope {
+    font-size: 10px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: var(--radius-full);
+}
+.cuhub-scope--in { background: rgba(16, 185, 129, 0.1); color: var(--success); }
+.cuhub-scope--hors { background: rgba(107, 114, 128, 0.1); color: var(--gray-400); }
+
+/* ========== HUB — Empty + Loader ========== */
+.cuhub-empty {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--gray-400);
+}
+.cuhub-empty-icon { font-size: 3rem; display: block; margin-bottom: 12px; }
+.cuhub-loader {
+    text-align: center;
+    padding: 40px;
+    color: var(--gray-400);
+    font-style: italic;
+    animation: pulse 1.5s infinite;
+}
+
+/* ========== DETAIL — Principle ========== */
+.cudet-principle {
+    font-size: 15px;
+    line-height: 1.9;
+    color: var(--gray-700);
+}
+.cudet-principle strong { color: var(--navy); }
+
+/* ========== DETAIL — SVG Diagram ========== */
+.cudet-diagram-wrap {
+    background: var(--white);
+    border-radius: var(--radius-2xl);
+    padding: 16px;
+    border: 1px solid var(--gray-100);
+    box-shadow: var(--shadow-md);
+    margin: 16px 0;
+    overflow-x: auto;
+}
+.cudet-svg {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+.cudet-step { cursor: pointer; transition: opacity 0.2s ease; }
+.cudet-svg:hover .cudet-step { opacity: 0.3; }
+.cudet-svg:hover .cudet-step:hover { opacity: 1; }
+
+.cudet-diagram-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-top: 12px;
+    justify-content: center;
+}
+.cudet-leg {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--gray-500);
+}
+
+/* ========== DETAIL — Statuses ========== */
+.cudet-statuses {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+    margin: 16px 0;
+}
+.cudet-status {
+    padding: 6px 14px;
+    border-radius: var(--radius-full);
+    font-size: 12px;
+    font-weight: 700;
+    background: color-mix(in srgb, var(--status-color) 10%, transparent);
+    color: var(--status-color);
+    border: 1px solid color-mix(in srgb, var(--status-color) 20%, transparent);
+}
+.cudet-status-arrow {
+    color: var(--gray-300);
+    font-size: 14px;
+    font-weight: 300;
+}
+
+/* ========== DETAIL — Related ========== */
+.cudet-related { margin-top: 24px; }
+.cudet-related h4 {
+    font-size: 13px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--gray-400);
+    margin-bottom: 12px;
+}
+.cudet-related-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+.cudet-related-card {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: var(--gray-50);
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius-full);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--gray-700);
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+.cudet-related-card:hover { border-color: var(--cyan); color: var(--cyan); }
+.cudet-related-num {
+    font-weight: 900;
+    color: var(--cyan);
+}
+
+@media (max-width: 600px) {
+    .cuhub-stats { flex-direction: column; }
+    .cuhub-grid { grid-template-columns: 1fr; }
+    .cudet-statuses { flex-direction: column; align-items: flex-start; }
+}
+
+/* Cartes cas d'usage — liens */
+a.cu-card {
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+}
+a.cu-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--cyan);
+}

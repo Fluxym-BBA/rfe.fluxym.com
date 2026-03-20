@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="page-title">Cas d'usage | E-Invoicing Academy</title>
+    <link rel="icon" href="./assets/favicon-Fluxym-V2.png" sizes="32x32" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/pages.css">
+</head>
+<body>
+
+    <nav id="main-nav"></nav>
+
+    <header class="page-hero" id="case-hero">
+        <div class="page-hero-content">
+            <div class="breadcrumb">
+                <a href="./index.html">Accueil</a> <span>/</span> <a href="./cas-usage.html">Cas d'usage</a> <span>/</span> <span id="bc-title">…</span>
+            </div>
+            <span class="hero-badge" id="case-badge">…</span>
+            <h1 id="case-title">Chargement…</h1>
+            <p id="case-subtitle"></p>
+        </div>
+    </header>
+
+    <main class="page-main">
+        <div class="page-container page-layout">
+
+            <aside class="page-sidebar">
+                <div class="sidebar-sticky">
+                    <h4>Sur cette page</h4>
+                    <ul class="sidebar-nav" id="case-sidebar">
+                        <li><a href="#principe" class="sidebar-link active">Principe</a></li>
+                        <li><a href="#diagramme" class="sidebar-link">Diagramme</a></li>
+                        <li><a href="#attention" class="sidebar-link">Points d'attention</a></li>
+                        <li><a href="#technique" class="sidebar-link">Données techniques</a></li>
+                        <li><a href="#statuts" class="sidebar-link">Cycle de vie</a></li>
+                    </ul>
+                    <div class="sidebar-nav-pages">
+                        <h4>Navigation</h4>
+                        <a href="./cas-usage.html" class="sidebar-page">← Tous les cas</a>
+                        <a href="#" class="sidebar-page" id="nav-prev-side">← Cas précédent</a>
+                        <a href="#" class="sidebar-page" id="nav-next-side">Cas suivant →</a>
+                    </div>
+                </div>
+            </aside>
+
+            <article class="page-content" id="case-content">
+
+                <!-- PRINCIPE -->
+                <section id="principe" class="content-section">
+                    <h2>📋 Principe</h2>
+                    <div id="case-principle">
+                        <div class="cuhub-loader">Chargement…</div>
+                    </div>
+                </section>
+
+                <!-- DIAGRAMME DE SÉQUENCE -->
+                <section id="diagramme" class="content-section">
+                    <h2>📐 Diagramme de séquence</h2>
+                    <p>Survolez chaque étape pour voir le détail. Les flèches montrent le sens de circulation entre les acteurs.</p>
+                    <div class="cudet-diagram-wrap" id="diagram-wrap">
+                        <div class="cuhub-loader">Génération du diagramme…</div>
+                    </div>
+                    <div class="cudet-diagram-legend">
+                        <span class="cudet-leg cudet-leg--doc">📄 Document</span>
+                        <span class="cudet-leg cudet-leg--flux">📡 Flux</span>
+                        <span class="cudet-leg cudet-leg--status">🔄 Statut</span>
+                        <span class="cudet-leg cudet-leg--pay">💰 Paiement</span>
+                        <span class="cudet-leg cudet-leg--reject">❌ Rejet</span>
+                    </div>
+                </section>
+
+                <!-- POINTS D'ATTENTION -->
+                <section id="attention" class="content-section">
+                    <h2>⚠️ Points d'attention</h2>
+                    <div id="case-attention"></div>
+                </section>
+
+                <!-- DONNÉES TECHNIQUES -->
+                <section id="technique" class="content-section">
+                    <h2>🔧 Données techniques</h2>
+                    <div id="case-bt-fields"></div>
+                </section>
+
+                <!-- CYCLE DE VIE -->
+                <section id="statuts" class="content-section">
+                    <h2>🔄 Statuts du cycle de vie</h2>
+                    <div id="case-statuses"></div>
+                    <div id="case-related"></div>
+                </section>
+
+                <!-- NAV BOTTOM -->
+                <nav class="page-nav-bottom" id="case-nav-bottom">
+                    <a href="./cas-usage.html" class="nav-prev">
+                        <span class="nav-label">Retour</span>
+                        <span class="nav-title">← Tous les cas d'usage</span>
+                    </a>
+                </nav>
+            </article>
+        </div>
+    </main>
+
+    <footer id="main-footer"></footer>
+
+    <script src="./js/nav.js"></script>
+    <script src="./js/animations.js"></script>
+    <script src="./js/cas-detail.js"></script>
+</body>
+</html>

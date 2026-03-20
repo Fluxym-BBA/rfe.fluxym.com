@@ -1,0 +1,638 @@
+{
+  "meta": {
+    "version": "1.0",
+    "lastUpdate": "2026-03-20",
+    "source": "FNFE-MPE — Cas listés au 31/10/2025",
+    "baseActors": ["Vendeur", "PA-E", "PPF", "PA-R", "Acheteur"]
+  },
+  "categories": {
+    "nominal":       { "label": "Cas Nominal",          "icon": "⚙️", "color": "navy" },
+    "standard":      { "label": "Standard",             "icon": "📦", "color": "cyan" },
+    "paiement":      { "label": "Paiement & Tiers",     "icon": "💳", "color": "green" },
+    "affacturage":   { "label": "Affacturage",          "icon": "🏦", "color": "purple" },
+    "intermediaire": { "label": "Intermédiaires",       "icon": "🔀", "color": "indigo" },
+    "soustraitance": { "label": "Sous/Co-traitance",    "icon": "🏗️", "color": "teal" },
+    "marketplace":   { "label": "Marketplace",          "icon": "🛒", "color": "orange" },
+    "mandat":        { "label": "Mandat & Auto-fact.",   "icon": "📝", "color": "rose" },
+    "acompte":       { "label": "Acompte & Escompte",   "icon": "💰", "color": "amber" },
+    "b2c":           { "label": "Cas B2C spéciaux",     "icon": "👤", "color": "lime" },
+    "special":       { "label": "Cas spécifiques",      "icon": "⭐", "color": "gray" },
+    "horschamp":     { "label": "Hors champ",           "icon": "🚫", "color": "gray" }
+  },
+  "cases": [
+    {
+      "id": "nominal",
+      "num": "Nominal",
+      "title": "Cas Nominal — Flux standard",
+      "subtitle": "Le schéma classique : un vendeur émet une facture à un acheteur via leurs PA respectives.",
+      "category": "nominal",
+      "tags": ["b2b", "standard", "base"],
+      "complexity": 1,
+      "inScope": true,
+      "principle": "<p>Le Cas Nominal correspond au schéma classique dans lequel un <strong>Vendeur</strong> émet via sa PA-E une facture à un <strong>Acheteur</strong> par le biais de sa PA-R.</p><p>C'est le flux de référence : toute facture B2B domestique suit ce parcours sauf particularité.</p>",
+      "actors": ["Vendeur", "PA-E", "PPF", "PA-R", "Acheteur"],
+      "steps": [
+        {"f": 0, "t": 1, "l": "Crée et dépose la facture", "c": "doc"},
+        {"f": 1, "t": 2, "l": "F1 — Données réglementaires", "c": "flux"},
+        {"f": 1, "t": 3, "l": "F2 — Facture complète", "c": "flux"},
+        {"f": 2, "t": 3, "l": "F3 — Données complémentaires", "c": "flux"},
+        {"f": 3, "t": 4, "l": "Mise à disposition", "c": "status"},
+        {"f": 4, "t": 3, "l": "Statut « Acceptée »", "c": "status"},
+        {"f": 3, "t": 2, "l": "F6 — Remontée statut", "c": "status"},
+        {"f": 2, "t": 1, "l": "F6 — Transfert au vendeur", "c": "status"}
+      ],
+      "attentionPoints": [],
+      "btFields": [
+        {"bt": "BT-23", "name": "Cadre de facturation", "note": "S1, B1 ou M1 selon la nature"}
+      ],
+      "statuses": ["Déposée", "Émise", "Reçue", "Mise à disposition", "Acceptée", "Encaissée"],
+      "relatedCases": ["nominal-rejet-emission", "nominal-refus", "cas-1"]
+    },
+    {
+      "id": "nominal-rejet-emission",
+      "num": "Nominal — Rejet émission",
+      "title": "Rejet à l'émission",
+      "subtitle": "La PA-E détecte une erreur dans la facture avant transmission au PPF.",
+      "category": "nominal",
+      "tags": ["rejet", "erreur", "emission"],
+      "complexity": 1,
+      "inScope": true,
+      "principle": "<p>La PA-E effectue des contrôles de conformité avant de transmettre la facture. Si une erreur est détectée (format, champs obligatoires manquants, incohérence), la facture est <strong>rejetée</strong> et ne part jamais vers le PPF.</p><p>Le vendeur doit corriger et redéposer.</p>",
+      "actors": ["Vendeur", "PA-E", "PPF", "PA-R", "Acheteur"],
+      "steps": [
+        {"f": 0, "t": 1, "l": "Dépose la facture", "c": "doc"},
+        {"f": 1, "t": 0, "l": "Rejet — Erreur détectée", "c": "reject"},
+        {"f": 0, "t": 1, "l": "Corrige et redépose", "c": "doc"}
+      ],
+      "attentionPoints": ["La facture ne quitte jamais la PA-E en cas de rejet", "Le vendeur reçoit un retour détaillant la cause du rejet"],
+      "btFields": [],
+      "statuses": ["Déposée", "Rejetée"],
+      "relatedCases": ["nominal"]
+    },
+    {
+      "id": "nominal-non-transmise",
+      "num": "Nominal — Non transmise",
+      "title": "Facture non transmise",
+      "subtitle": "Le PPF n'arrive pas à router la facture vers la PA-R du destinataire.",
+      "category": "nominal",
+      "tags": ["erreur", "routage"],
+      "complexity": 1,
+      "inScope": true,
+      "principle": "<p>La facture a été acceptée par la PA-E et transmise au PPF, mais le PPF ne parvient pas à la router vers la PA-R de l'acheteur (adresse inconnue, PA-R indisponible, erreur annuaire).</p><p>Le statut <strong>« Non transmise »</strong> est renvoyé au vendeur.</p>",
+      "actors": ["Vendeur", "PA-E", "PPF", "PA-R", "Acheteur"],
+      "steps": [
+        {"f": 0, "t": 1, "l": "Dépose la facture", "c": "doc"},
+        {"f": 1, "t": 2, "l": "F1 — Données réglementaires", "c": "flux"},
+        {"f": 2, "t": 1, "l": "Statut « Non transmise »", "c": "reject"}
+      ],
+      "attentionPoints": ["Le vendeur doit vérifier l'adresse électronique du destinataire dans l'annuaire (F7/F8)", "La facture a bien été reçue par le PPF côté fiscal (F1 transmis)"],
+      "btFields": [],
+      "statuses": ["Déposée", "Émise", "Non transmise"],
+      "relatedCases": ["nominal"]
+    },
+    {
+      "id": "nominal-rejet-reception",
+      "num": "Nominal — Rejet réception",
+      "title": "Rejet à la réception",
+      "subtitle": "La PA-R détecte une anomalie technique dans la facture reçue.",
+      "category": "nominal",
+      "tags": ["rejet", "reception"],
+      "complexity": 1,
+      "inScope": true,
+      "principle": "<p>La PA-R de l'acheteur effectue ses propres contrôles à la réception. Si la facture ne passe pas ces contrôles (format, cohérence, doublons), elle est <strong>rejetée techniquement</strong>.</p><p>Ce rejet est différent du refus métier (cas Nominal — Refus).</p>",
+      "actors": ["Vendeur", "PA-E", "PPF", "PA-R", "Acheteur"],
+      "steps": [
+        {"f": 0, "t": 1, "l": "Dépose la facture", "c": "doc"},
+        {"f": 1, "t": 2, "l": "F1 — Données réglementaires", "c": "flux"},
+        {"f": 1, "t": 3, "l": "F2 — Facture complète", "c": "flux"},
+        {"f": 3, "t": 2, "l": "Rejet technique", "c": "reject"},
+        {"f": 2, "t": 1, "l": "Statut « Rejetée »", "c": "reject"}
+      ],
+      "attentionPoints": ["Le rejet technique (par la PA-R) est différent du refus métier (par l'acheteur)", "Le vendeur doit corriger la facture et la réémettre"],
+      "btFields": [],
+      "statuses": ["Déposée", "Émise", "Reçue", "Rejetée"],
+      "relatedCases": ["nominal", "nominal-refus"]
+    },
+    {
+      "id": "nominal-refus",
+      "num": "Nominal — Refus",
+      "title": "Refus par l'acheteur (métier)",
+      "subtitle": "L'acheteur refuse la facture après l'avoir reçue. Statut obligatoire.",
+      "category": "nominal",
+      "tags": ["refus", "obligatoire", "cycle-de-vie"],
+      "complexity": 2,
+      "inScope": true,
+      "principle": "<p>L'acheteur examine la facture et la <strong>refuse</strong> (erreur de montant, prestation non conforme, etc.). Ce statut est <strong>obligatoire</strong> : il doit être transmis par la PA au PPF.</p><p>Si la facture a été refusée <strong>après comptabilisation</strong>, le statut refus peut être utilisé comme justificatif — il ne faut <strong>pas</strong> demander un avoir au vendeur pour une facture refusée.</p>",
+      "actors": ["Vendeur", "PA-E", "PPF", "PA-R", "Acheteur"],
+      "steps": [
+        {"f": 0, "t": 1, "l": "Dépose la facture", "c": "doc"},
+        {"f": 1, "t": 2, "l": "F1 — Données réglementaires", "c": "flux"},
+        {"f": 1, "t": 3, "l": "F2 — Facture complète", "c": "flux"},
+        {"f": 3, "t": 4, "l": "Mise à disposition", "c": "status"},
+        {"f": 4, "t": 3, "l": "Statut « Refusée »", "c": "reject"},
+        {"f": 3, "t": 2, "l": "F6 — Refus transmis au PPF", "c": "reject"},
+        {"f": 2, "t": 1, "l": "F6 — Transfert au vendeur", "c": "reject"}
+      ],
+      "attentionPoints": [
+        "Ce statut <strong>obligatoire</strong> sera transmis par la PA au PPF",
+        "Si ce statut a été communiqué au PPF, il faut <strong>corriger manuellement</strong> la déclaration pré-remplie",
+        "Si la facture a été refusée après comptabilisation, le statut refus sert de justificatif → <strong>NE PAS</strong> demander un avoir"
+      ],
+      "btFields": [],
+      "statuses": ["Déposée", "Émise", "Reçue", "Mise à disposition", "Refusée"],
+      "relatedCases": ["nominal", "nominal-litige-avoir"]
+    },
+    {
+      "id": "nominal-litige-avoir",
+      "num": "Nominal — Litige + Avoir",
+      "title": "Litige suivi d'un avoir",
+      "subtitle": "L'acheteur conteste, un litige est ouvert, puis le vendeur émet un avoir partiel ou total.",
+      "category": "nominal",
+      "tags": ["litige", "avoir", "cycle-de-vie"],
+      "complexity": 2,
+      "inScope": true,
+      "principle": "<p>L'acheteur met la facture <strong>en litige</strong>. Après échanges, le vendeur émet un <strong>avoir</strong> (partiel ou total) qui annule ou réduit le montant de la facture initiale.</p><p>L'avoir suit le même circuit que la facture initiale (F1 + F2) et référence la facture d'origine.</p>",
+      "actors": ["Vendeur", "PA-E", "PPF", "PA-R", "Acheteur"],
+      "steps": [
+        {"f": 0, "t": 1, "l": "Facture initiale", "c": "doc"},
+        {"f": 1, "t": 3, "l": "F2 — Facture", "c": "flux"},
+        {"f": 3, "t": 4, "l": "Mise à disposition", "c": "status"},
+        {"f": 4, "t": 3, "l": "Statut « Litige »", "c": "status"},
+        {"f": 3, "t": 1, "l": "F6 — Litige transmis", "c": "status"},
+        {"f": 0, "t": 1, "l": "Émet un avoir", "c": "doc"},
+        {"f": 1, "t": 2, "l": "F1 — Avoir (données)", "c": "flux"},
+        {"f": 1, "t": 3, "l": "F2 — Avoir (complet)", "c": "flux"}
+      ],
+      "attentionPoints": [
+        "L'avoir doit référencer la facture d'origine dans le bloc BG-3",
+        "L'avoir est un document à part entière, avec son propre cycle de vie"
+      ],
+      "btFields": [
+        {"bt": "BG-3", "name": "Référence facture antérieure", "note": "Numéro de la facture en litige"},
+        {"bt": "BT-25", "name": "Numéro de la facture précédente", "note": "Obligatoire dans l'avoir"}
+      ],
+      "statuses": ["Acceptée", "Litige", "Avoir émis"],
+      "relatedCases": ["nominal", "nominal-litige-rectificative"]
+    },
+    {
+      "id": "nominal-litige-rectificative",
+      "num": "Nominal — Litige + Rectificative",
+      "title": "Litige suivi d'une facture rectificative",
+      "subtitle": "L'acheteur conteste, puis le vendeur émet une facture rectificative.",
+      "category": "nominal",
+      "tags": ["litige", "rectificative"],
+      "complexity": 2,
+      "inScope": true,
+      "principle": "<p>Variante du litige : au lieu d'un avoir, le vendeur émet une <strong>facture rectificative</strong> qui remplace la facture initiale. La facture rectificative référence la facture d'origine.</p>",
+      "actors": ["Vendeur", "PA-E", "PPF", "PA-R", "Acheteur"],
+      "steps": [
+        {"f": 0, "t": 1, "l": "Facture initiale", "c": "doc"},
+        {"f": 1, "t": 3, "l": "F2 — Facture", "c": "flux"},
+        {"f": 4, "t": 3, "l": "Statut « Litige »", "c": "status"},
+        {"f": 0, "t": 1, "l": "Facture rectificative", "c": "doc"},
+        {"f": 1, "t": 2, "l": "F1 — Rectificative", "c": "flux"},
+        {"f": 1, "t": 3, "l": "F2 — Rectificative", "c": "flux"}
+      ],
+      "attentionPoints": ["La facture rectificative est un nouveau document avec son propre numéro"],
+      "btFields": [
+        {"bt": "BG-3", "name": "Référence facture antérieure", "note": "Numéro de la facture corrigée"}
+      ],
+      "statuses": ["Litige", "Rectificative émise"],
+      "relatedCases": ["nominal-litige-avoir"]
+    },
+    {
+      "id": "cas-1",
+      "num": "1",
+      "title": "Multi-commande / Multi-livraison",
+      "subtitle": "Facture regroupant plusieurs commandes et/ou plusieurs livraisons.",
+      "category": "standard",
+      "tags": ["b2b", "commande", "livraison"],
+      "complexity": 1,
+      "inScope": true,
+      "principle": "<p>Ce cas correspond à une facture qui regroupe <strong>plusieurs commandes</strong> et/ou <strong>plusieurs livraisons</strong>. C'est un cas très courant en B2B.</p><p>Il n'y a pas de séquence d'action particulière. Pas de particularité sur le statut de cycle de vie, ni sur l'e-reporting.</p><p>Les numéros de commandes et d'avis d'expédition ainsi que les informations de livraison peuvent être renseignés <strong>au niveau des lignes</strong>.</p>",
+      "actors": ["Vendeur", "PA-E", "PPF", "PA-R", "Acheteur"],
+      "steps": [
+        {"f": 0, "t": 1, "l": "Crée facture multi-commande", "c": "doc"},
+        {"f": 1, "t": 2, "l": "F1 — Données réglementaires", "c": "flux"},
+        {"f": 1, "t": 3, "l": "F2 — Facture complète", "c": "flux"},
+        {"f": 2, "t": 3, "l": "F3 — Données complémentaires", "c": "flux"},
+        {"f": 3, "t": 4, "l": "Mise à disposition", "c": "status"}
+      ],
+      "attentionPoints": ["Pas de séquence d'action particulière par rapport au cas nominal", "Les références commande (BT-13) et livraison (BT-16) se renseignent <strong>au niveau des lignes</strong>, pas de l'en-tête"],
+      "btFields": [
+        {"bt": "BT-13", "name": "Référence commande acheteur", "note": "Au niveau ligne si multi-commande"},
+        {"bt": "BT-16", "name": "Référence d'expédition", "note": "Au niveau ligne si multi-livraison"}
+      ],
+      "statuses": ["Déposée", "Émise", "Reçue", "Acceptée", "Encaissée"],
+      "relatedCases": ["nominal"]
+    },
+    {
+      "id": "cas-2",
+      "num": "2",
+      "title": "Facture déjà payée à l'émission",
+      "subtitle": "La facture est émise après le paiement. Le vendeur doit envoyer le statut « Encaissée ».",
+      "category": "paiement",
+      "tags": ["paiement", "encaissement", "tiers"],
+      "complexity": 2,
+      "inScope": true,
+      "principle": "<p>Le fournisseur émet une facture pour une prestation ou livraison <strong>déjà payée</strong>. Deux sous-cas : paiement par l'acheteur lui-même, ou par un <strong>tiers payeur</strong>.</p><p>Le vendeur doit renseigner le montant déjà payé (BT-113) et, si la TVA est à l'encaissement, envoyer le statut « Encaissée » car le paiement a déjà eu lieu.</p>",
+      "actors": ["Vendeur", "PA-E", "PPF", "PA-R", "Acheteur"],
+      "steps": [
+        {"f": 4, "t": 0, "l": "Paiement déjà effectué", "c": "pay"},
+        {"f": 0, "t": 1, "l": "Crée facture + montant payé (BT-113)", "c": "doc"},
+        {"f": 1, "t": 2, "l": "F1 — Données réglementaires", "c": "flux"},
+        {"f": 1, "t": 3, "l": "F2 — Facture complète", "c": "flux"},
+        {"f": 3, "t": 4, "l": "Mise à disposition", "c": "status"},
+        {"f": 0, "t": 1, "l": "Statut « Encaissée »", "c": "pay"},
+        {"f": 1, "t": 2, "l": "F6 — Encaissée transmise", "c": "pay"}
+      ],
+      "attentionPoints": [
+        "Si TVA à l'encaissement, le statut « Encaissée » doit être envoyé car le paiement a déjà eu lieu",
+        "Le net à payer de la facture est 0 si le paiement total a déjà été effectué",
+        "En cas de tiers payeur, celui-ci peut être renseigné dans le bloc EXT-FR-FE-BG-02"
+      ],
+      "btFields": [
+        {"bt": "BT-113", "name": "Montant payé", "note": "Montant déjà réglé au moment de l'émission"},
+        {"bt": "BT-115", "name": "Montant à payer", "note": "= 0 si paiement total déjà effectué"}
+      ],
+      "statuses": ["Déposée", "Émise", "Reçue", "Acceptée", "Encaissée"],
+      "relatedCases": ["cas-3", "cas-20"]
+    },
+    {
+      "id": "cas-3",
+      "num": "3",
+      "title": "Tiers payeur connu à la facturation",
+      "subtitle": "Le paiement sera effectué par un tiers identifié (ex : centrale de paiement).",
+      "category": "paiement",
+      "tags": ["tiers", "payeur", "paiement"],
+      "complexity": 2,
+      "inScope": true,
+      "principle": "<p>Le fournisseur sait que le paiement sera réalisé par un <strong>tiers payeur</strong> identifié (centrale de trésorerie, société mère, etc.). Le bloc TIERS PAYEUR doit être renseigné dans la facture.</p><p>La bonne pratique est de laisser l'acheteur gérer ses relations avec le tiers payeur de façon à rendre cette spécificité transparente pour le vendeur.</p>",
+      "actors": ["Vendeur", "PA-E", "PPF", "PA-R", "Acheteur", "Tiers Payeur"],
+      "steps": [
+        {"f": 0, "t": 1, "l": "Facture + bloc Tiers Payeur", "c": "doc"},
+        {"f": 1, "t": 2, "l": "F1 — Données réglementaires", "c": "flux"},
+        {"f": 1, "t": 3, "l": "F2 — Facture complète", "c": "flux"},
+        {"f": 3, "t": 4, "l": "Mise à disposition", "c": "status"},
+        {"f": 5, "t": 0, "l": "Paiement par le tiers", "c": "pay"},
+        {"f": 0, "t": 1, "l": "Statut « Encaissée »", "c": "pay"}
+      ],
+      "attentionPoints": [
+        "Le bloc TIERS PAYEUR doit être renseigné dans la facture",
+        "La bonne pratique : l'acheteur gère la relation avec le tiers payeur de façon transparente pour le vendeur"
+      ],
+      "btFields": [
+        {"bt": "EXT-FR-FE-BG-02", "name": "Tiers Payeur", "note": "SIREN, nom et coordonnées du tiers payeur"}
+      ],
+      "statuses": ["Déposée", "Émise", "Reçue", "Acceptée", "Paiement transmis", "Encaissée"],
+      "relatedCases": ["cas-2", "cas-4", "cas-8"]
+    },
+    {
+      "id": "cas-4",
+      "num": "4",
+      "title": "Prise en charge partielle par un tiers (assurance, subvention)",
+      "subtitle": "L'acheteur paie une partie, un tiers (assureur, subventionneur) paie le reste.",
+      "category": "paiement",
+      "tags": ["tiers", "partiel", "assurance"],
+      "complexity": 2,
+      "inScope": true,
+      "principle": "<p>Une facture de réparation où la franchise (+ TVA si déductible) est payée par l'acheteur, le solde étant réglé par l'assureur. Le montant déjà payé ou à payer par le tiers est renseigné dans BT-113.</p>",
+      "actors": ["Vendeur", "PA-E", "PPF", "PA-R", "Acheteur", "Tiers (Assureur)"],
+      "steps": [
+        {"f": 0, "t": 1, "l": "Facture + montant tiers (BT-113)", "c": "doc"},
+        {"f": 1, "t": 3, "l": "F2 — Facture complète", "c": "flux"},
+        {"f": 3, "t": 4, "l": "Mise à disposition", "c": "status"},
+        {"f": 4, "t": 0, "l": "Paiement partiel (franchise)", "c": "pay"},
+        {"f": 5, "t": 0, "l": "Paiement solde (assureur)", "c": "pay"},
+        {"f": 0, "t": 1, "l": "Statut « Encaissée »", "c": "pay"}
+      ],
+      "attentionPoints": [
+        "Le montant payé par le tiers est renseigné dans BT-113",
+        "La note de facture peut détailler la répartition du paiement"
+      ],
+      "btFields": [
+        {"bt": "BT-113", "name": "Montant payé", "note": "Montant payé/à payer par le tiers (assureur)"},
+        {"bt": "BT-22", "name": "Note de facture", "note": "Détail de la répartition du paiement"}
+      ],
+      "statuses": ["Déposée", "Émise", "Reçue", "Acceptée", "Encaissée"],
+      "relatedCases": ["cas-3", "cas-5"]
+    },
+    {
+      "id": "cas-5",
+      "num": "5",
+      "title": "Note de frais — Facture au nom de l'entreprise",
+      "subtitle": "Un collaborateur paie une dépense professionnelle, la facture est au nom de l'entreprise.",
+      "category": "paiement",
+      "tags": ["note-de-frais", "collaborateur", "tiers"],
+      "complexity": 1,
+      "inScope": true,
+      "principle": "<p>Un collaborateur paie une dépense professionnelle avec ses propres moyens (espèces, carte personnelle). La facture est émise au nom de <strong>l'entreprise</strong> (raison sociale, adresse, SIREN). L'entreprise rembourse ensuite le collaborateur.</p><p>Le montant déjà payé est égal au montant total, le net à payer est 0. Le collaborateur est considéré comme un tiers payeur.</p>",
+      "actors": ["Vendeur", "PA-E", "PPF", "PA-R", "Acheteur (Entreprise)"],
+      "steps": [
+        {"f": 0, "t": 1, "l": "Facture au nom de l'entreprise", "c": "doc"},
+        {"f": 1, "t": 2, "l": "F1 — Données réglementaires", "c": "flux"},
+        {"f": 1, "t": 3, "l": "F2 — Facture complète", "c": "flux"},
+        {"f": 3, "t": 4, "l": "Mise à disposition", "c": "status"}
+      ],
+      "attentionPoints": [
+        "La facture <strong>doit</strong> être émise au nom de l'entreprise (pas du collaborateur)",
+        "BT-113 = montant total, BT-115 (net à payer) = 0",
+        "Le collaborateur peut être identifié comme tiers payeur dans la facture"
+      ],
+      "btFields": [
+        {"bt": "BT-113", "name": "Montant payé", "note": "= montant total (payé par le collaborateur)"},
+        {"bt": "BT-115", "name": "Montant à payer", "note": "= 0"}
+      ],
+      "statuses": ["Déposée", "Émise", "Reçue", "Acceptée"],
+      "relatedCases": ["cas-6", "cas-2"]
+    },
+    {
+      "id": "cas-6",
+      "num": "6",
+      "title": "Note de frais — Sans facture au nom de l'entreprise",
+      "subtitle": "Simple ticket de caisse ou facture au nom du collaborateur. TVA potentiellement non déductible.",
+      "category": "paiement",
+      "tags": ["note-de-frais", "collaborateur", "b2c", "cadre-7"],
+      "complexity": 2,
+      "inScope": true,
+      "principle": "<p>Le collaborateur dispose d'un simple ticket de caisse ou d'une facture libellée à son nom. La déductibilité de la TVA est <strong>incertaine</strong> car l'entreprise n'a pas de facture à son nom.</p><p>Le collaborateur ou le client peut néanmoins demander une facture électronique B2B dans un second temps, avec un cadre de facturation <strong>BT-23 = type 7</strong> (S7, B7, M7) signifiant « TVA déjà collectée dans le cadre du e-reporting ».</p>",
+      "actors": ["Vendeur", "PA-E", "PPF", "PA-R", "Acheteur (Entreprise)"],
+      "steps": [
+        {"f": 0, "t": 1, "l": "E-reporting B2C initial", "c": "flux"},
+        {"f": 4, "t": 0, "l": "Demande facture B2B a posteriori", "c": "info"},
+        {"f": 0, "t": 1, "l": "Facture B2B cadre S7/B7/M7", "c": "doc"},
+        {"f": 1, "t": 2, "l": "F1 — TVA déjà collectée", "c": "flux"},
+        {"f": 1, "t": 3, "l": "F2 — Facture complète", "c": "flux"}
+      ],
+      "attentionPoints": [
+        "La déductibilité de la TVA est incertaine sans facture au nom de l'entreprise",
+        "Le cadre de facturation <strong>S7/B7/M7</strong> signifie « TVA déjà collectée via e-reporting B2C »",
+        "Le vendeur ne doit pas comptabiliser 2 fois la vente (e-reporting + e-invoicing)"
+      ],
+      "btFields": [
+        {"bt": "BT-23", "name": "Cadre de facturation", "note": "S7, B7 ou M7 — TVA déjà collectée"}
+      ],
+      "statuses": ["Déposée", "Émise", "Reçue", "Acceptée"],
+      "relatedCases": ["cas-5", "cas-30"]
+    },
+    {
+      "id": "cas-7",
+      "num": "7",
+      "title": "Carte logée (carte d'achat)",
+      "subtitle": "Transaction réglée directement par une carte logée (ex : réservation d'hôtel).",
+      "category": "paiement",
+      "tags": ["carte", "paiement", "logee"],
+      "complexity": 1,
+      "inScope": true,
+      "principle": "<p>La transaction (réservation d'hôtel par exemple) est réglée directement par la <strong>carte logée</strong> (carte d'achat rattachée à l'entreprise). La facture est émise au nom de l'entreprise titulaire de la carte.</p>",
+      "actors": ["Vendeur", "PA-E", "PPF", "PA-R", "Acheteur"],
+      "steps": [
+        {"f": 0, "t": 1, "l": "Facture (paiement par carte logée)", "c": "doc"},
+        {"f": 1, "t": 2, "l": "F1 — Données réglementaires", "c": "flux"},
+        {"f": 1, "t": 3, "l": "F2 — Facture complète", "c": "flux"},
+        {"f": 3, "t": 4, "l": "Mise à disposition", "c": "status"},
+        {"f": 0, "t": 1, "l": "Statut « Encaissée »", "c": "pay"}
+      ],
+      "attentionPoints": ["La facture est émise au nom de l'entreprise titulaire de la carte logée"],
+      "btFields": [
+        {"bt": "BT-113", "name": "Montant payé", "note": "= montant total (payé par carte logée)"}
+      ],
+      "statuses": ["Déposée", "Émise", "Reçue", "Acceptée", "Encaissée"],
+      "relatedCases": ["cas-2", "cas-5"]
+    },
+    {
+      "id": "cas-8",
+      "num": "8",
+      "title": "Affacturage connu à la facturation",
+      "subtitle": "Le bénéficiaire du paiement est un factor identifié dès l'émission de la facture.",
+      "category": "affacturage",
+      "tags": ["affacturage", "factor", "tiers"],
+      "complexity": 2,
+      "inScope": true,
+      "principle": "<p>Le vendeur a cédé sa créance à un <strong>factor</strong> (affactureur) avant l'émission de la facture. Le client doit payer directement le factor, identifié dans la facture comme bénéficiaire du paiement.</p><p>Le factor informe le vendeur de l'encaissement pour que le statut « Encaissée » soit mis à jour.</p>",
+      "actors": ["Vendeur", "PA-E", "PPF", "PA-R", "Acheteur", "Factor"],
+      "steps": [
+        {"f": 0, "t": 1, "l": "Facture + IBAN factor", "c": "doc"},
+        {"f": 1, "t": 2, "l": "F1 — Données réglementaires", "c": "flux"},
+        {"f": 1, "t": 3, "l": "F2 — Facture (bénéficiaire = factor)", "c": "flux"},
+        {"f": 3, "t": 4, "l": "Mise à disposition", "c": "status"},
+        {"f": 4, "t": 5, "l": "Paiement au factor", "c": "pay"},
+        {"f": 5, "t": 0, "l": "Informe le vendeur", "c": "info"},
+        {"f": 0, "t": 1, "l": "Statut « Encaissée »", "c": "pay"}
+      ],
+      "attentionPoints": [
+        "Le client doit identifier qu'il convient de payer le <strong>factor</strong> et non le vendeur",
+        "L'IBAN du factor est renseigné dans la facture"
+      ],
+      "btFields": [
+        {"bt": "BT-84", "name": "IBAN bénéficiaire", "note": "IBAN du factor"},
+        {"bt": "EXT-FR-FE-BG-02", "name": "Tiers bénéficiaire", "note": "Identité du factor"}
+      ],
+      "statuses": ["Déposée", "Émise", "Reçue", "Acceptée", "Paiement transmis", "Encaissée"],
+      "relatedCases": ["cas-9", "cas-10"]
+    },
+    {
+      "id": "cas-9",
+      "num": "9",
+      "title": "Distributeur / Dépositaire",
+      "subtitle": "Tiers bénéficiaire qui gère aussi la commande, la réception et parfois la facturation.",
+      "category": "affacturage",
+      "tags": ["distributeur", "depositaire", "tiers"],
+      "complexity": 2,
+      "inScope": true,
+      "principle": "<p>Traité comme le cas n°8 (sans mention de subrogation). Le tiers bénéficiaire est un distributeur ou dépositaire qui gère la commande et la réception pour le compte du vendeur.</p><p>Il n'est pas nécessaire d'organiser une réplication des factures vers le tiers. Seule l'information d'encaissement est nécessaire.</p>",
+      "actors": ["Vendeur", "PA-E", "PPF", "PA-R", "Acheteur", "Distributeur"],
+      "steps": [
+        {"f": 0, "t": 1, "l": "Facture + données distributeur", "c": "doc"},
+        {"f": 1, "t": 2, "l": "F1 — Données réglementaires", "c": "flux"},
+        {"f": 1, "t": 3, "l": "F2 — Facture complète", "c": "flux"},
+        {"f": 3, "t": 4, "l": "Mise à disposition", "c": "status"},
+        {"f": 4, "t": 5, "l": "Paiement au distributeur", "c": "pay"},
+        {"f": 5, "t": 0, "l": "Info encaissement", "c": "info"},
+        {"f": 0, "t": 1, "l": "Statut « Encaissée »", "c": "pay"}
+      ],
+      "attentionPoints": [
+        "Pas de réplication des factures vers le tiers bénéficiaire nécessaire",
+        "Seul l'encaissement effectif doit remonter au vendeur"
+      ],
+      "btFields": [],
+      "statuses": ["Déposée", "Émise", "Reçue", "Acceptée", "Encaissée"],
+      "relatedCases": ["cas-8", "cas-10"]
+    },
+    {
+      "id": "cas-10",
+      "num": "10",
+      "title": "Affacturage inconnu — Subrogation",
+      "subtitle": "Le factor (bénéficiaire) n'est pas connu au moment de la création de la facture.",
+      "category": "affacturage",
+      "tags": ["affacturage", "subrogation", "confidentiel"],
+      "complexity": 3,
+      "inScope": true,
+      "principle": "<p>Le vendeur cède sa créance <strong>après</strong> l'émission de la facture. Le client reçoit un statut de cycle de vie « Affacturée » avec le nouveau bénéficiaire et les nouvelles coordonnées bancaires.</p><p>Deux variantes : <strong>affacturage classique</strong> (le client est informé du nouveau bénéficiaire) et <strong>affacturage confidentiel</strong> (seul l'IBAN change, le bénéficiaire apparent reste le vendeur).</p><p>En cas d'annulation, le statut « NON AFFACTURÉE » restitue l'IBAN du vendeur.</p>",
+      "actors": ["Vendeur", "PA-E", "PPF", "PA-R", "Acheteur", "Factor"],
+      "steps": [
+        {"f": 0, "t": 1, "l": "Facture initiale (IBAN vendeur)", "c": "doc"},
+        {"f": 1, "t": 3, "l": "F2 — Facture complète", "c": "flux"},
+        {"f": 3, "t": 4, "l": "Mise à disposition", "c": "status"},
+        {"f": 0, "t": 5, "l": "Cession de créance au factor", "c": "info"},
+        {"f": 0, "t": 1, "l": "Statut « Affacturée » + nouvel IBAN", "c": "status"},
+        {"f": 1, "t": 3, "l": "F6 — Affacturée transmise", "c": "status"},
+        {"f": 3, "t": 4, "l": "Nouveau bénéficiaire", "c": "status"},
+        {"f": 4, "t": 5, "l": "Paiement au factor", "c": "pay"}
+      ],
+      "attentionPoints": [
+        "Le client doit être en mesure de recevoir et traiter le message de <strong>changement de bénéficiaire</strong>",
+        "<strong>Affacturage classique</strong> : le client voit le nouveau bénéficiaire (le factor)",
+        "<strong>Affacturage confidentiel</strong> : seul l'IBAN change, le bénéficiaire apparent reste le vendeur",
+        "Statut « NON AFFACTURÉE » permet l'annulation avec restitution de l'IBAN vendeur"
+      ],
+      "btFields": [
+        {"bt": "BT-84", "name": "IBAN bénéficiaire", "note": "Mis à jour via le statut « Affacturée »"}
+      ],
+      "statuses": ["Déposée", "Émise", "Reçue", "Acceptée", "Affacturée", "Encaissée"],
+      "relatedCases": ["cas-8", "cas-9"]
+    },
+    {
+      "id": "cas-11",
+      "num": "11",
+      "title": "Tiers gestionnaire pour le compte de l'acheteur",
+      "subtitle": "Un tiers (CSP par exemple) reçoit et traite les factures pour le compte de l'acheteur.",
+      "category": "intermediaire",
+      "tags": ["tiers", "gestionnaire", "csp", "delegation"],
+      "complexity": 2,
+      "inScope": true,
+      "principle": "<p>Le tiers gestionnaire (un CSP par exemple) souhaite recevoir les factures pour les traiter pour le compte de l'acheteur. Le client et son tiers gestionnaire ont la <strong>même PA</strong>.</p><p>L'acheteur dédie une adresse de facturation électronique à son tiers gestionnaire dans l'annuaire.</p>",
+      "actors": ["Vendeur", "PA-E", "PPF", "PA-R", "Tiers Gestionnaire", "Acheteur"],
+      "steps": [
+        {"f": 0, "t": 1, "l": "Facture au nom de l'acheteur", "c": "doc"},
+        {"f": 1, "t": 2, "l": "F1 — Données réglementaires", "c": "flux"},
+        {"f": 1, "t": 3, "l": "F2 — Facture complète", "c": "flux"},
+        {"f": 3, "t": 4, "l": "Mise à disposition (tiers)", "c": "status"},
+        {"f": 4, "t": 5, "l": "Traitement pour le compte de l'acheteur", "c": "info"},
+        {"f": 4, "t": 3, "l": "Statut « Acceptée »", "c": "status"}
+      ],
+      "attentionPoints": [
+        "Le client et son tiers gestionnaire doivent avoir la <strong>même PA</strong>",
+        "L'adresse de facturation dédiée est configurée dans l'annuaire PPF"
+      ],
+      "btFields": [],
+      "statuses": ["Déposée", "Émise", "Reçue", "Mise à disposition", "Acceptée"],
+      "relatedCases": ["cas-12", "cas-15"]
+    },
+    {
+      "id": "cas-12",
+      "num": "12",
+      "title": "Intermédiaire transparent pour l'acheteur",
+      "subtitle": "Un intermédiaire agit pour le compte de l'acheteur + émet sa propre facture de prestation.",
+      "category": "intermediaire",
+      "tags": ["intermediaire", "transparent", "mandat"],
+      "complexity": 3,
+      "inScope": true,
+      "principle": "<p>L'intermédiaire transparent agit pour le compte de l'acheteur (cas n°11 pour la facture principale). En plus, il émet <strong>sa propre facture de prestation d'intermédiation</strong> à l'acheteur.</p><p>Deux factures circulent : F1 (vendeur → acheteur via tiers) et F2 (intermédiaire → acheteur).</p>",
+      "actors": ["Vendeur", "PA-E", "PPF", "PA-R (Intermédiaire)", "Intermédiaire", "Acheteur"],
+      "steps": [
+        {"f": 0, "t": 1, "l": "F1: Facture vendeur → acheteur", "c": "doc"},
+        {"f": 1, "t": 3, "l": "F2 — via PA de l'intermédiaire", "c": "flux"},
+        {"f": 3, "t": 4, "l": "Réception par l'intermédiaire", "c": "status"},
+        {"f": 4, "t": 5, "l": "Transmission à l'acheteur", "c": "info"},
+        {"f": 4, "t": 1, "l": "F2: Facture intermédiation", "c": "doc"},
+        {"f": 1, "t": 3, "l": "F2 — Prestation intermédiaire", "c": "flux"}
+      ],
+      "attentionPoints": [
+        "Le client doit confier la gestion dans un cadre de délégation maîtrisé (mandat de gestion)",
+        "L'intermédiaire et l'acheteur doivent avoir accès commun aux factures sur la PA-R"
+      ],
+      "btFields": [],
+      "statuses": ["Déposée", "Émise", "Reçue", "Acceptée"],
+      "relatedCases": ["cas-11", "cas-15", "cas-39"]
+    },
+    {
+      "id": "cas-13",
+      "num": "13",
+      "title": "Sous-traitance avec paiement direct",
+      "subtitle": "Le sous-traitant facture le titulaire, l'acheteur (maître d'ouvrage) paie directement le sous-traitant.",
+      "category": "soustraitance",
+      "tags": ["sous-traitance", "paiement-direct", "b2g", "b2b"],
+      "complexity": 3,
+      "inScope": true,
+      "principle": "<p>Dans une sous-traitance B2B/B2G, trois acteurs : le <strong>sous-traitant</strong>, l'<strong>entreprise principale</strong> (titulaire) et l'<strong>acheteur</strong> (maître d'ouvrage). Deux factures sont créées :</p><p><strong>F1</strong> : sous-traitant → entreprise principale (pour sa prestation)<br><strong>F2</strong> : entreprise principale → acheteur (prestation globale incluant sous-traitance)</p><p>En cas de paiement direct, l'acheteur paie directement le sous-traitant.</p>",
+      "actors": ["Sous-traitant", "PA-E (ST)", "PPF", "PA-R (Titulaire)", "Titulaire", "Acheteur"],
+      "steps": [
+        {"f": 0, "t": 1, "l": "F1: Facture sous-traitant → titulaire", "c": "doc"},
+        {"f": 1, "t": 2, "l": "F1 — Données réglementaires", "c": "flux"},
+        {"f": 1, "t": 3, "l": "F2 — Facture sous-traitance", "c": "flux"},
+        {"f": 4, "t": 5, "l": "F2: Facture titulaire → acheteur", "c": "doc"},
+        {"f": 5, "t": 0, "l": "Paiement direct au sous-traitant", "c": "pay"}
+      ],
+      "attentionPoints": [
+        "Le client (maître d'ouvrage) doit savoir traiter les factures F2 associées à des demandes de <strong>paiement direct</strong> de sous-traitants",
+        "En B2G, le paiement direct est régi par le code de la commande publique",
+        "En B2B, il s'agit d'une délégation de paiement"
+      ],
+      "btFields": [],
+      "statuses": ["Déposée", "Émise", "Reçue", "Acceptée", "Encaissée"],
+      "relatedCases": ["cas-14"]
+    },
+    {
+      "id": "cas-14",
+      "num": "14",
+      "title": "Co-traitance B2B",
+      "subtitle": "Un co-traitant facture via un mandataire qui « vise » la facture avant transmission à l'acheteur.",
+      "category": "soustraitance",
+      "tags": ["co-traitance", "mandataire", "visa"],
+      "complexity": 3,
+      "inScope": true,
+      "principle": "<p>Le <strong>co-traitant</strong> transmet une facture F1 à l'acheteur, le <strong>mandataire</strong> du marché la « vise ». Le mandataire crée sa propre facture F2. L'acheteur paie une fois les deux factures approuvées.</p><p>Le mandataire est précisé dans le bloc <strong>AGENT DE VENDEUR</strong>. Le cadre de facturation est <strong>S6</strong> (dépôt par un co-traitant). L'acheteur doit créer une adresse dédiée type « SIREN_COTRAITANCE ».</p>",
+      "actors": ["Co-traitant", "PA-E", "PPF", "PA-R (Acheteur)", "Mandataire", "Acheteur"],
+      "steps": [
+        {"f": 0, "t": 1, "l": "F1: Facture co-traitant (cadre S6)", "c": "doc"},
+        {"f": 1, "t": 3, "l": "F2 — Facture au nom de l'acheteur", "c": "flux"},
+        {"f": 3, "t": 4, "l": "Mandataire « Vise » la facture F1", "c": "status"},
+        {"f": 4, "t": 1, "l": "F2: Facture mandataire + récap BG-24", "c": "doc"},
+        {"f": 1, "t": 3, "l": "F2 — Facture mandataire", "c": "flux"},
+        {"f": 5, "t": 0, "l": "Paiement après approbation F1 + F2", "c": "pay"}
+      ],
+      "attentionPoints": [
+        "Le mandataire est déclaré dans le bloc <strong>AGENT DE VENDEUR</strong>",
+        "Cadre de facturation : <strong>S6</strong> — Dépôt par un co-traitant",
+        "Il est recommandé à l'acheteur de créer une adresse dédiée <strong>SIREN_COTRAITANCE</strong>",
+        "Le mandataire joint un document récapitulatif (BG-24) listant toutes les factures F1"
+      ],
+      "btFields": [
+        {"bt": "BT-23", "name": "Cadre de facturation", "note": "S6 — Dépôt par un co-traitant"},
+        {"bt": "BG-11", "name": "Agent de vendeur", "note": "Identité du mandataire du marché"},
+        {"bt": "BG-24", "name": "Pièces jointes", "note": "Document récapitulatif des factures F1"}
+      ],
+      "statuses": ["Déposée", "Émise", "Reçue", "Visée", "Acceptée", "Encaissée"],
+      "relatedCases": ["cas-13"]
+    },
+    {
+      "id": "cas-15",
+      "num": "15",
+      "title": "Achat par un tiers pour le compte de l'acheteur",
+      "subtitle": "Un agent d'acheteur commande, réceptionne et valide les factures pour le compte de l'acheteur.",
+      "category": "intermediaire",
+      "tags": ["agent", "acheteur", "delegation", "commande"],
+      "complexity": 2,
+      "inScope": true,
+      "principle": "<p>Un tiers (agent d'acheteur) passe la commande, valide la facture et parfois paie, le tout <strong>pour le compte de l'acheteur</strong>. L'agent utilise une PA-R à laquelle l'acheteur a dédié une adresse de facturation.</p><p>L'agent d'acheteur transmet ensuite sa propre facture de prestation à l'acheteur (facture classique vendeur → acheteur).</p>",
+      "actors": ["Vendeur", "PA-E", "PPF", "PA-R (Agent)", "Agent d'Acheteur", "Acheteur"],
+      "steps": [
+        {"f": 0, "t": 1, "l": "Facture au nom de l'acheteur", "c": "doc"},
+        {"f": 1, "t": 2, "l": "F1 — Données réglementaires", "c": "flux"},
+        {"f": 1, "t": 3, "l": "F2 — Facture vers PA de l'agent", "c": "flux"},
+        {"f": 3, "t": 4, "l": "L'agent reçoit et traite", "c": "status"},
+        {"f": 4, "t": 5, "l": "Facture de prestation agent → acheteur", "c": "doc"}
+      ],
+      "attentionPoints": [
+        "Le client doit identifier que ces factures nécessitent un traitement conjoint avec le tiers gestionnaire",
+        "L'agent d'acheteur agit avec ses droits sur la PA-R dédiée"
+      ],
+      "btFields": [
+        {"bt": "BT-49", "name": "Adresse électronique acheteur", "note": "Adresse dédiée à l'agent dans l'annuaire"}
+      ],
+      "statuses": ["Déposée", "Émise", "Reçue", "Acceptée"],
+      "relatedCases": ["cas-11", "cas-12"]
+    }
+  ]
+}
