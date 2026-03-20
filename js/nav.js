@@ -57,6 +57,23 @@ const SiteNav = {
                         <li><a href="./formats.html">📐 Les formats</a></li>
                     </ul>
                 </li>
+                <li class="nav-dropdown">
+                    <a href="#" class="nav-link nav-link--dropdown">Pratique <span class="nav-arrow">▾</span></a>
+                    <ul class="nav-submenu">
+                        <li><a href="./cas-usage.html">📋 Cas d'usage</a></li>
+                        <li><a href="./technique.html">⚙️ APIs & technique</a></li>
+                        <li><a href="./regles.html">📏 Les règles</a></li>
+                        <li><a href="./se-preparer.html">🚀 Se préparer</a></li>
+                    </ul>
+                </li>
+                <li class="nav-dropdown">
+                    <a href="#" class="nav-link nav-link--dropdown">Ressources <span class="nav-arrow">▾</span></a>
+                    <ul class="nav-submenu">
+                        <li><a href="./glossaire.html">📖 Glossaire A→Z</a></li>
+                        <li><a href="./faq.html">❓ FAQ</a></li>
+                        <li><a href="./ressources.html">📚 Liens & outils</a></li>
+                    </ul>
+                </li>
             </ul>
         </div>`;
     },
@@ -65,42 +82,76 @@ const SiteNav = {
         const footer = document.getElementById('main-footer');
         if (!footer) return;
         footer.innerHTML = `
-        <div class="footer-container">
-            <div class="footer-grid">
-                <div class="footer-col">
+        <div class="site-footer">
+            <div class="footer-container">
+                <div class="footer-grid">
                     <div class="footer-brand">
-                        <img src="./assets/fluxym_logo_2018_sansdescriptif_blanc.png" alt="Fluxym" class="footer-logo">
-                        <span class="footer-academy">E-Invoicing Academy</span>
+                        <div class="footer-logo">
+                            <img src="./assets/fluxym_logo_2018_sansdescriptif_blanc.png" alt="Fluxym" class="footer-logo-img" />
+                            <span class="footer-title">E-Invoicing Academy</span>
+                        </div>
+                        <p class="footer-desc">Un projet éducatif de <strong>Fluxym</strong>, cabinet de conseil spécialisé dans la dématérialisation des processus financiers.</p>
                     </div>
-                <p class="footer-desc">Un projet éducatif de <strong>Fluxym</strong>, cabinet de conseil spécialisé dans la dématérialisation des processus financiers.</p>
+                    <div class="footer-col">
+                        <h4>Découverte</h4>
+                        <ul>
+                            <li><a href="./comprendre.html">Comprendre</a></li>
+                            <li><a href="./calendrier.html">Calendrier</a></li>
+                            <li><a href="./en-bref.html">En bref</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Écosystème</h4>
+                        <ul>
+                            <li><a href="./acteurs.html">Les acteurs</a></li>
+                            <li><a href="./e-invoicing.html">E-invoicing</a></li>
+                            <li><a href="./e-reporting.html">E-reporting</a></li>
+                            <li><a href="./chorus-pro.html">Chorus Pro</a></li>
+                            <li><a href="./peppol.html">Peppol</a></li>
+                            <li><a href="./sanctions.html">Sanctions</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Approfondir</h4>
+                        <ul>
+                            <li><a href="./schema-en-y.html">Schéma en Y</a></li>
+                            <li><a href="./flux.html">Les 14 flux</a></li>
+                            <li><a href="./cycle-de-vie.html">Cycle de vie</a></li>
+                            <li><a href="./formats.html">Les formats</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Mettre en pratique</h4>
+                        <ul>
+                            <li><a href="./cas-usage.html">Cas d'usage</a></li>
+                            <li><a href="./technique.html">APIs & technique</a></li>
+                            <li><a href="./regles.html">Les règles</a></li>
+                            <li><a href="./se-preparer.html">Se préparer</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Ressources</h4>
+                        <ul>
+                            <li><a href="./glossaire.html">Glossaire A→Z</a></li>
+                            <li><a href="./faq.html">FAQ</a></li>
+                            <li><a href="./ressources.html">Liens & outils</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Sources officielles</h4>
+                        <ul>
+                            <li><a href="https://www.impots.gouv.fr/professionnel/facturation-electronique" target="_blank">DGFiP ↗</a></li>
+                            <li><a href="https://chorus-pro.gouv.fr" target="_blank">Chorus Pro ↗</a></li>
+                            <li><a href="https://www.fnfe-mpe.org" target="_blank">FNFE-MPE ↗</a></li>
+                            <li><a href="https://piste.gouv.fr" target="_blank">PISTE ↗</a></li>
+                            <li><a href="https://peppol.org" target="_blank">OpenPEPPOL ↗</a></li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="footer-col">
-                    <h4>Découverte</h4>
-                    <ul>
-                        <li><a href="./comprendre.html">Comprendre</a></li>
-                        <li><a href="./calendrier.html">Calendrier</a></li>
-                        <li><a href="./en-bref.html">En bref</a></li>
-                    </ul>
+                <div class="footer-bottom">
+                    <p>© ${new Date().getFullYear()} Fluxym — E-Invoicing Academy. Contenu éducatif basé sur les spécifications DGFIP v3.1 et normes AFNOR XP Z12-012/013/014.</p>
+                    <p class="footer-disclaimer">Ce site est un outil pédagogique. Il ne se substitue pas aux textes officiels. Consultez <a href="https://www.impots.gouv.fr/professionnel/facturation-electronique" target="_blank">impots.gouv.fr</a> pour les informations à valeur légale.</p>
                 </div>
-                <div class="footer-col">
-                    <h4>À venir</h4>
-                    <ul>
-                        <li><a href="#">Écosystème</a></li>
-                        <li><a href="#">Flux & Cycle de vie</a></li>
-                        <li><a href="#">Cas d'usage</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>Sources officielles</h4>
-                    <ul>
-                        <li><a href="https://www.impots.gouv.fr/facturation-electronique" target="_blank" rel="noopener">DGFiP ↗</a></li>
-                        <li><a href="https://www.chorus-pro.gouv.fr" target="_blank" rel="noopener">Chorus Pro ↗</a></li>
-                        <li><a href="https://fnfe-mpe.org" target="_blank" rel="noopener">FNFE-MPE ↗</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>© ${new Date().getFullYear()} Fluxym — E-Invoicing Academy · Basé sur les spécifications DGFiP v3.1 et normes AFNOR.</p>
             </div>
         </div>`;
     },
@@ -124,7 +175,6 @@ const SiteNav = {
         });
     },
 
-    // Glassmorphism effect on scroll
     initScrollEffect() {
         const nav = document.getElementById('main-nav');
         const logoImg = document.getElementById('nav-logo-img');

@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Les règles de gestion | E-Invoicing Academy</title>
+    <link rel="icon" href="./assets/favicon-Fluxym-V2.png" sizes="32x32" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/pages.css">
+</head>
+<body>
+
+    <nav id="main-nav"></nav>
+
+    <header class="page-hero">
+        <div class="page-hero-content">
+            <div class="breadcrumb">
+                <a href="./index.html">Accueil</a> <span>/</span> <span>Niveau 4 — Mettre en pratique</span>
+            </div>
+            <span class="hero-badge">Niveau 4 — Mettre en pratique</span>
+            <h1>Les règles de gestion</h1>
+            <p>3 niveaux de contrôle : européen (EN 16931), français (BR-FR) et PPF. Chaque facture doit tous les passer.</p>
+        </div>
+    </header>
+
+    <main class="page-main">
+        <div class="page-container page-layout">
+
+            <aside class="page-sidebar">
+                <div class="sidebar-sticky">
+                    <h4>Sur cette page</h4>
+                    <ul class="sidebar-nav">
+                        <li><a href="#eu" class="sidebar-link active">🇪🇺 Règles EN 16931</a></li>
+                        <li><a href="#fr" class="sidebar-link">🇫🇷 Règles BR-FR</a></li>
+                        <li><a href="#ppf" class="sidebar-link">🏛️ Contrôles PPF</a></li>
+                        <li><a href="#refus" class="sidebar-link">Motifs de refus</a></li>
+                        <li><a href="#codelists" class="sidebar-link">Listes de codes</a></li>
+                    </ul>
+                    <div class="sidebar-nav-pages">
+                        <h4>Parcours Niveau 4</h4>
+                        <a href="./cas-usage.html" class="sidebar-page">📋 Cas d'usage</a>
+                        <a href="./technique.html" class="sidebar-page">⚙️ APIs & technique</a>
+                        <a href="./regles.html" class="sidebar-page active">📏 Les règles</a>
+                        <a href="./se-preparer.html" class="sidebar-page">🚀 Se préparer</a>
+                    </div>
+                </div>
+            </aside>
+
+            <article class="page-content">
+
+                <!-- EUROPÉEN -->
+                <section id="eu" class="content-section">
+                    <h2>🇪🇺 Niveau 1 — Règles européennes EN 16931</h2>
+
+                    <h3>BR — Business Rules (métier)</h3>
+                    <div class="comparison-table">
+                        <table>
+                            <thead><tr><th>Règle</th><th>Description</th></tr></thead>
+                            <tbody>
+                                <tr><td><strong>BR-1</strong></td><td>Une facture DOIT avoir un identifiant de spécification (BT-24)</td></tr>
+                                <tr><td><strong>BR-2</strong></td><td>Un numéro de facture (BT-1) est obligatoire</td></tr>
+                                <tr><td><strong>BR-3</strong></td><td>Une date de facture (BT-2) est obligatoire</td></tr>
+                                <tr><td><strong>BR-4</strong></td><td>Un code type de document (BT-3) est obligatoire</td></tr>
+                                <tr><td><strong>BR-5</strong></td><td>Un code devise (BT-5) est obligatoire</td></tr>
+                                <tr><td><strong>BR-6</strong></td><td>L'identification du vendeur est obligatoire</td></tr>
+                                <tr><td><strong>BR-7</strong></td><td>L'identification de l'acheteur est obligatoire</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h3>BR-CO — Calculation Rules (calculs)</h3>
+                    <div class="comparison-table">
+                        <table>
+                            <thead><tr><th>Règle</th><th>Formule</th></tr></thead>
+                            <tbody>
+                                <tr><td><strong>BR-CO-10</strong></td><td>Somme des montants nets de ligne = total net HT hors remises/charges</td></tr>
+                                <tr><td><strong>BR-CO-13</strong></td><td>BT-109 (HT) = Σ lignes − remises + charges</td></tr>
+                                <tr><td><strong>BR-CO-14</strong></td><td>BT-110 (TVA) = Σ montants TVA par ventilation</td></tr>
+                                <tr><td><strong>BR-CO-15</strong></td><td>BT-112 (TTC) = BT-109 + BT-110</td></tr>
+                                <tr><td><strong>BR-CO-16</strong></td><td>BT-115 (dû) = BT-112 − BT-113 (déjà payé) + BT-114 (arrondi)</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- FRANÇAIS -->
+                <section id="fr" class="content-section">
+                    <h2>🇫🇷 Niveau 2 — Règles françaises BR-FR</h2>
+
+                    <h3>BR-FR — Règles métier</h3>
+                    <div class="comparison-table">
+                        <table>
+                            <thead><tr><th>Règle</th><th>Description</th></tr></thead>
+                            <tbody>
+                                <tr><td><strong>BR-FR-01</strong></td><td>Taux TVA autorisés : 20%, 10%, 8.5%, 5.5%, 2.1%, 0%</td></tr>
+                                <tr><td><strong>BR-FR-04</strong></td><td>Codes types autorisés : 380, 381, 384, 386, 389, 393…</td></tr>
+                                <tr><td><strong>BR-FR-05</strong></td><td>3 notes obligatoires : <strong>PMT</strong> (pénalité 40€), <strong>PMD</strong> (pénalités propres), <strong>AAB</strong> (escompte)</td></tr>
+                                <tr><td><strong>BR-FR-07</strong></td><td>Codification des notes : ACC, AAI, ADN, SUR, ABL, CUS, BLU, BAR</td></tr>
+                                <tr><td><strong>BR-FR-08</strong></td><td>Cadres de facturation autorisés : B1, S1, M1, B2, S2, M2, S3, B4, S4, M4, S5, S6, B7, S7, B8, S8, M8</td></tr>
+                                <tr><td><strong>BR-FR-10</strong></td><td>SIREN vendeur (BT-30) obligatoire et actif dans l'annuaire PPF</td></tr>
+                                <tr><td><strong>BR-FR-11</strong></td><td>En B2B : SIREN acheteur (BT-47) obligatoire et actif dans l'annuaire</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="callout callout--warning"><div class="callout-icon">⚠️</div><div class="callout-content"><strong>BR-FR-05 :</strong> TOUTE facture doit contenir les 3 notes PMT, PMD et AAB, même si les valeurs sont vides ou « néant ».</div></div>
+
+                    <h3>BR-FR-CO — Calculs français</h3>
+                    <div class="comparison-table">
+                        <table>
+                            <thead><tr><th>Règle</th><th>Description</th></tr></thead>
+                            <tbody>
+                                <tr><td><strong>BR-FR-CO-01</strong></td><td>La date de facture ne peut PAS être dans le futur</td></tr>
+                                <tr><td><strong>BR-FR-CO-12</strong></td><td>Si devise ≠ EUR, devise de comptabilité DOIT être EUR et BT-111 (TVA en EUR) obligatoire</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h3>BR-FR-CPRO — Règles Chorus Pro (B2G uniquement)</h3>
+                    <div class="comparison-table">
+                        <table>
+                            <thead><tr><th>Règle</th><th>Description</th></tr></thead>
+                            <tbody>
+                                <tr><td><strong>BR-FR-CPRO-02</strong></td><td>N° facture limité à 20 caractères</td></tr>
+                                <tr><td><strong>BR-FR-CPRO-19</strong></td><td>N° de ligne max 6 car, max 999 999 lignes</td></tr>
+                                <tr><td><strong>BR-FR-CPRO-21</strong></td><td>En S3/S6 : Agent de Vendeur obligatoire</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- PPF -->
+                <section id="ppf" class="content-section">
+                    <h2>🏛️ Niveau 3 — Contrôles PPF</h2>
+
+                    <h3>Irrecevabilité (niveau flux)</h3>
+                    <div class="comparison-table">
+                        <table>
+                            <thead><tr><th>Code</th><th>Motif</th></tr></thead>
+                            <tbody>
+                                <tr><td><code>IRR_TAILLE</code></td><td>Flux dépasse la taille max</td></tr>
+                                <tr><td><code>IRR_UNICITE</code></td><td>Flux déjà soumis (doublon)</td></tr>
+                                <tr><td><code>IRR_SYNTAX</code></td><td>Échec contrôle syntaxique XSD</td></tr>
+                                <tr><td><code>IRR_ANTIVIRUS</code></td><td>Virus détecté</td></tr>
+                                <tr><td><code>IRR_VIDE</code></td><td>Flux vide</td></tr>
+                                <tr><td><code>IRR_FORM</code></td><td>Nom d'enveloppe non conforme</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h3>Rejets fonctionnels (niveau objet métier)</h3>
+                    <div class="comparison-table">
+                        <table>
+                            <thead><tr><th>Flux</th><th>Code</th><th>Motif</th></tr></thead>
+                            <tbody>
+                                <tr><td rowspan="3"><strong>F1</strong></td><td><code>REJ_SEMAN</code></td><td>Violation BR / BR-FR</td></tr>
+                                <tr><td><code>REJ_UNI</code></td><td>Doublon de facture</td></tr>
+                                <tr><td><code>REJ_COH</code></td><td>Incohérence de données</td></tr>
+                                <tr><td rowspan="5"><strong>F6</strong></td><td><code>REJ_INC</code></td><td>Transition de statut impossible</td></tr>
+                                <tr><td><code>REJ_INEX</code></td><td>Statut non autorisé</td></tr>
+                                <tr><td><code>REJ_RG</code></td><td>Règle de gestion violée</td></tr>
+                                <tr><td><code>REJ_HAB</code></td><td>Habilitation manquante</td></tr>
+                                <tr><td><code>REJ_ENCAISSEMENT</code></td><td>Montants encaissement non conformes</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- REFUS -->
+                <section id="refus" class="content-section">
+                    <h2>Motifs de refus par l'acheteur</h2>
+                    <div class="comparison-table">
+                        <table>
+                            <thead><tr><th>Code</th><th>Libellé</th></tr></thead>
+                            <tbody>
+                                <tr><td><code>DEST_INC</code></td><td>Destinataire inconnu</td></tr>
+                                <tr><td><code>DEST_ERR</code></td><td>Erreur de destinataire</td></tr>
+                                <tr><td><code>TRANSAC_INC</code></td><td>Transaction inconnue</td></tr>
+                                <tr><td><code>REF_CT_ABSENT</code></td><td>Référence contractuelle manquante</td></tr>
+                                <tr><td><code>REF_ERR</code></td><td>Référence incorrecte</td></tr>
+                                <tr><td><code>PU_ERR</code></td><td>Prix unitaires incorrects</td></tr>
+                                <tr><td><code>TX_TVA_ERR</code></td><td>Taux de TVA erroné</td></tr>
+                                <tr><td><code>COORD_BANC_ERR</code></td><td>Coordonnées bancaires erronées</td></tr>
+                                <tr><td><code>AUTRE</code></td><td>Motif libre (note explicative requise)</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- CODELISTS -->
+                <section id="codelists" class="content-section">
+                    <h2>Listes de codes essentielles</h2>
+
+                    <h3>Types de documents</h3>
+                    <div class="role-dual">
+                        <div class="role-card"><h4>Factures</h4><ul><li><code>380</code> — Facture commerciale</li><li><code>386</code> — Facture d'acompte</li><li><code>389</code> — Facture auto-facturée</li><li><code>393</code> — Facture affacturée</li><li><code>384</code> — Facture rectificative</li></ul></div>
+                        <div class="role-card"><h4>Avoirs</h4><ul><li><code>381</code> — Avoir</li><li><code>261</code> — Avoir auto-facturé</li><li><code>396</code> — Avoir affacturé</li><li><code>503</code> — Avoir de facture d'acompte</li></ul></div>
+                    </div>
+
+                    <h3>Taux de TVA français</h3>
+                    <div class="comparison-table">
+                        <table>
+                            <thead><tr><th>Taux</th><th>Application</th></tr></thead>
+                            <tbody>
+                                <tr><td><strong>20%</strong></td><td>Taux normal</td></tr>
+                                <tr><td><strong>10%</strong></td><td>Taux intermédiaire (restauration, travaux…)</td></tr>
+                                <tr><td><strong>8,5%</strong></td><td>Taux DOM</td></tr>
+                                <tr><td><strong>5,5%</strong></td><td>Taux réduit (alimentation, énergie…)</td></tr>
+                                <tr><td><strong>2,1%</strong></td><td>Super-réduit (presse, médicaments remboursables)</td></tr>
+                                <tr><td><strong>0%</strong></td><td>Exonéré ou hors champ</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h3>Catégories TVA</h3>
+                    <div class="comparison-table">
+                        <table>
+                            <thead><tr><th>Code</th><th>Signification</th></tr></thead>
+                            <tbody>
+                                <tr><td><code>S</code></td><td>Standard</td></tr>
+                                <tr><td><code>Z</code></td><td>Taux zéro</td></tr>
+                                <tr><td><code>E</code></td><td>Exonéré</td></tr>
+                                <tr><td><code>AE</code></td><td>Autoliquidation (Reverse Charge)</td></tr>
+                                <tr><td><code>K</code></td><td>Intracommunautaire</td></tr>
+                                <tr><td><code>G</code></td><td>Export hors UE</td></tr>
+                                <tr><td><code>O</code></td><td>Hors champ TVA</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <nav class="page-nav-bottom">
+                    <a href="./technique.html" class="nav-prev"><span class="nav-label">Page précédente</span><span class="nav-title">← ⚙️ APIs & technique</span></a>
+                    <a href="./se-preparer.html" class="nav-next"><span class="nav-label">Page suivante</span><span class="nav-title">🚀 Se préparer →</span></a>
+                </nav>
+            </article>
+        </div>
+    </main>
+
+    <footer id="main-footer"></footer>
+    <script src="./js/nav.js"></script>
+    <script src="./js/animations.js"></script>
+</body>
+</html>

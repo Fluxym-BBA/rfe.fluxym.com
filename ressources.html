@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ressources & liens utiles | E-Invoicing Academy</title>
+    <link rel="icon" href="./assets/favicon-Fluxym-V2.png" sizes="32x32" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/pages.css">
+</head>
+<body>
+
+    <nav id="main-nav"></nav>
+
+    <header class="page-hero">
+        <div class="page-hero-content">
+            <div class="breadcrumb">
+                <a href="./index.html">Accueil</a> <span>/</span> <span>Niveau 5 — Ressources</span>
+            </div>
+            <span class="hero-badge">Niveau 5 — Ressources</span>
+            <h1>Ressources & liens utiles</h1>
+            <p>Sites officiels, textes de loi, normes techniques, outils de test et formations.</p>
+        </div>
+    </header>
+
+    <main class="page-main">
+        <div class="page-container page-layout">
+
+            <aside class="page-sidebar">
+                <div class="sidebar-sticky">
+                    <h4>Sur cette page</h4>
+                    <ul class="sidebar-nav">
+                        <li><a href="#officiels" class="sidebar-link active">🏛️ Sites officiels</a></li>
+                        <li><a href="#lois" class="sidebar-link">📜 Textes de loi</a></li>
+                        <li><a href="#normes" class="sidebar-link">📐 Normes techniques</a></li>
+                        <li><a href="#communautes" class="sidebar-link">🤝 Communautés</a></li>
+                        <li><a href="#outils" class="sidebar-link">🛠️ Outils de test</a></li>
+                        <li><a href="#formations" class="sidebar-link">🎓 Formations</a></li>
+                        <li><a href="#profils" class="sidebar-link">📋 Par profil</a></li>
+                    </ul>
+                    <div class="sidebar-nav-pages">
+                        <h4>Parcours Niveau 5</h4>
+                        <a href="./glossaire.html" class="sidebar-page">📖 Glossaire</a>
+                        <a href="./faq.html" class="sidebar-page">❓ FAQ</a>
+                        <a href="./ressources.html" class="sidebar-page active">📚 Ressources</a>
+                    </div>
+                </div>
+            </aside>
+
+            <article class="page-content">
+
+                <section id="officiels" class="content-section">
+                    <h2>🏛️ Sites officiels</h2>
+                    <div class="resource-grid">
+                        <a href="https://www.impots.gouv.fr/professionnel/facturation-electronique" target="_blank" class="resource-card">
+                            <h4>impots.gouv.fr — Espace RFE</h4>
+                            <p>Point d'entrée officiel DGFIP. Calendrier, obligations, FAQ, actualités.</p>
+                            <span class="resource-badge">Tous profils</span>
+                        </a>
+                        <a href="https://www.impots.gouv.fr/je-consulte-la-liste-des-plateformes-agreees" target="_blank" class="resource-card">
+                            <h4>Liste officielle des PA</h4>
+                            <p>Toutes les PA immatriculées et en cours, avec coordonnées et dates d'agrément.</p>
+                            <span class="resource-badge">Indispensable</span>
+                        </a>
+                        <a href="https://chorus-pro.gouv.fr" target="_blank" class="resource-card">
+                            <h4>Chorus Pro</h4>
+                            <p>Portail B2G. Héberge l'annuaire central et le concentrateur PPF.</p>
+                            <span class="resource-badge">B2G + PA</span>
+                        </a>
+                        <a href="https://facturation.chorus-pro.gouv.fr/annuaire/#/" target="_blank" class="resource-card">
+                            <h4>Annuaire FE</h4>
+                            <p>Consultez les adresses de facturation électronique des entreprises inscrites.</p>
+                            <span class="resource-badge">Tous profils</span>
+                        </a>
+                        <a href="https://piste.gouv.fr" target="_blank" class="resource-card">
+                            <h4>PISTE — API de l'État</h4>
+                            <p>Raccordement aux API Chorus Pro et PPF. OAuth2, sandboxes.</p>
+                            <span class="resource-badge">DSI / PA</span>
+                        </a>
+                        <a href="https://www.economie.gouv.fr/aife" target="_blank" class="resource-card">
+                            <h4>AIFE</h4>
+                            <p>Agence opératrice de Chorus Pro. Documentation technique et spécifications.</p>
+                            <span class="resource-badge">DSI / PA</span>
+                        </a>
+                    </div>
+                </section>
+
+                <section id="lois" class="content-section">
+                    <h2>📜 Textes de loi & décrets</h2>
+                    <div class="resource-grid">
+                        <a href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000048638486" target="_blank" class="resource-card">
+                            <h4>Art. 289 bis CGI</h4>
+                            <p>Texte fondateur : obligation de facturation électronique, rôle du PPF et des PA.</p>
+                            <span class="resource-badge">Juridiques</span>
+                        </a>
+                        <a href="https://www.legifrance.gouv.fr/codes/section_lc/LEGITEXT000006069577/LEGISCTA000006179659/" target="_blank" class="resource-card">
+                            <h4>Art. 290 & 290 A CGI</h4>
+                            <p>Obligation de e-reporting (B2C, B2B international, paiements).</p>
+                            <span class="resource-badge">Juridiques</span>
+                        </a>
+                        <a href="https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000046186723" target="_blank" class="resource-card">
+                            <h4>LFR 2022 (art. 26)</h4>
+                            <p>Cadre législatif initial de la réforme et calendrier de déploiement.</p>
+                            <span class="resource-badge">Direction</span>
+                        </a>
+                        <a href="https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000048727345" target="_blank" class="resource-card">
+                            <h4>LF 2024 (art. 91)</h4>
+                            <p>Report du calendrier à sept. 2026 / sept. 2027.</p>
+                            <span class="resource-badge">Direction</span>
+                        </a>
+                        <a href="https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000046400825" target="_blank" class="resource-card">
+                            <h4>Décret 2022-1299</h4>
+                            <p>Décret d'application : immatriculation PA, modalités de transmission.</p>
+                            <span class="resource-badge">PA / DSI</span>
+                        </a>
+                    </div>
+                </section>
+
+                <section id="normes" class="content-section">
+                    <h2>📐 Normes & spécifications techniques</h2>
+                    <div class="resource-grid">
+                        <div class="resource-card">
+                            <h4>EN 16931</h4>
+                            <p>Norme sémantique européenne : modèle de données BT/BG, règles BR. Socle de tous les formats.</p>
+                            <span class="resource-badge">DSI / PA</span>
+                        </div>
+                        <a href="https://www.boutique.afnor.org" target="_blank" class="resource-card">
+                            <h4>AFNOR XP Z12-012</h4>
+                            <p>Formats et profils (UBL, CII, Factur-X, CDAR). Règles BR-France. <strong>Document fondamental.</strong></p>
+                            <span class="resource-badge">DSI / PA</span>
+                        </a>
+                        <a href="https://www.boutique.afnor.org" target="_blank" class="resource-card">
+                            <h4>AFNOR XP Z12-013</h4>
+                            <p>API standardisées : Directory Service + Flow Service. Spécifications Swagger/OpenAPI.</p>
+                            <span class="resource-badge">Développeurs</span>
+                        </a>
+                        <a href="https://www.boutique.afnor.org" target="_blank" class="resource-card">
+                            <h4>AFNOR XP Z12-014</h4>
+                            <p>~42 cas d'usage (A→K) + exemples XML. <strong>Indispensable pour l'implémentation.</strong></p>
+                            <span class="resource-badge">Chefs de projet</span>
+                        </a>
+                        <div class="resource-card">
+                            <h4>Specs DGFIP v3.1</h4>
+                            <p>Dossier général : architecture, flux 1-14, annuaire, CDV, e-reporting. Disponible sur Chorus Pro.</p>
+                            <span class="resource-badge">Tous techniques</span>
+                        </div>
+                        <a href="https://www.fnfe-mpe.org/factur-x/" target="_blank" class="resource-card">
+                            <h4>Factur-X v1.07.3</h4>
+                            <p>Spécification libre du format hybride PDF/A-3 + XML CII. Profils, exemples, règles.</p>
+                            <span class="resource-badge">Éditeurs / Dev</span>
+                        </a>
+                    </div>
+                </section>
+
+                <section id="communautes" class="content-section">
+                    <h2>🤝 Organisations & communautés</h2>
+                    <div class="resource-grid">
+                        <a href="https://www.fnfe-mpe.org" target="_blank" class="resource-card"><h4>FNFE-MPE</h4><p>Association FR de la facture électronique. Co-éditrice de Factur-X. Événements, guides, veille.</p><span class="resource-badge">Tous profils</span></a>
+                        <a href="https://www.gs1.fr" target="_blank" class="resource-card"><h4>GS1 France</h4><p>Standardisation (codes-barres, GLN, GTIN). Accompagnement retail et supply chain.</p><span class="resource-badge">Distribution / Retail</span></a>
+                        <a href="https://peppol.org" target="_blank" class="resource-card"><h4>OpenPEPPOL</h4><p>Gouvernance du réseau Peppol. Spécifications BIS, certification Access Points.</p><span class="resource-badge">International / PA</span></a>
+                        <a href="https://eespa.eu" target="_blank" class="resource-card"><h4>EESPA</h4><p>Association européenne des prestataires de facturation électronique. Interopérabilité UE.</p><span class="resource-badge">PA / Éditeurs</span></a>
+                        <a href="https://www.ferd-net.de" target="_blank" class="resource-card"><h4>FeRD</h4><p>Équivalent allemand de la FNFE. Co-éditeur de ZUGFeRD/Factur-X.</p><span class="resource-badge">Franco-allemand</span></a>
+                    </div>
+                </section>
+
+                <section id="outils" class="content-section">
+                    <h2>🛠️ Outils & plateformes de test</h2>
+                    <div class="resource-grid">
+                        <a href="https://piste.gouv.fr" target="_blank" class="resource-card"><h4>Qualification Chorus Pro</h4><p>Environnement de test AIFE. Simuler dépôts, annuaire, statuts.</p><span class="resource-badge">DSI / PA</span></a>
+                        <a href="https://github.com/itplr-kosit/validator" target="_blank" class="resource-card"><h4>KoSIT Validator</h4><p>Open source. Valide UBL et CII contre EN 16931 et règles nationales.</p><span class="resource-badge">Développeurs</span></a>
+                        <a href="https://peppol.helger.com/public/locale-en_US/menuitem-validation-bis3" target="_blank" class="resource-card"><h4>Validateur Peppol</h4><p>Vérification en ligne de conformité Peppol BIS (UBL).</p><span class="resource-badge">Peppol users</span></a>
+                        <a href="https://ecosio.com/fr/validateur-de-factures-electroniques/" target="_blank" class="resource-card"><h4>Ecosio Validator</h4><p>Gratuit et en ligne. Valide UBL et CII contre EN 16931.</p><span class="resource-badge">Tous techniques</span></a>
+                    </div>
+                </section>
+
+                <section id="formations" class="content-section">
+                    <h2>🎓 Formations & accompagnement</h2>
+                    <div class="resource-grid">
+                        <a href="https://www.cci.fr" target="_blank" class="resource-card"><h4>CCI France</h4><p>Sessions d'information, ateliers pratiques, accompagnement TPE/PME.</p><span class="resource-badge">TPE / PME</span></a>
+                        <a href="https://www.artisanat.fr" target="_blank" class="resource-card"><h4>CMA France</h4><p>Accompagnement artisans et micro-entreprises.</p><span class="resource-badge">Artisans</span></a>
+                        <a href="https://www.experts-comptables.fr" target="_blank" class="resource-card"><h4>Ordre des Experts-Comptables</h4><p>Guides, formations dédiées. Interlocuteur clé pour l'impact fiscal.</p><span class="resource-badge">Comptables</span></a>
+                        <a href="https://competences.afnor.org" target="_blank" class="resource-card"><h4>AFNOR Compétences</h4><p>Formations certifiantes sur la facturation électronique et les normes.</p><span class="resource-badge">Consultants / DSI</span></a>
+                    </div>
+                </section>
+
+                <section id="profils" class="content-section">
+                    <h2>📋 Récapitulatif par profil</h2>
+                    <div class="comparison-table">
+                        <table>
+                            <thead><tr><th>Profil</th><th>Ressources prioritaires</th></tr></thead>
+                            <tbody>
+                                <tr><td><strong>TPE / Micro</strong></td><td>impots.gouv.fr, Liste PA, CCI/CMA, Expert-comptable</td></tr>
+                                <tr><td><strong>PME</strong></td><td>impots.gouv.fr, Liste PA, Expert-comptable, Éditeur ERP, PA</td></tr>
+                                <tr><td><strong>ETI</strong></td><td>Specs DGFIP v3.1, Normes AFNOR, PA, ERP, FNFE-MPE</td></tr>
+                                <tr><td><strong>Grande Entreprise</strong></td><td>Normes AFNOR (Z12-012/013/014), PA, Peppol, EESPA</td></tr>
+                                <tr><td><strong>Comptable</strong></td><td>impots.gouv.fr, CNOEC, Textes de loi, FNFE-MPE</td></tr>
+                                <tr><td><strong>DSI</strong></td><td>Normes AFNOR, PISTE, Sandbox PA, Validateurs, Peppol</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <nav class="page-nav-bottom">
+                    <a href="./faq.html" class="nav-prev"><span class="nav-label">Page précédente</span><span class="nav-title">← ❓ FAQ</span></a>
+                    <a href="./index.html" class="nav-next"><span class="nav-label">Retour</span><span class="nav-title">🏠 Accueil →</span></a>
+                </nav>
+            </article>
+        </div>
+    </main>
+
+    <footer id="main-footer"></footer>
+    <script src="./js/nav.js"></script>
+    <script src="./js/animations.js"></script>
+</body>
+</html>

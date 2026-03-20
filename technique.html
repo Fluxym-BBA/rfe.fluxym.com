@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APIs & connectivité technique | E-Invoicing Academy</title>
+    <link rel="icon" href="./assets/favicon-Fluxym-V2.png" sizes="32x32" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/pages.css">
+</head>
+<body>
+
+    <nav id="main-nav"></nav>
+
+    <header class="page-hero">
+        <div class="page-hero-content">
+            <div class="breadcrumb">
+                <a href="./index.html">Accueil</a> <span>/</span> <span>Niveau 4 — Mettre en pratique</span>
+            </div>
+            <span class="hero-badge">Niveau 4 — Mettre en pratique</span>
+            <h1>APIs & connectivité technique</h1>
+            <p>Flow Service, Directory Service, protocoles de transport, annuaire et sécurité.</p>
+        </div>
+    </header>
+
+    <main class="page-main">
+        <div class="page-container page-layout">
+
+            <aside class="page-sidebar">
+                <div class="sidebar-sticky">
+                    <h4>Sur cette page</h4>
+                    <ul class="sidebar-nav">
+                        <li><a href="#flow" class="sidebar-link active">API Flow Service</a></li>
+                        <li><a href="#directory" class="sidebar-link">API Directory Service</a></li>
+                        <li><a href="#protocoles" class="sidebar-link">Protocoles de transport</a></li>
+                        <li><a href="#annuaire" class="sidebar-link">Annuaire technique</a></li>
+                        <li><a href="#envs" class="sidebar-link">Environnements</a></li>
+                        <li><a href="#securite" class="sidebar-link">Sécurité</a></li>
+                    </ul>
+                    <div class="sidebar-nav-pages">
+                        <h4>Parcours Niveau 4</h4>
+                        <a href="./cas-usage.html" class="sidebar-page">📋 Cas d'usage</a>
+                        <a href="./technique.html" class="sidebar-page active">⚙️ APIs & technique</a>
+                        <a href="./regles.html" class="sidebar-page">📏 Les règles</a>
+                        <a href="./se-preparer.html" class="sidebar-page">🚀 Se préparer</a>
+                    </div>
+                </div>
+            </aside>
+
+            <article class="page-content">
+
+                <section id="flow" class="content-section">
+                    <h2>API Flow Service (Z12-013)</h2>
+                    <p>L'API principale pour <strong>déposer, rechercher et récupérer</strong> les flux de factures et de cycle de vie.</p>
+
+                    <div class="comparison-table">
+                        <table>
+                            <thead><tr><th>Route</th><th>Méthode</th><th>Description</th></tr></thead>
+                            <tbody>
+                                <tr><td><code>/flows</code></td><td><strong>POST</strong></td><td>Déposer un flux (facture CII/UBL/Factur-X, CDV CDAR, e-reporting FRR)</td></tr>
+                                <tr><td><code>/flows/search</code></td><td><strong>POST</strong></td><td>Rechercher des flux avec filtres multi-critères</td></tr>
+                                <tr><td><code>/flows/{flowId}</code></td><td><strong>GET</strong></td><td>Récupérer un flux (Original, Converted, ReadableView, Metadata)</td></tr>
+                                <tr><td><code>/healthcheck</code></td><td><strong>GET</strong></td><td>Vérifier la disponibilité du service</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h3>FlowTypes disponibles</h3>
+                    <div class="comparison-table">
+                        <table>
+                            <thead><tr><th>FlowType</th><th>Description</th></tr></thead>
+                            <tbody>
+                                <tr><td><code>CustomerInvoice</code></td><td>Facture de vente (sortante)</td></tr>
+                                <tr><td><code>SupplierInvoice</code></td><td>Facture d'achat (entrante)</td></tr>
+                                <tr><td><code>CustomerInvoiceLC</code></td><td>Cycle de vie sur facture de vente</td></tr>
+                                <tr><td><code>SupplierInvoiceLC</code></td><td>Cycle de vie sur facture d'achat</td></tr>
+                                <tr><td><code>TransactionReport10.1</code></td><td>E-reporting factures émises international</td></tr>
+                                <tr><td><code>TransactionReport10.3</code></td><td>E-reporting transactions B2C</td></tr>
+                                <tr><td><code>PaymentReport10.4</code></td><td>E-reporting paiements</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h3>Webhook (notification temps réel)</h3>
+                    <p>En complément de <code>POST /search</code>, un <strong>Webhook HTTP POST</strong> notifie en temps réel l'arrivée ou la modification d'un flux. Filtrable par FlowType, FlowDirection, FlowAckStatus.</p>
+                </section>
+
+                <section id="directory" class="content-section">
+                    <h2>API Directory Service (Z12-013)</h2>
+                    <p>Consulter et gérer les informations d'adressage dans l'annuaire.</p>
+                    <div class="comparison-table">
+                        <table>
+                            <thead><tr><th>Ressource</th><th>Routes clés</th><th>Description</th></tr></thead>
+                            <tbody>
+                                <tr><td><strong>SIREN</strong></td><td><code>POST /siren/search</code>, <code>GET /siren/{siren}</code></td><td>Consulter une unité légale</td></tr>
+                                <tr><td><strong>SIRET</strong></td><td><code>POST /siret/search</code>, <code>GET /siret/{siret}</code></td><td>Consulter un établissement</td></tr>
+                                <tr><td><strong>Code Routage</strong></td><td><code>POST, GET, PATCH</code></td><td>Créer/modifier des codes de routage</td></tr>
+                                <tr><td><strong>Ligne annuaire</strong></td><td><code>POST, GET, PATCH, DELETE</code></td><td>Gérer les lignes d'annuaire</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <section id="protocoles" class="content-section">
+                    <h2>3 protocoles de transport</h2>
+                    <div class="triple-grid">
+                        <div class="objective-card">
+                            <div class="objective-icon">📁</div>
+                            <h3>SFTP</h3>
+                            <p>Dépôt/retrait de fichiers. Auth bi-clé RSA + certificat X509v3. Chiffrement AES. Retrait sous 7j (purge auto).</p>
+                            <p><strong>Usage :</strong> flux batch volumineux, EDI historique</p>
+                        </div>
+                        <div class="objective-card">
+                            <div class="objective-icon">📡</div>
+                            <h3>AS/4</h3>
+                            <p>Push/Pull avec acquittement MDN. Signature SHA-2. Chiffrement AES 256. Encapsulation SOAP.</p>
+                            <p><strong>Usage :</strong> EDI pro, interopérabilité Peppol</p>
+                        </div>
+                        <div class="objective-card">
+                            <div class="objective-icon">🔗</div>
+                            <h3>API REST</h3>
+                            <p>HTTP(S) synchrone/asynchrone. JSON + XML. OAuth2 via PISTE. Codes retour standards.</p>
+                            <p><strong>Usage :</strong> intégration moderne, SaaS, temps réel</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="annuaire" class="content-section">
+                    <h2>L'annuaire technique</h2>
+                    <h3>4 mailles d'adressage</h3>
+                    <div class="comparison-table">
+                        <table>
+                            <thead><tr><th>Maille</th><th>Identifiant</th><th>Schéma</th><th>Exemple</th></tr></thead>
+                            <tbody>
+                                <tr><td>Unité légale</td><td>SIREN</td><td>0002</td><td><code>123456789</code></td></tr>
+                                <tr><td>Établissement</td><td>SIRET</td><td>0009</td><td><code>12345678900012</code></td></tr>
+                                <tr><td>Code routage</td><td>SIRET + code</td><td>0224</td><td><code>12345678900012/COMPTA01</code></td></tr>
+                                <tr><td>Suffixe réseau</td><td>Identifiant réseau</td><td>—</td><td><code>12345678900012:ABCD01</code></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <h3>Cycle de vie d'une ligne d'annuaire</h3>
+                    <div class="code-block">Création → En vigueur → En cours de clôture → Clôturée</div>
+                    <h3>Portabilité (changement de PA)</h3>
+                    <p>La nouvelle PA actualise les lignes, l'ancienne les clôture. L'ancienne PA doit fournir des <strong>services minimums pendant la transition</strong> (art. 1788 E du CGI).</p>
+                </section>
+
+                <section id="envs" class="content-section">
+                    <h2>Environnements</h2>
+                    <div class="triple-grid">
+                        <div class="objective-card"><div class="objective-icon">🧪</div><h3>Sandbox</h3><p>Découverte et prototypage. Données fictives. Premiers tests d'intégration API.</p></div>
+                        <div class="objective-card"><div class="objective-icon">✅</div><h3>Qualification</h3><p>Recette et interopérabilité. Données de test proches de la prod. Obligatoire pour les PA.</p></div>
+                        <div class="objective-card"><div class="objective-icon">🚀</div><h3>Production</h3><p>Environnement réel. Factures et données opposables. Accès après validation en qualif.</p></div>
+                    </div>
+                    <h3>Comment se connecter ?</h3>
+                    <div class="numbered-blocks">
+                        <div class="nb-item"><span class="nb-num">1</span><div>S'inscrire sur <strong>PISTE</strong> (piste.gouv.fr)</div></div>
+                        <div class="nb-item"><span class="nb-num">2</span><div>Obtenir les <strong>clés d'accès</strong> (client_id, client_secret)</div></div>
+                        <div class="nb-item"><span class="nb-num">3</span><div>Récupérer un <strong>token Bearer</strong> via l'endpoint OAuth2</div></div>
+                        <div class="nb-item"><span class="nb-num">4</span><div>Appeler les APIs avec <code>Authorization: Bearer {token}</code></div></div>
+                    </div>
+                </section>
+
+                <section id="securite" class="content-section">
+                    <h2>Sécurité</h2>
+                    <div class="comparison-table">
+                        <table>
+                            <thead><tr><th>Couche</th><th>Technologie</th><th>Usage</th></tr></thead>
+                            <tbody>
+                                <tr><td><strong>Authentification</strong></td><td>OAuth2 / Certificats X509v3 / Bi-clé RSA</td><td>API REST / AS4 / SFTP</td></tr>
+                                <tr><td><strong>Chiffrement</strong></td><td>TLS 1.2+ / AES 256 / AES128_CBC</td><td>REST / AS4 / SFTP</td></tr>
+                                <tr><td><strong>Signature</strong></td><td>SHA-2</td><td>AS/4</td></tr>
+                                <tr><td><strong>Intégrité</strong></td><td>SHA-256 (empreinte numérique)</td><td>Tous les flux</td></tr>
+                                <tr><td><strong>Traçabilité</strong></td><td>flowId unique + horodatage</td><td>Tous les flux</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <nav class="page-nav-bottom">
+                    <a href="./cas-usage.html" class="nav-prev"><span class="nav-label">Page précédente</span><span class="nav-title">← 📋 Cas d'usage</span></a>
+                    <a href="./regles.html" class="nav-next"><span class="nav-label">Page suivante</span><span class="nav-title">📏 Les règles →</span></a>
+                </nav>
+            </article>
+        </div>
+    </main>
+
+    <footer id="main-footer"></footer>
+    <script src="./js/nav.js"></script>
+    <script src="./js/animations.js"></script>
+</body>
+</html>

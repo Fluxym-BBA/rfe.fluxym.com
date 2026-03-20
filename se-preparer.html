@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Se préparer : le guide pratique | E-Invoicing Academy</title>
+    <link rel="icon" href="./assets/favicon-Fluxym-V2.png" sizes="32x32" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/pages.css">
+</head>
+<body>
+
+    <nav id="main-nav"></nav>
+
+    <header class="page-hero">
+        <div class="page-hero-content">
+            <div class="breadcrumb">
+                <a href="./index.html">Accueil</a> <span>/</span> <span>Niveau 4 — Mettre en pratique</span>
+            </div>
+            <span class="hero-badge">Niveau 4 — Mettre en pratique</span>
+            <h1>Se préparer : le guide pratique</h1>
+            <p>5 phases, 30 points de checklist, top 10 des erreurs à éviter. Votre feuille de route complète.</p>
+        </div>
+    </header>
+
+    <main class="page-main">
+        <div class="page-container page-layout">
+
+            <aside class="page-sidebar">
+                <div class="sidebar-sticky">
+                    <h4>Sur cette page</h4>
+                    <ul class="sidebar-nav">
+                        <li><a href="#calendrier" class="sidebar-link active">📅 Calendrier</a></li>
+                        <li><a href="#phase1" class="sidebar-link">Phase 1 — Diagnostic</a></li>
+                        <li><a href="#phase2" class="sidebar-link">Phase 2 — Choix PA</a></li>
+                        <li><a href="#phase3" class="sidebar-link">Phase 3 — Intégration</a></li>
+                        <li><a href="#phase4" class="sidebar-link">Phase 4 — Tests</a></li>
+                        <li><a href="#phase5" class="sidebar-link">Phase 5 — Go live</a></li>
+                        <li><a href="#checklist" class="sidebar-link">✅ Checklist 30 pts</a></li>
+                        <li><a href="#erreurs" class="sidebar-link">⚠️ Top 10 erreurs</a></li>
+                        <li><a href="#ressources" class="sidebar-link">📚 Ressources</a></li>
+                    </ul>
+                    <div class="sidebar-nav-pages">
+                        <h4>Parcours Niveau 4</h4>
+                        <a href="./cas-usage.html" class="sidebar-page">📋 Cas d'usage</a>
+                        <a href="./technique.html" class="sidebar-page">⚙️ APIs & technique</a>
+                        <a href="./regles.html" class="sidebar-page">📏 Les règles</a>
+                        <a href="./se-preparer.html" class="sidebar-page active">🚀 Se préparer</a>
+                    </div>
+                </div>
+            </aside>
+
+            <article class="page-content">
+
+                <section id="calendrier" class="content-section">
+                    <h2>📅 Rappel du calendrier</h2>
+                    <div class="timeline-cards">
+                        <div class="timeline-card"><div class="timeline-date">Juil. 2025</div><div class="timeline-content"><strong>Échanges volontaires</strong> aux formats de la réforme</div></div>
+                        <div class="timeline-card timeline-card--active"><div class="timeline-date">1er sept. 2026</div><div class="timeline-content"><strong>Émission obligatoire</strong> GE et ETI + <strong>Réception obligatoire</strong> pour TOUTES les entreprises</div></div>
+                        <div class="timeline-card"><div class="timeline-date">1er sept. 2027</div><div class="timeline-content"><strong>Émission obligatoire</strong> PME, TPE et micro-entreprises</div></div>
+                    </div>
+                    <div class="callout callout--warning"><div class="callout-icon">⚠️</div><div class="callout-content">Même si vous êtes une PME et n'émettez qu'en septembre 2027, vous devez être prêt à <strong>RECEVOIR</strong> des factures électroniques dès <strong>septembre 2026</strong> !</div></div>
+                </section>
+
+                <section id="phase1" class="content-section">
+                    <h2>Phase 1 — Diagnostic <span style="color:var(--gray-400);font-weight:400;">(3 à 6 mois avant)</span></h2>
+                    <div class="numbered-blocks">
+                        <div class="nb-item"><span class="nb-num">1</span><div><strong>Cartographier ses flux</strong> — combien de factures émises/reçues ? Quels canaux (papier, PDF, EDI, Chorus Pro) ?</div></div>
+                        <div class="nb-item"><span class="nb-num">2</span><div><strong>Identifier ses typologies</strong> — B2B domestique (e-invoicing), B2C (e-reporting), B2G (Chorus Pro), International (e-reporting)</div></div>
+                        <div class="nb-item"><span class="nb-num">3</span><div><strong>Évaluer son SI</strong> — ERP, logiciel de facturation, EDI existant ? L'éditeur a-t-il un module RFE ?</div></div>
+                        <div class="nb-item"><span class="nb-num">4</span><div><strong>Mesurer les écarts</strong> — format actuel vs cible, transmission vs PA, réception manuelle vs automatique</div></div>
+                    </div>
+                </section>
+
+                <section id="phase2" class="content-section">
+                    <h2>Phase 2 — Choix de la PA <span style="color:var(--gray-400);font-weight:400;">(2 à 4 mois avant)</span></h2>
+
+                    <div class="stat-highlight">
+                        <div class="stat-big">~129</div>
+                        <div class="stat-desc">PA immatriculées ou en cours d'immatriculation (mars 2026). Liste officielle : <strong>impots.gouv.fr</strong></div>
+                    </div>
+
+                    <h3>Critères de sélection</h3>
+                    <div class="comparison-table">
+                        <table>
+                            <thead><tr><th>Critère</th><th>Question clé</th></tr></thead>
+                            <tbody>
+                                <tr><td><strong>Formats</strong></td><td>CII, UBL, Factur-X ? Les 3 ?</td></tr>
+                                <tr><td><strong>Protocoles</strong></td><td>API REST, SFTP, AS/4, Peppol ?</td></tr>
+                                <tr><td><strong>Cas d'usage</strong></td><td>Affacturage, sous-traitance, multi-vendeurs ?</td></tr>
+                                <tr><td><strong>ERP</strong></td><td>Connecteur natif pour votre ERP ?</td></tr>
+                                <tr><td><strong>Volumes & SLA</strong></td><td>Vos volumes ? Disponibilité 99,x% ?</td></tr>
+                                <tr><td><strong>E-reporting</strong></td><td>Gestion complète flux 10 (transactions + paiements) ?</td></tr>
+                                <tr><td><strong>Prix</strong></td><td>Par facture, forfait, mixte ?</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <section id="phase3" class="content-section">
+                    <h2>Phase 3 — Intégration technique <span style="color:var(--gray-400);font-weight:400;">(2 à 6 mois)</span></h2>
+                    <div class="triple-grid">
+                        <div class="objective-card"><div class="objective-icon">🔌</div><h3>Connecteur natif</h3><p>Module ERP prêt à l'emploi</p><p><strong>Pour :</strong> GE/ETI avec ERP majeur</p></div>
+                        <div class="objective-card"><div class="objective-icon">🔗</div><h3>API standard</h3><p>Intégration via Flow Service Z12-013</p><p><strong>Pour :</strong> ETI/PME avec capacité IT</p></div>
+                        <div class="objective-card"><div class="objective-icon">🖥️</div><h3>Portail web</h3><p>Saisie/dépôt via interface de la PA</p><p><strong>Pour :</strong> TPE/micro-entreprises</p></div>
+                    </div>
+
+                    <h3>Former ses équipes</h3>
+                    <div class="comparison-table">
+                        <table>
+                            <thead><tr><th>Public</th><th>Formation</th></tr></thead>
+                            <tbody>
+                                <tr><td><strong>Comptabilité</strong></td><td>Workflows d'approbation, statuts CDV, impact TVA</td></tr>
+                                <tr><td><strong>ADV / Facturation</strong></td><td>Nouveaux formats, données obligatoires, cas d'usage</td></tr>
+                                <tr><td><strong>Achats</strong></td><td>Réception automatique, motifs de refus</td></tr>
+                                <tr><td><strong>IT / DSI</strong></td><td>API, XML, intégration ERP, monitoring</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <section id="phase4" class="content-section">
+                    <h2>Phase 4 — Tests & recette <span style="color:var(--gray-400);font-weight:400;">(1 à 3 mois avant)</span></h2>
+                    <h3>Scénarios de test recommandés</h3>
+                    <div class="role-dual">
+                        <div class="role-card"><h4>Émission</h4><ul><li>☐ Facture standard (380) TVA 20%</li><li>☐ Avoir (381) avec référence</li><li>☐ Facture acompte (386) + solde (B4)</li><li>☐ Multi-taux de TVA</li><li>☐ Devise étrangère (TVA en EUR)</li></ul></div>
+                        <div class="role-card"><h4>Réception</h4><ul><li>☐ Réception + statut « Reçue »</li><li>☐ Approbation</li><li>☐ Refus avec motif normalisé</li><li>☐ Mise en litige</li><li>☐ E-reporting B2C (flux 10.3/10.4)</li></ul></div>
+                    </div>
+                </section>
+
+                <section id="phase5" class="content-section">
+                    <h2>Phase 5 — Go live & suivi</h2>
+                    <h3>Gestion des anomalies</h3>
+                    <div class="comparison-table">
+                        <table>
+                            <thead><tr><th>Anomalie</th><th>Action</th></tr></thead>
+                            <tbody>
+                                <tr><td><code>REJ_SEMAN</code></td><td>Vérifier conformité XML (BR + BR-FR)</td></tr>
+                                <tr><td><code>IRR_SYNTAX</code></td><td>Vérifier validité XSD</td></tr>
+                                <tr><td><code>DEST_INC</code></td><td>Vérifier l'annuaire, contacter le destinataire</td></tr>
+                                <tr><td><code>REJ_UNI</code></td><td>Ne pas ré-émettre — vérifier le n° de facture</td></tr>
+                                <tr><td>Timeout / indispo</td><td>Mode dégradé, ré-essayer plus tard</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <section id="checklist" class="content-section">
+                    <h2>✅ La checklist ultime — 30 points</h2>
+                    <div class="checklist-sections">
+                        <div class="checklist-group">
+                            <h4>Organisation & Gouvernance</h4>
+                            <ul class="checklist"><li>☐ Chef de projet RFE nommé</li><li>☐ Comité de pilotage en place</li><li>☐ Budget validé</li><li>☐ Planning de déploiement formalisé</li><li>☐ Communication interne réalisée</li></ul>
+                        </div>
+                        <div class="checklist-group">
+                            <h4>Choix & Contractualisation</h4>
+                            <ul class="checklist"><li>☐ PA sélectionnée et contrat signé</li><li>☐ PA immatriculée par la DGFIP</li><li>☐ SLA et conditions validés</li><li>☐ Portabilité documentée</li><li>☐ Réversibilité prévue</li></ul>
+                        </div>
+                        <div class="checklist-group">
+                            <h4>Technique & Intégration</h4>
+                            <ul class="checklist"><li>☐ Connecteur ERP ↔ PA opérationnel</li><li>☐ Format choisi (CII, UBL, Factur-X)</li><li>☐ Profil Factur-X choisi</li><li>☐ Mapping champs ERP → format validé</li><li>☐ Données obligatoires intégrées (PMT, PMD, AAB…)</li></ul>
+                        </div>
+                        <div class="checklist-group">
+                            <h4>Annuaire & Routage</h4>
+                            <ul class="checklist"><li>☐ Lignes d'annuaire créées dans le PPF</li><li>☐ Maille d'adressage définie</li><li>☐ Dates d'effet correctes</li><li>☐ Partenaires informés de votre adresse</li></ul>
+                        </div>
+                        <div class="checklist-group">
+                            <h4>Tests & Recette</h4>
+                            <ul class="checklist"><li>☐ Tests émission validés</li><li>☐ Tests réception validés</li><li>☐ Tests CDV (statuts) validés</li><li>☐ Tests e-reporting validés</li><li>☐ Tests bilatéraux réalisés</li><li>☐ Scénarios d'erreur testés</li></ul>
+                        </div>
+                        <div class="checklist-group">
+                            <h4>Formation & Support</h4>
+                            <ul class="checklist"><li>☐ Équipes comptabilité formées</li><li>☐ Équipes ADV/facturation formées</li><li>☐ Équipes IT formées</li><li>☐ Documentation utilisateur disponible</li><li>☐ Processus dégradé documenté</li></ul>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="erreurs" class="content-section">
+                    <h2>⚠️ Top 10 des erreurs à éviter</h2>
+                    <div class="numbered-blocks">
+                        <div class="nb-item"><span class="nb-num" style="background:var(--danger);color:white;">1</span><div><strong>Attendre la dernière minute</strong> — l'intégration prend 2 à 6 mois minimum</div></div>
+                        <div class="nb-item"><span class="nb-num" style="background:var(--danger);color:white;">2</span><div><strong>Choisir une PA non immatriculée</strong> — vérifiez sur impots.gouv.fr</div></div>
+                        <div class="nb-item"><span class="nb-num" style="background:var(--danger);color:white;">3</span><div><strong>Ignorer l'obligation de réception</strong> — même PME : réception dès sept. 2026</div></div>
+                        <div class="nb-item"><span class="nb-num" style="background:var(--danger);color:white;">4</span><div><strong>Oublier le e-reporting</strong> — B2C et international doivent aussi être déclarés</div></div>
+                        <div class="nb-item"><span class="nb-num" style="background:var(--danger);color:white;">5</span><div><strong>Négliger les mentions obligatoires</strong> — les 3 notes PMT, PMD, AAB sur TOUTE facture</div></div>
+                        <div class="nb-item"><span class="nb-num" style="background:var(--danger);color:white;">6</span><div><strong>Ne pas tester le cycle de vie</strong> — les statuts sont aussi importants que la facture</div></div>
+                        <div class="nb-item"><span class="nb-num" style="background:var(--danger);color:white;">7</span><div><strong>Ignorer le cadre de facturation</strong> — BT-23 obligatoire, détermine le traitement fiscal</div></div>
+                        <div class="nb-item"><span class="nb-num" style="background:var(--danger);color:white;">8</span><div><strong>Sous-estimer la qualité des données</strong> — SIRET erroné = facture non livrée</div></div>
+                        <div class="nb-item"><span class="nb-num" style="background:var(--danger);color:white;">9</span><div><strong>Oublier l'annuaire</strong> — sans inscription, vos partenaires ne vous trouvent pas</div></div>
+                        <div class="nb-item"><span class="nb-num" style="background:var(--danger);color:white;">10</span><div><strong>Pas de plan B</strong> — prévoyez un processus dégradé en cas de panne</div></div>
+                    </div>
+                </section>
+
+                <section id="ressources" class="content-section">
+                    <h2>📚 Ressources & contacts utiles</h2>
+                    <div class="role-dual">
+                        <div class="role-card"><h4>Sites officiels</h4><ul><li><a href="https://www.impots.gouv.fr/facturation-electronique" style="color:var(--cyan);">DGFIP — Page RFE</a></li><li><a href="https://www.impots.gouv.fr/je-consulte-la-liste-des-plateformes-agreees" style="color:var(--cyan);">Liste des PA</a></li><li><a href="https://chorus-pro.gouv.fr" style="color:var(--cyan);">Chorus Pro</a></li><li><a href="https://piste.gouv.fr" style="color:var(--cyan);">Plateforme PISTE</a></li></ul></div>
+                        <div class="role-card"><h4>Accompagnement</h4><ul><li>Votre <strong>expert-comptable</strong> (impact fiscal)</li><li>Votre <strong>éditeur ERP</strong> (intégration technique)</li><li>Votre <strong>PA</strong> (paramétrage et tests)</li><li>Les <strong>CCI</strong> (ateliers et formations gratuits)</li></ul></div>
+                    </div>
+                </section>
+
+                <nav class="page-nav-bottom">
+                    <a href="./regles.html" class="nav-prev"><span class="nav-label">Page précédente</span><span class="nav-title">← 📏 Les règles</span></a>
+                    <a href="./index.html" class="nav-next"><span class="nav-label">Retour</span><span class="nav-title">🏠 Accueil →</span></a>
+                </nav>
+            </article>
+        </div>
+    </main>
+
+    <footer id="main-footer"></footer>
+    <script src="./js/nav.js"></script>
+    <script src="./js/animations.js"></script>
+</body>
+</html>

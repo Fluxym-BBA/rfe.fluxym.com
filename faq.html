@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ — Questions fréquentes | E-Invoicing Academy</title>
+    <link rel="icon" href="./assets/favicon-Fluxym-V2.png" sizes="32x32" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/pages.css">
+</head>
+<body>
+
+    <nav id="main-nav"></nav>
+
+    <header class="page-hero">
+        <div class="page-hero-content">
+            <div class="breadcrumb">
+                <a href="./index.html">Accueil</a> <span>/</span> <span>Niveau 5 — Ressources</span>
+            </div>
+            <span class="hero-badge">Niveau 5 — Ressources</span>
+            <h1>Questions fréquentes</h1>
+            <p>25 questions, 5 catégories. Réponses claires et concrètes avec renvois vers les pages détaillées.</p>
+        </div>
+    </header>
+
+    <main class="page-main">
+        <div class="page-container page-layout">
+
+            <aside class="page-sidebar">
+                <div class="sidebar-sticky">
+                    <h4>Sur cette page</h4>
+                    <ul class="sidebar-nav">
+                        <li><a href="#obligations" class="sidebar-link active">📅 Obligations & calendrier</a></li>
+                        <li><a href="#plateformes" class="sidebar-link">🏢 Plateformes & choix</a></li>
+                        <li><a href="#formats" class="sidebar-link">💻 Formats & technique</a></li>
+                        <li><a href="#ereporting" class="sidebar-link">📊 E-reporting</a></li>
+                        <li><a href="#cas" class="sidebar-link">🔍 Cas particuliers</a></li>
+                    </ul>
+                    <div class="sidebar-nav-pages">
+                        <h4>Parcours Niveau 5</h4>
+                        <a href="./glossaire.html" class="sidebar-page">📖 Glossaire</a>
+                        <a href="./faq.html" class="sidebar-page active">❓ FAQ</a>
+                        <a href="./ressources.html" class="sidebar-page">📚 Ressources</a>
+                    </div>
+                </div>
+            </aside>
+
+            <article class="page-content">
+
+                <!-- OBLIGATIONS -->
+                <section id="obligations" class="content-section">
+                    <h2>📅 Obligations & calendrier</h2>
+                    <div class="faq-list">
+                        <details class="faq-item"><summary>1. Suis-je concerné par la réforme ?</summary><div class="faq-answer"><p><strong>Oui, si vous êtes assujetti à la TVA en France.</strong> Auto-entrepreneurs, TPE, PME, ETI, GE, professions libérales, associations assujetties… Même les entreprises en franchise en base sont concernées.</p><p>👉 <a href="./comprendre.html">Comprendre la réforme →</a></p></div></details>
+
+                        <details class="faq-item"><summary>2. Quand dois-je être prêt ?</summary><div class="faq-answer"><p><strong>Juillet 2025 :</strong> échanges volontaires. <strong>1er sept. 2026 :</strong> réception obligatoire pour TOUS + émission GE/ETI. <strong>1er sept. 2027 :</strong> émission PME/TPE/micro.</p><p>👉 <a href="./calendrier.html">Calendrier détaillé →</a></p></div></details>
+
+                        <details class="faq-item"><summary>3. Quelle est la différence entre émission et réception ?</summary><div class="faq-answer"><p><strong>Réception :</strong> recevoir des factures structurées via une PA (toutes les entreprises dès sept. 2026). <strong>Émission :</strong> produire et transmettre vos factures au format structuré (progressif 2026-2027).</p><p>👉 <a href="./e-invoicing.html">E-invoicing en détail →</a></p></div></details>
+
+                        <details class="faq-item"><summary>4. Je suis auto-entrepreneur, suis-je concerné ?</summary><div class="faq-answer"><p><strong>Oui.</strong> Réception dès sept. 2026, émission + e-reporting dès sept. 2027. Des PA proposent des offres adaptées (voire gratuites) pour les petits volumes.</p><p>👉 <a href="./calendrier.html">Mon profil dans le calendrier →</a></p></div></details>
+
+                        <details class="faq-item"><summary>5. Je ne fais que du B2C, suis-je concerné ?</summary><div class="faq-answer"><p><strong>Oui</strong>, mais via le <strong>e-reporting</strong> (pas l'e-invoicing). Vous devez transmettre les données de vos transactions B2C à l'administration (Flux 10), en détaillé ou en agrégé.</p><p>👉 <a href="./e-reporting.html">E-reporting expliqué →</a></p></div></details>
+
+                        <details class="faq-item"><summary>6. Que se passe-t-il si je ne suis pas prêt ?</summary><div class="faq-answer"><p><strong>Sanctions :</strong> 15 € par facture non émise (plafond 15 000 €/an) + 250 € par transmission e-reporting manquante (plafond 15 000 €/an).</p><p>👉 <a href="./sanctions.html">Sanctions détaillées →</a></p></div></details>
+                    </div>
+                </section>
+
+                <!-- PLATEFORMES -->
+                <section id="plateformes" class="content-section">
+                    <h2>🏢 Plateformes & choix</h2>
+                    <div class="faq-list">
+                        <details class="faq-item"><summary>7. Qu'est-ce qu'une PA ? Comment en choisir une ?</summary><div class="faq-answer"><p>Un opérateur privé immatriculé par la DGFIP. ~129 PA disponibles. Critères : compatibilité ERP, formats, protocoles, cas d'usage supportés, tarif, SLA.</p><p>👉 <a href="./acteurs.html">Les acteurs de la réforme →</a></p></div></details>
+
+                        <details class="faq-item"><summary>8. Puis-je changer de PA ?</summary><div class="faq-answer"><p><strong>Oui.</strong> La portabilité est garantie. L'ancienne PA assure la continuité de service et facilite la migration.</p><p>👉 <a href="./se-preparer.html">Guide de préparation →</a></p></div></details>
+
+                        <details class="faq-item"><summary>9. Dois-je obligatoirement passer par une PA ?</summary><div class="faq-answer"><p><strong>Oui</strong> pour le B2B domestique et le e-reporting (le PPF ne propose plus de service direct). <strong>Exception :</strong> B2G via Chorus Pro.</p><p>👉 <a href="./acteurs.html">Comprendre les acteurs →</a></p></div></details>
+
+                        <details class="faq-item"><summary>10. Combien coûte une PA ?</summary><div class="faq-answer"><p>Variable : gratuit/quelques €/mois pour les TPE, centaines à milliers €/an pour PME, sur mesure pour ETI/GE. Comparez au moins 3 offres.</p></div></details>
+
+                        <details class="faq-item"><summary>11. Puis-je utiliser Chorus Pro comme PA ?</summary><div class="faq-answer"><p><strong>Uniquement pour le B2G.</strong> Pour le B2B, vous devez choisir une PA privée. Si vous facturez public + privé : Chorus Pro pour B2G + PA privée pour B2B.</p><p>👉 <a href="./chorus-pro.html">Chorus Pro dans la réforme →</a></p></div></details>
+                    </div>
+                </section>
+
+                <!-- FORMATS -->
+                <section id="formats" class="content-section">
+                    <h2>💻 Formats & technique</h2>
+                    <div class="faq-list">
+                        <details class="faq-item"><summary>12. Quel format choisir : UBL, CII ou Factur-X ?</summary><div class="faq-answer"><p><strong>UBL 2.1 :</strong> international, Peppol. <strong>CII D22B :</strong> France/Allemagne, SAP. <strong>Factur-X :</strong> TPE/PME, transition douce. Votre PA et ERP vous guideront.</p><p>👉 <a href="./formats.html">Comparatif complet →</a></p></div></details>
+
+                        <details class="faq-item"><summary>13. Le PDF suffit-il ?</summary><div class="faq-answer"><p><strong>Non.</strong> Un PDF classique n'est pas structuré. La seule option PDF = <strong>Factur-X</strong> (PDF/A-3 + XML CII embarqué).</p><p>👉 <a href="./formats.html">Les formats en détail →</a></p></div></details>
+
+                        <details class="faq-item"><summary>14. Mon ERP est-il compatible ?</summary><div class="faq-answer"><p>La plupart des ERP majeurs ont des mises à jour RFE. Vérifiez avec votre éditeur : génération de formats, champs FR obligatoires, connexion PA.</p><p>👉 <a href="./technique.html">Aspect technique →</a></p></div></details>
+
+                        <details class="faq-item"><summary>15. Dois-je changer de logiciel ?</summary><div class="faq-answer"><p><strong>Pas forcément.</strong> Options : mise à jour, conversion via PA/SC, portail de saisie en ligne. Même Excel/Word peut fonctionner via le portail d'une PA.</p><p>👉 <a href="./se-preparer.html">Se préparer →</a></p></div></details>
+
+                        <details class="faq-item"><summary>16. Comment tester avant le go live ?</summary><div class="faq-answer"><p>Qualification Chorus Pro, sandbox des PA, validateurs XML (KoSIT, Peppol, Ecosio), échanges volontaires depuis juillet 2025.</p><p>👉 <a href="./technique.html">Outils de test →</a></p></div></details>
+                    </div>
+                </section>
+
+                <!-- E-REPORTING -->
+                <section id="ereporting" class="content-section">
+                    <h2>📊 E-reporting</h2>
+                    <div class="faq-list">
+                        <details class="faq-item"><summary>17. Quelle différence entre e-invoicing et e-reporting ?</summary><div class="faq-answer"><p><strong>E-invoicing :</strong> factures structurées B2B domestique (Flux 1+2). <strong>E-reporting :</strong> données de transactions B2C, international, paiements (Flux 10). L'e-invoicing = les factures, l'e-reporting = tout le reste.</p><p>👉 <a href="./e-invoicing.html">E-invoicing</a> | <a href="./e-reporting.html">E-reporting</a></p></div></details>
+
+                        <details class="faq-item"><summary>18. Je fais du B2C, comment déclarer ?</summary><div class="faq-answer"><p>Transmission détaillée (facture par facture) ou agrégée (cumul quotidien par catégorie/taux de TVA) via Flux 10, à travers votre PA.</p><p>👉 <a href="./e-reporting.html">E-reporting en détail →</a></p></div></details>
+
+                        <details class="faq-item"><summary>19. Je fais de l'export, comment déclarer ?</summary><div class="faq-answer"><p>E-reporting via Flux 10. Identifiant acheteur étranger : « 0223 » (UE, TVA intracom) ou « 0227 » (hors UE). Pas d'e-invoicing pour l'international.</p><p>👉 <a href="./e-reporting.html">E-reporting →</a></p></div></details>
+
+                        <details class="faq-item"><summary>20. À quelle fréquence transmettre le e-reporting ?</summary><div class="faq-answer"><p><strong>Régime réel normal :</strong> mensuel (le 10 du mois suivant). <strong>Simplifié :</strong> mensuel (25-30 du mois suivant). <strong>Franchise en base :</strong> bimestriel (25-30 du mois suivant le bimestre).</p><p>👉 <a href="./e-reporting.html">Détail des fréquences →</a></p></div></details>
+                    </div>
+                </section>
+
+                <!-- CAS PARTICULIERS -->
+                <section id="cas" class="content-section">
+                    <h2>🔍 Cas particuliers</h2>
+                    <div class="faq-list">
+                        <details class="faq-item"><summary>21. Et les factures à l'étranger ?</summary><div class="faq-answer"><p><strong>Export :</strong> e-reporting (pas d'e-invoicing) + Peppol si le client est raccordé. <strong>Import :</strong> pas d'e-invoicing, e-reporting d'acquisition possible (reporté sept. 2027 pour non-établis).</p><p>👉 <a href="./peppol.html">Peppol & international →</a></p></div></details>
+
+                        <details class="faq-item"><summary>22. Et l'affacturage ?</summary><div class="faq-answer"><p>Intégralement pris en compte. Types dédiés : 393 (facture affacturée), 396 (avoir). Le factor est identifié dans la chaîne. Cas d'usage spécifiques dans Z12-014.</p><p>👉 <a href="./cas-usage.html">Cas d'usage →</a></p></div></details>
+
+                        <details class="faq-item"><summary>23. Et l'auto-facturation ?</summary><div class="faq-answer"><p>L'acheteur émet pour le vendeur (mandat obligatoire). Codes 389 (facture), 261 (avoir), 500 (acompte). La PA de l'acheteur agit comme PA-E.</p><p>👉 <a href="./cas-usage.html">Cas d'usage →</a></p></div></details>
+
+                        <details class="faq-item"><summary>24. Et le secret professionnel (avocats, médecins…) ?</summary><div class="faq-answer"><p>La réforme s'applique mais avec des aménagements : le détail des prestations (BT-154) ne figure que dans le Flux 2 (entre les parties) et n'est <strong>jamais transmis</strong> au PPF.</p><p>👉 <a href="./cas-usage.html">Cas d'usage spéciaux →</a></p></div></details>
+
+                        <details class="faq-item"><summary>25. Et les DOM-TOM ?</summary><div class="faq-answer"><p><strong>Guadeloupe, Martinique, Réunion :</strong> oui (TVA FR). <strong>Guyane, Mayotte :</strong> non (pas de TVA). <strong>Nouvelle-Calédonie, Polynésie :</strong> traités comme international. Identifiants spécifiques : RIDET (0228), TAHITI (0229).</p><p>👉 <a href="./cas-usage.html">Cas d'usage →</a></p></div></details>
+                    </div>
+                </section>
+
+                <nav class="page-nav-bottom">
+                    <a href="./glossaire.html" class="nav-prev"><span class="nav-label">Page précédente</span><span class="nav-title">← 📖 Glossaire</span></a>
+                    <a href="./ressources.html" class="nav-next"><span class="nav-label">Page suivante</span><span class="nav-title">📚 Ressources →</span></a>
+                </nav>
+            </article>
+        </div>
+    </main>
+
+    <footer id="main-footer"></footer>
+    <script src="./js/nav.js"></script>
+    <script src="./js/animations.js"></script>
+</body>
+</html>
