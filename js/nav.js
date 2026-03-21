@@ -60,6 +60,7 @@ const SiteNav = {
                 <li class="nav-dropdown">
                     <a href="#" class="nav-link nav-link--dropdown">Pratique <span class="nav-arrow">▾</span></a>
                     <ul class="nav-submenu">
+                        <li><a href="./champs.html">🔧 Les champs</a></li>
                         <li><a href="./cas-usage.html">📋 Cas d'usage</a></li>
                         <li><a href="./technique.html">⚙️ APIs & technique</a></li>
                         <li><a href="./regles.html">📏 Les règles</a></li>

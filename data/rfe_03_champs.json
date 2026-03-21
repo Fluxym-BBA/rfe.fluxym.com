@@ -1,0 +1,3104 @@
+{
+  "blocks": [
+    {
+      "id": "BG-0",
+      "name": "En-tête de facture",
+      "description": "Informations générales identifiant la facture.",
+      "fields": [
+        {
+          "id": "BT-1",
+          "name": "Numéro de facture",
+          "description": "Identifiant unique séquentiel attribué par le vendeur.",
+          "type": "Identifiant",
+          "maxLength": 35,
+          "truncatedTo": 20,
+          "cardinality": "1..1",
+          "mandatory": true,
+          "format": "both",
+          "values": null,
+          "example": "FA-2026-00042",
+          "rules": [
+            "BR-2",
+            "BR-FR-CO-02",
+            "BR-FR-MAP-01"
+          ],
+          "tips": "Le PPF tronque à 20 car. dans le flux 1. Privilégiez des numéros courts. Numérotation séquentielle sans trou.",
+          "legalRefs": [
+            "BOI-TVA-DECLA-30-20-20-10",
+            "CGI-289"
+          ]
+        },
+        {
+          "id": "BT-2",
+          "name": "Date d'émission",
+          "description": "Date à laquelle la facture a été émise.",
+          "type": "Date",
+          "formatDetail": "YYYY-MM-DD",
+          "cardinality": "1..1",
+          "mandatory": true,
+          "format": "both",
+          "example": "2026-09-15",
+          "rules": [
+            "BR-3",
+            "BR-FR-03",
+            "BR-FR-CO-02"
+          ],
+          "tips": "Détermine l'année pour la règle d'unicité BR-FR-CO-02.",
+          "legalRefs": [
+            "CGI-289"
+          ]
+        },
+        {
+          "id": "BT-3",
+          "name": "Code du type de facture",
+          "description": "Code UNTDID 1001 identifiant le type de document.",
+          "type": "Code",
+          "maxLength": 3,
+          "cardinality": "1..1",
+          "mandatory": true,
+          "format": "both",
+          "values": {
+            "261": "Avoir auto-facturé",
+            "262": "Avoir remise globale",
+            "380": "Facture commerciale",
+            "381": "Avoir",
+            "384": "Facture rectificative",
+            "386": "Facture d'acompte",
+            "389": "Facture auto-facturée",
+            "393": "Facture affacturée",
+            "396": "Avoir affacturé",
+            "471": "Rectificative auto-facturée",
+            "472": "Rectificative affacturée",
+            "473": "Rectificative auto-facturée affacturée",
+            "500": "Acompte auto-facturé",
+            "501": "Facture auto-facturée affacturée",
+            "502": "Avoir auto-facturé affacturé",
+            "503": "Avoir d'acompte"
+          },
+          "example": "380",
+          "rules": [
+            "BR-4",
+            "BR-CL-01",
+            "BR-FR-04"
+          ],
+          "tips": "380 = classique, 381 = avoir, 386 = acompte, 389 = autofacturation.",
+          "legalRefs": [
+            "UNTDID-1001",
+            "CGI-289"
+          ]
+        },
+        {
+          "id": "BT-5",
+          "name": "Code devise",
+          "description": "Devise des montants (ISO 4217).",
+          "type": "Code",
+          "maxLength": 3,
+          "cardinality": "1..1",
+          "mandatory": true,
+          "format": "both",
+          "example": "EUR",
+          "rules": [
+            "BR-5"
+          ],
+          "tips": "Quasi toujours EUR en France.",
+          "legalRefs": [
+            "CGI-289"
+          ]
+        },
+        {
+          "id": "BT-6",
+          "name": "Devise comptabilisation TVA",
+          "description": "Devise TVA si différente de BT-5.",
+          "type": "Code",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "rules": [],
+          "tips": "Uniquement si devise facture != devise comptabilisation TVA.",
+          "legalRefs": []
+        },
+        {
+          "id": "BT-7",
+          "name": "Date d'exigibilité TVA",
+          "description": "Date exacte d'exigibilité de la TVA.",
+          "type": "Date",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "rules": [
+            "BR-CO-3",
+            "BR-FR-03"
+          ],
+          "tips": "Mutuellement exclusif avec BT-8.",
+          "legalRefs": [
+            "BOI-TVA-DECLA-30-20-20-20"
+          ]
+        },
+        {
+          "id": "BT-8",
+          "name": "Code date exigibilité TVA",
+          "description": "Mode de calcul de la date d'exigibilité.",
+          "type": "Code",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "values": {
+            "3": "Date facture",
+            "35": "Date livraison réelle",
+            "432": "Date paiement (encaissement)"
+          },
+          "rules": [
+            "BR-CO-3"
+          ],
+          "tips": "3=biens, 432=services. Mutuellement exclusif avec BT-7.",
+          "legalRefs": [
+            "BOI-TVA-DECLA-30-20-20-20"
+          ]
+        },
+        {
+          "id": "BT-9",
+          "name": "Date d'échéance",
+          "description": "Date de paiement attendue.",
+          "type": "Date",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "example": "2026-10-15",
+          "rules": [
+            "BR-FR-03",
+            "BR-FR-CO-09"
+          ],
+          "tips": "Pour B2/S2/M2 : date de paiement effectif.",
+          "legalRefs": [
+            "CGI-289"
+          ]
+        },
+        {
+          "id": "BT-10",
+          "name": "Référence acheteur",
+          "description": "Référence interne attribuée par l'acheteur.",
+          "type": "Texte",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "example": "SERVEXEC",
+          "rules": [],
+          "tips": "Pour le rapprochement automatique côté acheteur.",
+          "legalRefs": []
+        },
+        {
+          "id": "BT-11",
+          "name": "Référence de projet",
+          "description": "Identifiant du projet lié.",
+          "type": "Identifiant",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "example": "PROJET_2547",
+          "rules": [],
+          "tips": "Utile en BTP pour identifier un chantier.",
+          "legalRefs": []
+        },
+        {
+          "id": "BT-12",
+          "name": "Référence du contrat",
+          "description": "Identifiant du contrat lié.",
+          "type": "Identifiant",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "example": "CT2018120802",
+          "rules": [
+            "BR-FR-CO-03"
+          ],
+          "tips": "Obligatoire pour avoir remise globale (262).",
+          "legalRefs": []
+        },
+        {
+          "id": "BT-13",
+          "name": "Référence bon de commande",
+          "description": "N° de commande de l'acheteur.",
+          "type": "Identifiant",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "example": "PO201925478",
+          "rules": [],
+          "tips": "Clé du rapprochement facture/commande.",
+          "legalRefs": []
+        },
+        {
+          "id": "BT-14",
+          "name": "Numéro d'ordre de vente",
+          "description": "Référence de commande du vendeur.",
+          "type": "Identifiant",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "rules": [],
+          "tips": "Référence interne vendeur.",
+          "legalRefs": []
+        },
+        {
+          "id": "BT-15",
+          "name": "Référence avis de réception",
+          "type": "Identifiant",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "rules": [],
+          "tips": "Bon de réception.",
+          "legalRefs": []
+        },
+        {
+          "id": "BT-16",
+          "name": "Référence avis d'expédition",
+          "type": "Identifiant",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "rules": [],
+          "tips": "Bon de livraison.",
+          "legalRefs": []
+        },
+        {
+          "id": "BT-17",
+          "name": "Référence appel d'offres/lot",
+          "type": "Identifiant",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "rules": [],
+          "tips": "Marchés publics.",
+          "legalRefs": []
+        },
+        {
+          "id": "BT-18",
+          "name": "Identifiant objet facturé",
+          "description": "Référence codifiée de l'objet facturé.",
+          "type": "Identifiant",
+          "cardinality": "0..n",
+          "mandatory": false,
+          "format": "both",
+          "schemeID": "UNTDID 1153 (BT-18-1)",
+          "rules": [],
+          "tips": "N° plaque, compteur, téléphone, dossier, etc.",
+          "legalRefs": []
+        },
+        {
+          "id": "BT-19",
+          "name": "Référence comptable acheteur",
+          "type": "Texte",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "rules": [],
+          "tips": "Code d'imputation analytique fourni par l'acheteur.",
+          "legalRefs": []
+        },
+        {
+          "id": "BT-20",
+          "name": "Conditions de paiement",
+          "type": "Texte",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "example": "PAIEMENT 30 JOURS NET",
+          "rules": [],
+          "tips": "Texte libre. Ne remplace pas PMT/PMD/AAB.",
+          "legalRefs": [
+            "CGI-289"
+          ]
+        },
+        {
+          "id": "BT-23",
+          "name": "Cadre de facturation",
+          "description": "Code déterminant le cadre fiscal. Extension française OBLIGATOIRE.",
+          "type": "Code",
+          "cardinality": "1..1",
+          "mandatory": true,
+          "format": "both",
+          "values": {
+            "B1": "Facture de bien",
+            "S1": "Facture de service",
+            "M1": "Facture mixte (biens+services)",
+            "B2": "Bien déjà payée",
+            "S2": "Service déjà payée",
+            "M2": "Mixte déjà payée",
+            "S3": "Sous-traitance paiement direct (B2G)",
+            "B4": "Définitive après acompte - bien",
+            "S4": "Définitive après acompte - service",
+            "M4": "Définitive après acompte - mixte",
+            "S5": "Sous-traitant",
+            "S6": "Cotraitant",
+            "B7": "Bien post e-reporting",
+            "S7": "Service post e-reporting",
+            "B8": "Multi-vendeurs bien",
+            "S8": "Multi-vendeurs service",
+            "M8": "Multi-vendeurs mixte"
+          },
+          "example": "S1",
+          "rules": [
+            "BR-FR-08",
+            "BR-FR-CO-08",
+            "BR-FR-CO-09"
+          ],
+          "tips": "OBLIGATOIRE et spécifique France. B=biens, S=services, M=mixte.",
+          "legalRefs": [
+            "BOI-TVA-DECLA-30-20-20-20",
+            "AFNOR-XP-Z12-012"
+          ]
+        },
+        {
+          "id": "BT-24",
+          "name": "Identifiant de spécification",
+          "type": "Identifiant",
+          "cardinality": "1..1",
+          "mandatory": true,
+          "format": "both",
+          "rules": [
+            "BR-1",
+            "BR-FR-MAP-15"
+          ],
+          "tips": "Profil sémantique utilisé.",
+          "legalRefs": [
+            "EN-16931"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "BG-1",
+      "name": "Note de facture",
+      "description": "Notes textuelles codifiées par un code sujet.",
+      "fields": [
+        {
+          "id": "BT-21",
+          "name": "Code sujet de la note",
+          "type": "Code",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "values": {
+            "PMT": "Indemnité forfaitaire 40€",
+            "PMD": "Pénalités de retard",
+            "AAB": "Escompte",
+            "TXD": "Info fiscale (ex: AU)",
+            "ACC": "Subrogation factoring",
+            "AAI": "Info générale",
+            "ADN": "Indicateur B2G",
+            "SUR": "Remarque fournisseur",
+            "ABL": "Info légale (RCS)",
+            "CUS": "Douane",
+            "BLU": "Éco-participation DEEE",
+            "BAR": "Type traitement"
+          },
+          "rules": [
+            "BR-FR-05",
+            "BR-FR-06",
+            "BR-FR-07"
+          ],
+          "tips": "PMT, PMD et AAB sont OBLIGATOIRES.",
+          "legalRefs": [
+            "CGI-289"
+          ]
+        },
+        {
+          "id": "BT-22",
+          "name": "Texte de la note",
+          "type": "Texte",
+          "cardinality": "1..1",
+          "mandatory": true,
+          "format": "both",
+          "example": "Indemnité forfaitaire de 40€ pour frais de recouvrement (Art. L.441-10 C. com.)",
+          "rules": [
+            "BR-FR-05",
+            "BR-FR-CO-14"
+          ],
+          "tips": "PMT='40€ forfaitaire', PMD=taux pénalités, AAB='Pas d'escompte' ou conditions.",
+          "legalRefs": [
+            "CGI-289"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "BG-3",
+      "name": "Référence facture antérieure",
+      "description": "Obligatoire pour les avoirs.",
+      "fields": [
+        {
+          "id": "BT-25",
+          "name": "Référence facture antérieure",
+          "type": "Identifiant",
+          "truncatedTo": 20,
+          "cardinality": "1..1",
+          "mandatory": true,
+          "format": "both",
+          "rules": [
+            "BR-FR-CO-05",
+            "BR-FR-MAP-01"
+          ],
+          "tips": "Obligatoire pour tout avoir. Tronqué à 20 car.",
+          "legalRefs": [
+            "CGI-289"
+          ]
+        },
+        {
+          "id": "BT-26",
+          "name": "Date facture antérieure",
+          "type": "Date",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "rules": [
+            "BR-FR-03",
+            "BR-FR-CO-05"
+          ],
+          "tips": "Obligatoire en France pour les avoirs.",
+          "legalRefs": [
+            "CGI-289"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "BG-4",
+      "name": "Vendeur",
+      "description": "Identité et identifiants du vendeur.",
+      "fields": [
+        {
+          "id": "BT-27",
+          "name": "Nom du vendeur",
+          "type": "Texte",
+          "cardinality": "1..1",
+          "mandatory": true,
+          "format": "both",
+          "example": "DURAND SARL",
+          "rules": [
+            "BR-6"
+          ],
+          "tips": "Raison sociale.",
+          "legalRefs": [
+            "CGI-289"
+          ]
+        },
+        {
+          "id": "BT-28",
+          "name": "Nom commercial",
+          "type": "Texte",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "rules": [],
+          "tips": "Si différent de la raison sociale.",
+          "legalRefs": []
+        },
+        {
+          "id": "BT-29",
+          "name": "Identifiant du vendeur",
+          "type": "Identifiant",
+          "cardinality": "0..n",
+          "mandatory": false,
+          "format": "both",
+          "schemeID": "0060=DUNS, 0224=routage (max 100), 0231=AU",
+          "rules": [
+            "BR-FR-CO-10",
+            "BR-FR-CO-13",
+            "BR-FR-26"
+          ],
+          "tips": "Multiples occurrences possibles.",
+          "legalRefs": [
+            "AFNOR-XP-Z12-012"
+          ]
+        },
+        {
+          "id": "BT-30",
+          "name": "SIREN du vendeur",
+          "type": "Identifiant",
+          "maxLength": 9,
+          "cardinality": "1..1",
+          "mandatory": true,
+          "format": "both",
+          "schemeID": "0002",
+          "example": "100000009",
+          "rules": [
+            "BR-62",
+            "BR-FR-01",
+            "BR-FR-CO-02"
+          ],
+          "tips": "OBLIGATOIRE. 9 chiffres. Clé d'unicité.",
+          "legalRefs": [
+            "CGI-289"
+          ]
+        },
+        {
+          "id": "BT-31",
+          "name": "N° TVA du vendeur",
+          "type": "Identifiant",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "example": "FR88100000009",
+          "rules": [
+            "BR-62"
+          ],
+          "tips": "Requis sauf franchise en base.",
+          "legalRefs": [
+            "CGI-289"
+          ]
+        },
+        {
+          "id": "BT-32",
+          "name": "Identifiant fiscal vendeur",
+          "type": "Identifiant",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "rules": [
+            "BR-62",
+            "BR-FR-CO-16"
+          ],
+          "tips": "SIREN si pas de n° TVA (franchise).",
+          "legalRefs": [
+            "CGI-293-B"
+          ]
+        },
+        {
+          "id": "BT-33",
+          "name": "Forme juridique et capital",
+          "type": "Texte",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "example": "SARL AU CAPITAL DE 50 000 EUR",
+          "rules": [],
+          "tips": "Pied de facture classique.",
+          "legalRefs": []
+        },
+        {
+          "id": "BT-34",
+          "name": "Adresse électronique vendeur",
+          "type": "Identifiant",
+          "cardinality": "1..1",
+          "mandatory": true,
+          "format": "both",
+          "schemeID": "0225",
+          "example": "100000009",
+          "rules": [
+            "BR-12",
+            "BR-FR-02",
+            "BR-FR-22"
+          ],
+          "tips": "OBLIGATOIRE. Format SIREN ou SIREN_XXX pour e-invoicing.",
+          "legalRefs": [
+            "AFNOR-XP-Z12-012"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "BG-5",
+      "name": "Adresse postale vendeur",
+      "description": "Code pays obligatoire.",
+      "fields": [
+        {
+          "id": "BT-35",
+          "name": "Adresse Ligne 1",
+          "type": "Texte",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "rules": [],
+          "legalRefs": [
+            "CGI-289"
+          ]
+        },
+        {
+          "id": "BT-36",
+          "name": "Adresse Ligne 2",
+          "type": "Texte",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "rules": [],
+          "legalRefs": []
+        },
+        {
+          "id": "BT-162",
+          "name": "Adresse Ligne 3",
+          "type": "Texte",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "rules": [],
+          "legalRefs": []
+        },
+        {
+          "id": "BT-37",
+          "name": "Ville",
+          "type": "Texte",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "rules": [],
+          "legalRefs": [
+            "CGI-289"
+          ]
+        },
+        {
+          "id": "BT-38",
+          "name": "Code postal",
+          "type": "Texte",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "rules": [],
+          "legalRefs": [
+            "CGI-289"
+          ]
+        },
+        {
+          "id": "BT-39",
+          "name": "Subdivision pays",
+          "type": "Texte",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "rules": [],
+          "legalRefs": []
+        },
+        {
+          "id": "BT-40",
+          "name": "Code pays vendeur",
+          "type": "Code",
+          "cardinality": "1..1",
+          "mandatory": true,
+          "format": "both",
+          "schemeID": "ISO 3166-1",
+          "example": "FR",
+          "rules": [
+            "BR-9",
+            "BR-FR-MAP-14"
+          ],
+          "tips": "OBLIGATOIRE. DOM/COM convertis en FR dans flux 1.",
+          "legalRefs": [
+            "CGI-289"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "BG-6",
+      "name": "Contact vendeur",
+      "fields": [
+        {
+          "id": "BT-41",
+          "name": "Point de contact",
+          "type": "Texte",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "rules": [],
+          "legalRefs": [],
+          "description": "Nom ou désignation du point de contact chez le vendeur (ex : service facturation, nom d'un interlocuteur).",
+          "maxLength": 256,
+          "example": "Service Comptabilité Fournisseurs",
+          "tips": "Utile pour identifier le service à contacter en cas de litige sur la facture."
+        },
+        {
+          "id": "BT-42",
+          "name": "Téléphone",
+          "type": "Texte",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "rules": [],
+          "legalRefs": [],
+          "description": "Numéro de téléphone du point de contact du vendeur.",
+          "maxLength": 30,
+          "example": "+33 1 23 45 67 89",
+          "formatDetail": "Format international recommandé : +[indicatif] [numéro]"
+        },
+        {
+          "id": "BT-43",
+          "name": "Email",
+          "type": "Texte",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "rules": [],
+          "legalRefs": [],
+          "description": "Adresse email du point de contact du vendeur.",
+          "maxLength": 256,
+          "example": "facturation@fournisseur.fr",
+          "formatDetail": "Adresse email valide (RFC 5322)"
+        }
+      ],
+      "description": "Coordonnées de contact du vendeur : nom du point de contact, numéro de téléphone et adresse email pour joindre le fournisseur."
+    },
+    {
+      "id": "BG-7",
+      "name": "Acheteur",
+      "description": "Identité et identifiants de l'acheteur.",
+      "fields": [
+        {
+          "id": "BT-44",
+          "name": "Nom de l'acheteur",
+          "type": "Texte",
+          "cardinality": "1..1",
+          "mandatory": true,
+          "format": "both",
+          "rules": [
+            "BR-7"
+          ],
+          "legalRefs": [
+            "CGI-289"
+          ]
+        },
+        {
+          "id": "BT-45",
+          "name": "Nom commercial acheteur",
+          "type": "Texte",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "rules": [],
+          "legalRefs": []
+        },
+        {
+          "id": "BT-46",
+          "name": "Identifiant acheteur",
+          "type": "Identifiant",
+          "cardinality": "0..n",
+          "mandatory": false,
+          "format": "both",
+          "schemeID": "ISO 6523",
+          "rules": [
+            "BR-FR-CO-10",
+            "BR-FR-26"
+          ],
+          "legalRefs": []
+        },
+        {
+          "id": "BT-47",
+          "name": "SIREN de l'acheteur",
+          "type": "Identifiant",
+          "maxLength": 9,
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "schemeID": "0002",
+          "rules": [
+            "BR-63"
+          ],
+          "tips": "Fortement recommandé.",
+          "legalRefs": [
+            "CGI-289"
+          ]
+        },
+        {
+          "id": "BT-48",
+          "name": "N° TVA acheteur",
+          "type": "Identifiant",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "rules": [
+            "BR-63"
+          ],
+          "tips": "Obligatoire pour intracommunautaire et autoliquidation.",
+          "legalRefs": [
+            "CGI-289"
+          ]
+        },
+        {
+          "id": "BT-49",
+          "name": "Adresse électronique acheteur",
+          "type": "Identifiant",
+          "cardinality": "1..1",
+          "mandatory": true,
+          "format": "both",
+          "schemeID": "0225",
+          "rules": [
+            "BR-13",
+            "BR-FR-09"
+          ],
+          "tips": "OBLIGATOIRE. Routage.",
+          "legalRefs": [
+            "AFNOR-XP-Z12-012"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "BG-8",
+      "name": "Adresse postale acheteur",
+      "fields": [
+        {
+          "id": "BT-50",
+          "name": "Adresse Ligne 1",
+          "type": "Texte",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "rules": [],
+          "legalRefs": [
+            "CGI-289"
+          ],
+          "description": "Première ligne de l'adresse postale de l'acheteur (numéro et nom de rue).",
+          "maxLength": 150,
+          "example": "12 rue de la Paix"
+        },
+        {
+          "id": "BT-51",
+          "name": "Adresse Ligne 2",
+          "type": "Texte",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "rules": [],
+          "legalRefs": [],
+          "description": "Deuxième ligne de l'adresse postale de l'acheteur (complément d'adresse : bâtiment, étage, etc.).",
+          "maxLength": 150,
+          "example": "Bâtiment B, 3ème étage"
+        },
+        {
+          "id": "BT-163",
+          "name": "Adresse Ligne 3",
+          "type": "Texte",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "rules": [],
+          "legalRefs": [],
+          "description": "Subdivision du pays de l'acheteur (région, département, canton selon le pays).",
+          "maxLength": 75,
+          "example": "Île-de-France",
+          "tips": "Utilisé principalement hors France. En France, rarement renseigné."
+        },
+        {
+          "id": "BT-52",
+          "name": "Ville",
+          "type": "Texte",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "rules": [],
+          "legalRefs": [
+            "CGI-289"
+          ],
+          "description": "Troisième ligne de l'adresse postale de l'acheteur (complément supplémentaire).",
+          "maxLength": 150,
+          "example": "Zone industrielle Nord"
+        },
+        {
+          "id": "BT-53",
+          "name": "Code postal",
+          "type": "Texte",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "rules": [],
+          "legalRefs": [
+            "CGI-289"
+          ],
+          "description": "Code postal de l'adresse de l'acheteur.",
+          "maxLength": 10,
+          "example": "75002",
+          "formatDetail": "Code postal selon le pays (5 chiffres pour la France)"
+        },
+        {
+          "id": "BT-54",
+          "name": "Subdivision pays",
+          "type": "Texte",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "rules": [],
+          "legalRefs": [],
+          "description": "Ville ou localité de l'adresse de l'acheteur.",
+          "maxLength": 75,
+          "example": "Paris"
+        },
+        {
+          "id": "BT-55",
+          "name": "Code pays acheteur",
+          "type": "Code",
+          "cardinality": "1..1",
+          "mandatory": true,
+          "format": "both",
+          "example": "FR",
+          "rules": [
+            "BR-11",
+            "BR-FR-MAP-14"
+          ],
+          "legalRefs": [
+            "CGI-289"
+          ],
+          "description": "Code du pays de l'acheteur. Obligatoire dans BG-8 (BR-11).",
+          "formatDetail": "ISO 3166-1 alpha-2",
+          "tips": "Détermine le régime de TVA applicable. Valeur obligatoire (BR-11).",
+          "values": {
+            "FR": "France",
+            "DE": "Allemagne",
+            "BE": "Belgique",
+            "ES": "Espagne",
+            "IT": "Italie",
+            "LU": "Luxembourg",
+            "NL": "Pays-Bas",
+            "PT": "Portugal",
+            "CH": "Suisse",
+            "GB": "Royaume-Uni",
+            "US": "États-Unis"
+          }
+        }
+      ],
+      "description": "Adresse postale de l'acheteur, utilisée pour identifier le pays de taxation. Obligatoire sur toute facture (BR-10)."
+    },
+    {
+      "id": "BG-9",
+      "name": "Contact acheteur",
+      "fields": [
+        {
+          "id": "BT-56",
+          "name": "Point de contact",
+          "type": "Texte",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "rules": [],
+          "legalRefs": [],
+          "description": "Nom ou désignation du point de contact chez l'acheteur.",
+          "maxLength": 256,
+          "example": "Service Achats"
+        },
+        {
+          "id": "BT-57",
+          "name": "Téléphone",
+          "type": "Texte",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "rules": [],
+          "legalRefs": [],
+          "description": "Numéro de téléphone du point de contact de l'acheteur.",
+          "maxLength": 30,
+          "example": "+33 4 56 78 90 12",
+          "formatDetail": "Format international recommandé : +[indicatif] [numéro]"
+        },
+        {
+          "id": "BT-58",
+          "name": "Email",
+          "type": "Texte",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "rules": [],
+          "legalRefs": [],
+          "description": "Adresse email du point de contact de l'acheteur.",
+          "maxLength": 256,
+          "example": "achats@client.fr",
+          "formatDetail": "Adresse email valide (RFC 5322)"
+        }
+      ],
+      "description": "Coordonnées de contact de l'acheteur : nom du point de contact, numéro de téléphone et adresse email côté client."
+    },
+    {
+      "id": "BG-10",
+      "name": "Bénéficiaire",
+      "description": "Si différent du vendeur (affacturage).",
+      "fields": [
+        {
+          "id": "BT-59",
+          "name": "Nom du bénéficiaire",
+          "type": "Texte",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "rules": [
+            "BR-17"
+          ],
+          "legalRefs": []
+        },
+        {
+          "id": "BT-60",
+          "name": "Identifiant bénéficiaire",
+          "type": "Identifiant",
+          "cardinality": "0..n",
+          "mandatory": false,
+          "format": "both",
+          "rules": [
+            "BR-FR-CO-10"
+          ],
+          "legalRefs": []
+        },
+        {
+          "id": "BT-61",
+          "name": "Identifiant légal bénéficiaire",
+          "type": "Identifiant",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "rules": [],
+          "legalRefs": []
+        }
+      ]
+    },
+    {
+      "id": "BG-11",
+      "name": "Représentant fiscal vendeur",
+      "description": "Ou Assujetti Unique.",
+      "fields": [
+        {
+          "id": "BT-62",
+          "name": "Nom",
+          "type": "Texte",
+          "cardinality": "1..1",
+          "mandatory": true,
+          "format": "both",
+          "rules": [
+            "BR-FR-CO-15"
+          ],
+          "legalRefs": []
+        },
+        {
+          "id": "BT-63",
+          "name": "N° TVA représentant fiscal",
+          "type": "Identifiant",
+          "cardinality": "1..1",
+          "mandatory": true,
+          "format": "both",
+          "rules": [
+            "BR-FR-CO-15"
+          ],
+          "legalRefs": []
+        }
+      ]
+    },
+    {
+      "id": "BG-13",
+      "name": "Informations livraison",
+      "fields": [
+        {
+          "id": "BT-70",
+          "name": "Nom destinataire livraison",
+          "type": "Texte",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "rules": [],
+          "legalRefs": [],
+          "description": "Nom commercial ou raison sociale de la partie à qui les biens sont livrés, si différente de l'acheteur.",
+          "maxLength": 256,
+          "example": "Entrepôt Logistique Est"
+        },
+        {
+          "id": "BT-71",
+          "name": "Identifiant lieu livraison",
+          "type": "Identifiant",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "rules": [],
+          "legalRefs": [],
+          "description": "Identifiant du lieu de livraison (ex : GLN, identifiant de site) pour le routage ou la localisation.",
+          "maxLength": 150,
+          "example": "5412345678908",
+          "tips": "Souvent un GLN (Global Location Number) ou un identifiant de site interne."
+        },
+        {
+          "id": "BT-72",
+          "name": "Date de livraison effective",
+          "type": "Date",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "rules": [
+            "BR-FR-03",
+            "BR-FR-CO-17"
+          ],
+          "tips": "Obligatoire si connue et différente de BT-2.",
+          "legalRefs": [
+            "CGI-242-nonies-A"
+          ],
+          "description": "Date effective de la livraison des biens ou de la réalisation de la prestation de service.",
+          "example": "2026-03-15",
+          "formatDetail": "YYYY-MM-DD"
+        }
+      ],
+      "description": "Informations relatives à la livraison des biens ou à la réalisation de la prestation : nom du destinataire, date de livraison, identifiant et adresse du lieu de livraison."
+    },
+    {
+      "id": "BG-14",
+      "name": "Période de facturation",
+      "fields": [
+        {
+          "id": "BT-73",
+          "name": "Date de début",
+          "type": "Date",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "rules": [
+            "BR-FR-03",
+            "BR-FR-CO-03"
+          ],
+          "legalRefs": [
+            "CGI-289-I-3"
+          ],
+          "description": "Date de début de la période de facturation couverte par la facture au niveau document.",
+          "example": "2026-03-01",
+          "formatDetail": "YYYY-MM-DD",
+          "tips": "Si BG-14 est utilisé, au moins BT-73 ou BT-74 doit être renseigné (BR-CO-19)."
+        },
+        {
+          "id": "BT-74",
+          "name": "Date de fin",
+          "type": "Date",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "rules": [
+            "BR-FR-03"
+          ],
+          "legalRefs": [
+            "CGI-289-I-3"
+          ],
+          "description": "Date de fin de la période de facturation couverte par la facture au niveau document.",
+          "example": "2026-03-31",
+          "formatDetail": "YYYY-MM-DD",
+          "tips": "Doit être postérieure ou égale à BT-73 si les deux sont présents (BR-29)."
+        }
+      ],
+      "description": "Période de facturation couverte par la facture au niveau document. Utilisée notamment pour les factures de services récurrents ou abonnements."
+    },
+    {
+      "id": "BG-15",
+      "name": "Adresse de livraison",
+      "fields": [
+        {
+          "id": "BT-75",
+          "name": "Adresse Ligne 1",
+          "type": "Texte",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "rules": [
+            "BR-FR-14",
+            "BR-FR-MAP-10",
+            "BR-FR-MAP-17"
+          ],
+          "legalRefs": [],
+          "description": "Première ligne de l'adresse de livraison (numéro et nom de rue).",
+          "maxLength": 150,
+          "example": "45 avenue des Champs"
+        },
+        {
+          "id": "BT-76",
+          "name": "Adresse Ligne 2",
+          "type": "Texte",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "rules": [
+            "BR-FR-MAP-17"
+          ],
+          "legalRefs": [],
+          "description": "Deuxième ligne de l'adresse de livraison (complément d'adresse).",
+          "maxLength": 150,
+          "example": "Bâtiment C"
+        },
+        {
+          "id": "BT-165",
+          "name": "Adresse Ligne 3",
+          "type": "Texte",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "rules": [],
+          "legalRefs": [],
+          "description": "Troisième ligne de l'adresse de livraison (complément supplémentaire).",
+          "maxLength": 150,
+          "example": "Quai 7"
+        },
+        {
+          "id": "BT-77",
+          "name": "Ville",
+          "type": "Texte",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "rules": [
+            "BR-FR-14",
+            "BR-FR-MAP-10"
+          ],
+          "legalRefs": [],
+          "description": "Ville ou localité de l'adresse de livraison.",
+          "maxLength": 75,
+          "example": "Lyon"
+        },
+        {
+          "id": "BT-78",
+          "name": "Code postal",
+          "type": "Texte",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "rules": [
+            "BR-FR-14",
+            "BR-FR-MAP-10"
+          ],
+          "legalRefs": [],
+          "description": "Code postal de l'adresse de livraison.",
+          "maxLength": 10,
+          "example": "69003",
+          "formatDetail": "Code postal selon le pays (5 chiffres pour la France)"
+        },
+        {
+          "id": "BT-79",
+          "name": "Subdivision pays",
+          "type": "Texte",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "rules": [],
+          "legalRefs": [],
+          "description": "Subdivision du pays de livraison (région, département).",
+          "maxLength": 75,
+          "example": "Auvergne-Rhône-Alpes"
+        },
+        {
+          "id": "BT-80",
+          "name": "Code pays livraison",
+          "type": "Code",
+          "cardinality": "1..1",
+          "mandatory": true,
+          "format": "both",
+          "example": "FR",
+          "rules": [
+            "BR-57",
+            "BR-FR-14",
+            "BR-FR-MAP-14"
+          ],
+          "legalRefs": [],
+          "description": "Code du pays de livraison.",
+          "formatDetail": "ISO 3166-1 alpha-2",
+          "tips": "Déclenche le renseignement obligatoire de BG-15 si présent (BR-FR-MAP-10).",
+          "values": {
+            "FR": "France",
+            "DE": "Allemagne",
+            "BE": "Belgique",
+            "ES": "Espagne",
+            "IT": "Italie",
+            "LU": "Luxembourg",
+            "NL": "Pays-Bas",
+            "PT": "Portugal",
+            "CH": "Suisse",
+            "GB": "Royaume-Uni"
+          }
+        }
+      ],
+      "description": "Adresse postale du lieu de livraison des biens, si différente de l'adresse de l'acheteur. Obligatoire pour les livraisons de biens à partir du 01/09/2027 (BR-FR-MAP-10)."
+    },
+    {
+      "id": "BG-16",
+      "name": "Instructions paiement",
+      "fields": [
+        {
+          "id": "BT-81",
+          "name": "Code moyen de paiement",
+          "type": "Code",
+          "cardinality": "1..1",
+          "mandatory": true,
+          "format": "both",
+          "values": {
+            "10": "Espèces",
+            "20": "Chèque",
+            "30": "Virement (SEPA pour Chorus)",
+            "42": "Paiement sur compte bancaire",
+            "48": "Carte bancaire",
+            "49": "Prélèvement (SEPA pour Chorus)",
+            "57": "Convenu entre parties",
+            "58": "Virement SEPA",
+            "59": "Prélèvement SEPA",
+            "97": "Report",
+            "ZZZ": "Provisoire"
+          },
+          "rules": [
+            "BR-49"
+          ],
+          "tips": "Chorus Pro : utiliser 30 (pas 58) pour SEPA.",
+          "legalRefs": [
+            "UNTDID-4461"
+          ],
+          "description": "Code identifiant le type de moyen de paiement attendu. Obligatoire dans BG-16 (BR-49).",
+          "example": "30",
+          "formatDetail": "Code UNTDID 4461"
+        },
+        {
+          "id": "BT-82",
+          "name": "Texte moyen paiement",
+          "type": "Texte",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "rules": [],
+          "legalRefs": [],
+          "description": "Texte libre décrivant le moyen de paiement (ex : nom de la banque, précisions).",
+          "maxLength": 256,
+          "example": "Virement SEPA 30 jours"
+        },
+        {
+          "id": "BT-83",
+          "name": "ID mandat prélèvement",
+          "type": "Identifiant",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "rules": [],
+          "tips": "RUM SEPA.",
+          "legalRefs": [],
+          "description": "Référence de remise de paiement : identifiant à rappeler lors du règlement pour le rapprochement comptable.",
+          "maxLength": 256,
+          "example": "RF18539007547034"
+        }
+      ],
+      "description": "Instructions de paiement de la facture : type de moyen de paiement, texte descriptif, identifiant de remise et référence au sous-bloc correspondant (virement, carte ou prélèvement)."
+    },
+    {
+      "id": "BG-17",
+      "name": "Virement",
+      "fields": [
+        {
+          "id": "BT-84",
+          "name": "IBAN",
+          "type": "Identifiant",
+          "cardinality": "1..1",
+          "mandatory": true,
+          "format": "both",
+          "example": "FR7630001007941234567890185",
+          "rules": [],
+          "legalRefs": [
+            "CGI-289"
+          ],
+          "description": "Identifiant du compte de paiement du vendeur (typiquement un IBAN). Obligatoire si BG-17 est présent (BR-50).",
+          "maxLength": 34,
+          "formatDetail": "IBAN (ISO 13616) ou autre identifiant de compte",
+          "tips": "Pour les virements SEPA, c'est l'IBAN du bénéficiaire."
+        },
+        {
+          "id": "BT-85",
+          "name": "Nom titulaire compte",
+          "type": "Texte",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "rules": [],
+          "legalRefs": [],
+          "description": "Nom du titulaire du compte de paiement (nom affiché sur le RIB du vendeur).",
+          "maxLength": 256,
+          "example": "SARL Fournisseur France"
+        },
+        {
+          "id": "BT-86",
+          "name": "BIC",
+          "type": "Identifiant",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "rules": [],
+          "legalRefs": [],
+          "description": "Code BIC (Bank Identifier Code) de l'établissement financier du vendeur.",
+          "maxLength": 11,
+          "example": "BNPAFRPPXXX",
+          "formatDetail": "BIC/SWIFT (8 ou 11 caractères, ISO 9362)",
+          "tips": "Obligatoire pour les virements internationaux non-SEPA. Optionnel pour les virements SEPA intra-zone."
+        }
+      ],
+      "description": "Informations de virement bancaire (credit transfer) : identifiant du compte de paiement (IBAN), nom du titulaire et code BIC de l'établissement financier."
+    },
+    {
+      "id": "BG-18",
+      "name": "Carte de paiement",
+      "fields": [
+        {
+          "id": "BT-87",
+          "name": "N° carte (masqué)",
+          "type": "Texte",
+          "cardinality": "1..1",
+          "mandatory": true,
+          "format": "both",
+          "rules": [],
+          "tips": "4-6 derniers chiffres uniquement.",
+          "legalRefs": [],
+          "description": "Numéro de carte de paiement principal (PAN), généralement masqué pour des raisons de sécurité.",
+          "maxLength": 19,
+          "example": "1234 XXXX XXXX 5678",
+          "formatDetail": "PAN masqué (4 premiers et 4 derniers chiffres uniquement)"
+        },
+        {
+          "id": "BT-88",
+          "name": "Nom titulaire carte",
+          "type": "Texte",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "rules": [],
+          "legalRefs": [],
+          "description": "Nom du titulaire de la carte de paiement tel qu'il apparaît sur la carte.",
+          "maxLength": 256,
+          "example": "Jean DUPONT"
+        }
+      ],
+      "description": "Informations de paiement par carte : numéro de carte principal (masqué) et nom du titulaire de la carte."
+    },
+    {
+      "id": "BG-19",
+      "name": "Prélèvement",
+      "fields": [
+        {
+          "id": "BT-89",
+          "name": "ID mandat (RUM)",
+          "type": "Identifiant",
+          "cardinality": "1..1",
+          "mandatory": true,
+          "format": "both",
+          "rules": [],
+          "legalRefs": [],
+          "description": "Référence unique du mandat de prélèvement SEPA signé par l'acheteur.",
+          "maxLength": 35,
+          "example": "MANDATE-2026-001234",
+          "formatDetail": "Identifiant unique du mandat (max 35 car. alphanumériques)",
+          "tips": "Obligatoire pour les prélèvements SEPA (BT-81 = 49, 58 ou 59)."
+        },
+        {
+          "id": "BT-90",
+          "name": "IBAN à débiter",
+          "type": "Identifiant",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "rules": [],
+          "legalRefs": [],
+          "description": "Identifiant du compte bancaire du débiteur (acheteur) à prélever.",
+          "maxLength": 34,
+          "example": "FR7612345000010987654321098",
+          "formatDetail": "IBAN (ISO 13616)",
+          "tips": "IBAN du compte de l'acheteur qui sera débité."
+        },
+        {
+          "id": "BT-91",
+          "name": "ICS (Identifiant Créancier SEPA)",
+          "type": "Identifiant",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "rules": [],
+          "legalRefs": [],
+          "description": "Identifiant du créancier SEPA (vendeur), attribué par la banque pour identifier l'émetteur des prélèvements.",
+          "maxLength": 35,
+          "example": "FR72ZZZ123456",
+          "formatDetail": "ICS - Identifiant Créancier SEPA",
+          "tips": "Attribué par la Banque de France. Obligatoire pour les prélèvements SEPA."
+        }
+      ],
+      "description": "Informations de prélèvement automatique (direct debit) : référence du mandat, identifiant bancaire du débiteur et identifiant du créancier SEPA."
+    },
+    {
+      "id": "BG-20",
+      "name": "Remise document",
+      "fields": [
+        {
+          "id": "BT-92",
+          "name": "Montant remise",
+          "type": "Montant",
+          "cardinality": "1..1",
+          "mandatory": true,
+          "format": "both",
+          "rules": [
+            "BR-31",
+            "BR-FR-DEC-01"
+          ],
+          "legalRefs": [],
+          "description": "Montant de la remise au niveau du document (hors TVA). Obligatoire dans BG-20 (BR-31).",
+          "example": "100.00",
+          "formatDetail": "Décimal avec 2 décimales",
+          "tips": "Doit être positif. Vient en déduction du total HT."
+        },
+        {
+          "id": "BT-93",
+          "name": "Base remise",
+          "type": "Montant",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "rules": [],
+          "legalRefs": [],
+          "description": "Montant de base sur lequel la remise au niveau du document est calculée.",
+          "example": "1000.00",
+          "formatDetail": "Décimal avec 2 décimales",
+          "tips": "Si présent avec BT-94, alors BT-92 = BT-93 × BT-94 / 100 (BR-CO-15)."
+        },
+        {
+          "id": "BT-94",
+          "name": "% remise",
+          "type": "Pourcentage",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "rules": [],
+          "legalRefs": [],
+          "description": "Pourcentage de remise appliqué au montant de base (BT-93) pour calculer la remise document.",
+          "example": "10",
+          "formatDetail": "Décimal (pourcentage, ex : 10 pour 10%)"
+        },
+        {
+          "id": "BT-95",
+          "name": "Code TVA remise",
+          "type": "Code",
+          "cardinality": "1..1",
+          "mandatory": true,
+          "format": "both",
+          "values": {
+            "S": "Normal",
+            "Z": "Zéro",
+            "E": "Exonéré",
+            "AE": "Autoliquidation",
+            "K": "Intracom",
+            "G": "Export",
+            "O": "Hors champ"
+          },
+          "rules": [
+            "BR-FR-15"
+          ],
+          "legalRefs": [],
+          "description": "Code de catégorie de TVA applicable à la remise au niveau du document. Obligatoire dans BG-20 (BR-32).",
+          "example": "S",
+          "formatDetail": "Code UNTDID 5305 (subset EN16931)"
+        },
+        {
+          "id": "BT-96",
+          "name": "Taux TVA remise",
+          "type": "Pourcentage",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "rules": [
+            "BR-FR-DEC-04"
+          ],
+          "legalRefs": [],
+          "description": "Taux de TVA applicable à la remise au niveau du document, exprimé en pourcentage.",
+          "example": "20.00",
+          "formatDetail": "Décimal (pourcentage, ex : 20.00 pour 20%)"
+        },
+        {
+          "id": "BT-97",
+          "name": "Motif remise",
+          "type": "Texte",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "rules": [
+            "BR-CO-5"
+          ],
+          "legalRefs": [],
+          "description": "Motif en texte libre de la remise au niveau du document. Au moins BT-97 ou BT-98 obligatoire (BR-33).",
+          "maxLength": 256,
+          "example": "Remise fidélité annuelle"
+        },
+        {
+          "id": "BT-98",
+          "name": "Code motif remise",
+          "type": "Code",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "schemeID": "UNTDID 5189",
+          "rules": [
+            "BR-CO-5"
+          ],
+          "legalRefs": [],
+          "description": "Code normalisé du motif de la remise au niveau du document (codelist UNTDID 5189).",
+          "example": "95",
+          "formatDetail": "Code UNTDID 5189",
+          "tips": "Doit être cohérent avec BT-97 si les deux sont présents (BR-CO-05).",
+          "values": {
+            "41": "Remise de volume",
+            "42": "Remise spéciale accord",
+            "60": "Remise fabricant",
+            "62": "Remise intermédiaire",
+            "63": "Remise de fin d'année",
+            "64": "Remise de production",
+            "65": "Remise spéciale",
+            "66": "Remise de solde",
+            "67": "Remise pour paiement comptant",
+            "68": "Remise de rappel de commande",
+            "70": "Remise de retour",
+            "71": "Remise spéciale acheteur/vendeur",
+            "88": "Remise liée à un défaut",
+            "95": "Remise",
+            "100": "Escompte pour paiement anticipé",
+            "102": "Pénalité fixe",
+            "103": "Pénalité en pourcentage",
+            "104": "Remise intérimaire"
+          }
+        }
+      ],
+      "description": "Remise (allowance) appliquée au niveau du document entier, avec montant, base, taux, code TVA associé et motif de la remise."
+    },
+    {
+      "id": "BG-21",
+      "name": "Charges/frais document",
+      "fields": [
+        {
+          "id": "BT-99",
+          "name": "Montant charges",
+          "type": "Montant",
+          "cardinality": "1..1",
+          "mandatory": true,
+          "format": "both",
+          "rules": [
+            "BR-36",
+            "BR-FR-DEC-01"
+          ],
+          "legalRefs": [],
+          "description": "Montant de la charge ou des frais au niveau du document (hors TVA). Obligatoire dans BG-21 (BR-36).",
+          "example": "25.00",
+          "formatDetail": "Décimal avec 2 décimales",
+          "tips": "Doit être positif. Vient en augmentation du total HT."
+        },
+        {
+          "id": "BT-100",
+          "name": "Base charges",
+          "type": "Montant",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "rules": [],
+          "legalRefs": [],
+          "description": "Montant de base sur lequel la charge au niveau du document est calculée.",
+          "example": "500.00",
+          "formatDetail": "Décimal avec 2 décimales"
+        },
+        {
+          "id": "BT-101",
+          "name": "% charges",
+          "type": "Pourcentage",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "rules": [],
+          "legalRefs": [],
+          "description": "Pourcentage de la charge appliqué au montant de base (BT-100).",
+          "example": "5",
+          "formatDetail": "Décimal (pourcentage)"
+        },
+        {
+          "id": "BT-102",
+          "name": "Code TVA charges",
+          "type": "Code",
+          "cardinality": "1..1",
+          "mandatory": true,
+          "format": "both",
+          "values": {
+            "S": "Normal",
+            "Z": "Zéro",
+            "E": "Exonéré",
+            "AE": "Autoliquidation",
+            "K": "Intracom",
+            "G": "Export",
+            "O": "Hors champ"
+          },
+          "rules": [
+            "BR-FR-15"
+          ],
+          "legalRefs": [],
+          "description": "Code de catégorie de TVA applicable à la charge au niveau du document. Obligatoire dans BG-21 (BR-37).",
+          "example": "S",
+          "formatDetail": "Code UNTDID 5305 (subset EN16931)"
+        },
+        {
+          "id": "BT-103",
+          "name": "Taux TVA charges",
+          "type": "Pourcentage",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "rules": [
+            "BR-FR-DEC-04"
+          ],
+          "legalRefs": [],
+          "description": "Taux de TVA applicable à la charge au niveau du document, exprimé en pourcentage.",
+          "example": "20.00",
+          "formatDetail": "Décimal (pourcentage)"
+        },
+        {
+          "id": "BT-104",
+          "name": "Motif charges",
+          "type": "Texte",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "rules": [],
+          "legalRefs": [],
+          "description": "Motif en texte libre de la charge au niveau du document. Au moins BT-104 ou BT-105 obligatoire (BR-CO-22).",
+          "maxLength": 256,
+          "example": "Frais de livraison express"
+        },
+        {
+          "id": "BT-105",
+          "name": "Code motif charges",
+          "type": "Code",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "schemeID": "UNTDID 7161",
+          "rules": [],
+          "legalRefs": [],
+          "description": "Code normalisé du motif de la charge au niveau du document (codelist UNTDID 7161).",
+          "example": "FC",
+          "formatDetail": "Code UNTDID 7161",
+          "tips": "Doit être cohérent avec BT-104 si les deux sont présents (BR-CO-06).",
+          "values": {
+            "AA": "Publicité",
+            "AAA": "Télécommunications",
+            "ABK": "Divers",
+            "ABL": "Emballage supplémentaire",
+            "ADR": "Autre service",
+            "ADT": "Ramassage",
+            "FC": "Frais de transport",
+            "FI": "Financement",
+            "LA": "Frais de main-d'œuvre",
+            "PC": "Emballage",
+            "AEO": "Eco-contribution"
+          }
+        }
+      ],
+      "description": "Charges ou frais supplémentaires (charge) appliqués au niveau du document entier (ex : frais de port, emballage), avec montant, base, taux, code TVA et motif."
+    },
+    {
+      "id": "BG-22",
+      "name": "Totaux document",
+      "fields": [
+        {
+          "id": "BT-106",
+          "name": "Somme montants nets lignes",
+          "type": "Montant",
+          "cardinality": "1..1",
+          "mandatory": true,
+          "format": "both",
+          "rules": [
+            "BR-FR-DEC-01"
+          ],
+          "tips": "= Σ BT-131.",
+          "legalRefs": [],
+          "description": "Somme des montants nets de toutes les lignes de facture (avant remises/charges document). Obligatoire (BR-12).",
+          "example": "10000.00",
+          "formatDetail": "Décimal avec 2 décimales"
+        },
+        {
+          "id": "BT-107",
+          "name": "Somme remises document",
+          "type": "Montant",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "rules": [],
+          "tips": "= Σ BT-92.",
+          "legalRefs": [],
+          "description": "Somme de toutes les remises au niveau du document (Σ BT-92).",
+          "example": "100.00",
+          "formatDetail": "Décimal avec 2 décimales"
+        },
+        {
+          "id": "BT-108",
+          "name": "Somme charges document",
+          "type": "Montant",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "rules": [],
+          "tips": "= Σ BT-99.",
+          "legalRefs": [],
+          "description": "Somme de toutes les charges et frais au niveau du document (Σ BT-99).",
+          "example": "25.00",
+          "formatDetail": "Décimal avec 2 décimales"
+        },
+        {
+          "id": "BT-109",
+          "name": "Total HT",
+          "type": "Montant",
+          "cardinality": "1..1",
+          "mandatory": true,
+          "format": "both",
+          "rules": [
+            "BR-FR-DEC-01"
+          ],
+          "tips": "= BT-106 - BT-107 + BT-108.",
+          "legalRefs": [
+            "CGI-289"
+          ],
+          "description": "Montant total hors taxes de la facture. Obligatoire (BR-13).",
+          "example": "9925.00",
+          "formatDetail": "Décimal avec 2 décimales"
+        },
+        {
+          "id": "BT-110",
+          "name": "Total TVA",
+          "type": "Montant",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "rules": [
+            "BR-FR-DEC-01"
+          ],
+          "tips": "= Σ BT-117.",
+          "legalRefs": [
+            "CGI-289"
+          ],
+          "description": "Montant total de la TVA de la facture (somme de toutes les ventilations). Obligatoire (BR-14).",
+          "example": "1985.00",
+          "formatDetail": "Décimal avec 2 décimales"
+        },
+        {
+          "id": "BT-111",
+          "name": "Total TVA en devise compta",
+          "type": "Montant",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "rules": [],
+          "tips": "Si BT-6 renseigné.",
+          "legalRefs": [],
+          "description": "Montant total de la TVA dans la devise de comptabilisation (si différente de la devise de facturation BT-5).",
+          "example": "1985.00",
+          "formatDetail": "Décimal avec 2 décimales"
+        },
+        {
+          "id": "BT-112",
+          "name": "Total TTC",
+          "type": "Montant",
+          "cardinality": "1..1",
+          "mandatory": true,
+          "format": "both",
+          "rules": [
+            "BR-14",
+            "BR-FR-DEC-01",
+            "BR-FR-CO-09"
+          ],
+          "tips": "= BT-109 + BT-110.",
+          "legalRefs": [
+            "CGI-289"
+          ],
+          "description": "Montant total TTC de la facture (HT + TVA). Obligatoire (BR-15).",
+          "example": "11910.00",
+          "formatDetail": "Décimal avec 2 décimales"
+        },
+        {
+          "id": "BT-113",
+          "name": "Montant déjà payé",
+          "type": "Montant",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "rules": [
+            "BR-FR-DEC-01",
+            "BR-FR-CO-09"
+          ],
+          "tips": "Pour B2/S2/M2 : = BT-112.",
+          "legalRefs": [],
+          "description": "Montant total déjà payé (acomptes, paiements antérieurs à déduire du montant à payer).",
+          "example": "1000.00",
+          "formatDetail": "Décimal avec 2 décimales"
+        },
+        {
+          "id": "BT-114",
+          "name": "Arrondi",
+          "type": "Montant",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "rules": [],
+          "legalRefs": [],
+          "description": "Montant d'arrondi appliqué au montant à payer pour obtenir un montant rond.",
+          "example": "0.10",
+          "formatDetail": "Décimal avec 2 décimales",
+          "tips": "Rarement utilisé. Permet d'ajuster BT-115 si besoin (BR-CO-16)."
+        },
+        {
+          "id": "BT-115",
+          "name": "Net à payer",
+          "type": "Montant",
+          "cardinality": "1..1",
+          "mandatory": true,
+          "format": "both",
+          "rules": [
+            "BR-15",
+            "BR-FR-DEC-01",
+            "BR-FR-CO-09"
+          ],
+          "tips": "= BT-112 - BT-113 + BT-114. Pour B2/S2/M2 : 0.",
+          "legalRefs": [
+            "CGI-289"
+          ],
+          "description": "Montant à payer : solde dû par l'acheteur. Obligatoire (BR-16).",
+          "example": "10910.10",
+          "formatDetail": "Décimal avec 2 décimales"
+        }
+      ],
+      "description": "Totaux monétaires de la facture : somme des lignes, total des remises, total des charges, montant HT, montant TVA, montant TTC, acomptes versés, montant à payer et arrondi."
+    },
+    {
+      "id": "BG-23",
+      "name": "Ventilation TVA",
+      "description": "Détail par catégorie/taux. Au moins une occurrence.",
+      "fields": [
+        {
+          "id": "BT-116",
+          "name": "Base d'imposition",
+          "type": "Montant",
+          "cardinality": "1..1",
+          "mandatory": true,
+          "format": "both",
+          "rules": [
+            "BR-45",
+            "BR-FR-DEC-01"
+          ],
+          "legalRefs": [
+            "CGI-289"
+          ]
+        },
+        {
+          "id": "BT-117",
+          "name": "Montant TVA",
+          "type": "Montant",
+          "cardinality": "1..1",
+          "mandatory": true,
+          "format": "both",
+          "rules": [
+            "BR-48",
+            "BR-FR-DEC-01",
+            "BR-S-9"
+          ],
+          "legalRefs": [
+            "CGI-289"
+          ]
+        },
+        {
+          "id": "BT-118",
+          "name": "Code type TVA",
+          "type": "Code",
+          "cardinality": "1..1",
+          "mandatory": true,
+          "format": "both",
+          "values": {
+            "S": "Taux normal",
+            "Z": "Taux zéro",
+            "E": "Exonéré",
+            "AE": "Autoliquidation",
+            "K": "Intracommunautaire",
+            "G": "Export hors UE",
+            "O": "Hors champ"
+          },
+          "rules": [
+            "BR-47",
+            "BR-FR-15"
+          ],
+          "legalRefs": [
+            "UNTDID-5305"
+          ]
+        },
+        {
+          "id": "BT-119",
+          "name": "Taux TVA",
+          "type": "Pourcentage",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "example": "20.00",
+          "rules": [
+            "BR-FR-DEC-04",
+            "BR-S-9"
+          ],
+          "tips": "France : 20/10/5.5/2.1. 0 pour E/AE/K/G/O/Z.",
+          "legalRefs": []
+        },
+        {
+          "id": "BT-120",
+          "name": "Motif d'exonération (texte)",
+          "type": "Texte",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "example": "TVA non applicable, art. 293 B du CGI",
+          "rules": [
+            "BR-FR-MAP-25"
+          ],
+          "legalRefs": [
+            "CGI-293-B"
+          ]
+        },
+        {
+          "id": "BT-121",
+          "name": "Code VATEX",
+          "type": "Code",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "values": {
+            "VATEX-EU-AE": "Autoliquidation (Directive art. 194-199)",
+            "VATEX-FR-AE": "Autoliquidation domestique France",
+            "VATEX-EU-IC": "Livraison intracommunautaire",
+            "VATEX-EU-G": "Export hors UE",
+            "VATEX-EU-O": "Hors champ TVA",
+            "VATEX-EU-D": "Exonération voyageurs (art. 151)",
+            "VATEX-EU-F": "Exonération diplomates",
+            "VATEX-EU-I": "Organisations internationales",
+            "VATEX-EU-J": "OTAN",
+            "VATEX-FR-FRANCHISE": "Franchise en base (art. 293 B CGI)",
+            "VATEX-FR-CGI261-1": "Exonération art. 261.1",
+            "VATEX-FR-CGI261-2": "Exonération art. 261.2",
+            "VATEX-FR-CGI261-3": "Exonération art. 261.3",
+            "VATEX-FR-CGI261-4": "Exonération art. 261.4",
+            "VATEX-FR-CGI261-5": "Exonération art. 261.5",
+            "VATEX-FR-CGI261-7": "Exonération art. 261.7",
+            "VATEX-FR-CGI261-8": "Exonération art. 261.8",
+            "VATEX-FR-CGI261A": "Exonération art. 261 A",
+            "VATEX-FR-CGI261B": "Exonération art. 261 B",
+            "VATEX-FR-CGI261C-1": "Exonération art. 261 C.1",
+            "VATEX-FR-CGI261C-2": "Exonération art. 261 C.2",
+            "VATEX-FR-CGI261C-3": "Exonération art. 261 C.3",
+            "VATEX-FR-CGI261D-1": "Exonération art. 261 D.1",
+            "VATEX-FR-CGI261D-1BIS": "Exonération art. 261 D.1 bis",
+            "VATEX-FR-CGI261D-2": "Exonération art. 261 D.2",
+            "VATEX-FR-CGI261D-3": "Exonération art. 261 D.3",
+            "VATEX-FR-CGI261D-4": "Exonération art. 261 D.4",
+            "VATEX-FR-CGI261E-1": "Exonération art. 261 E.1",
+            "VATEX-FR-CGI261E-2": "Exonération art. 261 E.2"
+          },
+          "rules": [
+            "BR-FR-CO-16",
+            "BR-FR-MAP-25",
+            "BR-FR-MAP-27"
+          ],
+          "tips": "VATEX-EU-* = européen, VATEX-FR-* = français. VATEX-FR-FRANCHISE = micro-entrepreneurs.",
+          "legalRefs": [
+            "DIR-2006-112-CE",
+            "CGI-261",
+            "CGI-293-B"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "BG-24",
+      "name": "Documents justificatifs",
+      "fields": [
+        {
+          "id": "BT-122",
+          "name": "Référence document",
+          "type": "Identifiant",
+          "cardinality": "1..1",
+          "mandatory": true,
+          "format": "both",
+          "rules": [
+            "BR-52"
+          ],
+          "legalRefs": [],
+          "description": "Référence d'un document justificatif additionnel rattaché à la facture (ex : numéro de BL, contrat).",
+          "maxLength": 256,
+          "example": "ATT-2026-001",
+          "tips": "Identifiant unique permettant de retrouver le document justificatif."
+        },
+        {
+          "id": "BT-123",
+          "name": "Description document",
+          "type": "Texte",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "rules": [],
+          "legalRefs": [],
+          "description": "Description textuelle du document justificatif joint ou référencé.",
+          "maxLength": 256,
+          "example": "Bon de livraison signé"
+        },
+        {
+          "id": "BT-124",
+          "name": "URL document externe",
+          "type": "Texte",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "rules": [],
+          "legalRefs": [],
+          "description": "URL (lien externe) permettant d'accéder au document justificatif en ligne.",
+          "maxLength": 2048,
+          "example": "https://docs.fournisseur.fr/BL-2026-001.pdf",
+          "formatDetail": "URL (http:// ou https://)",
+          "tips": "Privilégier HTTPS. Le lien doit être accessible au destinataire."
+        },
+        {
+          "id": "BT-125",
+          "name": "Document joint (base64)",
+          "type": "Binaire",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "rules": [],
+          "legalRefs": [],
+          "description": "Contenu binaire du document justificatif, encodé en base64, embarqué directement dans la facture.",
+          "example": "JVBERi0xLjQKJeLjz9MK...",
+          "formatDetail": "Base64 (MIME type défini par BT-125-1)",
+          "tips": "Taille max recommandée : 100 Ko. Les formats courants sont PDF, PNG, JPEG, CSV. Le type MIME est indiqué dans l'attribut mimeCode."
+        }
+      ],
+      "description": "Documents justificatifs additionnels rattachés à la facture : référence, description, URL externe ou contenu binaire embarqué en base64."
+    },
+    {
+      "id": "BG-25",
+      "name": "Ligne de facture",
+      "description": "Au moins une ligne obligatoire.",
+      "fields": [
+        {
+          "id": "BT-126",
+          "name": "Identifiant ligne",
+          "type": "Identifiant",
+          "cardinality": "1..1",
+          "mandatory": true,
+          "format": "both",
+          "example": "1",
+          "rules": [
+            "BR-21"
+          ],
+          "legalRefs": []
+        },
+        {
+          "id": "BT-127",
+          "name": "Note de ligne",
+          "type": "Texte",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "rules": [],
+          "legalRefs": []
+        },
+        {
+          "id": "BT-128",
+          "name": "Référence objet en ligne",
+          "type": "Identifiant",
+          "cardinality": "0..n",
+          "mandatory": false,
+          "format": "both",
+          "schemeID": "UNTDID 1153 (BT-128-1), AFL=n° facture ligne",
+          "rules": [],
+          "legalRefs": []
+        },
+        {
+          "id": "BT-129",
+          "name": "Quantité facturée",
+          "type": "Quantité",
+          "cardinality": "1..1",
+          "mandatory": true,
+          "format": "both",
+          "example": "10",
+          "rules": [
+            "BR-22",
+            "BR-FR-DEC-02"
+          ],
+          "tips": "Max 6 décimales.",
+          "legalRefs": [
+            "CGI-242-nonies-A"
+          ]
+        },
+        {
+          "id": "BT-130",
+          "name": "Code unité de mesure",
+          "type": "Code",
+          "cardinality": "1..1",
+          "mandatory": true,
+          "format": "both",
+          "schemeID": "rec20",
+          "values": {
+            "C62": "Pièce/Unité",
+            "HUR": "Heure",
+            "DAY": "Jour",
+            "MON": "Mois",
+            "KGM": "Kilogramme",
+            "MTR": "Mètre",
+            "MTK": "m²",
+            "LTR": "Litre",
+            "XPK": "Colis"
+          },
+          "rules": [
+            "BR-23"
+          ],
+          "legalRefs": []
+        },
+        {
+          "id": "BT-131",
+          "name": "Montant net ligne",
+          "type": "Montant",
+          "cardinality": "1..1",
+          "mandatory": true,
+          "format": "both",
+          "rules": [
+            "BR-24",
+            "BR-FR-DEC-01"
+          ],
+          "tips": "= BT-129 × BT-146 ajusté.",
+          "legalRefs": [
+            "CGI-289"
+          ]
+        },
+        {
+          "id": "BT-132",
+          "name": "Réf. commande en ligne",
+          "type": "Identifiant",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "rules": [],
+          "legalRefs": []
+        },
+        {
+          "id": "BT-133",
+          "name": "Réf. comptable acheteur ligne",
+          "type": "Texte",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "rules": [],
+          "legalRefs": []
+        }
+      ]
+    },
+    {
+      "id": "BG-26",
+      "name": "Période facturation ligne",
+      "fields": [
+        {
+          "id": "BT-134",
+          "name": "Date début",
+          "type": "Date",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "rules": [
+            "BR-FR-03"
+          ],
+          "legalRefs": [],
+          "description": "Date de début de la période de facturation pour cette ligne de facture.",
+          "example": "2026-03-01",
+          "formatDetail": "YYYY-MM-DD",
+          "tips": "Si BG-26 est utilisé, au moins BT-134 ou BT-135 doit être renseigné (BR-CO-20)."
+        },
+        {
+          "id": "BT-135",
+          "name": "Date fin",
+          "type": "Date",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "rules": [
+            "BR-FR-03"
+          ],
+          "legalRefs": [],
+          "description": "Date de fin de la période de facturation pour cette ligne de facture.",
+          "example": "2026-03-31",
+          "formatDetail": "YYYY-MM-DD",
+          "tips": "Doit être postérieure ou égale à BT-134 si les deux sont présents (BR-30)."
+        }
+      ],
+      "description": "Période de facturation spécifique à une ligne de facture. Permet d'indiquer la période de service ou de livraison couverte par cette ligne en particulier."
+    },
+    {
+      "id": "BG-27",
+      "name": "Remise ligne",
+      "fields": [
+        {
+          "id": "BT-136",
+          "name": "Montant remise",
+          "type": "Montant",
+          "cardinality": "1..1",
+          "mandatory": true,
+          "format": "both",
+          "rules": [
+            "BR-FR-DEC-01"
+          ],
+          "legalRefs": [],
+          "description": "Montant de la remise appliquée à la ligne de facture (hors TVA). Obligatoire dans BG-27 (BR-41).",
+          "example": "50.00",
+          "formatDetail": "Décimal avec 2 décimales"
+        },
+        {
+          "id": "BT-137",
+          "name": "Base remise",
+          "type": "Montant",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "rules": [],
+          "legalRefs": [],
+          "description": "Montant de base sur lequel la remise de ligne est calculée.",
+          "example": "500.00",
+          "formatDetail": "Décimal avec 2 décimales"
+        },
+        {
+          "id": "BT-138",
+          "name": "% remise",
+          "type": "Pourcentage",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "rules": [],
+          "legalRefs": [],
+          "description": "Pourcentage de remise appliqué sur le montant de base (BT-137) pour cette ligne.",
+          "example": "10",
+          "formatDetail": "Décimal (pourcentage)"
+        },
+        {
+          "id": "BT-139",
+          "name": "Motif remise",
+          "type": "Texte",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "rules": [],
+          "legalRefs": [],
+          "description": "Motif en texte libre de la remise sur la ligne. Au moins BT-139 ou BT-140 obligatoire (BR-CO-23).",
+          "maxLength": 256,
+          "example": "Remise quantitative"
+        },
+        {
+          "id": "BT-140",
+          "name": "Code motif remise",
+          "type": "Code",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "rules": [],
+          "legalRefs": [],
+          "description": "Code normalisé du motif de la remise de ligne (codelist UNTDID 5189).",
+          "example": "95",
+          "formatDetail": "Code UNTDID 5189",
+          "tips": "Mêmes codes que BT-98 (remise document). Doit être cohérent avec BT-139 (BR-CO-07)."
+        }
+      ],
+      "description": "Remise (allowance) appliquée à une ligne de facture spécifique, avec montant, base de calcul, pourcentage et motif."
+    },
+    {
+      "id": "BG-28",
+      "name": "Charges/frais ligne",
+      "fields": [
+        {
+          "id": "BT-141",
+          "name": "Montant charges",
+          "type": "Montant",
+          "cardinality": "1..1",
+          "mandatory": true,
+          "format": "both",
+          "rules": [
+            "BR-FR-DEC-01"
+          ],
+          "legalRefs": [],
+          "description": "Montant de la charge ou des frais sur la ligne de facture (hors TVA). Obligatoire dans BG-28 (BR-43).",
+          "example": "15.00",
+          "formatDetail": "Décimal avec 2 décimales"
+        },
+        {
+          "id": "BT-142",
+          "name": "Base charges",
+          "type": "Montant",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "rules": [],
+          "legalRefs": [],
+          "description": "Montant de base sur lequel la charge de ligne est calculée.",
+          "example": "300.00",
+          "formatDetail": "Décimal avec 2 décimales"
+        },
+        {
+          "id": "BT-143",
+          "name": "% charges",
+          "type": "Pourcentage",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "rules": [],
+          "legalRefs": [],
+          "description": "Pourcentage de la charge appliqué au montant de base (BT-142) pour cette ligne.",
+          "example": "5",
+          "formatDetail": "Décimal (pourcentage)"
+        },
+        {
+          "id": "BT-144",
+          "name": "Motif charges",
+          "type": "Texte",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "rules": [],
+          "legalRefs": [],
+          "description": "Motif en texte libre de la charge sur la ligne. Au moins BT-144 ou BT-145 obligatoire (BR-CO-24).",
+          "maxLength": 256,
+          "example": "Supplément manutention"
+        },
+        {
+          "id": "BT-145",
+          "name": "Code motif charges",
+          "type": "Code",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "rules": [],
+          "legalRefs": [],
+          "description": "Code normalisé du motif de la charge de ligne (codelist UNTDID 7161).",
+          "example": "ABL",
+          "formatDetail": "Code UNTDID 7161",
+          "tips": "Mêmes codes que BT-105 (charge document). Doit être cohérent avec BT-144 (BR-CO-08)."
+        }
+      ],
+      "description": "Charges ou frais supplémentaires appliqués à une ligne de facture spécifique (ex : frais de manutention ligne), avec montant, base, pourcentage et motif."
+    },
+    {
+      "id": "BG-29",
+      "name": "Détail prix",
+      "fields": [
+        {
+          "id": "BT-146",
+          "name": "Prix unitaire net",
+          "type": "Montant",
+          "cardinality": "1..1",
+          "mandatory": true,
+          "format": "both",
+          "example": "100.00",
+          "rules": [
+            "BR-26",
+            "BR-27",
+            "BR-FR-DEC-03"
+          ],
+          "tips": "Toujours >= 0. Max 8 décimales.",
+          "legalRefs": [
+            "CGI-242-nonies-A"
+          ],
+          "description": "Prix net unitaire de l'article (après remise sur prix BT-147), base du calcul montant net ligne. Obligatoire (BR-26).",
+          "formatDetail": "Décimal avec jusqu'à 8 décimales"
+        },
+        {
+          "id": "BT-147",
+          "name": "Remise de prix",
+          "type": "Montant",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "rules": [
+            "BR-FR-DEC-03"
+          ],
+          "tips": "= BT-148 - BT-146.",
+          "legalRefs": [],
+          "description": "Remise appliquée sur le prix brut de l'article (BT-148) pour obtenir le prix net (BT-146).",
+          "example": "5.50",
+          "formatDetail": "Décimal avec jusqu'à 8 décimales"
+        },
+        {
+          "id": "BT-148",
+          "name": "Prix unitaire brut",
+          "type": "Montant",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "rules": [
+            "BR-FR-DEC-03"
+          ],
+          "legalRefs": [],
+          "description": "Prix brut unitaire de l'article, avant application de la remise sur prix (BT-147).",
+          "example": "30.00",
+          "formatDetail": "Décimal avec jusqu'à 8 décimales"
+        },
+        {
+          "id": "BT-149",
+          "name": "Quantité base prix",
+          "type": "Quantité",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "rules": [
+            "BR-FR-DEC-02"
+          ],
+          "tips": "Défaut = 1.",
+          "legalRefs": [],
+          "description": "Quantité de base à laquelle se rapporte le prix unitaire (ex : prix pour 100 unités → valeur 100).",
+          "example": "1",
+          "formatDetail": "Décimal"
+        },
+        {
+          "id": "BT-150",
+          "name": "Code unité base prix",
+          "type": "Code",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "rules": [],
+          "tips": "= BT-130.",
+          "legalRefs": [],
+          "description": "Code de l'unité de mesure applicable à la quantité de base du prix (BT-149).",
+          "example": "C62",
+          "formatDetail": "Code UN/ECE Rec. 20 ou 21",
+          "values": {
+            "C62": "Unité (pièce)",
+            "KGM": "Kilogramme",
+            "MTR": "Mètre",
+            "LTR": "Litre",
+            "MTK": "Mètre carré",
+            "MTQ": "Mètre cube",
+            "HUR": "Heure",
+            "DAY": "Jour",
+            "MON": "Mois",
+            "TNE": "Tonne métrique",
+            "SET": "Ensemble",
+            "XPK": "Colis"
+          }
+        }
+      ],
+      "description": "Détails du prix unitaire de l'article : prix brut, remise sur prix, prix net, quantité de base du prix et code d'unité de mesure."
+    },
+    {
+      "id": "BG-30",
+      "name": "Informations article",
+      "fields": [
+        {
+          "id": "BT-153",
+          "name": "Nom de l'article",
+          "type": "Texte",
+          "cardinality": "1..1",
+          "mandatory": true,
+          "format": "both",
+          "example": "Prestation conseil RFE",
+          "rules": [
+            "BR-25"
+          ],
+          "legalRefs": [
+            "CGI-242-nonies-A"
+          ],
+          "description": "Nom commercial de l'article facturé, tel qu'il est connu du vendeur et de l'acheteur. Obligatoire (BR-25).",
+          "maxLength": 256
+        },
+        {
+          "id": "BT-154",
+          "name": "Description article",
+          "type": "Texte",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "rules": [],
+          "legalRefs": [],
+          "description": "Description détaillée de l'article, complétant le nom (caractéristiques, spécifications techniques).",
+          "maxLength": 1024,
+          "example": "Cartouche d'encre noire haute capacité, compatible imprimantes série HP LaserJet Pro 400"
+        },
+        {
+          "id": "BT-155",
+          "name": "ID vendeur article",
+          "type": "Identifiant",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "rules": [],
+          "legalRefs": [],
+          "description": "Référence de l'article attribuée par le vendeur (code article fournisseur, SKU vendeur).",
+          "maxLength": 100,
+          "example": "ART-INK-BK-XL-2026"
+        },
+        {
+          "id": "BT-156",
+          "name": "ID acheteur article",
+          "type": "Identifiant",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "rules": [],
+          "legalRefs": [],
+          "description": "Référence de l'article attribuée par l'acheteur (code article client, SKU acheteur).",
+          "maxLength": 100,
+          "example": "FOURN-4521-ENCRE",
+          "tips": "Facilite le rapprochement automatique côté acheteur."
+        },
+        {
+          "id": "BT-157",
+          "name": "ID standard article (GTIN/EAN)",
+          "type": "Identifiant",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "schemeID": "0160 pour GTIN",
+          "rules": [],
+          "legalRefs": [],
+          "description": "Identifiant standard de l'article selon une codification reconnue (GTIN/EAN, ISBN...). Doit avoir un schéma (BR-64).",
+          "maxLength": 50,
+          "example": "3614271234567",
+          "formatDetail": "Identifiant + schéma ISO 6523 (ICD)",
+          "tips": "Utiliser le schéma 0160 pour les GTIN/EAN-13."
+        },
+        {
+          "id": "BT-158",
+          "name": "Classification article",
+          "type": "Identifiant",
+          "cardinality": "0..n",
+          "mandatory": false,
+          "format": "both",
+          "rules": [
+            "BR-65"
+          ],
+          "tips": "CPV, UNSPSC, etc.",
+          "legalRefs": [],
+          "description": "Identifiant de classification de l'article dans un référentiel produit (CPV, eCl@ss, UNSPSC). Doit avoir un schéma (BR-65).",
+          "maxLength": 50,
+          "example": "30192100-2",
+          "formatDetail": "Identifiant + schéma + version du schéma"
+        },
+        {
+          "id": "BT-159",
+          "name": "Code pays origine article",
+          "type": "Code",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "rules": [],
+          "legalRefs": [],
+          "description": "Code du pays d'origine de l'article (fabrication ou provenance commerciale).",
+          "example": "CN",
+          "formatDetail": "ISO 3166-1 alpha-2",
+          "tips": "Utile pour les déclarations douanières et les règles de TVA spécifiques.",
+          "values": {
+            "FR": "France",
+            "DE": "Allemagne",
+            "CN": "Chine",
+            "US": "États-Unis",
+            "JP": "Japon",
+            "IT": "Italie",
+            "ES": "Espagne",
+            "GB": "Royaume-Uni"
+          }
+        }
+      ],
+      "description": "Informations descriptives de l'article facturé : nom, description, identifiants (vendeur, acheteur, standard), pays d'origine, classifiants et attributs."
+    },
+    {
+      "id": "BG-31",
+      "name": "TVA article",
+      "fields": [
+        {
+          "id": "BT-151",
+          "name": "Code type TVA article",
+          "type": "Code",
+          "cardinality": "1..1",
+          "mandatory": true,
+          "format": "both",
+          "values": {
+            "S": "Normal",
+            "Z": "Zéro",
+            "E": "Exonéré",
+            "AE": "Autoliquidation",
+            "K": "Intracom",
+            "G": "Export",
+            "O": "Hors champ"
+          },
+          "example": "S",
+          "rules": [
+            "BR-CO-4",
+            "BR-FR-15"
+          ],
+          "legalRefs": [
+            "UNTDID-5305"
+          ],
+          "description": "Code de catégorie de TVA applicable à l'article facturé sur cette ligne. Obligatoire (BR-CO-04).",
+          "formatDetail": "Code UNTDID 5305 (subset EN16931)",
+          "tips": "Doit correspondre à une ventilation TVA (BG-23) existante dans la facture."
+        },
+        {
+          "id": "BT-152",
+          "name": "Taux TVA article",
+          "type": "Pourcentage",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "example": "20.00",
+          "rules": [
+            "BR-FR-DEC-04"
+          ],
+          "tips": "20/10/5.5/2.1 pour S. 0 pour le reste.",
+          "legalRefs": [],
+          "description": "Taux de TVA applicable à l'article facturé sur cette ligne, exprimé en pourcentage.",
+          "formatDetail": "Décimal (pourcentage, ex : 20.00 pour 20%)"
+        }
+      ],
+      "description": "Informations TVA applicables à l'article facturé sur la ligne : code de catégorie TVA et taux de TVA de l'article."
+    },
+    {
+      "id": "BG-32",
+      "name": "Attributs article",
+      "fields": [
+        {
+          "id": "BT-160",
+          "name": "Nom attribut",
+          "type": "Texte",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "example": "Couleur",
+          "rules": [
+            "BR-FR-27"
+          ],
+          "legalRefs": [],
+          "description": "Nom de l'attribut supplémentaire de l'article (clé de la paire nom/valeur). Obligatoire dans BG-32 (BR-54).",
+          "maxLength": 256,
+          "tips": "Permet de transmettre des caractéristiques produit non couvertes par les champs standard."
+        },
+        {
+          "id": "BT-161",
+          "name": "Valeur attribut",
+          "type": "Texte",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "example": "Rouge",
+          "rules": [
+            "BR-FR-28"
+          ],
+          "legalRefs": [],
+          "description": "Valeur de l'attribut supplémentaire de l'article (valeur de la paire nom/valeur). Obligatoire dans BG-32 (BR-54).",
+          "maxLength": 256
+        }
+      ],
+      "description": "Attributs supplémentaires de l'article sous forme de paires nom/valeur, permettant de transmettre des caractéristiques métier spécifiques (ex : couleur, taille, lot)."
+    },
+    {
+      "id": "EXT-FR-FE-BG-02",
+      "name": "Extensions françaises - Infos complémentaires",
+      "fields": [
+        {
+          "id": "EXT-FR-FE-01",
+          "name": "Type contrat/marché",
+          "type": "Code",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "values": {
+            "MARCHE": "Marché public",
+            "CONTRAT": "Contrat"
+          },
+          "rules": [],
+          "tips": "B2G uniquement.",
+          "legalRefs": [],
+          "description": "Type de contrat ou de marché public associé à la facture. Utilisé principalement dans le cadre B2G (Business to Government) pour rattacher la facture à un marché public ou un contrat cadre.",
+          "example": "MARCHE"
+        },
+        {
+          "id": "EXT-FR-FE-02",
+          "name": "Sous-type facture",
+          "type": "Texte",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "rules": [
+            "BR-FR-04"
+          ],
+          "legalRefs": [],
+          "description": "Sous-type de la facture, permettant de préciser la nature exacte du document au-delà du code type (BT-3). Exemples : facture de situation, décompte général, facture de solde.",
+          "example": "SITUATION",
+          "tips": "Complète le BT-3 (type document) avec une granularité plus fine propre au contexte français."
+        },
+        {
+          "id": "EXT-FR-FE-136",
+          "name": "N° facture antérieure en ligne",
+          "type": "Identifiant",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "rules": [
+            "BR-FR-MAP-01"
+          ],
+          "legalRefs": [],
+          "description": "Numéro de la facture antérieure référencée au niveau de la ligne. Permet de rattacher une ligne à une facture d'origine (utile pour les avoirs partiels ou rectificatives ligne par ligne).",
+          "maxLength": 35,
+          "example": "FA-2026-00035",
+          "tips": "Tronqué à 20 caractères dans le flux 1 vers le PPF (même règle que BT-1)."
+        }
+      ],
+      "description": "Extensions françaises spécifiques au profil EXTENDED-CTC-FR : informations complémentaires propres à la réforme française (type de contrat/marché, sous-type de facture, références antérieures). Ces champs n'existent pas dans la norme EN 16931 de base."
+    },
+    {
+      "id": "EXT-FR-FE-BG-10",
+      "name": "Adresse livraison en ligne",
+      "fields": [
+        {
+          "id": "EXT-FR-FE-146",
+          "name": "ID global lieu livraison ligne",
+          "type": "Identifiant",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "rules": [],
+          "legalRefs": [],
+          "description": "Identifiant global du lieu de livraison au niveau de la ligne (GLN, identifiant interne ou code site). Permet d'identifier précisément le site de livraison pour chaque ligne.",
+          "example": "3012345678904",
+          "formatDetail": "GLN (Global Location Number) sur 13 chiffres ou identifiant interne",
+          "tips": "Utile pour les livraisons multi-sites : chaque ligne peut avoir un lieu de livraison différent."
+        },
+        {
+          "id": "EXT-FR-FE-151",
+          "name": "Adresse Ligne 1",
+          "type": "Texte",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "rules": [
+            "BR-FR-MAP-11"
+          ],
+          "legalRefs": [],
+          "description": "Première ligne de l'adresse de livraison au niveau de la ligne de facture (numéro et nom de rue).",
+          "maxLength": 150,
+          "example": "45 avenue des Champs-Élysées"
+        },
+        {
+          "id": "EXT-FR-FE-154",
+          "name": "Code postal",
+          "type": "Texte",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "rules": [
+            "BR-FR-MAP-11"
+          ],
+          "legalRefs": [],
+          "description": "Code postal du lieu de livraison au niveau de la ligne de facture.",
+          "maxLength": 10,
+          "example": "75008"
+        },
+        {
+          "id": "EXT-FR-FE-155",
+          "name": "Localité",
+          "type": "Texte",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "rules": [
+            "BR-FR-MAP-11"
+          ],
+          "legalRefs": [],
+          "description": "Nom de la ville ou localité du lieu de livraison au niveau de la ligne de facture.",
+          "maxLength": 100,
+          "example": "Paris"
+        },
+        {
+          "id": "EXT-FR-FE-157",
+          "name": "Code pays",
+          "type": "Code",
+          "cardinality": "1..1",
+          "mandatory": true,
+          "format": "both",
+          "rules": [
+            "BR-FR-MAP-11",
+            "BR-FR-MAP-14"
+          ],
+          "legalRefs": [],
+          "description": "Code pays du lieu de livraison au niveau de la ligne. Obligatoire dès qu'une adresse de livraison en ligne est renseignée.",
+          "example": "FR",
+          "formatDetail": "ISO 3166-1 alpha-2 (2 lettres)",
+          "tips": "Obligatoire (1..1) si le bloc EXT-FR-FE-BG-10 est présent. Détermine le pays de taxation de la ligne.",
+          "values": {
+            "FR": "France",
+            "DE": "Allemagne",
+            "BE": "Belgique",
+            "ES": "Espagne",
+            "IT": "Italie",
+            "LU": "Luxembourg",
+            "NL": "Pays-Bas",
+            "CH": "Suisse"
+          }
+        }
+      ],
+      "description": "Adresse de livraison au niveau de la ligne de facture. Extension française permettant d'indiquer un lieu de livraison différent pour chaque ligne (livraisons multi-sites). Requise quand les marchandises sont livrées à des adresses différentes sur une même facture."
+    },
+    {
+      "id": "EXT-FR-FE-BG-12",
+      "name": "Sous-lignes et multi-vendeurs",
+      "fields": [
+        {
+          "id": "EXT-FR-FE-159",
+          "name": "Code attribut article",
+          "type": "Code",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "rules": [
+            "BR-FR-27"
+          ],
+          "legalRefs": [],
+          "description": "Code de l'attribut article dans le contexte d'une sous-ligne ou d'un article multi-vendeurs. Identifie le type de caractéristique technique de l'article.",
+          "example": "TAILLE"
+        },
+        {
+          "id": "EXT-FR-FE-160",
+          "name": "Valeur attribut avec mesure",
+          "type": "Quantité",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "rules": [
+            "BR-FR-28"
+          ],
+          "legalRefs": [],
+          "description": "Valeur numérique de l'attribut article avec unité de mesure. Utilisé pour les caractéristiques quantifiables (poids, volume, longueur).",
+          "example": "1.500",
+          "formatDetail": "Décimal avec point comme séparateur",
+          "tips": "Accompagné obligatoirement de EXT-FR-FE-161 (unité de mesure)."
+        },
+        {
+          "id": "EXT-FR-FE-161",
+          "name": "Unité mesure attribut",
+          "type": "Code",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "rules": [
+            "BR-FR-28"
+          ],
+          "legalRefs": [],
+          "description": "Code de l'unité de mesure associée à la valeur de l'attribut article (EXT-FR-FE-160). Suit la codification UN/ECE Recommandation 20.",
+          "example": "KGM",
+          "formatDetail": "Code UN/ECE Rec. 20",
+          "values": {
+            "KGM": "Kilogramme",
+            "MTR": "Mètre",
+            "LTR": "Litre",
+            "MTQ": "Mètre cube",
+            "C62": "Unité"
+          }
+        },
+        {
+          "id": "EXT-FR-FE-162",
+          "name": "ID ligne parent",
+          "type": "Identifiant",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "rules": [],
+          "tips": "Hiérarchie de lignes (sous-lignes).",
+          "legalRefs": [
+            "AFNOR-XP-Z12-012"
+          ],
+          "description": "Identifiant de la ligne parente dans une hiérarchie de sous-lignes. Permet de créer des arborescences de lignes (une ligne principale avec des sous-lignes de détail).",
+          "example": "1",
+          "formatDetail": "Identifiant de ligne (BT-126) de la ligne parente"
+        },
+        {
+          "id": "EXT-FR-FE-163",
+          "name": "Sous-type de ligne",
+          "type": "Code",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "values": {
+            "DETAIL": "Ligne comptée dans totaux (défaut)",
+            "GROUP": "Regroupement multi-vendeurs",
+            "INFORMATION": "Ligne info non comptée"
+          },
+          "rules": [],
+          "tips": "GROUP pour multi-vendeurs. Seul DETAIL va dans flux 1.",
+          "legalRefs": [
+            "AFNOR-XP-Z12-012"
+          ],
+          "description": "Sous-type de la ligne de facture, indiquant son rôle dans le calcul des totaux. DETAIL = ligne normale comptée. GROUP = regroupement multi-vendeurs. INFORMATION = ligne descriptive non comptée.",
+          "example": "DETAIL"
+        },
+        {
+          "id": "EXT-FR-FE-167",
+          "name": "SIREN vendeur à la ligne",
+          "type": "Identifiant",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "rules": [
+            "BR-FR-MV-06"
+          ],
+          "tips": "Multi-vendeurs.",
+          "legalRefs": [],
+          "description": "SIREN (9 chiffres) du vendeur tiers rattaché à cette ligne dans un contexte multi-vendeurs. Permet d'identifier quel fournisseur réel est concerné par cette ligne.",
+          "maxLength": 9,
+          "example": "987654321",
+          "formatDetail": "9 chiffres (SIREN) — schemeID 0002"
+        },
+        {
+          "id": "EXT-FR-FE-168",
+          "name": "N° TVA vendeur à la ligne",
+          "type": "Identifiant",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "rules": [
+            "BR-FR-MV-04"
+          ],
+          "tips": "Multi-vendeurs.",
+          "legalRefs": [],
+          "description": "Numéro d'identification TVA intracommunautaire du vendeur tiers rattaché à cette ligne en multi-vendeurs.",
+          "maxLength": 20,
+          "example": "FR12987654321",
+          "formatDetail": "FR + 2 chiffres clé + 9 chiffres SIREN (13 car.)"
+        },
+        {
+          "id": "EXT-FR-FE-178",
+          "name": "N° facture en ligne",
+          "type": "Identifiant",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "rules": [
+            "BR-FR-MV-07"
+          ],
+          "tips": "Facture unitaire du vendeur tiers.",
+          "legalRefs": [],
+          "description": "Numéro de facture unitaire du vendeur tiers. Dans un contexte multi-vendeurs, chaque vendeur tiers peut avoir son propre numéro de facture rattaché à ses lignes.",
+          "maxLength": 35,
+          "example": "VT-2026-00012"
+        },
+        {
+          "id": "EXT-FR-FE-181",
+          "name": "Total TVA à la ligne",
+          "type": "Montant",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "rules": [
+            "BR-FR-MV-09"
+          ],
+          "tips": "Ligne GROUP multi-vendeurs.",
+          "legalRefs": [],
+          "description": "Montant total de TVA calculé pour les lignes du vendeur tiers (lignes GROUP). C'est la somme de la TVA des sous-lignes DETAIL rattachées à ce vendeur.",
+          "example": "200.00",
+          "formatDetail": "Décimal avec 2 décimales, point comme séparateur"
+        },
+        {
+          "id": "EXT-FR-FE-184",
+          "name": "Total TTC à la ligne",
+          "type": "Montant",
+          "cardinality": "0..1",
+          "mandatory": false,
+          "format": "both",
+          "rules": [
+            "BR-FR-MV-10"
+          ],
+          "tips": "Ligne GROUP multi-vendeurs.",
+          "legalRefs": [],
+          "description": "Montant total TTC (toutes taxes comprises) pour les lignes du vendeur tiers (lignes GROUP). Somme HT + TVA des sous-lignes DETAIL de ce vendeur.",
+          "example": "1200.00",
+          "formatDetail": "Décimal avec 2 décimales, point comme séparateur"
+        }
+      ],
+      "description": "Sous-lignes et multi-vendeurs : extensions françaises pour gérer les factures impliquant plusieurs vendeurs (centrales d'achat, marketplaces) et les hiérarchies de lignes (sous-lignes). Permet de rattacher chaque ligne à un vendeur tiers avec son propre SIREN, N° TVA et totaux."
+    }
+  ]
+}

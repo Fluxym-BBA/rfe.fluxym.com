@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Les champs de la facture | E-Invoicing Academy</title>
+    <link rel="icon" href="./assets/favicon-Fluxym-V2.png" sizes="32x32" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/pages.css">
+</head>
+<body>
+    <nav id="main-nav"></nav>
+
+    <header class="page-hero">
+        <div class="page-hero-content">
+            <div class="breadcrumb">
+                <a href="./index.html">Accueil</a> <span>/</span>
+                <a href="./regles.html">Règles</a> <span>/</span>
+                <span>Les champs</span>
+            </div>
+            <span class="hero-badge">🔧 Niveau 4 — Technique</span>
+            <h1>Les champs de la facture électronique</h1>
+            <p>Explorez les ~170 champs BT/BG de la norme EN 16931 et des extensions françaises. Chaque champ est documenté avec ses contraintes, règles de validation et références juridiques.</p>
+        </div>
+    </header>
+
+    <main class="page-main">
+        <div class="page-container page-layout">
+
+            <aside class="page-sidebar">
+                <div class="sidebar-sticky">
+                    <h4>Filtres</h4>
+                    <div class="champs-filters">
+                        <input type="text" id="champs-search" class="champs-search" placeholder="🔍 Rechercher BT-1, numéro, vendeur…">
+
+                        <label class="filter-label">Bloc</label>
+                        <select id="filter-block" class="champs-select">
+                            <option value="">Tous les blocs</option>
+                        </select>
+
+                        <label class="filter-label">Obligatoire</label>
+                        <select id="filter-mandatory" class="champs-select">
+                            <option value="">Tous</option>
+                            <option value="true">✅ Obligatoire</option>
+                            <option value="false">◻️ Optionnel / Conditionnel</option>
+                        </select>
+
+                        <label class="filter-label">Format</label>
+                        <select id="filter-format" class="champs-select">
+                            <option value="">Tous les formats</option>
+                            <option value="both">EN16931 + Étendu</option>
+                            <option value="extended">Étendu uniquement</option>
+                        </select>
+
+                        <label class="filter-label">Type</label>
+                        <select id="filter-type" class="champs-select">
+                            <option value="">Tous les types</option>
+                            <option value="Texte">Texte</option>
+                            <option value="Identifiant">Identifiant</option>
+                            <option value="Code">Code</option>
+                            <option value="Montant">Montant</option>
+                            <option value="Date">Date</option>
+                            <option value="Quantité">Quantité</option>
+                            <option value="Pourcentage">Pourcentage</option>
+                        </select>
+                    </div>
+
+                    <div class="champs-stats" id="champs-stats">
+                        <div class="stat-row"><span>Champs affichés</span><strong id="stat-visible">—</strong></div>
+                        <div class="stat-row"><span>Blocs</span><strong id="stat-blocks">—</strong></div>
+                        <div class="stat-row"><span>Obligatoires</span><strong id="stat-mandatory">—</strong></div>
+                    </div>
+
+                    <div class="sidebar-nav-pages">
+                        <h4>Pages liées</h4>
+                        <a href="./regles.html" class="sidebar-page">📐 Les règles de gestion</a>
+                        <a href="./cas-usage.html" class="sidebar-page">📦 Cas d'usage</a>
+                        <a href="./formats.html" class="sidebar-page">📄 Les formats</a>
+                    </div>
+                </div>
+            </aside>
+
+            <article class="page-content">
+
+                <!-- Compteurs -->
+                <div class="champs-counters" id="champs-counters">
+                    <div class="champs-counter">
+                        <span class="counter-num" id="count-total">—</span>
+                        <span class="counter-label">Champs BT</span>
+                    </div>
+                    <div class="champs-counter">
+                        <span class="counter-num" id="count-blocks">—</span>
+                        <span class="counter-label">Blocs BG</span>
+                    </div>
+                    <div class="champs-counter">
+                        <span class="counter-num" id="count-rules">—</span>
+                        <span class="counter-label">Règles liées</span>
+                    </div>
+                    <div class="champs-counter">
+                        <span class="counter-num" id="count-legal">—</span>
+                        <span class="counter-label">Réf. juridiques</span>
+                    </div>
+                </div>
+
+                <!-- Onglets E-invoicing / E-reporting -->
+                <div class="ch-tabs">
+                    <button class="ch-tab ch-tab--active" data-tab="einvoicing">
+                        📄 E-invoicing
+                        <span class="ch-tab-sub">BT/BG — EN 16931</span>
+                    </button>
+                    <button class="ch-tab" data-tab="ereporting">
+                        📡 E-reporting
+                        <span class="ch-tab-sub">TT/TG/TB — Flux F10</span>
+                    </button>
+                </div>
+
+                <!-- Badge de scope -->
+                <div id="scope-badge" class="ch-scope-badge ch-scope--einv">
+                    📄 E-invoicing — Flux F1/F2 — Champs BT/BG (EN 16931)
+                </div>
+
+                <!-- Info sous-flux (visible uniquement en e-reporting) -->
+                <div id="subflow-info" style="display:none;"></div>
+
+                <!-- Résultats -->
+                <div id="champs-results">
+                    <div class="cuhub-loader">Chargement des champs…</div>
+                </div>
+
+            </article>
+        </div>
+    </main>
+
+    <footer id="main-footer"></footer>
+    <script src="./js/nav.js"></script>
+    <script src="./js/animations.js"></script>
+    <script src="./js/champs.js"></script>
+</body>
+</html>

@@ -1,0 +1,186 @@
+{
+  "meta": {
+    "version": "1.0",
+    "lastUpdate": "2026-03-21",
+    "source": "DGFIP Annexe 6 v1.9 + AFNOR XP Z12-012",
+    "scope": "e-reporting",
+    "parts": "Fichier 2/3 : Transactions détaillées (TB-2, 10.1) + Transactions agrégées (10.3)"
+  },
+  "blocks": [
+    {
+      "id": "TB-2",
+      "name": "Transmission Transactions",
+      "description": "Bloc principal des données de transactions. XOR avec TB-3 (G6.29).",
+      "xPath": "/TransactionsReport", "cardinality": "0..1",
+      "subFlows": ["10.1","10.3"], "rules": ["G6.29"],
+      "groups": [
+        {
+          "id": "TG-7", "name": "Période de transmission (Transactions)",
+          "xPath": "/TransactionsReport/ReportPeriod", "cardinality": "1..1",
+          "subFlows": ["10.1","10.3"],
+          "fields": [
+            { "id": "TT-17", "name": "Date début période", "type": "TEXTE", "maxLength": 8, "cardinality": "1..1", "mandatory": true, "xPath": "/TransactionsReport/ReportPeriod/StartDate", "btEquivalent": null, "example": "20260901", "rules": ["G1.09","G1.36","G6.24","G6.25"], "subFlows": ["10.1","10.3"] },
+            { "id": "TT-18", "name": "Date fin période", "type": "TEXTE", "maxLength": 8, "cardinality": "1..1", "mandatory": true, "xPath": "/TransactionsReport/ReportPeriod/EndDate", "btEquivalent": null, "example": "20260930", "rules": ["G1.09","G1.36","G6.25","G7.43"], "tips": "Doit être < date contrôle système et > date début", "subFlows": ["10.1","10.3"] }
+          ]
+        },
+        {
+          "id": "TG-8", "name": "Facture (Transaction détaillée)",
+          "description": "Bloc répétable : 1 occurrence = 1 facture. B2Bi uniquement (B2C interdit en 10.1, cf. G6.28).",
+          "xPath": "/TransactionsReport/Invoice", "cardinality": "0..n",
+          "subFlows": ["10.1"], "rules": ["G6.28"],
+          "fields": [
+            { "id": "TT-20", "name": "Numéro de facture", "type": "IDENTIFIANT", "maxLength": 35, "cardinality": "1..1", "mandatory": true, "xPath": "/TransactionsReport/Invoice/InvoiceID", "btEquivalent": "BT-1", "example": "FA-2026-00001", "rules": ["G1.05","G6.08"], "subFlows": ["10.1"] },
+            { "id": "TT-21", "name": "Code type de facture", "description": "UNTDID 1001 : 380(facture), 381(avoir), 384(rectificative), 386(acompte), 389(auto-facturée), 393(affacturée), 457(récapitulative), 500(acompte auto), 501(affacturée auto), 503(avoir acompte), 532(avoir affacturé).", "type": "CODE", "maxLength": 3, "cardinality": "1..1", "mandatory": true, "xPath": "/TransactionsReport/Invoice/TypeCode", "btEquivalent": "BT-3", "example": "380", "rules": ["G1.01","G6.08"], "codeList": ["380","381","384","386","389","393","457","500","501","503","532"], "subFlows": ["10.1"] },
+            { "id": "TT-22", "name": "Code devise facture", "type": "CODE", "maxLength": 3, "cardinality": "1..1", "mandatory": true, "xPath": "/TransactionsReport/Invoice/CurrencyCode", "btEquivalent": "BT-5", "example": "EUR", "rules": ["G1.16","G6.08"], "subFlows": ["10.1"] },
+            { "id": "TT-23", "name": "Date d'émission", "type": "TEXTE", "maxLength": 8, "cardinality": "1..1", "mandatory": true, "xPath": "/TransactionsReport/Invoice/IssueDate", "btEquivalent": "BT-2", "example": "20260915", "rules": ["G1.09","G1.07","G1.36","G6.08"], "subFlows": ["10.1"] },
+            { "id": "TT-24", "name": "Code date exigibilité TVA", "type": "CODE", "maxLength": 3, "cardinality": "0..1", "mandatory": false, "xPath": "/TransactionsReport/Invoice/TaxDueDateTypeCode", "btEquivalent": "BT-8", "example": "35", "rules": ["G1.44","G6.11"], "subFlows": ["10.1"] }
+          ],
+          "groups": [
+            {
+              "id": "TG-10", "name": "Contrôle du processus", "btEquivalent": "BG-2",
+              "xPath": "/TransactionsReport/Invoice/BusinessProcess", "cardinality": "1..1", "subFlows": ["10.1"],
+              "fields": [
+                { "id": "TT-28", "name": "Cadre de facturation", "description": "B1=B2B national, B2=B2B international, A2=B2G, M1-M4=après acompte.", "type": "TEXTE", "maxLength": 3, "cardinality": "1..1", "mandatory": true, "xPath": "/TransactionsReport/Invoice/BusinessProcess/ID", "btEquivalent": "BT-23", "example": "B1", "rules": ["G1.02","G1.60","G6.08"], "subFlows": ["10.1"] },
+                { "id": "TT-29", "name": "Type de profil", "type": "IDENTIFIANT", "maxLength": 255, "cardinality": "1..1", "mandatory": true, "xPath": "/TransactionsReport/Invoice/BusinessProcess/TypeID", "btEquivalent": "BT-24", "example": "urn:cef.eu:names:identifier:Facture:1.0:e-reporting", "rules": ["G6.08","S1.12"], "subFlows": ["10.1"] }
+              ]
+            },
+            {
+              "id": "TG-9", "name": "Référence facture antérieure",
+              "xPath": "/TransactionsReport/Invoice/ReferencedDocument", "cardinality": "0..1", "subFlows": ["10.1"],
+              "fields": [
+                { "id": "TT-30", "name": "Réf. facture antérieure", "type": "REFERENCE DU DOCUMENT", "maxLength": 35, "cardinality": "1..1", "mandatory": true, "xPath": "/TransactionsReport/Invoice/ReferencedDocument/ID", "btEquivalent": "BT-25", "rules": ["G1.05","G1.32","G6.14","G6.07"], "subFlows": ["10.1"] },
+                { "id": "TT-31", "name": "Date facture antérieure", "type": "TEXTE", "maxLength": 8, "cardinality": "0..1", "mandatory": false, "xPath": "/TransactionsReport/Invoice/ReferencedDocument/IssueDate", "btEquivalent": "BT-26", "rules": ["G1.09","G1.36","G1.32"], "subFlows": ["10.1"] }
+              ]
+            },
+            {
+              "id": "TG-11", "name": "Vendeur", "xPath": "/TransactionsReport/Invoice/Seller", "cardinality": "1..1", "subFlows": ["10.1"],
+              "fields": [
+                { "id": "TT-33-1", "name": "Schéma Id vendeur", "type": "CODE", "maxLength": 4, "cardinality": "1..1", "mandatory": true, "xPath": "/TransactionsReport/Invoice/Seller/CompanyId/@schemeId", "btEquivalent": "BT-30-1", "example": "0002", "rules": ["G2.19","G2.33"], "codeList": ["0002","0223","0227","0228","0229"], "subFlows": ["10.1"] },
+                { "id": "TT-33", "name": "Identifiant vendeur", "type": "IDENTIFIANT", "maxLength": 18, "cardinality": "1..1", "mandatory": true, "xPath": "/TransactionsReport/Invoice/Seller/CompanyId", "btEquivalent": "BT-30", "example": "123456789", "rules": ["G1.65","G6.14","G2.19"], "subFlows": ["10.1"] },
+                { "id": "TT-34-0", "name": "Qualifiant TVA vendeur", "type": "CODE", "maxLength": 3, "cardinality": "1..1", "mandatory": true, "xPath": "/TransactionsReport/Invoice/Seller/TaxRegistrationId/@qualifyingId", "btEquivalent": "BT-31-0", "example": "VAT", "rules": ["G2.33"], "codeList": ["VAT"], "subFlows": ["10.1"] },
+                { "id": "TT-34", "name": "Id TVA vendeur", "type": "IDENTIFIANT", "maxLength": 18, "cardinality": "0..1", "mandatory": false, "xPath": "/TransactionsReport/Invoice/Seller/TaxRegistrationId", "btEquivalent": "BT-31", "example": "FR12345678901", "rules": ["G6.14","G1.102","G2.33"], "tips": "Obligatoire si TT-33-1=0002/0223 ou code E en TT-56", "subFlows": ["10.1"] }
+              ]
+            },
+            {
+              "id": "TG-13", "name": "Acheteur", "xPath": "/TransactionsReport/Invoice/Buyer", "cardinality": "1..1", "subFlows": ["10.1"],
+              "fields": [
+                { "id": "TT-36", "name": "Identifiant acheteur", "type": "IDENTIFIANT", "maxLength": 18, "cardinality": "0..1", "mandatory": false, "xPath": "/TransactionsReport/Invoice/Buyer/CompanyId", "btEquivalent": "BT-47", "example": "987654321", "rules": ["G1.66","G6.14","G6.07","G2.19","G6.28"], "tips": "Obligatoire en B2Bi (G6.28)", "subFlows": ["10.1"] },
+                { "id": "TT-37", "name": "Schéma Id acheteur", "type": "CODE", "maxLength": 4, "cardinality": "1..1", "mandatory": true, "xPath": "/TransactionsReport/Invoice/Buyer/CompanyId/@schemeId", "btEquivalent": "BT-47-1", "example": "0223", "rules": ["G6.07","G2.19","G2.33"], "codeList": ["0002","0223","0227","0228","0229"], "subFlows": ["10.1"] },
+                { "id": "TT-38-0", "name": "Qualifiant TVA acheteur", "type": "CODE", "maxLength": 3, "cardinality": "1..1", "mandatory": true, "xPath": "/TransactionsReport/Invoice/Buyer/TaxRegistrationId/@qualifyingId", "btEquivalent": "BT-48-0", "example": "VAT", "rules": ["G2.33"], "codeList": ["VAT"], "subFlows": ["10.1"] },
+                { "id": "TT-38", "name": "Id TVA acheteur", "type": "IDENTIFIANT", "maxLength": 18, "cardinality": "0..1", "mandatory": false, "xPath": "/TransactionsReport/Invoice/Buyer/TaxRegistrationId", "btEquivalent": "BT-48", "example": "DE123456789", "rules": ["G6.14","G2.33"], "subFlows": ["10.1"] }
+              ]
+            },
+            {
+              "id": "TG-15", "name": "Adresse acheteur", "btEquivalent": "BG-8",
+              "xPath": "/TransactionsReport/Invoice/Buyer/Address", "cardinality": "0..1", "subFlows": ["10.1"],
+              "fields": [
+                { "id": "TT-39", "name": "Adresse ligne 1", "type": "TEXTE", "maxLength": 255, "cardinality": "0..1", "mandatory": false, "xPath": "/TransactionsReport/Invoice/Buyer/Address/LineOne", "btEquivalent": "BT-50", "rules": ["G6.14","G6.07"], "subFlows": ["10.1"] },
+                { "id": "TT-40", "name": "Localité (ville)", "type": "TEXTE", "maxLength": 255, "cardinality": "0..1", "mandatory": false, "xPath": "/TransactionsReport/Invoice/Buyer/Address/CityName", "btEquivalent": "BT-52", "rules": ["G6.14","G6.07"], "subFlows": ["10.1"] },
+                { "id": "TT-41", "name": "Code postal", "type": "TEXTE", "maxLength": 10, "cardinality": "0..1", "mandatory": false, "xPath": "/TransactionsReport/Invoice/Buyer/Address/PostalCode", "btEquivalent": "BT-53", "rules": ["G6.14","G6.07"], "subFlows": ["10.1"] },
+                { "id": "TT-43", "name": "Code pays", "type": "CODE", "maxLength": 2, "cardinality": "0..1", "mandatory": false, "xPath": "/TransactionsReport/Invoice/Buyer/Address/CountryCode", "btEquivalent": "BT-55", "example": "DE", "rules": ["G2.01","G6.14","G6.07"], "subFlows": ["10.1"] }
+              ]
+            },
+            {
+              "id": "TG-18", "name": "Période de facturation", "btEquivalent": "BG-14",
+              "xPath": "/TransactionsReport/Invoice/InvoicePeriod", "cardinality": "0..1", "subFlows": ["10.1"],
+              "fields": [
+                { "id": "TT-42", "name": "Date début facturation", "type": "TEXTE", "maxLength": 8, "cardinality": "0..1", "mandatory": false, "xPath": "/TransactionsReport/Invoice/InvoicePeriod/StartDate", "btEquivalent": "BT-73", "example": "20260901", "rules": ["G1.09","G1.36","G6.14","G6.07","G6.25"], "subFlows": ["10.1"] },
+                { "id": "TT-45", "name": "Date fin facturation", "type": "TEXTE", "maxLength": 8, "cardinality": "0..1", "mandatory": false, "xPath": "/TransactionsReport/Invoice/InvoicePeriod/EndDate", "btEquivalent": "BT-74", "example": "20260930", "rules": ["G1.09","G1.36","G1.38","G6.14","G6.07"], "subFlows": ["10.1"] }
+              ]
+            },
+            {
+              "id": "TG-19", "name": "Adresse de livraison",
+              "xPath": "/TransactionsReport/Invoice/Delivery/Location", "cardinality": "0..1", "subFlows": ["10.1"],
+              "fields": [
+                { "id": "TT-103", "name": "Adresse livraison L1", "type": "TEXTE", "maxLength": 255, "cardinality": "0..1", "mandatory": false, "xPath": "/TransactionsReport/Invoice/Delivery/Location/LineOne", "btEquivalent": "BT-75", "rules": ["G6.07","G6.30"], "subFlows": ["10.1"] },
+                { "id": "TT-105", "name": "Adresse livraison L3", "type": "TEXTE", "maxLength": 255, "cardinality": "0..1", "mandatory": false, "xPath": "/TransactionsReport/Invoice/Delivery/Location/LineThree", "btEquivalent": "BT-165", "subFlows": ["10.1"] },
+                { "id": "TT-106", "name": "Localité livraison", "type": "TEXTE", "maxLength": 255, "cardinality": "0..1", "mandatory": false, "xPath": "/TransactionsReport/Invoice/Delivery/Location/CityName", "btEquivalent": "BT-77", "rules": ["G6.07","G6.30"], "subFlows": ["10.1"] },
+                { "id": "TT-107", "name": "Code postal livraison", "type": "TEXTE", "maxLength": 10, "cardinality": "0..1", "mandatory": false, "xPath": "/TransactionsReport/Invoice/Delivery/Location/PostalCode", "btEquivalent": "BT-78", "rules": ["G6.07","G6.30"], "subFlows": ["10.1"] },
+                { "id": "TT-44", "name": "Code pays livraison", "type": "CODE", "maxLength": 2, "cardinality": "0..1", "mandatory": false, "xPath": "/TransactionsReport/Invoice/Delivery/Location/CountryCode", "btEquivalent": "BT-80", "example": "FR", "rules": ["G2.01","G6.07","G6.30"], "subFlows": ["10.1"] }
+              ]
+            },
+            {
+              "id": "TG-20", "name": "Charges/Remises document", "btEquivalent": "BG-20/BG-21",
+              "xPath": "/TransactionsReport/Invoice/AllowanceCharge", "cardinality": "0..n", "subFlows": ["10.1"],
+              "fields": [
+                { "id": "TT-46", "name": "Montant charge/remise", "type": "MONTANT", "maxLength": "19.2", "cardinality": "1..1", "mandatory": true, "xPath": "/TransactionsReport/Invoice/AllowanceCharge/Amount", "btEquivalent": "BT-92/BT-99", "rules": ["G1.14","G6.07"], "subFlows": ["10.1"] },
+                { "id": "TT-49", "name": "Code TVA charges", "type": "CODE", "maxLength": 2, "cardinality": "0..1", "mandatory": false, "xPath": "/TransactionsReport/Invoice/AllowanceCharge/TaxCategoryCode", "btEquivalent": "BT-102", "rules": ["G2.31","G6.07"], "codeList": ["S","E","AE","K","G","O","Z"], "subFlows": ["10.1"] }
+              ]
+            },
+            {
+              "id": "TG-22", "name": "Totaux monétaires", "btEquivalent": "BG-22",
+              "xPath": "/TransactionsReport/Invoice/MonetaryTotal", "cardinality": "1..1", "subFlows": ["10.1"],
+              "fields": [
+                { "id": "TT-51", "name": "Montant total HT", "type": "MONTANT", "maxLength": "19.2", "cardinality": "1..1", "mandatory": true, "xPath": "/TransactionsReport/Invoice/MonetaryTotal/TaxExclusiveAmount", "btEquivalent": "BT-109", "example": "1000.00", "rules": ["G1.14","G1.53","G6.08"], "subFlows": ["10.1"] },
+                { "id": "TT-52", "name": "Montant total TVA", "type": "MONTANT", "maxLength": "19.2", "cardinality": "1..1", "mandatory": true, "xPath": "/TransactionsReport/Invoice/MonetaryTotal/TaxAmount", "btEquivalent": "BT-110", "example": "200.00", "rules": ["G1.14","G1.53","G6.23","G6.08"], "tips": "Toujours EUR", "subFlows": ["10.1"] },
+                { "id": "TT-202", "name": "Devise montant TVA", "type": "CODE", "maxLength": 3, "cardinality": "1..1", "mandatory": true, "xPath": "/TransactionsReport/Invoice/MonetaryTotal/TaxAmount/@CurrencyCode", "btEquivalent": null, "example": "EUR", "rules": ["G6.23"], "codeList": ["EUR"], "subFlows": ["10.1"] }
+              ]
+            },
+            {
+              "id": "TG-23", "name": "Ventilation TVA", "btEquivalent": "BG-23",
+              "xPath": "/TransactionsReport/Invoice/TaxSubTotal", "cardinality": "1..n", "subFlows": ["10.1"],
+              "fields": [
+                { "id": "TT-54", "name": "Base imposition par type TVA", "type": "MONTANT", "maxLength": "19.2", "cardinality": "1..1", "mandatory": true, "xPath": "/TransactionsReport/Invoice/TaxSubTotal/TaxableAmount", "btEquivalent": "BT-116", "rules": ["G1.14","G1.53","G6.08"], "subFlows": ["10.1"] },
+                { "id": "TT-55", "name": "Montant TVA par type", "type": "MONTANT", "maxLength": "19.2", "cardinality": "1..1", "mandatory": true, "xPath": "/TransactionsReport/Invoice/TaxSubTotal/TaxAmount", "btEquivalent": "BT-117", "rules": ["G1.14","G1.53","G6.08"], "subFlows": ["10.1"] },
+                { "id": "TT-56", "name": "Code type TVA", "type": "CODE", "maxLength": 2, "cardinality": "0..1", "mandatory": false, "xPath": "/TransactionsReport/Invoice/TaxSubTotal/TaxCategory/Code", "btEquivalent": "BT-118", "rules": ["G2.31","G6.07"], "codeList": ["S","E","AE","K","G","O","Z"], "subFlows": ["10.1"] },
+                { "id": "TT-57", "name": "Taux TVA", "type": "POURCENTAGE", "maxLength": "3.2", "cardinality": "0..1", "mandatory": false, "xPath": "/TransactionsReport/Invoice/TaxSubTotal/TaxCategory/Percent", "btEquivalent": "BT-119", "example": "20", "rules": ["G1.24"], "subFlows": ["10.1"] }
+              ]
+            },
+            {
+              "id": "TG-24", "name": "Ligne de facture", "btEquivalent": "BG-25",
+              "xPath": "/TransactionsReport/Invoice/Line", "cardinality": "1..n", "subFlows": ["10.1"],
+              "fields": [
+                { "id": "TT-60", "name": "Id ligne", "type": "IDENTIFIANT", "maxLength": 10, "cardinality": "1..1", "mandatory": true, "xPath": "/TransactionsReport/Invoice/Line/ID", "btEquivalent": "BT-126", "example": "1", "subFlows": ["10.1"] },
+                { "id": "TT-61", "name": "Quantité", "type": "QUANTITE", "maxLength": "19.4", "cardinality": "0..1", "mandatory": false, "xPath": "/TransactionsReport/Invoice/Line/Quantity", "btEquivalent": "BT-129", "subFlows": ["10.1"] },
+                { "id": "TT-62", "name": "Unité mesure", "type": "CODE", "maxLength": 3, "cardinality": "0..1", "mandatory": false, "xPath": "/TransactionsReport/Invoice/Line/QuantityUnitCode", "btEquivalent": "BT-130", "subFlows": ["10.1"] },
+                { "id": "TT-63", "name": "Montant net ligne", "type": "MONTANT", "maxLength": "19.2", "cardinality": "1..1", "mandatory": true, "xPath": "/TransactionsReport/Invoice/Line/NetAmount", "btEquivalent": "BT-131", "example": "500.00", "rules": ["G1.14","G6.08"], "subFlows": ["10.1"] },
+                { "id": "TT-64", "name": "Prix unitaire net", "type": "MONTANT", "maxLength": "19.4", "cardinality": "0..1", "mandatory": false, "xPath": "/TransactionsReport/Invoice/Line/Price/Amount", "btEquivalent": "BT-146", "rules": ["G1.14","G6.07"], "subFlows": ["10.1"] }
+              ],
+              "groups": [
+                { "id": "TG-26", "name": "Remise ligne", "btEquivalent": "BG-27", "xPath": "/TransactionsReport/Invoice/Line/AllowanceCharge[remise]", "cardinality": "0..n", "subFlows": ["10.1"], "fields": [
+                  { "id": "TT-65", "name": "Montant remise", "type": "MONTANT", "maxLength": "19.2", "cardinality": "1..1", "mandatory": true, "xPath": "…/Line/AllowanceCharge/Amount", "btEquivalent": "BT-136", "rules": ["G1.14","G6.07"], "subFlows": ["10.1"] }
+                ]},
+                { "id": "TG-27", "name": "Charge ligne", "btEquivalent": "BG-28", "xPath": "/TransactionsReport/Invoice/Line/AllowanceCharge[charge]", "cardinality": "0..n", "subFlows": ["10.1"], "fields": [
+                  { "id": "TT-66", "name": "Montant charge", "type": "MONTANT", "maxLength": "19.2", "cardinality": "1..1", "mandatory": true, "xPath": "…/Line/AllowanceCharge/Amount", "btEquivalent": "BT-141", "rules": ["G1.14","G6.07"], "subFlows": ["10.1"] }
+                ]},
+                { "id": "TG-28", "name": "TVA ligne", "btEquivalent": "BG-30", "xPath": "/TransactionsReport/Invoice/Line/TaxCategory", "cardinality": "0..1", "subFlows": ["10.1"], "fields": [
+                  { "id": "TT-67", "name": "Code TVA ligne", "type": "CODE", "maxLength": 2, "cardinality": "0..1", "mandatory": false, "xPath": "…/Line/TaxCategory/Code", "btEquivalent": "BT-151", "rules": ["G2.31"], "codeList": ["S","E","AE","K","G","O","Z"], "subFlows": ["10.1"] },
+                  { "id": "TT-68", "name": "Taux TVA ligne", "type": "POURCENTAGE", "maxLength": "3.2", "cardinality": "0..1", "mandatory": false, "xPath": "…/Line/TaxCategory/Percent", "btEquivalent": "BT-152", "example": "20", "rules": ["G1.24"], "subFlows": ["10.1"] }
+                ]},
+                { "id": "TG-30", "name": "Article", "btEquivalent": "BG-31", "xPath": "/TransactionsReport/Invoice/Line/Product", "cardinality": "0..1", "subFlows": ["10.1"], "fields": [
+                  { "id": "TT-76", "name": "Nom article", "type": "TEXTE", "maxLength": 255, "cardinality": "1..1", "mandatory": true, "xPath": "…/Line/Product/Name", "btEquivalent": "BT-153", "rules": ["G6.07"], "subFlows": ["10.1"] }
+                ]},
+                { "id": "TG-29", "name": "Réf. facture antérieure en ligne", "btEquivalent": "EXT-FR-FE-BG-06", "xPath": "/TransactionsReport/Invoice/Line/ReferencedDocument", "cardinality": "0..1", "subFlows": ["10.1"], "fields": [
+                  { "id": "TT-300", "name": "ID facture antérieure (ligne)", "type": "REFERENCE DU DOCUMENT", "maxLength": 35, "cardinality": "0..1", "mandatory": false, "xPath": "…/Line/ReferencedDocument/ID", "btEquivalent": "EXT-FR-FE-024", "rules": ["G1.32","G6.07"], "subFlows": ["10.1"] },
+                  { "id": "TT-301", "name": "Date facture antérieure (ligne)", "type": "TEXTE", "maxLength": 8, "cardinality": "0..1", "mandatory": false, "xPath": "…/Line/ReferencedDocument/IssueDate", "btEquivalent": "EXT-FR-FE-025", "rules": ["G1.09","G1.32"], "subFlows": ["10.1"] }
+                ]},
+                { "id": "TG-41", "name": "Adresse livraison ligne", "btEquivalent": "EXT-FR-FE-BG-10", "xPath": "/TransactionsReport/Invoice/Line/Delivery", "cardinality": "0..1", "subFlows": ["10.1"], "rules": ["G6.30"], "fields": [
+                  { "id": "TT-302", "name": "Nom lieu livraison (ligne)", "type": "TEXTE", "maxLength": 100, "cardinality": "0..1", "mandatory": false, "xPath": "…/Line/Delivery/Name", "subFlows": ["10.1"] },
+                  { "id": "TT-305", "name": "Code postal livraison (ligne)", "type": "TEXTE", "maxLength": 10, "cardinality": "0..1", "mandatory": false, "xPath": "…/Line/Delivery/PostalCode", "subFlows": ["10.1"] }
+                ]}
+              ]
+            }
+          ]
+        },
+        {
+          "id": "TG-31", "name": "Transactions agrégées (10.3)",
+          "xPath": "/TransactionsReport/Transactions", "cardinality": "0..n", "subFlows": ["10.3"],
+          "fields": [
+            { "id": "TT-78", "name": "Code devise", "type": "CODE", "maxLength": 3, "cardinality": "1..1", "mandatory": true, "xPath": "/TransactionsReport/Transactions/CurrencyCode", "btEquivalent": null, "example": "EUR", "rules": ["G1.16","G6.08"], "subFlows": ["10.3"] },
+            { "id": "TT-81", "name": "Catégorie transactions", "description": "TLB1=Biens TVA, TPS1=Services TVA, TNT1=Non soumis TVA FR, TMA1=Marge.", "type": "CODE", "maxLength": 10, "cardinality": "1..1", "mandatory": true, "xPath": "/TransactionsReport/Transactions/CategoryCode", "btEquivalent": null, "example": "TLB1", "rules": ["G1.68"], "codeList": ["TLB1","TPS1","TNT1","TMA1"], "subFlows": ["10.3"] },
+            { "id": "TT-82", "name": "Montant total HT", "type": "MONTANT", "maxLength": "19.2", "cardinality": "1..1", "mandatory": true, "xPath": "/TransactionsReport/Transactions/TaxExclusiveAmount", "btEquivalent": null, "example": "15000.00", "rules": ["G1.14","G1.53","G6.08"], "tips": "somme(TT-87)=TT-82", "subFlows": ["10.3"] },
+            { "id": "TT-83", "name": "Montant total TVA", "type": "MONTANT", "maxLength": "19.2", "cardinality": "1..1", "mandatory": true, "xPath": "/TransactionsReport/Transactions/TaxAmount", "btEquivalent": null, "example": "3000.00", "rules": ["G1.14","G1.53","G6.23"], "tips": "Toujours EUR", "subFlows": ["10.3"] },
+            { "id": "TT-85", "name": "Nombre transactions", "type": "NOMBRE", "maxLength": 9, "cardinality": "0..1", "mandatory": false, "xPath": "/TransactionsReport/Transactions/TransactionsCount", "btEquivalent": null, "example": "150", "subFlows": ["10.3"] }
+          ],
+          "groups": [
+            { "id": "TG-32", "name": "Répartition TVA agrégée", "xPath": "/TransactionsReport/Transactions/TaxSubtotal", "cardinality": "1..n", "subFlows": ["10.3"], "fields": [
+              { "id": "TT-86", "name": "Taux TVA", "type": "POURCENTAGE", "maxLength": "3.2", "cardinality": "1..1", "mandatory": true, "xPath": "…/TaxSubtotal/TaxPercent", "btEquivalent": null, "example": "20", "rules": ["G1.24"], "subFlows": ["10.3"] },
+              { "id": "TT-87", "name": "Base imposition", "type": "MONTANT", "maxLength": "19.2", "cardinality": "1..1", "mandatory": true, "xPath": "…/TaxSubtotal/TaxableAmount", "btEquivalent": null, "rules": ["G1.14","G1.53","G1.57"], "subFlows": ["10.3"] },
+              { "id": "TT-88", "name": "Montant TVA", "type": "MONTANT", "maxLength": "19.2", "cardinality": "1..1", "mandatory": true, "xPath": "…/TaxSubtotal/TaxTotal", "btEquivalent": null, "rules": ["G1.14","G1.53"], "subFlows": ["10.3"] }
+            ]}
+          ]
+        }
+      ]
+    }
+  ]
+}

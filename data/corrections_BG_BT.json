@@ -1,0 +1,847 @@
+{
+  "blockDescriptions": {
+    "BG-6": "Coordonnées de contact du vendeur : nom du point de contact, numéro de téléphone et adresse email pour joindre le fournisseur.",
+    "BG-8": "Adresse postale de l'acheteur, utilisée pour identifier le pays de taxation. Obligatoire sur toute facture (BR-10).",
+    "BG-9": "Coordonnées de contact de l'acheteur : nom du point de contact, numéro de téléphone et adresse email côté client.",
+    "BG-13": "Informations relatives à la livraison des biens ou à la réalisation de la prestation : nom du destinataire, date de livraison, identifiant et adresse du lieu de livraison.",
+    "BG-14": "Période de facturation couverte par la facture au niveau document. Utilisée notamment pour les factures de services récurrents ou abonnements.",
+    "BG-15": "Adresse postale du lieu de livraison des biens, si différente de l'adresse de l'acheteur. Obligatoire pour les livraisons de biens à partir du 01/09/2027 (BR-FR-MAP-10).",
+    "BG-16": "Instructions de paiement de la facture : type de moyen de paiement, texte descriptif, identifiant de remise et référence au sous-bloc correspondant (virement, carte ou prélèvement).",
+    "BG-17": "Informations de virement bancaire (credit transfer) : identifiant du compte de paiement (IBAN), nom du titulaire et code BIC de l'établissement financier.",
+    "BG-18": "Informations de paiement par carte : numéro de carte principal (masqué) et nom du titulaire de la carte.",
+    "BG-19": "Informations de prélèvement automatique (direct debit) : référence du mandat, identifiant bancaire du débiteur et identifiant du créancier SEPA.",
+    "BG-20": "Remise (allowance) appliquée au niveau du document entier, avec montant, base, taux, code TVA associé et motif de la remise.",
+    "BG-21": "Charges ou frais supplémentaires (charge) appliqués au niveau du document entier (ex : frais de port, emballage), avec montant, base, taux, code TVA et motif.",
+    "BG-22": "Totaux monétaires de la facture : somme des lignes, total des remises, total des charges, montant HT, montant TVA, montant TTC, acomptes versés, montant à payer et arrondi.",
+    "BG-24": "Documents justificatifs additionnels rattachés à la facture : référence, description, URL externe ou contenu binaire embarqué en base64.",
+    "BG-26": "Période de facturation spécifique à une ligne de facture. Permet d'indiquer la période de service ou de livraison couverte par cette ligne en particulier.",
+    "BG-27": "Remise (allowance) appliquée à une ligne de facture spécifique, avec montant, base de calcul, pourcentage et motif.",
+    "BG-28": "Charges ou frais supplémentaires appliqués à une ligne de facture spécifique (ex : frais de manutention ligne), avec montant, base, pourcentage et motif.",
+    "BG-29": "Détails du prix unitaire de l'article : prix brut, remise sur prix, prix net, quantité de base du prix et code d'unité de mesure.",
+    "BG-30": "Informations descriptives de l'article facturé : nom, description, identifiants (vendeur, acheteur, standard), pays d'origine, classifiants et attributs.",
+    "BG-31": "Informations TVA applicables à l'article facturé sur la ligne : code de catégorie TVA et taux de TVA de l'article.",
+    "BG-32": "Attributs supplémentaires de l'article sous forme de paires nom/valeur, permettant de transmettre des caractéristiques métier spécifiques (ex : couleur, taille, lot).",
+    "EXT-FR-FE-BG-02": "Extensions françaises spécifiques au profil EXTENDED-CTC-FR : informations complémentaires propres à la réforme française (type de contrat/marché, sous-type de facture, références antérieures). Ces champs n'existent pas dans la norme EN 16931 de base.",
+    "EXT-FR-FE-BG-10": "Adresse de livraison au niveau de la ligne de facture. Extension française permettant d'indiquer un lieu de livraison différent pour chaque ligne (livraisons multi-sites). Requise quand les marchandises sont livrées à des adresses différentes sur une même facture.",
+    "EXT-FR-FE-BG-12": "Sous-lignes et multi-vendeurs : extensions françaises pour gérer les factures impliquant plusieurs vendeurs (centrales d'achat, marketplaces) et les hiérarchies de lignes (sous-lignes). Permet de rattacher chaque ligne à un vendeur tiers avec son propre SIREN, N° TVA et totaux."
+  },
+  "fieldDescriptions": {
+    "BT-41": {
+      "description": "Nom ou désignation du point de contact chez le vendeur (ex : service facturation, nom d'un interlocuteur).",
+      "maxLength": 256,
+      "example": "Service Comptabilité Fournisseurs",
+      "tips": "Utile pour identifier le service à contacter en cas de litige sur la facture."
+    },
+    "BT-42": {
+      "description": "Numéro de téléphone du point de contact du vendeur.",
+      "maxLength": 30,
+      "example": "+33 1 23 45 67 89",
+      "formatDetail": "Format international recommandé : +[indicatif] [numéro]"
+    },
+    "BT-43": {
+      "description": "Adresse email du point de contact du vendeur.",
+      "maxLength": 256,
+      "example": "facturation@fournisseur.fr",
+      "formatDetail": "Adresse email valide (RFC 5322)"
+    },
+    "BT-50": {
+      "description": "Première ligne de l'adresse postale de l'acheteur (numéro et nom de rue).",
+      "maxLength": 150,
+      "example": "12 rue de la Paix"
+    },
+    "BT-51": {
+      "description": "Deuxième ligne de l'adresse postale de l'acheteur (complément d'adresse : bâtiment, étage, etc.).",
+      "maxLength": 150,
+      "example": "Bâtiment B, 3ème étage"
+    },
+    "BT-52": {
+      "description": "Troisième ligne de l'adresse postale de l'acheteur (complément supplémentaire).",
+      "maxLength": 150,
+      "example": "Zone industrielle Nord"
+    },
+    "BT-53": {
+      "description": "Code postal de l'adresse de l'acheteur.",
+      "maxLength": 10,
+      "example": "75002",
+      "formatDetail": "Code postal selon le pays (5 chiffres pour la France)"
+    },
+    "BT-54": {
+      "description": "Ville ou localité de l'adresse de l'acheteur.",
+      "maxLength": 75,
+      "example": "Paris"
+    },
+    "BT-55": {
+      "description": "Code du pays de l'acheteur. Obligatoire dans BG-8 (BR-11).",
+      "formatDetail": "ISO 3166-1 alpha-2",
+      "example": "FR",
+      "values": {
+        "FR": "France",
+        "DE": "Allemagne",
+        "BE": "Belgique",
+        "ES": "Espagne",
+        "IT": "Italie",
+        "LU": "Luxembourg",
+        "NL": "Pays-Bas",
+        "PT": "Portugal",
+        "CH": "Suisse",
+        "GB": "Royaume-Uni",
+        "US": "États-Unis"
+      },
+      "tips": "Détermine le régime de TVA applicable. Valeur obligatoire (BR-11)."
+    },
+    "BT-163": {
+      "description": "Subdivision du pays de l'acheteur (région, département, canton selon le pays).",
+      "maxLength": 75,
+      "example": "Île-de-France",
+      "tips": "Utilisé principalement hors France. En France, rarement renseigné."
+    },
+    "BT-56": {
+      "description": "Nom ou désignation du point de contact chez l'acheteur.",
+      "maxLength": 256,
+      "example": "Service Achats"
+    },
+    "BT-57": {
+      "description": "Numéro de téléphone du point de contact de l'acheteur.",
+      "maxLength": 30,
+      "example": "+33 4 56 78 90 12",
+      "formatDetail": "Format international recommandé : +[indicatif] [numéro]"
+    },
+    "BT-58": {
+      "description": "Adresse email du point de contact de l'acheteur.",
+      "maxLength": 256,
+      "example": "achats@client.fr",
+      "formatDetail": "Adresse email valide (RFC 5322)"
+    },
+    "BT-70": {
+      "description": "Nom commercial ou raison sociale de la partie à qui les biens sont livrés, si différente de l'acheteur.",
+      "maxLength": 256,
+      "example": "Entrepôt Logistique Est"
+    },
+    "BT-71": {
+      "description": "Identifiant du lieu de livraison (ex : GLN, identifiant de site) pour le routage ou la localisation.",
+      "maxLength": 150,
+      "example": "5412345678908",
+      "tips": "Souvent un GLN (Global Location Number) ou un identifiant de site interne."
+    },
+    "BT-71-1": {
+      "description": "Identifiant du schéma de l'identifiant du lieu de livraison (BT-71).",
+      "formatDetail": "Code ISO 6523 (ICD)",
+      "example": "0088",
+      "tips": "0088 = GLN (EAN). Obligatoire si BT-71 est renseigné."
+    },
+    "BT-72": {
+      "description": "Date effective de la livraison des biens ou de la réalisation de la prestation de service.",
+      "formatDetail": "YYYY-MM-DD",
+      "example": "2026-03-15",
+      "tips": "Si BG-14 est utilisé, BT-72 devient optionnel. Sinon, fortement recommandé pour la TVA."
+    },
+    "BT-75": {
+      "description": "Première ligne de l'adresse de livraison (numéro et nom de rue).",
+      "maxLength": 150,
+      "example": "45 avenue des Champs"
+    },
+    "BT-76": {
+      "description": "Deuxième ligne de l'adresse de livraison (complément d'adresse).",
+      "maxLength": 150,
+      "example": "Bâtiment C"
+    },
+    "BT-165": {
+      "description": "Troisième ligne de l'adresse de livraison (complément supplémentaire).",
+      "maxLength": 150,
+      "example": "Quai 7"
+    },
+    "BT-77": {
+      "description": "Ville ou localité de l'adresse de livraison.",
+      "maxLength": 75,
+      "example": "Lyon"
+    },
+    "BT-78": {
+      "description": "Code postal de l'adresse de livraison.",
+      "maxLength": 10,
+      "example": "69003",
+      "formatDetail": "Code postal selon le pays (5 chiffres pour la France)"
+    },
+    "BT-79": {
+      "description": "Subdivision du pays de livraison (région, département).",
+      "maxLength": 75,
+      "example": "Auvergne-Rhône-Alpes"
+    },
+    "BT-80": {
+      "description": "Code du pays de livraison.",
+      "formatDetail": "ISO 3166-1 alpha-2",
+      "example": "FR",
+      "values": {
+        "FR": "France",
+        "DE": "Allemagne",
+        "BE": "Belgique",
+        "ES": "Espagne",
+        "IT": "Italie",
+        "LU": "Luxembourg",
+        "NL": "Pays-Bas",
+        "PT": "Portugal",
+        "CH": "Suisse",
+        "GB": "Royaume-Uni"
+      },
+      "tips": "Déclenche le renseignement obligatoire de BG-15 si présent (BR-FR-MAP-10)."
+    },
+    "BT-73": {
+      "description": "Date de début de la période de facturation couverte par la facture au niveau document.",
+      "formatDetail": "YYYY-MM-DD",
+      "example": "2026-03-01",
+      "tips": "Si BG-14 est utilisé, au moins BT-73 ou BT-74 doit être renseigné (BR-CO-19)."
+    },
+    "BT-74": {
+      "description": "Date de fin de la période de facturation couverte par la facture au niveau document.",
+      "formatDetail": "YYYY-MM-DD",
+      "example": "2026-03-31",
+      "tips": "Doit être postérieure ou égale à BT-73 si les deux sont présents (BR-29)."
+    },
+    "BT-81": {
+      "description": "Code identifiant le type de moyen de paiement attendu. Obligatoire dans BG-16 (BR-49).",
+      "formatDetail": "Code UNTDID 4461",
+      "example": "30",
+      "values": {
+        "10": "Espèces",
+        "20": "Chèque",
+        "30": "Virement",
+        "31": "Virement SEPA",
+        "42": "Paiement sur compte bancaire",
+        "48": "Carte de paiement",
+        "49": "Prélèvement",
+        "54": "Carte de crédit",
+        "55": "Carte de débit",
+        "57": "Compensation",
+        "58": "Prélèvement SEPA",
+        "59": "Prélèvement SEPA B2B",
+        "97": "Clearing entre partenaires",
+        "ZZZ": "Autre moyen convenu"
+      },
+      "tips": "Le code détermine quel sous-bloc remplir : 30/31 → BG-17, 48/54/55 → BG-18, 49/58/59 → BG-19."
+    },
+    "BT-82": {
+      "description": "Texte libre décrivant le moyen de paiement (ex : nom de la banque, précisions).",
+      "maxLength": 256,
+      "example": "Virement SEPA 30 jours"
+    },
+    "BT-83": {
+      "description": "Référence de remise de paiement : identifiant à rappeler lors du règlement pour le rapprochement comptable.",
+      "maxLength": 256,
+      "example": "RF18539007547034",
+      "tips": "Permet au destinataire d'identifier la facture lors du paiement. Peut être un numéro structuré ISO 11649."
+    },
+    "BT-84": {
+      "description": "Identifiant du compte de paiement du vendeur (typiquement un IBAN). Obligatoire si BG-17 est présent (BR-50).",
+      "maxLength": 34,
+      "example": "FR7630006000011234567890189",
+      "formatDetail": "IBAN (ISO 13616) ou autre identifiant de compte",
+      "tips": "Pour les virements SEPA, c'est l'IBAN du bénéficiaire."
+    },
+    "BT-85": {
+      "description": "Nom du titulaire du compte de paiement (nom affiché sur le RIB du vendeur).",
+      "maxLength": 256,
+      "example": "SARL Fournisseur France"
+    },
+    "BT-86": {
+      "description": "Code BIC (Bank Identifier Code) de l'établissement financier du vendeur.",
+      "maxLength": 11,
+      "example": "BNPAFRPPXXX",
+      "formatDetail": "BIC/SWIFT (8 ou 11 caractères, ISO 9362)",
+      "tips": "Obligatoire pour les virements internationaux non-SEPA. Optionnel pour les virements SEPA intra-zone."
+    },
+    "BT-87": {
+      "description": "Numéro de carte de paiement principal (PAN), généralement masqué pour des raisons de sécurité.",
+      "maxLength": 19,
+      "example": "1234 XXXX XXXX 5678",
+      "formatDetail": "PAN masqué (4 premiers et 4 derniers chiffres uniquement)",
+      "tips": "Ne jamais transmettre le PAN complet. Seuls les 4 premiers et derniers chiffres sont autorisés."
+    },
+    "BT-88": {
+      "description": "Nom du titulaire de la carte de paiement tel qu'il apparaît sur la carte.",
+      "maxLength": 256,
+      "example": "Jean DUPONT"
+    },
+    "BT-89": {
+      "description": "Référence unique du mandat de prélèvement SEPA signé par l'acheteur.",
+      "maxLength": 35,
+      "example": "MANDATE-2026-001234",
+      "formatDetail": "Identifiant unique du mandat (max 35 car. alphanumériques)",
+      "tips": "Obligatoire pour les prélèvements SEPA (BT-81 = 49, 58 ou 59)."
+    },
+    "BT-90": {
+      "description": "Identifiant du compte bancaire du débiteur (acheteur) à prélever.",
+      "maxLength": 34,
+      "example": "FR7612345000010987654321098",
+      "formatDetail": "IBAN (ISO 13616)",
+      "tips": "IBAN du compte de l'acheteur qui sera débité."
+    },
+    "BT-91": {
+      "description": "Identifiant du créancier SEPA (vendeur), attribué par la banque pour identifier l'émetteur des prélèvements.",
+      "maxLength": 35,
+      "example": "FR72ZZZ123456",
+      "formatDetail": "ICS - Identifiant Créancier SEPA",
+      "tips": "Attribué par la Banque de France. Obligatoire pour les prélèvements SEPA."
+    },
+    "BT-92": {
+      "description": "Montant de la remise au niveau du document (hors TVA). Obligatoire dans BG-20 (BR-31).",
+      "formatDetail": "Décimal avec 2 décimales",
+      "example": "100.00",
+      "tips": "Doit être positif. Vient en déduction du total HT."
+    },
+    "BT-93": {
+      "description": "Montant de base sur lequel la remise au niveau du document est calculée.",
+      "formatDetail": "Décimal avec 2 décimales",
+      "example": "1000.00",
+      "tips": "Si présent avec BT-94, alors BT-92 = BT-93 × BT-94 / 100 (BR-CO-15)."
+    },
+    "BT-94": {
+      "description": "Pourcentage de remise appliqué au montant de base (BT-93) pour calculer la remise document.",
+      "formatDetail": "Décimal (pourcentage, ex : 10 pour 10%)",
+      "example": "10"
+    },
+    "BT-95": {
+      "description": "Code de catégorie de TVA applicable à la remise au niveau du document. Obligatoire dans BG-20 (BR-32).",
+      "formatDetail": "Code UNTDID 5305 (subset EN16931)",
+      "example": "S",
+      "values": {
+        "S": "Taux normal (Standard)",
+        "Z": "Taux zéro",
+        "E": "Exonéré",
+        "AE": "Autoliquidation (Reverse charge)",
+        "K": "Livraison intracommunautaire",
+        "G": "Exportation hors UE",
+        "O": "Hors champ TVA",
+        "L": "Taxe IGIC (Canaries)",
+        "M": "Taxe IPSI (Ceuta/Melilla)"
+      }
+    },
+    "BT-96": {
+      "description": "Taux de TVA applicable à la remise au niveau du document, exprimé en pourcentage.",
+      "formatDetail": "Décimal (pourcentage, ex : 20.00 pour 20%)",
+      "example": "20.00"
+    },
+    "BT-97": {
+      "description": "Motif en texte libre de la remise au niveau du document. Au moins BT-97 ou BT-98 obligatoire (BR-33).",
+      "maxLength": 256,
+      "example": "Remise fidélité annuelle"
+    },
+    "BT-98": {
+      "description": "Code normalisé du motif de la remise au niveau du document (codelist UNTDID 5189).",
+      "formatDetail": "Code UNTDID 5189",
+      "example": "95",
+      "values": {
+        "41": "Remise de volume",
+        "42": "Remise spéciale accord",
+        "60": "Remise fabricant",
+        "62": "Remise intermédiaire",
+        "63": "Remise de fin d'année",
+        "64": "Remise de production",
+        "65": "Remise spéciale",
+        "66": "Remise de solde",
+        "67": "Remise pour paiement comptant",
+        "68": "Remise de rappel de commande",
+        "70": "Remise de retour",
+        "71": "Remise spéciale acheteur/vendeur",
+        "88": "Remise liée à un défaut",
+        "95": "Remise",
+        "100": "Escompte pour paiement anticipé",
+        "102": "Pénalité fixe",
+        "103": "Pénalité en pourcentage",
+        "104": "Remise intérimaire"
+      },
+      "tips": "Doit être cohérent avec BT-97 si les deux sont présents (BR-CO-05)."
+    },
+    "BT-99": {
+      "description": "Montant de la charge ou des frais au niveau du document (hors TVA). Obligatoire dans BG-21 (BR-36).",
+      "formatDetail": "Décimal avec 2 décimales",
+      "example": "25.00",
+      "tips": "Doit être positif. Vient en augmentation du total HT."
+    },
+    "BT-100": {
+      "description": "Montant de base sur lequel la charge au niveau du document est calculée.",
+      "formatDetail": "Décimal avec 2 décimales",
+      "example": "500.00"
+    },
+    "BT-101": {
+      "description": "Pourcentage de la charge appliqué au montant de base (BT-100).",
+      "formatDetail": "Décimal (pourcentage)",
+      "example": "5"
+    },
+    "BT-102": {
+      "description": "Code de catégorie de TVA applicable à la charge au niveau du document. Obligatoire dans BG-21 (BR-37).",
+      "formatDetail": "Code UNTDID 5305 (subset EN16931)",
+      "example": "S",
+      "values": {
+        "S": "Taux normal",
+        "Z": "Taux zéro",
+        "E": "Exonéré",
+        "AE": "Autoliquidation",
+        "K": "Intracommunautaire",
+        "G": "Export hors UE",
+        "O": "Hors champ TVA"
+      }
+    },
+    "BT-103": {
+      "description": "Taux de TVA applicable à la charge au niveau du document, exprimé en pourcentage.",
+      "formatDetail": "Décimal (pourcentage)",
+      "example": "20.00"
+    },
+    "BT-104": {
+      "description": "Motif en texte libre de la charge au niveau du document. Au moins BT-104 ou BT-105 obligatoire (BR-CO-22).",
+      "maxLength": 256,
+      "example": "Frais de livraison express"
+    },
+    "BT-105": {
+      "description": "Code normalisé du motif de la charge au niveau du document (codelist UNTDID 7161).",
+      "formatDetail": "Code UNTDID 7161",
+      "example": "FC",
+      "values": {
+        "AA": "Publicité",
+        "AAA": "Télécommunications",
+        "ABK": "Divers",
+        "ABL": "Emballage supplémentaire",
+        "ADR": "Autre service",
+        "ADT": "Ramassage",
+        "FC": "Frais de transport",
+        "FI": "Financement",
+        "LA": "Frais de main-d'œuvre",
+        "PC": "Emballage",
+        "AEO": "Eco-contribution"
+      },
+      "tips": "Doit être cohérent avec BT-104 si les deux sont présents (BR-CO-06)."
+    },
+    "BT-106": {
+      "description": "Somme des montants nets de toutes les lignes de facture (avant remises/charges document). Obligatoire (BR-12).",
+      "formatDetail": "Décimal avec 2 décimales",
+      "example": "10000.00",
+      "tips": "BT-106 = Σ BT-131 de toutes les lignes (BR-CO-10)."
+    },
+    "BT-107": {
+      "description": "Somme de toutes les remises au niveau du document (Σ BT-92).",
+      "formatDetail": "Décimal avec 2 décimales",
+      "example": "100.00",
+      "tips": "BT-107 = Σ BT-92 (BR-CO-11). Vaut 0 si aucune remise document."
+    },
+    "BT-108": {
+      "description": "Somme de toutes les charges et frais au niveau du document (Σ BT-99).",
+      "formatDetail": "Décimal avec 2 décimales",
+      "example": "25.00",
+      "tips": "BT-108 = Σ BT-99 (BR-CO-12). Vaut 0 si aucune charge document."
+    },
+    "BT-109": {
+      "description": "Montant total hors taxes de la facture. Obligatoire (BR-13).",
+      "formatDetail": "Décimal avec 2 décimales",
+      "example": "9925.00",
+      "tips": "BT-109 = BT-106 − BT-107 + BT-108 (BR-CO-13)."
+    },
+    "BT-110": {
+      "description": "Montant total de la TVA de la facture (somme de toutes les ventilations). Obligatoire (BR-14).",
+      "formatDetail": "Décimal avec 2 décimales",
+      "example": "1985.00",
+      "tips": "BT-110 = Σ BT-117 de toutes les ventilations TVA BG-23 (BR-CO-14)."
+    },
+    "BT-111": {
+      "description": "Montant total de la TVA dans la devise de comptabilisation (si différente de la devise de facturation BT-5).",
+      "formatDetail": "Décimal avec 2 décimales",
+      "example": "1985.00",
+      "tips": "À renseigner uniquement si BT-6 (devise comptabilisation TVA) est présent et différent de BT-5."
+    },
+    "BT-112": {
+      "description": "Montant total TTC de la facture (HT + TVA). Obligatoire (BR-15).",
+      "formatDetail": "Décimal avec 2 décimales",
+      "example": "11910.00",
+      "tips": "BT-112 = BT-109 + BT-110 (BR-CO-15)."
+    },
+    "BT-113": {
+      "description": "Montant total déjà payé (acomptes, paiements antérieurs à déduire du montant à payer).",
+      "formatDetail": "Décimal avec 2 décimales",
+      "example": "1000.00",
+      "tips": "Inclut les acomptes. Si aucun acompte, ne pas renseigner ou mettre 0."
+    },
+    "BT-114": {
+      "description": "Montant d'arrondi appliqué au montant à payer pour obtenir un montant rond.",
+      "formatDetail": "Décimal avec 2 décimales",
+      "example": "0.10",
+      "tips": "Rarement utilisé. Permet d'ajuster BT-115 si besoin (BR-CO-16)."
+    },
+    "BT-115": {
+      "description": "Montant à payer : solde dû par l'acheteur. Obligatoire (BR-16).",
+      "formatDetail": "Décimal avec 2 décimales",
+      "example": "10910.10",
+      "tips": "BT-115 = BT-112 − BT-113 + BT-114 (BR-CO-16). Peut être négatif (trop-perçu)."
+    },
+    "BT-122": {
+      "description": "Référence d'un document justificatif additionnel rattaché à la facture (ex : numéro de BL, contrat).",
+      "maxLength": 256,
+      "example": "ATT-2026-001",
+      "tips": "Identifiant unique permettant de retrouver le document justificatif."
+    },
+    "BT-123": {
+      "description": "Description textuelle du document justificatif joint ou référencé.",
+      "maxLength": 256,
+      "example": "Bon de livraison signé"
+    },
+    "BT-124": {
+      "description": "URL (lien externe) permettant d'accéder au document justificatif en ligne.",
+      "maxLength": 2048,
+      "example": "https://docs.fournisseur.fr/BL-2026-001.pdf",
+      "formatDetail": "URL (http:// ou https://)",
+      "tips": "Privilégier HTTPS. Le lien doit être accessible au destinataire."
+    },
+    "BT-125": {
+      "description": "Contenu binaire du document justificatif, encodé en base64, embarqué directement dans la facture.",
+      "formatDetail": "Base64 (MIME type défini par BT-125-1)",
+      "tips": "Taille max recommandée : 100 Ko. Les formats courants sont PDF, PNG, JPEG, CSV. Le type MIME est indiqué dans l'attribut mimeCode.",
+      "example": "JVBERi0xLjQKJeLjz9MK..."
+    },
+    "BT-125-1": {
+      "description": "Type MIME du document justificatif embarqué en base64 (BT-125).",
+      "formatDetail": "Type MIME (RFC 2046)",
+      "example": "application/pdf",
+      "values": {
+        "application/pdf": "Document PDF",
+        "image/png": "Image PNG",
+        "image/jpeg": "Image JPEG",
+        "text/csv": "Fichier CSV",
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": "Fichier Excel XLSX",
+        "application/vnd.oasis.opendocument.spreadsheet": "Fichier ODS"
+      }
+    },
+    "BT-125-2": {
+      "description": "Nom du fichier du document justificatif embarqué.",
+      "maxLength": 256,
+      "example": "bon_livraison_2026_001.pdf"
+    },
+    "BT-134": {
+      "description": "Date de début de la période de facturation pour cette ligne de facture.",
+      "formatDetail": "YYYY-MM-DD",
+      "example": "2026-03-01",
+      "tips": "Si BG-26 est utilisé, au moins BT-134 ou BT-135 doit être renseigné (BR-CO-20)."
+    },
+    "BT-135": {
+      "description": "Date de fin de la période de facturation pour cette ligne de facture.",
+      "formatDetail": "YYYY-MM-DD",
+      "example": "2026-03-31",
+      "tips": "Doit être postérieure ou égale à BT-134 si les deux sont présents (BR-30)."
+    },
+    "BT-136": {
+      "description": "Montant de la remise appliquée à la ligne de facture (hors TVA). Obligatoire dans BG-27 (BR-41).",
+      "formatDetail": "Décimal avec 2 décimales",
+      "example": "50.00"
+    },
+    "BT-137": {
+      "description": "Montant de base sur lequel la remise de ligne est calculée.",
+      "formatDetail": "Décimal avec 2 décimales",
+      "example": "500.00"
+    },
+    "BT-138": {
+      "description": "Pourcentage de remise appliqué sur le montant de base (BT-137) pour cette ligne.",
+      "formatDetail": "Décimal (pourcentage)",
+      "example": "10"
+    },
+    "BT-139": {
+      "description": "Motif en texte libre de la remise sur la ligne. Au moins BT-139 ou BT-140 obligatoire (BR-CO-23).",
+      "maxLength": 256,
+      "example": "Remise quantitative"
+    },
+    "BT-140": {
+      "description": "Code normalisé du motif de la remise de ligne (codelist UNTDID 5189).",
+      "formatDetail": "Code UNTDID 5189",
+      "example": "95",
+      "tips": "Mêmes codes que BT-98 (remise document). Doit être cohérent avec BT-139 (BR-CO-07)."
+    },
+    "BT-141": {
+      "description": "Montant de la charge ou des frais sur la ligne de facture (hors TVA). Obligatoire dans BG-28 (BR-43).",
+      "formatDetail": "Décimal avec 2 décimales",
+      "example": "15.00"
+    },
+    "BT-142": {
+      "description": "Montant de base sur lequel la charge de ligne est calculée.",
+      "formatDetail": "Décimal avec 2 décimales",
+      "example": "300.00"
+    },
+    "BT-143": {
+      "description": "Pourcentage de la charge appliqué au montant de base (BT-142) pour cette ligne.",
+      "formatDetail": "Décimal (pourcentage)",
+      "example": "5"
+    },
+    "BT-144": {
+      "description": "Motif en texte libre de la charge sur la ligne. Au moins BT-144 ou BT-145 obligatoire (BR-CO-24).",
+      "maxLength": 256,
+      "example": "Supplément manutention"
+    },
+    "BT-145": {
+      "description": "Code normalisé du motif de la charge de ligne (codelist UNTDID 7161).",
+      "formatDetail": "Code UNTDID 7161",
+      "example": "ABL",
+      "tips": "Mêmes codes que BT-105 (charge document). Doit être cohérent avec BT-144 (BR-CO-08)."
+    },
+    "BT-146": {
+      "description": "Prix net unitaire de l'article (après remise sur prix BT-147), base du calcul montant net ligne. Obligatoire (BR-26).",
+      "formatDetail": "Décimal avec jusqu'à 8 décimales",
+      "example": "24.50",
+      "tips": "BT-146 = BT-148 − BT-147 si les deux sont renseignés (BR-CO-18)."
+    },
+    "BT-147": {
+      "description": "Remise appliquée sur le prix brut de l'article (BT-148) pour obtenir le prix net (BT-146).",
+      "formatDetail": "Décimal avec jusqu'à 8 décimales",
+      "example": "5.50",
+      "tips": "Doit être inférieur ou égal à BT-148. Présent seulement si BT-148 est renseigné."
+    },
+    "BT-148": {
+      "description": "Prix brut unitaire de l'article, avant application de la remise sur prix (BT-147).",
+      "formatDetail": "Décimal avec jusqu'à 8 décimales",
+      "example": "30.00"
+    },
+    "BT-149": {
+      "description": "Quantité de base à laquelle se rapporte le prix unitaire (ex : prix pour 100 unités → valeur 100).",
+      "formatDetail": "Décimal",
+      "example": "1",
+      "tips": "Par défaut 1. Si le prix est indiqué pour 100 unités, mettre 100."
+    },
+    "BT-150": {
+      "description": "Code de l'unité de mesure applicable à la quantité de base du prix (BT-149).",
+      "formatDetail": "Code UN/ECE Rec. 20 ou 21",
+      "example": "C62",
+      "values": {
+        "C62": "Unité (pièce)",
+        "KGM": "Kilogramme",
+        "MTR": "Mètre",
+        "LTR": "Litre",
+        "MTK": "Mètre carré",
+        "MTQ": "Mètre cube",
+        "HUR": "Heure",
+        "DAY": "Jour",
+        "MON": "Mois",
+        "TNE": "Tonne métrique",
+        "SET": "Ensemble",
+        "XPK": "Colis"
+      },
+      "tips": "Doit correspondre au code unité utilisé en BT-130 (unité de la quantité facturée)."
+    },
+    "BT-153": {
+      "description": "Nom commercial de l'article facturé, tel qu'il est connu du vendeur et de l'acheteur. Obligatoire (BR-25).",
+      "maxLength": 256,
+      "example": "Cartouche d'encre noire XL"
+    },
+    "BT-154": {
+      "description": "Description détaillée de l'article, complétant le nom (caractéristiques, spécifications techniques).",
+      "maxLength": 1024,
+      "example": "Cartouche d'encre noire haute capacité, compatible imprimantes série HP LaserJet Pro 400"
+    },
+    "BT-155": {
+      "description": "Référence de l'article attribuée par le vendeur (code article fournisseur, SKU vendeur).",
+      "maxLength": 100,
+      "example": "ART-INK-BK-XL-2026"
+    },
+    "BT-156": {
+      "description": "Référence de l'article attribuée par l'acheteur (code article client, SKU acheteur).",
+      "maxLength": 100,
+      "example": "FOURN-4521-ENCRE",
+      "tips": "Facilite le rapprochement automatique côté acheteur."
+    },
+    "BT-157": {
+      "description": "Identifiant standard de l'article selon une codification reconnue (GTIN/EAN, ISBN...). Doit avoir un schéma (BR-64).",
+      "maxLength": 50,
+      "example": "3614271234567",
+      "formatDetail": "Identifiant + schéma ISO 6523 (ICD)",
+      "tips": "Utiliser le schéma 0160 pour les GTIN/EAN-13."
+    },
+    "BT-157-1": {
+      "description": "Identifiant du schéma de l'identifiant standard de l'article (BT-157).",
+      "formatDetail": "Code ISO 6523 (ICD)",
+      "example": "0160",
+      "values": {
+        "0160": "GTIN (EAN/UPC)",
+        "0021": "HIBC (Health Industry)",
+        "0088": "EAN Location Code",
+        "0113": "SIREN"
+      }
+    },
+    "BT-158": {
+      "description": "Identifiant de classification de l'article dans un référentiel produit (CPV, eCl@ss, UNSPSC). Doit avoir un schéma (BR-65).",
+      "maxLength": 50,
+      "example": "30192100-2",
+      "formatDetail": "Identifiant + schéma + version du schéma"
+    },
+    "BT-158-1": {
+      "description": "Identifiant du schéma de classification de l'article (BT-158).",
+      "formatDetail": "Code ISO 6523 (ICD) ou identifiant de liste",
+      "example": "STI",
+      "values": {
+        "STI": "CPV (Common Procurement Vocabulary)",
+        "TST": "eCl@ss",
+        "SRV": "UNSPSC",
+        "SMP": "GPC (GS1)"
+      }
+    },
+    "BT-158-2": {
+      "description": "Version du schéma de classification utilisé pour BT-158.",
+      "maxLength": 10,
+      "example": "2008"
+    },
+    "BT-159": {
+      "description": "Code du pays d'origine de l'article (fabrication ou provenance commerciale).",
+      "formatDetail": "ISO 3166-1 alpha-2",
+      "example": "CN",
+      "values": {
+        "FR": "France",
+        "DE": "Allemagne",
+        "CN": "Chine",
+        "US": "États-Unis",
+        "JP": "Japon",
+        "IT": "Italie",
+        "ES": "Espagne",
+        "GB": "Royaume-Uni"
+      },
+      "tips": "Utile pour les déclarations douanières et les règles de TVA spécifiques."
+    },
+    "BT-151": {
+      "description": "Code de catégorie de TVA applicable à l'article facturé sur cette ligne. Obligatoire (BR-CO-04).",
+      "formatDetail": "Code UNTDID 5305 (subset EN16931)",
+      "example": "S",
+      "values": {
+        "S": "Taux normal (Standard)",
+        "Z": "Taux zéro",
+        "E": "Exonéré",
+        "AE": "Autoliquidation (Reverse charge)",
+        "K": "Livraison intracommunautaire",
+        "G": "Exportation hors UE",
+        "O": "Hors champ TVA",
+        "L": "Taxe IGIC (Canaries)",
+        "M": "Taxe IPSI (Ceuta/Melilla)"
+      },
+      "tips": "Doit correspondre à une ventilation TVA (BG-23) existante dans la facture."
+    },
+    "BT-152": {
+      "description": "Taux de TVA applicable à l'article facturé sur cette ligne, exprimé en pourcentage.",
+      "formatDetail": "Décimal (pourcentage, ex : 20.00 pour 20%)",
+      "example": "20.00",
+      "tips": "Pour les codes E, AE, K, G, O, le taux doit être 0 (BR-E-5, BR-AE-5, etc.)."
+    },
+    "BT-160": {
+      "description": "Nom de l'attribut supplémentaire de l'article (clé de la paire nom/valeur). Obligatoire dans BG-32 (BR-54).",
+      "maxLength": 256,
+      "example": "Couleur",
+      "tips": "Permet de transmettre des caractéristiques produit non couvertes par les champs standard."
+    },
+    "BT-161": {
+      "description": "Valeur de l'attribut supplémentaire de l'article (valeur de la paire nom/valeur). Obligatoire dans BG-32 (BR-54).",
+      "maxLength": 256,
+      "example": "Noir"
+    },
+    "EXT-FR-FE-01": {
+      "description": "Type de contrat ou de marché public associé à la facture. Utilisé principalement dans le cadre B2G (Business to Government) pour rattacher la facture à un marché public ou un contrat cadre.",
+      "example": "MARCHE",
+      "tips": "Utilisé uniquement en B2G (factures vers le secteur public). En B2B, ce champ est ignoré.",
+      "legalRefs": ["CGI-289"]
+    },
+    "EXT-FR-FE-02": {
+      "description": "Sous-type de la facture, permettant de préciser la nature exacte du document au-delà du code type (BT-3). Exemples : facture de situation, décompte général, facture de solde.",
+      "example": "SITUATION",
+      "tips": "Complète le BT-3 (type document) avec une granularité plus fine propre au contexte français.",
+      "legalRefs": ["AFNOR-XP-Z12-012"]
+    },
+    "EXT-FR-FE-136": {
+      "description": "Numéro de la facture antérieure référencée au niveau de la ligne. Permet de rattacher une ligne à une facture d'origine (utile pour les avoirs partiels ou rectificatives ligne par ligne).",
+      "example": "FA-2026-00035",
+      "maxLength": 35,
+      "tips": "Tronqué à 20 caractères dans le flux 1 vers le PPF (même règle que BT-1).",
+      "legalRefs": ["AFNOR-XP-Z12-012"]
+    },
+    "EXT-FR-FE-146": {
+      "description": "Identifiant global du lieu de livraison au niveau de la ligne (GLN, identifiant interne ou code site). Permet d'identifier précisément le site de livraison pour chaque ligne.",
+      "example": "3012345678904",
+      "formatDetail": "GLN (Global Location Number) sur 13 chiffres ou identifiant interne",
+      "tips": "Utile pour les livraisons multi-sites : chaque ligne peut avoir un lieu de livraison différent.",
+      "legalRefs": ["AFNOR-XP-Z12-012"]
+    },
+    "EXT-FR-FE-151": {
+      "description": "Première ligne de l'adresse de livraison au niveau de la ligne de facture (numéro et nom de rue).",
+      "maxLength": 150,
+      "example": "45 avenue des Champs-Élysées",
+      "legalRefs": ["AFNOR-XP-Z12-012"]
+    },
+    "EXT-FR-FE-154": {
+      "description": "Code postal du lieu de livraison au niveau de la ligne de facture.",
+      "maxLength": 10,
+      "example": "75008",
+      "legalRefs": ["AFNOR-XP-Z12-012"]
+    },
+    "EXT-FR-FE-155": {
+      "description": "Nom de la ville ou localité du lieu de livraison au niveau de la ligne de facture.",
+      "maxLength": 100,
+      "example": "Paris",
+      "legalRefs": ["AFNOR-XP-Z12-012"]
+    },
+    "EXT-FR-FE-157": {
+      "description": "Code pays du lieu de livraison au niveau de la ligne. Obligatoire dès qu'une adresse de livraison en ligne est renseignée.",
+      "formatDetail": "ISO 3166-1 alpha-2 (2 lettres)",
+      "example": "FR",
+      "values": {"FR": "France", "DE": "Allemagne", "BE": "Belgique", "ES": "Espagne", "IT": "Italie", "LU": "Luxembourg", "NL": "Pays-Bas", "CH": "Suisse"},
+      "tips": "Obligatoire (1..1) si le bloc EXT-FR-FE-BG-10 est présent. Détermine le pays de taxation de la ligne.",
+      "legalRefs": ["AFNOR-XP-Z12-012", "ISO-3166"]
+    },
+    "EXT-FR-FE-159": {
+      "description": "Code de l'attribut article dans le contexte d'une sous-ligne ou d'un article multi-vendeurs. Identifie le type de caractéristique technique de l'article.",
+      "example": "TAILLE",
+      "legalRefs": ["AFNOR-XP-Z12-012"]
+    },
+    "EXT-FR-FE-160": {
+      "description": "Valeur numérique de l'attribut article avec unité de mesure. Utilisé pour les caractéristiques quantifiables (poids, volume, longueur).",
+      "formatDetail": "Décimal avec point comme séparateur",
+      "example": "1.500",
+      "tips": "Accompagné obligatoirement de EXT-FR-FE-161 (unité de mesure).",
+      "legalRefs": ["AFNOR-XP-Z12-012"]
+    },
+    "EXT-FR-FE-161": {
+      "description": "Code de l'unité de mesure associée à la valeur de l'attribut article (EXT-FR-FE-160). Suit la codification UN/ECE Recommandation 20.",
+      "formatDetail": "Code UN/ECE Rec. 20",
+      "example": "KGM",
+      "values": {"KGM": "Kilogramme", "MTR": "Mètre", "LTR": "Litre", "MTQ": "Mètre cube", "C62": "Unité"},
+      "legalRefs": ["AFNOR-XP-Z12-012"]
+    },
+    "EXT-FR-FE-162": {
+      "description": "Identifiant de la ligne parente dans une hiérarchie de sous-lignes. Permet de créer des arborescences de lignes (une ligne principale avec des sous-lignes de détail).",
+      "example": "1",
+      "formatDetail": "Identifiant de ligne (BT-126) de la ligne parente",
+      "tips": "Crée une hiérarchie parent/enfant entre les lignes. La ligne parente doit exister dans la facture. Utilisé pour les décompositions détaillées ou les regroupements multi-vendeurs."
+    },
+    "EXT-FR-FE-163": {
+      "description": "Sous-type de la ligne de facture, indiquant son rôle dans le calcul des totaux. DETAIL = ligne normale comptée. GROUP = regroupement multi-vendeurs. INFORMATION = ligne descriptive non comptée.",
+      "example": "DETAIL",
+      "tips": "Seules les lignes DETAIL sont transmises dans le flux 1 vers le PPF. Les lignes GROUP servent à regrouper les sous-lignes d'un même vendeur tiers. Les lignes INFORMATION sont purement descriptives."
+    },
+    "EXT-FR-FE-167": {
+      "description": "SIREN (9 chiffres) du vendeur tiers rattaché à cette ligne dans un contexte multi-vendeurs. Permet d'identifier quel fournisseur réel est concerné par cette ligne.",
+      "formatDetail": "9 chiffres (SIREN) — schemeID 0002",
+      "example": "987654321",
+      "maxLength": 9,
+      "tips": "Obligatoire sur les lignes GROUP en multi-vendeurs. C'est le SIREN du vendeur réel, différent du SIREN de l'émetteur de la facture (centrale d'achat/marketplace)."
+    },
+    "EXT-FR-FE-168": {
+      "description": "Numéro d'identification TVA intracommunautaire du vendeur tiers rattaché à cette ligne en multi-vendeurs.",
+      "formatDetail": "FR + 2 chiffres clé + 9 chiffres SIREN (13 car.)",
+      "example": "FR12987654321",
+      "maxLength": 20,
+      "tips": "Obligatoire si le vendeur tiers est assujetti à la TVA. Permet au PPF de valider la cohérence fiscale de chaque sous-ensemble de lignes."
+    },
+    "EXT-FR-FE-178": {
+      "description": "Numéro de facture unitaire du vendeur tiers. Dans un contexte multi-vendeurs, chaque vendeur tiers peut avoir son propre numéro de facture rattaché à ses lignes.",
+      "example": "VT-2026-00012",
+      "maxLength": 35,
+      "tips": "Permet la traçabilité : chaque vendeur tiers conserve sa propre séquence de facturation même au sein d'une facture multi-vendeurs."
+    },
+    "EXT-FR-FE-181": {
+      "description": "Montant total de TVA calculé pour les lignes du vendeur tiers (lignes GROUP). C'est la somme de la TVA des sous-lignes DETAIL rattachées à ce vendeur.",
+      "formatDetail": "Décimal avec 2 décimales, point comme séparateur",
+      "example": "200.00",
+      "tips": "Calculé automatiquement : somme des TVA des lignes DETAIL rattachées à la ligne GROUP de ce vendeur tiers."
+    },
+    "EXT-FR-FE-184": {
+      "description": "Montant total TTC (toutes taxes comprises) pour les lignes du vendeur tiers (lignes GROUP). Somme HT + TVA des sous-lignes DETAIL de ce vendeur.",
+      "formatDetail": "Décimal avec 2 décimales, point comme séparateur",
+      "example": "1200.00",
+      "tips": "Permet de vérifier la cohérence : la somme des TTC de toutes les lignes GROUP doit être égale au TTC total de la facture (BT-112)."
+    }
+  }
+}

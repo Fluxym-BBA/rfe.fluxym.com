@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', function() {
         var html = '<div class="comparison-table"><table>' +
             '<thead><tr><th>Champ</th><th>Nom</th><th>Valeur / Note</th></tr></thead><tbody>';
         fields.forEach(function(f) {
-            html += '<tr><td><strong>' + f.bt + '</strong></td><td>' + f.name + '</td><td>' + (f.note || '—') + '</td></tr>';
+            html += '<tr><td><a href="./champs.html#field-' + f.bt + '" class="bt-link"><strong>' + f.bt + '</strong></a></td><td>' + f.name + '</td><td>' + (f.note || '—') + '</td></tr>';
         });
         html += '</tbody></table></div>';
         document.getElementById('case-bt-fields').innerHTML = html;

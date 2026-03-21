@@ -1,0 +1,34 @@
+<!-- merge-ereporting.html — Ouvre dans le navigateur -->
+<!DOCTYPE html>
+<html><body>
+<h2>Fusion e-reporting JSON</h2>
+<pre id="output" style="font-size:11px;max-height:80vh;overflow:auto;"></pre>
+<script>
+Promise.all([
+    fetch('./data/flux10_part1_enveloppe.json').then(r => r.json()),
+    fetch('./data/flux10_part2_transactions.json').then(r => r.json()),
+    fetch('./data/flux10_part3_paiements.json').then(r => r.json())
+]).then(([p1, p2, p3]) => {
+    
+    var merged = {
+        meta: p1.meta,
+        subFlows: p1.subFlows,
+        rules: p1.rules || {},
+        btMapping: p1.btMapping || {},
+        blocks: [].concat(p1.blocks || [], p2.blocks || [], p3.blocks || [])
+    };
+
+    // Merge rules from parts 2 & 3
+    if (p2.rules) Object.assign(merged.rules, p2.rules);
+    if (p3.rules) Object.assign(merged.rules, p3.rules);
+    if (p2.btMapping) Object.assign(merged.btMapping, p2.btMapping);
+    if (p3.btMapping) Object.assign(merged.btMapping, p3.btMapping);
+
+    var result = JSON.stringify(merged, null, 2);
+    document.getElementById('output').textContent = result;
+    navigator.clipboard.writeText(result).then(() => {
+        alert('✅ JSON e-reporting fusionné copié ! Colle dans rfe_04_ereporting.json');
+    });
+});
+</script>
+</body></html>

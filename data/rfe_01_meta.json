@@ -1,0 +1,116 @@
+{
+  "meta": {
+    "version": "1.0",
+    "lastUpdate": "2026-03-21",
+    "source": "AFNOR XP Z12-012 v1.2 + Dossier Specs DGFiP v3.1 + BR-France_CTC + Codelists Factur-X",
+    "description": "Référentiel exhaustif des champs BT/BG de la facture électronique française. PARTIE 1 : métadonnées et références juridiques.",
+    "profiles": ["MINIMUM", "BASIC WL", "BASIC", "EN16931", "EXTENDED-CTC-FR", "EXTENDED"],
+    "formats": ["UBL 2.1 (Invoice / CreditNote)", "UN/CEFACT CII (CrossIndustryInvoice)"],
+    "parts": {
+      "part1": "rfe_01_meta_references_juridiques.txt (ce fichier - renommer en .json)",
+      "part2": "rfe_02_regles_validation.txt (règles BR/BR-FR/BR-CO/BR-FR-CO/BR-FR-DEC/BR-FR-MAP)",
+      "part3": "rfe_03_blocs_champs_BG_BT.txt (blocs BG-0 à BG-32 + extensions EXT-FR-FE)"
+    },
+    "usage": "Renommer les 3 fichiers en .json puis fusionner : Object.assign(part1, part2, part3)"
+  },
+  "legalReferences": {
+    "CGI-289": {
+      "shortName": "Mentions obligatoires des factures",
+      "type": "Code Général des Impôts",
+      "issuer": "Législateur français",
+      "explanation": "L'article 289 du CGI fixe les mentions obligatoires d'une facture : identité des parties, date, numéro, désignation des biens/services, montants HT/TVA/TTC. C'est LA base légale de toute facture en France.",
+      "impact": "Chaque champ obligatoire de la facture électronique (BT-1, BT-2, BT-27, BT-44, BT-109 à BT-115, etc.) découle directement de cet article.",
+      "url": "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000006309449"
+    },
+    "CGI-242-nonies-A": {
+      "shortName": "Contenu des factures (décret)",
+      "type": "Code Général des Impôts - Annexe II",
+      "issuer": "Pouvoir réglementaire",
+      "explanation": "L'article 242 nonies A détaille les 16 mentions obligatoires d'une facture : numéro, date, identité vendeur/acheteur, TVA, etc. C'est le décret d'application de l'article 289.",
+      "impact": "Chaque mention correspond à un ou plusieurs champs BT. Le 10° impose la date de livraison (BT-72).",
+      "url": "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000006294434"
+    },
+    "CGI-289-I-3": {
+      "shortName": "Factures périodiques / récapitulatives",
+      "type": "Code Général des Impôts",
+      "issuer": "Législateur français",
+      "explanation": "Autorise l'émission de factures récapitulatives pour plusieurs livraisons/prestations réalisées au cours d'un même mois. La période de facturation (BG-14) doit alors être renseignée.",
+      "impact": "Justifie l'utilisation de BG-14 (période de facturation)."
+    },
+    "BOI-TVA-DECLA-30-20-20-10": {
+      "shortName": "Numérotation des factures",
+      "type": "Doctrine fiscale (BOFIP)",
+      "issuer": "DGFiP",
+      "explanation": "Impose une numérotation séquentielle, chronologique, sans trou ni doublon. Les séries distinctes sont autorisées (par établissement par exemple).",
+      "impact": "Le numéro de facture BT-1 doit respecter cette règle. BR-FR-CO-02 contrôle l'unicité BT-1 + année BT-2 + SIREN BT-30.",
+      "url": "https://bofip.impots.gouv.fr/bofip/1100-PGP.html"
+    },
+    "BOI-TVA-DECLA-30-20-20-20": {
+      "shortName": "Date d'émission et d'exigibilité",
+      "type": "Doctrine fiscale (BOFIP)",
+      "issuer": "DGFiP",
+      "explanation": "Précise les règles relatives à la date d'émission et à la date d'exigibilité de la TVA. Distinction biens/services essentielle.",
+      "impact": "Impacte BT-2, BT-7, BT-8 et le cadre de facturation BT-23.",
+      "url": "https://bofip.impots.gouv.fr/bofip/1101-PGP.html"
+    },
+    "DIR-2006-112-CE": {
+      "shortName": "Directive TVA européenne",
+      "type": "Directive européenne",
+      "issuer": "Conseil de l'Union européenne",
+      "explanation": "Harmonise le système de TVA en Europe. Définit les règles d'exonération, d'autoliquidation et de livraisons intracommunautaires.",
+      "impact": "Les codes VATEX-EU-* en BT-121 référencent les articles de cette directive.",
+      "url": "https://eur-lex.europa.eu/legal-content/FR/TXT/?uri=CELEX:32006L0112"
+    },
+    "EN-16931": {
+      "shortName": "Norme sémantique de facturation électronique",
+      "type": "Norme européenne",
+      "issuer": "CEN",
+      "explanation": "Définit le modèle sémantique de données de la facture électronique européenne. Socle de tous les BT et BG.",
+      "impact": "Les règles BR-1 à BR-65 et BR-CO-* en découlent.",
+      "url": "https://standards.cencenelec.eu/dyn/www/f?p=CEN:110:0::::FSP_PROJECT:60602"
+    },
+    "AFNOR-XP-Z12-012": {
+      "shortName": "Profil français de facturation électronique",
+      "type": "Norme expérimentale AFNOR",
+      "issuer": "AFNOR",
+      "explanation": "Définit le profil EXTENDED-CTC-FR avec les champs spécifiques France : BT-23, BT-30, extensions EXT-FR-FE-*, règles BR-FR-*.",
+      "impact": "Tous les champs EXT-FR-FE-* et règles BR-FR-* proviennent de cette norme.",
+      "url": "https://www.boutique.afnor.org/"
+    },
+    "CGI-261": {
+      "shortName": "Exonérations de TVA",
+      "type": "Code Général des Impôts",
+      "issuer": "Législateur français",
+      "explanation": "Liste les opérations exonérées de TVA en France. Chaque alinéa correspond à un code VATEX-FR-CGI261-*.",
+      "impact": "Les codes VATEX-FR-CGI261-* en BT-121 référencent ces cas d'exonération."
+    },
+    "CGI-293-B": {
+      "shortName": "Franchise en base de TVA",
+      "type": "Code Général des Impôts",
+      "issuer": "Législateur français",
+      "explanation": "Régit la franchise en base pour les micro-entrepreneurs. Mention 'TVA non applicable, article 293 B du CGI'.",
+      "impact": "BT-118='E' avec BT-121='VATEX-FR-FRANCHISE'. Cf. BR-FR-CO-16."
+    },
+    "UNTDID-1001": {
+      "shortName": "Code type de document",
+      "type": "Liste de codes UN/EDIFACT",
+      "issuer": "UN/CEFACT",
+      "explanation": "Liste des codes type document. En France, seuls certains codes sont autorisés (BR-FR-04).",
+      "impact": "BT-3 doit utiliser exclusivement les codes listés."
+    },
+    "UNTDID-4461": {
+      "shortName": "Code moyen de paiement",
+      "type": "Liste de codes UN/EDIFACT",
+      "issuer": "UN/CEFACT",
+      "explanation": "Codes moyen de paiement : 10=espèces, 20=chèque, 30=virement, 48=carte, 58=SEPA, 59=prélèvement SEPA.",
+      "impact": "BT-81 doit utiliser un code de cette liste."
+    },
+    "UNTDID-5305": {
+      "shortName": "Catégorie de TVA",
+      "type": "Liste de codes UN/EDIFACT",
+      "issuer": "UN/CEFACT",
+      "explanation": "Codes catégorie TVA : S, Z, E, AE, K, G, O. L et M non pertinents en France.",
+      "impact": "Utilisé par BT-118, BT-95, BT-102, BT-151."
+    }
+  }
+}

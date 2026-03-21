@@ -1,0 +1,251 @@
+{
+  "meta": {
+    "version": "1.0",
+    "lastUpdate": "2026-03-21",
+    "source": "DGFIP Annexe 6 v1.9 + AFNOR XP Z12-012",
+    "scope": "e-reporting",
+    "parts": "Fichier 3/3 : Paiements détaillés (TB-3, 10.2) + Paiements agrégés (10.4)"
+  },
+  "blocks": [
+    {
+      "id": "TB-3",
+      "name": "Transmission Paiements",
+      "description": "Bloc principal des données de paiements (détaillés 10.2, agrégés 10.4). Ne peut pas coexister avec TB-2 (G6.29).",
+      "xPath": "/PaymentsReport",
+      "cardinality": "0..1",
+      "subFlows": ["10.2", "10.4"],
+      "rules": ["G6.29"],
+      "groups": [
+        {
+          "id": "TG-33",
+          "name": "Période de transmission (Paiements)",
+          "description": "Période couverte par la transmission des encaissements.",
+          "xPath": "/PaymentsReport/ReportPeriod",
+          "cardinality": "1..1",
+          "subFlows": ["10.2", "10.4"],
+          "fields": [
+            {
+              "id": "TT-89",
+              "name": "Date début période (Paiements)",
+              "description": "Date de début de la période de transmission des encaissements. Format AAAAMMJJ.",
+              "type": "TEXTE",
+              "maxLength": 8,
+              "cardinality": "1..1",
+              "mandatory": true,
+              "xPath": "/PaymentsReport/ReportPeriod/StartDate",
+              "btEquivalent": null,
+              "example": "20260901",
+              "rules": ["G1.09", "G1.36", "G6.24", "G6.25"],
+              "tips": "Même logique que TT-17 pour les transactions.",
+              "subFlows": ["10.2", "10.4"]
+            },
+            {
+              "id": "TT-90",
+              "name": "Date fin période (Paiements)",
+              "description": "Date de fin de la période. Doit être > TT-89 et < date contrôle système.",
+              "type": "TEXTE",
+              "maxLength": 8,
+              "cardinality": "1..1",
+              "mandatory": true,
+              "xPath": "/PaymentsReport/ReportPeriod/EndDate",
+              "btEquivalent": null,
+              "example": "20260930",
+              "rules": ["G1.09", "G1.36", "G6.25", "G7.43"],
+              "tips": "G6.25 : fin > début. G7.43 : TT-90 < contrôle système, TT-3 > TT-90.",
+              "subFlows": ["10.2", "10.4"]
+            }
+          ]
+        },
+        {
+          "id": "TG-34",
+          "name": "Facture (Paiement détaillé - 10.2)",
+          "description": "Bloc répétable : 1 occurrence = paiement d'une facture identifiée.",
+          "xPath": "/PaymentsReport/Invoice",
+          "cardinality": "0..n",
+          "subFlows": ["10.2"],
+          "fields": [
+            {
+              "id": "TT-91",
+              "name": "Numéro de facture (paiement)",
+              "description": "Identification unique de la facture payée. Max 35 caractères alphanumériques.",
+              "type": "IDENTIFIANT",
+              "maxLength": 35,
+              "cardinality": "1..1",
+              "mandatory": true,
+              "xPath": "/PaymentsReport/Invoice/InvoiceID",
+              "btEquivalent": null,
+              "example": "FA-2026-00001",
+              "rules": ["G1.05"],
+              "tips": "Mêmes règles de format que TT-20 (G1.05).",
+              "subFlows": ["10.2"]
+            }
+          ],
+          "groups": [
+            {
+              "id": "TG-35",
+              "name": "Paiement de la facture",
+              "description": "Détail du paiement pour la facture identifiée.",
+              "xPath": "/PaymentsReport/Invoice/Payment",
+              "cardinality": "1..1",
+              "subFlows": ["10.2"],
+              "fields": [
+                {
+                  "id": "TT-92",
+                  "name": "Date du paiement (détaillé)",
+                  "description": "Date effective de l'encaissement. Format AAAAMMJJ.",
+                  "type": "TEXTE",
+                  "maxLength": 8,
+                  "cardinality": "1..1",
+                  "mandatory": true,
+                  "xPath": "/PaymentsReport/Invoice/Payment/Date",
+                  "btEquivalent": null,
+                  "example": "20261015",
+                  "rules": ["G1.09", "G1.36", "G1.07"],
+                  "subFlows": ["10.2"]
+                },
+                {
+                  "id": "TT-93",
+                  "name": "Montant du paiement (détaillé)",
+                  "description": "Montant total de l'encaissement pour cette facture.",
+                  "type": "MONTANT",
+                  "maxLength": "19.2",
+                  "cardinality": "1..1",
+                  "mandatory": true,
+                  "xPath": "/PaymentsReport/Invoice/Payment/Amount",
+                  "btEquivalent": null,
+                  "example": "1200.00",
+                  "rules": ["G1.14", "G6.27"],
+                  "tips": "Format 19.2. Le signe '-' compte comme caractère.",
+                  "subFlows": ["10.2"]
+                }
+              ]
+            },
+            {
+              "id": "TG-36",
+              "name": "Répartition TVA paiement (détaillé)",
+              "description": "Ventilation TVA du paiement par taux.",
+              "xPath": "/PaymentsReport/Invoice/TaxSubtotal",
+              "cardinality": "1..n",
+              "subFlows": ["10.2"],
+              "fields": [
+                {
+                  "id": "TT-94",
+                  "name": "Taux TVA (paiement détaillé)",
+                  "description": "Taux de TVA pour cette tranche du paiement.",
+                  "type": "POURCENTAGE",
+                  "maxLength": "3.2",
+                  "cardinality": "1..1",
+                  "mandatory": true,
+                  "xPath": "/PaymentsReport/Invoice/TaxSubtotal/TaxPercent",
+                  "btEquivalent": null,
+                  "example": "20",
+                  "rules": ["G1.24"],
+                  "subFlows": ["10.2"]
+                },
+                {
+                  "id": "TT-95",
+                  "name": "Montant TVA paiement (détaillé)",
+                  "description": "Montant TVA pour ce taux.",
+                  "type": "MONTANT",
+                  "maxLength": "19.2",
+                  "cardinality": "1..1",
+                  "mandatory": true,
+                  "xPath": "/PaymentsReport/Invoice/TaxSubtotal/TaxAmount",
+                  "btEquivalent": null,
+                  "example": "200.00",
+                  "rules": ["G1.14"],
+                  "subFlows": ["10.2"]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "TG-37",
+          "name": "Transactions paiement agrégées (10.4)",
+          "description": "Bloc répétable pour paiements agrégés.",
+          "xPath": "/PaymentsReport/Transactions",
+          "cardinality": "0..n",
+          "subFlows": ["10.4"],
+          "groups": [
+            {
+              "id": "TG-38",
+              "name": "Paiement agrégé",
+              "description": "Date et montant du paiement agrégé.",
+              "xPath": "/PaymentsReport/Transactions/Payment",
+              "cardinality": "1..1",
+              "subFlows": ["10.4"],
+              "fields": [
+                {
+                  "id": "TT-96",
+                  "name": "Date paiement (agrégé)",
+                  "description": "Date du paiement agrégé. Format AAAAMMJJ.",
+                  "type": "TEXTE",
+                  "maxLength": 8,
+                  "cardinality": "1..1",
+                  "mandatory": true,
+                  "xPath": "/PaymentsReport/Transactions/Payment/Date",
+                  "btEquivalent": null,
+                  "example": "20261015",
+                  "rules": ["G1.09", "G1.36", "G1.07"],
+                  "subFlows": ["10.4"]
+                },
+                {
+                  "id": "TT-97",
+                  "name": "Montant paiement (agrégé)",
+                  "description": "Montant total de l'encaissement agrégé.",
+                  "type": "MONTANT",
+                  "maxLength": "19.2",
+                  "cardinality": "1..1",
+                  "mandatory": true,
+                  "xPath": "/PaymentsReport/Transactions/Payment/Amount",
+                  "btEquivalent": null,
+                  "example": "25000.00",
+                  "rules": ["G1.14", "G6.27"],
+                  "tips": "Si > 19 chiffres (entier+décimales), rejet. Le '.' n'est pas compté.",
+                  "subFlows": ["10.4"]
+                }
+              ]
+            },
+            {
+              "id": "TG-39",
+              "name": "Répartition TVA (paiement agrégé)",
+              "description": "Ventilation TVA par taux pour paiements agrégés.",
+              "xPath": "/PaymentsReport/Transactions/TaxSubtotal",
+              "cardinality": "1..n",
+              "subFlows": ["10.4"],
+              "fields": [
+                {
+                  "id": "TT-98",
+                  "name": "Taux TVA (paiement agrégé)",
+                  "type": "POURCENTAGE",
+                  "maxLength": "3.2",
+                  "cardinality": "1..1",
+                  "mandatory": true,
+                  "xPath": "/PaymentsReport/Transactions/TaxSubtotal/TaxPercent",
+                  "btEquivalent": null,
+                  "example": "20",
+                  "rules": ["G1.24"],
+                  "subFlows": ["10.4"]
+                },
+                {
+                  "id": "TT-99",
+                  "name": "Montant TVA (paiement agrégé)",
+                  "type": "MONTANT",
+                  "maxLength": "19.2",
+                  "cardinality": "1..1",
+                  "mandatory": true,
+                  "xPath": "/PaymentsReport/Transactions/TaxSubtotal/TaxAmount",
+                  "btEquivalent": null,
+                  "example": "5000.00",
+                  "rules": ["G1.14"],
+                  "subFlows": ["10.4"]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+<!-- merge-corrections.html — Ouvre dans le navigateur, copie le résultat -->
+<!DOCTYPE html>
+<html><body>
+<h2>Fusion JSON — Résultat dans la console</h2>
+<pre id="output" style="font-size:11px;max-height:80vh;overflow:auto;"></pre>
+<script>
+Promise.all([
+    fetch('./data/rfe_03_champs.json').then(r => r.json()),
+    fetch('./data/corrections_BG_BT.json').then(r => r.json())
+]).then(([base, corrections]) => {
+
+    // 1. Appliquer descriptions de blocs
+    var blockDescs = corrections.blockDescriptions || {};
+    base.blocks.forEach(block => {
+        if (blockDescs[block.id] && !block.description) {
+            block.description = blockDescs[block.id];
+        }
+    });
+
+    // 2. Appliquer descriptions + métadonnées de champs
+    var fieldDescs = corrections.fieldDescriptions || {};
+    base.blocks.forEach(block => {
+        (block.fields || []).forEach(field => {
+            var corr = fieldDescs[field.id];
+            if (corr) {
+                if (corr.description && !field.description) field.description = corr.description;
+                if (corr.maxLength && !field.maxLength) field.maxLength = corr.maxLength;
+                if (corr.example && !field.example) field.example = corr.example;
+                if (corr.formatDetail && !field.formatDetail) field.formatDetail = corr.formatDetail;
+                if (corr.tips && !field.tips) field.tips = corr.tips;
+                if (corr.values && !field.values) field.values = corr.values;
+            }
+        });
+    });
+
+    // 3. Afficher le résultat
+    var result = JSON.stringify(base, null, 2);
+    document.getElementById('output').textContent = result;
+    
+    // 4. Copier dans le presse-papier
+    navigator.clipboard.writeText(result).then(() => {
+        alert('✅ JSON fusionné copié dans le presse-papier ! Colle-le dans rfe_03_champs.json');
+    });
+
+    console.log('✅ JSON fusionné — ' + base.blocks.length + ' blocs');
+});
+</script>
+</body></html>
