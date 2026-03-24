@@ -1,92 +1,488 @@
 {
-  "0": {
-    "badge": "Cas A1 / Cadre B1",
-    "title": "Standard B2B domestique",
-    "desc1": "<strong>Scénario :</strong> C'est le cas le plus courant : une entreprise française vend un bien ou un service à une autre entreprise française. Le vendeur émet une facture classique que l'acheteur doit régler à échéance.",
-    "desc2": "<strong>Particularités :</strong> Transaction simple : un vendeur, un acheteur, une facture, un paiement direct. Le montant Net à payer est égal au montant total TTC. C'est la facture de référence pour comprendre tous les autres cas.",
-    "info": "Type 380 (Facture commerciale). Cadre B1 (biens) ou S1 (services). Vendeur et Acheteur classiques. Message UBL : &lt;Invoice&gt;.",
+  "nominal": {
+    "badge": "⚙️ Cas Nominal / Cadre B1-S1",
+    "title": "Flux standard B2B domestique",
+    "desc1": "<strong>Scénario :</strong> Le cas de référence. Un Vendeur émet via sa PA-E une facture à un Acheteur par le biais de sa PA-R. Toute facture B2B domestique suit ce parcours sauf particularité. C'est la brique de base à maîtriser avant tous les autres cas.",
+    "desc2": "<strong>Particularités :</strong> Flux nominal sans aucune particularité. La PA-E extrait F1 (données fiscales) et transmet F2 (facture complète). Le PPF route via l'annuaire. Le cycle de vie complet s'applique : Déposée → Émise → Reçue → Acceptée → Encaissée.",
+    "info": "Type 380. Cadre B1 (biens), S1 (services) ou M1 (mixte). Flux F1 + F2 + F6 (statuts). Message UBL : &lt;Invoice&gt;.",
     "target": "esker",
-    "label": "Cas 0 : Standard B2B domestique"
+    "label": "Cas Nominal : Flux standard B2B"
+  },
+  "nominal-rejet-emission": {
+    "badge": "⚙️ Nominal — Rejet émission",
+    "title": "Rejet à l'émission (PA-E)",
+    "desc1": "<strong>Scénario :</strong> La PA-E effectue ses contrôles de conformité avant transmission. Si une erreur est détectée (format, champs obligatoires manquants, incohérence), la facture est rejetée et ne part jamais vers le PPF.",
+    "desc2": "<strong>Particularités :</strong> La facture ne quitte jamais la PA-E en cas de rejet. Le vendeur reçoit un retour détaillant la cause du rejet. Il doit corriger et redéposer. Aucun impact fiscal puisque la facture n'a jamais atteint le PPF.",
+    "info": "Statuts : Déposée → Rejetée. La facture reste côté PA-E. Aucun F1 transmis au PPF. Le vendeur doit corriger et redéposer.",
+    "target": "esker",
+    "label": "Nominal — Rejet à l'émission"
+  },
+  "nominal-non-transmise": {
+    "badge": "⚙️ Nominal — Non transmise",
+    "title": "Facture non transmise (erreur routage)",
+    "desc1": "<strong>Scénario :</strong> La facture a été acceptée par la PA-E et transmise au PPF, mais le PPF ne parvient pas à la router vers la PA-R de l'acheteur (adresse inconnue, PA-R indisponible, erreur annuaire).",
+    "desc2": "<strong>Particularités :</strong> Le statut « Non transmise » est renvoyé au vendeur. Attention : le F1 a bien été reçu par le PPF côté fiscal. Le vendeur doit vérifier l'adresse électronique du destinataire dans l'annuaire (F7/F8).",
+    "info": "Statuts : Déposée → Émise → Non transmise. Le F1 est transmis au PPF mais le F2 ne parvient pas à la PA-R.",
+    "target": "esker",
+    "label": "Nominal — Facture non transmise"
+  },
+  "nominal-rejet-reception": {
+    "badge": "⚙️ Nominal — Rejet réception",
+    "title": "Rejet à la réception (PA-R)",
+    "desc1": "<strong>Scénario :</strong> La PA-R de l'acheteur effectue ses propres contrôles à la réception. Si la facture ne passe pas (format, cohérence, doublons), elle est rejetée techniquement.",
+    "desc2": "<strong>Particularités :</strong> Ce rejet technique (par la PA-R) est différent du refus métier (par l'acheteur humain). Le vendeur doit corriger la facture et la réémettre. Le rejet technique est automatisé.",
+    "info": "Statuts : Déposée → Émise → Reçue → Rejetée. Le rejet technique ≠ refus métier. Correction et réémission nécessaires.",
+    "target": "esker",
+    "label": "Nominal — Rejet à la réception"
+  },
+  "nominal-refus": {
+    "badge": "⚙️ Nominal — Refus métier",
+    "title": "Refus par l'acheteur (statut obligatoire)",
+    "desc1": "<strong>Scénario :</strong> L'acheteur examine la facture et la refuse (erreur de montant, prestation non conforme, etc.). Ce statut est obligatoire : il doit être transmis par la PA au PPF.",
+    "desc2": "<strong>Particularités :</strong> Si la facture a été refusée après comptabilisation, le statut refus sert de justificatif → NE PAS demander un avoir au vendeur. Si le statut a été communiqué au PPF, il faut corriger manuellement la déclaration pré-remplie.",
+    "info": "Statut « Refusée » = obligatoire, transmis au PPF via F6. Impact sur la déclaration pré-remplie si TVA déjà collectée.",
+    "target": "esker",
+    "label": "Nominal — Refus par l'acheteur"
+  },
+  "nominal-litige-avoir": {
+    "badge": "⚙️ Nominal — Litige + Avoir",
+    "title": "Litige suivi d'un avoir partiel ou total",
+    "desc1": "<strong>Scénario :</strong> L'acheteur met la facture en litige. Après échanges, le vendeur émet un avoir (partiel ou total) qui annule ou réduit le montant de la facture initiale.",
+    "desc2": "<strong>Particularités :</strong> L'avoir doit obligatoirement référencer la facture d'origine via le bloc BG-3. L'avoir est un document à part entière avec son propre cycle de vie (F1 + F2). Il suit le même circuit que la facture initiale.",
+    "info": "Type 381 (Avoir). BG-3 = référence facture initiale. L'avoir suit F1 + F2 comme une facture. Message UBL : &lt;CreditNote&gt;.",
+    "target": "esker",
+    "label": "Nominal — Litige + Avoir"
+  },
+  "nominal-litige-rectificative": {
+    "badge": "⚙️ Nominal — Litige + Rectificative",
+    "title": "Litige suivi d'une facture rectificative",
+    "desc1": "<strong>Scénario :</strong> Variante du litige : au lieu d'un avoir, le vendeur émet une facture rectificative qui remplace la facture initiale. La facture rectificative référence la facture d'origine.",
+    "desc2": "<strong>Particularités :</strong> La facture rectificative est un nouveau document avec son propre numéro. Elle remplace intégralement la facture erronée, contrairement à l'avoir qui annule tout ou partie.",
+    "info": "Type 384 (Rectificative). BG-3 = référence facture corrigée. Nouveau document avec nouveau numéro.",
+    "target": "esker",
+    "label": "Nominal — Litige + Rectificative"
   },
   "1": {
-    "badge": "Cas A1 - Multi",
-    "title": "Multi-commande / 3-Way Match",
-    "desc1": "<strong>Scénario :</strong> Une entreprise passe plusieurs bons de commande auprès d'un même fournisseur. Ce dernier regroupe tout sur une seule et même facture.",
-    "desc2": "<strong>Particularités :</strong> Le rapprochement facture/commande/réception (3-way match) se fait ligne par ligne dans la solution P2P de l'acheteur.",
-    "info": "Type 380. Les numéros de commande sont précisés au niveau des lignes via la balise &lt;cac:OrderLineReference&gt;.",
+    "badge": "📦 Cas 1 / Standard",
+    "title": "Multi-commande / Multi-livraison",
+    "desc1": "<strong>Scénario :</strong> Une facture regroupe plusieurs commandes et/ou plusieurs livraisons. C'est un cas très courant en B2B. Pas de séquence d'action particulière par rapport au nominal.",
+    "desc2": "<strong>Particularités :</strong> Les références commande (BT-13) et livraison (BT-16) se renseignent au niveau des lignes, pas de l'en-tête. Le rapprochement 3-way match se fait ligne par ligne dans la solution P2P.",
+    "info": "Type 380. BT-13 (réf commande) et BT-16 (réf expédition) au niveau ligne via &lt;cac:OrderLineReference&gt;.",
     "target": "esker",
-    "label": "Cas 1 : Multi-commande (3-Way Match)"
+    "label": "Cas 1 : Multi-commande / Multi-livraison"
   },
   "2": {
-    "badge": "Cas A1 / Cadre B2",
-    "title": "Tiers payeur / Facture déjà payée",
-    "desc1": "<strong>Scénario :</strong> L'acheteur ou un tiers a déjà réglé la facture au moment de son émission. C'est très fréquent pour les paiements comptants ou les achats par carte sur internet.",
-    "desc2": "<strong>Particularités :</strong> Le cadre de facturation bascule en B2/S2 (facture déjà payée). Le montant net à payer est de 0€ car le montant prépayé couvre l'intégralité de la facture.",
-    "info": "Type 380. Cadre B2/S2. Montant à payer (PayableAmount) = 0. Ajout du bloc &lt;cac:PayeeParty&gt;.",
+    "badge": "💳 Cas 2 / Paiement",
+    "title": "Facture déjà payée à l'émission",
+    "desc1": "<strong>Scénario :</strong> Le fournisseur émet une facture pour une prestation déjà payée. Deux sous-cas : paiement par l'acheteur lui-même, ou par un tiers payeur.",
+    "desc2": "<strong>Particularités :</strong> Le montant déjà payé est dans BT-113, le net à payer (BT-115) = 0. Si TVA à l'encaissement, le statut « Encaissée » doit être envoyé immédiatement car le paiement a déjà eu lieu.",
+    "info": "Type 380. Cadre B2/S2. BT-113 = montant payé, BT-115 = 0. Bloc EXT-FR-FE-BG-02 si tiers payeur.",
     "target": "esker",
-    "label": "Cas 2 : Tiers Payeur (Déjà payée)"
+    "label": "Cas 2 : Facture déjà payée"
   },
   "3": {
-    "badge": "Cas A1 / Code 386",
-    "title": "Facture d'acompte",
-    "desc1": "<strong>Scénario :</strong> Avant la livraison complète, le vendeur exige un acompte. Il émet une facture spécifique qui représente une avance financière.",
-    "desc2": "<strong>Particularités :</strong> Attention, la TVA est exigible immédiatement sur cet acompte. La facture définitive ultérieure viendra déduire ce montant.",
-    "info": "Type 386 (Facture d'acompte au lieu de 380). Montant partiel facturé avant livraison.",
+    "badge": "💳 Cas 3 / Tiers payeur",
+    "title": "Tiers payeur connu à la facturation",
+    "desc1": "<strong>Scénario :</strong> Le fournisseur sait que le paiement sera réalisé par un tiers payeur identifié (centrale de trésorerie, société mère, etc.). Le bloc TIERS PAYEUR doit être renseigné.",
+    "desc2": "<strong>Particularités :</strong> La bonne pratique est de laisser l'acheteur gérer ses relations avec le tiers payeur de façon à rendre cette spécificité transparente pour le vendeur. Le bloc EXT-FR-FE-BG-02 contient les infos du tiers.",
+    "info": "Type 380. Bloc EXT-FR-FE-BG-02 = SIREN, nom et coordonnées du tiers payeur.",
     "target": "esker",
-    "label": "Cas 3 : Facture d'acompte (Code 386)"
+    "label": "Cas 3 : Tiers payeur connu"
   },
   "4": {
-    "badge": "Cas A1",
-    "title": "Prise en charge partielle (Assurance)",
-    "desc1": "<strong>Scénario :</strong> Une facture est payée en partie par un tiers (ex: assureur, subvention). Le vendeur émet une seule facture à l'acheteur.",
-    "desc2": "<strong>Particularités :</strong> L'acheteur (le client final) ne paie que le reste à charge (la franchise).",
-    "info": "Type 380. Le champ PrepaidAmount contient le montant pris en charge par le tiers. Le PayableAmount contient le reste à charge.",
+    "badge": "💳 Cas 4 / Partiel",
+    "title": "Prise en charge partielle (Assurance/Subvention)",
+    "desc1": "<strong>Scénario :</strong> Une facture de réparation où la franchise est payée par l'acheteur, le solde étant réglé par un tiers (assureur, subventionneur).",
+    "desc2": "<strong>Particularités :</strong> Le montant payé par le tiers est dans BT-113 (PrepaidAmount). Le PayableAmount contient le reste à charge pour l'acheteur. La note de facture (BT-22) peut détailler la répartition.",
+    "info": "Type 380. BT-113 = montant tiers. BT-115 = reste à charge client. BT-22 = détail répartition.",
     "target": "esker",
-    "label": "Cas 4 : Prise en charge partielle (Subvention/Assurance)"
+    "label": "Cas 4 : Prise en charge partielle"
   },
   "5": {
-    "badge": "Cadre S2",
-    "title": "Note de frais (Payée par le collaborateur)",
-    "desc1": "<strong>Scénario :</strong> Un salarié avance des frais professionnels (train, hôtel). La facture est émise au nom de l'entreprise pour récupération de la TVA.",
-    "desc2": "<strong>Particularités :</strong> La facture B2B est considérée comme déjà payée. Le collaborateur agit comme \"tiers payeur\" et l'entreprise devra le rembourser en interne.",
-    "info": "Type 380. Cadre S2. PrepaidAmount = TTC, PayableAmount = 0. Le PayeeParty est le collaborateur.",
+    "badge": "💳 Cas 5 / Note de frais",
+    "title": "Note de frais — Facture au nom de l'entreprise",
+    "desc1": "<strong>Scénario :</strong> Un collaborateur paie une dépense professionnelle avec ses propres moyens. La facture est émise au nom de l'entreprise (raison sociale, SIREN). L'entreprise rembourse ensuite le collaborateur.",
+    "desc2": "<strong>Particularités :</strong> BT-113 = montant total (payé par le collaborateur), BT-115 = 0. Le collaborateur peut être identifié comme tiers payeur. La facture DOIT être au nom de l'entreprise pour la déductibilité TVA.",
+    "info": "Type 380. Cadre S2. BT-113 = TTC, BT-115 = 0. PayeeParty = collaborateur.",
     "target": "esker",
-    "label": "Cas 5 : Note de frais payée par le collaborateur"
+    "label": "Cas 5 : Note de frais (au nom de l'entreprise)"
+  },
+  "6": {
+    "badge": "💳 Cas 6 / Note de frais B2C",
+    "title": "Note de frais — Sans facture au nom de l'entreprise",
+    "desc1": "<strong>Scénario :</strong> Le collaborateur dispose d'un simple ticket de caisse ou d'une facture à son nom. La déductibilité de la TVA est incertaine car l'entreprise n'a pas de facture à son nom.",
+    "desc2": "<strong>Particularités :</strong> Le collaborateur peut demander a posteriori une facture B2B avec cadre S7/B7/M7 (TVA déjà collectée via e-reporting B2C). Le vendeur ne doit pas comptabiliser 2 fois la vente.",
+    "info": "E-reporting B2C initial puis facture B2B cadre S7/B7/M7. TVA déjà collectée = pas de double imposition.",
+    "target": "esker",
+    "label": "Cas 6 : Note de frais sans facture entreprise"
   },
   "7": {
-    "badge": "Cadre B2",
-    "title": "Carte logée (Achat déjà réglé)",
-    "desc1": "<strong>Scénario :</strong> Un achat B2B est réglé immédiatement via une carte d'achat entreprise (carte logée ou virtual card).",
-    "desc2": "<strong>Particularités :</strong> La facture est récupérée pour la comptabilité et la TVA, mais elle a déjà été payée via le moyen de paiement bancaire de l'entreprise.",
-    "info": "Type 380. Cadre B2. Le PaymentMeansCode indique le paiement par carte (ex: 48). PayableAmount = 0.",
+    "badge": "💳 Cas 7 / Carte logée",
+    "title": "Carte logée (carte d'achat)",
+    "desc1": "<strong>Scénario :</strong> La transaction (hôtel, fournitures…) est réglée directement par une carte logée rattachée à l'entreprise. La facture est émise au nom de l'entreprise titulaire.",
+    "desc2": "<strong>Particularités :</strong> La facture est déjà payée via le moyen de paiement bancaire. PaymentMeansCode = 48 (carte). BT-113 = montant total, BT-115 = 0.",
+    "info": "Type 380. Cadre B2. PaymentMeansCode = 48. BT-113 = TTC, BT-115 = 0.",
     "target": "esker",
-    "label": "Cas 7 : Carte logée (Achat déjà réglé)"
+    "label": "Cas 7 : Carte logée"
   },
   "8": {
-    "badge": "Cas A3 / Code 393",
-    "title": "Affacturage (Créance cédée)",
-    "desc1": "<strong>Scénario :</strong> Le vendeur cède sa créance à un organisme financier (Factor) pour obtenir de la trésorerie immédiate. C'est le Factor qui se chargera de recouvrer l'argent auprès de l'acheteur.",
-    "desc2": "<strong>Particularités :</strong> La facture doit obligatoirement mentionner ce tiers financier à qui le paiement final doit être adressé.",
-    "info": "Type 393 (Facture affacturée au lieu de 380). Le bloc &lt;cac:PayeeParty&gt; indique les coordonnées du Factor.",
+    "badge": "🏦 Cas 8 / Affacturage",
+    "title": "Affacturage connu à la facturation",
+    "desc1": "<strong>Scénario :</strong> Le vendeur a cédé sa créance à un factor avant l'émission de la facture. Le client doit payer directement le factor, identifié comme bénéficiaire du paiement.",
+    "desc2": "<strong>Particularités :</strong> Le client doit identifier qu'il convient de payer le factor et non le vendeur. L'IBAN du factor est renseigné dans BT-84. Le bloc EXT-FR-FE-BG-02 identifie le tiers bénéficiaire.",
+    "info": "Type 393 (Facture affacturée). BT-84 = IBAN factor. PayeeParty = coordonnées du factor.",
     "target": "esker",
-    "label": "Cas 8 : Affacturage (Créance cédée, Code 393)"
+    "label": "Cas 8 : Affacturage connu"
+  },
+  "9": {
+    "badge": "🏦 Cas 9 / Distributeur",
+    "title": "Distributeur / Dépositaire",
+    "desc1": "<strong>Scénario :</strong> Le tiers bénéficiaire est un distributeur ou dépositaire qui gère la commande et la réception pour le compte du vendeur. Traité comme le cas 8 sans mention de subrogation.",
+    "desc2": "<strong>Particularités :</strong> Pas de réplication des factures vers le tiers bénéficiaire nécessaire. Seule l'information d'encaissement est nécessaire pour le statut « Encaissée ».",
+    "info": "Type 380. Même structure que cas 8 mais sans subrogation. Tiers bénéficiaire = distributeur.",
+    "target": "esker",
+    "label": "Cas 9 : Distributeur / Dépositaire"
+  },
+  "10": {
+    "badge": "🏦 Cas 10 / Subrogation",
+    "title": "Affacturage inconnu — Subrogation",
+    "desc1": "<strong>Scénario :</strong> Le vendeur cède sa créance après l'émission de la facture. Le client reçoit un statut « Affacturée » avec le nouveau bénéficiaire et les nouvelles coordonnées bancaires.",
+    "desc2": "<strong>Particularités :</strong> Deux variantes : affacturage classique (le client voit le nouveau bénéficiaire) et affacturage confidentiel (seul l'IBAN change). Statut « NON AFFACTURÉE » permet l'annulation avec restitution de l'IBAN vendeur.",
+    "info": "Type 380 initial puis statut « Affacturée » via F6 avec nouvel IBAN (BT-84). Statut réversible.",
+    "target": "esker",
+    "label": "Cas 10 : Affacturage inconnu (Subrogation)"
+  },
+  "11": {
+    "badge": "🔀 Cas 11 / Intermédiaire",
+    "title": "Tiers gestionnaire pour l'acheteur",
+    "desc1": "<strong>Scénario :</strong> Un tiers (CSP, centre de services partagés) reçoit et traite les factures pour le compte de l'acheteur. Le client et son tiers gestionnaire ont la même PA.",
+    "desc2": "<strong>Particularités :</strong> L'acheteur dédie une adresse de facturation électronique à son tiers gestionnaire dans l'annuaire. Le vendeur envoie la facture à cette adresse dédiée.",
+    "info": "Type 380. Adresse de facturation dédiée dans l'annuaire PPF. Même PA pour le client et le tiers.",
+    "target": "esker",
+    "label": "Cas 11 : Tiers gestionnaire (CSP)"
+  },
+  "12": {
+    "badge": "🔀 Cas 12 / Transparent",
+    "title": "Intermédiaire transparent pour l'acheteur",
+    "desc1": "<strong>Scénario :</strong> Un intermédiaire agit pour le compte de l'acheteur (cas 11 pour la facture principale). En plus, il émet sa propre facture de prestation d'intermédiation.",
+    "desc2": "<strong>Particularités :</strong> Deux factures circulent : F1 (vendeur → acheteur via tiers) et F2 (intermédiaire → acheteur). Le client doit confier la gestion dans un cadre de délégation maîtrisé.",
+    "info": "Type 380. Deux flux distincts : facture fournisseur + facture d'intermédiation. Mandat de gestion requis.",
+    "target": "esker",
+    "label": "Cas 12 : Intermédiaire transparent"
+  },
+  "13": {
+    "badge": "🏗️ Cas 13 / Sous-traitance",
+    "title": "Sous-traitance avec paiement direct",
+    "desc1": "<strong>Scénario :</strong> Trois acteurs : le sous-traitant, l'entreprise principale (titulaire) et l'acheteur (maître d'ouvrage). Deux factures sont créées. En paiement direct, l'acheteur paie directement le sous-traitant.",
+    "desc2": "<strong>Particularités :</strong> F1 : sous-traitant → titulaire. F2 : titulaire → acheteur. En B2G, le paiement direct est régi par le code de la commande publique. En B2B, il s'agit d'une délégation de paiement.",
+    "info": "Type 380. Deux factures distinctes. Le maître d'ouvrage doit traiter les demandes de paiement direct.",
+    "target": "esker",
+    "label": "Cas 13 : Sous-traitance + paiement direct"
+  },
+  "14": {
+    "badge": "🏗️ Cas 14 / Co-traitance",
+    "title": "Co-traitance B2B",
+    "desc1": "<strong>Scénario :</strong> Un co-traitant transmet une facture à l'acheteur, le mandataire du marché la « vise ». Le mandataire crée sa propre facture. L'acheteur paie une fois les deux factures approuvées.",
+    "desc2": "<strong>Particularités :</strong> Le mandataire est déclaré dans BG-11 (Agent de vendeur). Cadre S6 (dépôt par un co-traitant). L'acheteur devrait créer une adresse dédiée type « SIREN_COTRAITANCE ». Document récapitulatif (BG-24).",
+    "info": "Type 380. Cadre S6. BG-11 = mandataire du marché. BG-24 = récapitulatif des factures F1.",
+    "target": "esker",
+    "label": "Cas 14 : Co-traitance B2B"
+  },
+  "15": {
+    "badge": "🔀 Cas 15 / Agent acheteur",
+    "title": "Achat par un tiers pour le compte de l'acheteur",
+    "desc1": "<strong>Scénario :</strong> Un agent d'acheteur passe la commande, valide la facture et parfois paie, pour le compte de l'acheteur. L'agent utilise une PA-R avec adresse de facturation dédiée.",
+    "desc2": "<strong>Particularités :</strong> L'agent d'acheteur transmet ensuite sa propre facture de prestation à l'acheteur. BT-49 = adresse dédiée à l'agent dans l'annuaire.",
+    "info": "Type 380. BT-49 = adresse électronique dédiée à l'agent. L'agent agit avec ses droits sur la PA-R.",
+    "target": "esker",
+    "label": "Cas 15 : Agent d'acheteur"
+  },
+  "16": {
+    "badge": "🔀 Cas 16 / Débours",
+    "title": "Facture de débours",
+    "desc1": "<strong>Scénario :</strong> Un intermédiaire (avocat, notaire, transitaire) avance des frais pour le compte de son client et se fait rembourser à l'euro près, sans marge.",
+    "desc2": "<strong>Particularités :</strong> Les débours sont hors du champ TVA pour l'intermédiaire. La facture de débours est distincte de la facture d'honoraires. Ne pas confondre avec la refacturation de frais (avec marge).",
+    "info": "Type 380. Débours = hors champ TVA. BT-22 = mention « débours » + référence du justificatif original.",
+    "target": "esker",
+    "label": "Cas 16 : Facture de débours"
+  },
+  "17a": {
+    "badge": "🛒 Cas 17a / Marketplace",
+    "title": "Marketplace — Intermédiaire de paiement",
+    "desc1": "<strong>Scénario :</strong> La marketplace agit comme intermédiaire de paiement uniquement. Le vendeur émet sa facture directement à l'acheteur via le circuit normal (PA-E → PPF → PA-R).",
+    "desc2": "<strong>Particularités :</strong> Le paiement transite par la marketplace qui reverse au vendeur. La marketplace émet sa propre facture de commission au vendeur. La facture de vente est émise par le vendeur, pas la marketplace.",
+    "info": "Type 380. Facture vendeur → acheteur (circuit normal) + Facture commission marketplace → vendeur.",
+    "target": "esker",
+    "label": "Cas 17a : Marketplace (intermédiaire paiement)"
+  },
+  "17b": {
+    "badge": "🛒 Cas 17b / Marketplace + Mandat",
+    "title": "Marketplace + Mandat de facturation",
+    "desc1": "<strong>Scénario :</strong> La marketplace dispose d'un mandat de facturation : elle émet la facture au nom et pour le compte du vendeur. Elle agit comme « Agent de vendeur » (BG-11).",
+    "desc2": "<strong>Particularités :</strong> Le vendeur reste le fournisseur légal. BG-11 identifie la marketplace comme mandataire. Un contrat de mandat écrit est obligatoire.",
+    "info": "Type 380. BG-11 = marketplace (Agent de vendeur). Vendeur = fournisseur légal dans la facture.",
+    "target": "esker",
+    "label": "Cas 17b : Marketplace + Mandat de facturation"
+  },
+  "18": {
+    "badge": "⭐ Cas 18 / Note de débit",
+    "title": "Notes de débit",
+    "desc1": "<strong>Scénario :</strong> Ajustement à la hausse d'une facture existante : pénalités de retard, frais de stockage supplémentaires, compléments de prix. Complément de facturation.",
+    "desc2": "<strong>Particularités :</strong> La note de débit référence la facture d'origine (BG-3). Codes types possibles : 383 (note de débit) ou 384 (facture rectificative). Traitée comme une facture classique.",
+    "info": "Type 383 (note de débit) ou 384 (rectificative). BG-3 = référence facture complétée.",
+    "target": "esker",
+    "label": "Cas 18 : Notes de débit"
+  },
+  "19a": {
+    "badge": "📝 Cas 19a / Mandat",
+    "title": "Mandat de facturation — Tiers facturant",
+    "desc1": "<strong>Scénario :</strong> Un mandataire (tiers distinct de l'acheteur) émet la facture au nom et pour le compte du vendeur. Le vendeur reste le fournisseur légal.",
+    "desc2": "<strong>Particularités :</strong> BG-11 identifie le mandataire. Le vendeur est responsable fiscalement même si le mandataire émet. Un contrat de mandat de facturation écrit est obligatoire.",
+    "info": "Type 380. BG-11 = Agent de vendeur (mandataire). Cadre B1/S1. Contrat de mandat obligatoire.",
+    "target": "esker",
+    "label": "Cas 19a : Mandat de facturation (tiers)"
+  },
+  "19b": {
+    "badge": "📝 Cas 19b / Self-billing",
+    "title": "Auto-facturation (Self-billing)",
+    "desc1": "<strong>Scénario :</strong> L'acheteur émet lui-même la facture pour le compte du vendeur. C'est un cas particulier de mandat où le mandataire EST l'acheteur.",
+    "desc2": "<strong>Particularités :</strong> Code type 389 obligatoire. Le vendeur est en position de récepteur de sa propre facture. L'acheteur agit comme PA-E et comme Agent de vendeur. Le vendeur peut refuser.",
+    "info": "Type 389 (Auto-facturation). BG-11 = l'acheteur lui-même. Le vendeur reçoit sa propre facture.",
+    "target": "esker",
+    "label": "Cas 19b : Auto-facturation (Self-billing)"
+  },
+  "20": {
+    "badge": "💰 Cas 20 / Acompte",
+    "title": "Facture d'acompte",
+    "desc1": "<strong>Scénario :</strong> Un acompte est un paiement partiel anticipé sur une commande. La TVA est exigible dès l'encaissement pour les services, et dès la livraison pour les biens.",
+    "desc2": "<strong>Particularités :</strong> Code type 386 (acompte) ou 500 (pré-facturation). La facture d'acompte est un document fiscal à part entière. La facture définitive viendra déduire ce montant (cas 21).",
+    "info": "Type 386 ou 500. Cadre B1/S1/M1. Document fiscal à part entière avec TVA exigible.",
+    "target": "esker",
+    "label": "Cas 20 : Facture d'acompte"
+  },
+  "21": {
+    "badge": "💰 Cas 21 / Solde après acompte",
+    "title": "Facture définitive après acompte(s)",
+    "desc1": "<strong>Scénario :</strong> La facture définitive clôt l'opération après un ou plusieurs acomptes. Elle reprend le montant total et déduit les acomptes en lignes négatives.",
+    "desc2": "<strong>Particularités :</strong> Cadre B4/S4/M4 (facture définitive après acompte). Chaque ligne négative référence la facture d'acompte correspondante. Net à payer = total − somme des acomptes.",
+    "info": "Type 380. Cadre B4/S4/M4. BT-25 = numéros des factures d'acompte. Lignes négatives pour déduction.",
+    "target": "esker",
+    "label": "Cas 21 : Facture définitive après acompte"
+  },
+  "22a": {
+    "badge": "💰 Cas 22a / Escompte services",
+    "title": "Escompte — TVA à l'encaissement (services)",
+    "desc1": "<strong>Scénario :</strong> L'acheteur bénéficie d'un escompte pour paiement anticipé d'une facture de services. Comme la TVA est à l'encaissement, le traitement est complexe.",
+    "desc2": "<strong>Particularités :</strong> L'avoir d'escompte peut être avec ou sans TVA selon que la TVA a été déclarée ou non. La base TVA = montant effectivement encaissé. Mention d'escompte obligatoire via BT-20.",
+    "info": "Type 380 + Avoir 381. BT-20 = conditions escompte. TVA basée sur l'encaissement réel.",
+    "target": "esker",
+    "label": "Cas 22a : Escompte (services, TVA encaissement)"
+  },
+  "22b": {
+    "badge": "💰 Cas 22b / Escompte biens",
+    "title": "Escompte — TVA sur les débits (biens)",
+    "desc1": "<strong>Scénario :</strong> Escompte pour paiement anticipé d'une facture de biens. La TVA ayant été collectée à l'émission, le vendeur émet un avoir AVEC TVA pour ajuster le montant.",
+    "desc2": "<strong>Particularités :</strong> L'avoir d'escompte sur biens inclut toujours la TVA (TVA sur les débits). L'avoir rectifie la base HT et la TVA collectée initialement.",
+    "info": "Type 380 + Avoir 381. BT-20 = conditions escompte. Avoir obligatoirement avec TVA.",
+    "target": "esker",
+    "label": "Cas 22b : Escompte (biens, TVA sur débits)"
+  },
+  "23": {
+    "badge": "📝 Cas 23 / Auto-fact. particulier",
+    "title": "Auto-facturation particulier → professionnel",
+    "desc1": "<strong>Scénario :</strong> Un professionnel (brocanteur, concessionnaire auto d'occasion) achète un bien à un particulier. Le particulier ne pouvant pas émettre de facture, le professionnel émet un document d'achat.",
+    "desc2": "<strong>Particularités :</strong> Le document d'achat est émis par le professionnel (l'acheteur). Souvent lié à la TVA sur la marge (cas 33). Le particulier ne peut pas émettre de facture.",
+    "info": "Document d'achat émis par l'acheteur professionnel. Souvent TVA sur la marge. E-reporting si B2C.",
+    "target": "esker",
+    "label": "Cas 23 : Auto-facturation particulier → pro"
+  },
+  "24": {
+    "badge": "⭐ Cas 24 / Arrhes",
+    "title": "Gestion des arrhes",
+    "desc1": "<strong>Scénario :</strong> Des arrhes sont versées à la commande. Contrairement aux acomptes, elles permettent à chaque partie de se désister : l'acheteur perd les arrhes, le vendeur doit rembourser le double.",
+    "desc2": "<strong>Particularités :</strong> Fiscalement, les arrhes sont une indemnité et non un paiement. Elles ne sont pas soumises à TVA tant que la vente n'est pas réalisée. En cas d'annulation : pas de facture, pas de e-invoicing.",
+    "info": "Les arrhes ≠ acomptes. Pas de TVA tant que la vente n'est pas réalisée. Indemnité et non paiement.",
+    "target": "esker",
+    "label": "Cas 24 : Gestion des arrhes"
+  },
+  "25": {
+    "badge": "⭐ Cas 25 / Bons cadeaux",
+    "title": "Bons & cartes cadeaux (BUU / BUM)",
+    "desc1": "<strong>Scénario :</strong> Deux régimes de TVA selon le type de bon. BUU (Bon à Usage Unique) : TVA à l'émission. BUM (Bon à Usages Multiples) : TVA uniquement à l'utilisation.",
+    "desc2": "<strong>Particularités :</strong> BUU : le lieu, le taux TVA et le fournisseur sont connus → TVA à chaque transfert. BUM : au moins un élément inconnu → TVA à l'utilisation seulement. Bons BUM non utilisés = aucune TVA.",
+    "info": "BUU = TVA à chaque transfert. BUM = TVA à l'utilisation uniquement. Classification selon connaissance du lieu/taux/fournisseur.",
+    "target": "esker",
+    "label": "Cas 25 : Bons & cartes cadeaux (BUU/BUM)"
+  },
+  "26": {
+    "badge": "⭐ Cas 26 / Réserve",
+    "title": "Clause de réserve contractuelle",
+    "desc1": "<strong>Scénario :</strong> La facture est émise alors que certaines conditions contractuelles ne sont pas remplies (réserve de propriété, levée de réserves BTP, validation étape projet).",
+    "desc2": "<strong>Particularités :</strong> La clause de réserve est transparente pour le PPF. Le statut « Suspendue » peut être utilisé en attente de levée. La TVA est exigible selon les règles normales (pas impactée par la réserve).",
+    "info": "Type 380. BT-22 = mention de la clause de réserve. Statut « Suspendue » possible. TVA non impactée.",
+    "target": "esker",
+    "label": "Cas 26 : Clause de réserve contractuelle"
+  },
+  "27": {
+    "badge": "⭐ Cas 27 / Péage",
+    "title": "Tickets de péage",
+    "desc1": "<strong>Scénario :</strong> Les sociétés d'autoroute émettent des factures récapitulatives mensuelles aux entreprises abonnées (badge télépéage). Facturation B2B classique avec tolérance.",
+    "desc2": "<strong>Particularités :</strong> Chaque passage n'est pas facturé individuellement — la facture mensuelle regroupe tous les passages du mois. Tolérance spécifique sur le regroupement.",
+    "info": "Type 380. Cadre S1. Facture récapitulative mensuelle. Passages détaillés en lignes.",
+    "target": "esker",
+    "label": "Cas 27 : Tickets de péage (récapitulatif)"
+  },
+  "28": {
+    "badge": "⭐ Cas 28 / Restaurant",
+    "title": "Notes de restaurant",
+    "desc1": "<strong>Scénario :</strong> Un repas est d'abord une opération B2C (e-reporting). Si le client professionnel demande ensuite une facture B2B, le restaurateur doit l'émettre avec le cadre S7/B7.",
+    "desc2": "<strong>Particularités :</strong> Le cadre S7/B7/M7 évite la double collecte TVA (e-reporting + e-invoicing). Le restaurateur ne doit pas comptabiliser 2 fois la vente.",
+    "info": "E-reporting B2C (flux 10.3) puis facture B2B cadre S7 si demandé. Pas de double collecte TVA.",
+    "target": "esker",
+    "label": "Cas 28 : Notes de restaurant"
+  },
+  "29": {
+    "badge": "⭐ Cas 29 / Assujetti unique",
+    "title": "Assujetti unique (Art. 256 C du CGI)",
+    "desc1": "<strong>Scénario :</strong> Flux intra-groupe au sein d'un assujetti unique (groupe TVA). Les opérations entre membres sont hors champ TVA mais restent dans le champ du e-invoicing.",
+    "desc2": "<strong>Particularités :</strong> Le SIREN de l'AU est dans BT-29 avec le schéma 0231. TVA = 0 sur les factures intra-groupe. Le régime d'assujetti unique doit être déclaré auprès de la DGFiP.",
+    "info": "Type 380. BT-29 + BT-48 = SIREN AU (schéma 0231). Hors champ TVA mais dans le champ e-invoicing.",
+    "target": "esker",
+    "label": "Cas 29 : Assujetti unique (groupe TVA)"
+  },
+  "30": {
+    "badge": "⭐ Cas 30 / TVA déjà collectée",
+    "title": "TVA déjà collectée (B2C → B2B)",
+    "desc1": "<strong>Scénario :</strong> Cas générique du cadre 7 : une opération déclarée en e-reporting B2C fait ensuite l'objet d'une facture B2B (le client s'avère être un professionnel).",
+    "desc2": "<strong>Particularités :</strong> Le cadre B7/S7/M7 signale que la TVA a déjà été collectée via l'e-reporting. Le vendeur doit corriger son e-reporting B2C en conséquence. Pas de double imposition.",
+    "info": "Type 380. Cadre B7/S7/M7. TVA déjà collectée via e-reporting B2C. Seul mécanisme anti-double collecte.",
+    "target": "esker",
+    "label": "Cas 30 : TVA déjà collectée (cadre 7)"
+  },
+  "31": {
+    "badge": "📦 Cas 31 / Mixte",
+    "title": "Factures mixtes (biens + services)",
+    "desc1": "<strong>Scénario :</strong> Une facture contient à la fois des livraisons de biens et des prestations de services non accessoires. Chacune a sa propre nature fiscale.",
+    "desc2": "<strong>Particularités :</strong> Cadre M1 (ou M2, M4, M7, M8 selon le contexte). Si un élément est accessoire à l'autre → utiliser B1 ou S1 au lieu de M. Chaque ligne porte sa propre catégorie TVA.",
+    "info": "Type 380. Cadre M1/M2/M4/M7/M8. Biens ET services non accessoires = cadre « M » (Mixed).",
+    "target": "esker",
+    "label": "Cas 31 : Factures mixtes (biens + services)"
+  },
+  "32": {
+    "badge": "⭐ Cas 32 / Mensualités",
+    "title": "Paiements mensuels avant facturation",
+    "desc1": "<strong>Scénario :</strong> Cas courant en énergie/télécoms : le client paie des mensualités estimées avant de recevoir la facture de régularisation.",
+    "desc2": "<strong>Particularités :</strong> En B2B : chaque mensualité = facture d'acompte (cas 20), régularisation = facture définitive (cas 21). Volume potentiellement très élevé (millions de factures/mois).",
+    "info": "Type 386/500 (acomptes) puis 380 (régularisation cadre S4). Volumes massifs en énergie/télécom.",
+    "target": "esker",
+    "label": "Cas 32 : Paiements mensuels (énergie/télécom)"
+  },
+  "33": {
+    "badge": "⭐ Cas 33 / TVA marge",
+    "title": "TVA sur la marge",
+    "desc1": "<strong>Scénario :</strong> Régime spécifique pour les revendeurs de biens d'occasion, agences de voyage et commissaires-priseurs. La TVA est calculée sur la marge (prix de vente − prix d'achat).",
+    "desc2": "<strong>Particularités :</strong> La mention « TVA sur la marge » est obligatoire. L'acheteur ne peut PAS déduire la TVA sur une facture à la marge. En e-reporting B2C : catégorie TMA1.",
+    "info": "Type 380. BT-151 = catégorie spécifique marge. BT-22 = mention obligatoire « TVA sur la marge ». TVA non déductible pour l'acheteur.",
+    "target": "esker",
+    "label": "Cas 33 : TVA sur la marge"
+  },
+  "34": {
+    "badge": "⭐ Cas 34 / Encaissement partiel",
+    "title": "Encaissement partiel & annulation",
+    "desc1": "<strong>Scénario :</strong> Le client paie une facture en plusieurs fois. Chaque encaissement partiel génère un statut 212 (« Encaissée partiellement »). Le statut final passe à « Encaissée ».",
+    "desc2": "<strong>Particularités :</strong> Chaque paiement partiel = nouveau statut 212 avec le montant cumulé. En cas d'annulation (erreur bancaire), nouveau statut 212 corrigé. Important pour la TVA à l'encaissement : chaque 212 peut déclencher une exigibilité partielle.",
+    "info": "Statut 212 = encaissée partiellement (montant cumulé). Réversible en cas d'annulation. Impact TVA encaissement.",
+    "target": "esker",
+    "label": "Cas 34 : Encaissement partiel"
+  },
+  "35": {
+    "badge": "⭐ Cas 35 / Auteur",
+    "title": "Notes d'auteur",
+    "desc1": "<strong>Scénario :</strong> Un auteur personne physique (écrivain, compositeur, artiste) facture des droits d'auteur à un éditeur ou producteur. Régime fiscal spécifique.",
+    "desc2": "<strong>Particularités :</strong> L'auteur peut être assujetti non redevable (franchise en base) ou assujetti redevable. Le traitement TVA dépend de son régime. Notes d'auteur = factures à part entière.",
+    "info": "Type 380. Régime spécifique auteur personne physique. Vérifier le régime TVA (franchise ou redevable).",
+    "target": "esker",
+    "label": "Cas 35 : Notes d'auteur"
+  },
+  "36": {
+    "badge": "⭐ Cas 36 / Secret professionnel",
+    "title": "Secret professionnel & données sensibles",
+    "desc1": "<strong>Scénario :</strong> Les professions soumises au secret professionnel (avocats, médecins, notaires) doivent protéger certaines données dans leurs factures. Les lignes sensibles peuvent être masquées.",
+    "desc2": "<strong>Particularités :</strong> BT-153 et BT-154 classifient les lignes comme confidentielles. Le PPF ne transmet que les données agrégées à la DGFiP. Le client reçoit la facture complète via sa PA-R.",
+    "info": "Type 380. BT-153/154 = lignes confidentielles. PPF = données agrégées. PA-R = facture complète.",
+    "target": "esker",
+    "label": "Cas 36 : Secret professionnel"
+  },
+  "37": {
+    "badge": "⭐ Cas 37 / SEP",
+    "title": "Sociétés en Participation (SEP)",
+    "desc1": "<strong>Scénario :</strong> La SEP n'a pas de personnalité morale. Le gérant émet et reçoit les factures pour le compte de la société. Chaque associé doit accéder aux données fiscales.",
+    "desc2": "<strong>Particularités :</strong> La SEP n'a pas de SIREN propre. Le gérant est le seul interlocuteur vis-à-vis du PPF. Chaque associé doit accéder aux données pour sa quote-part fiscale.",
+    "info": "Type 380. Pas de SIREN SEP → SIREN du gérant. Associés accèdent aux données pour leur quote-part.",
+    "target": "esker",
+    "label": "Cas 37 : Sociétés en Participation (SEP)"
+  },
+  "38": {
+    "badge": "⭐ Cas 38 / Sous-lignes",
+    "title": "Sous-lignes & regroupements",
+    "desc1": "<strong>Scénario :</strong> Certaines factures nécessitent une hiérarchie de lignes : un kit avec ses composants, un regroupement de prestations avec sous-détail.",
+    "desc2": "<strong>Particularités :</strong> EXT-FR-FE-162 (identifiant parent) et EXT-FR-FE-163 (type de sous-ligne) structurent la hiérarchie. Seules les lignes « parents » portent les montants TVA. La PA-R doit interpréter la hiérarchie.",
+    "info": "Type 380. EXT-FR-FE-162 = ID parent. EXT-FR-FE-163 = type sous-ligne. Seuls les parents portent la TVA.",
+    "target": "esker",
+    "label": "Cas 38 : Sous-lignes & regroupements"
+  },
+  "39": {
+    "badge": "⭐ Cas 39 / Multi-vendeurs",
+    "title": "Facture multi-vendeurs (intermédiaire)",
+    "desc1": "<strong>Scénario :</strong> Un intermédiaire émet une facture unique pour le compte de plusieurs vendeurs. Cas typique : la facture d'eau incluant eau (vendeur A) et assainissement (vendeur B).",
+    "desc2": "<strong>Particularités :</strong> Cadre B8/S8/M8. Chaque ligne identifie son vendeur réel. L'intermédiaire doit avoir un mandat de chaque vendeur. Le PPF ventile la TVA par vendeur.",
+    "info": "Type 380. Cadre B8/S8/M8. BG-11 = intermédiaire (agent de chaque vendeur). TVA ventilée par vendeur.",
+    "target": "esker",
+    "label": "Cas 39 : Multi-vendeurs (cadre 8)"
+  },
+  "40": {
+    "badge": "⭐ Cas 40 / Netting",
+    "title": "Netting / Compensation",
+    "desc1": "<strong>Scénario :</strong> Deux entreprises ont des créances réciproques. Par compensation (netting), seul le solde est payé. Chaque facture suit le circuit normal.",
+    "desc2": "<strong>Particularités :</strong> Les deux factures circulent normalement. La compensation est un mécanisme de paiement, pas de facturation. Le statut « Encaissée » est transmis pour les deux factures après compensation.",
+    "info": "Type 380 (deux factures). Compensation = mécanisme de paiement. Accord de compensation requis.",
+    "target": "esker",
+    "label": "Cas 40 : Netting / Compensation"
+  },
+  "41": {
+    "badge": "⭐ Cas 41 / Barter",
+    "title": "Sociétés de Barter (échange commercial)",
+    "desc1": "<strong>Scénario :</strong> Échange de biens ou services entre entreprises, avec ou sans soulte. Chaque partie émet une facture pour sa prestation. Proche du netting (cas 40).",
+    "desc2": "<strong>Particularités :</strong> Chaque partie émet une facture → deux factures. La TVA s'applique sur la valeur vénale de chaque prestation. Si soulte : paiement du différentiel en numéraire.",
+    "info": "Type 380 (deux factures). TVA sur valeur vénale. Échange = deux factures croisées + compensation.",
+    "target": "esker",
+    "label": "Cas 41 : Barter (échange commercial)"
+  },
+  "42": {
+    "badge": "⭐ Cas 42 / Détaxe",
+    "title": "Gestion de la détaxe (touristes étrangers)",
+    "desc1": "<strong>Scénario :</strong> Un touriste non résident UE achète en France et bénéficie de la détaxe. Trois schémas possibles : TTC + correction, HT directement, ou via opérateur de détaxe.",
+    "desc2": "<strong>Particularités :</strong> Montant minimum : 100,01 € TTC dans un même magasin le même jour. La correction d'e-reporting est nécessaire si la TVA avait été déclarée. Catégorie TNT1 en e-reporting.",
+    "info": "E-reporting B2C puis correction → TNT1 après validation détaxe. Opérateurs : Global Blue, Planet…",
+    "target": "esker",
+    "label": "Cas 42 : Détaxe (touristes non-UE)"
   },
   "A": {
-    "badge": "Cas A / Rejet",
-    "title": "Facture Rejetée",
-    "desc1": "<strong>Scénario :</strong> La facture (transmise via la plateforme) contient une erreur métier. Elle est rejetée. Le vendeur doit émettre une nouvelle facture corrigée.",
-    "desc2": "<strong>Action générée :</strong> Ce cas de test génère un lot de fichiers (ZIP) pour simuler ce scénario complet d'annulation dans un outil comme Esker.",
-    "info": "Génère un ZIP : Fichiers Master Data (Headers + Items) + Facture d'origine en erreur + Avoir d'annulation (Credit Note).",
+    "badge": "⚙️ Cas A / Rejet + Réémission",
+    "title": "Facture Rejetée (pack ZIP)",
+    "desc1": "<strong>Scénario :</strong> La facture contient une erreur métier. Elle est rejetée. Le vendeur doit émettre une nouvelle facture corrigée. Ce cas génère un pack complet de test.",
+    "desc2": "<strong>Action générée :</strong> Ce cas de test génère un ZIP contenant : fichiers Master Data (Headers + Items) + Facture d'origine en erreur + Avoir d'annulation (Credit Note).",
+    "info": "Génère un ZIP : Master Data CSV + Facture 380 + Avoir 381. Scénario complet d'annulation.",
     "target": "esker",
-    "label": "Cas A : Rejet et nouvelle émission"
+    "label": "Cas A : Rejet et nouvelle émission (ZIP)"
   },
   "B": {
-    "badge": "Cas B / Code 381",
-    "title": "Avoir commercial (Credit Note)",
+    "badge": "⚙️ Cas B / Avoir commercial",
+    "title": "Avoir commercial (Credit Note, pack ZIP)",
     "desc1": "<strong>Scénario :</strong> Suite à un litige (retour marchandise, remise oubliée), le vendeur émet un avoir pour annuler tout ou partie d'une facture déjà émise et acceptée.",
-    "desc2": "<strong>Particularités :</strong> L'avoir est un message XML radicalement différent d'une facture. Il doit obligatoirement pointer vers la facture d'origine qu'il annule.",
-    "info": "Type 381 (Avoir). Message UBL : &lt;CreditNote&gt;. Le bloc &lt;cac:BillingReference&gt; pointe vers la facture d'origine. Génère un ZIP complet de test.",
+    "desc2": "<strong>Particularités :</strong> L'avoir est un message XML différent (&lt;CreditNote&gt;). Il doit pointer vers la facture d'origine via BG-3. Ce cas génère un ZIP complet de test.",
+    "info": "Type 381 (Avoir). Message UBL : &lt;CreditNote&gt;. BG-3 pointe vers la facture d'origine. Génère un ZIP.",
     "target": "esker",
-    "label": "Cas B : Émission d'un Avoir (Credit Note)"
+    "label": "Cas B : Avoir commercial (Credit Note, ZIP)"
   }
 }
