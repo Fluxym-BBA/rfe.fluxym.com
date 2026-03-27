@@ -955,7 +955,8 @@ h1, h2, h3, h4, h5, h6 {
     gap: 60px;
     max-width: 1200px;
     margin: 0 auto;
-    align-items: start;
+    /* PAS de align-items: start — la sidebar doit s'étirer
+       sur toute la hauteur du grid row pour que sticky fonctionne */
 }
 
 @media (max-width: 1000px) {
@@ -970,6 +971,8 @@ h1, h2, h3, h4, h5, h6 {
 .sidebar-sticky {
     position: sticky;
     top: 90px;
+    max-height: calc(100vh - 110px);
+    overflow-y: auto;
 }
 
 .sidebar-sticky h4 {

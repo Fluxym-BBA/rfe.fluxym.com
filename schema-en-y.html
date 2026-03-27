@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Le schéma en Y | E-Invoicing Academy</title>
+    <title>Le schéma en Y | Re·Form·E — Fluxym</title>
     <link rel="icon" href="./assets/favicon-Fluxym-V2.png" sizes="32x32" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -33,6 +33,7 @@
                     <h4>Sur cette page</h4>
                     <ul class="sidebar-nav">
                         <li><a href="#intro" class="sidebar-link active">Pourquoi « en Y »</a></li>
+                        <li><a href="#schema" class="sidebar-link">🔀 Diagramme interactif</a></li>
                         <li><a href="#branche-gauche" class="sidebar-link">Branche gauche : la facture</a></li>
                         <li><a href="#branche-droite" class="sidebar-link">Branche droite : les données</a></li>
                         <li><a href="#pied" class="sidebar-link">Le pied : le PPF</a></li>
@@ -58,7 +59,7 @@
 
                     <div class="callout callout--info">
                         <div class="callout-icon">🔑</div>
-                        <div class="callout-content"><strong>Le point clé :</strong> le PPF ne voit <em>jamais</em> vos factures. Il ne reçoit que les données réglementaires extraites (F1) et les statuts (F6). La facture circule exclusivement entre Plateformes Agréées (F2).</div>
+                        <div class="callout-content"><strong>Le point clé :</strong> le PPF ne voit <em>jamais</em> vos factures. Il ne reçoit que les données réglementaires extraites (F1) et les statuts (F6). La facture circule exclusivement entre Plateformes Agréées (F2/F3).</div>
                     </div>
                 </section>
 
@@ -101,6 +102,7 @@
                                 <path d="M550,450 L550,590" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="80" stroke-linecap="round"/>
 
                                 <!-- ═══ ACTORS ═══ -->
+
                                 <!-- Fournisseur -->
                                 <g class="sy-actor" data-actor="fournisseur">
                                     <rect x="30" y="215" width="150" height="70" rx="14" fill="#1e2d4d" stroke="#2a3f6e" stroke-width="2"/>
@@ -114,7 +116,7 @@
                                     <text x="315" y="233" text-anchor="middle" fill="#00a7e1" font-size="11" font-weight="800" font-family="Inter, sans-serif" letter-spacing="1">PA</text>
                                     <text x="315" y="253" text-anchor="middle" fill="white" font-size="13" font-weight="700" font-family="Inter, sans-serif">d'Émission</text>
                                     <text x="315" y="273" text-anchor="middle" fill="#6b82a6" font-size="10" font-family="Inter, sans-serif">Contrôles + Extraction</text>
-                                    <text x="315" y="289" text-anchor="middle" fill="#6b82a6" font-size="9" font-family="Inter, sans-serif">F1 ↗ · F2 → · F6 ↔</text>
+                                    <text x="315" y="289" text-anchor="middle" fill="#6b82a6" font-size="9" font-family="Inter, sans-serif">F1 ↗ · F2/F3 → · F6 ↔ · F10 ↗</text>
                                 </g>
 
                                 <!-- PA-R -->
@@ -123,7 +125,7 @@
                                     <text x="715" y="233" text-anchor="middle" fill="#00a7e1" font-size="11" font-weight="800" font-family="Inter, sans-serif" letter-spacing="1">PA</text>
                                     <text x="715" y="253" text-anchor="middle" fill="white" font-size="13" font-weight="700" font-family="Inter, sans-serif">de Réception</text>
                                     <text x="715" y="273" text-anchor="middle" fill="#6b82a6" font-size="10" font-family="Inter, sans-serif">Conversion + Diffusion</text>
-                                    <text x="715" y="289" text-anchor="middle" fill="#6b82a6" font-size="9" font-family="Inter, sans-serif">← F2 · F6 ↔ · F3 ←</text>
+                                    <text x="715" y="289" text-anchor="middle" fill="#6b82a6" font-size="9" font-family="Inter, sans-serif">← F2/F3 · F6 ↔ · F10 ↗</text>
                                 </g>
 
                                 <!-- Acheteur -->
@@ -139,7 +141,7 @@
                                     <text x="555" y="452" text-anchor="middle" fill="#00a7e1" font-size="10" font-weight="800" font-family="Inter, sans-serif" letter-spacing="2">PORTAIL PUBLIC</text>
                                     <text x="555" y="478" text-anchor="middle" fill="white" font-size="18" font-weight="900" font-family="Inter, sans-serif">PPF</text>
                                     <text x="555" y="498" text-anchor="middle" fill="#6b82a6" font-size="10" font-family="Inter, sans-serif">Concentrateur + Annuaire</text>
-                                    <text x="555" y="516" text-anchor="middle" fill="#6b82a6" font-size="9" font-family="Inter, sans-serif">← F1 · F6 ↔ · F10 ← · F12 →</text>
+                                    <text x="555" y="516" text-anchor="middle" fill="#6b82a6" font-size="9" font-family="Inter, sans-serif">← F1 · F6 ↔ · F10 ←</text>
                                 </g>
 
                                 <!-- DGFIP -->
@@ -149,7 +151,7 @@
                                     <text x="555" y="658" text-anchor="middle" fill="#a68080" font-size="10" font-family="Inter, sans-serif">Pré-remplissage CA3</text>
                                 </g>
 
-                                <!-- ═══ FLOWS ═══ -->
+                                <!-- ═══ FLOWS — Corrigé DSE DGFIP v3.1 ═══ -->
 
                                 <!-- Entrée : Fournisseur → PA-E -->
                                 <g class="sy-flow-group" data-flow="entry">
@@ -157,15 +159,23 @@
                                     <text x="207" y="240" text-anchor="middle" fill="#64748b" font-size="9" font-family="Inter, sans-serif">ERP</text>
                                 </g>
 
-                                <!-- F2 : PA-E → PA-R (BRANCHE COMMERCIALE — arc supérieur) -->
+                                <!-- F2 : Factures format socle — PA-E → PA-R (BRANCHE COMMERCIALE — arc supérieur) -->
                                 <g class="sy-flow-group" data-flow="f2">
-                                    <path d="M390,220 Q550,80 640,220" fill="none" stroke="#00a7e1" stroke-width="3.5" marker-end="url(#sy-arr-blue)" class="sy-flow-path sy-animated"/>
-                                    <rect x="491" y="108" width="48" height="26" rx="13" fill="#00a7e1"/>
-                                    <text x="515" y="126" text-anchor="middle" fill="white" font-size="13" font-weight="800" font-family="Inter, sans-serif">F2</text>
-                                    <text x="515" y="95" text-anchor="middle" fill="#00a7e1" font-size="10" font-weight="600" font-family="Inter, sans-serif" opacity="0.7">Facture complète</text>
+                                    <path d="M390,220 Q550,70 640,220" fill="none" stroke="#00a7e1" stroke-width="3.5" marker-end="url(#sy-arr-blue)" class="sy-flow-path sy-animated"/>
+                                    <rect x="491" y="100" width="48" height="26" rx="13" fill="#00a7e1"/>
+                                    <text x="515" y="118" text-anchor="middle" fill="white" font-size="13" font-weight="800" font-family="Inter, sans-serif">F2</text>
+                                    <text x="515" y="87" text-anchor="middle" fill="#00a7e1" font-size="10" font-weight="600" font-family="Inter, sans-serif" opacity="0.7">Factures (format socle)</text>
                                 </g>
 
-                                <!-- F1 : PA-E → PPF (BRANCHE FISCALE — diagonale) -->
+                                <!-- F3 : Factures format hors socle — PA-E → PA-R (arc inférieur commercial) -->
+                                <g class="sy-flow-group" data-flow="f3">
+                                    <path d="M390,225 Q550,130 640,225" fill="none" stroke="#00a7e1" stroke-width="2.5" stroke-dasharray="6 4" marker-end="url(#sy-arr-blue)" class="sy-flow-path sy-animated"/>
+                                    <rect x="491" y="143" width="48" height="26" rx="13" fill="#00a7e1" opacity="0.8"/>
+                                    <text x="515" y="161" text-anchor="middle" fill="white" font-size="13" font-weight="800" font-family="Inter, sans-serif">F3</text>
+                                    <text x="515" y="133" text-anchor="middle" fill="#00a7e1" font-size="9" font-weight="600" font-family="Inter, sans-serif" opacity="0.6">Factures (hors socle)</text>
+                                </g>
+
+                                <!-- F1 : Données réglementaires — PA-E → PPF (BRANCHE FISCALE — diagonale) -->
                                 <g class="sy-flow-group" data-flow="f1">
                                     <path d="M340,300 Q380,380 460,440" fill="none" stroke="#f97316" stroke-width="3" stroke-dasharray="8 4" marker-end="url(#sy-arr-orange)" class="sy-flow-path sy-animated"/>
                                     <rect x="355" y="365" width="36" height="22" rx="11" fill="#f97316"/>
@@ -173,39 +183,42 @@
                                     <text x="340" y="400" text-anchor="end" fill="#f97316" font-size="9" font-weight="600" font-family="Inter, sans-serif" opacity="0.7">Données réglementaires</text>
                                 </g>
 
-                                <!-- F3 : PPF → PA-R -->
-                                <g class="sy-flow-group" data-flow="f3">
-                                    <path d="M650,440 Q710,380 730,300" fill="none" stroke="#f97316" stroke-width="2.5" stroke-dasharray="8 4" marker-end="url(#sy-arr-orange)" class="sy-flow-path sy-animated"/>
-                                    <rect x="690" y="365" width="36" height="22" rx="11" fill="#f97316"/>
-                                    <text x="708" y="381" text-anchor="middle" fill="white" font-size="11" font-weight="800" font-family="Inter, sans-serif">F3</text>
-                                    <text x="745" y="400" text-anchor="start" fill="#f97316" font-size="9" font-weight="600" font-family="Inter, sans-serif" opacity="0.7">Données complémentaires</text>
-                                </g>
-
-                                <!-- F6 : PA-E ↔ PPF (bidirectionnel) -->
+                                <!-- F6 : Cycle de vie CDAR — PA-E ↔ PPF ↔ PA-R (bidirectionnel) -->
                                 <g class="sy-flow-group" data-flow="f6">
+                                    <!-- PA-E → PPF -->
                                     <path d="M295,300 Q295,420 460,460" fill="none" stroke="#8b5cf6" stroke-width="2" stroke-dasharray="6 3" marker-end="url(#sy-arr-purple)" class="sy-flow-path sy-animated"/>
+                                    <!-- PPF → PA-E -->
                                     <path d="M460,475 Q295,435 295,315" fill="none" stroke="#8b5cf6" stroke-width="2" stroke-dasharray="6 3" marker-end="url(#sy-arr-purple)" class="sy-flow-path sy-animated-reverse"/>
+                                    <!-- PPF → PA-R -->
                                     <path d="M650,460 Q735,420 735,300" fill="none" stroke="#8b5cf6" stroke-width="2" stroke-dasharray="6 3" marker-end="url(#sy-arr-purple)" class="sy-flow-path sy-animated"/>
+                                    <!-- PA-R → PPF -->
                                     <path d="M735,315 Q735,435 650,475" fill="none" stroke="#8b5cf6" stroke-width="2" stroke-dasharray="6 3" marker-end="url(#sy-arr-purple)" class="sy-flow-path sy-animated-reverse"/>
+                                    <!-- Labels -->
                                     <rect x="240" y="380" width="36" height="22" rx="11" fill="#8b5cf6"/>
                                     <text x="258" y="396" text-anchor="middle" fill="white" font-size="11" font-weight="800" font-family="Inter, sans-serif">F6</text>
                                     <rect x="755" y="380" width="36" height="22" rx="11" fill="#8b5cf6"/>
                                     <text x="773" y="396" text-anchor="middle" fill="white" font-size="11" font-weight="800" font-family="Inter, sans-serif">F6</text>
                                 </g>
 
-                                <!-- F10 : E-reporting PA-E → PPF -->
+                                <!-- F10 : Données de transaction — PA → PPF (PAE + PAR) -->
                                 <g class="sy-flow-group" data-flow="f10">
+                                    <!-- Depuis PA-E -->
                                     <path d="M270,300 Q230,470 460,485" fill="none" stroke="#f59e0b" stroke-width="2.5" stroke-dasharray="7 4" marker-end="url(#sy-arr-amber)" class="sy-flow-path sy-animated"/>
+                                    <!-- Depuis PA-R -->
+                                    <path d="M760,300 Q800,470 650,485" fill="none" stroke="#f59e0b" stroke-width="2.5" stroke-dasharray="7 4" marker-end="url(#sy-arr-amber)" class="sy-flow-path sy-animated"/>
+                                    <!-- Labels -->
                                     <rect x="200" y="440" width="42" height="22" rx="11" fill="#f59e0b"/>
                                     <text x="221" y="456" text-anchor="middle" fill="white" font-size="10" font-weight="800" font-family="Inter, sans-serif">F10</text>
-                                    <text x="195" y="475" text-anchor="end" fill="#f59e0b" font-size="9" font-weight="600" font-family="Inter, sans-serif" opacity="0.7">E-reporting</text>
+                                    <rect x="790" y="440" width="42" height="22" rx="11" fill="#f59e0b" opacity="0.8"/>
+                                    <text x="811" y="456" text-anchor="middle" fill="white" font-size="10" font-weight="800" font-family="Inter, sans-serif">F10</text>
+                                    <text x="195" y="475" text-anchor="end" fill="#f59e0b" font-size="9" font-weight="600" font-family="Inter, sans-serif" opacity="0.7">Données de transaction</text>
                                 </g>
 
-                                <!-- F12 : PPF → DGFIP (PIED DU Y) -->
-                                <g class="sy-flow-group" data-flow="f12">
+                                <!-- PPF → DGFiP (PIED DU Y — flux non numéroté, agrégation F1+F6+F10) -->
+                                <g class="sy-flow-group" data-flow="dgfip">
                                     <path d="M555,530 L555,605" fill="none" stroke="#ef4444" stroke-width="3.5" stroke-dasharray="10 5" marker-end="url(#sy-arr-red)" class="sy-flow-path sy-animated"/>
-                                    <rect x="530" y="558" width="50" height="24" rx="12" fill="#ef4444"/>
-                                    <text x="555" y="575" text-anchor="middle" fill="white" font-size="12" font-weight="800" font-family="Inter, sans-serif">F12</text>
+                                    <rect x="565" y="558" width="105" height="24" rx="12" fill="#ef4444"/>
+                                    <text x="617" y="575" text-anchor="middle" fill="white" font-size="10" font-weight="700" font-family="Inter, sans-serif">F1+F6+F10</text>
                                 </g>
 
                                 <!-- Sortie : PA-R → Acheteur -->
@@ -215,19 +228,16 @@
                                 </g>
 
                                 <!-- ═══ Y SHAPE HIGHLIGHT ═══ -->
-                                <!-- Left branch label -->
                                 <g class="sy-branch-label-group" data-branch="commercial">
                                     <rect x="150" y="130" width="180" height="36" rx="18" fill="rgba(0,167,225,0.1)" stroke="rgba(0,167,225,0.3)" stroke-width="1"/>
                                     <text x="240" y="153" text-anchor="middle" fill="#00a7e1" font-size="11" font-weight="700" font-family="Inter, sans-serif">📄 Circuit de la facture</text>
                                 </g>
 
-                                <!-- Right branch label -->
                                 <g class="sy-branch-label-group" data-branch="fiscal">
                                     <rect x="140" y="340" width="190" height="36" rx="18" fill="rgba(249,115,22,0.1)" stroke="rgba(249,115,22,0.3)" stroke-width="1"/>
                                     <text x="235" y="363" text-anchor="middle" fill="#f97316" font-size="11" font-weight="700" font-family="Inter, sans-serif">📊 Circuit des données</text>
                                 </g>
 
-                                <!-- Stem label -->
                                 <g class="sy-branch-label-group" data-branch="stem">
                                     <rect x="620" y="558" width="170" height="36" rx="18" fill="rgba(239,68,68,0.1)" stroke="rgba(239,68,68,0.3)" stroke-width="1"/>
                                     <text x="705" y="581" text-anchor="middle" fill="#ef4444" font-size="11" font-weight="700" font-family="Inter, sans-serif">🏛️ Pied du Y → DGFiP</text>
@@ -245,6 +255,7 @@
                             </svg>
                         </div>
 
+
                         <!-- LÉGENDE -->
                         <div class="sy-legend" id="sy-legend">
                             <h3>Les deux branches</h3>
@@ -252,7 +263,11 @@
                             <div class="flux-legend-cat">📄 Branche commerciale</div>
                             <div class="flux-legend-item" data-flow="f2">
                                 <span class="flux-pill" style="background:#00a7e1;">F2</span>
-                                <div><strong>Facture complète</strong><br><span>PA-E → PA-R (document natif)</span></div>
+                                <div><strong>Factures (format socle)</strong><br><span>PA-E → PA-R (UBL/CII/FX)</span></div>
+                            </div>
+                            <div class="flux-legend-item" data-flow="f3">
+                                <span class="flux-pill" style="background:#00a7e1;">F3</span>
+                                <div><strong>Factures (format hors socle)</strong><br><span>PA-E → PA-R (EDI, tiers)</span></div>
                             </div>
 
                             <div class="flux-legend-cat">📊 Branche fiscale</div>
@@ -260,23 +275,19 @@
                                 <span class="flux-pill" style="background:#f97316;">F1</span>
                                 <div><strong>Données réglementaires</strong><br><span>PA-E → PPF</span></div>
                             </div>
-                            <div class="flux-legend-item" data-flow="f3">
-                                <span class="flux-pill" style="background:#f97316;">F3</span>
-                                <div><strong>Données complémentaires</strong><br><span>PPF → PA-R</span></div>
-                            </div>
                             <div class="flux-legend-item" data-flow="f6">
                                 <span class="flux-pill" style="background:#8b5cf6;">F6</span>
                                 <div><strong>Statuts (CDAR)</strong><br><span>PA ↔ PPF ↔ PA (bidirectionnel)</span></div>
                             </div>
                             <div class="flux-legend-item" data-flow="f10">
                                 <span class="flux-pill" style="background:#f59e0b;">F10</span>
-                                <div><strong>E-reporting</strong><br><span>PA → PPF (B2Bi, B2C, paiements)</span></div>
+                                <div><strong>Données de transaction</strong><br><span>PA → PPF (B2Bi, B2C, paiements)</span></div>
                             </div>
 
                             <div class="flux-legend-cat">🏛️ Pied du Y</div>
-                            <div class="flux-legend-item" data-flow="f12">
-                                <span class="flux-pill" style="background:#ef4444;">F12</span>
-                                <div><strong>Données fiscales</strong><br><span>PPF → DGFiP (CA3)</span></div>
+                            <div class="flux-legend-item" data-flow="dgfip">
+                                <span class="flux-pill" style="background:#ef4444;">→</span>
+                                <div><strong>PPF → DGFiP</strong><br><span>Agrégation F1+F6+F10 (CA3)</span></div>
                             </div>
 
                             <div class="flux-legend-note">
@@ -310,7 +321,7 @@
                             <div class="sy-step-num">3</div>
                             <div class="sy-step-content">
                                 <h4>La PA émettrice <span class="sy-step-tag sy-step-tag--red">nœud critique</span></h4>
-                                <p>La PA-E effectue <strong>6 niveaux de contrôles</strong>, extrait les données → PPF (F1), consulte l'annuaire (F8), et transmet la facture à la PA-R (F2).</p>
+                                <p>La PA-E effectue <strong>6 niveaux de contrôles</strong>, extrait les données → PPF (F1), consulte l'annuaire (F11), et transmet la facture à la PA-R (F2 ou F3).</p>
                                 <div class="sy-controls-grid">
                                     <div class="sy-control"><span>①</span> Syntaxiques — XML bien formé, XSD</div>
                                     <div class="sy-control"><span>②</span> Sémantiques — BT obligatoires</div>
@@ -325,7 +336,7 @@
                             <div class="sy-step-num">4</div>
                             <div class="sy-step-content">
                                 <h4>La PA réceptrice</h4>
-                                <p>Reçoit la facture (F2), peut convertir le format (CII → UBL…), et met à disposition du destinataire.</p>
+                                <p>Reçoit la facture (F2 en format socle ou F3 en format hors socle), peut convertir le format (CII → UBL…), et met à disposition du destinataire.</p>
                             </div>
                         </div>
                         <div class="sy-step">
@@ -351,7 +362,7 @@
                     <div class="triple-grid">
                         <div class="objective-card"><div class="objective-icon">📄</div><h3>Flux 1</h3><p><strong>PA-E → PPF</strong><br>Données réglementaires extraites (SIREN, montants, TVA, type…)</p></div>
                         <div class="objective-card"><div class="objective-icon">🔄</div><h3>Flux 6</h3><p><strong>PA ↔ PPF</strong><br>Statuts obligatoires : Déposée (200), Refusée (210), Encaissée (212), Rejetée (213)</p></div>
-                        <div class="objective-card"><div class="objective-icon">📊</div><h3>Flux 10</h3><p><strong>PA → PPF</strong><br>E-reporting : B2Bi, B2C, paiements</p></div>
+                        <div class="objective-card"><div class="objective-icon">📊</div><h3>Flux 10</h3><p><strong>PA → PPF</strong><br>Données de transaction : B2Bi, B2C, paiements</p></div>
                     </div>
 
                     <div class="callout callout--info">
@@ -368,16 +379,16 @@
                         <thead><tr><th>Flux reçu</th><th>Source</th><th>Contenu</th></tr></thead>
                         <tbody>
                             <tr><td><strong>F1</strong></td><td>PA-E → PPF</td><td>Données réglementaires de la facture</td></tr>
-                            <tr><td><strong>F6</strong></td><td>PA → PPF</td><td>Statuts obligatoires (200, 210, 212, 213)</td></tr>
-                            <tr><td><strong>F10</strong></td><td>PA → PPF</td><td>E-reporting (B2Bi, B2C, paiements)</td></tr>
+                            <tr><td><strong>F6</strong></td><td>PA ↔ PPF</td><td>Statuts obligatoires (200, 210, 212, 213)</td></tr>
+                            <tr><td><strong>F10</strong></td><td>PA → PPF</td><td>Données de transaction (B2Bi, B2C, paiements)</td></tr>
                         </tbody>
                     </table></div>
 
                     <div class="sy-steps" style="margin-top:1.5rem;">
                         <div class="sy-step"><div class="sy-step-num">1</div><div class="sy-step-content"><h4>Contrôle</h4><p>Cohérence des données reçues de toutes les PA</p></div></div>
                         <div class="sy-step"><div class="sy-step-num">2</div><div class="sy-step-content"><h4>Concentre</h4><p>Agrège toutes les données fiscales de toutes les PA</p></div></div>
-                        <div class="sy-step"><div class="sy-step-num">3</div><div class="sy-step-content"><h4>Transmet (F12)</h4><p>Envoie à la DGFiP pour le pré-remplissage TVA (CA3)</p></div></div>
-                        <div class="sy-step"><div class="sy-step-num">4</div><div class="sy-step-content"><h4>Gère l'annuaire</h4><p>Annuaire central des entreprises assujetties (F7/F8/F9)</p></div></div>
+                        <div class="sy-step"><div class="sy-step-num">3</div><div class="sy-step-content"><h4>Transmet</h4><p>Envoie les données agrégées (F1+F6+F10) à la DGFiP pour le pré-remplissage TVA (CA3)</p></div></div>
+                        <div class="sy-step"><div class="sy-step-num">4</div><div class="sy-step-content"><h4>Gère l'annuaire</h4><p>Annuaire central des entreprises assujetties (F11 à F14)</p></div></div>
                     </div>
                 </section>
 
@@ -406,7 +417,7 @@
                         <div class="role-card" style="border-top-color: var(--success);">
                             <h4>✅ Modèle actuel (oct. 2024)</h4>
                             <ul>
-                                <li>Les factures circulent <strong>PA à PA</strong> (F2)</li>
+                                <li>Les factures circulent <strong>PA à PA</strong> (F2/F3)</li>
                                 <li>Le PPF est un <strong>concentrateur de données</strong></li>
                                 <li>Architecture décentralisée → résiliente</li>
                             </ul>
@@ -435,25 +446,25 @@
         var expandBtn = document.getElementById('sy-expand');
         if (!svg || !legend) return;
 
-        // ═══ DATA ═══
+        // ═══ DATA — Corrigé DSE DGFIP v3.1 ═══
         var flowData = {
-            entry: { num: '→',   name: 'Émission',                 dir: 'Fournisseur → PA-E',  desc: 'Le SI de l\'émetteur transmet la facture à sa PA' },
-            f1:    { num: 'F1',  name: 'Données réglementaires',   dir: 'PA-E → PPF',          desc: 'Extraction des données fiscales (SIREN, TVA, montants…)' },
-            f2:    { num: 'F2',  name: 'Facture complète',          dir: 'PA-E → PA-R',         desc: 'Document natif (UBL/CII/Factur-X) — branche commerciale' },
-            f3:    { num: 'F3',  name: 'Données complémentaires',   dir: 'PPF → PA-R',          desc: 'Informations supplémentaires pour le destinataire' },
-            f6:    { num: 'F6',  name: 'Statuts (CDAR)',            dir: 'PA ↔ PPF ↔ PA',       desc: 'Cycle de vie bidirectionnel (200, 210, 212, 213…)' },
-            f10:   { num: 'F10', name: 'E-reporting',               dir: 'PA → PPF',            desc: 'B2Bi (10.1/10.2), B2C (10.3), paiements (10.4)' },
-            f12:   { num: 'F12', name: 'Données fiscales',          dir: 'PPF → DGFiP',         desc: 'Pied du Y — agrégation pour pré-remplissage CA3' },
-            exit:  { num: '→',   name: 'Réception',                 dir: 'PA-R → Acheteur',     desc: 'Mise à disposition dans le SI du destinataire' }
+            entry: { num: '→',   name: 'Émission',                    dir: 'Fournisseur → PA-E',  desc: 'Le SI de l\'émetteur transmet la facture à sa PA' },
+            f1:    { num: 'F1',  name: 'Données réglementaires',      dir: 'PA-E → PPF',          desc: 'Extraction des données fiscales (SIREN, TVA, montants…)' },
+            f2:    { num: 'F2',  name: 'Factures (format socle)',      dir: 'PA-E → PA-R',         desc: 'UBL/CII/Factur-X — branche commerciale' },
+            f3:    { num: 'F3',  name: 'Factures (format hors socle)', dir: 'PA-E → PA-R',         desc: 'EDI ou format tiers convenu — branche commerciale' },
+            f6:    { num: 'F6',  name: 'Cycle de vie (CDAR)',          dir: 'PA ↔ PPF ↔ PA',       desc: 'Statuts bidirectionnels (200, 210, 212, 213…)' },
+            f10:   { num: 'F10', name: 'Données de transaction',       dir: 'PA → PPF',            desc: 'B2Bi (10.1/10.2), B2C (10.3), paiements (10.4)' },
+            dgfip: { num: '→',   name: 'Données fiscales agrégées',    dir: 'PPF → DGFiP',         desc: 'Pied du Y — agrégation F1+F6+F10 pour CA3' },
+            exit:  { num: '→',   name: 'Réception',                    dir: 'PA-R → Acheteur',     desc: 'Mise à disposition dans le SI du destinataire' }
         };
 
         var actorData = {
-            fournisseur: { num: '👤',  name: 'Fournisseur (Émetteur)',     dir: 'Crée la facture dans son SI',         desc: 'ERP / logiciel de facturation → transmet à sa PA-E' },
-            'pa-e':      { num: '🔷',  name: 'PA d\'Émission (PA-E)',      dir: '6 contrôles + extraction F1 + envoi F2', desc: 'Nœud critique : valide, extrait, route la facture' },
-            ppf:         { num: '🏛️', name: 'PPF — Portail Public',       dir: 'Concentrateur fiscal + Annuaire',     desc: 'Ne voit JAMAIS la facture. Reçoit F1, F6, F10 → F12 DGFiP' },
-            'pa-r':      { num: '🔷',  name: 'PA de Réception (PA-R)',     dir: 'Reçoit F2 + convertit si besoin',     desc: 'Met la facture à disposition du destinataire' },
-            acheteur:    { num: '👤',  name: 'Acheteur (Destinataire)',     dir: 'Vérifie + rapproche + statuts',       desc: 'Approuve, refuse ou met en litige via F6' },
-            dgfip:       { num: '🏛️', name: 'DGFiP',                      dir: 'Reçoit F12 du PPF',                   desc: 'Pré-remplissage déclaration TVA (CA3)' }
+            fournisseur: { num: '👤',  name: 'Fournisseur (Émetteur)',     dir: 'Crée la facture dans son SI',              desc: 'ERP / logiciel de facturation → transmet à sa PA-E' },
+            'pa-e':      { num: '🔷',  name: 'PA d\'Émission (PA-E)',      dir: '6 contrôles + extraction F1 + envoi F2/F3', desc: 'Nœud critique : valide, extrait, route la facture' },
+            ppf:         { num: '🏛️', name: 'PPF — Portail Public',       dir: 'Concentrateur fiscal + Annuaire',          desc: 'Ne voit JAMAIS la facture. Reçoit F1, F6, F10 → DGFiP' },
+            'pa-r':      { num: '🔷',  name: 'PA de Réception (PA-R)',     dir: 'Reçoit F2/F3 + convertit si besoin',       desc: 'Met la facture à disposition du destinataire' },
+            acheteur:    { num: '👤',  name: 'Acheteur (Destinataire)',     dir: 'Vérifie + rapproche + statuts',            desc: 'Approuve, refuse ou met en litige via F6' },
+            dgfip:       { num: '🏛️', name: 'DGFiP',                      dir: 'Reçoit les données agrégées du PPF',       desc: 'Pré-remplissage déclaration TVA (CA3)' }
         };
 
         // ═══ TOOLTIP ═══
@@ -518,7 +529,6 @@
 
             actor.addEventListener('mouseenter', function(e) {
                 showTip(data, e);
-                // Highlight connected flows
                 actor.classList.add('actor-active');
             });
             actor.addEventListener('mousemove', moveTip);
@@ -566,7 +576,6 @@
             document.getElementById('sy-fs-container').appendChild(clone);
             document.body.style.overflow = 'hidden';
 
-            // Tooltip dans le clone
             var fsTip = clone.querySelector('.flux-tooltip');
             var fsTNum = clone.querySelector('#sy-tooltip-num');
             var fsTName = clone.querySelector('#sy-tooltip-name');
@@ -587,7 +596,6 @@
             }
             function hideFsTip() { if(fsTip) fsTip.setAttribute('opacity','0'); }
 
-            // Flows dans fullscreen
             clone.querySelectorAll('.sy-flow-group').forEach(function(g) {
                 var fid = g.dataset.flow;
                 var data = flowData[fid]; if(!data) return;
@@ -602,7 +610,6 @@
                 g.addEventListener('mouseleave', function() { clone.classList.remove('flux-highlight'); clone.querySelectorAll('.flow-active').forEach(function(el){el.classList.remove('flow-active');}); hideFsTip(); });
             });
 
-            // Actors dans fullscreen
             clone.querySelectorAll('.sy-actor').forEach(function(actor) {
                 var aid = actor.dataset.actor;
                 var data = actorData[aid]; if(!data) return;
@@ -617,7 +624,6 @@
                 actor.addEventListener('mouseleave', function() { hideFsTip(); });
             });
 
-            // Close
             function closeFS() { ov.classList.add('closing'); document.body.style.overflow=''; setTimeout(function(){ov.remove();},250); document.removeEventListener('keydown',escH); }
             function escH(e) { if(e.key==='Escape') closeFS(); }
             document.getElementById('sy-fs-close').addEventListener('click', closeFS);

@@ -71,3 +71,55 @@ const Animations = {
 };
 
 document.addEventListener('DOMContentLoaded', () => Animations.init());
+
+// ═══ SCROLL SPY — Sidebar active section tracking ═══
+(function() {
+    const sidebarLinks = document.querySelectorAll('.sidebar-link');
+    if (!sidebarLinks.length) return;
+
+    // Récupère les sections cibles
+    const sections = [];
+    sidebarLinks.forEach(function(link) {
+        const href = link.getAttribute('href');
+        if (href && href.startsWith('#')) {
+            const section = document.getElementById(href.substring(1));
+            if (section) sections.push({ el: section, link: link });
+        }
+    });
+
+    if (!sections.length) return;
+
+    let ticking = false;
+
+    function updateActiveLink() {
+        // Hauteur du header fixe (nav)
+        const offset = 120;
+        const scrollY = window.scrollY || window.pageYOffset;
+
+        let current = sections[0]; // fallback = première section
+
+        for (let i = sections.length - 1; i >= 0; i--) {
+            if (scrollY >= sections[i].el.offsetTop - offset) {
+                current = sections[i];
+                break;
+            }
+        }
+
+        sidebarLinks.forEach(function(link) {
+            link.classList.remove('active');
+        });
+        current.link.classList.add('active');
+
+        ticking = false;
+    }
+
+    window.addEventListener('scroll', function() {
+        if (!ticking) {
+            window.requestAnimationFrame(updateActiveLink);
+            ticking = true;
+        }
+    }, { passive: true });
+
+    // Init au chargement
+    updateActiveLink();
+})();
