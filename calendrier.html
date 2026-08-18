@@ -7,9 +7,7 @@
     <link rel="icon" href="./assets/favicon-Fluxym-V2.png" sizes="32x32" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Miriam+Libre:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./css/main.css">
-    <link rel="stylesheet" href="./css/components.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./css/pages.css">
 </head>
 <body>
@@ -22,8 +20,8 @@
                 <a href="./index.html">Accueil</a> <span>/</span> <span>Niveau 1 — Découverte</span>
             </div>
             <span class="hero-badge">Niveau 1 — Découverte</span>
-            <h1>Quand suis-je concerné ?</h1>
-            <p>Le calendrier définitif, les catégories d'entreprise et les grandes dates de la réforme.</p>
+            <h1>Quand suis-je concerné&nbsp;?</h1>
+            <p>Les échéances d'émission et de réception, les catégories d'entreprise et les principales étapes de la réforme.</p>
         </div>
     </header>
 
@@ -36,9 +34,9 @@
                     <ul class="sidebar-nav">
                         <li><a href="#countdown" class="sidebar-link active">Compte à rebours</a></li>
                         <li><a href="#historique" class="sidebar-link">Historique législatif</a></li>
-                        <li><a href="#timeline" class="sidebar-link">Les 3 grandes dates</a></li>
+                        <li><a href="#timeline" class="sidebar-link">Les échéances</a></li>
                         <li><a href="#categories" class="sidebar-link">Ma catégorie</a></li>
-                        <li><a href="#reception-emission" class="sidebar-link">Réception vs Émission</a></li>
+                        <li><a href="#reception-emission" class="sidebar-link">Réception vs émission</a></li>
                         <li><a href="#montee-charge" class="sidebar-link">Montée en charge</a></li>
                         <li><a href="#tolerances" class="sidebar-link">Tolérances</a></li>
                     </ul>
@@ -53,275 +51,219 @@
 
             <article class="page-content">
 
-                <!-- COUNTDOWN -->
                 <section id="countdown" class="content-section">
                     <h2>Compte à rebours</h2>
                     <div class="countdown-grid">
                         <div class="countdown-card countdown-card--primary">
-                            <h3>Vague 1 — Réception obligatoire pour TOUS</h3>
+                            <h3>1er septembre 2026 — Réception</h3>
                             <div class="countdown-timer" data-target="2026-09-01T00:00:00">
                                 <div class="cd-unit"><span class="cd-number" id="cd1-days">---</span><span class="cd-label">jours</span></div>
                                 <div class="cd-unit"><span class="cd-number" id="cd1-hours">--</span><span class="cd-label">heures</span></div>
                                 <div class="cd-unit"><span class="cd-number" id="cd1-mins">--</span><span class="cd-label">minutes</span></div>
                             </div>
-                            <p class="countdown-date">1er septembre 2026</p>
+                            <p class="countdown-date">Réception obligatoire pour tous les assujettis concernés</p>
                         </div>
                         <div class="countdown-card countdown-card--secondary">
-                            <h3>Vague 2 — Émission obligatoire pour TOUS</h3>
+                            <h3>1er septembre 2027 — Émission</h3>
                             <div class="countdown-timer" data-target="2027-09-01T00:00:00">
                                 <div class="cd-unit"><span class="cd-number" id="cd2-days">---</span><span class="cd-label">jours</span></div>
                                 <div class="cd-unit"><span class="cd-number" id="cd2-hours">--</span><span class="cd-label">heures</span></div>
                                 <div class="cd-unit"><span class="cd-number" id="cd2-mins">--</span><span class="cd-label">minutes</span></div>
                             </div>
-                            <p class="countdown-date">1er septembre 2027</p>
+                            <p class="countdown-date">Émission obligatoire pour les PME, TPE et micro-entreprises</p>
                         </div>
                     </div>
                 </section>
 
-                <!-- HISTORIQUE -->
                 <section id="historique" class="content-section">
                     <h2>L'historique législatif</h2>
-                    <p>La facturation électronique obligatoire est le fruit d'un long processus :</p>
+                    <p>Le calendrier actuel résulte de plusieurs textes successifs. Les dates historiques ci-dessous ne remplacent pas les échéances en vigueur présentées plus bas.</p>
 
                     <div class="legal-timeline">
                         <div class="lt-item">
                             <div class="lt-year">2020</div>
                             <div class="lt-content">
-                                <h4>Rapport exploratoire de la DGFiP</h4>
-                                <p>Recommande la généralisation du e-invoicing B2B, inspiré par le modèle italien.</p>
+                                <h4>Loi de finances pour 2021 — article 195</h4>
+                                <p>La loi n° 2020-1721 du 29 décembre 2020 habilite le Gouvernement à généraliser la facturation électronique et la transmission des données de transaction et de paiement.</p>
                             </div>
                         </div>
                         <div class="lt-item">
-                            <div class="lt-year">2021</div>
+                            <div class="lt-year">Sept. 2021</div>
                             <div class="lt-content">
-                                <h4>Loi de finances 2021 — Art. 195</h4>
-                                <p>Habilite le gouvernement à légiférer par ordonnance pour imposer la facturation électronique et le e-reporting.</p>
+                                <h4>Ordonnance n° 2021-1190</h4>
+                                <p>L'ordonnance met en œuvre l'habilitation et organise la généralisation de la facturation électronique entre assujettis ainsi que la transmission des données à l'administration.</p>
                             </div>
                         </div>
                         <div class="lt-item">
                             <div class="lt-year">Août 2022</div>
                             <div class="lt-content">
-                                <h4>Loi n°2022-1157 — Art. 26</h4>
-                                <p>Fixe le cadre juridique. Calendrier initial : juil. 2024 (GE), jan. 2025 (ETI), jan. 2026 (PME/TPE).</p>
+                                <h4>Loi n° 2022-1157 — article 26</h4>
+                                <p>La loi de finances rectificative pour 2022 inscrit notamment les articles 289 bis, 290, 290 A et 290 B du CGI. Le calendrier initial prévoyait un démarrage progressif à partir de juillet 2024.</p>
                             </div>
                         </div>
                         <div class="lt-item">
                             <div class="lt-year">Oct. 2022</div>
                             <div class="lt-content">
-                                <h4>Décret n°2022-1299 + Arrêté</h4>
-                                <p>Textes réglementaires définissant les normes techniques de transmission.</p>
+                                <h4>Décret n° 2022-1299</h4>
+                                <p>Le décret du 7 octobre 2022 précise les modalités d'émission, de réception, de transmission et d'immatriculation des plateformes.</p>
                             </div>
                         </div>
                         <div class="lt-item lt-item--alert">
                             <div class="lt-year">Déc. 2023</div>
                             <div class="lt-content">
-                                <h4>LdF 2024 — Art. 91 : Report ⚠️</h4>
-                                <p>Report de toutes les échéances de ~2 ans. Temps supplémentaire pour les entreprises et les PA.</p>
+                                <h4>Loi de finances pour 2024 — article 91</h4>
+                                <p>Le calendrier est réorganisé autour de deux échéances principales&nbsp;: réception pour tous en septembre 2026, puis émission généralisée en septembre 2027.</p>
                             </div>
                         </div>
                         <div class="lt-item lt-item--alert">
                             <div class="lt-year">Oct. 2024</div>
                             <div class="lt-content">
-                                <h4>Réorientation stratégique majeure ⚠️</h4>
-                                <p>Le PPF ne fait plus transiter les factures. Il se concentre sur l'<strong>annuaire central</strong> et le <strong>concentrateur de données</strong>. Les factures circulent directement de PA à PA (le « schéma en Y »).</p>
+                                <h4>Réorientation du dispositif</h4>
+                                <p>Le portail public de facturation est recentré sur l'annuaire central et la collecte des données. Les factures sont échangées entre plateformes selon le schéma en Y.</p>
                             </div>
                         </div>
                         <div class="lt-item lt-item--success">
-                            <div class="lt-year">2025</div>
+                            <div class="lt-year">2026</div>
                             <div class="lt-content">
-                                <h4>LdF 2025 + Concertation + PLF 2026</h4>
-                                <p>Calendrier en deux vagues confirmé. 60+ réunions DGFiP/AFNOR, 250+ participants. Spécifications v3.1 publiées.</p>
+                                <h4>Loi de finances pour 2026</h4>
+                                <p>La loi n° 2026-103 du 19 février 2026 précise notamment le régime des sanctions et les obligations liées à la réception et aux plateformes agréées.</p>
                             </div>
                         </div>
                     </div>
                 </section>
 
-                <!-- TIMELINE PRINCIPALE -->
                 <section id="timeline" class="content-section">
-                    <h2>Les 3 grandes dates</h2>
+                    <h2>Les échéances en vigueur</h2>
 
                     <div class="main-timeline">
-                        <!-- Date 1 -->
-                        <div class="mt-block mt-block--optional">
-                            <div class="mt-date">
-                                <span class="mt-month">Juillet</span>
-                                <span class="mt-year-big">2025</span>
-                            </div>
-                            <div class="mt-details">
-                                <span class="mt-badge mt-badge--optional">Phase volontaire</span>
-                                <h3>Ouverture des échanges volontaires</h3>
-                                <p>Les entreprises qui le souhaitent peuvent commencer à émettre et recevoir aux formats de la réforme. Les PA sont opérationnelles, l'annuaire est accessible, les APIs sont ouvertes.</p>
-                                <div class="mt-who">
-                                    <strong>Qui :</strong> Toute entreprise déjà prête, sans obligation.
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Date 2 -->
                         <div class="mt-block mt-block--vague1">
                             <div class="mt-date">
-                                <span class="mt-month">1er Septembre</span>
+                                <span class="mt-month">1er septembre</span>
                                 <span class="mt-year-big">2026</span>
                             </div>
                             <div class="mt-details">
-                                <span class="mt-badge mt-badge--vague1">VAGUE 1 — Jour J</span>
-                                <h3>Réception pour TOUS + Émission GE/ETI</h3>
-                                
+                                <span class="mt-badge mt-badge--vague1">VAGUE 1</span>
+                                <h3>Réception pour tous, émission progressive</h3>
+
                                 <div class="mt-obligation">
-                                    <h4>✅ Obligation de RÉCEPTION — Toutes les entreprises</h4>
+                                    <h4>✅ Obligation de réception — Tous les assujettis concernés</h4>
                                     <ul>
-                                        <li>Avoir choisi une <strong>Plateforme Agréée</strong> de réception</li>
-                                        <li>Être inscrit dans l'<strong>annuaire central</strong> du PPF</li>
-                                        <li>Pouvoir recevoir les formats UBL, CII ou Factur-X</li>
+                                        <li>Avoir choisi une <strong>plateforme agréée</strong> pour recevoir les factures</li>
+                                        <li>Disposer d'une adresse de réception exploitable dans l'<strong>annuaire central</strong></li>
+                                        <li>Être en mesure de recevoir les formats prévus par le dispositif</li>
                                     </ul>
                                 </div>
 
                                 <div class="mt-obligation">
-                                    <h4>✅ Obligation d'ÉMISSION — GE, ETI, organismes publics</h4>
+                                    <h4>✅ Obligation d'émission — GE, ETI et membres d'un assujetti unique</h4>
                                     <ul>
-                                        <li>Émettre toutes les factures B2B au format structuré via une PA</li>
-                                        <li>Inclut les membres d'un <strong>assujetti unique</strong> (art. 256 C CGI)</li>
-                                        <li>Inclut le <strong>e-reporting</strong> (B2Bi, B2C, paiements)</li>
+                                        <li>Émettre les factures électroniques B2B dans les conditions prévues par le CGI</li>
+                                        <li>Transmettre les données de e-reporting correspondant à leur périmètre d'obligation</li>
+                                        <li>Les membres d'un assujetti unique au sens de l'article 256 C du CGI suivent cette échéance, quelle que soit leur taille</li>
                                     </ul>
                                 </div>
 
                                 <div class="callout callout--warning">
                                     <div class="callout-icon">⚠️</div>
-                                    <div class="callout-content">
-                                        Même si vous êtes TPE/PME et pas encore obligé d'émettre, vous <strong>devez pouvoir recevoir</strong> dès cette date.
-                                    </div>
+                                    <div class="callout-content">Une PME, une TPE ou une micro-entreprise qui n'est pas membre d'un assujetti unique peut ne pas encore être tenue d'émettre, mais elle doit pouvoir <strong>recevoir</strong> dès cette date.</div>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Date 3 -->
                         <div class="mt-block mt-block--vague2">
                             <div class="mt-date">
-                                <span class="mt-month">1er Septembre</span>
+                                <span class="mt-month">1er septembre</span>
                                 <span class="mt-year-big">2027</span>
                             </div>
                             <div class="mt-details">
-                                <span class="mt-badge mt-badge--vague2">VAGUE 2 — Généralisation</span>
-                                <h3>Émission obligatoire pour TOUS</h3>
-                                <p>PME, TPE et micro-entreprises doivent à leur tour émettre des factures électroniques et effectuer le e-reporting.</p>
-                                <p><strong>À compter de cette date, 100% des assujettis TVA en France émettent et reçoivent des factures électroniques.</strong></p>
+                                <span class="mt-badge mt-badge--vague2">VAGUE 2</span>
+                                <h3>Émission généralisée</h3>
+                                <p>Les PME, TPE et micro-entreprises qui ne sont pas déjà rattachées à la vague 1 doivent à leur tour émettre des factures électroniques et transmettre les données de e-reporting qui leur incombent.</p>
+                                <p><strong>À cette échéance, tous les assujettis concernés par le dispositif doivent être capables d'émettre et de recevoir selon leur périmètre d'obligation.</strong></p>
                             </div>
                         </div>
                     </div>
                 </section>
 
-                <!-- CATÉGORIES -->
                 <section id="categories" class="content-section">
-                    <h2>Dans quelle catégorie êtes-vous ?</h2>
-                    <p>La taille de l'entreprise détermine votre échéance d'émission. Critères appréciés au <strong>1er janvier 2025</strong> (dernier exercice clos).</p>
+                    <h2>Dans quelle catégorie êtes-vous&nbsp;?</h2>
+                    <p>La catégorie d'entreprise détermine principalement l'échéance d'émission. Les critères ci-dessous reprennent la définition de l'article 51 de la loi n° 2008-776 du 4 août 2008, dite LME.</p>
 
                     <div class="comparison-table">
                         <table>
                             <thead>
-                                <tr>
-                                    <th>Catégorie</th>
-                                    <th>Effectif</th>
-                                    <th>CA annuel</th>
-                                    <th>Total bilan</th>
-                                    <th>Émission</th>
-                                </tr>
+                                <tr><th>Catégorie</th><th>Effectif</th><th>Chiffre d'affaires</th><th>Total bilan</th><th>Émission</th></tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td><strong>Micro</strong></td>
-                                    <td>&lt; 10</td>
-                                    <td>≤ 2 M€</td>
-                                    <td>≤ 2 M€</td>
-                                    <td><span class="badge-date badge-2027">Sept. 2027</span></td>
-                                </tr>
-                                <tr>
-                                    <td><strong>TPE / PME</strong></td>
-                                    <td>&lt; 250</td>
-                                    <td>≤ 50 M€</td>
-                                    <td>≤ 43 M€</td>
-                                    <td><span class="badge-date badge-2027">Sept. 2027</span></td>
-                                </tr>
-                                <tr>
-                                    <td><strong>ETI</strong></td>
-                                    <td>&lt; 5 000</td>
-                                    <td>≤ 1 500 M€</td>
-                                    <td>≤ 2 000 M€</td>
-                                    <td><span class="badge-date badge-2026">Sept. 2026</span></td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Grande Entreprise</strong></td>
-                                    <td>≥ 5 000</td>
-                                    <td>&gt; 1 500 M€</td>
-                                    <td>&gt; 2 000 M€</td>
-                                    <td><span class="badge-date badge-2026">Sept. 2026</span></td>
-                                </tr>
+                                <tr><td><strong>Micro</strong></td><td>&lt; 10</td><td>≤ 2 M€</td><td>≤ 2 M€</td><td><span class="badge-date badge-2027">Sept. 2027</span></td></tr>
+                                <tr><td><strong>PME</strong></td><td>&lt; 250</td><td>≤ 50 M€</td><td>≤ 43 M€</td><td><span class="badge-date badge-2027">Sept. 2027</span></td></tr>
+                                <tr><td><strong>ETI</strong></td><td>&lt; 5 000</td><td>≤ 1 500 M€</td><td>≤ 2 000 M€</td><td><span class="badge-date badge-2026">Sept. 2026</span></td></tr>
+                                <tr><td><strong>Grande entreprise</strong></td><td>≥ 5 000</td><td>&gt; 1 500 M€</td><td>&gt; 2 000 M€</td><td><span class="badge-date badge-2026">Sept. 2026</span></td></tr>
                             </tbody>
                         </table>
                     </div>
 
                     <div class="callout callout--info">
                         <div class="callout-icon">ℹ️</div>
-                        <div class="callout-content">
-                            <strong>Organismes publics :</strong> tous concernés dès septembre 2026, quelle que soit leur taille. Les <strong>membres d'un assujetti unique</strong> sont également alignés sur la Vague 1, même les entités PME/TPE.
-                        </div>
+                        <div class="callout-content"><strong>Attention à la lecture des seuils :</strong> pour les catégories micro, PME et ETI, le critère financier est « chiffre d'affaires <strong>ou</strong> total bilan » en complément de l'effectif. Pour une grande entreprise, le critère est « effectif ≥ 5 000 <strong>ou</strong> chiffre d'affaires &gt; 1 500 M€ <strong>et</strong> total bilan &gt; 2 000 M€ ».</div>
+                    </div>
+                    <div class="callout callout--warning">
+                        <div class="callout-icon">⚠️</div>
+                        <div class="callout-content">Ne figez pas la qualification au « 1er janvier 2025 » sans vérifier le texte applicable à votre situation. L'article 26 de la loi n° 2022-1157 retenait, pour le calendrier initial, une appréciation au 30 juin 2023 sur la base du dernier exercice clos avant cette date. Les changements de catégorie doivent être analysés au niveau de la personne juridique et selon les règles LME applicables.</div>
+                    </div>
+                    <div class="callout callout--info">
+                        <div class="callout-icon">🏛️</div>
+                        <div class="callout-content"><strong>Organismes publics :</strong> leur utilisation de Chorus Pro et les règles de la commande publique constituent une spécificité opérationnelle. Ils ne forment pas, à eux seuls, une catégorie de taille imposant systématiquement l'émission dès septembre 2026&nbsp;: le calendrier de la réforme se lit selon le périmètre juridique et les règles applicables.</div>
                     </div>
                 </section>
 
-                <!-- RÉCEPTION vs ÉMISSION -->
                 <section id="reception-emission" class="content-section">
-                    <h2>Réception vs. Émission : une distinction cruciale</h2>
+                    <h2>Réception et émission&nbsp;: deux obligations distinctes</h2>
                     <div class="comparison-table">
                         <table>
-                            <thead>
-                                <tr>
-                                    <th></th>
-                                    <th>Réception obligatoire</th>
-                                    <th>Émission obligatoire</th>
-                                </tr>
-                            </thead>
+                            <thead><tr><th></th><th>Réception</th><th>Émission</th></tr></thead>
                             <tbody>
-                                <tr><td><strong>Quand</strong></td><td>1er sept. 2026</td><td>Sept. 2026 (GE/ETI) puis sept. 2027 (tous)</td></tr>
-                                <tr><td><strong>Qui</strong></td><td><strong>TOUTES</strong> les entreprises</td><td>Progressive selon la taille</td></tr>
-                                <tr><td><strong>Quoi</strong></td><td>Recevoir des e-factures via une PA</td><td>Émettre au format structuré via une PA</td></tr>
-                                <tr><td><strong>Action</strong></td><td>Choisir une PA + être dans l'annuaire</td><td>Adapter son processus + choisir une PA d'émission</td></tr>
+                                <tr><td><strong>Quand&nbsp;?</strong></td><td>1er septembre 2026</td><td>Septembre 2026 pour la vague 1, puis septembre 2027 pour la vague 2</td></tr>
+                                <tr><td><strong>Qui&nbsp;?</strong></td><td>Tous les assujettis concernés</td><td>GE, ETI et membres d'un assujetti unique, puis PME/TPE/micro</td></tr>
+                                <tr><td><strong>Quoi&nbsp;?</strong></td><td>Recevoir les factures via une adresse active</td><td>Émettre sous forme électronique et transmettre les données exigées</td></tr>
+                                <tr><td><strong>Action&nbsp;?</strong></td><td>Choisir une plateforme agréée et être adressable</td><td>Adapter les processus, les données et l'intégration avec la plateforme</td></tr>
                             </tbody>
                         </table>
                     </div>
                 </section>
 
-                <!-- MONTÉE EN CHARGE -->
                 <section id="montee-charge" class="content-section">
-                    <h2>Phase de montée en charge</h2>
+                    <h2>Préparation et montée en charge</h2>
                     <div class="phase-timeline">
-                        <div class="pt-item"><div class="pt-period">Juil. 2025</div><div class="pt-desc">Ouverture des échanges volontaires. Les PA opérationnelles proposent leurs services.</div></div>
-                        <div class="pt-item"><div class="pt-period">Juil. 2025 → Août 2026</div><div class="pt-desc">Phase de rodage : tests, peuplement de l'annuaire, stabilisation des interopérabilités PA-à-PA.</div></div>
-                        <div class="pt-item pt-item--key"><div class="pt-period">1er sept. 2026</div><div class="pt-desc">Obligation réception (tous) + émission (GE/ETI/organismes publics).</div></div>
-                        <div class="pt-item"><div class="pt-period">Sept. 2026 → Août 2027</div><div class="pt-desc">Montée en charge. Les PME/TPE/micro se préparent à l'émission.</div></div>
-                        <div class="pt-item pt-item--key"><div class="pt-period">1er sept. 2027</div><div class="pt-desc">Obligation d'émission généralisée à tous les assujettis.</div></div>
+                        <div class="pt-item"><div class="pt-period">2025–2026</div><div class="pt-desc">Qualification, concertation, préparation des plateformes et possibilité d'une entrée volontaire anticipée pour les entreprises dont l'obligation d'émission arrive en 2027. La date d'une « phase volontaire » de production ouverte en juillet 2025 n'est pas retenue ici comme fait établi.</div></div>
+                        <div class="pt-item pt-item--key"><div class="pt-period">1er sept. 2026</div><div class="pt-desc">Réception obligatoire pour tous les assujettis concernés, émission obligatoire pour les GE, ETI et membres d'un assujetti unique.</div></div>
+                        <div class="pt-item"><div class="pt-period">Sept. 2026 → août 2027</div><div class="pt-desc">Montée en charge et préparation des PME, TPE et micro-entreprises à leur obligation d'émission.</div></div>
+                        <div class="pt-item pt-item--key"><div class="pt-period">1er sept. 2027</div><div class="pt-desc">Émission obligatoire pour les PME, TPE et micro-entreprises qui ne relèvent pas déjà de la vague 1.</div></div>
+                    </div>
+                    <div class="callout callout--info">
+                        <div class="callout-icon">📌</div>
+                        <div class="callout-content">Un cas particulier concerne le e-reporting d'acquisition des assujettis non établis&nbsp;: certaines transmissions sont reportées au 1er septembre 2027. Ce point doit être distingué de l'obligation générale d'émission.</div>
                     </div>
                 </section>
 
-                <!-- TOLÉRANCES -->
                 <section id="tolerances" class="content-section">
                     <h2>Simplifications et tolérances</h2>
-                    <p>La DGFiP a prévu des mesures de tolérance (courrier ministériel du 29 août 2025) :</p>
+                    <p>Un courrier ministériel du 29 août 2025 a annoncé des mesures visant à alléger les contraintes, clarifier les obligations et faciliter l'adoption du dispositif.</p>
                     <ul class="styled-list">
-                        <li>Accord formel de <strong>désignation des plateformes de réception</strong></li>
-                        <li>Renforcement de l'audit et de la sécurisation des données par les PA</li>
-                        <li>Encadrement de la <strong>portabilité</strong> (faciliter le changement de PA)</li>
-                        <li>Tolérances sur certaines données non réglementaires en phase de démarrage</li>
+                        <li>Accord formel concernant la désignation des plateformes de réception</li>
+                        <li>Renforcement de l'audit et de la sécurisation des données par les plateformes</li>
+                        <li>Encadrement de la portabilité lors d'un changement de plateforme</li>
+                        <li>Tolérances sur certaines données non réglementaires au démarrage</li>
                     </ul>
+                    <div class="callout callout--warning">
+                        <div class="callout-icon">⚠️</div>
+                        <div class="callout-content">Ces mesures d'accompagnement ne constituent ni un report général des échéances ni une suspension des obligations. Vérifiez toujours la rédaction en vigueur des textes et de la doctrine administrative.</div>
+                    </div>
                 </section>
 
                 <nav class="page-nav-bottom">
-                    <a href="./comprendre.html" class="nav-prev">
-                        <span class="nav-label">Page précédente</span>
-                        <span class="nav-title">← 📖 Comprendre</span>
-                    </a>
-                    <a href="./en-bref.html" class="nav-next">
-                        <span class="nav-label">Page suivante</span>
-                        <span class="nav-title">⚡ En bref →</span>
-                    </a>
+                    <a href="./comprendre.html" class="nav-prev"><span class="nav-label">Page précédente</span><span class="nav-title">← 📖 Comprendre</span></a>
+                    <a href="./en-bref.html" class="nav-next"><span class="nav-label">Page suivante</span><span class="nav-title">⚡ En bref →</span></a>
                 </nav>
             </article>
         </div>
