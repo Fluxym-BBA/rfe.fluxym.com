@@ -158,7 +158,7 @@ const GeneratorUI = {
         { key: "catD", label: "D — Intermédiaires & mandataires", cases: ["11","12","15","16"] },
         { key: "catE", label: "E — Sous-traitance & co-traitance", cases: ["13","14"] },
         { key: "catF", label: "F — Auto-facturation & mandat", cases: ["17a","17b","19a","19b"] },
-        { key: "catG", label: "G — Notes de débit", cases: ["18"] },
+        { key: "catG", label: "G — Factures complémentaires & rectificatives", cases: ["18"] },
         { key: "catH", label: "H — Acomptes & factures de solde", cases: ["20","21","32"] },
         { key: "catI", label: "I — Escompte", cases: ["22a","22b"] },
         { key: "catJ", label: "J — Cas spéciaux", cases: ["23","6","28","30","24","25","26","27","29","42"] },
