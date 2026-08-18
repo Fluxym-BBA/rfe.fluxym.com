@@ -56,7 +56,7 @@ const UBLGenerator = {
         "19a": { typeCode: "380", profile: "S1", zip: false, agentVendeur: true },
         "19b": { typeCode: "389", profile: "S1", zip: false, agentVendeur: true, selfBilling: true },
 
-        // --- G. NOTES DE DEBIT ---
+        // --- G. FACTURES COMPLEMENTAIRES (383 interdit par BR-FR-04) ---
         "18":  { typeCode: "380", profile: "S1", zip: false, billingRef: true },
 
         // --- H. ACOMPTE & SOLDE ---
