@@ -5,7 +5,7 @@
 
 Ce document décrit le projet tel qu'il est réellement, à la date ci-dessus.
 Il remplace intégralement la version du 24/03/2026, qui décrivait une
-architecture abandonnée (voir § 9).
+architecture abandonnée (voir § 9) .
 
 ---
 
