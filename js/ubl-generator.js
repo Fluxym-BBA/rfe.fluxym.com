@@ -57,7 +57,7 @@ const UBLGenerator = {
         "19b": { typeCode: "389", profile: "S1", zip: false, agentVendeur: true, selfBilling: true },
 
         // --- G. NOTES DE DEBIT ---
-        "18":  { typeCode: "383", profile: "S1", zip: false, billingRef: true },
+        "18":  { typeCode: "380", profile: "S1", zip: false, billingRef: true },
 
         // --- H. ACOMPTE & SOLDE ---
         "20":  { typeCode: "386", profile: "S1", zip: false },
