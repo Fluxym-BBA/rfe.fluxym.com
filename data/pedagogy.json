@@ -102,8 +102,8 @@
     "badge": "Cas 12",
     "title": "Commissionnaire à la vente",
     "desc1": "<strong>Scénario :</strong> Un intermédiaire agit pour le compte du vendeur.",
-    "desc2": "<strong>Particularités :</strong> BG-11 = agent de vendeur. Deux factures.",
-    "info": "Type 380. BG-11. Génère : 2 lignes vins (Margaux + St-Émilion) = 24 100€ HT.",
+    "desc2": "<strong>Particularités :</strong> EXT-FR-FE-BG-03 = agent de vendeur (tiers agissant pour le compte du vendeur). Deux factures.",
+        "info": "Type 380. Bloc EXT-FR-FE-BG-03. Génère : 2 lignes vins (Margaux + St-Émilion) = 24 100€ HT.",
     "target": "esker",
     "label": "Cas 12 — Commissionnaire à la vente"
   },
@@ -120,7 +120,7 @@
     "badge": "Cas 14",
     "title": "Co-traitance B2B",
     "desc1": "<strong>Scénario :</strong> Co-traitant facture, mandataire du marché vise.",
-    "desc2": "<strong>Particularités :</strong> Cadre S6. BG-11 = mandataire.",
+    "desc2": "<strong>Particularités :</strong> Cadre S6. Le mandataire du marché est porté par EXT-FR-FE-BG-03 (agent de vendeur), et non par BG-11 qui désigne le représentant fiscal.",
     "info": "Type 380. Cadre S6. Génère : tuyauterie 280m = 51 800€ HT.",
     "target": "esker",
     "label": "Cas 14 — Co-traitance (S6)"
