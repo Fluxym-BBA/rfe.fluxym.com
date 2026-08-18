@@ -1,5 +1,6 @@
 /**
- * NAV.JS — Navigation glassmorphism + Footer + Scroll Spy
+ * NAV.JS — Re·Form·E — Navigation + Footer + Scroll Spy
+ * Le badge de référentiel est alimenté par data/referentiel.json (source unique).
  */
 const SiteNav = {
     currentPage: window.location.pathname.split('/').pop() || 'index.html',
@@ -22,7 +23,7 @@ const SiteNav = {
             <a href="./index.html" class="nav-logo">
                 <img src="./assets/fluxym_logo_2018_sansdescriptif_blanc.png" alt="Fluxym" class="nav-logo-img" id="nav-logo-img">
                 <span class="nav-logo-separator">|</span>
-                <span class="nav-logo-text">E-Invoicing Academy</span>
+                <span class="nav-logo-text">Re·Form·E</span>
             </a>
             <button class="nav-toggle" aria-label="Menu">
                 <span></span><span></span><span></span>
@@ -83,19 +84,6 @@ const SiteNav = {
     },
 
     renderFooter() {
-        async renderReferentielBadge() {
-        const badge = document.getElementById('footer-ref-badge');
-        if (!badge) return;
-        try {
-            const res = await fetch('./data/referentiel.json');
-            if (!res.ok) return;
-            const ref = (await res.json()).referentiel;
-            badge.textContent = `🏷️ Socle : ${ref.socleNormatif} · Specs DGFiP ${ref.specsExternes} · site v${ref.versionSite}`;
-            badge.setAttribute('title', `Référentiel mis à jour le ${ref.dateMiseAJour}`);
-        } catch (err) {
-            /* le libellé par défaut du lien reste affiché */
-        }
-    },
         const footer = document.getElementById('main-footer');
         if (!footer) return;
         footer.innerHTML = `
@@ -105,7 +93,7 @@ const SiteNav = {
                     <div class="footer-brand">
                         <div class="footer-logo">
                             <img src="./assets/fluxym_logo_2018_sansdescriptif_blanc.png" alt="Fluxym" class="footer-logo-img" />
-                            <span class="footer-title">E-Invoicing Academy</span>
+                            <span class="footer-title">Re·Form·E</span>
                         </div>
                         <p class="footer-desc">Un projet éducatif de <strong>Fluxym</strong>, cabinet de conseil spécialisé dans la dématérialisation des processus financiers.</p>
                     </div>
@@ -175,6 +163,20 @@ const SiteNav = {
                 </div>
             </div>
         </div>`;
+    },
+
+    async renderReferentielBadge() {
+        const badge = document.getElementById('footer-ref-badge');
+        if (!badge) return;
+        try {
+            const res = await fetch('./data/referentiel.json');
+            if (!res.ok) return;
+            const ref = (await res.json()).referentiel;
+            badge.textContent = `🏷️ Socle : ${ref.socleNormatif} · Specs DGFiP ${ref.specsExternes} · site v${ref.versionSite}`;
+            badge.setAttribute('title', `Référentiel mis à jour le ${ref.dateMiseAJour}`);
+        } catch (err) {
+            /* le libellé par défaut du lien reste affiché */
+        }
     },
 
     setActiveLink() {
