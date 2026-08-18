@@ -144,13 +144,13 @@
     "label": "Cas 16 — Débours (notaire)"
   },
   "18": {
-    "badge": "Cas 18",
-    "title": "Notes de débit",
-    "desc1": "<strong>Scénario :</strong> Ajustement à la hausse d'une facture existante.",
-    "desc2": "<strong>Particularités :</strong> Type 383. BG-3 = référence facture d'origine.",
-    "info": "Type 383. BG-3. Génère : 2 lignes (carburant + zones difficiles) = 1 735€ HT.",
-    "target": "esker",
-    "label": "Cas 18 — Note de débit (383)"
+        "badge": "Cas 18",
+        "title": "Facture complémentaire (ex-note de débit)",
+        "desc1": "<strong>Scénario :</strong> Refacturation de surcoûts sur une prestation déjà facturée (surcharge carburant, zones difficiles). La facture d'origine était juste : on ne la corrige pas, on facture en plus.",
+        "desc2": "<strong>Particularités :</strong> Le code <strong>383 (note de débit) est interdit en RFE</strong> : BR-FR-04 ferme la liste à 16 codes et 383 n'y figure pas. On émet donc une <strong>facture 380</strong> avec BG-3 en référence informative. Si la facture d'origine avait été <em>erronée</em>, il faudrait une rectificative 384 avec BG-3 obligatoire et le seul différentiel.",
+        "info": "Type 380. BG-3 informatif. Cadre S1. Génère : 2 lignes (carburant + zones difficiles) = 1 735€ HT.",
+        "target": "esker",
+        "label": "Cas 18 — Facture complémentaire (ex-note de débit)"
   },
   "20": {
     "badge": "Cas 20",
