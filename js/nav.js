@@ -7,6 +7,7 @@ const SiteNav = {
     init() {
         this.renderNav();
         this.renderFooter();
+        this.renderReferentielBadge();
         this.setActiveLink();
         this.initMobileMenu();
         this.initScrollEffect();
@@ -73,6 +74,7 @@ const SiteNav = {
                         <li><a href="./glossaire.html">📖 Glossaire A→Z</a></li>
                         <li><a href="./faq.html">❓ FAQ</a></li>
                         <li><a href="./ressources.html">📚 Liens & outils</a></li>
+                        <li><a href="./referentiel.html">🏷️ Référentiel & versions</a></li>
                     </ul>
                 </li>
                 <li><a href="./generateur.html" class="nav-link nav-cta">🧪 Générateur</a></li>
@@ -81,6 +83,19 @@ const SiteNav = {
     },
 
     renderFooter() {
+        async renderReferentielBadge() {
+        const badge = document.getElementById('footer-ref-badge');
+        if (!badge) return;
+        try {
+            const res = await fetch('./data/referentiel.json');
+            if (!res.ok) return;
+            const ref = (await res.json()).referentiel;
+            badge.textContent = `🏷️ Socle : ${ref.socleNormatif} · Specs DGFiP ${ref.specsExternes} · site v${ref.versionSite}`;
+            badge.setAttribute('title', `Référentiel mis à jour le ${ref.dateMiseAJour}`);
+        } catch (err) {
+            /* le libellé par défaut du lien reste affiché */
+        }
+    },
         const footer = document.getElementById('main-footer');
         if (!footer) return;
         footer.innerHTML = `
@@ -137,6 +152,7 @@ const SiteNav = {
                             <li><a href="./glossaire.html">Glossaire A→Z</a></li>
                             <li><a href="./faq.html">FAQ</a></li>
                             <li><a href="./ressources.html">Liens & outils</a></li>
+                            <li><a href="./referentiel.html">🏷️ Référentiel & versions</a></li>
                             <li><a href="./generateur.html">🧪 Générateur UBL</a></li>
                         </ul>
                     </div>
@@ -144,7 +160,7 @@ const SiteNav = {
                         <h4>Sources officielles</h4>
                         <ul>
                             <li><a href="https://www.impots.gouv.fr/professionnel/facturation-electronique" target="_blank">DGFiP ↗</a></li>
-                            <li><a href="https://www.boutique.afnor.org/fr-fr/norme/xp-z12012/formats-et-profils-des-messages-factures-et-statuts-de-cycle-de-vie-constit/fa212486/444122" target="_blank">AFNOR ↗</a></li>
+                            <li><a href="https://www.boutique.afnor.org/fr-fr/norme/xp-z12012/formats-et-profils-des-messages-factures-et-statuts-de-cycle-de-vie-constit/fa301169/601641" target="_blank">AFNOR ↗</a></li>
                             <li><a href="https://chorus-pro.gouv.fr" target="_blank">Chorus Pro ↗</a></li>
                             <li><a href="https://www.fnfe-mpe.org" target="_blank">FNFE-MPE ↗</a></li>
                             <li><a href="https://piste.gouv.fr" target="_blank">PISTE ↗</a></li>
@@ -153,7 +169,8 @@ const SiteNav = {
                     </div>
                 </div>
                 <div class="footer-bottom">
-                    <p>© ${new Date().getFullYear()} Fluxym — E-Invoicing Academy. Contenu éducatif basé sur les spécifications DGFIP v3.1 et normes AFNOR XP Z12-012/013/014.</p>
+                    <p>© ${new Date().getFullYear()} Fluxym — Re·Form·E. Contenu éducatif basé sur les normes AFNOR XP Z12-012/013/014 et les spécifications externes DGFiP.</p>
+                    <p><a href="./referentiel.html" class="footer-referentiel" id="footer-ref-badge">🏷️ Voir le référentiel utilisé</a></p>
                     <p class="footer-disclaimer">Ce site est un outil pédagogique. Il ne se substitue pas aux textes officiels. Consultez <a href="https://www.impots.gouv.fr/professionnel/facturation-electronique" target="_blank">impots.gouv.fr</a> pour les informations à valeur légale.</p>
                 </div>
             </div>
