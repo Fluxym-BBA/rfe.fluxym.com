@@ -1,0 +1,125 @@
+{
+  "referentiel": {
+    "versionSite": "2.0",
+    "dateMiseAJour": "2026-08-18",
+    "socleNormatif": "AFNOR PR XP Z12-012 V1.4",
+    "socleDate": "2026-06-30",
+    "specsExternes": "3.2",
+    "resume": "L'intégralité des contenus techniques de ce site (champs BT/BG, règles de gestion, codes, cycle de vie, cas d'usage du générateur) est alignée sur la version 1.4 des normes AFNOR publiée le 30 juin 2026.",
+    "normes": [
+      {
+        "code": "PR XP Z12-012",
+        "version": "1.4",
+        "date": "2026-06-30",
+        "titre": "Formats et profils des messages Factures et Statuts de cycle de vie",
+        "usage": "Champs BT/BG, profils, règles de gestion, listes de codes, statuts",
+        "statut": "Socle principal du site"
+      },
+      {
+        "code": "PR XP Z12-013",
+        "version": "1.4",
+        "date": "2026-06-30",
+        "titre": "API et modalités d'échange entre plateformes",
+        "usage": "Page APIs & technique",
+        "statut": "Référencée"
+      },
+      {
+        "code": "PR XP Z12-014",
+        "version": "1.4",
+        "date": "2026-06-30",
+        "titre": "Cas d'usage de la facturation électronique",
+        "usage": "Cas d'usage du générateur UBL",
+        "statut": "Référencée"
+      },
+      {
+        "code": "Spécifications externes DGFiP",
+        "version": "3.2",
+        "date": "2026-06-30",
+        "titre": "Dossier de spécifications externes B2B",
+        "usage": "Flux, e-reporting, cycle de vie",
+        "statut": "Référencée"
+      },
+      {
+        "code": "EN 16931-1",
+        "version": "2017+A1:2019",
+        "date": "2019-10-01",
+        "titre": "Modèle sémantique de données de la facture électronique",
+        "usage": "Socle des champs BT/BG et des règles BR",
+        "statut": "Norme européenne"
+      }
+    ],
+    "telechargements": [
+      {
+        "libelle": "XP Z12-012 — Annexes A et B + exemples (V1.4)",
+        "description": "L'archive complète : description Excel de tous les formats et profils de facture et de statuts de cycle de vie, les règles de gestion, les listes de codes, complétée des exemples de factures et de cycles de vie. Versions FR et ENG.",
+        "type": "ZIP",
+        "url": "https://fnfe-mpe.org/wp-content/uploads/2026/07/FR_and_ENG_XP_Z12-012_Annexes_A_et_B_EXEMPLES_V1.4.zip",
+        "hebergeur": "FNFE-MPE",
+        "recommande": true
+      },
+      {
+        "libelle": "XP Z12-012 — norme complète",
+        "description": "Consultation et téléchargement gratuits du document normatif sur la boutique AFNOR (création de compte requise).",
+        "type": "PDF",
+        "url": "https://www.boutique.afnor.org/fr-fr/norme/xp-z12012/formats-et-profils-des-messages-factures-et-statuts-de-cycle-de-vie-constit/fa301169/601641",
+        "hebergeur": "AFNOR",
+        "recommande": false
+      },
+      {
+        "libelle": "Toutes les ressources normatives",
+        "description": "Page de référence de la FNFE-MPE regroupant l'ensemble des normes, annexes et exemples de la réforme.",
+        "type": "LIEN",
+        "url": "https://fnfe-mpe.org/ressources/",
+        "hebergeur": "FNFE-MPE",
+        "recommande": false
+      },
+      {
+        "libelle": "Spécifications externes B2B DGFiP",
+        "description": "Versions applicables des spécifications externes et normes pour la facturation électronique.",
+        "type": "LIEN",
+        "url": "https://www.impots.gouv.fr/specifications-externes-b2b",
+        "hebergeur": "DGFiP",
+        "recommande": false
+      }
+    ],
+    "couverture": [
+      { "domaine": "Générateur UBL — arithmétique (BR-S-08, BR-CO-10/15/16)", "etat": "complet", "detail": "52 cas vérifiés, 0 écart" },
+      { "domaine": "Codes type de facture BT-3 (BR-FR-04)", "etat": "complet", "detail": "16 codes sur 16" },
+      { "domaine": "Cadres de facturation BT-23 (BR-FR-08)", "etat": "complet", "detail": "20 valeurs sur 20" },
+      { "domaine": "Champs BT/BG", "etat": "partiel", "detail": "175 champs documentés sur 477" },
+      { "domaine": "Règles de gestion", "etat": "partiel", "detail": "80 règles documentées sur 312" },
+      { "domaine": "Motifs de statuts du cycle de vie", "etat": "partiel", "detail": "3 motifs sur 50" }
+    ],
+    "changelog": [
+      {
+        "version": "2.0",
+        "date": "2026-08-18",
+        "socle": "XP Z12-012 V1.4",
+        "titre": "Alignement sur la V1.4 des normes AFNOR",
+        "items": [
+          "Passage du socle normatif de la V1.2 à la V1.4 (publiée le 30/06/2026)",
+          "Spécifications externes DGFiP : 3.1 → 3.2",
+          "BR-FR-08 : ajout des cadres de facturation B9, S9 et M9 (factures bidirectionnelles)",
+          "BR-FR-08 : le cadre de facturation BT-23 devient normativement obligatoire",
+          "BT-147 (rabais sur le prix de l'article) : cardinalité 0..1 → 0..n",
+          "BT-151 (code de type de TVA de l'article) : cardinalité 1..1 → 0..1",
+          "BT-1 : longueur portée de 20 à 35 caractères pour le flux 1, applicable au 01/09/2026",
+          "Générateur UBL : retrait du code type 383 (note de débit), non autorisé par BR-FR-04",
+          "Création de cette page de transparence sur le référentiel utilisé"
+        ]
+      }
+    ],
+    "nouveautesV14": [
+      { "sujet": "Factures bidirectionnelles", "detail": "Nouveau cas d'auto-facturation dans les deux sens. Cadres BT-23 = B9/S9/M9, règles BR-FR-BD-* et BR-FR-BDMAP-01. Seul cas où un prix unitaire négatif est autorisé.", "statut": "a-traiter" },
+      { "sujet": "Taxes hors TVA dans les charges", "detail": "Prise en charge de l'éco-contribution (DEEE) via BT-177, BT-177-1, BT-193, BT-193-1 et la liste de codes 5153.", "statut": "a-traiter" },
+      { "sujet": "Taux de change", "detail": "Taux de change entre devise de facture et devise de comptabilité : BT-167, BT-167-1, BT-167-2 et EXT-FR-FE-192.", "statut": "a-traiter" },
+      { "sujet": "INCOTERM à la ligne", "detail": "Nouveau bloc EXT-FR-FE-BG-15 avec EXT-FR-FE-193 et 194.", "statut": "a-traiter" },
+      { "sujet": "Motifs de remise", "detail": "Motifs de remise en texte et en code : EXT-FR-FE-195 et 196. Règle de sommation BR-FR-MAP-30.", "statut": "a-traiter" },
+      { "sujet": "Dates de références", "detail": "Dates du bon de commande, du contrat et de l'avis d'expédition : EXT-FR-FE-197 à 201.", "statut": "a-traiter" },
+      { "sujet": "BR-FR-31 et BR-FR-32", "detail": "Ajout de la valeur BCINT sur BR-FR-31 ; BR-FR-32 impose un SIREN sur 9 chiffres (BT-29d).", "statut": "a-traiter" },
+      { "sujet": "Nouveaux motifs de refus B2G", "detail": "RETRAIT_MAN_SERV, ST_CT_NON_DECLAR, SUPPR_COMP_AVOIR, TRANSF_PMNT_REGIE, CONTACT_ACHTR.", "statut": "a-traiter" },
+      { "sujet": "Flux 11 — Annuaire", "detail": "Modèle de données de l'annuaire transmissible aux entreprises.", "statut": "a-traiter" },
+      { "sujet": "E-reporting flux 10", "detail": "G6.20 remplace G6.25 ; G7.07 remplace G6.16.", "statut": "a-traiter" }
+    ]
+  }
+}
