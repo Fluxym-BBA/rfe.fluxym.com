@@ -1,11 +1,21 @@
 {
   "meta": {
-    "version": "1.0",
-    "lastUpdate": "2026-03-21",
-    "source": "AFNOR XP Z12-012 v1.2 + Dossier Specs DGFiP v3.1 + BR-France_CTC + Codelists Factur-X",
+    "version": "2.0",
+    "lastUpdate": "2026-08-18",
+    "source": "AFNOR PR XP Z12-012 V1.4 (30/06/2026) + Dossier Specs DGFiP v3.2 + BR-France_CTC + Codelists Factur-X",
     "description": "Référentiel exhaustif des champs BT/BG de la facture électronique française. PARTIE 1 : métadonnées et références juridiques.",
-    "profiles": ["MINIMUM", "BASIC WL", "BASIC", "EN16931", "EXTENDED-CTC-FR", "EXTENDED"],
-    "formats": ["UBL 2.1 (Invoice / CreditNote)", "UN/CEFACT CII (CrossIndustryInvoice)"],
+    "profiles": [
+      "MINIMUM",
+      "BASIC WL",
+      "BASIC",
+      "EN16931",
+      "EXTENDED-CTC-FR",
+      "EXTENDED"
+    ],
+    "formats": [
+      "UBL 2.1 (Invoice / CreditNote)",
+      "UN/CEFACT CII (CrossIndustryInvoice)"
+    ],
     "parts": {
       "part1": "rfe_01_meta_references_juridiques.txt (ce fichier - renommer en .json)",
       "part2": "rfe_02_regles_validation.txt (règles BR/BR-FR/BR-CO/BR-FR-CO/BR-FR-DEC/BR-FR-MAP)",
