@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Référentiel &amp; versions | E-Invoicing Academy</title>
+    <meta name="description" content="Quelle version des normes AFNOR a servi à construire ce site : socle normatif, couverture, changelog et téléchargement des documents sources.">
+    <link rel="icon" href="./assets/favicon-Fluxym-V2.png" sizes="32x32" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/pages.css">
+</head>
+<body>
+
+    <nav id="main-nav"></nav>
+
+    <header class="page-hero">
+        <div class="page-hero-content">
+            <div class="breadcrumb">
+                <a href="./index.html">Accueil</a> <span>/</span> <span>Ressources</span>
+            </div>
+            <span class="hero-badge" id="ref-hero-badge">Chargement du référentiel…</span>
+            <h1>Référentiel &amp; versions</h1>
+            <p>Sur quelle version des normes ce site est-il construit ? Voici la réponse, sans zone d'ombre.</p>
+        </div>
+    </header>
+
+    <main class="page-main">
+        <div class="page-container page-layout">
+
+            <aside class="page-sidebar">
+                <div class="sidebar-sticky">
+                    <h4>Sur cette page</h4>
+                    <ul class="sidebar-nav">
+                        <li><a href="#socle" class="sidebar-link active">Socle normatif</a></li>
+                        <li><a href="#telechargements" class="sidebar-link">Télécharger les sources</a></li>
+                        <li><a href="#couverture" class="sidebar-link">Couverture du site</a></li>
+                        <li><a href="#nouveautes" class="sidebar-link">Nouveautés V1.4</a></li>
+                        <li><a href="#changelog" class="sidebar-link">Historique du site</a></li>
+                        <li><a href="#methode" class="sidebar-link">Méthode &amp; limites</a></li>
+                    </ul>
+                    <div class="sidebar-nav-pages">
+                        <h4>Ressources</h4>
+                        <a href="./glossaire.html" class="sidebar-page">📖 Glossaire A→Z</a>
+                        <a href="./faq.html" class="sidebar-page">❓ FAQ</a>
+                        <a href="./ressources.html" class="sidebar-page">📚 Liens &amp; outils</a>
+                        <a href="./referentiel.html" class="sidebar-page active">🏷️ Référentiel &amp; versions</a>
+                    </div>
+                </div>
+            </aside>
+
+            <article class="page-content">
+
+                <section id="socle" class="content-section">
+                    <h2>Le socle normatif de ce site</h2>
+                    <p id="ref-resume">Chargement…</p>
+
+                    <div class="ref-key-cards" id="ref-key-cards"></div>
+
+                    <div class="callout callout--info">
+                        <div class="callout-icon">ℹ️</div>
+                        <div class="callout-content">
+                            La réforme évolue par versions successives. Un contenu pédagogique qui ne dit pas
+                            <strong>sur quelle version il s'appuie</strong> est inexploitable en production.
+                            Cette page est donc mise à jour à chaque changement de socle.
+                        </div>
+                    </div>
+
+                    <h3>Documents de référence utilisés</h3>
+                    <div class="comparison-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Document</th>
+                                    <th>Version</th>
+                                    <th>Date</th>
+                                    <th>Intitulé</th>
+                                    <th>Usage sur le site</th>
+                                </tr>
+                            </thead>
+                            <tbody id="ref-normes-body"></tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <section id="telechargements" class="content-section">
+                    <h2>Télécharger les documents sources</h2>
+                    <p>
+                        Les normes de la commission AFNOR Facture Électronique sont
+                        <strong>téléchargeables gratuitement</strong>. Nous ne réhébergeons pas ces documents :
+                        les liens ci-dessous pointent vers les sources officielles, ce qui vous garantit
+                        de toujours récupérer la dernière version publiée.
+                    </p>
+
+                    <div class="ref-downloads" id="ref-downloads"></div>
+
+                    <div class="callout callout--success">
+                        <div class="callout-icon">✅</div>
+                        <div class="callout-content">
+                            L'archive <strong>Annexes A et B + exemples</strong> est la ressource la plus utile :
+                            elle contient la description Excel de tous les formats et profils de facture,
+                            les statuts de cycle de vie, les règles de gestion, les listes de codes,
+                            ainsi que des <strong>exemples concrets de factures et de cycles de vie</strong>,
+                            en français et en anglais.
+                        </div>
+                    </div>
+                </section>
+
+                <section id="couverture" class="content-section">
+                    <h2>Ce que ce site couvre — et ce qu'il ne couvre pas encore</h2>
+                    <p>
+                        Par honnêteté intellectuelle, voici l'état réel de la couverture du référentiel V1.4.
+                        Tout ce que le site affirme est conforme à la norme ; en revanche il ne couvre
+                        pas encore l'intégralité de son périmètre.
+                    </p>
+                    <div class="comparison-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Domaine</th>
+                                    <th>État</th>
+                                    <th>Détail</th>
+                                </tr>
+                            </thead>
+                            <tbody id="ref-couverture-body"></tbody>
+                        </table>
+                    </div>
+                    <div class="callout callout--warning">
+                        <div class="callout-icon">⚠️</div>
+                        <div class="callout-content">
+                            Pour tout usage à valeur contractuelle ou fiscale, référez-vous
+                            <strong>toujours au document normatif d'origine</strong> et non à ce site.
+                        </div>
+                    </div>
+                </section>
+
+                <section id="nouveautes" class="content-section">
+                    <h2>Ce qu'apporte la V1.4</h2>
+                    <p>
+                        Publiée le 30 juin 2026, la version 1.4 introduit plusieurs évolutions structurantes.
+                        Le statut indiqué correspond à leur intégration dans ce site.
+                    </p>
+                    <div class="ref-novelties" id="ref-nouveautes"></div>
+                </section>
+
+                <section id="changelog" class="content-section">
+                    <h2>Historique des mises à jour du site</h2>
+                    <div class="ref-logs" id="ref-changelog"></div>
+                </section>
+
+                <section id="methode" class="content-section">
+                    <h2>Méthode &amp; limites</h2>
+                    <h3>Comment l'alignement est vérifié</h3>
+                    <div class="numbered-blocks">
+                        <div class="nb-item">
+                            <span class="nb-num">1</span>
+                            <div><strong>Extraction</strong> — l'Annexe A de la norme est lue feuille par feuille pour en tirer l'inventaire des champs, des règles, des codes et des statuts.</div>
+                        </div>
+                        <div class="nb-item">
+                            <span class="nb-num">2</span>
+                            <div><strong>Comparaison</strong> — cet inventaire est confronté aux référentiels du site (<code>rfe_02_regles.json</code>, <code>rfe_03_champs.json</code>) pour détecter les écarts de valeur et de cardinalité.</div>
+                        </div>
+                        <div class="nb-item">
+                            <span class="nb-num">3</span>
+                            <div><strong>Contrôle arithmétique</strong> — chaque cas d'usage du générateur est testé sur les règles de cohérence des montants : BR-S-08, BR-CO-10, BR-CO-15 et BR-CO-16.</div>
+                        </div>
+                        <div class="nb-item">
+                            <span class="nb-num">4</span>
+                            <div><strong>Publication</strong> — les écarts corrigés sont consignés dans l'historique ci-dessus, et la couverture restante est affichée en toute transparence.</div>
+                        </div>
+                    </div>
+
+                    <h3>Limites assumées</h3>
+                    <ul class="styled-list">
+                        <li>Ce site est un <strong>outil pédagogique</strong>, il ne se substitue pas aux textes officiels.</li>
+                        <li>Les factures produites par le générateur sont des <strong>jeux d'essai</strong>, sans valeur fiscale.</li>
+                        <li>Certaines cardinalités sont volontairement présentées comme obligatoires lorsque les règles <code>BR-FR-*</code> les imposent en France, alors que la cardinalité sémantique de la norme reste optionnelle.</li>
+                        <li>Les normes sont des <strong>normes expérimentales</strong> (préfixe XP) : elles peuvent encore évoluer.</li>
+                    </ul>
+
+                    <div class="callout callout--info">
+                        <div class="callout-icon">📮</div>
+                        <div class="callout-content">
+                            Vous constatez un écart avec la norme ? Signalez-le, la correction sera tracée
+                            dans l'historique de cette page.
+                        </div>
+                    </div>
+                </section>
+
+                <nav class="page-nav-bottom">
+                    <a href="./ressources.html" class="nav-prev">
+                        <span class="nav-label">Page précédente</span>
+                        <span class="nav-title">← 📚 Liens &amp; outils</span>
+                    </a>
+                    <a href="./generateur.html" class="nav-next">
+                        <span class="nav-label">Mettre en pratique</span>
+                        <span class="nav-title">🧪 Générateur UBL →</span>
+                    </a>
+                </nav>
+            </article>
+        </div>
+    </main>
+
+    <footer id="main-footer"></footer>
+    <script src="./js/nav.js"></script>
+    <script src="./js/animations.js"></script>
+    <script src="./js/referentiel.js"></script>
+</body>
+</html>
