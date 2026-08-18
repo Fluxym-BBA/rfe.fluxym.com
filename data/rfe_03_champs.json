@@ -11,7 +11,7 @@
           "description": "Identifiant unique séquentiel attribué par le vendeur.",
           "type": "Identifiant",
           "maxLength": 35,
-          "truncatedTo": 20,
+          "truncatedTo": 35,
           "cardinality": "1..1",
           "mandatory": true,
           "format": "both",
@@ -22,7 +22,7 @@
             "BR-FR-CO-02",
             "BR-FR-MAP-01"
           ],
-          "tips": "Le PPF tronque à 20 car. dans le flux 1. Privilégiez des numéros courts. Numérotation séquentielle sans trou.",
+          "tips": "Depuis le 1er septembre 2026, la longueur transmise dans le flux 1 est portée de 20 à 35 caractères. Numérotation séquentielle sans trou ni doublon.",
           "legalRefs": [
             "BOI-TVA-DECLA-30-20-20-10",
             "CGI-289"
@@ -2491,13 +2491,14 @@
           "id": "BT-147",
           "name": "Remise de prix",
           "type": "Montant",
-          "cardinality": "0..1",
+          "cardinality": "0..n",
           "mandatory": false,
           "format": "both",
           "rules": [
-            "BR-FR-DEC-03"
+            "BR-FR-DEC-03",
+            "BR-FR-MAP-30"
           ],
-          "tips": "= BT-148 - BT-146.",
+          "tips": "= BT-148 - BT-146. Depuis la V1.4 : plusieurs rabais possibles sur le prix unitaire (0..n). BR-FR-MAP-30 impose de les sommer en une valeur unique pour les flux 1 et 10.1. Motifs disponibles en texte (EXT-FR-FE-195) et en code (EXT-FR-FE-196).",
           "legalRefs": [],
           "description": "Remise appliquée sur le prix brut de l'article (BT-148) pour obtenir le prix net (BT-146).",
           "example": "5.50",
@@ -2694,8 +2695,8 @@
           "id": "BT-151",
           "name": "Code type TVA article",
           "type": "Code",
-          "cardinality": "1..1",
-          "mandatory": true,
+          "cardinality": "0..1",
+          "mandatory": false,
           "format": "both",
           "values": {
             "S": "Normal",
@@ -2716,7 +2717,7 @@
           ],
           "description": "Code de catégorie de TVA applicable à l'article facturé sur cette ligne. Obligatoire (BR-CO-04).",
           "formatDetail": "Code UNTDID 5305 (subset EN16931)",
-          "tips": "Doit correspondre à une ventilation TVA (BG-23) existante dans la facture."
+          "tips": "Doit correspondre à une ventilation TVA (BG-23) existante dans la facture. Depuis la V1.4 : cardinalité ramenée à 0..1 pour permettre l'absence du code sur les lignes de type INFORMATION et GROUP. Reste requis sur les lignes DETAIL ou non qualifiées."
         },
         {
           "id": "BT-152",
