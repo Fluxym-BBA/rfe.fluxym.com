@@ -32,7 +32,7 @@
                 <div class="highlight-content">
                     <div class="highlight-icon">🔧</div>
                     <div class="highlight-text">
-                        <h3>Explorez les 175 champs de la facture électronique</h3>
+                        <h3>Explorez les 175 champs documentés de la facture électronique</h3>
                         <p>Chaque champ BT/BG documenté avec ses contraintes techniques (longueur, format, valeurs autorisées), ses règles de validation associées et ses références juridiques expliquées en langage clair. Recherche, filtres et liens croisés avec les cas d'usage.</p>
                     </div>
                 </div>
@@ -111,10 +111,10 @@
                             <thead><tr><th>Règle</th><th>Description</th></tr></thead>
                             <tbody>
                                 <tr><td><strong>BR-FR-01</strong></td><td>Taux TVA autorisés : 20%, 10%, 8.5%, 5.5%, 2.1%, 0%</td></tr>
-                                <tr><td><strong>BR-FR-04</strong></td><td>Codes types autorisés : 380, 381, 384, 386, 389, 393…</td></tr>
+                                <tr><td><strong>BR-FR-04</strong></td><td>Codes types autorisés (16 valeurs, liste fermée) : <strong>380</strong> facture, <strong>381</strong> avoir, <strong>384</strong> rectificative, <strong>386</strong> acompte, <strong>389</strong> auto-facturation, <strong>393</strong> affacturée, <strong>261</strong>, <strong>262</strong>, <strong>396</strong>, <strong>471</strong>, <strong>472</strong>, <strong>473</strong>, <strong>500</strong>, <strong>501</strong>, <strong>502</strong>, <strong>503</strong>. Tout autre code UNTDID 1001 est refusé.</td></tr>
                                 <tr><td><strong>BR-FR-05</strong></td><td>3 notes obligatoires : <strong>PMT</strong> (pénalité 40€), <strong>PMD</strong> (pénalités propres), <strong>AAB</strong> (escompte)</td></tr>
                                 <tr><td><strong>BR-FR-07</strong></td><td>Codification des notes : ACC, AAI, ADN, SUR, ABL, CUS, BLU, BAR</td></tr>
-                                <tr><td><strong>BR-FR-08</strong></td><td>Cadres de facturation autorisés : B1, S1, M1, B2, S2, M2, S3, B4, S4, M4, S5, S6, B7, S7, B8, S8, M8</td></tr>
+                                <tr><td><strong>BR-FR-08</strong></td><td>Cadre de facturation (BT-23) <strong>obligatoire</strong> depuis la V1.4. 20 valeurs : B1, S1, M1, B2, S2, M2, S3, B4, S4, M4, S5, S6, B7, S7, B8, S8, M8 + <strong>B9, S9, M9</strong> (factures bidirectionnelles, nouveauté V1.4)</td></tr>
                                 <tr><td><strong>BR-FR-10</strong></td><td>SIREN vendeur (BT-30) obligatoire et actif dans l'annuaire PPF</td></tr>
                                 <tr><td><strong>BR-FR-11</strong></td><td>En B2B : SIREN acheteur (BT-47) obligatoire et actif dans l'annuaire</td></tr>
                             </tbody>
