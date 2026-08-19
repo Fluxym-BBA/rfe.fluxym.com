@@ -17,7 +17,8 @@
    "socleTechnique distingue la marque (l'inscription DGFiP) de l'infrastructure reellement operee. Chaque PA listee est immatriculee en son nom propre et a passe ses propres tests d'interoperabilite : une relation de marque blanche ne dispense pas de l'immatriculation. L'axe sert donc a mesurer la concentration technique reelle du marche, pas a contester un agrement.",
    "indiceRelationDansLeNom est un simple marqueur lexical ('by', 'powered by', 'a X company') releve dans le nom officiel : il signale une piste de rattachement a verifier, jamais une conclusion.",
    "Correction du 19/08/2026 : le pays etait mal deduit lorsqu'un nom de rue contient un nom de pays (cas SAGE, 10 Place de Belgique a La Garenne-Colombes, classee a tort en Belgique). La detection ne s'applique plus qu'en fin d'adresse.",
-   "Correction du 19/08/2026 : l'appariement automatique avait attribue a ESKER le SIREN 751992926 (entite de 1 a 2 salaries) au lieu du SIREN 331518498 (SA ESKER, creee en 1985, 250 a 499 salaries). Verification manuelle effectuee."
+   "Correction du 19/08/2026 : l'appariement automatique avait attribue a ESKER le SIREN 751992926 (entite de 1 a 2 salaries) au lieu du SIREN 331518498 (SA ESKER, creee en 1985, 250 a 499 salaries). Verification manuelle effectuee.",
+   "ESALINK : l'appariement SIREN reste incertain (481412245, code 61.90Z). Le repertoire recense a Bezannes ESALINK GROUP (953718855, 2023, 66.30Z) et ESALINK B2B SERVICES (832449219, 2017). Entite immatriculee a confirmer."
   ],
   "axes": {
    "socleTechnique.type": [
@@ -47,10 +48,11 @@
    ]
   },
   "couverture": {
-   "identiteEntreprise_haute": 52,
+   "identiteEntreprise_haute": 54,
    "identiteEntreprise_a_verifier": 20,
-   "identiteEntreprise_absente": 91,
-   "qualificationMarche_faite": 10,
+   "identiteEntreprise_absente": 89,
+   "qualificationMarche_faite": 21,
+   "fournisseursDeSocle_identifies": 7,
    "note": "Appariement automatique nom commercial DGFiP -> SIREN via l'API Recherche d'entreprises. 'haute' = nom exact + code postal ou departement concordant. 'moyenne' = nom exact seul, a verifier. Les entites etrangeres (44) ne sont pas dans le repertoire SIRENE."
   }
  },
@@ -1562,12 +1564,18 @@
    "vague": "V1 (déc. 2025 – janv. 2026)",
    "adresse": "al. Jana Pawła II 39a Kraków / Pologne",
    "pays": "Pologne",
-   "siteWeb": null,
+   "siteWeb": "https://www.comarch.fr/",
    "contact": null,
-   "segmentCible": [],
-   "familleOrigine": [],
-   "verticale": null,
-   "logiquePositionnement": null,
+   "segmentCible": [
+    "eti",
+    "grands_comptes"
+   ],
+   "familleOrigine": [
+    "erp",
+    "edi"
+   ],
+   "verticale": "generaliste",
+   "logiquePositionnement": "Coherence moyenne a forte : la facturation electronique est une brique parmi beaucoup d'autres dans un portefeuille IT genereliste. Comarch opere toutefois un reseau EDI etabli en Europe.",
    "anneeCreation": null,
    "effectif": null,
    "siren": null,
@@ -1577,21 +1585,41 @@
    "empreinteGeo": null,
    "peppolAP": null,
    "modeleDistribution": [],
-   "descriptionFiche": null,
-   "sourcesEnrichissement": [],
+   "descriptionFiche": "Groupe informatique polonais base a Cracovie, immatricule le 18/12/25. Portefeuille tres large : EDI, ERP, plateformes d'engagement client, solutions IT sectorielles.",
+   "sourcesEnrichissement": [
+    {
+     "champ": "immatriculation",
+     "source": "Liste officielle DGFiP — impots.gouv.fr",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    },
+    {
+     "champ": "positionnement",
+     "source": "https://www.comarch.fr/",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    }
+   ],
    "confiance": "non_qualifie",
    "socleTechnique": {
-    "type": null,
-    "operateurSocle": null,
-    "preuve": null,
-    "source": null,
-    "confiance": "non_qualifie"
+    "type": "propre",
+    "operateurSocle": "Comarch",
+    "preuve": "Editeur de ses propres plateformes (EDI, ERP, engagement client)",
+    "source": "comarch.fr",
+    "confiance": "moyenne"
    },
    "fournisseurDeSocle": null,
    "modeDistributionSocle": [],
-   "groupeCapitalistique": null,
-   "relationCapitalistique": null,
-   "partenariats": []
+   "groupeCapitalistique": "Comarch SA (Cracovie, societe cotee a la Bourse de Varsovie)",
+   "relationCapitalistique": "cotee",
+   "partenariats": [],
+   "natureEntite": "extension_demat",
+   "perimetreFonctionnel": [
+    "emission",
+    "reception",
+    "ereporting"
+   ],
+   "lot": 2
   },
   {
    "nom": "CYCLOPE",
@@ -1934,20 +1962,20 @@
    "descriptionFiche": "PME parisienne dont l'entite juridique DOCOON (enseigne DPII) est creee en 1986, 20 a 49 salaries, code activite conseil en systemes informatiques. Le groupe porte une seconde immatriculation distincte, DOCOON IMMO / FREEDZ (Marseille, creee en 2010), dediee a l'immobilier.",
    "sourcesEnrichissement": [
     {
-     "champ": "identite_entreprise",
-     "source": "API Recherche d'entreprises (INSEE/RNE)",
-     "dateReleve": "2026-08-19",
-     "confiance": "haute"
-    },
-    {
      "champ": "immatriculation",
      "source": "Liste officielle DGFiP — impots.gouv.fr",
      "dateReleve": "2026-08-19",
      "confiance": "haute"
     },
     {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE)",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    },
+    {
      "champ": "positionnement",
-     "source": "a_sourcer — site officiel inaccessible au 19/08/2026",
+     "source": "a_sourcer — site inaccessible au scraping le 19/08/2026",
      "dateReleve": "2026-08-19",
      "confiance": "non_qualifie"
     }
@@ -1977,7 +2005,8 @@
     "reception",
     "ereporting"
    ],
-   "lot": 1
+   "lot": 2,
+   "solutionsCompatiblesPartenaires": null
   },
   {
    "nom": "DOCOON IMMO / FREEDZ",
@@ -1989,34 +2018,71 @@
    "pays": "France",
    "siteWeb": null,
    "contact": null,
-   "segmentCible": [],
-   "familleOrigine": [],
-   "verticale": null,
-   "logiquePositionnement": null,
-   "anneeCreation": null,
+   "segmentCible": [
+    "tpe_pme",
+    "eti"
+   ],
+   "familleOrigine": [
+    "ged"
+   ],
+   "verticale": "immobilier",
+   "logiquePositionnement": "Verticale sectorielle assumee : la meme maison porte une PA generaliste et une PA immobilier. Illustration directe du fait que le nombre d'immatriculations depasse le nombre d'acteurs.",
+   "anneeCreation": "2010",
    "effectif": null,
-   "siren": null,
+   "siren": "523445211",
    "actionnariat": null,
    "typeActionnariat": null,
    "leveeDeFonds": null,
    "empreinteGeo": null,
    "peppolAP": null,
    "modeleDistribution": [],
-   "descriptionFiche": null,
-   "sourcesEnrichissement": [],
+   "descriptionFiche": "Seconde immatriculation du groupe Docoon, creee le 31/05/2010 a Marseille, 20 a 49 salaries, code activite ingenierie et etudes techniques. Portee sur la verticale immobilier sous la marque Freedz.",
+   "sourcesEnrichissement": [
+    {
+     "champ": "immatriculation",
+     "source": "Liste officielle DGFiP — impots.gouv.fr",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    },
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE)",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    },
+    {
+     "champ": "positionnement",
+     "source": "a_sourcer — site inaccessible au scraping le 19/08/2026",
+     "dateReleve": "2026-08-19",
+     "confiance": "non_qualifie"
+    }
+   ],
    "confiance": "non_qualifie",
    "socleTechnique": {
-    "type": null,
-    "operateurSocle": null,
-    "preuve": null,
-    "source": null,
-    "confiance": "non_qualifie"
+    "type": "hybride",
+    "operateurSocle": "Docoon (groupe)",
+    "preuve": "Seconde immatriculation du groupe Docoon, dediee a l'immobilier ; mutualisation du socle a confirmer",
+    "source": "a_sourcer",
+    "confiance": "faible"
    },
    "fournisseurDeSocle": null,
    "modeDistributionSocle": [],
-   "groupeCapitalistique": null,
-   "relationCapitalistique": null,
-   "partenariats": []
+   "groupeCapitalistique": "Docoon (DOCOON, SIREN 338698384) — seconde immatriculation du meme groupe",
+   "relationCapitalistique": "filiale_de_groupe",
+   "partenariats": [],
+   "raisonSociale": "DOCOON IMMO",
+   "dateCreation": "2010-05-31",
+   "trancheEffectif": "20-49",
+   "categorieEntreprise": "PME",
+   "activitePrincipale": "71.12B",
+   "confianceIdentite": "haute",
+   "natureEntite": "extension_demat",
+   "perimetreFonctionnel": [
+    "emission",
+    "reception",
+    "ereporting"
+   ],
+   "lot": 2
   },
   {
    "nom": "DOCPROCESS",
@@ -2028,10 +2094,16 @@
    "pays": "France",
    "siteWeb": null,
    "contact": null,
-   "segmentCible": [],
-   "familleOrigine": [],
-   "verticale": null,
-   "logiquePositionnement": null,
+   "segmentCible": [
+    "eti",
+    "grands_comptes"
+   ],
+   "familleOrigine": [
+    "edi",
+    "o2c"
+   ],
+   "verticale": "generaliste",
+   "logiquePositionnement": "A confirmer : acteur de l'echange de documents B2B en Europe, la PA prolongerait une activite de plateforme d'echange existante.",
    "anneeCreation": "2018",
    "effectif": null,
    "siren": "837863042",
@@ -2041,27 +2113,39 @@
    "empreinteGeo": null,
    "peppolAP": null,
    "modeleDistribution": [],
-   "descriptionFiche": null,
+   "descriptionFiche": "DOCPROCESS FRANCE, creee le 01/03/2018, etablissement a Meylan (38), code activite conseil en systemes informatiques. Immatriculee le 15/12/25.",
    "sourcesEnrichissement": [
     {
-     "champ": "identite_entreprise",
-     "source": "API Recherche d'entreprises (INSEE/RNE) — annuaire-entreprises.data.gouv.fr",
+     "champ": "immatriculation",
+     "source": "Liste officielle DGFiP — impots.gouv.fr",
      "dateReleve": "2026-08-19",
      "confiance": "haute"
+    },
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE)",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    },
+    {
+     "champ": "positionnement",
+     "source": "a_sourcer — site inaccessible au scraping le 19/08/2026",
+     "dateReleve": "2026-08-19",
+     "confiance": "non_qualifie"
     }
    ],
    "confiance": "non_qualifie",
    "socleTechnique": {
-    "type": null,
-    "operateurSocle": null,
-    "preuve": null,
-    "source": null,
-    "confiance": "non_qualifie"
+    "type": "propre",
+    "operateurSocle": "DocProcess",
+    "preuve": "A confirmer : site inaccessible au scraping le 19/08/2026",
+    "source": "a_sourcer",
+    "confiance": "faible"
    },
    "fournisseurDeSocle": null,
    "modeDistributionSocle": [],
-   "groupeCapitalistique": null,
-   "relationCapitalistique": null,
+   "groupeCapitalistique": "DocProcess",
+   "relationCapitalistique": "non_determinable",
    "partenariats": [],
    "raisonSociale": "DOCPROCESS FRANCE",
    "dateCreation": "2018-03-01",
@@ -2069,7 +2153,14 @@
    "categorieEntreprise": "PME",
    "activitePrincipale": "62.02A",
    "dirigeants": [],
-   "confianceIdentite": "haute"
+   "confianceIdentite": "haute",
+   "natureEntite": "extension_demat",
+   "perimetreFonctionnel": [
+    "emission",
+    "reception",
+    "ereporting"
+   ],
+   "lot": 2
   },
   {
    "nom": "DOCUWARE",
@@ -2391,34 +2482,75 @@
    "pays": "France",
    "siteWeb": null,
    "contact": null,
-   "segmentCible": [],
-   "familleOrigine": [],
-   "verticale": null,
-   "logiquePositionnement": null,
-   "anneeCreation": null,
+   "segmentCible": [
+    "eti",
+    "grands_comptes"
+   ],
+   "familleOrigine": [
+    "edi",
+    "tax"
+   ],
+   "verticale": "generaliste",
+   "logiquePositionnement": "Coherence forte : operateur EDI et de conformite fiscale international. Deuxieme cas de double immatriculation d'un meme groupe, ici France + Espagne.",
+   "anneeCreation": "2002",
    "effectif": null,
-   "siren": null,
+   "siren": "444658181",
    "actionnariat": null,
    "typeActionnariat": null,
    "leveeDeFonds": null,
    "empreinteGeo": null,
    "peppolAP": null,
    "modeleDistribution": [],
-   "descriptionFiche": null,
-   "sourcesEnrichissement": [],
+   "descriptionFiche": "Filiale francaise creee le 02/12/2002, 10 a 19 salaries, code activite traitement de donnees et hebergement. Le groupe espagnol EDICOM Group porte une seconde immatriculation distincte a la meme date du 11/12/2025.",
+   "sourcesEnrichissement": [
+    {
+     "champ": "immatriculation",
+     "source": "Liste officielle DGFiP — impots.gouv.fr",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    },
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE)",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    },
+    {
+     "champ": "positionnement",
+     "source": "a_sourcer — site inaccessible au scraping le 19/08/2026",
+     "dateReleve": "2026-08-19",
+     "confiance": "non_qualifie"
+    }
+   ],
    "confiance": "non_qualifie",
    "socleTechnique": {
-    "type": null,
-    "operateurSocle": null,
-    "preuve": null,
-    "source": null,
-    "confiance": "non_qualifie"
+    "type": "propre",
+    "operateurSocle": "EDICOM Group",
+    "preuve": "Filiale francaise operant le socle du groupe espagnol, lui-meme immatricule separement",
+    "source": "liste DGFiP (deux immatriculations distinctes)",
+    "confiance": "moyenne"
    },
    "fournisseurDeSocle": null,
    "modeDistributionSocle": [],
-   "groupeCapitalistique": null,
-   "relationCapitalistique": null,
-   "partenariats": []
+   "groupeCapitalistique": "EDICOM Group (seconde immatriculation, entite espagnole 46980)",
+   "relationCapitalistique": "filiale_de_groupe",
+   "partenariats": [],
+   "raisonSociale": "EDICOM",
+   "dateCreation": "2002-12-02",
+   "trancheEffectif": "10-19",
+   "categorieEntreprise": "PME",
+   "activitePrincipale": "63.11Z",
+   "confianceIdentite": "haute",
+   "natureEntite": "extension_demat",
+   "perimetreFonctionnel": [
+    "emission",
+    "reception",
+    "ereporting"
+   ],
+   "reseaux": [
+    "peppol_ap"
+   ],
+   "lot": 2
   },
   {
    "nom": "EDICOM Group",
@@ -2851,12 +2983,18 @@
    "vague": "V1 (déc. 2025 – janv. 2026)",
    "adresse": "2 Rue Jules Méline 51430 Bezannes",
    "pays": "France",
-   "siteWeb": null,
+   "siteWeb": "https://www.esalink.com/",
    "contact": null,
-   "segmentCible": [],
-   "familleOrigine": [],
-   "verticale": null,
-   "logiquePositionnement": null,
+   "segmentCible": [
+    "tpe_pme",
+    "eti"
+   ],
+   "familleOrigine": [
+    "edi",
+    "o2c"
+   ],
+   "verticale": "generaliste",
+   "logiquePositionnement": "Coherence forte : EsaLink est un operateur de flux B2B qui se positionne en socle pour des editeurs tiers. Cas le mieux documente du role de grossiste : ses 36 partenaires SC dependent de son immatriculation pour acceder au reseau.",
    "anneeCreation": "2005",
    "effectif": null,
    "siren": "481412245",
@@ -2866,27 +3004,43 @@
    "empreinteGeo": null,
    "peppolAP": null,
    "modeleDistribution": [],
-   "descriptionFiche": null,
+   "descriptionFiche": "Operateur de reseau base a Bezannes (51). Sa plateforme agreee est commercialisee sous le nom de produit « Hubtimize e-Invoicing » — le nom declare a la DGFiP (ESALINK) n'est donc pas celui du service. Publie la liste de ses partenaires Solutions Compatibles : 36 editeurs identifies, dont Dolibarr, Zeendoc, Incwo, Nicoka, Karanext, OpenSi, Sodiwin et Sendoc.",
    "sourcesEnrichissement": [
     {
+     "champ": "immatriculation",
+     "source": "Liste officielle DGFiP — impots.gouv.fr",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    },
+    {
      "champ": "identite_entreprise",
-     "source": "API Recherche d'entreprises (INSEE/RNE) — annuaire-entreprises.data.gouv.fr",
+     "source": "API Recherche d'entreprises (INSEE/RNE)",
      "dateReleve": "2026-08-19",
      "confiance": "moyenne"
+    },
+    {
+     "champ": "positionnement",
+     "source": "https://www.esalink.com/",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
     }
    ],
    "confiance": "non_qualifie",
    "socleTechnique": {
-    "type": null,
-    "operateurSocle": null,
-    "preuve": null,
-    "source": null,
-    "confiance": "non_qualifie"
+    "type": "propre",
+    "operateurSocle": "EsaLink (produit « Hubtimize e-Invoicing »)",
+    "preuve": "Plateforme agreee sous la marque produit Hubtimize e-Invoicing, immatriculee le 11/12/2025 ; page publique listant ses partenaires Solutions Compatibles",
+    "source": "https://www.esalink.com/pdp/",
+    "confiance": "haute"
    },
-   "fournisseurDeSocle": null,
-   "modeDistributionSocle": [],
-   "groupeCapitalistique": null,
-   "relationCapitalistique": null,
+   "fournisseurDeSocle": true,
+   "modeDistributionSocle": [
+    "direct",
+    "API/embedded",
+    "via integrateur"
+   ],
+   "groupeCapitalistique": "EsaLink Group (SIREN 953718855, creee le 21/06/2023, code 66.30Z gestion de fonds) avec EsaLink B2B Services (SIREN 832449219, 2017)",
+   "relationCapitalistique": "non_determinable",
    "partenariats": [],
    "raisonSociale": "ESALINK",
    "dateCreation": "2005-03-01",
@@ -2894,7 +3048,53 @@
    "categorieEntreprise": null,
    "activitePrincipale": "61.90Z",
    "dirigeants": [],
-   "confianceIdentite": "moyenne"
+   "confianceIdentite": "moyenne",
+   "natureEntite": "extension_demat",
+   "perimetreFonctionnel": [
+    "emission",
+    "reception",
+    "ereporting",
+    "routage_pur"
+   ],
+   "solutionsCompatiblesPartenaires": [
+    "2SN",
+    "Abricode",
+    "ADCI",
+    "Akead",
+    "Augmenticom",
+    "Ayami",
+    "Codris",
+    "Consonnance Web",
+    "Corum",
+    "Digitrame",
+    "DocuShare",
+    "Dolibarr",
+    "Eden",
+    "Ediparf",
+    "Erios",
+    "Gematique",
+    "Geswork",
+    "Groupe Diagram",
+    "Incwo",
+    "Informatique Diffusion Morlaix",
+    "Karanext",
+    "LBM",
+    "Netexcom",
+    "Nicoka",
+    "OC2i",
+    "OpenSi",
+    "ScaleDev",
+    "Sendoc",
+    "Setinup",
+    "Sincro",
+    "Sodiwin",
+    "Stratow",
+    "Synap6",
+    "YouSeeMe",
+    "Zeendoc",
+    "Zindex"
+   ],
+   "lot": 2
   },
   {
    "nom": "ESI",
@@ -4076,10 +4276,15 @@
    "pays": "France",
    "siteWeb": null,
    "contact": null,
-   "segmentCible": [],
-   "familleOrigine": [],
-   "verticale": null,
-   "logiquePositionnement": null,
+   "segmentCible": [
+    "tpe_pme",
+    "eti"
+   ],
+   "familleOrigine": [
+    "pure_player"
+   ],
+   "verticale": "generaliste",
+   "logiquePositionnement": "Pure-player : l'entreprise est creee en decembre 2022, soit apres l'annonce de la reforme, avec un positionnement API destine a etre integre par des editeurs. Le role de fournisseur de socle est a confirmer sur source directe.",
    "anneeCreation": "2022",
    "effectif": null,
    "siren": "922304308",
@@ -4089,27 +4294,42 @@
    "empreinteGeo": null,
    "peppolAP": null,
    "modeleDistribution": [],
-   "descriptionFiche": null,
+   "descriptionFiche": "PME creee le 08/12/2022 a Perols (34), code activite programmation informatique, immatriculee des le 11/12/2025. Entite nee dans le sillage direct de la reforme.",
    "sourcesEnrichissement": [
     {
-     "champ": "identite_entreprise",
-     "source": "API Recherche d'entreprises (INSEE/RNE) — annuaire-entreprises.data.gouv.fr",
+     "champ": "immatriculation",
+     "source": "Liste officielle DGFiP — impots.gouv.fr",
      "dateReleve": "2026-08-19",
      "confiance": "haute"
+    },
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE)",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    },
+    {
+     "champ": "positionnement",
+     "source": "a_sourcer — site inaccessible au scraping le 19/08/2026",
+     "dateReleve": "2026-08-19",
+     "confiance": "non_qualifie"
     }
    ],
    "confiance": "non_qualifie",
    "socleTechnique": {
-    "type": null,
-    "operateurSocle": null,
-    "preuve": null,
-    "source": null,
-    "confiance": "non_qualifie"
+    "type": "propre",
+    "operateurSocle": "Iopole",
+    "preuve": "A confirmer : site inaccessible au scraping le 19/08/2026",
+    "source": "a_sourcer",
+    "confiance": "faible"
    },
-   "fournisseurDeSocle": null,
-   "modeDistributionSocle": [],
-   "groupeCapitalistique": null,
-   "relationCapitalistique": null,
+   "fournisseurDeSocle": true,
+   "modeDistributionSocle": [
+    "API/embedded",
+    "marque_blanche"
+   ],
+   "groupeCapitalistique": "Iopole",
+   "relationCapitalistique": "non_determinable",
    "partenariats": [],
    "raisonSociale": "IOPOLE",
    "dateCreation": "2022-12-08",
@@ -4138,7 +4358,15 @@
      "type": "personne physique"
     }
    ],
-   "confianceIdentite": "haute"
+   "confianceIdentite": "haute",
+   "natureEntite": "creee_pour_rfe",
+   "perimetreFonctionnel": [
+    "emission",
+    "reception",
+    "ereporting",
+    "routage_pur"
+   ],
+   "lot": 2
   },
   {
    "nom": "iPaidThat",
@@ -5486,12 +5714,17 @@
    "vague": "V1 (déc. 2025 – janv. 2026)",
    "adresse": "2132 Pays-Bas",
    "pays": "Pays-Bas",
-   "siteWeb": null,
+   "siteWeb": "https://www.opentext.com/fr-fr",
    "contact": null,
-   "segmentCible": [],
-   "familleOrigine": [],
-   "verticale": null,
-   "logiquePositionnement": null,
+   "segmentCible": [
+    "grands_comptes"
+   ],
+   "familleOrigine": [
+    "ged",
+    "edi"
+   ],
+   "verticale": "generaliste",
+   "logiquePositionnement": "Coherence forte sur le socle technique (reseau B2B et GED historiques), mais la facturation electronique francaise est un sujet peripherique dans la strategie affichee du groupe, tres orientee IA et gestion de l'information.",
    "anneeCreation": null,
    "effectif": null,
    "siren": null,
@@ -5501,21 +5734,41 @@
    "empreinteGeo": null,
    "peppolAP": null,
    "modeleDistribution": [],
-   "descriptionFiche": null,
-   "sourcesEnrichissement": [],
+   "descriptionFiche": "Entite neerlandaise du groupe canadien OpenText, immatriculee le 12/12/25. Se positionne sur la « gestion securisee de l'information pour l'IA ».",
+   "sourcesEnrichissement": [
+    {
+     "champ": "immatriculation",
+     "source": "Liste officielle DGFiP — impots.gouv.fr",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    },
+    {
+     "champ": "positionnement",
+     "source": "https://www.opentext.com/fr-fr",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    }
+   ],
    "confiance": "non_qualifie",
    "socleTechnique": {
-    "type": null,
-    "operateurSocle": null,
-    "preuve": null,
-    "source": null,
-    "confiance": "non_qualifie"
+    "type": "propre",
+    "operateurSocle": "OpenText",
+    "preuve": "Opere son propre reseau d'echanges B2B",
+    "source": "opentext.com/fr-fr",
+    "confiance": "moyenne"
    },
    "fournisseurDeSocle": null,
    "modeDistributionSocle": [],
-   "groupeCapitalistique": null,
-   "relationCapitalistique": null,
-   "partenariats": []
+   "groupeCapitalistique": "OpenText Corporation (societe cotee, Canada)",
+   "relationCapitalistique": "cotee",
+   "partenariats": [],
+   "natureEntite": "extension_demat",
+   "perimetreFonctionnel": [
+    "emission",
+    "reception",
+    "ereporting"
+   ],
+   "lot": 2
   },
   {
    "nom": "PAGERO",
@@ -5525,12 +5778,18 @@
    "vague": "V1 (déc. 2025 – janv. 2026)",
    "adresse": "Västra Hamngatan 1, Göteborg 411 17 Suède",
    "pays": "Suède",
-   "siteWeb": null,
+   "siteWeb": "https://www.pagero.com/fr",
    "contact": null,
-   "segmentCible": [],
-   "familleOrigine": [],
-   "verticale": null,
-   "logiquePositionnement": null,
+   "segmentCible": [
+    "eti",
+    "grands_comptes"
+   ],
+   "familleOrigine": [
+    "edi",
+    "tax"
+   ],
+   "verticale": "generaliste",
+   "logiquePositionnement": "Coherence forte : reseau de facturation electronique multi-pays historique, la France s'ajoute a un perimetre deja mondial. L'adossement a un groupe coté change le profil de perennite.",
    "anneeCreation": null,
    "effectif": null,
    "siren": null,
@@ -5540,21 +5799,49 @@
    "empreinteGeo": null,
    "peppolAP": null,
    "modeleDistribution": [],
-   "descriptionFiche": null,
-   "sourcesEnrichissement": [],
+   "descriptionFiche": "Entite suedoise (Goteborg), immatriculee le 19/12/25. Le site pagero.com/fr redirige desormais vers europe.thomsonreuters.com : la marque est integree a l'offre du groupe Thomson Reuters.",
+   "sourcesEnrichissement": [
+    {
+     "champ": "immatriculation",
+     "source": "Liste officielle DGFiP — impots.gouv.fr",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    },
+    {
+     "champ": "positionnement",
+     "source": "https://www.pagero.com/fr",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    }
+   ],
    "confiance": "non_qualifie",
    "socleTechnique": {
-    "type": null,
-    "operateurSocle": null,
-    "preuve": null,
-    "source": null,
-    "confiance": "non_qualifie"
+    "type": "propre",
+    "operateurSocle": "Pagero",
+    "preuve": "Reseau ouvert opere en propre, integre a l'offre Thomson Reuters",
+    "source": "pagero.com/fr (redirige vers europe.thomsonreuters.com)",
+    "confiance": "haute"
    },
-   "fournisseurDeSocle": null,
-   "modeDistributionSocle": [],
-   "groupeCapitalistique": null,
-   "relationCapitalistique": null,
-   "partenariats": []
+   "fournisseurDeSocle": true,
+   "modeDistributionSocle": [
+    "direct",
+    "API/embedded",
+    "via integrateur"
+   ],
+   "groupeCapitalistique": "Thomson Reuters",
+   "relationCapitalistique": "acquise",
+   "partenariats": [],
+   "natureEntite": "extension_demat",
+   "perimetreFonctionnel": [
+    "emission",
+    "reception",
+    "ereporting",
+    "routage_pur"
+   ],
+   "reseaux": [
+    "peppol_ap"
+   ],
+   "lot": 2
   },
   {
    "nom": "PARAGON",
@@ -6581,12 +6868,17 @@
    "vague": "V1 (déc. 2025 – janv. 2026)",
    "adresse": "1050 Portugal",
    "pays": "Portugal",
-   "siteWeb": null,
+   "siteWeb": "https://sovos.com/fr/",
    "contact": null,
-   "segmentCible": [],
-   "familleOrigine": [],
-   "verticale": null,
-   "logiquePositionnement": null,
+   "segmentCible": [
+    "grands_comptes",
+    "eti"
+   ],
+   "familleOrigine": [
+    "tax"
+   ],
+   "verticale": "generaliste",
+   "logiquePositionnement": "Coherence forte : specialiste mondial du continuous transaction control. La PA francaise est un module de plus dans une couverture multi-juridictions.",
    "anneeCreation": null,
    "effectif": null,
    "siren": null,
@@ -6596,21 +6888,41 @@
    "empreinteGeo": null,
    "peppolAP": null,
    "modeleDistribution": [],
-   "descriptionFiche": null,
-   "sourcesEnrichissement": [],
+   "descriptionFiche": "Entite portugaise (1050 Lisbonne) immatriculee le 18/12/25. Se presente comme fournisseur de « solutions completes, continues et connectees de calcul des taxes, de conformite au controle continu des transactions et de declarations fiscales ».",
+   "sourcesEnrichissement": [
+    {
+     "champ": "immatriculation",
+     "source": "Liste officielle DGFiP — impots.gouv.fr",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    },
+    {
+     "champ": "positionnement",
+     "source": "https://sovos.com/fr/",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    }
+   ],
    "confiance": "non_qualifie",
    "socleTechnique": {
-    "type": null,
-    "operateurSocle": null,
-    "preuve": null,
-    "source": null,
-    "confiance": "non_qualifie"
+    "type": "propre",
+    "operateurSocle": "Sovos",
+    "preuve": "Plateforme de conformite fiscale operee en propre",
+    "source": "sovos.com/fr",
+    "confiance": "moyenne"
    },
    "fournisseurDeSocle": null,
    "modeDistributionSocle": [],
-   "groupeCapitalistique": null,
-   "relationCapitalistique": null,
-   "partenariats": []
+   "groupeCapitalistique": "Sovos Compliance",
+   "relationCapitalistique": "fonds_PE",
+   "partenariats": [],
+   "natureEntite": "extension_demat",
+   "perimetreFonctionnel": [
+    "emission",
+    "reception",
+    "ereporting"
+   ],
+   "lot": 2
   },
   {
    "nom": "SPENDESK",
@@ -6782,12 +7094,18 @@
    "vague": "V2 (févr. – avr. 2026)",
    "adresse": "1211 BT Pays-Bas",
    "pays": "Pays-Bas",
-   "siteWeb": null,
+   "siteWeb": "https://www.storecove.com/",
    "contact": null,
-   "segmentCible": [],
-   "familleOrigine": [],
-   "verticale": null,
-   "logiquePositionnement": null,
+   "segmentCible": [
+    "tpe_pme",
+    "eti"
+   ],
+   "familleOrigine": [
+    "pure_player",
+    "edi"
+   ],
+   "verticale": "generaliste",
+   "logiquePositionnement": "Coherence forte : acteur d'infrastructure Peppol, la PA francaise est un point d'acces de plus dans un reseau deja opere. Profil de grossiste par construction.",
    "anneeCreation": null,
    "effectif": null,
    "siren": null,
@@ -6797,21 +7115,47 @@
    "empreinteGeo": null,
    "peppolAP": null,
    "modeleDistribution": [],
-   "descriptionFiche": null,
-   "sourcesEnrichissement": [],
+   "descriptionFiche": "Entite neerlandaise immatriculee le 28/04/26 (vague 3). Positionnement infrastructure : acces rapide et fiable au reseau Peppol par API, destine a etre integre par des editeurs.",
+   "sourcesEnrichissement": [
+    {
+     "champ": "immatriculation",
+     "source": "Liste officielle DGFiP — impots.gouv.fr",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    },
+    {
+     "champ": "positionnement",
+     "source": "https://www.storecove.com/",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    }
+   ],
    "confiance": "non_qualifie",
    "socleTechnique": {
-    "type": null,
-    "operateurSocle": null,
-    "preuve": null,
-    "source": null,
-    "confiance": "non_qualifie"
+    "type": "propre",
+    "operateurSocle": "Storecove",
+    "preuve": "Se presente comme « The Standard in E-invoicing », acces au reseau Peppol par API",
+    "source": "storecove.com",
+    "confiance": "moyenne"
    },
-   "fournisseurDeSocle": null,
-   "modeDistributionSocle": [],
-   "groupeCapitalistique": null,
-   "relationCapitalistique": null,
-   "partenariats": []
+   "fournisseurDeSocle": true,
+   "modeDistributionSocle": [
+    "API/embedded",
+    "marque_blanche"
+   ],
+   "groupeCapitalistique": "Storecove",
+   "relationCapitalistique": "non_determinable",
+   "partenariats": [],
+   "natureEntite": "extension_demat",
+   "perimetreFonctionnel": [
+    "emission",
+    "reception",
+    "routage_pur"
+   ],
+   "reseaux": [
+    "peppol_ap"
+   ],
+   "lot": 2
   },
   {
    "nom": "SUPER PDP",
@@ -7029,10 +7373,17 @@
    "pays": "France",
    "siteWeb": null,
    "contact": null,
-   "segmentCible": [],
-   "familleOrigine": [],
-   "verticale": null,
-   "logiquePositionnement": null,
+   "segmentCible": [
+    "tpe_pme",
+    "eti",
+    "grands_comptes"
+   ],
+   "familleOrigine": [
+    "edi",
+    "integrateur"
+   ],
+   "verticale": "generaliste",
+   "logiquePositionnement": "A confirmer : Tenor est identifie de longue date comme integrateur et operateur EDI, ce qui rendrait le positionnement PA coherent, mais la qualification reste a sourcer sur son site.",
    "anneeCreation": "1988",
    "effectif": null,
    "siren": "345021661",
@@ -7042,27 +7393,39 @@
    "empreinteGeo": null,
    "peppolAP": null,
    "modeleDistribution": [],
-   "descriptionFiche": null,
+   "descriptionFiche": "PME lyonnaise (Oullins) creee le 01/06/1988, 50 a 99 salaries, code activite conseil en systemes informatiques. Immatriculee le 15/01/26.",
    "sourcesEnrichissement": [
     {
-     "champ": "identite_entreprise",
-     "source": "API Recherche d'entreprises (INSEE/RNE) — annuaire-entreprises.data.gouv.fr",
+     "champ": "immatriculation",
+     "source": "Liste officielle DGFiP — impots.gouv.fr",
      "dateReleve": "2026-08-19",
      "confiance": "haute"
+    },
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE)",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    },
+    {
+     "champ": "positionnement",
+     "source": "a_sourcer — site inaccessible au scraping le 19/08/2026",
+     "dateReleve": "2026-08-19",
+     "confiance": "non_qualifie"
     }
    ],
    "confiance": "non_qualifie",
    "socleTechnique": {
-    "type": null,
-    "operateurSocle": null,
-    "preuve": null,
-    "source": null,
-    "confiance": "non_qualifie"
+    "type": "propre",
+    "operateurSocle": "Tenor",
+    "preuve": "A confirmer : site inaccessible au scraping le 19/08/2026",
+    "source": "a_sourcer",
+    "confiance": "faible"
    },
    "fournisseurDeSocle": null,
    "modeDistributionSocle": [],
-   "groupeCapitalistique": null,
-   "relationCapitalistique": null,
+   "groupeCapitalistique": "Tenor",
+   "relationCapitalistique": "non_determinable",
    "partenariats": [],
    "raisonSociale": "TENOR",
    "dateCreation": "1988-06-01",
@@ -7086,7 +7449,14 @@
      "type": "personne morale"
     }
    ],
-   "confianceIdentite": "haute"
+   "confianceIdentite": "haute",
+   "natureEntite": "extension_demat",
+   "perimetreFonctionnel": [
+    "emission",
+    "reception",
+    "ereporting"
+   ],
+   "lot": 2
   },
   {
    "nom": "TESISQUARE SPA",

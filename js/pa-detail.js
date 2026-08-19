@@ -68,7 +68,11 @@
       ['Opérateur du socle', val(s.operateurSocle)],
       ['Fournit son socle à d\u2019autres plateformes', pa.fournisseurDeSocle === null || pa.fournisseurDeSocle === undefined ? TODO : (pa.fournisseurDeSocle ? 'Oui' : 'Non')],
       ['Modes de distribution', (pa.modeDistributionSocle || []).length ? pa.modeDistributionSocle.join(', ') : TODO],
-      ['Élément de preuve', val(s.preuve)]
+      ['Élément de preuve', val(s.preuve)],
+      ['Solutions Compatibles partenaires déclarées', (pa.solutionsCompatiblesPartenaires || []).length
+        ? `<div class="pa-tags">${pa.solutionsCompatiblesPartenaires.map((x) => `<span class="pa-tag">${x}</span>`).join('')}</div>
+           <p class="pa-partner-count">${pa.solutionsCompatiblesPartenaires.length} éditeurs identifiés à partir des sources publiées par la plateforme.</p>`
+        : TODO]
     ]) + `<div class="callout callout--warning"><div class="callout-icon">⚠️</div><div class="callout-content"><strong>Rappel.</strong> « Marque blanche » et « marque grise » sont des notions commerciales, pas réglementaires. ${pa.nom} est immatriculée en son nom propre, a passé ses propres tests d\u2019interopérabilité et reste seule responsable devant l\u2019administration, quelle que soit l\u2019origine de son socle technique.</div></div>`;
 
     document.getElementById('pa-actionnariat').innerHTML = dl([
