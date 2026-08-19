@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": "1.0",
-    "lastUpdate": "2026-03-20",
+    "lastUpdate": "2026-08-19",
     "source": "FNFE-MPE — Cas listés au 31/10/2025",
     "baseActors": ["Vendeur", "PA-E", "PPF", "PA-R", "Acheteur"]
   },
@@ -744,12 +744,12 @@
         {"f": 3, "t": 4, "l": "Mise à disposition", "c": "status"}
       ],
       "attentionPoints": [
-        "La note de débit référence la facture d'origine (BG-3)",
-        "Codes types possibles : 383 (note de débit), 384 (facture rectificative)"
+        "Seule la facture rectificative 384 référence la facture d'origine (BG-3)",
+        "Le code <strong>383</strong> (note de débit) n'est <strong>pas autorisé</strong> : 380 complémentaire ou 384 rectificative"
       ],
       "btFields": [
-        {"bt": "BG-3", "name": "Référence facture antérieure", "note": "Numéro de la facture complétée"},
-        {"bt": "BT-3", "name": "Code type de facture", "note": "383 (note de débit) ou 384 (rectificative)"}
+        {"bt": "BG-3", "name": "Référence facture antérieure", "note": "Obligatoire uniquement si BT-3 = 384"},
+        {"bt": "BT-3", "name": "Code type de facture", "note": "380 (facture complémentaire) ou 384 (rectificative) — le code 383 est interdit"}
       ],
       "statuses": ["Déposée", "Émise", "Reçue", "Acceptée"],
       "relatedCases": ["nominal-litige-avoir", "nominal-litige-rectificative"]
@@ -1111,7 +1111,7 @@
       "id": "cas-29",
       "num": "29",
       "title": "Assujetti unique (Art. 256 C du CGI)",
-      "subtitle": "Flux intra-groupe au sein d'un assujetti unique : hors champ TVA mais dans le champ e-invoicing.",
+      "subtitle": "Flux intra-groupe au sein d'un assujetti unique : hors champ TVA, hors e-invoicing et hors e-reporting.",
       "category": "special",
       "tags": ["assujetti-unique", "groupe", "tva", "hors-champ"],
       "complexity": 3,
@@ -1125,7 +1125,7 @@
         {"f": 3, "t": 4, "l": "Mise à disposition", "c": "status"}
       ],
       "attentionPoints": [
-        "Opérations <strong>hors champ TVA</strong> mais <strong>dans le champ e-invoicing</strong>",
+        "Les flux internes sont <strong>hors champ TVA</strong> et donc <strong>hors e-invoicing et hors e-reporting</strong>",
         "Le SIREN de l'AU est renseigné dans <strong>BT-29</strong> (schéma 0231)",
         "TVA = 0 sur les factures intra-groupe",
         "Le régime d'assujetti unique doit être déclaré auprès de la DGFiP"
@@ -1190,7 +1190,7 @@
         "Chaque ligne porte sa propre catégorie TVA"
       ],
       "btFields": [
-        {"bt": "BT-23", "name": "Cadre de facturation", "note": "M1, M2, M4, M7 ou M8 selon le contexte"}
+        {"bt": "BT-23", "name": "Cadre de facturation", "note": "M1, M2, M4 ou M8 selon le contexte — M7 n'existe pas"}
       ],
       "statuses": ["Déposée", "Émise", "Reçue", "Acceptée", "Encaissée"],
       "relatedCases": ["cas-3", "cas-4"]
@@ -1199,7 +1199,7 @@
       "id": "cas-32",
       "num": "32",
       "title": "Paiements mensuels avant facturation",
-      "subtitle": "Mensualités versées avant facture (énergie, télécom). Acomptes B2B ou e-reporting B2C.",
+      "subtitle": "Mensualités versées avant facture (énergie, télécom) : factures 380/S1 puis facture de régularisation.",
       "category": "special",
       "tags": ["mensualite", "energie", "telecom", "acompte"],
       "complexity": 3,
@@ -1214,13 +1214,13 @@
         {"f": 1, "t": 3, "l": "F2 — Facture définitive", "c": "flux"}
       ],
       "attentionPoints": [
-        "Chaque mensualité est une facture d'acompte à part entière",
-        "La facture de régularisation déduit tous les acomptes en lignes négatives",
+        "En B2B, chaque mensualité est une <strong>facture ordinaire 380</strong>, pas une facture d'acompte",
+        "La régularisation reprend les sommes déjà versées en <strong>BT-113</strong> ; le net à payer BT-115 peut être négatif",
         "Volume potentiellement très élevé (millions de factures/mois pour un énergéticien)"
       ],
       "btFields": [
-        {"bt": "BT-23", "name": "Cadre de facturation", "note": "S1 (acomptes) puis S4 (régularisation)"},
-        {"bt": "BT-3", "name": "Code type", "note": "386/500 (acompte) puis 380 (régularisation)"}
+        {"bt": "BT-23", "name": "Cadre de facturation", "note": "S1 pour les mensualités comme pour la régularisation"},
+        {"bt": "BT-3", "name": "Code type de facture", "note": "380 pour les mensualités et pour la régularisation — 500 n'est pas un type valide"}
       ],
       "statuses": ["Déposée", "Émise", "Reçue", "Acceptée", "Encaissée"],
       "relatedCases": ["cas-20", "cas-21"]
@@ -1329,14 +1329,14 @@
         {"f": 3, "t": 4, "l": "Mise à disposition", "c": "status"}
       ],
       "attentionPoints": [
-        "Les champs <strong>BT-153/BT-154</strong> classifient les lignes comme confidentielles",
+        "<strong>BT-153</strong> porte un libellé générique, <strong>BT-154</strong> le détail sensible exclu du flux 1",
         "Le PPF reçoit les données <strong>agrégées</strong> (montant total TVA) sans le détail des lignes sensibles",
         "Le client reçoit la facture complète via sa PA-R",
         "Obligatoire pour les professions réglementées soumises au secret professionnel"
       ],
       "btFields": [
-        {"bt": "BT-153", "name": "Type de donnée confidentielle", "note": "Classification de la ligne"},
-        {"bt": "BT-154", "name": "Description de l'article", "note": "Peut être masquée si confidentielle"}
+        {"bt": "BT-153", "name": "Dénomination de l'article", "note": "Mention générique — seul libellé de ligne transmis dans le flux 1"},
+        {"bt": "BT-154", "name": "Description de l'article", "note": "Porte le détail sensible — transmis dans le flux 2 uniquement"}
       ],
       "statuses": ["Déposée", "Émise", "Reçue", "Acceptée", "Encaissée"],
       "relatedCases": []
@@ -1422,7 +1422,7 @@
       ],
       "btFields": [
         {"bt": "BT-23", "name": "Cadre de facturation", "note": "B8, S8 ou M8"},
-        {"bt": "BG-11", "name": "Agent de vendeur", "note": "L'intermédiaire (pour chaque vendeur)"}
+        {"bt": "EXT-FR-FE-164 / 167 / 178", "name": "Vendeur au niveau de la ligne", "note": "Nom, SIREN et numéro de facture de chaque vendeur secondaire"}
       ],
       "statuses": ["Déposée", "Émise", "Reçue", "Acceptée", "Encaissée"],
       "relatedCases": ["cas-12", "cas-17b"]

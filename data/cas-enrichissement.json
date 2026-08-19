@@ -1,6 +1,6 @@
 {
   "meta": {
-    "version": "1.0",
+    "version": "1.1",
     "lastUpdate": "2026-08-19",
     "source": "AFNOR XP Z12-012 V1.4 · XP Z12-014 V1.4 (Annexe A) · Spécifications externes DGFiP v3.1 (Annexe 1 Flux 1) · Règles de gestion 3.2",
     "validatedBy": "RFE_Expert — 19/08/2026",
@@ -11,7 +11,7 @@
       "recommandé": "Recommandé",
       "facultatif": "Facultatif"
     },
-    "coverage": "49 fiches enrichies sur 49 fiches lisibles de data/cas-usage.json"
+    "coverage": "52 fiches enrichies sur 52 — couverture complète du référentiel data/cas-usage.json"
   },
   "socle": {
     "label": "Socle obligatoire commun à tous les cas d'usage",
@@ -5733,6 +5733,14 @@
         "nominal": {
           "rel": "variante du nominal",
           "why": "Le parcours et les statuts sont ceux du nominal ; seule la coexistence de deux régimes d'exigibilité dans un même document distingue ce cas, via le cadre M1."
+        },
+        "cas-3": {
+          "rel": "lien ténu",
+          "why": "La fiche du référentiel renvoie vers ce cas, mais le rapport métier n'est pas évident : le cas 3 traite d'un <strong>tiers payeur</strong>, pas de la ventilation biens/services. Les comparaisons réellement utiles sont les cas 30 (cadre 7) et 33 (TVA sur marge), qui portent eux aussi sur la qualification de l'opération."
+        },
+        "cas-4": {
+          "rel": "lien ténu",
+          "why": "Même remarque : le cas 4 traite de la <strong>répartition du paiement</strong> entre l'acheteur et un tiers, sans rapport direct avec le cadre mixte M. Lien hérité du référentiel, signalé pour correction."
         }
       }
     },
@@ -7759,6 +7767,464 @@
         "cas-38": {
           "rel": "le socle technique",
           "why": "Les vendeurs secondaires sont portés par des lignes GROUP : la mécanique de sous-lignes du cas 38 est le prérequis technique du multi-vendeurs."
+        }
+      }
+    },
+    "cas-40": {
+      "narrative": {
+        "intro": "<p>La compensation est un mécanisme de <strong>paiement</strong>, jamais de facturation : les deux factures circulent intégralement et chacune est réputée <strong>payée en totalité</strong> au moment où le solde est versé. ⚠️ Le statut « Encaissée » porte donc le <strong>montant TTC complet de chaque facture</strong>, et non le solde compensé.</p>",
+        "steps": [
+          {
+            "t": 1,
+            "actor": "Entreprise A",
+            "title": "Deux factures indépendantes",
+            "text": "A facture 1 000 € à B, B facture 700 € à A. Chaque facture suit son circuit normal, avec son flux 1 fiscal, son flux 2 et son cycle de vie propre. Aucun lien technique ne les rapproche.",
+            "flux": [
+              "F1",
+              "F2"
+            ],
+            "refs": [
+              "BT-1",
+              "BT-23"
+            ],
+            "diagram": 0
+          },
+          {
+            "t": 2,
+            "actor": "Entreprise B",
+            "title": "Rapprochement des deux créances",
+            "text": "Chaque partie rapproche les montants <strong>TTC</strong> et calcule le net. La compensation s'opère sur des créances réciproques, certaines, liquides et exigibles, en vertu d'un accord entre les parties.",
+            "flux": [
+              "F2"
+            ],
+            "refs": [
+              "BT-112"
+            ],
+            "diagram": 1
+          },
+          {
+            "t": 3,
+            "actor": "Entreprise B",
+            "title": "Paiement du seul solde",
+            "text": "300 € sont versés. Le moyen de paiement peut être signalé par <strong>BT-81 = 97</strong>, « clearing entre partenaires ». C'est la <strong>date de paiement du net</strong> qui vaut date de paiement des deux factures.",
+            "flux": [
+              "F6"
+            ],
+            "refs": [
+              "BT-81"
+            ],
+            "diagram": 2
+          },
+          {
+            "t": 4,
+            "actor": "Entreprise A",
+            "title": "Statut « Encaissée » sur les deux factures, au montant plein",
+            "text": "Chaque acheteur transmet un statut <strong>« Encaissée » (212)</strong> au vendeur pour <strong>chaque facture</strong>, à hauteur de son <strong>montant TTC total</strong> : 1 000 € d'un côté, 700 € de l'autre. Le détail par taux de TVA est obligatoire.",
+            "flux": [
+              "F6"
+            ],
+            "refs": [
+              "MDT-215",
+              "MDT-224"
+            ],
+            "diagram": 4
+          },
+          {
+            "t": 5,
+            "actor": "PPF / CdD",
+            "title": "Effet sur le pré-remplissage",
+            "text": "En TVA sur les encaissements, la TVA des deux opérations devient exigible à la date du paiement du solde. Déclarer le seul solde ferait perdre la TVA de la partie compensée.",
+            "flux": [
+              "F1",
+              "F6"
+            ],
+            "diagram": 5
+          }
+        ]
+      },
+      "fields": [
+        {
+          "id": "BT-81",
+          "name": "Code du moyen de paiement",
+          "level": "Paiement",
+          "obligation": "conditionnel",
+          "value": "<strong>97</strong> — <em>clearing entre partenaires</em>, dès que le payeur sait que le règlement se fera par compensation",
+          "cond": "Si la compensation est connue à l'émission"
+        },
+        {
+          "id": "BT-113",
+          "name": "Montant déjà payé",
+          "level": "Totaux",
+          "obligation": "conditionnel",
+          "value": "Montant TTC de la créance croisée déduite, si la compensation est actée dans la facture elle-même",
+          "cond": "Si la facture est émise nette de compensation",
+          "rule": "BR-CO-16"
+        },
+        {
+          "id": "BT-115",
+          "name": "Net à payer",
+          "level": "Totaux",
+          "obligation": "obligatoire",
+          "value": "<strong>0</strong> si la compensation est totale, montant du solde sinon",
+          "rule": "BR-CO-16"
+        },
+        {
+          "id": "MDT-215",
+          "name": "Montant du statut « Encaissée »",
+          "level": "Cycle de vie",
+          "obligation": "obligatoire",
+          "value": "<strong>Montant TTC total de la facture</strong>, pas le solde compensé",
+          "rule": "BR-FR-CDV-CL-11 · G7.45"
+        },
+        {
+          "id": "MDT-224",
+          "name": "Taux de TVA du statut",
+          "level": "Cycle de vie",
+          "obligation": "obligatoire",
+          "value": "Un bloc par taux de TVA de la facture",
+          "rule": "BR-FR-CDV-CL-11"
+        },
+        {
+          "id": "MDT-207",
+          "name": "Type d'événement de paiement",
+          "level": "Cycle de vie",
+          "obligation": "obligatoire",
+          "value": "<strong>MEN</strong>",
+          "rule": "BR-FR-CDV-CL-11"
+        },
+        {
+          "id": "BT-23",
+          "name": "Cadre de facturation",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "Cadre standard B1/S1/M1 : <strong>aucun cadre spécifique à la compensation</strong>",
+          "rule": "BR-FR-08"
+        }
+      ],
+      "fieldsNote": "⚠️ <strong>L'erreur à ne pas commettre :</strong> transmettre un statut « Encaissée » de 300 € — le solde réellement viré. Les deux factures sont éteintes en totalité par la compensation ; déclarer le net reviendrait à ne jamais déclarer l'encaissement de 700 € et à sous-déclarer la TVA collectée de part et d'autre. Un accord de compensation entre les parties reste par ailleurs indispensable sur le plan juridique.",
+      "relatedWhy": {
+        "cas-41": {
+          "rel": "le prolongement",
+          "why": "Le barter est un netting <em>organisé</em> : mêmes règles de statut au montant plein, mais avec un tiers qui structure l'échange et des créances qui ne se soldent pas nécessairement en numéraire."
+        },
+        "cas-34": {
+          "rel": "la nuance à connaître",
+          "why": "Le cas 34 montre le statut « Encaissée » utilisé pour des <em>montants partiels</em> : c'est précisément ce qu'il ne faut <strong>pas</strong> faire ici, où chaque facture est éteinte en totalité."
+        }
+      }
+    },
+    "cas-41": {
+      "narrative": {
+        "intro": "<p>⚠️ La société de barter n'est <strong>ni un mandataire ni un intermédiaire transparent</strong> : c'est un <strong>acheteur-revendeur à part entière</strong>. Chaque étape de l'échange donne lieu à une vraie facture B2B, à la valeur vénale, avec sa TVA. Particularité : le paiement en numéraire ne couvre souvent <strong>que la TVA</strong>, le hors taxe restant « en compte ».</p>",
+        "steps": [
+          {
+            "t": 1,
+            "actor": "Entreprise A",
+            "title": "Vente à la société de barter",
+            "text": "A facture ses biens ou services à leur <strong>valeur vénale</strong>. La société de barter règle <strong>a minima la TVA</strong> en numéraire ; le hors taxe est mis en compte, sous forme de créance de A sur le barter.",
+            "flux": [
+              "F1",
+              "F2"
+            ],
+            "refs": [
+              "BT-113",
+              "BT-115"
+            ],
+            "diagram": 0
+          },
+          {
+            "t": 2,
+            "actor": "Société Barter",
+            "title": "Revente à la contrepartie",
+            "text": "Le barter facture à son tour l'entreprise B, qui règle elle aussi <strong>a minima la TVA</strong>, le solde restant en compte. Même mécanique BT-113 / BT-115.",
+            "flux": [
+              "F1",
+              "F2"
+            ],
+            "refs": [
+              "BT-113",
+              "BT-115"
+            ],
+            "diagram": 1
+          },
+          {
+            "t": 3,
+            "actor": "Entreprise B",
+            "title": "Contre-prestation facturée à A",
+            "text": "B facture sa propre prestation à A. Le paiement est partiel, la part hors taxe étant compensée par les créances détenues sur le barter — schéma proche du tiers payeur partiel du cas 4.",
+            "flux": [
+              "F1",
+              "F2"
+            ],
+            "refs": [
+              "BT-113"
+            ],
+            "diagram": 2
+          },
+          {
+            "t": 4,
+            "actor": "Société Barter",
+            "title": "Orchestration et commission",
+            "text": "La société de barter facture séparément sa <strong>commission</strong>, prestation de services domestique tout à fait ordinaire, dans le circuit e-invoicing normal.",
+            "flux": [
+              "F1",
+              "F2"
+            ],
+            "refs": [
+              "BT-23"
+            ],
+            "diagram": 3
+          },
+          {
+            "t": 5,
+            "actor": "Entreprise A",
+            "title": "Statuts au montant plein, y compris la part compensée",
+            "text": "Chaque facture reçoit un statut <strong>« Encaissée » à hauteur de son montant TTC total</strong> : un bloc MEN positif pour la totalité, complété si nécessaire d'un bloc MEN négatif pour la part compensée avec <strong>MDT-224 = 0</strong>.",
+            "flux": [
+              "F6"
+            ],
+            "refs": [
+              "MDT-215",
+              "MDT-224"
+            ],
+            "diagram": 4
+          },
+          {
+            "t": 6,
+            "actor": "PPF / CdD",
+            "title": "La TVA est due sur 100 % de chaque prestation",
+            "text": "Même si presque rien ne circule en numéraire, chaque vente est taxée sur sa valeur vénale intégrale. L'absence de flux monétaire n'a <strong>aucun effet</strong> sur la base taxable.",
+            "flux": [
+              "F1"
+            ]
+          }
+        ]
+      },
+      "fields": [
+        {
+          "id": "BT-113",
+          "name": "Montant déjà payé",
+          "level": "Totaux",
+          "obligation": "conditionnel",
+          "value": "Montant hors taxe <strong>mis en compte</strong> auprès de la société de barter",
+          "cond": "Si une part de la contrepartie est compensée",
+          "rule": "BR-CO-16"
+        },
+        {
+          "id": "BT-115",
+          "name": "Net à payer",
+          "level": "Totaux",
+          "obligation": "obligatoire",
+          "value": "Net réellement dû en numéraire — <strong>au moins le montant de la TVA</strong> de la facture",
+          "rule": "BR-CO-16"
+        },
+        {
+          "id": "BT-81",
+          "name": "Code du moyen de paiement",
+          "level": "Paiement",
+          "obligation": "conditionnel",
+          "value": "<strong>97</strong> pour la part compensée, <strong>30</strong> (virement) pour la part en numéraire"
+        },
+        {
+          "id": "EXT-FR-FE-BG-01",
+          "name": "Tiers agent côté acheteur",
+          "level": "Acheteur",
+          "obligation": "conditionnel",
+          "value": "Utilisé si une agence média intervient dans le montage, comme au cas 15",
+          "cond": "Si un agent agit pour l'acheteur"
+        },
+        {
+          "id": "MDT-215 / MDT-224",
+          "name": "Montant et taux du statut « Encaissée »",
+          "level": "Cycle de vie",
+          "obligation": "obligatoire",
+          "value": "Bloc MEN positif au montant TTC total, puis bloc MEN <strong>négatif</strong> avec MDT-224 = 0 pour la part compensée",
+          "rule": "BR-FR-CDV-CL-11 · G7.45"
+        },
+        {
+          "id": "Soulte",
+          "name": "Complément en numéraire",
+          "level": "Totaux",
+          "obligation": "conditionnel",
+          "value": "Correspond au BT-115 lorsque les créances ne sont pas symétriques : aucun champ dédié",
+          "cond": "Si les prestations échangées n'ont pas la même valeur"
+        },
+        {
+          "id": "Commission du barter",
+          "name": "Facture distincte",
+          "level": "—",
+          "obligation": "obligatoire",
+          "value": "Prestation de services domestique facturée à part, cadre S1, dans le champ e-invoicing"
+        }
+      ],
+      "fieldsNote": "💡 <strong>La valeur vénale, pas le prix ressenti.</strong> Dans un échange, la base taxable de chaque prestation est sa valeur vénale, indépendamment du fait qu'aucune somme — ou presque — ne change de main. Le montage habituel du barter média (annonceur → société de barter → régie) enchaîne trois factures complètes, chacune avec sa TVA intégralement déclarée.",
+      "relatedWhy": {
+        "cas-40": {
+          "rel": "le socle",
+          "why": "Le netting du cas 40 donne la règle de base : deux créances réciproques, un solde payé, des statuts au montant plein. Le barter en est la version organisée par un tiers."
+        },
+        "cas-4": {
+          "rel": "le mécanisme voisin",
+          "why": "La contre-prestation partiellement compensée reproduit la logique du tiers payeur partiel du cas 4, avec la même répartition entre BT-113 et BT-115."
+        }
+      }
+    },
+    "cas-42": {
+      "narrative": {
+        "intro": "<p>Trois montages, un même point d'arrivée : une vente qui ne doit pas rester taxée en France. La catégorie de transaction <strong>TNT1</strong> du e-reporting B2C signifie « TVA non territorialisée en France » — ⚠️ ce n'est <strong>pas</strong> un code d'exonération EN 16931. Et lorsqu'une facture B2B est émise à l'opérateur de détaxe, elle porte le cadre <strong>B7</strong> pour éviter de déclarer deux fois la même TVA.</p>",
+        "steps": [
+          {
+            "t": 1,
+            "actor": "Vendeur",
+            "title": "Schéma 1 — vente TTC puis correction",
+            "text": "La vente au touriste est d'abord un B2C ordinaire : e-reporting <strong>flux 10.3</strong> avec la catégorie <strong>TLB1</strong>, montant HT en TT-82, TVA en TT-83, détail par taux.",
+            "flux": [
+              "F10.3"
+            ],
+            "refs": [
+              "TT-81",
+              "TT-82",
+              "TT-83"
+            ],
+            "diagram": 0
+          },
+          {
+            "t": 2,
+            "actor": "Touriste",
+            "title": "Validation du bordereau en douane",
+            "text": "Le bordereau de vente à l'exportation est visé à la sortie du territoire : c'est cette validation qui ouvre le droit au remboursement.",
+            "diagram": 3
+          },
+          {
+            "t": 3,
+            "actor": "Vendeur",
+            "title": "Correction de l'e-reporting",
+            "text": "Après validation, le commerçant émet une <strong>écriture inverse</strong> annulant le TLB1 initial, et déclare la vente en <strong>TNT1</strong> avec une TVA à zéro. Sans validation dans le délai de six mois, aucune correction : la vente reste taxée.",
+            "flux": [
+              "F10.3"
+            ],
+            "refs": [
+              "TT-81"
+            ],
+            "diagram": 5
+          },
+          {
+            "t": 4,
+            "actor": "Vendeur",
+            "title": "Schéma 2 — facturation HT dès l'origine",
+            "text": "Le touriste ne paie pas la TVA : la vente est déclarée directement en <strong>TNT1</strong>, avec TT-83 = 0 et TT-88 = 0. Si le bordereau n'est pas validé sous six mois, le montant encaissé devient un montant TTC et la vente doit être <strong>corrigée en TLB1</strong>.",
+            "flux": [
+              "F10.3"
+            ],
+            "refs": [
+              "TT-81",
+              "TT-83"
+            ],
+            "diagram": 1
+          },
+          {
+            "t": 5,
+            "actor": "Opérateur détaxe",
+            "title": "Schéma 3 — un opérateur tiers rembourse",
+            "text": "Le commerçant vend le bien à l'opérateur de détaxe par une <strong>facture B2B en cadre B7</strong>, accompagnée de l'écriture inverse en B2C. L'opérateur déclare ensuite lui-même un e-reporting <strong>TNT1</strong> après remboursement au touriste, et facture sa commission de gestion à part.",
+            "flux": [
+              "F1",
+              "F2",
+              "F10.3"
+            ],
+            "refs": [
+              "BT-23"
+            ],
+            "diagram": 4
+          },
+          {
+            "t": 6,
+            "actor": "PPF / CdD",
+            "title": "Pourquoi le cadre B7",
+            "text": "Le cadre <strong>B7</strong> signale une opération dont la TVA a <strong>déjà été déclarée en e-reporting B2C</strong> : la facture à l'opérateur de détaxe ne la redéclare donc pas, tout en ouvrant son droit à déduction.",
+            "flux": [
+              "F1"
+            ],
+            "refs": [
+              "BT-23"
+            ],
+            "diagram": 2
+          }
+        ]
+      },
+      "fields": [
+        {
+          "id": "TT-81",
+          "name": "Catégorie de transaction e-reporting",
+          "level": "Flux 10.3",
+          "obligation": "obligatoire",
+          "value": "<strong>TLB1</strong> pour une vente domestique taxée · <strong>TNT1</strong> pour une TVA non territorialisée en France",
+          "rule": "G1.09 · G1.36"
+        },
+        {
+          "id": "TT-82 / TT-83",
+          "name": "Montant HT et montant de TVA",
+          "level": "Flux 10.3",
+          "obligation": "obligatoire",
+          "value": "En TNT1 : TT-83 = <strong>0</strong>, TT-87 = montant HT, TT-88 = 0"
+        },
+        {
+          "id": "BT-23",
+          "name": "Cadre de facturation",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "<strong>B7</strong> sur la facture émise à l'opérateur de détaxe : la TVA a déjà été déclarée en B2C",
+          "cond": "Si une facture B2B est émise au détaxeur",
+          "rule": "BR-FR-08"
+        },
+        {
+          "id": "BT-3",
+          "name": "Code type de facture",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "<strong>380</strong>, ou <strong>389</strong> si l'opérateur pratique l'auto-facturation comme au cas 19b"
+        },
+        {
+          "id": "BT-151",
+          "name": "Catégorie de TVA de la ligne",
+          "level": "Ligne",
+          "obligation": "conditionnel",
+          "value": "Catégorie <strong>O</strong> (hors champ) sur la part non territorialisée, catégories usuelles sur le reste",
+          "cond": "Si la facture mélange des régimes"
+        },
+        {
+          "id": "BT-121",
+          "name": "Code d'exonération de TVA",
+          "level": "TVA",
+          "obligation": "non applicable",
+          "value": "<strong>Aucun code VATEX spécifique</strong> n'est prévu pour ce cas : TNT1 est une catégorie de e-reporting, pas un motif d'exonération EN 16931."
+        },
+        {
+          "id": "Seuil de détaxe",
+          "name": "100,01 € TTC",
+          "level": "Hors facture",
+          "obligation": "non applicable",
+          "value": "Minimum d'achat dans un même magasin le même jour, réservé aux <strong>résidents hors UE</strong>",
+          "rule": "CGI art. 262-0 bis"
+        },
+        {
+          "id": "Délai de validation",
+          "name": "6 mois",
+          "level": "Hors facture",
+          "obligation": "non applicable",
+          "value": "Sans visa du bordereau dans ce délai, la vente reste — ou redevient — une vente domestique taxée",
+          "rule": "G1.36"
+        }
+      ],
+      "fieldsNote": "⚠️ <strong>Deux corrections utiles.</strong> D'abord, <strong>TNT1 n'est pas un code d'exonération</strong> : les articles 262-I et 262-0 bis du CGI fondent le <em>droit au remboursement</em>, mais le format de facture ne porte aucun VATEX dédié — c'est la catégorie de transaction du flux 10.3 qui traduit l'opération. Ensuite, la correction du e-reporting n'est pas une modification : c'est une <strong>écriture inverse</strong> qui annule la déclaration initiale, suivie d'une nouvelle déclaration dans la bonne catégorie.",
+      "relatedWhy": {
+        "cas-30": {
+          "rel": "le cadre 7 en détail",
+          "why": "Le cas 30 explique le fonctionnement du cadre B7/S7 et son effet sur le pré-remplissage : c'est exactement ce qui permet ici de facturer l'opérateur de détaxe sans redéclarer la TVA."
+        },
+        "cas-28": {
+          "rel": "la même bascule B2C → B2B",
+          "why": "Le restaurant e-reporte d'abord puis facture ensuite en cadre 7 : la détaxe suit le même chemin, avec en plus une écriture inverse pour annuler la déclaration initiale."
         }
       }
     }
