@@ -69,7 +69,7 @@
       ['Fournit son socle à d\u2019autres plateformes', pa.fournisseurDeSocle === null || pa.fournisseurDeSocle === undefined ? TODO : (pa.fournisseurDeSocle ? 'Oui' : 'Non')],
       ['Modes de distribution', (pa.modeDistributionSocle || []).length ? pa.modeDistributionSocle.join(', ') : TODO],
       ['Élément de preuve', val(s.preuve)]
-    ]) + `<div class="callout callout-warning"><strong>Rappel.</strong> « Marque blanche » et « marque grise » sont des notions commerciales, pas réglementaires. ${pa.nom} est immatriculée en son nom propre, a passé ses propres tests d\u2019interopérabilité et reste seule responsable devant l\u2019administration, quelle que soit l\u2019origine de son socle technique.</div>`;
+    ]) + `<div class="callout callout--warning"><div class="callout-icon">⚠️</div><div class="callout-content"><strong>Rappel.</strong> « Marque blanche » et « marque grise » sont des notions commerciales, pas réglementaires. ${pa.nom} est immatriculée en son nom propre, a passé ses propres tests d\u2019interopérabilité et reste seule responsable devant l\u2019administration, quelle que soit l\u2019origine de son socle technique.</div></div>`;
 
     document.getElementById('pa-actionnariat').innerHTML = dl([
       ['Groupe d\u2019appartenance', val(pa.groupeCapitalistique)],
@@ -84,7 +84,7 @@
       && (x.segmentCible || []).some((c) => (pa.segmentCible || []).includes(c)));
     document.getElementById('pa-concurrents').innerHTML = meme.length
       ? `<div class="pa-segment-list">${meme.map((x) => `<a href="./pa-detail.html?pa=${slugify(x.nom)}">${x.nom}</a>`).join('')}</div>`
-      : '<div class="callout callout-info">Le rapprochement concurrentiel s\u2019affichera dès que la famille d\u2019origine et le segment cible de cette plateforme auront été qualifiés.</div>';
+      : '<div class="callout callout--info"><div class="callout-icon">🚧</div><div class="callout-content">Le rapprochement concurrentiel s\u2019affichera dès que la famille d\u2019origine et le segment cible de cette plateforme auront été qualifiés.</div></div>';
 
     const m = all_meta;
     document.getElementById('pa-sources').innerHTML = dl([
@@ -103,7 +103,7 @@
     const pa = data.plateformes.find((x) => slugify(x.nom) === slug);
     if (!pa) {
       document.getElementById('pa-nom').textContent = 'Plateforme introuvable';
-      document.getElementById('pa-article').innerHTML = '<div class="callout callout-warning">Cette fiche n\u2019existe pas. <a href="./plateformes-agreees.html">Revenir à l\u2019annuaire des plateformes agréées</a>.</div>';
+      document.getElementById('pa-article').innerHTML = '<div class="callout callout--warning"><div class="callout-icon">⚠️</div><div class="callout-content">Cette fiche n\u2019existe pas. <a href="./plateformes-agreees.html">Revenir à l\u2019annuaire des plateformes agréées</a>.</div></div>';
       return;
     }
     render(pa, taxo, data.plateformes);
