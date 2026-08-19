@@ -1,6 +1,2 @@
-# Site pédagogique interne Fluxym — Re·Form·E
-# Accès volontairement direct : non destiné à l'indexation publique.
 User-agent: *
-Disallow: /
-
-# Aucun sitemap n'est publié intentionnellement.
+Disallow:
