@@ -11,7 +11,7 @@
       "recommandé": "Recommandé",
       "facultatif": "Facultatif"
     },
-    "coverage": "37 fiches enrichies sur 49"
+    "coverage": "49 fiches enrichies sur 49 fiches lisibles de data/cas-usage.json"
   },
   "socle": {
     "label": "Socle obligatoire commun à tous les cas d'usage",
@@ -180,8 +180,8 @@
             "name": "Cadre de facturation",
             "level": "En-tête",
             "obligation": "obligatoire",
-            "value": "3 caractères. Lettre selon la nature (B biens, S services, M mixte) + chiffre du cas : <strong>1</strong> nominal · <strong>2</strong> déjà payée · <strong>4</strong> solde après acompte · <strong>5</strong> sous-traitance · <strong>6</strong> co-traitance · <strong>7</strong> TVA déjà collectée · <strong>9</strong> bidirectionnel multi-vendeurs",
-            "rule": "BR-FR-01 · BR-FR-CO-08/09"
+            "value": "3 caractères : une lettre selon la nature de l'opération (<strong>B</strong> biens, <strong>S</strong> services, <strong>M</strong> mixte) suivie du chiffre du cas — <strong>1</strong> dépôt standard · <strong>2</strong> facture déjà payée · <strong>3</strong> demande de paiement d'un sous-traitant avec paiement direct (S3 seulement, B2G) · <strong>4</strong> facture définitive après acompte · <strong>5</strong> facture de sous-traitant (S5 seulement) · <strong>6</strong> facture de co-traitant (S6 seulement) · <strong>7</strong> opération déjà e-reportée, TVA déjà collectée (B7 et S7, <strong>pas de M7</strong>) · <strong>8</strong> facture multi-vendeurs · <strong>9</strong> facture bidirectionnelle (auto-facturation). Soit <strong>21 valeurs autorisées</strong> au total, il n'existe pas de chiffre 0.",
+            "rule": "BR-FR-08 · G1.02"
           },
           {
             "id": "BT-24",
@@ -6296,6 +6296,1469 @@
         "cas-22a": {
           "rel": "variante du même statut",
           "why": "L'escompte est un encaissement inférieur au montant facturé, déclaré en une fois ; l'encaissement partiel, une succession de montants. Le champ MDT-215 joue le même rôle central dans les deux fiches."
+        }
+      }
+    },
+    "cas-18": {
+      "narrative": {
+        "intro": "<p>⚠️ <strong>Il n'existe pas de « note de débit » dans la RFE.</strong> Le code <strong>383</strong> (<em>Debit note</em>) n'appartient pas à la liste limitative des types de facture autorisés. Pour un ajustement à la hausse, deux voies seulement : une <strong>facture complémentaire 380</strong> portant le seul montant additionnel, ou une <strong>facture rectificative 384</strong> qui annule et remplace la facture initiale.</p>",
+        "steps": [
+          {
+            "t": 1,
+            "actor": "Vendeur",
+            "title": "Un complément est constaté",
+            "text": "Pénalités de retard, frais additionnels, complément de prix : le montant facturé doit être revu à la hausse. Le vendeur choisit entre deux montages, et ce choix détermine tout le reste.",
+            "flux": [
+              "F2"
+            ],
+            "refs": [
+              "BT-3"
+            ],
+            "diagram": 0
+          },
+          {
+            "t": 2,
+            "actor": "Vendeur",
+            "title": "Voie A — la facture complémentaire (380)",
+            "text": "Le vendeur émet une facture <strong>ordinaire</strong> ne portant que le <strong>montant additionnel</strong>. La facture initiale reste valide et n'est pas touchée. Le groupe BG-3 n'est pas exigé : on ne référence pas la facture initiale au sens réglementaire, même s'il est recommandé de le rappeler en note.",
+            "flux": [
+              "F1",
+              "F2"
+            ],
+            "refs": [
+              "BT-3",
+              "BT-22"
+            ],
+            "diagram": 1
+          },
+          {
+            "t": 3,
+            "actor": "Vendeur",
+            "title": "Voie B — la facture rectificative (384)",
+            "text": "Le vendeur émet une facture reprenant le <strong>montant total corrigé</strong>, avec <strong>BG-3 obligatoire</strong> (BT-25 numéro et BT-26 date de la facture rectifiée). Elle <strong>annule et remplace</strong> la facture initiale.",
+            "flux": [
+              "F1",
+              "F2"
+            ],
+            "refs": [
+              "BT-3",
+              "BT-25",
+              "BT-26"
+            ],
+            "diagram": 1
+          },
+          {
+            "t": 4,
+            "actor": "PA-E",
+            "title": "Contrôle et transmission",
+            "text": "La plateforme vérifie que le type de facture est bien dans la liste autorisée — un 383 serait <strong>rejeté</strong> — puis transmet le flux 1 fiscal et le flux 2 vers l'acheteur.",
+            "flux": [
+              "F1",
+              "F2"
+            ],
+            "refs": [
+              "BT-3"
+            ],
+            "diagram": 2
+          },
+          {
+            "t": 5,
+            "actor": "Acheteur",
+            "title": "Traitement côté acheteur",
+            "text": "Sur une 380 complémentaire, l'acheteur comptabilise deux factures distinctes. Sur une 384, il neutralise la première écriture et ne conserve que la facture rectificative.",
+            "flux": [
+              "F2"
+            ],
+            "diagram": 3
+          },
+          {
+            "t": 6,
+            "actor": "Vendeur",
+            "title": "Clôture du dossier initial",
+            "text": "Dans le montage 384, il est recommandé de faire porter à la facture initiale le statut <strong>« Annulée » (251)</strong> pour que le cycle de vie ne laisse pas deux factures actives sur la même opération.",
+            "flux": [
+              "F6"
+            ]
+          }
+        ]
+      },
+      "fields": [
+        {
+          "id": "BT-3",
+          "name": "Code type de facture",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "<strong>380</strong> pour une facture complémentaire, <strong>384</strong> pour une facture rectificative. Le code <strong>383 est interdit</strong>.",
+          "rule": "BR-FR-DC-04 · G1.01"
+        },
+        {
+          "id": "BG-3",
+          "name": "Référence à une facture antérieure",
+          "level": "En-tête",
+          "obligation": "conditionnel",
+          "value": "Renseigné si BT-3 = 384",
+          "cond": "Obligatoire pour une rectificative, non exigé pour une facture complémentaire 380",
+          "rule": "BR-FR-CO-05"
+        },
+        {
+          "id": "BT-25",
+          "name": "Numéro de la facture rectifiée",
+          "level": "En-tête",
+          "obligation": "conditionnel",
+          "value": "Numéro exact de la facture initiale (BT-1 d'origine)",
+          "cond": "Si BG-3 est présent"
+        },
+        {
+          "id": "BT-26",
+          "name": "Date de la facture rectifiée",
+          "level": "En-tête",
+          "obligation": "conditionnel",
+          "value": "Date d'émission de la facture initiale",
+          "cond": "Si BT-3 = 384",
+          "rule": "BR-FR-CO-05"
+        },
+        {
+          "id": "BT-23",
+          "name": "Cadre de facturation",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "Le <strong>même cadre que la facture initiale</strong> : B1/S1/M1 dans le cas courant",
+          "rule": "BR-FR-08"
+        },
+        {
+          "id": "BT-21 / BT-22",
+          "name": "Code sujet et texte de la note",
+          "level": "En-tête",
+          "obligation": "recommandé",
+          "value": "Explication littérale de l'ajustement : nature du complément, référence de la facture d'origine"
+        },
+        {
+          "id": "Code 383",
+          "name": "Note de débit",
+          "level": "Type de document",
+          "obligation": "non applicable",
+          "value": "<strong>N'existe pas dans la RFE.</strong> Une plateforme qui recevrait un 383 doit le rejeter.",
+          "rule": "BR-FR-DC-04"
+        }
+      ],
+      "fieldsNote": "💡 <strong>Comment choisir entre 380 et 384 ?</strong> La facture complémentaire 380 est plus simple et préserve la piste d'audit de la facture initiale : à privilégier quand le complément est une <em>opération nouvelle</em> (pénalités, frais de relance, prestation supplémentaire). La rectificative 384 s'impose quand la facture initiale était <em>erronée</em> et doit disparaître de la comptabilité des deux parties. Dans les deux cas, la TVA du complément est due normalement.",
+      "relatedWhy": {
+        "nominal-litige-avoir": {
+          "rel": "le miroir",
+          "why": "L'avoir 381 traite l'ajustement <strong>à la baisse</strong>, la présente fiche l'ajustement <strong>à la hausse</strong> : mêmes mécanismes de référence à la facture antérieure, sens opposé."
+        },
+        "nominal-litige-rectificative": {
+          "rel": "le même outil",
+          "why": "La rectificative 384 est exactement l'outil décrit ici en voie B : la fiche litige en montre l'usage après contestation de l'acheteur."
+        }
+      }
+    },
+    "cas-24": {
+      "narrative": {
+        "intro": "<p>Les arrhes de l'article <strong>1590 du Code civil</strong> ne sont pas un acompte : ce sont des sommes versées <strong>à titre de dédit</strong>. Conséquence directe : elles sont <strong>hors champ de la TVA</strong>, donc hors e-invoicing <em>et</em> hors e-reporting. Aucune facture, aucun flux.</p>",
+        "steps": [
+          {
+            "t": 1,
+            "actor": "Acheteur",
+            "title": "Versement des arrhes à la commande",
+            "text": "L'acheteur verse une somme qui lui permettra de se dédire. Le vendeur peut lui aussi renoncer, en restituant le double. Rien n'est encore fermement engagé.",
+            "diagram": 0
+          },
+          {
+            "t": 2,
+            "actor": "Vendeur",
+            "title": "Aucun document RFE n'est émis",
+            "text": "Pas de facture d'acompte, pas de flux 1, pas de flux 10.3. La norme recommande simplement de <strong>qualifier explicitement la somme d'« arrhes »</strong> dans le contrat ou le reçu, pour prévenir toute requalification.",
+            "diagram": 1
+          },
+          {
+            "t": 3,
+            "actor": "Acheteur",
+            "title": "Scénario 1 — l'opération se réalise",
+            "text": "Les arrhes s'imputent sur le prix. La <strong>facture définitive</strong> est émise dans le circuit normal, et c'est elle seule qui porte la TVA sur la totalité de l'opération.",
+            "flux": [
+              "F1",
+              "F2"
+            ],
+            "refs": [
+              "BT-3",
+              "BT-113"
+            ],
+            "diagram": 2
+          },
+          {
+            "t": 4,
+            "actor": "Vendeur",
+            "title": "Scénario 2 — l'opération est annulée",
+            "text": "L'acheteur se dédit : les arrhes sont conservées par le vendeur. Cette somme rémunère un <strong>préjudice commercial</strong>, c'est une <strong>indemnité hors champ de la TVA</strong> — aucune facture électronique, aucune déclaration.",
+            "diagram": 3
+          }
+        ]
+      },
+      "fields": [
+        {
+          "id": "Champ spécifique",
+          "name": "Aucun",
+          "level": "—",
+          "obligation": "non applicable",
+          "value": "<strong>Aucun champ BT dédié.</strong> Les arrhes ne donnent lieu à aucun document dans le périmètre de la réforme.",
+          "rule": "Z12-014 §3.2.23"
+        },
+        {
+          "id": "BT-113",
+          "name": "Montant déjà payé",
+          "level": "Totaux",
+          "obligation": "conditionnel",
+          "value": "Sur la facture définitive, les arrhes imputées sur le prix se retrouvent naturellement dans le montant déjà payé",
+          "cond": "Si l'opération se réalise et que les arrhes ont été encaissées",
+          "rule": "BR-CO-16"
+        },
+        {
+          "id": "Qualification contractuelle",
+          "name": "Mention « arrhes »",
+          "level": "Hors facture",
+          "obligation": "recommandé",
+          "value": "À porter au contrat ou au reçu : c'est la seule protection contre une requalification en acompte, qui rendrait la TVA exigible"
+        }
+      ],
+      "fieldsNote": "⚠️ <strong>La frontière avec l'acompte est fiscale, pas rédactionnelle.</strong> L'acompte marque un engagement <em>ferme et définitif</em> des deux parties : la TVA devient exigible à l'encaissement (art. 269 du CGI) et une facture d'acompte est obligatoire. Les arrhes laissent au contraire une faculté de dédit. Une somme appelée « arrhes » mais assortie d'un engagement irrévocable sera traitée comme un acompte par l'administration — avec le rappel de TVA et l'absence de facture qui vont avec.",
+      "relatedWhy": {
+        "cas-20": {
+          "rel": "à ne pas confondre",
+          "why": "C'est la comparaison décisive : l'acompte du cas 20 est dans le champ, avec facture 386 et TVA exigible dès l'encaissement, tandis que les arrhes n'entraînent strictement rien."
+        }
+      }
+    },
+    "cas-25": {
+      "narrative": {
+        "intro": "<p>Tout dépend d'une seule question, posée par l'article <strong>256 ter du CGI</strong> : au moment où le bon est émis, connaît-on le lieu de l'opération et le taux de TVA applicable ? Si oui, c'est un <strong>bon à usage unique (BUU)</strong> et la TVA est due dès l'émission. Si non, c'est un <strong>bon à usages multiples (BUM)</strong> et rien ne se passe avant l'utilisation.</p>",
+        "steps": [
+          {
+            "t": 1,
+            "actor": "Émetteur du bon",
+            "title": "Qualification du bon",
+            "text": "Un bon valable sur un seul produit à un taux connu, dans un seul pays, est un <strong>BUU</strong>. Une carte cadeau utilisable sur tout un catalogue à taux multiples est un <strong>BUM</strong>.",
+            "diagram": 0
+          },
+          {
+            "t": 2,
+            "actor": "Émetteur du bon",
+            "title": "BUU — la TVA est due à chaque transfert",
+            "text": "Chaque cession du bon est traitée comme l'opération sous-jacente elle-même : e-invoicing si le cessionnaire est un assujetti, e-reporting flux 10.3 s'il s'agit d'un particulier. Le taux est celui du bien ou du service visé.",
+            "flux": [
+              "F1",
+              "F2",
+              "F10.3"
+            ],
+            "refs": [
+              "BT-151"
+            ],
+            "diagram": 1
+          },
+          {
+            "t": 3,
+            "actor": "Utilisateur",
+            "title": "BUU — l'utilisation n'est pas une opération",
+            "text": "La remise du bon en paiement <strong>ne génère aucune TVA additionnelle</strong> et aucun flux : l'opération a déjà été taxée à l'émission.",
+            "diagram": 2
+          },
+          {
+            "t": 4,
+            "actor": "Émetteur du bon",
+            "title": "BUM — l'émission est hors champ",
+            "text": "Lieu et taux étant inconnus, l'émission et les cessions successives sont <strong>hors champ de la TVA</strong> : ni e-invoicing, ni e-reporting.",
+            "diagram": 1
+          },
+          {
+            "t": 5,
+            "actor": "Utilisateur",
+            "title": "BUM — la TVA naît à l'utilisation",
+            "text": "C'est la remise du bon contre un bien ou un service qui déclenche la TVA, au taux réel de l'article obtenu : <strong>e-invoicing en B2B, flux 10.3 en B2C</strong>.",
+            "flux": [
+              "F1",
+              "F2",
+              "F10.3"
+            ],
+            "refs": [
+              "BT-151"
+            ],
+            "diagram": 2
+          },
+          {
+            "t": 6,
+            "actor": "Émetteur du bon",
+            "title": "Les commissions suivent leur propre régime",
+            "text": "Les frais de distribution, de gestion ou de mise en marché du bon sont des <strong>prestations de services taxables</strong>, facturées séparément dans le circuit e-invoicing normal, quel que soit le type de bon.",
+            "flux": [
+              "F1",
+              "F2"
+            ],
+            "refs": [
+              "BT-23"
+            ]
+          }
+        ]
+      },
+      "fields": [
+        {
+          "id": "BT-3",
+          "name": "Code type de facture",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "<strong>380</strong> : le bon ne crée pas de type de document particulier"
+        },
+        {
+          "id": "BT-23",
+          "name": "Cadre de facturation",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "Cadre de l'<strong>opération sous-jacente</strong> : B1 pour une livraison de biens, S1 pour un service",
+          "rule": "BR-FR-08"
+        },
+        {
+          "id": "BT-151",
+          "name": "Catégorie de TVA de la ligne",
+          "level": "Ligne",
+          "obligation": "obligatoire",
+          "value": "Catégorie et taux du bien ou du service visé par le bon — jamais un taux « moyen »",
+          "rule": "BR-S-08"
+        },
+        {
+          "id": "BG-25",
+          "name": "Ligne de facture",
+          "level": "Ligne",
+          "obligation": "obligatoire",
+          "value": "Décrit l'opération réelle. Pour un BUU, la ligne décrit le bien ou service dont le bon donne droit"
+        },
+        {
+          "id": "Champ « type de bon »",
+          "name": "BUU / BUM",
+          "level": "—",
+          "obligation": "non applicable",
+          "value": "<strong>Aucun champ BT n'identifie la nature du bon.</strong> La qualification est purement fiscale et se lit dans le régime appliqué, pas dans la facture.",
+          "rule": "Z12-014 §3.2.24"
+        }
+      ],
+      "fieldsNote": "⚠️ <strong>Cas encore ouvert.</strong> La norme XP Z12-014 V1.4 indique elle-même que ce cas d'usage « fait encore l'objet de discussions et est donc susceptible de compléments significatifs ». Le traitement décrit ici est celui du droit commun de l'article 256 ter du CGI ; une doctrine ultérieure peut préciser notamment le sort des bons multi-pays et des plateformes de distribution.",
+      "relatedWhy": {}
+    },
+    "cas-26": {
+      "narrative": {
+        "intro": "<p>Une retenue de garantie ou une réserve de propriété ne change rien à la facture : le vendeur facture <strong>la totalité</strong>, avec la TVA sur la totalité. La clause n'est portée que par une <strong>note</strong> — les profils EN 16931 et EXTENDED-CTC-FR ne savent pas représenter un échéancier structuré en plusieurs montants.</p>",
+        "steps": [
+          {
+            "t": 1,
+            "actor": "Vendeur",
+            "title": "Facturation à 100 %",
+            "text": "La facture porte le montant total de l'opération et la TVA correspondante. Aucune ligne négative, aucune minoration : la réserve n'est pas une réduction de prix.",
+            "flux": [
+              "F1",
+              "F2"
+            ],
+            "refs": [
+              "BT-112",
+              "BT-115"
+            ],
+            "diagram": 0
+          },
+          {
+            "t": 2,
+            "actor": "Vendeur",
+            "title": "La clause est exprimée en note",
+            "text": "Le couple <strong>BT-21 = ABU</strong> et <strong>BT-22</strong> porte le texte de la clause — par exemple « 95 % payables à réception, 5 % retenus jusqu'à la levée des réserves ». Les conditions de paiement BT-20 peuvent rappeler l'échéancier en texte libre.",
+            "flux": [
+              "F2"
+            ],
+            "refs": [
+              "BT-21",
+              "BT-22",
+              "BT-20"
+            ],
+            "diagram": 1
+          },
+          {
+            "t": 3,
+            "actor": "Acheteur",
+            "title": "Paiement partiel puis levée de la réserve",
+            "text": "L'acheteur règle la part immédiate, puis le solde à la levée de la réserve. <strong>Aucune nouvelle facture n'est émise</strong> : c'est le même document qui est soldé en deux fois.",
+            "flux": [
+              "F6"
+            ],
+            "diagram": 2
+          },
+          {
+            "t": 4,
+            "actor": "Vendeur",
+            "title": "Si la réserve n'est pas levée",
+            "text": "La retenue devient définitive : le vendeur émet alors un <strong>avoir (381)</strong> à hauteur de la part non due, référençant la facture initiale en BG-3.",
+            "flux": [
+              "F1",
+              "F2"
+            ],
+            "refs": [
+              "BT-3",
+              "BG-3"
+            ],
+            "diagram": 3
+          }
+        ]
+      },
+      "fields": [
+        {
+          "id": "BT-21",
+          "name": "Code sujet de la note",
+          "level": "En-tête",
+          "obligation": "conditionnel",
+          "value": "<strong>ABU</strong> — le code normé pour ce type de mention contractuelle",
+          "cond": "Si une clause de réserve s'applique",
+          "rule": "BR-FR-07"
+        },
+        {
+          "id": "BT-22",
+          "name": "Texte de la note",
+          "level": "En-tête",
+          "obligation": "conditionnel",
+          "value": "Texte de la clause : nature de la réserve, part retenue, condition de levée",
+          "cond": "Renseigné avec BT-21",
+          "rule": "BR-FR-07"
+        },
+        {
+          "id": "BT-20",
+          "name": "Conditions de paiement",
+          "level": "En-tête",
+          "obligation": "recommandé",
+          "value": "Rappel de l'échéancier en <strong>texte libre</strong> — aucun échéancier structuré multi-montants n'est possible dans les profils autorisés"
+        },
+        {
+          "id": "BT-8",
+          "name": "Code de la date d'exigibilité de la TVA",
+          "level": "En-tête",
+          "obligation": "conditionnel",
+          "value": "Sur option pour les débits, la TVA est due à l'émission : la retenue ne la diffère pas",
+          "cond": "Selon le régime d'exigibilité retenu"
+        },
+        {
+          "id": "BT-3",
+          "name": "Code type de facture",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "<strong>380</strong> pour la facture initiale, <strong>381</strong> pour l'avoir si la réserve est mise en œuvre"
+        },
+        {
+          "id": "BT-112 / BT-115",
+          "name": "Total TTC et net à payer",
+          "level": "Totaux",
+          "obligation": "obligatoire",
+          "value": "Portent le <strong>montant intégral</strong> : la retenue de garantie ne se déduit pas dans les totaux de la facture",
+          "rule": "BR-CO-16"
+        }
+      ],
+      "fieldsNote": "⚠️ <strong>Correction fréquente :</strong> ce n'est pas BT-22 seul qui « porte » la clause, c'est le <strong>couple BT-21 = ABU + BT-22</strong> ; BT-20 reste les conditions de paiement. Et surtout, il est tentant de minorer la facture du montant retenu : c'est une erreur. La retenue est un <em>différé de paiement</em>, pas une réduction de base taxable. La TVA reste due sur 100 %.",
+      "relatedWhy": {}
+    },
+    "cas-27": {
+      "narrative": {
+        "intro": "<p>Au péage, la société d'autoroute ne connaît pas son client. Le passage ponctuel est donc traité comme du <strong>B2C</strong> et déclaré en e-reporting, tandis que les <strong>abonnés</strong> identifiés reçoivent une véritable facture périodique en e-invoicing.</p>",
+        "steps": [
+          {
+            "t": 1,
+            "actor": "Société autoroute",
+            "title": "Passage ponctuel, client inconnu",
+            "text": "Aucune identification de l'assujetti au moment du passage : l'opération est assimilée à une vente au détail et entre dans le <strong>e-reporting B2C, flux 10.3</strong>, sous forme de cumul de ventes.",
+            "flux": [
+              "F10.3"
+            ],
+            "diagram": 0
+          },
+          {
+            "t": 2,
+            "actor": "Entreprise abonnée",
+            "title": "Le reçu reste le justificatif de déduction",
+            "text": "L'entreprise conserve le reçu de péage pour déduire la TVA, en application de la tolérance sur les reçus valant facture — mention du taux et du montant de TVA, numérotation séquentielle, espace réservé à l'usager.",
+            "diagram": 1
+          },
+          {
+            "t": 3,
+            "actor": "Société autoroute",
+            "title": "Abonnement ou carte accréditive",
+            "text": "Dès lors que le client est identifié par un contrat, la société d'autoroute émet une <strong>facture périodique mensuelle</strong> dans le circuit e-invoicing classique, cadre <strong>S1</strong>, avec la période de facturation en BT-73 et BT-74.",
+            "flux": [
+              "F1",
+              "F2"
+            ],
+            "refs": [
+              "BT-23",
+              "BT-73",
+              "BT-74"
+            ],
+            "diagram": 2
+          },
+          {
+            "t": 4,
+            "actor": "PPF / CdD",
+            "title": "Pré-remplissage et écart assumé",
+            "text": "La TVA collectée déclarée par l'autoroute passe par le flux 10.3 pour les passages ponctuels, alors que la déduction est portée par l'entreprise cliente : l'écart entre les deux est <strong>connu et assumé</strong> par l'administration.",
+            "flux": [
+              "F10.3"
+            ],
+            "diagram": 3
+          },
+          {
+            "t": 5,
+            "actor": "Société autoroute",
+            "title": "Automates non encore adaptés",
+            "text": "Tant que les automates ne savent pas identifier l'assujetti, le traitement B2C reste la règle, à titre transitoire.",
+            "flux": [
+              "F10.3"
+            ]
+          }
+        ]
+      },
+      "fields": [
+        {
+          "id": "BT-23",
+          "name": "Cadre de facturation",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "<strong>S1</strong> — prestation de service, cadre standard. Il n'existe <strong>aucun cadre spécifique au péage</strong>.",
+          "cond": "Sur la facture périodique des abonnés uniquement",
+          "rule": "BR-FR-08"
+        },
+        {
+          "id": "BT-3",
+          "name": "Code type de facture",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "<strong>380</strong>",
+          "cond": "Sur la facture périodique"
+        },
+        {
+          "id": "BT-73 / BT-74",
+          "name": "Début et fin de la période de facturation",
+          "level": "En-tête",
+          "obligation": "recommandé",
+          "value": "Bornes du mois facturé — c'est ce qui rend la facture récapitulative lisible",
+          "rule": "BG-14"
+        },
+        {
+          "id": "Flux 10.3",
+          "name": "E-reporting de transactions B2C",
+          "level": "Flux",
+          "obligation": "obligatoire",
+          "value": "Cumul quotidien des passages non identifiés",
+          "cond": "Pour tous les passages sans client identifié"
+        },
+        {
+          "id": "Reçu de péage",
+          "name": "Justificatif de déduction",
+          "level": "Hors facture",
+          "obligation": "non applicable",
+          "value": "Le reçu n'est pas une facture électronique : il vaut justificatif au titre d'une <strong>tolérance doctrinale</strong>, sous conditions de mentions.",
+          "rule": "Z12-014 §3.2.26"
+        }
+      ],
+      "fieldsNote": "💡 <strong>Deux régimes coexistent pour la même société.</strong> Une société d'autoroute est simultanément un déclarant e-reporting massif (les péages ponctuels) et un émetteur de factures e-invoicing (les abonnés). Le point de bascule n'est pas le montant mais l'<strong>identification du client</strong> au moment de l'opération.",
+      "relatedWhy": {
+        "cas-28": {
+          "rel": "la même logique",
+          "why": "Restaurant et péage posent le même problème : un client d'abord anonyme, donc e-reporté, qui peut ensuite réclamer une facture. Le cas 28 traite explicitement ce rattrapage avec le cadre 7."
+        }
+      }
+    },
+    "cas-28": {
+      "narrative": {
+        "intro": "<p>Un repas est encaissé à la caisse, donc déclaré en e-reporting B2C. Si le client assujetti réclame ensuite une facture, il ne faut surtout pas déclarer la TVA une seconde fois : c'est le rôle du cadre de facturation <strong>7</strong>, « TVA déjà collectée ».</p>",
+        "steps": [
+          {
+            "t": 1,
+            "actor": "Restaurant",
+            "title": "Encaissement en caisse",
+            "text": "Note inférieure à 150 € HT, client qui ne demande rien : l'opération part en <strong>e-reporting B2C, flux 10.3</strong> en cumul quotidien, complété du <strong>flux 10.4</strong> pour l'encaissement si le restaurateur est en TVA à l'encaissement.",
+            "flux": [
+              "F10.3",
+              "F10.4"
+            ],
+            "diagram": 0
+          },
+          {
+            "t": 2,
+            "actor": "Client entreprise",
+            "title": "Demande de facture a posteriori",
+            "text": "Le collaborateur revient chercher une facture au nom de son entreprise, ou la note dépasse 150 € HT : une facture électronique devient nécessaire.",
+            "diagram": 1
+          },
+          {
+            "t": 3,
+            "actor": "Restaurant",
+            "title": "Voie 1 — sortir l'opération de la caisse",
+            "text": "Si le logiciel de caisse permet d'exclure la vente <strong>avant</strong> l'envoi du e-reporting, alors la facture est une facture ordinaire, cadre <strong>S1</strong>, avec sa TVA. C'est la voie la plus propre.",
+            "flux": [
+              "F1",
+              "F2"
+            ],
+            "refs": [
+              "BT-23"
+            ],
+            "diagram": 2
+          },
+          {
+            "t": 4,
+            "actor": "Restaurant",
+            "title": "Voie 2 — la vente est déjà e-reportée",
+            "text": "Le cumul est parti : la facture est émise avec le cadre <strong>S7</strong> (ou B7), qui signale que la <strong>TVA a déjà été collectée</strong> via le e-reporting.",
+            "flux": [
+              "F1",
+              "F2"
+            ],
+            "refs": [
+              "BT-23"
+            ],
+            "diagram": 2
+          },
+          {
+            "t": 5,
+            "actor": "PPF / CdD",
+            "title": "Effet du cadre 7 sur le pré-remplissage",
+            "text": "Le flux 1 de cette facture <strong>ne compte pas</strong> dans la TVA collectée du restaurant, déjà comptée par le 10.3/10.4, <strong>mais compte</strong> dans la TVA déductible de l'entreprise cliente. Le cadre 7 est exactement l'instrument de cette asymétrie.",
+            "flux": [
+              "F1"
+            ],
+            "refs": [
+              "BT-23"
+            ],
+            "diagram": 3
+          }
+        ]
+      },
+      "fields": [
+        {
+          "id": "BT-23",
+          "name": "Cadre de facturation",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "<strong>S7</strong> pour un service — <strong>B7</strong> pour une vente de biens. Attention : <strong>M7 n'existe pas</strong>. Cadre <strong>S1</strong> si la vente a pu être sortie de la caisse avant e-reporting.",
+          "rule": "BR-FR-08"
+        },
+        {
+          "id": "BT-3",
+          "name": "Code type de facture",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "<strong>380</strong>"
+        },
+        {
+          "id": "BT-8",
+          "name": "Code de la date d'exigibilité de la TVA",
+          "level": "En-tête",
+          "obligation": "conditionnel",
+          "value": "Selon l'option débits ou encaissements du restaurateur",
+          "cond": "Selon le régime d'exigibilité"
+        },
+        {
+          "id": "BT-47 / BT-48",
+          "name": "Identifiants de l'acheteur",
+          "level": "Acheteur",
+          "obligation": "obligatoire",
+          "value": "C'est le passage du client anonyme au client identifié qui rend la facture possible : SIREN et numéro de TVA de l'entreprise",
+          "rule": "BR-FR-CO-09"
+        },
+        {
+          "id": "Flux 10.3 / 10.4",
+          "name": "E-reporting B2C et paiements",
+          "level": "Flux",
+          "obligation": "obligatoire",
+          "value": "Déclaration initiale de la vente en caisse, puis de l'encaissement si TVA à l'encaissement",
+          "cond": "10.4 si TVA à l'encaissement"
+        }
+      ],
+      "fieldsNote": "⚠️ <strong>Ne pas cumuler S1 et e-reporting.</strong> Si la correction est faite directement dans le logiciel de caisse, avant l'envoi du e-reporting, il faut émettre une facture classique <strong>S1 avec TVA</strong> et <em>ne pas</em> utiliser le cadre 7. Inversement, émettre une facture S1 sur une vente déjà partie en 10.3 revient à déclarer deux fois la même TVA collectée. La tolérance doctrinale des notes inférieures à 150 € HT reste par ailleurs applicable.",
+      "relatedWhy": {
+        "cas-6": {
+          "rel": "la même bascule",
+          "why": "Le cas 6 pose le principe général du passage d'une opération hors champ B2B vers une régularisation en cadre 7 ; le restaurant en est l'illustration la plus quotidienne."
+        },
+        "cas-30": {
+          "rel": "le cadre 7 en détail",
+          "why": "Le cas 30 est consacré au cadre B7/S7 lui-même : effets sur le pré-remplissage, périmètre, limites. À lire pour comprendre pourquoi la voie 2 ne double pas la TVA."
+        }
+      }
+    },
+    "cas-32": {
+      "narrative": {
+        "intro": "<p>Énergie, télécom : le client paie des mensualités estimées, puis reçoit une facture de régularisation. En B2B, ces mensualités sont des <strong>factures ordinaires 380 en cadre S1</strong> — et non des acomptes 386 en cadre 4. La régularisation est elle aussi une 380/S1, qui reprend les sommes déjà payées en BT-113.</p>",
+        "steps": [
+          {
+            "t": 1,
+            "actor": "Fournisseur (énergie/télécom)",
+            "title": "Chaque mensualité est une facture",
+            "text": "Le fournisseur émet mensuellement une facture <strong>380</strong> en cadre <strong>S1</strong> sur consommation estimée, avec son flux 1 fiscal et son cycle de vie propre.",
+            "flux": [
+              "F1",
+              "F2",
+              "F6"
+            ],
+            "refs": [
+              "BT-3",
+              "BT-23"
+            ],
+            "diagram": 0
+          },
+          {
+            "t": 2,
+            "actor": "Client",
+            "title": "Paiement de la mensualité",
+            "text": "En prestation de services soumise à la TVA sur les encaissements, chaque encaissement mensuel donne lieu au statut de paiement correspondant dans le <strong>flux 6</strong>.",
+            "flux": [
+              "F6"
+            ],
+            "diagram": 1
+          },
+          {
+            "t": 3,
+            "actor": "Fournisseur (énergie/télécom)",
+            "title": "Relevé réel et facture de régularisation",
+            "text": "À l'échéance du contrat ou du cycle annuel, le fournisseur relève la consommation réelle et émet une facture de régularisation, toujours <strong>380 / S1</strong>.",
+            "flux": [
+              "F1",
+              "F2"
+            ],
+            "refs": [
+              "BT-3",
+              "BT-23"
+            ],
+            "diagram": 2
+          },
+          {
+            "t": 4,
+            "actor": "Fournisseur (énergie/télécom)",
+            "title": "Imputation des sommes déjà versées",
+            "text": "Le cumul des mensualités encaissées est porté en <strong>BT-113</strong> ; le net à payer <strong>BT-115</strong> s'en déduit et peut être <strong>négatif</strong> si le client a trop versé.",
+            "flux": [
+              "F1"
+            ],
+            "refs": [
+              "BT-113",
+              "BT-115"
+            ],
+            "diagram": 2
+          },
+          {
+            "t": 5,
+            "actor": "PPF / CdD",
+            "title": "TVA résiduelle et pré-remplissage",
+            "text": "Le flux 1 de la régularisation porte la TVA résiduelle. Le pré-remplissage additionne les mensualités et la régularisation : c'est pourquoi la régularisation ne doit <strong>pas</strong> réémettre la TVA déjà déclarée.",
+            "flux": [
+              "F1"
+            ],
+            "diagram": 3
+          }
+        ]
+      },
+      "fields": [
+        {
+          "id": "BT-3",
+          "name": "Code type de facture",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "<strong>380</strong> pour les mensualités <em>et</em> pour la régularisation. Le code <strong>500 n'est pas un type de facture valide</strong> dans la liste restreinte du profil français.",
+          "rule": "BR-FR-DC-04"
+        },
+        {
+          "id": "BT-23",
+          "name": "Cadre de facturation",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "<strong>S1</strong> tout au long du cycle. Pas de S4 : on n'est pas dans le mécanisme de la facture définitive après acompte.",
+          "rule": "BR-FR-08"
+        },
+        {
+          "id": "BT-113",
+          "name": "Montant déjà payé",
+          "level": "Totaux",
+          "obligation": "obligatoire",
+          "value": "Cumul des mensualités effectivement encaissées",
+          "cond": "Sur la facture de régularisation",
+          "rule": "BR-CO-16"
+        },
+        {
+          "id": "BT-115",
+          "name": "Net à payer",
+          "level": "Totaux",
+          "obligation": "obligatoire",
+          "value": "BT-112 − BT-113 : <strong>peut être négatif</strong> si les mensualités excèdent la consommation réelle",
+          "rule": "BR-CO-16"
+        },
+        {
+          "id": "BG-26",
+          "name": "Période de facturation de la ligne",
+          "level": "Ligne",
+          "obligation": "conditionnel",
+          "value": "Bornes de la période consommée, ligne par ligne (BT-134 et BT-135)",
+          "cond": "Recommandé pour rendre la régularisation vérifiable"
+        },
+        {
+          "id": "BT-73 / BT-74",
+          "name": "Période de facturation",
+          "level": "En-tête",
+          "obligation": "recommandé",
+          "value": "Période couverte par la mensualité ou par la régularisation"
+        }
+      ],
+      "fieldsNote": "⚠️ <strong>Ne pas confondre mensualité estimée et acompte.</strong> Une mensualité sur estimation de consommation est une <em>facture</em> : elle a son numéro, son flux 1, sa TVA. L'acompte du cas 20 est un document distinct qui anticipe une facture unique à venir. En <strong>B2C</strong>, le rescrit BOI-RES-RVA-000209-20250605 traite au contraire les mensualités comme des acomptes, avec TVA exigible à l'encaissement (art. 269-2-a du CGI) : le régime dépend donc de la qualité du client.",
+      "relatedWhy": {
+        "cas-20": {
+          "rel": "le mécanisme voisin",
+          "why": "L'acompte du cas 20 est le montage <em>alternatif</em> : un document 386 anticipant une facture unique, là où les mensualités sont autant de factures complètes."
+        },
+        "cas-21": {
+          "rel": "la mécanique du solde",
+          "why": "Le cas 21 détaille la facture définitive après acompte, avec ses lignes négatives et son cadre 4 — utile pour voir précisément ce que la régularisation du cas 32 ne fait <em>pas</em>."
+        }
+      }
+    },
+    "cas-35": {
+      "narrative": {
+        "intro": "<p>⚠️ Contrairement à une intuition courante, l'auteur <strong>n'émet pas de facture</strong> pour ses droits. Le versement de droits d'auteur par un éditeur, un producteur ou une société de perception donne lieu à un <strong>relevé de droits</strong>, hors champ du e-invoicing, avec <strong>retenue de TVA à la source</strong> (art. 285 bis du CGI). C'est l'<strong>établissement payeur</strong> qui déclare.</p>",
+        "steps": [
+          {
+            "t": 1,
+            "actor": "Éditeur/Producteur",
+            "title": "Versement des droits d'auteur",
+            "text": "L'éditeur, le producteur ou la société de perception et de répartition verse les droits et applique la <strong>retenue de TVA</strong> prévue à l'article 285 bis du CGI. Aucune facture électronique n'est émise.",
+            "diagram": 0
+          },
+          {
+            "t": 2,
+            "actor": "Auteur",
+            "title": "Un relevé de droits, pas une facture",
+            "text": "L'auteur reçoit un relevé détaillant les droits, la TVA retenue et les cotisations sociales. Ce document <strong>n'entre pas</strong> dans le périmètre de la facturation électronique.",
+            "diagram": 1
+          },
+          {
+            "t": 3,
+            "actor": "Éditeur/Producteur",
+            "title": "C'est le payeur qui déclare",
+            "text": "L'établissement payeur transmet un <strong>e-reporting de transaction (flux 10.3)</strong> portant le montant et la TVA retenue. L'auteur n'a aucune obligation de transmission pour ces sommes.",
+            "flux": [
+              "F10.3"
+            ],
+            "diagram": 2
+          },
+          {
+            "t": 4,
+            "actor": "Auteur",
+            "title": "Les autres opérations de l'auteur restent dans le champ",
+            "text": "Si l'auteur vend une prestation directe — conférence, commande, cession hors droits — il redevient un assujetti ordinaire : facture <strong>380 / S1</strong> en B2B, e-reporting en B2C.",
+            "flux": [
+              "F1",
+              "F2"
+            ],
+            "refs": [
+              "BT-3",
+              "BT-23"
+            ],
+            "diagram": 3
+          }
+        ]
+      },
+      "fields": [
+        {
+          "id": "Champ spécifique",
+          "name": "Aucun",
+          "level": "—",
+          "obligation": "non applicable",
+          "value": "<strong>Aucun champ BT n'est mobilisé</strong> pour les droits d'auteur : il n'y a pas de facture électronique. Les retenues sociales AGESSA / URSSAF ne sont pas portées dans le format de facture.",
+          "rule": "Z12-014 §3.2.34"
+        },
+        {
+          "id": "Flux 10.3",
+          "name": "E-reporting de transaction",
+          "level": "Flux",
+          "obligation": "obligatoire",
+          "value": "Déclaré par l'<strong>établissement payeur</strong>, pas par l'auteur"
+        },
+        {
+          "id": "BT-3",
+          "name": "Code type de facture",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "<strong>380</strong>",
+          "cond": "Seulement pour les opérations de l'auteur hors droits d'auteur"
+        },
+        {
+          "id": "BT-23",
+          "name": "Cadre de facturation",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "<strong>S1</strong>",
+          "cond": "Seulement pour les opérations de l'auteur hors droits d'auteur",
+          "rule": "BR-FR-08"
+        },
+        {
+          "id": "BT-107 / BT-99",
+          "name": "Déductions et remises",
+          "level": "Totaux",
+          "obligation": "non applicable",
+          "value": "Ces champs ne servent <strong>pas</strong> à représenter les retenues sociales : celles-ci restent hors format."
+        }
+      ],
+      "fieldsNote": "⚠️ <strong>Cas encore ouvert.</strong> La norme V1.4 signale ce cas comme « susceptible de compléments ». Le point de vigilance pratique est la <strong>double casquette</strong> de l'auteur : ses droits sont hors e-invoicing, mais ses prestations directes n'échappent en rien à l'obligation. Un logiciel d'édition doit donc distinguer les deux flux au niveau du tiers, et non au niveau du contrat.",
+      "relatedWhy": {}
+    },
+    "cas-36": {
+      "narrative": {
+        "intro": "<p>Un avocat ou un médecin ne peut pas transmettre à l'administration le détail de ses prestations. La solution normée n'est pas une exonération, c'est une <strong>asymétrie de contenu</strong> : le <strong>flux 1</strong> ne reçoit qu'un libellé générique, le <strong>flux 2</strong> — de partie à partie — porte le détail réel.</p>",
+        "steps": [
+          {
+            "t": 1,
+            "actor": "Professionnel (avocat/médecin)",
+            "title": "Libellé générique en dénomination d'article",
+            "text": "<strong>BT-153</strong> porte une désignation neutre : « Prestation juridique », « Honoraires de consultation ». C'est ce champ, et lui seul, qui remonte à l'administration.",
+            "flux": [
+              "F1",
+              "F2"
+            ],
+            "refs": [
+              "BT-153"
+            ],
+            "diagram": 0
+          },
+          {
+            "t": 2,
+            "actor": "Professionnel (avocat/médecin)",
+            "title": "Détail sensible en description d'article",
+            "text": "Le détail réel de la prestation est placé en <strong>BT-154</strong>, transmis exclusivement dans le <strong>flux 2</strong> vers l'acheteur. Le flux 1 ne le contient pas.",
+            "flux": [
+              "F2"
+            ],
+            "refs": [
+              "BT-154"
+            ],
+            "diagram": 1
+          },
+          {
+            "t": 3,
+            "actor": "PA-E",
+            "title": "Construction du flux 1 expurgé",
+            "text": "La plateforme émettrice applique la cartographie du flux 1 : la description d'article et les attributs de ligne détaillés sont <strong>exclus par construction</strong>.",
+            "flux": [
+              "F1"
+            ],
+            "refs": [
+              "BT-154"
+            ],
+            "diagram": 2
+          },
+          {
+            "t": 4,
+            "actor": "Acheteur",
+            "title": "Le client reçoit la facture complète",
+            "text": "L'acheteur, lié par la même confidentialité, dispose du détail nécessaire au contrôle de la prestation et à sa comptabilisation.",
+            "flux": [
+              "F2"
+            ],
+            "diagram": 3
+          },
+          {
+            "t": 5,
+            "actor": "PPF / CdD",
+            "title": "Ce que voit l'administration",
+            "text": "Montants, TVA, parties, dates : tout ce qui est fiscalement nécessaire. Rien de ce qui relève du secret. La <strong>TVA reste due normalement</strong>.",
+            "flux": [
+              "F1"
+            ]
+          }
+        ]
+      },
+      "fields": [
+        {
+          "id": "BT-153",
+          "name": "Dénomination de l'article",
+          "level": "Ligne",
+          "obligation": "obligatoire",
+          "value": "<strong>Mention générique autorisée</strong> — c'est le seul libellé de ligne transmis dans le flux 1",
+          "rule": "BR-FR-MAP-24"
+        },
+        {
+          "id": "BT-154",
+          "name": "Description de l'article",
+          "level": "Ligne",
+          "obligation": "conditionnel",
+          "value": "Porte le détail sensible. <strong>Flux 2 uniquement</strong>, jamais transmis à l'administration.",
+          "cond": "Si un détail doit être communiqué au client",
+          "rule": "BR-FR-MAP-24"
+        },
+        {
+          "id": "BG-32",
+          "name": "Attributs de l'article",
+          "level": "Ligne",
+          "obligation": "conditionnel",
+          "value": "Comme BT-154, exclus du flux 1 : peuvent porter des précisions réservées aux parties"
+        },
+        {
+          "id": "BT-151 / BT-121",
+          "name": "Catégorie de TVA et code d'exonération",
+          "level": "Ligne",
+          "obligation": "obligatoire",
+          "value": "<strong>Régime normal de l'opération.</strong> Le secret professionnel n'ouvre <strong>aucune exonération</strong> et n'appelle aucun code VATEX particulier."
+        }
+      ],
+      "fieldsNote": "⚠️ <strong>Le secret porte sur la description, pas sur le régime de TVA.</strong> Une prestation d'avocat reste taxable au taux normal ; une exonération éventuelle d'un acte médical découle de l'article 261-4-1° du CGI, pas du secret. Sources du régime : art. 226-13 du Code pénal (secret professionnel), art. L.511-33 du Code monétaire et financier (secret bancaire), art. L.151-1 du Code de commerce (secret des affaires), instruction ministérielle 900/ARM/CAB/NP du 15/03/2021 pour les données sensibles de Défense.",
+      "relatedWhy": {}
+    },
+    "cas-37": {
+      "narrative": {
+        "intro": "<p>La société en participation n'a pas de personnalité juridique opposable aux tiers : elle ne peut donc pas apparaître comme partie à la facture. Tout passe par des <strong>SIREN existants</strong> — celui du mandataire pour les ventes, celui du gérant pour la gestion interne — et par des <strong>références</strong> qui permettent d'affecter chaque écriture à la bonne SEP.</p>",
+        "steps": [
+          {
+            "t": 1,
+            "actor": "Mandataire",
+            "title": "Facturation du client final",
+            "text": "Le membre désigné facture l'acheteur final en son nom : c'est <strong>son SIREN</strong> qui figure en BT-30 et BT-31 du bloc vendeur BG-4.",
+            "flux": [
+              "F1",
+              "F2"
+            ],
+            "refs": [
+              "BT-30",
+              "BT-31"
+            ],
+            "diagram": 0
+          },
+          {
+            "t": 2,
+            "actor": "Gérant SEP",
+            "title": "Réception des factures fournisseurs",
+            "text": "Les fournisseurs facturent le <strong>gérant</strong>, qui figure en acheteur BG-7. Le gérant utilise une <strong>adresse de facturation électronique dédiée</strong> à la gestion pour compte de tiers, afin de ne pas mélanger ses propres achats et ceux de la SEP.",
+            "flux": [
+              "F2"
+            ],
+            "refs": [
+              "BT-47",
+              "BT-49"
+            ],
+            "diagram": 1
+          },
+          {
+            "t": 3,
+            "actor": "Associés SEP",
+            "title": "Refacturation des quotes-parts",
+            "text": "Chaque associé facture sa part au gérant, qui est alors l'acheteur. Les références de projet ou de commande permettent d'imputer ces factures à la SEP concernée.",
+            "flux": [
+              "F1",
+              "F2"
+            ],
+            "refs": [
+              "BT-10",
+              "BT-11",
+              "BT-13"
+            ],
+            "diagram": 2
+          },
+          {
+            "t": 4,
+            "actor": "Gérant SEP",
+            "title": "Auto-facturation de la part du gérant",
+            "text": "Pour sa propre quote-part, le gérant se retrouve à la fois vendeur et acheteur : <strong>le même SIREN</strong> figure en BT-30 et en BT-47. C'est structurellement admis ici.",
+            "flux": [
+              "F1",
+              "F2"
+            ],
+            "refs": [
+              "BT-30",
+              "BT-47"
+            ],
+            "diagram": 3
+          },
+          {
+            "t": 5,
+            "actor": "PPF / CdD",
+            "title": "Pré-remplissage nécessairement décalé",
+            "text": "La TVA de la SEP est portée par les SIREN du gérant et du mandataire : le pré-remplissage est <strong>incohérent par construction</strong> avec la comptabilité de la SEP. La réconciliation est à la charge de l'ERP.",
+            "flux": [
+              "F1"
+            ]
+          }
+        ]
+      },
+      "fields": [
+        {
+          "id": "BT-30 / BT-31",
+          "name": "Identifiant légal et n° de TVA du vendeur",
+          "level": "Vendeur",
+          "obligation": "obligatoire",
+          "value": "SIREN du <strong>mandataire</strong> sur les factures de vente ; SIREN du <strong>gérant</strong> sur l'auto-facturation de sa quote-part"
+        },
+        {
+          "id": "BT-47",
+          "name": "Identifiant légal de l'acheteur",
+          "level": "Acheteur",
+          "obligation": "obligatoire",
+          "value": "SIREN du <strong>gérant</strong> sur les factures fournisseurs et les factures de quote-part des associés"
+        },
+        {
+          "id": "BT-49",
+          "name": "Adresse électronique de l'acheteur",
+          "level": "Acheteur",
+          "obligation": "obligatoire",
+          "value": "Adresse <strong>dédiée à la gestion pour compte de tiers</strong> côté gérant, du type <code>SIREN_gestiontiers</code>, pour isoler les flux de la SEP"
+        },
+        {
+          "id": "BT-10 / BT-11 / BT-13",
+          "name": "Référence comptable, référence de projet, n° de commande",
+          "level": "En-tête",
+          "obligation": "conditionnel",
+          "value": "Clé d'affectation de la facture à la bonne SEP — <strong>conditionnel dans la norme mais critique en pratique</strong>",
+          "cond": "Dès qu'un même gérant administre plusieurs SEP"
+        },
+        {
+          "id": "Adresse de réception de la SEP",
+          "name": "Annuaire PPF",
+          "level": "Annuaire",
+          "obligation": "non applicable",
+          "value": "La SEP peut avoir un SIREN au répertoire SIRENE, mais elle <strong>ne doit pas activer d'adresse de réception</strong> dans l'annuaire : aucune facture ne doit lui être adressée directement.",
+          "rule": "Z12-014 §3.2.36"
+        },
+        {
+          "id": "BT-23",
+          "name": "Cadre de facturation",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "Cadre standard B1/S1/M1 : <strong>il n'existe pas de cadre de facturation dédié à la SEP</strong>.",
+          "rule": "BR-FR-08"
+        }
+      ],
+      "fieldsNote": "⚠️ <strong>Le pré-remplissage de TVA sera faux, et c'est structurel.</strong> Puisque la SEP n'est pas partie aux factures, la TVA qu'elle génère est déclarée sous les SIREN du gérant et du mandataire. Aucun champ ne rétablit l'affectation économique : seul le paramétrage de l'ERP, appuyé sur BT-10/BT-11/BT-13 et sur l'adresse dédiée BT-49, permet de reconstituer les comptes de la SEP.",
+      "relatedWhy": {
+        "cas-29": {
+          "rel": "le même problème d'entité",
+          "why": "L'assujetti unique et la SEP partagent la difficulté centrale : une réalité fiscale collective qui ne correspond à aucune partie identifiable sur la facture, avec les mêmes conséquences sur le pré-remplissage."
+        }
+      }
+    },
+    "cas-38": {
+      "narrative": {
+        "intro": "<p>Oui, la norme française admet les <strong>sous-lignes</strong>, via le profil <strong>EXTENDED-CTC-FR</strong>. Chaque ligne reçoit un sous-type — <strong>GROUP</strong>, <strong>DETAIL</strong> ou <strong>INFORMATION</strong> — et seules les lignes DETAIL comptent dans les totaux et dans le flux fiscal.</p>",
+        "steps": [
+          {
+            "t": 1,
+            "actor": "Vendeur",
+            "title": "Structuration hiérarchique de la facture",
+            "text": "Un kit devient une ligne <strong>GROUP</strong> qui porte le libellé commercial, sous laquelle des lignes <strong>DETAIL</strong> portent les composants réellement valorisés. Les lignes <strong>INFORMATION</strong> n'ajoutent que du commentaire.",
+            "flux": [
+              "F2"
+            ],
+            "refs": [
+              "EXT-FR-FE-162",
+              "EXT-FR-FE-163"
+            ],
+            "diagram": 0
+          },
+          {
+            "t": 2,
+            "actor": "Vendeur",
+            "title": "Rattachement des sous-lignes",
+            "text": "<strong>EXT-FR-FE-162</strong> désigne la ligne parente, <strong>EXT-FR-FE-163</strong> le sous-type. La composition du kit peut être exprimée par <strong>EXT-FR-FE-191</strong>, nombre d'unités contenues dans une unité de la ligne parente.",
+            "flux": [
+              "F2"
+            ],
+            "refs": [
+              "EXT-FR-FE-162",
+              "EXT-FR-FE-163",
+              "EXT-FR-FE-191"
+            ],
+            "diagram": 1
+          },
+          {
+            "t": 3,
+            "actor": "PA-E",
+            "title": "Calcul des totaux sur les seules lignes DETAIL",
+            "text": "Les lignes GROUP et INFORMATION portent un montant net de ligne à <strong>0</strong> et ne participent ni à la base taxable, ni aux totaux.",
+            "flux": [
+              "F2"
+            ],
+            "refs": [
+              "BT-131",
+              "BT-151"
+            ],
+            "diagram": 1
+          },
+          {
+            "t": 4,
+            "actor": "PA-E",
+            "title": "Construction du flux 1",
+            "text": "Les lignes <strong>GROUP et INFORMATION sont exclues</strong> du flux 1 : l'administration ne reçoit que les lignes de détail effectivement valorisées.",
+            "flux": [
+              "F1"
+            ],
+            "diagram": 2
+          },
+          {
+            "t": 5,
+            "actor": "Acheteur",
+            "title": "Lecture par la plateforme de réception",
+            "text": "La PA-R doit être capable d'interpréter la hiérarchie pour restituer une facture lisible : c'est le principal point de vigilance d'interopérabilité de ce cas.",
+            "flux": [
+              "F2"
+            ],
+            "diagram": 3
+          }
+        ]
+      },
+      "fields": [
+        {
+          "id": "EXT-FR-FE-163",
+          "name": "Sous-type de ligne",
+          "level": "Ligne",
+          "obligation": "conditionnel",
+          "value": "<strong>GROUP</strong> (regroupement), <strong>DETAIL</strong> (ligne valorisée) ou <strong>INFORMATION</strong> (commentaire)",
+          "cond": "Dès qu'une hiérarchie de lignes est utilisée",
+          "rule": "BR-FR-SL-01 à BR-FR-SL-07"
+        },
+        {
+          "id": "EXT-FR-FE-162",
+          "name": "Identifiant de la ligne parente",
+          "level": "Ligne",
+          "obligation": "conditionnel",
+          "value": "Référence la ligne GROUP à laquelle la sous-ligne se rattache",
+          "cond": "Sur toute sous-ligne",
+          "rule": "BR-FR-SL-01 à BR-FR-SL-07"
+        },
+        {
+          "id": "EXT-FR-FE-191",
+          "name": "Nombre d'unités dans une unité de ligne parente",
+          "level": "Ligne",
+          "obligation": "facultatif",
+          "value": "Exprime la composition du kit : par exemple 4 pneus pour 1 véhicule"
+        },
+        {
+          "id": "BT-131",
+          "name": "Montant net de la ligne",
+          "level": "Ligne",
+          "obligation": "obligatoire",
+          "value": "<strong>0</strong> sur les lignes GROUP et INFORMATION, montant réel sur les lignes DETAIL",
+          "rule": "BR-S-08"
+        },
+        {
+          "id": "BT-151 / BT-152",
+          "name": "Catégorie et taux de TVA de la ligne",
+          "level": "Ligne",
+          "obligation": "conditionnel",
+          "value": "Non exigés sur les lignes GROUP et INFORMATION",
+          "cond": "Obligatoires sur les lignes DETAIL"
+        },
+        {
+          "id": "Profil",
+          "name": "EXTENDED-CTC-FR",
+          "level": "Enveloppe",
+          "obligation": "obligatoire",
+          "value": "Les sous-lignes n'existent <strong>pas</strong> dans le profil EN 16931 nu : le profil étendu est obligatoire."
+        }
+      ],
+      "fieldsNote": "✅ <strong>Effet sur BR-S-08 :</strong> la règle « base taxable = somme des montants nets de ligne » reste vraie, mais elle ne s'applique qu'aux <strong>lignes DETAIL</strong>. Une ligne GROUP valorisée à autre chose que 0 provoquerait un double comptage et le rejet de la facture. La règle BR-FR-MAP-24-01 formalise l'exclusion des lignes GROUP et INFORMATION du flux 1.",
+      "relatedWhy": {}
+    },
+    "cas-39": {
+      "narrative": {
+        "intro": "<p>Une seule facture, plusieurs vendeurs : la facture d'eau qui inclut l'assainissement en est l'exemple canonique. Le cadre de facturation passe à <strong>8</strong> (B8, S8 ou M8) et chaque vendeur secondaire est identifié <strong>au niveau de la ligne</strong>. ⚠️ Ce n'est <strong>pas</strong> BG-11 « agent de vendeur » qui porte ce mécanisme, mais un bloc dédié d'extensions françaises.</p>",
+        "steps": [
+          {
+            "t": 1,
+            "actor": "Intermédiaire (Agent)",
+            "title": "Émission d'une facture unique",
+            "text": "Le distributeur, vendeur principal en BG-4, émet <strong>une seule facture</strong> pour l'ensemble des vendeurs, avec <strong>BT-23 = S8</strong> (ou B8/M8 selon la nature).",
+            "flux": [
+              "F2"
+            ],
+            "refs": [
+              "BT-23"
+            ],
+            "diagram": 0
+          },
+          {
+            "t": 2,
+            "actor": "Intermédiaire (Agent)",
+            "title": "Identification de chaque vendeur en ligne GROUP",
+            "text": "Chaque vendeur secondaire est décrit dans une <strong>ligne GROUP</strong> : nom, SIREN, pays, ainsi que <strong>son propre numéro de facture</strong> et <strong>son propre cadre de facturation</strong>, typiquement S1.",
+            "flux": [
+              "F2"
+            ],
+            "refs": [
+              "EXT-FR-FE-164",
+              "EXT-FR-FE-167",
+              "EXT-FR-FE-178"
+            ],
+            "diagram": 0
+          },
+          {
+            "t": 3,
+            "actor": "Intermédiaire (Agent)",
+            "title": "Détail des prestations sous chaque vendeur",
+            "text": "Sous chaque ligne GROUP, les lignes DETAIL portent les prestations du vendeur concerné, avec leurs totaux de TVA et de TTC propres en EXT-FR-FE-181 et EXT-FR-FE-184.",
+            "flux": [
+              "F2"
+            ],
+            "refs": [
+              "EXT-FR-FE-181",
+              "EXT-FR-FE-184"
+            ],
+            "diagram": 1
+          },
+          {
+            "t": 4,
+            "actor": "PA-E",
+            "title": "Éclatement en autant de flux 1 que de vendeurs",
+            "text": "La plateforme émettrice génère <strong>un flux 1 par vendeur</strong> : les valeurs de ligne remplacent celles de l'en-tête — bloc vendeur BG-4, numéro BT-1, cadre BT-23, exigibilité BT-8, total TVA BT-110.",
+            "flux": [
+              "F1"
+            ],
+            "refs": [
+              "BT-1",
+              "BT-23",
+              "BT-110"
+            ],
+            "diagram": 1
+          },
+          {
+            "t": 5,
+            "actor": "Acheteur",
+            "title": "Une seule facture reçue",
+            "text": "L'acheteur ne reçoit <strong>qu'un seul flux 2</strong> : une facture unique, lisible, dont il n'a pas à reconstituer l'éclatement fiscal.",
+            "flux": [
+              "F2"
+            ],
+            "diagram": 3
+          },
+          {
+            "t": 6,
+            "actor": "PPF / CdD",
+            "title": "Responsabilité fiscale par vendeur",
+            "text": "Chaque vendeur reste <strong>fiscalement responsable de sa part de TVA</strong> : l'éclatement en flux 1 distincts est précisément ce qui rend le pré-remplissage juste pour chacun.",
+            "flux": [
+              "F1"
+            ],
+            "diagram": 2
+          }
+        ]
+      },
+      "fields": [
+        {
+          "id": "BT-23",
+          "name": "Cadre de facturation",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "<strong>B8, S8 ou M8</strong> — c'est ce cadre qui déclenche l'obligation de tout le bloc de ligne",
+          "rule": "BR-FR-08 · BR-FR-MV-01 à BR-FR-MV-11"
+        },
+        {
+          "id": "EXT-FR-FE-164",
+          "name": "Nom du vendeur au niveau de la ligne",
+          "level": "Ligne",
+          "obligation": "obligatoire",
+          "value": "Raison sociale du vendeur secondaire",
+          "cond": "Si BT-23 ∈ {B8, S8, M8}",
+          "rule": "BR-FR-MV-01 à BR-FR-MV-11"
+        },
+        {
+          "id": "EXT-FR-FE-167",
+          "name": "Identifiant légal du vendeur en ligne",
+          "level": "Ligne",
+          "obligation": "obligatoire",
+          "value": "SIREN du vendeur secondaire",
+          "cond": "Si BT-23 ∈ {B8, S8, M8}",
+          "rule": "BR-FR-MV-01 à BR-FR-MV-11"
+        },
+        {
+          "id": "EXT-FR-FE-177",
+          "name": "Code pays du vendeur en ligne",
+          "level": "Ligne",
+          "obligation": "obligatoire",
+          "value": "Code pays du vendeur secondaire",
+          "cond": "Si BT-23 ∈ {B8, S8, M8}",
+          "rule": "BR-FR-MV-01 à BR-FR-MV-11"
+        },
+        {
+          "id": "EXT-FR-FE-178",
+          "name": "Numéro de facture au niveau de la ligne",
+          "level": "Ligne",
+          "obligation": "obligatoire",
+          "value": "Porté par BT-128 avec le qualifiant <strong>AFL</strong> : c'est ce numéro qui devient le BT-1 du flux 1 éclaté",
+          "cond": "Si BT-23 ∈ {B8, S8, M8}",
+          "rule": "BR-FR-MV-01 à BR-FR-MV-11"
+        },
+        {
+          "id": "BT-128 / AVV",
+          "name": "Cadre de facturation au niveau de la ligne",
+          "level": "Ligne",
+          "obligation": "obligatoire",
+          "value": "Cadre propre du vendeur secondaire, <strong>différent du S8 d'en-tête</strong> — typiquement S1",
+          "cond": "Si BT-23 ∈ {B8, S8, M8}",
+          "rule": "BR-FR-MV-01 à BR-FR-MV-11"
+        },
+        {
+          "id": "EXT-FR-FE-181",
+          "name": "Total de TVA au niveau de la ligne",
+          "level": "Ligne",
+          "obligation": "obligatoire",
+          "value": "TVA due par ce vendeur — contrôlée par BR-FR-MV-09",
+          "cond": "Si BT-23 ∈ {B8, S8, M8}",
+          "rule": "BR-FR-MV-09"
+        },
+        {
+          "id": "EXT-FR-FE-184",
+          "name": "Total TTC au niveau de la ligne",
+          "level": "Ligne",
+          "obligation": "obligatoire",
+          "value": "Montant TTC de la part de ce vendeur — contrôlé par BR-FR-MV-10",
+          "cond": "Si BT-23 ∈ {B8, S8, M8}",
+          "rule": "BR-FR-MV-10"
+        },
+        {
+          "id": "EXT-FR-FE-180",
+          "name": "Code de la date d'exigibilité de la TVA en ligne",
+          "level": "Ligne",
+          "obligation": "conditionnel",
+          "value": "Remplace BT-8 dans le flux 1 du vendeur concerné",
+          "cond": "Si l'exigibilité diffère de l'en-tête"
+        },
+        {
+          "id": "EXT-FR-FE-179",
+          "name": "Motif d'exonération en ligne",
+          "level": "Ligne",
+          "obligation": "conditionnel",
+          "value": "Texte devant <strong>commencer par <code>#n° de facture#</code></strong> pour être rattaché au bon vendeur",
+          "cond": "Si une ligne est exonérée",
+          "rule": "BR-FR-MV-01 à BR-FR-MV-11"
+        },
+        {
+          "id": "BG-11",
+          "name": "Agent de vendeur",
+          "level": "Vendeur",
+          "obligation": "non applicable",
+          "value": "<strong>N'est pas le mécanisme du multi-vendeurs.</strong> L'identification des vendeurs secondaires passe exclusivement par les extensions de ligne."
+        },
+        {
+          "id": "Auto-factures",
+          "name": "Types 389, 261, 500, 501, 502, 471, 473",
+          "level": "Type de document",
+          "obligation": "non applicable",
+          "value": "<strong>Interdits</strong> avec un cadre 8 : une facture multi-vendeurs ne peut pas être une auto-facture.",
+          "rule": "BR-FR-MV-13"
+        }
+      ],
+      "fieldsNote": "💡 <strong>Le cadre 8 ne se confond pas avec le cadre 9.</strong> Le <strong>8</strong> désigne la facture multi-vendeurs, le <strong>9</strong> la facture bidirectionnelle (auto-facturation) : BR-FR-MV-13 interdit les types d'auto-facture avec un cadre 8, et BR-FR-BD-13 ne les autorise <em>que</em> avec un cadre 9. Sur le plan technique, ce cas s'appuie sur la même mécanique de sous-lignes que le cas 38 : les vendeurs sont portés par des lignes GROUP.",
+      "relatedWhy": {
+        "cas-12": {
+          "rel": "à ne pas confondre",
+          "why": "Le cas 12 résout le même besoin commercial par <strong>deux factures distinctes</strong> et deux flux 1, là où le cas 39 conserve une facture unique éclatée par la plateforme."
+        },
+        "cas-17b": {
+          "rel": "le mandat en arrière-plan",
+          "why": "La marketplace mandataire du cas 17b montre le socle juridique nécessaire ici : l'intermédiaire doit détenir un mandat de facturation de chaque vendeur secondaire."
+        },
+        "cas-38": {
+          "rel": "le socle technique",
+          "why": "Les vendeurs secondaires sont portés par des lignes GROUP : la mécanique de sous-lignes du cas 38 est le prérequis technique du multi-vendeurs."
         }
       }
     }
