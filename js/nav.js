@@ -54,7 +54,7 @@ const SiteNav = {
                     <a href="#" class="nav-link nav-link--dropdown">Approfondir <span class="nav-arrow">▾</span></a>
                     <ul class="nav-submenu">
                         <li><a href="./schema-en-y.html">🔀 Schéma en Y</a></li>
-                        <li><a href="./flux.html">📡 Les 14 flux</a></li>
+                        <li><a href="./flux.html">📡 Les flux</a></li>
                         <li><a href="./cycle-de-vie.html">🔄 Cycle de vie</a></li>
                         <li><a href="./formats.html">📐 Les formats</a></li>
                     </ul>
@@ -120,7 +120,7 @@ const SiteNav = {
                         <h4>Approfondir</h4>
                         <ul>
                             <li><a href="./schema-en-y.html">Schéma en Y</a></li>
-                            <li><a href="./flux.html">Les 14 flux</a></li>
+                            <li><a href="./flux.html">Les flux</a></li>
                             <li><a href="./cycle-de-vie.html">Cycle de vie</a></li>
                             <li><a href="./formats.html">Les formats</a></li>
                         </ul>
