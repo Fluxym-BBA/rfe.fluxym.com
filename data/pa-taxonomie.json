@@ -1,0 +1,83 @@
+{
+ "_meta": {
+  "objet": "Definition des axes d'analyse des plateformes agreees. Deux couches : les facettes (filtrables) et la fiche (informative).",
+  "dateReleve": "2026-08-19",
+  "avertissement": "Les axes familleOrigine, segmentCible, natureEntite et socleTechnique relevent d'une observation du marche, pas d'une categorie reglementaire. Confirme par RFE_Expert : l'administration ne distingue que PA immatriculee vs Solution Compatible non immatriculee ; les notions de marque blanche et marque grise n'existent pas dans les textes."
+ },
+ "facettes": [
+  {"id":"statut","label":"Statut d'immatriculation","filtrable":true,"source":"DGFiP","valeurs":[
+    {"v":"immatriculee_definitive","label":"Immatriculation definitive","couleur":"success"},
+    {"v":"en_attente_tests_interoperabilite","label":"En attente des tests d'interoperabilite","couleur":"warning"}]},
+  {"id":"vague","label":"Vague d'immatriculation","filtrable":true,"source":"DGFiP","valeurs":[
+    {"v":"V1 (déc. 2025 – janv. 2026)","label":"V1 - dec. 2025 / janv. 2026"},
+    {"v":"V2 (févr. – avr. 2026)","label":"V2 - fevr. / avr. 2026"},
+    {"v":"V3 (mai – août 2026)","label":"V3 - mai / aout 2026"}]},
+  {"id":"pays","label":"Pays de l'etablissement principal","filtrable":true,"source":"DGFiP"},
+  {"id":"trancheAnneeCreation","label":"Anciennete de l'entreprise","filtrable":true,"source":"INSEE/RNE","valeurs":[
+    {"v":"avant 2000","label":"Avant 2000"},{"v":"2000-2010","label":"2000-2010"},
+    {"v":"2011-2020","label":"2011-2020"},{"v":"depuis 2021","label":"Depuis 2021"}]},
+  {"id":"trancheEffectif","label":"Effectif salarie","filtrable":true,"source":"INSEE"},
+  {"id":"categorieEntreprise","label":"Categorie INSEE","filtrable":true,"source":"INSEE","valeurs":[
+    {"v":"PME","label":"PME"},{"v":"ETI","label":"ETI"},{"v":"GE","label":"Grande entreprise"}]},
+  {"id":"familleOrigine","label":"Famille d'origine","filtrable":true,"multi":true,"source":"qualification marche","valeurs":[
+    {"v":"s2p","label":"Source-to-Pay / Purchase-to-Pay"},
+    {"v":"o2c","label":"Order-to-Cash / poste client"},
+    {"v":"edi","label":"Operateur EDI historique"},
+    {"v":"tax","label":"Tax compliance internationale"},
+    {"v":"facturation_compta","label":"Editeur facturation / comptabilite"},
+    {"v":"portail_ec","label":"Portail de cabinet d'expertise comptable"},
+    {"v":"ged","label":"GED / archivage / capture"},
+    {"v":"fintech","label":"Neobanque / fintech / gestion de depenses"},
+    {"v":"erp","label":"Editeur d'ERP"},
+    {"v":"integrateur","label":"Integrateur / conseil"},
+    {"v":"pure_player","label":"Pure-player PA"}]},
+  {"id":"segmentCible","label":"Segment client cible","filtrable":true,"multi":true,"source":"qualification marche","valeurs":[
+    {"v":"micro","label":"Independants / micro-entreprises"},
+    {"v":"tpe_pme","label":"TPE / PME"},{"v":"eti","label":"ETI"},
+    {"v":"grands_comptes","label":"Grands comptes"},{"v":"public","label":"Secteur public"}]},
+  {"id":"verticale","label":"Verticale sectorielle","filtrable":true,"source":"mixte","valeurs":[
+    {"v":"generaliste","label":"Generaliste"},{"v":"sante_pharma","label":"Sante / pharmacie"},
+    {"v":"assurance","label":"Assurance"},{"v":"optique","label":"Optique"},
+    {"v":"immobilier","label":"Immobilier"},{"v":"juridique","label":"Juridique / notariat"},
+    {"v":"transport","label":"Transport / logistique"},{"v":"agro","label":"Agroalimentaire"},
+    {"v":"btp","label":"BTP"},{"v":"esn","label":"ESN / services"}]},
+  {"id":"natureEntite","label":"Logique du positionnement PA","filtrable":true,"source":"qualification marche","valeurs":[
+    {"v":"creee_pour_rfe","label":"Entite creee pour la reforme"},
+    {"v":"extension_demat","label":"Extension d'un metier demat existant"},
+    {"v":"diversification","label":"Diversification depuis un autre metier"}]},
+  {"id":"socleTechnique.type","label":"Socle technique","filtrable":true,"source":"qualification marche","valeurs":[
+    {"v":"propre","label":"Socle propre"},{"v":"marque_blanche","label":"Marque blanche d'une autre PA"},
+    {"v":"marque_grise","label":"Marque grise"},{"v":"hybride","label":"Hybride"},
+    {"v":"inconnu","label":"Non determine"}]},
+  {"id":"fournisseurDeSocle","label":"Fournit son socle a d'autres","filtrable":true,"source":"qualification marche"},
+  {"id":"relationCapitalistique","label":"Actionnariat","filtrable":true,"source":"RNE / presse","valeurs":[
+    {"v":"independante","label":"Independante, fondateurs identifies"},
+    {"v":"filiale_de_groupe","label":"Filiale d'un groupe"},{"v":"acquise","label":"Acquise recemment"},
+    {"v":"joint_venture","label":"Joint-venture"},{"v":"cotee","label":"Societe cotee"},
+    {"v":"fonds_PE","label":"Detenue par un fonds"},
+    {"v":"holding_non_transparente","label":"Holding a la chaine peu lisible"},
+    {"v":"non_determinable","label":"Non determinable"}]},
+  {"id":"perimetreFonctionnel","label":"Perimetre fonctionnel","filtrable":true,"multi":true,"source":"qualification marche","valeurs":[
+    {"v":"emission","label":"Emission"},{"v":"reception","label":"Reception"},
+    {"v":"ereporting","label":"e-reporting"},{"v":"routage_pur","label":"Routage pur"},
+    {"v":"suite_gestion","label":"PA + suite de gestion"}]},
+  {"id":"reseaux","label":"Reseaux","filtrable":true,"multi":true,"source":"qualification marche","valeurs":[
+    {"v":"peppol_ap","label":"Point d'acces Peppol"},{"v":"autre","label":"Autre reseau"}]}
+ ],
+ "fiche": [
+  {"id":"raisonSociale","label":"Raison sociale"},
+  {"id":"siren","label":"SIREN","lien":"https://annuaire-entreprises.data.gouv.fr/entreprise/"},
+  {"id":"dateCreation","label":"Date de creation"},
+  {"id":"activitePrincipale","label":"Code APE"},
+  {"id":"adresse","label":"Etablissement principal declare a la DGFiP"},
+  {"id":"dateImmatriculation","label":"Date de delivrance du numero d'immatriculation"},
+  {"id":"dirigeants","label":"Dirigeants (RNE)"},
+  {"id":"groupeCapitalistique","label":"Groupe d'appartenance"},
+  {"id":"partenariats","label":"Partenariats et accords"},
+  {"id":"descriptionFiche","label":"Caracterisation de l'entreprise"},
+  {"id":"logiquePositionnement","label":"Coherence du positionnement PA avec le metier d'origine"},
+  {"id":"siteWeb","label":"Site web"},
+  {"id":"contact","label":"Contact facturation electronique"},
+  {"id":"sourcesEnrichissement","label":"Sources et date de releve"}
+ ]
+}
