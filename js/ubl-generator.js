@@ -8,6 +8,8 @@
  * Changelog v3b:
  *   - nominal-litige-rectificative genere un ZIP (originale 380 + rectificative 384)
  *   - buildXML accepte overrideLineData pour surcharger les donnees de ligne
+ *   - buildXML accepte attachment pour embarquer le lisible PDF (BG-24 / BT-125)
+ *   - buildRenderData produit le modele pivot du lisible depuis les memes donnees
  *   - Labels avec numeros de cas d'usage dans pedagogy.json
  */
 
@@ -750,6 +752,53 @@ const UBLGenerator = {
     },
 
     // =====================================================
+    // TRIPTYQUE : UBL nu / UBL + lisible / PDF lisible
+    // =====================================================
+
+    // Cas pour lesquels la representation lisible est disponible.
+    // Un cas n'est ajoute ici qu'apres verification de la coherence
+    // entre les donnees structurees et le rendu lisible.
+    PDF_CASES: ["nominal"],
+
+    supportsPdf: function(usecase) {
+        return typeof PDFLisible !== 'undefined' && this.PDF_CASES.indexOf(usecase) !== -1;
+    },
+
+    // Lecture des cases a cocher "Contenu du telechargement".
+    // Repli sur l'UBL nu seul si le lisible n'est pas disponible
+    // pour le cas, ou si l'utilisateur a tout decoche.
+    getArtifactOptions: function(usecase) {
+        var read = function(id, fallback) {
+            var el = document.getElementById(id);
+            return el ? el.checked : fallback;
+        };
+        var opts = {
+            ubl: read('opt-ubl', true),
+            ublWithPdf: read('opt-ubl-pdf', true),
+            pdf: read('opt-pdf', true)
+        };
+        if (!this.supportsPdf(usecase)) {
+            opts.ublWithPdf = false;
+            opts.pdf = false;
+        }
+        if (!opts.ubl && !opts.ublWithPdf && !opts.pdf) opts.ubl = true;
+        return opts;
+    },
+
+    // Declenche le telechargement d'un Blob sous un nom donne.
+    triggerDownload: function(blob, fileName) {
+        var url = window.URL.createObjectURL(blob);
+        var a = document.createElement("a");
+        a.href = url;
+        a.download = fileName;
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(url);
+        document.body.removeChild(a);
+        if (typeof UIManager !== 'undefined') UIManager.showSuccess(fileName);
+    },
+
+    // =====================================================
     // GENERATION DU FICHIER
     // =====================================================
     generateFile: function() {
@@ -850,17 +899,29 @@ const UBLGenerator = {
             // les donnees de ligne (ZIP rectificative)
             // ==========================================
             var self = this;
-            var buildXML = function(numFacture, typeCode, asCreditNote, refOriginale, poNumber, overrideLineData) {
+            var buildXML = function(numFacture, typeCode, asCreditNote, refOriginale, poNumber, overrideLineData, attachment) {
                 asCreditNote = asCreditNote || false;
                 refOriginale = refOriginale || null;
                 poNumber = poNumber || null;
                 overrideLineData = overrideLineData || null;
+                attachment = attachment || null;
 
                 var xml = UBLTemplates.getHeader(numFacture, dateFactureXML, dateEcheanceXML, typeCode, profileId, notes, asCreditNote, buyerReference, self.getCustomizationId(usecase));
 
                 // Billing reference (rectificative ou avoir)
                 if (refOriginale) {
                     xml += UBLTemplates.getBillingReference(refOriginale, dateFactureXML);
+                }
+
+                // BG-24 Representation lisible embarquee (BT-123 = LISIBLE, BR-FR-17)
+                if (attachment) {
+                    xml += UBLTemplates.getAdditionalDocumentReference(
+                        attachment.id,
+                        "LISIBLE",
+                        "application/pdf",
+                        attachment.filename,
+                        attachment.base64
+                    );
                 }
 
                 xml += UBLTemplates.getSupplierParty(supplier);
@@ -943,6 +1004,76 @@ const UBLGenerator = {
             };
 
             // ==========================================
+            // FONCTION INTERNE : buildRenderData
+            // Construit le modele pivot du lisible a partir
+            // des MEMES donnees que buildXML, pour garantir
+            // la coherence entre structure et representation.
+            // ==========================================
+            var buildRenderData = function(numFacture, typeCode, overrideLineData) {
+                var ld = overrideLineData || self.getLineData(usecase);
+                if (!ld) return null;
+
+                var breakdown = self.computeTaxBreakdown(usecase, ld);
+                var vatTotal = breakdown.reduce(function(sum, sub) { return sum + parseFloat(sub.amount); }, 0);
+                var taxExclusive = parseFloat(ld.totals[1]);
+                var prepaid = parseFloat(ld.totals[3]);
+                var taxInclusive = Math.round((taxExclusive + vatTotal) * 100) / 100;
+
+                // Mentions lisibles : on retire le prefixe technique #XXX#
+                // et la note de cadre #BAR#, non destinee au lecteur humain.
+                var pdfNotes = notes
+                    .filter(function(n) { return n.indexOf("#BAR#") !== 0; })
+                    .map(function(n) { return n.replace(/^#[A-Z]{3}#/, ""); });
+
+                var meansCodePdf = cfg.paymentMeans || "30";
+                var meansLabel = PDFLisible.MEANS_LABELS[meansCodePdf] || ("Code " + meansCodePdf);
+                var withIban = (meansCodePdf === "30" || meansCodePdf === "58");
+
+                return {
+                    supplier: supplier,
+                    buyer: buyer,
+                    typeCode: typeCode,
+                    profileId: profileId,
+                    invoiceNumber: numFacture,
+                    issueDate: dateFactureXML,
+                    dueDate: dateEcheanceXML,
+                    buyerReference: buyerReference,
+                    paymentTerms: cfg.prepaid ? "Paiement comptant" : "Paiement a 30 jours date de facture",
+                    paymentMeans: meansLabel,
+                    iban: withIban ? (supplier.iban || null) : null,
+                    bic: withIban ? (supplier.bic || null) : null,
+                    taxSubtotals: breakdown.map(function(sub) {
+                        return {
+                            category: sub.category,
+                            percent: sub.percent,
+                            taxable: sub.taxable,
+                            amount: sub.amount,
+                            reason: sub.reason || ""
+                        };
+                    }),
+                    taxExclusiveAmount: ld.totals[1],
+                    taxAmount: vatTotal.toFixed(2),
+                    taxInclusiveAmount: taxInclusive.toFixed(2),
+                    prepaidAmount: ld.totals[3],
+                    payableAmount: (Math.round((taxInclusive - prepaid) * 100) / 100).toFixed(2),
+                    notes: pdfNotes,
+                    lines: ld.lines.map(function(line) {
+                        var vat = self.getLineVat(usecase, line.id);
+                        return {
+                            id: line.id,
+                            ref: line.ref || "",
+                            desc: line.desc,
+                            qty: line.qty,
+                            price: line.price,
+                            amount: line.amount,
+                            vatPercent: vat.percent,
+                            unitCode: line.unitCode || "C62"
+                        };
+                    })
+                };
+            };
+
+            // ==========================================
             // 5. ROUTAGE : ZIP vs FICHIER SIMPLE
             // ==========================================
             if (cfg.zip) {
@@ -1022,19 +1153,70 @@ const UBLGenerator = {
                 }
 
             } else {
-                // Fichier XML simple
-                var xmlContent = buildXML(numeroFacture, invoiceTypeCode, false, null, "PO-1001");
-                var blob = new Blob([xmlContent], { type: "application/xml" });
-                var url = window.URL.createObjectURL(blob);
-                var a = document.createElement("a");
-                var fileName = numeroFacture + "_Cas_" + usecase + "_" + nomExplicatif + ".xml";
-                a.href = url;
-                a.download = fileName;
-                document.body.appendChild(a);
-                a.click();
-                window.URL.revokeObjectURL(url);
-                document.body.removeChild(a);
-                if (typeof UIManager !== 'undefined') UIManager.showSuccess(fileName);
+                // ========================================
+                // FICHIER SIMPLE ou TRIPTYQUE
+                // UBL nu / UBL avec lisible embarque / PDF lisible
+                // ========================================
+                var opts = self.getArtifactOptions(usecase);
+                var baseName = numeroFacture + "_Cas_" + usecase + "_" + nomExplicatif;
+                var artifacts = [];
+                var pdfDoc = null;
+
+                // Le PDF est genere UNE SEULE FOIS et sert aux deux usages :
+                // fichier autonome et objet binaire base64 de BT-125.
+                if (opts.pdf || opts.ublWithPdf) {
+                    var renderData = buildRenderData(numeroFacture, invoiceTypeCode, null);
+                    if (renderData) {
+                        pdfDoc = PDFLisible.build(renderData);
+                    } else {
+                        opts.pdf = false;
+                        opts.ublWithPdf = false;
+                        opts.ubl = true;
+                    }
+                }
+
+                if (opts.ubl) {
+                    artifacts.push({
+                        name: baseName + "_UBL.xml",
+                        blob: new Blob([buildXML(numeroFacture, invoiceTypeCode, false, null, "PO-1001")],
+                            { type: "application/xml" })
+                    });
+                }
+
+                if (opts.ublWithPdf && pdfDoc) {
+                    var attachment = {
+                        id: numeroFacture + "-LISIBLE",
+                        filename: pdfDoc.filename,
+                        base64: pdfDoc.base64
+                    };
+                    artifacts.push({
+                        name: baseName + "_UBL_avec_lisible.xml",
+                        blob: new Blob([buildXML(numeroFacture, invoiceTypeCode, false, null, "PO-1001", null, attachment)],
+                            { type: "application/xml" })
+                    });
+                }
+
+                if (opts.pdf && pdfDoc) {
+                    artifacts.push({
+                        name: pdfDoc.filename,
+                        blob: PDFLisible.toBlob(pdfDoc.raw)
+                    });
+                }
+
+                if (artifacts.length === 1) {
+                    self.triggerDownload(artifacts[0].blob, artifacts[0].name);
+                } else {
+                    if (typeof JSZip === 'undefined') {
+                        alert("Erreur: La librairie JSZip n'est pas chargee."); return;
+                    }
+                    var zipSimple = new JSZip();
+                    artifacts.forEach(function(item) { zipSimple.file(item.name, item.blob); });
+                    var zipSimpleName = "Triptyque_" + trigramme + "_Cas" + usecase + "_" + nomExplicatif +
+                        "_" + yyyy + MM + dd + "_" + HH + mm + ss + ".zip";
+                    zipSimple.generateAsync({ type: "blob" }).then(function(content) {
+                        self.triggerDownload(content, zipSimpleName);
+                    });
+                }
             }
 
         } catch (error) {

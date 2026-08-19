@@ -366,6 +366,74 @@ const GeneratorUI = {
         }, 150);
     },
 
+    // =====================================================
+    // CONTENU DU TELECHARGEMENT (triptyque)
+    // =====================================================
+
+    // Active ou desactive les artefacts selon le cas selectionne :
+    // le lisible n'est propose que pour les cas ou sa coherence
+    // avec les donnees structurees a ete verifiee (UBLGenerator.PDF_CASES).
+    syncArtifactOptions: function(usecase) {
+        var group = document.getElementById('group-artifacts');
+        if (!group || typeof UBLGenerator === 'undefined') return;
+
+        var cfg = UBLGenerator.caseConfig[usecase] || {};
+        var hint = document.getElementById('artifacts-hint');
+
+        // Les cas a pack ZIP produisent plusieurs documents : options sans objet.
+        group.classList.toggle('hidden', !!cfg.zip);
+        if (cfg.zip) {
+            GeneratorUI.syncGenerateLabel();
+            return;
+        }
+
+        var supported = UBLGenerator.supportsPdf(usecase);
+        ['opt-ubl-pdf', 'opt-pdf'].forEach(function(id) {
+            var input = document.getElementById(id);
+            if (!input) return;
+            var wasDisabled = input.disabled;
+            input.disabled = !supported;
+            if (!supported) input.checked = false;
+            else if (wasDisabled) input.checked = true;
+            if (input.parentElement) input.parentElement.classList.toggle('disabled', !supported);
+        });
+
+        if (hint) {
+            hint.innerHTML = supported
+                ? 'Plusieurs fichiers cochés sont livrés dans une archive ZIP. Le PDF embarqué est identique au PDF autonome.'
+                : 'Représentation lisible non encore disponible pour ce cas : seule la facture UBL est générée.';
+        }
+        GeneratorUI.syncGenerateLabel();
+    },
+
+    // Libelle du bouton, aligne sur ce qui sera reellement telecharge.
+    syncGenerateLabel: function() {
+        var btn = document.getElementById('btn-generate');
+        if (!btn || typeof UBLGenerator === 'undefined') return;
+
+        var usecase = document.getElementById('usecase').value;
+        var cfg = UBLGenerator.caseConfig[usecase] || {};
+        var label;
+
+        if (cfg.zip) {
+            label = 'Télécharger le pack ZIP';
+        } else {
+            var opts = UBLGenerator.getArtifactOptions(usecase);
+            var count = (opts.ubl ? 1 : 0) + (opts.ublWithPdf ? 1 : 0) + (opts.pdf ? 1 : 0);
+            if (count > 1) label = 'Télécharger le ZIP (' + count + ' fichiers)';
+            else if (opts.pdf) label = 'Télécharger le PDF lisible';
+            else label = 'Télécharger la facture UBL';
+        }
+        btn.innerHTML = '<span class="gen-btn-icon">📥</span> ' + label;
+    },
+
+    initArtifactOptions: function() {
+        ['opt-ubl', 'opt-ubl-pdf', 'opt-pdf'].forEach(function(id) {
+            var input = document.getElementById(id);
+            if (input) input.addEventListener('change', function() { GeneratorUI.syncGenerateLabel(); });
+        });
+    },
+
     updateInfoBox: function() {
         var usecase = document.getElementById('usecase').value;
         var theory = window.APP_DATA.pedagogy[usecase];
@@ -386,6 +454,8 @@ const GeneratorUI = {
             var needsThird = CASES_WITH_THIRDPARTY.indexOf(usecase) !== -1;
             cardThird.classList.toggle('hidden', !needsThird);
         }
+
+        GeneratorUI.syncArtifactOptions(usecase);
 
         document.getElementById('success-msg').classList.add('hidden');
     },
@@ -412,6 +482,7 @@ document.addEventListener('DOMContentLoaded', function() {
         };
 
         GeneratorUI.populateSelects();
+        GeneratorUI.initArtifactOptions();
         GeneratorUI.updateInfoBox();
         GeneratorUI.initTabs();
         GeneratorUI.initTemplateDownload();
