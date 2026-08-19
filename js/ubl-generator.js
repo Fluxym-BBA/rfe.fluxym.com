@@ -16,6 +16,69 @@ const UBLGenerator = {
     // =====================================================
     // CONFIG PAR CAS D'USAGE
     // =====================================================
+    // =====================================================
+    // PROFILS DE TVA (socle AFNOR / codelist VATEX)
+    // BT-118 categorie, BT-119 taux, BT-121 code d'exoneration, BT-120 motif
+    // =====================================================
+    VAT: {
+        STANDARD:  { category: "S", percent: "20.00", code: "", reason: "" },
+        DEBOURS:   { category: "O", percent: "0.00", code: "VATEX-EU-O", reason: "Hors du perimetre d'application de la TVA" },
+        GROUPE_TVA:{ category: "O", percent: "0.00", code: "VATEX-EU-O", reason: "Operations internes a l'assujetti unique - article 256 C du CGI" },
+        MARGE:     { category: "E", percent: "0.00", code: "VATEX-EU-F", reason: "Regime particulier - Biens d'occasion - article 297 A du CGI" },
+        EXPORT:    { category: "G", percent: "0.00", code: "VATEX-EU-G", reason: "Exoneration de TVA pour exportation hors UE - article 262-I du CGI" }
+    },
+
+    // Profil de TVA par cas d'usage. vat = profil applique a toutes les lignes.
+    // lineVat = profil par identifiant de ligne (facture mixte).
+    // customization = CustomizationID specifique (obligatoire si melange O + S).
+    vatProfiles: {
+        "16": {
+            lineVat: { "1": "STANDARD", "2": "DEBOURS", "3": "DEBOURS" },
+            customization: "urn:cen.eu:en16931:2017#conformant#urn.cpro.gouv.fr:1p0:extended-ctc-fr"
+        },
+        "29": { vat: "GROUPE_TVA" },
+        "33": { vat: "MARGE" }
+    },
+
+    // Profil de TVA applicable a une ligne donnee.
+    getLineVat: function(usecase, lineId) {
+        var profile = this.vatProfiles[usecase] || {};
+        var key = (profile.lineVat && profile.lineVat[lineId]) || profile.vat || "STANDARD";
+        return this.VAT[key] || this.VAT.STANDARD;
+    },
+
+    getCustomizationId: function(usecase) {
+        var profile = this.vatProfiles[usecase] || {};
+        return profile.customization || "urn:cen.eu:en16931:2017";
+    },
+
+    // Ventilation BG-23 : un sous-total par couple categorie / taux,
+    // calcule a partir des lignes pour garantir BR-S-08 et BR-CO-*.
+    computeTaxBreakdown: function(usecase, ld) {
+        var self = this;
+        var groups = {};
+        var order = [];
+        ld.lines.forEach(function(line) {
+            var vat = self.getLineVat(usecase, line.id);
+            var key = vat.category + "|" + vat.percent;
+            if (!groups[key]) { groups[key] = { vat: vat, taxable: 0 }; order.push(key); }
+            groups[key].taxable += parseFloat(line.amount);
+        });
+        return order.map(function(key) {
+            var g = groups[key];
+            var taxable = Math.round(g.taxable * 100) / 100;
+            var amount = Math.round(taxable * parseFloat(g.vat.percent)) / 100;
+            return {
+                taxable: taxable.toFixed(2),
+                amount: amount.toFixed(2),
+                category: g.vat.category,
+                percent: g.vat.percent,
+                code: g.vat.code,
+                reason: g.vat.reason
+            };
+        });
+    },
+
     caseConfig: {
         // --- A. CAS STANDARDS ---
         "nominal":                     { typeCode: "380", profile: "S1", zip: false },
@@ -793,7 +856,7 @@ const UBLGenerator = {
                 poNumber = poNumber || null;
                 overrideLineData = overrideLineData || null;
 
-                var xml = UBLTemplates.getHeader(numFacture, dateFactureXML, dateEcheanceXML, typeCode, profileId, notes, asCreditNote, buyerReference);
+                var xml = UBLTemplates.getHeader(numFacture, dateFactureXML, dateEcheanceXML, typeCode, profileId, notes, asCreditNote, buyerReference, self.getCustomizationId(usecase));
 
                 // Billing reference (rectificative ou avoir)
                 if (refOriginale) {
@@ -823,20 +886,22 @@ const UBLGenerator = {
                 if (cfg.tiersPayeur && !(window.COMPANY_MODE === 'custom' && window.CUSTOM_THIRDPARTY)) {
                     xml += UBLTemplates.getPayeeParty("99999999900001", "Stark Industries (Tiers Payeur)", "999999999");
                 }
-                if (cfg.paymentMeans) {
-                    xml += UBLTemplates.getPaymentMeans(cfg.paymentMeans);
-                }
+                // BG-16 est obligatoire (BR-49) : virement (30) par defaut.
+                // BT-84 IBAN ajoute pour les codes 30 et 58 conformement a BR-50.
+                var meansCode = cfg.paymentMeans || "30";
+                xml += UBLTemplates.getPaymentMeans(meansCode, supplier.iban || null, supplier.bic || null);
+                xml += UBLTemplates.getPaymentTerms();
 
                 // --- Lignes et Totaux ---
                 if (asCreditNote) {
                     // Avoir (cas B ZIP)
-                    xml += UBLTemplates.getTaxTotal("6.32", "1.26");
+                    xml += UBLTemplates.getTaxTotal([{ taxable: "6.32", amount: "1.26", category: "S", percent: "20.00", code: "", reason: "" }]);
                     xml += UBLTemplates.getLegalMonetaryTotal("6.32", "6.32", "7.58", "0.00", "7.58");
                     xml += UBLTemplates.getInvoiceLine("1", "-1.00", "6.32", "Annulation 1 unite CNT50922", "6.32", true, { line: "000003", id: poNumber });
                 }
                 else if (usecase === "B" && !overrideLineData) {
                     // Cas B : bloc hardcode multi-PO
-                    xml += UBLTemplates.getTaxTotal("4934.70", "986.94");
+                    xml += UBLTemplates.getTaxTotal([{ taxable: "4934.70", amount: "986.94", category: "S", percent: "20.00", code: "", reason: "" }]);
                     xml += UBLTemplates.getLegalMonetaryTotal("4934.70", "4934.70", "5921.64", "0.00", "5921.64");
                     xml += UBLTemplates.getInvoiceLine("1", "1.00", "0.38", "CNT01160", "0.38", false, { line: "000001", id: poNumber });
                     xml += UBLTemplates.getInvoiceLine("2", "100.00", "136.00", "CNT31421", "1.36", false, { line: "000002", id: poNumber });
@@ -848,12 +913,26 @@ const UBLGenerator = {
                     // Tous les autres cas : overrideLineData OU getLineData()
                     var ld = overrideLineData || self.getLineData(usecase);
                     if (ld) {
-                        xml += UBLTemplates.getTaxTotal(ld.tax[0], ld.tax[1]);
-                        xml += UBLTemplates.getLegalMonetaryTotal(ld.totals[0], ld.totals[1], ld.totals[2], ld.totals[3], ld.totals[4]);
+                        // Ventilation recalculee depuis les lignes (BG-23, BR-S-08, BR-CO-*)
+                        var breakdown = self.computeTaxBreakdown(usecase, ld);
+                        var vatTotal = breakdown.reduce(function(sum, s) { return sum + parseFloat(s.amount); }, 0);
+                        var taxExclusive = parseFloat(ld.totals[1]);
+                        var prepaid = parseFloat(ld.totals[3]);
+                        var taxInclusive = Math.round((taxExclusive + vatTotal) * 100) / 100;
+
+                        xml += UBLTemplates.getTaxTotal(breakdown);
+                        xml += UBLTemplates.getLegalMonetaryTotal(
+                            ld.totals[0],
+                            ld.totals[1],
+                            taxInclusive.toFixed(2),
+                            ld.totals[3],
+                            (Math.round((taxInclusive - prepaid) * 100) / 100).toFixed(2)
+                        );
                         ld.lines.forEach(function(line) {
                             xml += UBLTemplates.getInvoiceLine(
                                 line.id, line.qty, line.amount, line.desc, line.price,
-                                asCreditNote, line.po || null
+                                asCreditNote, line.po || null,
+                                self.getLineVat(usecase, line.id), line.unitCode || "C62"
                             );
                         });
                     }

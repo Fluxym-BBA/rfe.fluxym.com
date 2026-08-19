@@ -12,7 +12,9 @@
         "zip": "69009",
         "country": "FR"
       },
-      "nic": "00018"
+      "nic": "00018",
+      "iban": "FR7630004170100001234567805",
+      "bic": "BNPAFRPPXXX"
     },
     {
       "id": "fluxym_fr",
@@ -26,7 +28,9 @@
         "zip": "75116",
         "country": "FR"
       },
-      "nic": "00007"
+      "nic": "00007",
+      "iban": "FR7630002005500000765432174",
+      "bic": "CRLYFRPPXXX"
     }
   ],
   "buyers": [

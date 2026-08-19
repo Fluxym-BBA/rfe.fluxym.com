@@ -11,10 +11,10 @@ const csvQuote = (val) => {
 const UBLTemplates = {
 
     // 1. En-tête (Invoice ou CreditNote) avec TOUS les espaces de noms
-    getHeader: (numeroFacture, dateFacture, dateEcheance, invoiceTypeCode, profileId, notes, isCreditNote = false, buyerReference = "") => `<?xml version="1.0" encoding="UTF-8"?>
+    getHeader: (numeroFacture, dateFacture, dateEcheance, invoiceTypeCode, profileId, notes, isCreditNote = false, buyerReference = "", customizationId = "urn:cen.eu:en16931:2017") => `<?xml version="1.0" encoding="UTF-8"?>
 <${isCreditNote ? 'CreditNote' : 'Invoice'} xmlns="urn:oasis:names:specification:ubl:schema:xsd:${isCreditNote ? 'CreditNote' : 'Invoice'}-2" xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:qdt="urn:oasis:names:specification:ubl:schema:xsd:QualifiedDatatypes-2" xmlns:udt="urn:oasis:names:specification:ubl:schema:xsd:UnqualifiedDataTypes-2">
 \t<cbc:UBLVersionID>2.1</cbc:UBLVersionID>
-\t<cbc:CustomizationID>urn:cen.eu:en16931:2017</cbc:CustomizationID>
+\t<cbc:CustomizationID>${customizationId}</cbc:CustomizationID>
 \t<cbc:ProfileID>${profileId}</cbc:ProfileID>
 \t<cbc:ID>${numeroFacture}</cbc:ID>
 \t<cbc:IssueDate>${dateFacture}</cbc:IssueDate>
@@ -81,9 +81,9 @@ ${notes.map(n => `\t<cbc:Note>${n}</cbc:Note>`).join('\n')}
 \t</cac:AccountingCustomerParty>`,
 
     // 4.5. Payment Terms (Ajouté)
-    getPaymentTerms: () => `
+    getPaymentTerms: (note = "Paiement a 30 jours") => `
 \t<cac:PaymentTerms>
-\t\t<cbc:Note>Paiement a 30 jours</cbc:Note>
+\t\t<cbc:Note>${note}</cbc:Note>
 \t</cac:PaymentTerms>`,
 
     // 5. Bloc PayeeParty
@@ -95,21 +95,33 @@ ${notes.map(n => `\t<cbc:Note>${n}</cbc:Note>`).join('\n')}
 \t</cac:PayeeParty>`,
 
     // 6. Bloc PaymentMeans
-    getPaymentMeans: (code) => `
+    // BG-16 obligatoire (BR-49). BT-84 IBAN requis si code 30 ou 58 (BR-50).
+    getPaymentMeans: (code, iban = null, bic = null) => `
 \t<cac:PaymentMeans>
-\t\t<cbc:PaymentMeansCode>${code}</cbc:PaymentMeansCode>
+\t\t<cbc:PaymentMeansCode>${code}</cbc:PaymentMeansCode>${(code === "30" || code === "58") && iban ? `
+\t\t<cac:PayeeFinancialAccount>
+\t\t\t<cbc:ID>${iban}</cbc:ID>${bic ? `
+\t\t\t<cac:FinancialInstitutionBranch><cbc:ID>${bic}</cbc:ID></cac:FinancialInstitutionBranch>` : ""}
+\t\t</cac:PayeeFinancialAccount>` : ""}
 \t</cac:PaymentMeans>`,
 
     // 7. Blocs Totaux
-    getTaxTotal: (taxableAmount, taxAmount, taxPercent = "20.00") => `
-\t<cac:TaxTotal>
-\t\t<cbc:TaxAmount currencyID="EUR">${taxAmount}</cbc:TaxAmount>
+    // BG-23 : une ventilation par couple categorie / taux.
+    // subtotals = [{ taxable, amount, category, percent, code, reason }]
+    getTaxTotal: (subtotals) => {
+        const list = Array.isArray(subtotals) ? subtotals : [subtotals];
+        const total = list.reduce((sum, s) => sum + parseFloat(s.amount), 0).toFixed(2);
+        const blocks = list.map((s) => `
 \t\t<cac:TaxSubtotal>
-\t\t\t<cbc:TaxableAmount currencyID="EUR">${taxableAmount}</cbc:TaxableAmount>
-\t\t\t<cbc:TaxAmount currencyID="EUR">${taxAmount}</cbc:TaxAmount>
-\t\t\t<cac:TaxCategory><cbc:ID>S</cbc:ID><cbc:Percent>${taxPercent}</cbc:Percent><cac:TaxScheme><cbc:ID>VAT</cbc:ID></cac:TaxScheme></cac:TaxCategory>
-\t\t</cac:TaxSubtotal>
-\t</cac:TaxTotal>`,
+\t\t\t<cbc:TaxableAmount currencyID="EUR">${s.taxable}</cbc:TaxableAmount>
+\t\t\t<cbc:TaxAmount currencyID="EUR">${s.amount}</cbc:TaxAmount>
+\t\t\t<cac:TaxCategory><cbc:ID>${s.category}</cbc:ID><cbc:Percent>${s.percent}</cbc:Percent>${s.code ? `<cbc:TaxExemptionReasonCode>${s.code}</cbc:TaxExemptionReasonCode>` : ""}${s.reason ? `<cbc:TaxExemptionReason>${s.reason}</cbc:TaxExemptionReason>` : ""}<cac:TaxScheme><cbc:ID>VAT</cbc:ID></cac:TaxScheme></cac:TaxCategory>
+\t\t</cac:TaxSubtotal>`).join("");
+        return `
+\t<cac:TaxTotal>
+\t\t<cbc:TaxAmount currencyID="EUR">${total}</cbc:TaxAmount>${blocks}
+\t</cac:TaxTotal>`;
+    },
 
     getLegalMonetaryTotal: (lineExtAmt, taxExclusiveAmt, taxInclusiveAmt, prepaidAmt, payableAmt) => `
 \t<cac:LegalMonetaryTotal>
@@ -120,14 +132,14 @@ ${prepaidAmt !== "0.00" ? `\t\t<cbc:PrepaidAmount currencyID="EUR">${prepaidAmt}
 \t</cac:LegalMonetaryTotal>`,
 
     // 8. Ligne de Facture / Avoir
-    getInvoiceLine: (id, qty, amount, itemName, price, isCreditNote = false, orderRef = null) => `
+    getInvoiceLine: (id, qty, amount, itemName, price, isCreditNote = false, orderRef = null, vat = { category: "S", percent: "20.00" }, unitCode = "C62") => `
 \t<cac:${isCreditNote ? 'CreditNoteLine' : 'InvoiceLine'}>
 \t\t<cbc:ID>${id}</cbc:ID>
-\t\t<cbc:${isCreditNote ? 'CreditedQuantity' : 'InvoicedQuantity'} unitCode="C62">${qty}</cbc:${isCreditNote ? 'CreditedQuantity' : 'InvoicedQuantity'}>
+\t\t<cbc:${isCreditNote ? 'CreditedQuantity' : 'InvoicedQuantity'} unitCode="${unitCode}">${qty}</cbc:${isCreditNote ? 'CreditedQuantity' : 'InvoicedQuantity'}>
 \t\t<cbc:LineExtensionAmount currencyID="EUR">${amount}</cbc:LineExtensionAmount>
 ${orderRef ? `\t\t<cac:OrderLineReference><cbc:LineID>${orderRef.line}</cbc:LineID><cac:OrderReference><cbc:ID>${orderRef.id}</cbc:ID></cac:OrderReference></cac:OrderLineReference>\n` : ""}\t\t<cac:Item>
 \t\t\t<cbc:Name>${itemName}</cbc:Name>
-\t\t\t<cac:ClassifiedTaxCategory><cbc:ID>S</cbc:ID><cbc:Percent>20.00</cbc:Percent><cac:TaxScheme><cbc:ID>VAT</cbc:ID></cac:TaxScheme></cac:ClassifiedTaxCategory>
+\t\t\t<cac:ClassifiedTaxCategory><cbc:ID>${vat.category}</cbc:ID><cbc:Percent>${vat.percent}</cbc:Percent><cac:TaxScheme><cbc:ID>VAT</cbc:ID></cac:TaxScheme></cac:ClassifiedTaxCategory>
 \t\t</cac:Item>
 \t\t<cac:Price><cbc:PriceAmount currencyID="EUR">${price}</cbc:PriceAmount></cac:Price>
 \t</cac:${isCreditNote ? 'CreditNoteLine' : 'InvoiceLine'}>`,
