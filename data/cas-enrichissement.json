@@ -11,7 +11,7 @@
       "recommandé": "Recommandé",
       "facultatif": "Facultatif"
     },
-    "coverage": "28 fiches enrichies : nominal + 6 variantes nominales + cas 1 à 17b, 19a, 19b et 23"
+    "coverage": "37 fiches enrichies sur 49"
   },
   "socle": {
     "label": "Socle obligatoire commun à tous les cas d'usage",
@@ -180,7 +180,7 @@
             "name": "Cadre de facturation",
             "level": "En-tête",
             "obligation": "obligatoire",
-            "value": "3 caractères. B/S/M (biens, services, mixte) + chiffre du cas : 1 nominal, 2 déjà payée, 4 sous-traitance, 6/7/8 intermédiaires, 9 bidirectionnel.",
+            "value": "3 caractères. Lettre selon la nature (B biens, S services, M mixte) + chiffre du cas : <strong>1</strong> nominal · <strong>2</strong> déjà payée · <strong>4</strong> solde après acompte · <strong>5</strong> sous-traitance · <strong>6</strong> co-traitance · <strong>7</strong> TVA déjà collectée · <strong>9</strong> bidirectionnel multi-vendeurs",
             "rule": "BR-FR-01 · BR-FR-CO-08/09"
           },
           {
@@ -4946,6 +4946,1356 @@
         "cas-33": {
           "rel": "situation connexe",
           "why": "Les achats à des particuliers alimentent typiquement la revente de biens d'occasion, qui relève de la TVA sur la marge. Le cas 23 traite l'entrée du bien, le cas 33 sa sortie."
+        }
+      }
+    },
+    "cas-20": {
+      "narrative": {
+        "intro": "<p>L'acompte est une <strong>vraie facture</strong>, avec son propre type de document. Mais son cadre de facturation reste celui de l'opération finale.</p>",
+        "steps": [
+          {
+            "t": 1,
+            "actor": "Vendeur",
+            "title": "La facture d'acompte est émise",
+            "text": "Type <strong>386</strong>, cadre <strong>B1/S1/M1</strong> — celui de la nature de l'opération. Au moins une ligne de détail est obligatoire : en pratique une ligne unique « Acompte sur… », quantité 1, prix égal au montant HT de l'acompte.",
+            "flux": [
+              "F2"
+            ],
+            "refs": [
+              "BT-3",
+              "BT-23",
+              "BT-129"
+            ],
+            "diagram": 0
+          },
+          {
+            "t": 2,
+            "actor": "PA-E",
+            "title": "Contrôles, « Déposée », double transmission",
+            "text": "Flux 1 au portail public et flux 2 vers la PA-R.",
+            "flux": [
+              "F1",
+              "F2",
+              "F6"
+            ],
+            "diagram": 1
+          },
+          {
+            "t": 3,
+            "actor": "Acheteur",
+            "title": "L'acheteur comptabilise en compte de bilan",
+            "text": "L'acompte n'est pas une charge : il se comptabilise en compte de bilan, puis se solde à la facture définitive.",
+            "flux": [
+              "F6"
+            ],
+            "refs": [
+              "BT-115"
+            ],
+            "diagram": 2
+          },
+          {
+            "t": 4,
+            "actor": "Acheteur",
+            "title": "Paiement de l'acompte",
+            "text": "Le règlement porte sur BT-115, égal au TTC de l'acompte.",
+            "refs": [
+              "BT-115"
+            ],
+            "diagram": 3
+          },
+          {
+            "t": 5,
+            "actor": "Vendeur",
+            "title": "Statut « Encaissée » avec le montant et le taux",
+            "text": "Si la TVA est exigible à l'encaissement, le statut porte le TTC encaissé ventilé par taux.",
+            "flux": [
+              "F6"
+            ],
+            "refs": [
+              "BT-8"
+            ],
+            "diagram": 4
+          },
+          {
+            "t": 6,
+            "actor": "PPF",
+            "title": "Le pré-remplissage se déclenche selon le régime",
+            "text": "À l'émission si le vendeur a opté pour les débits, à la réception du statut « Encaissée » sinon.",
+            "flux": [
+              "F1"
+            ]
+          }
+        ]
+      },
+      "fields": [
+        {
+          "id": "BT-3",
+          "name": "Code type de facture",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "<strong>386</strong> — facture d'acompte",
+          "rule": "BR-FR-CO-08 · BR-FR-CO-09"
+        },
+        {
+          "id": "BT-23",
+          "name": "Cadre de facturation",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "<strong>B1 · S1 · M1</strong> — le cadre de la nature de l'opération, et <strong>surtout pas</strong> B4/S4/M4",
+          "rule": "BR-FR-08"
+        },
+        {
+          "id": "BT-9",
+          "name": "Date d'échéance",
+          "level": "En-tête",
+          "obligation": "conditionnel",
+          "value": "<strong>Peut être antérieure à BT-2</strong> : exception réservée aux types 386, 500 et 503",
+          "rule": "BR-FR-CO-08"
+        },
+        {
+          "id": "BT-8",
+          "name": "Code de date d'exigibilité TVA",
+          "level": "En-tête",
+          "obligation": "conditionnel",
+          "value": "Absent ou 72 / 432 si TVA à l'encaissement ; 5 / 3 si option pour les débits",
+          "rule": "BR-FR-MAP-03"
+        },
+        {
+          "id": "BT-113",
+          "name": "Montant déjà payé",
+          "level": "En-tête",
+          "obligation": "facultatif",
+          "value": "<strong>0 ou absent</strong> — l'acompte <em>est</em> la facture, il n'y a pas de paiement antérieur"
+        },
+        {
+          "id": "BT-115",
+          "name": "Montant net à payer",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "= BT-112, le TTC de l'acompte",
+          "rule": "BR-CO-16"
+        },
+        {
+          "id": "BT-129",
+          "name": "Quantité facturée",
+          "level": "Ligne",
+          "obligation": "obligatoire",
+          "value": "<strong>≥ 1</strong> — au moins une ligne BG-25 est exigée, avec BT-146 et BT-151",
+          "rule": "EN 16931"
+        },
+        {
+          "id": "BT-153",
+          "name": "Nom de l'article",
+          "level": "Ligne",
+          "obligation": "obligatoire",
+          "value": "Ex. « Acompte sur commande n°… »"
+        }
+      ],
+      "fieldsNote": "⚠️ <strong>La facture d'acompte n'a pas de cadre spécifique.</strong> Elle porte le cadre de l'opération finale (B1/S1/M1) ; B4/S4/M4 sont réservés à la facture <em>définitive</em> qui reprend les acomptes, et BR-FR-CO-09 l'interdit explicitement sur un acompte. 💡 Deuxième particularité : c'est l'un des trois seuls types de document (386, 500, 503) où <strong>BT-9 peut être antérieure à BT-2</strong>. Et contrairement à une idée répandue, une facture d'acompte doit comporter au moins une ligne de détail avec une quantité.",
+      "relatedWhy": {
+        "cas-21": {
+          "rel": "suite obligatoire",
+          "why": "Un acompte appelle toujours une facture de solde. Le cas 21 en décrit la mécanique de reprise, et c'est là seulement que le cadre passe en B4/S4/M4."
+        },
+        "cas-2": {
+          "rel": "à ne pas confondre",
+          "why": "Les deux mettent de l'argent en jeu avant la facture définitive, mais l'acompte est un paiement partiel qui appelle un solde, alors que le cas 2 solde l'opération d'un coup."
+        }
+      }
+    },
+    "cas-21": {
+      "narrative": {
+        "intro": "<p>C'est ici, et seulement ici, que le <strong>cadre 4</strong> apparaît. La méthode recommandée est la reprise des acomptes en <strong>lignes négatives</strong>.</p>",
+        "steps": [
+          {
+            "t": 1,
+            "actor": "Vendeur",
+            "title": "La facture définitive est construite en deux blocs de lignes",
+            "text": "Les lignes réelles de la prestation, puis une <strong>ligne de reprise par acompte</strong> : quantité <strong>−1</strong>, prix égal au montant HT de l'acompte, ce qui rend BT-131 négatif. Type 380, cadre <strong>B4/S4/M4</strong>.",
+            "refs": [
+              "BT-3",
+              "BT-23",
+              "BT-129",
+              "BT-131"
+            ],
+            "diagram": 0
+          },
+          {
+            "t": 2,
+            "actor": "Vendeur",
+            "title": "Chaque acompte est référencé",
+            "text": "Un bloc BG-3 par facture d'acompte, avec son numéro BT-25 et sa date BT-26. En profil étendu, EXT-FR-FE-137 = 386 au niveau ligne permet le repérage automatique des reprises.",
+            "refs": [
+              "BT-25",
+              "BT-26"
+            ],
+            "diagram": 1
+          },
+          {
+            "t": 3,
+            "actor": "Vendeur",
+            "title": "Contrôle de cohérence avant dépôt",
+            "text": "BT-113 doit porter la somme TTC des acomptes versés et BT-115 le solde, soit BT-112 − BT-113.",
+            "refs": [
+              "BT-113",
+              "BT-115"
+            ],
+            "diagram": 1
+          },
+          {
+            "t": 4,
+            "actor": "PA-E",
+            "title": "La PA-E vérifie BR-S-08 puis transmet",
+            "text": "Le schematron contrôle que, pour chaque taux, BT-116 est égal à la somme des BT-131 des lignes de ce taux. Les lignes de reprise <strong>diminuent</strong> donc mécaniquement la base.",
+            "flux": [
+              "F1",
+              "F2",
+              "F6"
+            ],
+            "refs": [
+              "BT-116",
+              "BT-131"
+            ],
+            "diagram": 2
+          },
+          {
+            "t": 5,
+            "actor": "PPF",
+            "title": "Le flux 1 ne porte que le solde de TVA",
+            "text": "Les acomptes ayant déjà fait l'objet de leur propre flux 1, ils ne sont pas recomptés.",
+            "flux": [
+              "F1"
+            ],
+            "diagram": 3
+          },
+          {
+            "t": 6,
+            "actor": "Acheteur",
+            "title": "Rapprochement avec les acomptes comptabilisés",
+            "text": "L'acheteur solde ses comptes de bilan grâce aux références BG-3, puis règle le solde.",
+            "flux": [
+              "F6"
+            ],
+            "refs": [
+              "BT-115"
+            ],
+            "diagram": 4
+          }
+        ]
+      },
+      "fields": [
+        {
+          "id": "BT-3",
+          "name": "Code type de facture",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "<strong>380</strong> — jamais 386, ce n'est plus un acompte",
+          "rule": "BR-FR-CO-09"
+        },
+        {
+          "id": "BT-23",
+          "name": "Cadre de facturation",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "<strong>B4 · S4 · M4</strong> — c'est le sens réel du chiffre 4 : solde après acompte",
+          "rule": "BR-FR-08 · BR-FR-CO-09"
+        },
+        {
+          "id": "BG-3",
+          "name": "Référence de facture antérieure",
+          "level": "Groupe",
+          "obligation": "obligatoire",
+          "value": "<strong>Un bloc par facture d'acompte</strong>, avec BT-25 et BT-26",
+          "rule": "Z12-014 §3.2.19"
+        },
+        {
+          "id": "EXT-FR-FE-02",
+          "name": "Code type de la facture antérieure",
+          "level": "En-tête",
+          "obligation": "conditionnel",
+          "value": "386 — profil EXTENDED-CTC-FR uniquement",
+          "rule": "Règles de gestion 3.2"
+        },
+        {
+          "id": "BT-129",
+          "name": "Quantité facturée — ligne de reprise",
+          "level": "Ligne",
+          "obligation": "obligatoire",
+          "value": "<strong>−1</strong>"
+        },
+        {
+          "id": "BT-146",
+          "name": "Prix unitaire net — ligne de reprise",
+          "level": "Ligne",
+          "obligation": "obligatoire",
+          "value": "Montant HT de l'acompte, en valeur <strong>positive</strong>"
+        },
+        {
+          "id": "BT-131",
+          "name": "Montant net de la ligne de reprise",
+          "level": "Ligne",
+          "obligation": "obligatoire",
+          "value": "<strong>Négatif</strong> — c'est ce qui déduit l'acompte de la base imposable",
+          "rule": "BR-S-08"
+        },
+        {
+          "id": "BT-153",
+          "name": "Nom de l'article — ligne de reprise",
+          "level": "Ligne",
+          "obligation": "obligatoire",
+          "value": "Ex. « Reprise acompte n° FA-001 »"
+        },
+        {
+          "id": "EXT-FR-FE-137",
+          "name": "Code type de facture antérieure, à la ligne",
+          "level": "Ligne",
+          "obligation": "conditionnel",
+          "value": "386 — permet le repérage automatique des reprises",
+          "rule": "Z12-014 §3.2.19"
+        },
+        {
+          "id": "EXT-FR-FE-BG-06",
+          "name": "Référence de la facture antérieure, à la ligne",
+          "level": "Ligne",
+          "obligation": "recommandé",
+          "value": "Numéro, date et type de la facture d'acompte reprise"
+        },
+        {
+          "id": "BT-113",
+          "name": "Montant déjà payé",
+          "level": "En-tête",
+          "obligation": "recommandé",
+          "value": "Somme <strong>TTC</strong> des acomptes déjà versés",
+          "rule": "BR-CO-16"
+        },
+        {
+          "id": "BT-115",
+          "name": "Montant net à payer",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "= BT-112 − BT-113 — <strong>peut être négatif</strong> si les acomptes excèdent le total",
+          "rule": "BR-CO-16"
+        }
+      ],
+      "fieldsNote": "⚠️ <strong>Deux contrôles bloquants se cumulent.</strong> BR-S-08 impose que la base d'imposition BT-116 de chaque taux soit égale à la somme des BT-131 des lignes de ce taux : les lignes de reprise négatives la diminuent donc mécaniquement, et c'est précisément l'effet voulu — le pré-remplissage ne porte que sur le solde de TVA. Et BR-CO-16 impose la cohérence BT-115 = BT-112 − BT-113 : un BT-113 oublié ou faux fait rejeter la facture. 💡 La reprise en lignes négatives est la méthode <strong>recommandée par la norme</strong>, à préférer à un simple report en BT-113.",
+      "relatedWhy": {
+        "cas-20": {
+          "rel": "cas amont",
+          "why": "La facture de solde n'existe que par les acomptes qu'elle reprend. Le cas 20 explique leur émission, en cadre B1/S1/M1 ; le cas 21 leur déduction, en cadre B4/S4/M4."
+        }
+      }
+    },
+    "cas-22a": {
+      "narrative": {
+        "intro": "<p>Contre toute attente, l'escompte <strong>n'apparaît pas</strong> dans les montants de la facture. Il se régularise par le statut d'encaissement.</p>",
+        "steps": [
+          {
+            "t": 1,
+            "actor": "Vendeur",
+            "title": "La facture est émise au montant plein",
+            "text": "Type 380, cadre <strong>S1</strong>. Aucune déduction n'est appliquée : seules les <strong>conditions</strong> d'escompte sont mentionnées, en note BT-21 = <strong>AAB</strong>, qui est de toute façon une mention légale obligatoire.",
+            "flux": [
+              "F2"
+            ],
+            "refs": [
+              "BT-3",
+              "BT-23",
+              "BT-22"
+            ],
+            "diagram": 0
+          },
+          {
+            "t": 2,
+            "actor": "PA-E",
+            "title": "Contrôles et double transmission",
+            "text": "Flux 1 au portail public sur le montant plein, flux 2 vers la PA-R.",
+            "flux": [
+              "F1",
+              "F2",
+              "F6"
+            ],
+            "diagram": 1
+          },
+          {
+            "t": 3,
+            "actor": "Acheteur",
+            "title": "L'acheteur paie par anticipation, escompte déduit",
+            "text": "Il règle le TTC diminué de l'escompte.",
+            "diagram": 2
+          },
+          {
+            "t": 4,
+            "actor": "Acheteur",
+            "title": "Statut « Paiement transmis » détaillé, en option",
+            "text": "Il peut transmettre deux blocs MDG-43 : l'un pour le montant réellement payé (MDT-207 = MEN), l'autre pour l'escompte (MDT-207 = ESC).",
+            "flux": [
+              "F6"
+            ],
+            "diagram": 3
+          },
+          {
+            "t": 5,
+            "actor": "Vendeur",
+            "title": "Statut « Encaissée » au montant réellement encaissé",
+            "text": "C'est le point pivot : le statut porte le TTC <strong>net d'escompte</strong>, ventilé par taux.",
+            "flux": [
+              "F6"
+            ],
+            "diagram": 4
+          },
+          {
+            "t": 6,
+            "actor": "PPF",
+            "title": "La TVA collectée suit l'encaissement réel",
+            "text": "Le pré-remplissage s'appuie sur le montant encaissé, donc sur la TVA réellement due. <strong>Aucun avoir n'est nécessaire.</strong>",
+            "flux": [
+              "F1"
+            ]
+          }
+        ]
+      },
+      "fields": [
+        {
+          "id": "BT-3",
+          "name": "Code type de facture",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "380"
+        },
+        {
+          "id": "BT-23",
+          "name": "Cadre de facturation",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "<strong>S1</strong> — prestation de services",
+          "rule": "BR-FR-08"
+        },
+        {
+          "id": "BT-8",
+          "name": "Code de date d'exigibilité TVA",
+          "level": "En-tête",
+          "obligation": "conditionnel",
+          "value": "<strong>Absent</strong>, ou 72 / 432 : TVA exigible à l'encaissement",
+          "rule": "BR-FR-MAP-03"
+        },
+        {
+          "id": "BT-21 = AAB",
+          "name": "Code de note — escompte",
+          "level": "Groupe BG-1",
+          "obligation": "obligatoire",
+          "value": "Mention légale déjà exigée par le socle",
+          "rule": "BR-FR-07"
+        },
+        {
+          "id": "BT-22",
+          "name": "Texte des conditions d'escompte",
+          "level": "Groupe BG-1",
+          "obligation": "obligatoire",
+          "value": "Ex. « Escompte de 2 % pour paiement sous 10 jours »",
+          "rule": "Z12-014 §3.2.20"
+        },
+        {
+          "id": "BT-20",
+          "name": "Conditions de paiement",
+          "level": "En-tête",
+          "obligation": "recommandé",
+          "value": "Détail des échéances"
+        },
+        {
+          "id": "BG-20 / BT-92",
+          "name": "Déduction au niveau document",
+          "level": "Groupe",
+          "obligation": "à ne pas utiliser",
+          "value": "<strong>L'escompte ne se matérialise pas ici</strong> : son montant n'apparaît pas sur la facture émise",
+          "rule": "Z12-014 §3.2.20"
+        },
+        {
+          "id": "MDT-215 / MDT-224",
+          "name": "Montant et taux du statut « Encaissée »",
+          "level": "Cycle de vie",
+          "obligation": "obligatoire",
+          "value": "TTC <strong>net d'escompte</strong>, ventilé par taux de TVA",
+          "cond": "Si TVA exigible à l'encaissement"
+        },
+        {
+          "id": "Avoir 381",
+          "name": "Avoir de régularisation",
+          "level": "Document",
+          "obligation": "non nécessaire",
+          "value": "Le statut « Encaissée » suffit à ajuster la TVA collectée"
+        }
+      ],
+      "fieldsNote": "💡 <strong>Pourquoi aucun avoir ?</strong> Parce qu'en régime d'encaissement, la TVA n'est exigible qu'au paiement : la TVA collectée est donc, par construction, celle du montant réellement encaissé. L'administration le déduit du statut « Encaissée ». ⚠️ C'est exactement l'inverse en régime de débits — voir le cas 22b. Ne cherchez pas à porter l'escompte en BG-20 : la norme prévoit une simple mention en note.",
+      "relatedWhy": {
+        "cas-22b": {
+          "rel": "variante par régime de TVA",
+          "why": "Même geste commercial, deux traitements opposés selon l'exigibilité. À l'encaissement, le statut « Encaissée » régularise tout seul ; sur les débits, il ne corrige rien et un avoir devient le seul mécanisme disponible."
+        },
+        "cas-34": {
+          "rel": "même mécanisme de statut",
+          "why": "Les deux reposent sur le statut « Encaissée » et son montant : l'escompte le fait porter sur un montant inférieur au dû, l'encaissement partiel le répète sur des fractions successives. Dans les deux cas, c'est le montant déclaré qui pilote la TVA collectée."
+        }
+      }
+    },
+    "cas-22b": {
+      "narrative": {
+        "intro": "<p>En régime de débits, la TVA est déjà due au moment de la facture. Le statut d'encaissement ne corrige rien : il faut un <strong>avoir net de taxe</strong>.</p>",
+        "steps": [
+          {
+            "t": 1,
+            "actor": "Vendeur",
+            "title": "Facture au montant plein, TVA pleine",
+            "text": "Type 380, cadre <strong>B1</strong> — ou S1 en cas d'option pour les débits. Les conditions d'escompte figurent en note BT-21 = AAB.",
+            "flux": [
+              "F2"
+            ],
+            "refs": [
+              "BT-3",
+              "BT-23",
+              "BT-22"
+            ],
+            "diagram": 0
+          },
+          {
+            "t": 2,
+            "actor": "PPF",
+            "title": "La TVA est exigible dès la facturation",
+            "text": "Le flux 1 porte la TVA sur le montant plein, l'exigibilité étant acquise à l'émission.",
+            "flux": [
+              "F1"
+            ],
+            "refs": [
+              "BT-8"
+            ],
+            "diagram": 1
+          },
+          {
+            "t": 3,
+            "actor": "Acheteur",
+            "title": "Paiement anticipé, escompte déduit",
+            "text": "L'acheteur règle le TTC diminué de l'escompte.",
+            "diagram": 2
+          },
+          {
+            "t": 4,
+            "actor": "Vendeur",
+            "title": "Émission d'un avoir « net de taxe »",
+            "text": "Faculté, mais seul mécanisme disponible : un avoir <strong>381</strong> référençant la facture en BG-3, d'un TTC égal au montant de l'escompte, en catégorie de TVA <strong>E</strong> avec le code <code>VATEX-FR-CNWVAT</code>, et BT-117 comme BT-110 à zéro.",
+            "flux": [
+              "F2"
+            ],
+            "refs": [
+              "BT-3",
+              "BT-118",
+              "BT-121",
+              "BT-117"
+            ],
+            "diagram": 3
+          },
+          {
+            "t": 5,
+            "actor": "PPF",
+            "title": "Le flux 1 de l'avoir corrige la base imposable",
+            "text": "Le HT escompté est retiré de la base : l'avoir ne reverse pas de TVA, il réduit l'assiette.",
+            "flux": [
+              "F1"
+            ],
+            "refs": [
+              "BT-109"
+            ],
+            "diagram": 4
+          },
+          {
+            "t": 6,
+            "actor": "Vendeur",
+            "title": "Sans avoir, l'écart n'est pas corrigé",
+            "text": "Si le vendeur s'abstient, l'écart de TVA reste dans ses comptes et le pré-remplissage n'est pas ajusté automatiquement."
+          }
+        ]
+      },
+      "fields": [
+        {
+          "id": "BT-3",
+          "name": "Code type — facture",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "380"
+        },
+        {
+          "id": "BT-23",
+          "name": "Cadre de facturation",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "<strong>B1</strong> pour des biens, S1 si option pour les débits sur des services",
+          "rule": "BR-FR-08"
+        },
+        {
+          "id": "BT-8",
+          "name": "Code de date d'exigibilité TVA",
+          "level": "En-tête",
+          "obligation": "conditionnel",
+          "value": "5 / 3 en cas d'option pour les débits sur services ; absent pour des biens, les débits s'appliquant par défaut",
+          "rule": "BR-FR-MAP-03"
+        },
+        {
+          "id": "BT-21 = AAB / BT-22",
+          "name": "Conditions d'escompte",
+          "level": "Groupe BG-1",
+          "obligation": "obligatoire",
+          "value": "Mention légale identique au cas 22a",
+          "rule": "BR-FR-07"
+        },
+        {
+          "id": "BT-3",
+          "name": "Code type — avoir de régularisation",
+          "level": "En-tête",
+          "obligation": "facultatif",
+          "value": "<strong>381</strong>"
+        },
+        {
+          "id": "BG-3 / BT-25",
+          "name": "Référence de la facture d'origine sur l'avoir",
+          "level": "Groupe",
+          "obligation": "obligatoire",
+          "value": "Numéro de la facture escomptée",
+          "cond": "Si l'avoir est émis"
+        },
+        {
+          "id": "BT-118",
+          "name": "Catégorie de TVA de l'avoir",
+          "level": "Groupe BG-23",
+          "obligation": "obligatoire",
+          "value": "<strong>E</strong> — exonéré",
+          "cond": "Si l'avoir est émis",
+          "rule": "BR-FR-15"
+        },
+        {
+          "id": "BT-121",
+          "name": "Code du motif d'exonération de l'avoir",
+          "level": "Groupe BG-23",
+          "obligation": "obligatoire",
+          "value": "<code>VATEX-FR-CNWVAT</code> — avoir net de taxe",
+          "cond": "Si l'avoir est émis",
+          "rule": "Z12-014 §3.2.20"
+        },
+        {
+          "id": "BT-117 / BT-110",
+          "name": "Montants de TVA de l'avoir",
+          "level": "Groupe BG-23",
+          "obligation": "obligatoire",
+          "value": "<strong>0</strong> — l'avoir ne reverse aucune TVA",
+          "cond": "Si l'avoir est émis"
+        },
+        {
+          "id": "BT-109 / BT-112",
+          "name": "Totaux de l'avoir",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "Montant de l'escompte : en HT pour BT-109, en TTC pour BT-112",
+          "cond": "Si l'avoir est émis"
+        },
+        {
+          "id": "Statut « Encaissée »",
+          "name": "Statut d'encaissement",
+          "level": "Cycle de vie",
+          "obligation": "non nécessaire",
+          "value": "Pas de e-reporting de paiement en régime de débits"
+        }
+      ],
+      "fieldsNote": "⚠️ <strong>La différence avec le cas 22a est fondamentale.</strong> Sur les débits, la TVA est exigible dès la facturation : le statut « Encaissée » n'existe pas et ne corrige donc rien. Le seul outil pour régulariser est un <strong>avoir net de taxe</strong> : catégorie E, code <code>VATEX-FR-CNWVAT</code>, BT-117 à zéro. Il ne rembourse pas de TVA, il <em>réduit la base imposable</em> dans le flux 1. 💡 Cet avoir est facultatif dans la norme, mais sans lui l'écart de TVA n'est jamais répercuté dans le pré-remplissage.",
+      "relatedWhy": {
+        "cas-22a": {
+          "rel": "variante par régime de TVA",
+          "why": "Le cas jumeau, en régime d'encaissement, où le statut « Encaissée » régularise seul. Comparer les deux fiches est la meilleure façon de comprendre l'effet concret de l'exigibilité de la TVA."
+        }
+      }
+    },
+    "cas-31": {
+      "narrative": {
+        "intro": "<p>Une seule facture, mais <strong>deux régimes d'exigibilité</strong> : les biens suivent les débits, les services l'encaissement. C'est toute la difficulté du cadre M1.</p>",
+        "steps": [
+          {
+            "t": 1,
+            "actor": "Vendeur",
+            "title": "Une facture mixte est émise en cadre M1",
+            "text": "Lignes de biens et lignes de services non accessoires coexistent, avec des taux identiques ou différents. Le cadre <strong>M1</strong> signale la mixité.",
+            "flux": [
+              "F2"
+            ],
+            "refs": [
+              "BT-3",
+              "BT-23",
+              "BT-151"
+            ],
+            "diagram": 0
+          },
+          {
+            "t": 2,
+            "actor": "PA-E",
+            "title": "Contrôles et double transmission",
+            "text": "Flux 1 au portail public, flux 2 vers la PA-R.",
+            "flux": [
+              "F1",
+              "F2",
+              "F6"
+            ],
+            "diagram": 1
+          },
+          {
+            "t": 3,
+            "actor": "PPF",
+            "title": "Deux exigibilités dans un même document",
+            "text": "Les biens sont exigibles à l'émission, les services au paiement — sauf option globale pour les débits.",
+            "flux": [
+              "F1"
+            ],
+            "refs": [
+              "BT-8"
+            ],
+            "diagram": 2
+          },
+          {
+            "t": 4,
+            "actor": "Acheteur",
+            "title": "Paiement, total ou partiel",
+            "text": "Le règlement porte sur l'ensemble de la facture.",
+            "diagram": 3
+          },
+          {
+            "t": 5,
+            "actor": "Vendeur",
+            "title": "Statut « Encaissée » sur la seule part services",
+            "text": "Le montant déclaré doit correspondre au TTC encaissé au prorata des services, ventilé par taux. <strong>La norme ne fournit aucun mécanisme de ventilation</strong> : le calcul incombe au vendeur.",
+            "flux": [
+              "F6"
+            ]
+          },
+          {
+            "t": 6,
+            "actor": "PPF",
+            "title": "Ajustement du pré-remplissage",
+            "text": "La TVA collectée sur les services est recalculée sur la base du montant encaissé.",
+            "flux": [
+              "F1"
+            ]
+          }
+        ]
+      },
+      "fields": [
+        {
+          "id": "BT-3",
+          "name": "Code type de facture",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "380"
+        },
+        {
+          "id": "BT-23",
+          "name": "Cadre de facturation",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "<strong>M1</strong> — facture mixte, biens et services non accessoires",
+          "rule": "BR-FR-08"
+        },
+        {
+          "id": "BT-8",
+          "name": "Code de date d'exigibilité TVA",
+          "level": "En-tête",
+          "obligation": "conditionnel",
+          "value": "<strong>Absent</strong> si le vendeur n'a pas opté pour les débits ; 5 / 3 si option globale",
+          "rule": "BR-FR-MAP-03"
+        },
+        {
+          "id": "BT-151",
+          "name": "Catégorie de TVA de la ligne",
+          "level": "Ligne",
+          "obligation": "obligatoire",
+          "value": "S — un même taux peut s'appliquer aux biens et aux services"
+        },
+        {
+          "id": "EXT-FR-FE-163",
+          "name": "Sous-type de ligne",
+          "level": "Ligne",
+          "obligation": "conditionnel",
+          "value": "DETAIL — profil étendu. <strong>Aucun sous-type ne distingue les biens des services.</strong>"
+        },
+        {
+          "id": "MDT-215",
+          "name": "Montant du statut « Encaissée »",
+          "level": "Cycle de vie",
+          "obligation": "obligatoire",
+          "value": "<strong>Part services uniquement</strong>, au prorata, ventilée par taux",
+          "cond": "Si pas d'option pour les débits"
+        }
+      ],
+      "fieldsNote": "⚠️ <strong>Le point dur, non résolu par la norme.</strong> Le cadre M1 déclenche un double régime d'exigibilité, et le statut « Encaissée » ne doit porter que sur la part services. Or ni EN 16931 ni la Z12-014 ne prévoient de <strong>marquage biens/services au niveau ligne</strong>, ni de mécanisme de ventilation dans le statut : le calcul du prorata est à la charge du vendeur, sans contrôle possible par la plateforme. 💡 L'option pour les débits ne dispense pas de distinguer biens et services dans le cadre de facturation, mais elle supprime le e-reporting de paiement — ce qui simplifie considérablement ce cas.",
+      "relatedWhy": {
+        "nominal": {
+          "rel": "variante du nominal",
+          "why": "Le parcours et les statuts sont ceux du nominal ; seule la coexistence de deux régimes d'exigibilité dans un même document distingue ce cas, via le cadre M1."
+        }
+      }
+    },
+    "cas-29": {
+      "narrative": {
+        "intro": "<p>Deux régimes cohabitent : les flux <strong>internes</strong> entre membres sortent totalement du champ, les ventes <strong>externes</strong> restent soumises mais portent des mentions spécifiques.</p>",
+        "steps": [
+          {
+            "t": 1,
+            "actor": "Membre de l'AU",
+            "title": "Les flux internes sortent du champ",
+            "text": "Les opérations entre membres d'un même assujetti unique sont <strong>hors champ de la facturation électronique et du e-reporting</strong>. Elles peuvent être échangées électroniquement, mais sans flux 1 ni statuts obligatoires.",
+            "diagram": 0
+          },
+          {
+            "t": 2,
+            "actor": "Membre de l'AU",
+            "title": "La vente à un tiers porte les mentions de l'AU",
+            "text": "Sur une facture externe, l'identifiant privé BT-29 porte le <strong>SIREN de l'assujetti unique</strong> avec le schéma <strong>0231</strong>, le bloc BG-11 décrit l'AU comme représentant fiscal avec son numéro de TVA en BT-63, et une note BT-21 = <strong>TXD</strong> porte le texte <code>MEMBRE_ASSUJETTI_UNIQUE</code>.",
+            "flux": [
+              "F2"
+            ],
+            "refs": [
+              "BT-21",
+              "BT-22",
+              "BT-63"
+            ],
+            "diagram": 1
+          },
+          {
+            "t": 3,
+            "actor": "PA-E",
+            "title": "Contrôles spécifiques à l'assujetti unique",
+            "text": "La PA-E vérifie BR-FR-CO-13, 14 et 15, ainsi que la présence du SIREN de l'AU dans l'annuaire du portail public.",
+            "refs": [
+              "BT-23"
+            ],
+            "diagram": 2
+          },
+          {
+            "t": 4,
+            "actor": "PA-E",
+            "title": "Transmission normale de la facture externe",
+            "text": "Flux 1 au portail public, flux 2 vers la PA-R, statut « Déposée ».",
+            "flux": [
+              "F1",
+              "F2",
+              "F6"
+            ],
+            "diagram": 3
+          },
+          {
+            "t": 5,
+            "actor": "Acheteur",
+            "title": "Le pré-remplissage se fait au nom de l'AU",
+            "text": "Si l'acheteur est lui-même membre d'un assujetti unique, c'est l'AU qui apparaît dans son pré-remplissage.",
+            "flux": [
+              "F6"
+            ],
+            "refs": [
+              "BT-118"
+            ]
+          },
+          {
+            "t": 6,
+            "actor": "Membre de l'AU",
+            "title": "E-reporting par membre ou au global",
+            "text": "Le flux 10 peut être transmis membre par membre ou globalement pour l'assujetti unique, au choix.",
+            "flux": [
+              "F10"
+            ]
+          }
+        ]
+      },
+      "fields": [
+        {
+          "id": "BT-3",
+          "name": "Code type de facture",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "380, ou 381 pour un avoir"
+        },
+        {
+          "id": "BT-23",
+          "name": "Cadre de facturation",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "B1 · S1 · M1 — cadre standard, il n'existe pas de cadre propre à l'assujetti unique"
+        },
+        {
+          "id": "BT-21 = TXD",
+          "name": "Code de note — assujetti unique",
+          "level": "Groupe BG-1",
+          "obligation": "obligatoire",
+          "value": "Code fixe TXD",
+          "rule": "BR-FR-CO-14"
+        },
+        {
+          "id": "BT-22",
+          "name": "Texte de la note",
+          "level": "Groupe BG-1",
+          "obligation": "obligatoire",
+          "value": "<code>MEMBRE_ASSUJETTI_UNIQUE</code>",
+          "rule": "BR-FR-CO-14"
+        },
+        {
+          "id": "BT-29 / BT-29-1",
+          "name": "Identifiant privé du vendeur et son schéma",
+          "level": "Groupe BG-4",
+          "obligation": "obligatoire",
+          "value": "SIREN de l'<strong>assujetti unique</strong> (9 caractères), schéma <strong>0231</strong>",
+          "rule": "BR-FR-CO-13"
+        },
+        {
+          "id": "BG-11",
+          "name": "Représentant fiscal du vendeur",
+          "level": "Groupe",
+          "obligation": "obligatoire",
+          "value": "Bloc complet décrivant l'AU : raison sociale, adresse, numéro de TVA",
+          "rule": "BR-FR-CO-15"
+        },
+        {
+          "id": "BT-63",
+          "name": "Numéro de TVA du représentant fiscal",
+          "level": "Groupe BG-11",
+          "obligation": "obligatoire",
+          "value": "Numéro de TVA intracommunautaire de l'AU — <strong>seul redevable</strong>",
+          "rule": "BR-FR-CO-15"
+        },
+        {
+          "id": "BT-118",
+          "name": "Catégorie de TVA",
+          "level": "Groupe BG-23",
+          "obligation": "obligatoire",
+          "value": "S, E, AE… selon l'opération : l'AU est seul redevable",
+          "rule": "BR-FR-15"
+        },
+        {
+          "id": "Flux 1 et e-reporting — opérations internes",
+          "name": "Périmètre des flux intra-groupe",
+          "level": "Périmètre",
+          "obligation": "non applicable",
+          "value": "<strong>Aucun flux 1, aucun e-reporting, aucun statut obligatoire</strong> sur les opérations entre membres",
+          "rule": "Z12-014"
+        }
+      ],
+      "fieldsNote": "⚠️ <strong>Le risque majeur est la double comptabilisation.</strong> Un ERP qui transmettrait par erreur les flux internes de l'assujetti unique provoquerait un double comptage de TVA. 💡 Et un prérequis à ne pas manquer : le SIREN de l'AU doit être <strong>enregistré dans l'annuaire du portail public</strong> (schéma 0231) avant toute émission, faute de quoi les factures externes sont rejetées au titre de BR-FR-CO-13.",
+      "relatedWhy": {
+        "nominal": {
+          "rel": "variante du nominal",
+          "why": "Les ventes externes d'un membre suivent intégralement le parcours nominal ; seules s'ajoutent les mentions d'identification de l'assujetti unique. Ce sont les flux internes, eux, qui sortent du champ."
+        },
+        "cas-37": {
+          "rel": "structure de groupe voisine",
+          "why": "La société en participation pose la même question que l'assujetti unique : quelle entité est redevable et identifiable dans la facture. Les réponses diffèrent, l'assujetti unique disposant d'un schéma dédié (0231) et d'un représentant fiscal en BG-11."
+        }
+      }
+    },
+    "cas-30": {
+      "narrative": {
+        "intro": "<p>Le cadre <strong>7</strong> résout une équation délicate : ouvrir la déduction à l'acheteur <strong>sans</strong> collecter la TVA une seconde fois.</p>",
+        "steps": [
+          {
+            "t": 1,
+            "actor": "Vendeur",
+            "title": "Une vente B2C est d'abord enregistrée",
+            "text": "Vente en caisse à un client qui se présente comme particulier, cumulée dans le e-reporting de transactions.",
+            "flux": [
+              "F10.3"
+            ],
+            "diagram": 0
+          },
+          {
+            "t": 2,
+            "actor": "PA-E",
+            "title": "Le e-reporting B2C est transmis",
+            "text": "Flux 10.3 avec la catégorie et la ventilation par taux, et flux 10.4 pour le paiement si la TVA est exigible à l'encaissement. <strong>La TVA est désormais collectée.</strong>",
+            "flux": [
+              "F10.3",
+              "F10.4"
+            ],
+            "diagram": 1
+          },
+          {
+            "t": 3,
+            "actor": "Vendeur",
+            "title": "Le client demande une facture au nom de son entreprise",
+            "text": "Le vendeur émet alors une facture B2B en cadre <strong>B7 / S7</strong>, avec BT-113 égal au TTC et BT-115 à zéro puisque la vente est déjà payée.",
+            "refs": [
+              "BT-23",
+              "BT-113",
+              "BT-115"
+            ],
+            "diagram": 2
+          },
+          {
+            "t": 4,
+            "actor": "PA-E",
+            "title": "Le flux 1 est marqué « TVA déjà collectée »",
+            "text": "Il est transmis au portail public mais <strong>exclu du pré-remplissage de la TVA collectée</strong> du vendeur, tout en étant pris en compte pour la <strong>TVA déductible</strong> de l'acheteur.",
+            "flux": [
+              "F1",
+              "F2",
+              "F6"
+            ],
+            "diagram": 3
+          },
+          {
+            "t": 5,
+            "actor": "Vendeur",
+            "title": "Contre-passation comptable indispensable",
+            "text": "Le cadre 7 évite le double comptage côté administration, mais pas dans l'ERP : le vendeur doit contre-passer son écriture de vente B2C.",
+            "diagram": 4
+          }
+        ]
+      },
+      "fields": [
+        {
+          "id": "BT-3",
+          "name": "Code type de facture",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "380"
+        },
+        {
+          "id": "BT-23",
+          "name": "Cadre de facturation",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "<strong>B7</strong> (biens) · <strong>S7</strong> (services) — « TVA déjà collectée »",
+          "rule": "Z12-014 §3.2.30"
+        },
+        {
+          "id": "BT-113",
+          "name": "Montant déjà payé",
+          "level": "En-tête",
+          "obligation": "conditionnel",
+          "value": "= BT-112 si la vente a été intégralement encaissée",
+          "cond": "Vente déjà réglée en caisse"
+        },
+        {
+          "id": "BT-115",
+          "name": "Montant net à payer",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "0 si le paiement est complet",
+          "rule": "BR-CO-16"
+        },
+        {
+          "id": "BT-18 / BT-18-1",
+          "name": "Identifiant de l'objet facturé",
+          "level": "En-tête",
+          "obligation": "facultatif",
+          "value": "Référence du bordereau de vente si elle est connue, qualifiée par le code <code>APT</code>"
+        },
+        {
+          "id": "BT-118",
+          "name": "Catégorie de TVA",
+          "level": "Groupe BG-23",
+          "obligation": "obligatoire",
+          "value": "S — au taux applicable, identique à celui de la vente initiale"
+        },
+        {
+          "id": "Effet du cadre 7",
+          "name": "Traitement du flux 1",
+          "level": "Périmètre",
+          "obligation": "obligatoire",
+          "value": "<strong>Exclu</strong> du pré-remplissage de TVA collectée du vendeur, <strong>inclus</strong> dans la TVA déductible de l'acheteur",
+          "rule": "Z12-014 §3.2.30"
+        }
+      ],
+      "fieldsNote": "⚠️ <strong>Deux conditions de cohérence.</strong> D'abord, le e-reporting B2C doit avoir été <strong>effectivement transmis</strong> avant l'émission de la facture : sinon le cadre 7 est incohérent, puisqu'il affirme une collecte qui n'a pas eu lieu. Ensuite, la <strong>contre-passation comptable</strong> de la vente B2C est indispensable côté vendeur. 💡 À signaler : la Z12-014 V1.4 ne documente explicitement que <strong>B7 et S7</strong>. Le cadre <strong>M7</strong> est une extension logique de la convention B/S/M, mais il reste <strong>à confirmer auprès de la DGFiP</strong>.",
+      "relatedWhy": {
+        "cas-6": {
+          "rel": "cas déclencheur",
+          "why": "La note de frais sans facture au nom de l'entreprise est le cas type qui appelle ce rattrapage. Le cas 6 pose le problème — TVA non déductible — et le cas 30 apporte la seule solution normée."
+        },
+        "cas-28": {
+          "rel": "situation analogue",
+          "why": "La note de restaurant suit exactement le même enchaînement : encaissement B2C d'abord, demande de facture professionnelle ensuite, donc cadre 7."
+        }
+      }
+    },
+    "cas-33": {
+      "narrative": {
+        "intro": "<p>Règle d'or de ce régime : <strong>la TVA ne doit jamais apparaître sur la facture</strong>. Les prix de ligne sont donc portés en TTC.</p>",
+        "steps": [
+          {
+            "t": 1,
+            "actor": "Vendeur",
+            "title": "La facture masque la TVA",
+            "text": "Les prix unitaires et les montants de ligne sont exprimés en <strong>TTC</strong>, la catégorie de TVA de ligne BT-151 est <strong>E</strong> et le taux BT-152 est à <strong>0</strong>.",
+            "refs": [
+              "BT-131",
+              "BT-146",
+              "BT-151"
+            ],
+            "diagram": 0
+          },
+          {
+            "t": 2,
+            "actor": "Vendeur",
+            "title": "La ventilation porte le motif d'exonération",
+            "text": "BT-118 = E, BT-117 et BT-119 à zéro, et le code BT-121 précise le régime : <code>VATEX-EU-F</code> pour l'occasion, <code>VATEX-EU-I</code> pour l'art, <code>VATEX-EU-J</code> pour les antiquités, <code>VATEX-EU-D</code> pour les voyages.",
+            "refs": [
+              "BT-118",
+              "BT-121"
+            ],
+            "diagram": 0
+          },
+          {
+            "t": 3,
+            "actor": "PA-E",
+            "title": "Contrôles de cohérence puis transmission",
+            "text": "La plateforme vérifie la cohérence entre BT-118, BT-117, BT-119 et le code VATEX, puis transmet les flux 1 et 2.",
+            "flux": [
+              "F1",
+              "F2",
+              "F6"
+            ],
+            "diagram": 1
+          },
+          {
+            "t": 4,
+            "actor": "Acheteur",
+            "title": "Aucune TVA déductible, sauf exception",
+            "text": "L'acheteur ne peut rien déduire, sauf dans le cas des agences de voyages et des terrains à bâtir où une ligne de marge dédiée ouvre le droit à déduction.",
+            "flux": [
+              "F6"
+            ],
+            "diagram": 2
+          },
+          {
+            "t": 5,
+            "actor": "Vendeur",
+            "title": "Correction manuelle de la déclaration",
+            "text": "Le vendeur déclare sa TVA sur la marge <strong>réelle</strong> en CA3, laquelle diffère du pré-remplissage."
+          }
+        ]
+      },
+      "fields": [
+        {
+          "id": "BT-3",
+          "name": "Code type de facture",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "380"
+        },
+        {
+          "id": "BT-23",
+          "name": "Cadre de facturation",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "<strong>B1</strong> pour les biens d'occasion, l'art et les antiquités ; <strong>S1</strong> pour les agences de voyages"
+        },
+        {
+          "id": "BT-131",
+          "name": "Montant net de la ligne",
+          "level": "Ligne",
+          "obligation": "obligatoire",
+          "value": "<strong>En TTC</strong> — la TVA est incluse dans le prix, sans être affichée"
+        },
+        {
+          "id": "BT-146 / BT-147 / BT-148",
+          "name": "Prix unitaires",
+          "level": "Groupe BG-29",
+          "obligation": "obligatoire",
+          "value": "<strong>En TTC</strong>"
+        },
+        {
+          "id": "BT-151",
+          "name": "Catégorie de TVA de la ligne",
+          "level": "Groupe BG-30",
+          "obligation": "obligatoire",
+          "value": "<strong>E</strong> — masque la TVA sur la ligne"
+        },
+        {
+          "id": "BT-152",
+          "name": "Taux de TVA de la ligne",
+          "level": "Groupe BG-30",
+          "obligation": "obligatoire",
+          "value": "<strong>0</strong>"
+        },
+        {
+          "id": "BT-118",
+          "name": "Catégorie de TVA de la ventilation",
+          "level": "Groupe BG-23",
+          "obligation": "obligatoire",
+          "value": "<strong>E</strong>"
+        },
+        {
+          "id": "BT-116",
+          "name": "Base d'imposition",
+          "level": "Groupe BG-23",
+          "obligation": "obligatoire",
+          "value": "Somme des montants de lignes, donc en pratique le <strong>total TTC</strong>"
+        },
+        {
+          "id": "BT-117",
+          "name": "Montant de TVA",
+          "level": "Groupe BG-23",
+          "obligation": "obligatoire",
+          "value": "<strong>0</strong> — il est interdit de faire apparaître la TVA"
+        },
+        {
+          "id": "BT-119",
+          "name": "Taux de TVA",
+          "level": "Groupe BG-23",
+          "obligation": "obligatoire",
+          "value": "<strong>0</strong>"
+        },
+        {
+          "id": "BT-121",
+          "name": "Code du motif d'exonération",
+          "level": "Groupe BG-23",
+          "obligation": "obligatoire",
+          "value": "<code>VATEX-EU-F</code> occasion · <code>VATEX-EU-I</code> art · <code>VATEX-EU-J</code> antiquités · <code>VATEX-EU-D</code> voyages"
+        },
+        {
+          "id": "Ligne « MARGE BENEFICIAIRE HT »",
+          "name": "Ligne de marge, par exception",
+          "level": "Ligne",
+          "obligation": "conditionnel",
+          "value": "BT-153 = <code>MARGE BENEFICIAIRE HT</code>, BT-146 = montant de la marge HT, BT-151 = <strong>S</strong>, BT-152 = taux applicable. <strong>Ouvre le droit à déduction.</strong>",
+          "cond": "Agences de voyages et terrains à bâtir uniquement",
+          "rule": "BOI-TVA-SECT-60"
+        }
+      ],
+      "fieldsNote": "⚠️ <strong>Le pré-remplissage sera nécessairement faux.</strong> BT-116 contenant un total TTC et non une base HT réelle, l'administration appliquera un taux de marge moyen : le vendeur devra <strong>corriger manuellement sa CA3</strong>. C'est une limite structurelle du régime, pas une erreur de saisie. 💡 Et la règle à ne jamais transgresser : hors l'exception des agences de voyages et des terrains à bâtir, <strong>BT-117 doit rester à zéro</strong> sur les lignes de marge.",
+      "relatedWhy": {
+        "cas-23": {
+          "rel": "situation amont",
+          "why": "Les achats à des particuliers, traités au cas 23, alimentent précisément la revente de biens d'occasion sous ce régime. Le cas 23 gère l'entrée du bien, le cas 33 sa sortie."
+        }
+      }
+    },
+    "cas-34": {
+      "narrative": {
+        "intro": "<p>Il n'existe <strong>aucun statut « Encaissée partiellement »</strong>. Le même statut est réutilisé à chaque versement, avec le montant de la fraction encaissée.</p>",
+        "steps": [
+          {
+            "t": 1,
+            "actor": "Vendeur",
+            "title": "Une facture est émise, payable en plusieurs fois",
+            "text": "Exemple : 3 000 € en régime de TVA à l'encaissement, cadre S1. Statut « Déposée » comme d'habitude.",
+            "flux": [
+              "F1",
+              "F2",
+              "F6"
+            ],
+            "refs": [
+              "BT-3",
+              "BT-23"
+            ],
+            "diagram": 0
+          },
+          {
+            "t": 2,
+            "actor": "Vendeur",
+            "title": "Premier encaissement partiel déclaré",
+            "text": "1 000 € encaissés : le vendeur transmet un statut <strong>« Encaissée » portant 1 000</strong>, et non le total de la facture.",
+            "flux": [
+              "F6"
+            ],
+            "diagram": 1
+          },
+          {
+            "t": 3,
+            "actor": "Vendeur",
+            "title": "Deuxième encaissement partiel",
+            "text": "1 000 € de plus, donc un second statut « Encaissée » de 1 000. Les statuts s'accumulent.",
+            "flux": [
+              "F6"
+            ],
+            "diagram": 2
+          },
+          {
+            "t": 4,
+            "actor": "Vendeur",
+            "title": "Annulation par un montant négatif",
+            "text": "Erreur de lettrage ou fraude détectée sur le deuxième versement : le vendeur émet un statut « Encaissée » portant <strong>−1 000</strong>. C'est le mécanisme normé d'annulation.",
+            "flux": [
+              "F6"
+            ],
+            "diagram": 3
+          },
+          {
+            "t": 5,
+            "actor": "Vendeur",
+            "title": "Encaissement du solde",
+            "text": "2 000 € encaissés, donc un dernier statut « Encaissée » de 2 000.",
+            "flux": [
+              "F6"
+            ],
+            "diagram": 4
+          },
+          {
+            "t": 6,
+            "actor": "Vendeur",
+            "title": "Cas de l'encaissement non lettré",
+            "text": "Si un encaissement ne peut être rattaché à sa facture avant l'échéance de e-reporting, il doit être déclaré en <strong>flux 10.4</strong>, puis corrigé au rapprochement.",
+            "flux": [
+              "F10.4"
+            ]
+          }
+        ]
+      },
+      "fields": [
+        {
+          "id": "BT-3",
+          "name": "Code type de facture",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "380, ou 381 pour un avoir en cas d'annulation après encaissement"
+        },
+        {
+          "id": "BT-23",
+          "name": "Cadre de facturation",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "S1 ou S2 pour des services en TVA à l'encaissement, B1 ou B2 selon le contexte"
+        },
+        {
+          "id": "MDT-215",
+          "name": "Montant du statut « Encaissée »",
+          "level": "Cycle de vie",
+          "obligation": "obligatoire",
+          "value": "<strong>Montant partiel réellement encaissé</strong>, jamais le total de la facture. Peut être <strong>négatif</strong> pour annuler un encaissement.",
+          "rule": "Z12-014 §3.2.33"
+        },
+        {
+          "id": "MDT-224",
+          "name": "Taux de TVA du statut",
+          "level": "Cycle de vie",
+          "obligation": "obligatoire",
+          "value": "Ventilation du montant encaissé par taux"
+        },
+        {
+          "id": "Statut « Encaissée partiellement »",
+          "name": "Statut dédié",
+          "level": "Cycle de vie",
+          "obligation": "non applicable",
+          "value": "<strong>N'existe pas.</strong> Le statut « Encaissée » est réutilisé autant de fois que nécessaire.",
+          "rule": "Z12-014 §3.2.33"
+        },
+        {
+          "id": "Flux 10.4",
+          "name": "E-reporting de paiement",
+          "level": "Flux",
+          "obligation": "conditionnel",
+          "value": "Déclaration d'un encaissement <strong>non lettré</strong> avant la date limite, à corriger ensuite",
+          "cond": "Si le rapprochement n'est pas possible à temps"
+        }
+      ],
+      "fieldsNote": "⚠️ <strong>Aucun garde-fou côté plateforme.</strong> L'annulation par montant négatif est un mécanisme purement <strong>déclaratif</strong> : rien ne vérifie que le cumul des encaissements reste inférieur ou égal à BT-112. Un ERP mal paramétré peut donc émettre des statuts incohérents — un cumul supérieur au montant de la facture — <strong>sans aucun rejet technique</strong>, mais avec un impact direct sur le pré-remplissage de TVA. La cohérence est entièrement à la charge de l'émetteur.",
+      "relatedWhy": {
+        "cas-20": {
+          "rel": "à ne pas confondre",
+          "why": "Les deux fractionnent le paiement, mais l'acompte du cas 20 est un <em>document</em> distinct, avec son propre numéro et son propre flux 1, alors que l'encaissement partiel n'est qu'une succession de <em>statuts</em> sur une facture unique."
+        },
+        "cas-22a": {
+          "rel": "variante du même statut",
+          "why": "L'escompte est un encaissement inférieur au montant facturé, déclaré en une fois ; l'encaissement partiel, une succession de montants. Le champ MDT-215 joue le même rôle central dans les deux fiches."
         }
       }
     }
