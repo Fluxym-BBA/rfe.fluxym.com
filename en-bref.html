@@ -8,9 +8,7 @@
     <link rel="icon" href="./assets/favicon-Fluxym-V2.png" sizes="32x32" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Miriam+Libre:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./css/main.css">
-    <link rel="stylesheet" href="./css/components.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./css/pages.css">
 </head>
 <body>
@@ -66,22 +64,22 @@
                 <section id="pourquoi" class="content-section brief-section">
                     <div class="brief-icon">🎯</div>
                     <h2>Pourquoi ?</h2>
-                    <p>Quatre objectifs : <strong>lutter contre la fraude à la TVA</strong> (20-25 Mds€/an de manque à gagner), <strong>simplifier les déclarations</strong> (pré-remplissage TVA), <strong>moderniser les échanges</strong> (gains de productivité), et <strong>piloter l'économie en temps réel</strong>.</p>
+                    <p>Quatre objectifs : <strong>lutter contre la fraude à la TVA</strong> (écart de TVA estimé à environ 15 Mds€/an pour la France), <strong>simplifier les déclarations</strong> (pré-remplissage TVA), <strong>moderniser les échanges</strong> (gains de productivité), et <strong>piloter l'économie en temps réel</strong>.</p>
                 </section>
 
                 <section id="qui" class="content-section brief-section">
                     <div class="brief-icon">🏢</div>
                     <h2>Qui est concerné ?</h2>
-                    <p><strong>Toutes les entreprises assujetties à la TVA en France</strong>, sans exception : grandes entreprises, ETI, PME, TPE, micro-entreprises, indépendants, professions libérales, auto-entrepreneurs. Soit environ <strong>4,5 millions d'entreprises</strong>.</p>
+                    <p><strong>Les assujettis à la TVA établis en France</strong> : grandes entreprises, ETI, PME, TPE, micro-entreprises, indépendants, professions libérales, auto-entrepreneurs. Soit environ <strong>4,5 millions d'entreprises</strong>. Le critère est la <strong>qualité d'assujetti</strong>, pas le fait de collecter effectivement de la TVA : un assujetti en franchise en base est dans le périmètre, une entité non assujettie ne l'est pas.</p>
                 </section>
 
                 <section id="quand" class="content-section brief-section">
                     <div class="brief-icon">📅</div>
                     <h2>Quand ?</h2>
                     <div class="brief-dates">
-                        <div class="brief-date"><strong>Juillet 2025</strong> — Échanges volontaires (les entreprises prêtes peuvent commencer)</div>
-                        <div class="brief-date"><strong>1er sept. 2026</strong> — Réception obligatoire pour TOUS + Émission pour GE et ETI</div>
-                        <div class="brief-date"><strong>1er sept. 2027</strong> — Émission obligatoire pour TOUS (PME, TPE, micro)</div>
+                        <div class="brief-date"><strong>Juillet 2025</strong> — Ouverture des échanges volontaires : les entreprises prêtes peuvent commencer, sans obligation</div>
+                        <div class="brief-date"><strong>1er sept. 2026</strong> — Réception obligatoire pour TOUS les assujettis + émission et e-reporting obligatoires pour les grandes entreprises et les ETI</div>
+                        <div class="brief-date"><strong>1er sept. 2027</strong> — Émission et e-reporting obligatoires pour les PME, TPE et micro-entreprises</div>
                     </div>
                 </section>
 
@@ -110,15 +108,15 @@
                     <div class="actors-brief">
                         <div class="actor-card-brief">
                             <h4>PPF <span class="actor-full">Portail Public de Facturation</span></h4>
-                            <p>Le service public qui gère l'<strong>annuaire central</strong> et collecte les <strong>données fiscales</strong>. Opéré par l'AIFE. Depuis octobre 2024, il ne fait plus transiter les factures.</p>
+                            <p>Le service public qui gère l'<strong>annuaire central</strong> et collecte les <strong>données fiscales</strong>. Opéré par la <strong>DGFiP</strong>. Depuis l'annonce d'octobre 2024, il ne fait plus transiter les factures : ce rôle revient aux Plateformes Agréées.</p>
                         </div>
                         <div class="actor-card-brief">
                             <h4>PA <span class="actor-full">Plateforme Agréée</span></h4>
-                            <p>Opérateur privé <strong>immatriculé par la DGFiP</strong> qui transmet les factures entre entreprises et les données au PPF. ~129 PA immatriculées ou en cours.</p>
+                            <p>Opérateur <strong>immatriculé par la DGFiP</strong> qui transmet les factures entre entreprises et les données au PPF. Terme officiel depuis la loi de finances pour 2026, en remplacement de « PDP ». Environ <strong>130 PA</strong> immatriculées ou en cours (impots.gouv.fr, févr. 2026).</p>
                         </div>
                         <div class="actor-card-brief">
                             <h4>SC <span class="actor-full">Solution Compatible</span></h4>
-                            <p>Logiciel (ERP, facturation, compta…) <strong>compatible avec les formats</strong> de la réforme. Se connecte à une PA pour émettre/recevoir.</p>
+                            <p>Logiciel (ERP, facturation, compta…) <strong>compatible avec les formats</strong> de la réforme. Ce n'est pas un statut délivré par l'administration : la conformité relève de l'éditeur. Une SC doit se connecter à une PA pour émettre et recevoir.</p>
                         </div>
                     </div>
                 </section>
@@ -133,7 +131,7 @@
                             </thead>
                             <tbody>
                                 <tr><td><strong>Quoi</strong></td><td>Factures électroniques structurées</td><td>Données de transactions et paiements</td></tr>
-                                <tr><td><strong>Opérations</strong></td><td>B2B domestique (France ↔ France)</td><td>B2B international + B2C</td></tr>
+                                <tr><td><strong>Opérations</strong></td><td>B2B domestique entre assujettis établis en France</td><td>B2B international, B2C, et données de paiement</td></tr>
                                 <tr><td><strong>Logique</strong></td><td>Les factures circulent via les PA</td><td>Les données sont déclarées séparément</td></tr>
                             </tbody>
                         </table>
@@ -169,7 +167,7 @@
                         </div>
                         <div class="action-step">
                             <span class="action-num">4</span>
-                            <div><strong>Testez dès que possible</strong> : les échanges volontaires sont ouverts depuis juillet 2025. Plus vous testez tôt, plus la transition sera fluide.</div>
+                            <div><strong>Testez dès que possible</strong> : les échanges volontaires sont ouverts depuis juillet 2025 et restent facultatifs jusqu'à votre échéance. Plus vous testez tôt, plus la transition sera fluide.</div>
                         </div>
                     </div>
                 </section>
@@ -179,15 +177,15 @@
                     <div class="glossary-grid">
                         <div class="glossary-item">
                             <dt>PPF</dt>
-                            <dd>Portail Public de Facturation. Service public qui gère l'annuaire des entreprises et collecte les données fiscales des factures. Opéré par l'AIFE pour le compte de la DGFiP.</dd>
+                            <dd>Portail Public de Facturation. Service public qui gère l'annuaire des entreprises et collecte les données fiscales des factures. Opéré par la DGFiP. À ne pas confondre avec Chorus Pro, opéré par l'AIFE pour la sphère publique.</dd>
                         </div>
                         <div class="glossary-item">
                             <dt>PA</dt>
-                            <dd>Plateforme Agréée. Opérateur privé autorisé par l'État à transmettre les factures électroniques entre entreprises. Chaque entreprise doit en choisir au moins une (~129 immatriculées).</dd>
+                            <dd>Plateforme Agréée. Opérateur immatriculé par la DGFiP, autorisé à transmettre les factures électroniques entre entreprises. Terme officiel depuis la loi de finances pour 2026, ex-« PDP ». Chaque entreprise doit en choisir au moins une (~130 immatriculées).</dd>
                         </div>
                         <div class="glossary-item">
                             <dt>SC</dt>
-                            <dd>Solution Compatible. Logiciel (facturation, comptabilité, ERP, caisse…) capable de créer et traiter des factures aux formats de la réforme. Se connecte à une PA.</dd>
+                            <dd>Solution Compatible. Logiciel (facturation, comptabilité, ERP, caisse…) capable de créer et traiter des factures aux formats de la réforme. Terme d'usage du marché, pas un agrément administratif : la SO doit se connecter à une PA.</dd>
                         </div>
                         <div class="glossary-item">
                             <dt>UBL</dt>
@@ -203,7 +201,7 @@
                         </div>
                         <div class="glossary-item">
                             <dt>E-invoicing</dt>
-                            <dd>Obligation d'émettre/recevoir des factures structurées. Concerne les transactions B2B domestiques entre assujettis TVA.</dd>
+                            <dd>Obligation d'émettre et de recevoir des factures structurées. Concerne les transactions B2B domestiques entre assujettis établis en France.</dd>
                         </div>
                         <div class="glossary-item">
                             <dt>E-reporting</dt>

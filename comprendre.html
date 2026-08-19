@@ -8,9 +8,7 @@
     <link rel="icon" href="./assets/favicon-Fluxym-V2.png" sizes="32x32" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Miriam+Libre:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./css/main.css">
-    <link rel="stylesheet" href="./css/components.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./css/pages.css">
 </head>
 <body>
@@ -62,7 +60,7 @@
                 <section id="pourquoi" class="content-section">
                     <h2>Pourquoi ce sujet vous concerne (oui, vous aussi)</h2>
                     <p>Vous dirigez une entreprise, vous êtes indépendant, auto-entrepreneur, profession libérale ? Alors <strong>la facture électronique obligatoire vous concerne directement</strong>. À partir de septembre 2026, la façon dont les entreprises françaises s'échangent des factures va fondamentalement changer.</p>
-                    <p>Ce n'est pas une option. Ce n'est pas un « truc de grandes entreprises ». C'est une obligation légale qui touche <strong>toutes les entreprises assujetties à la TVA</strong>, de la micro-entreprise au groupe du CAC 40, soit environ <strong>4,5 millions d'entreprises</strong> en France.</p>
+                    <p>Ce n'est pas une option. Ce n'est pas un « truc de grandes entreprises ». C'est une obligation légale qui touche <strong>les assujettis à la TVA établis en France</strong>, de la micro-entreprise au groupe du CAC 40, soit environ <strong>4,5 millions d'entreprises</strong>. Le périmètre repose sur la qualité d'assujetti, et non sur le fait de payer effectivement de la TVA : un assujetti en franchise en base est concerné, une entité non assujettie ne l'est pas.</p>
                     
                     <div class="callout callout--warning">
                         <div class="callout-icon">⚠️</div>
@@ -184,6 +182,11 @@
                             </tbody>
                         </table>
                     </div>
+
+                    <div class="callout callout--info">
+                        <div class="callout-icon">ℹ️</div>
+                        <div class="callout-content"><strong>La nuance à connaître :</strong> le PDF n'est pas banni en tant que tel. Ce qui est exclu, c'est le PDF <em>seul</em>, sans données structurées. Le format <strong>Factur-X</strong> est précisément un PDF lisible auquel un fichier XML est attaché : il reste parfaitement conforme. Un PDF peut aussi continuer à circuler comme document de confort, mais il ne vaut plus facture au sens de la réforme.</div>
+                    </div>
                 </section>
 
                 <!-- SECTION : Les 4 objectifs -->
@@ -196,7 +199,7 @@
                             <div class="objective-number">01</div>
                             <div class="objective-icon">🛡️</div>
                             <h3>Lutter contre la fraude à la TVA</h3>
-                            <p>La fraude à la TVA coûte entre <strong>20 et 25 milliards d'euros par an</strong> à la France. Avec la facturation électronique, chaque facture est transmise en temps réel à l'administration, rendant les circuits de fraude (carrousels TVA) beaucoup plus difficiles.</p>
+                            <p>L'écart de TVA — la différence entre la TVA théoriquement due et celle réellement collectée — est estimé à environ <strong>15 milliards d'euros par an</strong> pour la France par la Commission européenne. Avec la facturation électronique, les données de chaque facture sont transmises à l'administration, ce qui rend les circuits de fraude, notamment les carrousels TVA, beaucoup plus difficiles.</p>
                         </div>
                         <div class="objective-card">
                             <div class="objective-number">02</div>
@@ -234,13 +237,13 @@
                         <div class="europe-card">
                             <div class="europe-flag">🇵🇱</div>
                             <h3>Pologne — KSeF</h3>
-                            <p>Système national déployé progressivement à partir de <strong>2026-2027</strong>. Calendrier très similaire à la France.</p>
+                            <p>Système national KSeF déployé progressivement à partir de <strong>2026</strong>, avec une montée en charge par taille d'entreprise. Calendrier proche de celui de la France.</p>
                             <span class="europe-status europe-status--soon">En déploiement</span>
                         </div>
                         <div class="europe-card">
                             <div class="europe-flag">🇪🇸</div>
                             <h3>Espagne — VeriFactu</h3>
-                            <p>Obligation progressive entre <strong>2026 et 2028</strong> selon la taille des entreprises.</p>
+                            <p>Dispositif VeriFactu de contrôle des logiciels de facturation, déployé progressivement à partir de <strong>2026</strong>. Attention : c'est un régime de conformité logicielle, distinct d'une obligation générale de facturation électronique B2B.</p>
                             <span class="europe-status europe-status--soon">En préparation</span>
                         </div>
                         <div class="europe-card">
@@ -252,8 +255,8 @@
                         <div class="europe-card europe-card--wide">
                             <div class="europe-flag">🇪🇺</div>
                             <h3>Directive ViDA (VAT in the Digital Age)</h3>
-                            <p>La Commission européenne prévoit la <strong>généralisation du e-invoicing dans tous les États membres</strong>. Objectif : harmoniser les systèmes nationaux et créer un cadre commun interopérable.</p>
-                            <span class="europe-status europe-status--planned">Directive en cours</span>
+                            <p>Le paquet ViDA a été <strong>définitivement adopté le 11 mars 2025</strong>. Il rend la facturation électronique et la déclaration numérique obligatoires pour les <strong>opérations intracommunautaires à partir de juillet 2030</strong>, et supprime dès son entrée en vigueur l'obligation d'obtenir une dérogation pour imposer la facture électronique en national.</p>
+                            <span class="europe-status europe-status--live">✓ Adopté le 11 mars 2025</span>
                         </div>
                     </div>
 
@@ -271,9 +274,9 @@
                     <div class="stats-grid">
                         <div class="stat-card"><div class="stat-value">~4,5M</div><div class="stat-label">Entreprises assujetties TVA en France</div></div>
                         <div class="stat-card"><div class="stat-value">~2,5 Mds</div><div class="stat-label">Factures B2B par an en France</div></div>
-                        <div class="stat-card"><div class="stat-value">20-25 Mds€</div><div class="stat-label">Écart TVA annuel (France)</div></div>
-                        <div class="stat-card"><div class="stat-value">~60 Mds€</div><div class="stat-label">Écart TVA annuel (Europe)</div></div>
-                        <div class="stat-card"><div class="stat-value">~129</div><div class="stat-label">Plateformes Agréées immatriculées</div></div>
+                        <div class="stat-card"><div class="stat-value">~15 Mds€</div><div class="stat-label">Écart TVA annuel France (Commission européenne)</div></div>
+                        <div class="stat-card"><div class="stat-value">~60 Mds€</div><div class="stat-label">Écart TVA annuel UE (ordre de grandeur, rapports VAT Gap)</div></div>
+                        <div class="stat-card"><div class="stat-value">~130</div><div class="stat-label">Plateformes Agréées immatriculées (impots.gouv.fr, févr. 2026)</div></div>
                         <div class="stat-card"><div class="stat-value">3</div><div class="stat-label">Formats acceptés (UBL, CII, Factur-X)</div></div>
                     </div>
                 </section>
