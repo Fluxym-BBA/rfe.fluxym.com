@@ -96,7 +96,7 @@
                         <div class="nb-item"><span class="nb-num">2</span><div><strong>La PA</strong> vérifie la conformité, extrait les données pour le PPF (Flux 1), et transmet à <strong>Chorus Pro</strong>.</div></div>
                         <div class="nb-item"><span class="nb-num">3</span><div><strong>Chorus Pro</strong> réceptionne et route vers l'entité publique destinataire.</div></div>
                         <div class="nb-item"><span class="nb-num">4</span><div><strong>L'entité publique</strong> traite la facture (validation service fait, mise en paiement).</div></div>
-                        <div class="nb-item"><span class="nb-num">5</span><div><strong>Les statuts</strong> remontent à chaque étape (Déposée → Transmise → Reçue → Mise en paiement).</div></div>
+                        <div class="nb-item"><span class="nb-num">5</span><div><strong>Les statuts</strong> remontent à chaque étape. Attention : « Mise en paiement » est un statut <strong>interne à Chorus Pro</strong>, propre au circuit de la dépense publique. Dans le cycle de vie inter-plateformes, c'est le statut <strong>Encaissée</strong> qui clôt la facture.</div></div>
                     </div>
 
                     <h3>Circuit historique (dépôt direct maintenu)</h3>
@@ -110,18 +110,20 @@
                         <div class="role-card">
                             <h4>✅ Formats réforme (cible)</h4>
                             <ul>
-                                <li><strong>CII</strong> — profil AFNOR minimum</li>
                                 <li><strong>UBL 2.1</strong> — profil AFNOR minimum</li>
+                                <li><strong>CII D22B</strong> — profil AFNOR minimum</li>
+                                <li><strong>Factur-X</strong> — hybride PDF/A-3 + XML CII, profil BASIC WL minimum</li>
                             </ul>
                         </div>
                         <div class="role-card">
-                            <h4>🔄 Formats historiques (transitoire)</h4>
+                            <h4>🔄 Formats historiques Chorus Pro (transitoire)</h4>
                             <ul>
-                                <li>Factur-X (PDF/A-3 + XML)</li>
-                                <li>UBL historique Chorus Pro</li>
+                                <li>UBL au format historique Chorus Pro</li>
+                                <li>CII 16B (version antérieure)</li>
                                 <li>PES V2 (secteur public local)</li>
                                 <li>CPP (format pivot Chorus Pro)</li>
                             </ul>
+                            <p><strong>Factur-X n'est pas un format historique :</strong> il fait partie du socle cible de la réforme.</p>
                         </div>
                     </div>
                 </section>
@@ -167,7 +169,7 @@
                                 <tr><td><strong>PA du destinataire</strong></td><td>Toujours <strong>Chorus Pro</strong></td><td>PA privée au choix</td></tr>
                                 <tr><td><strong>En vigueur depuis</strong></td><td>2017-2020 (déjà en place)</td><td>Septembre 2026 (nouveau)</td></tr>
                                 <tr><td><strong>Formats historiques</strong></td><td>Maintenus transitoirement</td><td>Directement formats réforme</td></tr>
-                                <tr><td><strong>Cycle de vie</strong></td><td>Statuts spécifiques (« Service fait », « Mise en paiement »)</td><td>Statuts standards</td></tr>
+                                <tr><td><strong>Cycle de vie</strong></td><td>Statuts internes Chorus Pro en plus des statuts normalisés (« Service fait », « Mise en paiement »)</td><td>Statuts normalisés du cycle de vie</td></tr>
                                 <tr><td><strong>Annuaire</strong></td><td>Entités pré-enregistrées dans Chorus Pro</td><td>Déclaration dans l'annuaire PPF</td></tr>
                             </tbody>
                         </table>
@@ -180,7 +182,7 @@
                         <div class="nb-item"><span class="nb-num">1</span><div><strong>Capitalisez sur votre expérience Chorus Pro</strong> — Vous connaissez déjà la plateforme. Le schéma en Y ne bouleversera pas vos habitudes.</div></div>
                         <div class="nb-item"><span class="nb-num">2</span><div><strong>Choisissez une PA compatible B2G</strong> — Vérifiez qu'elle gère la transmission vers Chorus Pro et les statuts spécifiques du public.</div></div>
                         <div class="nb-item"><span class="nb-num">3</span><div><strong>Soignez les données d'adressage</strong> — Les entités publiques utilisent des codes de routage spécifiques (code service, numéro d'engagement).</div></div>
-                        <div class="nb-item"><span class="nb-num">4</span><div><strong>Anticipez la transition des formats</strong> — Planifiez votre migration vers CII ou UBL 2.1. Les formats historiques ne dureront pas.</div></div>
+                        <div class="nb-item"><span class="nb-num">4</span><div><strong>Anticipez la transition des formats</strong> — Planifiez votre migration vers UBL 2.1, CII D22B ou Factur-X. Les formats historiques Chorus Pro ne dureront pas.</div></div>
                         <div class="nb-item"><span class="nb-num">5</span><div><strong>Testez en qualification</strong> — Chorus Pro met à disposition un environnement sandbox. Utilisez-le systématiquement.</div></div>
                         <div class="nb-item"><span class="nb-num">6</span><div><strong>Surveillez les statuts</strong> — En B2G, le suivi est crucial pour savoir si votre facture a été « service fait » et mise en paiement.</div></div>
                     </div>

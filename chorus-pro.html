@@ -60,7 +60,7 @@
                 <section id="historique" class="content-section">
                     <h2>D'où vient Chorus Pro ?</h2>
                     <div class="legal-timeline">
-                        <div class="lt-item"><div class="lt-year">2012</div><div class="lt-content"><h4>Lancement de « Chorus Portail Pro »</h4><p>Première version pour les fournisseurs de l'État.</p></div></div>
+                        <div class="lt-item"><div class="lt-year">Avant 2017</div><div class="lt-content"><h4>Les portails fournisseurs de l'État</h4><p>Chorus Pro succède à des portails antérieurs destinés aux fournisseurs de l'État, dont « Chorus Portail Pro ». Les dates exactes de ces prédécesseurs sont mal documentées : la date de référence du dispositif actuel reste 2017.</p></div></div>
                         <div class="lt-item"><div class="lt-year">Jan. 2017</div><div class="lt-content"><h4>Chorus Pro remplace l'ancien portail</h4><p>Plateforme unique de dépôt des factures destinées au secteur public.</p></div></div>
                         <div class="lt-item"><div class="lt-year">2017→2020</div><div class="lt-content"><h4>Déploiement progressif B2G</h4><p>GE (2017) → ETI (2018) → PME (2019) → TPE/micro (2020).</p></div></div>
                         <div class="lt-item lt-item--success"><div class="lt-year">Depuis 2020</div><div class="lt-content"><h4>100% des factures B2G transitent par Chorus Pro</h4><p>Obligation universelle pour tous les fournisseurs de la sphère publique.</p></div></div>
@@ -81,8 +81,8 @@
                         <div class="objective-card">
                             <div class="objective-number">02</div>
                             <div class="objective-icon">🟢</div>
-                            <h3>Composant PPF</h3>
-                            <p>Héberge l'<strong>annuaire central</strong> des entreprises et le <strong>concentrateur de données</strong> qui centralise Flux 1, Flux 6 et Flux 10.</p>
+                            <h3>Interface avec le PPF</h3>
+                            <p><strong>Alimente et consulte l'annuaire central</strong> pour les structures publiques, et transmet au concentrateur du PPF les données fiscales des factures qu'il traite (Flux 1, Flux 6, Flux 10). Chorus Pro <strong>n'héberge pas</strong> le PPF.</p>
                         </div>
                         <div class="objective-card">
                             <div class="objective-number">03</div>
@@ -99,10 +99,10 @@
                         <table>
                             <thead><tr><th>Critère</th><th>Chorus Pro</th><th>PA privée</th></tr></thead>
                             <tbody>
-                                <tr><td><strong>Nature</strong></td><td>Plateforme publique (AIFE)</td><td>Plateforme privée (DGFiP)</td></tr>
+                                <tr><td><strong>Nature</strong></td><td>Plateforme publique, opérée par l'AIFE</td><td>Opérateur privé, immatriculé par la DGFiP</td></tr>
                                 <tr><td><strong>Utilisateurs obligatoires</strong></td><td>Toutes entités publiques</td><td>Aucun (choix libre)</td></tr>
                                 <tr><td><strong>Coût</strong></td><td>Gratuit</td><td>Selon offre commerciale</td></tr>
-                                <tr><td><strong>Rôle PPF</strong></td><td><span class="status-yes">✓ Héberge annuaire + concentrateur</span></td><td><span class="status-no">✗ Interagit avec le PPF</span></td></tr>
+                                <tr><td><strong>Relation au PPF</strong></td><td>Interagit avec le PPF, et alimente l'annuaire pour les structures publiques</td><td>Interagit avec le PPF</td></tr>
                                 <tr><td><strong>Services additionnels</strong></td><td>Limités (service public)</td><td>Variables (intégration ERP, workflow…)</td></tr>
                             </tbody>
                         </table>
@@ -156,9 +156,9 @@
                 <section id="ppf-relation" class="content-section">
                     <h2>Chorus Pro ≠ PPF (mais ils sont liés)</h2>
                     <div class="summary-box">
-                        <p>Chorus Pro est l'<strong>infrastructure technique</strong> qui héberge à la fois la PA publique ET une partie des services PPF.</p>
-                        <p>Le PPF est un <strong>concept fonctionnel</strong> (annuaire + concentrateur) dont l'implémentation vit dans l'écosystème Chorus Pro.</p>
-                        <p>Pensez-y comme un <strong>bâtiment</strong> (Chorus Pro) qui héberge à la fois un bureau de poste (PA publique) et un service de l'État (PPF).</p>
+                        <p><strong>Ce sont deux systèmes distincts.</strong> Chorus Pro est une plateforme agréée, doublée d'un hub obligatoire pour la sphère publique. Le PPF est le service public qui porte l'annuaire central et le concentrateur de données fiscales.</p>
+                        <p>Ce qui les rapproche : ils sont opérés par la même agence technique, l'<strong>AIFE</strong>, pour le compte de la DGFiP. Ce qui les sépare : Chorus Pro fait circuler des factures, le PPF ne le fait plus depuis octobre 2024.</p>
+                        <p>L'image juste n'est donc pas celle d'un bâtiment qui hébergerait les deux, mais celle de <strong>deux services voisins tenus par le même opérateur technique</strong>.</p>
                     </div>
                 </section>
 
@@ -167,7 +167,7 @@
                     <div class="numbered-blocks">
                         <div class="nb-item"><span class="nb-num">1</span><div>📅 <strong>Historique</strong> — existe depuis 2017, B2G obligatoire pour tous depuis 2020</div></div>
                         <div class="nb-item"><span class="nb-num">2</span><div>🏛️ <strong>PA publique</strong> — plateforme agréée unique pour les entités publiques</div></div>
-                        <div class="nb-item"><span class="nb-num">3</span><div>🧠 <strong>Composant PPF</strong> — héberge l'annuaire central et le concentrateur de données</div></div>
+                        <div class="nb-item"><span class="nb-num">3</span><div>🧠 <strong>Interface avec le PPF</strong> — alimente l'annuaire pour les structures publiques et transmet les données au concentrateur, sans héberger le PPF</div></div>
                         <div class="nb-item"><span class="nb-num">4</span><div>🔗 <strong>Hub B2G</strong> — point de passage obligatoire pour la facturation publique</div></div>
                         <div class="nb-item"><span class="nb-num">5</span><div>🔄 <strong>En évolution</strong> — s'adapte au schéma en Y tout en maintenant ses circuits historiques</div></div>
                     </div>

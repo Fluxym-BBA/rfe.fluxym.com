@@ -116,7 +116,7 @@
                             <ul>
                                 <li>Émettre dans l'un des <strong>3 formats structurés</strong></li>
                                 <li>Transmettre <strong>via une PA</strong></li>
-                                <li>Indiquer le <strong>cadre de facturation</strong></li>
+                                <li>Indiquer le <strong>cadre de facturation</strong> (BT-23), désormais obligatoire au sens de la règle BR-FR-08</li>
                                 <li>Renseigner toutes les <strong>mentions obligatoires</strong></li>
                                 <li>Suivre les <strong>statuts de cycle de vie</strong></li>
                             </ul>
@@ -127,7 +127,7 @@
                                 <li>Désigner une <strong>PA de réception</strong></li>
                                 <li>S'inscrire dans l'<strong>annuaire central</strong></li>
                                 <li>Traiter les factures dans les <strong>formats du socle</strong></li>
-                                <li>Renvoyer les <strong>statuts obligatoires</strong></li>
+                                <li>Émettre les statuts qui lui incombent : <strong>Refusée</strong> en cas de refus, et <strong>Encaissée</strong> pour clore le cycle de vie</li>
                                 <li>Signer un <strong>accord formel</strong> de désignation PA</li>
                             </ul>
                         </div>
@@ -155,7 +155,7 @@
 
                 <section id="formats" class="content-section">
                     <h2>Les formats acceptés</h2>
-                    <p>3 formats syntaxiques normalisés par l'AFNOR (norme XP Z12-012) :</p>
+                    <p>3 formats de facture normalisés par l'AFNOR (norme XP Z12-012, version V1.4) :</p>
                     <div class="comparison-table">
                         <table>
                             <thead><tr><th>Format</th><th>Norme</th><th>Caractéristique</th></tr></thead>
@@ -168,7 +168,12 @@
                     </div>
                     <div class="callout callout--warning">
                         <div class="callout-icon">⚠️</div>
-                        <div class="callout-content">Pour Factur-X, le profil minimum est <strong>BASIC WL</strong>. Les profils « MINIMUM » et « BASIC » ne contiennent pas toutes les données réglementaires exigées par la réforme.</div>
+                        <div class="callout-content">Pour Factur-X, le profil minimum est <strong>BASIC WL</strong>. Les profils « MINIMUM » et « BASIC » ne contiennent pas toutes les données réglementaires exigées par la réforme. À noter : BASIC WL est un profil sans lignes de détail, ce qui suffit au socle réglementaire mais reste souvent insuffisant pour un traitement métier automatisé côté acheteur.</div>
+                    </div>
+
+                    <div class="callout callout--info">
+                        <div class="callout-icon">📄</div>
+                        <div class="callout-content">Le socle de la réforme comporte en réalité un <strong>quatrième format</strong>, souvent oublié : le <strong>CDAR</strong> (Cross Domain Acknowledgement and Response), qui porte les statuts de cycle de vie. Ce n'est pas un format de facture, mais il est indispensable au fonctionnement des flux.</div>
                     </div>
                 </section>
 

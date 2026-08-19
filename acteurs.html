@@ -150,12 +150,12 @@
                         <li><strong>Audit de conformité</strong> obligatoire avant la fin de la 1ère année</li>
                         <li>Obligations de <strong>portabilité</strong> (6 mois minimum si changement de PA)</li>
                         <li><strong>Accord formel</strong> requis de chaque entreprise cliente</li>
-                        <li>Sécurisation, transparence, respect du réseau <strong>Peppol</strong></li>
+                        <li>Sécurisation, transparence et <strong>interopérabilité obligatoire</strong> avec les autres PA, par convention bilatérale ou via un réseau d'interopérabilité comme <strong>Peppol</strong></li>
                     </ul>
 
                     <div class="stat-highlight">
-                        <div class="stat-big">~129</div>
-                        <div class="stat-desc">PA immatriculées ou en cours d'immatriculation auprès de la DGFiP (mars 2026). Liste officielle : <strong>impots.gouv.fr</strong></div>
+                        <div class="stat-big">~130</div>
+                        <div class="stat-desc">PA immatriculées ou en cours d'immatriculation auprès de la DGFiP (févr. 2026). Liste officielle : <strong>impots.gouv.fr</strong></div>
                     </div>
 
                     <p><strong>Exemples :</strong> Esker, Generix, Sage, Cegid, Basware, Yooz, Ivalua, Cegedim, Comarch, DocProcess, OpenText, Sovos…</p>
@@ -164,7 +164,7 @@
                 <!-- SC -->
                 <section id="sc" class="content-section">
                     <h2>💻 Les Solutions Compatibles (SC)</h2>
-                    <p>Les SC (anciennement « Opérateurs de Dématérialisation ») sont des éditeurs de logiciels <strong>non immatriculés</strong> par l'administration.</p>
+                    <p>Les SC (anciennement « Opérateurs de Dématérialisation ») sont des opérateurs offrant des services de dématérialisation, <strong>non immatriculés</strong> par l'administration. Le périmètre ne se limite pas aux éditeurs de logiciels : il couvre aussi les prestataires EDI, les solutions bancaires, l'affacturage ou la carte d'achat.</p>
 
                     <div class="comparison-table">
                         <table>
@@ -197,7 +197,7 @@
                 <!-- PPF -->
                 <section id="ppf" class="content-section">
                     <h2>🏛️ Le PPF — le cerveau central</h2>
-                    <p>Le PPF est l'opérateur public, administré par l'<strong>AIFE</strong> (Agence pour l'Informatique Financière de l'État).</p>
+                    <p>Le PPF est le service public de la réforme, <strong>opéré par la DGFiP</strong>. L'<strong>AIFE</strong> (Agence pour l'Informatique Financière de l'État) en assure la mise en œuvre technique, comme elle opère déjà Chorus Pro. La DGFiP porte la responsabilité réglementaire, l'AIFE la construction du système.</p>
 
                     <div class="callout callout--warning">
                         <div class="callout-icon">🔑</div>
@@ -210,9 +210,9 @@
                         <div class="role-card">
                             <h4>📋 L'Annuaire Central</h4>
                             <ul>
-                                <li>Référence <strong>toutes les entreprises</strong> assujetties TVA</li>
+                                <li>Référence les <strong>assujettis à la TVA</strong> établis en France et les entités publiques — les non-assujettis n'y figurent pas</li>
                                 <li>Indique <strong>quelle PA</strong> reçoit les factures</li>
-                                <li>Alimenté par les PA, actualisé quotidiennement (INSEE/SIRENE)</li>
+                                <li>Données d'identification issues de l'<strong>INSEE/SIRENE</strong> et du registre des assujettis TVA, en mise à jour quotidienne. Les <strong>adresses d'adressage</strong> (quelle PA reçoit) sont créées et maintenues par les PA</li>
                                 <li>Consulté par les PA pour <strong>router</strong> chaque facture</li>
                             </ul>
                         </div>
@@ -260,9 +260,13 @@
                     <p>Chorus Pro existe depuis 2017 pour les échanges avec le secteur public. Dans la réforme, il joue un rôle triple :</p>
                     <ul class="styled-list">
                         <li><strong>PA publique</strong> pour les entités publiques</li>
-                        <li><strong>Composant du PPF</strong> (héberge l'annuaire et le concentrateur)</li>
+                        <li><strong>Contributeur à l'annuaire central</strong> : il y déclare les adresses de réception des structures publiques</li>
                         <li><strong>Hub obligatoire</strong> pour toute facturation avec la sphère publique</li>
                     </ul>
+                    <div class="callout callout--warning">
+                        <div class="callout-icon">⚠️</div>
+                        <div class="callout-content"><strong>Chorus Pro n'est pas un composant du PPF.</strong> Les deux sont opérés par la même agence technique, l'AIFE, mais ce sont deux systèmes distincts : le PPF porte l'annuaire et le concentrateur, Chorus Pro est une plateforme agréée doublée d'un hub pour la sphère publique.</div>
+                    </div>
                     <p>👉 <a href="./chorus-pro.html" style="color:var(--cyan);font-weight:700;">Page dédiée complète sur Chorus Pro →</a></p>
                 </section>
 
@@ -310,11 +314,11 @@
                             </thead>
                             <tbody>
                                 <tr><td><strong>Entreprise</strong></td><td>Émet et reçoit les e-factures</td><td>Tout assujetti TVA</td></tr>
-                                <tr><td><strong>PA</strong></td><td>Transmet factures (PA↔PA) + données au PPF</td><td>Esker, Sage, Cegid (~129)</td></tr>
+                                <tr><td><strong>PA</strong></td><td>Transmet factures (PA↔PA) + données au PPF</td><td>Esker, Sage, Cegid (~130)</td></tr>
                                 <tr><td><strong>SC</strong></td><td>Crée/lit les factures, se connecte à une PA</td><td>SAP, Oracle, EBP, Pennylane</td></tr>
-                                <tr><td><strong>PPF</strong></td><td>Annuaire central + concentrateur de données</td><td>Opéré par l'AIFE</td></tr>
+                                <tr><td><strong>PPF</strong></td><td>Annuaire central + concentrateur de données</td><td>Opéré par la DGFiP, mise en œuvre AIFE</td></tr>
                                 <tr><td><strong>DGFiP</strong></td><td>Régulateur : immatricule PA, reçoit données TVA</td><td>Administration fiscale</td></tr>
-                                <tr><td><strong>Chorus Pro</strong></td><td>PA publique + composant PPF + hub B2G</td><td><a href="./chorus-pro.html" style="color:var(--cyan);">Page dédiée →</a></td></tr>
+                                <tr><td><strong>Chorus Pro</strong></td><td>PA publique + hub B2G/G2B/G2G — distincte du PPF</td><td><a href="./chorus-pro.html" style="color:var(--cyan);">Page dédiée →</a></td></tr>
                             </tbody>
                         </table>
                     </div>
