@@ -72,7 +72,7 @@
                     <div class="legal-timeline">
                         <div class="lt-item"><div class="lt-year">2008</div><div class="lt-content"><h4>Lancement du projet</h4><p>Financé par la Commission européenne (ICT-PSP).</p></div></div>
                         <div class="lt-item"><div class="lt-year">2012</div><div class="lt-content"><h4>Création d'OpenPeppol</h4><p>Association basée à Bruxelles pour gérer le réseau.</p></div></div>
-                        <div class="lt-item"><div class="lt-year">2019</div><div class="lt-content"><h4>Directive 2014/55/UE</h4><p>Acheteurs publics UE obligés de recevoir les factures Peppol BIS.</p></div></div>
+                        <div class="lt-item"><div class="lt-year">2019</div><div class="lt-content"><h4>Directive 2014/55/UE</h4><p>Les acheteurs publics de l'UE doivent pouvoir recevoir les factures conformes à la <strong>norme EN 16931</strong>. La directive impose la norme, pas Peppol : Peppol s'est imposé comme le moyen le plus répandu de la respecter.</p></div></div>
                         <div class="lt-item lt-item--success"><div class="lt-year">2020-2024</div><div class="lt-content"><h4>Extension rapide</h4><p>Belgique, Pays-Bas, Allemagne, France, Australie, Singapour…</p></div></div>
                         <div class="lt-item lt-item--alert"><div class="lt-year">2025-2026</div><div class="lt-content"><h4>Intégration réforme française</h4><p>Infrastructure complémentaire d'interopérabilité entre PA.</p></div></div>
                     </div>
@@ -103,7 +103,7 @@
                     <p>Les <strong>Access Points</strong> sont certifiés par OpenPeppol. Dans la réforme française, les PA qui veulent utiliser Peppol doivent obtenir cette certification.</p>
 
                     <h3>2. Les identifiants Peppol</h3>
-                    <p>Chaque participant a un <strong>Peppol Participant Identifier</strong>. En France : schéma <code>0225</code> (code ISO 6523 pour le SIREN). Format : <code>0225:123456789</code>.</p>
+                    <p>Chaque participant a un <strong>Peppol Participant Identifier</strong>. En France : schéma <code>0225</code>, qui couvre le SIREN, le SIRET et le SIREN suivi d'un code service. Format : <code>0225:123456789</code>. D'autres schémas restent utilisables en Europe, notamment <code>9957</code> pour le numéro de TVA français.</p>
 
                     <h3>3. Les formats Peppol BIS 3.0</h3>
                     <p><strong>Peppol BIS Billing 3.0</strong> = UBL 2.1 conforme à EN 16931, avec les règles de validation Peppol. Compatible avec le format UBL de la réforme française (moyennant les règles BR-France).</p>
@@ -153,7 +153,7 @@
                         <table>
                             <thead><tr><th>Caractéristique</th><th>Annuaire PPF</th><th>Annuaire Peppol (SMP/SML)</th></tr></thead>
                             <tbody>
-                                <tr><td><strong>Gestionnaire</strong></td><td>PPF / AIFE / DGFiP</td><td>OpenPeppol (décentralisé)</td></tr>
+                                <tr><td><strong>Gestionnaire</strong></td><td>PPF, opéré par la DGFiP avec l'AIFE</td><td>OpenPeppol (décentralisé)</td></tr>
                                 <tr><td><strong>Contenu</strong></td><td>Adresses des assujettis français</td><td>Participants Peppol mondiaux</td></tr>
                                 <tr><td><strong>Identifiant</strong></td><td>SIREN + suffixe (0225)</td><td>Peppol ID (multi-schémas)</td></tr>
                                 <tr><td><strong>Rôle</strong></td><td>Routage <strong>dans l'écosystème français</strong></td><td>Routage <strong>sur le réseau Peppol</strong></td></tr>
@@ -189,7 +189,7 @@
                     <div class="numbered-blocks">
                         <div class="nb-item"><span class="nb-num">📐</span><div><strong>EN 16931</strong> — Norme européenne définissant le modèle sémantique d'une facture. Socle commun européen.</div></div>
                         <div class="nb-item"><span class="nb-num">🔮</span><div><strong>Directive ViDA</strong> — VAT in the Digital Age. Vise à généraliser la facturation électronique B2B dans toute l'UE. Horizon 2028-2030.</div></div>
-                        <div class="nb-item"><span class="nb-num">📋</span><div><strong>Directive 2014/55/UE</strong> — Depuis 2019, tous les acheteurs publics UE doivent recevoir des factures EN 16931 via Peppol.</div></div>
+                        <div class="nb-item"><span class="nb-num">📋</span><div><strong>Directive 2014/55/UE</strong> — Depuis 2019, tous les acheteurs publics de l'UE doivent pouvoir recevoir des factures conformes à EN 16931. Peppol est un moyen d'y parvenir, pas une obligation en soi.</div></div>
                     </div>
                     <div class="callout callout--info">
                         <div class="callout-icon">📌</div>

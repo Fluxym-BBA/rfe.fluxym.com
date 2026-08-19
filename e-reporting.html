@@ -79,7 +79,7 @@
                                 <tr><td><strong>Périmètre</strong></td><td>B2B domestique France</td><td>B2C + B2B international + paiements</td></tr>
                                 <tr><td><strong>Destinataire final</strong></td><td>L'entreprise cliente (via sa PA)</td><td>L'administration (via le PPF)</td></tr>
                                 <tr><td><strong>Format</strong></td><td>UBL, CII, Factur-X</td><td>Flux 10 (XML spécifique)</td></tr>
-                                <tr><td><strong>Cycle de vie</strong></td><td>Oui (statuts interentreprises)</td><td>Non (juste un accusé technique)</td></tr>
+                                <tr><td><strong>Cycle de vie</strong></td><td>Oui (statuts interentreprises)</td><td>Non — seuls un accusé technique et un compte rendu de traitement sont retournés</td></tr>
                             </tbody>
                         </table>
                     </div>
@@ -464,7 +464,7 @@
                 <!-- FLUX 10.2 -->
                 <section id="flux102" class="content-section">
                     <h2>📋 Flux 10.2 — Données de paiement (individuelles)</h2>
-                    <p>Informations de <strong>paiement facture par facture</strong>. Concerne les situations où la TVA est exigible à l'encaissement :</p>
+                    <p>Informations de <strong>paiement facture par facture</strong>. Concerne <strong>toutes les opérations pour lesquelles la TVA est exigible à l'encaissement</strong>, notamment :</p>
                     <ul class="styled-list">
                         <li><strong>Prestations de services</strong> (sauf option TVA sur les débits)</li>
                         <li><strong>Factures d'acompte</strong></li>
@@ -475,8 +475,8 @@
 
                 <!-- FLUX 10.3 -->
                 <section id="flux103" class="content-section">
-                    <h2>📋 Flux 10.3 — Transactions agrégées (cumuls quotidiens)</h2>
-                    <p>Pour les opérations <strong>B2C</strong>, il serait irréaliste de déclarer chaque ticket individuellement. Le Flux 10.3 transmet des <strong>cumuls quotidiens</strong> par catégorie :</p>
+                    <h2>📋 Flux 10.3 — Transactions agrégées</h2>
+                    <p>Pour les opérations <strong>B2C</strong>, il serait irréaliste de déclarer chaque ticket individuellement. Le Flux 10.3 transmet des <strong>cumuls par catégorie d'opération</strong>, agrégés sur la période de transmission :</p>
                     <div class="comparison-table">
                         <table>
                             <thead><tr><th>Code</th><th>Nom</th><th>Exemples</th></tr></thead>
@@ -496,11 +496,15 @@
 
                 <!-- FLUX 10.4 -->
                 <section id="flux104" class="content-section">
-                    <h2>📋 Flux 10.4 — Paiements agrégés (cumuls quotidiens)</h2>
-                    <p>Le pendant « paiement » du Flux 10.3. Pour les <strong>prestations de services B2C</strong> (TPS1), les encaissements sont transmis en cumuls quotidiens.</p>
+                    <h2>📋 Flux 10.4 — Paiements agrégés</h2>
+                    <p>Le pendant « paiement » du Flux 10.3. Pour les <strong>prestations de services B2C</strong> (TPS1), les encaissements sont transmis sous forme de cumuls.</p>
                     <div class="callout callout--warning">
                         <div class="callout-icon">📌</div>
                         <div class="callout-content">Les flux 10.3 et 10.4 sont toujours transmis <strong>séparément</strong>. Une transmission contenant les deux sera rejetée.</div>
+                    </div>
+                    <div class="callout callout--info">
+                        <div class="callout-icon">🗓️</div>
+                        <div class="callout-content"><strong>La périodicité n'est pas quotidienne.</strong> Le rythme de transmission dépend du régime de TVA de l'entreprise : régime réel normal mensuel, régime réel simplifié, ou franchise. Les données sont agrégées puis transmises selon l'échéance déclarative applicable, et non chaque jour. En revanche, l'agrégation elle-même se fait bien par journée d'opération.</div>
                     </div>
                 </section>
 
@@ -525,7 +529,7 @@
                             <thead><tr><th>Date</th><th>Obligation</th></tr></thead>
                             <tbody>
                                 <tr><td><strong>1er sept. 2026</strong></td><td>E-reporting obligatoire pour <strong>GE et ETI</strong></td></tr>
-                                <tr><td><strong>1er sept. 2027</strong></td><td>E-reporting obligatoire pour <strong>toutes les entreprises</strong></td></tr>
+                                <tr><td><strong>1er sept. 2027</strong></td><td>E-reporting obligatoire pour <strong>toutes les entreprises</strong>. C'est aussi l'échéance du e-reporting d'acquisition des <strong>assujettis non établis en France</strong>, reporté d'un an.</td></tr>
                             </tbody>
                         </table>
                     </div>
@@ -533,7 +537,7 @@
 
                 <!-- TABLEAU DES OPÉRATIONS ART. 290 -->
                 <section id="tableau-ereporting" class="content-section">
-                    <h2>📊 Tableau des opérations — Art. 290 du CGI</h2>
+                    <h2>📊 Tableau des opérations — Art. 290 et 290 A du CGI</h2>
                     <p>Le tableau complet des opérations situées dans le champ du e-reporting, issu des spécifications DGFIP. Filtrez par catégorie pour trouver votre cas.</p>
 
                     <div class="erp-filters">
@@ -699,8 +703,8 @@
                             <tbody>
                                 <tr><td><strong>Flux 10.1</strong></td><td>Factures B2B internationales</td><td>Individuelles</td><td>Export, intra-UE</td></tr>
                                 <tr><td><strong>Flux 10.2</strong></td><td>Données de paiement</td><td>Individuelles</td><td>TVA à l'encaissement</td></tr>
-                                <tr><td><strong>Flux 10.3</strong></td><td>Transactions agrégées</td><td>Cumuls quotidiens</td><td>B2C (TPS1, TLB1, TNT1, TMA1)</td></tr>
-                                <tr><td><strong>Flux 10.4</strong></td><td>Paiements agrégés</td><td>Cumuls quotidiens</td><td>Encaissements B2C (TPS1)</td></tr>
+                                <tr><td><strong>Flux 10.3</strong></td><td>Transactions agrégées</td><td>Cumuls par période</td><td>B2C (TPS1, TLB1, TNT1, TMA1)</td></tr>
+                                <tr><td><strong>Flux 10.4</strong></td><td>Paiements agrégés</td><td>Cumuls par période</td><td>Encaissements B2C (TPS1)</td></tr>
                             </tbody>
                         </table>
                     </div>
