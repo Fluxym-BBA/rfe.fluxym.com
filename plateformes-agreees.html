@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Les plateformes agréées | Re·Form·E</title>
+  <meta name="description" content="Cartographie des plateformes agréées (PA) immatriculées par la DGFiP : liste complète, segments de marché, ancienneté, actionnariat et socle technique.">
+  <link rel="icon" href="./assets/favicon-Fluxym-V2.png" sizes="32x32" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/pages.css">
+</head>
+<body>
+  <nav id="main-nav"></nav>
+
+  <header class="page-hero">
+    <div class="page-container">
+      <div class="breadcrumb"><a href="./index.html">Accueil</a> <span>/</span> <a href="./acteurs.html">Les acteurs</a> <span>/</span> Les plateformes agréées</div>
+      <div class="hero-badge">Référentiel de marché</div>
+      <h1>Les plateformes agréées</h1>
+      <p>Derrière la liste alphabétique publiée par la DGFiP, un marché : des grossistes, des pure-players, des éditeurs historiques et des entités créées pour la réforme. Cette page les compte, les qualifie et les compare.</p>
+      <p class="hero-meta" id="pa-meta">Chargement du référentiel…</p>
+    </div>
+  </header>
+
+  <main class="page-main">
+    <div class="page-container page-layout">
+      <aside class="page-sidebar">
+        <div class="sidebar-sticky">
+          <nav class="sidebar-nav">
+            <div class="sidebar-title">Sur cette page</div>
+            <ul>
+              <li><a href="#chiffres" class="sidebar-link">Les chiffres clés</a></li>
+              <li><a href="#annuaire" class="sidebar-link">L'annuaire complet</a></li>
+              <li><a href="#segments" class="sidebar-link">Les segments de marché</a></li>
+              <li><a href="#methode" class="sidebar-link">Méthode et sources</a></li>
+            </ul>
+          </nav>
+        </div>
+      </aside>
+
+      <article class="page-content">
+        <section id="chiffres" class="content-section reveal-on-scroll">
+          <h2>📊 Les chiffres clés</h2>
+          <div class="counters-grid" id="pa-counters"></div>
+          <p class="source-note" id="pa-source"></p>
+        </section>
+
+        <section id="annuaire" class="content-section reveal-on-scroll">
+          <h2>📇 L'annuaire complet</h2>
+          <div class="pa-toolbar">
+            <input type="search" id="pa-search" class="pa-search" placeholder="Rechercher une plateforme…" aria-label="Rechercher une plateforme agréée">
+            <div id="pa-facets" class="pa-facets"></div>
+            <button type="button" id="pa-reset" class="btn-hero-outline">Réinitialiser</button>
+          </div>
+          <p class="pa-count" id="pa-count"></p>
+          <div class="pa-grid" id="pa-grid"></div>
+        </section>
+
+        <section id="segments" class="content-section reveal-on-scroll">
+          <h2>🎯 Les segments de marché</h2>
+          <p>Regroupement des plateformes par <strong>famille d'origine</strong> et <strong>segment cible</strong> : chaque bloc réunit des acteurs qui se disputent le même terrain.</p>
+          <div id="pa-segments" class="pa-segments"></div>
+        </section>
+
+        <section id="methode" class="content-section reveal-on-scroll">
+          <h2>🔍 Méthode et sources</h2>
+          <ul class="styled-list">
+            <li><strong>Source de référence :</strong> liste officielle des plateformes agréées publiée par la DGFiP sur <a href="https://www.impots.gouv.fr/je-consulte-la-liste-des-plateformes-agreees" target="_blank" rel="noopener">impots.gouv.fr</a>. Chaque chiffre de cette page est horodaté.</li>
+            <li><strong>Identité des entreprises :</strong> API Recherche d'entreprises (INSEE / RNE) — SIREN, date de création, effectif, dirigeants.</li>
+            <li><strong>Qualification de marché</strong> (famille d'origine, segment cible, socle technique) : observation des offres commerciales publiées par les plateformes elles-mêmes. Chaque champ porte sa source et un indice de confiance.</li>
+          </ul>
+          <div class="callout callout-warning">
+            <strong>À lire avant d'interpréter.</strong> Les notions de « marque blanche » et de « marque grise » sont des catégories commerciales, <strong>pas des catégories réglementaires</strong> : l'administration ne distingue que les plateformes agréées immatriculées et les Solutions Compatibles non immatriculées. Chaque plateforme figurant sur la liste officielle est immatriculée en son nom propre, a passé ses propres tests d'interopérabilité et porte seule la responsabilité réglementaire vis-à-vis de l'administration, quelle que soit l'origine de son socle technique. L'axe « socle technique » mesure une dépendance industrielle, il ne remet jamais en cause un agrément.
+          </div>
+        </section>
+      </article>
+    </div>
+  </main>
+
+  <script src="./js/nav.js"></script>
+  <script src="./js/animations.js"></script>
+  <script src="./js/pa-hub.js"></script>
+</body>
+</html>

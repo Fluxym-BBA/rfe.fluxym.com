@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fiche plateforme agréée | Re·Form·E</title>
+  <link rel="icon" href="./assets/favicon-Fluxym-V2.png" sizes="32x32" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/pages.css">
+</head>
+<body>
+  <nav id="main-nav"></nav>
+
+  <header class="page-hero">
+    <div class="page-container">
+      <div class="breadcrumb"><a href="./index.html">Accueil</a> <span>/</span> <a href="./plateformes-agreees.html">Les plateformes agréées</a> <span>/</span> <span id="pa-bc">Fiche</span></div>
+      <div class="hero-badge" id="pa-statut">—</div>
+      <h1 id="pa-nom">Chargement…</h1>
+      <p id="pa-accroche"></p>
+    </div>
+  </header>
+
+  <main class="page-main">
+    <div class="page-container page-layout">
+      <aside class="page-sidebar">
+        <div class="sidebar-sticky">
+          <nav class="sidebar-nav">
+            <div class="sidebar-title">Sur cette fiche</div>
+            <ul>
+              <li><a href="#identite" class="sidebar-link">Carte d'identité</a></li>
+              <li><a href="#positionnement" class="sidebar-link">Positionnement</a></li>
+              <li><a href="#socle" class="sidebar-link">Socle technique</a></li>
+              <li><a href="#actionnariat" class="sidebar-link">Actionnariat</a></li>
+              <li><a href="#concurrents" class="sidebar-link">Sur le même segment</a></li>
+              <li><a href="#sources" class="sidebar-link">Sources</a></li>
+            </ul>
+          </nav>
+          <nav class="sidebar-nav-pages">
+            <div class="sidebar-title">Voir aussi</div>
+            <ul>
+              <li><a href="./plateformes-agreees.html" class="sidebar-link">← Retour à l'annuaire</a></li>
+              <li><a href="./acteurs.html" class="sidebar-link">Les acteurs de la réforme</a></li>
+              <li><a href="./se-preparer.html" class="sidebar-link">Choisir sa plateforme</a></li>
+            </ul>
+          </nav>
+        </div>
+      </aside>
+
+      <article class="page-content" id="pa-article">
+        <section id="identite" class="content-section"><h2>🪪 Carte d'identité</h2><div id="pa-identite"></div></section>
+        <section id="positionnement" class="content-section"><h2>🎯 Positionnement</h2><div id="pa-positionnement"></div></section>
+        <section id="socle" class="content-section"><h2>⚙️ Socle technique</h2><div id="pa-socle"></div></section>
+        <section id="actionnariat" class="content-section"><h2>🏛️ Actionnariat et gouvernance</h2><div id="pa-actionnariat"></div></section>
+        <section id="concurrents" class="content-section"><h2>⚔️ Sur le même segment</h2><div id="pa-concurrents"></div></section>
+        <section id="sources" class="content-section"><h2>🔍 Sources et date de relevé</h2><div id="pa-sources"></div></section>
+      </article>
+    </div>
+  </main>
+
+  <script src="./js/nav.js"></script>
+  <script src="./js/animations.js"></script>
+  <script src="./js/pa-detail.js"></script>
+</body>
+</html>
