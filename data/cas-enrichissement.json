@@ -11,7 +11,7 @@
       "recommandé": "Recommandé",
       "facultatif": "Facultatif"
     },
-    "coverage": "14 fiches enrichies : nominal + 6 variantes nominales + cas 1 à 7"
+    "coverage": "21 fiches enrichies : nominal + 6 variantes nominales + cas 1 à 12, 15 et 16"
   },
   "socle": {
     "label": "Socle obligatoire commun à tous les cas d'usage",
@@ -2783,6 +2783,1142 @@
         "cas-5": {
           "rel": "cas voisin",
           "why": "Les deux traitent d'un achat professionnel réglé sur le moment. La différence tient au support : une carte logée appartenant à l'entreprise (BG-18, pas de tiers payeur) contre l'avance personnelle d'un collaborateur (tiers payeur identifié)."
+        }
+      }
+    },
+    "cas-8": {
+      "narrative": {
+        "intro": "<p>Le vendeur cède sa créance à un factor <strong>avant</strong> d'émettre la facture. Celle-ci l'annonce donc ouvertement, et redirige le paiement.</p>",
+        "steps": [
+          {
+            "t": 1,
+            "actor": "Vendeur",
+            "title": "La facture annonce la cession de créance",
+            "text": "Type <strong>393</strong> (facture affacturée), groupe BG-10 identifiant le factor comme bénéficiaire, IBAN du factor en BT-84, et une note <strong>BT-21 = ACC</strong> portant la mention de subrogation. Le cadre BT-23 reste B1/S1/M1 : il décrit la nature de la prestation, pas le montage financier.",
+            "refs": [
+              "BT-3",
+              "BT-23",
+              "BT-59",
+              "BT-84"
+            ],
+            "diagram": 0
+          },
+          {
+            "t": 2,
+            "actor": "PA-E",
+            "title": "Contrôles, « Déposée », double transmission",
+            "text": "La PA-E contrôle, pose <strong>Déposée (201)</strong>, envoie le flux 1 au portail public et la facture complète à la PA-R de l'acheteur.",
+            "flux": [
+              "F1",
+              "F2",
+              "F6"
+            ],
+            "diagram": 1
+          },
+          {
+            "t": 3,
+            "actor": "PA-E",
+            "title": "Réplication facultative vers le factor",
+            "text": "La PA-E peut, en service complémentaire, répliquer la facture et ses statuts vers le factor pour qu'il suive son encours. <strong>Hors périmètre réglementaire</strong> : c'est une prestation commerciale, pas une obligation.",
+            "diagram": 1
+          },
+          {
+            "t": 4,
+            "actor": "PA-R",
+            "title": "Réception et mise à disposition",
+            "text": "Statuts « Reçue » puis « Mise à disposition ». L'acheteur découvre que le bénéficiaire est le factor.",
+            "flux": [
+              "F6"
+            ],
+            "refs": [
+              "BT-59"
+            ],
+            "diagram": 2
+          },
+          {
+            "t": 5,
+            "actor": "Acheteur",
+            "title": "Traitement, en payant le bon destinataire",
+            "text": "L'acheteur rapproche et approuve, en enregistrant bien que le règlement devra partir sur l'IBAN du factor et non sur celui du vendeur.",
+            "flux": [
+              "F6"
+            ],
+            "refs": [
+              "BT-84"
+            ],
+            "diagram": 3
+          },
+          {
+            "t": 6,
+            "actor": "Factor",
+            "title": "Le factor encaisse",
+            "text": "Le paiement de l'acheteur arrive directement sur le compte du factor.",
+            "diagram": 4
+          },
+          {
+            "t": 7,
+            "actor": "Vendeur",
+            "title": "Le vendeur reste maître du statut « Encaissée »",
+            "text": "Même si c'est le factor qui a encaissé, l'obligation de déposer <strong>Encaissée (212)</strong> incombe au vendeur lorsque la TVA est exigible à l'encaissement.",
+            "flux": [
+              "F6"
+            ],
+            "refs": [
+              "BT-8"
+            ],
+            "diagram": 5
+          }
+        ]
+      },
+      "fields": [
+        {
+          "id": "BT-3",
+          "name": "Code type de facture",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "<strong>393</strong> — facture affacturée. Déclinaisons : 396 avoir, 472 rectificative, 501/502/473 en auto-facturation.",
+          "rule": "BR-FR-CO-02 · G1.01"
+        },
+        {
+          "id": "BT-23",
+          "name": "Cadre de facturation",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "B1 · S1 · M1 — <strong>aucun cadre spécifique à l'affacturage</strong> ; B2/S2/M2 si déjà payée",
+          "rule": "BR-FR-08 · G1.02"
+        },
+        {
+          "id": "BG-10",
+          "name": "Bénéficiaire du paiement (PayeeParty)",
+          "level": "Groupe",
+          "obligation": "obligatoire",
+          "value": "Identifie le factor. <strong>Absent</strong> en affacturage confidentiel.",
+          "rule": "Z12-014 §3.2.9.3"
+        },
+        {
+          "id": "BT-59",
+          "name": "Nom du bénéficiaire",
+          "level": "Groupe BG-10",
+          "obligation": "obligatoire",
+          "value": "Dénomination sociale de l'affactureur"
+        },
+        {
+          "id": "BT-60 / BT-60-1",
+          "name": "Identifiant du bénéficiaire et son schéma",
+          "level": "Groupe BG-10",
+          "obligation": "obligatoire",
+          "value": "SIRET du factor (14 caractères), schéma <strong>0009</strong>",
+          "rule": "BR-FR-CPRO-18"
+        },
+        {
+          "id": "BT-61 / BT-61-1",
+          "name": "Identifiant légal du bénéficiaire et son schéma",
+          "level": "Groupe BG-10",
+          "obligation": "recommandé",
+          "value": "SIREN du factor (9 caractères), schéma 0002"
+        },
+        {
+          "id": "BG-17",
+          "name": "Informations de virement",
+          "level": "Groupe",
+          "obligation": "obligatoire",
+          "value": "Coordonnées bancaires <strong>du factor</strong>, pas du vendeur"
+        },
+        {
+          "id": "BT-84",
+          "name": "IBAN de paiement",
+          "level": "Groupe BG-17",
+          "obligation": "obligatoire",
+          "value": "<strong>IBAN du factor</strong> — c'est le point pivot du cas : le flux financier est redirigé"
+        },
+        {
+          "id": "BT-85",
+          "name": "Nom du titulaire du compte",
+          "level": "Groupe BG-17",
+          "obligation": "recommandé",
+          "value": "Nom du factor"
+        },
+        {
+          "id": "BT-86",
+          "name": "BIC",
+          "level": "Groupe BG-17",
+          "obligation": "conditionnel",
+          "value": "8 à 11 caractères sans espace",
+          "rule": "BR-FR-CPRO-49"
+        },
+        {
+          "id": "BT-21 = ACC",
+          "name": "Code de note — clause de subrogation",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "S'ajoute aux trois notes déjà obligatoires PMT, PMD et AAB",
+          "rule": "BR-FR-07"
+        },
+        {
+          "id": "BT-22",
+          "name": "Texte de la mention de subrogation",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "Ex. « Facture cédée à [Factor] par subrogation conventionnelle (art. 1346-1 du Code civil) »"
+        }
+      ],
+      "fieldsNote": "⚠️ <strong>Affacturage classique ou confidentiel : deux factures radicalement différentes.</strong> En affacturage <em>confidentiel</em>, la facture doit rester une <strong>380 classique</strong> : pas de code 393, pas de BG-10, pas de note ACC. L'acheteur ne doit rien savoir de la cession, et l'IBAN de BT-84 est alors un compte ouvert au nom du vendeur chez le factor. Mettre 393 et BG-10 sur une facture censée être confidentielle brise la confidentialité et viole le contrat d'affacturage. 💡 Second point : la réplication vers le factor n'est pas réglementaire, c'est un service de PA-E à négocier.",
+      "relatedWhy": {
+        "cas-9": {
+          "rel": "structure identique, nature opposée",
+          "why": "La norme traite le distributeur « de la même façon que le cas 8 » sur le plan technique — même BG-10, même redirection d'IBAN. Mais il n'y a aucune cession de créance : donc type 380 et surtout <strong>pas</strong> de note ACC."
+        },
+        "cas-10": {
+          "rel": "même montage, autre chronologie",
+          "why": "Ici le factor est connu avant l'émission et figure dans la facture ; au cas 10 il arrive après, et la facture ne peut plus être modifiée — d'où un mécanisme de cycle de vie dédié."
+        },
+        "cas-3": {
+          "rel": "mécanisme inverse",
+          "why": "Le factor est bénéficiaire du paiement (BG-10), le tiers payeur en est l'émetteur (EXT-FR-FE-BG-02). Deux blocs distincts, deux sens opposés du flux financier."
+        }
+      }
+    },
+    "cas-9": {
+      "narrative": {
+        "intro": "<p>Techniquement, c'est un cas 8. Juridiquement, c'est son contraire : <strong>aucune créance n'est cédée</strong>, il s'agit d'une simple relation commerciale de distribution.</p>",
+        "steps": [
+          {
+            "t": 1,
+            "actor": "Vendeur",
+            "title": "Facture classique, avec bénéficiaire distinct",
+            "text": "Type <strong>380</strong> — pas 393, ce n'est pas de l'affacturage. BG-7 porte l'<strong>acheteur réel</strong>, BG-10 le distributeur, et BT-84 l'IBAN du distributeur. Le distributeur peut aussi être décrit en EXT-FR-FE-BG-01 s'il passe la commande, ou en EXT-FR-FE-BG-04 s'il traite les factures.",
+            "refs": [
+              "BT-3",
+              "BT-44",
+              "BT-59",
+              "BT-84"
+            ],
+            "diagram": 0
+          },
+          {
+            "t": 2,
+            "actor": "PA-E",
+            "title": "Contrôles, « Déposée », double transmission",
+            "text": "Flux 1 vers le portail public, flux 2 vers la PA-R de l'acheteur. La réplication vers le distributeur n'est ici même pas nécessairement organisée.",
+            "flux": [
+              "F1",
+              "F2",
+              "F6"
+            ],
+            "diagram": 1
+          },
+          {
+            "t": 3,
+            "actor": "PA-R",
+            "title": "Réception et mise à disposition",
+            "text": "Statuts « Reçue » puis « Mise à disposition ». Le distributeur peut y accéder par délégation, si la PA-R le permet.",
+            "flux": [
+              "F6"
+            ],
+            "diagram": 2
+          },
+          {
+            "t": 4,
+            "actor": "Acheteur",
+            "title": "Traitement, éventuellement délégué au distributeur",
+            "text": "L'acheteur — ou le distributeur agissant pour lui — approuve ou refuse la facture.",
+            "flux": [
+              "F6"
+            ],
+            "diagram": 3
+          },
+          {
+            "t": 5,
+            "actor": "Distributeur",
+            "title": "Le distributeur paie le vendeur",
+            "text": "Étant à la fois bénéficiaire et souvent payeur, il règle le vendeur et l'informe de l'encaissement.",
+            "diagram": 4
+          },
+          {
+            "t": 6,
+            "actor": "Vendeur",
+            "title": "Statut « Encaissée » si TVA à l'encaissement",
+            "text": "Le vendeur pose le statut et le fait transmettre au portail public par sa PA-E.",
+            "flux": [
+              "F6"
+            ],
+            "refs": [
+              "BT-8"
+            ],
+            "diagram": 5
+          }
+        ]
+      },
+      "fields": [
+        {
+          "id": "BT-3",
+          "name": "Code type de facture",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "<strong>380</strong> — surtout pas 393 : il n'y a pas d'affacturage",
+          "rule": "G1.01"
+        },
+        {
+          "id": "BT-23",
+          "name": "Cadre de facturation",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "B1 · S1 · M1",
+          "rule": "G1.02"
+        },
+        {
+          "id": "BG-7 / BT-44 / BT-47",
+          "name": "Acheteur",
+          "level": "Groupe",
+          "obligation": "obligatoire",
+          "value": "<strong>L'acheteur réel</strong> : celui qui comptabilise la charge et déduit la TVA. Le distributeur n'est jamais l'acheteur.",
+          "rule": "Socle"
+        },
+        {
+          "id": "BG-10",
+          "name": "Bénéficiaire du paiement",
+          "level": "Groupe",
+          "obligation": "recommandé",
+          "value": "Identifie le distributeur ou dépositaire",
+          "rule": "Z12-014 §3.2.9.4"
+        },
+        {
+          "id": "BT-59",
+          "name": "Nom du bénéficiaire",
+          "level": "Groupe BG-10",
+          "obligation": "obligatoire",
+          "value": "Dénomination sociale du distributeur",
+          "cond": "Si BG-10 est présent"
+        },
+        {
+          "id": "BT-60 / BT-61",
+          "name": "Identifiants du bénéficiaire",
+          "level": "Groupe BG-10",
+          "obligation": "conditionnel",
+          "value": "SIRET en schéma 0009, SIREN en schéma 0002"
+        },
+        {
+          "id": "BT-84",
+          "name": "IBAN de paiement",
+          "level": "Groupe BG-17",
+          "obligation": "obligatoire",
+          "value": "IBAN du distributeur"
+        },
+        {
+          "id": "BT-21 = ACC",
+          "name": "Clause de subrogation",
+          "level": "En-tête",
+          "obligation": "à ne pas utiliser",
+          "value": "<strong>Interdit ici</strong> : la norme précise qu'« il ne faut pas de mention de subrogation »",
+          "rule": "Z12-014 §3.2.9.4"
+        },
+        {
+          "id": "BG-13 / BT-70 / BT-71",
+          "name": "Partie livrée",
+          "level": "Groupe",
+          "obligation": "facultatif",
+          "value": "Peut désigner le distributeur lorsque c'est lui qui reçoit physiquement les biens"
+        },
+        {
+          "id": "EXT-FR-FE-BG-01",
+          "name": "Agent d'acheteur",
+          "level": "Groupe",
+          "obligation": "facultatif",
+          "value": "Si le distributeur passe commande pour le compte de l'acheteur. Profil EXTENDED-CTC-FR."
+        },
+        {
+          "id": "EXT-FR-FE-BG-04",
+          "name": "Adressé à",
+          "level": "Groupe",
+          "obligation": "facultatif",
+          "value": "Si le distributeur traite les factures pour le compte de l'acheteur"
+        }
+      ],
+      "fieldsNote": "⚠️ <strong>Le piège :</strong> traiter ce cas comme de l'affacturage. Deux erreurs en découlent — mettre le type 393 et ajouter la note ACC — alors que la norme l'interdit explicitement faute de subrogation. 💡 Et ne jamais confondre le bénéficiaire du paiement (BG-10) avec l'acheteur au sens fiscal (BG-7) : le distributeur encaisse, mais c'est l'acheteur final qui déduit la TVA. C'est aussi ce qui autorise le distributeur à cumuler plusieurs rôles — commande, réception, traitement — chacun avec son propre bloc.",
+      "relatedWhy": {
+        "cas-8": {
+          "rel": "cas de référence technique",
+          "why": "La Z12-014 renvoie explicitement au cas 8 pour la mécanique de tiers bénéficiaire. Ne diffèrent que le type de document (380 au lieu de 393) et l'interdiction de la mention de subrogation."
+        },
+        "cas-11": {
+          "rel": "rôles voisins",
+          "why": "Le distributeur peut, comme un centre de services partagés, traiter les factures pour le compte de l'acheteur via EXT-FR-FE-BG-04. La différence : il est en plus bénéficiaire du paiement."
+        },
+        "cas-10": {
+          "rel": "à ne pas confondre",
+          "why": "Les deux font intervenir un tiers bénéficiaire après coup ou dès l'origine, mais le cas 10 est un véritable affacturage avec cession de créance et statut 225 ; le distributeur, lui, n'a aucune créance cédée."
+        }
+      }
+    },
+    "cas-10": {
+      "narrative": {
+        "intro": "<p>La facture est déjà partie et déclarée quand la créance est cédée. Elle ne peut plus être modifiée : la réforme prévoit donc un <strong>statut de cycle de vie dédié</strong> pour changer le bénéficiaire.</p>",
+        "steps": [
+          {
+            "t": 1,
+            "actor": "Vendeur",
+            "title": "Une facture parfaitement standard est émise",
+            "text": "Type <strong>380</strong>, aucun BG-10, IBAN habituel du vendeur en BT-84, aucune mention de subrogation. Rien ne laisse deviner un affacturage futur.",
+            "refs": [
+              "BT-3",
+              "BT-84"
+            ],
+            "diagram": 0
+          },
+          {
+            "t": 2,
+            "actor": "PA-E",
+            "title": "Contrôles, « Déposée », double transmission",
+            "text": "Flux 1 au portail public, flux 2 à la PA-R. La facture est fiscalement figée.",
+            "flux": [
+              "F1",
+              "F2",
+              "F6"
+            ],
+            "diagram": 1
+          },
+          {
+            "t": 3,
+            "actor": "Vendeur",
+            "title": "La créance est cédée au factor",
+            "text": "Subrogation conventionnelle, cession Dailly ou cession de créance : le factor devient propriétaire de la créance. <strong>Cette étape est hors flux RFE</strong>, c'est un contrat bilatéral.",
+            "diagram": 2
+          },
+          {
+            "t": 4,
+            "actor": "Vendeur",
+            "title": "Un message de cycle de vie « Affacturée » est émis",
+            "text": "Le vendeur émet, via sa PA-E, un statut <strong>Affacturée (225)</strong> qui transporte le nouveau bénéficiaire (MDG-41, code rôle <strong>DL</strong>), les nouvelles coordonnées bancaires (MDG-43, type CBB visant BT-84, BT-85 et BT-86) et la mention de subrogation (MDG-39). Le statut est de type « information seulement » : il ne bloque pas le traitement de la facture.",
+            "flux": [
+              "F6"
+            ],
+            "refs": [
+              "BT-84",
+              "BT-85",
+              "BT-86"
+            ],
+            "diagram": 3
+          },
+          {
+            "t": 5,
+            "actor": "PA-E",
+            "title": "Diffusion du changement de bénéficiaire",
+            "text": "La PA-E transmet le statut à la PA-R, qui informe l'acheteur du nouvel IBAN — <strong>sauf</strong> en affacturage confidentiel (code 226), qui ne doit jamais être transmis à la PA-R.",
+            "flux": [
+              "F6"
+            ],
+            "diagram": 4
+          },
+          {
+            "t": 6,
+            "actor": "Acheteur",
+            "title": "L'acheteur met à jour son référentiel de paiement",
+            "text": "Il enregistre le nouvel IBAN et règle <strong>le factor</strong>. Payer le vendeur après notification ne libère pas de la dette : le risque est de payer deux fois.",
+            "refs": [
+              "BT-84"
+            ],
+            "diagram": 5
+          },
+          {
+            "t": 7,
+            "actor": "Vendeur",
+            "title": "Statut « Encaissée » toujours à la charge du vendeur",
+            "text": "Même encaissé par le factor, le paiement doit être déclaré par le vendeur si la TVA est exigible à l'encaissement.",
+            "flux": [
+              "F6"
+            ],
+            "refs": [
+              "BT-8"
+            ]
+          }
+        ]
+      },
+      "fields": [
+        {
+          "id": "BT-3",
+          "name": "Code type de facture (à l'émission)",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "<strong>380</strong> — pas 393 : le factor n'est pas connu",
+          "rule": "G1.01"
+        },
+        {
+          "id": "BG-10",
+          "name": "Bénéficiaire du paiement",
+          "level": "Groupe",
+          "obligation": "à ne pas utiliser",
+          "value": "<strong>Absent</strong> à l'émission — le vendeur est bénéficiaire par défaut"
+        },
+        {
+          "id": "BT-84",
+          "name": "IBAN de paiement (à l'émission)",
+          "level": "Groupe BG-17",
+          "obligation": "obligatoire",
+          "value": "IBAN habituel du <strong>vendeur</strong>"
+        },
+        {
+          "id": "MDT-105 / MDT-106",
+          "name": "Code et libellé du statut de traitement",
+          "level": "Cycle de vie",
+          "obligation": "obligatoire",
+          "value": "<strong>225 « Affacturée »</strong>. Variantes : 226 Affacturée Confidentiel, 227 Changement de compte à payer, 228 Non Affacturée.",
+          "rule": "Z12-014 — CDAR"
+        },
+        {
+          "id": "MDT-77",
+          "name": "Phase du cycle de vie",
+          "level": "Cycle de vie",
+          "obligation": "obligatoire",
+          "value": "23 — traitement"
+        },
+        {
+          "id": "MDT-88",
+          "name": "Code statut standard",
+          "level": "Cycle de vie",
+          "obligation": "obligatoire",
+          "value": "5 — « information seulement » : n'altère pas le traitement de la facture côté acheteur"
+        },
+        {
+          "id": "MDG-39 / MDT-126",
+          "name": "Note de statut",
+          "level": "Cycle de vie",
+          "obligation": "obligatoire",
+          "value": "Texte de la clause de subrogation ou de cession"
+        },
+        {
+          "id": "MDG-41 / MDT-155 / MDT-156",
+          "name": "Nouveau bénéficiaire et son schéma d'identification",
+          "level": "Cycle de vie",
+          "obligation": "obligatoire",
+          "value": "SIREN du factor, qualifié par son schéma"
+        },
+        {
+          "id": "MDT-158",
+          "name": "Code rôle du bénéficiaire",
+          "level": "Cycle de vie",
+          "obligation": "obligatoire",
+          "value": "<strong>DL</strong> — affactureur"
+        },
+        {
+          "id": "MDT-178",
+          "name": "Adresse électronique du factor",
+          "level": "Cycle de vie",
+          "obligation": "recommandé",
+          "value": "Permet la réplication des statuts vers le factor"
+        },
+        {
+          "id": "MDG-43 / MDT-206 / MDT-207 / MDT-214",
+          "name": "Donnée modifiée : référence, type et nouvelle valeur",
+          "level": "Cycle de vie",
+          "obligation": "obligatoire",
+          "value": "Type <strong>CBB</strong> (coordonnées bancaires du bénéficiaire), une occurrence par champ visé : BT-84 (IBAN), BT-85 (titulaire), BT-86 (BIC)"
+        },
+        {
+          "id": "Facture rectificative / avoir",
+          "name": "Régularisation documentaire",
+          "level": "Document",
+          "obligation": "à ne pas utiliser",
+          "value": "<strong>Inutile</strong> : le statut 225 modifie les coordonnées de paiement sans toucher à la facture fiscale",
+          "rule": "Z12-014"
+        }
+      ],
+      "fieldsNote": "💡 <strong>Le mécanisme existe précisément pour éviter la lourdeur documentaire.</strong> La Z12-014 relève que le factor « n'est pas identifié dans la facture, qui ne peut plus être modifiée — il faudrait sinon faire un avoir et une nouvelle facture, ou une facture rectificative ». Le statut 225 répond exactement à ce problème. ⚠️ Deux vigilances : le code <strong>226</strong> (confidentiel) ne doit jamais être transmis à la PA-R ni à l'acheteur, et un <strong>228</strong> (« Non Affacturée ») annulant un 226 ne doit pas l'être davantage, sous peine de révéler l'affacturage a posteriori. Côté acheteur, le risque est juridique : après notification régulière de la cession, un paiement fait au vendeur n'est pas libératoire.",
+      "relatedWhy": {
+        "cas-8": {
+          "rel": "même montage, autre chronologie",
+          "why": "Le seul paramètre qui change est le moment où le factor entre en scène. Avant l'émission, tout se joue dans la facture (393, BG-10, note ACC) ; après, tout se joue dans le cycle de vie (statut 225)."
+        },
+        "nominal-litige-rectificative": {
+          "rel": "fausse piste à écarter",
+          "why": "Le réflexe naturel serait d'émettre une rectificative pour corriger l'IBAN. La norme l'écarte : le statut 225 change les coordonnées de paiement sans réémettre la facture."
+        },
+        "cas-9": {
+          "rel": "structure voisine",
+          "why": "Le distributeur redirige lui aussi le paiement vers un tiers, mais il le fait dans la facture et sans subrogation. Le cas 10 doit passer par le cycle de vie, précisément parce qu'il y a cession de créance après émission."
+        }
+      }
+    },
+    "cas-11": {
+      "narrative": {
+        "intro": "<p>Un centre de services partagés traite les factures pour le compte de l'acheteur. Le point clé : <strong>tout le routage repose sur l'adresse électronique BT-49</strong>, pas sur l'identité de l'acheteur.</p>",
+        "steps": [
+          {
+            "t": 1,
+            "actor": "Acheteur",
+            "title": "Une adresse électronique dédiée est créée dans l'annuaire",
+            "text": "L'acheteur déclare dans l'annuaire du portail public une adresse du type <code>SIRENacheteur_MONCSP</code>, <strong>hébergée sur la même plateforme que le CSP</strong>, et donne mandat à celui-ci — un modèle de mandat est proposé par la FNFE-MPE.",
+            "refs": [
+              "BT-49"
+            ],
+            "diagram": 0
+          },
+          {
+            "t": 2,
+            "actor": "Vendeur",
+            "title": "La facture désigne l'acheteur, mais s'adresse au CSP",
+            "text": "BT-44 et BT-47 portent la raison sociale et le SIREN de l'<strong>acheteur</strong>. Seul BT-49 pointe vers l'adresse dédiée du CSP, et le bloc EXT-FR-FE-BG-04 « adressé à » identifie ce dernier.",
+            "refs": [
+              "BT-44",
+              "BT-47",
+              "BT-49"
+            ],
+            "diagram": 1
+          },
+          {
+            "t": 3,
+            "actor": "PA-E",
+            "title": "Contrôles, « Déposée », double transmission",
+            "text": "Flux 1 au portail public, flux 2 vers la plateforme de réception qui héberge l'adresse du CSP.",
+            "flux": [
+              "F1",
+              "F2",
+              "F6"
+            ],
+            "diagram": 2
+          },
+          {
+            "t": 4,
+            "actor": "CSP",
+            "title": "Le CSP réceptionne et traite par délégation",
+            "text": "Il reçoit la facture sur l'adresse dédiée et pose les statuts de traitement — « Approuvée », « Mise en paiement », « Refusée » — <strong>pour le compte de l'acheteur</strong>.",
+            "flux": [
+              "F6"
+            ],
+            "diagram": 3
+          },
+          {
+            "t": 5,
+            "actor": "Acheteur",
+            "title": "Paiement, puis statut « Encaissée »",
+            "text": "Le règlement part de l'acheteur, ou du CSP s'il détient aussi un mandat de paiement. Le statut « Encaissée » est ensuite posé.",
+            "flux": [
+              "F6"
+            ],
+            "refs": [
+              "BT-8"
+            ],
+            "diagram": 4
+          }
+        ]
+      },
+      "fields": [
+        {
+          "id": "BT-3",
+          "name": "Code type de facture",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "380",
+          "rule": "UNTDID 1001"
+        },
+        {
+          "id": "BT-23",
+          "name": "Cadre de facturation",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "B1 · S1 · M1 selon la nature de l'opération",
+          "rule": "BR-FR-DC-02"
+        },
+        {
+          "id": "BT-44",
+          "name": "Nom de l'acheteur",
+          "level": "Groupe BG-7",
+          "obligation": "obligatoire",
+          "value": "Raison sociale de l'<strong>acheteur</strong>, jamais celle du CSP"
+        },
+        {
+          "id": "BT-47",
+          "name": "Identifiant légal de l'acheteur",
+          "level": "Groupe BG-7",
+          "obligation": "obligatoire",
+          "value": "SIREN de l'<strong>acheteur</strong>, schéma 0002"
+        },
+        {
+          "id": "BT-49",
+          "name": "Adresse de facturation électronique de l'acheteur",
+          "level": "Groupe BG-7",
+          "obligation": "obligatoire",
+          "value": "<code>0225:SIRENacheteur_MONCSP</code> — adresse dédiée déclarée dans l'annuaire et <strong>hébergée sur la plateforme du CSP</strong>",
+          "rule": "Z12-014 §3.2.11"
+        },
+        {
+          "id": "EXT-FR-FE-BG-04",
+          "name": "Bloc « adressé à »",
+          "level": "Groupe",
+          "obligation": "conditionnel",
+          "value": "Identifie le CSP : raison sociale, SIREN, adresse postale. Permet à la PA-R de gérer des droits de délégation ciblés et satisfait l'article L441-9 du Code de commerce.",
+          "rule": "Z12-014"
+        },
+        {
+          "id": "MDT-105",
+          "name": "Code du statut de traitement",
+          "level": "Cycle de vie",
+          "obligation": "obligatoire",
+          "value": "Posé par le <strong>CSP</strong> par délégation, et non par l'acheteur"
+        }
+      ],
+      "fieldsNote": "⚠️ <strong>Le CSP n'est jamais l'acheteur juridique.</strong> BT-44 et BT-47 portent toujours l'entité mandante ; le CSP n'existe que par l'adresse BT-49 et le bloc EXT-FR-FE-BG-04. Et une contrainte technique décisive : si le CSP est inscrit sur une plateforme <em>différente</em> de celle qui héberge l'adresse BT-49, il n'aura tout simplement <strong>aucun accès</strong> aux factures.",
+      "relatedWhy": {
+        "cas-15": {
+          "rel": "à ne pas confondre",
+          "why": "Le CSP est un tiers <strong>passif</strong> : il reçoit et traite des factures déjà émises, via EXT-FR-FE-BG-04. L'agent d'acheteur du cas 15 est <strong>actif</strong> : il passe commande, ce qui mobilise EXT-FR-FE-BG-01 et rend BT-13 critique."
+        },
+        "cas-12": {
+          "rel": "extension du cas",
+          "why": "L'intermédiaire transparent réutilise exactement le montage du cas 11 pour la facture principale, et y ajoute une seconde facture, celle de sa commission."
+        }
+      }
+    },
+    "cas-12": {
+      "narrative": {
+        "intro": "<p>Ce cas met en scène <strong>deux factures distinctes</strong>, avec deux cycles de vie et deux flux 1 indépendants. Toute la difficulté est de ne pas les mélanger.</p>",
+        "steps": [
+          {
+            "t": 1,
+            "actor": "Intermédiaire",
+            "title": "L'intermédiaire négocie pour le compte de l'acheteur",
+            "text": "Il met en relation le vendeur et l'acheteur et négocie le contrat au nom de ce dernier.",
+            "diagram": 0
+          },
+          {
+            "t": 2,
+            "actor": "Vendeur",
+            "title": "Facture principale, routée vers l'intermédiaire",
+            "text": "Facture 380 émise au nom de l'<strong>acheteur</strong> (BG-7), mais dont le BT-49 pointe vers l'adresse dédiée <code>SIRENacheteur_INTERMEDIAIRE</code>. Le montage est celui du cas 11.",
+            "flux": [
+              "F1",
+              "F2"
+            ],
+            "refs": [
+              "BT-3",
+              "BT-23",
+              "BT-44",
+              "BT-49"
+            ],
+            "diagram": 1
+          },
+          {
+            "t": 3,
+            "actor": "Intermédiaire",
+            "title": "Réception et traitement de la facture principale",
+            "text": "L'intermédiaire la reçoit via sa plateforme et pose les statuts pour le compte de l'acheteur.",
+            "flux": [
+              "F6"
+            ],
+            "diagram": 2
+          },
+          {
+            "t": 4,
+            "actor": "Intermédiaire",
+            "title": "Facture d'entremise pour sa commission",
+            "text": "Il émet sa <strong>propre</strong> facture 380 à l'acheteur : il y est vendeur (BG-4), l'acheteur y est acheteur (BG-7), et sa commission porte <strong>sa propre TVA</strong>.",
+            "flux": [
+              "F1",
+              "F2"
+            ],
+            "refs": [
+              "BT-3",
+              "BT-23"
+            ],
+            "diagram": 3
+          },
+          {
+            "t": 5,
+            "actor": "Acheteur",
+            "title": "Deux factures, deux traitements",
+            "text": "L'acheteur reçoit les deux documents et pose un statut « Encaissée » sur chacun d'eux, séparément.",
+            "flux": [
+              "F6"
+            ],
+            "diagram": 4
+          }
+        ]
+      },
+      "fields": [
+        {
+          "id": "BT-3",
+          "name": "Code type — facture principale",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "380 — facture du vendeur à l'acheteur",
+          "rule": "UNTDID 1001"
+        },
+        {
+          "id": "BT-23",
+          "name": "Cadre — facture principale",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "B1 · S1 · M1 selon la nature de l'opération"
+        },
+        {
+          "id": "BT-49",
+          "name": "Adresse électronique — facture principale",
+          "level": "Groupe BG-7",
+          "obligation": "obligatoire",
+          "value": "<code>0225:SIRENacheteur_INTERMEDIAIRE</code> — adresse dédiée hébergée sur la plateforme de l'intermédiaire",
+          "rule": "Z12-014 §3.2.12"
+        },
+        {
+          "id": "EXT-FR-FE-BG-04",
+          "name": "Bloc « adressé à » — facture principale",
+          "level": "Groupe",
+          "obligation": "conditionnel",
+          "value": "Identifie l'intermédiaire, comme au cas 11"
+        },
+        {
+          "id": "BT-3",
+          "name": "Code type — facture d'entremise",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "380 — prestation de service d'intermédiation"
+        },
+        {
+          "id": "BT-23",
+          "name": "Cadre — facture d'entremise",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "S1 — c'est une prestation de service"
+        },
+        {
+          "id": "BG-4",
+          "name": "Vendeur — facture d'entremise",
+          "level": "Groupe",
+          "obligation": "obligatoire",
+          "value": "L'<strong>intermédiaire</strong> devient vendeur sur sa propre facture"
+        },
+        {
+          "id": "BG-7",
+          "name": "Acheteur — facture d'entremise",
+          "level": "Groupe",
+          "obligation": "obligatoire",
+          "value": "L'acheteur final"
+        },
+        {
+          "id": "BG-23",
+          "name": "Ventilation de TVA — facture d'entremise",
+          "level": "Groupe",
+          "obligation": "obligatoire",
+          "value": "TVA <strong>propre</strong> à la commission, indépendante de celle de la prestation principale",
+          "rule": "BOI-TVA-CHAMP-10-10-40-40 §40"
+        }
+      ],
+      "fieldsNote": "⚠️ <strong>Ne jamais fusionner les deux factures.</strong> La commission d'intermédiation suit son propre régime de TVA : c'est une prestation de service indépendante de l'opération objet de l'entremise. Deux factures signifient donc <strong>deux flux 1 distincts</strong> vers le portail public et deux cycles de vie autonomes.",
+      "relatedWhy": {
+        "cas-11": {
+          "rel": "cas de base réutilisé",
+          "why": "La facture principale applique littéralement le montage du cas 11 : adresse BT-49 dédiée et bloc « adressé à ». Le cas 12 n'y ajoute que la facture de commission."
+        },
+        "cas-15": {
+          "rel": "rôle voisin",
+          "why": "L'intermédiaire transparent et l'agent d'acheteur agissent tous deux pour le compte de l'acheteur. La différence : l'intermédiaire facture une commission à son mandant, l'agent se contente de commander et d'appeler les fonds."
+        },
+        "cas-39": {
+          "rel": "montage dérivé",
+          "why": "La facture multi-vendeurs pousse le principe de l'intermédiaire transparent à l'échelle : un même intermédiaire agrège les prestations de plusieurs vendeurs, ce qui démultiplie les factures principales autour d'une seule facture de commission."
+        }
+      }
+    },
+    "cas-15": {
+      "narrative": {
+        "intro": "<p>Ici le tiers ne se contente pas de traiter les factures : il <strong>passe la commande</strong>. Cette différence de rôle change le bloc d'extension à utiliser.</p>",
+        "steps": [
+          {
+            "t": 1,
+            "actor": "Agent d'acheteur",
+            "title": "L'agent commande au nom de l'acheteur",
+            "text": "Typiquement une agence média ou une centrale d'achat : elle passe commande auprès du vendeur pour le compte de l'acheteur, et génère la référence de commande.",
+            "refs": [
+              "BT-13"
+            ],
+            "diagram": 0
+          },
+          {
+            "t": 2,
+            "actor": "Vendeur",
+            "title": "La facture identifie l'agent comme acteur de la transaction",
+            "text": "BG-7 porte l'acheteur, BT-49 l'adresse dédiée confiée à la plateforme du tiers, et le bloc <strong>EXT-FR-FE-BG-01 « agent d'acheteur »</strong> identifie l'agent. Si la livraison va à l'acheteur et non à l'agent, BG-13 et BG-15 le précisent.",
+            "refs": [
+              "BT-49",
+              "BT-13"
+            ],
+            "diagram": 1
+          },
+          {
+            "t": 3,
+            "actor": "PA-E",
+            "title": "Contrôles puis routage vers la plateforme du tiers",
+            "text": "Flux 1 au portail public, flux 2 vers la plateforme désignée par l'acheteur pour cette adresse — qui peut être différente de sa plateforme de réception habituelle.",
+            "flux": [
+              "F1",
+              "F2",
+              "F6"
+            ],
+            "diagram": 2
+          },
+          {
+            "t": 4,
+            "actor": "Agent d'acheteur",
+            "title": "L'agent traite les factures et appelle les fonds",
+            "text": "Il rapproche chaque facture de sa commande, pose les statuts « Approuvée » ou « Refusée », et émet ses appels de fonds vers l'acheteur.",
+            "flux": [
+              "F6"
+            ],
+            "refs": [
+              "BT-13"
+            ],
+            "diagram": 3
+          },
+          {
+            "t": 5,
+            "actor": "Agent d'acheteur",
+            "title": "Paiement du vendeur",
+            "text": "L'agent règle s'il détient un mandat de paiement — il est alors décrit en EXT-FR-FE-BG-02 —, sinon l'acheteur paie après appel de fonds.",
+            "diagram": 4
+          },
+          {
+            "t": 6,
+            "actor": "Acheteur",
+            "title": "Statut « Encaissée » après règlement effectif",
+            "text": "Le statut est posé une fois le paiement constaté.",
+            "flux": [
+              "F6"
+            ],
+            "refs": [
+              "BT-8"
+            ]
+          }
+        ]
+      },
+      "fields": [
+        {
+          "id": "BT-3",
+          "name": "Code type de facture",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "380"
+        },
+        {
+          "id": "BT-23",
+          "name": "Cadre de facturation",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "B1 · S1 · M1 selon la nature de l'opération"
+        },
+        {
+          "id": "BT-49",
+          "name": "Adresse de facturation électronique de l'acheteur",
+          "level": "Groupe BG-7",
+          "obligation": "obligatoire",
+          "value": "Adresse dédiée du type <code>0225:SIRENacheteur_ACHATPUB</code>, confiée à la plateforme du tiers sur laquelle l'agent détient une délégation",
+          "rule": "Z12-014 §3.2.15"
+        },
+        {
+          "id": "EXT-FR-FE-BG-01",
+          "name": "Bloc « agent d'acheteur »",
+          "level": "Groupe",
+          "obligation": "obligatoire",
+          "value": "SIREN et raison sociale du tiers qui passe commande. <strong>C'est la différence majeure avec le cas 11.</strong>",
+          "rule": "Z12-014 §3.2.15"
+        },
+        {
+          "id": "EXT-FR-FE-BG-02",
+          "name": "Bloc « payeur de la facture »",
+          "level": "Groupe",
+          "obligation": "conditionnel",
+          "value": "SIREN de l'agent",
+          "cond": "Si l'agent règle également la facture"
+        },
+        {
+          "id": "BT-13",
+          "name": "Référence de la commande acheteur",
+          "level": "En-tête",
+          "obligation": "recommandé",
+          "value": "Numéro de la commande passée par l'agent — <strong>critique</strong> pour son rapprochement"
+        },
+        {
+          "id": "BG-13 / BT-70 / BT-71",
+          "name": "Informations de livraison",
+          "level": "Groupe",
+          "obligation": "conditionnel",
+          "value": "Désigne l'<strong>acheteur</strong> comme destinataire réel, pas l'agent",
+          "cond": "Si le lieu de livraison diffère de l'adresse de l'acheteur"
+        },
+        {
+          "id": "BG-15",
+          "name": "Adresse de livraison",
+          "level": "Groupe BG-13",
+          "obligation": "conditionnel",
+          "value": "Adresse physique de l'acheteur, confirmant que le bien ou le service lui est destiné"
+        },
+        {
+          "id": "BG-24",
+          "name": "Pièces justificatives",
+          "level": "Groupe",
+          "obligation": "facultatif",
+          "value": "Documents complémentaires : ordre d'insertion, bon à tirer…"
+        }
+      ],
+      "fieldsNote": "⚠️ <strong>Cas 11 ou cas 15 ?</strong> Le critère est l'activité du tiers. Un tiers <em>passif</em>, qui reçoit et traite des factures déjà émises, relève du cas 11 et du bloc EXT-FR-FE-BG-04. Un tiers <em>actif</em>, qui passe commande, relève du cas 15 et du bloc EXT-FR-FE-BG-01. Trois conséquences en découlent : BT-13 devient déterminant, BG-13 et BG-15 doivent pointer vers l'acheteur réel et non vers l'agent, et la facture est routée vers la plateforme du tiers plutôt que vers celle de l'acheteur.",
+      "relatedWhy": {
+        "cas-11": {
+          "rel": "cas jumeau à distinguer",
+          "why": "Même apparence — un tiers reçoit les factures d'un acheteur — mais rôles opposés : le CSP subit la facture, l'agent l'a provoquée en commandant. D'où deux blocs d'extension différents."
+        },
+        "cas-12": {
+          "rel": "rôle voisin",
+          "why": "Même famille d'acteurs agissant pour le compte de l'acheteur. L'agent d'acheteur commande sans facturer de commission au sens de l'entremise ; l'intermédiaire du cas 12 émet en plus sa propre facture d'honoraires."
+        }
+      }
+    },
+    "cas-16": {
+      "narrative": {
+        "intro": "<p>Un débours n'est pas une refacturation : c'est le remboursement à l'identique d'une dépense avancée pour le compte du client. Il est donc <strong>hors du champ de la TVA</strong>.</p>",
+        "steps": [
+          {
+            "t": 1,
+            "actor": "Mandataire",
+            "title": "Le mandataire avance la dépense",
+            "text": "Il paie le fournisseur pour le compte du client. Point décisif : la facture du fournisseur est libellée au nom du <strong>client final</strong>, et les sommes transitent par un compte de passage.",
+            "diagram": 0
+          },
+          {
+            "t": 2,
+            "actor": "Mandataire",
+            "title": "La facture de débours est émise en profil étendu",
+            "text": "Elle mêle des lignes de débours (BT-151 = <strong>O</strong>, hors champ) et éventuellement des lignes d'honoraires taxées (BT-151 = S). Ce mélange impose le profil <strong>EXTENDED-CTC-FR</strong>.",
+            "refs": [
+              "BT-3",
+              "BT-23",
+              "BT-151"
+            ],
+            "diagram": 1
+          },
+          {
+            "t": 3,
+            "actor": "PA-E",
+            "title": "Contrôles, « Déposée », transmission",
+            "text": "La PA-E valide le profil étendu, accepte la coexistence des catégories O et S, puis envoie le flux 1 au portail public et le flux 2 à la PA-R.",
+            "flux": [
+              "F1",
+              "F2",
+              "F6"
+            ],
+            "refs": [
+              "BT-118"
+            ],
+            "diagram": 2
+          },
+          {
+            "t": 4,
+            "actor": "Client",
+            "title": "Le client vérifie la stricte identité des montants",
+            "text": "Il contrôle que le montant refacturé correspond <strong>exactement</strong> à celui de la facture d'origine du fournisseur : un débours ne supporte aucune marge.",
+            "flux": [
+              "F6"
+            ],
+            "refs": [
+              "BT-116",
+              "BT-117"
+            ],
+            "diagram": 3
+          },
+          {
+            "t": 5,
+            "actor": "Client",
+            "title": "La TVA se récupère sur la facture d'origine",
+            "text": "Le client pose « Encaissée » après règlement. Sa TVA déductible provient de la facture du fournisseur établie à son nom, <strong>jamais</strong> de la ligne de débours, qui n'en porte pas.",
+            "flux": [
+              "F6"
+            ],
+            "diagram": 4
+          }
+        ]
+      },
+      "fields": [
+        {
+          "id": "BT-3",
+          "name": "Code type de facture",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "380"
+        },
+        {
+          "id": "BT-23",
+          "name": "Cadre de facturation",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "B1 · S1 · M1 selon la nature de l'opération"
+        },
+        {
+          "id": "Profil",
+          "name": "Profil sémantique du document",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "<strong>EXTENDED-CTC-FR</strong> — seul profil autorisant la coexistence des catégories O et S dans une même facture",
+          "rule": "Z12-014"
+        },
+        {
+          "id": "BT-151",
+          "name": "Code de catégorie de TVA de la ligne",
+          "level": "Ligne",
+          "obligation": "obligatoire",
+          "value": "<strong>O</strong> — hors champ de la TVA, sur les lignes de débours",
+          "rule": "Article 267 II-2 du CGI"
+        },
+        {
+          "id": "BT-118",
+          "name": "Code de catégorie de TVA de la ventilation",
+          "level": "Groupe BG-23",
+          "obligation": "obligatoire",
+          "value": "<strong>O</strong> — une ventilation BG-23 dédiée aux débours"
+        },
+        {
+          "id": "BT-116",
+          "name": "Base d'imposition de la ventilation",
+          "level": "Groupe BG-23",
+          "obligation": "obligatoire",
+          "value": "Somme des montants nets des lignes de débours"
+        },
+        {
+          "id": "BT-117",
+          "name": "Montant de TVA de la ventilation",
+          "level": "Groupe BG-23",
+          "obligation": "obligatoire",
+          "value": "<strong>0.00</strong> — aucune TVA sur un débours"
+        },
+        {
+          "id": "BT-119",
+          "name": "Taux de TVA",
+          "level": "Groupe BG-23",
+          "obligation": "obligatoire",
+          "value": "<strong>0</strong>"
+        },
+        {
+          "id": "BT-120",
+          "name": "Motif d'exonération (texte)",
+          "level": "Groupe BG-23",
+          "obligation": "obligatoire",
+          "value": "Ex. « Débours — article 267 II-2 du CGI — hors base d'imposition »",
+          "cond": "Obligatoire si BT-118 = O"
+        },
+        {
+          "id": "BT-121",
+          "name": "Code du motif d'exonération",
+          "level": "Groupe BG-23",
+          "obligation": "obligatoire",
+          "value": "Code VATEX correspondant à la catégorie O",
+          "cond": "Obligatoire si BT-118 = O",
+          "rule": "BR-O-10"
+        }
+      ],
+      "fieldsNote": "⚠️ <strong>Trois conditions cumulatives</strong> (article 267 II-2 du CGI) : un mandat préalable du client, une facture du fournisseur établie au nom du <strong>client final</strong> et non du mandataire, et des sommes transitant par un <strong>compte de passage</strong>. Si l'une manque, ce n'est plus un débours mais une refacturation taxable en catégorie S. 💡 Contrainte technique associée : en profil EN 16931 strict, une facture intégralement en catégorie O est possible, mais le <strong>mélange O + S est interdit</strong> — d'où le recours obligatoire à EXTENDED-CTC-FR dès qu'on facture des honoraires en même temps que des débours.",
+      "relatedWhy": {
+        "cas-15": {
+          "rel": "situation d'origine fréquente",
+          "why": "L'agent d'acheteur qui avance des dépenses pour son mandant se retrouve précisément à émettre une facture de débours. Le cas 15 décrit le rôle, le cas 16 le traitement fiscal de la refacturation."
+        },
+        "cas-12": {
+          "rel": "complément fréquent",
+          "why": "Un intermédiaire facture souvent sa commission (cas 12) et refacture en parallèle des dépenses avancées (cas 16). Les deux se cumulent sur des factures distinctes, ou sur une même facture mêlant catégories S et O."
         }
       }
     }
