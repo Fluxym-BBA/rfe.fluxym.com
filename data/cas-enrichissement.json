@@ -1,0 +1,1136 @@
+{
+  "meta": {
+    "version": "1.0",
+    "lastUpdate": "2026-08-19",
+    "source": "AFNOR XP Z12-012 V1.4 · XP Z12-014 V1.4 (Annexe A) · Spécifications externes DGFiP v3.1 (Annexe 1 Flux 1) · Règles de gestion 3.2",
+    "validatedBy": "RFE_Expert — 19/08/2026",
+    "purpose": "Enrichissement des fiches de cas d'usage : socle de champs commun, champs spécifiques au cas, récit chronologique et justification des cas liés. Complète data/cas-usage.json sans le modifier.",
+    "obligationLabels": {
+      "obligatoire": "Obligatoire",
+      "conditionnel": "Conditionnel",
+      "recommandé": "Recommandé",
+      "facultatif": "Facultatif"
+    }
+  },
+  "socle": {
+    "label": "Socle obligatoire commun à tous les cas d'usage",
+    "intro": "<p>Quel que soit le cas d'usage, une facture B2B domestique française doit porter ce socle de groupes (BG) et de champs (BT) : obligations issues de la norme <strong>EN 16931</strong>, complétées par les <strong>extensions et règles françaises</strong> (profil EXTENDED-CTC-FR). Les champs listés dans la section précédente s'<strong>ajoutent</strong> à ce socle, ils ne le remplacent pas.</p>",
+    "note": "Les champs marqués <em>conditionnel</em> deviennent obligatoires dès que leur condition est remplie. Les règles citées (BR-…) sont celles contrôlées par les plateformes agréées à réception.",
+    "groups": [
+      {
+        "id": "entete",
+        "label": "En-tête de facture",
+        "fields": [
+          {
+            "id": "BT-1",
+            "name": "Numéro de facture",
+            "level": "En-tête",
+            "obligation": "obligatoire",
+            "value": "Séquentiel, unique par (numéro, année, SIREN émetteur). 35 car. max.",
+            "rule": "BR-2 · BR-FR-CO-01"
+          },
+          {
+            "id": "BT-2",
+            "name": "Date d'émission de la facture",
+            "level": "En-tête",
+            "obligation": "obligatoire",
+            "value": "Format AAAA-MM-JJ en UBL, AAAAMMJJ en CII",
+            "rule": "BR-3"
+          },
+          {
+            "id": "BT-3",
+            "name": "Code type de facture",
+            "level": "En-tête",
+            "obligation": "obligatoire",
+            "value": "UNTDID 1001 — 380 facture, 381 avoir, 384 rectificative, 386 acompte",
+            "rule": "BR-4 · BR-FR-CO-03"
+          },
+          {
+            "id": "BT-5",
+            "name": "Code devise de la facture",
+            "level": "En-tête",
+            "obligation": "obligatoire",
+            "value": "EUR pour le B2B domestique français",
+            "rule": "BR-5"
+          },
+          {
+            "id": "BT-6",
+            "name": "Code devise de comptabilisation TVA",
+            "level": "En-tête",
+            "obligation": "conditionnel",
+            "value": "EUR",
+            "cond": "Obligatoire si BT-5 ≠ EUR",
+            "rule": "BR-FR-CO-12"
+          },
+          {
+            "id": "BT-8",
+            "name": "Code de date d'exigibilité TVA",
+            "level": "En-tête",
+            "obligation": "conditionnel",
+            "value": "Option sur les débits : 35 (CII) / 3 (UBL). Encaissement : 72 (CII) / 432 (UBL). Absent = encaissement par défaut pour les services.",
+            "cond": "Selon le régime de TVA du vendeur",
+            "rule": "BR-FR-CO-07"
+          },
+          {
+            "id": "BT-9",
+            "name": "Date d'échéance",
+            "level": "En-tête",
+            "obligation": "conditionnel",
+            "value": "≥ BT-2, sauf cadres « déjà payée » et acompte",
+            "cond": "Obligatoire si BT-115 &gt; 0 (ou BT-20 à la place)",
+            "rule": "BR-CO-25 · BR-FR-CO-07"
+          },
+          {
+            "id": "BT-10",
+            "name": "Référence de l'acheteur",
+            "level": "En-tête",
+            "obligation": "facultatif",
+            "rule": "EN 16931"
+          },
+          {
+            "id": "BT-12",
+            "name": "Référence du contrat",
+            "level": "En-tête",
+            "obligation": "facultatif",
+            "value": "50 car. max en B2G",
+            "rule": "EN 16931 · BR-FR-CPRO-14"
+          },
+          {
+            "id": "BT-13",
+            "name": "Référence de la commande acheteur",
+            "level": "En-tête",
+            "obligation": "facultatif",
+            "value": "Non répétable : une seule commande pour toute la facture",
+            "cond": "Obligatoire en B2G si exigé par l'entité publique",
+            "rule": "BR-FR-CPRO-12/13"
+          },
+          {
+            "id": "BT-16",
+            "name": "Référence de l'avis d'expédition",
+            "level": "En-tête",
+            "obligation": "facultatif",
+            "value": "Non répétable : une seule livraison pour toute la facture",
+            "rule": "EN 16931"
+          },
+          {
+            "id": "BT-20",
+            "name": "Conditions de paiement",
+            "level": "En-tête",
+            "obligation": "conditionnel",
+            "value": "Texte libre",
+            "cond": "Alternative à BT-9 si BT-115 &gt; 0",
+            "rule": "BR-CO-25"
+          }
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Notes de facture — BG-1 (mentions légales françaises)",
+        "fields": [
+          {
+            "id": "BT-21 = PMT",
+            "name": "Note — indemnité forfaitaire de recouvrement",
+            "level": "En-tête",
+            "obligation": "obligatoire",
+            "value": "Mention des 40 € d'indemnité forfaitaire",
+            "rule": "BR-FR-05"
+          },
+          {
+            "id": "BT-21 = PMD",
+            "name": "Note — pénalités de retard",
+            "level": "En-tête",
+            "obligation": "obligatoire",
+            "value": "Taux et conditions des pénalités de retard",
+            "rule": "BR-FR-05"
+          },
+          {
+            "id": "BT-21 = AAB",
+            "name": "Note — escompte",
+            "level": "En-tête",
+            "obligation": "obligatoire",
+            "value": "Mention de l'escompte ou de son absence",
+            "rule": "BR-FR-05"
+          },
+          {
+            "id": "BT-21 = TXD",
+            "name": "Note — membre d'un assujetti unique",
+            "level": "En-tête",
+            "obligation": "conditionnel",
+            "value": "BT-22 = MEMBRE_ASSUJETTI_UNIQUE",
+            "cond": "Si le vendeur est membre d'un assujetti unique",
+            "rule": "BR-FR-CO-14"
+          },
+          {
+            "id": "BT-22",
+            "name": "Texte de la note",
+            "level": "En-tête",
+            "obligation": "obligatoire",
+            "value": "Un texte par occurrence de BG-1",
+            "rule": "BR-FR-05"
+          }
+        ]
+      },
+      {
+        "id": "process",
+        "label": "Contrôle du processus — BG-2",
+        "fields": [
+          {
+            "id": "BT-23",
+            "name": "Cadre de facturation",
+            "level": "En-tête",
+            "obligation": "obligatoire",
+            "value": "3 caractères. B/S/M (biens, services, mixte) + chiffre du cas : 1 nominal, 2 déjà payée, 4 sous-traitance, 6/7/8 intermédiaires, 9 bidirectionnel.",
+            "rule": "BR-FR-01 · BR-FR-CO-08/09"
+          },
+          {
+            "id": "BT-24",
+            "name": "Type de profil (CustomizationID)",
+            "level": "En-tête",
+            "obligation": "obligatoire",
+            "value": "urn:cen.eu:en16931:2017",
+            "rule": "EN 16931 · Annexe 1 Flux 1"
+          }
+        ]
+      },
+      {
+        "id": "refanterieure",
+        "label": "Référence à une facture antérieure — BG-3",
+        "fields": [
+          {
+            "id": "BG-3",
+            "name": "Référence de facture antérieure",
+            "level": "En-tête",
+            "obligation": "conditionnel",
+            "cond": "Obligatoire pour les avoirs (381, 396) et les rectificatives (384, 472)",
+            "rule": "BR-55"
+          },
+          {
+            "id": "BT-25",
+            "name": "Numéro de la facture antérieure",
+            "level": "En-tête",
+            "obligation": "obligatoire",
+            "cond": "Si BG-3 présent",
+            "rule": "BR-55"
+          },
+          {
+            "id": "BT-26",
+            "name": "Date d'émission de la facture antérieure",
+            "level": "En-tête",
+            "obligation": "recommandé",
+            "value": "Recommandé si BT-25 n'est pas unique",
+            "rule": "EN 16931"
+          }
+        ]
+      },
+      {
+        "id": "vendeur",
+        "label": "Vendeur — BG-4 / BG-5",
+        "fields": [
+          {
+            "id": "BT-27",
+            "name": "Raison sociale du vendeur",
+            "level": "En-tête",
+            "obligation": "obligatoire",
+            "rule": "BR-6"
+          },
+          {
+            "id": "BT-30",
+            "name": "Numéro de SIREN du vendeur",
+            "level": "En-tête",
+            "obligation": "obligatoire",
+            "value": "9 chiffres",
+            "rule": "Annexe 1 Flux 1"
+          },
+          {
+            "id": "BT-30-1",
+            "name": "Identifiant du schéma SIREN vendeur",
+            "level": "En-tête",
+            "obligation": "obligatoire",
+            "value": "0002",
+            "rule": "Annexe 1 Flux 1"
+          },
+          {
+            "id": "BT-31",
+            "name": "Identifiant TVA du vendeur",
+            "level": "En-tête",
+            "obligation": "conditionnel",
+            "value": "FR + 2 car. + 9 chiffres (13 car.)",
+            "cond": "Obligatoire si le vendeur est assujetti à la TVA",
+            "rule": "BR-CO-26"
+          },
+          {
+            "id": "BT-33",
+            "name": "Forme juridique et capital social",
+            "level": "En-tête",
+            "obligation": "recommandé",
+            "value": "Ex. « SARL AU CAPITAL DE 50 000 EUROS »",
+            "rule": "Usage FR"
+          },
+          {
+            "id": "BT-34",
+            "name": "Adresse de facturation électronique du vendeur",
+            "level": "En-tête",
+            "obligation": "obligatoire",
+            "value": "Commence par le SIREN du vendeur (BT-30)",
+            "rule": "BR-FR-04 · BR-FR-22"
+          },
+          {
+            "id": "BT-34-1",
+            "name": "SchemeID de l'adresse électronique vendeur",
+            "level": "En-tête",
+            "obligation": "obligatoire",
+            "value": "0225",
+            "rule": "BR-FR-04"
+          },
+          {
+            "id": "BT-40",
+            "name": "Code pays du vendeur",
+            "level": "En-tête",
+            "obligation": "obligatoire",
+            "value": "FR en B2B domestique",
+            "rule": "BR-9"
+          },
+          {
+            "id": "BT-35 / BT-37 / BT-38",
+            "name": "Adresse postale du vendeur (rue, ville, code postal)",
+            "level": "En-tête",
+            "obligation": "recommandé",
+            "rule": "EN 16931"
+          }
+        ]
+      },
+      {
+        "id": "acheteur",
+        "label": "Acheteur — BG-7 / BG-8",
+        "fields": [
+          {
+            "id": "BT-44",
+            "name": "Raison sociale de l'acheteur",
+            "level": "En-tête",
+            "obligation": "obligatoire",
+            "rule": "BR-7"
+          },
+          {
+            "id": "BT-47",
+            "name": "Numéro de SIREN de l'acheteur",
+            "level": "En-tête",
+            "obligation": "obligatoire",
+            "value": "9 chiffres",
+            "rule": "Annexe 1 Flux 1"
+          },
+          {
+            "id": "BT-47-1",
+            "name": "Identifiant du schéma SIREN acheteur",
+            "level": "En-tête",
+            "obligation": "obligatoire",
+            "value": "0002",
+            "rule": "Annexe 1 Flux 1"
+          },
+          {
+            "id": "BT-48",
+            "name": "Identifiant TVA de l'acheteur",
+            "level": "En-tête",
+            "obligation": "conditionnel",
+            "cond": "Obligatoire si l'acheteur est identifié à la TVA",
+            "rule": "BR-CO-26"
+          },
+          {
+            "id": "BT-49",
+            "name": "Adresse de facturation électronique de l'acheteur",
+            "level": "En-tête",
+            "obligation": "obligatoire",
+            "value": "Commence par le SIREN de l'acheteur (BT-47). C'est la donnée de routage vers la PA-R.",
+            "rule": "BR-FR-03 · BR-FR-21"
+          },
+          {
+            "id": "BT-49-1",
+            "name": "SchemeID de l'adresse électronique acheteur",
+            "level": "En-tête",
+            "obligation": "obligatoire",
+            "value": "0225",
+            "rule": "BR-FR-03"
+          },
+          {
+            "id": "BT-55",
+            "name": "Code pays de l'acheteur",
+            "level": "En-tête",
+            "obligation": "obligatoire",
+            "value": "FR en B2B domestique",
+            "rule": "BR-11"
+          },
+          {
+            "id": "BT-50 / BT-52 / BT-53",
+            "name": "Adresse postale de l'acheteur (rue, ville, code postal)",
+            "level": "En-tête",
+            "obligation": "recommandé",
+            "rule": "EN 16931"
+          }
+        ]
+      },
+      {
+        "id": "paiement",
+        "label": "Instructions de paiement — BG-16 / BG-17",
+        "fields": [
+          {
+            "id": "BG-16",
+            "name": "Instructions de paiement",
+            "level": "En-tête",
+            "obligation": "recommandé",
+            "rule": "EN 16931"
+          },
+          {
+            "id": "BT-81",
+            "name": "Code du moyen de paiement",
+            "level": "En-tête",
+            "obligation": "obligatoire",
+            "value": "UNTDID 4461 — 30 virement, 58 virement SEPA, 48 carte, 10 espèces",
+            "cond": "Si BG-16 présent",
+            "rule": "BR-49"
+          },
+          {
+            "id": "BT-83",
+            "name": "Référence de l'avis de paiement",
+            "level": "En-tête",
+            "obligation": "facultatif",
+            "value": "Recommandé : n° de facture + SIREN",
+            "rule": "EN 16931"
+          },
+          {
+            "id": "BT-84",
+            "name": "IBAN de paiement",
+            "level": "En-tête",
+            "obligation": "obligatoire",
+            "cond": "Si BT-81 = 30 ou 58 (virement)",
+            "rule": "BR-61"
+          },
+          {
+            "id": "BT-86",
+            "name": "BIC",
+            "level": "En-tête",
+            "obligation": "recommandé",
+            "rule": "BR-FR-CPRO-49"
+          }
+        ]
+      },
+      {
+        "id": "livraison",
+        "label": "Livraison — BG-13 / BG-14 / BG-15",
+        "fields": [
+          {
+            "id": "BT-72",
+            "name": "Date de livraison réelle",
+            "level": "En-tête",
+            "obligation": "conditionnel",
+            "cond": "Obligatoire sauf si BG-14 (période) ou BG-26 est renseigné. Règle non contrôlée par schematron.",
+            "rule": "BR-FR-CO-04"
+          },
+          {
+            "id": "BG-14",
+            "name": "Période de facturation",
+            "level": "En-tête",
+            "obligation": "conditionnel",
+            "value": "BT-73 (début) et BT-74 (fin) obligatoires dans le groupe",
+            "cond": "Alternative à BT-72",
+            "rule": "BR-29 · BR-30"
+          },
+          {
+            "id": "BG-15",
+            "name": "Adresse de livraison",
+            "level": "En-tête",
+            "obligation": "conditionnel",
+            "value": "BT-80 (code pays) obligatoire dans le groupe",
+            "cond": "Obligatoire à partir du 01/09/2027 si différente de BG-8, biens uniquement",
+            "rule": "BR-FR-14 · BR-57"
+          }
+        ]
+      },
+      {
+        "id": "tva",
+        "label": "Ventilation de la TVA — BG-23 (1..n)",
+        "fields": [
+          {
+            "id": "BT-116",
+            "name": "Base d'imposition par type de TVA",
+            "level": "En-tête",
+            "obligation": "obligatoire",
+            "value": "= Σ des montants nets de lignes du même taux",
+            "rule": "BR-45"
+          },
+          {
+            "id": "BT-117",
+            "name": "Montant de TVA par type",
+            "level": "En-tête",
+            "obligation": "obligatoire",
+            "value": "= BT-116 × BT-119",
+            "rule": "BR-46"
+          },
+          {
+            "id": "BT-118",
+            "name": "Code du type de TVA",
+            "level": "En-tête",
+            "obligation": "obligatoire",
+            "value": "S taxé, E exonéré, K intracommunautaire, AE autoliquidation",
+            "rule": "BR-47"
+          },
+          {
+            "id": "BT-119",
+            "name": "Taux de TVA",
+            "level": "En-tête",
+            "obligation": "conditionnel",
+            "value": "20, 10, 5.5 ou 2.1",
+            "cond": "Obligatoire si BT-118 = S",
+            "rule": "BR-48"
+          },
+          {
+            "id": "BT-120 / BT-121",
+            "name": "Motif d'exonération de TVA (texte / code)",
+            "level": "En-tête",
+            "obligation": "conditionnel",
+            "value": "Codes VATEX-FR-*",
+            "cond": "Obligatoire si BT-118 ≠ S",
+            "rule": "Règles par catégorie de TVA"
+          }
+        ]
+      },
+      {
+        "id": "totaux",
+        "label": "Totaux du document — BG-22",
+        "fields": [
+          {
+            "id": "BT-106",
+            "name": "Somme des montants nets des lignes",
+            "level": "En-tête",
+            "obligation": "obligatoire",
+            "value": "= Σ BT-131",
+            "rule": "BR-12"
+          },
+          {
+            "id": "BT-109",
+            "name": "Montant total hors TVA",
+            "level": "En-tête",
+            "obligation": "obligatoire",
+            "value": "= BT-106 − BT-107 + BT-108",
+            "rule": "BR-13"
+          },
+          {
+            "id": "BT-110",
+            "name": "Montant total de TVA",
+            "level": "En-tête",
+            "obligation": "obligatoire",
+            "value": "= Σ BT-117",
+            "rule": "BR-CO-14"
+          },
+          {
+            "id": "BT-110-1",
+            "name": "Code devise du montant de TVA",
+            "level": "En-tête",
+            "obligation": "obligatoire",
+            "value": "= BT-5",
+            "rule": "Annexe 1 Flux 1"
+          },
+          {
+            "id": "BT-112",
+            "name": "Montant total TTC",
+            "level": "En-tête",
+            "obligation": "obligatoire",
+            "value": "= BT-109 + BT-110",
+            "rule": "BR-CO-15"
+          },
+          {
+            "id": "BT-113",
+            "name": "Montant déjà payé",
+            "level": "En-tête",
+            "obligation": "conditionnel",
+            "value": "0 ou absent si rien n'a été payé à l'émission",
+            "cond": "Renseigné dès qu'un paiement ou un tiers payeur intervient",
+            "rule": "BR-FR-CO-09"
+          },
+          {
+            "id": "BT-114",
+            "name": "Montant d'arrondi",
+            "level": "En-tête",
+            "obligation": "facultatif",
+            "rule": "EN 16931"
+          },
+          {
+            "id": "BT-115",
+            "name": "Montant net à payer",
+            "level": "En-tête",
+            "obligation": "obligatoire",
+            "value": "= BT-112 − BT-113 + BT-114",
+            "rule": "BR-CO-16"
+          }
+        ]
+      },
+      {
+        "id": "ligne",
+        "label": "Ligne de facture — BG-25 (1..n)",
+        "fields": [
+          {
+            "id": "BT-126",
+            "name": "Identifiant de la ligne de facture",
+            "level": "Ligne",
+            "obligation": "obligatoire",
+            "value": "Unique dans la facture",
+            "rule": "BR-21"
+          },
+          {
+            "id": "BT-129",
+            "name": "Quantité facturée",
+            "level": "Ligne",
+            "obligation": "obligatoire",
+            "rule": "BR-22"
+          },
+          {
+            "id": "BT-130",
+            "name": "Unité de mesure de la quantité",
+            "level": "Ligne",
+            "obligation": "obligatoire",
+            "value": "Code UN/ECE Rec. 20 (ex. C62 = unité)",
+            "rule": "BR-23"
+          },
+          {
+            "id": "BT-131",
+            "name": "Montant net de la ligne",
+            "level": "Ligne",
+            "obligation": "obligatoire",
+            "value": "= BT-129 × BT-146 (hors remises de ligne)",
+            "rule": "BR-24"
+          },
+          {
+            "id": "BT-132",
+            "name": "Référence de la ligne de commande",
+            "level": "Ligne",
+            "obligation": "facultatif",
+            "value": "Numéro de ligne <em>dans</em> la commande citée en BT-13 — ce n'est pas un autre numéro de commande",
+            "rule": "EN 16931"
+          },
+          {
+            "id": "BT-146",
+            "name": "Prix unitaire net de l'article",
+            "level": "Ligne",
+            "obligation": "obligatoire",
+            "rule": "BR-26"
+          },
+          {
+            "id": "BT-151",
+            "name": "Code du type de TVA de l'article",
+            "level": "Ligne",
+            "obligation": "obligatoire",
+            "value": "Lignes de type DETAIL uniquement",
+            "rule": "BR-FREXT-CO-04"
+          },
+          {
+            "id": "BT-152",
+            "name": "Taux de TVA de l'article",
+            "level": "Ligne",
+            "obligation": "conditionnel",
+            "cond": "Obligatoire si BT-151 = S",
+            "rule": "EN 16931"
+          },
+          {
+            "id": "BT-153",
+            "name": "Nom de l'article",
+            "level": "Ligne",
+            "obligation": "obligatoire",
+            "rule": "BR-25"
+          }
+        ]
+      }
+    ]
+  },
+  "cases": {
+    "nominal": {
+      "narrative": {
+        "intro": "<p>Le même scénario que le diagramme, raconté étape par étape : qui agit, à quel moment, et quelle donnée porte l'information.</p>",
+        "steps": [
+          {
+            "t": 1,
+            "actor": "Vendeur",
+            "title": "La facture est créée dans le SI du vendeur",
+            "text": "Le vendeur constitue sa facture avec l'intégralité du socle obligatoire : numéro (BT-1), date d'émission (BT-2), type de facture 380 (BT-3), cadre de facturation B1, S1 ou M1 (BT-23), et surtout les deux adresses de facturation électronique BT-34 et BT-49, qui conditionnent tout le routage. Il la dépose ensuite sur sa plateforme agréée émettrice (PA-E).",
+            "flux": [
+              "Dépôt"
+            ],
+            "refs": [
+              "BT-1",
+              "BT-2",
+              "BT-3",
+              "BT-23",
+              "BT-34",
+              "BT-49"
+            ],
+            "diagram": 0
+          },
+          {
+            "t": 2,
+            "actor": "PA-E",
+            "title": "La PA-E contrôle et déclare la facture à l'administration",
+            "text": "La PA-E vérifie la conformité (format, règles BR, doublons, existence de l'adresse BT-49 dans l'annuaire), puis extrait les seules données réglementaires et les transmet au portail public de facturation via le <strong>flux 1</strong>. Elle émet en parallèle le statut « Déposée ».",
+            "flux": [
+              "F1",
+              "F6"
+            ],
+            "refs": [
+              "BT-30",
+              "BT-47"
+            ],
+            "diagram": 1
+          },
+          {
+            "t": 3,
+            "actor": "PA-E",
+            "title": "La facture complète part vers la plateforme de l'acheteur",
+            "text": "La facture entière — et non plus seulement les données fiscales — est routée vers la PA-R de l'acheteur grâce à l'adresse électronique BT-49 résolue dans l'annuaire. C'est le <strong>flux 2</strong> (ou flux 3 si le format n'est pas un format socle).",
+            "flux": [
+              "F2"
+            ],
+            "refs": [
+              "BT-49"
+            ],
+            "diagram": 2
+          },
+          {
+            "t": 4,
+            "actor": "PA-R",
+            "title": "La PA-R réceptionne et met la facture à disposition",
+            "text": "La PA-R exécute ses propres contrôles, génère les statuts « Reçue » puis « Mise à disposition », et rend la facture accessible à l'acheteur dans son environnement.",
+            "flux": [
+              "F6"
+            ],
+            "diagram": 4
+          },
+          {
+            "t": 5,
+            "actor": "Acheteur",
+            "title": "L'acheteur traite la facture et se prononce",
+            "text": "L'acheteur intègre la facture dans son cycle achats et pose un statut de traitement : « Approuvée », « Prise en charge », ou au contraire « En litige » ou « Refusée ». Le statut de refus est obligatoire lorsqu'il survient.",
+            "flux": [
+              "F6"
+            ],
+            "diagram": 5
+          },
+          {
+            "t": 6,
+            "actor": "Vendeur",
+            "title": "Le vendeur reçoit le statut en retour",
+            "text": "Le statut remonte de la PA-R vers le portail public puis vers la PA-E, qui le restitue au vendeur. Le vendeur sait donc, sans relance téléphonique, où en est sa facture.",
+            "flux": [
+              "F6"
+            ],
+            "diagram": 7
+          },
+          {
+            "t": 7,
+            "actor": "Acheteur",
+            "title": "Le paiement est réalisé",
+            "text": "Le paiement s'effectue hors plateforme, par les canaux bancaires habituels. L'acheteur peut transmettre le statut « Paiement transmis » (recommandé, non obligatoire) et le vendeur le statut « Encaissée » lorsque la TVA est exigible à l'encaissement.",
+            "flux": [
+              "F6"
+            ]
+          }
+        ]
+      },
+      "fields": [
+        {
+          "id": "BT-3",
+          "name": "Code type de facture",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "380",
+          "rule": "BR-4"
+        },
+        {
+          "id": "BT-23",
+          "name": "Cadre de facturation",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "B1 (biens) · S1 (services) · M1 (mixte)",
+          "rule": "BR-FR-01"
+        },
+        {
+          "id": "BT-24",
+          "name": "Type de profil",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "urn:cen.eu:en16931:2017",
+          "rule": "EN 16931"
+        },
+        {
+          "id": "BT-113",
+          "name": "Montant déjà payé",
+          "level": "En-tête",
+          "obligation": "conditionnel",
+          "value": "0 ou champ absent — rien n'a été payé à l'émission",
+          "rule": "BR-CO-16"
+        },
+        {
+          "id": "BT-115",
+          "name": "Montant net à payer",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "= BT-112 (la totalité reste due)",
+          "rule": "BR-CO-16"
+        }
+      ],
+      "fieldsNote": "Le cas nominal ne mobilise <strong>aucune extension</strong> au-delà du socle : les valeurs ci-dessus sont simplement celles que le cadre nominal détermine à l'avance.",
+      "relatedWhy": {
+        "nominal-rejet-emission": {
+          "rel": "variante d'échec",
+          "why": "Même départ, mais la facture n'atteint jamais l'étape 2 : la PA-E la rejette à ses propres contrôles. C'est la première porte de sortie du parcours nominal."
+        },
+        "nominal-refus": {
+          "rel": "variante d'échec",
+          "why": "Le parcours nominal va jusqu'au bout techniquement, mais l'acheteur pose « Refusée » à l'étape 5 au lieu d'accepter. Le statut de refus fait alors office de justificatif : on ne demande pas d'avoir."
+        },
+        "cas-1": {
+          "rel": "extension du nominal",
+          "why": "Aucune modification du parcours ni du cycle de vie : seul le contenu de la facture change, avec les commandes et livraisons portées à la ligne. C'est la première brique à ajouter au nominal."
+        }
+      }
+    },
+    "cas-1": {
+      "narrative": {
+        "intro": "<p>Le parcours est strictement celui du cas nominal. Ce qui change se situe <strong>à l'intérieur de la facture</strong>, ligne par ligne.</p>",
+        "steps": [
+          {
+            "t": 1,
+            "actor": "Vendeur",
+            "title": "Plusieurs commandes, plusieurs livraisons, une seule facture",
+            "text": "Le vendeur a reçu plusieurs bons de commande (BC1, BC2…) et effectué plusieurs livraisons (BL1, BL2…), éventuellement à des adresses différentes. Il décide de tout regrouper sur une facture unique — pratique très courante en B2B."
+          },
+          {
+            "t": 2,
+            "actor": "Vendeur",
+            "title": "Les références sont descendues au niveau de la ligne",
+            "text": "En-tête, BT-13 et BT-16 ne peuvent porter qu'<em>une</em> commande et <em>un</em> avis d'expédition : ils ne suffisent donc pas. Le vendeur renseigne, pour chaque ligne, l'extension française EXT-FR-FE-135 (n° de commande de cette ligne), EXT-FR-FE-140 et EXT-FR-FE-141 (avis d'expédition et ligne d'avis), et EXT-FR-FE-BG-10 si l'adresse de livraison diffère selon les lignes. Le cadre de facturation reste B1/S1/M1.",
+            "flux": [
+              "Dépôt"
+            ],
+            "refs": [
+              "BT-13",
+              "BT-16",
+              "BT-132"
+            ],
+            "diagram": 0
+          },
+          {
+            "t": 3,
+            "actor": "PA-E",
+            "title": "Contrôle des extensions puis double transmission",
+            "text": "La PA-E valide la facture avec le schematron EXTENDED-CTC-FR (les extensions ne sont pas reconnues en profil EN 16931 pur). Elle transmet ensuite le flux 1 au portail public et la facture complète à la PA-R.",
+            "flux": [
+              "F1",
+              "F2"
+            ],
+            "diagram": 1
+          },
+          {
+            "t": 4,
+            "actor": "PA-R",
+            "title": "Mise à disposition avec le détail multi-références",
+            "text": "La PA-R réceptionne, contrôle et met la facture à disposition de l'acheteur, en restituant le détail commande/livraison ligne à ligne.",
+            "flux": [
+              "F6"
+            ],
+            "diagram": 4
+          },
+          {
+            "t": 5,
+            "actor": "Acheteur",
+            "title": "Rapprochement ligne à ligne",
+            "text": "C'est ici que réside tout l'intérêt du cas : l'acheteur rapproche chaque ligne de facture avec le bon de commande et le bon de livraison qui lui correspondent, sans intervention manuelle.",
+            "flux": [
+              "F6"
+            ]
+          },
+          {
+            "t": 6,
+            "actor": "Vendeur",
+            "title": "Cycle de vie standard",
+            "text": "Statuts de traitement, paiement et éventuel « Encaissée » : rien de spécifique à ce cas, on retombe intégralement sur le nominal.",
+            "flux": [
+              "F6"
+            ]
+          }
+        ]
+      },
+      "fields": [
+        {
+          "id": "BT-23",
+          "name": "Cadre de facturation",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "B1 · S1 · M1 — pas de cadre spécifique au multi-commande",
+          "rule": "BR-FR-01"
+        },
+        {
+          "id": "BT-13",
+          "name": "Référence de la commande acheteur",
+          "level": "En-tête",
+          "obligation": "facultatif",
+          "value": "À ne renseigner que s'il existe une commande principale unique",
+          "rule": "EN 16931"
+        },
+        {
+          "id": "BT-132",
+          "name": "Référence de la ligne de commande",
+          "level": "Ligne",
+          "obligation": "facultatif",
+          "value": "Numéro de ligne dans la commande de BT-13. <strong>Ne convient pas</strong> pour référencer une autre commande.",
+          "rule": "EN 16931"
+        },
+        {
+          "id": "EXT-FR-FE-135",
+          "name": "Identifiant de la commande relative à la ligne",
+          "level": "Ligne",
+          "obligation": "conditionnel",
+          "value": "N° de bon de commande propre à cette ligne",
+          "cond": "Dès que les lignes proviennent de commandes différentes",
+          "rule": "Z12-014 §3.2.2"
+        },
+        {
+          "id": "EXT-FR-FE-140",
+          "name": "Référence de l'avis d'expédition à la ligne",
+          "level": "Ligne",
+          "obligation": "conditionnel",
+          "value": "N° d'avis d'expédition propre à cette ligne",
+          "cond": "Dès que les lignes proviennent de livraisons différentes",
+          "rule": "Z12-014 §3.2.2"
+        },
+        {
+          "id": "EXT-FR-FE-141",
+          "name": "Ligne de l'avis d'expédition",
+          "level": "Ligne",
+          "obligation": "conditionnel",
+          "value": "N° de ligne dans l'avis d'expédition de EXT-FR-FE-140",
+          "rule": "Z12-014 §3.2.2"
+        },
+        {
+          "id": "EXT-FR-FE-BG-10",
+          "name": "Adresse de livraison à la ligne",
+          "level": "Ligne",
+          "obligation": "conditionnel",
+          "value": "Groupe complet : nom du lieu, adresse, code postal, ville, code pays",
+          "cond": "Si les adresses de livraison diffèrent d'une ligne à l'autre",
+          "rule": "Z12-014 §3.2.2"
+        },
+        {
+          "id": "EXT-FR-FE-146 / 148",
+          "name": "Identifiant global du lieu de livraison et son schéma",
+          "level": "Ligne",
+          "obligation": "facultatif",
+          "value": "Ex. GLN avec schemeID 0088",
+          "rule": "Z12-014 §3.2.2"
+        }
+      ],
+      "fieldsNote": "⚠️ Ces extensions imposent le profil <strong>EXTENDED-CTC-FR</strong> : elles ne sont pas disponibles en EN 16931 pur ni en profil minimum.",
+      "relatedWhy": {
+        "nominal": {
+          "rel": "cas parent",
+          "why": "Le déroulé, les flux et les statuts sont identiques au nominal, sans exception. Ce cas n'ajoute que des références supplémentaires au niveau des lignes."
+        }
+      }
+    },
+    "cas-2": {
+      "narrative": {
+        "intro": "<p>La particularité de ce cas est chronologique : <strong>le paiement précède la facture</strong>. Tout le reste en découle.</p>",
+        "steps": [
+          {
+            "t": 1,
+            "actor": "Acheteur",
+            "title": "Le paiement a déjà eu lieu",
+            "text": "L'acheteur — ou un tiers payeur — a réglé la prestation avant même que la facture n'existe : achat comptant, carte bancaire, note de frais, prélèvement. Le vendeur encaisse d'abord, facture ensuite.",
+            "diagram": 0
+          },
+          {
+            "t": 2,
+            "actor": "Vendeur",
+            "title": "La facture est créée en indiquant qu'elle est déjà réglée",
+            "text": "Le vendeur bascule le cadre de facturation en <strong>B2 / S2 / M2</strong>, porte le montant déjà réglé en BT-113, met le net à payer BT-115 à zéro et renseigne en BT-9 la <em>date à laquelle la facture a été payée</em> — qui peut donc être antérieure à la date d'émission. S'il y a un tiers payeur, il ajoute le bloc EXT-FR-FE-BG-02 et une note BT-21 = PAI.",
+            "flux": [
+              "Dépôt"
+            ],
+            "refs": [
+              "BT-23",
+              "BT-113",
+              "BT-115",
+              "BT-9",
+              "BT-81"
+            ],
+            "diagram": 1
+          },
+          {
+            "t": 3,
+            "actor": "PA-E",
+            "title": "La PA-E vérifie la cohérence des totaux puis transmet",
+            "text": "Le contrôle bloquant est BR-FR-CO-09 : avec un cadre en 2, la plateforme exige BT-113 = BT-112 et BT-115 = 0. Si le compte est faux, la facture est rejetée avant tout envoi. Sinon, flux 1 vers le portail public et flux 2 vers la PA-R.",
+            "flux": [
+              "F1",
+              "F2",
+              "F6"
+            ],
+            "refs": [
+              "BT-112",
+              "BT-113",
+              "BT-115"
+            ],
+            "diagram": 2
+          },
+          {
+            "t": 4,
+            "actor": "PA-R",
+            "title": "Réception et mise à disposition",
+            "text": "Parcours inchangé : la PA-R contrôle, génère « Reçue » puis « Mise à disposition » et remet la facture à l'acheteur.",
+            "flux": [
+              "F6"
+            ],
+            "diagram": 4
+          },
+          {
+            "t": 5,
+            "actor": "Acheteur",
+            "title": "L'acheteur constate qu'il n'a rien à payer",
+            "text": "Il lit BT-115 = 0 (ou le reliquat à sa charge en cas de tiers payeur partiel) et traite la facture comme justificatif comptable, sans déclencher de paiement.",
+            "flux": [
+              "F6"
+            ],
+            "refs": [
+              "BT-115"
+            ],
+            "diagram": 4
+          },
+          {
+            "t": 6,
+            "actor": "Vendeur",
+            "title": "Le statut « Encaissée » est émis",
+            "text": "Comme l'argent est déjà entré, le vendeur peut envoyer « Encaissée » dès l'émission. Ce statut est <strong>obligatoire</strong> pour des services avec TVA exigible à l'encaissement (cadre S2 sans option pour les débits) ; il ne l'est pas pour des biens ni sous option sur les débits.",
+            "flux": [
+              "F6"
+            ],
+            "refs": [
+              "BT-8"
+            ],
+            "diagram": 5
+          },
+          {
+            "t": 7,
+            "actor": "PA-E",
+            "title": "Le statut remonte au portail public et à l'acheteur",
+            "text": "La PA-E transmet « Encaissée » au portail public — au plus tard à la fin de la période de e-reporting des paiements, par exemple le 10 du mois suivant en régime normal — et à la PA-R pour information de l'acheteur.",
+            "flux": [
+              "F6"
+            ],
+            "diagram": 6
+          }
+        ]
+      },
+      "fields": [
+        {
+          "id": "BT-23",
+          "name": "Cadre de facturation",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "B2 (biens) · S2 (services) · M2 (mixte)",
+          "rule": "BR-FR-CO-09"
+        },
+        {
+          "id": "BT-113",
+          "name": "Montant déjà payé",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "= BT-112 si la facture est intégralement réglée ; = part du tiers en cas de tiers payeur partiel",
+          "rule": "BR-FR-CO-09"
+        },
+        {
+          "id": "BT-115",
+          "name": "Montant net à payer",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "0.00 si le paiement est total ; sinon BT-112 − BT-113",
+          "rule": "BR-CO-16 · BR-FR-CO-09"
+        },
+        {
+          "id": "BT-9",
+          "name": "Date d'échéance",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "Date effective du paiement — <strong>peut être antérieure à BT-2</strong>, par exception à BR-FR-CO-07",
+          "rule": "BR-FR-CO-09"
+        },
+        {
+          "id": "BT-8",
+          "name": "Code de date d'exigibilité TVA",
+          "level": "En-tête",
+          "obligation": "conditionnel",
+          "value": "35 (CII) / 3 (UBL) si option sur les débits ; absent ou 72 / 432 si TVA à l'encaissement",
+          "cond": "Détermine si le statut « Encaissée » est obligatoire",
+          "rule": "BR-FR-CO-07"
+        },
+        {
+          "id": "BT-81",
+          "name": "Code du moyen de paiement",
+          "level": "En-tête",
+          "obligation": "recommandé",
+          "value": "Le moyen réellement utilisé : 30 virement, 48/54/55 carte, 10 espèces",
+          "rule": "BR-49"
+        },
+        {
+          "id": "BT-87",
+          "name": "Numéro de carte (tronqué)",
+          "level": "En-tête",
+          "obligation": "conditionnel",
+          "value": "4 à 6 derniers chiffres uniquement",
+          "cond": "Si paiement par carte (BG-18)",
+          "rule": "BR-51"
+        },
+        {
+          "id": "EXT-FR-FE-BG-02",
+          "name": "Bloc « payeur de la facture » (tiers payeur)",
+          "level": "En-tête",
+          "obligation": "conditionnel",
+          "value": "Non répétable : un seul tiers payeur par facture. Profil EXTENDED-CTC-FR uniquement.",
+          "cond": "Si le paiement est effectué par un tiers",
+          "rule": "Z12-014 §3.2.4"
+        },
+        {
+          "id": "EXT-FR-FE-43",
+          "name": "Raison sociale du tiers payeur",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "cond": "Si EXT-FR-FE-BG-02 est présent",
+          "rule": "Z12-012"
+        },
+        {
+          "id": "BT-21 = PAI",
+          "name": "Note de mention du tiers payeur",
+          "level": "En-tête",
+          "obligation": "conditionnel",
+          "value": "Texte signalant le paiement par un tiers",
+          "cond": "Si tiers payeur",
+          "rule": "Règles de gestion 3.2"
+        },
+        {
+          "id": "BT-84",
+          "name": "IBAN de paiement",
+          "level": "En-tête",
+          "obligation": "conditionnel",
+          "value": "IBAN du <strong>bénéficiaire réel</strong> du paiement, qui n'est pas forcément le vendeur",
+          "cond": "Si le règlement passe par un virement vers un tiers",
+          "rule": "Z12-014 §3.2.9"
+        }
+      ],
+      "fieldsNote": "Le contrôle à ne pas manquer est <strong>BR-FR-CO-09</strong> : dès que BT-23 vaut B2, S2 ou M2, la plateforme exige BT-113 = BT-112, BT-115 = 0 et une date de paiement en BT-9. À ne pas confondre avec BR-FR-CO-16, qui traite de la franchise en base.",
+      "relatedWhy": {
+        "cas-3": {
+          "rel": "variante sur le payeur",
+          "why": "Même mécanique de tiers, mais décalée dans le temps : ici le tiers a déjà payé, dans le cas 3 il est identifié à la facturation et paiera plus tard. Le bloc EXT-FR-FE-BG-02 est commun aux deux."
+        },
+        "cas-20": {
+          "rel": "cas voisin sur l'antériorité du paiement",
+          "why": "L'acompte est l'autre situation où de l'argent circule avant la facture définitive. La différence : l'acompte est un paiement partiel qui appelle une facture de solde, alors qu'ici le paiement solde l'opération."
+        }
+      }
+    }
+  }
+}
