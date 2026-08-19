@@ -3,13 +3,257 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="robots" content="noindex, nofollow">
     <title id="page-title">Cas d'usage | Re·Form·E</title>
     <link rel="icon" href="./assets/favicon-Fluxym-V2.png" sizes="32x32" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./css/pages.css">
+    <style>
+        /* ==================================================================
+           STYLES SPÉCIFIQUES À LA FICHE DE CAS D'USAGE
+           (récit chronologique, tableau des champs, socle, cas liés)
+           ================================================================== */
+
+        /* --- Récit chronologique --- */
+        .cudet-story-intro { font-size: 15px; color: var(--gray-600); line-height: 1.8; margin-bottom: 24px; }
+        .cudet-story { list-style: none; margin: 0; padding: 0; position: relative; }
+        .cudet-story::before {
+            content: '';
+            position: absolute;
+            left: 27px;
+            top: 12px;
+            bottom: 12px;
+            width: 2px;
+            background: linear-gradient(180deg, var(--cyan), var(--purple));
+            opacity: 0.35;
+        }
+        .cudet-story-step {
+            position: relative;
+            display: grid;
+            grid-template-columns: 56px 1fr;
+            gap: 18px;
+            padding: 0 0 26px 0;
+        }
+        .cudet-story-step:last-child { padding-bottom: 0; }
+        .cudet-story-time {
+            width: 56px;
+            height: 56px;
+            border-radius: var(--radius-full);
+            background: var(--white);
+            border: 2px solid var(--cyan);
+            color: var(--navy);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            line-height: 1.1;
+            z-index: 1;
+            transition: all 0.25s ease;
+        }
+        .cudet-story-time span { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--gray-500); }
+        .cudet-story-time strong { font-size: 18px; }
+        .cudet-story-step:hover .cudet-story-time {
+            background: var(--cyan);
+            border-color: var(--cyan);
+            color: var(--white);
+            box-shadow: var(--shadow-cyan);
+            transform: scale(1.06);
+        }
+        .cudet-story-step:hover .cudet-story-time span { color: rgba(255, 255, 255, 0.85); }
+        .cudet-story-body {
+            background: var(--gray-50);
+            border: 1px solid var(--gray-200);
+            border-radius: var(--radius-lg);
+            padding: 18px 20px;
+            transition: all 0.25s ease;
+        }
+        .cudet-story-step:hover .cudet-story-body {
+            border-color: var(--cyan);
+            box-shadow: var(--shadow-sm);
+            transform: translateX(3px);
+        }
+        .cudet-story-meta { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 8px; }
+        .cudet-story-actor {
+            font-size: 11px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+            padding: 4px 12px;
+            border-radius: var(--radius-full);
+            color: var(--white);
+            background: var(--actor-color, var(--gray-500));
+        }
+        .cudet-story-flux {
+            font-size: 11px;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: var(--radius-sm);
+            background: rgba(0, 167, 225, 0.12);
+            color: var(--cyan);
+            border: 1px solid rgba(0, 167, 225, 0.25);
+        }
+        .cudet-story-body h4 { font-size: 15px; font-weight: 700; color: var(--gray-900); margin-bottom: 6px; }
+        .cudet-story-body p { font-size: 14px; line-height: 1.8; color: var(--gray-600); margin: 0; }
+        .cudet-story-refs { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+        .cudet-story-refs .bt-chip {
+            font-size: 11px;
+            font-weight: 700;
+            font-family: 'SFMono-Regular', Consolas, monospace;
+            padding: 3px 9px;
+            border-radius: var(--radius-sm);
+            background: var(--white);
+            border: 1px solid var(--gray-200);
+            color: var(--navy);
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+        .cudet-story-refs a.bt-chip:hover { border-color: var(--cyan); color: var(--cyan); }
+
+        /* Mise en évidence croisée récit ↔ diagramme */
+        .cudet-svg .cudet-step { transition: opacity 0.2s ease; }
+        .cudet-svg--focus .cudet-step { opacity: 0.2; }
+        .cudet-svg--focus .cudet-step--hl { opacity: 1; }
+        .cudet-story-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            margin-top: 10px;
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--gray-400);
+        }
+
+        /* --- Tableau des champs (delta) --- */
+        .cudet-flds { overflow-x: auto; border-radius: var(--radius-lg); border: 1px solid var(--gray-200); }
+        .cudet-flds table { width: 100%; border-collapse: collapse; font-size: 13px; min-width: 720px; }
+        .cudet-flds thead th {
+            background: var(--navy);
+            color: var(--white);
+            text-align: left;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 12px 14px;
+            white-space: nowrap;
+        }
+        .cudet-flds tbody td { padding: 12px 14px; border-top: 1px solid var(--gray-200); vertical-align: top; line-height: 1.7; color: var(--gray-600); }
+        .cudet-flds tbody tr:nth-child(even) { background: var(--gray-50); }
+        .cudet-flds tbody tr:hover { background: rgba(0, 167, 225, 0.05); }
+        .cudet-flds-id { font-family: 'SFMono-Regular', Consolas, monospace; font-weight: 700; color: var(--navy); text-decoration: none; white-space: nowrap; }
+        .cudet-flds-id:hover { color: var(--cyan); text-decoration: underline; }
+        .cudet-flds-name { color: var(--gray-900); font-weight: 600; }
+        .cudet-flds-val code, .cudet-flds-val strong { color: var(--gray-900); }
+        .cudet-flds-rule { font-size: 11px; color: var(--gray-400); white-space: nowrap; }
+        .cudet-flds-cond { display: block; font-size: 12px; color: var(--gray-500); font-style: italic; margin-top: 4px; }
+        .cudet-tag {
+            display: inline-block;
+            font-size: 10px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+            padding: 3px 9px;
+            border-radius: var(--radius-full);
+            white-space: nowrap;
+        }
+        .cudet-tag--obligatoire { background: rgba(239, 68, 68, 0.12); color: #b91c1c; }
+        .cudet-tag--conditionnel { background: rgba(245, 158, 11, 0.14); color: #b45309; }
+        .cudet-tag--recommande { background: rgba(0, 167, 225, 0.12); color: #0369a1; }
+        .cudet-tag--facultatif { background: var(--gray-100); color: var(--gray-500); }
+        .cudet-tag--niveau { background: rgba(99, 102, 241, 0.1); color: #4338ca; }
+        .cudet-flds-note {
+            margin-top: 16px;
+            font-size: 14px;
+            line-height: 1.8;
+            color: var(--gray-600);
+            padding: 14px 18px;
+            background: var(--gray-50);
+            border-left: 3px solid var(--cyan);
+            border-radius: var(--radius-sm);
+        }
+        .cudet-flds-sub { font-size: 15px; font-weight: 700; color: var(--gray-900); margin: 0 0 12px; }
+
+        /* --- Socle repliable --- */
+        .cudet-socle { margin-top: 28px; border: 1px solid var(--gray-200); border-radius: var(--radius-lg); background: var(--white); overflow: hidden; }
+        .cudet-socle > summary {
+            cursor: pointer;
+            padding: 16px 20px;
+            font-weight: 700;
+            font-size: 15px;
+            color: var(--navy);
+            background: var(--gray-50);
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .cudet-socle > summary::-webkit-details-marker { display: none; }
+        .cudet-socle > summary::after { content: '▾'; margin-left: auto; color: var(--gray-400); transition: transform 0.2s ease; }
+        .cudet-socle[open] > summary::after { transform: rotate(180deg); }
+        .cudet-socle > summary:hover { background: var(--gray-100); }
+        .cudet-socle-inner { padding: 20px; }
+        .cudet-socle-intro { font-size: 14px; line-height: 1.8; color: var(--gray-600); margin-bottom: 20px; }
+        .cudet-socle-group { margin-bottom: 24px; }
+        .cudet-socle-group:last-child { margin-bottom: 0; }
+        .cudet-socle-group > h5 {
+            font-size: 12px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+            color: var(--cyan);
+            margin-bottom: 10px;
+            padding-bottom: 6px;
+            border-bottom: 1px solid var(--gray-200);
+        }
+        .cudet-socle-note { font-size: 13px; color: var(--gray-500); font-style: italic; margin-top: 18px; }
+
+        /* --- Cas liés --- */
+        .cudet-lien-grid { display: grid; gap: 14px; }
+        .cudet-lien {
+            display: block;
+            text-decoration: none;
+            border: 1px solid var(--gray-200);
+            border-radius: var(--radius-lg);
+            padding: 16px 20px;
+            background: var(--white);
+            transition: all 0.25s ease;
+        }
+        .cudet-lien:hover { border-color: var(--cyan); box-shadow: var(--shadow-sm); transform: translateY(-2px); }
+        .cudet-lien-head { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-bottom: 8px; }
+        .cudet-lien-num {
+            font-size: 12px;
+            font-weight: 800;
+            color: var(--white);
+            background: var(--navy);
+            border-radius: var(--radius-sm);
+            padding: 4px 10px;
+            white-space: nowrap;
+        }
+        .cudet-lien-title { font-size: 15px; font-weight: 700; color: var(--gray-900); }
+        .cudet-lien-rel {
+            font-size: 10px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+            padding: 3px 10px;
+            border-radius: var(--radius-full);
+            background: rgba(99, 102, 241, 0.12);
+            color: #4338ca;
+        }
+        .cudet-lien-why { font-size: 14px; line-height: 1.8; color: var(--gray-600); margin: 0; }
+        .cudet-lien:hover .cudet-lien-title { color: var(--cyan); }
+
+        @media (max-width: 700px) {
+            .cudet-story::before { left: 19px; }
+            .cudet-story-step { grid-template-columns: 40px 1fr; gap: 12px; }
+            .cudet-story-time { width: 40px; height: 40px; }
+            .cudet-story-time strong { font-size: 14px; }
+            .cudet-story-time span { font-size: 7px; }
+            .cudet-story-body { padding: 14px 16px; }
+        }
+    </style>
 </head>
 <body>
 
@@ -34,10 +278,12 @@
                     <h4>Sur cette page</h4>
                     <ul class="sidebar-nav" id="case-sidebar">
                         <li><a href="#principe" class="sidebar-link active">Principe</a></li>
+                        <li><a href="#recit" class="sidebar-link">Déroulé pas à pas</a></li>
                         <li><a href="#diagramme" class="sidebar-link">Diagramme</a></li>
                         <li><a href="#attention" class="sidebar-link">Points d'attention</a></li>
-                        <li><a href="#technique" class="sidebar-link">Données techniques</a></li>
+                        <li><a href="#technique" class="sidebar-link">Champs à renseigner</a></li>
                         <li><a href="#statuts" class="sidebar-link">Cycle de vie</a></li>
+                        <li><a href="#lies" class="sidebar-link">Cas liés</a></li>
                     </ul>
                     <div class="sidebar-nav-pages">
                         <h4>Navigation</h4>
@@ -56,6 +302,12 @@
                     <div id="case-principle">
                         <div class="cuhub-loader">Chargement…</div>
                     </div>
+                </section>
+
+                <!-- RÉCIT CHRONOLOGIQUE -->
+                <section id="recit" class="content-section">
+                    <h2>🎬 Déroulé pas à pas</h2>
+                    <div id="case-story"></div>
                 </section>
 
                 <!-- DIAGRAMME DE SÉQUENCE -->
@@ -80,16 +332,22 @@
                     <div id="case-attention"></div>
                 </section>
 
-                <!-- DONNÉES TECHNIQUES -->
+                <!-- CHAMPS À RENSEIGNER -->
                 <section id="technique" class="content-section">
-                    <h2>🔧 Données techniques</h2>
+                    <h2>🔧 Champs à renseigner</h2>
                     <div id="case-bt-fields"></div>
+                    <div id="case-socle"></div>
                 </section>
 
                 <!-- CYCLE DE VIE -->
                 <section id="statuts" class="content-section">
                     <h2>🔄 Statuts du cycle de vie</h2>
                     <div id="case-statuses"></div>
+                </section>
+
+                <!-- CAS LIÉS -->
+                <section id="lies" class="content-section">
+                    <h2>🔗 Cas liés</h2>
                     <div id="case-related"></div>
                 </section>
 
