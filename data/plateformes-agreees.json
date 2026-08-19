@@ -18,7 +18,9 @@
    "indiceRelationDansLeNom est un simple marqueur lexical ('by', 'powered by', 'a X company') releve dans le nom officiel : il signale une piste de rattachement a verifier, jamais une conclusion.",
    "Correction du 19/08/2026 : le pays etait mal deduit lorsqu'un nom de rue contient un nom de pays (cas SAGE, 10 Place de Belgique a La Garenne-Colombes, classee a tort en Belgique). La detection ne s'applique plus qu'en fin d'adresse.",
    "Correction du 19/08/2026 : l'appariement automatique avait attribue a ESKER le SIREN 751992926 (entite de 1 a 2 salaries) au lieu du SIREN 331518498 (SA ESKER, creee en 1985, 250 a 499 salaries). Verification manuelle effectuee.",
-   "ESALINK : l'appariement SIREN reste incertain (481412245, code 61.90Z). Le repertoire recense a Bezannes ESALINK GROUP (953718855, 2023, 66.30Z) et ESALINK B2B SERVICES (832449219, 2017). Entite immatriculee a confirmer."
+   "ESALINK : l'appariement SIREN reste incertain (481412245, code 61.90Z). Le repertoire recense a Bezannes ESALINK GROUP (953718855, 2023, 66.30Z) et ESALINK B2B SERVICES (832449219, 2017). Entite immatriculee a confirmer.",
+   "Lot 3 : correction majeure. L'appariement automatique attribuait le meme SIREN 844589226 a KOLECTO PDP et KOLECTO PA. Le RNE recense en realite trois entites distinctes au 75008 Paris : KOLECTO (844589226, 2018), KOLECTO PDP (950955542, 20/12/2022) et KOLECTO PA (993109024, 16/10/2025). Deux immatriculations DGFiP pour un meme groupe, portees par deux societes differentes.",
+   "Lot 3 : aucune entite nommee MYKINEXO, SUPER PDP, TIIME PDP, N2F PDP ou EFFINUM n'a ete retrouvee par recherche de nom au RNE. Les suffixes PDP/PA de ces inscriptions peuvent relever du nom commercial et non d'une entite dediee. Identites a confirmer une par une."
   ],
   "axes": {
    "socleTechnique.type": [
@@ -48,11 +50,12 @@
    ]
   },
   "couverture": {
-   "identiteEntreprise_haute": 54,
-   "identiteEntreprise_a_verifier": 20,
-   "identiteEntreprise_absente": 89,
-   "qualificationMarche_faite": 21,
+   "identiteEntreprise_haute": 53,
+   "identiteEntreprise_a_verifier": 22,
+   "identiteEntreprise_absente": 88,
+   "qualificationMarche_faite": 28,
    "fournisseursDeSocle_identifies": 7,
+   "entitesCreeesPourLaReforme": 4,
    "note": "Appariement automatique nom commercial DGFiP -> SIREN via l'API Recherche d'entreprises. 'haute' = nom exact + code postal ou departement concordant. 'moyenne' = nom exact seul, a verifier. Les entites etrangeres (44) ne sont pas dans le repertoire SIRENE."
   }
  },
@@ -1432,10 +1435,15 @@
    "pays": "France",
    "siteWeb": null,
    "contact": null,
-   "segmentCible": [],
-   "familleOrigine": [],
-   "verticale": null,
-   "logiquePositionnement": null,
+   "segmentCible": [
+    "tpe_pme",
+    "eti"
+   ],
+   "familleOrigine": [
+    "facturation_compta"
+   ],
+   "verticale": "generaliste",
+   "logiquePositionnement": "Le suffixe « by Visma » dans le nom d'inscription signale un rattachement capitalistique a un editeur nordique de logiciels de gestion. Nature exacte de l'operation a sourcer.",
    "anneeCreation": "2018",
    "effectif": null,
    "siren": "842804858",
@@ -1445,13 +1453,25 @@
    "empreinteGeo": null,
    "peppolAP": null,
    "modeleDistribution": [],
-   "descriptionFiche": null,
+   "descriptionFiche": "Entite creee le 03/10/2018, immatriculee le 18/12/25. Le nom officiel declare a la DGFiP porte deja la marque du groupe acquereur, Visma.",
    "sourcesEnrichissement": [
     {
-     "champ": "identite_entreprise",
-     "source": "API Recherche d'entreprises (INSEE/RNE) — annuaire-entreprises.data.gouv.fr",
+     "champ": "immatriculation",
+     "source": "Liste officielle DGFiP — impots.gouv.fr",
      "dateReleve": "2026-08-19",
      "confiance": "haute"
+    },
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE)",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    },
+    {
+     "champ": "positionnement",
+     "source": "nom officiel declare a la DGFiP + RNE",
+     "dateReleve": "2026-08-19",
+     "confiance": "moyenne"
     }
    ],
    "confiance": "non_qualifie",
@@ -1464,8 +1484,8 @@
    },
    "fournisseurDeSocle": null,
    "modeDistributionSocle": [],
-   "groupeCapitalistique": null,
-   "relationCapitalistique": null,
+   "groupeCapitalistique": "Visma",
+   "relationCapitalistique": "acquise",
    "partenariats": [],
    "indiceRelationDansLeNom": "CHAINTRUST by Visma",
    "raisonSociale": "CHAINTRUST",
@@ -1495,7 +1515,14 @@
      "type": "personne morale"
     }
    ],
-   "confianceIdentite": "haute"
+   "confianceIdentite": "haute",
+   "natureEntite": "extension_demat",
+   "perimetreFonctionnel": [
+    "emission",
+    "reception",
+    "ereporting"
+   ],
+   "lot": 3
   },
   {
    "nom": "CLEARTAX",
@@ -2752,10 +2779,15 @@
    "pays": "France",
    "siteWeb": null,
    "contact": null,
-   "segmentCible": [],
-   "familleOrigine": [],
-   "verticale": null,
-   "logiquePositionnement": null,
+   "segmentCible": [
+    "eti",
+    "grands_comptes"
+   ],
+   "familleOrigine": [
+    "tax"
+   ],
+   "verticale": "generaliste",
+   "logiquePositionnement": "La formule « powered by » suggere que le service s'appuie sur les moyens du groupe VAT IT, specialiste de la recuperation et de la conformite TVA. Rattachement a confirmer.",
    "anneeCreation": "2016",
    "effectif": null,
    "siren": "823517073",
@@ -2765,11 +2797,23 @@
    "empreinteGeo": null,
    "peppolAP": null,
    "modeleDistribution": [],
-   "descriptionFiche": null,
+   "descriptionFiche": "Entite creee le 01/11/2016, etablie a Saint-Germain-en-Laye, immatriculee le 13/01/26. La mention « powered by VAT IT » figure dans le nom declare a la DGFiP.",
    "sourcesEnrichissement": [
     {
+     "champ": "immatriculation",
+     "source": "Liste officielle DGFiP — impots.gouv.fr",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    },
+    {
      "champ": "identite_entreprise",
-     "source": "API Recherche d'entreprises (INSEE/RNE) — annuaire-entreprises.data.gouv.fr",
+     "source": "API Recherche d'entreprises (INSEE/RNE)",
+     "dateReleve": "2026-08-19",
+     "confiance": "moyenne"
+    },
+    {
+     "champ": "positionnement",
+     "source": "nom officiel declare a la DGFiP + RNE",
      "dateReleve": "2026-08-19",
      "confiance": "moyenne"
     }
@@ -2784,8 +2828,8 @@
    },
    "fournisseurDeSocle": null,
    "modeDistributionSocle": [],
-   "groupeCapitalistique": null,
-   "relationCapitalistique": null,
+   "groupeCapitalistique": "VAT IT",
+   "relationCapitalistique": "filiale_de_groupe",
    "partenariats": [],
    "indiceRelationDansLeNom": "EEZI powered by VAT IT",
    "raisonSociale": "EEZI",
@@ -2800,7 +2844,14 @@
      "type": "personne physique"
     }
    ],
-   "confianceIdentite": "moyenne"
+   "confianceIdentite": "moyenne",
+   "natureEntite": "extension_demat",
+   "perimetreFonctionnel": [
+    "emission",
+    "reception",
+    "ereporting"
+   ],
+   "lot": 3
   },
   {
    "nom": "Effinum by SPEE",
@@ -2812,10 +2863,14 @@
    "pays": "France",
    "siteWeb": null,
    "contact": null,
-   "segmentCible": [],
-   "familleOrigine": [],
-   "verticale": null,
-   "logiquePositionnement": null,
+   "segmentCible": [
+    "tpe_pme"
+   ],
+   "familleOrigine": [
+    "facturation_compta"
+   ],
+   "verticale": "generaliste",
+   "logiquePositionnement": "A qualifier entierement : le nom d'inscription indique un service (Effinum) porte par une societe (SPEE), sans element public suffisant a ce stade.",
    "anneeCreation": null,
    "effectif": null,
    "siren": null,
@@ -2825,8 +2880,21 @@
    "empreinteGeo": null,
    "peppolAP": null,
    "modeleDistribution": [],
-   "descriptionFiche": null,
-   "sourcesEnrichissement": [],
+   "descriptionFiche": "Immatriculee le 11/12/25, etablie 18 rue de l'Armorique a Paris. Aucune entite « Effinum » ni « SPEE » retrouvee au RNE par recherche de nom : identite juridique a confirmer.",
+   "sourcesEnrichissement": [
+    {
+     "champ": "immatriculation",
+     "source": "Liste officielle DGFiP — impots.gouv.fr",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    },
+    {
+     "champ": "positionnement",
+     "source": "nom officiel declare a la DGFiP + RNE",
+     "dateReleve": "2026-08-19",
+     "confiance": "moyenne"
+    }
+   ],
    "confiance": "non_qualifie",
    "socleTechnique": {
     "type": null,
@@ -2837,10 +2905,17 @@
    },
    "fournisseurDeSocle": null,
    "modeDistributionSocle": [],
-   "groupeCapitalistique": null,
-   "relationCapitalistique": null,
+   "groupeCapitalistique": "SPEE",
+   "relationCapitalistique": "filiale_de_groupe",
    "partenariats": [],
-   "indiceRelationDansLeNom": "Effinum by SPEE"
+   "indiceRelationDansLeNom": "Effinum by SPEE",
+   "natureEntite": "extension_demat",
+   "perimetreFonctionnel": [
+    "emission",
+    "reception",
+    "ereporting"
+   ],
+   "lot": 3
   },
   {
    "nom": "ENERJ",
@@ -3308,21 +3383,45 @@
    "pays": "France",
    "siteWeb": null,
    "contact": null,
-   "segmentCible": [],
-   "familleOrigine": [],
-   "verticale": null,
-   "logiquePositionnement": null,
-   "anneeCreation": null,
+   "segmentCible": [
+    "micro",
+    "tpe_pme"
+   ],
+   "familleOrigine": [
+    "facturation_compta"
+   ],
+   "verticale": "generaliste",
+   "logiquePositionnement": "A confirmer : editeur de facturation de petite taille, le suffixe « PDP » releverait du nom commercial du service et non d'une entite dediee.",
+   "anneeCreation": "2015",
    "effectif": null,
-   "siren": null,
+   "siren": "813779691",
    "actionnariat": null,
    "typeActionnariat": null,
    "leveeDeFonds": null,
    "empreinteGeo": null,
    "peppolAP": null,
    "modeleDistribution": [],
-   "descriptionFiche": null,
-   "sourcesEnrichissement": [],
+   "descriptionFiche": "Le nom declare a la DGFiP est « FACNOTE PDP » mais aucune entite de ce nom ne figure au RNE : l'entite retenue est FACNOTE (SIREN 813779691, creee le 15/09/2015 a Marseille, 3 a 5 salaries). Appariement a confirmer.",
+   "sourcesEnrichissement": [
+    {
+     "champ": "immatriculation",
+     "source": "Liste officielle DGFiP — impots.gouv.fr",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    },
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE)",
+     "dateReleve": "2026-08-19",
+     "confiance": "moyenne"
+    },
+    {
+     "champ": "positionnement",
+     "source": "nom officiel declare a la DGFiP + RNE",
+     "dateReleve": "2026-08-19",
+     "confiance": "moyenne"
+    }
+   ],
    "confiance": "non_qualifie",
    "socleTechnique": {
     "type": null,
@@ -3333,9 +3432,21 @@
    },
    "fournisseurDeSocle": null,
    "modeDistributionSocle": [],
-   "groupeCapitalistique": null,
-   "relationCapitalistique": null,
-   "partenariats": []
+   "groupeCapitalistique": "Facnote (Marseille, 13002)",
+   "relationCapitalistique": "non_determinable",
+   "partenariats": [],
+   "raisonSociale": "FACNOTE",
+   "dateCreation": "2015-09-15",
+   "trancheEffectif": "3-5",
+   "activitePrincipale": "62.01Z",
+   "confianceIdentite": "moyenne",
+   "natureEntite": "extension_demat",
+   "perimetreFonctionnel": [
+    "emission",
+    "reception",
+    "ereporting"
+   ],
+   "lot": 3
   },
   {
    "nom": "FIDUCIAL CLOUD",
@@ -4599,45 +4710,62 @@
    "pays": "France",
    "siteWeb": null,
    "contact": null,
-   "segmentCible": [],
-   "familleOrigine": [],
-   "verticale": null,
-   "logiquePositionnement": null,
-   "anneeCreation": "2018",
+   "segmentCible": [
+    "tpe_pme"
+   ],
+   "familleOrigine": [
+    "facturation_compta",
+    "fintech"
+   ],
+   "verticale": "generaliste",
+   "logiquePositionnement": "Creee exclusivement pour porter une immatriculation sous le nouveau vocable « plateforme agreee ». Illustre que le compteur d'immatriculations mesure des inscriptions administratives, pas des offres distinctes.",
+   "anneeCreation": "2025",
    "effectif": null,
-   "siren": "844589226",
+   "siren": "993109024",
    "actionnariat": null,
    "typeActionnariat": null,
    "leveeDeFonds": null,
    "empreinteGeo": null,
    "peppolAP": null,
    "modeleDistribution": [],
-   "descriptionFiche": null,
+   "descriptionFiche": "Entite creee le 16/10/2025, soit deux mois avant l'entree en vigueur, et immatriculee le 22/04/26. La plus recente creation d'entreprise de tout le referentiel.",
    "sourcesEnrichissement": [
     {
-     "champ": "identite_entreprise",
-     "source": "API Recherche d'entreprises (INSEE/RNE) — annuaire-entreprises.data.gouv.fr",
+     "champ": "immatriculation",
+     "source": "Liste officielle DGFiP — impots.gouv.fr",
      "dateReleve": "2026-08-19",
      "confiance": "haute"
+    },
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE)",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    },
+    {
+     "champ": "positionnement",
+     "source": "nom officiel declare a la DGFiP + RNE",
+     "dateReleve": "2026-08-19",
+     "confiance": "moyenne"
     }
    ],
    "confiance": "non_qualifie",
    "socleTechnique": {
-    "type": null,
-    "operateurSocle": null,
-    "preuve": null,
-    "source": null,
-    "confiance": "non_qualifie"
+    "type": "propre",
+    "operateurSocle": "Kolecto",
+    "preuve": "Seconde entite dediee du groupe Kolecto",
+    "source": "RNE",
+    "confiance": "moyenne"
    },
    "fournisseurDeSocle": null,
    "modeDistributionSocle": [],
-   "groupeCapitalistique": null,
-   "relationCapitalistique": null,
+   "groupeCapitalistique": "Kolecto (SIREN 844589226) — seconde immatriculation du groupe, avec KOLECTO PDP",
+   "relationCapitalistique": "filiale_de_groupe",
    "partenariats": [],
-   "raisonSociale": "KOLECTO",
-   "dateCreation": "2018-11-26",
-   "trancheEffectif": "10-19",
-   "categorieEntreprise": "GE",
+   "raisonSociale": "KOLECTO PA",
+   "dateCreation": "2025-10-16",
+   "trancheEffectif": null,
+   "categorieEntreprise": null,
    "activitePrincipale": "62.01Z",
    "dirigeants": [
     {
@@ -4656,7 +4784,14 @@
      "type": "personne morale"
     }
    ],
-   "confianceIdentite": "haute"
+   "confianceIdentite": "haute",
+   "natureEntite": "creee_pour_rfe",
+   "perimetreFonctionnel": [
+    "emission",
+    "reception",
+    "ereporting"
+   ],
+   "lot": 3
   },
   {
    "nom": "KOLECTO PDP",
@@ -4668,45 +4803,62 @@
    "pays": "France",
    "siteWeb": null,
    "contact": null,
-   "segmentCible": [],
-   "familleOrigine": [],
-   "verticale": null,
-   "logiquePositionnement": null,
-   "anneeCreation": "2018",
+   "segmentCible": [
+    "tpe_pme"
+   ],
+   "familleOrigine": [
+    "facturation_compta",
+    "fintech"
+   ],
+   "verticale": "generaliste",
+   "logiquePositionnement": "Cas unique observe a ce jour : le groupe a cree une entite dediee a l'epoque du vocable « PDP », puis une seconde entite « PA » en octobre 2025 lorsque la terminologie officielle a change. Les deux sont immatriculees separement.",
+   "anneeCreation": "2022",
    "effectif": null,
-   "siren": "844589226",
+   "siren": "950955542",
    "actionnariat": null,
    "typeActionnariat": null,
    "leveeDeFonds": null,
    "empreinteGeo": null,
    "peppolAP": null,
    "modeleDistribution": [],
-   "descriptionFiche": null,
+   "descriptionFiche": "Entite dediee creee le 20/12/2022, immatriculee le 18/12/25. Le groupe Kolecto porte trois societes distinctes a la meme adresse parisienne : KOLECTO (2018, societe operationnelle), KOLECTO PDP (2022) et KOLECTO PA (2025).",
    "sourcesEnrichissement": [
     {
-     "champ": "identite_entreprise",
-     "source": "API Recherche d'entreprises (INSEE/RNE) — annuaire-entreprises.data.gouv.fr",
+     "champ": "immatriculation",
+     "source": "Liste officielle DGFiP — impots.gouv.fr",
      "dateReleve": "2026-08-19",
      "confiance": "haute"
+    },
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE)",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    },
+    {
+     "champ": "positionnement",
+     "source": "nom officiel declare a la DGFiP + RNE",
+     "dateReleve": "2026-08-19",
+     "confiance": "moyenne"
     }
    ],
    "confiance": "non_qualifie",
    "socleTechnique": {
-    "type": null,
-    "operateurSocle": null,
-    "preuve": null,
-    "source": null,
-    "confiance": "non_qualifie"
+    "type": "propre",
+    "operateurSocle": "Kolecto",
+    "preuve": "Entite dediee du groupe Kolecto",
+    "source": "RNE",
+    "confiance": "moyenne"
    },
    "fournisseurDeSocle": null,
    "modeDistributionSocle": [],
-   "groupeCapitalistique": null,
-   "relationCapitalistique": null,
+   "groupeCapitalistique": "Kolecto (SIREN 844589226, creee le 26/11/2018, 10 a 19 salaries, 75008 Paris)",
+   "relationCapitalistique": "filiale_de_groupe",
    "partenariats": [],
-   "raisonSociale": "KOLECTO",
-   "dateCreation": "2018-11-26",
-   "trancheEffectif": "10-19",
-   "categorieEntreprise": "GE",
+   "raisonSociale": "KOLECTO PDP",
+   "dateCreation": "2022-12-20",
+   "trancheEffectif": null,
+   "categorieEntreprise": null,
    "activitePrincipale": "62.01Z",
    "dirigeants": [
     {
@@ -4725,7 +4877,14 @@
      "type": "personne morale"
     }
    ],
-   "confianceIdentite": "haute"
+   "confianceIdentite": "haute",
+   "natureEntite": "creee_pour_rfe",
+   "perimetreFonctionnel": [
+    "emission",
+    "reception",
+    "ereporting"
+   ],
+   "lot": 3
   },
   {
    "nom": "LE VILLAGE CONNECTE",
@@ -4806,10 +4965,16 @@
    "pays": "Italie",
    "siteWeb": null,
    "contact": null,
-   "segmentCible": [],
-   "familleOrigine": [],
-   "verticale": null,
-   "logiquePositionnement": null,
+   "segmentCible": [
+    "tpe_pme",
+    "eti"
+   ],
+   "familleOrigine": [
+    "tax",
+    "facturation_compta"
+   ],
+   "verticale": "generaliste",
+   "logiquePositionnement": "Coherence forte a confirmer : Tinexta Infocert est un tiers de confiance et prestataire de signature electronique deja actif sur la facturation electronique italienne.",
    "anneeCreation": null,
    "effectif": null,
    "siren": null,
@@ -4819,8 +4984,21 @@
    "empreinteGeo": null,
    "peppolAP": null,
    "modeleDistribution": [],
-   "descriptionFiche": null,
-   "sourcesEnrichissement": [],
+   "descriptionFiche": "Immatriculee le 13/04/26 (vague 3). Le nom d'inscription associe la marque produit Legalinvoice et le groupe italien Tinexta Infocert, prestataire de services de confiance.",
+   "sourcesEnrichissement": [
+    {
+     "champ": "immatriculation",
+     "source": "Liste officielle DGFiP — impots.gouv.fr",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    },
+    {
+     "champ": "positionnement",
+     "source": "nom officiel declare a la DGFiP + RNE",
+     "dateReleve": "2026-08-19",
+     "confiance": "moyenne"
+    }
+   ],
    "confiance": "non_qualifie",
    "socleTechnique": {
     "type": null,
@@ -4831,10 +5009,17 @@
    },
    "fournisseurDeSocle": null,
    "modeDistributionSocle": [],
-   "groupeCapitalistique": null,
-   "relationCapitalistique": null,
+   "groupeCapitalistique": "Tinexta Infocert",
+   "relationCapitalistique": "filiale_de_groupe",
    "partenariats": [],
-   "indiceRelationDansLeNom": "Legalinvoice by Tinexta Infocert"
+   "indiceRelationDansLeNom": "Legalinvoice by Tinexta Infocert",
+   "natureEntite": "extension_demat",
+   "perimetreFonctionnel": [
+    "emission",
+    "reception",
+    "ereporting"
+   ],
+   "lot": 3
   },
   {
    "nom": "LOGILEC",
@@ -7633,7 +7818,7 @@
      "type": "personne physique"
     }
    ],
-   "confianceIdentite": "haute"
+   "confianceIdentite": "moyenne"
   },
   {
    "nom": "TRADESHIFT BABELWAY",
