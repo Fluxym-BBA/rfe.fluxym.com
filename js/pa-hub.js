@@ -43,7 +43,7 @@
       <div class="counter-card">
         <div class="counter-value">${c.n}</div>
         <div class="counter-label">${c.l}</div>
-        <div class="counter-sub">${c.s}</div>
+        <div class="counter-detail">${c.s}</div>
       </div>`).join('');
 
     const d = new Date(m.dateReleve).toLocaleDateString('fr-FR');
@@ -131,7 +131,36 @@
           <h3>${g.label} <span class="pa-segment-count">${g.items.length}</span></h3>
           <div class="pa-segment-list">${g.items.map((pa) => `<a href="./pa-detail.html?pa=${slugify(pa.nom)}">${pa.nom}</a>`).join('')}</div>
         </div>`).join('')
-      : `<div class="callout callout-info">La qualification par famille d\u2019origine est en cours de construction. Les ${state.data.plateformes.length} plateformes sont déjà listées dans l\u2019annuaire ci-dessus avec leurs données officielles.</div>`;
+      : `<div class="callout callout--info"><div class="callout-icon">🚧</div><div class="callout-content">La qualification par famille d\u2019origine est en cours de construction. Les ${state.data.plateformes.length} plateformes sont déjà listées dans l\u2019annuaire ci-dessus avec leurs données officielles.</div></div>`;
+  };
+
+
+  const renderLecture = () => {
+    const pa = state.data.plateformes;
+    const cov = state.data._meta.couverture || {};
+    const tranches = ['avant 2000', '2000-2010', '2011-2020', 'depuis 2021'];
+    const parAnciennete = tranches.map((t) => [t, pa.filter((p) => trancheAnnee(p.anneeCreation) === t).length]);
+    const parCategorie = ['PME', 'ETI', 'GE'].map((c) => [c, pa.filter((p) => p.categorieEntreprise === c).length]);
+    const rows = (arr) => arr.filter(([, n]) => n).map(([k, n]) => `<tr><td>${k}</td><td>${n}</td></tr>`).join('');
+    document.getElementById('pa-lecture').innerHTML = `
+      <div class="pa-datablocks">
+        <div class="pa-datablock">
+          <h3>Ancienneté de l\u2019entreprise</h3>
+          <table class="pa-table"><tbody>${rows(parAnciennete)}</tbody></table>
+        </div>
+        <div class="pa-datablock">
+          <h3>Catégorie INSEE</h3>
+          <table class="pa-table"><tbody>${rows(parCategorie)}</tbody></table>
+        </div>
+        <div class="pa-datablock">
+          <h3>Origine géographique</h3>
+          <table class="pa-table"><tbody>
+            <tr><td>Entités françaises</td><td>${pa.filter((p) => p.pays === 'France').length}</td></tr>
+            <tr><td>Entités étrangères</td><td>${pa.filter((p) => p.pays && p.pays !== 'France').length}</td></tr>
+          </tbody></table>
+        </div>
+      </div>
+      <p class="pa-source-note">Identité juridique appariée avec haute confiance pour <strong>${cov.identiteEntreprise_haute || 0}</strong> plateformes, à vérifier pour <strong>${cov.identiteEntreprise_a_verifier || 0}</strong>, non encore appariée pour <strong>${cov.identiteEntreprise_absente || 0}</strong>. Les répartitions ci-dessus ne portent donc que sur les plateformes identifiées.</p>`;
   };
 
   const init = async () => {
@@ -142,6 +171,7 @@
     renderFacets();
     renderGrid();
     renderSegments();
+    renderLecture();
     document.getElementById('pa-search').addEventListener('input', (e) => {
       state.query = e.target.value.trim().toLowerCase();
       renderGrid();
