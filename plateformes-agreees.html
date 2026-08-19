@@ -1,84 +1,123 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Les plateformes agréées | Re·Form·E</title>
-  <meta name="description" content="Cartographie des plateformes agréées (PA) immatriculées par la DGFiP : liste complète, segments de marché, ancienneté, actionnariat et socle technique.">
-  <link rel="icon" href="./assets/favicon-Fluxym-V2.png" sizes="32x32" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./css/pages.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Les plateformes agréées | Re·Form·E</title>
+    <meta name="description" content="Référentiel des plateformes agréées (PA) immatriculées par la DGFiP : annuaire complet, segments de marché, ancienneté, actionnariat et socle technique.">
+    <link rel="icon" href="./assets/favicon-Fluxym-V2.png" sizes="32x32" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/pages.css">
 </head>
 <body>
-  <nav id="main-nav"></nav>
+    <nav id="main-nav"></nav>
 
-  <header class="page-hero">
-    <div class="page-container">
-      <div class="breadcrumb"><a href="./index.html">Accueil</a> <span>/</span> <a href="./acteurs.html">Les acteurs</a> <span>/</span> Les plateformes agréées</div>
-      <div class="hero-badge">Référentiel de marché</div>
-      <h1>Les plateformes agréées</h1>
-      <p>Derrière la liste alphabétique publiée par la DGFiP, un marché : des grossistes, des pure-players, des éditeurs historiques et des entités créées pour la réforme. Cette page les compte, les qualifie et les compare.</p>
-      <p class="hero-meta" id="pa-meta">Chargement du référentiel…</p>
-    </div>
-  </header>
-
-  <main class="page-main">
-    <div class="page-container page-layout">
-      <aside class="page-sidebar">
-        <div class="sidebar-sticky">
-          <nav class="sidebar-nav">
-            <div class="sidebar-title">Sur cette page</div>
-            <ul>
-              <li><a href="#chiffres" class="sidebar-link">Les chiffres clés</a></li>
-              <li><a href="#annuaire" class="sidebar-link">L'annuaire complet</a></li>
-              <li><a href="#segments" class="sidebar-link">Les segments de marché</a></li>
-              <li><a href="#methode" class="sidebar-link">Méthode et sources</a></li>
-            </ul>
-          </nav>
+    <!-- HERO -->
+    <header class="page-hero">
+        <div class="page-hero-content">
+            <div class="breadcrumb">
+                <a href="./index.html">Accueil</a> <span>/</span> <a href="./acteurs.html">Les acteurs</a> <span>/</span> <span>Les plateformes agréées</span>
+            </div>
+            <span class="hero-badge">Niveau 2 — Écosystème</span>
+            <h1>Les plateformes agréées</h1>
+            <p>Derrière la liste alphabétique publiée par la DGFiP, il y a un marché : des grossistes, des pure-players, des éditeurs historiques et des entités créées pour la réforme. Cette page les compte, les qualifie et les compare.</p>
+            <p class="pa-hero-meta" id="pa-meta">Chargement du référentiel…</p>
         </div>
-      </aside>
+    </header>
 
-      <article class="page-content">
-        <section id="chiffres" class="content-section reveal-on-scroll">
-          <h2>📊 Les chiffres clés</h2>
-          <div class="counters-grid" id="pa-counters"></div>
-          <p class="source-note" id="pa-source"></p>
-        </section>
+    <!-- COMPTEURS -->
+    <section class="counters-section">
+        <div class="page-container">
+            <div class="counters-grid" id="pa-counters"></div>
+            <p class="pa-source-note" id="pa-source"></p>
+        </div>
+    </section>
 
-        <section id="annuaire" class="content-section reveal-on-scroll">
-          <h2>📇 L'annuaire complet</h2>
-          <div class="pa-toolbar">
-            <input type="search" id="pa-search" class="pa-search" placeholder="Rechercher une plateforme…" aria-label="Rechercher une plateforme agréée">
-            <div id="pa-facets" class="pa-facets"></div>
-            <button type="button" id="pa-reset" class="btn-hero-outline">Réinitialiser</button>
-          </div>
-          <p class="pa-count" id="pa-count"></p>
-          <div class="pa-grid" id="pa-grid"></div>
-        </section>
+    <!-- CONTENU PRINCIPAL -->
+    <section class="page-section">
+        <div class="page-container page-layout">
 
-        <section id="segments" class="content-section reveal-on-scroll">
-          <h2>🎯 Les segments de marché</h2>
-          <p>Regroupement des plateformes par <strong>famille d'origine</strong> et <strong>segment cible</strong> : chaque bloc réunit des acteurs qui se disputent le même terrain.</p>
-          <div id="pa-segments" class="pa-segments"></div>
-        </section>
+            <!-- SIDEBAR NAV -->
+            <aside class="page-sidebar">
+                <div class="sidebar-sticky">
+                    <h4>Sur cette page</h4>
+                    <ul class="sidebar-nav">
+                        <li><a href="#annuaire" class="sidebar-link active">📇 L'annuaire complet</a></li>
+                        <li><a href="#segments" class="sidebar-link">🎯 Les segments de marché</a></li>
+                        <li><a href="#lecture" class="sidebar-link">📊 Ce que dit la donnée</a></li>
+                        <li class="sidebar-sep"></li>
+                        <li><a href="#methode" class="sidebar-link">🔍 Méthode et sources</a></li>
+                    </ul>
+                    <div class="sidebar-pages">
+                        <h4>Pages liées</h4>
+                        <a href="./acteurs.html" class="sidebar-page-link">👥 Les acteurs de la réforme</a>
+                        <a href="./se-preparer.html" class="sidebar-page-link">🚀 Se préparer</a>
+                        <a href="./ressources.html" class="sidebar-page-link">📚 Liens & outils</a>
+                    </div>
+                </div>
+            </aside>
 
-        <section id="methode" class="content-section reveal-on-scroll">
-          <h2>🔍 Méthode et sources</h2>
-          <ul class="styled-list">
-            <li><strong>Source de référence :</strong> liste officielle des plateformes agréées publiée par la DGFiP sur <a href="https://www.impots.gouv.fr/je-consulte-la-liste-des-plateformes-agreees" target="_blank" rel="noopener">impots.gouv.fr</a>. Chaque chiffre de cette page est horodaté.</li>
-            <li><strong>Identité des entreprises :</strong> API Recherche d'entreprises (INSEE / RNE) — SIREN, date de création, effectif, dirigeants.</li>
-            <li><strong>Qualification de marché</strong> (famille d'origine, segment cible, socle technique) : observation des offres commerciales publiées par les plateformes elles-mêmes. Chaque champ porte sa source et un indice de confiance.</li>
-          </ul>
-          <div class="callout callout-warning">
-            <strong>À lire avant d'interpréter.</strong> Les notions de « marque blanche » et de « marque grise » sont des catégories commerciales, <strong>pas des catégories réglementaires</strong> : l'administration ne distingue que les plateformes agréées immatriculées et les Solutions Compatibles non immatriculées. Chaque plateforme figurant sur la liste officielle est immatriculée en son nom propre, a passé ses propres tests d'interopérabilité et porte seule la responsabilité réglementaire vis-à-vis de l'administration, quelle que soit l'origine de son socle technique. L'axe « socle technique » mesure une dépendance industrielle, il ne remet jamais en cause un agrément.
-          </div>
-        </section>
-      </article>
-    </div>
-  </main>
+            <!-- CONTENU -->
+            <main class="page-content">
 
-  <script src="./js/nav.js"></script>
-  <script src="./js/animations.js"></script>
-  <script src="./js/pa-hub.js"></script>
+                <section class="content-section">
+                    <h2 id="annuaire">📇 L'annuaire complet</h2>
+                    <p>Chaque plateforme dispose de sa fiche : identité juridique, positionnement, socle technique, actionnariat et concurrents sur le même segment. Les filtres se combinent librement.</p>
+
+                    <div class="pa-toolbar">
+                        <input type="search" id="pa-search" class="pa-search" placeholder="Rechercher une plateforme…" aria-label="Rechercher une plateforme agréée">
+                        <button type="button" id="pa-reset" class="pa-reset">Réinitialiser</button>
+                    </div>
+                    <div id="pa-facets" class="pa-facets"></div>
+                    <p class="pa-count" id="pa-count"></p>
+                    <div class="pa-grid" id="pa-grid"></div>
+                </section>
+
+                <section class="content-section">
+                    <h2 id="segments">🎯 Les segments de marché</h2>
+                    <p>Regroupement par <strong>famille d'origine</strong> : chaque bloc réunit des acteurs qui se disputent le même terrain.</p>
+                    <div id="pa-segments" class="pa-segments"></div>
+                </section>
+
+                <section class="content-section">
+                    <h2 id="lecture">📊 Ce que dit la donnée</h2>
+                    <div id="pa-lecture"></div>
+                    <div class="callout callout--info">
+                        <div class="callout-icon">💡</div>
+                        <div class="callout-content">
+                            <strong>Le nombre de plateformes n'est pas le nombre d'acteurs.</strong>
+                            Plusieurs inscriptions appartiennent au même groupe, et certaines plateformes s'appuient sur le socle technique d'une autre. Le nombre d'offres réellement indépendantes est donc inférieur au nombre d'immatriculations.
+                        </div>
+                    </div>
+                </section>
+
+                <section class="content-section">
+                    <h2 id="methode">🔍 Méthode et sources</h2>
+                    <ul class="styled-list">
+                        <li><strong>Source de référence :</strong> liste officielle des plateformes agréées publiée par la DGFiP sur <a href="https://www.impots.gouv.fr/je-consulte-la-liste-des-plateformes-agreees" target="_blank" rel="noopener">impots.gouv.fr</a>. Chaque chiffre de cette page est horodaté par sa date de relevé.</li>
+                        <li><strong>Identité des entreprises :</strong> API Recherche d'entreprises (INSEE / RNE) — SIREN, date de création, effectif, dirigeants. Les entités étrangères ne figurent pas au répertoire SIRENE.</li>
+                        <li><strong>Qualification de marché</strong> (famille d'origine, segment cible, socle technique) : observation des offres commerciales publiées par les plateformes elles-mêmes. Chaque champ porte sa source, sa date et un indice de confiance.</li>
+                        <li><strong>Ce que cette page n'est pas :</strong> ni un classement, ni une recommandation, ni un audit. Aucune note, aucun palmarès.</li>
+                    </ul>
+
+                    <div class="callout callout--warning">
+                        <div class="callout-icon">⚠️</div>
+                        <div class="callout-content">
+                            <strong>À lire avant d'interpréter l'axe « socle technique ».</strong>
+                            « Marque blanche » et « marque grise » sont des catégories commerciales, <strong>pas des catégories réglementaires</strong> : l'administration ne distingue que la plateforme agréée immatriculée et la Solution Compatible non immatriculée. Chaque plateforme figurant sur la liste officielle est immatriculée en son nom propre, a passé ses propres tests d'interopérabilité et porte seule la responsabilité réglementaire devant l'administration, quelle que soit l'origine de son socle technique. Cet axe mesure une dépendance industrielle, il ne remet jamais en cause un agrément.
+                        </div>
+                    </div>
+                </section>
+
+            </main>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer id="main-footer"></footer>
+
+    <script src="./js/nav.js"></script>
+    <script src="./js/animations.js"></script>
+    <script src="./js/pa-hub.js"></script>
 </body>
 </html>
