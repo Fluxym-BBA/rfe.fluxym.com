@@ -45,7 +45,7 @@
                     <div class="sidebar-nav-pages">
                         <h4>Parcours Niveau 3</h4>
                         <a href="./schema-en-y.html" class="sidebar-page">🔀 Schéma en Y</a>
-                        <a href="./flux.html" class="sidebar-page">📡 Les 14 flux</a>
+                        <a href="./flux.html" class="sidebar-page">📡 Les flux</a>
                         <a href="./cycle-de-vie.html" class="sidebar-page">🔄 Cycle de vie</a>
                         <a href="./formats.html" class="sidebar-page active">📐 Les formats</a>
                     </div>
@@ -147,7 +147,7 @@
                     <h2>📙 Factur-X — Le format hybride</h2>
                     <p>Le meilleur des deux mondes : un <strong>PDF/A-3</strong> lisible par un humain + un <strong>XML CII</strong> embarqué lisible par une machine. Identique à <strong>ZUGFeRD</strong> côté allemand.</p>
 
-                    <h3>Les 6 profils</h3>
+                    <h3>Les profils Factur-X</h3>
                     <div class="comparison-table">
                         <table>
                             <thead><tr><th>Profil</th><th>Données</th><th>RFE ?</th><th>Description</th></tr></thead>
@@ -158,6 +158,7 @@
                                 <tr><td><strong>EN16931</strong></td><td>Norme complète</td><td><span class="status-yes">✅ Recommandé</span></td><td>Conformité européenne totale</td></tr>
                                 <tr><td><strong>EXTENDED</strong></td><td>EN16931 +</td><td><span class="status-yes">✅</span></td><td>Données additionnelles</td></tr>
                                 <tr><td><strong>EXTENDED-CTC-FR</strong></td><td>Extension FR</td><td><span class="status-yes">✅ Avancé</span></td><td>Extension française (Chorus Pro, sous-traitance…)</td></tr>
+                                <tr><td><strong>EXTENDED-B2B-FR</strong></td><td>Extension FR B2B</td><td><span class="status-yes">✅ Avancé</span></td><td>Profil français complémentaire, à distinguer d'EXTENDED-CTC-FR</td></tr>
                             </tbody>
                         </table>
                     </div>
@@ -216,12 +217,15 @@
                         <table>
                             <thead><tr><th>Préfixe</th><th>Origine</th><th>Exemple</th></tr></thead>
                             <tbody>
-                                <tr><td><strong>BR-xx</strong></td><td>Règles EN 16931</td><td>BR-1 : une facture DOIT avoir un BT-24</td></tr>
+                                <tr><td><strong>BR-xx</strong></td><td>Règles EN 16931</td><td>BR-1 : la facture doit comporter un identifiant (BT-1)</td></tr>
                                 <tr><td><strong>BR-CO-xx</strong></td><td>Calcul européen</td><td>BR-CO-10 : total TVA = somme sous-totaux</td></tr>
-                                <tr><td><strong>BR-FR-xx</strong></td><td>Règles françaises CTC</td><td>BR-FR-10 : SIREN vendeur actif dans l'annuaire</td></tr>
-                                <tr><td><strong>BR-FR-CO-xx</strong></td><td>Calcul français</td><td>BR-FR-CO-01 : pas d'antidatage futur</td></tr>
-                                <tr><td><strong>BR-FR-CDV-xx</strong></td><td>Cycle de vie FR</td><td>BR-FR-CDV-12 : code statut obligatoire</td></tr>
-                                <tr><td><strong>BR-FR-MAP-xx</strong></td><td>Mapping Flux 1</td><td>BR-FR-MAP-13 : mapping adresse livraison</td></tr>
+                                <tr><td><strong>BR-FR-xx</strong></td><td>Règles françaises CTC</td><td>BR-FR-04 : le code type de facture doit appartenir à la liste autorisée</td></tr>
+                                <tr><td><strong>BR-FR-CO-xx</strong></td><td>Cohérence française</td><td>BR-FR-CO-08 : un code d'acompte est incompatible avec un cadre de facturation en B4/S4/M4</td></tr>
+                                <tr><td><strong>BR-FR-CDV-xx</strong></td><td>Cycle de vie FR</td><td>Contrôles applicables aux messages de statut CDAR</td></tr>
+                                <tr><td><strong>BR-FR-MAP-xx</strong></td><td>Mapping Flux 1</td><td>BR-FR-MAP-30 : règle de mapping introduite en V1.4 pour BT-147 répétable</td></tr>
+                                <tr><td><strong>BR-FR-MV-xx</strong></td><td>TVA sur la marge</td><td>Contrôles propres aux opérations taxées sur la marge</td></tr>
+                                <tr><td><strong>BR-FR-CPRO-xx</strong></td><td>Spécificités Chorus Pro</td><td>Contrôles du canal public</td></tr>
+                                <tr><td><strong>BR-FREXT-xx</strong></td><td>Extensions françaises</td><td>Contrôles portant sur les champs EXT-FR-FE</td></tr>
                             </tbody>
                         </table>
                     </div>

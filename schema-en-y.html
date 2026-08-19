@@ -44,7 +44,7 @@
                     <div class="sidebar-nav-pages">
                         <h4>Parcours Niveau 3</h4>
                         <a href="./schema-en-y.html" class="sidebar-page active">🔀 Schéma en Y</a>
-                        <a href="./flux.html" class="sidebar-page">📡 Les 14 flux</a>
+                        <a href="./flux.html" class="sidebar-page">📡 Les flux</a>
                         <a href="./cycle-de-vie.html" class="sidebar-page">🔄 Cycle de vie</a>
                         <a href="./formats.html" class="sidebar-page">📐 Les formats</a>
                     </div>
@@ -322,7 +322,7 @@
                             <div class="sy-step-num">3</div>
                             <div class="sy-step-content">
                                 <h4>La PA émettrice <span class="sy-step-tag sy-step-tag--red">nœud critique</span></h4>
-                                <p>La PA-E effectue <strong>6 niveaux de contrôles</strong>, extrait les données → PPF (F1), consulte l'annuaire (F11), et transmet la facture à la PA-R (F2 ou F3).</p>
+                                <p>La PA-E effectue <strong>trois niveaux de contrôles</strong> — techniques, applicatifs puis fonctionnels —, extrait les données → PPF (F1), consulte l'annuaire (F11), et transmet la facture à la PA-R (F2 ou F3).</p>
                                 <div class="sy-controls-grid">
                                     <div class="sy-control"><span>①</span> Syntaxiques — XML bien formé, XSD</div>
                                     <div class="sy-control"><span>②</span> Sémantiques — BT obligatoires</div>
@@ -361,7 +361,7 @@
                     <p>Pendant que la facture voyage entre les PA, des données fiscales remontent <strong>en parallèle</strong> vers le PPF.</p>
 
                     <div class="triple-grid">
-                        <div class="objective-card"><div class="objective-icon">📄</div><h3>Flux 1</h3><p><strong>PA-E → PPF</strong><br>Données réglementaires extraites (SIREN, montants, TVA, type…)</p></div>
+                        <div class="objective-card"><div class="objective-icon">📄</div><h3>Flux 1</h3><p><strong>PA-E → PPF</strong><br>Données réglementaires extraites (SIREN, montants, TVA, type…), transmises en <strong>UBL ou CII</strong> uniquement</p></div>
                         <div class="objective-card"><div class="objective-icon">🔄</div><h3>Flux 6</h3><p><strong>PA ↔ PPF</strong><br>Statuts obligatoires : Déposée (200), Refusée (210), Encaissée (212), Rejetée (213)</p></div>
                         <div class="objective-card"><div class="objective-icon">📊</div><h3>Flux 10</h3><p><strong>PA → PPF</strong><br>Données de transaction : B2Bi, B2C, paiements</p></div>
                     </div>
@@ -397,7 +397,7 @@
                 <section id="cas-particuliers" class="content-section">
                     <h2>🔀 Cas particuliers</h2>
                     <div class="triple-grid">
-                        <div class="objective-card"><div class="objective-icon">🏛️</div><h3>B2G</h3><p>Chorus Pro joue le rôle de <strong>PA réceptrice</strong>. La PA-E transmet normalement.</p></div>
+                        <div class="objective-card"><div class="objective-icon">🏛️</div><h3>B2G</h3><p>Chorus Pro est la <strong>plateforme agréée des entités publiques</strong> : en B2G elle joue donc le rôle de plateforme de réception. La PA-E transmet normalement.</p></div>
                         <div class="objective-card"><div class="objective-icon">🔄</div><h3>Auto-facturation</h3><p>L'acheteur émet pour le compte du vendeur. Sa PA agit comme PA-E.</p></div>
                         <div class="objective-card"><div class="objective-icon">👥</div><h3>Affacturage</h3><p>Le factor intervient comme bénéficiaire. Circuit normal, cadre spécifique.</p></div>
                     </div>
@@ -428,7 +428,7 @@
 
                 <nav class="page-nav-bottom">
                     <a href="./sanctions.html" class="nav-prev"><span class="nav-label">Niveau 2</span><span class="nav-title">← ⚖️ Sanctions</span></a>
-                    <a href="./flux.html" class="nav-next"><span class="nav-label">Page suivante</span><span class="nav-title">📡 Les 14 flux →</span></a>
+                    <a href="./flux.html" class="nav-next"><span class="nav-label">Page suivante</span><span class="nav-title">📡 Les flux →</span></a>
                 </nav>
             </article>
         </div>

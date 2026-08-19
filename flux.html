@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex, nofollow">
-    <title>Les 14 flux | Re·Form·E</title>
+    <title>Les flux de la réforme | Re·Form·E</title>
     <link rel="icon" href="./assets/favicon-Fluxym-V2.png" sizes="32x32" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,8 +21,8 @@
                 <a href="./index.html">Accueil</a> <span>/</span> <span>Niveau 3 — Approfondir</span>
             </div>
             <span class="hero-badge">Niveau 3 — Approfondir</span>
-            <h1>Les 14 flux de la réforme</h1>
-            <p>12 flux actifs entre 6 acteurs. Survolez chaque flux pour comprendre son rôle.</p>
+            <h1>Les flux de la réforme</h1>
+            <p>12 flux entre 6 acteurs, numérotés jusqu'à F14. Survolez chaque flux pour comprendre son rôle.</p>
         </div>
     </header>
 
@@ -44,7 +44,7 @@
                     <div class="sidebar-nav-pages">
                         <h4>Parcours Niveau 3</h4>
                         <a href="./schema-en-y.html" class="sidebar-page">🔀 Schéma en Y</a>
-                        <a href="./flux.html" class="sidebar-page active">📡 Les 14 flux</a>
+                        <a href="./flux.html" class="sidebar-page active">📡 Les flux</a>
                         <a href="./cycle-de-vie.html" class="sidebar-page">🔄 Cycle de vie</a>
                         <a href="./formats.html" class="sidebar-page">📐 Les formats</a>
                     </div>
@@ -56,7 +56,7 @@
                 <!-- INTERACTIVE DIAGRAM -->
                 <section id="diagram" class="content-section">
                     <h2>🗺️ Diagramme interactif</h2>
-                    <p>Survolez un flux dans la légende pour le mettre en évidence. <em>F4 et F5 ont été supprimés en octobre 2024.</em></p>
+                    <p>Survolez un flux dans la légende pour le mettre en évidence. <em>Les numéros F4 et F5 ne sont pas attribués : la numérotation va jusqu'à F14 pour 12 flux réellement définis.</em></p>
 
                     <div class="flux-interactive">
                         <div class="flux-svg-wrap" id="flux-diagram-wrap">
@@ -292,7 +292,7 @@
 
                         <!-- INTERACTIVE LEGEND -->
                         <div class="flux-legend" id="flux-legend">
-                            <h3>12 flux actifs</h3>
+                            <h3>12 flux</h3>
 
                             <div class="flux-legend-cat">🔵 Commerciaux</div>
                             <div class="flux-legend-item" data-flow="f2">
@@ -393,8 +393,8 @@
                                 <thead><tr><th>Statut</th><th>Code</th><th>Obligatoire PPF ?</th></tr></thead>
                                 <tbody>
                                     <tr><td>Déposée</td><td>200</td><td>✅ Oui</td></tr>
-                                    <tr><td>Reçue</td><td>220</td><td>Non</td></tr>
-                                    <tr><td>Approuvée</td><td>230</td><td>Non</td></tr>
+                                    <tr><td>Reçue</td><td>202</td><td>Non</td></tr>
+                                    <tr><td>Approuvée</td><td>205</td><td>Non</td></tr>
                                     <tr><td>Refusée</td><td>210</td><td>✅ Oui</td></tr>
                                     <tr><td>Encaissée</td><td>212</td><td>✅ Oui</td></tr>
                                     <tr><td>Rejetée</td><td>213</td><td>✅ Oui</td></tr>
@@ -404,6 +404,7 @@
                         <div class="role-card"><h4>F7 — Format non-CDAR (libre)</h4>
                             <p>Statuts en format libre échangés entre <strong>Fournisseur ↔ PA-E</strong> et <strong>PA-R ↔ Acheteur</strong>.</p>
                             <p><strong>Ne passe PAS par le PPF.</strong> Ce flux reste entre l'entreprise et sa plateforme.</p>
+                            <p><em>À savoir :</em> cet échange n'est pas normé par les spécifications, qui n'imposent le CDAR que pour les statuts transmis au PPF. Le « F7 » est ici une commodité pédagogique, pas un numéro officiel du même rang que F1, F2 ou F6.</p>
                         </div>
                     </div>
                 </section>
@@ -415,7 +416,7 @@
                     <div class="triple-grid">
                         <div class="objective-card"><div class="objective-icon">🌍</div><h3>F8 — International (B2Bi)</h3><p><strong>Fournisseur → PA-E</strong><br>Factures B2Bi, Bi2B, Bi2Bi. La PA-E les convertit en F10 pour le PPF.</p></div>
                         <div class="objective-card"><div class="objective-icon">👤</div><h3>F9 — B2C (non-assujettis)</h3><p><strong>Fournisseur → PA-E</strong><br>Factures vers des particuliers. La PA-E les convertit en F10.</p></div>
-                        <div class="objective-card"><div class="objective-icon">📊</div><h3>F10 — Données de transaction</h3><p><strong>PA → PPF</strong><br>10.1 B2Bi émises · 10.2 B2Bi reçues · 10.3 B2C · 10.4 Paiements</p></div>
+                        <div class="objective-card"><div class="objective-icon">📊</div><h3>F10 — Données de transaction et de paiement</h3><p><strong>PA → PPF</strong><br>10.1 transactions individuelles · 10.2 paiements individuels · 10.3 transactions agrégées · 10.4 paiements agrégés</p></div>
                     </div>
                     <div class="callout callout--info"><div class="callout-icon">🔑</div><div class="callout-content"><strong>F8 et F9 ne vont jamais directement au PPF.</strong> Le fournisseur les transmet à sa PA-E, qui les convertit en <strong>F10</strong> avant transmission au PPF.</div></div>
                 </section>
@@ -444,8 +445,8 @@
                             <tr><td><strong>F1</strong></td><td>PA-E → PPF</td><td>Données réglementaires de la facture</td><td>🟠 Fiscal</td></tr>
                             <tr><td><strong>F2</strong></td><td>PA-E → PA-R</td><td>Factures — format socle (UBL/CII/FX)</td><td>🔵 Commercial</td></tr>
                             <tr><td><strong>F3</strong></td><td>PA-E → PA-R</td><td>Factures — format hors socle (EDI, tiers)</td><td>🔵 Commercial</td></tr>
-                            <tr><td style="color:#64748b;">F4</td><td colspan="3" style="color:#64748b;font-style:italic;">Supprimé (oct. 2024)</td></tr>
-                            <tr><td style="color:#64748b;">F5</td><td colspan="3" style="color:#64748b;font-style:italic;">Supprimé (oct. 2024)</td></tr>
+                            <tr><td style="color:#64748b;">F4</td><td colspan="3" style="color:#64748b;font-style:italic;">Numéro non attribué</td></tr>
+                            <tr><td style="color:#64748b;">F5</td><td colspan="3" style="color:#64748b;font-style:italic;">Numéro non attribué</td></tr>
                             <tr><td><strong>F6</strong></td><td>PA ↔ PPF ↔ PA</td><td>Statuts cycle de vie (CDAR)</td><td>🟣 CDV</td></tr>
                             <tr><td><strong>F7</strong></td><td>Fournisseur ↔ PA ↔ Acheteur</td><td>Statuts cycle de vie (non-CDAR)</td><td>🟣 CDV</td></tr>
                             <tr><td><strong>F8</strong></td><td>Fournisseur → PA-E</td><td>Factures internationales (B2Bi)</td><td>🟡 E-rep</td></tr>
@@ -492,7 +493,7 @@
             f7:    { num: 'F7',    name: 'Cycle de vie (non-CDAR)',         dir: 'Fournisseur ↔ PA ↔ Acheteur',        desc: 'Statuts en format libre — ne passe PAS par le PPF' },
             f8:    { num: 'F8',    name: 'Factures B2Bi (international)',   dir: 'Fournisseur → PA-E / Acheteur → PA-R', desc: 'B2Bi émises + Bi2B reçues — converti en F10 par la PA' },
             f9:    { num: 'F9',    name: 'Factures B2C (non-assujettis)',   dir: 'Fournisseur → PA-E',                  desc: 'Factures vers particuliers — converties en F10' },
-            f10:   { num: 'F10',   name: 'Données de transaction',          dir: 'PA → PPF',                           desc: '10.1 B2Bi émises, 10.2 B2Bi reçues, 10.3 B2C, 10.4 paiements' },
+            f10:   { num: 'F10',   name: 'Données de transaction',          dir: 'PA → PPF',                           desc: '10.1 transactions individuelles, 10.2 paiements individuels, 10.3 transactions agrégées, 10.4 paiements agrégés' },
             f11:   { num: 'F11',   name: 'Consultation annuaire',           dir: 'PA → Utilisateurs',                  desc: 'La PA met les données d\'annuaire à disposition' },
             f12:   { num: 'F12',   name: 'Actualisation annuaire',          dir: 'Acheteur → PA-R',                    desc: 'Mise à jour des informations d\'adressage' },
             f13:   { num: 'F13',   name: 'Actualisation annuaire',          dir: 'PA-R → PPF',                         desc: 'Répercussion vers l\'annuaire central' },
@@ -625,7 +626,7 @@
             overlay.className = 'flux-fullscreen-overlay';
             overlay.innerHTML =
                 '<div class="flux-fs-toolbar">' +
-                    '<span class="flux-fs-title">📡 Les 14 flux — Vue plein écran</span>' +
+                    '<span class="flux-fs-title">📡 Les flux — Vue plein écran</span>' +
                     '<div class="flux-fs-controls">' +
                         '<button class="flux-fs-btn flux-fs-btn--close" id="flux-fs-close">✕ Fermer</button>' +
                     '</div>' +

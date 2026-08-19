@@ -45,7 +45,7 @@
                     <div class="sidebar-nav-pages">
                         <h4>Parcours Niveau 3</h4>
                         <a href="./schema-en-y.html" class="sidebar-page">🔀 Schéma en Y</a>
-                        <a href="./flux.html" class="sidebar-page">📡 Les 14 flux</a>
+                        <a href="./flux.html" class="sidebar-page">📡 Les flux</a>
                         <a href="./cycle-de-vie.html" class="sidebar-page active">🔄 Cycle de vie</a>
                         <a href="./formats.html" class="sidebar-page">📐 Les formats</a>
                     </div>
@@ -74,7 +74,7 @@
                                 <tr><td><strong>200</strong></td><td>Déposée</td><td>PA-E</td><td>La PA émettrice a validé et accepté la facture. Acte de naissance officiel.</td></tr>
                                 <tr><td><strong>210</strong></td><td>Refusée</td><td>Destinataire</td><td>Le destinataire refuse la facture. <strong>Statut terminal</strong> : le Flux 1 est annulé fiscalement.</td></tr>
                                 <tr><td><strong>212</strong></td><td>Encaissée</td><td>Vendeur</td><td>Le vendeur confirme l'encaissement. <strong>Obligatoire si TVA à l'encaissement.</strong></td></tr>
-                                <tr><td><strong>213</strong></td><td>Rejetée</td><td>PA</td><td>Anomalie détectée lors des contrôles. La facture n'entre pas dans le circuit.</td></tr>
+                                <tr><td><strong>213</strong></td><td>Rejetée</td><td>PA émettrice ou PA réceptrice</td><td>Anomalie détectée lors des contrôles. La facture n'entre pas dans le circuit.</td></tr>
                             </tbody>
                         </table>
                     </div>
@@ -152,7 +152,16 @@
                 </section>
 
                 <section id="b2g" class="content-section">
+                    <div class="callout callout--info">
+                        <div class="callout-icon">🧾</div>
+                        <div class="callout-content"><strong>Ne pas confondre deux niveaux.</strong> Les statuts ci-dessus portent sur la <em>facture</em>. Il existe aussi des statuts au niveau du <em>flux</em> transmis, notamment <strong>Recevable</strong> et <strong>Irrecevable</strong>, qui indiquent si l'envoi lui-même a pu être pris en charge avant tout examen des factures qu'il contient.</div>
+                    </div>
+
                     <h2>Statuts spécifiques B2G</h2>
+                    <div class="callout callout--warning">
+                        <div class="callout-icon">⚠️</div>
+                        <div class="callout-content">Ces statuts sont <strong>internes à Chorus Pro</strong> et propres au circuit de la dépense publique. Ils ne font pas partie des codes normalisés du cycle de vie inter-plateformes. Côté cycle de vie normalisé, c'est « Mise en paiement » qui déclenche le statut <strong>Encaissée (212)</strong>.</div>
+                    </div>
                     <div class="comparison-table">
                         <table>
                             <thead><tr><th>Statut B2G</th><th>Description</th></tr></thead>
@@ -174,8 +183,8 @@
                             <tbody>
                                 <tr><td><strong>Paiement B2B</strong></td><td>60 jours date de facture (ou 45j fin de mois)</td><td>Art. L441-10 Code commerce</td></tr>
                                 <tr><td><strong>Paiement B2G</strong></td><td>30 jours (50j santé publique)</td><td>Décret 2013-269</td></tr>
-                                <tr><td><strong>Statuts obligatoires → PPF</strong></td><td>Sans délai après création</td><td>Spec. DGFiP v3.1</td></tr>
-                                <tr><td><strong>Flux 1 → PPF</strong></td><td>Simultanément au Flux 2</td><td>Spec. DGFiP v3.1</td></tr>
+                                <tr><td><strong>Statuts obligatoires → PPF</strong></td><td>Dans les <strong>24 heures</strong> suivant leur création</td><td>Spécifications externes DGFiP</td></tr>
+                                <tr><td><strong>Flux 1 → PPF</strong></td><td>Après les contrôles de la PA émettrice, sans attendre la remise au destinataire</td><td>Spécifications externes DGFiP</td></tr>
                             </tbody>
                         </table>
                     </div>
@@ -195,7 +204,7 @@
                         </div>
                         <div class="faq-item">
                             <h4>UC3 — Refus par le destinataire</h4>
-                            <p>Circuit normal jusqu'à mise à dispo → Acheteur : <strong>Refusée (210)</strong> avec motif obligatoire (DOUBLON, TVA_ERR, ART_ERR, QTE_ERR…) → Flux 1 neutralisé.</p>
+                            <p>Circuit normal jusqu'à mise à disposition → Acheteur : <strong>Refusée (210)</strong> avec motif obligatoire, choisi dans une liste normalisée de plusieurs dizaines de codes (par exemple <code>DEST_ERR</code>, <code>ADR_ERR</code>, <code>SIRET_ERR</code>, <code>TRANSAC_INC</code>) → Flux 1 neutralisé.</p>
                         </div>
                         <div class="faq-item">
                             <h4>UC4 — Auto-facturation</h4>
@@ -238,7 +247,7 @@
                 <nav class="page-nav-bottom">
                     <a href="./flux.html" class="nav-prev">
                         <span class="nav-label">Page précédente</span>
-                        <span class="nav-title">← 📡 Les 14 flux</span>
+                        <span class="nav-title">← 📡 Les flux</span>
                     </a>
                     <a href="./formats.html" class="nav-next">
                         <span class="nav-label">Page suivante</span>
