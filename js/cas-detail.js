@@ -15,6 +15,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const caseId = params.get('id');
     if (!caseId) { window.location.href = './cas-usage.html'; return; }
 
+    /** Attributs d'ouverture dans un nouvel onglet, pour ne jamais perdre la fiche en cours. */
+    const NEW_TAB = 'target="_blank" rel="noopener"';
+
     const ACTOR_COLORS = {
         'Vendeur': '#0B2046',
         'Fournisseur': '#0B2046',
@@ -101,7 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const fieldId = (id) => {
         const btMatch = /^(BT-\d+[\w-]*)/.exec(id);
         if (btMatch) {
-            return `<a href="./champs.html#field-${btMatch[1]}" class="cudet-flds-id">${id}</a>`;
+            return `<a href="./champs.html#field-${btMatch[1]}" class="cudet-flds-id" ${NEW_TAB}>${id}</a>`;
         }
         return `<span class="cudet-flds-id">${id}</span>`;
     };
@@ -175,7 +178,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const refs = (s.refs || []).map((ref) => {
                 const btMatch = /^BT-\d+/.exec(ref);
                 return btMatch
-                    ? `<a class="bt-chip" href="./champs.html#field-${ref}">${ref}</a>`
+                    ? `<a class="bt-chip" href="./champs.html#field-${ref}" ${NEW_TAB}>${ref}</a>`
                     : `<span class="bt-chip">${ref}</span>`;
             }).join('');
             const refsHtml = refs ? `<div class="cudet-story-refs">${refs}</div>` : '';
@@ -278,7 +281,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const text = info && info.why
                 ? `<p class="cudet-lien-why">${info.why}</p>`
                 : '<p class="cudet-lien-why">Cas connexe du même parcours.</p>';
-            return `<a href="./cas-detail.html?id=${rc.id}" class="cudet-lien">` +
+            return `<a href="./cas-detail.html?id=${rc.id}" class="cudet-lien" ${NEW_TAB}>` +
                 '<div class="cudet-lien-head">' +
                 `<span class="cudet-lien-num">Cas ${rc.num}</span>` +
                 `<span class="cudet-lien-title">${rc.title}</span>${badge}` +

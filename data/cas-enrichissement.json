@@ -10,7 +10,8 @@
       "conditionnel": "Conditionnel",
       "recommandé": "Recommandé",
       "facultatif": "Facultatif"
-    }
+    },
+    "coverage": "14 fiches enrichies : nominal + 6 variantes nominales + cas 1 à 7"
   },
   "socle": {
     "label": "Socle obligatoire commun à tous les cas d'usage",
@@ -1129,6 +1130,1659 @@
         "cas-20": {
           "rel": "cas voisin sur l'antériorité du paiement",
           "why": "L'acompte est l'autre situation où de l'argent circule avant la facture définitive. La différence : l'acompte est un paiement partiel qui appelle une facture de solde, alors qu'ici le paiement solde l'opération."
+        }
+      }
+    },
+    "nominal-rejet-emission": {
+      "narrative": {
+        "intro": "<p>La facture ne quitte jamais la plateforme du vendeur. Elle n'existe donc <strong>ni pour l'acheteur, ni pour l'administration</strong>.</p>",
+        "steps": [
+          {
+            "t": 1,
+            "actor": "Vendeur",
+            "title": "La facture est créée et déposée",
+            "text": "Le vendeur constitue une facture en apparence normale — type 380, cadre B1/S1/M1, socle complet — et la dépose sur sa plateforme agréée émettrice.",
+            "refs": [
+              "BT-1",
+              "BT-2",
+              "BT-3",
+              "BT-23"
+            ],
+            "diagram": 0
+          },
+          {
+            "t": 2,
+            "actor": "PA-E",
+            "title": "La PA-E déroule ses contrôles et détecte une erreur",
+            "text": "Sept familles de contrôles s'enchaînent : technique (taille, antivirus, extraction), syntaxique (XSD/Schematron), sémantique (profil EN 16931 ou EXTENDED-CTC-FR puis règles BR-FR), unicité du triplet BT-1 + année + SIREN, adressage BT-49 dans l'annuaire, pièces jointes, et contrôles B2G le cas échéant. Le premier échec arrête tout.",
+            "refs": [
+              "BT-1",
+              "BT-49"
+            ],
+            "diagram": 1
+          },
+          {
+            "t": 3,
+            "actor": "PA-E",
+            "title": "Le statut « Rejetée » est créé avec son motif",
+            "text": "La PA-E pose le statut <strong>Rejetée (213)</strong>, obligatoire, accompagné d'un motif normé pris dans une liste fermée : REJ_SEMAN, REJ_UNI, REJ_COH, REJ_ADR, DOUBLON, DEST_INC, ADR_ERR, MONTANTTOTAL_ERR, CALCUL_ERR, REJ_REF_PJ, REJ_ASS_PJ, REJ_CONT_B2G.",
+            "flux": [
+              "F6"
+            ],
+            "diagram": 2
+          },
+          {
+            "t": 4,
+            "actor": "PA-E",
+            "title": "Rien n'est transmis, ni au fisc ni à l'acheteur",
+            "text": "Point capital : <strong>aucun flux 1</strong> ne part vers le portail public et <strong>aucun flux 2</strong> vers la PA-R. Le rejet précède le statut « Déposée », donc aucune donnée fiscale n'est déclarée. Le destinataire n'est même pas informé."
+          },
+          {
+            "t": 5,
+            "actor": "Vendeur",
+            "title": "Le vendeur reçoit le motif et identifie l'erreur",
+            "text": "La PA-E met le statut et son motif à disposition du vendeur, qui sait précisément quel contrôle a échoué."
+          },
+          {
+            "t": 6,
+            "actor": "Vendeur",
+            "title": "Correction puis nouveau dépôt",
+            "text": "Le vendeur corrige et redépose. La facture initiale, elle, n'a jamais existé : elle n'entrera dans aucune déclaration de TVA.",
+            "refs": [
+              "BT-1"
+            ]
+          }
+        ]
+      },
+      "fields": [
+        {
+          "id": "BT-3",
+          "name": "Code type de facture",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "380 — inchangé, la facture est normale, c'est sa transmission qui échoue",
+          "rule": "BR-4"
+        },
+        {
+          "id": "BT-23",
+          "name": "Cadre de facturation",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "B1 · S1 · M1 — identique au nominal",
+          "rule": "BR-FR-01"
+        },
+        {
+          "id": "Statut 213",
+          "name": "Statut « Rejetée »",
+          "level": "Cycle de vie",
+          "obligation": "obligatoire",
+          "value": "Seul statut du cycle de vie. Transmis au portail public uniquement.",
+          "rule": "G7.08"
+        },
+        {
+          "id": "MDT-113",
+          "name": "Motif du rejet",
+          "level": "Cycle de vie",
+          "obligation": "obligatoire",
+          "value": "Code de la liste fermée : REJ_SEMAN, REJ_UNI, REJ_COH, REJ_ADR, DOUBLON, DEST_INC, ADR_ERR, MONTANTTOTAL_ERR, CALCUL_ERR, REJ_REF_PJ, REJ_ASS_PJ, REJ_CONT_B2G",
+          "cond": "Obligatoire dès que le statut vaut 213",
+          "rule": "G7.08 · BR-FR-CDV-CL-09"
+        },
+        {
+          "id": "Flux 1",
+          "name": "Données fiscales vers le portail public",
+          "level": "Transmission",
+          "obligation": "non applicable",
+          "value": "<strong>Non généré</strong> — le rejet intervient avant le statut « Déposée »",
+          "rule": "Z12-014 §4.2.2"
+        },
+        {
+          "id": "Flux 2",
+          "name": "Facture vers la plateforme de l'acheteur",
+          "level": "Transmission",
+          "obligation": "non applicable",
+          "value": "<strong>Non transmis</strong> — le destinataire ne reçoit rien",
+          "rule": "Z12-014 §4.2.2"
+        }
+      ],
+      "fieldsNote": "⚠️ <strong>Le numéro BT-1 est-il réutilisable ?</strong> La norme ne tranche pas. Le contrôle d'unicité BR-FR-DC-01 porte sur le triplet BT-1 + année BT-2 + SIREN BT-30 ; or le statut « Rejetée » a déjà été transmis au portail public avec ce numéro. Selon les plateformes, le numéro sera considéré comme brûlé ou réutilisable après correction. <strong>Point à qualifier avec chaque PA.</strong>",
+      "relatedWhy": {
+        "nominal": {
+          "rel": "cas parent",
+          "why": "C'est la première porte de sortie du parcours nominal : le scénario est identique jusqu'aux contrôles de la PA-E, où il s'interrompt définitivement."
+        }
+      }
+    },
+    "nominal-non-transmise": {
+      "narrative": {
+        "intro": "<p>Cas contre-intuitif : la facture est <strong>parfaitement valide et fiscalement existante</strong>, mais l'acheteur ne la recevra jamais par le circuit, faute de plateforme en réception.</p>",
+        "steps": [
+          {
+            "t": 1,
+            "actor": "Vendeur",
+            "title": "L'annuaire révèle que le client n'a pas de plateforme active",
+            "text": "Avant d'émettre, le vendeur interroge l'annuaire du portail public : son client n'expose aucune adresse active, seulement une adresse SIREN inactive.",
+            "refs": [
+              "BT-49"
+            ],
+            "diagram": 0
+          },
+          {
+            "t": 2,
+            "actor": "Vendeur",
+            "title": "La facture est émise malgré tout",
+            "text": "Le vendeur émet sa facture avec cette adresse SIREN en BT-49 et la dépose sur sa PA-E. Il n'a pas le droit de s'abstenir de facturer.",
+            "refs": [
+              "BT-49"
+            ],
+            "diagram": 0
+          },
+          {
+            "t": 3,
+            "actor": "PA-E",
+            "title": "Les contrôles passent : la facture est conforme",
+            "text": "Aucune anomalie. Ce n'est pas un rejet : la facture est valide.",
+            "diagram": 1
+          },
+          {
+            "t": 4,
+            "actor": "PA-E",
+            "title": "Statut « Déposée » avec le motif NON_TRANSMISE, et flux 1 envoyé",
+            "text": "La PA-E pose <strong>Déposée (200)</strong> assorti du motif <strong>NON_TRANSMISE</strong>, et transmet bien les données fiscales au portail public. C'est ce qui rend la facture fiscalement existante.",
+            "flux": [
+              "F1",
+              "F6"
+            ],
+            "diagram": 2
+          },
+          {
+            "t": 5,
+            "actor": "PA-E",
+            "title": "Aucun flux 2 : il n'y a personne à qui livrer",
+            "text": "Faute de PA-R joignable, la facture complète n'est routée nulle part. Le statut est simplement restitué au vendeur."
+          },
+          {
+            "t": 6,
+            "actor": "Vendeur",
+            "title": "Le vendeur reprend contact hors plateforme",
+            "text": "Il transmet à son client un duplicata par les moyens classiques — typiquement une présentation lisible en PDF — pour que celui-ci puisse payer."
+          },
+          {
+            "t": 7,
+            "actor": "Vendeur",
+            "title": "Le statut « Encaissée » reste dû",
+            "text": "Si la TVA est exigible à l'encaissement, le vendeur doit malgré tout déposer le statut <strong>Encaissée (212)</strong> après règlement : l'obligation de e-reporting des paiements ne disparaît pas.",
+            "flux": [
+              "F6"
+            ],
+            "refs": [
+              "BT-8"
+            ]
+          }
+        ]
+      },
+      "fields": [
+        {
+          "id": "BT-49",
+          "name": "Adresse de facturation électronique de l'acheteur",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "Adresse SIREN <strong>inactive</strong> dans l'annuaire — à renseigner quand même",
+          "rule": "Z12-014 §1.4.4"
+        },
+        {
+          "id": "Statut 200",
+          "name": "Statut « Déposée »",
+          "level": "Cycle de vie",
+          "obligation": "obligatoire",
+          "value": "Posé normalement : la facture est valide",
+          "rule": "G7.08"
+        },
+        {
+          "id": "MDT-113",
+          "name": "Motif du statut",
+          "level": "Cycle de vie",
+          "obligation": "obligatoire",
+          "value": "<code>NON_TRANSMISE</code> — seul motif autorisé ici, il alerte l'administration",
+          "rule": "Tableau des motifs V1.4"
+        },
+        {
+          "id": "Statut 212",
+          "name": "Statut « Encaissée »",
+          "level": "Cycle de vie",
+          "obligation": "conditionnel",
+          "value": "À déposer après encaissement effectif",
+          "cond": "Si la TVA est exigible à l'encaissement",
+          "rule": "G7.08"
+        },
+        {
+          "id": "Flux 1",
+          "name": "Données fiscales vers le portail public",
+          "level": "Transmission",
+          "obligation": "obligatoire",
+          "value": "<strong>Transmis</strong> — c'est toute la différence avec un rejet",
+          "rule": "Z12-014 §4.2.3"
+        },
+        {
+          "id": "Flux 2",
+          "name": "Facture vers la plateforme de l'acheteur",
+          "level": "Transmission",
+          "obligation": "non applicable",
+          "value": "<strong>Non transmis</strong> — aucune PA-R joignable",
+          "rule": "Z12-014 §4.2.3"
+        }
+      ],
+      "fieldsNote": "⚠️ <strong>NON_TRANSMISE n'est pas un rejet.</strong> C'est un statut « Déposée » assorti d'un motif particulier : la facture est valide, conforme et fiscalement existante. Elle alimentera la TVA pré-remplie <em>des deux côtés</em>, y compris chez un acheteur qui ne l'a jamais reçue et devra donc corriger sa déclaration. Aucun délai de reprise n'est normé, et le vendeur n'a pas d'obligation de réémission : c'est à l'acheteur non équipé que le PLF 2026 réserve une sanction.",
+      "relatedWhy": {
+        "nominal": {
+          "rel": "cas parent",
+          "why": "Le parcours nominal amputé de son étape de routage : tout se passe normalement côté vendeur et côté administration, seule la remise à l'acheteur n'a pas lieu."
+        }
+      }
+    },
+    "nominal-rejet-reception": {
+      "narrative": {
+        "intro": "<p>Ici la facture a bel et bien circulé et été déclarée. C'est la plateforme <strong>de l'acheteur</strong> qui la rejette, ce qui n'a pas les mêmes conséquences qu'un rejet à l'émission.</p>",
+        "steps": [
+          {
+            "t": 1,
+            "actor": "Vendeur",
+            "title": "Émission et dépôt normaux",
+            "text": "Rien ne distingue cette facture d'une facture nominale au moment du dépôt.",
+            "diagram": 0
+          },
+          {
+            "t": 2,
+            "actor": "PA-E",
+            "title": "Contrôles OK, « Déposée », double transmission",
+            "text": "La PA-E valide, pose <strong>Déposée (200)</strong>, envoie le flux 1 au portail public et le flux 2 à la PA-R. À cet instant, la facture <strong>existe fiscalement</strong>.",
+            "flux": [
+              "F1",
+              "F2",
+              "F6"
+            ],
+            "diagram": 1
+          },
+          {
+            "t": 3,
+            "actor": "PA-R",
+            "title": "La PA-R contrôle à son tour et détecte une erreur",
+            "text": "La plateforme de réception rejoue ses propres contrôles réglementaires sur la facture reçue.",
+            "diagram": 2
+          },
+          {
+            "t": 4,
+            "actor": "PA-R",
+            "title": "Statut « Rejetée » posé par la PA-R, facture non délivrée",
+            "text": "Elle pose <strong>Rejetée (213)</strong> avec motif, le transmet au portail public et à la PA-E, et met le statut à disposition de l'acheteur pour information. Mais elle <strong>ne délivre pas la facture</strong>.",
+            "flux": [
+              "F6"
+            ],
+            "diagram": 3
+          },
+          {
+            "t": 5,
+            "actor": "Vendeur",
+            "title": "Le vendeur est informé et régularise",
+            "text": "Il reçoit le statut via sa PA-E, annule la facture dans ses comptes par un avoir <strong>interne</strong> non transmis, puis émet une nouvelle facture avec un <strong>nouveau numéro BT-1</strong>.",
+            "refs": [
+              "BT-1"
+            ],
+            "diagram": 4
+          }
+        ]
+      },
+      "fields": [
+        {
+          "id": "Statut 200",
+          "name": "Statut « Déposée »",
+          "level": "Cycle de vie",
+          "obligation": "obligatoire",
+          "value": "Posé par la PA-E avant le rejet — la facture a donc existé",
+          "rule": "G7.08"
+        },
+        {
+          "id": "Statut 213",
+          "name": "Statut « Rejetée »",
+          "level": "Cycle de vie",
+          "obligation": "obligatoire",
+          "value": "Posé par la <strong>PA-R</strong>, et non par la PA-E. Statut terminal.",
+          "rule": "Z12-014 §4.2.4"
+        },
+        {
+          "id": "MDT-113",
+          "name": "Motif du rejet",
+          "level": "Cycle de vie",
+          "obligation": "obligatoire",
+          "value": "Mêmes codes REJ_* qu'à l'émission",
+          "cond": "Obligatoire dès que le statut vaut 213",
+          "rule": "G7.08"
+        },
+        {
+          "id": "Flux 1",
+          "name": "Données fiscales vers le portail public",
+          "level": "Transmission",
+          "obligation": "obligatoire",
+          "value": "<strong>Déjà transmis</strong> lors du « Déposée » — c'est la différence majeure avec le rejet à l'émission",
+          "rule": "Z12-014 §4.2.4"
+        },
+        {
+          "id": "BT-1",
+          "name": "Numéro de la nouvelle facture",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "<strong>Nouveau numéro</strong> obligatoire pour la facture corrigée",
+          "rule": "BR-FR-DC-01"
+        }
+      ],
+      "fieldsNote": "⚠️ Deux pièges. <strong>Rejet ≠ refus</strong> : le rejet (213) est un contrôle automatique de plateforme, le refus (210) une décision humaine de l'acheteur. Et surtout, <strong>l'annulation fiscale n'est pas garantie</strong> : le « Rejetée » n'annule l'effet du « Déposée » sur la TVA pré-remplie que s'il arrive dans la même période déclarative. Un rejet tardif — en mai pour une facture de mars déjà déclarée — n'a plus aucun effet, la correction devra se faire hors circuit. À noter enfin : un avoir référençant une facture rejetée ne sera ni transmis à l'acheteur, ni déclaré.",
+      "relatedWhy": {
+        "nominal": {
+          "rel": "cas parent",
+          "why": "Le parcours va une étape plus loin que le rejet à l'émission : la facture a été déclarée et routée avant d'être arrêtée, ce qui change tout son traitement fiscal."
+        },
+        "nominal-refus": {
+          "rel": "à ne pas confondre",
+          "why": "Même issue apparente — l'acheteur ne traitera pas la facture — mais l'auteur et la nature diffèrent : ici une plateforme applique un contrôle réglementaire, là un humain prend une décision commerciale."
+        }
+      }
+    },
+    "nominal-refus": {
+      "narrative": {
+        "intro": "<p>La facture est techniquement irréprochable et a été remise à l'acheteur. C'est un <strong>humain</strong> qui la conteste. Et le statut de refus suffit : pas besoin d'avoir.</p>",
+        "steps": [
+          {
+            "t": 1,
+            "actor": "Vendeur",
+            "title": "Émission et dépôt normaux",
+            "text": "Facture conforme au socle, type 380, cadre nominal.",
+            "diagram": 0
+          },
+          {
+            "t": 2,
+            "actor": "PA-E",
+            "title": "« Déposée », flux 1 et flux 2",
+            "text": "Contrôles OK, déclaration au portail public, routage vers la PA-R.",
+            "flux": [
+              "F1",
+              "F2",
+              "F6"
+            ],
+            "diagram": 1
+          },
+          {
+            "t": 3,
+            "actor": "PA-R",
+            "title": "Réception, mise à disposition, remise à l'acheteur",
+            "text": "La PA-R pose « Reçue » puis « Mise à disposition » et délivre effectivement la facture à l'acheteur.",
+            "flux": [
+              "F6"
+            ],
+            "diagram": 2
+          },
+          {
+            "t": 4,
+            "actor": "Acheteur",
+            "title": "L'acheteur refuse, motif obligatoire à l'appui",
+            "text": "Il choisit un motif dans une liste fermée : DEST_ERR (mauvais SIREN), TRANSAC_INC (rien commandé), EMMET_INC (émetteur inconnu, anti-spam), NON_CONFORME (mention légale manquante), REF_CT_ABSENT (référence contractuelle absente), TX_TVA_ERR, PU_ERR, QTE_ERR, DOUBLON…",
+            "diagram": 4
+          },
+          {
+            "t": 5,
+            "actor": "PA-R",
+            "title": "Le statut « Refusée » est diffusé",
+            "text": "La PA-R transmet <strong>Refusée (210)</strong> et son motif au portail public et à la PA-E. Ce statut est obligatoire.",
+            "flux": [
+              "F6"
+            ],
+            "diagram": 5
+          },
+          {
+            "t": 6,
+            "actor": "Vendeur",
+            "title": "Annulation par un avoir strictement interne",
+            "text": "Le vendeur solde l'opération dans sa comptabilité par un avoir <strong>interne</strong>, qu'il ne transmet pas au circuit — sauf pour son archivage.",
+            "diagram": 6
+          },
+          {
+            "t": 7,
+            "actor": "Acheteur",
+            "title": "Le statut de refus fait office de justificatif",
+            "text": "Si l'acheteur avait déjà comptabilisé la facture, il l'annule, le statut « Refusée » constituant la pièce justificative de cette annulation."
+          }
+        ]
+      },
+      "fields": [
+        {
+          "id": "BT-3",
+          "name": "Code type de facture",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "380 — la facture est inchangée, tout le delta est dans le cycle de vie",
+          "rule": "BR-4"
+        },
+        {
+          "id": "Statut 210",
+          "name": "Statut « Refusée »",
+          "level": "Cycle de vie",
+          "obligation": "obligatoire",
+          "value": "Posé par l'<strong>acheteur</strong> via sa PA-R. Statut terminal.",
+          "rule": "Z12-014 §4.2.5"
+        },
+        {
+          "id": "MDT-113",
+          "name": "Motif du refus",
+          "level": "Cycle de vie",
+          "obligation": "obligatoire",
+          "value": "DEST_ERR · TRANSAC_INC · EMMET_INC · NON_CONFORME · DOUBLON · ADR_ERR · TX_TVA_ERR · MONTANTTOTAL_ERR · CALCUL_ERR · REF_CT_ABSENT · PU_ERR · QTE_ERR",
+          "cond": "Obligatoire dès que le statut vaut 210",
+          "rule": "G7.08 · G7.10"
+        },
+        {
+          "id": "Avoir 381",
+          "name": "Avoir d'annulation",
+          "level": "Document",
+          "obligation": "à ne pas émettre",
+          "value": "<strong>Avoir interne uniquement</strong> : s'il est transmis, la PA-E ne le routera pas à l'acheteur et n'enverra pas de flux 1",
+          "rule": "Z12-014 §4.2.5"
+        }
+      ],
+      "fieldsNote": "💡 <strong>Pourquoi pas d'avoir ?</strong> Parce que le statut « Refusée » annule lui-même l'effet de la facture sur la TVA pré-remplie. Émettre un avoir provoquerait une <em>double</em> annulation. La norme est explicite : un avoir référençant une facture refusée n'est ni transmis à l'acheteur, ni déclaré au portail public. ⚠️ Corollaire temporel : refuser vite. Si le refus arrive après la période de pré-remplissage, il n'a plus d'effet fiscal ; il vaut alors mieux passer par « En litige » puis un avoir ou une rectificative.",
+      "relatedWhy": {
+        "nominal": {
+          "rel": "cas parent",
+          "why": "Le parcours nominal se déroule intégralement, jusqu'à la remise de la facture. Seule la décision finale de l'acheteur diverge."
+        },
+        "nominal-litige-avoir": {
+          "rel": "alternative au refus",
+          "why": "Même point de départ — l'acheteur contexte la facture — mais deux issues opposées : le refus clôt le dossier sans nouveau document, le litige en appelle un. Le choix dépend surtout du délai écoulé depuis la réception."
+        }
+      }
+    },
+    "nominal-litige-avoir": {
+      "narrative": {
+        "intro": "<p>Contrairement au refus, le litige ne clôt rien : il déclenche l'émission d'un <strong>second document</strong>, l'avoir, qui a son propre cycle de vie et son propre effet fiscal.</p>",
+        "steps": [
+          {
+            "t": 1,
+            "actor": "Acheteur",
+            "title": "L'acheteur place la facture « En litige »",
+            "text": "Il a reçu et traité la facture, puis constate un problème. Il pose <strong>En litige (207)</strong> avec un motif et l'action attendue — ici, une demande d'avoir.",
+            "flux": [
+              "F6"
+            ],
+            "diagram": 0
+          },
+          {
+            "t": 2,
+            "actor": "PA-R",
+            "title": "Le litige remonte au vendeur, mais pas au fisc",
+            "text": "Le statut circule de la PA-R vers la PA-E. Ce statut étant facultatif, il <strong>n'est pas transmis au portail public</strong>.",
+            "flux": [
+              "F6"
+            ],
+            "diagram": 1
+          },
+          {
+            "t": 3,
+            "actor": "Vendeur",
+            "title": "Le vendeur accepte et crée l'avoir",
+            "text": "Il émet un document de type <strong>381</strong>, qui référence obligatoirement la facture initiale dans le groupe BG-3 (numéro BT-25, date BT-26), et conserve le même cadre de facturation BT-23.",
+            "refs": [
+              "BT-3",
+              "BT-25",
+              "BT-26",
+              "BT-23"
+            ],
+            "diagram": 2
+          },
+          {
+            "t": 4,
+            "actor": "PA-E",
+            "title": "L'avoir suit le parcours complet d'une facture",
+            "text": "Contrôles, statut « Déposée » <em>de l'avoir</em>, flux 1 de ses données fiscales au portail public et flux 2 vers la PA-R. L'avoir n'est pas un simple message : c'est une pièce à part entière.",
+            "flux": [
+              "F1",
+              "F2",
+              "F6"
+            ],
+            "diagram": 3
+          },
+          {
+            "t": 5,
+            "actor": "PA-R",
+            "title": "Mise à disposition de l'avoir",
+            "text": "La PA-R réceptionne l'avoir et le remet à l'acheteur.",
+            "flux": [
+              "F6"
+            ],
+            "diagram": 4
+          },
+          {
+            "t": 6,
+            "actor": "Acheteur",
+            "title": "L'acheteur traite l'avoir",
+            "text": "Il l'impute et peut poser un statut « Approuvée » dessus.",
+            "flux": [
+              "F6"
+            ],
+            "diagram": 5
+          },
+          {
+            "t": 7,
+            "actor": "Acheteur",
+            "title": "Clôture du cycle de vie de la facture initiale",
+            "text": "Bonne pratique fortement recommandée : poser <strong>Annulée (251)</strong> sur la facture d'origine, sinon elle reste indéfiniment « En litige ».",
+            "flux": [
+              "F6"
+            ],
+            "diagram": 7
+          }
+        ]
+      },
+      "fields": [
+        {
+          "id": "BT-3",
+          "name": "Code type de document (sur l'avoir)",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "<strong>381</strong> — avoir",
+          "rule": "G1.01 · BR-FR-04"
+        },
+        {
+          "id": "BT-23",
+          "name": "Cadre de facturation (sur l'avoir)",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "<strong>Identique</strong> à celui de la facture initiale",
+          "rule": "BR-FR-CO-06"
+        },
+        {
+          "id": "BG-3",
+          "name": "Référence à une facture antérieure",
+          "level": "Groupe",
+          "obligation": "obligatoire",
+          "value": "Cardinalité <strong>1..n</strong> : un avoir peut référencer plusieurs factures",
+          "rule": "G1.32 · BR-FR-MV-14"
+        },
+        {
+          "id": "BT-25",
+          "name": "Numéro de la facture antérieure",
+          "level": "Groupe BG-3",
+          "obligation": "obligatoire",
+          "value": "Le BT-1 de la facture initiale",
+          "rule": "G1.32"
+        },
+        {
+          "id": "BT-26",
+          "name": "Date de la facture antérieure",
+          "level": "Groupe BG-3",
+          "obligation": "conditionnel",
+          "value": "Le BT-2 de la facture initiale",
+          "cond": "Obligatoire en trajectoire cible, recommandé en démarrage",
+          "rule": "G1.32"
+        },
+        {
+          "id": "EXT-FR-FE-136 / 138",
+          "name": "Référence et date de la facture antérieure, à la ligne",
+          "level": "Ligne",
+          "obligation": "conditionnel",
+          "value": "Alternative au BG-3 d'en-tête, en trajectoire cible hors PDF",
+          "cond": "Mutuellement exclusif avec BG-3 en en-tête",
+          "rule": "G1.32"
+        },
+        {
+          "id": "BT-112",
+          "name": "Montant total TTC de l'avoir",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "Montant du crédit accordé, total ou partiel",
+          "rule": "BR-CO-15"
+        },
+        {
+          "id": "Statut 207",
+          "name": "Statut « En litige »",
+          "level": "Cycle de vie",
+          "obligation": "facultatif",
+          "value": "Posé par l'acheteur sur la facture initiale, avec motif et action attendue",
+          "rule": "G7.08"
+        },
+        {
+          "id": "Statut 251",
+          "name": "Statut « Annulée »",
+          "level": "Cycle de vie",
+          "obligation": "recommandé",
+          "value": "À poser sur la facture initiale pour clore son cycle de vie",
+          "rule": "G7.08"
+        }
+      ],
+      "fieldsNote": "⚠️ <strong>Règle critique :</strong> renseigner BG-3 à la fois en en-tête <em>et</em> sur les lignes fait <strong>rejeter</strong> le flux 1 de l'avoir (G1.32). Il faut choisir. 💡 Faut-il une nouvelle facture ensuite ? Non : un avoir total solde l'opération, un avoir partiel laisse le solde dû. Si les données de départ étaient erronées et doivent être corrigées, c'est vers la facture rectificative qu'il faut se tourner.",
+      "relatedWhy": {
+        "nominal": {
+          "rel": "cas parent",
+          "why": "Le parcours nominal se déroule entièrement ; le litige s'y greffe après la mise à disposition et déclenche un second document qui refait tout le trajet."
+        },
+        "nominal-litige-rectificative": {
+          "rel": "choix alternatif",
+          "why": "Même déclencheur, le statut « En litige », mais deux réponses différentes : créditer (avoir) ou corriger et remplacer (rectificative). En pratique : « créditez-moi » donne un avoir, « corrigez et renvoyez » donne une rectificative."
+        }
+      }
+    },
+    "nominal-litige-rectificative": {
+      "narrative": {
+        "intro": "<p>Même déclencheur que l'avoir, mais l'issue est différente : la facture initiale est <strong>annulée et remplacée</strong> par une nouvelle facture, positive.</p>",
+        "steps": [
+          {
+            "t": 1,
+            "actor": "Acheteur",
+            "title": "L'acheteur place la facture « En litige »",
+            "text": "Statut <strong>En litige (207)</strong> avec motif et action attendue : ici, une demande de facture rectificative.",
+            "flux": [
+              "F6"
+            ],
+            "diagram": 0
+          },
+          {
+            "t": 2,
+            "actor": "PA-R",
+            "title": "Transmission du litige au vendeur",
+            "text": "Le statut remonte via la PA-E. Il n'est pas transmis au portail public.",
+            "flux": [
+              "F6"
+            ],
+            "diagram": 1
+          },
+          {
+            "t": 3,
+            "actor": "Vendeur",
+            "title": "Émission de la facture rectificative",
+            "text": "Document de type <strong>384</strong>, référençant la facture initiale en BG-3 avec une cardinalité <strong>stricte 1..1</strong> — une rectificative ne remplace qu'une seule facture. Comptablement, elle annule et remplace.",
+            "refs": [
+              "BT-3",
+              "BT-25",
+              "BT-26"
+            ],
+            "diagram": 2
+          },
+          {
+            "t": 4,
+            "actor": "PA-E",
+            "title": "Parcours complet de la rectificative",
+            "text": "Contrôles, statut « Déposée », flux 1 au portail public et flux 2 vers la PA-R.",
+            "flux": [
+              "F1",
+              "F2",
+              "F6"
+            ],
+            "diagram": 3
+          },
+          {
+            "t": 5,
+            "actor": "PA-R",
+            "title": "Mise à disposition de la rectificative",
+            "text": "L'acheteur reçoit la nouvelle facture.",
+            "flux": [
+              "F6"
+            ],
+            "diagram": 4
+          },
+          {
+            "t": 6,
+            "actor": "Acheteur",
+            "title": "Double traitement : annuler puis imputer",
+            "text": "Il annule la facture initiale dans ses comptes — l'existence de la rectificative le justifie — puis traite cette dernière comme une facture normale, à payer.",
+            "diagram": 5
+          },
+          {
+            "t": 7,
+            "actor": "Acheteur",
+            "title": "Clôture du cycle de vie de la facture initiale",
+            "text": "Recommandé : poser <strong>Annulée (251)</strong> sur la facture d'origine.",
+            "flux": [
+              "F6"
+            ]
+          },
+          {
+            "t": 8,
+            "actor": "Vendeur",
+            "title": "Suite normale sur la rectificative",
+            "text": "Encaissement, puis statut « Encaissée » si la TVA est exigible à l'encaissement.",
+            "flux": [
+              "F6"
+            ],
+            "refs": [
+              "BT-8"
+            ]
+          }
+        ]
+      },
+      "fields": [
+        {
+          "id": "BT-3",
+          "name": "Code type de document",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "<strong>384</strong> — facture rectificative",
+          "rule": "G1.01 · BR-FR-04"
+        },
+        {
+          "id": "BT-23",
+          "name": "Cadre de facturation",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "<strong>Identique</strong> à celui de la facture initiale",
+          "rule": "BR-FR-CO-06"
+        },
+        {
+          "id": "BG-3",
+          "name": "Référence à une facture antérieure",
+          "level": "Groupe",
+          "obligation": "obligatoire",
+          "value": "Cardinalité <strong>1..1</strong> stricte — une seule facture annulée, à la différence de l'avoir",
+          "rule": "G1.32"
+        },
+        {
+          "id": "BT-25",
+          "name": "Numéro de la facture antérieure",
+          "level": "Groupe BG-3",
+          "obligation": "obligatoire",
+          "value": "Le BT-1 de la facture remplacée",
+          "rule": "G1.32"
+        },
+        {
+          "id": "BT-26",
+          "name": "Date de la facture antérieure",
+          "level": "Groupe BG-3",
+          "obligation": "conditionnel",
+          "value": "Le BT-2 de la facture remplacée",
+          "cond": "Obligatoire en trajectoire cible, recommandé en démarrage",
+          "rule": "G1.32"
+        },
+        {
+          "id": "BT-112",
+          "name": "Montant total TTC",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "Montant <strong>positif</strong> — c'est une facture, pas un crédit",
+          "rule": "BR-CO-15"
+        },
+        {
+          "id": "Statut 207",
+          "name": "Statut « En litige »",
+          "level": "Cycle de vie",
+          "obligation": "facultatif",
+          "value": "Posé par l'acheteur sur la facture initiale",
+          "rule": "G7.08"
+        },
+        {
+          "id": "Statut 251",
+          "name": "Statut « Annulée »",
+          "level": "Cycle de vie",
+          "obligation": "recommandé",
+          "value": "À poser sur la facture initiale pour clore son cycle de vie",
+          "rule": "G7.08"
+        }
+      ],
+      "fieldsNote": "💡 <strong>Avoir ou rectificative ?</strong> L'avoir crédite, avec un BG-3 en 1..n, et ne produit pas de nouvelle facture. La rectificative annule et remplace, avec un BG-3 en 1..1, et oblige l'acheteur à annuler puis à traiter une facture neuve. On choisit l'avoir pour une remise, un retour ou une annulation sans remplacement ; la rectificative pour une erreur de données à corriger. ⚠️ Le statut « Annulée » sur la facture initiale n'est que recommandé : si personne ne le pose, elle reste « En litige » indéfiniment.",
+      "relatedWhy": {
+        "nominal-litige-avoir": {
+          "rel": "choix alternatif",
+          "why": "Les deux réponses possibles à un même litige. Le critère est l'intention : créditer sans réémettre, ou corriger et remplacer. La cardinalité de BG-3 les distingue techniquement (1..n contre 1..1)."
+        }
+      }
+    },
+    "cas-3": {
+      "narrative": {
+        "intro": "<p>Le tiers qui paiera est connu dès l'émission, mais <strong>rien n'est encore payé</strong>. Toute la difficulté du cas tient dans cette nuance.</p>",
+        "steps": [
+          {
+            "t": 1,
+            "actor": "Vendeur",
+            "title": "La facture identifie le futur payeur",
+            "text": "Le vendeur émet une facture parfaitement normale — cadre <strong>B1/S1/M1</strong>, BT-113 à zéro, BT-115 égal au total TTC — et y ajoute le bloc EXT-FR-FE-BG-02 décrivant la centrale de paiement. Une note BT-21 = PAI explique la situation en clair.",
+            "refs": [
+              "BT-23",
+              "BT-113",
+              "BT-115"
+            ],
+            "diagram": 0
+          },
+          {
+            "t": 2,
+            "actor": "PA-E",
+            "title": "Contrôles, « Déposée », double transmission",
+            "text": "La PA-E valide, pose « Déposée », envoie le flux 1 au portail public et la facture complète à la PA-R.",
+            "flux": [
+              "F1",
+              "F2",
+              "F6"
+            ],
+            "diagram": 1
+          },
+          {
+            "t": 3,
+            "actor": "PA-R",
+            "title": "Réception et mise à disposition",
+            "text": "Statuts « Reçue » puis « Mise à disposition ». La facture est remise à l'acheteur.",
+            "flux": [
+              "F6"
+            ],
+            "diagram": 2
+          },
+          {
+            "t": 4,
+            "actor": "Acheteur",
+            "title": "L'acheteur valide puis transmet au tiers",
+            "text": "Il liquide la facture (« Prise en charge », « Approuvée ») et la transmet à sa centrale de paiement. <strong>Cette transmission est hors périmètre RFE</strong> : elle s'organise côté acheteur.",
+            "flux": [
+              "F6"
+            ],
+            "diagram": 3
+          },
+          {
+            "t": 5,
+            "actor": "Tiers payeur",
+            "title": "Le tiers règle le vendeur",
+            "text": "Le paiement part de la centrale vers le vendeur. Le statut « Paiement transmis » peut être posé par l'acheteur ou par le tiers via délégation — recommandé, non obligatoire.",
+            "diagram": 4
+          },
+          {
+            "t": 6,
+            "actor": "Vendeur",
+            "title": "Statut « Encaissée » à l'encaissement réel",
+            "text": "Ce n'est qu'en constatant l'argent que le vendeur pose « Encaissée » — obligatoire si la TVA est exigible à l'encaissement — et le transmet au portail public via sa PA-E.",
+            "flux": [
+              "F6"
+            ],
+            "refs": [
+              "BT-8"
+            ],
+            "diagram": 5
+          }
+        ]
+      },
+      "fields": [
+        {
+          "id": "BT-3",
+          "name": "Code type de facture",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "380",
+          "rule": "G1.01"
+        },
+        {
+          "id": "BT-23",
+          "name": "Cadre de facturation",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "<strong>B1 · S1 · M1</strong> — surtout pas un cadre en 2 : la facture n'est pas payée",
+          "rule": "BR-FR-DC-01"
+        },
+        {
+          "id": "BT-113",
+          "name": "Montant déjà payé",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "<strong>0</strong> — rien n'a encore été réglé"
+        },
+        {
+          "id": "BT-115",
+          "name": "Montant net à payer",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "<strong>= BT-112</strong> — la totalité reste due",
+          "rule": "BR-CO-16"
+        },
+        {
+          "id": "BT-9",
+          "name": "Date d'échéance",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "Date <strong>future</strong> : c'est une vraie échéance",
+          "rule": "BR-CO-25"
+        },
+        {
+          "id": "EXT-FR-FE-BG-02",
+          "name": "Bloc « payeur de la facture »",
+          "level": "Groupe",
+          "obligation": "facultatif",
+          "value": "Non répétable — un seul tiers payeur. Profil EXTENDED-CTC-FR.",
+          "rule": "Z12-014 §3.2.4"
+        },
+        {
+          "id": "EXT-FR-FE-43",
+          "name": "Raison sociale du tiers payeur",
+          "level": "Groupe BG-02",
+          "obligation": "conditionnel",
+          "value": "Nom de la centrale de paiement ou du GIE",
+          "cond": "Si EXT-FR-FE-BG-02 est présent"
+        },
+        {
+          "id": "EXT-FR-FE-48 / -49",
+          "name": "SIREN du tiers payeur et son schéma",
+          "level": "Groupe BG-02",
+          "obligation": "facultatif",
+          "value": "SIREN 9 caractères, schéma 0002"
+        },
+        {
+          "id": "EXT-FR-FE-52",
+          "name": "Adresse électronique du tiers payeur",
+          "level": "Groupe BG-02",
+          "obligation": "facultatif",
+          "value": "Permet à la PA-R d'organiser l'accès du tiers à la facture et à son cycle de vie"
+        },
+        {
+          "id": "BT-21 = PAI",
+          "name": "Note sur le paiement",
+          "level": "En-tête",
+          "obligation": "recommandé",
+          "value": "Texte libre en BT-22 précisant le circuit de paiement"
+        },
+        {
+          "id": "BT-81",
+          "name": "Code du moyen de paiement",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "30 (virement), le plus courant ici",
+          "rule": "BR-49"
+        },
+        {
+          "id": "BT-84",
+          "name": "IBAN de paiement",
+          "level": "En-tête",
+          "obligation": "conditionnel",
+          "value": "<strong>IBAN du vendeur</strong> : le tiers <em>paie</em>, il ne <em>reçoit</em> pas",
+          "cond": "Si BT-81 = 30",
+          "rule": "BR-FR-CPRO-49"
+        }
+      ],
+      "fieldsNote": "⚠️ <strong>Le piège du cas 3.</strong> La tentation est forte de traduire « un tiers va payer » par « déjà payée » et de basculer en B2/S2/M2. Ce serait une erreur : le cadre en 2 déclenche BR-FR-CO-09, qui impose BT-113 = BT-112 et BT-115 = 0, et fait attendre un statut « Encaissée » immédiat alors que rien n'a été réglé. On reste en B1/S1/M1 et l'on attend l'encaissement réel.",
+      "relatedWhy": {
+        "cas-2": {
+          "rel": "cas à ne pas confondre",
+          "why": "Le tiers est présent dans les deux cas, mais à des moments opposés : ici il paiera plus tard (cadre en 1, BT-113 = 0), là il a déjà payé (cadre en 2, BT-113 = BT-112). Le bloc EXT-FR-FE-BG-02 est le seul élément commun."
+        },
+        "cas-4": {
+          "rel": "variante partielle",
+          "why": "Même mécanique de tiers payeur identifié à l'émission, mais la prise en charge n'est plus totale : le montant se répartit entre BT-113 (part du tiers) et BT-115 (part de l'acheteur)."
+        },
+        "cas-8": {
+          "rel": "mécanisme inverse",
+          "why": "L'affacturage identifie lui aussi un tiers dès l'émission, mais à l'autre bout de la chaîne : le factor est le <em>bénéficiaire</em> du paiement, alors que le tiers payeur en est l'<em>émetteur</em>. L'IBAN change donc de camp."
+        }
+      }
+    },
+    "cas-4": {
+      "narrative": {
+        "intro": "<p>Un exemple parle mieux qu'une règle : réparation de 1 000 € TTC, l'assureur prend 800 €, l'acheteur paie 200 € de franchise.</p>",
+        "steps": [
+          {
+            "t": 1,
+            "actor": "Vendeur",
+            "title": "La facture répartit la charge du paiement",
+            "text": "Total TTC 1 000 € en BT-112, part de l'assureur 800 € en BT-113, franchise 200 € en BT-115. L'assureur est décrit dans EXT-FR-FE-BG-02 et la répartition détaillée en clair dans une note BT-21 = PAI.",
+            "refs": [
+              "BT-112",
+              "BT-113",
+              "BT-115"
+            ],
+            "diagram": 0
+          },
+          {
+            "t": 2,
+            "actor": "PA-E",
+            "title": "Contrôles, « Déposée », double transmission",
+            "text": "La cohérence BT-115 = BT-112 − BT-113 est vérifiée (BR-CO-16), puis flux 1 au portail public et flux 2 à la PA-R.",
+            "flux": [
+              "F1",
+              "F2",
+              "F6"
+            ],
+            "refs": [
+              "BT-115"
+            ],
+            "diagram": 1
+          },
+          {
+            "t": 3,
+            "actor": "PA-R",
+            "title": "Réception et mise à disposition",
+            "text": "Statuts « Reçue » puis « Mise à disposition ».",
+            "flux": [
+              "F6"
+            ],
+            "diagram": 2
+          },
+          {
+            "t": 4,
+            "actor": "Acheteur",
+            "title": "L'acheteur ne règle que sa franchise",
+            "text": "Il pose « Prise en charge » et paie les 200 € de BT-115, éventuellement suivis d'un « Paiement transmis » pour sa part.",
+            "refs": [
+              "BT-115"
+            ],
+            "diagram": 3
+          },
+          {
+            "t": 5,
+            "actor": "Tiers payeur",
+            "title": "L'assureur règle sa part directement au vendeur",
+            "text": "Les 800 € de BT-113 arrivent au vendeur sans passer par l'acheteur.",
+            "refs": [
+              "BT-113"
+            ],
+            "diagram": 4
+          },
+          {
+            "t": 6,
+            "actor": "Vendeur",
+            "title": "Deux statuts « Encaissée » si deux dates",
+            "text": "Le vendeur pose un « Encaissée » pour la franchise et un second pour la part de l'assureur, chacun avec son montant et son détail TVA. Si les deux règlements tombent le même jour, un seul statut suffit.",
+            "flux": [
+              "F6"
+            ],
+            "refs": [
+              "BT-8"
+            ],
+            "diagram": 5
+          }
+        ]
+      },
+      "fields": [
+        {
+          "id": "BT-3",
+          "name": "Code type de facture",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "380",
+          "rule": "G1.01"
+        },
+        {
+          "id": "BT-23",
+          "name": "Cadre de facturation",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "B1 · S1 · M1 — la facture n'est pas « déjà payée »",
+          "rule": "BR-FR-DC-01 · G1.02"
+        },
+        {
+          "id": "BT-113",
+          "name": "Montant déjà payé",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "<strong>= montant pris en charge par le ou les tiers</strong>. Convention française : « déjà payé <em>ou</em> qui sera payé par un tiers ».",
+          "rule": "Z12-014 §3.2.5"
+        },
+        {
+          "id": "BT-115",
+          "name": "Montant net à payer",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "<strong>= BT-112 − BT-113</strong> — la part restant à la charge de l'acheteur",
+          "rule": "BR-CO-16"
+        },
+        {
+          "id": "EXT-FR-FE-BG-02",
+          "name": "Bloc « payeur de la facture »",
+          "level": "Groupe",
+          "obligation": "facultatif",
+          "value": "Identifie l'assureur ou l'organisme financeur. <strong>Un seul</strong> tiers possible.",
+          "rule": "Z12-014 §3.2.5"
+        },
+        {
+          "id": "EXT-FR-FE-43",
+          "name": "Raison sociale du tiers",
+          "level": "Groupe BG-02",
+          "obligation": "conditionnel",
+          "value": "Nom de l'assureur ou du financeur",
+          "cond": "Si EXT-FR-FE-BG-02 est présent"
+        },
+        {
+          "id": "EXT-FR-FE-46 / -47",
+          "name": "Identifiant du tiers et son schéma",
+          "level": "Groupe BG-02",
+          "obligation": "facultatif",
+          "value": "SIRET, GLN… qualifié par un code ISO 6523"
+        },
+        {
+          "id": "BT-21 = PAI",
+          "name": "Note de répartition du paiement",
+          "level": "En-tête",
+          "obligation": "recommandé",
+          "value": "<strong>Indispensable en pratique</strong> : c'est le seul endroit où détailler une répartition entre plusieurs tiers"
+        },
+        {
+          "id": "BT-81",
+          "name": "Code du moyen de paiement",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "30 (virement) le plus souvent",
+          "rule": "BR-49"
+        },
+        {
+          "id": "BT-84",
+          "name": "IBAN de paiement",
+          "level": "En-tête",
+          "obligation": "conditionnel",
+          "value": "IBAN du vendeur",
+          "cond": "Si BT-81 = 30",
+          "rule": "BR-FR-CPRO-49"
+        }
+      ],
+      "fieldsNote": "⚠️ <strong>Deux limites structurelles.</strong> D'abord, EN 16931 et les formats UBL/CII n'acceptent qu'<strong>un seul</strong> tiers payeur : avec deux assureurs, un seul peut être nommé, la répartition complète devant être décrite en texte libre dans BT-21 = PAI. Ensuite, BT-113 agrège le total payé par <em>tous</em> les tiers, y compris ceux qui ne sont pas nommés. 💡 Et attention au sens du champ : ici BT-113 ne veut pas dire « déjà encaissé » mais « montant que l'acheteur n'a pas à payer » — c'est une convention sémantique propre à la réforme française.",
+      "relatedWhy": {
+        "cas-3": {
+          "rel": "cas parent",
+          "why": "Même structure de tiers payeur identifié dès l'émission ; le cas 4 en est la déclinaison partielle, où BT-113 et BT-115 se partagent le montant au lieu que l'un soit à zéro."
+        },
+        "cas-2": {
+          "rel": "cas voisin",
+          "why": "Les deux jouent sur le couple BT-113 / BT-115, mais le cas 2 le sature (tout payé, net à payer nul) là où le cas 4 le répartit."
+        },
+        "cas-5": {
+          "rel": "tiers payeur particulier",
+          "why": "La note de frais est l'autre grande famille de tiers payeur, mais à prise en charge totale : le collaborateur avance 100 % du montant, là où l'assureur n'en couvre qu'une part."
+        }
+      }
+    },
+    "cas-5": {
+      "narrative": {
+        "intro": "<p>Le collaborateur avance l'argent, mais l'acheteur au sens fiscal reste <strong>l'entreprise</strong>. C'est toute la clé du cas.</p>",
+        "steps": [
+          {
+            "t": 1,
+            "actor": "Collaborateur",
+            "title": "L'achat est fait au nom de l'entreprise",
+            "text": "Le collaborateur demande au vendeur une facture au nom de son employeur et lui fournit le SIREN, l'adresse de facturation électronique de l'entreprise — souvent une adresse dédiée du type SIREN_FRAISCOLLABORATEUR — et un identifiant de rattachement, matricule ou numéro de ticket.",
+            "diagram": 0
+          },
+          {
+            "t": 2,
+            "actor": "Vendeur",
+            "title": "La facture est libellée à l'entreprise et marquée payée",
+            "text": "BT-44 et BT-47 portent la raison sociale et le SIREN de <strong>l'entreprise</strong>. Le cadre passe en <strong>B2/S2/M2</strong>, BT-113 = BT-112, BT-115 = 0, et BT-9 reçoit la date effective du paiement par le collaborateur. Celui-ci est identifié comme tiers payeur, de préférence par son matricule.",
+            "refs": [
+              "BT-44",
+              "BT-47",
+              "BT-23",
+              "BT-113",
+              "BT-115",
+              "BT-9"
+            ],
+            "diagram": 1
+          },
+          {
+            "t": 3,
+            "actor": "PA-E",
+            "title": "Contrôles, « Déposée », double transmission",
+            "text": "BR-FR-CO-09 est vérifiée, puis flux 1 au portail public et flux 2 vers la PA-R de l'entreprise.",
+            "flux": [
+              "F1",
+              "F2",
+              "F6"
+            ],
+            "diagram": 2
+          },
+          {
+            "t": 4,
+            "actor": "PA-R",
+            "title": "La facture arrive dans le SI de l'entreprise",
+            "text": "Statuts « Reçue » puis « Mise à disposition », sur l'adresse de réception indiquée par le collaborateur.",
+            "flux": [
+              "F6"
+            ],
+            "diagram": 3
+          },
+          {
+            "t": 5,
+            "actor": "Acheteur",
+            "title": "Rapprochement avec la note de frais",
+            "text": "L'entreprise réconcilie la facture et la ligne de note de frais, puis pose « Prise en charge ». Aucun circuit de paiement fournisseur n'est déclenché : la facture est déjà réglée.",
+            "flux": [
+              "F6"
+            ]
+          },
+          {
+            "t": 6,
+            "actor": "Vendeur",
+            "title": "Statut « Encaissée » possible immédiatement",
+            "text": "Si la TVA est exigible à l'encaissement, le vendeur pose « Encaissée » à la date du paiement par le collaborateur, soit BT-9.",
+            "flux": [
+              "F6"
+            ],
+            "refs": [
+              "BT-9"
+            ]
+          },
+          {
+            "t": 7,
+            "actor": "Acheteur",
+            "title": "Le remboursement du salarié reste hors périmètre",
+            "text": "L'entreprise rembourse son collaborateur par la paie ou un virement interne : ce n'est ni une livraison, ni une prestation, donc <strong>aucun flux RFE</strong>, aucune facture, aucun e-reporting."
+          }
+        ]
+      },
+      "fields": [
+        {
+          "id": "BT-3",
+          "name": "Code type de facture",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "380",
+          "rule": "G1.01"
+        },
+        {
+          "id": "BT-23",
+          "name": "Cadre de facturation",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "<strong>B2 · S2 · M2</strong> — la facture est déjà payée par le collaborateur",
+          "rule": "BR-FR-DC-01 · G1.02"
+        },
+        {
+          "id": "BT-44",
+          "name": "Nom de l'acheteur",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "<strong>Raison sociale de l'entreprise</strong>, jamais le nom du salarié",
+          "rule": "BR-FR-DC-02"
+        },
+        {
+          "id": "BT-47",
+          "name": "Identifiant légal de l'acheteur",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "<strong>SIREN de l'entreprise</strong>, schéma BT-47-1 = 0002",
+          "rule": "BR-FR-CO-10"
+        },
+        {
+          "id": "BT-113",
+          "name": "Montant déjà payé",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "= BT-112 — le collaborateur a tout réglé",
+          "rule": "BR-FR-CO-09"
+        },
+        {
+          "id": "BT-115",
+          "name": "Montant net à payer",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "0.00",
+          "rule": "BR-FR-CO-09"
+        },
+        {
+          "id": "BT-9",
+          "name": "Date d'échéance",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "Date du paiement par le collaborateur, éventuellement antérieure à BT-2",
+          "rule": "BR-FR-CO-09"
+        },
+        {
+          "id": "EXT-FR-FE-BG-02",
+          "name": "Bloc « payeur de la facture »",
+          "level": "Groupe",
+          "obligation": "facultatif",
+          "value": "Identifie le collaborateur comme tiers payeur",
+          "rule": "Z12-014 §3.2.6"
+        },
+        {
+          "id": "EXT-FR-FE-43",
+          "name": "Raison sociale du tiers payeur",
+          "level": "Groupe BG-02",
+          "obligation": "conditionnel",
+          "value": "<strong>Matricule du collaborateur de préférence</strong>, plutôt que son nom en clair — enjeu RGPD",
+          "cond": "Si EXT-FR-FE-BG-02 est présent"
+        },
+        {
+          "id": "BT-18 / BT-18-1",
+          "name": "Identifiant de l'objet facturé",
+          "level": "En-tête",
+          "obligation": "facultatif",
+          "value": "Alternative en profil EN 16931 pur : code AHK (référence du payeur)"
+        },
+        {
+          "id": "BT-160 / BT-161",
+          "name": "Attribut d'article",
+          "level": "Ligne",
+          "obligation": "facultatif",
+          "value": "Autre alternative : BT-160 = MATRICULE, BT-161 = sa valeur"
+        },
+        {
+          "id": "BT-81",
+          "name": "Code du moyen de paiement",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "30 si virement, 48/54/55 si carte bancaire",
+          "rule": "BR-49"
+        },
+        {
+          "id": "BT-87 / BT-88",
+          "name": "Carte de paiement : numéro masqué et porteur",
+          "level": "Groupe BG-18",
+          "obligation": "facultatif",
+          "value": "6 premiers et 4 derniers chiffres au maximum ; nom du collaborateur porteur",
+          "cond": "Si le paiement a été fait par carte"
+        }
+      ],
+      "fieldsNote": "⚠️ <strong>L'erreur à ne pas commettre :</strong> mettre le collaborateur en BT-44 / BT-47. Ces champs sont ceux de l'entreprise, point. Une facture libellée au nom du salarié fait basculer l'opération en B2C — c'est le cas 6 — avec perte de la déductibilité de la TVA. Le collaborateur n'apparaît que comme tiers payeur. 💡 Second oubli fréquent : renseigner BT-87 / BT-88 en cas de paiement par carte, qui sont précisément ce qui permet le rapprochement automatique côté entreprise.",
+      "relatedWhy": {
+        "cas-2": {
+          "rel": "même mécanique",
+          "why": "La note de frais est un cas particulier de facture déjà payée : cadre en 2, BT-113 saturé, BT-115 à zéro. Seule l'identité du payeur change — un salarié au lieu d'un tiers institutionnel."
+        },
+        "cas-6": {
+          "rel": "frontière à ne pas franchir",
+          "why": "Le même achat physique, mais une facture au nom du salarié au lieu de l'entreprise. Cette seule différence fait sortir l'opération du champ de la facturation électronique B2B et compromet la déduction de TVA."
+        }
+      }
+    },
+    "cas-6": {
+      "narrative": {
+        "intro": "<p>Cas frontière : l'achat est professionnel, mais la pièce est au nom d'une personne physique. Juridiquement, c'est une vente <strong>B2C</strong>.</p>",
+        "steps": [
+          {
+            "t": 1,
+            "actor": "Collaborateur",
+            "title": "Un ticket au nom du salarié, pas de l'entreprise",
+            "text": "Le collaborateur paie et reçoit un ticket de caisse ou une facture à <strong>son</strong> nom. Aucune donnée de l'entreprise n'y figure.",
+            "diagram": 0
+          },
+          {
+            "t": 2,
+            "actor": "Vendeur",
+            "title": "La vente est enregistrée comme B2C",
+            "text": "Le vendeur intègre le montant dans son cumul quotidien de ventes aux particuliers. Il n'y a <strong>aucune facture électronique B2B</strong> à émettre.",
+            "diagram": 1
+          },
+          {
+            "t": 3,
+            "actor": "Vendeur",
+            "title": "Déclaration en e-reporting B2C, pas en facturation",
+            "text": "La transaction part dans le <strong>flux 10.3</strong> : catégorie TT-81 (par exemple TLB1 pour une vente domestique de biens), montant HT TT-82, TVA TT-83 et ventilation par taux.",
+            "flux": [
+              "F10.3"
+            ],
+            "diagram": 2
+          },
+          {
+            "t": 4,
+            "actor": "Vendeur",
+            "title": "E-reporting de paiement si la TVA est à l'encaissement",
+            "text": "Le règlement est déclaré via le <strong>flux 10.4</strong>.",
+            "flux": [
+              "F10.4"
+            ]
+          },
+          {
+            "t": 5,
+            "actor": "Acheteur",
+            "title": "Côté entreprise : aucun droit à déduction",
+            "text": "L'entreprise rembourse son collaborateur, mais ne détient aucune facture à son nom : la TVA n'est pas déductible."
+          },
+          {
+            "t": 6,
+            "actor": "Vendeur",
+            "title": "Rattrapage possible, mais non garanti",
+            "text": "Sur demande, le vendeur <em>peut</em> émettre a posteriori une facture B2B en cadre <strong>B7/S7/M7</strong>, qui signale que la TVA a déjà été collectée en e-reporting et évite la double collecte. C'est la seule voie normée pour retrouver la déductibilité — mais la norme n'oblige pas le vendeur à l'accepter.",
+            "flux": [
+              "F1",
+              "F2"
+            ],
+            "refs": [
+              "BT-23",
+              "BT-44",
+              "BT-47"
+            ]
+          }
+        ]
+      },
+      "fields": [
+        {
+          "id": "Facture électronique B2B",
+          "name": "Obligation de facturation électronique",
+          "level": "Périmètre",
+          "obligation": "non applicable",
+          "value": "<strong>Hors champ</strong> de l'article 289 bis du CGI : la vente est B2C",
+          "rule": "Z12-014 §3.2.7"
+        },
+        {
+          "id": "TT-81",
+          "name": "Catégorie de transaction",
+          "level": "Flux 10.3",
+          "obligation": "obligatoire",
+          "value": "TLB1 pour une vente B2C domestique de biens, ou la catégorie de service équivalente"
+        },
+        {
+          "id": "TT-82",
+          "name": "Montant total HT",
+          "level": "Flux 10.3",
+          "obligation": "obligatoire",
+          "value": "Montant HT de la vente"
+        },
+        {
+          "id": "TT-83",
+          "name": "Montant total de TVA",
+          "level": "Flux 10.3",
+          "obligation": "obligatoire",
+          "value": "Montant de TVA de la vente"
+        },
+        {
+          "id": "TG-32 / TT-86 / TT-87 / TT-88",
+          "name": "Ventilation par taux de TVA",
+          "level": "Flux 10.3",
+          "obligation": "obligatoire",
+          "value": "Taux, base et montant de TVA pour chaque taux applicable"
+        },
+        {
+          "id": "Flux 10.4",
+          "name": "E-reporting des paiements",
+          "level": "Flux 10.4",
+          "obligation": "conditionnel",
+          "value": "Déclaration du règlement",
+          "cond": "Si la TVA est exigible à l'encaissement"
+        },
+        {
+          "id": "BT-23",
+          "name": "Cadre de facturation du rattrapage",
+          "level": "En-tête",
+          "obligation": "conditionnel",
+          "value": "<strong>B7 · S7 · M7</strong> — TVA déjà collectée via e-reporting, déductible pour l'acheteur",
+          "cond": "Uniquement si une facture B2B est émise a posteriori",
+          "rule": "BR-FR-DC-01"
+        },
+        {
+          "id": "BT-44 / BT-47",
+          "name": "Acheteur de la facture de rattrapage",
+          "level": "En-tête",
+          "obligation": "conditionnel",
+          "value": "Raison sociale et SIREN de <strong>l'entreprise</strong>, pas du collaborateur",
+          "cond": "Si facture de rattrapage"
+        }
+      ],
+      "fieldsNote": "⚠️ <strong>La TVA n'est pas déductible.</strong> L'article 271 II-1 du CGI conditionne la déduction à une facture au nom du redevable ; sans elle, le droit à déduction n'existe pas. La Z12-014 relève elle-même que « la déductibilité de la TVA pour l'acheteur est à préciser dans la mesure où l'acheteur n'a pas de facture qui lui est directement adressée ». Le rattrapage en cadre B7/S7/M7 est la seule voie normée, mais rien n'oblige le vendeur à réémettre. 💡 Conséquence pratique : ce cas se prévient en amont, en équipant les collaborateurs pour demander systématiquement une facture au nom de l'entreprise (cas 5).",
+      "relatedWhy": {
+        "cas-5": {
+          "rel": "cas à privilégier",
+          "why": "Le même achat, mais correctement facturé à l'entreprise. C'est la version à atteindre : elle préserve la déductibilité de la TVA et fait entrer l'opération dans le circuit B2B."
+        },
+        "cas-30": {
+          "rel": "mécanisme de rattrapage",
+          "why": "C'est le cas qui décrit en détail le cadre B7/S7/M7, seule façon d'émettre après coup une facture B2B sans collecter deux fois la TVA déjà déclarée en e-reporting B2C."
+        }
+      }
+    },
+    "cas-7": {
+      "narrative": {
+        "intro": "<p>La carte logée n'est pas un tiers payeur : c'est un <strong>moyen de paiement de l'acheteur</strong>, au même titre qu'un virement. Le cas se ramène donc au cas 2.</p>",
+        "steps": [
+          {
+            "t": 1,
+            "actor": "Acheteur",
+            "title": "L'achat est réglé immédiatement par la carte d'achat",
+            "text": "L'acheteur paie le vendeur avec la carte logée de l'entreprise. Le règlement est immédiat.",
+            "diagram": 0
+          },
+          {
+            "t": 2,
+            "actor": "Vendeur",
+            "title": "La facture est marquée payée, avec le bloc carte",
+            "text": "Cadre <strong>B2/S2/M2</strong>, BT-113 = BT-112, BT-115 = 0, BT-9 à la date du paiement par carte. Le moyen de paiement BT-81 passe à <strong>48</strong> et le bloc BG-18 porte les derniers chiffres de la carte et le nom du porteur. <strong>Aucun EXT-FR-FE-BG-02.</strong>",
+            "refs": [
+              "BT-23",
+              "BT-81",
+              "BT-113",
+              "BT-115"
+            ],
+            "diagram": 1
+          },
+          {
+            "t": 3,
+            "actor": "PA-E",
+            "title": "Contrôles, « Déposée », double transmission",
+            "text": "BR-FR-CO-09 est vérifiée du fait du cadre en 2, puis flux 1 au portail public et flux 2 à la PA-R.",
+            "flux": [
+              "F1",
+              "F2",
+              "F6"
+            ],
+            "diagram": 2
+          },
+          {
+            "t": 4,
+            "actor": "PA-R",
+            "title": "Réception et mise à disposition",
+            "text": "Statuts « Reçue » puis « Mise à disposition ».",
+            "flux": [
+              "F6"
+            ],
+            "diagram": 3
+          },
+          {
+            "t": 5,
+            "actor": "Acheteur",
+            "title": "Rapprochement avec le relevé de la carte",
+            "text": "L'acheteur réconcilie la facture et la ligne du relevé de carte d'achat, puis pose « Prise en charge ». Il conserve la possibilité de refuser un achat contesté.",
+            "flux": [
+              "F6"
+            ],
+            "refs": [
+              "BT-87"
+            ]
+          },
+          {
+            "t": 6,
+            "actor": "Vendeur",
+            "title": "Statut « Encaissée » émis rapidement",
+            "text": "L'argent étant déjà encaissé, le statut peut suivre de près le dépôt. Certaines PA-E proposent même de le générer automatiquement à partir du cadre en 2 et de BT-9.",
+            "flux": [
+              "F6"
+            ],
+            "refs": [
+              "BT-8"
+            ]
+          }
+        ]
+      },
+      "fields": [
+        {
+          "id": "BT-3",
+          "name": "Code type de facture",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "380",
+          "rule": "G1.01"
+        },
+        {
+          "id": "BT-23",
+          "name": "Cadre de facturation",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "<strong>B2 · S2 · M2</strong> si la facture suit le paiement ; B1/S1/M1 reste admis si la convention prévoit de facturer avant",
+          "rule": "BR-FR-DC-01"
+        },
+        {
+          "id": "BT-113",
+          "name": "Montant déjà payé",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "= BT-112 — la totalité a été réglée par la carte",
+          "cond": "Si cadre en 2",
+          "rule": "BR-FR-CO-09"
+        },
+        {
+          "id": "BT-115",
+          "name": "Montant net à payer",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "0.00",
+          "cond": "Si cadre en 2",
+          "rule": "BR-FR-CO-09"
+        },
+        {
+          "id": "BT-9",
+          "name": "Date d'échéance",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "Date du paiement par carte, éventuellement antérieure à BT-2",
+          "rule": "BR-FR-CO-09 · BR-FR-CO-07"
+        },
+        {
+          "id": "BT-81",
+          "name": "Code du moyen de paiement",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "<strong>48</strong> (carte bancaire) — code générique recommandé ; 54 crédit, 55 débit",
+          "rule": "UNTDID 4461"
+        },
+        {
+          "id": "BG-18",
+          "name": "Informations de carte de paiement",
+          "level": "Groupe",
+          "obligation": "conditionnel",
+          "value": "Bloc activé à la place de BG-17 (virement)",
+          "cond": "Si BT-81 ∈ {48, 54, 55}"
+        },
+        {
+          "id": "BT-87",
+          "name": "Numéro de carte masqué",
+          "level": "Groupe BG-18",
+          "obligation": "recommandé",
+          "value": "4 à 6 derniers chiffres. La norme autorise au maximum les 6 premiers et les 4 derniers."
+        },
+        {
+          "id": "BT-88",
+          "name": "Nom du titulaire de la carte",
+          "level": "Groupe BG-18",
+          "obligation": "facultatif",
+          "value": "Souvent le nom de l'entreprise ou du service porteur"
+        },
+        {
+          "id": "EXT-FR-FE-BG-02",
+          "name": "Bloc « payeur de la facture »",
+          "level": "Groupe",
+          "obligation": "à ne pas utiliser",
+          "value": "<strong>Non applicable</strong> : l'émetteur de la carte n'est pas un tiers payeur",
+          "rule": "Z12-014 §3.2.8"
+        },
+        {
+          "id": "BG-17",
+          "name": "Virement",
+          "level": "Groupe",
+          "obligation": "à ne pas utiliser",
+          "value": "BT-84, BT-85 et BT-86 restent vides : le paiement n'est pas un virement"
+        }
+      ],
+      "fieldsNote": "⚠️ <strong>Le piège classique :</strong> déclarer l'émetteur de la carte — banque, Visa, Mastercard — comme tiers payeur dans EXT-FR-FE-BG-02. C'est faux. Une carte logée est un moyen de paiement de l'acheteur, comme un chèque : le bloc à utiliser est BG-18, avec BT-87 et BT-88. Second point de vigilance, le masquage de BT-87 : s'en tenir aux derniers chiffres est la bonne pratique. 💡 En B2G, la carte d'achat est très répandue (UGAP, centrales d'achat publiques) : les règles sont les mêmes, complétées des contraintes BR-FR-CPRO, et le cadre en 2 y est valide.",
+      "relatedWhy": {
+        "cas-2": {
+          "rel": "cas parent",
+          "why": "Le cas 7 est un cas 2 dont le moyen de paiement est précisé : même cadre en 2, même BT-113 saturé, même BT-115 nul. La seule addition est le bloc carte BG-18, et la seule soustraction le tiers payeur."
+        },
+        "cas-5": {
+          "rel": "cas voisin",
+          "why": "Les deux traitent d'un achat professionnel réglé sur le moment. La différence tient au support : une carte logée appartenant à l'entreprise (BG-18, pas de tiers payeur) contre l'avance personnelle d'un collaborateur (tiers payeur identifié)."
         }
       }
     }
