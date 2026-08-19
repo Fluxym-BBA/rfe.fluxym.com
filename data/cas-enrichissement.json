@@ -11,7 +11,7 @@
       "recommandé": "Recommandé",
       "facultatif": "Facultatif"
     },
-    "coverage": "21 fiches enrichies : nominal + 6 variantes nominales + cas 1 à 12, 15 et 16"
+    "coverage": "28 fiches enrichies : nominal + 6 variantes nominales + cas 1 à 17b, 19a, 19b et 23"
   },
   "socle": {
     "label": "Socle obligatoire commun à tous les cas d'usage",
@@ -3919,6 +3919,1033 @@
         "cas-12": {
           "rel": "complément fréquent",
           "why": "Un intermédiaire facture souvent sa commission (cas 12) et refacture en parallèle des dépenses avancées (cas 16). Les deux se cumulent sur des factures distinctes, ou sur une même facture mêlant catégories S et O."
+        }
+      }
+    },
+    "cas-13": {
+      "narrative": {
+        "intro": "<p>Deux factures et deux paiements se superposent : le sous-traitant facture le titulaire, mais c'est le maître d'ouvrage qui le règle <strong>directement</strong>.</p>",
+        "steps": [
+          {
+            "t": 1,
+            "actor": "Sous-traitant",
+            "title": "F1 : le sous-traitant facture le titulaire",
+            "text": "Facture 380 avec un cadre de facturation <strong>S5</strong> (dépôt par un sous-traitant), et, en cas d'autoliquidation, BT-120 = « AUTOLIQUIDATION DE TVA » avec le code BT-121 = <code>VATEX-FR-AE</code>.",
+            "flux": [
+              "F2"
+            ],
+            "refs": [
+              "BT-3",
+              "BT-23",
+              "BT-121"
+            ],
+            "diagram": 0
+          },
+          {
+            "t": 2,
+            "actor": "PA-E",
+            "title": "Une demande de paiement direct est émise",
+            "text": "La plateforme du sous-traitant transmet un message de cycle de vie <strong>224 « Demande de paiement direct »</strong> vers la plateforme de l'acheteur, avec copie au titulaire et la facture F1 en pièce jointe (MDT-96).",
+            "flux": [
+              "F6"
+            ],
+            "diagram": 1
+          },
+          {
+            "t": 3,
+            "actor": "Titulaire",
+            "title": "F2 : le titulaire facture l'acheteur pour le tout",
+            "text": "Sa facture couvre l'ensemble du marché, part du sous-traitant incluse, en cadre B1/S1/M1. La ventilation se fait par une convention propre à ce cas : <strong>BT-113 = part du sous-traitant</strong>, <strong>BT-115 = part restant due au titulaire</strong>.",
+            "flux": [
+              "F1",
+              "F2"
+            ],
+            "refs": [
+              "BT-113",
+              "BT-115"
+            ],
+            "diagram": 2
+          },
+          {
+            "t": 4,
+            "actor": "Acheteur",
+            "title": "Deux paiements pour une seule facture",
+            "text": "L'acheteur règle le titulaire à hauteur de BT-115 et le sous-traitant à hauteur de BT-113. Il peut poser deux statuts « Paiement transmis », le second désignant le sous-traitant comme bénéficiaire.",
+            "flux": [
+              "F6"
+            ],
+            "refs": [
+              "BT-113",
+              "BT-115"
+            ],
+            "diagram": 3
+          },
+          {
+            "t": 5,
+            "actor": "Sous-traitant",
+            "title": "Chacun déclare son encaissement",
+            "text": "Le sous-traitant pose « Encaissée » sur F1, le titulaire sur F2, chacun via sa propre plateforme, si la TVA est exigible à l'encaissement.",
+            "flux": [
+              "F6"
+            ],
+            "refs": [
+              "BT-8"
+            ],
+            "diagram": 4
+          }
+        ]
+      },
+      "fields": [
+        {
+          "id": "BT-3",
+          "name": "Code type de facture",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "380 sur F1 comme sur F2",
+          "rule": "G1.01"
+        },
+        {
+          "id": "BT-23",
+          "name": "Cadre de facturation — F1",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "<strong>S5</strong> — dépôt par un sous-traitant d'une facture de prestation. En B2G, <strong>S3</strong> pour la demande de paiement direct.",
+          "rule": "G1.02"
+        },
+        {
+          "id": "BT-23",
+          "name": "Cadre de facturation — F2",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "B1 · S1 · M1 selon la nature de l'opération",
+          "rule": "G1.02"
+        },
+        {
+          "id": "BT-113",
+          "name": "Montant déjà payé — F2",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "<strong>= montant à régler directement au sous-traitant</strong>. Convention propre à ce cas."
+        },
+        {
+          "id": "BT-115",
+          "name": "Montant net à payer — F2",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "= montant restant dû au titulaire",
+          "rule": "BR-CO-16"
+        },
+        {
+          "id": "BT-120 / BT-121",
+          "name": "Motif d'exonération de TVA — F1",
+          "level": "Groupe BG-23",
+          "obligation": "conditionnel",
+          "value": "« AUTOLIQUIDATION DE TVA » et <code>VATEX-FR-AE</code>",
+          "cond": "Si autoliquidation (bâtiment notamment)"
+        },
+        {
+          "id": "BT-18 / BT-18-1",
+          "name": "Objet facturé et son qualifiant",
+          "level": "En-tête",
+          "obligation": "recommandé",
+          "value": "Référence de chantier, qualifiée par un code UNTDID 1153 — indispensable au rapprochement des deux factures"
+        },
+        {
+          "id": "Statut 224",
+          "name": "Demande de paiement direct",
+          "level": "Cycle de vie",
+          "obligation": "obligatoire",
+          "value": "Obligatoire en commande publique, fortement recommandé en B2B privé. MDT-96 porte la facture F1 en pièce jointe.",
+          "rule": "Z12-014"
+        },
+        {
+          "id": "BG-17 / BT-84",
+          "name": "Coordonnées bancaires — F2",
+          "level": "Groupe",
+          "obligation": "recommandé",
+          "value": "IBAN du <strong>titulaire</strong> pour le net à payer. Celles du sous-traitant ne sont pas portées de façon normée dans F2."
+        }
+      ],
+      "fieldsNote": "⚠️ <strong>Le chiffre 4 n'est pas celui de la sous-traitance</strong> — contrairement à une idée répandue. B4/S4/M4 désignent la facture de solde après acompte. Le code de la sous-traitance est <strong>S5</strong> en B2B, et <strong>S3</strong> en B2G pour le paiement direct. 💡 Second piège, plus insidieux : la convention « BT-113 = part du sous-traitant » <em>déroge</em> à l'usage normal de ce champ, qui désigne des acomptes déjà versés. Un ERP non paramétré pour ce cas lira BT-113 comme un acompte reçu et faussera tout le rapprochement. Sans oublier que l'acheteur doit gérer <strong>deux paiements sur une seule facture</strong>, ce que peu de workflows achats savent faire nativement.",
+      "relatedWhy": {
+        "cas-14": {
+          "rel": "montage voisin",
+          "why": "Sous-traitance et co-traitance organisent tous deux plusieurs intervenants autour d'un même marché. La différence est hiérarchique : le sous-traitant contracte avec le titulaire, les co-traitants contractent tous directement avec l'acheteur."
+        }
+      }
+    },
+    "cas-14": {
+      "narrative": {
+        "intro": "<p>Un groupement d'entreprises répond ensemble à un marché. Chaque membre facture l'acheteur <strong>directement</strong>, et le mandataire coordonne l'ensemble.</p>",
+        "steps": [
+          {
+            "t": 1,
+            "actor": "Co-traitant",
+            "title": "Chaque co-traitant émet sa propre facture",
+            "text": "Facture 380 en cadre <strong>S6</strong> (dépôt par un co-traitant), adressée à l'acheteur sur une adresse électronique dédiée à la co-traitance. Le mandataire y est identifié via le bloc EXT-FR-FE-BG-03 « agent de vendeur ».",
+            "flux": [
+              "F2"
+            ],
+            "refs": [
+              "BT-3",
+              "BT-23"
+            ],
+            "diagram": 0
+          },
+          {
+            "t": 2,
+            "actor": "Mandataire",
+            "title": "Le mandataire vise les factures du groupement",
+            "text": "Il accède aux factures sur la plateforme de réception de l'acheteur, par délégation de droits, et pose sur chacune le statut <strong>« Visée »</strong>.",
+            "flux": [
+              "F6"
+            ],
+            "diagram": 1
+          },
+          {
+            "t": 3,
+            "actor": "Mandataire",
+            "title": "Il émet sa propre facture, accompagnée du récapitulatif",
+            "text": "Sa facture couvre sa part de prestation — il est lui aussi co-traitant, d'où un cadre S6 — et porte une pièce jointe récapitulative qualifiée <code>RECAPITULATIF_COTRAITANCE</code> (BT-123, BG-24).",
+            "flux": [
+              "F1",
+              "F2"
+            ],
+            "refs": [
+              "BT-123"
+            ],
+            "diagram": 2
+          },
+          {
+            "t": 4,
+            "actor": "Acheteur",
+            "title": "L'acheteur traite le dossier dans son ensemble",
+            "text": "Il rapproche les factures visées et le récapitulatif, puis valide.",
+            "flux": [
+              "F6"
+            ],
+            "diagram": 3
+          },
+          {
+            "t": 5,
+            "actor": "Acheteur",
+            "title": "Le paiement dépend de la forme du groupement",
+            "text": "En groupement <strong>solidaire</strong>, l'acheteur peut régler le mandataire pour l'ensemble. En groupement <strong>conjoint</strong>, chaque facture est payée séparément à son émetteur.",
+            "diagram": 4
+          },
+          {
+            "t": 6,
+            "actor": "Co-traitant",
+            "title": "Chacun déclare son propre encaissement",
+            "text": "Chaque membre pose « Encaissée » sur sa facture, via sa plateforme, si la TVA est exigible à l'encaissement.",
+            "flux": [
+              "F6"
+            ],
+            "refs": [
+              "BT-8"
+            ]
+          }
+        ]
+      },
+      "fields": [
+        {
+          "id": "BT-3",
+          "name": "Code type de facture",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "380"
+        },
+        {
+          "id": "BT-23",
+          "name": "Cadre de facturation",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "<strong>S6</strong> — dépôt par un co-traitant. S'applique aussi à la facture du mandataire, qui est lui-même co-traitant.",
+          "rule": "G1.02"
+        },
+        {
+          "id": "BG-4",
+          "name": "Vendeur",
+          "level": "Groupe",
+          "obligation": "obligatoire",
+          "value": "Le co-traitant émetteur — chacun facture en son nom propre"
+        },
+        {
+          "id": "BG-7",
+          "name": "Acheteur",
+          "level": "Groupe",
+          "obligation": "obligatoire",
+          "value": "L'acheteur final, identique sur toutes les factures du groupement"
+        },
+        {
+          "id": "EXT-FR-FE-BG-03",
+          "name": "Bloc « agent de vendeur »",
+          "level": "Groupe",
+          "obligation": "recommandé",
+          "value": "Identifie le <strong>mandataire du groupement</strong> : SIREN en EXT-FR-FE-71, SIRET en EXT-FR-FE-69. Profil EXTENDED-CTC-FR.",
+          "rule": "Z12-014"
+        },
+        {
+          "id": "BT-123",
+          "name": "Qualifiant de la pièce jointe",
+          "level": "Groupe BG-24",
+          "obligation": "recommandé",
+          "value": "<code>RECAPITULATIF_COTRAITANCE</code>"
+        },
+        {
+          "id": "BG-24",
+          "name": "Pièce jointe",
+          "level": "Groupe",
+          "obligation": "recommandé",
+          "value": "Document récapitulatif listant toutes les factures du groupement"
+        },
+        {
+          "id": "BT-18",
+          "name": "Objet facturé",
+          "level": "En-tête",
+          "obligation": "recommandé",
+          "value": "Référence commune de chantier et période, par exemple <code>CHANTIERXX_JANVIER26</code> — c'est le liant entre les factures"
+        },
+        {
+          "id": "Statut « Visée »",
+          "name": "Visa du mandataire",
+          "level": "Cycle de vie",
+          "obligation": "facultatif",
+          "value": "Posé par le mandataire sur chaque facture de co-traitant"
+        }
+      ],
+      "fieldsNote": "💡 <strong>Solidaire ou conjoint ?</strong> La norme ne distingue pas les deux au niveau sémantique : dans les deux cas, chaque co-traitant émet sa propre facture et le mandataire les vise. La différence est purement contractuelle et comptable, et se joue au moment du paiement. ⚠️ Le statut <strong>« Visée » est facultatif dans la norme mais structurant dans le processus</strong> : sans lui, l'acheteur n'a aucun signal que le mandataire a validé les factures. Encore faut-il que la plateforme de réception sache déléguer ce droit au mandataire — une fonctionnalité qui n'est pas universelle.",
+      "relatedWhy": {
+        "cas-13": {
+          "rel": "montage voisin",
+          "why": "Même univers des marchés à plusieurs intervenants, mais structure juridique inverse : le sous-traitant facture le titulaire, alors que chaque co-traitant facture l'acheteur en direct."
+        }
+      }
+    },
+    "cas-17a": {
+      "narrative": {
+        "intro": "<p>La marketplace encaisse pour le compte du vendeur, mais reste <strong>totalement absente de la facture</strong>. Elle n'apparaît dans aucun bloc.</p>",
+        "steps": [
+          {
+            "t": 1,
+            "actor": "Vendeur",
+            "title": "Le vendeur émet une facture parfaitement standard",
+            "text": "Facture 380 du vendeur à l'acheteur, en cadre B1/S1/M1. Aucune mention de la marketplace : l'intermédiation de paiement est <strong>hors du périmètre sémantique</strong> de la facture.",
+            "flux": [
+              "F2"
+            ],
+            "refs": [
+              "BT-3",
+              "BT-23"
+            ],
+            "diagram": 0
+          },
+          {
+            "t": 2,
+            "actor": "PA-E",
+            "title": "Transmission classique",
+            "text": "Flux 1 vers le portail public, flux 2 vers la plateforme de l'acheteur, statut « Déposée ».",
+            "flux": [
+              "F1",
+              "F2",
+              "F6"
+            ],
+            "diagram": 1
+          },
+          {
+            "t": 3,
+            "actor": "Acheteur",
+            "title": "L'acheteur paie… la marketplace",
+            "text": "Le règlement passe par la plateforme, en carte ou en virement. <strong>Ce flux financier est hors circuit RFE.</strong>",
+            "diagram": 2
+          },
+          {
+            "t": 4,
+            "actor": "Marketplace",
+            "title": "Elle reverse au vendeur, net de ses frais",
+            "text": "La marketplace transfère au vendeur le TTC de la vente diminué de ses frais d'intermédiation, et pose le statut <strong>« Encaissée »</strong> pour le compte du vendeur via sa propre plateforme.",
+            "flux": [
+              "F6"
+            ],
+            "diagram": 3
+          },
+          {
+            "t": 5,
+            "actor": "Marketplace",
+            "title": "Elle facture ses frais au vendeur",
+            "text": "Seconde facture, 380 en cadre S1 : la marketplace y est vendeur, le vendeur y est acheteur. Sa commission porte sa propre TVA.",
+            "flux": [
+              "F1",
+              "F2"
+            ],
+            "diagram": 4
+          }
+        ]
+      },
+      "fields": [
+        {
+          "id": "BT-3",
+          "name": "Code type — facture de vente",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "380"
+        },
+        {
+          "id": "BT-23",
+          "name": "Cadre — facture de vente",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "B1 · S1 · M1 selon la nature de l'opération",
+          "rule": "G1.02"
+        },
+        {
+          "id": "BG-4",
+          "name": "Vendeur — facture de vente",
+          "level": "Groupe",
+          "obligation": "obligatoire",
+          "value": "<strong>Le vendeur réel</strong>, jamais la marketplace"
+        },
+        {
+          "id": "BG-7",
+          "name": "Acheteur — facture de vente",
+          "level": "Groupe",
+          "obligation": "obligatoire",
+          "value": "L'acheteur final"
+        },
+        {
+          "id": "Marketplace",
+          "name": "Identification de la plateforme",
+          "level": "En-tête",
+          "obligation": "non applicable",
+          "value": "<strong>Aucun bloc</strong> : ni BG-10 bénéficiaire, ni agent de vendeur. L'intermédiation de paiement est extérieure à la sémantique de la facture.",
+          "rule": "Z12-014"
+        },
+        {
+          "id": "BT-3",
+          "name": "Code type — facture de frais",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "380"
+        },
+        {
+          "id": "BT-23",
+          "name": "Cadre — facture de frais",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "S1 — c'est une prestation de service"
+        },
+        {
+          "id": "BG-4 / BG-7",
+          "name": "Parties — facture de frais",
+          "level": "Groupe",
+          "obligation": "obligatoire",
+          "value": "La marketplace est vendeur, le vendeur est acheteur"
+        },
+        {
+          "id": "Statut 230",
+          "name": "Statut « Encaissée »",
+          "level": "Cycle de vie",
+          "obligation": "obligatoire",
+          "value": "Posé par la <strong>marketplace</strong> pour le compte du vendeur, puisque c'est elle qui encaisse",
+          "cond": "Si la TVA est exigible à l'encaissement"
+        },
+        {
+          "id": "E-reporting",
+          "name": "Obligation de e-reporting",
+          "level": "Périmètre",
+          "obligation": "conditionnel",
+          "value": "Si l'acheteur est un particulier, c'est le <strong>vendeur</strong> qui reste redevable du e-reporting, pas la marketplace",
+          "cond": "Ventes B2C"
+        }
+      ],
+      "fieldsNote": "⚠️ <strong>Le nœud du cas :</strong> la marketplace détient l'information d'encaissement — c'est elle qui reçoit l'argent — mais c'est le vendeur qui est <strong>fiscalement redevable</strong> de la TVA collectée. Si la plateforme ne transmet pas le statut « Encaissée » en temps voulu, le vendeur ne peut pas honorer ses obligations déclaratives. Le contrat marketplace-vendeur doit impérativement organiser cette transmission.",
+      "relatedWhy": {
+        "cas-17b": {
+          "rel": "variante avec mandat",
+          "why": "Le même acteur, avec un rôle élargi : en 17a la marketplace ne fait qu'encaisser et reste invisible dans la facture ; en 17b elle l'établit au nom du vendeur et apparaît en EXT-FR-FE-BG-03."
+        },
+        "cas-3": {
+          "rel": "rôle à distinguer",
+          "why": "La marketplace encaisse pour le compte du vendeur : elle est intermédiaire d'encaissement, pas tiers payeur. Le tiers payeur du cas 3 paie à la place de l'acheteur et se déclare en EXT-FR-FE-BG-02 ; la marketplace, elle, n'apparaît dans aucun bloc de la facture."
+        }
+      }
+    },
+    "cas-17b": {
+      "narrative": {
+        "intro": "<p>La marketplace ne se contente plus d'encaisser : elle <strong>établit la facture</strong> au nom et pour le compte du vendeur. Elle devient donc visible dans le document.</p>",
+        "steps": [
+          {
+            "t": 1,
+            "actor": "Marketplace",
+            "title": "La plateforme crée la facture au nom du vendeur",
+            "text": "Le vendeur reste vendeur au sens de BG-4, mais c'est la marketplace qui rédige et dépose la facture, en s'identifiant comme <strong>facturant</strong> dans le bloc EXT-FR-FE-BG-03.",
+            "flux": [
+              "F2"
+            ],
+            "refs": [
+              "BT-3",
+              "BT-23"
+            ],
+            "diagram": 0
+          },
+          {
+            "t": 2,
+            "actor": "PA-E",
+            "title": "Transmission via la plateforme du facturant",
+            "text": "Le dépôt se fait soit sur la plateforme du vendeur, soit sur celle de la marketplace agissant comme plateforme du tiers facturant. Flux 1 au portail public, flux 2 à la plateforme de l'acheteur.",
+            "flux": [
+              "F1",
+              "F2",
+              "F6"
+            ],
+            "diagram": 1
+          },
+          {
+            "t": 3,
+            "actor": "Acheteur",
+            "title": "Paiement via la plateforme",
+            "text": "L'acheteur règle la marketplace, hors circuit RFE.",
+            "diagram": 2
+          },
+          {
+            "t": 4,
+            "actor": "Marketplace",
+            "title": "Encaissement et statut « Encaissée »",
+            "text": "La marketplace pose le statut, toujours pour le compte du vendeur, via sa plateforme.",
+            "flux": [
+              "F6"
+            ],
+            "diagram": 3
+          },
+          {
+            "t": 5,
+            "actor": "Marketplace",
+            "title": "Reversement, facture de frais et restitution au vendeur",
+            "text": "Elle reverse le net, facture ses frais au vendeur, et doit lui restituer <strong>toutes les factures émises en son nom ainsi que leurs statuts</strong>.",
+            "flux": [
+              "F2"
+            ],
+            "diagram": 4
+          }
+        ]
+      },
+      "fields": [
+        {
+          "id": "BT-3",
+          "name": "Code type de facture",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "380 — un mandat de facturation n'est <strong>pas</strong> une auto-facturation, le code self-billed ne s'applique pas"
+        },
+        {
+          "id": "BT-23",
+          "name": "Cadre de facturation",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "B1 · S1 · M1 selon la nature de l'opération",
+          "rule": "G1.02"
+        },
+        {
+          "id": "BG-4",
+          "name": "Vendeur",
+          "level": "Groupe",
+          "obligation": "obligatoire",
+          "value": "<strong>Le vendeur réel</strong> — même si la marketplace rédige la facture"
+        },
+        {
+          "id": "EXT-FR-FE-BG-03",
+          "name": "Bloc « agent de vendeur » / facturant",
+          "level": "Groupe",
+          "obligation": "obligatoire",
+          "value": "Identifie la marketplace : SIREN en EXT-FR-FE-71, SIRET en EXT-FR-FE-69. Profil EXTENDED-CTC-FR. <strong>C'est la différence visible avec le cas 17a.</strong>",
+          "rule": "Z12-014"
+        },
+        {
+          "id": "BG-7",
+          "name": "Acheteur",
+          "level": "Groupe",
+          "obligation": "obligatoire",
+          "value": "L'acheteur final"
+        },
+        {
+          "id": "Responsabilité fiscale",
+          "name": "Redevable de la TVA",
+          "level": "Périmètre",
+          "obligation": "obligatoire",
+          "value": "<strong>Le vendeur</strong> reste redevable. Le mandat transfère la <em>création</em> de la facture, jamais la responsabilité fiscale.",
+          "rule": "BOI-TVA-DECLA-30-20-10"
+        },
+        {
+          "id": "Statut 230",
+          "name": "Statut « Encaissée »",
+          "level": "Cycle de vie",
+          "obligation": "obligatoire",
+          "value": "Posé par la marketplace en tant que facturant",
+          "cond": "Si la TVA est exigible à l'encaissement"
+        }
+      ],
+      "fieldsNote": "⚠️ <strong>Deux obligations pratiques souvent négligées.</strong> D'abord, le vendeur doit disposer de <strong>toutes les factures émises pour son compte et de leurs statuts</strong> : si la marketplace utilise sa propre plateforme, cet accès n'est pas natif et doit être organisé contractuellement (API, export, transmission). Ensuite, si le vendeur est en <strong>franchise en base</strong> et franchit le seuil en cours d'année, il doit en informer immédiatement la marketplace, qui doit ajuster la facturation de la TVA — le mandataire est tenu de connaître le régime fiscal de son mandant.",
+      "relatedWhy": {
+        "cas-17a": {
+          "rel": "cas de base",
+          "why": "Même flux financier et même facture de frais ; le 17b y ajoute le mandat de facturation, donc l'apparition de la marketplace dans le bloc EXT-FR-FE-BG-03."
+        },
+        "cas-19a": {
+          "rel": "même mécanisme juridique",
+          "why": "La marketplace mandatée est un tiers facturant comme un autre : mandat écrit préalable, responsabilité fiscale conservée par le vendeur, identification dans la facture. Le cas 19a en donne la forme générale."
+        }
+      }
+    },
+    "cas-19a": {
+      "narrative": {
+        "intro": "<p>Un tiers rédige et transmet les factures d'un vendeur, sur mandat écrit. Attention : <strong>ce n'est pas de l'auto-facturation</strong> — le sens du flux reste inchangé.</p>",
+        "steps": [
+          {
+            "t": 1,
+            "actor": "Vendeur",
+            "title": "Un mandat écrit préalable est signé",
+            "text": "Le vendeur mandate un tiers pour établir ses factures. Cette étape est <strong>hors circuit RFE</strong> mais conditionne la validité fiscale de tout ce qui suit.",
+            "diagram": 0
+          },
+          {
+            "t": 2,
+            "actor": "Mandataire",
+            "title": "Le mandataire établit la facture",
+            "text": "Facture <strong>380</strong> classique — surtout pas un code d'auto-facturation — où le vendeur reste vendeur en BG-4. Le mandataire s'identifie dans le bloc <strong>EXT-FR-FE-BG-05 « tiers facturant »</strong> et emploie une racine de numérotation BT-1 qui lui est propre.",
+            "flux": [
+              "F2"
+            ],
+            "refs": [
+              "BT-1",
+              "BT-3",
+              "BT-23"
+            ],
+            "diagram": 1
+          },
+          {
+            "t": 3,
+            "actor": "PA-E",
+            "title": "Dépôt, contrôles et double transmission",
+            "text": "Le dépôt se fait sur la plateforme du vendeur — le mandataire agissant par délégation — ou sur la sienne. Puis flux 1 au portail public et flux 2 vers la plateforme de l'acheteur.",
+            "flux": [
+              "F1",
+              "F2",
+              "F6"
+            ],
+            "refs": [
+              "BT-34",
+              "BT-49"
+            ],
+            "diagram": 2
+          },
+          {
+            "t": 4,
+            "actor": "Acheteur",
+            "title": "Réception et traitement habituels",
+            "text": "L'acheteur reçoit une facture qui, de son point de vue, est parfaitement ordinaire, et pose ses statuts. Ceux-ci remontent vers le vendeur via l'adresse BT-34.",
+            "flux": [
+              "F6"
+            ],
+            "refs": [
+              "BT-34"
+            ],
+            "diagram": 3
+          },
+          {
+            "t": 5,
+            "actor": "Acheteur",
+            "title": "Le paiement va au vendeur",
+            "text": "Et non au mandataire : celui-ci n'est qu'un prestataire de rédaction, il n'est ni bénéficiaire ni redevable.",
+            "diagram": 4
+          },
+          {
+            "t": 6,
+            "actor": "Vendeur",
+            "title": "Le vendeur pose « Encaissée »",
+            "text": "Comme dans le cas nominal, si la TVA est exigible à l'encaissement.",
+            "flux": [
+              "F6"
+            ],
+            "refs": [
+              "BT-8"
+            ]
+          }
+        ]
+      },
+      "fields": [
+        {
+          "id": "BT-3",
+          "name": "Code type de facture",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "<strong>380</strong> — facture commerciale standard, jamais un code self-billed",
+          "rule": "BR-FR-CO-02"
+        },
+        {
+          "id": "BT-23",
+          "name": "Cadre de facturation",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "B1 · S1 · M1 selon la nature — un mandat n'est pas une auto-facturation",
+          "rule": "BR-FR-CO-06"
+        },
+        {
+          "id": "EXT-FR-FE-BG-05",
+          "name": "Bloc « tiers facturant »",
+          "level": "Groupe",
+          "obligation": "obligatoire",
+          "value": "Identifie le mandataire : raison sociale et SIREN ou SIRET. Profil <strong>EXTENDED-CTC-FR</strong> requis.",
+          "rule": "Z12-014 §4.1.4.5"
+        },
+        {
+          "id": "BT-1",
+          "name": "Numéro de facture",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "<strong>Racine de numérotation propre au mandataire</strong>, pour éviter toute collision avec la série du vendeur",
+          "rule": "BR-FR-01"
+        },
+        {
+          "id": "BT-34",
+          "name": "Adresse de facturation électronique du vendeur",
+          "level": "Groupe BG-4",
+          "obligation": "obligatoire",
+          "value": "<code>0225:SIREN_vendeur</code> — c'est par là que les statuts reviennent au vendeur",
+          "rule": "BR-FR-13 · BR-FR-22"
+        },
+        {
+          "id": "BT-21 / BT-22",
+          "name": "Mention légale du mandat",
+          "level": "Groupe BG-1",
+          "obligation": "obligatoire",
+          "value": "« Facture établie par [Mandataire] au nom et pour le compte de [Vendeur] »",
+          "rule": "CGI art. 289-I-2 · BOI-TVA-DECLA-30-20-10"
+        },
+        {
+          "id": "Responsabilité fiscale",
+          "name": "Redevable de la TVA",
+          "level": "Périmètre",
+          "obligation": "obligatoire",
+          "value": "<strong>Le vendeur</strong>, intégralement. Le mandataire n'est qu'un prestataire."
+        }
+      ],
+      "fieldsNote": "⚠️ <strong>Ne pas confondre les blocs.</strong> Le tiers facturant se déclare en <strong>EXT-FR-FE-BG-05</strong>, et non en EXT-FR-FE-BG-03 qui désigne un agent de vendeur, rôle commercial sans mandat de facturation. 💡 Et l'erreur qui coûte cher en production : oublier la racine de numérotation propre au mandataire en BT-1 provoque un <strong>rejet pour doublon</strong> (BR-FR-01) dès que deux séries se croisent. À noter enfin que les identifiants exacts des sous-champs de EXT-FR-FE-BG-05 restent <strong>à confirmer</strong> sur le schéma sémantique V1.4.",
+      "relatedWhy": {
+        "cas-19b": {
+          "rel": "à ne pas confondre",
+          "why": "Deux mécanismes que tout oppose malgré leur ressemblance. Dans le mandat, un tiers neutre rédige pour le vendeur et la facture reste une 380 circulant du vendeur vers l'acheteur. En auto-facturation, c'est l'acheteur lui-même qui rédige, avec un code 389 et un circuit inversé."
+        },
+        "cas-17b": {
+          "rel": "application concrète",
+          "why": "La marketplace mandatée est le cas d'école du tiers facturant : mêmes exigences de mandat écrit préalable, de mention légale et de conservation de la responsabilité fiscale par le vendeur."
+        }
+      }
+    },
+    "cas-19b": {
+      "narrative": {
+        "intro": "<p>C'est l'acheteur qui établit la facture. Conséquence majeure : <strong>le circuit s'inverse</strong>, la plateforme d'émission est celle de l'acheteur et celle de réception celle du vendeur.</p>",
+        "steps": [
+          {
+            "t": 1,
+            "actor": "Vendeur",
+            "title": "Mandat et transmission du régime de TVA",
+            "text": "Le vendeur mandate l'acheteur par écrit et lui communique son régime de TVA — franchise en base ou non — en s'engageant à signaler tout dépassement de seuil.",
+            "diagram": 0
+          },
+          {
+            "t": 2,
+            "actor": "Acheteur",
+            "title": "L'acheteur rédige et dépose la facture",
+            "text": "Facture de type <strong>389</strong> (self-billed), où le vendeur reste vendeur en BG-4 mais où l'émetteur est l'acheteur. Le dépôt se fait sur la plateforme <strong>de l'acheteur</strong>.",
+            "flux": [
+              "F2"
+            ],
+            "refs": [
+              "BT-3",
+              "BT-23",
+              "BT-34"
+            ],
+            "diagram": 1
+          },
+          {
+            "t": 3,
+            "actor": "PA-E",
+            "title": "Routage inversé, via l'adresse du vendeur",
+            "text": "La plateforme de l'acheteur envoie le flux 1 au portail public et route la facture vers la plateforme <strong>du vendeur</strong>, en s'appuyant sur BT-34 et non sur BT-49. Statut « Déposée ».",
+            "flux": [
+              "F1",
+              "F2",
+              "F6"
+            ],
+            "refs": [
+              "BT-34"
+            ],
+            "diagram": 2
+          },
+          {
+            "t": 4,
+            "actor": "Vendeur",
+            "title": "Le vendeur reçoit sa propre facture et se prononce",
+            "text": "Il l'approuve ou la refuse — acceptation tacite ou expresse selon l'accord. Le délai de contestation est <strong>purement contractuel</strong>, la norme ne le fixe pas.",
+            "flux": [
+              "F6"
+            ],
+            "diagram": 3
+          },
+          {
+            "t": 5,
+            "actor": "Acheteur",
+            "title": "Paiement et statut « Paiement transmis »",
+            "text": "Seul le volet paiement conserve le sens habituel : l'acheteur paie et pose ce statut.",
+            "flux": [
+              "F6"
+            ],
+            "diagram": 4
+          },
+          {
+            "t": 6,
+            "actor": "Vendeur",
+            "title": "Statut « Encaissée » posé par le vendeur",
+            "text": "Inchangé lui aussi, si la TVA est exigible à l'encaissement.",
+            "flux": [
+              "F6"
+            ],
+            "refs": [
+              "BT-8"
+            ]
+          }
+        ]
+      },
+      "fields": [
+        {
+          "id": "BT-3",
+          "name": "Code type de facture",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "<strong>389</strong> — facture auto-facturée. Déclinaisons : 261 avoir, 500 acompte, 471 rectificative, 501 affacturée, 502 avoir affacturé, 473 rectificative affacturée.",
+          "rule": "BR-FR-CO-02"
+        },
+        {
+          "id": "BT-23",
+          "name": "Cadre de facturation",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "<strong>B1 · S1 · M1</strong> pour une auto-facturation simple entre deux parties. <strong>B9 · S9 · M9</strong> uniquement pour une facture bidirectionnelle multi-vendeurs.",
+          "rule": "BR-FR-CO-06 · BR-FR-BD-13"
+        },
+        {
+          "id": "BT-34",
+          "name": "Adresse de facturation électronique du vendeur",
+          "level": "Groupe BG-4",
+          "obligation": "obligatoire",
+          "value": "<code>0225:SIREN_vendeur</code> — devient l'<strong>adresse de destination</strong> de la facture, rôle inverse du cas classique",
+          "rule": "BR-FR-22"
+        },
+        {
+          "id": "BT-34-1",
+          "name": "Schéma de l'adresse du vendeur",
+          "level": "Groupe BG-4",
+          "obligation": "obligatoire",
+          "value": "0225",
+          "rule": "BR-FR-22"
+        },
+        {
+          "id": "BT-49",
+          "name": "Adresse de facturation électronique de l'acheteur",
+          "level": "Groupe BG-7",
+          "obligation": "obligatoire",
+          "value": "Tout schéma EAS admis, y compris EM : l'acheteur est ici l'émetteur. Sert au retour des statuts.",
+          "rule": "BR-FR-12 · BR-FR-13"
+        },
+        {
+          "id": "BT-21 / BT-22",
+          "name": "Mention d'auto-facturation",
+          "level": "Groupe BG-1",
+          "obligation": "obligatoire",
+          "value": "« Autofacturation » ou mention équivalente",
+          "rule": "CGI art. 289-I"
+        },
+        {
+          "id": "E-reporting",
+          "name": "Obligation de e-reporting",
+          "level": "Périmètre",
+          "obligation": "non applicable",
+          "value": "Non requis : l'opération est B2B domestique entre assujettis, le flux 1 suffit"
+        }
+      ],
+      "fieldsNote": "⚠️ <strong>Le piège du cadre 9.</strong> Une auto-facturation simple entre deux parties reste en <strong>B1/S1/M1</strong> : le caractère auto-facturé est porté par BT-3 = 389, pas par le cadre. Les cadres B9/S9/M9 sont réservés au cas bidirectionnel multi-vendeurs ; les confondre déclenche un rejet schematron (BR-FR-BD-13 ou BR-FR-MV-13). 💡 Et le point à intégrer dans les projets : <strong>tous les statuts métier s'inversent</strong>. C'est le vendeur qui approuve, refuse ou met en litige, alors que l'acheteur conserve « Paiement transmis » et le vendeur « Encaissée ».",
+      "relatedWhy": {
+        "cas-19a": {
+          "rel": "à ne pas confondre",
+          "why": "Le mandat de facturation confie la rédaction à un tiers neutre, sans changer le sens du flux ni le type de document. L'auto-facturation la confie à l'acheteur, avec un code 389 et une inversion complète du circuit et des statuts."
+        },
+        "cas-23": {
+          "rel": "cas particulier",
+          "why": "L'auto-facturation appliquée à un vendeur particulier. Toute la mécanique du 19b s'applique, mais la question de l'identification du vendeur — SIREN, numéro de TVA — devient déterminante."
+        }
+      }
+    },
+    "cas-23": {
+      "narrative": {
+        "intro": "<p>Un professionnel achète à un particulier et établit lui-même le document. Tout dépend d'une seule question : <strong>ce particulier a-t-il un SIREN ?</strong></p>",
+        "steps": [
+          {
+            "t": 1,
+            "actor": "Professionnel",
+            "title": "Vérification préalable décisive : le SIREN",
+            "text": "Avec un SIREN, le particulier est un assujetti en franchise en base et l'opération relève de la facturation électronique. Sans SIREN, elle en sort totalement, et seul le e-reporting s'applique.",
+            "refs": [
+              "BT-30"
+            ],
+            "diagram": 0
+          },
+          {
+            "t": 2,
+            "actor": "Professionnel",
+            "title": "Le professionnel établit la facture auto-facturée",
+            "text": "Type <strong>389</strong>, le particulier en vendeur (BG-4), le professionnel en acheteur (BG-7). La TVA est en catégorie <strong>E</strong> avec le code <code>VATEX-FR-FRANCHISE</code>, et la mention « TVA non applicable, article 293 B du CGI » figure en note.",
+            "flux": [
+              "F2"
+            ],
+            "refs": [
+              "BT-3",
+              "BT-23",
+              "BT-118",
+              "BT-121"
+            ],
+            "diagram": 1
+          },
+          {
+            "t": 3,
+            "actor": "PA-E",
+            "title": "Transmission avec routage inversé",
+            "text": "La plateforme du professionnel envoie le flux 1 au portail public et route la facture vers celle du particulier via BT-34.",
+            "flux": [
+              "F1",
+              "F2",
+              "F6"
+            ],
+            "refs": [
+              "BT-34"
+            ],
+            "diagram": 2
+          },
+          {
+            "t": 4,
+            "actor": "Vendeur",
+            "title": "Le particulier reçoit et approuve",
+            "text": "Réception sur sa plateforme, approbation tacite ou expresse.",
+            "flux": [
+              "F6"
+            ]
+          },
+          {
+            "t": 5,
+            "actor": "Professionnel",
+            "title": "Paiement et statut « Paiement transmis »",
+            "text": "Le professionnel règle le particulier.",
+            "flux": [
+              "F6"
+            ]
+          },
+          {
+            "t": 6,
+            "actor": "Vendeur",
+            "title": "Pas de statut « Encaissée » obligatoire",
+            "text": "En franchise en base, il n'y a pas de TVA à collecter : le statut « Encaissée » n'est donc pas obligatoire vers le portail public."
+          }
+        ]
+      },
+      "fields": [
+        {
+          "id": "BT-3",
+          "name": "Code type de facture",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "<strong>389</strong> — facture auto-facturée",
+          "rule": "BR-FR-CO-02"
+        },
+        {
+          "id": "BT-23",
+          "name": "Cadre de facturation",
+          "level": "En-tête",
+          "obligation": "obligatoire",
+          "value": "B1 · S1 selon la nature de l'opération",
+          "rule": "BR-FR-CO-06"
+        },
+        {
+          "id": "BT-27",
+          "name": "Raison sociale du vendeur",
+          "level": "Groupe BG-4",
+          "obligation": "obligatoire",
+          "value": "Nom de la personne physique"
+        },
+        {
+          "id": "BT-30",
+          "name": "Identifiant légal du vendeur",
+          "level": "Groupe BG-4",
+          "obligation": "obligatoire",
+          "value": "<strong>SIREN du particulier</strong> — obligatoire même en franchise en base, ce qui suppose son immatriculation",
+          "rule": "BR-FR-01"
+        },
+        {
+          "id": "BT-31",
+          "name": "Numéro de TVA du vendeur",
+          "level": "Groupe BG-4",
+          "obligation": "conditionnel",
+          "value": "<strong>Absent</strong> en franchise en base : aucun numéro n'a été attribué",
+          "rule": "BR-FR-CO-16"
+        },
+        {
+          "id": "BT-34",
+          "name": "Adresse de facturation électronique du vendeur",
+          "level": "Groupe BG-4",
+          "obligation": "obligatoire",
+          "value": "<code>0225:SIREN_particulier</code>, qui doit figurer dans l'annuaire",
+          "rule": "BR-FR-22"
+        },
+        {
+          "id": "BT-118",
+          "name": "Code de catégorie de TVA",
+          "level": "Groupe BG-23",
+          "obligation": "obligatoire",
+          "value": "<strong>E</strong> — exonéré",
+          "rule": "BR-FR-CO-16"
+        },
+        {
+          "id": "BT-121",
+          "name": "Code du motif d'exonération",
+          "level": "Groupe BG-23",
+          "obligation": "obligatoire",
+          "value": "<code>VATEX-FR-FRANCHISE</code>",
+          "rule": "BR-FR-CO-16"
+        },
+        {
+          "id": "BT-21 / BT-22",
+          "name": "Mention de franchise",
+          "level": "Groupe BG-1",
+          "obligation": "obligatoire",
+          "value": "« TVA non applicable, article 293 B du CGI »",
+          "rule": "CGI art. 293 B"
+        },
+        {
+          "id": "E-reporting",
+          "name": "Traitement d'un particulier sans SIREN",
+          "level": "Périmètre",
+          "obligation": "conditionnel",
+          "value": "<strong>Hors champ de la facturation électronique.</strong> Le professionnel déclare l'opération en e-reporting (flux 10.2 ou 10.3 selon la nature).",
+          "cond": "Si le particulier n'a pas de SIREN"
+        }
+      ],
+      "fieldsNote": "⚠️ <strong>La frontière du cas tient en une phrase : pas de SIREN, pas de facturation électronique.</strong> Sans SIREN, BT-30 et BT-34 ne peuvent pas être renseignés au format 0225, donc la facture ne peut physiquement pas circuler sur le réseau des plateformes. 💡 Le cas visé par la norme est celui d'un particulier <em>assujetti en franchise en base</em> — activité habituelle au sens de l'article 293 B du CGI — donc immatriculé. Une vente réellement occasionnelle par un non-assujetti relève, elle, du seul e-reporting côté acheteur.",
+      "relatedWhy": {
+        "cas-19b": {
+          "rel": "cas parent",
+          "why": "Toute la mécanique de l'auto-facturation s'applique : code 389, circuit inversé, statuts inversés. Le cas 23 n'ajoute que la difficulté d'identification d'un vendeur particulier et le régime de franchise en base."
+        },
+        "cas-33": {
+          "rel": "situation connexe",
+          "why": "Les achats à des particuliers alimentent typiquement la revente de biens d'occasion, qui relève de la TVA sur la marge. Le cas 23 traite l'entrée du bien, le cas 33 sa sortie."
         }
       }
     }
