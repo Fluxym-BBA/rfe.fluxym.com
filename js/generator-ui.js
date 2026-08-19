@@ -209,11 +209,36 @@ const GeneratorUI = {
             '</div>';
         settingsContainer.innerHTML = html;
 
+        var buyerSelect = document.getElementById('adv-buyer');
+        if (buyerSelect) {
+            buyerSelect.addEventListener('change', function() { GeneratorUI.syncBuyerReference(); });
+        }
+        this.syncBuyerReference();
+
         var factorSelect = document.getElementById('adv-factor');
         if (factorSelect) {
             factorSelect.innerHTML = data.companies.factors.map(function(f) {
                 return '<option value="' + f.id + '">' + f.name + '</option>';
             }).join('');
+        }
+    },
+
+    // BT-10 : pre-remplissage de la reference acheteur depuis companies.json.
+    // Une valeur saisie par l'utilisateur n'est jamais ecrasee.
+    syncBuyerReference: function() {
+        const field = document.getElementById('buyer-reference');
+        const select = document.getElementById('adv-buyer');
+        if (!field || !select || !window.APP_DATA || !window.APP_DATA.companies) return;
+
+        const buyer = window.APP_DATA.companies.buyers.find((b) => b.id === select.value)
+            || window.APP_DATA.companies.buyers[0];
+        const trigrammeField = document.getElementById('trigramme');
+        const fallback = ((trigrammeField && trigrammeField.value) || 'BBA').toUpperCase() + '-REF-001';
+        const previous = field.dataset.autofill || '';
+
+        if (!field.value || field.value === previous) {
+            field.value = (buyer && buyer.buyerReference) || fallback;
+            field.dataset.autofill = field.value;
         }
     },
 

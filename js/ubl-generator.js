@@ -695,6 +695,10 @@ const UBLGenerator = {
             var trigramme = document.getElementById('trigramme').value.toUpperCase() || "UNK";
             var usecase = document.getElementById('usecase').value;
 
+            // BT-10 Reference acheteur (obligatoire, BR-10) : saisie utilisateur prioritaire.
+            var buyerRefField = document.getElementById('buyer-reference');
+            var buyerRefInput = buyerRefField ? buyerRefField.value.trim() : "";
+
             var supplierId = document.getElementById('adv-supplier') ? document.getElementById('adv-supplier').value : null;
             var buyerId = document.getElementById('adv-buyer') ? document.getElementById('adv-buyer').value : null;
             var factorId = document.getElementById('adv-factor') ? document.getElementById('adv-factor').value : null;
@@ -716,6 +720,9 @@ const UBLGenerator = {
             if (!supplier || !buyer) {
                 alert("Erreur: Donnees d'entreprise introuvables."); return;
             }
+
+            // Repli en cascade : saisie UI, puis valeur par defaut du tiers, puis trigramme + cas.
+            var buyerReference = buyerRefInput || buyer.buyerReference || (trigramme + "-REF-" + usecase);
 
             // 2. Dates et Numeros
             var now = new Date();
@@ -786,7 +793,7 @@ const UBLGenerator = {
                 poNumber = poNumber || null;
                 overrideLineData = overrideLineData || null;
 
-                var xml = UBLTemplates.getHeader(numFacture, dateFactureXML, dateEcheanceXML, typeCode, profileId, notes, asCreditNote);
+                var xml = UBLTemplates.getHeader(numFacture, dateFactureXML, dateEcheanceXML, typeCode, profileId, notes, asCreditNote, buyerReference);
 
                 // Billing reference (rectificative ou avoir)
                 if (refOriginale) {

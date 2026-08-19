@@ -11,7 +11,8 @@
         "city": "LYON",
         "zip": "69009",
         "country": "FR"
-      }
+      },
+      "nic": "00018"
     },
     {
       "id": "fluxym_fr",
@@ -24,7 +25,8 @@
         "city": "PARIS",
         "zip": "75116",
         "country": "FR"
-      }
+      },
+      "nic": "00007"
     }
   ],
   "buyers": [
@@ -40,7 +42,8 @@
         "city": "VILLEFRANCHE-SUR-MER",
         "zip": "06230",
         "country": "FR"
-      }
+      },
+      "buyerReference": "REF-KREAMOB-2026"
     }
   ],
   "factors": [

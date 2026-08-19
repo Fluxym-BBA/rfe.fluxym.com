@@ -11,7 +11,7 @@ const csvQuote = (val) => {
 const UBLTemplates = {
 
     // 1. En-tête (Invoice ou CreditNote) avec TOUS les espaces de noms
-    getHeader: (numeroFacture, dateFacture, dateEcheance, invoiceTypeCode, profileId, notes, isCreditNote = false) => `<?xml version="1.0" encoding="UTF-8"?>
+    getHeader: (numeroFacture, dateFacture, dateEcheance, invoiceTypeCode, profileId, notes, isCreditNote = false, buyerReference = "") => `<?xml version="1.0" encoding="UTF-8"?>
 <${isCreditNote ? 'CreditNote' : 'Invoice'} xmlns="urn:oasis:names:specification:ubl:schema:xsd:${isCreditNote ? 'CreditNote' : 'Invoice'}-2" xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:qdt="urn:oasis:names:specification:ubl:schema:xsd:QualifiedDatatypes-2" xmlns:udt="urn:oasis:names:specification:ubl:schema:xsd:UnqualifiedDataTypes-2">
 \t<cbc:UBLVersionID>2.1</cbc:UBLVersionID>
 \t<cbc:CustomizationID>urn:cen.eu:en16931:2017</cbc:CustomizationID>
@@ -21,7 +21,7 @@ const UBLTemplates = {
 ${!isCreditNote ? `\t<cbc:DueDate>${dateEcheance}</cbc:DueDate>\n` : ''}\t<cbc:${isCreditNote ? 'CreditNoteTypeCode' : 'InvoiceTypeCode'}>${invoiceTypeCode}</cbc:${isCreditNote ? 'CreditNoteTypeCode' : 'InvoiceTypeCode'}>
 ${notes.map(n => `\t<cbc:Note>${n}</cbc:Note>`).join('\n')}
 \t<cbc:DocumentCurrencyCode>EUR</cbc:DocumentCurrencyCode>
-\t<cbc:TaxCurrencyCode>EUR</cbc:TaxCurrencyCode>`,
+\t<cbc:BuyerReference>${buyerReference}</cbc:BuyerReference>`,
 
     // 2. BillingReference AVEC LA DATE (Obligatoire pour les Avoirs)
     getBillingReference: (originalInvoiceNumber, dateFactureXML) => `
@@ -37,7 +37,7 @@ ${notes.map(n => `\t<cbc:Note>${n}</cbc:Note>`).join('\n')}
 \t<cac:AccountingSupplierParty>
 \t\t<cac:Party>
 \t\t\t<cbc:EndpointID schemeID="0225">${supplier.siren}</cbc:EndpointID>
-\t\t\t<cac:PartyIdentification><cbc:ID schemeID="0009">${supplier.siren}00001</cbc:ID></cac:PartyIdentification>
+\t\t\t<cac:PartyIdentification><cbc:ID schemeID="0009">${supplier.siren}${supplier.nic || "00001"}</cbc:ID></cac:PartyIdentification>
 \t\t\t<cac:PartyName><cbc:Name>${supplier.name}</cbc:Name></cac:PartyName>
 \t\t\t<cac:PostalAddress>
 \t\t\t\t<cbc:StreetName>${supplier.address.street}</cbc:StreetName>
