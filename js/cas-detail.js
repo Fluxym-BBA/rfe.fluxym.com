@@ -1,234 +1,406 @@
 /**
- * CAS-DETAIL.JS — Rendu page détail + Diagramme de séquence SVG
+ * CAS-DETAIL.JS — Rendu de la fiche d'un cas d'usage
+ * ---------------------------------------------------
+ * Sources de données :
+ *   - data/cas-usage.json          → référentiel des cas (principe, steps, statuts, cas liés)
+ *   - data/cas-enrichissement.json → socle de champs commun, champs spécifiques au cas,
+ *                                    récit chronologique, justification des cas liés
+ *
+ * Le fichier d'enrichissement est optionnel : si un cas n'y figure pas encore,
+ * la fiche s'affiche comme avant, sans section vide.
  */
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', () => {
 
-    // Get case ID from URL
-    var params = new URLSearchParams(window.location.search);
-    var caseId = params.get('id');
+    const params = new URLSearchParams(window.location.search);
+    const caseId = params.get('id');
     if (!caseId) { window.location.href = './cas-usage.html'; return; }
 
-    // Load JSON
-    fetch('./data/cas-usage.json')
-        .then(function(r) { return r.json(); })
-        .then(function(data) {
-            var cas = data.cases.find(function(c) { return c.id === caseId; });
+    const ACTOR_COLORS = {
+        'Vendeur': '#0B2046',
+        'Fournisseur': '#0B2046',
+        'Acheteur': '#6366f1',
+        'Client': '#6366f1',
+        'PA-E': '#00A7E1',
+        'PA-R': '#0ea5e9',
+        'PPF': '#f59e0b',
+        'CdD PPF': '#f59e0b',
+        'PDP': '#00A7E1',
+        'Factor': '#8b5cf6',
+        'Tiers Payeur': '#10b981',
+        'Tiers payeur': '#10b981',
+        'Sous-traitant': '#059669',
+        'Mandataire': '#8b5cf6'
+    };
+
+    const STATUS_COLORS = {
+        'Déposée': '#6b7280', 'Émise': '#0ea5e9', 'Reçue': '#8b5cf6',
+        'Mise à disposition': '#6366f1', 'Acceptée': '#10b981', 'Refusée': '#ef4444',
+        'Encaissée': '#059669', 'Payée': '#059669', 'Rejetée': '#ef4444',
+        'Litige': '#f59e0b', 'Suspendue': '#f59e0b', 'Affacturée': '#8b5cf6',
+        'Paiement transmis': '#3b82f6'
+    };
+
+    const TYPE_COLORS = {
+        doc: '#0b2046', flux: '#00a7e1', status: '#f59e0b',
+        pay: '#10b981', reject: '#ef4444', info: '#6b7280'
+    };
+
+    const TYPE_DASH = {
+        doc: '', flux: '', status: '6,4', pay: '', reject: '4,4', info: '2,4'
+    };
+
+    // =====================
+    // CHARGEMENT
+    // =====================
+    Promise.all([
+        fetch('./data/cas-usage.json').then((r) => r.json()),
+        fetch('./data/cas-enrichissement.json').then((r) => (r.ok ? r.json() : null)).catch(() => null)
+    ])
+        .then(([data, enrich]) => {
+            const cas = data.cases.find((c) => c.id === caseId);
             if (!cas) { window.location.href = './cas-usage.html'; return; }
 
-            var caseIndex = data.cases.indexOf(cas);
-            var prevCase = caseIndex > 0 ? data.cases[caseIndex - 1] : null;
-            var nextCase = caseIndex < data.cases.length - 1 ? data.cases[caseIndex + 1] : null;
-            var cat = data.categories[cas.category] || {};
-            var actors = cas.actors || data.meta.baseActors;
+            const caseIndex = data.cases.indexOf(cas);
+            const prevCase = caseIndex > 0 ? data.cases[caseIndex - 1] : null;
+            const nextCase = caseIndex < data.cases.length - 1 ? data.cases[caseIndex + 1] : null;
+            const cat = data.categories[cas.category] || {};
+            const actors = cas.actors || data.meta.baseActors;
+            const extra = (enrich && enrich.cases && enrich.cases[caseId]) || null;
+            const socle = (enrich && enrich.socle) || null;
 
             renderHero(cas, cat);
             renderPrinciple(cas);
+            renderStory(extra);
             renderDiagram(actors, cas.steps || []);
             renderAttention(cas);
-            renderBtFields(cas);
+            renderFields(cas, extra, socle);
             renderStatuses(cas);
-            renderRelated(cas, data);
+            renderRelated(cas, data, extra);
             renderNav(prevCase, nextCase);
+            linkStoryToDiagram();
         })
-        .catch(function(err) {
+        .catch((err) => {
             console.error(err);
             document.getElementById('case-principle').innerHTML =
                 '<div class="callout callout--warning"><div class="callout-icon">⚠️</div><div class="callout-content">Erreur de chargement.</div></div>';
         });
 
     // =====================
+    // UTILITAIRES
+    // =====================
+
+    /** Masque une section de contenu et le lien de sommaire correspondant. */
+    const hideSection = (sectionId) => {
+        const section = document.getElementById(sectionId);
+        if (section) section.style.display = 'none';
+        const link = document.querySelector(`#case-sidebar a[href="#${sectionId}"]`);
+        if (link && link.parentElement) link.parentElement.style.display = 'none';
+    };
+
+    /** Rend un identifiant de champ : lien vers champs.html pour les BT, texte simple sinon. */
+    const fieldId = (id) => {
+        const btMatch = /^(BT-\d+[\w-]*)/.exec(id);
+        if (btMatch) {
+            return `<a href="./champs.html#field-${btMatch[1]}" class="cudet-flds-id">${id}</a>`;
+        }
+        return `<span class="cudet-flds-id">${id}</span>`;
+    };
+
+    /** Classe CSS du badge d'obligation (sans accent ni casse). */
+    const obligationClass = (obligation) => {
+        const map = {
+            'obligatoire': 'obligatoire',
+            'conditionnel': 'conditionnel',
+            'recommandé': 'recommande',
+            'facultatif': 'facultatif'
+        };
+        return `cudet-tag cudet-tag--${map[obligation] || 'facultatif'}`;
+    };
+
+    /** Une ligne de tableau de champs. */
+    const fieldRow = (f) => {
+        const value = f.value || '—';
+        const cond = f.cond ? `<span class="cudet-flds-cond">Condition : ${f.cond}</span>` : '';
+        return '<tr>' +
+            `<td>${fieldId(f.id)}</td>` +
+            `<td class="cudet-flds-name">${f.name}</td>` +
+            `<td><span class="cudet-tag cudet-tag--niveau">${f.level}</span></td>` +
+            `<td><span class="${obligationClass(f.obligation)}">${f.obligation}</span></td>` +
+            `<td class="cudet-flds-val">${value}${cond}</td>` +
+            `<td class="cudet-flds-rule">${f.rule || '—'}</td>` +
+            '</tr>';
+    };
+
+    /** Un tableau complet de champs. */
+    const fieldTable = (fields) =>
+        '<div class="cudet-flds"><table>' +
+        '<thead><tr><th>Champ</th><th>Libellé</th><th>Niveau</th><th>Obligation</th><th>Valeur attendue / condition</th><th>Règle</th></tr></thead>' +
+        `<tbody>${fields.map(fieldRow).join('')}</tbody>` +
+        '</table></div>';
+
+    // =====================
     // RENDERERS
     // =====================
 
-    function renderHero(cas, cat) {
-        document.title = 'Cas ' + cas.num + ' — ' + cas.title + ' | E-Invoicing Academy';
+    const renderHero = (cas, cat) => {
+        document.title = `Cas ${cas.num} — ${cas.title} | Re·Form·E`;
         document.getElementById('page-title').textContent = document.title;
-        document.getElementById('bc-title').textContent = 'Cas ' + cas.num;
-        document.getElementById('case-badge').textContent = cat.icon + ' ' + cat.label + ' — Complexité ' + '●'.repeat(cas.complexity) + '○'.repeat(3 - cas.complexity);
-        document.getElementById('case-title').textContent = 'Cas n°' + cas.num + ' — ' + cas.title;
+        document.getElementById('bc-title').textContent = `Cas ${cas.num}`;
+        document.getElementById('case-badge').textContent =
+            `${cat.icon} ${cat.label} — Complexité ${'●'.repeat(cas.complexity)}${'○'.repeat(3 - cas.complexity)}`;
+        document.getElementById('case-title').textContent = `Cas n°${cas.num} — ${cas.title}`;
         document.getElementById('case-subtitle').textContent = cas.subtitle || '';
-    }
+    };
 
-    function renderPrinciple(cas) {
-        var html = '<div class="cudet-principle">' + cas.principle + '</div>';
+    const renderPrinciple = (cas) => {
+        let html = `<div class="cudet-principle">${cas.principle}</div>`;
         if (cas.inScope === false) {
             html += '<div class="callout callout--warning"><div class="callout-icon">🚫</div>' +
                 '<div class="callout-content">Ce cas est <strong>hors du champ</strong> de la facturation électronique et du e-reporting.</div></div>';
         }
         document.getElementById('case-principle').innerHTML = html;
-    }
+    };
 
-    function renderAttention(cas) {
-        var pts = cas.attentionPoints || [];
-        if (pts.length === 0) {
-            document.getElementById('attention').style.display = 'none';
-            return;
-        }
-        document.getElementById('case-attention').innerHTML = pts.map(function(p) {
-            return '<div class="callout callout--warning"><div class="callout-icon">⚠️</div><div class="callout-content">' + p + '</div></div>';
+    /** Récit chronologique « Temps 1 → Temps n » : qui fait quoi, quand, avec quels champs. */
+    const renderStory = (extra) => {
+        const narrative = extra && extra.narrative;
+        const steps = (narrative && narrative.steps) || [];
+        if (steps.length === 0) { hideSection('recit'); return; }
+
+        const intro = narrative.intro ? `<div class="cudet-story-intro">${narrative.intro}</div>` : '';
+
+        const items = steps.map((s) => {
+            const color = ACTOR_COLORS[s.actor] || '#6b7280';
+            const flux = (s.flux || []).map((fx) => `<span class="cudet-story-flux">${fx}</span>`).join('');
+            const refs = (s.refs || []).map((ref) => {
+                const btMatch = /^BT-\d+/.exec(ref);
+                return btMatch
+                    ? `<a class="bt-chip" href="./champs.html#field-${ref}">${ref}</a>`
+                    : `<span class="bt-chip">${ref}</span>`;
+            }).join('');
+            const refsHtml = refs ? `<div class="cudet-story-refs">${refs}</div>` : '';
+            const diagramAttr = typeof s.diagram === 'number' ? ` data-diagram="${s.diagram}"` : '';
+
+            return `<li class="cudet-story-step"${diagramAttr}>` +
+                `<div class="cudet-story-time"><span>Temps</span><strong>${s.t}</strong></div>` +
+                '<div class="cudet-story-body">' +
+                `<div class="cudet-story-meta"><span class="cudet-story-actor" style="--actor-color: ${color}">${s.actor}</span>${flux}</div>` +
+                `<h4>${s.title}</h4>` +
+                `<p>${s.text}</p>` +
+                refsHtml +
+                '</div></li>';
         }).join('');
-    }
 
-    function renderBtFields(cas) {
-        var fields = cas.btFields || [];
-        if (fields.length === 0) {
-            document.getElementById('technique').style.display = 'none';
-            return;
+        document.getElementById('case-story').innerHTML = `${intro}<ol class="cudet-story">${items}</ol>`;
+    };
+
+    const renderAttention = (cas) => {
+        const pts = cas.attentionPoints || [];
+        if (pts.length === 0) { hideSection('attention'); return; }
+        document.getElementById('case-attention').innerHTML = pts.map((p) =>
+            `<div class="callout callout--warning"><div class="callout-icon">⚠️</div><div class="callout-content">${p}</div></div>`
+        ).join('');
+    };
+
+    /**
+     * Champs à renseigner = champs propres au cas (delta) + socle commun repliable.
+     * Le delta enrichi (cas-enrichissement.json) prend le pas sur l'ancien btFields
+     * de cas-usage.json, qui reste supporté pour les cas non encore migrés.
+     */
+    const renderFields = (cas, extra, socle) => {
+        const delta = (extra && extra.fields) || [];
+        const legacy = cas.btFields || [];
+        let html = '';
+
+        if (delta.length > 0) {
+            html += '<h3 class="cudet-flds-sub">Champs spécifiques à ce cas d\'usage</h3>';
+            html += fieldTable(delta);
+            if (extra.fieldsNote) html += `<div class="cudet-flds-note">${extra.fieldsNote}</div>`;
+        } else if (legacy.length > 0) {
+            html += '<h3 class="cudet-flds-sub">Champs spécifiques à ce cas d\'usage</h3>';
+            html += '<div class="cudet-flds"><table>' +
+                '<thead><tr><th>Champ</th><th>Libellé</th><th>Valeur / Note</th></tr></thead><tbody>' +
+                legacy.map((f) =>
+                    `<tr><td>${fieldId(f.bt)}</td><td class="cudet-flds-name">${f.name}</td><td>${f.note || '—'}</td></tr>`
+                ).join('') +
+                '</tbody></table></div>';
         }
-        var html = '<div class="comparison-table"><table>' +
-            '<thead><tr><th>Champ</th><th>Nom</th><th>Valeur / Note</th></tr></thead><tbody>';
-        fields.forEach(function(f) {
-            html += '<tr><td><a href="./champs.html#field-' + f.bt + '" class="bt-link"><strong>' + f.bt + '</strong></a></td><td>' + f.name + '</td><td>' + (f.note || '—') + '</td></tr>';
-        });
-        html += '</tbody></table></div>';
+
         document.getElementById('case-bt-fields').innerHTML = html;
-    }
+        renderSocle(socle);
 
-    function renderStatuses(cas) {
-        var statuses = cas.statuses || [];
-        if (statuses.length === 0) {
-            document.getElementById('statuts').style.display = 'none';
-            return;
-        }
-        var statusColors = {
-            'Déposée': '#6b7280', 'Émise': '#0ea5e9', 'Reçue': '#8b5cf6',
-            'Mise à disposition': '#6366f1', 'Acceptée': '#10b981', 'Refusée': '#ef4444',
-            'Encaissée': '#059669', 'Payée': '#059669', 'Rejetée': '#ef4444',
-            'Litige': '#f59e0b', 'Suspendue': '#f59e0b', 'Affacturée': '#8b5cf6',
-            'Paiement transmis': '#3b82f6'
-        };
+        if (html === '' && !socle) hideSection('technique');
+    };
+
+    /** Socle obligatoire commun, affiché sur toutes les fiches en bloc repliable. */
+    const renderSocle = (socle) => {
+        const target = document.getElementById('case-socle');
+        if (!socle || !(socle.groups || []).length) { target.innerHTML = ''; return; }
+
+        const total = socle.groups.reduce((acc, g) => acc + (g.fields || []).length, 0);
+        const groups = socle.groups.map((g) =>
+            '<div class="cudet-socle-group">' +
+            `<h5>${g.label}</h5>` +
+            fieldTable(g.fields || []) +
+            '</div>'
+        ).join('');
+
+        target.innerHTML = '<details class="cudet-socle">' +
+            `<summary>🧱 ${socle.label} — ${total} champs</summary>` +
+            '<div class="cudet-socle-inner">' +
+            `<div class="cudet-socle-intro">${socle.intro || ''}</div>` +
+            groups +
+            (socle.note ? `<p class="cudet-socle-note">${socle.note}</p>` : '') +
+            '</div></details>';
+    };
+
+    const renderStatuses = (cas) => {
+        const statuses = cas.statuses || [];
+        if (statuses.length === 0) { hideSection('statuts'); return; }
         document.getElementById('case-statuses').innerHTML =
-            '<div class="cudet-statuses">' + statuses.map(function(s) {
-                var color = statusColors[s] || '#6b7280';
-                return '<span class="cudet-status" style="--status-color: ' + color + '">' + s + '</span>';
+            '<div class="cudet-statuses">' + statuses.map((s) => {
+                const color = STATUS_COLORS[s] || '#6b7280';
+                return `<span class="cudet-status" style="--status-color: ${color}">${s}</span>`;
             }).join('<span class="cudet-status-arrow">→</span>') + '</div>';
-    }
+    };
 
-    function renderRelated(cas, data) {
-        var related = cas.relatedCases || [];
-        if (related.length === 0) { document.getElementById('case-related').innerHTML = ''; return; }
-        var html = '<div class="cudet-related"><h4>Cas liés</h4><div class="cudet-related-grid">';
-        related.forEach(function(rid) {
-            var rc = data.cases.find(function(c) { return c.id === rid; });
-            if (rc) {
-                html += '<a href="./cas-detail.html?id=' + rc.id + '" class="cudet-related-card">' +
-                    '<span class="cudet-related-num">' + rc.num + '</span>' +
-                    '<span>' + rc.title + '</span></a>';
-            }
-        });
-        html += '</div></div>';
-        document.getElementById('case-related').innerHTML = html;
-    }
+    /** Cas liés, avec la nature du lien et son explication quand elle est documentée. */
+    const renderRelated = (cas, data, extra) => {
+        const related = cas.relatedCases || [];
+        if (related.length === 0) { hideSection('lies'); return; }
 
-    function renderNav(prev, next) {
-        var navHtml = '';
+        const why = (extra && extra.relatedWhy) || {};
+        const cards = related.map((rid) => {
+            const rc = data.cases.find((c) => c.id === rid);
+            if (!rc) return '';
+            const info = why[rid] || null;
+            const badge = info && info.rel ? `<span class="cudet-lien-rel">${info.rel}</span>` : '';
+            const text = info && info.why
+                ? `<p class="cudet-lien-why">${info.why}</p>`
+                : '<p class="cudet-lien-why">Cas connexe du même parcours.</p>';
+            return `<a href="./cas-detail.html?id=${rc.id}" class="cudet-lien">` +
+                '<div class="cudet-lien-head">' +
+                `<span class="cudet-lien-num">Cas ${rc.num}</span>` +
+                `<span class="cudet-lien-title">${rc.title}</span>${badge}` +
+                '</div>' + text + '</a>';
+        }).join('');
+
+        document.getElementById('case-related').innerHTML = `<div class="cudet-lien-grid">${cards}</div>`;
+    };
+
+    const renderNav = (prev, next) => {
+        let navHtml = '';
         if (prev) {
-            navHtml += '<a href="./cas-detail.html?id=' + prev.id + '" class="nav-prev">' +
+            navHtml += `<a href="./cas-detail.html?id=${prev.id}" class="nav-prev">` +
                 '<span class="nav-label">Cas précédent</span>' +
-                '<span class="nav-title">← Cas ' + prev.num + ' — ' + prev.title + '</span></a>';
-            document.getElementById('nav-prev-side').href = './cas-detail.html?id=' + prev.id;
-            document.getElementById('nav-prev-side').textContent = '← Cas ' + prev.num;
+                `<span class="nav-title">← Cas ${prev.num} — ${prev.title}</span></a>`;
+            document.getElementById('nav-prev-side').href = `./cas-detail.html?id=${prev.id}`;
+            document.getElementById('nav-prev-side').textContent = `← Cas ${prev.num}`;
         }
         if (next) {
-            navHtml += '<a href="./cas-detail.html?id=' + next.id + '" class="nav-next">' +
+            navHtml += `<a href="./cas-detail.html?id=${next.id}" class="nav-next">` +
                 '<span class="nav-label">Cas suivant</span>' +
-                '<span class="nav-title">Cas ' + next.num + ' — ' + next.title + ' →</span></a>';
-            document.getElementById('nav-next-side').href = './cas-detail.html?id=' + next.id;
-            document.getElementById('nav-next-side').textContent = 'Cas ' + next.num + ' →';
+                `<span class="nav-title">Cas ${next.num} — ${next.title} →</span></a>`;
+            document.getElementById('nav-next-side').href = `./cas-detail.html?id=${next.id}`;
+            document.getElementById('nav-next-side').textContent = `Cas ${next.num} →`;
         }
         document.getElementById('case-nav-bottom').innerHTML = navHtml ||
             '<a href="./cas-usage.html" class="nav-prev"><span class="nav-label">Retour</span><span class="nav-title">← Tous les cas</span></a>';
-    }
+    };
+
+    /** Survol d'une étape du récit → mise en évidence de l'étape correspondante du diagramme. */
+    const linkStoryToDiagram = () => {
+        const svg = document.querySelector('#diagram-wrap .cudet-svg');
+        if (!svg) return;
+
+        document.querySelectorAll('.cudet-story-step[data-diagram]').forEach((li) => {
+            const target = svg.querySelector(`.cudet-step[data-step="${li.dataset.diagram}"]`);
+            if (!target) return;
+            li.addEventListener('mouseenter', () => {
+                svg.classList.add('cudet-svg--focus');
+                target.classList.add('cudet-step--hl');
+            });
+            li.addEventListener('mouseleave', () => {
+                svg.classList.remove('cudet-svg--focus');
+                target.classList.remove('cudet-step--hl');
+            });
+        });
+    };
 
     // =====================
-    // SVG SEQUENCE DIAGRAM — Original + Fullscreen
+    // DIAGRAMME DE SÉQUENCE SVG (+ plein écran)
     // =====================
     function renderDiagram(actors, steps) {
-        var wrap = document.getElementById('diagram-wrap');
+        const wrap = document.getElementById('diagram-wrap');
         if (!steps || steps.length === 0) {
             wrap.innerHTML = '<div class="callout callout--info"><div class="callout-icon">ℹ️</div><div class="callout-content">Ce cas ne comporte pas de diagramme de séquence spécifique. Il suit le flux nominal standard.</div></div>';
             return;
         }
 
-        var n = actors.length;
-        var pad = 60;
-        var colW = (940 - pad * 2) / (n - 1);
-        var headerH = 70;
-        var stepH = 56;
-        var totalH = headerH + steps.length * stepH + 40;
+        const n = actors.length;
+        const pad = 60;
+        const colW = (940 - pad * 2) / (n - 1);
+        const headerH = 70;
+        const stepH = 56;
+        const totalH = headerH + steps.length * stepH + 40;
 
-        var typeColors = {
-            doc: '#0b2046', flux: '#00a7e1', status: '#f59e0b',
-            pay: '#10b981', reject: '#ef4444', info: '#6b7280'
-        };
-        var typeDash = {
-            doc: '', flux: '', status: '6,4', pay: '', reject: '4,4', info: '2,4'
-        };
+        let svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 ${totalH}" class="cudet-svg">`;
+        svg += `<rect width="960" height="${totalH}" rx="16" fill="#fafbfc" stroke="#e5e7eb" stroke-width="1"/>`;
 
-        var svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 ' + totalH + '" class="cudet-svg">';
-        svg += '<rect width="960" height="' + totalH + '" rx="16" fill="#fafbfc" stroke="#e5e7eb" stroke-width="1"/>';
-
-        actors.forEach(function(actor, i) {
-            var x = pad + i * colW;
-            svg += '<line x1="' + x + '" y1="' + (headerH + 5) + '" x2="' + x + '" y2="' + (totalH - 20) + '" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4,4"/>';
-            var boxW = Math.min(colW - 10, 120);
-            svg += '<rect x="' + (x - boxW/2) + '" y="12" width="' + boxW + '" height="40" rx="10" fill="#0b2046"/>';
-            svg += '<text x="' + x + '" y="38" text-anchor="middle" fill="white" font-size="11" font-weight="700" font-family="Inter, sans-serif">' + actor + '</text>';
+        actors.forEach((actor, i) => {
+            const x = pad + i * colW;
+            svg += `<line x1="${x}" y1="${headerH + 5}" x2="${x}" y2="${totalH - 20}" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4,4"/>`;
+            const boxW = Math.min(colW - 10, 120);
+            svg += `<rect x="${x - boxW / 2}" y="12" width="${boxW}" height="40" rx="10" fill="#0b2046"/>`;
+            svg += `<text x="${x}" y="38" text-anchor="middle" fill="white" font-size="11" font-weight="700" font-family="Inter, sans-serif">${actor}</text>`;
         });
 
-        steps.forEach(function(step, i) {
-            var y = headerH + 15 + i * stepH;
-            var x1 = pad + step.f * colW;
-            var x2 = pad + step.t * colW;
-            var color = typeColors[step.c] || '#6b7280';
-            var dash = typeDash[step.c] || '';
-            var dir = x2 > x1 ? 1 : -1;
-            var arrowX = x2 - dir * 8;
+        steps.forEach((step, i) => {
+            const y = headerH + 15 + i * stepH;
+            const x1 = pad + step.f * colW;
+            const x2 = pad + step.t * colW;
+            const color = TYPE_COLORS[step.c] || '#6b7280';
+            const dash = TYPE_DASH[step.c] || '';
+            const dir = x2 > x1 ? 1 : -1;
+            const arrowX = x2 - dir * 8;
 
-            svg += '<g class="cudet-step" data-step="' + i + '">';
-            svg += '<line x1="' + x1 + '" y1="' + y + '" x2="' + arrowX + '" y2="' + y + '" stroke="' + color + '" stroke-width="2.5" ' + (dash ? 'stroke-dasharray="' + dash + '"' : '') + ' stroke-linecap="round"/>';
-            svg += '<polygon points="' + x2 + ',' + y + ' ' + (x2 - dir * 10) + ',' + (y - 5) + ' ' + (x2 - dir * 10) + ',' + (y + 5) + '" fill="' + color + '"/>';
+            svg += `<g class="cudet-step" data-step="${i}">`;
+            svg += `<line x1="${x1}" y1="${y}" x2="${arrowX}" y2="${y}" stroke="${color}" stroke-width="2.5" ${dash ? `stroke-dasharray="${dash}"` : ''} stroke-linecap="round"/>`;
+            svg += `<polygon points="${x2},${y} ${x2 - dir * 10},${y - 5} ${x2 - dir * 10},${y + 5}" fill="${color}"/>`;
 
-            var circleX = (x1 + x2) / 2;
-            svg += '<circle cx="' + circleX + '" cy="' + y + '" r="12" fill="white" stroke="' + color + '" stroke-width="2"/>';
-            svg += '<text x="' + circleX + '" y="' + (y + 4) + '" text-anchor="middle" fill="' + color + '" font-size="10" font-weight="800" font-family="Inter, sans-serif">' + (i + 1) + '</text>';
-
-            var labelY = y - 16;
-            svg += '<text x="' + circleX + '" y="' + labelY + '" text-anchor="middle" fill="#374151" font-size="10" font-weight="600" font-family="Inter, sans-serif">' + step.l + '</text>';
+            const circleX = (x1 + x2) / 2;
+            svg += `<circle cx="${circleX}" cy="${y}" r="12" fill="white" stroke="${color}" stroke-width="2"/>`;
+            svg += `<text x="${circleX}" y="${y + 4}" text-anchor="middle" fill="${color}" font-size="10" font-weight="800" font-family="Inter, sans-serif">${i + 1}</text>`;
+            svg += `<text x="${circleX}" y="${y - 16}" text-anchor="middle" fill="#374151" font-size="10" font-weight="600" font-family="Inter, sans-serif">${step.l}</text>`;
             svg += '</g>';
         });
 
         svg += '</svg>';
         wrap.innerHTML = svg;
 
-        // ═══ FULLSCREEN ═══
-        // Bouton expand
-        var expandBtn = document.createElement('button');
+        // ═══ PLEIN ÉCRAN ═══
+        const expandBtn = document.createElement('button');
         expandBtn.className = 'cudet-expand-btn';
         expandBtn.innerHTML = '⛶ Plein écran';
         expandBtn.title = 'Voir en plein écran';
         wrap.style.position = 'relative';
         wrap.appendChild(expandBtn);
 
-        expandBtn.addEventListener('click', function() {
-            // Créer l'overlay
-            var overlay = document.createElement('div');
+        expandBtn.addEventListener('click', () => {
+            const overlay = document.createElement('div');
             overlay.className = 'cudet-fullscreen-overlay';
 
-            // Header avec titre + bouton fermer
-            var header = document.createElement('div');
+            const header = document.createElement('div');
             header.className = 'cudet-fs-header';
             header.innerHTML = '<span>📐 Diagramme de séquence</span><button class="cudet-fs-close">✕ Fermer</button>';
             overlay.appendChild(header);
 
-            // Container SVG
-            var svgContainer = document.createElement('div');
+            const svgContainer = document.createElement('div');
             svgContainer.className = 'cudet-fs-svg';
             svgContainer.innerHTML = svg;
             overlay.appendChild(svgContainer);
 
-            // Légende
-            var legend = document.createElement('div');
+            const legend = document.createElement('div');
             legend.className = 'cudet-fs-legend';
             legend.innerHTML =
                 '<span class="cudet-leg cudet-leg--doc">📄 Document</span>' +
@@ -241,24 +413,18 @@ document.addEventListener('DOMContentLoaded', function() {
             document.body.appendChild(overlay);
             document.body.style.overflow = 'hidden';
 
-            // Animation d'entrée
-            requestAnimationFrame(function() {
-                overlay.classList.add('cudet-fs-active');
-            });
+            requestAnimationFrame(() => overlay.classList.add('cudet-fs-active'));
 
-            // Fermer
-            function closeFs() {
+            const closeFs = () => {
                 overlay.classList.remove('cudet-fs-active');
-                setTimeout(function() {
+                setTimeout(() => {
                     document.body.removeChild(overlay);
                     document.body.style.overflow = '';
                 }, 300);
-            }
+            };
 
             overlay.querySelector('.cudet-fs-close').addEventListener('click', closeFs);
-            overlay.addEventListener('click', function(e) {
-                if (e.target === overlay) closeFs();
-            });
+            overlay.addEventListener('click', (e) => { if (e.target === overlay) closeFs(); });
             document.addEventListener('keydown', function handler(e) {
                 if (e.key === 'Escape') { closeFs(); document.removeEventListener('keydown', handler); }
             });
