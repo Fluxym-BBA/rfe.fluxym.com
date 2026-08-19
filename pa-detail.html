@@ -1,64 +1,97 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fiche plateforme agréée | Re·Form·E</title>
-  <link rel="icon" href="./assets/favicon-Fluxym-V2.png" sizes="32x32" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./css/pages.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche plateforme agréée | Re·Form·E</title>
+    <meta name="description" content="Fiche détaillée d'une plateforme agréée : identité juridique, positionnement, socle technique, actionnariat et concurrents.">
+    <link rel="icon" href="./assets/favicon-Fluxym-V2.png" sizes="32x32" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/pages.css">
 </head>
 <body>
-  <nav id="main-nav"></nav>
+    <nav id="main-nav"></nav>
 
-  <header class="page-hero">
-    <div class="page-container">
-      <div class="breadcrumb"><a href="./index.html">Accueil</a> <span>/</span> <a href="./plateformes-agreees.html">Les plateformes agréées</a> <span>/</span> <span id="pa-bc">Fiche</span></div>
-      <div class="hero-badge" id="pa-statut">—</div>
-      <h1 id="pa-nom">Chargement…</h1>
-      <p id="pa-accroche"></p>
-    </div>
-  </header>
-
-  <main class="page-main">
-    <div class="page-container page-layout">
-      <aside class="page-sidebar">
-        <div class="sidebar-sticky">
-          <nav class="sidebar-nav">
-            <div class="sidebar-title">Sur cette fiche</div>
-            <ul>
-              <li><a href="#identite" class="sidebar-link">Carte d'identité</a></li>
-              <li><a href="#positionnement" class="sidebar-link">Positionnement</a></li>
-              <li><a href="#socle" class="sidebar-link">Socle technique</a></li>
-              <li><a href="#actionnariat" class="sidebar-link">Actionnariat</a></li>
-              <li><a href="#concurrents" class="sidebar-link">Sur le même segment</a></li>
-              <li><a href="#sources" class="sidebar-link">Sources</a></li>
-            </ul>
-          </nav>
-          <nav class="sidebar-nav-pages">
-            <div class="sidebar-title">Voir aussi</div>
-            <ul>
-              <li><a href="./plateformes-agreees.html" class="sidebar-link">← Retour à l'annuaire</a></li>
-              <li><a href="./acteurs.html" class="sidebar-link">Les acteurs de la réforme</a></li>
-              <li><a href="./se-preparer.html" class="sidebar-link">Choisir sa plateforme</a></li>
-            </ul>
-          </nav>
+    <!-- HERO -->
+    <header class="page-hero">
+        <div class="page-hero-content">
+            <div class="breadcrumb">
+                <a href="./index.html">Accueil</a> <span>/</span> <a href="./plateformes-agreees.html">Les plateformes agréées</a> <span>/</span> <span id="pa-bc">Fiche</span>
+            </div>
+            <span class="hero-badge" id="pa-statut">Plateforme agréée</span>
+            <h1 id="pa-nom">Chargement…</h1>
+            <p id="pa-accroche"></p>
         </div>
-      </aside>
+    </header>
 
-      <article class="page-content" id="pa-article">
-        <section id="identite" class="content-section"><h2>🪪 Carte d'identité</h2><div id="pa-identite"></div></section>
-        <section id="positionnement" class="content-section"><h2>🎯 Positionnement</h2><div id="pa-positionnement"></div></section>
-        <section id="socle" class="content-section"><h2>⚙️ Socle technique</h2><div id="pa-socle"></div></section>
-        <section id="actionnariat" class="content-section"><h2>🏛️ Actionnariat et gouvernance</h2><div id="pa-actionnariat"></div></section>
-        <section id="concurrents" class="content-section"><h2>⚔️ Sur le même segment</h2><div id="pa-concurrents"></div></section>
-        <section id="sources" class="content-section"><h2>🔍 Sources et date de relevé</h2><div id="pa-sources"></div></section>
-      </article>
-    </div>
-  </main>
+    <!-- CONTENU PRINCIPAL -->
+    <section class="page-section">
+        <div class="page-container page-layout">
 
-  <script src="./js/nav.js"></script>
-  <script src="./js/animations.js"></script>
-  <script src="./js/pa-detail.js"></script>
+            <!-- SIDEBAR NAV -->
+            <aside class="page-sidebar">
+                <div class="sidebar-sticky">
+                    <h4>Sur cette fiche</h4>
+                    <ul class="sidebar-nav">
+                        <li><a href="#identite" class="sidebar-link active">🪪 Carte d'identité</a></li>
+                        <li><a href="#positionnement" class="sidebar-link">🎯 Positionnement</a></li>
+                        <li><a href="#socle" class="sidebar-link">⚙️ Socle technique</a></li>
+                        <li><a href="#actionnariat" class="sidebar-link">🏛️ Actionnariat</a></li>
+                        <li><a href="#concurrents" class="sidebar-link">⚔️ Sur le même segment</a></li>
+                        <li class="sidebar-sep"></li>
+                        <li><a href="#sources" class="sidebar-link">🔍 Sources et relevé</a></li>
+                    </ul>
+                    <div class="sidebar-pages">
+                        <h4>Pages liées</h4>
+                        <a href="./plateformes-agreees.html" class="sidebar-page-link">📇 Retour à l'annuaire</a>
+                        <a href="./acteurs.html" class="sidebar-page-link">👥 Les acteurs de la réforme</a>
+                        <a href="./se-preparer.html" class="sidebar-page-link">🚀 Se préparer</a>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- CONTENU -->
+            <main class="page-content" id="pa-article">
+
+                <section class="content-section">
+                    <h2 id="identite">🪪 Carte d'identité</h2>
+                    <div id="pa-identite"></div>
+                </section>
+
+                <section class="content-section">
+                    <h2 id="positionnement">🎯 Positionnement</h2>
+                    <div id="pa-positionnement"></div>
+                </section>
+
+                <section class="content-section">
+                    <h2 id="socle">⚙️ Socle technique</h2>
+                    <div id="pa-socle"></div>
+                </section>
+
+                <section class="content-section">
+                    <h2 id="actionnariat">🏛️ Actionnariat et gouvernance</h2>
+                    <div id="pa-actionnariat"></div>
+                </section>
+
+                <section class="content-section">
+                    <h2 id="concurrents">⚔️ Sur le même segment</h2>
+                    <div id="pa-concurrents"></div>
+                </section>
+
+                <section class="content-section">
+                    <h2 id="sources">🔍 Sources et date de relevé</h2>
+                    <div id="pa-sources"></div>
+                </section>
+
+            </main>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer id="main-footer"></footer>
+
+    <script src="./js/nav.js"></script>
+    <script src="./js/animations.js"></script>
+    <script src="./js/pa-detail.js"></script>
 </body>
 </html>
