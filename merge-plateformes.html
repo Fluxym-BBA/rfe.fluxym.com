@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Fusion des patchs — plateformes agréées | Re·Form·E</title>
+    <link rel="icon" href="./assets/favicon-Fluxym-V2.png" sizes="32x32" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/pages.css">
+    <style>
+        .merge-wrap { max-width: 900px; margin: 40px auto; padding: 0 24px; }
+        .merge-drop { padding: 34px; text-align: center; border: 2px dashed var(--gray-200); border-radius: var(--radius-lg); background: var(--gray-50); cursor: pointer; }
+        .merge-drop.over { border-color: var(--cyan); background: #f0f9ff; }
+        .merge-log { margin-top: 22px; font-family: ui-monospace, monospace; font-size: 12.5px; line-height: 1.75; white-space: pre-wrap; background: var(--gray-50); border-radius: var(--radius-md); padding: 18px; max-height: 460px; overflow: auto; }
+        .merge-ok { color: #047857; }
+        .merge-warn { color: #b45309; }
+        .merge-err { color: #b91c1c; }
+    </style>
+</head>
+<body>
+    <div class="merge-wrap">
+        <h1>Fusion des patchs — plateformes agréées</h1>
+        <p>Utilitaire interne. Charge <code>data/plateformes-agreees.json</code>, applique un ou plusieurs patchs déposés ici, puis produit le fichier fusionné à télécharger. Aucune écriture automatique dans le dépôt.</p>
+
+        <p><strong>Référentiel de base :</strong> <span id="base-state">chargement…</span></p>
+
+        <div class="merge-drop" id="drop">
+            <strong>Déposer ici les fichiers <code>patch-*.json</code></strong><br>
+            <span style="font-size:13px;color:var(--gray-500)">ou cliquer pour les sélectionner — plusieurs patchs acceptés d'un coup</span>
+            <input type="file" id="file" accept=".json" multiple hidden>
+        </div>
+
+        <div class="merge-log" id="log">En attente de patchs…</div>
+
+        <p style="margin-top:20px">
+            <button type="button" id="dl" class="pa-reset" disabled>⬇️ Télécharger data/plateformes-agreees.json fusionné</button>
+        </p>
+    </div>
+
+    <script>
+        (() => {
+            'use strict';
+            const BASE = './data/plateformes-agreees.json';
+            const log = document.getElementById('log');
+            const say = (msg, cls = '') => { log.innerHTML += `<span class="${cls}">${msg}</span>\n`; log.scrollTop = log.scrollHeight; };
+            let base = null;
+            let touched = 0;
+
+            const load = async () => {
+                try {
+                    base = await fetch(BASE).then((r) => r.json());
+                    document.getElementById('base-state').textContent =
+                        `${base.plateformes.length} plateformes, relevé du ${base._meta.dateReleve}`;
+                } catch (e) {
+                    document.getElementById('base-state').textContent = 'échec du chargement';
+                    say(`Impossible de charger ${BASE} : ${e.message}`, 'merge-err');
+                }
+            };
+
+            const apply = (patch, filename) => {
+                const meta = patch._patch || {};
+                say(`\n── ${filename} — lot ${meta.id || '?'} — ${(patch.plateformes || []).length} plateforme(s) — relevé ${meta.dateReleve || 'non daté'}`);
+                if (meta.note) say(`   note : ${meta.note}`, 'merge-warn');
+                (patch.plateformes || []).forEach((p) => {
+                    const cible = base.plateformes.find((x) => x.nom === p.nom);
+                    if (!cible) { say(`   ✗ « ${p.nom} » introuvable dans le référentiel — ligne ignorée`, 'merge-err'); return; }
+                    const champs = [];
+                    Object.entries(p).forEach(([k, v]) => {
+                        if (k === 'nom') return;
+                        if (k === 'socleTechnique' && typeof v === 'object' && v !== null) {
+                            cible.socleTechnique = { ...(cible.socleTechnique || {}), ...v };
+                        } else {
+                            cible[k] = v;
+                        }
+                        champs.push(k);
+                    });
+                    cible.lot = meta.id || cible.lot;
+                    touched += 1;
+                    say(`   ✓ ${p.nom} — ${champs.length} champ(s) : ${champs.join(', ')}`, 'merge-ok');
+                });
+            };
+
+            const recount = () => {
+                const P = base.plateformes;
+                const rempli = (v) => !(v === null || v === undefined || v === '' || (Array.isArray(v) && !v.length));
+                base._meta.couverture = {
+                    ...base._meta.couverture,
+                    identiteEntreprise_haute: P.filter((x) => x.confianceIdentite === 'haute').length,
+                    identiteEntreprise_a_verifier: P.filter((x) => x.confianceIdentite === 'moyenne').length,
+                    identiteEntreprise_absente: P.filter((x) => !x.siren).length,
+                    qualificationMarche_faite: P.filter((x) => rempli(x.familleOrigine)).length,
+                    fournisseursDeSocle_identifies: P.filter((x) => x.fournisseurDeSocle).length,
+                    entitesCreeesPourLaReforme: P.filter((x) => x.natureEntite === 'creee_pour_rfe').length,
+                    siteWeb_rempli: P.filter((x) => rempli(x.siteWeb)).length,
+                    dateDerniereFusion: new Date().toISOString().slice(0, 10)
+                };
+                say(`\n── Couverture après fusion`);
+                Object.entries(base._meta.couverture).forEach(([k, v]) => {
+                    if (typeof v !== 'object') say(`   ${k} : ${v}`);
+                });
+                say(`\n${touched} enregistrement(s) modifié(s). Fichier prêt.`, 'merge-ok');
+                document.getElementById('dl').disabled = false;
+            };
+
+            const read = (files) => {
+                let done = 0;
+                [...files].forEach((f) => {
+                    const fr = new FileReader();
+                    fr.onload = () => {
+                        try { apply(JSON.parse(fr.result), f.name); }
+                        catch (e) { say(`✗ ${f.name} : JSON invalide — ${e.message}`, 'merge-err'); }
+                        done += 1;
+                        if (done === files.length) recount();
+                    };
+                    fr.readAsText(f);
+                });
+            };
+
+            const drop = document.getElementById('drop');
+            const input = document.getElementById('file');
+            drop.addEventListener('click', () => input.click());
+            input.addEventListener('change', (e) => read(e.target.files));
+            drop.addEventListener('dragover', (e) => { e.preventDefault(); drop.classList.add('over'); });
+            drop.addEventListener('dragleave', () => drop.classList.remove('over'));
+            drop.addEventListener('drop', (e) => {
+                e.preventDefault();
+                drop.classList.remove('over');
+                read(e.dataTransfer.files);
+            });
+
+            document.getElementById('dl').addEventListener('click', () => {
+                const blob = new Blob([JSON.stringify(base, null, 1)], { type: 'application/json' });
+                const a = document.createElement('a');
+                a.href = URL.createObjectURL(blob);
+                a.download = 'plateformes-agreees.json';
+                a.click();
+                URL.revokeObjectURL(a.href);
+            });
+
+            load();
+        })();
+    </script>
+</body>
+</html>

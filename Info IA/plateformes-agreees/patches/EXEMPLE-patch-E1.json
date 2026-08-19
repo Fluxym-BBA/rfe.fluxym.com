@@ -1,0 +1,33 @@
+{
+ "_patch": {
+  "id": "E1",
+  "chantier": "E — qualification marché",
+  "auteur": "RFE_WebSite",
+  "dateReleve": "2026-08-20",
+  "nbPlateformes": 1,
+  "note": "Fichier d'exemple. À dupliquer, ne pas fusionner tel quel."
+ },
+ "plateformes": [
+  {
+   "nom": "AXONAUT",
+   "siteWeb": "https://www.axonaut.com/",
+   "familleOrigine": ["facturation_compta"],
+   "segmentCible": ["micro", "tpe_pme"],
+   "verticale": "generaliste",
+   "natureEntite": "extension_demat",
+   "perimetreFonctionnel": ["emission", "reception", "ereporting", "suite_gestion"],
+   "socleTechnique": {
+    "type": "inconnu",
+    "operateurSocle": null,
+    "preuve": "À sourcer sur le site officiel",
+    "source": "a_sourcer",
+    "confiance": "non_qualifie"
+   },
+   "descriptionFiche": "Exemple de structure. Remplacer par une description factuelle de 3 à 6 lignes.",
+   "logiquePositionnement": "Exemple de structure. Répondre à : le positionnement PA est-il cohérent avec le métier d'origine ?",
+   "sourcesEnrichissement": [
+    { "champ": "positionnement", "source": "https://www.axonaut.com/", "dateReleve": "2026-08-20", "confiance": "haute" }
+   ]
+  }
+ ]
+}
