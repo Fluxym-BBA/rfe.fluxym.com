@@ -1,0 +1,520 @@
+{
+ "_patch": {
+  "id": "E8",
+  "chantier": "E — qualification marché",
+  "auteur": "RFE_WebSite",
+  "dateReleve": "2026-08-20",
+  "nbPlateformes": 10,
+  "note": "Lot E8, 10 plateformes françaises, qualification réalisée le 20/08/2026 à partir des sites officiels uniquement. SOURCE DU RÉFÉRENTIEL : data/plateformes-agreees.json a bien été lu sur GitHub main (arbre 82a8045), mais le fichier (253 Ko) dépasse la capacité d'un seul fetch et la lecture s'est arrêtée dans les entrées en E (ENERJ). Les 10 entrées du lot se trouvant en fin de fichier (T à V), les clés de fusion ont été reprises caractère pour caractère depuis Info IA/plateformes-agreees/LOTS-E.md, ligne E8, également versionné sur main. À vérifier au moment de la fusion : si une ligne échoue, comparer casse et espaces. IDENTITÉ JURIDIQUE : aucun champ des chantiers B et C n'a été touché. CHAMPS NON RENSEIGNÉS, faute de source : (1) fournisseurDeSocle et modeDistributionSocle absents pour TESSI Technologies, TIIME PDP, TRESO2, TUNGSTEN AUTOMATION FRANCE et VERYSWING : aucune page partenaires éditeurs, marque blanche ou API pour éditeurs trouvée sur leurs sites. L'absence de page n'étant pas une preuve d'absence de pratique, le champ est laissé intact plutôt que mis à false. (2) solutionsCompatiblesPartenaires absent partout sauf TX2 Concept et TeamSystem Sellsy : aucune liste publiée ailleurs. Ventya adresse explicitement les éditeurs mais ne nomme aucun partenaire. (3) groupeCapitalistique absent pour TX2 Concept, VENTYA, VERYSWING et VosFactures : rien de sourçable sur leurs sites. (4) segmentCible absent pour VERYSWING : le site qualifie sa cible par métier (ESN, conseil, portage) et jamais par taille. (5) ereporting non codé dans perimetreFonctionnel pour TESSI Technologies, TUNGSTEN AUTOMATION FRANCE, TX2 Concept et TeamSystem Sellsy : capacité non affirmée explicitement sur les pages lues, alors qu'elle est de facto requise par l'immatriculation. Convention retenue : ne coder que ce qui est écrit. POINTS D'ATTENTION : (a) TAXERA : site en anglais (taxera.tech), aucune page dédiée à la réforme française, communiqués signés « Taxera Technologies GmbH » depuis Zurich ; qualification en confiance moyenne, et taxera.io renvoie une erreur serveur. (b) VosFactures : socle technique non documenté, laissé en type inconnu et confiance non_qualifie, à re-sourcer. Indice pour les chantiers B et C, non retenu ici faute de source officielle : le site sert ses ressources statiques depuis un CDN tiers (fs.siteor.com) et comporte des chaînes en polonais, ce qui suggère un adossement à un groupe étranger. (c) TUNGSTEN AUTOMATION FRANCE : le site français emploie encore le vocabulaire « PDP » et non « PA ». (d) Noms commerciaux distincts du nom d'inscription, confirmés : TESSI Technologies vers « DIGITAL INVOICE by Tessi » ; VENTYA vers « Clear'Invoice » ; TX2 Concept vers « TX2 Cloud » ; TUNGSTEN AUTOMATION FRANCE vers « Tungsten e-Invoice Network » et « Tungsten InvoiceAgility » ; TeamSystem Sellsy vers « Sellsy », dont la plateforme agréée alimente aussi « TeamSystem Facture ». (e) Rôles de grossiste identifiés dans ce lot : TX2 Concept (deux partenaires nommés, CISA Informatique et Synapture), VENTYA (offre éditeurs, intégrateurs et centres de services partagés explicite, aucun partenaire nommé), TeamSystem Sellsy (socle partagé intra-groupe avec TeamSystem Facture), TAXERA (programme Reseller et System Integrator). Rappel de cadrage : ces montages n'ont aucune existence réglementaire. L'administration ne distingue que la plateforme agréée immatriculée et la Solution Compatible non immatriculée, et chacune des dix plateformes de ce lot est immatriculée en son nom propre et reste seule responsable devant l'administration."
+ },
+ "plateformes": [
+  {
+   "nom": "TAXERA",
+   "siteWeb": "https://taxera.tech/",
+   "familleOrigine": [
+    "tax"
+   ],
+   "segmentCible": [
+    "eti",
+    "grands_comptes"
+   ],
+   "verticale": "generaliste",
+   "natureEntite": "extension_demat",
+   "perimetreFonctionnel": [
+    "emission",
+    "reception",
+    "ereporting"
+   ],
+   "socleTechnique": {
+    "type": "propre",
+    "operateurSocle": "Taxera Technologies",
+    "preuve": "« One vendor, one database, one integration across eInvoicing, SAF-T, VAT returns, and more. No multi-vendor fragmentation. » — plateforme cloud-native unique opérée par Taxera ; également Access Point certifié DBNAlliance pour l'Amérique du Nord.",
+    "source": "https://taxera.tech/partners/",
+    "confiance": "moyenne"
+   },
+   "fournisseurDeSocle": true,
+   "modeDistributionSocle": [
+    "direct",
+    "via integrateur"
+   ],
+   "groupeCapitalistique": "Taxera Technologies GmbH, siège à Zurich (Suisse) — éditeur international de conformité fiscale ; l'entité française est immatriculée en son nom propre",
+   "descriptionFiche": "Éditeur international de conformité fiscale indirecte (« Global tax compliance, reimagined »), positionné sur une plateforme unique couvrant e-invoicing, SAF-T, déclarations de TVA et reporting fiscal dans plusieurs pays. Cible déclarée : entreprises et grands comptes servis par middleware et intégrations ERP natives. Le programme partenaires est structuré en quatre modèles (Referral, Reseller, System Integrator, Strategic Alliance) et vise explicitement les Big 4, les cabinets SAP et les intégrateurs mondiaux. Partenariat avec ECIT Digital pour la capture intelligente des documents fournisseurs. Le site, en anglais, ne comporte aucune page dédiée à la réforme française : le périmètre France n'y est pas documenté.",
+   "logiquePositionnement": "Cohérent : la plateforme agréée française est un mandat national de plus dans un catalogue de conformité fiscale multi-pays déjà construit sur ce modèle. Le positionnement est celui d'un spécialiste tax/compliance qui absorbe la réforme française comme un mandat parmi d'autres, et non celui d'un acteur du marché français de la facture. La France est adressée depuis Zurich, sans vitrine française à ce jour.",
+   "sourcesEnrichissement": [
+    {
+     "champ": "positionnement",
+     "source": "https://taxera.tech/",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    },
+    {
+     "champ": "fournisseurDeSocle + modeDistributionSocle",
+     "source": "https://taxera.tech/partners/",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "groupeCapitalistique",
+     "source": "https://taxera.tech/ (communiqués signés « Taxera Technologies GmbH », Zurich)",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    },
+    {
+     "champ": "perimetreFonctionnel",
+     "source": "https://taxera.tech/ (description du site : eInvoicing, SAF-T, VAT Returns, tax reporting)",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    }
+   ]
+  },
+  {
+   "nom": "TESSI Technologies",
+   "siteWeb": "https://www.tessi.eu/fr/digital-invoice-by-tessi/",
+   "familleOrigine": [
+    "ged",
+    "s2p",
+    "o2c"
+   ],
+   "segmentCible": [
+    "eti",
+    "grands_comptes"
+   ],
+   "verticale": "generaliste",
+   "natureEntite": "extension_demat",
+   "perimetreFonctionnel": [
+    "emission",
+    "reception"
+   ],
+   "socleTechnique": {
+    "type": "propre",
+    "operateurSocle": "Tessi",
+    "preuve": "Solution commercialisée sous le nom « DIGITAL INVOICE by Tessi », immatriculée plateforme agréée : immatriculation provisoire obtenue en août 2024, puis levée des réserves confirmée par la DGFiP à l'issue des tests menés par les équipes Tessi.",
+    "source": "https://www.tessi.eu/fr/facture-electronique-la-direction-generale-des-finances-publiques-dgfip-confirme-limmatriculation-definitive-de-la-plateforme-agreee-digital-invoice-by-tessi/",
+    "confiance": "haute"
+   },
+   "groupeCapitalistique": "Groupe Tessi (traitement documentaire et BPO, présence internationale)",
+   "descriptionFiche": "Acteur historique du traitement documentaire et du BPO, dont l'offre de facturation est commercialisée sous le nom « DIGITAL INVOICE by Tessi » — distinct du nom d'inscription « TESSI Technologies ». Le positionnement affiché est explicitement haut de marché : « la référence des grandes entreprises et des ETI à fortes volumétries ». L'offre couvre les deux sens du cycle facture, processus P2P côté fournisseurs et processus O2C côté clients, complétés par un volet gestion de la conformité en France et à l'international destiné aux directions financières. Immatriculation provisoire en août 2024, réserves levées et immatriculation confirmée par la DGFiP.",
+   "logiquePositionnement": "Très cohérent : Tessi dématérialise et traite des factures pour de gros donneurs d'ordre depuis des décennies. Le statut de plateforme agréée prolonge un métier de tiers de confiance documentaire existant, sur la même clientèle grands comptes et ETI à forte volumétrie, sans changement de segment ni de modèle économique. Aucune page « partenaires éditeurs », « marque blanche » ou « API pour éditeurs » n'a été trouvée : le rôle de grossiste n'est pas documenté.",
+   "sourcesEnrichissement": [
+    {
+     "champ": "positionnement + segmentCible + perimetreFonctionnel",
+     "source": "https://www.tessi.eu/fr/digital-invoice-by-tessi/",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "nom commercial + socleTechnique",
+     "source": "https://www.tessi.eu/fr/facture-electronique-la-direction-generale-des-finances-publiques-dgfip-confirme-limmatriculation-definitive-de-la-plateforme-agreee-digital-invoice-by-tessi/",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "TIIME PDP",
+   "siteWeb": "https://www.tiime.fr/",
+   "familleOrigine": [
+    "facturation_compta",
+    "fintech"
+   ],
+   "segmentCible": [
+    "micro",
+    "tpe_pme"
+   ],
+   "verticale": "generaliste",
+   "natureEntite": "creee_pour_rfe",
+   "perimetreFonctionnel": [
+    "emission",
+    "reception",
+    "ereporting",
+    "suite_gestion"
+   ],
+   "socleTechnique": {
+    "type": "propre",
+    "operateurSocle": "Tiime",
+    "preuve": "« La plateforme a fait l'objet de nombreux tests portant sur sa fiabilité technique, sa sécurité et sa capacité à communiquer avec l'ensemble de l'écosystème » : socle opéré par Tiime et intégré à l'application.",
+    "source": "https://blog.tiime.fr/tiime-devient-plateforme-agreee",
+    "confiance": "moyenne"
+   },
+   "groupeCapitalistique": "Indépendante : capital détenu par le management, « aucun investisseur étranger à bord » revendiqué sur le site",
+   "descriptionFiche": "Éditeur français d'une application de gestion pour entrepreneurs réunissant facturation, comptabilité, compte pro et suivi des dépenses, avec un écosystème tourné vers les cabinets d'expertise comptable. Cible affichée : entrepreneurs, micro-entreprises, TPE et PME. La facturation électronique est présentée comme intégrée et gratuite pour les utilisateurs, sans changement d'habitudes. Le périmètre annoncé couvre l'émission, la transmission et la réception des factures B2B, ainsi que l'e-reporting des transactions B2C et internationales, avec archivage à valeur probante et format Factur-X. Le nom d'inscription « TIIME PDP » distingue une entité dédiée de la marque produit Tiime.",
+   "logiquePositionnement": "Cohérent : tous les utilisateurs de Tiime sont assujettis à la réforme, et devenir plateforme agréée évite de les voir partir vers une plateforme tierce. Le choix d'une plateforme agréée gratuite en fait un instrument de rétention et d'acquisition sur le segment micro et TPE, où la conformité n'est pas un produit vendu mais une condition de survie de l'application de facturation. Le suffixe « PDP » du nom d'inscription signale une entité dédiée, distincte de l'éditeur historique.",
+   "sourcesEnrichissement": [
+    {
+     "champ": "positionnement + perimetreFonctionnel + socleTechnique",
+     "source": "https://blog.tiime.fr/tiime-devient-plateforme-agreee",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "segmentCible + familleOrigine + groupeCapitalistique",
+     "source": "https://www.tiime.fr/",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "natureEntite",
+     "source": "Nom d'inscription « TIIME PDP » (référentiel / LOTS-E.md) : suffixe PDP interprété comme entité dédiée à la réforme",
+     "dateReleve": "2026-08-20",
+     "confiance": "faible"
+    }
+   ]
+  },
+  {
+   "nom": "TRESO2",
+   "siteWeb": "https://www.treso2.com/",
+   "familleOrigine": [
+    "s2p",
+    "fintech"
+   ],
+   "segmentCible": [
+    "tpe_pme",
+    "eti"
+   ],
+   "verticale": "generaliste",
+   "natureEntite": "extension_demat",
+   "perimetreFonctionnel": [
+    "emission",
+    "reception",
+    "ereporting"
+   ],
+   "socleTechnique": {
+    "type": "propre",
+    "operateurSocle": "TRESO2",
+    "preuve": "Plateforme agréée présentée comme un module de la plateforme TRESO2, avec couverture annoncée de l'ensemble des cas d'usage AFNOR, des formats UBL, CII et Factur-X, des statuts du cycle de vie, de l'archivage légal et de l'annuaire.",
+    "source": "https://www.treso2.com/solutions/fonctionnalites/facture-electronique",
+    "confiance": "moyenne"
+   },
+   "groupeCapitalistique": "Adossée à des partenaires bancaires français : Bpifrance et Crédit Mutuel Arkéa (Arkéa Banque Entreprises et Institutionnels, Arkéa Asset Management, Suravenir)",
+   "descriptionFiche": "Plateforme française de gestion, de paiement et de financement de factures, revendiquant plus de 1 000 PME et ETI clientes. L'offre est modulaire : facturation électronique via la plateforme agréée, automatisation des traitements (pré-imputation comptable, workflows de validation, OCR et IA pour les factures internationales) et financement court terme des factures clients ou fournisseurs en lien direct avec les banques et les factors. Le discours de conformité est gradué par taille, « de la simple réception pour les PME à l'ensemble des cas d'usage pour les ETI ». L'écosystème mis en avant est bancaire et financier (Bpifrance, Crédit Mutuel Arkéa, adhésions AFDCC et AFTE), et non éditeur.",
+   "logiquePositionnement": "Cohérent avec une logique de trade finance et de poste fournisseurs : TRESO2 traitait déjà le flux facture pour le financer et le payer, et le statut de plateforme agréée sécurise la maîtrise du flux entrant et sortant qui alimente ses services de trésorerie. Le risque de banalisation de la brique agréée est compensé par les modules à valeur ajoutée, qui restent le véritable produit. Les intégrations ERP et logiciels comptables sont présentées comme des connecteurs entrants, pas comme une revente de socle.",
+   "sourcesEnrichissement": [
+    {
+     "champ": "positionnement + segmentCible + perimetreFonctionnel",
+     "source": "https://www.treso2.com/solutions/fonctionnalites/facture-electronique",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "familleOrigine",
+     "source": "https://www.treso2.com/",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "groupeCapitalistique",
+     "source": "https://www.treso2.com/nos-partenaires",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    }
+   ]
+  },
+  {
+   "nom": "TUNGSTEN AUTOMATION FRANCE",
+   "siteWeb": "https://www.tungstenautomation.fr/products/einvoice-network",
+   "familleOrigine": [
+    "s2p",
+    "ged",
+    "edi"
+   ],
+   "segmentCible": [
+    "eti",
+    "grands_comptes"
+   ],
+   "verticale": "generaliste",
+   "natureEntite": "extension_demat",
+   "perimetreFonctionnel": [
+    "emission",
+    "reception"
+   ],
+   "socleTechnique": {
+    "type": "propre",
+    "operateurSocle": "Tungsten Automation",
+    "preuve": "« Tungsten e-Invoice Network met en relation les entreprises, les fournisseurs et leurs institutions financières au sein d'un réseau numérique exclusif » ; l'offre InvoiceAgility est présentée comme « une solution intégrée alliant réseau de facturation électronique et capture de factures ».",
+    "source": "https://www.tungstenautomation.fr/products/einvoice-network",
+    "confiance": "moyenne"
+   },
+   "groupeCapitalistique": "Tungsten Automation, éditeur international de solutions d'automatisation documentaire ; l'entité française TUNGSTEN AUTOMATION FRANCE porte l'immatriculation",
+   "descriptionFiche": "Filiale française d'un éditeur international d'automatisation documentaire, dont l'offre repose sur deux briques nommées : Tungsten e-Invoice Network, réseau d'échange de factures électroniques reliant entreprises, fournisseurs et institutions financières, et Tungsten InvoiceAgility, qui combine ce réseau avec la capture de factures tous formats. Le discours cible les directions comptables de grandes organisations, avec un accent marqué sur l'embarquement des fournisseurs à l'échelle internationale (témoignage Schneider Electric). Le site français mentionne le statut d'immatriculation avec un vocabulaire non actualisé : « en tant que Plateforme de Dématérialisation Partenaire (PDP) immatriculée, Tungsten Automation vous accompagne dans l'adoption des nouvelles réglementations françaises ».",
+   "logiquePositionnement": "Cohérent : l'automatisation des factures fournisseurs et le réseau d'échange constituent le métier historique, et la plateforme agréée française s'ajoute à un catalogue de conformité pays déjà industrialisé. Le positionnement reste celui de l'automatisation du poste fournisseurs pour grands comptes, où la conformité est un prérequis vendu avec la capture et l'embarquement des fournisseurs, non un produit autonome. Aucune offre éditeurs ou marque blanche n'est documentée sur le site français.",
+   "sourcesEnrichissement": [
+    {
+     "champ": "positionnement + socleTechnique + segmentCible",
+     "source": "https://www.tungstenautomation.fr/products/einvoice-network",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "perimetreFonctionnel + familleOrigine",
+     "source": "https://www.tungstenautomation.fr/products/invoiceagility",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "TX2 Concept",
+   "siteWeb": "https://www.tx2.fr/",
+   "familleOrigine": [
+    "edi"
+   ],
+   "segmentCible": [
+    "tpe_pme",
+    "eti",
+    "grands_comptes"
+   ],
+   "verticale": "generaliste",
+   "natureEntite": "extension_demat",
+   "perimetreFonctionnel": [
+    "emission",
+    "reception"
+   ],
+   "socleTechnique": {
+    "type": "propre",
+    "operateurSocle": "TX2 Concept",
+    "preuve": "« Cette validation marque une étape structurante. Elle confirme la robustesse de notre solution TX2 Cloud, notre conformité réglementaire… » ; certifications détenues en propre : ISO 27001, PEPPOL Access Point, GS1, Odette.",
+    "source": "https://www.tx2.fr/2025/12/22/tx2-concept-obtient-immatriculation-definitive-plateforme-agreee/",
+    "confiance": "haute"
+   },
+   "fournisseurDeSocle": true,
+   "modeDistributionSocle": [
+    "direct",
+    "via integrateur"
+   ],
+   "solutionsCompatiblesPartenaires": [
+    "CISA Informatique (éditeur-intégrateur, ERP Louxor et LXP)",
+    "Synapture (conseil et GED, plateforme collaborative Pulse)"
+   ],
+   "descriptionFiche": "Opérateur EDI français basé à Olivet (45), expert des échanges de données informatisées depuis près de trente-cinq ans, dont les solutions sont utilisées par plus de 2 000 sociétés présentes dans plus de 40 pays. Immatriculation définitive obtenue en décembre 2025, adossée à la solution TX2 Cloud et aux certifications ISO 27001, PEPPOL Access Point, GS1 et Odette. Signal marquant : TX2 Concept met sa plateforme agréée à disposition de tiers qui l'intègrent à leur propre offre — « CISA Informatique intègre la Plateforme Agréée - PA, de TX2 CONCEPT à son offre de services pour proposer une solution conforme à ses clients » (mars 2026) — et a conclu un partenariat stratégique avec Synapture (décembre 2025), où le périmètre agréé opéré par TX2 complète les architectures déployées par le partenaire. Secteurs cités : automobile, distribution, industrie, négoce, secteur financier, logistique.",
+   "logiquePositionnement": "Très cohérent, et l'un des rares rôles de grossiste explicitement documenté dans ce lot : un opérateur EDI historique, dont le métier est déjà le transport normalisé de flux inter-entreprises, devient plateforme agréée puis met ce socle à disposition d'éditeurs d'ERP et d'intégrateurs qui ne souhaitent pas s'immatriculer. TX2 opère le périmètre réglementaire, le partenaire conserve la relation client. Précision de cadrage : l'administration ne connaît que la plateforme agréée immatriculée, ici TX2 Concept, et les solutions non immatriculées qui s'y raccordent ; TX2 reste seule responsable de son immatriculation.",
+   "sourcesEnrichissement": [
+    {
+     "champ": "positionnement + socleTechnique",
+     "source": "https://www.tx2.fr/2025/12/22/tx2-concept-obtient-immatriculation-definitive-plateforme-agreee/",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "fournisseurDeSocle + solutionsCompatiblesPartenaires",
+     "source": "https://www.tx2.fr/2026/03/19/partenariat-tx2-concept-cisa-informatique-partenariat-strategique-facturation-electronique/",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "solutionsCompatiblesPartenaires + segmentCible",
+     "source": "https://www.tx2.fr/2025/12/02/tx2-concept-synapture-partenariat-strategique-facture-electronique-flux-edi/",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "familleOrigine",
+     "source": "https://www.tx2.fr/",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "TeamSystem Sellsy",
+   "siteWeb": "https://go.sellsy.com/",
+   "familleOrigine": [
+    "facturation_compta",
+    "o2c"
+   ],
+   "segmentCible": [
+    "micro",
+    "tpe_pme"
+   ],
+   "verticale": "generaliste",
+   "natureEntite": "extension_demat",
+   "perimetreFonctionnel": [
+    "emission",
+    "reception",
+    "suite_gestion"
+   ],
+   "socleTechnique": {
+    "type": "propre",
+    "operateurSocle": "Sellsy",
+    "preuve": "« Nous sommes désormais enregistrés en tant que Plateforme Agréée (PA) », avec certification ISO 27001 obtenue dans le même mouvement et adhésion au FNFE dès 2022 ; socle opéré par Sellsy et partagé avec un autre produit du groupe.",
+    "source": "https://go.sellsy.com/blog/sellsy-plateforme-agreee-facturation-electronique",
+    "confiance": "haute"
+   },
+   "fournisseurDeSocle": true,
+   "modeDistributionSocle": [
+    "direct",
+    "API/embedded"
+   ],
+   "solutionsCompatiblesPartenaires": [
+    "TeamSystem Facture (TeamSystem France) — « TeamSystem Facture est relié à la PA de Sellsy »"
+   ],
+   "groupeCapitalistique": "Groupe TeamSystem (acteur européen de la digitalisation des entreprises) ; TeamSystem France réunit Sellsy, TeamSystem Facture, ClicData, Sendethic et ACD, écosystème revendiqué à plus de 3,1 millions de clients en Europe",
+   "descriptionFiche": "Éditeur français d'une suite de gestion couvrant l'ensemble du cycle client (facturation, CRM, trésorerie, marketing), lancée en 2009, revendiquant plus de 65 000 utilisateurs et 180 collaborateurs entre La Rochelle, Bordeaux et Barcelone. Immatriculée plateforme agréée en septembre 2025, avec certification ISO 27001 obtenue simultanément et adhésion au FNFE dès 2022. L'entreprise a depuis rejoint le groupe italien TeamSystem, d'où le nom d'inscription « TeamSystem Sellsy ». Signal notable : la plateforme agréée de Sellsy sert de socle à un autre produit du groupe, TeamSystem Facture, destiné aux indépendants, artisans, TPE et SCI, « relié à la PA de Sellsy » pour la conformité, avec émission au format Factur-X. Un programme partenaires commercial et un espace dédié aux experts-comptables complètent la distribution.",
+   "logiquePositionnement": "Cohérent : éditeur de facturation dont toute la base client est concernée par la réforme, Sellsy internalise la conformité plutôt que de dépendre d'une plateforme tierce. L'intégration au groupe TeamSystem fait apparaître un rôle de grossiste intra-groupe : une même plateforme agréée alimente plusieurs produits commerciaux, avec des marques et des cibles distinctes. Ce partage de socle reste interne au groupe, aucune offre publique à destination d'éditeurs tiers n'étant documentée.",
+   "sourcesEnrichissement": [
+    {
+     "champ": "positionnement + socleTechnique + segmentCible",
+     "source": "https://go.sellsy.com/blog/sellsy-plateforme-agreee-facturation-electronique",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "fournisseurDeSocle + solutionsCompatiblesPartenaires + groupeCapitalistique",
+     "source": "https://go.sellsy.com/blog/avec-teamsystem-facture-la-facturation-electronique-devient-une-simple-formalite",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "modeDistributionSocle",
+     "source": "https://go.sellsy.com/partenaires",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    }
+   ]
+  },
+  {
+   "nom": "VENTYA",
+   "siteWeb": "https://www.ventya.fr/",
+   "familleOrigine": [
+    "edi",
+    "s2p",
+    "o2c"
+   ],
+   "segmentCible": [
+    "eti",
+    "grands_comptes"
+   ],
+   "verticale": "generaliste",
+   "natureEntite": "extension_demat",
+   "perimetreFonctionnel": [
+    "emission",
+    "reception",
+    "ereporting"
+   ],
+   "socleTechnique": {
+    "type": "propre",
+    "operateurSocle": "Ventya",
+    "preuve": "« Ventya conçoit, développe, héberge et exploite des plateformes d'échanges » ; « plateforme agréée de facturation électronique pensée, développée et opérée en France » ; « nos équipes, centres de traitements et nos sous-traitants sont tous basés en France ».",
+    "source": "https://www.ventya.fr/",
+    "confiance": "haute"
+   },
+   "fournisseurDeSocle": true,
+   "modeDistributionSocle": [
+    "direct",
+    "API/embedded",
+    "via integrateur"
+   ],
+   "descriptionFiche": "Éditeur et opérateur SaaS de plateformes d'échanges électroniques, issu d'un savoir-faire historique en EDI, dont l'offre de facturation porte le nom commercial « Clear'Invoice » — distinct du nom d'inscription « VENTYA ». La plateforme est présentée comme une solution d'e-invoicing et d'e-reporting proposant « un ensemble de services P2P et O2C cohérent », avec engagement de résultat et accompagnement projet. Levée officielle des réserves obtenue en décembre 2025. Au-delà de la facture, Ventya opère des plateformes supply chain, de réservation et collaboratives pour des écosystèmes à fortes contraintes : assurance, assistance, finance, voyage d'affaires, location de véhicules, dépannage, édition, industrie, distribution. Le site revendique une adaptation « aux process et aux besoins d'entreprises de toutes tailles », mais les références citées et l'approche projet situent le cœur de cible sur les ETI et les grands comptes.",
+   "logiquePositionnement": "Cohérent : opérateur d'échanges électroniques de longue date, Ventya ajoute la plateforme agréée à un portefeuille de plateformes déjà opérées pour le compte de tiers. Signal de grossiste explicite : une offre « Solutions pour les Éditeurs et Partenaires » adresse « les éditeurs de logiciels, les intégrateurs et les centres de service partagés », avec la promesse « Ventya vous permet d'offrir à vos clients une solution complètement intégrée à vos propres solutions et logiciels », « nous prenons en charge l'ensemble des aspects réglementaires et techniques liés à l'immatriculation en tant que Plateforme Agréée » et « Ventya opère, pour votre compte, les échanges de flux de factures », avec connexion par API, EDI ou portail. Aucun partenaire n'est nommé publiquement : la liste des solutions compatibles reste à établir.",
+   "sourcesEnrichissement": [
+    {
+     "champ": "positionnement + nom commercial Clear'Invoice + socleTechnique",
+     "source": "https://www.ventya.fr/",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "fournisseurDeSocle + modeDistributionSocle + perimetreFonctionnel",
+     "source": "https://www.ventya.fr/facture-electronique/",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "verticale + segmentCible",
+     "source": "https://www.ventya.fr/ (secteurs et références clients cités)",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    }
+   ]
+  },
+  {
+   "nom": "VERYSWING",
+   "siteWeb": "https://veryswing.com/",
+   "familleOrigine": [
+    "erp"
+   ],
+   "verticale": "esn",
+   "natureEntite": "extension_demat",
+   "perimetreFonctionnel": [
+    "emission",
+    "reception",
+    "ereporting",
+    "suite_gestion"
+   ],
+   "socleTechnique": {
+    "type": "propre",
+    "operateurSocle": "Veryswing",
+    "preuve": "« Veryswing est immatriculée Plateforme Agréée par la DGFIP. Vous bénéficiez ainsi de la facturation électronique intégrée à nos logiciels ERP VSActivity et VSPortage et interfacée directement avec l'administration fiscale, sans intermédiaire supplémentaire. »",
+    "source": "https://veryswing.com/",
+    "confiance": "haute"
+   },
+   "descriptionFiche": "Éditeur français d'ERP SaaS spécialisé sur les sociétés de services : VSActivity pour les ESN et cabinets de conseil, VSPortage pour le portage salarial, VSExperience pour le volet SIRH, avec plus de 60 000 utilisateurs revendiqués. La plateforme agréée est présentée comme intégrée aux ERP maison et interfacée directement avec l'administration, « sans intermédiaire supplémentaire » : émission et transmission des factures de vente au format Factur-X, réception et intégration des factures fournisseurs en format structuré, accès à l'annuaire du portail public de facturation et transmission des données d'e-reporting. La cible sectorielle est affichée sans ambiguïté en tête de page : ESN, cabinets de conseil, sociétés de portage salarial.",
+   "logiquePositionnement": "Cohérent et rare par sa verticalité : plutôt que de viser le marché général, Veryswing capitalise sur une clientèle métier captive, ESN, conseil et portage, pour laquelle la facturation est déjà produite dans son ERP. Devenir plateforme agréée évite d'insérer un tiers entre l'ERP et l'administration et transforme la contrainte réglementaire en argument de fidélisation sur une niche où l'éditeur est déjà installé. La taille des clients n'étant pas documentée sur le site, le champ segmentCible est volontairement laissé vide.",
+   "sourcesEnrichissement": [
+    {
+     "champ": "verticale + perimetreFonctionnel + socleTechnique",
+     "source": "https://veryswing.com/facturation-electronique-et-plateforme-agreee",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "familleOrigine + positionnement",
+     "source": "https://veryswing.com/",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "VosFactures",
+   "siteWeb": "https://vosfactures.fr/",
+   "familleOrigine": [
+    "facturation_compta"
+   ],
+   "segmentCible": [
+    "micro",
+    "tpe_pme"
+   ],
+   "verticale": "generaliste",
+   "natureEntite": "extension_demat",
+   "perimetreFonctionnel": [
+    "emission",
+    "reception",
+    "ereporting",
+    "suite_gestion"
+   ],
+   "socleTechnique": {
+    "type": "inconnu",
+    "operateurSocle": null,
+    "preuve": "Le site annonce que « le logiciel de facturation VosFactures est également Plateforme Agréée officielle » et décrit la conversion des factures par sa propre brique agréée, mais ne documente ni l'architecture, ni l'opérateur du socle, ni les certifications obtenues.",
+    "source": "https://vosfactures.fr/facturation-electronique-plateforme-agreee/",
+    "confiance": "non_qualifie"
+   },
+   "modeDistributionSocle": [
+    "direct",
+    "via cabinet EC"
+   ],
+   "descriptionFiche": "Éditeur d'un logiciel de facturation en ligne orienté petites structures — « PME, TPE, auto-entrepreneurs » — avec devis, gestion de stock, application mobile et export des écritures comptables. Le logiciel est annoncé comme étant lui-même plateforme agréée, cette brique prenant en charge la conversion au format structuré, la transmission et l'e-reporting des ventes B2C et des transactions internationales. Second canal de distribution assumé : une offre réservée aux cabinets comptables, où le cabinet bénéficie d'un tarif préférentiel, accède aux pièces de ses clients et peut les refacturer — « rien ne vous empêche de facturer éventuellement vos clients ». Conformité à la loi anti-fraude à la TVA et compatibilité Chorus Pro mises en avant, avec une politique tarifaire promotionnelle visible.",
+   "logiquePositionnement": "Cohérent sur le principe — un éditeur de facturation pour micro-entreprises et TPE ne peut pas laisser sortir le flux de son outil — mais le dossier technique est le moins documenté du lot : aucune page ne détaille l'architecture de la plateforme agréée, l'opérateur du socle, les certifications ou le calendrier d'immatriculation. La distribution par les cabinets comptables constitue en revanche un canal indirect clair, proche de la logique portail expert-comptable, sans pour autant constituer une revente de socle à des éditeurs tiers.",
+   "sourcesEnrichissement": [
+    {
+     "champ": "positionnement + perimetreFonctionnel",
+     "source": "https://vosfactures.fr/facturation-electronique-plateforme-agreee/",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "segmentCible + familleOrigine",
+     "source": "https://vosfactures.fr/",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "modeDistributionSocle",
+     "source": "https://vosfactures.fr/comptables",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  }
+ ]
+}
