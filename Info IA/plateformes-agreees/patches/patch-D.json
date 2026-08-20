@@ -1,0 +1,1632 @@
+{
+  "_patch": {
+    "id": "D",
+    "chantier": "D — reseaux (Access Point Peppol)",
+    "auteur": "RFE_WebSite",
+    "dateReleve": "2026-08-20",
+    "nbPlateformes": 108,
+    "note": "Chantier D — champ « reseaux » uniquement. Périmètre analysé : les 163 entrées de data/plateformes-agreees.json, relu sur GitHub Fluxym-BBA/rfe.fluxym.com@main (blob de 253 380 octets). Source : annuaire officiel des Peppol Certified Service Providers publié par OpenPeppol (https://peppol.org/members/peppol-certified-service-providers/), liste datée du 19/08/2026, colonne « Access Point (AP) » = « AP Certified », relevée le 20/08/2026. MÉTHODE : rapprochement par nom commercial, par raison sociale ET par nom de groupe, puis validation manuelle entrée par entrée. RÈGLE D'ARBITRAGE : « peppol_ap » n'est coché que si l'entité immatriculée est ELLE-MÊME Access Point certifié. Être joignable via Peppol, ou appartenir à un groupe dont une autre société est Access Point, ne suffit pas. Lorsque l'Access Point est une société sœur, mère ou une filiale étrangère du même groupe, le champ est laissé ABSENT. Cas écartés à ce titre, malgré une correspondance au niveau groupe : ACCENTURE (France) — l'AP listé est Accenture Solutions Sdn Bhd, Malaisie, autorité MDEC ; AVALARA (France) — les AP listés sont Avalara Europe (Royaume-Uni) et INPOSIA Solutions GmbH (Allemagne) ; Aruba S.p.A. (Italie) — l'AP listé est Aruba PEC S.p.A., entité juridique distincte ; CLEARTAX (France) — l'AP listé est Defmacro Software Private Limited, Inde ; ECOSIO (Autriche) — l'AP listé est ecosio InterCom GmbH, Allemagne, si bien que l'entrée allemande du référentiel est retenue mais pas l'autrichienne ; GEP (France) — l'AP listé est GEP Finland Oy, Finlande ; TUNGSTEN AUTOMATION FRANCE (France) — l'AP listé est Tungsten Automation, Suède. Cas écartés pour ambiguïté d'entité : KOLECTO PA — le référentiel signale une seconde immatriculation du groupe Kolecto, or l'annuaire ne comporte qu'une ligne « Kolecto PDP », retenue pour la seule entrée KOLECTO PDP ; FACTUREAPP — la proximité avec la ligne « FacturesApp SAS » n'est pas concluante, homonymie possible ; « Dougs Facturation gratuite » — la ligne « Dougs / API FIRST (Dougs) » ne permet pas de confirmer qu'il s'agit de la même entité immatriculée ; FISKALTRUST — la ligne « fiskaltrust consulting GmbH » (Autriche) ne peut être rattachée, le pays n'étant pas renseigné dans le référentiel. LIMITE DE COUVERTURE À CONNAÎTRE : l'annuaire OpenPeppol est une page à tableau unique rendu côté client, sans filtre serveur ni export. Sa restitution intégrale dépasse la capacité de lecture disponible : la tranche alphabétique A → « ReSOFT s.r.o. » a été lue intégralement (529 lignes), la tranche suivante jusqu'à Z n'a été obtenue que par extraction partielle de cette même page. En conséquence, l'absence du champ « reseaux » sur une entrée de fin d'alphabet ne vaut PAS constat de non-certification, mais non-détermination. Entrées concernées, à revérifier lors d'un prochain passage sur l'annuaire complet : SAGE, SAP, SEEBURGER, SNI, SOLO, SOVOS, SPS COMMERCE, Shine, SWILE, TAXERA, Taxilla Europe BV, TeamSystem Sellsy, TESISQUARE SPA, TRADESHIFT BABELWAY, Transalis Limited, « VOXEL, an Amadeus company », VosFactures, WAKASTELLAR, WiseTech GLOBAL, YOOZ PDP. Plusieurs d'entre elles sont citées comme Access Points par des registres d'autorités Peppol nationales (ATO australienne, eInvoicing Nouvelle-Zélande), parfois via une entité d'un autre pays : non retenu faute de vérification sur l'annuaire OpenPeppol lui-même. Autres entrées sans correspondance trouvée dans la tranche lue intégralement, champ laissé absent : B4VALUE.NET, DEXT, DIGITAL TECHNOLOGIES, DOCUWARE, EDT, « EEZI powered by VAT IT », « Effinum by SPEE », ESI, FLOWIE, jefacture.com, LOGILEC, MyKinexo PDP, NEOTIMO, PAYFLOWS, Basikon, CENSE, « EY Expertises & Transactions », KALANDA, MY-EDDY, RATIOO. AUCUNE valeur « autre » n'est produite : établir qu'une plateforme assure son interopérabilité par un réseau non-Peppol ou par convention bilatérale exige une source explicite par plateforme, dont ce chantier ne dispose pas. Le chantier ne conclut donc que sur « peppol_ap ». NON MODIFIÉ VOLONTAIREMENT : B2BRouter, EDICOM France, PAGERO et STORECOVE portaient déjà reseaux = [\"peppol_ap\"] dans le référentiel, valeur confirmée par l'annuaire ; elles sont donc hors patch. Le champ historique « peppolAP », présent et à null sur les entrées et absent de data/pa-taxonomie.json, n'est pas touché : sa dépréciation relève d'une migration de schéma, pas d'un patch de contenu. CADRE MÉTIER : Peppol est l'un des moyens d'assurer l'interopérabilité obligatoire entre plateformes ; il n'est pas imposé, l'interopérabilité pouvant aussi passer par convention bilatérale. Le statut d'Access Point Peppol ne constitue donc ni une obligation réglementaire, ni un gage de conformité à l'immatriculation française."
+  },
+  "plateformes": [
+    {
+      "nom": "A-Cube",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « A-Cube S.r.l. (Italie, AGID) », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "ABBY",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « Abby / Abby SAS (France, DGFIP) », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "ADEMICO SOFTWARE",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « Ademico Software (Belgique, BOSA) », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "AGENA 3000",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « AGENA 3000 DATA MANAGEMENT (France, DGFIP) », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "AGICAP",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « Agicap / Agicap S.A.S (France, DGFIP) », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "AGS RECORDS MANAGEMENT",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « AGS Records Management / Pro Archives Systemes (France, DGFIP) », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "Arratech",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « Arratech / Arratech AB (Suede, NAPP) », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "ARTEVA",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « ARTEVA (France, DGFIP) », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "ATGP",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « @GP (France, DGFIP) — contact commerciaux@atgp.net », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "moyenne"
+        }
+      ]
+    },
+    {
+      "nom": "AXELOR",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « Axelor (France, DGFIP) », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "AXONAUT",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « Axonaut / DIGITICA (Axonaut) (France, DGFIP) », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "moyenne"
+        }
+      ]
+    },
+    {
+      "nom": "AXWAY SOFTWARE",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « Axway / Axway Software (France, DGFIP) », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "AZOPIO",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « AZOPIO (France, DGFIP) », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "BASWARE",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « Basware / Basware Corporation (Finlande, VK) », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "BC SOLUTIONS",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « BCSOLUTIONS / BUSINESS COMMUNICATION SOLUTIONS (France, DGFIP) », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "moyenne"
+        }
+      ]
+    },
+    {
+      "nom": "BILLIT",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « Billit / Billit BVBA (Belgique, BOSA) », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "CBS Corporate Business Solutions",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « cbs Corporate Business Solutions Unternehmensberatung GmbH (Allemagne) », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "CECURITY",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « Cecurity.com (France, DGFIP) », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "CEGEDIM",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « CEGEDIM SA (France, DGFIP) », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "CEGI ALFA",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « GROUPE CEGI / CEGI ALFA (GROUPE CEGI) (France, DGFIP) », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "moyenne"
+        }
+      ]
+    },
+    {
+      "nom": "CEGID",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « Cegid (France, DGFIP) », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "CHAINTRUST by Visma",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « Chaintrust by Visma / Chaintrust (France, DGFIP) », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "COMARCH SA",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « Comarch SA (Pologne, MRiT) », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "CYCLOPE",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « Cyclope SAS (France, DGFIP) », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "DARVA",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « DARVA (France, DGFIP) », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "DIGIPHARMACIE",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « Digipharmacie (France, DGFIP) », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "Docnova, MELASOFT GmbH",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « Melasoft GmbH (Allemagne) — Docnova est l'offre portee par cette entite », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "moyenne"
+        }
+      ]
+    },
+    {
+      "nom": "DOCOON",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « DOCOON / DPII TELECOM ET SERVICES (France, DGFIP) », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "moyenne"
+        }
+      ]
+    },
+    {
+      "nom": "DOCOON IMMO / FREEDZ",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « DOCOON.IMMO (France, DGFIP) », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "moyenne"
+        }
+      ]
+    },
+    {
+      "nom": "DOCPROCESS",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « DocProcess France / DocProcess France SASU (France, DGFIP) », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "DOKAPI",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « Dokapi / DOK-API bv (Belgique, BOSA) », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "DOXALLIA",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « DOXALLIA (France, DGFIP) », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "ecosio InterCom, a Vertex Company",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « ecosio InterCom GmbH (Allemagne) », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "EDICOM Group",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « EDICOM CAPITAL S.L. (Espagne) », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "moyenne"
+        }
+      ]
+    },
+    {
+      "nom": "EDICS France",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « EDiCS (France, DGFIP) », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "EdiEyes Vision Care",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « EdiEyes Vision Care (France, DGFIP) », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "ENERJ",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « ENERJ SAS (France, DGFIP) », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "ENTROPICS",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « Entropics (France, DGFIP) », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "ESALINK",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « ESALINK / ESALINK B2B SERVICES (France, DGFIP) », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "ESKER",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « Esker S.A. (France, DGFIP) », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "EURO INFORMATION",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « Euro-Information (France, DGFIP) », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "FACNOTE PDP",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « FACNOTE (France, DGFIP) », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "moyenne"
+        }
+      ]
+    },
+    {
+      "nom": "FIDUCIAL CLOUD",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « FIDUCIAL CLOUD (France, DGFIP) », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "Fonoa Technologies Limited",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « Fonoa Technologies Ltd (Irlande) », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "FULLL",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « fulll (France, DGFIP) », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "GENERIX Group",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « Generix Group (France, DGFIP) », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "GESTAV",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « GESTAV / Augusta Viromanduorum Numericam (France, DGFIP) », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "moyenne"
+        }
+      ]
+    },
+    {
+      "nom": "GROUPE SIGMA",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « Groupe Sigma / Sigma Informatique (France, DGFIP) », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "GURUSOFT",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « GuruSoft SL (Espagne) », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "IAF",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « IAF (France, DGFIP) », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "ICD International",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « ICD International / INTERNATIONAL COMMUNICATIONS DATA NETWORKS (France, DGFIP) », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "iEDI ApS",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « iEDI ApS (Danemark) », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "IGA ASSURANCE",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « IGA ASSURANCES (France, DGFIP) », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "moyenne"
+        }
+      ]
+    },
+    {
+      "nom": "INDICOM",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « IDC - INDICOM DOCUMENT CARE S.p.A. (Italie, AGID) », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "moyenne"
+        }
+      ]
+    },
+    {
+      "nom": "INDY",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « Indy / INDY.FR SAS (France, DGFIP) », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "INFOLOGIC",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « Infologic / Infologic Engineering (France, DGFIP) », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "In.Te.S.A. spa",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « In.Te.S.A. / In.Te.S.A. S.p.A. (Italie, AGID) », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "INVOPOP",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « Invopop / Invopop SL (Espagne) », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "IOPOLE",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « IOPOLE (France, DGFIP) », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "iPaidThat",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « iPaidThat / IPT Technologie (France, DGFIP) », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "ITESOFT",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « ITESOFT (France, DGFIP) », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "KLEKOON",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « KLEKOON (France, DGFIP) », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "KOLECTO PDP",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « Kolecto PDP (France, DGFIP) », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "LE VILLAGE CONNECTE",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « LE VILLAGE CONNECTE / COAXIS ASP (France, DGFIP) », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "Legalinvoice by Tinexta Infocert",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « Infocert S.p.A. (Italie, AGID) », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "moyenne"
+        }
+      ]
+    },
+    {
+      "nom": "LUCCA",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « Lucca (France, DGFIP) », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "LUNDI MATIN",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « LundiMatin (France, DGFIP) », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "MACOMPTA.FR",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « Macompta.fr (France, DGFIP) », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "MAROSA",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « Marosa VAT / Marosa VAT S.L. (Espagne) », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "MEDIUS",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « Medius / Expensya SAS (Medius) (France, DGFIP) », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "moyenne"
+        }
+      ]
+    },
+    {
+      "nom": "MY FITECO",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « MY FITECO / FITECO (France, DGFIP) », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "MY UNISOFT",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « MyUnisoft (France, DGFIP) », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "MySupply Aps",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « mySupply ApS (Danemark) », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "N2F PDP",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « N2JSOFT (France, DGFIP) — contact peppol@n2f.com », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "moyenne"
+        }
+      ]
+    },
+    {
+      "nom": "NTT DATA Business Solutions",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « NTT DATA Business Solutions AG (Allemagne, KoSIT) », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "ODOO",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « Odoo SA (Belgique, BOSA) », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "OfficeIn",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « OfficeIn / SAS Sylvestre (OfficeIn) (France, DGFIP) », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "ONE UP",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « OneUp (France, DGFIP) », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "OPEN BEE",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « Open Bee / Open Bee France (France, DGFIP) », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "OPENTEXT",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « OpenText / OpenText Inc. (USA) », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "PARAGON",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « Paragon Business Process Services (France, DGFIP) », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "PENNYLANE",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « PENNYLANE, SAS (France, DGFIP) », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "PITNEY BOWES",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « Pitney Bowes (France, DGFIP) », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "QONTO",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « Qonto / Olinda SAS (Qonto) (France, DGFIP) », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "QWEEBY",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « QWEEBY PDP (France, DGFIP) », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "moyenne"
+        }
+      ]
+    },
+    {
+      "nom": "SCRIBEE",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « SCRIBEE (France, DGFIP) », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "SEPTEO",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « SEPTEO (France, DGFIP) », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "SEQINO",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « SEQINO / Axe Innovation (SEQINO) (France, DGFIP) », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "SERENSIA by Quadient",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « Serensia (France, DGFIP) », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "moyenne"
+        }
+      ]
+    },
+    {
+      "nom": "SERES",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « SERES (France, DGFIP) », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "SPENDESK",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « Spendesk SAS (France, DGFIP) », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "SRCI",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « SRCI (France, DGFIP) », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "SUPER PDP",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « SUPER PDP / SUPER G (SUPER PDP) (France, DGFIP) », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "SYMTRAX",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « SYMTRAX S.A. (France, DGFIP) », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "TENOR",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « TENOR (France, DGFIP) », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "TESSI Technologies",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « TESSI TECHNOLOGIES (France, DGFIP) », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "TIIME PDP",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « TIIME PDP (France, DGFIP) », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "TRESO2",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « Pytheas Capital – TRESO2 / Pytheas Capital Advisors (TRESO2) (France, DGFIP) », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "moyenne"
+        }
+      ]
+    },
+    {
+      "nom": "TX2 Concept",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « TX2 CONCEPT (France, DGFIP) », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "VENTYA",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « Ventya SAS (France, DGFIP) », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "VERYSWING",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « VERYSWING (France, DGFIP) », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "WEPROC",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « Weproc (France, DGFIP) », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "XELYA",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « Xelya / XELYA SAS (France, DGFIP) », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "BLG",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « BLG (France, DGFIP) », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "BE FRESH S.à r.l.",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « BE FRESH S.a r.l. (Luxembourg) », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "EAGLESSOFT",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « Eaglessoft BV (Belgique, BOSA) », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "Insiders Technologies GmbH",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « Insiders Technologies GmbH (Allemagne) », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "NUMERIA",
+      "reseaux": [
+        "peppol_ap"
+      ],
+      "sourcesEnrichissement": [
+        {
+          "champ": "reseaux",
+          "source": "https://peppol.org/members/peppol-certified-service-providers/",
+          "preuve": "Ligne « NUMERIA / Microlist (NUMERIA) (France, DGFIP) », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        }
+      ]
+    }
+  ]
+}
