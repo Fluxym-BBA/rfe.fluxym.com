@@ -1,0 +1,236 @@
+{
+  "_patch": {
+    "id": "E3",
+    "chantier": "E — qualification marché",
+    "auteur": "RFE_WebSite",
+    "dateReleve": "2026-08-20",
+    "nbPlateformes": 10,
+    "note": "Référentiel relu sur GitHub Fluxym-BBA/rfe.fluxym.com@main, data/plateformes-agreees.json (247 Ko, 9161 lignes, dernier commit 9a71dee). Le fichier dépasse la fenêtre de récupération brute (~85 Ko lus, jusqu'à l'entrée ENERJ) : les noms des 10 plateformes du lot ont donc été recontrôlés caractère pour caractère sur Info IA/plateformes-agreees/LOTS-E.md (branche main), qui liste le lot E3 à l'identique. Aucun fichier du dépôt n'a été modifié. // CHOIX DE PÉRIMÈTRE : aucun champ d'identité juridique (nom hors clé de fusion, siren, raisonSociale, adresse) n'est touché (chantiers B et C). Le champ siteWeb est volontairement absent de toutes les entrées : les URL relevées figurent dans sourcesEnrichissement, pour ne pas écraser une valeur déjà arbitrée ailleurs. // CHAMPS NON RENSEIGNÉS FAUTE DE SOURCE (donc absents du patch) : segmentCible pour DOCUWARE, EDICS France, EDT, ENERJ, ENTROPICS et EURO INFORMATION (ces sites revendiquent une cible « toutes tailles » ou ne qualifient aucun segment) ; groupeCapitalistique pour DOXALLIA, Dougs Facturation gratuite, EDICS France, ENTROPICS, ESI et EdiEyes Vision Care (aucune appartenance capitalistique publiée sur le site) ; solutionsCompatiblesPartenaires pour les 10 plateformes (aucune ne publie de liste nominative de Solutions Compatibles ; les logos partenaires d'eucleia-santé sont des SVG sans libellé exploitable) ; fournisseurDeSocle pour 8 plateformes sur 10 (absence de page « devenez partenaire / marque blanche / API éditeurs » ; l'absence de preuve n'est pas une preuve d'absence, le champ est laissé intact plutôt que mis à false) ; modeDistributionSocle pour DOXALLIA, EDICS France, EDT, ENERJ, ENTROPICS, ESI et EURO INFORMATION. // DIFFICULTÉS : www.doxallia.com répond 503 « Maintenance en cours » le 20/08/2026 (page d'accueil, /qui-sommes-nous/, /nous-connaitre/) ; la qualification s'appuie sur la capture Wayback du 17/05/2026 de sa propre page « Plateforme Agréée Invox-IA », soit un contenu auto-publié par Doxallia, avec confiance dégradée à moyenne. // SIGNAUX GROSSISTE TROUVÉS (2) : EdiEyes Vision Care propose explicitement eucleia-santé en marque blanche (bouton et formulaire dédiés) ; DOXALLIA adresse nommément les Opérateurs de dématérialisation et les Éditeurs comme clients de son hub Invox-IA. // NOMS COMMERCIAUX ≠ NOM D'INSCRIPTION (4) : ENTROPICS → « ZenPA » (GED « ZenOnline »), DOXALLIA → « Invox-IA », ESI → « OpenPDP », EdiEyes Vision Care → « Eucleia PA » (ex-InvoXml) ; EURO INFORMATION expose son offre sous la marque « HBS e-factures » via sa filiale Épithète. // Rappel de cadrage repris dans chaque logiquePositionnement : « marque blanche » n'est pas une catégorie réglementaire ; chacune de ces 10 plateformes est immatriculée en son nom propre et reste seule responsable devant l'administration."
+  },
+  "plateformes": [
+    {
+      "nom": "DOCUWARE",
+      "familleOrigine": ["ged"],
+      "verticale": "generaliste",
+      "natureEntite": "extension_demat",
+      "perimetreFonctionnel": ["emission", "reception", "ereporting", "suite_gestion"],
+      "socleTechnique": {
+        "type": "propre",
+        "operateurSocle": "DocuWare",
+        "preuve": "La page PA française présente DocuWare comme fournissant lui-même « cette base technique tout en offrant les fonctionnalités complètes d'une GED » (réception des flux, conversion aux formats normés, contrôle de conformité, transmission au destinataire et à l'administration, archivage).",
+        "source": "https://start.docuware.com/fr/plateforme-agreee",
+        "confiance": "moyenne"
+      },
+      "modeDistributionSocle": ["via integrateur"],
+      "groupeCapitalistique": "Ricoh — DocuWare, fondé en Allemagne, a été racheté par Ricoh en 2019 et opère comme filiale indépendante détenue à 100 % (~800 collaborateurs, 20 000 clients, 100+ pays).",
+      "descriptionFiche": "Éditeur allemand de GED / ECM et d'automatisation de workflows documentaires, immatriculé définitivement plateforme agréée par la DGFiP. Son argumentaire PA repose sur la « double nature » de l'offre : plateforme agréée pour le cycle de vie de la facture (réception des flux, conversion Factur-X / UBL / CII, contrôle, transmission au destinataire et à l'administration, e-reporting, archivage) et GED complète pour tous les autres documents de l'entreprise (contrats, RH, qualité, juridique). Le produit est vendu exclusivement de façon indirecte, via un réseau mondial d'environ 800 partenaires (VAR, intégrateurs, revendeurs bureautiques), avec plus de 1 000 intégrations applicatives revendiquées. Filiale à 100 % de Ricoh depuis 2019.",
+      "logiquePositionnement": "Cohérent : le métier d'origine est la dématérialisation et la gestion documentaire, la PA en est le prolongement naturel côté facture. La particularité est le modèle de distribution 100 % indirect : l'entreprise cliente contracte via un partenaire DocuWare, alors que l'immatriculation reste au nom de DocuWare, seul responsable devant l'administration. Aucune offre de socle en marque blanche pour des éditeurs tiers n'est publiée : le réseau partenaire est un réseau de revente, pas un dispositif de grossiste.",
+      "sourcesEnrichissement": [
+        { "champ": "positionnement", "source": "https://start.docuware.com/fr/plateforme-agreee", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "perimetreFonctionnel", "source": "https://start.docuware.com/fr/plateforme-agreee", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "groupeCapitalistique", "source": "https://start.docuware.com/about-docuware", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "modeDistributionSocle", "source": "https://start.docuware.com/partnership-opportunities", "dateReleve": "2026-08-20", "confiance": "moyenne" }
+      ]
+    },
+    {
+      "nom": "DOXALLIA",
+      "familleOrigine": ["ged"],
+      "segmentCible": ["eti", "grands_comptes"],
+      "verticale": "generaliste",
+      "natureEntite": "extension_demat",
+      "perimetreFonctionnel": ["emission", "reception", "ereporting"],
+      "socleTechnique": {
+        "type": "propre",
+        "operateurSocle": "Doxallia (hub Invox-IA)",
+        "preuve": "Doxallia présente l'immatriculation comme confirmant « la qualité de son hub de facturation » Invox-IA, hébergé sur son propre sous-domaine invox-ia.doxallia.com.",
+        "source": "https://web.archive.org/web/20260517061013/https://www.doxallia.com/plateforme-de-facturation-electronique-pdp/",
+        "confiance": "moyenne"
+      },
+      "fournisseurDeSocle": true,
+      "descriptionFiche": "Acteur français de la gestion documentaire et de la sécurisation des données, qui commercialise sa plateforme agréée sous le nom « Invox-IA », présenté comme un HUB de facturation électronique. La cible est explicitement annoncée : ETI, grandes entreprises, mais aussi opérateurs de dématérialisation et éditeurs de logiciels. Le périmètre revendiqué couvre l'émission des factures sans passer par le portail public, la transmission des données obligatoires à l'administration fiscale, l'automatisation du traitement des factures et un portail de traçabilité et de pilotage des activités financières. Site officiel indisponible (maintenance) au moment du relevé : qualification établie sur une capture d'archive de sa propre page.",
+      "logiquePositionnement": "Cohérent : positionnement PA en prolongement direct d'un métier de dématérialisation documentaire et de traitement de flux. L'élément différenciant est l'adressage assumé des opérateurs de dématérialisation et des éditeurs, c'est-à-dire une logique de grossiste où d'autres acteurs s'appuient sur le hub Invox-IA. À rappeler : ces éditeurs restent des Solutions Compatibles non immatriculées, et c'est Doxallia, immatriculée en son nom propre, qui demeure seule responsable devant l'administration.",
+      "sourcesEnrichissement": [
+        { "champ": "positionnement", "source": "https://web.archive.org/web/20260517061013/https://www.doxallia.com/plateforme-de-facturation-electronique-pdp/", "dateReleve": "2026-08-20", "confiance": "moyenne" },
+        { "champ": "segmentCible", "source": "https://web.archive.org/web/20260517061013/https://www.doxallia.com/plateforme-de-facturation-electronique-pdp/", "dateReleve": "2026-08-20", "confiance": "moyenne" },
+        { "champ": "fournisseurDeSocle", "source": "https://web.archive.org/web/20260517061013/https://www.doxallia.com/plateforme-de-facturation-electronique-pdp/", "dateReleve": "2026-08-20", "confiance": "moyenne" },
+        { "champ": "disponibilite_site", "source": "https://www.doxallia.com/", "dateReleve": "2026-08-20", "confiance": "haute" }
+      ]
+    },
+    {
+      "nom": "Dougs Facturation gratuite",
+      "familleOrigine": ["portail_ec", "facturation_compta"],
+      "segmentCible": ["micro", "tpe_pme"],
+      "verticale": "generaliste",
+      "natureEntite": "diversification",
+      "perimetreFonctionnel": ["emission", "reception", "ereporting", "suite_gestion"],
+      "socleTechnique": {
+        "type": "inconnu",
+        "preuve": "Le site revendique « notre plateforme agréée », « plateforme agréée intégrée » au logiciel de facturation, mais ne documente ni l'opérateur du socle ni son origine technique.",
+        "source": "https://www.dougs.fr/logiciel-facturation-gratuit/",
+        "confiance": "faible"
+      },
+      "modeDistributionSocle": ["direct"],
+      "descriptionFiche": "Dougs est un cabinet d'expertise comptable en ligne qui adosse à son offre un logiciel de facturation annoncé 100 % gratuit, sans limite de volume et sans obligation d'achat (0 € HT/mois), avec plateforme agréée intégrée. La cible est explicitement les consultants, auto-entrepreneurs, freelances, professions libérales et l'ensemble des TPE et PME. Le périmètre annoncé couvre l'émission et la réception au format structuré Factur-X, la gestion du e-reporting, le traitement du cycle de vie des factures et le rapprochement automatique avec la comptabilité tenue par le cabinet. La comptabilité reste, elle, une offre payante (à partir de 79 € HT/mois).",
+      "logiquePositionnement": "Diversification cohérente mais d'une nature différente des acteurs de la dématérialisation : le métier d'origine est la tenue comptable en ligne, et la plateforme agréée sert de produit d'appel gratuit destiné à capter les micro-entreprises et TPE dans l'écosystème comptable Dougs. Le socle technique n'étant pas documenté, il n'est pas qualifié ici.",
+      "sourcesEnrichissement": [
+        { "champ": "positionnement", "source": "https://www.dougs.fr/logiciel-facturation-gratuit/", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "segmentCible", "source": "https://www.dougs.fr/logiciel-facturation-gratuit/", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "perimetreFonctionnel", "source": "https://www.dougs.fr/logiciel-facturation-gratuit/", "dateReleve": "2026-08-20", "confiance": "haute" }
+      ]
+    },
+    {
+      "nom": "EDICS France",
+      "familleOrigine": ["ged"],
+      "verticale": "generaliste",
+      "natureEntite": "extension_demat",
+      "perimetreFonctionnel": ["reception"],
+      "socleTechnique": {
+        "type": "propre",
+        "operateurSocle": "EDiCS (solution EDiCSpro)",
+        "preuve": "Le site présente « notre solution EDiCSpro » comme la plateforme de l'entreprise, avec des API pour les applications métiers, et annonce l'immatriculation PA par la DGFiP.",
+        "source": "https://edics.fr/",
+        "confiance": "moyenne"
+      },
+      "descriptionFiche": "EDiCS, fondée en 2009 et immatriculée plateforme agréée par la DGFiP (immatriculation sous réserve annoncée le 7 janvier 2025), se présente comme experte en gestion documentaire et en « logistique documentaire ». Sa solution EDiCSpro est mise en avant sur la vue d'ensemble du cycle fournisseur et l'automatisation du traitement des factures d'achat, avec des API pour les applications métiers. L'entreprise revendique une approche sur mesure pour toutes tailles de structures et s'appuie sur une entité partenaire, EDSC43, pour l'accompagnement des projets de dématérialisation. Ancrage régional Auvergne-Rhône-Alpes (membre de Digital League).",
+      "logiquePositionnement": "Cohérent : la PA prolonge une activité de dématérialisation et de gestion documentaire préexistante. Le discours public est nettement orienté cycle fournisseur / réception ; l'émission n'est pas documentée sur le site et n'a donc pas été qualifiée. Aucun dispositif de revente de socle à des éditeurs tiers n'est publié ; les « partenaires » cités relèvent du réseau d'affaires et non de Solutions Compatibles.",
+      "sourcesEnrichissement": [
+        { "champ": "positionnement", "source": "https://edics.fr/qui-sommes-nous/", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "perimetreFonctionnel", "source": "https://edics.fr/", "dateReleve": "2026-08-20", "confiance": "moyenne" },
+        { "champ": "socleTechnique", "source": "https://edics.fr/", "dateReleve": "2026-08-20", "confiance": "moyenne" }
+      ]
+    },
+    {
+      "nom": "EDT",
+      "familleOrigine": ["edi"],
+      "verticale": "generaliste",
+      "natureEntite": "extension_demat",
+      "perimetreFonctionnel": ["emission", "reception"],
+      "socleTechnique": {
+        "type": "inconnu",
+        "preuve": "EDT revendique l'édition de ses propres solutions EDI / webEDI / portail et une plateforme d'intégration iPaaS, mais ne documente pas le socle de sa plateforme agréée ; le site mentionne par ailleurs des partenariats éditeurs (IBM, OpenText, iXPath) au titre de l'intégration B2B, ce qui ne permet pas de conclure sur le socle PA.",
+        "source": "https://www.group-edt.fr/",
+        "confiance": "faible"
+      },
+      "groupeCapitalistique": "Weexa — EDT se présente systématiquement comme « EDT, a Weexa group company », groupe disposant de filiales en Asie, Europe, Afrique et Amériques (support 24/7 « follow the sun »).",
+      "descriptionFiche": "Spécialiste de la digitalisation des flux B2B depuis plus de 30 ans (EDI, webEDI, flux alternatifs, API, iPaaS, portail web), immatriculé définitivement plateforme agréée sous le numéro 0058. L'entreprise revendique 15 millions de factures dématérialisées par an, la certification ISO 27001, le statut de Peppol access provider et l'adhésion à la FNFE. L'offre PA est présentée comme un accompagnement de bout en bout de la mise en conformité 2026 (émission et réception), adossée aux métiers historiques d'intégration de flux entre ERP, applications et partenaires commerciaux. Support mondial via les filiales du groupe Weexa.",
+      "logiquePositionnement": "Très cohérent : acteur EDI historique dont la plateforme agréée prolonge trente ans de routage de flux B2B inter-entreprises. Le discours est orienté projet et volumétrie (le formulaire de diagnostic segmente jusqu'à plus de 100 000 factures par an), sans cible de taille explicitement affichée, d'où l'absence de segmentCible ici. Aucune offre de socle destinée à des éditeurs tiers n'est publiée.",
+      "sourcesEnrichissement": [
+        { "champ": "positionnement", "source": "https://www.group-edt.fr/", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "perimetreFonctionnel", "source": "https://www.group-edt.fr/facture-electronique/", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "groupeCapitalistique", "source": "https://www.group-edt.fr/edt-obtient-son-immatriculation-en-tant-que-plateforme-de-dematerialisation-partenaire/", "dateReleve": "2026-08-20", "confiance": "haute" }
+      ]
+    },
+    {
+      "nom": "ENERJ",
+      "familleOrigine": ["ged"],
+      "verticale": "generaliste",
+      "natureEntite": "extension_demat",
+      "perimetreFonctionnel": ["suite_gestion"],
+      "socleTechnique": {
+        "type": "inconnu",
+        "preuve": "EnerJ France se présente comme filiale française d'EnerJ Italia appartenant au groupe Zucchetti, sans documenter le socle technique de sa plateforme agréée.",
+        "source": "https://www.enerj.fr/",
+        "confiance": "faible"
+      },
+      "groupeCapitalistique": "Zucchetti (groupe italien), via EnerJ Italia — « EnerJ France est une filiale française d'EnerJ Italia appartenant au groupe Zucchetti ».",
+      "descriptionFiche": "EnerJ France, filiale française d'EnerJ Italia (groupe Zucchetti), est spécialisée dans le conseil et la mise en œuvre de solutions de numérisation des processus d'entreprise : e-invoicing, archivage numérique à valeur probante, GED, pilotage de workflows et dématérialisation du processus de signature. L'entreprise se déclare immatriculée plateforme agréée et pilote, et positionne son accompagnement sur la transition des entreprises françaises vers la facture électronique. Elle met en avant l'intégration avec les principaux environnements de gestion (Infor, IBM AS/400, Oracle, SAP, Microsoft, Zucchetti Infinity).",
+      "logiquePositionnement": "Cohérent : la PA prolonge une activité de dématérialisation, d'archivage probatoire et de workflow documentaire, avec l'appui d'un groupe éditeur européen déjà rompu à la facturation électronique obligatoire côté italien. Le site reste toutefois très générique sur la plateforme elle-même : ni la cible de taille, ni le détail émission / réception / e-reporting, ni le socle ne sont documentés, d'où une qualification volontairement prudente.",
+      "sourcesEnrichissement": [
+        { "champ": "positionnement", "source": "https://www.enerj.fr/", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "groupeCapitalistique", "source": "https://www.enerj.fr/", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "perimetreFonctionnel", "source": "https://www.enerj.fr/solutions/facturation-electronique", "dateReleve": "2026-08-20", "confiance": "moyenne" }
+      ]
+    },
+    {
+      "nom": "ENTROPICS",
+      "familleOrigine": ["ged"],
+      "verticale": "generaliste",
+      "natureEntite": "extension_demat",
+      "perimetreFonctionnel": ["emission", "reception", "ereporting", "suite_gestion"],
+      "socleTechnique": {
+        "type": "propre",
+        "operateurSocle": "ENTROPICS (marques ZenPA pour la plateforme agréée et ZenOnline pour la GED)",
+        "preuve": "Le parcours d'adhésion décrit l'inscription « auprès de ZenPA » avec attribution d'une adresse fiscale électronique préfixée 0225 suivie du SIREN, et la GED est commercialisée sous la marque maison ZenOnline.",
+        "source": "https://entropics.fr/adhesion-pa/",
+        "confiance": "moyenne"
+      },
+      "descriptionFiche": "ENTROPICS se présente comme un acteur de la plateforme agréée, de la GED et de l'expertise documentaire. Son offre s'articule en quatre entrées : GED et portail documentaire (ZenOnline), workflows et validations, facturation électronique, IA documentaire et intégrations par API. La plateforme agréée est commercialisée sous le nom ZenPA, avec attribution d'une adresse fiscale électronique par SIREN (préfixe 0225). Le site propose un parcours de qualification en ligne à partir du SIREN, couvrant réception 2026, émission 2027, e-reporting, flux B2C et internationaux, et flux publics via Chorus Pro.",
+      "logiquePositionnement": "Cohérent : éditeur GED et workflow documentaire dont la PA prolonge le traitement des flux de factures, avec une identité produit distincte (ZenPA) de la raison sociale d'inscription. Le parcours de diagnostic couvre tous les profils, de la franchise en base de TVA aux entreprises de plus de 5 000 salariés, sans cible de taille affichée : segmentCible n'est donc pas qualifié.",
+      "sourcesEnrichissement": [
+        { "champ": "positionnement", "source": "https://entropics.fr/", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "perimetreFonctionnel", "source": "https://entropics.fr/adhesion-pa/", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "socleTechnique", "source": "https://entropics.fr/adhesion-pa/", "dateReleve": "2026-08-20", "confiance": "moyenne" }
+      ]
+    },
+    {
+      "nom": "ESI",
+      "familleOrigine": ["ged"],
+      "segmentCible": ["eti", "grands_comptes", "public"],
+      "verticale": "generaliste",
+      "natureEntite": "extension_demat",
+      "perimetreFonctionnel": ["emission"],
+      "socleTechnique": {
+        "type": "propre",
+        "operateurSocle": "ESI (plateforme OpenPDP)",
+        "preuve": "ESI annonce son immatriculation (numéro 76) et présente « notre nouvelle plateforme OpenPDP » ; l'entreprise revendique la maîtrise de l'intégralité de la chaîne documentaire et l'exploitation de ses propres centres de production de Lyon et Dijon.",
+        "source": "https://www.esi-groupe.com/",
+        "confiance": "moyenne"
+      },
+      "descriptionFiche": "ESI intervient depuis plus de 30 ans sur la création, la diffusion et l'archivage des documents stratégiques de ses clients : dématérialisation fiscale, éditique industrielle noir et couleur, mise sous pli et affranchissement, archivage légal à valeur fiscale. L'entreprise, d'une cinquantaine de collaborateurs et plus de 500 clients, exploite ses propres centres de production à Lyon et Dijon. Son immatriculation (numéro 76) est mise en avant avec la plateforme OpenPDP, positionnée d'abord sur l'envoi de factures dématérialisées au format Factur-X. Ses secteurs clients affichés : négoce, industrie, administrations, laboratoires pharmaceutiques et d'analyses, mutuelles, caisses de retraite, banques, assurances.",
+      "logiquePositionnement": "Cohérent : opérateur d'éditique et de dématérialisation fiscale dont la plateforme agréée prolonge une chaîne documentaire déjà industrielle. Le positionnement affiché est majoritairement émetteur (OpenPDP présentée pour envoyer les factures) ; la réception n'est pas documentée et n'a pas été qualifiée. Le segment est déduit des secteurs clients publiés (banques, assurances, mutuelles, caisses de retraite, administrations, laboratoires) et de la volumétrie éditique, d'où une confiance moyenne.",
+      "sourcesEnrichissement": [
+        { "champ": "positionnement", "source": "https://www.esi-groupe.com/", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "descriptionFiche", "source": "https://www.esi-groupe.com/Apropos", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "segmentCible", "source": "https://www.esi-groupe.com/", "dateReleve": "2026-08-20", "confiance": "moyenne" }
+      ]
+    },
+    {
+      "nom": "EURO INFORMATION",
+      "familleOrigine": ["fintech"],
+      "verticale": "generaliste",
+      "natureEntite": "extension_demat",
+      "perimetreFonctionnel": ["emission", "reception", "ereporting", "suite_gestion"],
+      "socleTechnique": {
+        "type": "propre",
+        "operateurSocle": "Euro-Information",
+        "preuve": "Euro-Information revendique la réalisation en interne des développements informatiques, la gestion intégrale de sa production informatique et la propriété en propre de ses datacenters en France (redondants, certifiés Tier IV), avec certifications ISO 9001, ISO 27001 et NF461 (archivage à valeur probante des dossiers de factures électroniques).",
+        "source": "https://www.epithete.com/fr/pdp-euro-information.html",
+        "confiance": "haute"
+      },
+      "groupeCapitalistique": "Crédit Mutuel Alliance Fédérale — Euro-Information est sa filiale technologique depuis 1978 ; elle gère le système d'information de 16 groupes de Crédit Mutuel, de toutes les banques CIC et des filiales du groupe, avec environ 7 000 développeurs (internes et externes).",
+      "descriptionFiche": "Euro-Information, filiale technologique du Crédit Mutuel Alliance Fédérale depuis 1978, est immatriculée plateforme agréée. L'offre est exposée aux clients sous la marque « HBS e-factures » de sa filiale Épithète, distribuée par les réseaux Crédit Mutuel et CIC, et annoncée sans frais supplémentaires pour les utilisateurs de la gamme. Antériorité revendiquée : émission de factures au format Factur-X depuis 2018, intégration des factures fournisseurs en Factur-X, CII et UBL depuis 2019, piste d'audit fiable native et dossier facture scellé. L'immatriculation sert aussi les besoins propres du groupe : banques, fédérations et filiales, dont les factors et Épithète. Infrastructure et archivage internes (datacenters Tier IV en France, ISO 9001, ISO 27001, NF461, ISAE 3402).",
+      "logiquePositionnement": "Cohérent, avec une logique captive assumée : la PA répond d'abord aux besoins du groupe bancaire et de ses filiales, puis aux clients professionnels, associations et entreprises des réseaux Crédit Mutuel et CIC. C'est une extension d'une pratique de facture électronique déjà en production depuis 2018, adossée à une informatique et à des datacenters détenus en propre, et non une entité créée pour la réforme. Aucune revente du socle à des éditeurs tiers n'est publiée : la mutualisation annoncée est intra-groupe.",
+      "sourcesEnrichissement": [
+        { "champ": "positionnement", "source": "https://www.epithete.com/fr/pdp-euro-information.html", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "groupeCapitalistique", "source": "https://www.epithete.com/fr/pdp-euro-information.html", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "socleTechnique", "source": "https://www.epithete.com/fr/pdp-euro-information.html", "dateReleve": "2026-08-20", "confiance": "haute" }
+      ]
+    },
+    {
+      "nom": "EdiEyes Vision Care",
+      "familleOrigine": ["edi"],
+      "segmentCible": ["tpe_pme", "eti"],
+      "verticale": "optique",
+      "natureEntite": "extension_demat",
+      "perimetreFonctionnel": ["emission", "reception"],
+      "socleTechnique": {
+        "type": "propre",
+        "operateurSocle": "EdiEyes Vision Care (solution Eucleia PA, ex-InvoXml)",
+        "preuve": "« EdiEyes a spécialement développé Eucleia PA, une solution complète de facturation électronique pensée pour les opticiens et les audioprothésistes », certifiée HDS ; InvoXml, la version précédente, est qualifiée par GS1 depuis 2014 pour la dématérialisation des factures EDI.",
+        "source": "https://www.edieyes.fr/eucleia-facturation-electronique-pour-les-opticiens/",
+        "confiance": "haute"
+      },
+      "fournisseurDeSocle": true,
+      "modeDistributionSocle": ["direct", "marque_blanche"],
+      "descriptionFiche": "EdiEyes Vision Care accompagne depuis 25 ans les acteurs de l'optique dans la dématérialisation de leurs factures, d'abord avec InvoXml (qualifié GS1 depuis 2014 pour les factures EDI) puis avec eucleia-santé et la solution Eucleia PA, conçue pour les opticiens et les audioprothésistes et certifiée HDS. Les trois profils adressés sont explicites : opticiens, enseignes et groupements, fournisseurs, avec un annuaire des opticiens permettant aux fournisseurs de déposer directement leurs factures. La solution est interfacée avec Chorus Pro et s'appuie sur un partenariat avec Digiposte (La Poste) pour le coffre-fort numérique en environnement HDS. Mise en œuvre annoncée de l'API AFNOR XP Z12-013 publiée en février 2026.",
+      "logiquePositionnement": "Très cohérent et fortement différenciant : EDI sectoriel de l'optique devenu plateforme agréée sur sa propre filière, avec une conformité santé (HDS) que peu d'acteurs généralistes portent. Deuxième point rare : eucleia-santé est explicitement proposée en marque blanche, avec bouton et formulaire dédiés, ce qui en fait un fournisseur de socle pour des tiers de la filière (enseignes, groupements, éditeurs métier). Rappel : la marque blanche n'est pas une catégorie réglementaire ; EdiEyes Vision Care est immatriculée en son nom propre et reste seule responsable devant l'administration, les tiers distribuant son socle demeurant des Solutions Compatibles non immatriculées.",
+      "sourcesEnrichissement": [
+        { "champ": "positionnement", "source": "https://eucleia-sante.fr/", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "verticale", "source": "https://www.edieyes.fr/eucleia-facturation-electronique-pour-les-opticiens/", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "segmentCible", "source": "https://eucleia-sante.fr/", "dateReleve": "2026-08-20", "confiance": "moyenne" },
+        { "champ": "fournisseurDeSocle", "source": "https://eucleia-sante.fr/contact-en-marque-blanche", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "perimetreFonctionnel", "source": "https://eucleia-sante.fr/", "dateReleve": "2026-08-20", "confiance": "haute" }
+      ]
+    }
+  ]
+}
