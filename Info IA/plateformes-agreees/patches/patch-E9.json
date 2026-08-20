@@ -1,0 +1,276 @@
+{
+  "_patch": {
+    "id": "E9",
+    "chantier": "E — qualification marché",
+    "auteur": "RFE_WebSite",
+    "dateReleve": "2026-08-20",
+    "nbPlateformes": 4,
+    "note": "Lot E9 (4 plateformes). Referentiel relu sur GitHub Fluxym-BBA/rfe.fluxym.com, branche main, fichier data/plateformes-agreees.json. RESERVE DE LECTURE : la recuperation du fichier brut a ete tronquee par la limite de taille de l'outil de fetch (lecture effective interrompue vers l'entree ENERJ) ; les quatre valeurs de la cle de fusion nom ont donc ete reprises caractere pour caractere depuis Info IA/plateformes-agreees/LOTS-E.md (WEPROC, XELYA, iPaidThat, jefacture.com) et restent a controler visuellement avant fusion. Identite juridique volontairement non touchee (chantiers B et C). CHAMPS NON RENSEIGNES, faute de source publiee : WEPROC - groupeCapitalistique (WeInvoice est une marque de Weproc, aucun groupe d'appartenance publie). XELYA - verticale : aucune valeur de la taxonomie ne correspond ; l'activite est multi-verticale (services a la personne et services autonomie, medico-social, cabinets d'avocats, cabinets d'experts-comptables, conseils departementaux) et la communication PA porte sur le medico-social ; une valeur services_domicile / medico_social manque dans data/pa-taxonomie.json. XELYA - fournisseurDeSocle, solutionsCompatiblesPartenaires, groupeCapitalistique : aucune page partenaires ni offre pour editeurs tiers trouvee ; xelya.com ne comporte aucune page dediee a la Plateforme Agreee, la seule communication produit est portee par ximi.fr. iPaidThat - fournisseurDeSocle, solutionsCompatiblesPartenaires, groupeCapitalistique : la mention \"plus de 200 partenaires nous font confiance\" affichee sur la page PA n'est pas explicitee (probablement des cabinets d'expertise comptable) et n'a pas ete retenue comme preuve d'un role de grossiste. iPaidThat - le site www.ipaidthat.io a renvoye une erreur 500 sur deux URL ; le contenu a ete releve sur ipaidthat.io et app.ipaidthat.io, accessibles. socleTechnique laisse a inconnu pour XELYA et iPaidThat : aucune des deux ne documente son socle, et rien ne permet de conclure ni au socle propre ni a un socle tiers. PRECISION SUR WEPROC : les valeurs de solutionsCompatiblesPartenaires (Stripe, GoCardless, Adyen) sont des integrations publiees sur weinvoice.fr, pas une liste de Solutions Compatibles declarees comme telle ; Shopify, WooCommerce et HubSpot sont annonces \"en preparation\" et n'ont pas ete retenus. SIGNAUX GROSSISTE CONFIRMES sur ce lot, a ajouter a la liste du brief : jefacture.com (page devenir partenaire, offre en marque grise, API gratuites pour partenaires techniques, 16 logos partenaires publies plus 2 temoignages d'editeurs) et WEPROC / WeInvoice (API REST publique OpenAPI 3.1, SDK, sandbox, co-branding facture au document). NOMS COMMERCIAUX DIFFERENTS DU NOM D'INSCRIPTION : l'inscription WEPROC correspond au service \"WeInvoice by Weproc\" (weinvoice.fr, PA n0104 revendiquee) ; l'inscription XELYA correspond au service \"PA Xelya\" integre dans les logiciels metiers du groupe, dont Ximi. Numeros d'immatriculation revendiques par les sites et non verifies ici contre la liste DGFiP : WeInvoice PA n0104, jefacture.com n0055."
+  },
+  "plateformes": [
+    {
+      "nom": "WEPROC",
+      "siteWeb": "https://www.weproc.com/",
+      "familleOrigine": [
+        "s2p"
+      ],
+      "segmentCible": [
+        "micro",
+        "tpe_pme",
+        "eti"
+      ],
+      "verticale": "generaliste",
+      "natureEntite": "extension_demat",
+      "perimetreFonctionnel": [
+        "emission",
+        "reception",
+        "ereporting",
+        "suite_gestion"
+      ],
+      "socleTechnique": {
+        "type": "propre",
+        "operateurSocle": "Weproc (marque WeInvoice)",
+        "preuve": "Weproc opere sa propre Plateforme Agreee sous la marque WeInvoice (PA n0104 revendiquee sur le site), avec API REST publique documentee (OpenAPI 3.1), SDK Node.js/Python/PHP/Java/.NET et sandbox de test ; aucun operateur tiers n'est mentionne comme socle.",
+        "source": "https://weinvoice.fr/ ; https://weinvoice.fr/tarifs",
+        "confiance": "moyenne"
+      },
+      "fournisseurDeSocle": true,
+      "modeDistributionSocle": [
+        "direct",
+        "marque_grise",
+        "API/embedded"
+      ],
+      "solutionsCompatiblesPartenaires": [
+        "Stripe",
+        "GoCardless",
+        "Adyen"
+      ],
+      "descriptionFiche": "Editeur du logiciel d'achats (Procure-to-Pay) Weproc, dont l'offre couvre demande d'achat, commande, reception, workflow de validation et rapprochement 2-way/3-way des factures fournisseurs. La Plateforme Agreee est commercialisee sous une marque distincte, WeInvoice (\"by Weproc\", PA n0104 revendiquee), avec trois modes d'acces publies : PA Interface (SaaS libre-service, gratuit jusqu'a 15 documents/mois), PA Weproc (PA incluse sans surcout dans l'abonnement Procure-to-Pay) et PA Connect (API REST publique pour ESN, ERP metier et editeurs SaaS). Formats annonces : Factur-X, UBL 2.1 et CII (EN 16931), avec routage via l'annuaire, interconnexion PPF/Chorus Pro et e-reporting. Tarification publique affichee (0 EUR / 29 EUR / 39 EUR par mois, puis devis ; PA Connect a 200 EUR/mois d'abonnement plateforme plus un cout au document).",
+      "logiquePositionnement": "Positionnement coherent avec le metier d'origine : Weproc traitait deja la facture fournisseur (reception, controle, rapprochement) dans son cycle achats, et prolonge cette chaine vers l'emission, la reception normee et l'e-reporting. L'element notable est la strategie de grossiste assumee : WeInvoice publie une API pour editeurs et une offre en co-branding (personnalisation logo et couleurs, mention de la PA en pied de page), ce qui la place dans la categorie des plateformes qui equipent d'autres editeurs en plus de leurs propres clients. Rappel : cette offre reste un montage commercial ; WeInvoice est immatriculee en son nom propre et demeure seule responsable devant l'administration.",
+      "sourcesEnrichissement": [
+        {
+          "champ": "positionnement, perimetreFonctionnel, socleTechnique",
+          "source": "https://weinvoice.fr/",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        },
+        {
+          "champ": "modeDistributionSocle, fournisseurDeSocle, tarification",
+          "source": "https://weinvoice.fr/tarifs",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        },
+        {
+          "champ": "familleOrigine, natureEntite",
+          "source": "https://www.weproc.com/fr/facture-electronique/",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        },
+        {
+          "champ": "integration ERP, routage, e-reporting",
+          "source": "https://www.weproc.com/fr/pa-connect/",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        },
+        {
+          "champ": "solutionsCompatiblesPartenaires (integrations publiees)",
+          "source": "https://weinvoice.fr/",
+          "dateReleve": "2026-08-20",
+          "confiance": "moyenne"
+        }
+      ]
+    },
+    {
+      "nom": "XELYA",
+      "siteWeb": "https://www.xelya.com/",
+      "familleOrigine": [
+        "erp"
+      ],
+      "segmentCible": [
+        "tpe_pme"
+      ],
+      "natureEntite": "diversification",
+      "perimetreFonctionnel": [
+        "emission",
+        "reception",
+        "ereporting",
+        "suite_gestion"
+      ],
+      "socleTechnique": {
+        "type": "inconnu",
+        "preuve": "Aucune page dediee a la Plateforme Agreee sur xelya.com ; la seule communication produit trouvee est portee par le site du logiciel Ximi, qui annonce une \"PA Xelya\" integree nativement, sans indiquer si le socle technique est developpe en interne ou fourni par un tiers.",
+        "source": "https://www.ximi.fr/facturation-electronique/",
+        "confiance": "faible"
+      },
+      "modeDistributionSocle": [
+        "direct"
+      ],
+      "descriptionFiche": "Editeur de logiciels metiers en SaaS, egalement organisme de formation et societe de conseil (SAS, marques deposees Xelya, Ximi, Diapaz, Ozmo, Anomia, Amaltia, Domiphone). Le portefeuille est organise par metier : Ximi pour les structures de services a la personne et services autonomie, Diapaz pour les cabinets d'avocats, Ozmo pour les cabinets d'experts-comptables, Domiphone pour les conseils departementaux. La Plateforme Agreee est commercialisee sous le nom \"PA Xelya\" et presentee comme integree nativement dans le logiciel metier, gratuite et sans limitation de volume pour les clients Ximi, sans connecteur tiers. L'offre met en avant des specificites sectorielles du medico-social : routage multi-financeurs (CPAM, mutuelles, caisses de retraite, conseils departementaux), connexion Chorus Pro pour les flux APA/PCH, gestion multi-taux de TVA et e-reporting du reste a charge facture aux beneficiaires. L'accompagnement au projet est porte par la marque de conseil Amaltia.",
+      "logiquePositionnement": "Diversification depuis l'edition de logiciels metiers verticaux : Xelya n'avait pas de metier de dematerialisation prealable et devient PA pour securiser sa base installee, en integrant la conformite dans la licence existante plutot qu'en la vendant separement. La coherence est forte cote usage metier, la PA absorbant des complexites propres au secteur (multi-financeurs, TVA mixte, frontiere e-invoicing / e-reporting, Chorus Pro). Aucune offre publiee a destination d'editeurs tiers n'a ete trouvee : le socle semble servir exclusivement les logiciels du groupe, mais cette absence de publication n'est pas une preuve d'absence.",
+      "sourcesEnrichissement": [
+        {
+          "champ": "familleOrigine, portefeuille produits, verticales",
+          "source": "https://www.xelya.com/nos-activites/",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        },
+        {
+          "champ": "perimetreFonctionnel, positionnement PA, modeDistributionSocle",
+          "source": "https://www.ximi.fr/facturation-electronique/",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        },
+        {
+          "champ": "natureEntite",
+          "source": "https://www.xelya.com/nos-activites/",
+          "dateReleve": "2026-08-20",
+          "confiance": "moyenne"
+        },
+        {
+          "champ": "socleTechnique",
+          "source": "https://www.ximi.fr/facturation-electronique/",
+          "dateReleve": "2026-08-20",
+          "confiance": "faible"
+        }
+      ]
+    },
+    {
+      "nom": "iPaidThat",
+      "siteWeb": "https://ipaidthat.io/",
+      "familleOrigine": [
+        "facturation_compta",
+        "fintech"
+      ],
+      "segmentCible": [
+        "micro",
+        "tpe_pme"
+      ],
+      "verticale": "generaliste",
+      "natureEntite": "extension_demat",
+      "perimetreFonctionnel": [
+        "emission",
+        "reception",
+        "ereporting",
+        "suite_gestion"
+      ],
+      "socleTechnique": {
+        "type": "inconnu",
+        "preuve": "Le site revendique \"notre Plateforme Agreee\" et une immatriculation officielle par la DGFiP, mais ne documente ni socle developpe en interne ni operateur tiers ; aucune page technique ou API n'est publiee.",
+        "source": "https://app.ipaidthat.io/fr/facturation-electronique-pdp/",
+        "confiance": "faible"
+      },
+      "modeDistributionSocle": [
+        "direct"
+      ],
+      "descriptionFiche": "Solution SaaS de gestion financiere et de pre-comptabilite pour independants, TPE et PME : collecte automatique des factures d'achat (boite e-mail, sites fournisseurs, OCR), rapprochement bancaire automatise, detection des pieces manquantes, paiement des fournisseurs, notes de frais et indemnites kilometriques, devis et factures de vente, previsionnel de tresorerie. La Plateforme Agreee est presentee comme un module de cette suite : reception centralisee des factures fournisseurs avec suivi des statuts, emission de factures electroniques normees et e-reporting propose selon trois modalites (selection des factures non electroniques presentes dans l'outil, import d'un fichier Excel pre-formate, saisie manuelle). Le site annonce une immatriculation definitive obtenue aupres de la DGFiP. Integrations citees : Stripe, CRM, Prestashop, MEG.",
+      "logiquePositionnement": "Extension logique d'un metier de dematerialisation deja exerce : iPaidThat collectait, numerisait et exploitait des factures avant la reforme, la PA prolonge cette chaine en la rendant conforme, en amont (emission) et en aval (e-reporting). Le positionnement reste celui d'un outil de gestion destine au dirigeant de petite structure et a son expert-comptable, la conformite etant un argument d'usage plus qu'un produit vendu separement. Aucune offre a destination d'editeurs tiers n'a ete identifiee ; la mention \"plus de 200 partenaires\" affichee sur le site n'est pas explicitee et n'a pas ete retenue comme preuve d'un role de grossiste.",
+      "sourcesEnrichissement": [
+        {
+          "champ": "familleOrigine, segmentCible, perimetre suite de gestion",
+          "source": "https://ipaidthat.io/",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        },
+        {
+          "champ": "perimetreFonctionnel PA, ereporting, immatriculation revendiquee",
+          "source": "https://app.ipaidthat.io/fr/facturation-electronique-pdp/",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        },
+        {
+          "champ": "emission, personnalisation, integrations",
+          "source": "https://app.ipaidthat.io/fr/vente-et-facturation-electronique/",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        },
+        {
+          "champ": "socleTechnique",
+          "source": "https://app.ipaidthat.io/fr/facturation-electronique-pdp/",
+          "dateReleve": "2026-08-20",
+          "confiance": "faible"
+        }
+      ]
+    },
+    {
+      "nom": "jefacture.com",
+      "siteWeb": "https://www.jefacture.com/",
+      "familleOrigine": [
+        "portail_ec"
+      ],
+      "segmentCible": [
+        "micro",
+        "tpe_pme"
+      ],
+      "verticale": "generaliste",
+      "natureEntite": "extension_demat",
+      "perimetreFonctionnel": [
+        "emission",
+        "reception",
+        "ereporting",
+        "suite_gestion"
+      ],
+      "socleTechnique": {
+        "type": "propre",
+        "operateurSocle": "ECMA",
+        "preuve": "Plateforme presentee comme operationnelle depuis 2020 et exploitee par ECMA, qui expose ses propres API aux editeurs partenaires (\"API First\", cellule editeur dediee, comite partenaires) et commercialise son socle en marque grise ; les tiers cites le sont sur des briques peripheriques (archivage chez Orange Business Services, paiement via Banqup), pas comme socle de la PA.",
+        "source": "https://ecma-solutions.com/partenaires/jefacture ; https://ecma-solutions.com/produits-expert-comptable/jefacture",
+        "confiance": "moyenne"
+      },
+      "fournisseurDeSocle": true,
+      "modeDistributionSocle": [
+        "marque_grise",
+        "API/embedded",
+        "via cabinet EC"
+      ],
+      "solutionsCompatiblesPartenaires": [
+        "Abymap",
+        "ACD",
+        "Cote Flux",
+        "Dext",
+        "EBP",
+        "effiz",
+        "Gestimum",
+        "iDocus",
+        "INGE-COM",
+        "MyCompanyFiles",
+        "MyUnisoft",
+        "NETexcom",
+        "RCA",
+        "Si Expertise",
+        "Tempolia",
+        "Welyb",
+        "transferFACT",
+        "Evoliz"
+      ],
+      "groupeCapitalistique": "ECMA, editeur des services numeriques de la profession comptable (jedeclare.com, jesignexpert.com, jefacture.com, conformexpert.com, jedataviz.com) ; taille du groupe non publiee sur le site",
+      "descriptionFiche": "Plateforme Agreee de la profession comptable, editee par ECMA et presentee comme la PA \"des experts-comptables et de leurs 3 millions de clients entreprises\" (immatriculation n0055 revendiquee sur le site, plateforme annoncee operationnelle depuis 2020). Fonctionnellement : creation de factures, collecte multi-canal (e-mail, collecteurs marchands, API, photo, chargement manuel, Chorus Pro, autres plateformes privees), OCR et video-codage, controles legaux et de coherence, transformation en Factur-X, scellement avec le cachet de l'Ordre des experts-comptables, distribution (e-mail avec bouton de paiement, Chorus Pro, autre dossier jefacture.com), reglement des factures d'achat via Banqup et archivage 10 ans en France chez Orange Business Services. Le modele de distribution passe par le cabinet d'expertise comptable, qui reste au coeur des flux de son client.",
+      "logiquePositionnement": "Positionnement tres coherent : ECMA operait deja les portails de dematerialisation de la profession (declarations via jedeclare.com, signature electronique via jesignexpert.com) et prolonge cet ecosysteme avec une PA dediee au meme canal de distribution, le cabinet. C'est aussi l'un des rares acteurs a assumer publiquement un role de grossiste : page \"devenir partenaire\" explicite, offre de la PA en marque grise sans frais de mise en place et paiement a l'usage, API gratuites pour les partenaires techniques, comite partenaires et cellule editeur, avec une liste de partenaires publiee (section signalee \"en cours de mise a jour\" sur le site). A rappeler : la marque grise n'est pas une categorie reglementaire ; jefacture.com est immatriculee en son nom propre et reste seule responsable devant l'administration, les logiciels partenaires restant des Solutions Compatibles non immatriculees.",
+      "sourcesEnrichissement": [
+        {
+          "champ": "positionnement, perimetreFonctionnel, groupeCapitalistique",
+          "source": "https://ecma-solutions.com/produits-expert-comptable/jefacture",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        },
+        {
+          "champ": "fournisseurDeSocle, modeDistributionSocle, solutionsCompatiblesPartenaires",
+          "source": "https://ecma-solutions.com/partenaires/jefacture",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        },
+        {
+          "champ": "familleOrigine, natureEntite",
+          "source": "https://www.jefacture.com/",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        },
+        {
+          "champ": "socleTechnique",
+          "source": "https://ecma-solutions.com/partenaires/jefacture",
+          "dateReleve": "2026-08-20",
+          "confiance": "moyenne"
+        }
+      ]
+    }
+  ]
+}
