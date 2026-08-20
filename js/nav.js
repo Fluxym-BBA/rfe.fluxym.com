@@ -2,8 +2,17 @@
  * NAV.JS — Re·Form·E — Navigation + Footer + Scroll Spy
  * Le badge de référentiel est alimenté par data/referentiel.json (source unique).
  */
+/* Pages de detail sans entree propre dans le menu : elles activent l'entree de leur page mere. */
+const PAGES_FILLES = {
+    'pa-detail.html': 'plateformes-agreees.html',
+    'cas-detail.html': 'cas-usage.html'
+};
+
 const SiteNav = {
-    currentPage: window.location.pathname.split('/').pop() || 'index.html',
+    currentPage: (() => {
+        const p = window.location.pathname.split('/').pop() || 'index.html';
+        return PAGES_FILLES[p] || p;
+    })(),
 
     init() {
         this.renderNav();
@@ -41,6 +50,7 @@ const SiteNav = {
                     <a href="#" class="nav-link nav-link--dropdown">Écosystème <span class="nav-arrow">▾</span></a>
                     <ul class="nav-submenu">
                         <li><a href="./acteurs.html">👥 Les acteurs</a></li>
+                        <li><a href="./plateformes-agreees.html">📇 Les plateformes agréées</a></li>
                         <li><a href="./e-invoicing.html">📨 E-invoicing</a></li>
                         <li><a href="./e-reporting.html">📊 E-reporting</a></li>
                         <li><a href="./chorus-pro.html">🏛️ Chorus Pro</a></li>
@@ -85,7 +95,6 @@ const SiteNav = {
                         <li><a href="./outils.html">🧰 Tous les outils</a></li>
                         <li><a href="./generateur.html">🧪 Générateur UBL</a></li>
                         <li><a href="./transcodification.html">🧭 Matrice de transcodification</a></li>
-                        <li><a href="./validateur.html">🔍 Validateur XSD & Schematron</a></li>
                     </ul>
                 </li>
             </ul>
@@ -118,6 +127,7 @@ const SiteNav = {
                         <h4>Écosystème</h4>
                         <ul>
                             <li><a href="./acteurs.html">Les acteurs</a></li>
+                            <li><a href="./plateformes-agreees.html">Les plateformes agréées</a></li>
                             <li><a href="./e-invoicing.html">E-invoicing</a></li>
                             <li><a href="./e-reporting.html">E-reporting</a></li>
                             <li><a href="./chorus-pro.html">Chorus Pro</a></li>
@@ -154,7 +164,6 @@ const SiteNav = {
                             <li><a href="./outils.html">🧰 Les outils</a></li>
                             <li><a href="./generateur.html">🧪 Générateur UBL</a></li>
                             <li><a href="./transcodification.html">🧭 Matrice de transcodification</a></li>
-                            <li><a href="./validateur.html">🔍 Validateur XSD & Schematron</a></li>
                         </ul>
                     </div>
                     <div class="footer-col">
