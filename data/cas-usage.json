@@ -1,8 +1,8 @@
 {
   "meta": {
-    "version": "1.0",
+    "version": "1.1",
     "lastUpdate": "2026-08-19",
-    "source": "FNFE-MPE — Cas listés au 31/10/2025",
+    "source": "AFNOR XP Z12-014 Annexe A V1.4 — 44 cas d'usage (49 entrées) + variantes du cas nominal",
     "baseActors": ["Vendeur", "PA-E", "PPF", "PA-R", "Acheteur"]
   },
   "categories": {
@@ -17,7 +17,8 @@
     "acompte":       { "label": "Acompte & Escompte",   "icon": "💰", "color": "amber" },
     "b2c":           { "label": "Cas B2C spéciaux",     "icon": "👤", "color": "lime" },
     "special":       { "label": "Cas spécifiques",      "icon": "⭐", "color": "gray" },
-    "horschamp":     { "label": "Hors champ",           "icon": "🚫", "color": "gray" }
+    "horschamp":     { "label": "Hors champ",           "icon": "🚫", "color": "gray" },
+    "international": { "label": "International & Outre-mer", "icon": "🌍", "color": "blue" }
   },
   "cases": [
     {
@@ -1512,6 +1513,139 @@
       "btFields": [],
       "statuses": [],
       "relatedCases": ["cas-30"]
+    },
+    {
+      "id": "cas-43",
+      "num": "43",
+      "title": "E-reporting B2B international",
+      "subtitle": "Ventes, acquisitions et encaissements avec des opérateurs étrangers : flux 10.1 et 10.2, hors e-invoicing.",
+      "category": "international",
+      "tags": ["international", "e-reporting", "flux-10", "intracommunautaire", "export"],
+      "complexity": 3,
+      "inScope": true,
+      "principle": "<p>Les opérations B2B avec un opérateur <strong>étranger</strong> sont <strong>hors du champ du e-invoicing</strong> : aucune facture ne transite par le PPF. En contrepartie, elles doivent être déclarées en <strong>e-reporting de transactions (flux 10.1)</strong>, et parfois en <strong>e-reporting de paiement (flux 10.2)</strong>.</p><p>Trois catégories de TVA structurent le cas : <strong>K</strong> pour une livraison intracommunautaire, <strong>AE</strong> pour une opération autoliquidée par le preneur, <strong>G</strong> pour une exportation hors UE. ⚠️ Les <strong>importations de biens hors UE</strong> sont <strong>exclues</strong> du e-reporting : le dédouanement en tient lieu.</p>",
+      "actors": ["Vendeur FR", "PA-E", "PPF", "Acheteur étranger"],
+      "steps": [
+        {"f": 0, "t": 3, "l": "Facture B2B internationale (hors PPF)", "c": "doc"},
+        {"f": 0, "t": 1, "l": "Flux 10.1 — e-reporting de transaction", "c": "flux"},
+        {"f": 1, "t": 2, "l": "Contrôle et transmission au CdD", "c": "flux"},
+        {"f": 0, "t": 1, "l": "Flux 10.2 — e-reporting de paiement", "c": "flux"},
+        {"f": 3, "t": 0, "l": "Autoliquidation par le preneur", "c": "info"}
+      ],
+      "attentionPoints": [
+        "Ne <strong>jamais</strong> émettre de flux 1 pour une facture B2B internationale : c'est du e-reporting pur",
+        "Les <strong>importations de biens hors UE</strong> sont <strong>exclues</strong> du e-reporting",
+        "Le montant de TVA du flux 10.1 doit être exprimé en <strong>EUR</strong>, même si la facture est en devise",
+        "Pas de flux 10.2 dès que la TVA est due par le preneur (art. 290 A du CGI)",
+        "Catégories de TVA : <strong>K</strong> livraison intracommunautaire, <strong>AE</strong> autoliquidation, <strong>G</strong> exportation"
+      ],
+      "btFields": [
+        {"bt": "BT-118 / BT-151", "name": "Catégorie de TVA", "note": "K (LIC), AE (autoliquidation) ou G (export)"},
+        {"bt": "BT-121", "name": "Code d'exonération", "note": "VATEX-EU-IC, VATEX-EU-AE ou VATEX-EU-G"},
+        {"bt": "BT-40 / BT-55", "name": "Codes pays des parties", "note": "Code ISO réel du vendeur et de l'acheteur"},
+        {"bt": "BT-6", "name": "Devise de la TVA", "note": "Le flux 10.1 exige une TVA en EUR"}
+      ],
+      "statuses": [],
+      "relatedCases": ["cas-43a", "cas-43b", "cas-44", "cas-42"]
+    },
+    {
+      "id": "cas-43a",
+      "num": "43a",
+      "title": "Opérations triangulaires intra-UE",
+      "subtitle": "Trois opérateurs UE, livraison directe A → C : la simplification de l'article 141 et ses effets sur le e-reporting.",
+      "category": "international",
+      "tags": ["international", "triangulaire", "article-141", "autoliquidation", "flux-10"],
+      "complexity": 3,
+      "inScope": true,
+      "principle": "<p>A (pays UE-A) vend à B (pays UE-B) qui revend à C (pays UE-C), mais le bien est livré <strong>directement de A à C</strong>. La simplification de l'<strong>article 141 de la directive 2006/112/CE</strong> évite à B de s'immatriculer dans le pays de C.</p><p>L'obligation française dépend de la position de l'opérateur français : <strong>A en France</strong> → e-reporting de vente, catégorie K · <strong>C en France</strong> → e-reporting d'acquisition, catégorie AE · <strong>B en France</strong> → ⚠️ <strong>aucun e-reporting</strong>, ni à l'achat ni à la vente.</p>",
+      "actors": ["Vendeur A (UE)", "Intermédiaire B", "Acheteur C (UE)", "PA-E", "PPF"],
+      "steps": [
+        {"f": 0, "t": 1, "l": "Facture A → B (catégorie K)", "c": "doc"},
+        {"f": 0, "t": 2, "l": "Livraison directe A → C", "c": "info"},
+        {"f": 1, "t": 2, "l": "Facture B → C, mention art. 141", "c": "doc"},
+        {"f": 2, "t": 3, "l": "Flux 10.1 — acquisition autoliquidée", "c": "flux"},
+        {"f": 3, "t": 4, "l": "Transmission au CdD", "c": "flux"}
+      ],
+      "attentionPoints": [
+        "Si l'intermédiaire B est français, il ne déclare <strong>rien</strong> : ni acquisition, ni vente",
+        "La mention « Autoliquidation — article 141 de la directive 2006/112/CE — opération triangulaire » est obligatoire sur la facture B → C",
+        "Il n'existe <strong>pas encore de code VATEX dédié</strong> aux opérations triangulaires : VATEX-EU-AE en attendant",
+        "La livraison physique directe A → C est la condition de la simplification"
+      ],
+      "btFields": [
+        {"bt": "BT-118 / BT-151", "name": "Catégorie de TVA", "note": "K côté A, AE côté C"},
+        {"bt": "BT-120", "name": "Motif d'exonération", "note": "Mention explicite de l'article 141 de la directive"},
+        {"bt": "BT-121", "name": "Code d'exonération", "note": "VATEX-EU-AE (faute de code triangulaire dédié)"}
+      ],
+      "statuses": [],
+      "relatedCases": ["cas-43", "cas-43b"]
+    },
+    {
+      "id": "cas-43b",
+      "num": "43b",
+      "title": "Transferts de stocks intra-UE",
+      "subtitle": "Mouvement de stock entre deux pays UE au sein d'une même entité : pas de facture, mais un e-reporting.",
+      "category": "international",
+      "tags": ["international", "transfert-stock", "flux-10", "proforma", "lic"],
+      "complexity": 3,
+      "inScope": true,
+      "principle": "<p>Une entreprise déplace ses stocks d'un pays de l'UE vers un autre, <strong>au sein de la même entité juridique</strong>. L'article 256-III du CGI assimile ce mouvement à une <strong>livraison intracommunautaire</strong>.</p><p>Il n'y a <strong>pas de facture</strong> au sens fiscal — seulement un document justificatif de type proforma — mais l'opération doit être déclarée en <strong>flux 10.1</strong> : catégorie <strong>K</strong> au départ de France, catégorie <strong>AE</strong> à l'arrivée en France. Vendeur et acheteur portent le <strong>même SIREN</strong> avec deux numéros de TVA différents.</p>",
+      "actors": ["Assujetti FR (départ)", "Assujetti FR (arrivée)", "PA-E", "PPF"],
+      "steps": [
+        {"f": 0, "t": 1, "l": "Transfert de stock (proforma)", "c": "doc"},
+        {"f": 0, "t": 2, "l": "Flux 10.1 — départ de France, catégorie K", "c": "flux"},
+        {"f": 1, "t": 2, "l": "Flux 10.1 — arrivée en France, catégorie AE", "c": "flux"},
+        {"f": 2, "t": 3, "l": "Transmission au CdD", "c": "flux"}
+      ],
+      "attentionPoints": [
+        "Pas de facture donc pas de flux 1, <strong>mais un flux 10.1 obligatoire</strong>",
+        "Vendeur et acheteur ont le <strong>même SIREN</strong>, avec des numéros de TVA de pays différents",
+        "Un transfert vers un territoire <strong>hors UE fiscale</strong> (Suisse, Royaume-Uni, Guyane, Mayotte) n'entraîne <strong>aucun</strong> flux 10.1",
+        "Si le document support est une facture structurée, ses données doivent être cohérentes avec le e-reporting"
+      ],
+      "btFields": [
+        {"bt": "BT-118 / BT-151", "name": "Catégorie de TVA", "note": "K au départ de France, AE à l'arrivée"},
+        {"bt": "BT-121", "name": "Code d'exonération", "note": "VATEX-EU-IC au départ, VATEX-EU-AE à l'arrivée"},
+        {"bt": "BT-30 / BT-47", "name": "Identifiants légaux", "note": "Même SIREN de part et d'autre"}
+      ],
+      "statuses": [],
+      "relatedCases": ["cas-43", "cas-43a", "cas-44"]
+    },
+    {
+      "id": "cas-44",
+      "num": "44",
+      "title": "Transactions DROM / COM / TAAF",
+      "subtitle": "Deux groupes de territoires, deux régimes : e-invoicing ou e-reporting. Et l'octroi de mer dans la facture.",
+      "category": "international",
+      "tags": ["outre-mer", "drom", "octroi-de-mer", "flux-10", "extended"],
+      "complexity": 3,
+      "inScope": true,
+      "principle": "<p>Les territoires ultramarins se répartissent en <strong>deux groupes</strong>. Groupe « France TVA » : Métropole, <strong>Guadeloupe, Martinique, La Réunion</strong> → <strong>e-invoicing</strong>, flux 1, code pays <strong>FR</strong> obligatoire. Groupe « Export » : <strong>Guyane, Mayotte</strong>, COM et TAAF → traités comme <strong>hors UE</strong>, donc <strong>e-reporting flux 10.1</strong>.</p><p>Lorsque l'<strong>octroi de mer</strong> s'applique, la facture doit porter une <strong>charge hors TVA</strong> dédiée, ce qui impose le profil <strong>EXTENDED-CTC-FR</strong>.</p>",
+      "actors": ["Vendeur (Métropole ou DROM)", "PA-E", "PPF", "PA-R", "Acheteur (DROM/COM)"],
+      "steps": [
+        {"f": 0, "t": 4, "l": "Facture avec octroi de mer (EXTENDED)", "c": "doc"},
+        {"f": 0, "t": 1, "l": "Flux 1 si groupe France TVA (GP/MQ/RE)", "c": "flux"},
+        {"f": 1, "t": 2, "l": "Transmission au CdD, code pays FR", "c": "flux"},
+        {"f": 0, "t": 1, "l": "Flux 10.1 si groupe Export (GF/YT/COM)", "c": "flux"},
+        {"f": 2, "t": 3, "l": "Routage vers l'acheteur", "c": "flux"}
+      ],
+      "attentionPoints": [
+        "<strong>Guyane et Mayotte ne sont pas dans le groupe « France TVA »</strong> : elles relèvent du e-reporting, pas du flux 1",
+        "Le code pays <strong>FR</strong> est obligatoire dans le flux 1 pour la Guadeloupe, la Martinique et La Réunion (BR-FR-MAP-14)",
+        "L'octroi de mer est <strong>parallèle</strong> à la TVA : il n'entre pas dans la base taxable",
+        "Les <strong>services</strong> sont hors champ de l'octroi de mer",
+        "Seul le profil <strong>EXTENDED-CTC-FR</strong> permet de porter l'octroi de mer (catégories O et S dans la même facture)"
+      ],
+      "btFields": [
+        {"bt": "BT-104", "name": "Motif de la charge document", "note": "OCTROI_MER"},
+        {"bt": "BT-177", "name": "Code de taxe hors TVA", "note": "IMP (liste 5153)"},
+        {"bt": "BT-99 / BT-100 / BT-101", "name": "Montant, base et taux de la charge", "note": "Montant, assiette et taux de l'octroi de mer"},
+        {"bt": "BT-102", "name": "Catégorie de TVA de la charge", "note": "O — hors champ de la TVA"},
+        {"bt": "BT-160 / BT-161", "name": "Attributs de ligne", "note": "OM_REFNC (nomenclature) et OM_TAUX (taux)"},
+        {"bt": "EXT-FR-FE-189 / 190", "name": "Motif et code d'exonération de la charge", "note": "OCTROI_MER et VATEX-EU-O"}
+      ],
+      "statuses": ["Déposée", "Reçue", "Mise à disposition", "Encaissée"],
+      "relatedCases": ["cas-43", "cas-43b", "cas-31", "cas-16"]
     }
   ]
 }
