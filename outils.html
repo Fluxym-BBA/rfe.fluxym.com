@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Les outils | Re·Form·E</title>
+    <link rel="icon" href="./assets/favicon-Fluxym-V2.png" sizes="32x32" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/pages.css">
+</head>
+<body>
+
+    <nav id="main-nav"></nav>
+
+    <header class="page-hero">
+        <div class="page-hero-content">
+            <div class="breadcrumb">
+                <a href="./index.html">Accueil</a> <span>/</span> <span>Les outils</span>
+            </div>
+            <span class="hero-badge">Boîte à outils</span>
+            <h1>Les outils Re·Form·E</h1>
+            <p>Des utilitaires concrets pour préparer, produire et contrôler les flux de la réforme. Certains sont pédagogiques, d’autres sont pensés pour les missions de conseil.</p>
+        </div>
+    </header>
+
+    <main class="page-main">
+        <div class="page-container">
+
+            <div class="section-header">
+                <span class="section-badge">Disponibles</span>
+                <h2>Choisissez votre outil</h2>
+                <p>Chaque outil fonctionne entièrement dans votre navigateur : aucune donnée saisie n’est transmise à un serveur.</p>
+            </div>
+
+            <div class="discover-grid">
+
+                <a href="./generateur.html" class="discover-card discover-card--purple reveal-on-scroll">
+                    <div class="discover-level">Génération</div>
+                    <div class="discover-icon">🧪</div>
+                    <h3>Générateur UBL</h3>
+                    <p>Sélectionnez un cas d’usage, consultez sa fiche pédagogique et téléchargez la facture XML UBL 2.1 conforme EN 16931 correspondante.</p>
+                    <span class="discover-cta">Générer une facture →</span>
+                </a>
+
+                <a href="./transcodification.html" class="discover-card discover-card--teal reveal-on-scroll">
+                    <div class="discover-level">Cadrage projet</div>
+                    <div class="discover-icon">🧭</div>
+                    <h3>Matrice de transcodification</h3>
+                    <p>Sélectionnez les cas d’usage d’une entreprise et générez le classeur Excel de mapping : socle obligatoire, champs par cas, colonnes ERP et balise XML à compléter.</p>
+                    <span class="discover-cta">Préparer une matrice →</span>
+                </a>
+
+                <div class="discover-card discover-card--coming">
+                    <div class="discover-level">Contrôle</div>
+                    <div class="discover-icon">🔍</div>
+                    <h3>Validateur Schematron</h3>
+                    <p>Déposer une facture XML et vérifier immédiatement sa conformité aux règles EN 16931 et aux règles françaises, sans quitter le navigateur.</p>
+                    <span class="discover-cta">En préparation</span>
+                </div>
+
+            </div>
+
+            <div class="section-header">
+                <span class="section-badge">Repères</span>
+                <h2>Quel outil pour quel besoin ?</h2>
+            </div>
+
+            <section class="content-section">
+                <div class="comparison-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Besoin</th>
+                                <th>Outil</th>
+                                <th>Résultat produit</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Obtenir un exemple de facture conforme pour un cas d’usage précis</td>
+                                <td><a href="./generateur.html">Générateur UBL</a></td>
+                                <td>Fichier XML UBL 2.1 (ou pack ZIP)</td>
+                            </tr>
+                            <tr>
+                                <td>Cadrer avec un client les données à fournir avant une transcodification</td>
+                                <td><a href="./transcodification.html">Matrice de transcodification</a></td>
+                                <td>Classeur Excel (.xlsx) multi-onglets à compléter</td>
+                            </tr>
+                            <tr>
+                                <td>Vérifier qu’un fichier client passe les contrôles de conformité</td>
+                                <td>Validateur Schematron</td>
+                                <td>En préparation — voir la page <a href="./validation.html">Validation</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="callout callout--info">
+                    <span class="callout-icon">💡</span>
+                    <div class="callout-content">
+                        <p>Les outils de cette section s’appuient sur les mêmes référentiels que le reste du site. Le détail des versions utilisées est consultable sur la page <a href="./referentiel.html">Référentiel &amp; versions</a>.</p>
+                    </div>
+                </div>
+            </section>
+
+            <nav class="page-nav-bottom">
+                <a href="./index.html" class="nav-prev">
+                    <span class="nav-label">Retour</span>
+                    <span class="nav-title">← Accueil</span>
+                </a>
+                <a href="./transcodification.html" class="nav-next">
+                    <span class="nav-label">Nouveau</span>
+                    <span class="nav-title">Matrice de transcodification →</span>
+                </a>
+            </nav>
+
+        </div>
+    </main>
+
+    <footer id="main-footer"></footer>
+
+    <script src="./js/nav.js"></script>
+    <script src="./js/animations.js"></script>
+</body>
+</html>

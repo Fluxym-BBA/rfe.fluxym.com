@@ -1,0 +1,798 @@
+{
+  "meta": {
+    "version": "1.0",
+    "dateMiseAJour": "2026-08-20",
+    "titre": "Matrice de transcodification — champs obligatoires par cas d’usage",
+    "source": "Trame de travail Fluxym — référentiel : données légales obligatoires + Annexe 1 « Format sémantique FE e-invoicing — Flux 1 » v1.2 et AFNOR XP Z12-014",
+    "avertissement": "Contenu repris à l’identique de la trame de travail Fluxym fournie par le consultant. Les références de norme n’ont pas été réinterprétées.",
+    "colonnes": [
+      "Référence de la norme",
+      "Donnée à inclure",
+      "Information présente dans l'ERP",
+      "Balise présente dans le XML de facture"
+    ],
+    "categories": [
+      "Commandes, livraisons & structure de lignes",
+      "Paiement & tiers",
+      "Rôles & mandats",
+      "Acomptes, escomptes & retenues",
+      "TVA & nature de l'opération"
+    ]
+  },
+  "socle": {
+    "titre": "Champs obligatoires de la facture électronique",
+    "referentiel": "Référentiel de travail : données légales obligatoires communiquées + Annexe 1 – Format sémantique FE e-invoicing – Flux 1 v1.2",
+    "definition": "Définition : cet onglet regroupe les informations qui doivent être disponibles pour émettre une facture conforme. La colonne « Référence de la norme » indique la donnée sémantique identifiée dans le fichier de réforme lorsqu’une correspondance est disponible. Les colonnes ERP et XML sont laissées à compléter lors de l’analyse de votre système et du format XML cible.",
+    "champs": [
+      {
+        "ref": "BT-30",
+        "label": "N° SIREN de l’assujetti / vendeur."
+      },
+      {
+        "ref": "BT-31",
+        "label": "N° TVA intracommunautaire de l’assujetti / vendeur, lorsque applicable."
+      },
+      {
+        "ref": "BT-40",
+        "label": "Pays de l’assujetti / vendeur."
+      },
+      {
+        "ref": "BT-63",
+        "label": "N° TVA intracommunautaire du représentant fiscal, lorsque applicable."
+      },
+      {
+        "ref": "BT-5",
+        "label": "Code / désignation de la devise de la facture."
+      },
+      {
+        "ref": "BT-47",
+        "label": "N° SIREN du client / acheteur."
+      },
+      {
+        "ref": "BT-48",
+        "label": "N° TVA intracommunautaire du client / acheteur, lorsque applicable."
+      },
+      {
+        "ref": "BT-55",
+        "label": "Pays du client / acheteur."
+      },
+      {
+        "ref": "BT-29d + BT-21/BT-22",
+        "label": "Si groupe TVA : identification de l’assujetti unique et mention « Membre d’un assujetti unique »."
+      },
+      {
+        "ref": "BT-2",
+        "label": "Date d’émission de la facture."
+      },
+      {
+        "ref": "BT-9",
+        "label": "Date de versement de l’acompte, lorsqu’elle est différente de la date d’émission."
+      },
+      {
+        "ref": "BT-25 / BT-26",
+        "label": "N° et date de la facture rectifiée / antérieure, lorsque applicable."
+      },
+      {
+        "ref": "BT-1",
+        "label": "N° unique de la facture."
+      },
+      {
+        "ref": "BT-3 + mention",
+        "label": "Auto-facturation : utiliser le type de document adapté et faire apparaître la mention « Auto-facturation »."
+      },
+      {
+        "ref": "BT-21 / BT-22",
+        "label": "Mention « Auto-liquidation » lorsque le régime l’exige."
+      },
+      {
+        "ref": "BT-23",
+        "label": "Catégorie / cadre de l’opération : livraison de biens, prestation de services ou opération mixte."
+      },
+      {
+        "ref": "BT-72",
+        "label": "Date effective de livraison du bien ou de fin d’exécution de la prestation, lorsque requise."
+      },
+      {
+        "ref": "BT-116",
+        "label": "Total hors taxe / base d’imposition par catégorie ou taux de TVA."
+      },
+      {
+        "ref": "BT-117",
+        "label": "Montant de TVA correspondant à chaque catégorie / taux."
+      },
+      {
+        "ref": "BT-119",
+        "label": "Taux de TVA applicable, avec ventilation lorsqu’il existe plusieurs taux."
+      },
+      {
+        "ref": "BT-109",
+        "label": "Somme totale de la facture hors TVA."
+      },
+      {
+        "ref": "BT-110",
+        "label": "Montant total de TVA de la facture."
+      },
+      {
+        "ref": "BT-21 / BT-22",
+        "label": "Option pour le paiement de la TVA d’après les débits, lorsque applicable."
+      },
+      {
+        "ref": "BT-120 / BT-121",
+        "label": "Référence / motif légal d’exonération de TVA, lorsque applicable."
+      },
+      {
+        "ref": "BT-120 / BT-121 ou BT-21/BT-22",
+        "label": "Référence au régime particulier applicable, lorsque nécessaire."
+      },
+      {
+        "ref": "BG-20 / BT-92 ; BG-27 / BT-136 ; BT-147",
+        "label": "Minoration de prix : rabais, remises, ristournes ou réductions applicables."
+      },
+      {
+        "ref": "BT-153",
+        "label": "Dénomination précise du bien livré ou du service rendu."
+      },
+      {
+        "ref": "BT-129 / BT-130",
+        "label": "Quantité de chaque ligne et unité de mesure."
+      },
+      {
+        "ref": "BT-146 / BT-148",
+        "label": "Prix HT / prix de chaque ligne de biens ou services."
+      },
+      {
+        "ref": "BG-15 / BT-75 à BT-80",
+        "label": "Adresse complète de livraison des biens ou de réalisation de la prestation si différente de l’adresse du client."
+      },
+      {
+        "ref": "BT-21 / BT-22",
+        "label": "Mention relative à l’escompte : conditions d’escompte ou absence d’escompte selon le cas."
+      },
+      {
+        "ref": "À confirmer dans le format cible",
+        "label": "Éco-participation (art. L. 541-10 du Code de l’environnement), lorsque applicable."
+      }
+    ]
+  },
+  "cas": [
+    {
+      "id": "1",
+      "code": "Cas 1",
+      "titre": "Multi-commande / Multi-livraison",
+      "categorie": "Commandes, livraisons & structure de lignes",
+      "refNorme": "Réf. XP Z12-014 §3.2.2",
+      "objectif": "Rattacher les lignes aux commandes/livraisons et gérer des adresses de livraison distinctes.",
+      "definition": "Une même facture regroupe plusieurs commandes client et/ou plusieurs livraisons. Il faut pouvoir rattacher les lignes de facture à la bonne commande, au bon avis d’expédition et, si nécessaire, à la bonne adresse ou date de livraison.",
+      "champs": [
+        {
+          "ref": "EXT-FR-FE-135",
+          "label": "N° de commande au niveau de la ligne."
+        },
+        {
+          "ref": "EXT-FR-FE-140 / 141",
+          "label": "N° et ligne d’avis d’expédition."
+        },
+        {
+          "ref": "EXT-FR-FE-BG-10",
+          "label": "Adresse de livraison au niveau de la ligne."
+        },
+        {
+          "ref": "EXT-FR-FE-149 à 157",
+          "label": "Nom du lieu et adresse postale de livraison à la ligne."
+        },
+        {
+          "ref": "EXT-FR-FE-158",
+          "label": "Date de livraison à la ligne."
+        }
+      ]
+    },
+    {
+      "id": "36",
+      "code": "Cas 36",
+      "titre": "Secret professionnel / données sensibles",
+      "categorie": "Commandes, livraisons & structure de lignes",
+      "refNorme": "Réf. XP Z12-014 §3.2.35",
+      "objectif": "Protéger le détail confidentiel tout en restant conforme.",
+      "definition": "Certaines informations détaillées de la facture sont confidentielles ou couvertes par le secret professionnel. Le format transmis doit rester conforme tout en limitant l’exposition de ces informations.",
+      "champs": [
+        {
+          "ref": "BT-153",
+          "label": "Libellé générique transmis à l’administration."
+        },
+        {
+          "ref": "Description hors Flux 1",
+          "label": "Détail réel dans les zones accessibles uniquement aux parties."
+        },
+        {
+          "ref": "Règle",
+          "label": "Séparer donnée générique fiscale et détail confidentiel client."
+        }
+      ]
+    },
+    {
+      "id": "38",
+      "code": "Cas 38",
+      "titre": "Sous-lignes et regroupements",
+      "categorie": "Commandes, livraisons & structure de lignes",
+      "refNorme": "Réf. XP Z12-014 §3.2.37",
+      "objectif": "Créer une hiérarchie de lignes.",
+      "definition": "Une ligne de facture doit être décomposée en sous-lignes, par exemple pour détailler un kit, un ensemble fabriqué, des composants ou un regroupement d’articles.",
+      "champs": [
+        {
+          "ref": "EXT-FR-FE-162",
+          "label": "Identifiant de ligne parent."
+        },
+        {
+          "ref": "EXT-FR-FE-163",
+          "label": "Sous-type DETAIL / INFORMATION / GROUP."
+        },
+        {
+          "ref": "EXT-FR-FE-191",
+          "label": "Quantité dans une unité de la ligne parent."
+        },
+        {
+          "ref": "Règle",
+          "label": "Seules lignes standard et DETAIL alimentent totaux/TVA."
+        }
+      ]
+    },
+    {
+      "id": "39",
+      "code": "Cas 39",
+      "titre": "Facture multi-vendeurs",
+      "categorie": "Commandes, livraisons & structure de lignes",
+      "refNorme": "Réf. XP Z12-014 §3.2.38",
+      "objectif": "Consolider plusieurs factures unitaires de vendeurs.",
+      "definition": "Une facture consolidée regroupe des opérations provenant de plusieurs vendeurs ou entités vendeuses. Le format doit permettre d’identifier le vendeur correspondant à chaque groupe de lignes.",
+      "champs": [
+        {
+          "ref": "BT-23",
+          "label": "Cadre B8 / S8 / M8."
+        },
+        {
+          "ref": "EXT-FR-FE-162 / 163",
+          "label": "Ligne GROUP par facture unitaire et DETAIL rattachées."
+        },
+        {
+          "ref": "EXT-FR-FE-BG-12 / 164 / 167 / 168 / 177",
+          "label": "Identification vendeur à la ligne."
+        },
+        {
+          "ref": "BT-128 + AFL",
+          "label": "Numéro de facture unitaire."
+        },
+        {
+          "ref": "BT-128 + AVV",
+          "label": "Cadre de facturation unitaire."
+        },
+        {
+          "ref": "EXT-FR-FE-180 / 181 / 182 / 184",
+          "label": "Exigibilité TVA et montants par facture unitaire."
+        },
+        {
+          "ref": "EXT-FR-FE-178 / 179",
+          "label": "Raison d’exemption à la ligne si nécessaire."
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "code": "Cas 2",
+      "titre": "Facture déjà payée",
+      "categorie": "Paiement & tiers",
+      "refNorme": "Réf. XP Z12-014 §3.2.3",
+      "objectif": "Indiquer dans la facture qu’elle est déjà réglée.",
+      "definition": "La facture est émise alors que son montant a déjà été réglé. La facture doit indiquer qu’aucune somme ne reste à payer et tracer le montant déjà encaissé.",
+      "champs": [
+        {
+          "ref": "BT-23",
+          "label": "Cadre de facturation d’une facture déjà payée selon la nature de l’opération."
+        },
+        {
+          "ref": "BT-113",
+          "label": "Montant déjà payé = montant total TTC."
+        },
+        {
+          "ref": "BT-115",
+          "label": "Net à payer = 0."
+        },
+        {
+          "ref": "BT-9",
+          "label": "Date d’échéance, si renseignée, égale à la date de paiement."
+        },
+        {
+          "ref": "EXT-FR-FE-BG-02",
+          "label": "Identifier le tiers payeur s’il existe."
+        }
+      ]
+    },
+    {
+      "id": "3",
+      "code": "Cas 3",
+      "titre": "Facture à payer par un tiers PAYEUR connu",
+      "categorie": "Paiement & tiers",
+      "refNorme": "Réf. XP Z12-014 §3.2.4",
+      "objectif": "Identifier le tiers qui règlera la dette de l’acheteur.",
+      "definition": "Le client reste l’acheteur de la marchandise ou du service, mais le règlement de la facture sera effectué par un tiers identifié.",
+      "champs": [
+        {
+          "ref": "EXT-FR-FE-BG-02",
+          "label": "Bloc PAYEUR : identification du tiers payeur."
+        },
+        {
+          "ref": "BG-7",
+          "label": "Conserver l’acheteur juridique dans le bloc ACHETEUR."
+        }
+      ]
+    },
+    {
+      "id": "4",
+      "code": "Cas 4",
+      "titre": "Prise en charge partielle par un tiers",
+      "categorie": "Paiement & tiers",
+      "refNorme": "Réf. XP Z12-014 §3.2.5",
+      "objectif": "Distinguer la part du tiers et le solde acheteur.",
+      "definition": "Une partie de la facture est prise en charge par un tiers et le reste demeure payable par le client. La facture doit permettre de distinguer les deux montants.",
+      "champs": [
+        {
+          "ref": "EXT-FR-FE-BG-02",
+          "label": "Identifier le tiers payeur."
+        },
+        {
+          "ref": "BT-113",
+          "label": "Montant pris en charge par le tiers."
+        },
+        {
+          "ref": "BT-115",
+          "label": "Solde net restant à payer par l’acheteur."
+        }
+      ]
+    },
+    {
+      "id": "5",
+      "code": "Cas 5",
+      "titre": "Frais collaborateur avec facture entreprise",
+      "categorie": "Paiement & tiers",
+      "refNorme": "Réf. XP Z12-014 §3.2.6",
+      "objectif": "Rapprocher une facture déjà payée par un collaborateur.",
+      "definition": "Une dépense professionnelle a été payée directement par un collaborateur alors que la facture est établie au nom de l’entreprise. La facture doit permettre d’identifier qu’elle est déjà payée et, si nécessaire, le payeur.",
+      "champs": [
+        {
+          "ref": "BT-113",
+          "label": "Montant déjà payé = TTC."
+        },
+        {
+          "ref": "BT-115",
+          "label": "Net à payer = 0."
+        },
+        {
+          "ref": "EXT-FR-FE-BG-02 / EXT-FR-FE-43",
+          "label": "Identifier le collaborateur comme tiers payeur, de préférence par matricule/identifiant."
+        },
+        {
+          "ref": "BT-18 + BT-18-1=AHK",
+          "label": "Alternative EN16931 : référence du payeur/collaborateur."
+        }
+      ]
+    },
+    {
+      "id": "7",
+      "code": "Cas 7",
+      "titre": "Carte logée / carte d’achat",
+      "categorie": "Paiement & tiers",
+      "refNorme": "Réf. XP Z12-014 §3.2.8",
+      "objectif": "Traiter la facture comme déjà payée.",
+      "definition": "La facture correspondant à un achat ou une dépense qui a déjà été réglée par carte d’achat ou carte logée. Elle doit être émise comme une facture déjà payée.",
+      "champs": [
+        {
+          "ref": "BT-113",
+          "label": "Montant déjà payé = TTC."
+        },
+        {
+          "ref": "BT-115",
+          "label": "Net à payer = 0."
+        },
+        {
+          "ref": "BT-9",
+          "label": "Date d’échéance = date de paiement si présente."
+        },
+        {
+          "ref": "Règle",
+          "label": "Ne pas qualifier le gestionnaire de carte comme tiers payeur du seul fait de son rôle."
+        }
+      ]
+    },
+    {
+      "id": "8",
+      "code": "Cas 8",
+      "titre": "Affacturage / paiement à un tiers",
+      "categorie": "Paiement & tiers",
+      "refNorme": "Réf. XP Z12-014 §3.2.9.2",
+      "objectif": "Identifier le bénéficiaire du paiement dès l’émission.",
+      "definition": "Le fournisseur cède ou délègue l’encaissement de la facture à un tiers, par exemple un factor. Le client doit donc payer ce bénéficiaire et non directement le fournisseur.",
+      "champs": [
+        {
+          "ref": "BT-3",
+          "label": "393 facture affacturée ; 501 si auto-facturée affacturée."
+        },
+        {
+          "ref": "BG-10",
+          "label": "Bénéficiaire du paiement."
+        },
+        {
+          "ref": "EXT-FR-FE-26",
+          "label": "Code rôle DL pour l’affactureur."
+        },
+        {
+          "ref": "EXT-FR-FE-27 à 39",
+          "label": "TVA, adresse électronique/postale et contact du bénéficiaire."
+        },
+        {
+          "ref": "BG-17 / BT-84 à 86",
+          "label": "IBAN, titulaire, BIC du compte à payer."
+        },
+        {
+          "ref": "BT-21=AAC / BT-22",
+          "label": "Mention de subrogation / cession."
+        }
+      ]
+    },
+    {
+      "id": "9",
+      "code": "Cas 9",
+      "titre": "Distributeur / dépositaire bénéficiaire",
+      "categorie": "Paiement & tiers",
+      "refNorme": "Réf. XP Z12-014 §3.2.9.3",
+      "objectif": "Identifier le tiers bénéficiaire du paiement.",
+      "definition": "Le paiement doit être effectué à un distributeur, dépositaire ou autre intermédiaire désigné. La facture doit identifier clairement le bénéficiaire du règlement.",
+      "champs": [
+        {
+          "ref": "BG-10",
+          "label": "Bénéficiaire = distributeur / dépositaire."
+        },
+        {
+          "ref": "BG-17",
+          "label": "Coordonnées de paiement du bénéficiaire."
+        },
+        {
+          "ref": "EXTENDED-CTC-FR",
+          "label": "Compléter l’identification du bénéficiaire si nécessaire."
+        }
+      ]
+    },
+    {
+      "id": "40",
+      "code": "Cas 40",
+      "titre": "Netting / compensation",
+      "categorie": "Paiement & tiers",
+      "refNorme": "Réf. XP Z12-014 §3.2.39",
+      "objectif": "Ne pas compenser achats et ventes dans une seule facture.",
+      "definition": "Deux entreprises sont à la fois clientes et fournisseurs l’une de l’autre et souhaitent compenser leurs créances. Les ventes et achats doivent rester portés par des factures distinctes même si le paiement est compensé.",
+      "champs": [
+        {
+          "ref": "Règle",
+          "label": "Émettre deux factures distinctes ; pas de lignes négatives de compensation."
+        },
+        {
+          "ref": "BT-81",
+          "label": "Code 97 « clearing between partners » possible si pertinent."
+        }
+      ]
+    },
+    {
+      "id": "41",
+      "code": "Cas 41",
+      "titre": "Sociétés de Barter",
+      "categorie": "Paiement & tiers",
+      "refNorme": "Réf. XP Z12-014 §3.2.40",
+      "objectif": "Représenter part compensée et part payable en numéraire.",
+      "definition": "Tout ou partie du règlement est réalisé par compensation ou échange via un mécanisme de barter. La facture doit distinguer la part compensée de la somme restant éventuellement payable.",
+      "champs": [
+        {
+          "ref": "BT-113",
+          "label": "Montant déjà payé/compensé."
+        },
+        {
+          "ref": "BT-115",
+          "label": "Net restant à payer en numéraire."
+        },
+        {
+          "ref": "EXT-FR-FE-BG-02",
+          "label": "Tiers payeur si la société de Barter règle/compense pour une partie."
+        },
+        {
+          "ref": "BT-81",
+          "label": "Moyen de paiement de compensation si pertinent."
+        }
+      ]
+    },
+    {
+      "id": "11",
+      "code": "Cas 11",
+      "titre": "« Adressé à » différent de l’acheteur",
+      "categorie": "Rôles & mandats",
+      "refNorme": "Réf. XP Z12-014 §3.2.10",
+      "objectif": "Dissocier acheteur juridique et tiers destinataire.",
+      "definition": "La facture concerne un acheteur juridique mais doit être adressée à un autre service, établissement ou tiers chargé de la recevoir et de la traiter.",
+      "champs": [
+        {
+          "ref": "BG-7",
+          "label": "Acheteur juridique."
+        },
+        {
+          "ref": "EXT-FR-FE-BG-04",
+          "label": "Tiers « ADRESSÉ À »."
+        },
+        {
+          "ref": "EXT-FR-FE-BG-02",
+          "label": "À renseigner aussi si ce tiers est payeur."
+        }
+      ]
+    },
+    {
+      "id": "15",
+      "code": "Cas 15",
+      "titre": "Agent d’acheteur",
+      "categorie": "Rôles & mandats",
+      "refNorme": "Réf. XP Z12-014 §3.2.13",
+      "objectif": "Identifier le tiers qui commande/approuve pour l’acheteur.",
+      "definition": "Un tiers agit pour le compte de l’acheteur pour passer la commande, valider la facture ou éventuellement la payer. Les différents rôles doivent être correctement identifiés.",
+      "champs": [
+        {
+          "ref": "BG-7 / BT-49",
+          "label": "Acheteur et adresse de facturation électronique dédiée."
+        },
+        {
+          "ref": "EXT-FR-FE-BG-01",
+          "label": "Agent d’acheteur."
+        },
+        {
+          "ref": "EXT-FR-FE-BG-02",
+          "label": "Tiers payeur si l’agent paie aussi."
+        },
+        {
+          "ref": "BG-24",
+          "label": "Justificatif additionnel éventuel."
+        }
+      ]
+    },
+    {
+      "id": "19a",
+      "code": "Cas 19a",
+      "titre": "Tiers facturant sous mandat",
+      "categorie": "Rôles & mandats",
+      "refNorme": "Réf. XP Z12-014 §3.2.18.1",
+      "objectif": "Identifier le mandataire de facturation.",
+      "definition": "Le fournisseur confie à un tiers la création et l’émission matérielle de ses factures. Le fournisseur reste le vendeur juridique mais le tiers facturant doit être identifié.",
+      "champs": [
+        {
+          "ref": "BG-4",
+          "label": "Vendeur juridique."
+        },
+        {
+          "ref": "EXT-FR-FE-BG-05",
+          "label": "Tiers facturant / mandataire."
+        },
+        {
+          "ref": "BT-3",
+          "label": "Type de document cohérent avec l’opération."
+        }
+      ]
+    },
+    {
+      "id": "19b",
+      "code": "Cas 19b",
+      "titre": "Auto-facturation",
+      "categorie": "Rôles & mandats",
+      "refNorme": "Réf. XP Z12-014 §3.2.18.2",
+      "objectif": "Identifier qu’une facture est créée par l’acheteur pour le vendeur.",
+      "definition": "Le client établit lui-même la facture au nom et pour le compte de son fournisseur, dans le cadre d’un accord d’auto-facturation.",
+      "champs": [
+        {
+          "ref": "BT-3",
+          "label": "Code de document d’auto-facturation adapté à la pièce."
+        },
+        {
+          "ref": "Mention",
+          "label": "Mention « Auto-facturation »."
+        },
+        {
+          "ref": "BG-4 / BG-7",
+          "label": "Conserver vendeur=fournisseur et acheteur=client."
+        }
+      ]
+    },
+    {
+      "id": "20",
+      "code": "Cas 20",
+      "titre": "Facture d’acompte",
+      "categorie": "Acomptes, escomptes & retenues",
+      "refNorme": "Réf. XP Z12-014 §3.2.19",
+      "objectif": "Émettre correctement une facture d’acompte.",
+      "definition": "Un acompte est facturé avant la facture finale, généralement à la commande ou avant livraison. La facture d’acompte doit être identifiable comme telle et préciser son règlement lorsqu’il a déjà eu lieu.",
+      "champs": [
+        {
+          "ref": "BT-3",
+          "label": "Type 325 = facture d’acompte."
+        },
+        {
+          "ref": "BT-113",
+          "label": "Montant déjà payé si acompte déjà versé."
+        },
+        {
+          "ref": "BT-115",
+          "label": "Net à payer = 0 si intégralement payé."
+        },
+        {
+          "ref": "Date acompte",
+          "label": "Date de versement si différente de l’émission."
+        }
+      ]
+    },
+    {
+      "id": "21",
+      "code": "Cas 21",
+      "titre": "Facture finale après acompte",
+      "categorie": "Acomptes, escomptes & retenues",
+      "refNorme": "Réf. XP Z12-014 §3.2.19",
+      "objectif": "Déduire l’acompte sans doubler base taxable/TVA.",
+      "definition": "La facture finale est émise après une ou plusieurs factures d’acompte. Elle doit reprendre les références des acomptes et déduire correctement les montants déjà facturés ou payés.",
+      "champs": [
+        {
+          "ref": "BT-25 / BT-26",
+          "label": "Référence et date de la facture d’acompte."
+        },
+        {
+          "ref": "EXT-FR-FE-BG-06 / 136 / 138",
+          "label": "Reprise de facture antérieure en ligne si nécessaire."
+        },
+        {
+          "ref": "BT-113",
+          "label": "Acompte / montant déjà payé à déduire."
+        },
+        {
+          "ref": "BT-115",
+          "label": "Net à payer après déduction."
+        }
+      ]
+    },
+    {
+      "id": "22a",
+      "code": "Cas 22a",
+      "titre": "Escompte – services TVA encaissement",
+      "categorie": "Acomptes, escomptes & retenues",
+      "refNorme": "Réf. XP Z12-014 §3.2.20",
+      "objectif": "Faire figurer les conditions d’escompte.",
+      "definition": "Le fournisseur prévoit un escompte en cas de paiement anticipé d’une prestation de services. Les conditions de cet escompte doivent apparaître sur la facture.",
+      "champs": [
+        {
+          "ref": "BT-21=AAB",
+          "label": "Code sujet de la note."
+        },
+        {
+          "ref": "BT-22",
+          "label": "Texte des conditions d’escompte."
+        },
+        {
+          "ref": "Règle",
+          "label": "Ne pas déduire à l’émission un escompte seulement éventuel."
+        }
+      ]
+    },
+    {
+      "id": "22b",
+      "code": "Cas 22b",
+      "titre": "Escompte – biens / TVA sur débits",
+      "categorie": "Acomptes, escomptes & retenues",
+      "refNorme": "Réf. XP Z12-014 §3.2.21",
+      "objectif": "Gérer l’impact fiscal d’un escompte appliqué.",
+      "definition": "Un escompte est appliqué sur une facture de biens ou une opération soumise à TVA sur les débits. Son application peut nécessiter une correction de la base taxable ou de la TVA.",
+      "champs": [
+        {
+          "ref": "BT-21=AAB / BT-22",
+          "label": "Conditions d’escompte."
+        },
+        {
+          "ref": "Avoir / rectification",
+          "label": "Prévoir une pièce corrective lorsque l’escompte modifie la base/TVA et que nécessaire."
+        }
+      ]
+    },
+    {
+      "id": "26",
+      "code": "Cas 26",
+      "titre": "Retenue de garantie / clause de réserve",
+      "categorie": "Acomptes, escomptes & retenues",
+      "refNorme": "Réf. XP Z12-014 §3.2.24",
+      "objectif": "Conserver le montant contractuel et gérer la retenue séparément.",
+      "definition": "Le contrat prévoit qu’une partie du montant facturé est temporairement retenue, par exemple au titre d’une garantie. La facture reste établie au montant contractuel et la retenue doit être gérée sans fausser le prix facturé.",
+      "champs": [
+        {
+          "ref": "Montants",
+          "label": "Facture initiale au montant total contractuel."
+        },
+        {
+          "ref": "Note / conditions",
+          "label": "Faire apparaître la clause/retention si nécessaire au traitement."
+        },
+        {
+          "ref": "Avoir",
+          "label": "Avoir si la retenue devient définitivement acquise et réduit le prix."
+        }
+      ]
+    },
+    {
+      "id": "18",
+      "code": "Cas 18",
+      "titre": "Notes de débit",
+      "categorie": "TVA & nature de l'opération",
+      "refNorme": "Réf. XP Z12-014 §3.2.17",
+      "objectif": "Traiter comme facture une note de débit qui en a la nature fiscale.",
+      "definition": "Un document appelé « note de débit » correspond en réalité à une opération taxable ayant la nature d’une facture. Il doit alors être émis avec les données et le type de document appropriés.",
+      "champs": [
+        {
+          "ref": "BT-3",
+          "label": "Si soumise à TVA et avec mentions de facture : type 380."
+        },
+        {
+          "ref": "Règle",
+          "label": "Ne pas utiliser une note de débit hors facture pour une opération qui constitue une facture."
+        }
+      ]
+    },
+    {
+      "id": "29",
+      "code": "Cas 29",
+      "titre": "Assujetti unique – groupe TVA",
+      "categorie": "TVA & nature de l'opération",
+      "refNorme": "Réf. XP Z12-014 §3.2.28",
+      "objectif": "Identifier membre facturant et assujetti unique.",
+      "definition": "L’entreprise qui facture est membre d’un groupe TVA constitué en assujetti unique. La facture doit permettre d’identifier à la fois le membre qui réalise l’opération et l’assujetti unique.",
+      "champs": [
+        {
+          "ref": "BG-4",
+          "label": "Vendeur = membre réalisant l’opération."
+        },
+        {
+          "ref": "BT-29d / BT-29d-1",
+          "label": "SIREN assujetti unique ; schéma 0231."
+        },
+        {
+          "ref": "BG-11",
+          "label": "Autres données d’identification de l’assujetti unique selon le modèle."
+        },
+        {
+          "ref": "BT-21=TXD / BT-22",
+          "label": "Mention « MEMBRE_ASSUJETTI_UNIQUE »."
+        }
+      ]
+    },
+    {
+      "id": "31",
+      "code": "Cas 31",
+      "titre": "Facture mixte biens / services",
+      "categorie": "TVA & nature de l'opération",
+      "refNorme": "Réf. XP Z12-014 §3.2.30",
+      "objectif": "Qualifier correctement biens et services.",
+      "definition": "Une même facture comporte à la fois des ventes de biens et des prestations de services, situation fréquente en production avec installation, maintenance, transport ou prestations associées.",
+      "champs": [
+        {
+          "ref": "BT-23",
+          "label": "Cadre biens/services/mixte selon l’opération. (codification spécifique)"
+        },
+        {
+          "ref": "Lignes",
+          "label": "Séparer biens et services indépendants."
+        },
+        {
+          "ref": "TVA",
+          "label": "Catégories/taux/ventilations propres à chaque ligne."
+        },
+        {
+          "ref": "Règle",
+          "label": "Une prestation accessoire suit le traitement de l’opération principale."
+        }
+      ]
+    }
+  ]
+}

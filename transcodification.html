@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Matrice de transcodification | Re·Form·E</title>
+    <link rel="icon" href="./assets/favicon-Fluxym-V2.png" sizes="32x32" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/pages.css">
+    <style>
+        /* =============================================
+           STYLES SPÉCIFIQUES — Matrice de transcodification
+           Palette pages.css (thème clair)
+           ============================================= */
+
+        /* --- Barre d'actions de sélection --- */
+        .transco-toolbar {
+            display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+            margin: 18px 0 24px;
+        }
+        .transco-link-btn {
+            border: 1px solid var(--gray-200); background: var(--white);
+            color: var(--navy); font-family: 'Inter', sans-serif;
+            font-size: 0.78rem; font-weight: 600; padding: 8px 16px;
+            border-radius: var(--radius-full); cursor: pointer; transition: all 0.2s ease;
+        }
+        .transco-link-btn:hover {
+            border-color: var(--cyan); color: var(--cyan); box-shadow: var(--shadow-sm);
+        }
+
+        /* --- Groupes de cas d'usage --- */
+        .transco-group { margin-bottom: 28px; }
+        .transco-group-head {
+            display: flex; flex-wrap: wrap; gap: 12px;
+            align-items: center; justify-content: space-between;
+            padding-bottom: 10px; margin-bottom: 14px;
+            border-bottom: 1px solid var(--gray-200);
+        }
+        .transco-group-head h3 {
+            margin: 0; font-size: 0.95rem; font-weight: 700; color: var(--navy);
+            text-transform: uppercase; letter-spacing: 0.06em;
+        }
+
+        .transco-cards {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px;
+        }
+
+        /* --- Carte cas d'usage sélectionnable --- */
+        .transco-card {
+            position: relative; display: flex; gap: 12px; cursor: pointer;
+            background: var(--white); border: 1.5px solid var(--gray-200);
+            border-radius: var(--radius-md); padding: 14px 16px;
+            transition: all 0.2s ease;
+        }
+        .transco-card:hover { border-color: var(--cyan); box-shadow: var(--shadow-sm); }
+        .transco-card input { margin-top: 3px; width: 17px; height: 17px; accent-color: var(--cyan); flex-shrink: 0; }
+        .transco-card:has(input:checked) {
+            border-color: var(--cyan); background: rgba(0, 167, 225, 0.05);
+            box-shadow: 0 0 0 3px rgba(0, 167, 225, 0.1);
+        }
+        .transco-card-body { display: flex; flex-direction: column; gap: 5px; }
+        .transco-card-head { display: flex; align-items: center; gap: 8px; }
+        .transco-card-badge {
+            font-size: 0.68rem; font-weight: 800; letter-spacing: 0.04em;
+            color: var(--white); background: var(--navy);
+            padding: 3px 9px; border-radius: var(--radius-full);
+        }
+        .transco-card-count { font-size: 0.7rem; color: var(--gray-400); font-weight: 600; }
+        .transco-card-title { font-size: 0.9rem; font-weight: 700; color: var(--gray-900); line-height: 1.35; }
+        .transco-card-desc { font-size: 0.78rem; color: var(--gray-500); line-height: 1.5; }
+        .transco-card-ref { font-size: 0.68rem; color: var(--gray-400); font-style: italic; }
+
+        /* --- Récapitulatif de sélection --- */
+        .transco-summary {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 14px;
+            margin-bottom: 16px;
+        }
+        .transco-stat {
+            background: var(--gray-50); border: 1px solid var(--gray-200);
+            border-radius: var(--radius-md); padding: 16px; text-align: center;
+        }
+        .transco-stat-value { font-size: 1.7rem; font-weight: 900; color: var(--navy); line-height: 1.1; }
+        .transco-stat-label {
+            font-size: 0.72rem; color: var(--gray-500); font-weight: 600;
+            text-transform: uppercase; letter-spacing: 0.05em; margin-top: 4px;
+        }
+        .transco-hint { font-size: 0.82rem; color: var(--gray-600); margin-bottom: 18px; }
+
+        /* --- Actions de génération --- */
+        .transco-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+        @media (max-width: 768px) { .transco-actions { grid-template-columns: 1fr; } }
+        .transco-actions .gen-btn { margin-top: 0; }
+        .gen-btn:disabled { opacity: 0.45; cursor: not-allowed; box-shadow: none; transform: none; }
+        .gen-btn:disabled:hover { transform: none; box-shadow: none; }
+        .transco-btn-secondary {
+            background: var(--white) !important; color: var(--navy) !important;
+            border: 1.5px solid var(--gray-200) !important; box-shadow: none !important;
+        }
+        .transco-btn-secondary:hover { border-color: var(--cyan) !important; color: var(--cyan) !important; }
+
+        /* --- Statut / erreurs --- */
+        .transco-status {
+            margin-top: 16px; font-size: 0.85rem; font-weight: 500;
+            color: var(--gray-600); min-height: 22px;
+        }
+        .transco-status--ok { color: var(--success); font-weight: 600; }
+        .transco-status--error { color: var(--danger); font-weight: 600; }
+        .transco-error { color: var(--danger); font-weight: 600; }
+
+        /* --- Aperçu de la structure produite --- */
+        .transco-preview {
+            background: var(--navy); border-radius: var(--radius-md);
+            padding: 20px; margin-top: 18px;
+        }
+        .transco-preview h4 {
+            margin: 0 0 12px 0; font-size: 0.75rem; font-weight: 700;
+            color: rgba(255, 255, 255, 0.6); text-transform: uppercase; letter-spacing: 0.08em;
+        }
+        .transco-preview ul { list-style: none; margin: 0; padding: 0; }
+        .transco-preview li {
+            font-size: 0.82rem; color: rgba(255, 255, 255, 0.85);
+            padding: 6px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .transco-preview li:last-child { border-bottom: none; }
+        .transco-preview li strong { color: var(--white); }
+        .transco-preview code {
+            background: rgba(0, 0, 0, 0.25); border-radius: 4px;
+            padding: 1px 6px; font-size: 0.76rem; color: #7dd3fc;
+        }
+    </style>
+</head>
+<body>
+
+    <nav id="main-nav"></nav>
+
+    <header class="page-hero">
+        <div class="page-hero-content">
+            <div class="breadcrumb">
+                <a href="./index.html">Accueil</a> <span>/</span> <a href="./outils.html">Les outils</a> <span>/</span> <span>Matrice de transcodification</span>
+            </div>
+            <span class="hero-badge">Outil consultant</span>
+            <h1>Matrice de transcodification</h1>
+            <p>Sélectionnez les cas d’usage applicables à une entreprise et générez le classeur Excel de mapping à faire compléter par le client.</p>
+        </div>
+    </header>
+
+    <main class="page-main">
+        <div class="page-container page-layout">
+
+            <aside class="page-sidebar">
+                <div class="sidebar-sticky">
+                    <h4>Sur cette page</h4>
+                    <ul class="sidebar-nav">
+                        <li><a href="#principe" class="sidebar-link active">🧭 Principe</a></li>
+                        <li><a href="#contexte" class="sidebar-link">🏢 Contexte client</a></li>
+                        <li><a href="#selection" class="sidebar-link">✅ Cas d’usage</a></li>
+                        <li><a href="#generation" class="sidebar-link">📥 Génération</a></li>
+                    </ul>
+                    <div class="sidebar-nav-pages">
+                        <h4>Outils</h4>
+                        <a href="./outils.html" class="sidebar-page">🧰 Tous les outils</a>
+                        <a href="./generateur.html" class="sidebar-page">🧪 Générateur UBL</a>
+                        <a href="./transcodification.html" class="sidebar-page active">🧭 Matrice de transcodification</a>
+                    </div>
+                </div>
+            </aside>
+
+            <article class="page-content">
+
+                <section id="principe" class="content-section">
+                    <h2>🧭 Principe</h2>
+                    <p>
+                        Lors d’une mission de transcodification, le client fournit un fichier XML de facture issu de son système.
+                        Il faut alors établir la correspondance entre ses données et les champs attendus dans la facture cible
+                        conforme à la réforme. Cet outil produit le support de ce travail : un classeur Excel qui liste, pour chaque
+                        cas d’usage retenu, les données à obtenir, avec deux colonnes vierges à compléter côté client.
+                    </p>
+
+                    <div class="transco-preview">
+                        <h4>Structure du classeur généré</h4>
+                        <ul>
+                            <li><strong>Onglet <code>00 - Champs obligatoires</code></strong> — le socle commun à toute facture (<span id="transco-socle-count">…</span> données).</li>
+                            <li><strong>Onglet <code>01 - Liste de vos cas d’usage</code></strong> — récapitulatif des cas retenus pour l’entreprise.</li>
+                            <li><strong>Un onglet par cas d’usage</strong> — les données supplémentaires propres au cas.</li>
+                            <li>Chaque onglet comporte 4 colonnes : référence de la norme, donnée à inclure, puis <strong>Information présente dans l’ERP</strong> et <strong>Balise présente dans le XML de facture</strong>, laissées vierges.</li>
+                        </ul>
+                    </div>
+
+                    <div class="callout callout--info">
+                        <span class="callout-icon">🔒</span>
+                        <div class="callout-content">
+                            <p>Tout est généré dans votre navigateur : le nom du client et les informations saisies ne quittent pas votre poste.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="contexte" class="content-section">
+                    <h2>🏢 Contexte client</h2>
+                    <p>Ces informations sont facultatives. Elles servent à nommer le fichier et à en-têter les onglets du classeur.</p>
+
+                    <div class="gen-form">
+                        <div class="gen-field">
+                            <label for="transco-client">Entreprise / client</label>
+                            <input type="text" id="transco-client" placeholder="Ex : ACME Industrie" autocomplete="off">
+                        </div>
+                        <div class="gen-field">
+                            <label for="transco-projet">Projet / périmètre</label>
+                            <input type="text" id="transco-projet" placeholder="Ex : Flux 1 — factures de vente France" autocomplete="off">
+                        </div>
+                        <div class="gen-field">
+                            <label for="transco-consultant">Consultant (trigramme)</label>
+                            <input type="text" id="transco-consultant" placeholder="Ex : BBA" maxlength="3" autocomplete="off">
+                        </div>
+                    </div>
+                </section>
+
+                <section id="selection" class="content-section">
+                    <h2>✅ Cas d’usage applicables</h2>
+                    <p>
+                        Cochez les situations rencontrées par l’entreprise. <span id="transco-cas-count">…</span> cas d’usage sont
+                        disponibles, représentant <span id="transco-field-count">…</span> données supplémentaires possibles.
+                    </p>
+
+                    <div class="transco-toolbar">
+                        <button type="button" class="transco-link-btn" id="btn-select-all">Tout sélectionner</button>
+                        <button type="button" class="transco-link-btn" id="btn-select-none">Tout désélectionner</button>
+                    </div>
+
+                    <div id="transco-list">
+                        <div class="gen-loader">Chargement des cas d’usage…</div>
+                    </div>
+                </section>
+
+                <section id="generation" class="content-section">
+                    <h2>📥 Génération du classeur</h2>
+
+                    <div class="transco-summary">
+                        <div class="transco-stat">
+                            <div class="transco-stat-value" id="summary-cas">0</div>
+                            <div class="transco-stat-label">Cas retenus</div>
+                        </div>
+                        <div class="transco-stat">
+                            <div class="transco-stat-value" id="summary-champs">0</div>
+                            <div class="transco-stat-label">Champs à mapper</div>
+                        </div>
+                        <div class="transco-stat">
+                            <div class="transco-stat-value" id="summary-onglets">0</div>
+                            <div class="transco-stat-label">Onglets Excel</div>
+                        </div>
+                    </div>
+
+                    <p class="transco-hint" id="summary-hint">Sélectionnez au moins un cas d’usage, ou générez directement la matrice complète.</p>
+
+                    <div class="transco-actions">
+                        <button class="gen-btn" id="btn-transco-generate" type="button" disabled>
+                            <span class="gen-btn-icon">📥</span>
+                            Générer ma matrice (.xlsx)
+                        </button>
+                        <button class="gen-btn transco-btn-secondary" id="btn-transco-generate-all" type="button">
+                            <span class="gen-btn-icon">📚</span>
+                            Générer la matrice complète
+                        </button>
+                    </div>
+
+                    <div class="transco-status" id="transco-status"></div>
+
+                    <div class="gen-info-box">
+                        <h4>📋 Bon usage du fichier</h4>
+                        <p>
+                            Le classeur est un support de collecte : il ne préjuge pas de la solution technique retenue.
+                            Les deux dernières colonnes sont à compléter par le client (donnée disponible dans l’ERP) puis
+                            par l’équipe projet (balise du XML source). Une donnée absente de l’ERP est un point d’attention
+                            à traiter avant la phase de transcodification.
+                        </p>
+                        <p id="transco-version"></p>
+                    </div>
+                </section>
+
+                <nav class="page-nav-bottom">
+                    <a href="./outils.html" class="nav-prev">
+                        <span class="nav-label">Retour</span>
+                        <span class="nav-title">← Les outils</span>
+                    </a>
+                    <a href="./champs.html" class="nav-next">
+                        <span class="nav-label">Approfondir</span>
+                        <span class="nav-title">Les champs BT / BG →</span>
+                    </a>
+                </nav>
+            </article>
+        </div>
+    </main>
+
+    <footer id="main-footer"></footer>
+
+    <script src="./js/nav.js"></script>
+    <script src="./js/animations.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="./js/xlsx-writer.js"></script>
+    <script src="./js/transcodification-ui.js"></script>
+</body>
+</html>
