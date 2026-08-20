@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Validateur XSD &amp; Schematron | Re·Form·E</title>
+    <link rel="icon" href="./assets/favicon-Fluxym-V2.png" sizes="32x32" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/pages.css">
+    <style>
+        /* ===== Styles spécifiques au validateur (console de type éditeur) ===== */
+        .vld-container { max-width: 1600px; margin: 0 auto; padding: 0 24px; }
+
+        .vld-toolbar {
+            display: flex; flex-wrap: wrap; align-items: center; gap: 12px;
+            padding: 14px 18px; margin-bottom: 14px;
+            background: var(--white); border: 1px solid var(--gray-200);
+            border-radius: var(--radius-lg); box-shadow: var(--shadow-sm);
+        }
+        .vld-toolbar-group { display: flex; align-items: center; gap: 8px; }
+        .vld-toolbar-sep { width: 1px; height: 28px; background: var(--gray-200); }
+        .vld-toolbar-spacer { flex: 1; }
+
+        .vld-select {
+            font-family: inherit; font-size: .9rem; font-weight: 600; color: var(--gray-900);
+            padding: 9px 12px; border: 1px solid var(--gray-200);
+            border-radius: var(--radius-sm); background: var(--white); cursor: pointer;
+        }
+        .vld-btn {
+            display: inline-flex; align-items: center; gap: 6px;
+            font-family: inherit; font-size: .85rem; font-weight: 600;
+            padding: 9px 14px; border-radius: var(--radius-sm); cursor: pointer;
+            border: 1px solid var(--gray-200); background: var(--white); color: var(--gray-600);
+            transition: all .15s ease;
+        }
+        .vld-btn:hover { border-color: var(--cyan); color: var(--navy); box-shadow: var(--shadow-sm); }
+        .vld-btn--primary { background: var(--cyan); border-color: var(--cyan); color: var(--white); }
+        .vld-btn--primary:hover { background: var(--navy); border-color: var(--navy); color: var(--white); }
+
+        .status-badge {
+            display: inline-flex; align-items: center; gap: 6px;
+            font-size: .8rem; font-weight: 700; padding: 7px 13px;
+            border-radius: var(--radius-full); text-transform: uppercase; letter-spacing: .04em;
+        }
+        .status-badge::before { content: '●'; font-size: .7rem; }
+        .status-badge--idle { background: var(--gray-100); color: var(--gray-500); }
+        .status-badge--pending { background: rgba(245,158,11,.14); color: #b45309; }
+        .status-badge--running { background: var(--cyan-glow); color: var(--navy); }
+        .status-badge--ok { background: rgba(16,185,129,.14); color: #047857; }
+        .status-badge--error { background: rgba(239,68,68,.13); color: #b91c1c; }
+
+        /* ---- Espace de travail ---- */
+        .vld-workspace {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 330px;
+            grid-template-rows: minmax(340px, 50vh) minmax(220px, auto);
+            border: 1px solid var(--gray-200); border-radius: var(--radius-lg);
+            overflow: hidden; box-shadow: var(--shadow-md); background: var(--navy);
+        }
+        .vld-workspace.console-collapsed { grid-template-rows: minmax(340px, 62vh) 48px; }
+
+        /* ---- Éditeur ---- */
+        .vld-editor { position: relative; display: flex; overflow: hidden; background: var(--navy); }
+        .vld-editor.is-dropping { outline: 2px dashed var(--cyan); outline-offset: -6px; }
+
+        .editor-gutter {
+            flex: 0 0 58px; overflow: hidden; padding: 14px 10px 14px 0;
+            text-align: right; background: #081837; color: #4d6494;
+            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+            font-size: 12.5px; line-height: 1.55; user-select: none;
+        }
+        .gutter-line { position: relative; padding-right: 8px; }
+        .gutter-line--error { color: #fca5a5; font-weight: 700; background: rgba(239,68,68,.16); }
+        .gutter-line--warning { color: #fcd34d; font-weight: 700; background: rgba(245,158,11,.14); }
+
+        .editor-area { position: relative; flex: 1; overflow: hidden; }
+        .editor-highlight, .editor-input {
+            margin: 0; padding: 14px 16px; border: 0;
+            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+            font-size: 12.5px; line-height: 1.55; tab-size: 2;
+            white-space: pre; word-wrap: normal; overflow-wrap: normal;
+        }
+        .editor-highlight {
+            position: absolute; inset: 0; overflow: auto; pointer-events: none;
+            color: #e2e8f0; background: var(--navy);
+        }
+        .editor-input {
+            position: absolute; inset: 0; width: 100%; height: 100%;
+            resize: none; overflow: auto; background: transparent;
+            color: transparent; caret-color: var(--cyan); outline: none;
+        }
+        .editor-input::selection { background: rgba(0,167,225,.35); }
+        .editor-highlight::-webkit-scrollbar { width: 0; height: 0; }
+
+        .xh-tag { color: #7dd3fc; }
+        .xh-ns { color: #64a0c8; }
+        .xh-attr { color: #c4b5fd; }
+        .xh-value { color: #86efac; }
+        .xh-comment { color: #64748b; font-style: italic; }
+        .xh-pi { color: #f0abfc; }
+
+        /* ---- Panneau latéral ---- */
+        .vld-side {
+            background: #0e2650; border-left: 1px solid rgba(255,255,255,.08);
+            overflow-y: auto; padding: 16px; color: #cbd5e1;
+        }
+        .side-title {
+            font-size: .7rem; font-weight: 800; text-transform: uppercase; letter-spacing: .09em;
+            color: #7ea6d6; margin: 0 0 10px;
+        }
+        .side-block { margin-bottom: 22px; }
+        .side-note { font-size: .78rem; line-height: 1.5; color: #93a8c4; margin: 0; }
+
+        .schema-toggle {
+            display: grid; grid-template-columns: 18px 1fr; gap: 4px 8px;
+            align-items: start; padding: 9px 10px; margin-bottom: 7px;
+            background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.07);
+            border-radius: var(--radius-sm); cursor: pointer; transition: background .15s ease;
+        }
+        .schema-toggle:hover { background: rgba(255,255,255,.08); }
+        .schema-toggle input { margin-top: 3px; accent-color: var(--cyan); }
+        .schema-name { font-size: .82rem; font-weight: 600; color: #e2e8f0; }
+        .schema-file, .schema-sev { grid-column: 2; font-size: .68rem; }
+        .schema-file { color: #7d96b8; font-family: Consolas, monospace; word-break: break-all; }
+        .schema-sev { font-weight: 700; text-transform: uppercase; letter-spacing: .05em; margin-top: 2px; }
+        .schema-sev--error { color: #fca5a5; }
+        .schema-sev--warning { color: #fcd34d; }
+
+        .schema-stat {
+            display: grid; grid-template-columns: 1fr auto auto auto; gap: 8px;
+            font-size: .75rem; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,.06);
+        }
+        .schema-stat-label { color: #cbd5e1; }
+        .schema-stat-num { font-weight: 700; min-width: 26px; text-align: right; }
+        .schema-stat-num--err { color: #fca5a5; }
+        .schema-stat-num--warn { color: #fcd34d; }
+        .schema-stat-num--skip { color: #94a3b8; }
+
+        /* ---- Console ---- */
+        .vld-console {
+            grid-column: 1 / -1; display: flex; flex-direction: column;
+            background: #081837; border-top: 1px solid rgba(255,255,255,.1); min-height: 0;
+        }
+        .console-header {
+            display: flex; align-items: center; gap: 4px; padding: 0 12px;
+            background: #061431; border-bottom: 1px solid rgba(255,255,255,.08); flex: 0 0 auto;
+        }
+        .console-tab {
+            font-family: inherit; font-size: .78rem; font-weight: 600;
+            padding: 12px 14px; background: none; border: 0; border-bottom: 2px solid transparent;
+            color: #7d96b8; cursor: pointer;
+        }
+        .console-tab:hover { color: #e2e8f0; }
+        .console-tab.is-active { color: var(--white); border-bottom-color: var(--cyan); }
+        .console-tab .tab-count {
+            display: inline-block; min-width: 20px; margin-left: 6px; padding: 1px 6px;
+            font-size: .68rem; border-radius: var(--radius-full);
+            background: rgba(255,255,255,.1); color: #e2e8f0;
+        }
+        .console-spacer { flex: 1; }
+        .console-metrics { font-size: .72rem; color: #7d96b8; font-family: Consolas, monospace; }
+        .console-icon-btn {
+            background: none; border: 0; color: #7d96b8; cursor: pointer;
+            font-size: .95rem; padding: 6px 8px;
+        }
+        .console-icon-btn:hover { color: var(--white); }
+
+        .console-body { flex: 1; overflow-y: auto; min-height: 0; }
+        .console-collapsed .console-body, .console-collapsed .console-footer { display: none; }
+
+        .console-empty { padding: 26px 20px; font-size: .85rem; color: #7d96b8; text-align: center; }
+        .console-empty--ok { color: #6ee7b7; }
+
+        .result-row {
+            display: grid; grid-template-columns: 106px 1fr; gap: 12px;
+            padding: 10px 14px; border-bottom: 1px solid rgba(255,255,255,.05);
+            cursor: pointer; transition: background .12s ease;
+        }
+        .result-row:hover { background: rgba(255,255,255,.045); }
+        .result-row--skipped { cursor: default; }
+        .result-sev {
+            font-size: .64rem; font-weight: 800; text-transform: uppercase; letter-spacing: .05em;
+            padding: 3px 8px; border-radius: var(--radius-sm); text-align: center; height: fit-content;
+        }
+        .result-sev--error { background: rgba(239,68,68,.2); color: #fca5a5; }
+        .result-sev--warning { background: rgba(245,158,11,.18); color: #fcd34d; }
+        .result-sev--skipped { background: rgba(148,163,184,.16); color: #cbd5e1; }
+        .result-head { display: flex; flex-wrap: wrap; gap: 10px; align-items: baseline; margin-bottom: 3px; }
+        .result-head strong { font-size: .82rem; color: #e2e8f0; }
+        .result-line { font-size: .72rem; color: var(--cyan); font-family: Consolas, monospace; }
+        .result-schema { font-size: .7rem; color: #7d96b8; }
+        .result-msg { font-size: .8rem; line-height: 1.5; color: #cbd5e1; }
+        .result-meta { margin-top: 4px; }
+        .result-meta code { font-size: .68rem; color: #7d96b8; font-family: Consolas, monospace; }
+
+        .console-footer {
+            flex: 0 0 auto; max-height: 96px; overflow-y: auto; padding: 8px 14px;
+            background: #050f26; border-top: 1px solid rgba(255,255,255,.07);
+            font-family: Consolas, monospace; font-size: .72rem; color: #93a8c4;
+        }
+        .log-line { padding: 2px 0; }
+        .log-time { color: #4d6494; margin-right: 10px; }
+        .log-err { color: #fca5a5; }
+
+        .vld-statusbar {
+            display: flex; flex-wrap: wrap; align-items: center; gap: 16px;
+            padding: 9px 16px; margin-top: 12px;
+            font-size: .76rem; color: var(--gray-500);
+            background: var(--gray-50); border: 1px solid var(--gray-200);
+            border-radius: var(--radius-sm);
+        }
+        .vld-statusbar code { font-size: .72rem; color: var(--gray-600); }
+
+        @media (max-width: 1100px) {
+            .vld-workspace { grid-template-columns: 1fr; grid-template-rows: auto minmax(300px, 46vh) minmax(200px, auto); }
+            .vld-side { grid-row: 1; border-left: 0; border-bottom: 1px solid rgba(255,255,255,.08); max-height: 260px; }
+            .vld-editor { grid-row: 2; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav id="main-nav"></nav>
+
+    <header class="page-hero">
+        <div class="page-hero-content">
+            <div class="breadcrumb">
+                <a href="./index.html">Accueil</a> <span>/</span>
+                <a href="./outils.html">Les outils</a> <span>/</span> <span>Validateur</span>
+            </div>
+            <span class="hero-badge">Contrôle de conformité</span>
+            <h1>Validateur XSD &amp; Schematron</h1>
+            <p>Éditez une facture UBL, CII ou Factur-X et voyez, à chaque frappe, les règles FNFE qui passent et celles qui échouent. Tout s’exécute dans votre navigateur : aucun fichier n’est transmis à un serveur.</p>
+        </div>
+    </header>
+
+    <main class="page-main">
+        <div class="vld-container">
+
+            <div class="vld-toolbar">
+                <div class="vld-toolbar-group">
+                    <select id="pack-select" class="vld-select" aria-label="Profil de validation"></select>
+                </div>
+                <div class="vld-toolbar-sep"></div>
+                <div class="vld-toolbar-group">
+                    <button type="button" id="btn-open" class="vld-btn">📂 Ouvrir</button>
+                    <button type="button" id="btn-run" class="vld-btn vld-btn--primary">▶ Valider</button>
+                    <button type="button" id="btn-format" class="vld-btn">⌗ Réindenter</button>
+                    <button type="button" id="btn-clear" class="vld-btn">🗑 Vider</button>
+                </div>
+                <div class="vld-toolbar-sep"></div>
+                <div class="vld-toolbar-group">
+                    <button type="button" id="btn-download-xml" class="vld-btn">⬇ XML</button>
+                    <button type="button" id="btn-report" class="vld-btn">📄 Rapport</button>
+                    <button type="button" id="btn-copy-report" class="vld-btn">📋 Copier</button>
+                </div>
+                <div class="vld-toolbar-spacer"></div>
+                <span id="status-state" class="status-badge status-badge--idle">En attente d’un fichier</span>
+                <input type="file" id="file-input" accept=".xml,.sch,.pdf" hidden>
+            </div>
+
+            <div class="vld-workspace">
+
+                <div class="vld-editor">
+                    <div class="editor-gutter" id="ed-gutter"></div>
+                    <div class="editor-area">
+                        <pre class="editor-highlight" id="ed-highlight" aria-hidden="true"></pre>
+                        <textarea class="editor-input" id="ed-input" spellcheck="false"
+                            autocomplete="off" autocapitalize="off"
+                            placeholder="Collez ici une facture XML (UBL, CII), ouvrez un fichier .xml, ou déposez un PDF Factur-X pour en extraire le XML embarqué…"></textarea>
+                    </div>
+                </div>
+
+                <aside class="vld-side">
+                    <div class="side-block">
+                        <h3 class="side-title">Profil</h3>
+                        <p class="side-note" id="pack-description"></p>
+                    </div>
+                    <div class="side-block">
+                        <h3 class="side-title">Schémas appliqués</h3>
+                        <div id="schema-list"></div>
+                    </div>
+                    <div class="side-block">
+                        <h3 class="side-title">Par schéma — err. / avert. / écartées</h3>
+                        <div id="schema-stats"></div>
+                    </div>
+                    <div class="side-block">
+                        <h3 class="side-title">Paquet de règles</h3>
+                        <p class="side-note">
+                            <strong id="pack-version">—</strong><br>
+                            publié le <span id="pack-date">—</span>
+                        </p>
+                    </div>
+                </aside>
+
+                <section class="vld-console">
+                    <div class="console-header">
+                        <button type="button" class="console-tab is-active" data-filter="all">Tout</button>
+                        <button type="button" class="console-tab" data-filter="errors">Erreurs <span class="tab-count" id="tab-count-errors">0</span></button>
+                        <button type="button" class="console-tab" data-filter="warnings">Avertissements <span class="tab-count" id="tab-count-warnings">0</span></button>
+                        <button type="button" class="console-tab" data-filter="skipped">Non évaluées <span class="tab-count" id="tab-count-skipped">0</span></button>
+                        <div class="console-spacer"></div>
+                        <span class="console-metrics" id="status-metrics">—</span>
+                        <button type="button" class="console-icon-btn" id="btn-toggle-console" title="Replier / déplier la console">⌃</button>
+                    </div>
+                    <div class="console-body" id="console-results">
+                        <div class="console-empty">Déposez ou saisissez un fichier XML pour lancer les contrôles.</div>
+                    </div>
+                    <div class="console-footer" id="console-log"></div>
+                </section>
+
+            </div>
+
+            <div class="vld-statusbar">
+                <span id="status-caret">Ligne 1, col 1</span>
+                <span>Moteur : interpréteur Schematron Re·Form·E + XPath 3.1</span>
+                <span>Validation relancée automatiquement 0,7 s après la dernière frappe — ou avec <code>Ctrl</code>+<code>S</code></span>
+            </div>
+
+        </div>
+
+        <div class="page-container">
+
+            <div class="section-header">
+                <span class="section-badge">Mode d’emploi</span>
+                <h2>Comment lire les résultats</h2>
+            </div>
+
+            <section class="content-section" id="lecture">
+                <p>Le validateur enchaîne les contrôles dans l’ordre défini par la page <a href="./validation.html">Validation</a> :</p>
+                <ol>
+                    <li><strong>XML bien formé</strong> — si cette étape échoue, aucune règle métier n’est évaluée : corrigez d’abord la syntaxe signalée en rouge.</li>
+                    <li><strong>Conformité au schéma XSD</strong> — cardinalités et types de la syntaxe UBL ou CII. <em>Non encore activé dans cet outil</em> (voir la limite ci-dessous).</li>
+                    <li><strong>Règles métier Schematron</strong> — c’est le cœur de l’outil : règles européennes EN 16931 et règles françaises CTC-FR / Flux 2 du paquet FNFE indiqué dans le panneau latéral.</li>
+                    <li><strong>Contrôles de la plateforme</strong> — annuaire, unicité, cohérence inter-flux : ils ne peuvent pas être reproduits hors d’une plateforme agréée.</li>
+                </ol>
+
+                <div class="callout callout--info">
+                    <span class="callout-icon">💡</span>
+                    <div class="callout-content">
+                        <p>Une ligne <strong>erreur</strong> bloque la facture : c’est un rejet. Une ligne <strong>avertissement</strong> ne bloque pas, mais signale une pratique à risque ou une donnée incohérente. Cliquez sur une ligne de la console pour sauter directement à l’endroit concerné dans le fichier.</p>
+                    </div>
+                </div>
+            </section>
+
+            <div class="section-header">
+                <span class="section-badge">Transparence</span>
+                <h2>Ce que l’outil fait, et ce qu’il ne fait pas</h2>
+            </div>
+
+            <section class="content-section" id="perimetre">
+                <div class="comparison-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Contrôle</th>
+                                <th>État</th>
+                                <th>Précision</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>XML bien formé</td>
+                                <td>✅ Actif</td>
+                                <td>Analyseur XML natif du navigateur.</td>
+                            </tr>
+                            <tr>
+                                <td>Schematron FNFE (UBL, CII, CDAR)</td>
+                                <td>✅ Actif</td>
+                                <td>Les fichiers <code>.sch</code> livrés par la FNFE sont interprétés tels quels, sans réécriture des règles.</td>
+                            </tr>
+                            <tr>
+                                <td>Schematron Factur-X étendu</td>
+                                <td>⚠️ Partiel</td>
+                                <td>Ce schéma interroge une base de codes externe. Les règles qui en dépendent apparaissent dans l’onglet <strong>Non évaluées</strong> tant que ce fichier n’est pas déposé à côté des schémas.</td>
+                            </tr>
+                            <tr>
+                                <td>Validation XSD</td>
+                                <td>🚧 À venir</td>
+                                <td>Aucune API de navigateur ne valide un XSD : cette étape nécessite l’ajout des jeux de schémas XSD et d’un validateur dédié.</td>
+                            </tr>
+                            <tr>
+                                <td>Contrôles plateforme / annuaire</td>
+                                <td>❌ Hors périmètre</td>
+                                <td>Dépend de données de production détenues par les plateformes agréées et l’administration.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="callout callout--warning">
+                    <span class="callout-icon">⚠️</span>
+                    <div class="callout-content">
+                        <p>L’onglet <strong>Non évaluées</strong> est volontairement visible : il liste chaque règle que le moteur n’a pas pu exécuter, avec la raison. Un résultat « aucune erreur » n’a de valeur que si cet onglet est vide. Cet outil est un appui pédagogique et de pré-contrôle : il ne remplace pas la validation d’une plateforme agréée.</p>
+                    </div>
+                </div>
+            </section>
+
+            <nav class="page-nav-bottom">
+                <a href="./outils.html" class="nav-prev">
+                    <span class="nav-label">Retour</span>
+                    <span class="nav-title">← Les outils</span>
+                </a>
+                <a href="./validation.html" class="nav-next">
+                    <span class="nav-label">Pour aller plus loin</span>
+                    <span class="nav-title">Les 4 niveaux de validation →</span>
+                </a>
+            </nav>
+
+        </div>
+    </main>
+
+    <footer id="main-footer"></footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/fontoxpath@3.33.1/dist/fontoxpath.js"></script>
+    <script src="./js/schematron-engine.js"></script>
+    <script src="./js/validator-ui.js"></script>
+    <script src="./js/nav.js"></script>
+    <script src="./js/animations.js"></script>
+</body>
+</html>

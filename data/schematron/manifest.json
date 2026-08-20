@@ -1,0 +1,152 @@
+{
+  "package": "FNFE Schematrons FR CTC V1.4.0.03",
+  "publishedAt": "2026-08-04",
+  "importedAt": "2026-08-20",
+  "source": "Livraison FNFE-MPE — jeux de Schematron FR CTC (UBL, CII, Factur-X, CDAR)",
+  "engine": {
+    "name": "Interpréteur Schematron Re·Form·E",
+    "xpath": "fontoxpath 3.33.1 (XPath 3.1, MIT)",
+    "note": "Les fichiers .sch sont interprétés tels quels : pour une mise à jour FNFE, il suffit de remplacer les fichiers de ce dossier et d'ajuster ce manifeste."
+  },
+  "codeDatabases": [
+    {
+      "name": "FACTUR-X_EXTENDED_codedb.xml",
+      "url": "./data/schematron/Factur-X/FACTUR-X_EXTENDED_codedb.xml",
+      "requiredBy": "facturx-extended",
+      "note": "Base de codes appelée par fn:document() dans FACTUR-X_EXTENDED.sch. Absente de ce dépôt : les règles concernées apparaissent dans l'onglet « Non évaluées »."
+    }
+  ],
+  "packs": [
+    {
+      "id": "ubl",
+      "label": "UBL 2.1 — Facture / Avoir (Flux 2)",
+      "description": "Facture ou avoir au format UBL 2.1. Contrôles européens EN 16931 étendus CTC-FR, puis règles françaises BR-FR du Flux 2.",
+      "detect": { "roots": ["Invoice", "CreditNote"], "namespace": "oasis:names:specification:ubl" },
+      "schemas": [
+        {
+          "id": "extended-ctc-fr-ubl",
+          "label": "EXTENDED CTC-FR — UBL",
+          "file": "EXTENDED-CTC-FR-UBL.sch",
+          "url": "./data/schematron/UBL/EXTENDED-CTC-FR-UBL.sch",
+          "defaultSeverity": "error",
+          "enabledByDefault": true,
+          "note": "Règles EN 16931 étendues au profil CTC-FR (syntaxe UBL)."
+        },
+        {
+          "id": "br-fr-flux2-ubl",
+          "label": "BR-FR Flux 2 — UBL (bloquant)",
+          "file": "BR-FR-Flux2-Schematron-UBL.sch",
+          "url": "./data/schematron/UBL/BR-FR-Flux2-Schematron-UBL.sch",
+          "defaultSeverity": "error",
+          "enabledByDefault": true,
+          "note": "Règles françaises BR-FR du Flux 2 en mode bloquant."
+        },
+        {
+          "id": "br-fr-flux2-ubl-warning",
+          "label": "BR-FR Flux 2 — UBL (mode WARNING)",
+          "file": "BR-FR-Flux2-Schematron-UBL_WARNING.sch",
+          "url": "./data/schematron/UBL/BR-FR-Flux2-Schematron-UBL_WARNING.sch",
+          "defaultSeverity": "warning",
+          "enabledByDefault": false,
+          "note": "Variante applicable en réception jusqu'au 30 septembre 2026 : les mêmes règles y sont non bloquantes."
+        }
+      ]
+    },
+    {
+      "id": "cii",
+      "label": "CII D16B — Facture / Avoir (Flux 2)",
+      "description": "Facture ou avoir au format UN/CEFACT CII (CrossIndustryInvoice). Contrôles EN 16931 étendus CTC-FR, puis règles françaises BR-FR du Flux 2.",
+      "detect": { "roots": ["CrossIndustryInvoice"], "namespace": "un:unece:uncefact" },
+      "schemas": [
+        {
+          "id": "extended-ctc-fr-cii",
+          "label": "EXTENDED CTC-FR — CII",
+          "file": "EXTENDED-CTC-FR-CII.sch",
+          "url": "./data/schematron/CII/EXTENDED-CTC-FR-CII.sch",
+          "defaultSeverity": "error",
+          "enabledByDefault": true,
+          "note": "Règles EN 16931 étendues au profil CTC-FR (syntaxe CII)."
+        },
+        {
+          "id": "br-fr-flux2-cii",
+          "label": "BR-FR Flux 2 — CII (bloquant)",
+          "file": "BR-FR-Flux2-Schematron-CII.sch",
+          "url": "./data/schematron/CII/BR-FR-Flux2-Schematron-CII.sch",
+          "defaultSeverity": "error",
+          "enabledByDefault": true,
+          "note": "Règles françaises BR-FR du Flux 2 en mode bloquant."
+        },
+        {
+          "id": "br-fr-flux2-cii-warning",
+          "label": "BR-FR Flux 2 — CII (mode WARNING)",
+          "file": "BR-FR-Flux2-Schematron-CII_WARNING.sch",
+          "url": "./data/schematron/CII/BR-FR-Flux2-Schematron-CII_WARNING.sch",
+          "defaultSeverity": "warning",
+          "enabledByDefault": false,
+          "note": "Variante applicable en réception jusqu'au 30 septembre 2026 : les mêmes règles y sont non bloquantes."
+        }
+      ]
+    },
+    {
+      "id": "facturx",
+      "label": "Factur-X 1.09.2 — profil EXTENDED",
+      "description": "XML CII extrait d'un PDF Factur-X (déposez directement le PDF : le XML embarqué est extrait automatiquement). Profil EXTENDED plus les règles françaises du Flux 2.",
+      "detect": { "roots": [], "namespace": null },
+      "schemas": [
+        {
+          "id": "facturx-extended",
+          "label": "FACTUR-X EXTENDED",
+          "file": "FACTUR-X_EXTENDED.sch",
+          "url": "./data/schematron/Factur-X/FACTUR-X_EXTENDED.sch",
+          "defaultSeverity": "error",
+          "enabledByDefault": true,
+          "note": "Schéma du profil EXTENDED. Les règles de listes de codes nécessitent FACTUR-X_EXTENDED_codedb.xml, absent du dépôt."
+        },
+        {
+          "id": "br-fr-flux2-facturx",
+          "label": "BR-FR Flux 2 — CII (livraison Factur-X)",
+          "file": "BR-FR-Flux2-Schematron-CII.sch",
+          "url": "./data/schematron/Factur-X/BR-FR-Flux2-Schematron-CII.sch",
+          "defaultSeverity": "error",
+          "enabledByDefault": true,
+          "note": "Copie livrée dans le paquet Factur-X : deux libellés y diffèrent de la version du dossier CII."
+        },
+        {
+          "id": "br-fr-flux2-facturx-warning",
+          "label": "BR-FR Flux 2 — CII (mode WARNING, livraison Factur-X)",
+          "file": "BR-FR-Flux2-Schematron-CII_WARNING.sch",
+          "url": "./data/schematron/Factur-X/BR-FR-Flux2-Schematron-CII_WARNING.sch",
+          "defaultSeverity": "warning",
+          "enabledByDefault": false,
+          "note": "Variante non bloquante applicable en réception jusqu'au 30 septembre 2026."
+        }
+      ]
+    },
+    {
+      "id": "cdar",
+      "label": "CDAR — Compte rendu / statut (Flux 2)",
+      "description": "Message CrossDomainAcknowledgementAndResponse : cycle de vie et statuts de facture.",
+      "detect": { "roots": ["CrossDomainAcknowledgementAndResponse"], "namespace": null },
+      "schemas": [
+        {
+          "id": "br-fr-cdv-cdar",
+          "label": "BR-FR CDV — CDAR (bloquant)",
+          "file": "BR-FR-CDV-Schematron-CDAR.sch",
+          "url": "./data/schematron/CDAR/BR-FR-CDV-Schematron-CDAR.sch",
+          "defaultSeverity": "error",
+          "enabledByDefault": true,
+          "note": "Règles du cycle de vie (statuts, motifs, actions)."
+        },
+        {
+          "id": "br-fr-cdv-cdar-warning",
+          "label": "BR-FR CDV — CDAR (mode WARNING)",
+          "file": "BR-FR-CDV-Schematron-CDAR_WARNING.sch",
+          "url": "./data/schematron/CDAR/BR-FR-CDV-Schematron-CDAR_WARNING.sch",
+          "defaultSeverity": "warning",
+          "enabledByDefault": false,
+          "note": "Variante non bloquante applicable en réception jusqu'au 30 septembre 2026."
+        }
+      ]
+    }
+  ]
+}
