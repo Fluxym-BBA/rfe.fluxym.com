@@ -347,15 +347,15 @@ document.addEventListener('DOMContentLoaded', () => {
         if (Array.isArray(data.families) && data.families.length > 0) {
             families = data.families.map((fam) => ({
                 key: fam.letter,
-                icon: fam.icon || '📁',
                 badge: fam.letter,
-                label: fam.label,
+                label: fam.short || fam.label,
+                title: fam.label,
                 cases: fam.cases.map((id) => byId.get(id)).filter(Boolean)
             }));
             const classed = new Set(data.families.flatMap((fam) => fam.cases));
             const orphans = data.cases.filter((c) => !classed.has(c.id));
             if (orphans.length > 0) {
-                families.push({ key: 'ZZ', icon: '📁', badge: '·', label: 'Autres cas', cases: orphans });
+                families.push({ key: 'ZZ', badge: '·', label: 'Autres cas', title: 'Autres cas', cases: orphans });
             }
         } else {
             const order = Object.keys(data.categories || {});
@@ -364,9 +364,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 const cat = (data.categories || {})[key] || {};
                 return {
                     key,
-                    icon: cat.icon || '📁',
                     badge: '',
                     label: cat.label || key,
+                    title: cat.label || key,
                     cases: data.cases.filter((c) => c.category === key)
                 };
             });
@@ -386,8 +386,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 const search = `${c.num || ''} ${c.title} ${c.subtitle || ''} ${(c.tags || []).join(' ')}`
                     .toLowerCase().replace(/"/g, '');
                 const aria = c.id === current.id ? ' aria-current="page"' : '';
-                return `<a href="./cas-detail.html?id=${c.id}" class="${cls}" data-search="${search}"${aria}>` +
-                    `<strong>${num}</strong>${c.title}</a>`;
+                return `<a href="./cas-detail.html?id=${c.id}" class="${cls}" data-search="${search}"${aria} ` +
+                    `title="${c.title.replace(/"/g, '')}"><strong>${num}</strong>${c.title}</a>`;
             }).join('');
 
             const classes = ['cudet-fam-group'];
@@ -396,18 +396,18 @@ document.addEventListener('DOMContentLoaded', () => {
             const badge = fam.badge ? `<span class="cudet-fam-letter">${fam.badge}</span>` : '';
 
             return `<div class="${classes.join(' ')}" data-cat="${fam.key}">` +
-                `<button type="button" class="cudet-fam-toggle" aria-expanded="${isOpen}">` +
-                `<span class="cudet-fam-icon">${fam.icon}</span>${badge}` +
+                `<button type="button" class="cudet-fam-toggle" aria-expanded="${isOpen}" ` +
+                `title="${fam.title.replace(/"/g, '')}">${badge}` +
                 `<span class="cudet-fam-label">${fam.label}</span>` +
                 `<span class="cudet-fam-count">${cases.length}</span>` +
-                '<span class="cudet-fam-chevron">▶</span></button>' +
+                '<span class="cudet-fam-chevron">&#9656;</span></button>' +
                 `<div class="cudet-fam-body">${items}</div></div>`;
         }).join('');
 
         host.innerHTML = groups + '<div class="cudet-fam-empty is-hidden" id="fam-empty">Aucun cas ne correspond.</div>';
 
         const total = document.getElementById('fam-total');
-        if (total) total.textContent = `${data.cases.length} fiches`;
+        if (total) total.textContent = `${data.cases.length}`;
 
         // Déploiement / repliement d'une famille.
         host.querySelectorAll('.cudet-fam-toggle').forEach((btn) => {
@@ -420,10 +420,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 );
             });
         });
-
-        // La fiche courante est amenée dans le champ de vision de l'ascenseur.
-        const active = host.querySelector('.cudet-fam-item.is-current');
-        if (active) active.scrollIntoView({ block: 'nearest' });
 
         bindFamilyFilter(host);
     };
