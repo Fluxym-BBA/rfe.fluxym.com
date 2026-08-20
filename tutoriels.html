@@ -84,6 +84,66 @@
             color: var(--cyan);
             font-family: 'SF Mono', 'Fira Code', monospace;
         }
+        .tuto-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 12px;
+        }
+        .tuto-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 9px 16px;
+            border: none;
+            border-radius: var(--radius-full);
+            background: linear-gradient(135deg, var(--cyan), var(--navy));
+            color: var(--white);
+            font-family: 'Inter', sans-serif;
+            font-size: 12px;
+            font-weight: 700;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .tuto-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-cyan);
+        }
+        .tuto-btn:disabled {
+            opacity: 0.6;
+            cursor: progress;
+            transform: none;
+            box-shadow: none;
+        }
+        .tuto-btn--ghost {
+            background: var(--white);
+            color: var(--gray-600);
+            border: 1.5px solid var(--gray-200);
+        }
+        .tuto-btn--ghost:hover {
+            border-color: var(--cyan);
+            color: var(--cyan);
+            box-shadow: none;
+        }
+        .tuto-msg {
+            margin-top: 12px;
+            padding: 10px 14px;
+            border-radius: var(--radius-sm);
+            font-size: 12px;
+            line-height: 1.6;
+        }
+        .tuto-msg--ok {
+            background: rgba(16, 185, 129, 0.08);
+            color: var(--success);
+        }
+        .tuto-msg--warn {
+            background: rgba(245, 158, 11, 0.08);
+            color: var(--warning);
+        }
+        .tuto-msg code {
+            font-size: 11px;
+        }
         .action-time {
             margin-left: auto;
             flex-shrink: 0;
@@ -453,28 +513,55 @@
                         </a>
                     </div>
                     <h3>⬇️ Fichiers à télécharger</h3>
-                    <p>Raccourcis vers les fichiers utilisés dans la partie 2, <strong>tels qu'ils étaient publiés au 20 août 2026</strong>. Les URL OASIS de la norme UBL 2.1 sont stables ; l'archive Schématron FNFE est versionnée et changera d'adresse à chaque nouvelle release — en cas de lien mort, repartez de <a href="https://fnfe-mpe.org/ressources/" target="_blank" rel="noopener">fnfe-mpe.org/ressources</a>.</p>
+                    <p>Les fichiers utilisés dans la partie 2, <strong>dans l'état publié au 20 août 2026</strong>. Les URL OASIS de la norme UBL 2.1 sont figées (release <em>OASIS Standard</em> du 04/11/2013) ; l'archive Schématron FNFE est versionnée et changera d'adresse à chaque nouvelle publication — en cas de lien mort, repartez de <a href="https://fnfe-mpe.org/ressources/" target="_blank" rel="noopener">fnfe-mpe.org/ressources</a>.</p>
                     <div class="resource-grid">
-                        <a class="resource-card" href="https://fnfe-mpe.org/wp-content/uploads/2026/08/2026_08_04_FNFE_SCHEMATRONS_FR_CTC_V1.4.0.03.zip" target="_blank" rel="noopener">
+
+                        <div class="resource-card">
                             <h4>✅ Schématrons FR CTC — v1.4.0.03</h4>
-                            <p>Archive ZIP des Schématrons français (règles métier EN 16931 + règles CTC françaises). Publication FNFE du 04/08/2026. Contient les fichiers <code>.sch</code> à référencer dans le XML.</p>
+                            <p>Archive ZIP des Schématrons français (règles EN 16931 + règles CTC françaises), publiée par la FNFE-MPE le 04/08/2026. Contient les fichiers <code>.sch</code> à référencer dans le XML.</p>
                             <span class="resource-badge">fnfe-mpe.org · .zip · version datée</span>
-                        </a>
-                        <a class="resource-card" href="https://docs.oasis-open.org/ubl/os-UBL-2.1/xsd/maindoc/UBL-Invoice-2.1.xsd" target="_blank" rel="noopener">
+                            <div class="tuto-actions">
+                                <a class="tuto-btn" href="https://fnfe-mpe.org/wp-content/uploads/2026/08/2026_08_04_FNFE_SCHEMATRONS_FR_CTC_V1.4.0.03.zip">⬇️ Télécharger le ZIP</a>
+                                <a class="tuto-btn tuto-btn--ghost" href="https://fnfe-mpe.org/ressources/" target="_blank" rel="noopener">Voir la source ↗</a>
+                            </div>
+                        </div>
+
+                        <div class="resource-card">
                             <h4>📐 XSD — UBL-Invoice-2.1</h4>
-                            <p>Schéma XSD officiel OASIS de la facture UBL 2.1. Sert à la validation de structure (arborescence, blocs, imbrication) dans VS Code.</p>
-                            <span class="resource-badge">docs.oasis-open.org · .xsd</span>
-                        </a>
-                        <a class="resource-card" href="https://docs.oasis-open.org/ubl/os-UBL-2.1/xsd/maindoc/UBL-CreditNote-2.1.xsd" target="_blank" rel="noopener">
+                            <p>Schéma XSD officiel OASIS de la facture UBL 2.1 (58 Ko). Sert à la validation de structure — arborescence, blocs, niveaux d'imbrication — dans VS Code.</p>
+                            <span class="resource-badge">docs.oasis-open.org · .xsd · copie locale</span>
+                            <div class="tuto-actions">
+                                <button class="tuto-btn" data-download data-filename="UBL-Invoice-2.1.xsd" data-local="./assets/xsd/UBL-Invoice-2.1.xsd" data-remote="https://docs.oasis-open.org/ubl/os-UBL-2.1/xsd/maindoc/UBL-Invoice-2.1.xsd">⬇️ Télécharger le .xsd</button>
+                                <a class="tuto-btn tuto-btn--ghost" href="https://docs.oasis-open.org/ubl/os-UBL-2.1/xsd/maindoc/UBL-Invoice-2.1.xsd" target="_blank" rel="noopener">Voir la source ↗</a>
+                            </div>
+                        </div>
+
+                        <div class="resource-card">
                             <h4>📐 XSD — UBL-CreditNote-2.1</h4>
-                            <p>Schéma XSD officiel OASIS de l'avoir UBL 2.1. Indispensable dès que le fichier produit est une note de crédit (InvoiceTypeCode 381).</p>
-                            <span class="resource-badge">docs.oasis-open.org · .xsd</span>
-                        </a>
-                        <a class="resource-card" href="https://docs.oasis-open.org/ubl/os-UBL-2.1/xsd/maindoc/" target="_blank" rel="noopener">
+                            <p>Schéma XSD officiel OASIS de l'avoir UBL 2.1 (56 Ko). Indispensable dès que le fichier produit est une note de crédit (InvoiceTypeCode 381).</p>
+                            <span class="resource-badge">docs.oasis-open.org · .xsd · copie locale</span>
+                            <div class="tuto-actions">
+                                <button class="tuto-btn" data-download data-filename="UBL-CreditNote-2.1.xsd" data-local="./assets/xsd/UBL-CreditNote-2.1.xsd" data-remote="https://docs.oasis-open.org/ubl/os-UBL-2.1/xsd/maindoc/UBL-CreditNote-2.1.xsd">⬇️ Télécharger le .xsd</button>
+                                <a class="tuto-btn tuto-btn--ghost" href="https://docs.oasis-open.org/ubl/os-UBL-2.1/xsd/maindoc/UBL-CreditNote-2.1.xsd" target="_blank" rel="noopener">Voir la source ↗</a>
+                            </div>
+                        </div>
+
+                        <div class="resource-card">
                             <h4>🗂️ Tous les XSD UBL 2.1</h4>
-                            <p>Répertoire OASIS des schémas principaux UBL 2.1 : commande, avis d'expédition, catalogue, etc. À utiliser pour tout document autre que la facture et l'avoir.</p>
+                            <p>Répertoire OASIS des schémas principaux UBL 2.1 : commande, avis d'expédition, catalogue, note de débit, auto-facturation… À utiliser pour tout document autre que la facture et l'avoir.</p>
                             <span class="resource-badge">docs.oasis-open.org · index</span>
-                        </a>
+                            <div class="tuto-actions">
+                                <a class="tuto-btn tuto-btn--ghost" href="https://docs.oasis-open.org/ubl/os-UBL-2.1/xsd/maindoc/" target="_blank" rel="noopener">Parcourir le répertoire ↗</a>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="callout callout--info">
+                        <span class="callout-icon">💡</span>
+                        <div class="callout-content">
+                            <p>Les schémas du répertoire <code>maindoc</code> s'appuient sur les schémas du dossier <code>common</code> du même package. Si VS Code signale des références introuvables au moment de la validation XSD, récupérez le package complet <a href="https://docs.oasis-open.org/ubl/os-UBL-2.1/UBL-2.1.zip">UBL-2.1.zip</a> (55 Mo, OASIS) et conservez l'arborescence d'origine.</p>
+                        </div>
                     </div>
 
                     <div class="callout callout--warning">
@@ -504,5 +591,6 @@
 
     <script src="./js/nav.js"></script>
     <script src="./js/animations.js"></script>
+    <script src="./js/tuto-download.js"></script>
 </body>
 </html>
