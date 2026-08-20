@@ -131,30 +131,6 @@
         }
         .gen-separator::before { left: 0; }
         .gen-separator::after { right: 0; }
-
-        /* --- Contenu du telechargement (triptyque UBL / UBL+lisible / PDF) --- */
-        .gen-field .gen-checks {
-            display: flex; flex-direction: column; gap: 9px; margin-top: 2px;
-        }
-        .gen-field .gen-check {
-            display: flex; align-items: flex-start; gap: 9px; margin: 0;
-            font-size: 0.84rem; font-weight: 400; color: var(--gray-600);
-            text-transform: none; letter-spacing: normal;
-            line-height: 1.35; cursor: pointer;
-        }
-        .gen-field .gen-check input[type="checkbox"] {
-            width: 16px; height: 16px; margin: 1px 0 0 0; flex: 0 0 auto;
-            accent-color: var(--cyan); cursor: pointer;
-        }
-        .gen-field .gen-check code {
-            font-size: 0.78rem; color: var(--navy); background: var(--gray-100);
-            padding: 1px 5px; border-radius: 4px;
-        }
-        .gen-field .gen-check.disabled { opacity: 0.45; cursor: not-allowed; }
-        .gen-field .gen-check.disabled input { cursor: not-allowed; }
-        .gen-hint {
-            margin: 10px 0 0; font-size: 0.76rem; color: var(--gray-500); line-height: 1.45;
-        }
     </style>
 </head>
 <body>
@@ -164,7 +140,7 @@
     <header class="page-hero">
         <div class="page-hero-content">
             <div class="breadcrumb">
-                <a href="./index.html">Accueil</a> <span>/</span> <span>Outils</span>
+                <a href="./index.html">Accueil</a> <span>/</span> <a href="./outils.html">Les outils</a> <span>/</span> <span>Générateur UBL</span>
             </div>
             <span class="hero-badge">Outil pratique</span>
             <h1>Générateur de flux UBL</h1>
@@ -184,7 +160,9 @@
                     </ul>
                     <div class="sidebar-nav-pages">
                         <h4>Outils</h4>
+                        <a href="./outils.html" class="sidebar-page">🧰 Tous les outils</a>
                         <a href="./generateur.html" class="sidebar-page active">🧪 Générateur UBL</a>
+                        <a href="./transcodification.html" class="sidebar-page">🧭 Matrice de transcodification</a>
                     </div>
                 </div>
             </aside>
@@ -215,30 +193,6 @@
                         <div class="gen-field">
                             <label for="trigramme">Consultant (Trigramme)</label>
                             <input type="text" id="trigramme" placeholder="Ex: BBA" maxlength="3" value="BBA">
-                        </div>
-
-                        <div class="gen-field">
-                            <label for="buyer-reference">Reference acheteur BT-10 (obligatoire AFNOR)</label>
-                            <input type="text" id="buyer-reference" placeholder="Ex: REF-KREAMOB-2026" maxlength="60">
-                        </div>
-
-                        <div class="gen-field" id="group-artifacts">
-                            <label>Contenu du téléchargement</label>
-                            <div class="gen-checks">
-                                <label class="gen-check" for="opt-ubl">
-                                    <input type="checkbox" id="opt-ubl" checked>
-                                    <span>Facture UBL nue (.xml)</span>
-                                </label>
-                                <label class="gen-check" for="opt-ubl-pdf">
-                                    <input type="checkbox" id="opt-ubl-pdf" checked>
-                                    <span>Facture UBL avec lisible PDF embarqué en base64 <code>BG-24</code></span>
-                                </label>
-                                <label class="gen-check" for="opt-pdf">
-                                    <input type="checkbox" id="opt-pdf" checked>
-                                    <span>PDF lisible autonome</span>
-                                </label>
-                            </div>
-                            <p class="gen-hint" id="artifacts-hint"></p>
                         </div>
 
                         <div class="gen-companies">
@@ -343,9 +297,9 @@
                 </section>
 
                 <nav class="page-nav-bottom">
-                    <a href="./index.html" class="nav-prev">
+                    <a href="./outils.html" class="nav-prev">
                         <span class="nav-label">Retour</span>
-                        <span class="nav-title">← Accueil</span>
+                        <span class="nav-title">← Les outils</span>
                     </a>
                     <a href="./comprendre.html" class="nav-next">
                         <span class="nav-label">Continuer</span>
@@ -362,7 +316,6 @@
     <script src="./js/animations.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
     <script src="./data/ubl-templates.js"></script>
-    <script src="./js/pdf-lisible.js"></script>
     <script src="./js/ubl-generator.js"></script>
     <script src="./js/generator-ui.js"></script>
 </body>

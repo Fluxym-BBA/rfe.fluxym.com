@@ -1,10 +1,10 @@
 {
   "meta": {
-    "version": "1.0",
+    "version": "1.1",
     "dateMiseAJour": "2026-08-20",
     "titre": "Matrice de transcodification — champs obligatoires par cas d’usage",
-    "source": "Trame de travail Fluxym — référentiel : données légales obligatoires + Annexe 1 « Format sémantique FE e-invoicing — Flux 1 » v1.2 et AFNOR XP Z12-014",
-    "avertissement": "Contenu repris à l’identique de la trame de travail Fluxym fournie par le consultant. Les références de norme n’ont pas été réinterprétées.",
+    "source": "Trame de travail Fluxym (socle + 25 cas) enrichie des entrées P0 validées par RFE_Expert — référentiels : AFNOR XP Z12-014 V1.4 Annexe A, XP Z12-012 V1.4, Règles de gestion DGFiP v3.2, Spécifications externes FE v3.1",
+    "avertissement": "Les 25 cas d'origine sont repris à l'identique de la trame de travail Fluxym. Les 14 entrées ajoutées en version 1.1 ont été documentées et validées par l'agent RFE_Expert ; deux points de vigilance subsistent (cas 17b et cas 33), signalés dans le champ « note » du cas concerné.",
     "colonnes": [
       "Référence de la norme",
       "Donnée à inclure",
@@ -16,7 +16,8 @@
       "Paiement & tiers",
       "Rôles & mandats",
       "Acomptes, escomptes & retenues",
-      "TVA & nature de l'opération"
+      "TVA & nature de l'opération",
+      "Régimes de TVA & situations transverses"
     ]
   },
   "socle": {
@@ -461,6 +462,30 @@
       ]
     },
     {
+      "id": "17a",
+      "code": "Cas 17a",
+      "titre": "Marketplace avec intermédiaire de paiement",
+      "categorie": "Paiement & tiers",
+      "refNorme": "Réf. XP Z12-014 §3.2.15",
+      "objectif": "Traiter une vente via marketplace où un intermédiaire collecte le paiement pour le compte du vendeur et perçoit une commission.",
+      "definition": "Le vendeur réalise la vente et émet la facture F1 à l'acheteur. L'intermédiaire de paiement (marketplace) collecte le règlement de l'acheteur, prélève sa commission et reverse le solde au vendeur. L'intermédiaire émet une facture F2 au vendeur pour ses frais de service. Si la TVA de F1 est exigible à l'encaissement, l'intermédiaire transmet le statut « Encaissé » via sa PA (PA-T) au CdD PPF et à la PA du vendeur.",
+      "note": "La facture F2 (commission intermédiaire vers vendeur) est une facture classique, sans champ spécifique. La gestion du statut « Encaissé » par la PA-T est une spécificité de flux, non de données de facture.",
+      "champs": [
+        {
+          "ref": "BG-10",
+          "label": "Bloc Bénéficiaire sur F1 : identification de l'intermédiaire comme destinataire du règlement"
+        },
+        {
+          "ref": "BT-59",
+          "label": "Identifiant du bénéficiaire : SIREN de l’intermédiaire de paiement"
+        },
+        {
+          "ref": "BG-16 / BG-17",
+          "label": "Instructions de paiement sur F1 : coordonnées bancaires de l’intermédiaire (IBAN, BIC)"
+        }
+      ]
+    },
+    {
       "id": "40",
       "code": "Cas 40",
       "titre": "Netting / compensation",
@@ -530,6 +555,76 @@
       ]
     },
     {
+      "id": "13",
+      "code": "Cas 13",
+      "titre": "Sous-traitance B2B avec paiement direct",
+      "categorie": "Rôles & mandats",
+      "refNorme": "Réf. XP Z12-014 §3.2.12.3",
+      "objectif": "Traiter une opération de sous-traitance B2B où l'acheteur final règle directement le sous-traitant pour le compte du titulaire.",
+      "definition": "En sous-traitance avec paiement direct, le sous-traitant émet une facture F1 au titulaire (entreprise principale), avec autoliquidation de TVA si applicable (BTP notamment). Le titulaire émet ensuite une facture globale F2 à l'acheteur final incluant toutes les prestations. Sur F2, le champ BT-113 porte par convention le montant à régler directement au sous-traitant, et BT-115 le solde dû au titulaire. La demande de paiement direct peut être formalisée par un message CDAR avec le statut « Demande de Paiement Direct » (code 224).",
+      "champs": [
+        {
+          "ref": "BT-118",
+          "label": "Code catégorie de TVA du BG-23 sur F1 : AE (autoliquidation)"
+        },
+        {
+          "ref": "BT-119",
+          "label": "Taux de TVA sur F1 : 0"
+        },
+        {
+          "ref": "BT-121",
+          "label": "Code motif d’exonération TVA sur F1 : VATEX-FR-AE"
+        },
+        {
+          "ref": "BT-120",
+          "label": "Motif d’exonération en texte sur F1 : « Autoliquidation de TVA »"
+        },
+        {
+          "ref": "BT-113",
+          "label": "Montant déjà payé sur F2 : égal au montant payé en direct au sous-traitant (par convention)"
+        },
+        {
+          "ref": "BT-115",
+          "label": "Net à payer sur F2 : solde restant dû au titulaire uniquement"
+        },
+        {
+          "ref": "BT-18 / BT-18-1",
+          "label": "Objet facturé avec qualifiant UNTDID 1153 : référence de chantier ou de lot"
+        }
+      ]
+    },
+    {
+      "id": "14",
+      "code": "Cas 14",
+      "titre": "Co-traitance B2B avec mandataire",
+      "categorie": "Rôles & mandats",
+      "refNorme": "Réf. XP Z12-014 §3.2.12.5",
+      "objectif": "Permettre la gestion des factures de co-traitance B2B où chaque co-traitant facture l'acheteur sous la coordination d'un mandataire.",
+      "definition": "Dans un groupement de co-traitance, chaque co-traitant émet sa propre facture à l'acheteur final. Un mandataire coordonne l'ensemble : il « vise » les factures sur la PA de réception avant présentation groupée à l'acheteur. Les factures doivent porter une référence commune (identifiant de chantier et période de facturation) pour permettre le regroupement. Le mandataire est identifié dans le bloc Agent de Vendeur du profil EXTENDED-CTC-FR.",
+      "champs": [
+        {
+          "ref": "EXT-FR-FE-BG-03",
+          "label": "Bloc Agent de Vendeur : identification du mandataire du groupement"
+        },
+        {
+          "ref": "EXT-FR-FE-71",
+          "label": "SIREN du mandataire (dans EXT-FR-FE-BG-03)"
+        },
+        {
+          "ref": "EXT-FR-FE-69 / EXT-FR-FE-70",
+          "label": "SIRET du mandataire (schemeID EXT-FR-FE-70 = 0009)"
+        },
+        {
+          "ref": "BT-18 / BT-18-1",
+          "label": "Objet facturé : référence commune de chantier et période (ex. : CHANTIERXX_JANVIER25)"
+        },
+        {
+          "ref": "BT-10",
+          "label": "Référence de l'acheteur : référence de marché commune au groupement"
+        }
+      ]
+    },
+    {
       "id": "15",
       "code": "Cas 15",
       "titre": "Agent d’acheteur",
@@ -553,6 +648,42 @@
         {
           "ref": "BG-24",
           "label": "Justificatif additionnel éventuel."
+        }
+      ]
+    },
+    {
+      "id": "17b",
+      "code": "Cas 17b",
+      "titre": "Marketplace avec mandat de facturation",
+      "categorie": "Rôles & mandats",
+      "refNorme": "Réf. XP Z12-014 §3.2.16",
+      "objectif": "Traiter une vente via marketplace où l'intermédiaire émet la facture au nom et pour le compte du vendeur en vertu d'un mandat de facturation.",
+      "definition": "En plus de collecter le paiement, l'intermédiaire (marketplace) facture au nom et pour le compte du vendeur sous mandat de facturation. La facture F1 est créée par l'intermédiaire et transmise à l'acheteur via la PA de l'intermédiaire (PA-T). Le vendeur reste identifié en BG-4, et l'intermédiaire est identifié comme tiers facturant. L'intermédiaire gère les statuts d'encaissement lorsque la TVA est exigible à l'encaissement.",
+      "note": "l'utilisation de EXT-FR-FE-BG-03 pour le tiers facturant sous mandat en B2B est cohérente avec le profil EXTENDED-CTC-FR et son usage en B2G (BR-FR-CPRO-21), mais la Z12-014 §3.2.16 ne détaille pas explicitement le mapping champ par champ. À confirmer sur la section complète du PDF ; le cas 19a (§3.2.18.1) documente le même mécanisme de mandat.",
+      "champs": [
+        {
+          "ref": "EXT-FR-FE-BG-03",
+          "label": "Bloc Agent de Vendeur : identification de l'intermédiaire comme mandataire de facturation"
+        },
+        {
+          "ref": "EXT-FR-FE-71",
+          "label": "SIREN de l’intermédiaire / mandataire de facturation"
+        },
+        {
+          "ref": "EXT-FR-FE-69 / EXT-FR-FE-70",
+          "label": "SIRET de l’intermédiaire (schemeID EXT-FR-FE-70 = 0009)"
+        },
+        {
+          "ref": "BG-10",
+          "label": "Bloc Bénéficiaire : identification de l'intermédiaire comme destinataire du règlement"
+        },
+        {
+          "ref": "BT-59",
+          "label": "Identifiant du bénéficiaire : SIREN de l’intermédiaire"
+        },
+        {
+          "ref": "BG-16 / BG-17",
+          "label": "Instructions de paiement : coordonnées bancaires de l’intermédiaire"
         }
       ]
     },
@@ -599,6 +730,45 @@
         {
           "ref": "BG-4 / BG-7",
           "label": "Conserver vendeur=fournisseur et acheteur=client."
+        }
+      ]
+    },
+    {
+      "id": "23",
+      "code": "Cas 23",
+      "titre": "Auto-facturation particulier / professionnel",
+      "categorie": "Rôles & mandats",
+      "refNorme": "Réf. XP Z12-014 §3.2.22",
+      "objectif": "Traiter l'émission d'une facture par un professionnel (acheteur) au nom d'un particulier (vendeur) dans le cadre d'un mandat d'auto-facturation.",
+      "definition": "Un particulier qui vend ou fournit des services de manière répétée à un professionnel est assujetti à la TVA. Il peut bénéficier du régime de franchise en base (art. 293 B du CGI). Dans la plupart des cas, c'est le professionnel (acheteur) qui crée la facture en auto-facturation. La facture porte le code type 389 (facture auto-facturée) et le cadre de facturation B9. Si le vendeur (particulier) est en franchise en base, la catégorie TVA E et le code VATEX-FR-FRANCHISE s'appliquent.",
+      "champs": [
+        {
+          "ref": "BT-3",
+          "label": "Code type de facture : 389 (facture auto-facturée)"
+        },
+        {
+          "ref": "BT-23",
+          "label": "Cadre de facturation : B9 (auto-facturation B2B)"
+        },
+        {
+          "ref": "BT-118",
+          "label": "Code catégorie TVA du BG-23 : E si vendeur en franchise en base, S sinon"
+        },
+        {
+          "ref": "BT-119",
+          "label": "Taux de TVA : 0 si franchise en base"
+        },
+        {
+          "ref": "BT-121",
+          "label": "Code motif d’exonération : VATEX-FR-FRANCHISE (si franchise en base)"
+        },
+        {
+          "ref": "BT-120",
+          "label": "Motif en texte : « TVA non applicable, art. 293 B du CGI » (si franchise en base)"
+        },
+        {
+          "ref": "BT-32",
+          "label": "N° d’identification fiscale du vendeur : répéter le SIREN si le particulier n’a pas de N° de TVA (cf. BR-FR-CO-16)"
         }
       ]
     },
@@ -791,6 +961,447 @@
         {
           "ref": "Règle",
           "label": "Une prestation accessoire suit le traitement de l’opération principale."
+        }
+      ]
+    },
+    {
+      "id": "33",
+      "code": "Cas 33",
+      "titre": "Opérations soumises à la TVA sur la marge",
+      "categorie": "TVA & nature de l'opération",
+      "refNorme": "Réf. XP Z12-014 §3.2.32 / Art. 297 A et 266-1-e du CGI",
+      "objectif": "Traiter les factures relevant du régime de la TVA sur la marge bénéficiaire (biens d'occasion, agences de voyages, terrains à bâtir).",
+      "definition": "La TVA sur la marge est calculée sur la différence entre le prix de vente et le prix d'achat, et non sur le prix de vente total. Le montant de TVA sur la marge n'est pas porté sur la facture dans le cas général, ce qui implique que les montants de ligne sont exprimés TTC (prix de vente). La ventilation TVA utilise la catégorie E avec un taux de 0. Pour les agences de voyages et les terrains à bâtir, une exception en profil EXTENDED-CTC-FR permet d'indiquer la marge bénéficiaire HT et la TVA correspondante via des lignes additionnelles.",
+      "note": "pour les biens d'occasion et objets de collection (art. 297 A du CGI), la Z12-014 §3.2.32 ne fournit pas de code VATEX distinct dans les exemples documentés (seul VATEX-EU-D, agences de voyages, est couvert). À confirmer dans la codelist VATEX de la Z12-012 Annexe A ; à défaut, utiliser catégorie E / taux 0 avec la mention légale en BT-120. Option profil EXTENDED (agences de voyages, terrains à bâtir) : lignes additionnelles exposant la marge bénéficiaire HT (BT-153 = « MARGE BENEFICIAIRE HT », BT-146 = montant de marge, BT-151 = S, BT-152 = taux applicable) et second bloc BG-23 avec BT-118 = S et le taux réel sur la marge (cf. §3.2.32.3).",
+      "champs": [
+        {
+          "ref": "BT-118",
+          "label": "Code catégorie TVA du BG-23 : E (exonéré, pour les lignes au régime de la marge)"
+        },
+        {
+          "ref": "BT-119",
+          "label": "Taux de TVA du BG-23 : 0"
+        },
+        {
+          "ref": "BT-151",
+          "label": "Code catégorie TVA en ligne : E (pour chaque ligne relevant du régime marge)"
+        },
+        {
+          "ref": "BT-152",
+          "label": "Taux de TVA en ligne : 0"
+        },
+        {
+          "ref": "BT-146",
+          "label": "Prix unitaire net de la ligne : montant TTC (prix de vente, et non HT)"
+        },
+        {
+          "ref": "BT-121",
+          "label": "Code motif d’exonération : VATEX-EU-D pour agences de voyages (Directive 2006/112/CE art. 306-310)"
+        },
+        {
+          "ref": "BT-120",
+          "label": "Motif en texte : mention légale du régime applicable (ex. : « Régime particulier – Agences de voyage »)"
+        }
+      ]
+    },
+    {
+      "id": "T1",
+      "code": "T1",
+      "titre": "Autoliquidation de TVA (reverse charge)",
+      "categorie": "Régimes de TVA & situations transverses",
+      "refNorme": "Réf. EN 16931-1 BR-AE-01 à BR-AE-10 / BR-FR-15 (XP Z12-012)",
+      "objectif": "Traiter les factures où la TVA est due par le preneur (acheteur) en application du mécanisme d'autoliquidation.",
+      "definition": "L'autoliquidation de TVA (reverse charge) s'applique lorsque le redevable de la TVA est le preneur et non le fournisseur. C'est le cas notamment pour les acquisitions intracommunautaires de services, certaines opérations domestiques (sous-traitance BTP, livraisons de déchets, etc.) et les achats auprès de fournisseurs non établis en France. La facture ne porte pas de TVA collectée mais doit signaler la catégorie AE et le code VATEX approprié.",
+      "champs": [
+        {
+          "ref": "BT-118",
+          "label": "Code catégorie TVA du BG-23 : AE (autoliquidation)"
+        },
+        {
+          "ref": "BT-119",
+          "label": "Taux de TVA : 0"
+        },
+        {
+          "ref": "BT-121",
+          "label": "Code motif d’exonération : VATEX-FR-AE (domestique) ou VATEX-EU-AE (intracommunautaire / import)"
+        },
+        {
+          "ref": "BT-120",
+          "label": "Motif d’exonération en texte : « Autoliquidation de TVA » ou « Reverse Charge »"
+        },
+        {
+          "ref": "BT-151",
+          "label": "Code catégorie TVA en ligne : AE (sur chaque ligne concernée)"
+        },
+        {
+          "ref": "BT-152",
+          "label": "Taux de TVA en ligne : 0"
+        }
+      ]
+    },
+    {
+      "id": "T2",
+      "code": "T2",
+      "titre": "Franchise en base de TVA (art. 293 B CGI)",
+      "categorie": "Régimes de TVA & situations transverses",
+      "refNorme": "Réf. BR-FR-CO-16 et BR-FR-MAP-08 / BR-FR-MAP-09 (XP Z12-012)",
+      "objectif": "Traiter les factures émises par un assujetti bénéficiant du régime de franchise en base de TVA.",
+      "definition": "Les assujettis en franchise en base (art. 293 B du CGI) émettent des factures sans TVA avec la mention obligatoire « TVA non applicable, art. 293 B du CGI ». En facturation électronique, la catégorie TVA est E (exonéré) avec le code VATEX-FR-FRANCHISE. Si le vendeur n'a pas de numéro de TVA intracommunautaire, il doit répéter son SIREN en BT-32. Un point de vigilance majeur concerne la transcodification en Flux 1 : la PA doit transcoder BT-118 de E vers Z et supprimer BT-121 et BT-120 (règle BR-FR-MAP-08).",
+      "champs": [
+        {
+          "ref": "BT-118",
+          "label": "Code catégorie TVA du BG-23 : E (exonéré de TVA)"
+        },
+        {
+          "ref": "BT-119",
+          "label": "Taux de TVA : 0"
+        },
+        {
+          "ref": "BT-121",
+          "label": "Code motif d’exonération : VATEX-FR-FRANCHISE"
+        },
+        {
+          "ref": "BT-120",
+          "label": "Motif en texte : « TVA non applicable, art. 293 B du CGI »"
+        },
+        {
+          "ref": "BT-151",
+          "label": "Code catégorie TVA en ligne : E"
+        },
+        {
+          "ref": "BT-152",
+          "label": "Taux de TVA en ligne : 0"
+        },
+        {
+          "ref": "BT-32",
+          "label": "N° d’identification fiscale du vendeur : SIREN répété si pas de N° TVA intracommunautaire (cf. BR-FR-CO-16)"
+        },
+        {
+          "ref": "BR-FR-MAP-08 (Flux 1)",
+          "label": "⚠️ Transcodification PA : BT-118 transcodé de E vers Z, BT-121 et BT-120 supprimés dans le Flux 1"
+        },
+        {
+          "ref": "BR-FR-MAP-09 (Flux 10)",
+          "label": "⚠️ Transcodification PA : même logique E vers Z pour le Flux 10.1 e-reporting"
+        }
+      ]
+    },
+    {
+      "id": "T3",
+      "code": "T3",
+      "titre": "Avoirs et factures rectificatives",
+      "categorie": "Régimes de TVA & situations transverses",
+      "refNorme": "Réf. BR-FR-04 (XP Z12-012) / RG G1.32 (DGFIP v3.2)",
+      "objectif": "Traiter l'émission d'un avoir (annulation partielle ou totale) ou d'une facture rectificative (correction et remplacement) référençant un ou plusieurs documents d'origine.",
+      "definition": "Un avoir (credit note) annule tout ou partie d'une facture antérieure. Une facture rectificative remplace intégralement la facture d'origine, qui doit être annulée. Dans les deux cas, la référence au(x) document(s) d'origine est obligatoire. Pour un avoir, plusieurs factures antérieures peuvent être référencées (cardinalité 1..n). Pour une facture rectificative, une seule référence antérieure est autorisée. Les références peuvent être portées en en-tête (BG-3) ou en ligne (EXT-FR-FE-BG-06), mais pas aux deux niveaux simultanément.",
+      "note": "Règle RG G1.32 (DGFIP v3.2) : en trajectoire Démarrage, BT-25 est obligatoire ; BT-26 le devient également en trajectoire Cible. Si les références sont portées en ligne (EXT-FR-FE-136 / EXT-FR-FE-138), elles ne doivent PAS l'être aussi en BG-3, sous peine de rejet du Flux 1. Facture rectificative : une et une seule référence antérieure. Avoir : au moins une référence, multiples possibles (cardinalité 1..n).",
+      "champs": [
+        {
+          "ref": "BT-3",
+          "label": "Code type de facture : 381 (avoir), 384 (facture rectificative), 396 (avoir affacturé), 261 (avoir auto-facturé), 503 (avoir d’acompte), 472 (rectificative affacturée), 471 (rectificative auto-facturée)"
+        },
+        {
+          "ref": "BG-3",
+          "label": "Bloc Référence à une facture antérieure (en en-tête)"
+        },
+        {
+          "ref": "BT-25",
+          "label": "Référence à une facture antérieure : numéro de la facture d’origine (obligatoire)"
+        },
+        {
+          "ref": "BT-26",
+          "label": "Date de la facture antérieure (obligatoire en trajectoire Cible)"
+        },
+        {
+          "ref": "EXT-FR-FE-BG-06",
+          "label": "Bloc Référence à facture antérieure en ligne (alternative à BG-3, profil EXTENDED)"
+        },
+        {
+          "ref": "EXT-FR-FE-136",
+          "label": "Identifiant de la facture antérieure en ligne"
+        },
+        {
+          "ref": "EXT-FR-FE-138",
+          "label": "Date de la facture antérieure en ligne"
+        }
+      ]
+    },
+    {
+      "id": "T4",
+      "code": "T4",
+      "titre": "Facture en devise étrangère (hors EUR)",
+      "categorie": "Régimes de TVA & situations transverses",
+      "refNorme": "Réf. BR-FR-CO-12 (XP Z12-012)",
+      "objectif": "Traiter une facture dont la devise principale est différente de l'euro, en assurant la déclaration du montant de TVA en euros.",
+      "definition": "Lorsqu'une facture est émise dans une devise autre que l'euro (USD, GBP, etc.), la réglementation française impose que la devise de comptabilité soit l'euro et que le montant total de TVA soit exprimé en euros. La règle BR-FR-CO-12 rend obligatoires la présence de BT-6 (devise de comptabilité = EUR) et de BT-111 (montant de TVA en devise de comptabilité). Cette exigence est contrôlée par schematron.",
+      "champs": [
+        {
+          "ref": "BT-5",
+          "label": "Devise de la facture : code ISO 4217 de la devise étrangère (ex. : USD, GBP)"
+        },
+        {
+          "ref": "BT-6",
+          "label": "Devise de comptabilité : EUR (obligatoire si BT-5 ≠ EUR)"
+        },
+        {
+          "ref": "BT-111",
+          "label": "Montant total de TVA en devise de comptabilité : montant de TVA converti en EUR"
+        },
+        {
+          "ref": "BT-111-1",
+          "label": "Qualifiant de la devise de BT-111 : EUR"
+        }
+      ]
+    },
+    {
+      "id": "T5",
+      "code": "T5",
+      "titre": "Sous-traitance BTP avec autoliquidation",
+      "categorie": "Régimes de TVA & situations transverses",
+      "refNorme": "Réf. XP Z12-014 §3.2.12 / Art. 283-2 nonies du CGI",
+      "objectif": "Traiter la facture d'un sous-traitant BTP dont la TVA est autoliquidée par le donneur d'ordres en application de l'article 283-2 nonies du CGI.",
+      "definition": "Dans le secteur du BTP, les prestations de travaux immobiliers réalisées par un sous-traitant pour le compte d'un preneur assujetti relèvent de l'autoliquidation de TVA (art. 283-2 nonies du CGI). Le sous-traitant émet sa facture HT sans TVA avec la mention « Autoliquidation » et le code VATEX-FR-AE. C'est le preneur (titulaire ou donneur d'ordres) qui déclare et déduit la TVA. Ce cas est un sous-ensemble de l'autoliquidation domestique, spécifique au secteur BTP.",
+      "champs": [
+        {
+          "ref": "BT-118",
+          "label": "Code catégorie TVA du BG-23 : AE (autoliquidation)"
+        },
+        {
+          "ref": "BT-119",
+          "label": "Taux de TVA : 0"
+        },
+        {
+          "ref": "BT-121",
+          "label": "Code motif d’exonération : VATEX-FR-AE"
+        },
+        {
+          "ref": "BT-120",
+          "label": "Motif en texte : « Autoliquidation de TVA – art. 283-2 nonies du CGI »"
+        },
+        {
+          "ref": "BT-151",
+          "label": "Code catégorie TVA en ligne : AE"
+        },
+        {
+          "ref": "BT-152",
+          "label": "Taux de TVA en ligne : 0"
+        },
+        {
+          "ref": "BT-18 / BT-18-1",
+          "label": "Objet facturé avec qualifiant UNTDID 1153 : référence de chantier, lot ou marché"
+        }
+      ]
+    },
+    {
+      "id": "T6",
+      "code": "T6",
+      "titre": "Remises, majorations et frais annexes",
+      "categorie": "Régimes de TVA & situations transverses",
+      "refNorme": "Réf. EN 16931-1 BG-20, BG-21, BG-27, BG-28 / BR-CO-23, BR-CO-24",
+      "objectif": "Traiter les remises (rabais, ristournes) et les charges (frais de port, majorations, frais de déplacement) au niveau du document et des lignes de facture.",
+      "definition": "Les remises et charges peuvent être appliquées au niveau du document global (BG-20 pour les remises, BG-21 pour les charges) ou au niveau de chaque ligne de facture (BG-27 pour les remises de ligne, BG-28 pour les charges de ligne). Chaque occurrence doit être associée à un motif en texte et/ou un code motif normalisé. Les remises et charges au niveau document participent à la ventilation TVA et doivent porter un code catégorie TVA et un taux.",
+      "champs": [
+        {
+          "ref": "BG-20",
+          "label": "Bloc Remise au niveau du document (répétable)"
+        },
+        {
+          "ref": "BT-92",
+          "label": "Montant de la remise au niveau du document"
+        },
+        {
+          "ref": "BT-93",
+          "label": "Base de calcul de la remise au niveau du document"
+        },
+        {
+          "ref": "BT-94",
+          "label": "Pourcentage de la remise au niveau du document"
+        },
+        {
+          "ref": "BT-95",
+          "label": "Code catégorie TVA de la remise au niveau du document (S, E, AE, K, G, O, Z)"
+        },
+        {
+          "ref": "BT-96",
+          "label": "Taux de TVA de la remise au niveau du document"
+        },
+        {
+          "ref": "BT-97",
+          "label": "Motif de la remise (texte libre, ex. : « Remise commerciale »)"
+        },
+        {
+          "ref": "BT-98",
+          "label": "Code motif de la remise (codelist UNTDID 5189, ex. : 95 = remise)"
+        },
+        {
+          "ref": "BG-21",
+          "label": "Bloc Charges ou frais au niveau du document (répétable)"
+        },
+        {
+          "ref": "BT-99",
+          "label": "Montant des charges au niveau du document"
+        },
+        {
+          "ref": "BT-100",
+          "label": "Base de calcul des charges au niveau du document"
+        },
+        {
+          "ref": "BT-101",
+          "label": "Pourcentage des charges au niveau du document"
+        },
+        {
+          "ref": "BT-102",
+          "label": "Code catégorie TVA des charges"
+        },
+        {
+          "ref": "BT-103",
+          "label": "Taux de TVA des charges"
+        },
+        {
+          "ref": "BT-104",
+          "label": "Motif des charges (texte libre, ex. : « Frais de port »)"
+        },
+        {
+          "ref": "BT-105",
+          "label": "Code motif des charges (codelist UNTDID 7161, ex. : FC = freight charge)"
+        },
+        {
+          "ref": "BG-27",
+          "label": "Bloc Remise de ligne de facture (répétable, au sein de BG-25)"
+        },
+        {
+          "ref": "BT-136",
+          "label": "Montant de la remise de ligne"
+        },
+        {
+          "ref": "BT-137",
+          "label": "Base de calcul de la remise de ligne"
+        },
+        {
+          "ref": "BT-138",
+          "label": "Pourcentage de la remise de ligne"
+        },
+        {
+          "ref": "BT-139",
+          "label": "Motif de la remise de ligne (obligatoire si pas de BT-140, cf. BR-CO-23)"
+        },
+        {
+          "ref": "BT-140",
+          "label": "Code motif de la remise de ligne (UNTDID 5189)"
+        },
+        {
+          "ref": "BG-28",
+          "label": "Bloc Charges ou frais sur ligne de facture (répétable, au sein de BG-25)"
+        },
+        {
+          "ref": "BT-141",
+          "label": "Montant des charges de ligne"
+        },
+        {
+          "ref": "BT-142",
+          "label": "Base de calcul des charges de ligne"
+        },
+        {
+          "ref": "BT-143",
+          "label": "Pourcentage des charges de ligne"
+        },
+        {
+          "ref": "BT-144",
+          "label": "Motif des charges de ligne (obligatoire si pas de BT-145, cf. BR-CO-24)"
+        },
+        {
+          "ref": "BT-145",
+          "label": "Code motif des charges de ligne (UNTDID 7161)"
+        }
+      ]
+    },
+    {
+      "id": "T7",
+      "code": "T7",
+      "titre": "Livraison intracommunautaire de biens",
+      "categorie": "Régimes de TVA & situations transverses",
+      "refNorme": "Réf. EN 16931-1 BR-IC-01 à BR-IC-12 / BR-FR-15, BR-FR-20 (XP Z12-012) / Art. 138 Directive 2006/112/CE",
+      "objectif": "Traiter une facture de livraison intracommunautaire de biens exonérée de TVA avec e-reporting obligatoire (flux 10.1).",
+      "definition": "Les livraisons intracommunautaires de biens entre assujettis sont exonérées de TVA dans le pays de départ (art. 138 Directive 2006/112/CE). La facture porte la catégorie TVA K (exempt for intra-Community supply), un taux de 0 et le code VATEX-EU-IC. Ces opérations ne relèvent pas du e-invoicing domestique (flux 1/2) mais du e-reporting (flux 10.1). La PA du vendeur doit être en mesure de traiter et transmettre l'enregistrement de e-reporting correspondant.",
+      "champs": [
+        {
+          "ref": "BT-118",
+          "label": "Code catégorie TVA du BG-23 : K (livraison intracommunautaire)"
+        },
+        {
+          "ref": "BT-119",
+          "label": "Taux de TVA : 0"
+        },
+        {
+          "ref": "BT-121",
+          "label": "Code motif d’exonération : VATEX-EU-IC"
+        },
+        {
+          "ref": "BT-120",
+          "label": "Motif en texte : « Exonération de TVA – Livraison intracommunautaire – article 138 Directive 2006/112/CE »"
+        },
+        {
+          "ref": "BT-151",
+          "label": "Code catégorie TVA en ligne : K"
+        },
+        {
+          "ref": "BT-152",
+          "label": "Taux de TVA en ligne : 0"
+        },
+        {
+          "ref": "BT-48",
+          "label": "N° TVA intracommunautaire du vendeur"
+        },
+        {
+          "ref": "BT-47",
+          "label": "N° TVA intracommunautaire de l’acheteur (obligatoire, cf. BR-IC-04/05)"
+        },
+        {
+          "ref": "BT-21 / BT-22",
+          "label": "Note avec code sujet BAR : signale à la PA le traitement e-reporting et non e-invoicing (cf. BR-FR-20)"
+        }
+      ]
+    },
+    {
+      "id": "T8",
+      "code": "T8",
+      "titre": "Exportation de biens hors Union européenne",
+      "categorie": "Régimes de TVA & situations transverses",
+      "refNorme": "Réf. EN 16931-1 BR-G-01 à BR-G-12 / BR-FR-15, BR-FR-20 (XP Z12-012)",
+      "objectif": "Traiter une facture d'exportation de biens hors UE exonérée de TVA avec e-reporting obligatoire (flux 10.1).",
+      "definition": "Les exportations de biens à destination d'un pays hors Union européenne sont exonérées de TVA. La facture porte la catégorie TVA G (free export item, tax not charged), un taux de 0 et le code VATEX-EU-G. Comme pour les livraisons intracommunautaires, ces opérations relèvent du e-reporting (flux 10.1) et non du e-invoicing domestique. La PA du vendeur doit pouvoir constituer et transmettre le message de e-reporting correspondant au CdD PPF.",
+      "champs": [
+        {
+          "ref": "BT-118",
+          "label": "Code catégorie TVA du BG-23 : G (export hors UE)"
+        },
+        {
+          "ref": "BT-119",
+          "label": "Taux de TVA : 0"
+        },
+        {
+          "ref": "BT-121",
+          "label": "Code motif d’exonération : VATEX-EU-G"
+        },
+        {
+          "ref": "BT-120",
+          "label": "Motif en texte : « Export hors UE » ou « Exonération de TVA pour exportation »"
+        },
+        {
+          "ref": "BT-151",
+          "label": "Code catégorie TVA en ligne : G"
+        },
+        {
+          "ref": "BT-152",
+          "label": "Taux de TVA en ligne : 0"
+        },
+        {
+          "ref": "BT-48",
+          "label": "N° TVA intracommunautaire du vendeur"
+        },
+        {
+          "ref": "BT-21 / BT-22",
+          "label": "Note avec code sujet BAR : signale à la PA le traitement e-reporting et non e-invoicing (cf. BR-FR-20)"
         }
       ]
     }

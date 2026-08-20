@@ -88,6 +88,7 @@ const TranscoTool = {
                     <span class="transco-card-title">${this.escapeHtml(cas.titre)}</span>
                     <span class="transco-card-desc">${this.escapeHtml(cas.objectif)}</span>
                     <span class="transco-card-ref">${this.escapeHtml(cas.refNorme)}</span>
+                    ${cas.note ? '<span class="transco-card-warn">⚠️ Point de vigilance documenté dans le classeur</span>' : ''}
                 </span>
             </label>`;
     },
@@ -146,12 +147,17 @@ const TranscoTool = {
         return this.sortCas(this.data.cas.filter(c => this.selected.has(c.id)));
     },
 
-    /** Ordonne les cas par numéro croissant (1, 2, 19a, 19b, 20…). */
+    /**
+     * Ordonne les entrées : d'abord les cas FNFE par numéro croissant
+     * (1, 2, 17a, 17b, 19a…), puis les situations transverses (T1 → T8).
+     */
     sortCas(cas) {
+        const rank = entry => (/^\d/.test(entry.id) ? 0 : 1);
+        const num = entry => parseInt(entry.id.replace(/\D/g, ''), 10) || 0;
         return [...cas].sort((a, b) => {
-            const na = parseInt(a.id, 10);
-            const nb = parseInt(b.id, 10);
-            return na === nb ? a.id.localeCompare(b.id) : na - nb;
+            if (rank(a) !== rank(b)) return rank(a) - rank(b);
+            if (num(a) !== num(b)) return num(a) - num(b);
+            return a.id.localeCompare(b.id);
         });
     },
 
@@ -268,25 +274,32 @@ const TranscoTool = {
 
     buildCasSheet(cas) {
         const S = XlsxWriter.STYLE;
+
+        // En-tête à hauteur variable : la note de vigilance est facultative,
+        // la ligne figée est donc calculée et non codée en dur.
+        const head = [
+            [
+                { v: `${cas.code} – ${cas.titre}`, s: S.TITLE },
+                null,
+                null,
+                { v: '← Retour au sommaire', s: S.LINK }
+            ],
+            [{ v: cas.refNorme, s: S.SUBTITLE }],
+            [{ v: `Objectif : ${cas.objectif}`, s: S.PARAGRAPH }],
+            [{ v: `Définition du cas d’usage : ${cas.definition}`, s: S.PARAGRAPH }]
+        ];
+        if (cas.note) {
+            head.push([{ v: `⚠️ Point de vigilance : ${cas.note}`, s: S.PARAGRAPH }]);
+        }
+        head.push([]);
+        head.push([{ v: 'Ces champs s’ajoutent au socle de l’onglet « 00 - Champs obligatoires ».', s: S.PARAGRAPH }]);
+        head.push(this.headerRow('Données supplémentaires à inclure :'));
+
         return {
             name: `${cas.code} - ${cas.titre}`,
             cols: [26, 74, 34, 40],
-            freeze: 7,
-            rows: [
-                [
-                    { v: `${cas.code} – ${cas.titre}`, s: S.TITLE },
-                    null,
-                    null,
-                    { v: '← Retour au sommaire', s: S.LINK }
-                ],
-                [{ v: cas.refNorme, s: S.SUBTITLE }],
-                [{ v: `Objectif : ${cas.objectif}`, s: S.PARAGRAPH }],
-                [{ v: `Définition du cas d’usage : ${cas.definition}`, s: S.PARAGRAPH }],
-                [],
-                [{ v: 'Ces champs s’ajoutent au socle de l’onglet « 00 - Champs obligatoires ».', s: S.PARAGRAPH }],
-                this.headerRow('Données supplémentaires à inclure :'),
-                ...this.fieldRows(cas.champs)
-            ]
+            freeze: head.length,
+            rows: [...head, ...this.fieldRows(cas.champs)]
         };
     },
 
