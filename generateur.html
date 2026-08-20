@@ -256,6 +256,10 @@
                                     <input type="checkbox" id="opt-cii">
                                     <span>Même facture en syntaxe UN/CEFACT <code>CII D22B</code> (socle du Factur-X)</span>
                                 </label>
+                                <label class="gen-check" for="opt-facturx">
+                                    <input type="checkbox" id="opt-facturx">
+                                    <span>Facture hybride <code>Factur-X</code> : PDF/A-3B avec le CII embarqué</span>
+                                </label>
                             </div>
                             <p class="gen-hint" id="artifacts-hint"></p>
                         </div>
@@ -382,8 +386,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
     <script src="./data/ubl-templates.js"></script>
     <script src="./data/cii-templates.js"></script>
+    <script src="./data/font-liberation.js"></script>
     <script src="./js/pdf-lisible.js"></script>
     <script src="./js/pdf-annexes.js"></script>
+    <script src="./js/pdf-facturx.js"></script>
     <script src="./js/cii-generator.js"></script>
     <script src="./js/ubl-generator.js"></script>
     <script src="./js/generator-ui.js"></script>

@@ -999,14 +999,16 @@ const UBLGenerator = {
             // Syntaxe UN/CEFACT CII D22B : socle du futur Factur-X, et
             // demonstration qu'une meme facture EN 16931 s'ecrit dans deux
             // syntaxes sans changer d'un centime.
-            cii: read('opt-cii', false)
+            cii: read('opt-cii', false),
+            // Factur-X : PDF/A-3B portant le CII en fichier associe.
+            facturx: read('opt-facturx', false)
         };
         if (!this.supportsPdf(usecase)) {
             opts.ublWithPdf = false;
             opts.pdf = false;
             opts.annexes = false;
         }
-        if (!opts.ubl && !opts.ublWithPdf && !opts.pdf && !opts.annexes && !opts.cii) opts.ubl = true;
+        if (!opts.ubl && !opts.ublWithPdf && !opts.pdf && !opts.annexes && !opts.cii && !opts.facturx) opts.ubl = true;
         return opts;
     },
 
@@ -1690,7 +1692,7 @@ const UBLGenerator = {
                 // fichier autonome et objet binaire base64 de BT-125. Les annexes
                 // sont produites depuis le MEME modele pivot, ce qui garantit que
                 // bon de commande, bon de livraison et facture concordent.
-                if (opts.pdf || opts.ublWithPdf || opts.annexes) {
+                if (opts.pdf || opts.ublWithPdf || opts.annexes || opts.facturx) {
                     var renderData = buildRenderData(numeroFacture, invoiceTypeCode, null);
                     if (renderData) {
                         pdfDoc = PDFLisible.build(renderData);
@@ -1704,6 +1706,7 @@ const UBLGenerator = {
                         opts.pdf = false;
                         opts.ublWithPdf = false;
                         opts.annexes = false;
+                        opts.facturx = false;
                         opts.ubl = true;
                     }
                 }
@@ -1783,6 +1786,42 @@ const UBLGenerator = {
                         artifacts.push({
                             name: baseName + "_CII_avec_3_PJ.xml",
                             blob: new Blob([CIIGenerator.build(ciiPivotPj)], { type: "application/xml" })
+                        });
+                    }
+                }
+
+                // FACTUR-X : le PDF/A-3 et le CII reunis dans un seul fichier.
+                // Le PDF ne peut pas etre sa propre piece jointe : la valeur
+                // LISIBLE du BT-123 disparait donc, le PDF ETANT le document
+                // lisible. Les bons de commande et de livraison sont embarques
+                // comme fichiers associes du PDF/A-3, avec la relation
+                // /Supplement, plutot que recopies en base64 dans le XML.
+                //
+                // BT-16 reste neanmoins emis : une reference documentaire garde
+                // son sens meme lorsque le fichier voyage dans le conteneur PDF
+                // et non dans le XML. On transmet donc au pivot des annexes
+                // reduites a leur identite, avant de vider BG-24.
+                if (opts.facturx && renderData) {
+                    var fxRefs = (opts.annexes && annexDocs)
+                        ? annexDocs.map(function(a) {
+                            return { description: a.description, docNumber: a.number };
+                        })
+                        : null;
+                    var fxPivot = buildCiiPivot(numeroFacture, invoiceTypeCode, null, "PO-1001", fxRefs);
+                    if (fxPivot) {
+                        fxPivot.attachments = [];
+                        var fxXml = CIIGenerator.build(fxPivot);
+                        var fxErr = CIIGenerator.verify(fxPivot, fxXml);
+                        if (fxErr.length) console.warn("Factur-X : incoherences detectees", fxErr);
+                        var fxFiles = (opts.annexes && annexDocs)
+                            ? annexDocs.map(function(a) {
+                                return { filename: a.filename, desc: a.description, raw: a.raw };
+                            })
+                            : null;
+                        var fxDoc = PDFFacturX.buildFacturX(renderData, fxXml, fxFiles);
+                        artifacts.push({
+                            name: fxDoc.filename,
+                            blob: PDFFacturX.toBlob(fxDoc.raw)
                         });
                     }
                 }

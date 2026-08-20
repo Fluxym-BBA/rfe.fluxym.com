@@ -602,3 +602,84 @@ Confirmations utiles obtenues : les 4 URI de namespaces, BT-23 qui accueille le 
 - Validation externe du CII au validateur FNFE-MPE, en complément des contrôles internes.
 - Un moteur Schematron existe désormais sur le site (`js/schematron-engine.js`, `data/schematron/`) : il pourrait valider le CII directement en ligne, sous réserve d'y charger les règles CII, distinctes des règles UBL.
 - Les items du lot 4 restent ouverts (cas assujetti unique externe, blocs tiers payeur et facturant dans le lisible, `payeeType` non rendus, variante multi-taux de T6, mise en page des factures courtes).
+
+---
+
+## 12. Lot 5b - Factur-X, emballage PDF/A-3B (21/08/2026)
+
+Le generateur produit desormais une **facture hybride** : un seul fichier PDF, lisible par un humain, contenant le XML CII exploitable par une machine. C'est l'aboutissement des lots 4 et 5a reunis.
+
+### 12.1 Ce qu'exige reellement un Factur-X
+
+Un Factur-X n'est pas un PDF avec un XML colle dedans. C'est un **PDF/A-3**, c'est-a-dire un document d'archivage, auquel le XML est associe par le mecanisme des *Associated Files*. Quatre exigences en decoulent, et **chacune suffit a faire rejeter le fichier** :
+
+| Exigence | Traitement retenu |
+|---|---|
+| Toutes les polices embarquees, **y compris les 14 standard** | `data/font-liberation.js` |
+| Un `OutputIntent` portant un **profil ICC reel** | profil sRGB construit en 468 octets |
+| XMP declarant `pdfaid:part` 3 / `conformance` B **et un schema d'extension PDF/A** | `_xmp()` |
+| Chaque fichier embarque reference par le tableau `/AF` du catalogue | `_assemble()` |
+
+Deux pieges meritent d'etre signales, parce qu'ils sont silencieux :
+
+- **`/AFRelationship` vaut `/Data`** pour le XML, et non `/Alternative`. Cette derniere valeur, tres repandue dans les exemples en ligne, est un heritage de ZUGFeRD 1.x explicitement corrige depuis.
+- **Le schema d'extension XMP n'est pas decoratif.** PDF/A impose que tout namespace de metadonnees non standard soit decrit par un schema enumerant ses proprietes. Le namespace Factur-X en fait partie, et son omission est la cause d'echec la plus frequente **alors que tout le reste du fichier est correct**.
+
+### 12.2 Le profil ICC, en 468 octets
+
+PDF/A exige un `OutputIntent` avec un profil ICC embarque. La solution habituelle consiste a embarquer un profil sRGB tout fait, soit environ 3 Ko de donnees binaires tierces. Un profil ICC v2.1 matrice/TRC valide a ete construit **octet par octet en JavaScript** : en-tete de 128 octets, table de 9 balises, primaires sRGB adaptees a l'illuminant D50 du PCS. Les trois courbes de transfert etant identiques, elles partagent le meme offset.
+
+Resultat : **468 octets, zero donnee externe**, et le profil est accepte par littleCMS, qui l'identifie correctement comme `sRGB IEC61966-2.1` et execute une transformation de couleur.
+
+### 12.3 Les polices, seul vrai obstacle
+
+Le moteur de rendu employait Helvetica en police standard, ce que PDF/A interdit. Deux sous-ensembles de **Liberation Sans** (Regular et Bold) sont desormais embarques, reduits aux 191 glyphes WinAnsi presents dans la police.
+
+Le choix de cette police n'est pas esthetique mais **metrique** : sur les 224 positions WinAnsi, l'ecart de largeur avec Helvetica ne depasse 3/1000 em que pour **cinq caracteres** - macron, plus-ou-moins, micro, point median et division - dont aucun n'apparait sur une facture francaise. Le mot "Facture" mesure exactement 3390/1000 em dans les deux tables. La mise en page est donc rigoureusement preservee, ce que la validation confirme.
+
+Un detail a failli couter cher : l'outil de decoupe ne produisait qu'une table `cmap` **(1,0) Mac Roman**, inexploitable avec `/WinAnsiEncoding` ou le lecteur attend une **(3,1) Unicode**. Le symbole euro, en position 0x80 de WinAnsi, aurait disparu silencieusement. La table a ete reconstruite en une sous-table (3,1) format 4, cote generation : **aucun cout a l'execution**.
+
+Les largeurs declarees dans `/Widths` sont celles **reelles** des glyphes embarques et non celles d'Helvetica, PDF/A exigeant la coherence entre le tableau et le programme de police.
+
+### 12.4 Les pieces jointes : l'option retenue
+
+Un PDF ne peut pas etre sa propre piece jointe. En Factur-X, la valeur `LISIBLE` du BT-123 **disparait donc**, le PDF *etant* le document lisible.
+
+Restaient deux voies pour le bon de commande et le bon de livraison. La voie retenue est celle des **fichiers associes du PDF/A-3**, avec la relation `/Supplement`, plutot que la recopie en base64 dans le XML. C'est ce que ferait un Factur-X "riche" en production, et cela produit un cas de test que peu de plateformes voient passer.
+
+`BT-16` reste neanmoins emis : une reference documentaire garde son sens meme lorsque le fichier voyage dans le conteneur PDF et non dans le XML. Le pivot recoit donc des annexes reduites a leur identite, avant que BG-24 ne soit vide.
+
+Un fichier Factur-X complet contient ainsi trois fichiers associes :
+
+| Fichier | Relation | Taille (cas T6) |
+|---|---|---|
+| `factur-x.xml` | `/Data` | 10 484 o |
+| `..._bon-commande.pdf` | `/Supplement` | 9 686 o |
+| `..._bon-livraison.pdf` | `/Supplement` | 7 705 o |
+
+### 12.5 Architecture
+
+`PDFFacturX` **herite de `PDFLisible` par delegation**, comme `PDFAnnexes`. Seule la methode `_assemble` est redefinie, ce qui suffit puisque `build()` l'appelle via `this`. Les flux de contenu des pages ne sont pas touches : ils continuent de referencer `/F1` et `/F2`, qui designent desormais des polices TrueType embarquees au lieu des polices standard.
+
+Consequence mesuree : **le texte extrait du Factur-X est identique a celui du PDF lisible**, caractere pour caractere. Le rendu est le meme, le fichier ne l'est plus.
+
+Le PDF est assemble comme une chaine latin1 dont chaque caractere vaut un octet, ce qui permet d'y inserer un programme de police ou un profil ICC sans quitter le JavaScript. Le XML, lui, passe par une conversion UTF-8 explicite : un accent pesant deux octets, les longueurs declarees et la table `xref` seraient sinon fausses.
+
+L'identifiant `/ID` du trailer, exige par PDF/A, est **derive du titre** : deux executions sur la meme facture produisent un fichier identique, ce qui rend les tests de non-regression possibles.
+
+### 12.6 Validation
+
+- **54 Factur-X generes**, un par cas non groupe. **0 invalide**, `qpdf --check` sans erreur de syntaxe sur les 54, une page chacun, de 88 a 96 Ko.
+- **108 controles cibles, 0 echec** : version PDF 1.7, `/ID` au trailer, `OutputIntent` en `GTS_PDFA1`, profil ICC de 468 octets accepte par littleCMS, deux polices TrueType avec programme embarque et 224 largeurs chacune, **aucune police standard residuelle**, les six valeurs XMP attendues dont `fx:ConformanceLevel` valant exactement `EN 16931`, le schema d'extension et ses quatre proprietes, la coherence `dc:title` / `/Title`, l'encapsulation `xpacket`, le tableau `/AF`, l'arbre `/Names /EmbeddedFiles` trie, `/AFRelationship /Data` sur le XML et `/Supplement` sur les pieces jointes.
+- **Le XML embarque est le CII autonome** : memes montants, a la valeur pres.
+- **Les binaires embarques sont identiques aux PDF autonomes.**
+- **Le texte extrait est identique a celui du PDF lisible**, accents et symbole euro compris.
+- **Non-regression** : les **57 cas produisent un UBL identique bit a bit** et les **78 artefacts du lisible sont inchanges**.
+
+### 12.7 Reste a faire
+
+- **Validation externe au validateur FNFE-MPE et a veraPDF.** Les controles menes ici sont structurels et exhaustifs sur ce qui est verifiable hors ligne, mais seul veraPDF prononce la conformite PDF/A-3B. C'est la prochaine etape naturelle, et la seule qui manque.
+- **Packs groupes** : les trois cas produisant un ZIP (avoir, rectificative, pack B) n'ont pas de Factur-X, la branche correspondante generant plusieurs documents. Un Factur-X d'avoir serait pedagogiquement interessant.
+- **Profil EXTENDED** : seul EN 16931 est declare. Le socle francais admet aussi l'EXTENDED CTC-FR, dont BT-24 porte deja la valeur en UBL comme en CII.
+- La compression des flux (`FlateDecode`) n'est pas utilisee : PDF/A ne l'exige pas, et l'API `CompressionStream` du navigateur imposerait de rendre la generation asynchrone. Les 63 Ko de polices non compressees expliquent l'essentiel du poids des fichiers.
+- Les items des lots 4 et 5a restent ouverts (pack B sans modele declaratif, cas assujetti unique externe, blocs tiers payeur et facturant dans le lisible, variante multi-taux de T6, mise en page des factures courtes).
