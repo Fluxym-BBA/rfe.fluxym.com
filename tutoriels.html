@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Guide vidéo — Créer son fichier e-invoicing | Re·Form·E</title>
+    <link rel="icon" href="./assets/favicon-Fluxym-V2.png" sizes="32x32" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/pages.css">
+    <style>
+        /* Styles specifiques a la page tutoriels (lecteur video + transcription) */
+        .tuto-player {
+            background: var(--white);
+            border: 1px solid var(--gray-200);
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-md);
+            overflow: hidden;
+            margin: 24px 0 8px;
+        }
+        .tuto-player video {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background: #000;
+            display: block;
+        }
+        .tuto-player-bar {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 14px 20px;
+            border-top: 1px solid var(--gray-100);
+        }
+        .tuto-player-title {
+            font-size: 14px;
+            font-weight: 800;
+            color: var(--navy);
+        }
+        .tuto-player-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .tuto-chip {
+            font-size: 11px;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: var(--radius-full);
+            background: rgba(0, 167, 225, 0.08);
+            color: var(--cyan);
+        }
+        .tuto-transcript {
+            margin: 20px 0 8px;
+        }
+        .tuto-transcript summary {
+            cursor: pointer;
+        }
+        .tuto-transcript-body {
+            padding: 4px 20px 20px;
+            max-height: 420px;
+            overflow-y: auto;
+        }
+        .tuto-transcript-body p {
+            font-size: 13px;
+            line-height: 1.9;
+            color: var(--gray-600);
+            padding: 12px 0;
+            border-top: 1px solid var(--gray-100);
+            margin: 0;
+        }
+        .tuto-transcript-body p:first-child {
+            border-top: none;
+        }
+        .tuto-time {
+            display: inline-block;
+            min-width: 52px;
+            margin-right: 8px;
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--cyan);
+            font-family: 'SF Mono', 'Fira Code', monospace;
+        }
+        .action-time {
+            margin-left: auto;
+            flex-shrink: 0;
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--gray-400);
+            font-family: 'SF Mono', 'Fira Code', monospace;
+        }
+    </style>
+</head>
+<body>
+
+    <nav id="main-nav"></nav>
+
+    <header class="page-hero">
+        <div class="page-hero-content">
+            <div class="breadcrumb">
+                <a href="./index.html">Accueil</a> <span>/</span> <a href="./outils.html">Les outils</a> <span>/</span> <span>Guide vidéo</span>
+            </div>
+            <span class="hero-badge">Guide vidéo</span>
+            <h1>Créer son fichier e-invoicing</h1>
+            <p>Deux modules vidéo pour passer de la norme au fichier valide : exploiter les annexes de l'État pour construire un UBL, CII ou Factur-X, puis outiller son poste pour valider structure et règles métier.</p>
+        </div>
+    </header>
+
+    <main class="page-main">
+        <div class="page-container page-layout">
+
+            <aside class="page-sidebar">
+                <div class="sidebar-sticky">
+                    <h4>Sur cette page</h4>
+                    <ul class="sidebar-nav">
+                        <li><a href="#partie-1" class="sidebar-link">1 · Les fichiers de l'État</a></li>
+                        <li><a href="#partie-2" class="sidebar-link">2 · Outils IT &amp; validation</a></li>
+                        <li><a href="#prerequis" class="sidebar-link">Prérequis techniques</a></li>
+                        <li><a href="#liens" class="sidebar-link">Liens &amp; outils</a></li>
+                    </ul>
+                    <div class="sidebar-nav-pages">
+                        <h4>Pour aller plus loin</h4>
+                        <a href="./outils.html" class="sidebar-page">🧰 Tous les outils</a>
+                        <a href="./generateur.html" class="sidebar-page">🧪 Générateur UBL</a>
+                        <a href="./transcodification.html" class="sidebar-page">🧭 Matrice de transcodification</a>
+                        <a href="./formats.html" class="sidebar-page">📐 Les formats</a>
+                        <a href="./champs.html" class="sidebar-page">🔧 Les champs</a>
+                        <a href="./regles.html" class="sidebar-page">📏 Les règles</a>
+                    </div>
+                </div>
+            </aside>
+
+            <article class="page-content">
+
+                <section class="content-section reveal-on-scroll">
+                    <h2>🎬 Comment utiliser ce guide</h2>
+                    <p>Ce guide reprend l'atelier Fluxym « Création d'un fichier structuré RFE » en deux temps : la <strong>partie 1</strong> montre comment lire les annexes normatives et construire le fichier, la <strong>partie 2</strong> comment le contrôler. Chaque module propose la vidéo, un parcours horodaté des étapes clés et la transcription complète.</p>
+                    <div class="callout callout--info">
+                        <span class="callout-icon">💡</span>
+                        <div class="callout-content">
+                            <p>Une fois la méthode acquise, le <a href="./generateur.html">Générateur UBL</a> permet de produire directement un exemple conforme pour un cas d'usage donné, et la page <a href="./validation.html">Validation</a> détaille les quatre niveaux de contrôle attendus par la réforme.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="partie-1" class="content-section reveal-on-scroll">
+                    <h2>📄 Utiliser les fichiers de l&#x27;État</h2>
+                    <p>Comment constituer son fichier UBL, CII ou Factur-X à partir des ressources officielles de la DGFIP et de l&#x27;AFNOR. Niveau : débutant à intermédiaire.</p>
+                    <div class="tuto-player">
+                        <video controls preload="metadata">
+                            <source src="https://26096000.fs1.hubspotusercontent-eu1.net/hubfs/26096000/Cr%C3%A9ation%20fichier%20structur%C3%A9%20RFE%20-%20Partie%201%20-%20Utiliser%20les%20fichiers%20de%20l%C3%A9tat.mp4" type="video/mp4">
+                            Votre navigateur ne supporte pas la lecture vidéo HTML5.
+                        </video>
+                        <div class="tuto-player-bar">
+                            <span class="tuto-player-title">Partie 1 — Les fichiers de l&#x27;État</span>
+                            <span class="tuto-player-meta"><span class="tuto-chip">~30 min</span><span class="tuto-chip">🎯 Débutant</span></span>
+                        </div>
+                    </div>
+                    <details class="faq-item tuto-transcript">
+                        <summary>📝 Transcription complète — Partie 1</summary>
+                        <div class="tuto-transcript-body">
+                            <p><span class="tuto-time">[0:00]</span>Bonjour, on se voit aujourd&#x27;hui pour rentrer dans le détail de comment on crée sa facture électronique. Je partirai plus sur le format UBL, mais que vous vouliez faire du CII ou de la Factur-X, finalement, c&#x27;est à peu près la même manière de fonctionner. Premier élément, on va déjà suivre le site de la DGFIP des impôts.</p>
+                            <p><span class="tuto-time">[0:31]</span>Tous les liens, on vous les fournira et vous y aurez accès au sein d&#x27;une page web qui récapitule l&#x27;ensemble des différents liens importants. Ici, quand vous descendez un petit peu, ce qui est intéressant, c&#x27;est de comprendre que c&#x27;est bien l&#x27;AFNOR qui détermine les règles.</p>
+                            <p><span class="tuto-time">[1:04]</span>Ce qu&#x27;il faut comprendre, c&#x27;est qu&#x27;on vous parlera de Z12-12, Z12-13, Z12-14. La Z12-12, c&#x27;est le mode de fonctionnement de base de la facture électronique. C&#x27;est comment on la constitue.</p>
+                            <p><span class="tuto-time">[1:22]</span>À l&#x27;intérieur de ce fichier-là, vous aurez les différents éléments à votre disposition : des exemples de factures, la norme telle qu&#x27;elle est. Ça vous fait une bonne lecture pour le soir, mais ce n&#x27;est pas vraiment là que vous allez travailler.</p>
+                            <p><span class="tuto-time">[1:41]</span>La Z13, c&#x27;est pour la partie IT : comment on communique via API avec la plateforme agréée, les APIs SG5. La Z12-14, c&#x27;est plutôt les cas d&#x27;usage spécifiques.</p>
+                            <p><span class="tuto-time">[2:01]</span>On va cliquer sur le fameux lien de l&#x27;AFNOR. On clique sur Consultation. Vous choisissez votre langue. Et vous ne cliquez pas sur « Téléchargement de la Norme », vous cliquez sur « Téléchargement des Annexes ».</p>
+                            <p><span class="tuto-time">[2:39]</span>Ce qui nous intéresse, c&#x27;est le téléchargement des annexes. Il va vous télécharger la norme aussi.</p>
+                            <p><span class="tuto-time">[3:07]</span>Important : les fichiers semblent avoir été créés sous Mac. Les titres sont très longs. Retirez un maximum de caractères du nom de dossier avant d&#x27;extraire, sinon vous aurez des erreurs sur Windows.</p>
+                            <p><span class="tuto-time">[4:27]</span>Ne vous inquiétez pas des longueurs de noms dans les dossiers. Évitez juste au maximum d&#x27;avoir des longueurs trop importantes.</p>
+                            <p><span class="tuto-time">[4:49]</span>Là, vous avez les éléments concernant la norme. Ça fait environ 91 pages. C&#x27;est en anglais malgré l&#x27;indication en français.</p>
+                            <p><span class="tuto-time">[5:41]</span>Le fichier Excel important : ne prenez pas peur, il a une vingtaine d&#x27;onglets. À chaque fois que vous voulez travailler sur la norme, re-téléchargez le fichier car ça bouge.</p>
+                            <p><span class="tuto-time">[6:43]</span>Onglet n°1 — Profil étendu : La norme de base, c&#x27;est l&#x27;EN 16931. Mais il est préférable de se baser directement sur l&#x27;UBL XML Extended. Pourquoi ? On connaît déjà les limites de l&#x27;EN 16931, et les évolutions vont tirer vers le profil étendu.</p>
+                            <p><span class="tuto-time">[7:36]</span>Sur la facture classique, ça représente 3-4 champs de plus. Mais ça fait la différence : si demain on vous demande de vous replonger dedans 8-9 mois plus tard, ça ne sera pas plaisant.</p>
+                            <p><span class="tuto-time">[8:33]</span>Onglet n°2 — Business Rules : Les règles métier. Par exemple, sur le flux 2, la BT23 dépend de la règle BRFR08. On retrouve ces règles dans l&#x27;onglet dédié.</p>
+                            <p><span class="tuto-time">[9:50]</span>Pour certains champs (les BT), on doit aller voir des listes complètes de valeurs à respecter.</p>
+                            <p><span class="tuto-time">[10:41]</span>Onglet n°3 — Codelist : Par exemple, ISO 4217 pour les devises. On fait Ctrl+F dans l&#x27;onglet Codelist pour retrouver la bonne liste. Le bleu ciel indique les valeurs les plus utilisées.</p>
+                            <p><span class="tuto-time">[12:34]</span>Ce sont les trois principaux onglets : le profil étendu, les listes (Codelist) et les business rules.</p>
+                            <p><span class="tuto-time">[13:01]</span>Ensuite, dans les annexes, la partie factures : plusieurs exemples de factures dans les trois formats (CII, Factur-X, UBL). C&#x27;est strictement la même facture dans les trois profils.</p>
+                            <p><span class="tuto-time">[13:53]</span>La Factur-X, c&#x27;est un PDF lisible avec un fichier XML en pièce jointe qui comprend les informations sous format structuré.</p>
+                            <p><span class="tuto-time">[15:03]</span>La méthode : Imprimez l&#x27;exemple de facture. Regardez sur votre facture à vous quels champs sont les mêmes. Retrouvez le mapping entre le PDF et le fichier XML structuré.</p>
+                            <p><span class="tuto-time">[15:46]</span>Exemple : le numéro de facture sur le PDF se retrouve dans le fichier structuré sous la balise correspondante. En UBL, c&#x27;est des blocs CAC/CBC. En CII/Factur-X, c&#x27;est RSM/RAM.</p>
+                            <p><span class="tuto-time">[16:34]</span>C&#x27;est toujours pareil : des blocs (BC), des sous-blocs, et des champs (CBC). C&#x27;est une hiérarchisation avec des niveaux (1 à 5).</p>
+                            <p><span class="tuto-time">[17:26]</span>Dans le fichier Excel, chaque BT a un niveau et un XPath qui montre son arborescence dans le fichier XML.</p>
+                            <p><span class="tuto-time">[19:58]</span>Certaines informations sont dans les attributs des balises (le « Schema ID »). C&#x27;est noté « @SchemeID » dans le fichier Excel.</p>
+                            <p><span class="tuto-time">[23:19]</span>Les notes de facture (BT22) : il faut au moins 3 notes. On peut caractériser la typologie avec des codes entre dièses. Chaque code ne peut être utilisé qu&#x27;une seule fois.</p>
+                            <p><span class="tuto-time">[27:00]</span>La BR-FR-20 : qualification du traitement attendu. On peut indiquer via une note quel traitement est attendu (B2C, international, plateforme agréée…). C&#x27;est utile pour le dispatching.</p>
+                            <p><span class="tuto-time">[27:38]</span>L&#x27;objectif de cette vidéo : vous créer une boussole. Le plus important : regarder les règles (surtout flux 2), les notes d&#x27;usage, et le XPath pour l&#x27;arborescence.</p>
+                            <p><span class="tuto-time">[28:45]</span>Prochaine étape → Vidéo Partie 2 pour aller plus loin avec les outils de validation IT.</p>
+                        </div>
+                    </details>
+                    <h3>🗺️ Parcours de la vidéo — étapes clés</h3>
+                    <div class="action-steps">
+                        <div class="action-step">
+                            <div class="action-num">1</div>
+                            <div>
+                                <h3>Accéder au site DGFIP</h3>
+                                <p>Aller sur <code>impots.gouv.fr/specifications-externes-b2b</code> et comprendre les normes Z12-12, Z12-13, Z12-14.</p>
+                            </div>
+                            <span class="action-time">0:00</span>
+                        </div>
+                        <div class="action-step">
+                            <div class="action-num">2</div>
+                            <div>
+                                <h3>Télécharger les annexes AFNOR</h3>
+                                <p>Cliquer sur le lien AFNOR → Consultation → Français → <strong>Téléchargement des Annexes</strong> (pas la norme seule). Attention aux noms de fichiers trop longs sur Windows.</p>
+                            </div>
+                            <span class="action-time">2:01</span>
+                        </div>
+                        <div class="action-step">
+                            <div class="action-num">3</div>
+                            <div>
+                                <h3>Explorer le fichier Excel (~20 onglets)</h3>
+                                <p>Trois onglets essentiels : <code>Profil étendu UBL</code>, <code>Business Rules</code> et <code>Codelist</code>. Toujours re-télécharger pour avoir la dernière version.</p>
+                            </div>
+                            <span class="action-time">5:41</span>
+                        </div>
+                        <div class="action-step">
+                            <div class="action-num">4</div>
+                            <div>
+                                <h3>Choisir le profil étendu (Extended)</h3>
+                                <p>Ne pas rester sur l'EN 16931 de base. Aller directement sur <code>UBL XML Extended</code> : 3-4 champs de plus mais évite de devoir tout refaire plus tard.</p>
+                            </div>
+                            <span class="action-time">6:43</span>
+                        </div>
+                        <div class="action-step">
+                            <div class="action-num">5</div>
+                            <div>
+                                <h3>Mapper sa facture</h3>
+                                <p>Imprimer l'exemple de facture PDF. Identifier les champs communs avec votre facture. Retrouver chaque champ dans le fichier XML structuré (UBL ou CII).</p>
+                            </div>
+                            <span class="action-time">15:03</span>
+                        </div>
+                        <div class="action-step">
+                            <div class="action-num">6</div>
+                            <div>
+                                <h3>Comprendre la hiérarchie XML</h3>
+                                <p>Blocs (BG) → Sous-blocs → Champs (BT). En UBL : <code>CAC</code>/<code>CBC</code>. En CII : <code>RSM</code>/<code>RAM</code>. Jusqu'à 5 niveaux d'imbrication.</p>
+                            </div>
+                            <span class="action-time">16:34</span>
+                        </div>
+                        <div class="action-step">
+                            <div class="action-num">7</div>
+                            <div>
+                                <h3>Vérifier les Business Rules &amp; Codelists</h3>
+                                <p>Pour chaque champ, vérifier les règles (BR-FR-XX), les cardinalités et les listes de valeurs autorisées dans l'onglet Codelist.</p>
+                            </div>
+                            <span class="action-time">23:19</span>
+                        </div>
+                    </div>
+                    <h3>💡 Points clés à retenir</h3>
+                    <div class="resource-grid">
+                        <div class="resource-card">
+                            <h4>Format recommandé</h4>
+                            <p>UBL XML Extended (profil étendu)</p>
+                        </div>
+                        <div class="resource-card">
+                            <h4>Source principale</h4>
+                            <p><a href="https://www.impots.gouv.fr/specifications-externes-b2b" target="_blank">impots.gouv.fr — Spécifications B2B</a></p>
+                        </div>
+                        <div class="resource-card">
+                            <h4>3 onglets essentiels</h4>
+                            <p>Profil étendu · Business Rules · Codelist</p>
+                        </div>
+                        <div class="resource-card">
+                            <h4>3 formats acceptés</h4>
+                            <p>UBL · CII · Factur-X (PDF + CII embarqué)</p>
+                        </div>
+                        <div class="resource-card">
+                            <h4>Hiérarchie XML</h4>
+                            <p>BG (blocs) → BT (champs), jusqu'à 5 niveaux</p>
+                        </div>
+                        <div class="resource-card">
+                            <h4>Notes obligatoires</h4>
+                            <p>Au moins 3 notes (BT-22), codes uniques</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="partie-2" class="content-section reveal-on-scroll">
+                    <h2>🛠️ Outils IT &amp; Validation</h2>
+                    <p>Comment tester et valider son fichier e-invoicing avec Visual Studio Code, les fichiers XSD et le Schématron. Niveau : avancé / IT.</p>
+                    <div class="tuto-player">
+                        <video controls preload="metadata">
+                            <source src="https://26096000.fs1.hubspotusercontent-eu1.net/hubfs/26096000/Cr%C3%A9ation%20fichier%20structur%C3%A9%20RFE%20-%20Partie%202%20-%20Outils%20IT.mp4" type="video/mp4">
+                            Votre navigateur ne supporte pas la lecture vidéo HTML5.
+                        </video>
+                        <div class="tuto-player-bar">
+                            <span class="tuto-player-title">Partie 2 — Outils IT &amp; Validation</span>
+                            <span class="tuto-player-meta"><span class="tuto-chip">~30 min</span><span class="tuto-chip">🎯 Avancé</span></span>
+                        </div>
+                    </div>
+                    <details class="faq-item tuto-transcript">
+                        <summary>📝 Transcription complète — Partie 2</summary>
+                        <div class="tuto-transcript-body">
+                            <p><span class="tuto-time">[0:00]</span>Bienvenue dans cette deuxième vidéo dédiée aux utilisateurs IT. L&#x27;objectif : tester le fichier une fois constitué et s&#x27;assurer qu&#x27;il correspond aux attendus de l&#x27;État.</p>
+                            <p><span class="tuto-time">[1:06]</span>Pour tester, on utilise deux types de fichiers : le fichier XSD (pour valider la structure / le squelette) et le fichier SCH — Schématron (pour valider les règles de gestion de chaque champ).</p>
+                            <p><span class="tuto-time">[2:19]</span>On va sur Visual Studio Code. Important : il y a le lien FNFE-MPE dans les ressources.</p>
+                            <p><span class="tuto-time">[2:43]</span>Sur la page FNFE ressources, deux éléments à télécharger : le Schématron (le seul lien en rouge sur la page) et le fichier XSD UBL 2.1 (plus bas, section UBL 2.1).</p>
+                            <p><span class="tuto-time">[3:25]</span>Pour le XSD : aller sur UBL 2.1 → XSD → Main Documentation → télécharger Invoice 2.1 et Credit Note 2.1 . Attention : il faut copier le contenu manuellement dans un fichier .xsd en supprimant la première ligne.</p>
+                            <p><span class="tuto-time">[5:22]</span>Rappel : on repart des fichiers téléchargés dans la Partie 1 (site DGFIP, Z12-12, annexes AFNOR). On place les fichiers XSD et SCH au même niveau que notre facture d&#x27;exemple.</p>
+                            <p><span class="tuto-time">[6:23]</span>Pour le Schématron : extraire le zip, prendre le fichier correspondant à votre format (UBL Extended dans notre cas), et le placer à côté de votre fichier de facture.</p>
+                            <p><span class="tuto-time">[8:38]</span>Étape cruciale : il faut ajouter une ligne dans votre fichier XML de facture pour appeler le fichier SCH. Cette ligne doit être placée juste avant la balise &lt;Invoice&gt; .</p>
+                            <p><span class="tuto-time">[9:50]</span>Extension 1 — XML Visual Editor v0.6.0 : permet de valider la structure avec le fichier XSD. Attention au mode « Restricted Mode » de VS Code qui peut bloquer les extensions.</p>
+                            <p><span class="tuto-time">[10:17]</span>Pour voir l&#x27;éditeur XML : View → Appearance → Secondary Sidebar.</p>
+                            <p><span class="tuto-time">[11:17]</span>Extension 2 — VS Code Lemmings Schematron : pour valider les règles de gestion. Prérequis : l&#x27;extension Red Hat XML (souvent installée par défaut) et Java 17+ sur votre machine.</p>
+                            <p><span class="tuto-time">[12:58]</span>Pour vérifier Java : ouvrir le Terminal dans VS Code et taper java -version . Il faut au minimum la version 17.</p>
+                            <p><span class="tuto-time">[14:02]</span>Validation XSD (structure) : ouvrir le fichier XML → extension XML Visual Editor → charger le fichier XSD → « Check well-formedness » puis « Validate with schema ». Le mode grille permet de visualiser l&#x27;arborescence.</p>
+                            <p><span class="tuto-time">[17:24]</span>Les erreurs structurelles s&#x27;affichent en rouge directement dans le fichier. Exemple : « Has no child element » signifie un attribut mal placé.</p>
+                            <p><span class="tuto-time">[20:18]</span>Pour chaque erreur, retourner dans le fichier Excel pour vérifier les attributs autorisés (ex: BT-18 → @SchemeID → liste UNTDID 1153).</p>
+                            <p><span class="tuto-time">[23:44]</span>Validation Schématron (règles métier) : les erreurs apparaissent dans View → Problems. Le Schématron vérifie les valeurs des champs, pas seulement la structure.</p>
+                            <p><span class="tuto-time">[25:08]</span>Exemple : BT-1 (numéro de facture) → max 35 caractères, seuls les alphanumériques et + - _ / autorisés. Si vous mettez une étoile *, l&#x27;erreur s&#x27;affiche instantanément en français.</p>
+                            <p><span class="tuto-time">[26:19]</span>Autre exemple : une date mal formatée → erreur immédiate. Un taux de TVA &gt; 100% → erreur immédiate. C&#x27;est du feedback en temps réel.</p>
+                            <p><span class="tuto-time">[27:17]</span>La méthode complète : 1) Constituer le fichier avec la Partie 1. 2) Valider la structure avec XSD + XML Visual Editor. 3) Valider les valeurs avec SCH + Schématron. 4) Itérer sur vos cas d&#x27;usage.</p>
+                            <p><span class="tuto-time">[29:01]</span>Pour la suite : analyser vos cas d&#x27;usage spécifiques. Chaque cas d&#x27;usage détermine quels BT/BG sont nécessaires. Faites-vous accompagner pour cette étape.</p>
+                        </div>
+                    </details>
+                    <h3>🗺️ Parcours de la vidéo — étapes clés</h3>
+                    <div class="action-steps">
+                        <div class="action-step">
+                            <div class="action-num">1</div>
+                            <div>
+                                <h3>Télécharger le Schématron (FNFE)</h3>
+                                <p>Sur <code>fnfe-mpe.org/ressources</code>, télécharger le fichier Schématron (lien en rouge). Extraire et prendre le fichier UBL Extended.</p>
+                            </div>
+                            <span class="action-time">2:43</span>
+                        </div>
+                        <div class="action-step">
+                            <div class="action-num">2</div>
+                            <div>
+                                <h3>Télécharger le XSD UBL 2.1</h3>
+                                <p>Toujours sur FNFE → section UBL 2.1 → XSD → <code>Invoice 2.1</code> et <code>Credit Note 2.1</code>. Copier le contenu dans un fichier .xsd (sans la 1ère ligne).</p>
+                            </div>
+                            <span class="action-time">3:25</span>
+                        </div>
+                        <div class="action-step">
+                            <div class="action-num">3</div>
+                            <div>
+                                <h3>Organiser ses fichiers</h3>
+                                <p>Placer le fichier XSD et le fichier SCH au même niveau que votre fichier XML de facture.</p>
+                            </div>
+                            <span class="action-time">5:22</span>
+                        </div>
+                        <div class="action-step">
+                            <div class="action-num">4</div>
+                            <div>
+                                <h3>Ajouter l&#x27;appel SCH dans le fichier XML</h3>
+                                <p>Ajouter une ligne de référence au fichier Schématron <strong>juste avant</strong> la balise <code>&lt;Invoice&gt;</code>. Sans ça, la validation ne fonctionnera pas.</p>
+                            </div>
+                            <span class="action-time">8:38</span>
+                        </div>
+                        <div class="action-step">
+                            <div class="action-num">5</div>
+                            <div>
+                                <h3>Installer les extensions VS Code</h3>
+                                <p><code>XML Visual Editor v0.6.0</code> (validation structure) + <code>VS Code Lemmings Schematron</code> (validation règles). Prérequis : extension Red Hat XML + Java 17+.</p>
+                            </div>
+                            <span class="action-time">9:50</span>
+                        </div>
+                        <div class="action-step">
+                            <div class="action-num">6</div>
+                            <div>
+                                <h3>Valider la structure (XSD)</h3>
+                                <p>XML Visual Editor → charger le XSD → « Check well-formedness » → « Validate with schema ». Erreurs affichées en rouge. Mode grille disponible.</p>
+                            </div>
+                            <span class="action-time">14:02</span>
+                        </div>
+                        <div class="action-step">
+                            <div class="action-num">7</div>
+                            <div>
+                                <h3>Valider les règles métier (Schématron)</h3>
+                                <p>View → Problems. Feedback en temps réel et en français : caractères autorisés, longueurs max, taux TVA, formats de date…</p>
+                            </div>
+                            <span class="action-time">23:44</span>
+                        </div>
+                    </div>
+                    <h3>💡 Points clés à retenir</h3>
+                    <div class="resource-grid">
+                        <div class="resource-card">
+                            <h4>XSD = Structure</h4>
+                            <p>Vérifie l'arborescence, les blocs, les niveaux d'imbrication</p>
+                        </div>
+                        <div class="resource-card">
+                            <h4>SCH = Règles métier</h4>
+                            <p>Vérifie les valeurs des champs, longueurs, formats, taux</p>
+                        </div>
+                        <div class="resource-card">
+                            <h4>Source fichiers</h4>
+                            <p><a href="https://fnfe-mpe.org/ressources/" target="_blank">fnfe-mpe.org/ressources</a></p>
+                        </div>
+                        <div class="resource-card">
+                            <h4>Feedback</h4>
+                            <p>Erreurs en temps réel, en français, directement dans VS Code</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="prerequis" class="content-section reveal-on-scroll">
+                    <h2>⚙️ Prérequis techniques</h2>
+                    <p>À installer sur le poste avant de suivre la partie 2.</p>
+                    <ul>
+                        <li><strong>Visual Studio Code</strong> — Environnement de développement (gratuit)</li>
+                        <li><strong>Java 17+</strong> — Vérifier avec <code>java -version</code> dans le terminal</li>
+                        <li><strong>Extension XML Visual Editor v0.6.0</strong> — Pour la validation de structure XSD</li>
+                        <li><strong>Extension Red Hat XML</strong> — Souvent pré-installée, nécessaire pour Schematron</li>
+                        <li><strong>Extension VS Code Lemmings Schematron</strong> — Pour la validation des règles métier</li>
+                        <li><strong>Fichier XSD</strong> — Invoice 2.1 (et Credit Note 2.1) depuis FNFE / UBL 2.1</li>
+                        <li><strong>Fichier SCH</strong> — Schématron UBL Extended depuis FNFE ressources</li>
+                        <li>Désactiver le <strong>Restricted Mode</strong> de VS Code si les extensions sont bloquées</li>
+                    </ul>
+                </section>
+
+                <section id="liens" class="content-section reveal-on-scroll">
+                    <h2>🔗 Liens utiles</h2>
+                    <h3>📋 Sites officiels</h3>
+                    <div class="resource-grid">
+                        <a class="resource-card" href="https://www.impots.gouv.fr/specifications-externes-b2b" target="_blank" rel="noopener">
+                            <h4>🏛️ Spécifications externes B2B — DGFIP</h4>
+                            <p>Normes Z12-12, Z12-13, Z12-14. Lien vers l&#x27;AFNOR pour télécharger les annexes (fichier Excel, exemples de factures).</p>
+                            <span class="resource-badge">impots.gouv.fr/specifications-externes-b2b</span>
+                        </a>
+                        <a class="resource-card" href="https://fnfe-mpe.org/ressources/" target="_blank" rel="noopener">
+                            <h4>📚 Ressources — FNFE-MPE</h4>
+                            <p>Fichiers Schématron (SCH) et XSD UBL 2.1 pour la validation. Le Schématron est le lien en rouge sur la page.</p>
+                            <span class="resource-badge">fnfe-mpe.org/ressources</span>
+                        </a>
+                    </div>
+                    <h3>🛠️ Outils à installer</h3>
+                    <div class="resource-grid">
+                        <a class="resource-card" href="https://code.visualstudio.com/" target="_blank" rel="noopener">
+                            <h4>💻 Visual Studio Code</h4>
+                            <p>Éditeur de code gratuit de Microsoft. Base pour toutes les extensions de validation.</p>
+                            <span class="resource-badge">code.visualstudio.com</span>
+                        </a>
+                        <a class="resource-card" href="https://marketplace.visualstudio.com/items?itemName=nicolithed.xml-visual-editor" target="_blank" rel="noopener">
+                            <h4>📐 Extension — XML Visual Editor v0.6.0</h4>
+                            <p>Validation de la structure XML avec fichier XSD. Vue grille pour visualiser l&#x27;arborescence.</p>
+                            <span class="resource-badge">marketplace.visualstudio.com</span>
+                        </a>
+                        <a class="resource-card" href="https://marketplace.visualstudio.com/items?itemName=LemmingsSchematron.lemmings-schematron" target="_blank" rel="noopener">
+                            <h4>✅ Extension — VS Code Lemmings Schematron</h4>
+                            <p>Validation des règles métier en temps réel. Nécessite Red Hat XML + Java 17+.</p>
+                            <span class="resource-badge">marketplace.visualstudio.com</span>
+                        </a>
+                        <a class="resource-card" href="https://www.oracle.com/java/technologies/downloads/" target="_blank" rel="noopener">
+                            <h4>☕ Java JDK 17+</h4>
+                            <p>Requis pour l&#x27;extension Schematron. Vérifier avec java -version dans le terminal.</p>
+                            <span class="resource-badge">oracle.com/java/technologies/downloads</span>
+                        </a>
+                    </div>
+                    <div class="callout callout--warning">
+                        <span class="callout-icon">⚠️</span>
+                        <div class="callout-content">
+                            <p>Les annexes normatives et les fichiers Schématron évoluent : téléchargez-les à nouveau avant chaque nouveau chantier plutôt que de réutiliser une copie locale. Les versions retenues par Re·Form·E sont listées sur la page <a href="./referentiel.html">Référentiel &amp; versions</a>.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <nav class="page-nav-bottom">
+                    <a href="./outils.html" class="nav-prev">
+                        <span class="nav-label">Retour</span>
+                        <span class="nav-title">← Les outils</span>
+                    </a>
+                    <a href="./generateur.html" class="nav-next">
+                        <span class="nav-label">Passer à la pratique</span>
+                        <span class="nav-title">Générateur UBL →</span>
+                    </a>
+                </nav>
+
+            </article>
+        </div>
+    </main>
+
+    <footer id="main-footer"></footer>
+
+    <script src="./js/nav.js"></script>
+    <script src="./js/animations.js"></script>
+</body>
+</html>

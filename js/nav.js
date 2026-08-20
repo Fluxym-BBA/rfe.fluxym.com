@@ -85,6 +85,7 @@ const SiteNav = {
                         <li><a href="./outils.html">🧰 Tous les outils</a></li>
                         <li><a href="./generateur.html">🧪 Générateur UBL</a></li>
                         <li><a href="./transcodification.html">🧭 Matrice de transcodification</a></li>
+                        <li><a href="./tutoriels.html">🎬 Guide vidéo</a></li>
                     </ul>
                 </li>
             </ul>
@@ -153,6 +154,7 @@ const SiteNav = {
                             <li><a href="./outils.html">🧰 Les outils</a></li>
                             <li><a href="./generateur.html">🧪 Générateur UBL</a></li>
                             <li><a href="./transcodification.html">🧭 Matrice de transcodification</a></li>
+                            <li><a href="./tutoriels.html">🎬 Guide vidéo</a></li>
                         </ul>
                     </div>
                     <div class="footer-col">
