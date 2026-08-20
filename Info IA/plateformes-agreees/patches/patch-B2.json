@@ -1,0 +1,419 @@
+{
+ "_patch": {
+  "id": "B2",
+  "chantier": "B — identites juridiques manquantes et douteuses",
+  "auteur": "RFE_WebSite",
+  "dateReleve": "2026-08-20",
+  "nbPlateformes": 21,
+  "nbCiblesExaminees": 34,
+  "referentielLu": "data/plateformes-agreees.json — GitHub Fluxym-BBA/rfe.fluxym.com @ main, commit b419029, via index-identites.json genere le 2026-08-20",
+  "note": "Lot B2 : 34 cibles examinees, 21 lignes de patch. Complete le lot B1 (18 cibles) : le chantier B est desormais couvert en totalite (52 cibles = 30 France sans SIREN + 22 confianceIdentite moyenne). | SOURCE : index-identites.json genere le 2026-08-20 par extraire-index-identites.html depuis data/plateformes-agreees.json (releve du 2026-08-19), le referentiel complet (253 Ko / 9 161 lignes) depassant la capacite de lecture d'une seule requete. | METHODE : une requete API par plateforme, jamais en lot, avec controle systematique que l'URL de la reponse est bien celle demandee. Nom nettoye des suffixes PDP / PA / by X / powered by X. Filtre code_postal, puis departement, puis recherche nationale en dernier recours. Pour les 16 entrees en confiance moyenne, le SIREN deja enregistre a ete interroge directement afin de verifier a quelle entite il correspond reellement. | REGLE DE CONFIANCE : 'haute' = nom exact (denomination, sigle RNE ou nom commercial entre parentheses) ET adresse ou departement concordant ; 'moyenne' = ecart lexical limite a un suffixe pays, une forme juridique ou des mots ajoutes, avec adresse ou code postal concordant — meme convention que le lot B1, a valider ; aucun match fiable = aucun champ rempli. | PROMOTIONS MOYENNE -> HAUTE, SIREN INCHANGE, SEULE LA CONFIANCE EVOLUE : FACNOTE PDP (813779691, sigle FACNOTE, 13002 Marseille concordant) ; GESTAV (790846679, nom commercial GESTAV, 57 bis rue de la Pomme Rouge 02100 identique) ; SAGE (313966129, denomination exacte SAGE, Tour Hekla 92800 Puteaux : l'adresse DGFiP 10 place de Belgique 92250 est l'ancien siege, concordance retenue au niveau du departement 92) ; TIIME PDP (831280680, denomination TIIME, 15 rue Auber 75009 identique). | FAUX APPARIEMENTS CORRIGES : ESALINK (481412245, 92000 Nanterre, APE 61.90Z -> 832449219 ESALINK B2B SERVICES, nom commercial ESALINK, 222 rue Louis Victor de Broglie 51430 Bezannes, adresse identique ; a la meme adresse, ESALINK GROUP 953718855, holding creee en 2023 (APE 66.30Z), est un candidat groupeCapitalistique mais le lien capitalistique n'est pas source, champ laisse intact) ; EURO INFORMATION (408172021, 59121 Prouvy, APE 46.51Z -> 312730674, sigle EURO INFORMATION, 4 rue Frederic-Guillaume Raiffeisen 67000 Strasbourg, code postal concordant) ; PARAGON (910492750, Monaco, APE 68.20A immobilier -> 320496789 PARAGON BUSINESS PROCESS SERVICES, 274 boulevard Clemenceau 59700 Marcq-en-Baroeul, adresse identique, APE 63.11Z). Pour ces trois entrees, dirigeants est vide car les dirigeants enregistres provenaient de l'entite erronee : a recharger par le chantier C. | EFFACEMENTS, homonyme confirme et aucun candidat fiable : GEP (308446087 = association parisienne, 142 rue Lecourbe 75015, APE 94.99Z, date de creation 1900-01-01 ; par ailleurs l'entree porte pays=France avec une adresse finlandaise, Innopoli 2 Tekniikantie 14 a Espoo : incoherence a arbitrer hors chantier B, champ pays non modifie) ; INDY (440403442 = boulangerie-patisserie a Moulins 03000, APE 10.71C ; au code postal declare 69006 le repertoire ne ramene qu'une entite INDY 513137620 en commerce de detail APE 47.78C, ecartee comme homonyme probable de la fintech) ; INFOLOGIC (414347856 = INFOLOGIC a Nimes 30000, adresse discordante ; a l'adresse declaree 99 avenue de Lyon 26500 Bourg-les-Valence coexistent INFOLOGIC GROUPE 415293646, INFOLOGIC RECHERCHE & DEVELOPPEMENT 821742996, INFOLOGIC - ENGINEERING 484937222 et INFOLOGIC SERVICES 812600195, aucune nommee exactement INFOLOGIC, INFOLOGIC SA 324430354 etant cessee : entite immatriculee a confirmer aupres de l'editeur) ; N2F PDP (949325047 = N2F a Villepinte 93420, APE 68.20B immobilier ; quatre entites portent exactement le nom N2F, aucune au code postal declare 01250 Montagnat : retenir l'une d'elles serait arbitraire). | AUCUN MATCH, CHAMPS NON REMPLIS, candidats documentes pour arbitrage : GROUPE SIGMA (l'entite nommee exactement GROUPE SIGMA, 422490565, est cessee ; a l'adresse declaree ZAC de la Gesvrine rue Newton 44240, l'entite active est SIGMA INFORMATIQUE 872803390, 500-999 salaries, APE 62.03Z, nom non exact) ; LUNDI MATIN (aucune entite nommee exactement ainsi parmi les 12 resultats du code postal 34000 ; candidat GROUPE LUNDI MATIN 833511033 a l'adresse declaree, nom non exact) ; ICD International (aucun resultat exact au code postal 92360, au departement 92 ni en recherche nationale) ; iPaidThat, jefacture.com, MY FITECO, MyKinexo PDP, NEOTIMO, SEQINO, SUPER PDP, TRESO2, VosFactures (aucun resultat au code postal declare, au departement, ni en recherche nationale : noms commerciaux non deposes comme denomination au RNE) ; OfficeIn (seuls candidats OFFICE'IN 384458105 cessee dans le Vaucluse et TAMOU 510828288 en restauration : ecartes). | ECART SIGNALE ENTRE LA DOCUMENTATION ET L'OUTIL : FORMAT-PATCH.md regle 4 annonce que sourcesEnrichissement est remplace, alors que merge-plateformes.html cumule ce tableau avec dedoublonnage sur le couple (champ, source). Ce patch ne declare donc que sa propre source identite_entreprise, conformement au comportement reel de l'outil. FORMAT-PATCH.md est a corriger. | Tranches d'effectif converties depuis les codes INSEE (01 = 1-2, 02 = 3-5, 11 = 10-19, 12 = 20-49, 21 = 50-99, 22 = 100-199, 32 = 250-499, 42 = 1000-1999). trancheEffectif et categorieEntreprise sont omis quand l'API ne les renseigne pas : TAXERA n'a pas de tranche d'effectif publiee."
+ },
+ "plateformes": [
+  {
+   "nom": "SEPTEO",
+   "siren": "790675037",
+   "raisonSociale": "SEPTEO",
+   "dateCreation": "2012-12-19",
+   "anneeCreation": "2012",
+   "activitePrincipale": "70.22Z",
+   "confianceIdentite": "haute",
+   "sourcesEnrichissement": [
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — recherche-entreprises.api.gouv.fr",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ],
+   "trancheEffectif": "100-199",
+   "categorieEntreprise": "ETI"
+  },
+  {
+   "nom": "SRCI",
+   "siren": "339144727",
+   "raisonSociale": "SRCI",
+   "dateCreation": "1986-10-16",
+   "anneeCreation": "1986",
+   "activitePrincipale": "58.29C",
+   "confianceIdentite": "haute",
+   "sourcesEnrichissement": [
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — recherche-entreprises.api.gouv.fr",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ],
+   "trancheEffectif": "20-49",
+   "categorieEntreprise": "ETI"
+  },
+  {
+   "nom": "FACNOTE PDP",
+   "siren": "813779691",
+   "raisonSociale": "FACNOTE",
+   "dateCreation": "2015-09-15",
+   "anneeCreation": "2015",
+   "activitePrincipale": "62.01Z",
+   "confianceIdentite": "haute",
+   "sourcesEnrichissement": [
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — recherche-entreprises.api.gouv.fr",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ],
+   "trancheEffectif": "3-5",
+   "categorieEntreprise": "PME"
+  },
+  {
+   "nom": "GESTAV",
+   "siren": "790846679",
+   "raisonSociale": "AUGUSTA VIROMANDUORUM NUMERICAM (GESTAV)",
+   "dateCreation": "2013-02-01",
+   "anneeCreation": "2013",
+   "activitePrincipale": "58.29C",
+   "confianceIdentite": "haute",
+   "sourcesEnrichissement": [
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — recherche-entreprises.api.gouv.fr",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ],
+   "trancheEffectif": "3-5",
+   "categorieEntreprise": "PME"
+  },
+  {
+   "nom": "SAGE",
+   "siren": "313966129",
+   "raisonSociale": "SAGE",
+   "dateCreation": "1978-01-01",
+   "anneeCreation": "1978",
+   "activitePrincipale": "58.29C",
+   "confianceIdentite": "haute",
+   "sourcesEnrichissement": [
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — recherche-entreprises.api.gouv.fr",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ],
+   "trancheEffectif": "1000-1999",
+   "categorieEntreprise": "ETI"
+  },
+  {
+   "nom": "TIIME PDP",
+   "siren": "831280680",
+   "raisonSociale": "TIIME",
+   "dateCreation": "2017-07-31",
+   "anneeCreation": "2017",
+   "activitePrincipale": "62.01Z",
+   "confianceIdentite": "haute",
+   "sourcesEnrichissement": [
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — recherche-entreprises.api.gouv.fr",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ],
+   "trancheEffectif": "10-19",
+   "categorieEntreprise": "ETI"
+  },
+  {
+   "nom": "ESALINK",
+   "siren": "832449219",
+   "raisonSociale": "ESALINK B2B SERVICES (ESALINK)",
+   "dateCreation": "2017-08-01",
+   "anneeCreation": "2017",
+   "activitePrincipale": "70.22Z",
+   "confianceIdentite": "haute",
+   "sourcesEnrichissement": [
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — recherche-entreprises.api.gouv.fr",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ],
+   "trancheEffectif": "20-49",
+   "categorieEntreprise": "PME",
+   "dirigeants": []
+  },
+  {
+   "nom": "EURO INFORMATION",
+   "siren": "312730674",
+   "raisonSociale": "EURO-INFORMATION EUROPEENNE DE TRAITEMENT DE L'INFORMATION (EURO INFORMATION)",
+   "dateCreation": "1978-01-01",
+   "anneeCreation": "1978",
+   "activitePrincipale": "62.03Z",
+   "confianceIdentite": "haute",
+   "sourcesEnrichissement": [
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — recherche-entreprises.api.gouv.fr",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ],
+   "trancheEffectif": "20-49",
+   "categorieEntreprise": "GE",
+   "dirigeants": []
+  },
+  {
+   "nom": "IGA ASSURANCE",
+   "siren": "433931235",
+   "raisonSociale": "IGA.ASSURANCES (IGA*A)",
+   "dateCreation": "2000-11-28",
+   "anneeCreation": "2000",
+   "activitePrincipale": "58.29C",
+   "confianceIdentite": "moyenne",
+   "sourcesEnrichissement": [
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — recherche-entreprises.api.gouv.fr",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    }
+   ],
+   "trancheEffectif": "20-49",
+   "categorieEntreprise": "PME"
+  },
+  {
+   "nom": "VENTYA",
+   "siren": "821839982",
+   "raisonSociale": "VENTYA SAS",
+   "dateCreation": "2016-07-29",
+   "anneeCreation": "2016",
+   "activitePrincipale": "63.11Z",
+   "confianceIdentite": "moyenne",
+   "sourcesEnrichissement": [
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — recherche-entreprises.api.gouv.fr",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    }
+   ],
+   "trancheEffectif": "20-49",
+   "categorieEntreprise": "ETI"
+  },
+  {
+   "nom": "TeamSystem Sellsy",
+   "siren": "509961074",
+   "raisonSociale": "SELLSY",
+   "dateCreation": "2009-01-16",
+   "anneeCreation": "2009",
+   "activitePrincipale": "58.29C",
+   "confianceIdentite": "moyenne",
+   "sourcesEnrichissement": [
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — recherche-entreprises.api.gouv.fr",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    }
+   ],
+   "trancheEffectif": "100-199",
+   "categorieEntreprise": "PME"
+  },
+  {
+   "nom": "PARAGON",
+   "siren": "320496789",
+   "raisonSociale": "PARAGON BUSINESS PROCESS SERVICES",
+   "dateCreation": "1980-11-03",
+   "anneeCreation": "1980",
+   "activitePrincipale": "63.11Z",
+   "confianceIdentite": "moyenne",
+   "sourcesEnrichissement": [
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — recherche-entreprises.api.gouv.fr",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    }
+   ],
+   "trancheEffectif": "250-499",
+   "categorieEntreprise": "ETI",
+   "dirigeants": []
+  },
+  {
+   "nom": "OPEN BEE",
+   "siren": "504389446",
+   "raisonSociale": "OPEN BEE FRANCE",
+   "dateCreation": "2008-05-13",
+   "anneeCreation": "2008",
+   "activitePrincipale": "62.02A",
+   "confianceIdentite": "moyenne",
+   "sourcesEnrichissement": [
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — recherche-entreprises.api.gouv.fr",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    }
+   ],
+   "trancheEffectif": "50-99",
+   "categorieEntreprise": "PME"
+  },
+  {
+   "nom": "SYMTRAX",
+   "siren": "352073910",
+   "raisonSociale": "SYMTRAX SA",
+   "dateCreation": "1989-09-20",
+   "anneeCreation": "1989",
+   "activitePrincipale": "58.29C",
+   "confianceIdentite": "moyenne",
+   "sourcesEnrichissement": [
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — recherche-entreprises.api.gouv.fr",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    }
+   ],
+   "trancheEffectif": "20-49",
+   "categorieEntreprise": "PME"
+  },
+  {
+   "nom": "TAXERA",
+   "siren": "919179663",
+   "raisonSociale": "TAXERA TECHNOLOGIES FRANCE",
+   "dateCreation": "2022-04-07",
+   "anneeCreation": "2022",
+   "activitePrincipale": "58.29A",
+   "confianceIdentite": "moyenne",
+   "sourcesEnrichissement": [
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — recherche-entreprises.api.gouv.fr",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    }
+   ],
+   "categorieEntreprise": "PME"
+  },
+  {
+   "nom": "LE VILLAGE CONNECTE",
+   "siren": "950883231",
+   "raisonSociale": "LE VILLAGE CONNECTE (LVC)",
+   "dateCreation": "2023-03-23",
+   "anneeCreation": "2023",
+   "activitePrincipale": "62.01Z",
+   "confianceIdentite": "moyenne",
+   "sourcesEnrichissement": [
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — recherche-entreprises.api.gouv.fr",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    }
+   ],
+   "trancheEffectif": "1-2",
+   "categorieEntreprise": "PME"
+  },
+  {
+   "nom": "LOGILEC",
+   "siren": "423793785",
+   "raisonSociale": "LOGILEC",
+   "dateCreation": "1999-07-01",
+   "anneeCreation": "1999",
+   "activitePrincipale": "52.29B",
+   "confianceIdentite": "moyenne",
+   "sourcesEnrichissement": [
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — recherche-entreprises.api.gouv.fr",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    }
+   ],
+   "trancheEffectif": "50-99",
+   "categorieEntreprise": "GE"
+  },
+  {
+   "nom": "GEP",
+   "siren": null,
+   "raisonSociale": null,
+   "dateCreation": null,
+   "anneeCreation": null,
+   "trancheEffectif": null,
+   "categorieEntreprise": null,
+   "activitePrincipale": null,
+   "dirigeants": [],
+   "confianceIdentite": null,
+   "sourcesEnrichissement": [
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — recherche-entreprises.api.gouv.fr",
+     "dateReleve": "2026-08-20",
+     "confiance": "non_qualifie"
+    }
+   ]
+  },
+  {
+   "nom": "INDY",
+   "siren": null,
+   "raisonSociale": null,
+   "dateCreation": null,
+   "anneeCreation": null,
+   "trancheEffectif": null,
+   "categorieEntreprise": null,
+   "activitePrincipale": null,
+   "dirigeants": [],
+   "confianceIdentite": null,
+   "sourcesEnrichissement": [
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — recherche-entreprises.api.gouv.fr",
+     "dateReleve": "2026-08-20",
+     "confiance": "non_qualifie"
+    }
+   ]
+  },
+  {
+   "nom": "INFOLOGIC",
+   "siren": null,
+   "raisonSociale": null,
+   "dateCreation": null,
+   "anneeCreation": null,
+   "trancheEffectif": null,
+   "categorieEntreprise": null,
+   "activitePrincipale": null,
+   "dirigeants": [],
+   "confianceIdentite": null,
+   "sourcesEnrichissement": [
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — recherche-entreprises.api.gouv.fr",
+     "dateReleve": "2026-08-20",
+     "confiance": "non_qualifie"
+    }
+   ]
+  },
+  {
+   "nom": "N2F PDP",
+   "siren": null,
+   "raisonSociale": null,
+   "dateCreation": null,
+   "anneeCreation": null,
+   "trancheEffectif": null,
+   "categorieEntreprise": null,
+   "activitePrincipale": null,
+   "dirigeants": [],
+   "confianceIdentite": null,
+   "sourcesEnrichissement": [
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — recherche-entreprises.api.gouv.fr",
+     "dateReleve": "2026-08-20",
+     "confiance": "non_qualifie"
+    }
+   ]
+  }
+ ]
+}
