@@ -226,6 +226,34 @@
     {
      "v": "esn",
      "label": "ESN / services"
+    },
+    {
+     "v": "expertise_comptable",
+     "label": "Expertise comptable"
+    },
+    {
+     "v": "retail_distribution",
+     "label": "Retail / grande distribution"
+    },
+    {
+     "v": "chr_tourisme",
+     "label": "Hotellerie, restauration, tourisme"
+    },
+    {
+     "v": "biens_consommation",
+     "label": "Industrie et distribution de biens de consommation"
+    },
+    {
+     "v": "materiels_equipements",
+     "label": "Distribution et location de materiels"
+    },
+    {
+     "v": "financement_leasing",
+     "label": "Financement, credit et leasing"
+    },
+    {
+     "v": "avantages_salaries",
+     "label": "Avantages salaries et titres-restaurant"
     }
    ]
   },

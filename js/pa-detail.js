@@ -18,6 +18,8 @@
     return found ? found.label : v;
   };
 
+  const liste = (v) => (Array.isArray(v) ? v : (v === null || v === undefined || v === '' ? [] : [v]));
+
   const dl = (rows) => `<dl class="pa-dl">${rows.map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join('')}</dl>`;
 
   const confiance = (c) => {
@@ -52,12 +54,14 @@
     ]);
 
     document.getElementById('pa-positionnement').innerHTML = dl([
-      ['Famille d\u2019origine', (pa.familleOrigine || []).length ? pa.familleOrigine.map((v) => label(taxo, 'familleOrigine', v)).join(', ') : TODO],
-      ['Segments cibles', (pa.segmentCible || []).length ? pa.segmentCible.map((v) => label(taxo, 'segmentCible', v)).join(', ') : TODO],
-      ['Verticale', pa.verticale ? label(taxo, 'verticale', pa.verticale) : TODO],
+      ['Famille d\u2019origine', liste(pa.familleOrigine).length ? liste(pa.familleOrigine).map((v) => label(taxo, 'familleOrigine', v)).join(', ') : TODO],
+      ['Segments cibles', liste(pa.segmentCible).length ? liste(pa.segmentCible).map((v) => label(taxo, 'segmentCible', v)).join(', ') : TODO],
+      ['Verticale', pa.verticale
+        ? `${label(taxo, 'verticale', pa.verticale)}${pa.verticalePrecision ? ` <em>— ${pa.verticalePrecision}</em>` : ''}`
+        : TODO],
       ['Logique du positionnement PA', pa.natureEntite ? label(taxo, 'natureEntite', pa.natureEntite) : TODO],
-      ['Périmètre fonctionnel', (pa.perimetreFonctionnel || []).length ? pa.perimetreFonctionnel.map((v) => label(taxo, 'perimetreFonctionnel', v)).join(', ') : TODO],
-      ['Réseaux', (pa.reseaux || []).length ? pa.reseaux.map((v) => label(taxo, 'reseaux', v)).join(', ') : TODO],
+      ['Périmètre fonctionnel', liste(pa.perimetreFonctionnel).length ? liste(pa.perimetreFonctionnel).map((v) => label(taxo, 'perimetreFonctionnel', v)).join(', ') : TODO],
+      ['Réseaux', liste(pa.reseaux).length ? liste(pa.reseaux).map((v) => label(taxo, 'reseaux', v)).join(', ') : TODO],
       ['Caractérisation', val(pa.descriptionFiche)],
       ['Cohérence avec le métier d\u2019origine', val(pa.logiquePositionnement)]
     ]);
@@ -67,25 +71,24 @@
       ['Type de socle', s.type ? label(taxo, 'socleTechnique.type', s.type) : TODO],
       ['Opérateur du socle', val(s.operateurSocle)],
       ['Fournit son socle à d\u2019autres plateformes', pa.fournisseurDeSocle === null || pa.fournisseurDeSocle === undefined ? TODO : (pa.fournisseurDeSocle ? 'Oui' : 'Non')],
-      ['Modes de distribution', (pa.modeDistributionSocle || []).length ? pa.modeDistributionSocle.join(', ') : TODO],
+      ['Modes de distribution', liste(pa.modeDistributionSocle).length ? liste(pa.modeDistributionSocle).join(', ') : TODO],
       ['Élément de preuve', val(s.preuve)],
-      ['Solutions Compatibles partenaires déclarées', (pa.solutionsCompatiblesPartenaires || []).length
-        ? `<div class="pa-tags">${pa.solutionsCompatiblesPartenaires.map((x) => `<span class="pa-tag">${x}</span>`).join('')}</div>
-           <p class="pa-partner-count">${pa.solutionsCompatiblesPartenaires.length} éditeurs identifiés à partir des sources publiées par la plateforme.</p>`
+      ['Solutions Compatibles partenaires déclarées', liste(pa.solutionsCompatiblesPartenaires).length
+        ? `<div class="pa-tags">${liste(pa.solutionsCompatiblesPartenaires).map((x) => `<span class="pa-tag">${x}</span>`).join('')}</div>
+           <p class="pa-partner-count">${liste(pa.solutionsCompatiblesPartenaires).length} éditeurs identifiés à partir des sources publiées par la plateforme.</p>`
         : TODO]
     ]) + `<div class="callout callout--warning"><div class="callout-icon">⚠️</div><div class="callout-content"><strong>Rappel.</strong> « Marque blanche » et « marque grise » sont des notions commerciales, pas réglementaires. ${pa.nom} est immatriculée en son nom propre, a passé ses propres tests d\u2019interopérabilité et reste seule responsable devant l\u2019administration, quelle que soit l\u2019origine de son socle technique.</div></div>`;
 
     document.getElementById('pa-actionnariat').innerHTML = dl([
       ['Groupe d\u2019appartenance', val(pa.groupeCapitalistique)],
       ['Nature de l\u2019actionnariat', pa.relationCapitalistique ? label(taxo, 'relationCapitalistique', pa.relationCapitalistique) : TODO],
-      ['Dirigeants (RNE)', (pa.dirigeants || []).length ? `<ul>${pa.dirigeants.map((d) => `<li>${d.nom}${d.qualite ? ` — ${d.qualite}` : ''}</li>`).join('')}</ul>` : TODO],
-      ['Levées de fonds', val(pa.leveeDeFonds)],
-      ['Partenariats et accords', (pa.partenariats || []).length ? `<ul>${pa.partenariats.map((p) => `<li>${p}</li>`).join('')}</ul>` : TODO]
+      ['Dirigeants (RNE)', liste(pa.dirigeants).length ? `<ul>${liste(pa.dirigeants).map((d) => `<li>${d.nom}${d.qualite ? ` — ${d.qualite}` : ''}</li>`).join('')}</ul>` : TODO],
+      ['Partenariats et accords', liste(pa.partenariats).length ? `<ul>${liste(pa.partenariats).map((p) => `<li>${p}</li>`).join('')}</ul>` : TODO]
     ]);
 
     const meme = all.filter((x) => x.nom !== pa.nom
-      && (x.familleOrigine || []).some((f) => (pa.familleOrigine || []).includes(f))
-      && (x.segmentCible || []).some((c) => (pa.segmentCible || []).includes(c)));
+      && liste(x.familleOrigine).some((f) => liste(pa.familleOrigine).includes(f))
+      && liste(x.segmentCible).some((c) => liste(pa.segmentCible).includes(c)));
     document.getElementById('pa-concurrents').innerHTML = meme.length
       ? `<div class="pa-segment-list">${meme.map((x) => `<a href="./pa-detail.html?pa=${slugify(x.nom)}">${x.nom}</a>`).join('')}</div>`
       : '<div class="callout callout--info"><div class="callout-icon">🚧</div><div class="callout-content">Le rapprochement concurrentiel s\u2019affichera dès que la famille d\u2019origine et le segment cible de cette plateforme auront été qualifiés.</div></div>';
@@ -94,7 +97,7 @@
     document.getElementById('pa-sources').innerHTML = dl([
       ['Liste officielle', `<a href="${m.sourceUrl}" target="_blank" rel="noopener">DGFiP — impots.gouv.fr</a>, relevé du ${new Date(m.dateReleve).toLocaleDateString('fr-FR')} (fichier mis à jour le ${new Date(m.dateMiseAJourDGFiP).toLocaleDateString('fr-FR')})`],
       ['Identité de l\u2019entreprise', 'API Recherche d\u2019entreprises (INSEE / RNE) — annuaire-entreprises.data.gouv.fr'],
-      ['Champs qualifiés', (pa.sourcesEnrichissement || []).length ? `<ul>${pa.sourcesEnrichissement.map((x) => `<li><strong>${x.champ}</strong> — ${x.source} (${x.dateReleve}, confiance : ${x.confiance})</li>`).join('')}</ul>` : TODO]
+      ['Champs qualifiés', liste(pa.sourcesEnrichissement).length ? `<ul>${liste(pa.sourcesEnrichissement).map((x) => `<li><strong>${x.champ}</strong> — ${x.source} (${x.dateReleve}, confiance : ${x.confiance})</li>`).join('')}</ul>` : TODO]
     ]);
   };
 
