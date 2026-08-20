@@ -1,0 +1,240 @@
+{
+  "_patch": {
+    "id": "E15",
+    "chantier": "E — qualification marché",
+    "auteur": "RFE_WebSite",
+    "dateReleve": "2026-08-20",
+    "nbPlateformes": 6,
+    "note": "LOT CANDIDATE — les 6 plateformes de ce lot sont des candidates en attente des tests d'interopérabilité : elles NE SONT PAS immatriculées et ne peuvent donc PAS être choisies aujourd'hui comme plateforme agréée. La DGFiP ne publie que leur nom (ni adresse, ni date), tout le contenu ci-dessous vient exclusivement de ce que chaque société dit d'elle-même sur son propre site, URL et date de relevé à l'appui. LIMITE DE LECTURE DU RÉFÉRENTIEL : data/plateformes-agreees.json (branche main) a été récupéré depuis raw.githubusercontent.com mais le fetch est tronqué autour de la lettre E ; les 6 entrées M/N/R/S/T/W n'ont donc pas pu être relues caractère pour caractère dans le fichier lui-même. Les clés de fusion ont été reprises depuis 'Info IA/plateformes-agreees/LOTS-E.md' (ligne du lot E15, lu sur main) et sont identiques à celles du brief de commande : MY-EDDY, NUMERIA, RATIOO, SWILE, Taxilla Europe BV, WAKASTELLAR. À contrôler au moment de la fusion. CAS PAR CAS : (1) MY-EDDY : aucun site officiel identifié sous ce nom (my-eddy.fr, my-eddy.com, myeddy.fr ne répondent pas) ; aucune page d'aucune société ne revendique publiquement cette candidature. Tous les champs de qualification restent donc absents et confiance = non_qualifie. Piste NON retenue faute de preuve : la marque 'My Eddy' (ex. 'My EddyDoc', GED TPE/PME) appartient à XEFI (https://www.xefi.fr/fr/software/digitalisation-nos-solutions/my-eddydoc-numerisation-et-gestion-electronique-de-documents/), mais aucune source ne relie XEFI à l'inscription 'MY-EDDY' : à vérifier auprès de l'éditeur avant toute qualification. (2) NUMERIA : le site se présente comme 'acteur PDP immatriculé par la DGFIP' (https://www.numeria.fr/dematerialisation-des-factures.htm) alors que la liste officielle la classe en candidate en attente des tests d'interopérabilité — écart à signaler, et page par ailleurs datée (calendrier 2024/2025 obsolète). (3) RATIOO : le site revendique aussi la qualité de plateforme agréée (https://ratioo.fr/pa-facturation-electronique) ; même écart avec le statut réel de candidate. Aucun groupe capitalistique identifié (mentions légales : Ratioo, SIREN 834 331 704, Boulogne-Billancourt), champ laissé absent. (4) SWILE : aucune offre de plateforme agréée publiée sur swile.co ; la seule mention de la réforme est un article d'aide indiquant que Swile a retenu GENERIX comme plateforme agréée pour l'émission de ses propres factures aux affiliés. Le motif de sa candidature n'est donc pas documenté : segmentCible et perimetreFonctionnel laissés absents, socleTechnique = inconnu / non_qualifie. Aucune conclusion n'est tirée du seul nom de l'entreprise. (5) Taxilla Europe BV : qualification faite sur le site du groupe (taxilla.com, en anglais) ; la page contact (qui rattache 'Taxilla Europe BV' à la Belgique) renvoie une erreur 500 au scraping, la structure capitalistique exacte n'est donc pas confirmée et reste prudente. Aucune page française ni aucune mention de l'immatriculation FR. (6) WAKASTELLAR : seul cas du lot avec un rôle de grossiste explicite (module Waka-PDP en API, 'intégration en marque blanche', modules 'disponibles en marque grise', cible affichée 'startup, éditeur logiciel, intégrateur ou DSI'), mais AUCUNE liste de partenaires ni de Solutions Compatibles n'est publiée : solutionsCompatiblesPartenaires laissé absent. segmentCible laissé absent car le site cible des types d'acteurs (éditeurs, intégrateurs, DSI) et non des tailles d'entreprise. RAPPEL DE VOCABULAIRE : 'marque blanche' / 'marque grise' sont des modèles commerciaux, pas des catégories réglementaires ; l'administration ne distingue que la plateforme agréée immatriculée et la Solution Compatible non immatriculée, et chaque plateforme immatriculée l'est en son nom propre et reste seule responsable devant l'administration."
+  },
+  "plateformes": [
+    {
+      "nom": "MY-EDDY",
+      "socleTechnique": {
+        "type": "inconnu",
+        "preuve": "Aucun site officiel ni aucune page produit identifiable sous le nom d'inscription MY-EDDY : les domaines my-eddy.fr, my-eddy.com et myeddy.fr ne répondent pas et aucune société ne revendique publiquement cette candidature.",
+        "source": "https://www.comparatif-facture-electronique.fr/etat-plateformes-agreees-2026/",
+        "confiance": "non_qualifie"
+      },
+      "descriptionFiche": "Candidate à l'immatriculation, mentionnée par la DGFiP sous le seul nom MY-EDDY et en attente des tests d'interopérabilité. Aucun site officiel, aucune page produit et aucune communication publique n'ont pu être rattachés à ce nom d'inscription au 20/08/2026. Le positionnement de marché (famille d'origine, cible, périmètre, socle) reste donc entièrement à qualifier. En l'état, cette plateforme ne peut pas être retenue comme plateforme agréée par une entreprise.",
+      "sourcesEnrichissement": [
+        {
+          "champ": "positionnement",
+          "source": "https://www.comparatif-facture-electronique.fr/etat-plateformes-agreees-2026/",
+          "dateReleve": "2026-08-20",
+          "confiance": "non_qualifie"
+        }
+      ]
+    },
+    {
+      "nom": "NUMERIA",
+      "siteWeb": "https://www.numeria.fr/",
+      "familleOrigine": ["ged"],
+      "segmentCible": ["tpe_pme", "grands_comptes"],
+      "verticale": "generaliste",
+      "natureEntite": "extension_demat",
+      "perimetreFonctionnel": ["emission", "reception"],
+      "socleTechnique": {
+        "type": "inconnu",
+        "preuve": "Le site décrit une plateforme exploitée par le Groupe Numeria (dépôt des factures, mise en conformité, archivage sur l'espace client) mais n'indique nulle part si le socle de facturation électronique est développé en propre ou repose sur un opérateur tiers.",
+        "source": "https://www.numeria.fr/dematerialisation-des-factures.htm",
+        "confiance": "non_qualifie"
+      },
+      "modeDistributionSocle": ["direct"],
+      "groupeCapitalistique": "Groupe Numeria — société INFO SERVICE EUROPE (SAS, RCS Pontoise 384 315 552, capital 271 000 €), Eragny-sur-Oise (95), activité depuis 1974, code NAF 6202A",
+      "descriptionFiche": "Prestataire francilien de dématérialisation documentaire, actif depuis 1974 sous la marque Numeria (société INFO SERVICE EUROPE, Eragny-sur-Oise). Son catalogue couvre la GED, l'archivage, le coffre-fort numérique, la signature électronique, la dématérialisation des factures et un volet digitalisation RH (ProDIP RH). La plateforme de facturation est présentée comme un espace de dépôt et d'envoi de factures avec mise en conformité, archivage et recherche avancée, revendiquant plus de 1 000 clients actifs et 40 millions de pages traitées par mois. Le site se présente comme « acteur PDP immatriculé par la DGFIP », alors que la liste officielle la range parmi les candidates en attente des tests d'interopérabilité : elle ne peut donc pas encore être choisie comme plateforme agréée.",
+      "logiquePositionnement": "Cohérent avec le métier d'origine : la facturation électronique prolonge une activité historique de dématérialisation et d'archivage documentaire, la plateforme agréée venant s'ajouter à un catalogue GED/signature/archivage déjà vendu en direct aux entreprises clientes.",
+      "sourcesEnrichissement": [
+        {
+          "champ": "positionnement",
+          "source": "https://www.numeria.fr/dematerialisation-des-factures.htm",
+          "dateReleve": "2026-08-20",
+          "confiance": "moyenne"
+        },
+        {
+          "champ": "familleOrigine",
+          "source": "https://www.numeria.fr/nos-solutions.htm",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        },
+        {
+          "champ": "segmentCible",
+          "source": "https://www.numeria.fr/dematerialisation-des-factures.htm",
+          "dateReleve": "2026-08-20",
+          "confiance": "moyenne"
+        },
+        {
+          "champ": "groupeCapitalistique",
+          "source": "https://www.numeria.fr/mentions-legales.htm",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "RATIOO",
+      "siteWeb": "https://ratioo.fr/",
+      "familleOrigine": ["portail_ec", "facturation_compta"],
+      "segmentCible": ["micro", "tpe_pme"],
+      "verticale": "cabinets d'expertise comptable",
+      "natureEntite": "extension_demat",
+      "perimetreFonctionnel": ["emission", "reception", "ereporting", "suite_gestion"],
+      "socleTechnique": {
+        "type": "inconnu",
+        "preuve": "Le site revendique un logiciel « pensé et développé par une équipe 100% ch'timi », conçu et hébergé en France et certifié ISO 27001, mais ne précise pas si le socle de plateforme agréée est opéré en propre ou repose sur un opérateur tiers.",
+        "source": "https://ratioo.fr/pa-facturation-electronique",
+        "confiance": "non_qualifie"
+      },
+      "modeDistributionSocle": ["via cabinet EC", "direct"],
+      "descriptionFiche": "Éditeur d'une suite de production comptable en ligne destinée aux cabinets d'expertise comptable et à leurs clients, revendiquée comme « le logiciel pour cabinets comptables le moins cher du marché » à partir de 4 €/dossier/mois, toutes fonctionnalités incluses. La suite couvre la précomptabilité, la TVA, la gestion des achats, la lettre de mission, le prélèvement SEPA, la signature eIDAS, la GED et la facturation client. Le module de facturation électronique est inclus dans l'offre : émission au format Factur-X, réception et centralisation des flux des clients du cabinet, e-reporting et tableau de bord de suivi de la mise en conformité du portefeuille. Le site se présente déjà comme plateforme agréée, alors que la liste officielle la classe en candidate en attente des tests d'interopérabilité : elle ne peut donc pas encore être retenue comme plateforme agréée.",
+      "logiquePositionnement": "Cohérent : l'immatriculation prolonge une suite de production comptable et de facturation déjà en place, distribuée par les cabinets à leurs clients. Le positionnement de marché est celui d'un outil de cabinet à bas prix, où la plateforme agréée est un module inclus plutôt qu'un produit vendu séparément.",
+      "sourcesEnrichissement": [
+        {
+          "champ": "positionnement",
+          "source": "https://ratioo.fr/pa-facturation-electronique",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        },
+        {
+          "champ": "perimetreFonctionnel",
+          "source": "https://ratioo.fr/pa-facturation-electronique",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        },
+        {
+          "champ": "segmentCible",
+          "source": "https://ratioo.fr/tarifs",
+          "dateReleve": "2026-08-20",
+          "confiance": "moyenne"
+        },
+        {
+          "champ": "verticale",
+          "source": "https://ratioo.fr/fonctionnalites/facturation-electronique",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "SWILE",
+      "siteWeb": "https://www.swile.co/fr-fr",
+      "familleOrigine": ["fintech"],
+      "verticale": "avantages salariés et titres-restaurant",
+      "natureEntite": "diversification",
+      "socleTechnique": {
+        "type": "inconnu",
+        "preuve": "Aucune offre de plateforme agréée n'est publiée sur le site Swile. La seule mention de la réforme est un article d'aide destiné aux affiliés, où Swile indique avoir retenu Generix comme plateforme agréée pour l'émission de ses propres factures : rien n'indique donc un socle qu'elle opérerait elle-même pour des tiers.",
+        "source": "https://help.swile.co/hc/fr/articles/37064143857554-Comment-renseigner-le-code-d-adressage-pour-la-facturation-%C3%A9lectronique-sur-l-espace-affili%C3%A9",
+        "confiance": "non_qualifie"
+      },
+      "descriptionFiche": "Fintech française des avantages salariés : carte et application Swile pour les titres-restaurant, titres cadeaux, mobilité, chèques culture et déplacements professionnels, avec des références grands comptes affichées (Carrefour, JCDecaux). Le site ne publie aucune offre de facturation électronique ni de plateforme agréée ; la seule communication sur la réforme est un article d'aide aux commerçants affiliés, qui les invite à transmettre leur identifiant d'adressage et précise que Swile a retenu Generix comme plateforme agréée pour l'émission de ses propres factures. Le motif de sa candidature (industrialisation de ses flux de facturation vers son réseau d'affiliés ou offre à venir) n'est donc pas documenté publiquement, et aucune conclusion n'est tirée ici du seul nom de l'entreprise. Candidate en attente des tests d'interopérabilité, elle ne peut pas être choisie comme plateforme agréée.",
+      "logiquePositionnement": "Non cohérent en apparence avec le métier d'origine : Swile est un émetteur de titres et de moyens de paiement salariaux, pas un opérateur de dématérialisation. Une candidature de ce type s'explique le plus souvent par le volume de factures émises vers un réseau d'affiliés, mais cette lecture n'est confirmée par aucune source : à requalifier dès qu'une page officielle existera.",
+      "sourcesEnrichissement": [
+        {
+          "champ": "positionnement",
+          "source": "https://www.swile.co/fr-fr",
+          "dateReleve": "2026-08-20",
+          "confiance": "moyenne"
+        },
+        {
+          "champ": "socleTechnique",
+          "source": "https://help.swile.co/hc/fr/articles/37064143857554-Comment-renseigner-le-code-d-adressage-pour-la-facturation-%C3%A9lectronique-sur-l-espace-affili%C3%A9",
+          "dateReleve": "2026-08-20",
+          "confiance": "non_qualifie"
+        }
+      ]
+    },
+    {
+      "nom": "Taxilla Europe BV",
+      "siteWeb": "https://www.taxilla.com/",
+      "familleOrigine": ["tax"],
+      "segmentCible": ["eti", "grands_comptes"],
+      "verticale": "generaliste",
+      "natureEntite": "extension_demat",
+      "perimetreFonctionnel": ["emission", "reception"],
+      "socleTechnique": {
+        "type": "propre",
+        "operateurSocle": "Taxilla",
+        "preuve": "Taxilla présente sa propre plateforme de données pour la finance (« the data platform for autonomous finance ») et une offre e-invoicing mondiale « One API, global control — real-time compliance across borders », déployée directement chez ses clients grands comptes.",
+        "source": "https://www.taxilla.com/",
+        "confiance": "moyenne"
+      },
+      "modeDistributionSocle": ["direct", "API/embedded"],
+      "groupeCapitalistique": "Entité européenne du groupe Taxilla (plateforme de conformité et d'automatisation financière revendiquant plus de 100 clients grands comptes et une couverture multi-juridictions ; structure de détention non publiée sur le site)",
+      "descriptionFiche": "Entité européenne du groupe Taxilla, éditeur d'une plateforme de données et de conformité financière pour grandes entreprises : ingestion multi-ERP, orchestration des processus finance, consolidation, reporting réglementaire et ESG, avec des références internationales affichées (FedEx, Infosys). Son offre enInvoice couvre la facturation électronique dans de nombreux pays via une API unique, et un article de son blog détaille l'obligation française du 1er septembre 2026 en mettant en avant le raccordement au portail public et les formats standardisés. Aucune page en français, aucune grille tarifaire et aucune communication sur l'immatriculation française ne sont publiées. Candidate en attente des tests d'interopérabilité, elle ne peut pas encore être retenue comme plateforme agréée.",
+      "logiquePositionnement": "Cohérent : l'immatriculation française prolonge une activité existante de conformité fiscale et de facturation électronique multi-pays vendue en direct aux grands comptes, la France n'étant qu'un mandat national de plus dans un catalogue global. Le positionnement reste celui d'un fournisseur international pour directions financières, pas d'une offre de marché française.",
+      "sourcesEnrichissement": [
+        {
+          "champ": "positionnement",
+          "source": "https://www.taxilla.com/",
+          "dateReleve": "2026-08-20",
+          "confiance": "moyenne"
+        },
+        {
+          "champ": "perimetreFonctionnel",
+          "source": "https://www.taxilla.com/eninvoice-france",
+          "dateReleve": "2026-08-20",
+          "confiance": "moyenne"
+        },
+        {
+          "champ": "groupeCapitalistique",
+          "source": "https://www.taxilla.com/",
+          "dateReleve": "2026-08-20",
+          "confiance": "faible"
+        }
+      ]
+    },
+    {
+      "nom": "WAKASTELLAR",
+      "siteWeb": "https://www.wakastellar.com/",
+      "familleOrigine": ["ged", "edi"],
+      "verticale": "generaliste",
+      "natureEntite": "extension_demat",
+      "perimetreFonctionnel": ["emission", "reception"],
+      "socleTechnique": {
+        "type": "propre",
+        "operateurSocle": "Wakastellar (module Waka-PDP)",
+        "preuve": "Waka-PDP est présenté comme un module développé par Wakastellar, exposé en API RESTful et hébergé sur une infrastructure en France (ISO 27001, RGPD), permettant d'émettre, recevoir et transmettre les factures vers le portail public ou une autre plateforme « sans dépendance à un opérateur tiers ».",
+        "source": "https://www.wakastellar.com/nos-modules/waka-pdp",
+        "confiance": "moyenne"
+      },
+      "fournisseurDeSocle": true,
+      "modeDistributionSocle": ["API/embedded", "marque_blanche", "marque_grise", "via integrateur", "direct"],
+      "groupeCapitalistique": "Groupe Wakastellar, créé en 2025 par JDS pour regrouper ses briques logicielles historiques : CTOOLS (1992), DataExchanger (1995, EAI/ETL), Documalis (2004, GED et archivage) et SoWeSign (2017, cédé en 2022 au groupe HSW)",
+      "descriptionFiche": "Groupe technologique français né en 2025 du regroupement des briques logicielles de JDS (CTOOLS, DataExchanger, Documalis, SoWeSign), qui commercialise une gamme de modules SaaS souverains prêts à intégrer : Waka-HDS, Waka-SIGN, Waka-SAFE, Waka-INVOICE, Waka-MEDIA et Waka-PDP. Waka-PDP est un connecteur API pour la facturation électronique B2B (Factur-X, UBL, CII, authentification, suivi des statuts) utilisable seul ou embarqué dans les solutions maison (WakaStart, WakaSign, Documalis). Le site cible explicitement les startups, éditeurs de logiciels, intégrateurs et DSI, avec une « intégration en marque blanche » et des modules « disponibles en marque grise ». Aucune liste de partenaires ou de Solutions Compatibles n'est publiée. Candidate en attente des tests d'interopérabilité, elle ne peut pas encore être choisie comme plateforme agréée.",
+      "logiquePositionnement": "Cohérent, et c'est le seul cas de grossiste identifié dans ce lot : l'immatriculation prolonge trente ans d'échanges inter-systèmes, de GED et de signature électronique, et le module de facturation est vendu comme brique technique à intégrer chez des éditeurs et intégrateurs plutôt que comme portail pour utilisateurs finaux. Attention au vocabulaire : marque blanche et marque grise sont des modèles commerciaux, l'immatriculation reste au nom de Wakastellar, seule responsable devant l'administration, les éditeurs qui l'intègrent restant des Solutions Compatibles non immatriculées.",
+      "sourcesEnrichissement": [
+        {
+          "champ": "positionnement",
+          "source": "https://www.wakastellar.com/nos-modules/waka-pdp",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        },
+        {
+          "champ": "fournisseurDeSocle",
+          "source": "https://www.wakastellar.com/nos-modules",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        },
+        {
+          "champ": "modeDistributionSocle",
+          "source": "https://www.wakastellar.com/nos-modules",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        },
+        {
+          "champ": "groupeCapitalistique",
+          "source": "https://www.wakastellar.com/groupe/a-propos",
+          "dateReleve": "2026-08-20",
+          "confiance": "moyenne"
+        },
+        {
+          "champ": "familleOrigine",
+          "source": "https://www.wakastellar.com/groupe/a-propos",
+          "dateReleve": "2026-08-20",
+          "confiance": "moyenne"
+        }
+      ]
+    }
+  ]
+}
