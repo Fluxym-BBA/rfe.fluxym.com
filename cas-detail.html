@@ -245,7 +245,131 @@
         .cudet-lien-why { font-size: 14px; line-height: 1.8; color: var(--gray-600); margin: 0; }
         .cudet-lien:hover .cudet-lien-title { color: var(--cyan); }
 
+        /* ── NAVIGATEUR PAR FAMILLE (sidebar) ───────────────────────── */
+        .cudet-fam { margin-top: 26px; }
+        .cudet-fam-head {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+        .cudet-fam-head h4 { margin: 0; }
+        .cudet-fam-total { font-size: 11px; font-weight: 700; color: var(--gray-400); }
+        .cudet-fam-filter {
+            width: 100%;
+            box-sizing: border-box;
+            font-family: inherit;
+            font-size: 13px;
+            color: var(--gray-900);
+            background: var(--white);
+            border: 1.5px solid var(--gray-200);
+            border-radius: var(--radius-sm);
+            padding: 8px 12px;
+            margin-bottom: 10px;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        .cudet-fam-filter:focus {
+            outline: none;
+            border-color: var(--cyan);
+            box-shadow: 0 0 0 3px var(--cyan-glow);
+        }
+        .cudet-fam-list {
+            max-height: 52vh;
+            overflow-y: auto;
+            padding-right: 4px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .cudet-fam-list::-webkit-scrollbar { width: 6px; }
+        .cudet-fam-list::-webkit-scrollbar-thumb { background: var(--gray-200); border-radius: 3px; }
+        .cudet-fam-group { border-radius: var(--radius-sm); overflow: hidden; }
+        .cudet-fam-toggle {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: inherit;
+            font-size: 12.5px;
+            font-weight: 700;
+            color: var(--gray-600);
+            text-align: left;
+            background: var(--gray-50);
+            border: none;
+            border-radius: var(--radius-sm);
+            padding: 9px 10px;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s;
+        }
+        .cudet-fam-toggle:hover { background: var(--gray-100); color: var(--navy); }
+        .cudet-fam-toggle .cudet-fam-icon { font-size: 14px; line-height: 1; }
+        .cudet-fam-toggle .cudet-fam-label { flex: 1; }
+        .cudet-fam-toggle .cudet-fam-letter {
+            font-size: 10px;
+            font-weight: 900;
+            color: var(--white);
+            background: var(--navy);
+            border-radius: var(--radius-sm);
+            padding: 2px 5px;
+            line-height: 1.3;
+        }
+        .cudet-fam-group.is-open > .cudet-fam-toggle .cudet-fam-letter { background: var(--cyan); }
+        .cudet-fam-toggle .cudet-fam-count {
+            font-size: 10px;
+            font-weight: 800;
+            color: var(--gray-500);
+            background: var(--white);
+            border-radius: var(--radius-full);
+            padding: 2px 7px;
+        }
+        .cudet-fam-toggle .cudet-fam-chevron {
+            font-size: 9px;
+            color: var(--gray-400);
+            transition: transform 0.25s ease;
+        }
+        .cudet-fam-group.is-open > .cudet-fam-toggle {
+            background: rgba(0, 167, 225, 0.1);
+            color: var(--navy);
+        }
+        .cudet-fam-group.is-open .cudet-fam-chevron { transform: rotate(90deg); }
+        .cudet-fam-group.has-current > .cudet-fam-toggle { box-shadow: inset 3px 0 0 var(--cyan); }
+        .cudet-fam-body { display: none; padding: 4px 0 8px 12px; }
+        .cudet-fam-group.is-open > .cudet-fam-body { display: block; }
+        .cudet-fam-item {
+            display: block;
+            font-size: 12.5px;
+            line-height: 1.45;
+            color: var(--gray-600);
+            text-decoration: none;
+            border-left: 2px solid var(--gray-200);
+            padding: 5px 8px 5px 10px;
+            transition: color 0.15s, border-color 0.15s, background 0.15s;
+        }
+        .cudet-fam-item:hover {
+            color: var(--navy);
+            background: var(--gray-50);
+            border-left-color: var(--cyan);
+        }
+        .cudet-fam-item strong { font-weight: 800; color: var(--gray-500); margin-right: 5px; }
+        .cudet-fam-item:hover strong { color: var(--cyan); }
+        .cudet-fam-item.is-current {
+            color: var(--navy);
+            font-weight: 700;
+            background: rgba(0, 167, 225, 0.08);
+            border-left-color: var(--cyan);
+        }
+        .cudet-fam-item.is-current strong { color: var(--cyan); }
+        .cudet-fam-item.is-hidden, .cudet-fam-group.is-hidden { display: none; }
+        .cudet-fam-empty {
+            font-size: 12px;
+            color: var(--gray-400);
+            padding: 10px 4px;
+            font-style: italic;
+        }
+
         @media (max-width: 700px) {
+            .cudet-fam-list { max-height: none; }
             .cudet-story::before { left: 19px; }
             .cudet-story-step { grid-template-columns: 40px 1fr; gap: 12px; }
             .cudet-story-time { width: 40px; height: 40px; }
@@ -290,6 +414,16 @@
                         <a href="./cas-usage.html" class="sidebar-page">← Tous les cas</a>
                         <a href="#" class="sidebar-page" id="nav-prev-side">← Cas précédent</a>
                         <a href="#" class="sidebar-page" id="nav-next-side">Cas suivant →</a>
+                    </div>
+                    <div class="cudet-fam">
+                        <div class="cudet-fam-head">
+                            <h4>Toutes les fiches</h4>
+                            <span class="cudet-fam-total" id="fam-total"></span>
+                        </div>
+                        <input type="search" class="cudet-fam-filter" id="fam-filter"
+                               placeholder="Filtrer : numéro, titre, mot-clé…"
+                               autocomplete="off" aria-label="Filtrer les cas d'usage">
+                        <div class="cudet-fam-list" id="fam-list"></div>
                     </div>
                 </div>
             </aside>

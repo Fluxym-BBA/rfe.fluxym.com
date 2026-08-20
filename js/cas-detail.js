@@ -80,6 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
             renderStatuses(cas);
             renderRelated(cas, data, extra);
             renderNav(prevCase, nextCase);
+            renderFamilies(data, cas);
             linkStoryToDiagram();
         })
         .catch((err) => {
@@ -309,6 +310,169 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         document.getElementById('case-nav-bottom').innerHTML = navHtml ||
             '<a href="./cas-usage.html" class="nav-prev"><span class="nav-label">Retour</span><span class="nav-title">← Tous les cas</span></a>';
+    };
+
+    // =====================
+    // NAVIGATEUR PAR FAMILLE (sidebar)
+    // =====================
+
+    /** Clé de mémorisation des familles ouvertes, d'une fiche à l'autre. */
+    const FAM_STORE = 'cudet-fam-open';
+
+    const readOpenFamilies = () => {
+        try {
+            const raw = sessionStorage.getItem(FAM_STORE);
+            return raw ? JSON.parse(raw) : null;
+        } catch (e) { return null; }
+    };
+
+    const writeOpenFamilies = (keys) => {
+        try { sessionStorage.setItem(FAM_STORE, JSON.stringify(keys)); } catch (e) { /* ignore */ }
+    };
+
+    /**
+     * Construit l'accordéon des familles de cas d'usage : chaque famille est repliée,
+     * seule celle du cas courant est dépliée. Un champ de filtre déplie automatiquement
+     * les familles qui contiennent un résultat.
+     */
+    const renderFamilies = (data, current) => {
+        const host = document.getElementById('fam-list');
+        if (!host) return;
+
+        // Taxonomie de référence : data.families (les familles A→L du hub).
+        // À défaut, repli sur data.categories, puis sur toute famille orpheline.
+        const byId = new Map(data.cases.map((c) => [c.id, c]));
+        let families;
+
+        if (Array.isArray(data.families) && data.families.length > 0) {
+            families = data.families.map((fam) => ({
+                key: fam.letter,
+                icon: fam.icon || '📁',
+                badge: fam.letter,
+                label: fam.label,
+                cases: fam.cases.map((id) => byId.get(id)).filter(Boolean)
+            }));
+            const classed = new Set(data.families.flatMap((fam) => fam.cases));
+            const orphans = data.cases.filter((c) => !classed.has(c.id));
+            if (orphans.length > 0) {
+                families.push({ key: 'ZZ', icon: '📁', badge: '·', label: 'Autres cas', cases: orphans });
+            }
+        } else {
+            const order = Object.keys(data.categories || {});
+            data.cases.forEach((c) => { if (!order.includes(c.category)) order.push(c.category); });
+            families = order.map((key) => {
+                const cat = (data.categories || {})[key] || {};
+                return {
+                    key,
+                    icon: cat.icon || '📁',
+                    badge: '',
+                    label: cat.label || key,
+                    cases: data.cases.filter((c) => c.category === key)
+                };
+            });
+        }
+
+        const opened = readOpenFamilies();
+        const groups = families.map((fam) => {
+            const cases = fam.cases;
+            if (cases.length === 0) return '';
+
+            const hasCurrent = cases.some((c) => c.id === current.id);
+            const isOpen = opened ? opened.includes(fam.key) : hasCurrent;
+
+            const items = cases.map((c) => {
+                const num = c.num ? `Cas ${c.num}` : 'Variante';
+                const cls = c.id === current.id ? 'cudet-fam-item is-current' : 'cudet-fam-item';
+                const search = `${c.num || ''} ${c.title} ${c.subtitle || ''} ${(c.tags || []).join(' ')}`
+                    .toLowerCase().replace(/"/g, '');
+                const aria = c.id === current.id ? ' aria-current="page"' : '';
+                return `<a href="./cas-detail.html?id=${c.id}" class="${cls}" data-search="${search}"${aria}>` +
+                    `<strong>${num}</strong>${c.title}</a>`;
+            }).join('');
+
+            const classes = ['cudet-fam-group'];
+            if (isOpen) classes.push('is-open');
+            if (hasCurrent) classes.push('has-current');
+            const badge = fam.badge ? `<span class="cudet-fam-letter">${fam.badge}</span>` : '';
+
+            return `<div class="${classes.join(' ')}" data-cat="${fam.key}">` +
+                `<button type="button" class="cudet-fam-toggle" aria-expanded="${isOpen}">` +
+                `<span class="cudet-fam-icon">${fam.icon}</span>${badge}` +
+                `<span class="cudet-fam-label">${fam.label}</span>` +
+                `<span class="cudet-fam-count">${cases.length}</span>` +
+                '<span class="cudet-fam-chevron">▶</span></button>' +
+                `<div class="cudet-fam-body">${items}</div></div>`;
+        }).join('');
+
+        host.innerHTML = groups + '<div class="cudet-fam-empty is-hidden" id="fam-empty">Aucun cas ne correspond.</div>';
+
+        const total = document.getElementById('fam-total');
+        if (total) total.textContent = `${data.cases.length} fiches`;
+
+        // Déploiement / repliement d'une famille.
+        host.querySelectorAll('.cudet-fam-toggle').forEach((btn) => {
+            btn.addEventListener('click', () => {
+                const group = btn.closest('.cudet-fam-group');
+                const isOpen = group.classList.toggle('is-open');
+                btn.setAttribute('aria-expanded', String(isOpen));
+                writeOpenFamilies(
+                    Array.from(host.querySelectorAll('.cudet-fam-group.is-open')).map((g) => g.dataset.cat)
+                );
+            });
+        });
+
+        // La fiche courante est amenée dans le champ de vision de l'ascenseur.
+        const active = host.querySelector('.cudet-fam-item.is-current');
+        if (active) active.scrollIntoView({ block: 'nearest' });
+
+        bindFamilyFilter(host);
+    };
+
+    /** Filtre transversal : masque les cas et les familles sans correspondance. */
+    const bindFamilyFilter = (host) => {
+        const input = document.getElementById('fam-filter');
+        if (!input) return;
+
+        const empty = document.getElementById('fam-empty');
+        const groups = Array.from(host.querySelectorAll('.cudet-fam-group'));
+
+        input.addEventListener('input', () => {
+            const q = input.value.trim().toLowerCase();
+            let found = 0;
+
+            groups.forEach((group) => {
+                const items = Array.from(group.querySelectorAll('.cudet-fam-item'));
+                let matches = 0;
+
+                items.forEach((item) => {
+                    const hit = q === '' || item.dataset.search.includes(q);
+                    item.classList.toggle('is-hidden', !hit);
+                    if (hit) matches += 1;
+                });
+
+                group.classList.toggle('is-hidden', matches === 0);
+                found += matches;
+
+                if (q === '') {
+                    const hasCurrent = group.classList.contains('has-current');
+                    group.classList.toggle('is-open', hasCurrent);
+                    group.querySelector('.cudet-fam-toggle').setAttribute('aria-expanded', String(hasCurrent));
+                } else {
+                    group.classList.add('is-open');
+                    group.querySelector('.cudet-fam-toggle').setAttribute('aria-expanded', 'true');
+                }
+            });
+
+            if (empty) empty.classList.toggle('is-hidden', found > 0);
+        });
+
+        // Échap vide le filtre.
+        input.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                input.value = '';
+                input.dispatchEvent(new Event('input'));
+            }
+        });
     };
 
     /** Survol d'une étape du récit → mise en évidence de l'étape correspondante du diagramme. */

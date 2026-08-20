@@ -20,6 +20,20 @@
     "horschamp":     { "label": "Hors champ",           "icon": "🚫", "color": "gray" },
     "international": { "label": "International & Outre-mer", "icon": "🌍", "color": "blue" }
   },
+  "families": [
+    { "letter": "A", "label": "Cas standards", "icon": "⚙️", "cases": ["nominal", "nominal-rejet-emission", "nominal-non-transmise", "nominal-rejet-reception", "nominal-refus", "cas-1", "cas-31"] },
+    { "letter": "B", "label": "Paiements, frais & tiers payeurs", "icon": "💳", "cases": ["cas-2", "cas-3", "cas-4", "cas-5", "cas-6", "cas-7"] },
+    { "letter": "C", "label": "Affacturage & tiers bénéficiaires", "icon": "🏦", "cases": ["cas-8", "cas-9", "cas-10"] },
+    { "letter": "D", "label": "Intermédiaires & mandataires", "icon": "🔀", "cases": ["cas-11", "cas-12", "cas-15", "cas-16", "cas-17a", "cas-17b"] },
+    { "letter": "E", "label": "Sous-traitance & co-traitance", "icon": "🏗️", "cases": ["cas-13", "cas-14"] },
+    { "letter": "F", "label": "Auto-facturation & mandat", "icon": "📝", "cases": ["cas-19a", "cas-19b", "cas-23"] },
+    { "letter": "G", "label": "Notes de débit & rectificatives", "icon": "↩️", "cases": ["nominal-litige-avoir", "nominal-litige-rectificative", "cas-18"] },
+    { "letter": "H", "label": "Acomptes & factures de solde", "icon": "💰", "cases": ["cas-20", "cas-21"] },
+    { "letter": "I", "label": "Escompte", "icon": "🏷️", "cases": ["cas-22a", "cas-22b"] },
+    { "letter": "J", "label": "Cas spéciaux", "icon": "⭐", "cases": ["cas-24", "cas-25", "cas-26", "cas-27", "cas-28", "cas-30"] },
+    { "letter": "K", "label": "Cas avancés & régimes spéciaux", "icon": "🔬", "cases": ["cas-29", "cas-32", "cas-33", "cas-34", "cas-35", "cas-36", "cas-37", "cas-38", "cas-39", "cas-40", "cas-41", "cas-42"] },
+    { "letter": "L", "label": "International & Outre-mer", "icon": "🌍", "cases": ["cas-43", "cas-43a", "cas-43b", "cas-44"] }
+  ],
   "cases": [
     {
       "id": "nominal",
