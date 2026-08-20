@@ -123,22 +123,26 @@ ${t}</cac:PartyLegalEntity>`,
     getSupplierParty: (supplier, agent = null, facturant = null) => `
 \t<cac:AccountingSupplierParty>
 \t\t<cac:Party>
-\t\t\t<cbc:EndpointID schemeID="0225">${xmlEsc(supplier.siren)}</cbc:EndpointID>
-\t\t\t<cac:PartyIdentification><cbc:ID schemeID="0009">${xmlEsc(supplier.siren)}${xmlEsc(supplier.nic || "00001")}</cbc:ID></cac:PartyIdentification>
+\t\t\t<cbc:EndpointID schemeID="${xmlEsc(supplier.endpointScheme || "0225")}">${xmlEsc(supplier.endpointId || supplier.siren)}</cbc:EndpointID>${supplier.siren ? `
+\t\t\t<cac:PartyIdentification><cbc:ID schemeID="0009">${xmlEsc(supplier.siren)}${xmlEsc(supplier.nic || "00001")}</cbc:ID></cac:PartyIdentification>` : ""}
 \t\t\t<cac:PartyName><cbc:Name>${xmlEsc(supplier.name)}</cbc:Name></cac:PartyName>
 \t\t\t<cac:PostalAddress>
 \t\t\t\t<cbc:StreetName>${xmlEsc(supplier.address.street)}</cbc:StreetName>
 \t\t\t\t<cbc:CityName>${xmlEsc(supplier.address.city)}</cbc:CityName>
 \t\t\t\t<cbc:PostalZone>${xmlEsc(supplier.address.zip)}</cbc:PostalZone>
 \t\t\t\t<cac:Country><cbc:IdentificationCode>${xmlEsc(supplier.address.country)}</cbc:IdentificationCode></cac:Country>
-\t\t\t</cac:PostalAddress>
+\t\t\t</cac:PostalAddress>${supplier.vatNumber ? `
 \t\t\t<cac:PartyTaxScheme>
 \t\t\t\t<cbc:CompanyID>${xmlEsc(supplier.vatNumber)}</cbc:CompanyID>
 \t\t\t\t<cac:TaxScheme><cbc:ID>VAT</cbc:ID></cac:TaxScheme>
-\t\t\t</cac:PartyTaxScheme>
+\t\t\t</cac:PartyTaxScheme>` : ""}${supplier.taxRegistrationId ? `
+\t\t\t<cac:PartyTaxScheme>
+\t\t\t\t<cbc:CompanyID>${xmlEsc(supplier.taxRegistrationId)}</cbc:CompanyID>
+\t\t\t\t<cac:TaxScheme><cbc:ID>FC</cbc:ID></cac:TaxScheme>
+\t\t\t</cac:PartyTaxScheme>` : ""}
 \t\t\t<cac:PartyLegalEntity>
-\t\t\t\t<cbc:RegistrationName>${xmlEsc(supplier.legalName)}</cbc:RegistrationName>
-\t\t\t\t<cbc:CompanyID schemeID="0002">${xmlEsc(supplier.siren)}</cbc:CompanyID>${supplier.legalForm ? `
+\t\t\t\t<cbc:RegistrationName>${xmlEsc(supplier.legalName)}</cbc:RegistrationName>${supplier.siren ? `
+\t\t\t\t<cbc:CompanyID schemeID="0002">${xmlEsc(supplier.siren)}</cbc:CompanyID>` : ""}${supplier.legalForm ? `
 \t\t\t\t<cbc:CompanyLegalForm>${xmlEsc(supplier.legalForm)}</cbc:CompanyLegalForm>` : ""}
 \t\t\t</cac:PartyLegalEntity>${agent ? `
 \t\t\t<cac:AgentParty>${UBLTemplates.partyFragment(agent, "\t\t\t\t")}
@@ -151,25 +155,28 @@ ${t}</cac:PartyLegalEntity>`,
 \t</cac:AccountingSupplierParty>`,
 
     // 4. Bloc Acheteur
+    // BT-48 (n° de TVA) et BT-47 (identifiant legal) sont conditionnels :
+    // un acheteur etabli hors de France n'a ni SIREN ni numero de TVA francais.
+    // BT-49 EndpointID accepte un autre schema EAS (9930 Allemagne, 9927 Suisse).
     getCustomerParty: (buyer) => `
 \t<cac:AccountingCustomerParty>
 \t\t<cac:Party>
-\t\t\t<cbc:EndpointID schemeID="0225">${xmlEsc(buyer.siren)}</cbc:EndpointID>
-\t\t\t<cac:PartyIdentification><cbc:ID schemeID="0009">${xmlEsc(buyer.siren)}${xmlEsc(buyer.nic || "00001")}</cbc:ID></cac:PartyIdentification>
+\t\t\t<cbc:EndpointID schemeID="${xmlEsc(buyer.endpointScheme || "0225")}">${xmlEsc(buyer.endpointId || buyer.siren)}</cbc:EndpointID>${buyer.siren ? `
+\t\t\t<cac:PartyIdentification><cbc:ID schemeID="0009">${xmlEsc(buyer.siren)}${xmlEsc(buyer.nic || "00001")}</cbc:ID></cac:PartyIdentification>` : ""}
 \t\t\t<cac:PartyName><cbc:Name>${xmlEsc(buyer.name)}</cbc:Name></cac:PartyName>
 \t\t\t<cac:PostalAddress>
 \t\t\t\t<cbc:StreetName>${xmlEsc(buyer.address.street)}</cbc:StreetName>
 \t\t\t\t<cbc:CityName>${xmlEsc(buyer.address.city)}</cbc:CityName>
 \t\t\t\t<cbc:PostalZone>${xmlEsc(buyer.address.zip)}</cbc:PostalZone>
 \t\t\t\t<cac:Country><cbc:IdentificationCode>${xmlEsc(buyer.address.country)}</cbc:IdentificationCode></cac:Country>
-\t\t\t</cac:PostalAddress>
+\t\t\t</cac:PostalAddress>${buyer.vatNumber ? `
 \t\t\t<cac:PartyTaxScheme>
 \t\t\t\t<cbc:CompanyID>${xmlEsc(buyer.vatNumber)}</cbc:CompanyID>
 \t\t\t\t<cac:TaxScheme><cbc:ID>VAT</cbc:ID></cac:TaxScheme>
-\t\t\t</cac:PartyTaxScheme>
+\t\t\t</cac:PartyTaxScheme>` : ""}
 \t\t\t<cac:PartyLegalEntity>
-\t\t\t\t<cbc:RegistrationName>${xmlEsc(buyer.legalName)}</cbc:RegistrationName>
-\t\t\t\t<cbc:CompanyID schemeID="0002">${xmlEsc(buyer.siren)}</cbc:CompanyID>
+\t\t\t\t<cbc:RegistrationName>${xmlEsc(buyer.legalName)}</cbc:RegistrationName>${buyer.siren ? `
+\t\t\t\t<cbc:CompanyID schemeID="0002">${xmlEsc(buyer.siren)}</cbc:CompanyID>` : ""}
 \t\t\t</cac:PartyLegalEntity>
 \t\t</cac:Party>
 \t</cac:AccountingCustomerParty>`,

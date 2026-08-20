@@ -149,18 +149,18 @@ Colonnes : **Transco** = présent dans la matrice de transcodification · **Gén
 
 ## 4. Régimes de TVA & situations transverses (T1–T8 de la matrice de transcodification)
 
-Ces entrées ne sont pas des cas AFNOR mais des **variantes techniques transverses**. Elles portent 78 champs obligatoires et **aucune n'a de branche dans le générateur aujourd'hui** — c'est le principal angle mort.
+Ces entrées ne sont pas des cas AFNOR mais des **variantes techniques transverses**. Elles portent 78 champs obligatoires. Le **lot 3a** en a couvert quatre (T1/T5, T2, T7, T8) ; il reste T4 et T6, qui touchent le moteur de calcul et non la seule ventilation de TVA.
 
 | Réf | Intitulé | Champs | Périmètre | Générateur |
 |---|---|:--:|:--:|---|
-| `T1` | Autoliquidation de TVA (reverse charge) | 6 | **E-INV** | absent — catégorie TVA `AE`, mention obligatoire |
-| `T2` | Franchise en base de TVA (art. 293 B CGI) | 9 | **E-INV** | absent — catégorie `E`, VATEX, mention art. 293 B |
-| `T3` | Avoirs et factures rectificatives | 7 | **E-INV** | partiel — `var. litige-avoir` sans `getLineData`, `var. litige-rectificative` OK |
-| `T4` | Facture en devise étrangère (hors EUR) | 4 | **E-INV** | absent — `DocumentCurrencyCode` figé à EUR, BT-6/BT-111 non gérés |
-| `T5` | Sous-traitance BTP avec autoliquidation | 7 | **E-INV** | absent — combinaison cas 13 + T1 |
-| `T6` | Remises, majorations et frais annexes | 28 | **E-INV** | absent — BG-20/BG-21 (niveau document et ligne) non générés |
-| `T7` | Livraison intracommunautaire de biens | 9 | E-REP | absent — pertinent avec note `BAR`/`B2BINT` |
-| `T8` | Exportation de biens hors UE | 8 | E-REP | absent — idem T7 |
+| `T1` | Autoliquidation de TVA (reverse charge) | 6 | **E-INV** | **fait (lot 3a)** — cas `T1`, catégorie `AE` / `VATEX-FR-AE` |
+| `T2` | Franchise en base de TVA (art. 293 B CGI) | 9 | **E-INV** | **fait (lot 3a)** — cas `T2`, catégorie `E` / `VATEX-FR-FRANCHISE`, BT-31 absent + BT-32 |
+| `T3` | Avoirs et factures rectificatives | 7 | **E-INV** | fait (lot périmètre) — `var. litige-avoir` et `var. litige-rectificative` |
+| `T4` | Facture en devise étrangère (hors EUR) | 4 | **E-INV** | **absent** — `DocumentCurrencyCode` figé à EUR, BT-6/BT-111 non gérés |
+| `T5` | Sous-traitance BTP avec autoliquidation | 7 | **E-INV** | **fait (lot 3a)** — couvert par le cas `T1`, décliné en sous-traitance BTP (cadre S5) |
+| `T6` | Remises, majorations et frais annexes | 28 | **E-INV** | **absent** — BG-20/BG-21 (niveau document et ligne) non générés |
+| `T7` | Livraison intracommunautaire de biens | 9 | E-REP | **fait (lot 3a)** — cas `T7`, catégorie `K` / `VATEX-EU-IC`, note `B2BINT` |
+| `T8` | Exportation de biens hors UE | 8 | E-REP | **fait (lot 3a)** — cas `T8`, catégorie `G` / `VATEX-EU-G`, note `B2BINT` |
 
 ## 5. Écarts constatés
 
@@ -263,3 +263,88 @@ Panier de référence porté de **12 à 20 cas** : ajout de `1`, `3`, `14`, `17b
 3. **Cas à créer** — facture B2B *externe* d'un assujetti unique (BT-29 schéma `0231`, n° de TVA de l'AU en BT-63) : c'est la seule variante e-invoicing du cas 29.
 4. **Question de design ouverte** — sur les factures courtes, le cadre du tableau du lisible descend jusqu'au bloc de totaux et laisse un vide central. Option : arrêter le cadre après la dernière ligne et remonter les totaux (~3 lignes de code).
 5. **Autres `payeeType` non rendus dans le lisible** — distributeur, collaborateur, tiers payeur (cas `3`, `5`, `12`).
+
+## 8. Lot 3a — régimes de TVA transverses (20/08/2026)
+
+Base de départ : `main` @ `82a8045`, relu fichier par fichier (7 blobs vérifiés identiques à la copie de travail avant modification).
+
+### 8.1 Principe retenu
+
+Un régime de TVA ne change **ni la structure de la facture, ni le circuit de dépôt**. Il change quatre choses, et seulement quatre :
+
+1. la catégorie de TVA **BT-118** du sous-total BG-23 ;
+2. le taux **BT-119**, ramené à 0 ;
+3. le motif d'exonération, en code **BT-121** (liste VATEX publiée par la Commission) et en clair **BT-120** ;
+4. les identifiants qui deviennent obligatoires ou impossibles, et la mention légale portée en BT-22.
+
+Conséquence sur les totaux : le total TTC (BT-112) est égal au total HT (BT-109), et le net à payer (BT-115) au total HT. Le vendeur n'encaisse aucune TVA.
+
+### 8.2 Les quatre cas produits
+
+| Cas | Régime | BT-118 | BT-121 | Cadre | Montant HT | Note BR-FR-31 |
+|---|---|:--:|---|:--:|--:|:--:|
+| `T1` | Autoliquidation, sous-traitance BTP (art. 283-2 nonies CGI) | `AE` | `VATEX-FR-AE` | S5 | 24 800,00 € | `B2B` |
+| `T2` | Franchise en base (art. 293 B CGI) | `E` | `VATEX-FR-FRANCHISE` | S1 | 5 400,00 € | `B2B` |
+| `T7` | Livraison intracommunautaire (art. 262 ter I CGI) | `K` | `VATEX-EU-IC` | S1 | 9 550,00 € | `B2BINT` |
+| `T8` | Exportation hors UE (art. 262-I CGI) | `G` | `VATEX-EU-G` | S1 | 8 570,00 € | `B2BINT` |
+
+`VATEX-FR-AE` et `VATEX-FR-FRANCHISE` ont été vérifiés dans la liste VATEX officielle : ce sont bien des codes français réservés au domestique, et non des inventions. `T1` couvre du même coup l'entrée `T5` de la matrice de transcodification : la sous-traitance BTP avec autoliquidation est l'application de T1 à la situation du cas 13. Tout autre secteur en autoliquidation réutilise la structure à l'identique, en changeant le seul libellé BT-120.
+
+### 8.3 Contraintes d'identification, régime par régime
+
+| Régime | Vendeur | Acheteur |
+|---|---|---|
+| `T1` | BT-31 obligatoire (BR-AE-02) | BT-48 obligatoire (BR-AE-03) |
+| `T2` | BT-31 **absent**, BT-32 obligatoire (BR-E-02) | standard |
+| `T7` | BT-31 obligatoire (BR-IC-02) | BT-48 obligatoire (BR-IC-03) + BT-72 et BT-80 (BR-IC-11/12) |
+| `T8` | BT-31 obligatoire (BR-G-02) | BT-47 et BT-48 **absents** (client non-UE) |
+
+C'est le point qui aurait fait rejeter les factures : émettre un numéro de TVA français pour un acheteur suisse, ou l'omettre pour une livraison intracommunautaire, est bloquant côté plateforme.
+
+### 8.4 Mécanismes ajoutés au générateur
+
+- **`VAT_PROFILES`** : trois profils (`AUTOLIQ`, `FRANCHISE`, `INTRACOM`) ; `EXPORT` existait déjà et a été réutilisé tel quel.
+- **`caseConfig.forceSupplier` / `forceBuyer`** : le régime impose la nature des parties. Laisser le choix de l'interface produirait une facture incohérente (une franchise en base émise par une SA avec numéro de TVA n'existe pas). L'imposition s'applique aussi en mode données personnalisées.
+- **`caseConfig.barCode`** : la note BR-FR-31 passe de `B2B` à `B2BINT` dès que l'acheteur est établi hors de France.
+- **Identifiants conditionnels** dans `data/ubl-templates.js` : `EndpointID` accepte un autre schéma EAS (`9930` n° de TVA allemand, `9927` n° IDE suisse), et `PartyIdentification`, `PartyTaxScheme`, `CompanyID` ne sont plus émis inconditionnellement. BT-32 est porté par un second `PartyTaxScheme` avec `TaxScheme/ID = FC`.
+- **Lisible** : les identifiants deviennent conditionnels. Avant correction, un acheteur étranger affichait « SIRET 00001 » — concaténation d'un SIREN absent avec le NIC par défaut.
+
+### 8.5 Correction de conformité : clés de TVA françaises
+
+La clé d'un numéro de TVA français est déterministe : `clé = (12 + 3 × (SIREN mod 97)) mod 97`. Formule vérifiée sur deux numéros réels (ACME du jeu de données, et un tiers de contrôle externe). Six numéros du référentiel ne la respectaient pas, dont les cinq tiers créés au lot 2 :
+
+| Partie | Avant | Après |
+|---|---|---|
+| `fluxym_fr` | `FR66442654927` | `FR67442654927` |
+| `opco_formation` | `FR26999999006` | `FR42999999006` |
+| `marketplace_fr` | `FR35999999014` | `FR66999999014` |
+| `criee_atlantique` | `FR62999999030` | `FR17999999030` |
+| `seller_agent` | `FR44999999022` | `FR90999999022` |
+| `distri_logistique` | `FR89999999048` | `FR71999999048` |
+
+⚠️ **Point à trancher pour `fluxym_fr`** : le couple SIREN `442654927` / TVA `FR66442654927` est mathématiquement impossible. J'ai corrigé la clé pour la rendre cohérente avec le SIREN présent dans le repo. Si le vrai numéro de TVA de Fluxym est bien `FR66…`, alors c'est le SIREN qui est erroné et il faut corriger dans l'autre sens.
+
+### 8.6 Validation
+
+- 55 cas dans `caseConfig`, 58 documents XML produits, **tous bien formés**.
+- Ordre des éléments UBL contrôlé contre les séquences `Party`, `TaxCategory`, `PaymentMeans`, `PaymentMandate`, `PostalAddress`, `PartyLegalEntity` : **0 erreur** sur les 58 documents.
+- Égalité base de TVA = somme des lignes vérifiée sur les 4 nouveaux cas (transposition de BR-S-08 aux règles BR-AE-08, BR-E-08, BR-IC-08, BR-G-08) : **0 écart**.
+- BT-109 = BT-112 = BT-115 = base sur les 4 cas : conforme.
+- 13 contrôles structurels ciblés (présence/absence de BT-31, BT-32, BT-47, BT-48, schémas EAS, BT-72, BT-80, notes `B2BINT`) : **13/13**.
+- **Non-régression** : sur les 51 cas antérieurs, 46 sont identiques bit à bit ; les 5 modifiés (3, 4, 14, 17b, 19a) ne diffèrent que par la clé de TVA corrigée.
+- **Lisibles** : 24 PDF au panier, tous valides `qpdf` et sur une page ; les 20 antérieurs sont identiques bit à bit.
+
+### 8.7 Reste à faire
+
+**Lot 3b — les deux régimes qui touchent le moteur de calcul**
+- `T4` devise étrangère : `DocumentCurrencyCode` non-EUR, BT-6 (devise comptable = EUR) et BT-111 (TVA en EUR) obligatoires, taux de change sur le lisible. Deux devises coexistent sur le même document.
+- `T6` remises, majorations et frais annexes : BG-20 / BG-21 au niveau document et BG-27 / BG-28 au niveau ligne. Change l'arithmétique des totaux (BT-109 = BT-106 − BT-107 + BT-108, règles BR-CO-10 à BR-CO-13). 28 champs.
+
+**Reste du périmètre**
+- Cas à créer : facture B2B **externe** d'un assujetti unique (BT-29 schéma `0231`, numéro de TVA de l'AU en BT-63) — seule variante e-invoicing du cas 29.
+- Blocs dédiés dans le lisible pour le tiers payeur, le facturant et l'agent de vendeur : aujourd'hui présents dans les mentions, pas dans un encadré propre.
+- `payeeType` non rendus dans le lisible : distributeur, collaborateur (cas 5, 9, 12).
+- Question de mise en page jamais tranchée : sur une facture courte, le cadre du tableau descend jusqu'au bloc de totaux et laisse un vide central. Option = arrêter le cadre après la dernière ligne (~3 lignes de code).
+- Interface : signaler visuellement que le vendeur ou l'acheteur est imposé par le cas d'usage (`forceSupplier` / `forceBuyer`), aujourd'hui indiqué seulement dans la fiche pédagogique.
+- `orderReference` est figé à `PO-1001` dans `buildRenderData` : cohérent avec l'XML, qui émet lui aussi cette référence de commande sur tous les cas. À revoir si l'on veut des factures sans bon de commande.
+- Étape 2 du plan initial : Factur-X (CII D22B + PDF/A-3), non entamée.

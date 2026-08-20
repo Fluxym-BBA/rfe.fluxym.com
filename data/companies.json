@@ -22,7 +22,7 @@
       "name": "FLUXYM",
       "legalName": "FLUXYM SAS",
       "siren": "442654927",
-      "vatNumber": "FR66442654927",
+      "vatNumber": "FR67442654927",
       "address": {
         "street": "3 rue de la Faisanderie",
         "city": "PARIS",
@@ -85,7 +85,7 @@
       "legalName": "OPCO FORMATION SUD - Association loi 1901",
       "siren": "999999006",
       "nic": "00003",
-      "vatNumber": "FR26999999006",
+      "vatNumber": "FR42999999006",
       "address": {
         "street": "24 boulevard Vivier Merle",
         "city": "LYON",
@@ -100,7 +100,7 @@
       "legalName": "MARKETPLACE SERVICES FRANCE SAS",
       "siren": "999999014",
       "nic": "00007",
-      "vatNumber": "FR35999999014",
+      "vatNumber": "FR66999999014",
       "address": {
         "street": "8 rue du Sentier",
         "city": "PARIS",
@@ -115,7 +115,7 @@
       "legalName": "CRIEE ATLANTIQUE SA",
       "siren": "999999030",
       "nic": "00003",
-      "vatNumber": "FR62999999030",
+      "vatNumber": "FR17999999030",
       "address": {
         "street": "Quai des Pecheurs - Port de peche",
         "city": "LA TURBALLE",
@@ -130,7 +130,7 @@
       "legalName": "ATLANTIQUE MANDATAIRE SAS",
       "siren": "999999022",
       "nic": "00018",
-      "vatNumber": "FR44999999022",
+      "vatNumber": "FR90999999022",
       "address": {
         "street": "17 quai des Chartrons",
         "city": "BORDEAUX",
@@ -145,12 +145,116 @@
       "legalName": "DISTRI-LOGISTIQUE SAS",
       "siren": "999999048",
       "nic": "00005",
-      "vatNumber": "FR89999999048",
+      "vatNumber": "FR71999999048",
       "address": {
         "street": "Parc d'activites de la Plaine, bat. C",
         "city": "VITROLLES",
         "zip": "13127",
         "country": "FR"
+      }
+    },
+    {
+      "id": "st_batiment",
+      "role": "supplier",
+      "name": "SOTRABAT",
+      "legalName": "SOTRABAT SARL",
+      "siren": "999999055",
+      "nic": "00018",
+      "vatNumber": "FR92999999055",
+      "address": {
+        "street": "14 rue des Compagnons",
+        "city": "BRUGES",
+        "zip": "33520",
+        "country": "FR"
+      },
+      "iban": "FR7630006000111234567890136",
+      "bic": "AGRIFRPPXXX",
+      "legalForm": "SARL au capital de 50 000 euros - RCS Bordeaux 999 999 055"
+    },
+    {
+      "id": "constructeur_general",
+      "role": "buyer",
+      "name": "BATIGRAND",
+      "legalName": "BATIGRAND SA",
+      "siren": "999999063",
+      "nic": "00004",
+      "vatNumber": "FR19999999063",
+      "address": {
+        "street": "8 avenue de l'Industrie",
+        "city": "MERIGNAC",
+        "zip": "33700",
+        "country": "FR"
+      },
+      "buyerReference": "REF-BATIGRAND-2026",
+      "deliveryName": "BATIGRAND – Chantier Les Terrasses du Lac",
+      "deliveryAddress": {
+        "street": "12 allée des Peupliers",
+        "city": "BORDEAUX",
+        "zip": "33300",
+        "country": "FR"
+      }
+    },
+    {
+      "id": "micro_conseil",
+      "role": "supplier",
+      "name": "AUDREY MERCIER CONSEIL",
+      "legalName": "MERCIER Audrey - Entrepreneur individuel",
+      "siren": "999999071",
+      "nic": "00007",
+      "taxRegistrationId": "99999907100007",
+      "address": {
+        "street": "5 rue Sainte-Catherine",
+        "city": "BORDEAUX",
+        "zip": "33000",
+        "country": "FR"
+      },
+      "iban": "FR7610907000529876543210943",
+      "bic": "CCBPFRPPBDX",
+      "legalForm": "Entrepreneur individuel - RCS Bordeaux 999 999 071"
+    },
+    {
+      "id": "technik_gmbh",
+      "role": "buyer",
+      "name": "TECHNIK NORD",
+      "legalName": "Technik Nord GmbH",
+      "vatNumber": "DE811234565",
+      "endpointScheme": "9930",
+      "endpointId": "DE811234565",
+      "address": {
+        "street": "Hafenstrasse 42",
+        "city": "HAMBURG",
+        "zip": "20359",
+        "country": "DE"
+      },
+      "buyerReference": "BESTELL-2026-0442",
+      "deliveryName": "Technik Nord GmbH – Lager Altona",
+      "deliveryAddress": {
+        "street": "Hafenstrasse 42",
+        "city": "HAMBURG",
+        "zip": "20359",
+        "country": "DE"
+      }
+    },
+    {
+      "id": "helvetia_sa",
+      "role": "buyer",
+      "name": "HELVETIA PRECISION",
+      "legalName": "Helvetia Precision SA",
+      "endpointScheme": "9927",
+      "endpointId": "CHE-112.287.412",
+      "address": {
+        "street": "Industriestrasse 18",
+        "city": "WINTERTHUR",
+        "zip": "8404",
+        "country": "CH"
+      },
+      "buyerReference": "CMD-CH-2026-1187",
+      "deliveryName": "Helvetia Precision SA – Werk Winterthur",
+      "deliveryAddress": {
+        "street": "Industriestrasse 18",
+        "city": "WINTERTHUR",
+        "zip": "8404",
+        "country": "CH"
       }
     }
   ]

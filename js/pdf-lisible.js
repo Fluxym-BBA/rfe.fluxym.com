@@ -292,10 +292,20 @@ const PDFLisible = {
         const cityLine = ((a.zip || '') + ' ' + (a.city || '')).trim();
         if (cityLine) out.push(cityLine);
         if (a.country) out.push(a.country === 'FR' ? 'FRANCE' : a.country);
-        let ids = 'SIRET ' + (p.siren || '') + (p.nic || '00001');
-        if (p.vatNumber) ids += '  |  TVA ' + p.vatNumber;
-        out.push(ids);
-        if (endpoint) out.push('Adr. \u00e9lectronique (0225) : ' + endpoint);
+        // Les identifiants sont conditionnels : une partie etablie hors de France
+        // n'a ni SIREN ni SIRET, et un vendeur en franchise en base n'a pas de
+        // numero de TVA (BT-31) mais un identifiant fiscal de substitution (BT-32).
+        if (p.siren) {
+            let ids = 'SIRET ' + p.siren + (p.nic || '00001');
+            if (p.vatNumber) ids += '  |  TVA ' + p.vatNumber;
+            out.push(ids);
+        } else if (p.vatNumber) {
+            out.push('TVA ' + p.vatNumber);
+        }
+        // BT-34 / BT-49 : le schema d'identification n'est pas toujours 0225
+        // (9930 numero de TVA allemand, 9927 numero IDE suisse...).
+        const ep = p.endpointId || endpoint;
+        if (ep) out.push('Adr. \u00e9lectronique (' + (p.endpointScheme || '0225') + ') : ' + ep);
         return out;
     },
 
@@ -588,7 +598,7 @@ const PDFLisible = {
         const M = this.M, R = this.PAGE_W - this.M;
         const s = d.supplier;
         this._hline(ctx, M, R, 57, this.C.rule, 0.6);
-        this._txt(ctx, M, 43, s.name + ' | SIRET ' + (s.siren || '') + (s.nic || '00001') +
+        this._txt(ctx, M, 43, s.name + (s.siren ? ' | SIRET ' + s.siren + (s.nic || '00001') : '') +
             (s.vatNumber ? ' | TVA ' + s.vatNumber : ''), { size: 6.8, color: this.C.muted });
         this._txt(ctx, R, 43, 'Page ' + pageNo + ' / ' + pageTotal, { size: 6.8, color: this.C.muted, align: 'right' });
         // BT-33 : forme juridique et capital social, mention obligatoire sur

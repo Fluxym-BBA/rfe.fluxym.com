@@ -483,5 +483,41 @@
     "info": "Type 381. BG-3. Génère un ZIP complet.",
     "target": "esker",
     "label": "📦 Cas B — Pack ZIP (Facture + Avoir + CSV)"
+  },
+  "T1": {
+    "badge": "Régime T1",
+    "title": "Autoliquidation en sous-traitance du bâtiment",
+    "desc1": "<strong>Scénario :</strong> Un sous-traitant du BTP facture l'entreprise générale titulaire du marché des travaux de gros œuvre. Il facture hors taxe : la TVA est autoliquidée par le preneur, qui la déclare et la déduit simultanément.",
+    "desc2": "<strong>Particularités :</strong> Catégorie de TVA <code>AE</code> (BT-118), taux 0, code d'exonération <code>VATEX-FR-AE</code> (BT-121) et motif en clair (BT-120). Les numéros de TVA du vendeur (BT-31) <em>et</em> de l'acheteur (BT-48) sont tous deux obligatoires (BR-AE-02 / BR-AE-03). Le net à payer BT-115 est égal au total HT : le sous-traitant n'encaisse aucune TVA. Vendeur et acheteur sont imposés par le cas d'usage.",
+    "info": "Type 380. Cadre S5. Catégorie AE. Génère : 2 lignes de travaux = 24 800 € HT, TVA 0,00 €, net à payer 24 800 €.",
+    "target": "esker",
+    "label": "Régime T1 — Autoliquidation sous-traitance BTP (AE)"
+  },
+  "T2": {
+    "badge": "Régime T2",
+    "title": "Franchise en base de TVA",
+    "desc1": "<strong>Scénario :</strong> Un entrepreneur individuel placé sous le régime de la franchise en base facture une prestation de conseil. Il ne collecte pas de TVA et n'en déduit aucune.",
+    "desc2": "<strong>Particularités :</strong> Catégorie de TVA <code>E</code> (BT-118), taux 0, code <code>VATEX-FR-FRANCHISE</code> (BT-121). Le vendeur n'a pas de numéro de TVA intracommunautaire : BT-31 est <strong>absent</strong>. BR-E-02 exige alors un identifiant fiscal de substitution, renseigné en BT-32 (<code>PartyTaxScheme</code> avec <code>TaxScheme/ID = FC</code>) — ici le SIRET. Le vendeur est imposé par le cas d'usage.",
+    "info": "Type 380. Cadre S1. Catégorie E. Génère : 12 journées de conseil = 5 400 € HT, TVA 0,00 €, BT-31 absent et BT-32 renseigné.",
+    "target": "esker",
+    "label": "Régime T2 — Franchise en base, article 293 B (E)"
+  },
+  "T7": {
+    "badge": "Régime T7",
+    "title": "Livraison intracommunautaire de biens",
+    "desc1": "<strong>Scénario :</strong> Un vendeur français livre des biens à un acquéreur assujetti établi en Allemagne. La livraison est exonérée en France ; l'acquéreur autoliquide la TVA dans son État membre.",
+    "desc2": "<strong>Particularités :</strong> Catégorie <code>K</code> (BT-118), taux 0, code <code>VATEX-EU-IC</code> (BT-121). Les deux numéros de TVA sont obligatoires (BR-IC-02 / BR-IC-03), la date de livraison effective BT-72 et le pays de livraison BT-80 également (BR-IC-11 / BR-IC-12) : le bloc <code>cac:Delivery</code> est donc émis avec une adresse allemande. BT-49 utilise le schéma EAS <code>9930</code> (n° de TVA allemand). Note BR-FR-31 <code>B2BINT</code>. L'opération relève normalement du flux 10.1 d'e-reporting ; le dépôt sur une PA reste possible.",
+    "info": "Type 380. Cadre S1. Catégorie K. Génère : 2 lignes = 9 550 € HT, TVA 0,00 €, acheteur allemand et livraison à Hambourg.",
+    "target": "esker",
+    "label": "Régime T7 — Livraison intracommunautaire (K)"
+  },
+  "T8": {
+    "badge": "Régime T8",
+    "title": "Exportation de biens hors Union européenne",
+    "desc1": "<strong>Scénario :</strong> Un vendeur français exporte des biens vers un client suisse. L'opération est exonérée de TVA au titre de l'article 262-I du CGI.",
+    "desc2": "<strong>Particularités :</strong> Catégorie <code>G</code> (BT-118), taux 0, code <code>VATEX-EU-G</code> (BT-121). Seul l'identifiant du vendeur est exigé (BR-G-02) : l'acheteur suisse n'a ni SIREN ni numéro de TVA intracommunautaire, donc BT-47 et BT-48 sont <strong>absents</strong>. BT-49 utilise le schéma EAS <code>9927</code> (n° IDE suisse). Note BR-FR-31 <code>B2BINT</code>.",
+    "info": "Type 380. Cadre S1. Catégorie G. Génère : 2 lignes = 8 570 € HT, TVA 0,00 €, acheteur suisse sans identifiant français.",
+    "target": "esker",
+    "label": "Régime T8 — Exportation hors UE (G)"
   }
 }

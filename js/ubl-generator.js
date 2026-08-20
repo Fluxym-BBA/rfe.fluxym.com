@@ -5,6 +5,14 @@
  *
  * Auteur: Bruno BARTOLI — Fluxym / Re-Form-E
  * Date: 2026-08-20
+ * Changelog v3d — regimes de TVA transverses (lot 3a) :
+ *   - VAT: AUTOLIQ (AE / VATEX-FR-AE), FRANCHISE (E / VATEX-FR-FRANCHISE),
+ *     INTRACOM (K / VATEX-EU-IC) ; EXPORT (G / VATEX-EU-G) reutilise
+ *   - Cas T1 autoliquidation BTP, T2 franchise en base, T7 livraison
+ *     intracommunautaire, T8 exportation hors UE
+ *   - caseConfig.forceSupplier / forceBuyer : le regime impose la nature des parties
+ *   - caseConfig.barCode : B2BINT pour les operations internationales (BR-FR-31)
+ *   - Cles de TVA francaises recalculees dans companies.json (6 valeurs invalides)
  * Changelog v3c — recadrage du perimetre e-invoicing :
  *   - NO_INVOICE_CASES : cas hors perimetre e-invoicing (aucune facture produite)
  *     24 arrhes, 27 peages, 29 flux internes d'un assujetti unique
@@ -34,7 +42,13 @@ const UBLGenerator = {
         DEBOURS:   { category: "O", percent: "0.00", code: "VATEX-EU-O", reason: "Hors du perimetre d'application de la TVA" },
         GROUPE_TVA:{ category: "O", percent: "0.00", code: "VATEX-EU-O", reason: "Operations internes a l'assujetti unique - article 256 C du CGI" },
         MARGE:     { category: "E", percent: "0.00", code: "VATEX-EU-F", reason: "Regime particulier - Biens d'occasion - article 297 A du CGI" },
-        EXPORT:    { category: "G", percent: "0.00", code: "VATEX-EU-G", reason: "Exoneration de TVA pour exportation hors UE - article 262-I du CGI" }
+        EXPORT:    { category: "G", percent: "0.00", code: "VATEX-EU-G", reason: "Exoneration de TVA pour exportation hors UE - article 262-I du CGI" },
+        // Regimes transverses : l'operation reste facturable en e-invoicing,
+        // seule la ventilation de TVA change. Codes issus de la liste VATEX
+        // publiee par la Commission (VATEX-FR-* reserves au domestique France).
+        AUTOLIQ:   { category: "AE", percent: "0.00", code: "VATEX-FR-AE", reason: "Autoliquidation de la TVA par le preneur - article 283-2 nonies du CGI" },
+        FRANCHISE: { category: "E",  percent: "0.00", code: "VATEX-FR-FRANCHISE", reason: "TVA non applicable - article 293 B du CGI" },
+        INTRACOM:  { category: "K",  percent: "0.00", code: "VATEX-EU-IC", reason: "Exoneration de TVA - livraison intracommunautaire - article 262 ter I du CGI" }
     },
 
     // =====================================================
@@ -66,7 +80,12 @@ const UBLGenerator = {
         },
         // 33 : la marge est exoneree (E / VATEX-EU-F), les prestations
         // annexes restent taxees au taux normal. Deux sous-totaux BG-23.
-        "33": { lineVat: { "1": "MARGE", "2": "STANDARD" } }
+        "33": { lineVat: { "1": "MARGE", "2": "STANDARD" } },
+        // Regimes de TVA transverses : un seul sous-total BG-23, taux 0.
+        "T1": { vat: "AUTOLIQ" },
+        "T2": { vat: "FRANCHISE" },
+        "T7": { vat: "INTRACOM" },
+        "T8": { vat: "EXPORT" }
     },
 
     // Profil de TVA applicable a une ligne donnee.
@@ -192,6 +211,20 @@ const UBLGenerator = {
         "39": { typeCode: "380", profile: "S8", zip: false },
         "40": { typeCode: "380", profile: "S1", zip: false, paymentMeans: "97", netting: true },
         "41": { typeCode: "380", profile: "S1", zip: false },
+
+        // --- L. REGIMES DE TVA TRANSVERSES ---
+        // La categorie de TVA (BT-118) et le motif d'exoneration (BT-120 / BT-121)
+        // portent tout le regime. La nature des parties est imposee par le cas :
+        // une franchise en base suppose un vendeur sans numero de TVA, une livraison
+        // intracommunautaire un acheteur assujetti dans un autre Etat membre.
+        "T1": { typeCode: "380", profile: "S5", zip: false,
+                forceSupplier: "st_batiment", forceBuyer: "constructeur_general" },
+        "T2": { typeCode: "380", profile: "S1", zip: false,
+                forceSupplier: "micro_conseil" },
+        "T7": { typeCode: "380", profile: "S1", zip: false,
+                forceBuyer: "technik_gmbh", barCode: "B2BINT" },
+        "T8": { typeCode: "380", profile: "S1", zip: false,
+                forceBuyer: "helvetia_sa", barCode: "B2BINT" },
 
         // --- TESTS & PACKS ---
         "A": { typeCode: "999", profile: "S1", zip: false },
@@ -767,6 +800,55 @@ const UBLGenerator = {
             case "B":
                 return null;
 
+            // ================================================
+            //  L — REGIMES DE TVA TRANSVERSES
+            //  Taux 0 : le total TTC (BT-112) est egal au total HT (BT-109)
+            //  et le net a payer (BT-115) au total HT.
+            // ================================================
+
+            case "T1":
+                return {
+                    tax: ["24800.00", "0.00"],
+                    totals: ["24800.00", "24800.00", "24800.00", "0.00", "24800.00"],
+                    lines: [
+                        { id: "1", qty: "1.00", amount: "18500.00", desc: "Gros oeuvre - Dalle portee et elevation R+1 (lot 2)", price: "18500.00" },
+                        { id: "2", qty: "420.00", amount: "6300.00", desc: "Coffrage banche - m2 mis en oeuvre", price: "15.00" }
+                    ]
+                };
+                // BR-AE-08/09: 18500+6300 = 24800 base, TVA 0.00 autoliquidee par le preneur
+
+            case "T2":
+                return {
+                    tax: ["5400.00", "0.00"],
+                    totals: ["5400.00", "5400.00", "5400.00", "0.00", "5400.00"],
+                    lines: [
+                        { id: "1", qty: "12.00", amount: "5400.00", desc: "Conseil en organisation - 12 journees", price: "450.00" }
+                    ]
+                };
+                // BR-E-08/09: 12 x 450 = 5400 base, TVA 0.00 (article 293 B du CGI)
+
+            case "T7":
+                return {
+                    tax: ["9550.00", "0.00"],
+                    totals: ["9550.00", "9550.00", "9550.00", "0.00", "9550.00"],
+                    lines: [
+                        { id: "1", qty: "40.00", amount: "7400.00", desc: "Module capteur industriel MCI-200", price: "185.00" },
+                        { id: "2", qty: "1.00", amount: "2150.00", desc: "Outillage de calibrage dedie", price: "2150.00" }
+                    ]
+                };
+                // BR-IC-08/09: 7400+2150 = 9550 base, TVA 0.00 (article 262 ter I du CGI)
+
+            case "T8":
+                return {
+                    tax: ["8570.00", "0.00"],
+                    totals: ["8570.00", "8570.00", "8570.00", "0.00", "8570.00"],
+                    lines: [
+                        { id: "1", qty: "12.00", amount: "7680.00", desc: "Vanne de regulation haute pression VRP-40", price: "640.00" },
+                        { id: "2", qty: "1.00", amount: "890.00", desc: "Mise en conteneur et documents d'exportation", price: "890.00" }
+                    ]
+                };
+                // BR-G-08/09: 7680+890 = 8570 base, TVA 0.00 (article 262-I du CGI)
+
             default:
                 console.warn("getLineData: cas non gere: " + usecase);
                 return {
@@ -830,7 +912,8 @@ const UBLGenerator = {
     // Panier de reference : un cas representatif par categorie de cas d'usage,
     // chacun verifie individuellement (montants, TVA, blocs structurants).
     PDF_CASES: ["nominal", "1", "2", "3", "8", "13", "14", "16", "17b", "18", "19b", "20",
-        "21", "22a", "23", "26", "30", "31", "38", "40"],
+        "21", "22a", "23", "26", "30", "31", "38", "40",
+        "T1", "T2", "T7", "T8"],
 
     supportsPdf: function(usecase) {
         return typeof PDFLisible !== 'undefined' && this.PDF_CASES.indexOf(usecase) !== -1;
@@ -917,6 +1000,22 @@ const UBLGenerator = {
                 return data.thirdParties.find(function(t) { return t.id === id; }) || null;
             };
 
+            // Certains regimes de TVA imposent la nature des parties : une facture
+            // en franchise en base suppose un vendeur sans numero de TVA (BT-31
+            // absent, BT-32 renseigne), une livraison intracommunautaire ou une
+            // exportation un acheteur etabli hors de France. Le cas d'usage impose
+            // donc la partie concernee, y compris en mode donnees personnalisees :
+            // laisser le choix de l'UI produirait une facture incoherente.
+            const regimeCfg = this.caseConfig[usecase] || {};
+            if (regimeCfg.forceSupplier) {
+                const forcedSupplier = findThirdParty(regimeCfg.forceSupplier);
+                if (forcedSupplier) supplier = forcedSupplier;
+            }
+            if (regimeCfg.forceBuyer) {
+                const forcedBuyer = findThirdParty(regimeCfg.forceBuyer);
+                if (forcedBuyer) buyer = forcedBuyer;
+            }
+
             if (!supplier || !buyer) {
                 alert("Erreur: Donnees d'entreprise introuvables."); return;
             }
@@ -960,7 +1059,8 @@ const UBLGenerator = {
 
             // 4. Notes
             var notes = [
-                "#BAR#B2B",
+                // BR-FR-31 : B2B par defaut, B2BINT des que l'acheteur est hors de France.
+                "#BAR#" + (cfg.barCode || "B2B"),
                 "#PMT#Indemnité forfaitaire pour frais de recouvrement : 40 euros.",
                 "#PMD#En cas de retard de paiement, des pénalités égales à 3 fois le taux d'intérêt légal seront appliquées.",
                 "#AAB#Pas d'escompte pour paiement anticipé."
@@ -970,6 +1070,11 @@ const UBLGenerator = {
             if (usecase === "25") notes.push("#AAI#Cession de bons d'achat a usage unique (BUU) - TVA exigible des l'emission");
             if (usecase === "32") notes.push("#AAI#Mensualite facturee en acompte - Regularisation a la facture de solde");
             if (usecase === "16") notes.push("#AAI#Debours - Avance de frais pour le compte du client - Hors champ TVA");
+            // Regimes de TVA transverses : la mention legale est obligatoire sur la facture.
+            if (usecase === "T1") notes.push("#AAI#Autoliquidation de la TVA par le preneur - article 283-2 nonies du CGI. Sous-traitance de travaux immobiliers.");
+            if (usecase === "T2") notes.push("#AAI#TVA non applicable - article 293 B du CGI. Le vendeur releve du regime de la franchise en base.");
+            if (usecase === "T7") notes.push("#AAI#Exoneration de TVA - livraison intracommunautaire - article 262 ter I du CGI. TVA autoliquidee par l'acquereur dans son Etat membre.");
+            if (usecase === "T8") notes.push("#AAI#Exoneration de TVA - exportation de biens hors Union europeenne - article 262-I du CGI.");
             if (usecase === "6" || usecase === "28" || usecase === "30") notes.push("#AAI#TVA deja collectee via e-reporting B2C - Cadre S7");
             if (cfg.typeCode === "393") notes.push("#ACC#Facture cedee par subrogation conventionnelle. Reglement a effectuer exclusivement aupres du Factor.");
             // Mandat de facturation (BG-05) : mention obligatoire.
