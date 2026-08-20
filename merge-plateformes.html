@@ -18,6 +18,13 @@
         .merge-err { color: #b91c1c; }
         .merge-rules { background: var(--gray-50); border-left: 3px solid var(--cyan); border-radius: var(--radius-md); padding: 14px 18px; font-size: 13.5px; line-height: 1.7; }
         .merge-rules ul { margin: 8px 0 0 18px; }
+        .merge-actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin: 22px 0 16px; }
+        .merge-btn { font-family: inherit; font-size: 14px; font-weight: 600; padding: 11px 20px; border: 0; border-radius: var(--radius-full); background: var(--navy); color: var(--white); cursor: pointer; }
+        .merge-btn:hover:not(:disabled) { background: var(--navy-light); }
+        .merge-btn:disabled { opacity: .45; cursor: not-allowed; }
+        .merge-btn--cyan { background: var(--cyan); }
+        .merge-btn--cyan:hover:not(:disabled) { background: #0090c4; }
+        .merge-hint { font-size: 13px; color: var(--gray-500); }
     </style>
 </head>
 <body>
@@ -33,14 +40,20 @@
                 <li>Les autres tableaux et les valeurs simples sont <strong>remplacés</strong>. Tout écrasement d'une valeur déjà renseignée est signalé dans le journal.</li>
                 <li><code>lot</code> n'est plus écrasé : les lots contributeurs sont cumulés dans <code>lotsContributeurs</code>.</li>
                 <li>L'ordre de dépôt des patchs n'a aucune incidence sur le résultat, sauf pour un champ simple écrit par deux patchs différents — cas signalé en jaune.</li>
+                <li>La fusion ne peut être lancée <strong>qu'une fois par ouverture de page</strong> : le référentiel en mémoire est déjà modifié. Pour refaire une passe, recharger la page.</li>
             </ul>
         </div>
 
         <p><strong>Référentiel de base :</strong> <span id="base-state">chargement…</span></p>
 
+        <div class="merge-actions">
+            <button type="button" id="load-repo" class="merge-btn merge-btn--cyan" disabled>⬇️ Charger tous les patchs du dépôt</button>
+            <span class="merge-hint">lit <code>Info IA/plateformes-agreees/patches/patch-*.json</code> directement depuis <code>main</code> — aucun téléchargement manuel</span>
+        </div>
+
         <div class="merge-drop" id="drop">
-            <strong>Déposer ici les fichiers <code>patch-*.json</code></strong><br>
-            <span style="font-size:13px;color:var(--gray-500)">ou cliquer pour les sélectionner — plusieurs patchs acceptés d'un coup</span>
+            <strong>… ou déposer ici des fichiers <code>patch-*.json</code></strong><br>
+            <span style="font-size:13px;color:var(--gray-500)">voie manuelle, pour un patch non encore versionné — plusieurs patchs acceptés d'un coup</span>
             <input type="file" id="file" accept=".json" multiple hidden>
         </div>
 
@@ -55,12 +68,15 @@
         (() => {
             'use strict';
             const BASE = './data/plateformes-agreees.json';
+            const PATCH_DIR = './Info IA/plateformes-agreees/patches/';
+            const PATCH_INDEX = 'https://api.github.com/repos/Fluxym-BBA/rfe.fluxym.com/contents/Info%20IA/plateformes-agreees/patches?ref=main';
             const log = document.getElementById('log');
             const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
             const say = (msg, cls = '') => { log.innerHTML += `<span class="${cls}">${msg}</span>\n`; log.scrollTop = log.scrollHeight; };
             const rempli = (v) => !(v === null || v === undefined || v === '' || (Array.isArray(v) && !v.length));
 
             let base = null;
+            let fusionFaite = false;
             let touched = 0;
             let ecrasements = 0;
             let rejets = 0;
@@ -71,6 +87,7 @@
                     document.getElementById('base-state').textContent =
                         `${base.plateformes.length} plateformes, relevé du ${base._meta.dateReleve}`;
                     log.innerHTML = 'En attente de patchs…\n';
+                    document.getElementById('load-repo').disabled = false;
                 } catch (e) {
                     document.getElementById('base-state').textContent = 'échec du chargement';
                     say(`Impossible de charger ${BASE} : ${esc(e.message)}`, 'merge-err');
@@ -191,18 +208,89 @@
                 document.getElementById('dl').disabled = false;
             };
 
-            const read = async (files) => {
-                if (!base) { say(`Référentiel de base non chargé — fusion impossible.`, 'merge-err'); return; }
-                const liste = [...files].sort((a, b) => a.name.localeCompare(b.name, 'fr'));
-                for (const f of liste) {
-                    try {
-                        apply(JSON.parse(await f.text()), f.name);
-                    } catch (e) {
-                        say(`✗ ${esc(f.name)} : JSON invalide — ${esc(e.message)}`, 'merge-err');
-                    }
+            const collator = new Intl.Collator('fr', { numeric: true });
+
+            const prete = () => {
+                if (!base) { say(`Référentiel de base non chargé — fusion impossible.`, 'merge-err'); return false; }
+                if (fusionFaite) {
+                    say(`\nFusion déjà effectuée sur cette page. Recharge la page avant d'en lancer une autre, sinon les patchs s'empilent sur un référentiel déjà modifié.`, 'merge-err');
+                    return false;
                 }
+                return true;
+            };
+
+            const fusionner = (entrees) => {
+                entrees.sort((a, b) => collator.compare(a.nom, b.nom));
+                entrees.forEach(({ nom, texte }) => {
+                    try {
+                        apply(JSON.parse(texte), nom);
+                    } catch (e) {
+                        say(`✗ ${esc(nom)} : JSON invalide — ${esc(e.message)}`, 'merge-err');
+                        rejets += 1;
+                    }
+                });
+                fusionFaite = true;
                 recount();
             };
+
+            const read = async (files) => {
+                if (!prete()) return;
+                const entrees = [];
+                for (const f of [...files]) {
+                    entrees.push({ nom: f.name, texte: await f.text() });
+                }
+                fusionner(entrees);
+            };
+
+            const listerPatchs = async () => {
+                const rep = await fetch(PATCH_INDEX);
+                if (!rep.ok) throw new Error(`index GitHub HTTP ${rep.status}`);
+                return (await rep.json())
+                    .filter((e) => e.type === 'file' && /^patch-.+\.json$/i.test(e.name))
+                    .map((e) => e.name)
+                    .sort(collator.compare);
+            };
+
+            const chargerDepuisDepot = async () => {
+                if (!prete()) return;
+                const bouton = document.getElementById('load-repo');
+                bouton.disabled = true;
+                let noms = [];
+                try {
+                    noms = await listerPatchs();
+                } catch (e) {
+                    say(`✗ Impossible de lister les patchs du dépôt : ${esc(e.message)}`, 'merge-err');
+                    say(`   Utilise la voie manuelle ci-dessous (dépôt de fichiers).`, 'merge-warn');
+                    bouton.disabled = false;
+                    return;
+                }
+                if (!noms.length) {
+                    say(`Aucun fichier patch-*.json trouvé dans le dépôt.`, 'merge-err');
+                    bouton.disabled = false;
+                    return;
+                }
+                say(`${noms.length} patch(s) détecté(s) dans le dépôt : ${esc(noms.join(', '))}`);
+
+                const entrees = [];
+                for (const nom of noms) {
+                    try {
+                        const rep = await fetch(encodeURI(PATCH_DIR + nom));
+                        if (!rep.ok) throw new Error(`HTTP ${rep.status}`);
+                        entrees.push({ nom, texte: await rep.text() });
+                    } catch (e) {
+                        say(`✗ ${esc(nom)} : téléchargement impossible — ${esc(e.message)}`, 'merge-err');
+                        rejets += 1;
+                    }
+                }
+                if (!entrees.length) {
+                    say(`Aucun patch n'a pu être lu. Fusion abandonnée.`, 'merge-err');
+                    bouton.disabled = false;
+                    return;
+                }
+                fusionner(entrees);
+            };
+
+            document.getElementById('load-repo').addEventListener('click', chargerDepuisDepot);
 
             const drop = document.getElementById('drop');
             const input = document.getElementById('file');
