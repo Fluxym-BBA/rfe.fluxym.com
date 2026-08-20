@@ -1,0 +1,256 @@
+{
+  "_patch": {
+    "id": "E2",
+    "chantier": "E — qualification marché",
+    "auteur": "RFE_WebSite",
+    "dateReleve": "2026-08-20",
+    "nbPlateformes": 10,
+    "note": "Référentiel relu sur GitHub Fluxym-BBA/rfe.fluxym.com@main, data/plateformes-agreees.json : les 10 noms du lot E2 y figurent, tous avec siteWeb null (le site officiel a donc été identifié et vérifié pour chaque entité, sauf réserve CYCLOPE ci-dessous). Aucun fichier du dépôt n'a été modifié. RÔLE DE GROSSISTE : deux cas confirmés par une page officielle. (1) BC SOLUTIONS — bloc 'Je suis éditeur et je recherche une PA/PDP : BCSolutions propose des API standardisées pour connecter vos applications à notre plateforme agréée' (https://bcsolutions.fr/reforme-de-la-facturation-electronique/). (2) CEGEDIM — page 'Vous êtes Solutions compatibles (anciennement OD) ? Rejoignez notre réseau de partenaires' + CTA 'Devenir partenaire' (https://www.cegedim-business-services.com/facture-electronique/). Pour ces deux cas aucune liste nominative de Solutions Compatibles n'est publiée : solutionsCompatiblesPartenaires reste absent. modeDistributionSocle n'est renseigné que lorsque le mode est écrit noir sur blanc : renseigné pour BC SOLUTIONS (API pour éditeurs) et DEXT (via cabinet EC) ; ABSENT pour CEGEDIM (le réseau de partenaires SC est affirmé mais les modalités techniques ne sont pas décrites), AZOPIO, CECURITY, CEGI ALFA, CLEARTAX, CYCLOPE, DARVA, DIGIPHARMACIE. fournisseurDeSocle n'est posé qu'à true et seulement pour BC SOLUTIONS et CEGEDIM ; il est ABSENT partout ailleurs (aucune page 'devenez partenaire' / 'marque blanche' / 'API pour éditeurs' trouvée) et n'a jamais été mis à false, faute de preuve négative. CHAMPS NON TROUVÉS, donc absents du patch : AZOPIO groupeCapitalistique (aucune mention d'actionnaire ou de groupe sur le site) ; CECURITY 'ereporting' dans perimetreFonctionnel (les pages PA/eFacture ne décrivent que émission, réception, contrôle, archivage et paiement) ; CEGI ALFA segmentCible (le communiqué d'immatriculation cite des secteurs et des 'volumes élevés' mais aucune taille d'entreprise cible ; le déduire serait une invention) ; CLEARTAX fournisseurDeSocle et modeDistributionSocle (une page /partners existe mais n'a pas été ouverte, donc non sourcée) ; DARVA et DEXT groupeCapitalistique (non mentionné sur les pages officielles consultées) ; DIGIPHARMACIE 'emission' dans perimetreFonctionnel (la grille tarifaire mentionne des 'outils de facturation' et la PA 'incluse dans toutes les formules', sans expliciter l'émission via la PA). CYCLOPE : quasi non qualifié. Le site http://cyclope.digital/ est une page vitrine unique, sans mentions légales, sans page tarifs, sans page partenaires, sans nom d'éditeur ni de groupe ; le rattachement de ce domaine à l'entité immatriculée CYCLOPE n'est donc pas formellement établi par le site lui-même (confiance faible sur siteWeb). Seuls perimetreFonctionnel et socleTechnique (type inconnu) sont renseignés ; familleOrigine, segmentCible, verticale, natureEntite, groupeCapitalistique restent absents et la source de positionnement est marquée confiance 'non_qualifie'. NOMS COMMERCIAUX différents du nom d'inscription (signal demandé) : BC SOLUTIONS -> eas'Invoice ; CECURITY -> eFacture ; CEGEDIM -> SY business ; DARVA -> Ofeli ; CEGI ALFA -> plateforme agréée du Groupe CEGI (le communiqué est publié au nom du 'Groupe CEGI', pas de 'CEGI Alfa'). VERTICALES sectorielles confirmées : DARVA = assurance, DIGIPHARMACIE = pharmacie, CEGI ALFA = santé / médico-social / intérim. RÉSERVE HORS PÉRIMÈTRE (chantiers B et C, non retouchée ici) : la marque CLEARTAX se présente sur son propre site comme une plateforme du groupe Clear d'origine indienne (LinkedIn 'cleartaxindia'), avec une adresse française 42 rue Cambronne 75015 Paris ; l'identité juridique rattachée à cette inscription mérite d'être revérifiée côté B/C. Idem pour DEXT, dont le site officiel est dext.com : l'entité juridique française rattachée à l'inscription est à confirmer côté B/C. socleTechnique laissé à 'inconnu' avec confiance faible pour AZOPIO, CYCLOPE, DEXT et DIGIPHARMACIE : ces sites revendiquent une PA immatriculée mais ne documentent nulle part l'origine de leur socle technique. Aucune hypothèse de marque blanche n'a été formulée sur la base d'une ressemblance d'interface."
+  },
+  "plateformes": [
+    {
+      "nom": "AZOPIO",
+      "siteWeb": "https://www.azopio.com/fr/",
+      "familleOrigine": ["facturation_compta", "ged"],
+      "segmentCible": ["micro", "tpe_pme"],
+      "verticale": "generaliste",
+      "natureEntite": "extension_demat",
+      "perimetreFonctionnel": ["emission", "reception", "suite_gestion"],
+      "socleTechnique": {
+        "type": "inconnu",
+        "preuve": "Le site revendique une « Plateforme Agréée (PA) incluse » dans tous les abonnements mais ne documente ni l'éditeur du socle ni un éventuel opérateur tiers.",
+        "source": "https://www.azopio.com/fr/tarification/",
+        "confiance": "faible"
+      },
+      "descriptionFiche": "Azopio est une plateforme SaaS de pré-comptabilité et de gestion documentaire pour TPE-PME et leurs experts-comptables : collecte automatique des factures fournisseurs (email, collecteurs d'espaces clients, scanner mobile Azopio Snap, import de masse), OCR d'extraction des données, GED et coffre-fort numérique, synchronisation bancaire, workflow de validation, génération de factures clients aux formats électroniques, initiation de paiement et export des écritures comptables. La Plateforme Agréée est annoncée « incluse en Émission et Réception » dans les quatre formules d'abonnement (Lite 14,95 € à Ultimate 199,95 € HT/mois), l'API Azopio étant une option facturée sur les formules intermédiaires. Une offre « Grands comptes » (facturation globale, personnalisation, accompagnement dédié) est proposée sur devis.",
+      "logiquePositionnement": "Cohérent : Azopio traitait déjà le flux de factures achats et ventes de ses clients en amont de la comptabilité. Intégrer la PA au socle existant sans surcoût prolonge ce métier de collecte-traitement plutôt que d'ouvrir une activité nouvelle.",
+      "sourcesEnrichissement": [
+        { "champ": "positionnement", "source": "https://www.azopio.com/fr/caracteristiques/", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "perimetreFonctionnel", "source": "https://www.azopio.com/fr/tarification/", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "segmentCible", "source": "https://www.azopio.com/fr/tarification/", "dateReleve": "2026-08-20", "confiance": "moyenne" },
+        { "champ": "socleTechnique", "source": "https://www.azopio.com/fr/tarification/", "dateReleve": "2026-08-20", "confiance": "faible" }
+      ]
+    },
+    {
+      "nom": "BC SOLUTIONS",
+      "siteWeb": "https://bcsolutions.fr/",
+      "familleOrigine": ["o2c", "s2p"],
+      "segmentCible": ["eti", "grands_comptes", "public"],
+      "verticale": "generaliste",
+      "natureEntite": "extension_demat",
+      "perimetreFonctionnel": ["emission", "reception", "ereporting"],
+      "socleTechnique": {
+        "type": "propre",
+        "operateurSocle": "BCSolutions (eas'Invoice)",
+        "preuve": "BCSolutions édite eas'Invoice et la présente comme « une solution à 2 étages », une Plateforme Agréée et une brique Solution Compatible, avec son propre moteur d'orchestration configurable, ses connecteurs standards SAP et Infor M3 et « une architecture d'intégration extensible permettant le développement de connecteurs vers d'autres ERP ».",
+        "source": "https://bcsolutions.fr/easinvoice/",
+        "confiance": "moyenne"
+      },
+      "fournisseurDeSocle": true,
+      "modeDistributionSocle": ["direct", "API/embedded"],
+      "descriptionFiche": "BCSolutions commercialise eas'Invoice, plateforme « tout-en-un » qui cumule les fonctions de Plateforme Agréée (immatriculation définitive revendiquée) et de Solution Compatible : accès à l'annuaire du PPF et gestion des lignes d'adressage, émission et réception aux formats UBL, CII et Factur-X, routage automatique vers le PPF, les autres PA ou Peppol, génération et transmission des fichiers d'e-reporting, APIs standardisées AFNOR pour l'interopérabilité PA/OD. La brique Solution Compatible ajoute un moteur d'orchestration configurable, des connecteurs SAP et Infor M3, la signature électronique eIDAS et l'archivage probant en coffre-fort. La société se décrit comme spécialiste de la composition et de la distribution de factures depuis 20 ans, avec 10 ans de dématérialisation fiscale et un portail de gestion autour de Chorus Pro, et revendique une couverture réglementaire dans plus de 60 pays. Membre du FNFE. Sites à Aix-en-Provence et Casablanca.",
+      "logiquePositionnement": "Très cohérent : l'entreprise vient de l'éditique et de la distribution de factures, puis de la dématérialisation fiscale et de Chorus Pro. La PA prolonge directement cette chaîne. Le positionnement notable est le double rôle assumé de fournisseur d'infrastructure : BCSolutions adresse explicitement les éditeurs cherchant une PA via des API standardisées, en plus de la vente directe aux entreprises.",
+      "sourcesEnrichissement": [
+        { "champ": "positionnement", "source": "https://bcsolutions.fr/easinvoice/", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "fournisseurDeSocle", "source": "https://bcsolutions.fr/reforme-de-la-facturation-electronique/", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "modeDistributionSocle", "source": "https://bcsolutions.fr/reforme-de-la-facturation-electronique/", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "perimetreFonctionnel", "source": "https://bcsolutions.fr/easinvoice/", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "familleOrigine", "source": "https://bcsolutions.fr/reforme-de-la-facturation-electronique/", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "segmentCible", "source": "https://bcsolutions.fr/easinvoice/", "dateReleve": "2026-08-20", "confiance": "moyenne" }
+      ]
+    },
+    {
+      "nom": "CECURITY",
+      "siteWeb": "https://www.cecurity.com/",
+      "familleOrigine": ["ged"],
+      "segmentCible": ["eti", "grands_comptes"],
+      "verticale": "generaliste",
+      "natureEntite": "extension_demat",
+      "perimetreFonctionnel": ["emission", "reception"],
+      "socleTechnique": {
+        "type": "propre",
+        "operateurSocle": "Cecurity.com (eFacture)",
+        "preuve": "« La plateforme SaaS eFacture de Cecurity.com a été immatriculée Plateforme Agréée » ; Cecurity.com se décrit comme « éditeur historique de logiciels et de solutions en mode SaaS » fondé en 2001, et sa plateforme est « entièrement pilotable via des API REST et des webhooks ».",
+        "source": "https://www.cecurity.com/plateforme-dematerialisation-partenaire/",
+        "confiance": "haute"
+      },
+      "groupeCapitalistique": "Filiale du groupe ISAGRI, présenté par Cecurity.com comme « leader européen de l'informatique pour l'agriculture, la viticulture et la profession comptable ». Cecurity.com est entré dans le groupe à la suite d'une offre de rachat des actions initiée par Groupe ISAGRI.",
+      "descriptionFiche": "Cecurity.com est un éditeur français fondé en 2001, spécialiste du coffre-fort numérique, de l'archivage à valeur probante et du traitement sécurisé des flux documentaires, revendiquant plus de 200 clients (banques, grandes entreprises, opérateurs, professions réglementées). Son offre de facturation électronique s'appelle eFacture : plateforme SaaS immatriculée Plateforme Agréée, couvrant les factures de vente (diffusion automatisée multicanale, archivage certifié NF-461, suivi temps réel, module d'échange et de relance client) et les factures d'achat (collecte, contrôle et extraction sur formats structurés UBL, CII, Factur-X et non structurés PDF, modules de validation et d'approbation, module de paiement intégré). La plateforme est annoncée modulaire et personnalisable, avec administration en cascade, interface aux couleurs du client et pilotage complet par API REST et webhooks.",
+      "logiquePositionnement": "Cohérent : le métier historique est la conformité documentaire et l'archivage probant, dont la facture est un objet central. Passer de l'archivage des factures à leur émission et réception sous statut de PA est une extension naturelle, appuyée sur des actifs de confiance déjà en place (NF-461, tiers de confiance qualifié). L'appartenance au groupe ISAGRI, très implanté auprès de la profession comptable, constitue un canal de distribution potentiel non documenté sur les pages consultées.",
+      "sourcesEnrichissement": [
+        { "champ": "positionnement", "source": "https://www.cecurity.com/plateforme-dematerialisation-partenaire/", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "perimetreFonctionnel", "source": "https://www.cecurity.com/efacture-dematerialisation-des-factures-entreprise/", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "groupeCapitalistique", "source": "https://www.cecurity.com/presentation-cecurity-com-votre-tiers-de-confiance/", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "segmentCible", "source": "https://www.cecurity.com/plateforme-dematerialisation-partenaire/", "dateReleve": "2026-08-20", "confiance": "moyenne" }
+      ]
+    },
+    {
+      "nom": "CEGEDIM",
+      "siteWeb": "https://www.cegedim-business-services.com/",
+      "familleOrigine": ["s2p", "o2c"],
+      "segmentCible": ["eti", "grands_comptes"],
+      "verticale": "generaliste",
+      "natureEntite": "extension_demat",
+      "perimetreFonctionnel": ["emission", "reception", "ereporting"],
+      "socleTechnique": {
+        "type": "propre",
+        "operateurSocle": "Cegedim Business Services (SY business)",
+        "preuve": "« SY business de Cegedim Business Services, une plateforme agréée, définitivement immatriculée » ; l'entreprise se présente comme « acteur historique de la dématérialisation de factures » et affiche ses propres certifications ISO 27001 et qualification SecNumCloud.",
+        "source": "https://www.cegedim-business-services.com/facture-electronique/",
+        "confiance": "haute"
+      },
+      "fournisseurDeSocle": true,
+      "groupeCapitalistique": "Cegedim Business Services, entité services aux entreprises du groupe Cegedim, couvrant les fonctions finance, achats, ventes, RH et les flux santé (produits Teams RH, Laponi, Cosytec, SY business, SY pharma, TPO, Hospitalis).",
+      "descriptionFiche": "Cegedim Business Services commercialise SY business, plateforme agréée définitivement immatriculée, présentée comme une solution modulaire d'automatisation des processus de facturation et d'achats. Au-delà du rôle de PA (émission, réception, transmission des flux d'e-reporting à l'administration), la plateforme revendique la prise en charge des factures hors champ de la réforme (B2C, non assujettis, B2B international), l'automatisation de contrôles métiers et la gestion de bout en bout des processus Procure to Pay et Order to Cash, avec une couverture multi-pays (formats PDF, UBL, Facturae, Fattura-PA, réseau Peppol). Certifications affichées : ISO 27001, immatriculation PA, qualification SecNumCloud. L'éditeur publie une offre explicite à destination des Solutions Compatibles : « Rejoignez notre réseau de partenaires de solutions compatibles » avec un parcours « Devenir partenaire PA ». Un simulateur d'économies est proposé aux entreprises traitant plus de 10 000 factures par mois.",
+      "logiquePositionnement": "Cohérent et assumé : acteur historique de la dématérialisation de factures et du BPO, Cegedim Business Services positionne la PA comme une brique de conformité au sein d'une offre P2P/O2C déjà installée en ETI et grands comptes. Le point rare est le double canal : vente directe aux entreprises et rôle de grossiste revendiqué auprès des éditeurs de Solutions Compatibles qui souhaitent adosser leurs clients à une PA immatriculée, sans que les modalités techniques de ce partenariat soient décrites publiquement.",
+      "sourcesEnrichissement": [
+        { "champ": "positionnement", "source": "https://www.cegedim-business-services.com/facture-electronique/", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "fournisseurDeSocle", "source": "https://www.cegedim-business-services.com/facture-electronique/", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "perimetreFonctionnel", "source": "https://www.cegedim-business-services.com/facture-electronique/", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "groupeCapitalistique", "source": "https://www.sybycegedim.com/fr", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "segmentCible", "source": "https://www.cegedim-business-services.com/facture-electronique/", "dateReleve": "2026-08-20", "confiance": "moyenne" }
+      ]
+    },
+    {
+      "nom": "CEGI ALFA",
+      "siteWeb": "https://www.cegi.fr/",
+      "familleOrigine": ["erp", "facturation_compta"],
+      "verticale": "sante_medico_social_interim",
+      "natureEntite": "extension_demat",
+      "perimetreFonctionnel": ["suite_gestion"],
+      "socleTechnique": {
+        "type": "propre",
+        "operateurSocle": "Groupe CEGI",
+        "preuve": "« L'offre Groupe CEGI n'est pas un assemblage de solutions hétérogènes » : elle intègre « facturation, comptabilité et plateforme agréée au sein d'un environnement unique », avec « un référentiel de données unique, sans rupture ni ressaisie ».",
+        "source": "https://www.cegi.fr/facture-electronique-groupe-cegi-obtient-limmatriculation-de-sa-plateforme-agreee/",
+        "confiance": "moyenne"
+      },
+      "groupeCapitalistique": "Groupe CEGI, organisé en entités CEGI, CEGI Santé et CEGI Alfa. Direction générale : Julien Taïeb.",
+      "descriptionFiche": "Le Groupe CEGI, éditeur de solutions de gestion, annonce l'immatriculation de sa plateforme agréée par la DGFiP et se revendique « acteur de référence unique sur les secteurs de la santé, du médico-social et de l'intérim ». Le positionnement mis en avant n'est pas celui d'une PA autonome mais d'une offre nativement intégrée de bout en bout : facturation, comptabilité et plateforme agréée dans un environnement unique, référentiel de données unique, guichet unique et interlocuteur unique en après-vente. Les capacités mises en avant correspondent aux besoins de ses secteurs : gestion de volumes élevés, comptabilité analytique avancée, suivi des engagements et des budgets, pilotage financier en temps réel (suivi des factures, cash-flow, anticipation des délais de paiement). Le groupe s'appuie sur une expérience de déploiement de solutions de dématérialisation de factures auprès de plusieurs centaines de clients. Le communiqué est publié au nom du « Groupe CEGI », alors que l'inscription au référentiel porte le nom CEGI ALFA (contact CEGI Alfa : 04 73 980 980).",
+      "logiquePositionnement": "Cohérent : éditeur d'ERP et de gestion comptable sur des verticales réglementées, CEGI intègre la PA à sa suite plutôt que de la vendre comme un service séparé. La valeur revendiquée est l'absence de rupture entre facturation, comptabilité et conformité fiscale, pas la performance de la plateforme en tant que telle. Le segment d'entreprises visé n'est pas explicité sur le site : il n'a donc pas été qualifié.",
+      "sourcesEnrichissement": [
+        { "champ": "positionnement", "source": "https://www.cegi.fr/facture-electronique-groupe-cegi-obtient-limmatriculation-de-sa-plateforme-agreee/", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "verticale", "source": "https://www.cegi.fr/facture-electronique-groupe-cegi-obtient-limmatriculation-de-sa-plateforme-agreee/", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "groupeCapitalistique", "source": "https://www.cegi.fr/facture-electronique-groupe-cegi-obtient-limmatriculation-de-sa-plateforme-agreee/", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "perimetreFonctionnel", "source": "https://www.cegi.fr/facture-electronique-groupe-cegi-obtient-limmatriculation-de-sa-plateforme-agreee/", "dateReleve": "2026-08-20", "confiance": "moyenne" }
+      ]
+    },
+    {
+      "nom": "CLEARTAX",
+      "siteWeb": "https://www.cleartax.com/fr",
+      "familleOrigine": ["tax"],
+      "segmentCible": ["grands_comptes"],
+      "verticale": "generaliste",
+      "natureEntite": "extension_demat",
+      "perimetreFonctionnel": ["emission", "reception", "ereporting"],
+      "socleTechnique": {
+        "type": "propre",
+        "operateurSocle": "ClearTax",
+        "preuve": "Le site revendique sa propre infrastructure : « Single unified API, to support 60+ country mandates » et « AI-powered seamless integration with any ERP, POS systems », sous la bannière « DGFIP Certified Plateforme Agréée (PA) & ViDA Ready E-Invoicing Platform in France ».",
+        "source": "https://www.cleartax.com/fr/en",
+        "confiance": "haute"
+      },
+      "groupeCapitalistique": "Marque ClearTax (groupe Clear). Le site oriente vers le compte LinkedIn « cleartaxindia » et vers clear.in, et localise son adresse française au 42 rue Cambronne, 75015 Paris.",
+      "descriptionFiche": "ClearTax est une plateforme de conformité fiscale et de facturation électronique internationale, qui se présente en France comme « DGFIP Certified Plateforme Agréée (PA) & ViDA Ready E-Invoicing Platform ». L'argumentaire est celui d'un acteur multi-juridictions : une API unifiée couvrant plus de 60 mandats nationaux, une intégration assistée par IA à n'importe quel ERP ou système de caisse, le support des formats Factur-X, UBL et CII, l'e-reporting transfrontalier et la gestion des 14 statuts du cycle de vie de la facture française. La cible affichée est l'entreprise multinationale : « Trusted by 5000+ global enterprises », avec un mur de logos de grands groupes industriels et de biens de consommation. Le site publie par ailleurs un important corpus pédagogique en français sur la réforme (PA/OD/PPF, Chorus Pro, Factur-X, e-reporting, sanctions).",
+      "logiquePositionnement": "Cohérent : le métier d'origine est la conformité fiscale et la facturation électronique réglementaire dans plusieurs pays. La PA française est un mandat de plus branché sur une API unique, vendu à des grands comptes internationaux qui cherchent un fournisseur unique plutôt qu'une PA par pays. C'est un positionnement de conformité multi-pays, pas de dématérialisation de proximité, ce qui le distingue nettement des autres plateformes de ce lot.",
+      "sourcesEnrichissement": [
+        { "champ": "positionnement", "source": "https://www.cleartax.com/fr/en", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "segmentCible", "source": "https://www.cleartax.com/fr/en", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "perimetreFonctionnel", "source": "https://www.cleartax.com/fr/en", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "groupeCapitalistique", "source": "https://www.cleartax.com/fr/en", "dateReleve": "2026-08-20", "confiance": "moyenne" }
+      ]
+    },
+    {
+      "nom": "CYCLOPE",
+      "siteWeb": "http://cyclope.digital/",
+      "perimetreFonctionnel": ["emission", "reception"],
+      "socleTechnique": {
+        "type": "inconnu",
+        "preuve": "Le site est une page vitrine unique, sans mentions légales, sans nom d'éditeur ni de groupe. Il annonce seulement « Plateforme Agréée pour émettre, recevoir et suivre vos factures électroniques en toute conformité » et une « connexion à vos outils (ERP, compta, CRM) via API et connecteurs ». Aucune information sur l'origine du socle.",
+        "source": "http://cyclope.digital/",
+        "confiance": "faible"
+      },
+      "descriptionFiche": "Site officiel réduit à une page vitrine. CYCLOPE se présente comme une « Plateforme Agréée pour émettre, recevoir et suivre vos factures électroniques en toute conformité », autour de quatre promesses génériques : conformité (« processus alignés avec le cadre réglementaire »), simplicité (« interface intuitive, mise en route rapide »), traçabilité (« statuts, historiques et preuves d'échanges centralisés ») et interopérabilité (« connexion à vos outils ERP, compta, CRM via API et connecteurs »). Aucune page « plateforme agréée » détaillée, aucune page tarifs, aucune page partenaires, aucune mention légale, aucune indication de secteur, de taille de client ciblée, de groupe d'appartenance ni d'éditeur. Le rattachement de ce domaine à l'entité immatriculée n'est pas établi par le site lui-même.",
+      "logiquePositionnement": "Non qualifiable en l'état. Le site ne dit rien du métier d'origine de l'entité ni de son marché : toute affirmation sur la cohérence entre son activité et sa position de PA relèverait de la déduction à partir du nom ou de sources tierces, ce que le brief interdit. À reprendre lorsque le site sera enrichi ou qu'une communication officielle sera disponible.",
+      "sourcesEnrichissement": [
+        { "champ": "positionnement", "source": "http://cyclope.digital/", "dateReleve": "2026-08-20", "confiance": "non_qualifie" },
+        { "champ": "perimetreFonctionnel", "source": "http://cyclope.digital/", "dateReleve": "2026-08-20", "confiance": "moyenne" },
+        { "champ": "siteWeb", "source": "http://cyclope.digital/", "dateReleve": "2026-08-20", "confiance": "faible" }
+      ]
+    },
+    {
+      "nom": "DARVA",
+      "siteWeb": "https://www.darva.com/",
+      "familleOrigine": ["edi"],
+      "segmentCible": ["tpe_pme", "eti", "grands_comptes"],
+      "verticale": "assurance",
+      "natureEntite": "extension_demat",
+      "perimetreFonctionnel": ["emission", "reception", "ereporting"],
+      "socleTechnique": {
+        "type": "propre",
+        "operateurSocle": "DARVA (Ofeli)",
+        "preuve": "« Fort de 35 années d'expertise dans la gestion des flux dématérialisés, dont 8 millions de factures et notes d'honoraires par an, DARVA a conçu une plateforme adaptée à toutes les entreprises. Sa valeur ajoutée ? Se conformer aux spécificités de l'assurance et de la gestion de sinistres. »",
+        "source": "https://www.darva.com/fr/solutions/ofeli-outil-de-facturation-electronique-legale-integre/",
+        "confiance": "haute"
+      },
+      "descriptionFiche": "DARVA est l'opérateur historique des échanges dématérialisés du secteur de l'assurance français : 37 ans au service de la digitalisation du secteur, 15 000 clients (assureurs, réseaux et prestataires de la gestion de sinistres), 227 millions de messages traités par an et 8 millions de factures et notes d'honoraires annuelles. Son offre de facturation électronique s'appelle Ofeli (Outil de Facturation Électronique Légale Intégré), plateforme agréée par la DGFiP. Fonctionnalités annoncées : conversion vers les formats normalisés, vérification, contrôle et certification des factures, routage et transfert, intégration au système comptable ou métier, extraction et transmission des données obligatoires à l'administration fiscale, suivi temps réel du cycle de vie, archivage à valeur probante, transformation et réconciliation. DARVA propose en complément un accompagnement projet (analyse d'impact sur les processus comptables, achats, ventes et règlement, analyse de complétude des données, choix des modules, formation).",
+      "logiquePositionnement": "Très cohérent, et c'est le cas type de la verticale sectorielle : DARVA opère déjà les flux normalisés entre assureurs, réseaux et prestataires de sinistres, y compris des millions de notes d'honoraires. La PA est l'extension réglementaire d'une infrastructure d'échange existante, et l'argument de vente explicite est la conformité aux spécificités de l'assurance et de la gestion de sinistres, pas la polyvalence.",
+      "sourcesEnrichissement": [
+        { "champ": "positionnement", "source": "https://www.darva.com/fr/solutions/ofeli-outil-de-facturation-electronique-legale-integre/", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "verticale", "source": "https://www.darva.com/fr/solutions/ofeli-outil-de-facturation-electronique-legale-integre/", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "perimetreFonctionnel", "source": "https://www.darva.com/fr/solutions/ofeli-outil-de-facturation-electronique-legale-integre/", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "segmentCible", "source": "https://www.darva.com/fr/solutions/ofeli-outil-de-facturation-electronique-legale-integre/", "dateReleve": "2026-08-20", "confiance": "moyenne" }
+      ]
+    },
+    {
+      "nom": "DEXT",
+      "siteWeb": "https://dext.com/fr",
+      "familleOrigine": ["facturation_compta", "portail_ec", "ged"],
+      "segmentCible": ["micro", "tpe_pme"],
+      "verticale": "generaliste",
+      "natureEntite": "extension_demat",
+      "perimetreFonctionnel": ["emission", "reception", "ereporting"],
+      "socleTechnique": {
+        "type": "inconnu",
+        "preuve": "Dext revendique être « officiellement certifiée Plateforme Agréée (PA) par la DGFiP » et un « accès PA (ex-PDP) inclus et sans surcoût », mais aucune page consultée ne documente l'origine ou l'opérateur du socle technique de cette PA.",
+        "source": "https://dext.com/fr/cabinet/produits/logiciel-facturation-electronique",
+        "confiance": "faible"
+      },
+      "modeDistributionSocle": ["direct", "via cabinet EC"],
+      "descriptionFiche": "Dext est une plateforme d'automatisation de la tenue comptable et de pré-comptabilité, positionnée en priorité sur les cabinets d'expertise comptable et leurs clients entreprises : collecte et extraction des pièces par IA, GED intelligente, flux bancaires, notes de frais, solution de paiement. La Plateforme Agréée est présentée comme immatriculée par la DGFiP et « incluse dans tous les abonnements existants, sans surcoût » (mention « 100 % gratuit » sur la page produit). Périmètre annoncé : émission et réception de factures électroniques, gestion de l'e-reporting, gestion automatique des statuts, filtrage anti-fraude et traçabilité, prise en charge de Factur-X, UBL et CII ainsi que des flux hors réforme (B2C, fournisseurs étrangers). Dext se décrit comme faisant partie des premiers acteurs immatriculés et affiche l'ambition de devenir une « plateforme globale » de gestion de la facture. Distribution par le canal des cabinets comptables (accompagnement, communication aux clients) et en direct par inscription en ligne.",
+      "logiquePositionnement": "Cohérent : Dext traite déjà l'intégralité des pièces d'achat et de vente de ses utilisateurs pour le compte des cabinets. Devenir PA sécurise ce flux à la source plutôt que de le laisser transiter par un tiers, et l'inclusion sans surcoût est un argument de rétention du parc plus qu'une ligne de revenus. Le levier de distribution est le cabinet d'expertise comptable, ce qui distingue Dext des PA vendues directement en entreprise.",
+      "sourcesEnrichissement": [
+        { "champ": "positionnement", "source": "https://dext.com/fr/cabinet/produits/logiciel-facturation-electronique", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "perimetreFonctionnel", "source": "https://dext.com/fr/ressources/facture-electronique", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "modeDistributionSocle", "source": "https://dext.com/fr/cabinet/produits/logiciel-facturation-electronique", "dateReleve": "2026-08-20", "confiance": "moyenne" },
+        { "champ": "segmentCible", "source": "https://dext.com/fr", "dateReleve": "2026-08-20", "confiance": "moyenne" },
+        { "champ": "socleTechnique", "source": "https://dext.com/fr/cabinet/produits/logiciel-facturation-electronique", "dateReleve": "2026-08-20", "confiance": "faible" }
+      ]
+    },
+    {
+      "nom": "DIGIPHARMACIE",
+      "siteWeb": "https://digipharmacie.fr/",
+      "familleOrigine": ["ged", "facturation_compta"],
+      "segmentCible": ["micro", "tpe_pme"],
+      "verticale": "pharmacie",
+      "natureEntite": "extension_demat",
+      "perimetreFonctionnel": ["reception", "suite_gestion"],
+      "socleTechnique": {
+        "type": "inconnu",
+        "preuve": "La grille tarifaire annonce « Plateforme Agréée incluse dans toutes les formules », mais aucune page du site ne documente l'éditeur ou l'opérateur du socle technique de cette PA.",
+        "source": "https://digipharmacie.fr/",
+        "confiance": "faible"
+      },
+      "groupeCapitalistique": "Groupe Equasens (le site publie une page dédiée « À propos du groupe Equasens »).",
+      "descriptionFiche": "Digipharmacie est une plateforme de collecte et de gestion des factures dédiée aux pharmacies d'officine, revendiquant plus de 16 000 pharmacies utilisatrices et plus de 200 cabinets comptables partenaires, avec les logos des principaux groupements d'officines (Giphar, Alphega, Pharm'Etoile, Aptiphar, Apothical, Pharmacorp…). Modules : Digicollecte (import automatique des factures depuis la boîte mail et plus de 150 espaces clients fournisseurs de type Arkevia, OCP, Alloga, Pierre Fabre, avec extraction automatique des données), DigiGED (gestion électronique de documents), DigiÉcriture (analyse du FEC et comptabilisation automatique, tests de cohérence, isolement des doublons, pro forma et immobilisations, valeur probante conforme au décret 2016-1673), et récupération automatisée des LCR depuis les espaces bancaires avec rapprochement facture/LCR et génération des écritures. La Plateforme Agréée est annoncée incluse dans toutes les formules d'abonnement. Compatibilité affichée avec les logiciels de production comptable du marché (dont Ibiza et Inqom) et interface administrateur dédiée aux cabinets.",
+      "logiquePositionnement": "Très cohérent : Digipharmacie centralise déjà les factures fournisseurs de l'officine et les transmet à l'expert-comptable. La réforme rend obligatoire l'usage d'une plateforme agréée sur ce même flux ; devenir PA protège la position d'intermédiaire acquise auprès de 16 000 pharmacies plutôt que de la déléguer. Verticale sectorielle nette (pharmacie), adossée au groupe Equasens, très implanté dans l'informatique officinale.",
+      "sourcesEnrichissement": [
+        { "champ": "positionnement", "source": "https://digipharmacie.fr/", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "verticale", "source": "https://digipharmacie.fr/", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "groupeCapitalistique", "source": "https://digipharmacie.fr/a-propos-du-groupe-equasens", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "segmentCible", "source": "https://digipharmacie.fr/comptables", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "perimetreFonctionnel", "source": "https://digipharmacie.fr/", "dateReleve": "2026-08-20", "confiance": "moyenne" }
+      ]
+    }
+  ]
+}
