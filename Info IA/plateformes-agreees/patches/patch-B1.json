@@ -1,0 +1,258 @@
+{
+ "_patch": {
+  "id": "B1",
+  "chantier": "B — identites juridiques manquantes et douteuses",
+  "auteur": "RFE_WebSite",
+  "dateReleve": "2026-08-20",
+  "nbPlateformes": 12,
+  "referentielLu": "data/plateformes-agreees.json — GitHub Fluxym-BBA/rfe.fluxym.com @ main, commit b419029 (arbre 3654af9), lu le 2026-08-20",
+  "note": "Lot B1 : 18 cibles examinees, 12 lignes de patch (6 cibles sans candidat retenu ne figurent pas dans le patch, voir plus bas), correspondant aux entrees du referentiel lisibles dans le fichier data/plateformes-agreees.json entre 'A-Cube' et 'Effinum by SPEE' (51 premieres entrees). BLOCAGE OUTIL : le referentiel fait 9 161 lignes / 253 Ko et mes outils de lecture web plafonnent a 85 011 caracteres par URL. Je n'ai pu lire que les 51 premieres entrees. Les ~33 cibles suivantes du chantier B (pays=France & siren=null, ou confianceIdentite=moyenne, au-dela de 'Effinum by SPEE') ne sont pas traitees ici : elles necessitent un acces fractionne au fichier (extrait ou decoupage). | METHODE : une requete API par plateforme, jamais en lot ; nom nettoye des suffixes PDP/PA/by X/powered by X ; filtre code_postal puis departement ; verification du SIREN deja enregistre par requete sur le SIREN lui-meme. | REGLE DE CONFIANCE APPLIQUEE : 'haute' = nom exact (raison sociale, sigle RNE ou nom commercial entre parentheses dans nom_complet) ET adresse concordante ; 'moyenne' = ecart limite a un suffixe pays (AVALARA -> AVALARA FRANCE, EDICS France -> EDICS, DEXT -> DEXT FRANCE) avec adresse strictement identique — cette extension de la regle est signalee ici et reste a valider ; aucun match = aucun champ rempli. | FAUX APPARIEMENTS CONFIRMES ET EFFACES : BC SOLUTIONS (829620434 = BC SOLUTIONS a Cosnes-et-Romain 54400, APE 43.99C batiment, vs 13290 attendu) ; CECURITY (488554825 = CECURITY OUTSOURCING/MEDIAN, cessee, 75 Rue Saint-Lazare non concordant) ; EEZI powered by VAT IT (823517073 = EEZI, 75005 Paris, cessee, APE 68.31Z, vs 78100 attendu). Pour ces trois entrees, siren, raisonSociale, dateCreation, anneeCreation, trancheEffectif, categorieEntreprise, activitePrincipale, dirigeants et confianceIdentite sont mis a null : correction d'erreur assumee. | FAUX APPARIEMENTS CORRIGES : EDT (809008824, 75016 Paris, APE 74.10Z -> 352753800 EDT - ELECTRONIC DATA TRANSFERT, sigle EDT, 85 Rue Lavoisier 38330 Montbonnot-Saint-Martin, adresse identique au referentiel) ; CYCLOPE (478259682, 06580 Pegomas, immobilier -> 988397865 CYCLOPE, 92 Cours Vitton 69006 Lyon, adresse identique, APE 62.01Z, active) ; DEXT (833856297 TOARIKI DEXTER -> 828986109 DEXT FRANCE, 34 Rue Laffitte 75009, adresse identique). Pour ces trois entrees, dirigeants est vide car les dirigeants enregistres provenaient de l'entite erronee : a recharger par le chantier C. | POINT A ARBITRER : CYCLOPE (988397865) a ete cree le 23/06/2025, sous le vocable de la reforme. Candidat probable a la categorie 'entite creee pour porter l'immatriculation', comme KOLECTO PA. La societe operationnelle n'a pas ete identifiee de source sure : groupeCapitalistique laisse intact. | AUCUN MATCH, CHAMPS NON REMPLIS (candidats ecartes, documentes pour arbitrage) : AGENA 3000 (49300 Cholet : deux societes soeurs a la meme adresse, AGENA 3000 ERP 880231014 et AGENA 3000 DATA MANAGEMENT 824561450, aucune nommee exactement 'AGENA 3000' — entite immatriculee a confirmer) ; ATGP (0 resultat au CP 26120 et au departement 26) ; AXONAUT (0 resultat au CP 31130 et au departement 31) ; AXWAY SOFTWARE (0 resultat au CP 92035 ; en departement 92 la recherche ne ramene que 74SOFTWARE 433977980, Annecy 74000, ex-Axway Software : nom et adresse non concordants, non retenu) ; Dougs Facturation gratuite (au CP 45450 le repertoire ne recense que API FIRST 953321098, APE 62.02A ; en departement 45, DOUG'S 987361656 est un etablissement de restauration : aucun candidat credible) ; Effinum by SPEE (0 resultat pour EFFINUM au CP 75015 et au departement 75, ce qui confirme l'avertissement deja porte au referentiel). | Les tranches d'effectif sont converties depuis les codes INSEE (03 = 6-9, 11 = 10-19, 12 = 20-49, 21 = 50-99, 22 = 100-199, 32 = 250-499). trancheEffectif et categorieEntreprise sont omis quand l'API ne les renseigne pas.",
+  "nbCiblesExaminees": 18
+ },
+ "plateformes": [
+  {
+   "nom": "AGS RECORDS MANAGEMENT",
+   "siren": "338183726",
+   "raisonSociale": "PRO ARCHIVES SYSTEMES (AGS RECORDS MANAGEMENT)",
+   "dateCreation": "1986-06-26",
+   "anneeCreation": "1986",
+   "categorieEntreprise": "ETI",
+   "activitePrincipale": "52.10B",
+   "confianceIdentite": "haute",
+   "sourcesEnrichissement": [
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — recherche-entreprises.api.gouv.fr",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ],
+   "trancheEffectif": "250-499"
+  },
+  {
+   "nom": "ARTEVA",
+   "siren": "490794427",
+   "raisonSociale": "ARTEVA",
+   "dateCreation": "2006-07-01",
+   "anneeCreation": "2006",
+   "categorieEntreprise": "PME",
+   "activitePrincipale": "63.11Z",
+   "confianceIdentite": "haute",
+   "sourcesEnrichissement": [
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — recherche-entreprises.api.gouv.fr",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ],
+   "trancheEffectif": "10-19"
+  },
+  {
+   "nom": "AXELOR",
+   "siren": "480879733",
+   "raisonSociale": "AXELOR",
+   "dateCreation": "2005-02-21",
+   "anneeCreation": "2005",
+   "categorieEntreprise": "PME",
+   "activitePrincipale": "58.29C",
+   "confianceIdentite": "haute",
+   "sourcesEnrichissement": [
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — recherche-entreprises.api.gouv.fr",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ],
+   "trancheEffectif": "50-99"
+  },
+  {
+   "nom": "DARVA",
+   "siren": "345133128",
+   "raisonSociale": "DEVELOPPEMENT D'APPLICATION SUR RESEAUX A VALEUR AJOUTEE (DARVA)",
+   "dateCreation": "1988-05-02",
+   "anneeCreation": "1988",
+   "categorieEntreprise": "PME",
+   "activitePrincipale": "63.11Z",
+   "confianceIdentite": "haute",
+   "sourcesEnrichissement": [
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — recherche-entreprises.api.gouv.fr",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ],
+   "trancheEffectif": "100-199"
+  },
+  {
+   "nom": "EDT",
+   "siren": "352753800",
+   "raisonSociale": "EDT - ELECTRONIC DATA TRANSFERT (EDT)",
+   "dateCreation": "1989-12-01",
+   "anneeCreation": "1989",
+   "categorieEntreprise": "PME",
+   "activitePrincipale": "63.11Z",
+   "confianceIdentite": "haute",
+   "sourcesEnrichissement": [
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — recherche-entreprises.api.gouv.fr",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ],
+   "trancheEffectif": "20-49",
+   "dirigeants": []
+  },
+  {
+   "nom": "CYCLOPE",
+   "siren": "988397865",
+   "raisonSociale": "CYCLOPE",
+   "dateCreation": "2025-06-23",
+   "anneeCreation": "2025",
+   "activitePrincipale": "62.01Z",
+   "confianceIdentite": "haute",
+   "sourcesEnrichissement": [
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — recherche-entreprises.api.gouv.fr",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ],
+   "dirigeants": []
+  },
+  {
+   "nom": "AVALARA",
+   "siren": "814232740",
+   "raisonSociale": "AVALARA FRANCE",
+   "dateCreation": "2015-10-15",
+   "anneeCreation": "2015",
+   "categorieEntreprise": "ETI",
+   "activitePrincipale": "63.11Z",
+   "confianceIdentite": "moyenne",
+   "sourcesEnrichissement": [
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — recherche-entreprises.api.gouv.fr",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    }
+   ],
+   "trancheEffectif": "1-2"
+  },
+  {
+   "nom": "EDICS France",
+   "siren": "518385745",
+   "raisonSociale": "EDICS",
+   "dateCreation": "2009-11-16",
+   "anneeCreation": "2009",
+   "categorieEntreprise": "PME",
+   "activitePrincipale": "63.11Z",
+   "confianceIdentite": "moyenne",
+   "sourcesEnrichissement": [
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — recherche-entreprises.api.gouv.fr",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    }
+   ],
+   "trancheEffectif": "6-9"
+  },
+  {
+   "nom": "DEXT",
+   "siren": "828986109",
+   "raisonSociale": "DEXT FRANCE",
+   "dateCreation": "2017-03-31",
+   "anneeCreation": "2017",
+   "categorieEntreprise": "PME",
+   "activitePrincipale": "70.22Z",
+   "confianceIdentite": "moyenne",
+   "sourcesEnrichissement": [
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — recherche-entreprises.api.gouv.fr",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    }
+   ],
+   "trancheEffectif": "20-49",
+   "dirigeants": []
+  },
+  {
+   "nom": "BC SOLUTIONS",
+   "siren": null,
+   "raisonSociale": null,
+   "dateCreation": null,
+   "anneeCreation": null,
+   "trancheEffectif": null,
+   "categorieEntreprise": null,
+   "activitePrincipale": null,
+   "dirigeants": [],
+   "confianceIdentite": null,
+   "sourcesEnrichissement": [
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — recherche-entreprises.api.gouv.fr",
+     "dateReleve": "2026-08-20",
+     "confiance": "non_qualifie"
+    }
+   ]
+  },
+  {
+   "nom": "CECURITY",
+   "siren": null,
+   "raisonSociale": null,
+   "dateCreation": null,
+   "anneeCreation": null,
+   "trancheEffectif": null,
+   "categorieEntreprise": null,
+   "activitePrincipale": null,
+   "dirigeants": [],
+   "confianceIdentite": null,
+   "sourcesEnrichissement": [
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — recherche-entreprises.api.gouv.fr",
+     "dateReleve": "2026-08-20",
+     "confiance": "non_qualifie"
+    }
+   ]
+  },
+  {
+   "nom": "EEZI powered by VAT IT",
+   "siren": null,
+   "raisonSociale": null,
+   "dateCreation": null,
+   "anneeCreation": null,
+   "trancheEffectif": null,
+   "categorieEntreprise": null,
+   "activitePrincipale": null,
+   "dirigeants": [],
+   "confianceIdentite": null,
+   "sourcesEnrichissement": [
+    {
+     "champ": "immatriculation",
+     "source": "Liste officielle DGFiP — impots.gouv.fr",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    },
+    {
+     "champ": "positionnement",
+     "source": "nom officiel declare a la DGFiP + RNE",
+     "dateReleve": "2026-08-19",
+     "confiance": "moyenne"
+    },
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — recherche-entreprises.api.gouv.fr",
+     "dateReleve": "2026-08-20",
+     "confiance": "non_qualifie"
+    }
+   ]
+  }
+ ]
+}

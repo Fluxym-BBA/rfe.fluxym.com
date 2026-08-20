@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Extraction de l'index des identités | Re·Form·E</title>
+<link rel="icon" href="./assets/favicon-Fluxym-V2.png" sizes="32x32" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./css/pages.css">
+<style>
+  .util-wrap { max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+  .util-card { background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--radius-lg);
+               box-shadow: var(--shadow-sm); padding: 1.5rem; margin-bottom: 1.5rem; }
+  .util-actions { display: flex; flex-wrap: wrap; gap: .75rem; align-items: center; }
+  .util-log { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .8125rem;
+              background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: var(--radius-sm);
+              padding: 1rem; max-height: 22rem; overflow: auto; white-space: pre-wrap; color: var(--gray-900); }
+  .util-kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: .75rem; margin: 1rem 0; }
+  .util-kpi { background: var(--gray-50); border-radius: var(--radius-md); padding: .875rem 1rem; }
+  .util-kpi strong { display: block; font-size: 1.5rem; color: var(--navy); }
+  .util-kpi span { font-size: .8125rem; color: var(--gray-500); }
+</style>
+</head>
+<body>
+<nav id="main-nav"></nav>
+
+<header class="page-hero">
+  <div class="page-container">
+    <div class="breadcrumb"><a href="./index.html">Accueil</a> · <a href="./plateformes-agreees.html">Plateformes agréées</a> · Extraction de l'index</div>
+    <span class="hero-badge">Utilitaire interne</span>
+    <h1>Extraction de l'index des identités</h1>
+    <p>Produit <code>index-identites.json</code> à partir de <code>data/plateformes-agreees.json</code> : uniquement <code>nom</code>, <code>pays</code>, <code>adresse</code>, <code>siren</code> et <code>confianceIdentite</code>. Fichier léger, destiné aux chantiers d'enrichissement qui ne peuvent pas charger le référentiel complet.</p>
+  </div>
+</header>
+
+<main class="page-main">
+  <div class="util-wrap">
+    <section class="util-card">
+      <h2>1. Charger le référentiel</h2>
+      <div class="util-actions">
+        <button id="btn-fetch" class="btn-hero-primary" type="button">Charger depuis ./data/plateformes-agreees.json</button>
+        <label class="btn-hero-outline" for="file-input" style="cursor:pointer">…ou sélectionner le fichier</label>
+        <input id="file-input" type="file" accept="application/json,.json" hidden />
+      </div>
+      <p style="color:var(--gray-500);font-size:.875rem;margin-top:.75rem">
+        Le chargement automatique nécessite d'ouvrir cette page via un serveur web (site publié ou serveur local) ; en <code>file://</code>, utiliser la sélection de fichier.
+      </p>
+    </section>
+
+    <section class="util-card">
+      <h2>2. Résultat</h2>
+      <div class="util-kpis" id="kpis"></div>
+      <div class="util-actions">
+        <button id="btn-index" class="btn-hero-primary" type="button" disabled>Télécharger index-identites.json</button>
+        <button id="btn-cibles" class="btn-hero-secondary" type="button" disabled>Télécharger cibles-chantier-B.json</button>
+      </div>
+      <div class="util-log" id="log">En attente du référentiel…</div>
+    </section>
+  </div>
+</main>
+
+<script src="./js/nav.js"></script>
+<script src="./js/animations.js"></script>
+<script>
+  const CHAMPS = ['nom', 'pays', 'adresse', 'siren', 'confianceIdentite'];
+  const logEl = document.getElementById('log');
+  const kpisEl = document.getElementById('kpis');
+  const btnIndex = document.getElementById('btn-index');
+  const btnCibles = document.getElementById('btn-cibles');
+  let index = null;
+  let cibles = null;
+
+  const log = (msg) => { logEl.textContent = msg; };
+
+  const kpi = (valeur, libelle) => `<div class="util-kpi"><strong>${valeur}</strong><span>${libelle}</span></div>`;
+
+  const telecharger = (nomFichier, donnees) => {
+    const blob = new Blob([JSON.stringify(donnees, null, 1)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = nomFichier;
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
+  const traiter = (referentiel) => {
+    const plateformes = referentiel.plateformes || [];
+    index = {
+      _meta: {
+        genereLe: new Date().toISOString().slice(0, 10),
+        source: 'data/plateformes-agreees.json',
+        dateReleveReferentiel: (referentiel._meta && referentiel._meta.dateReleve) || null,
+        champs: CHAMPS,
+        nbEntrees: plateformes.length,
+        note: "Extrait de lecture seule. Ne jamais fusionner ce fichier dans le referentiel."
+      },
+      plateformes: plateformes.map((p) => {
+        const ligne = {};
+        CHAMPS.forEach((c) => { ligne[c] = p[c] === undefined ? null : p[c]; });
+        return ligne;
+      })
+    };
+
+    const sansSiren = index.plateformes.filter((p) => p.pays === 'France' && !p.siren);
+    const aVerifier = index.plateformes.filter((p) => p.confianceIdentite === 'moyenne');
+    cibles = {
+      _meta: {
+        genereLe: index._meta.genereLe,
+        chantier: 'B — identites juridiques manquantes et douteuses',
+        nbSansSiren: sansSiren.length,
+        nbAVerifier: aVerifier.length
+      },
+      sansSiren,
+      aVerifier
+    };
+
+    kpisEl.innerHTML = [
+      kpi(plateformes.length, 'entrées au référentiel'),
+      kpi(index.plateformes.filter((p) => p.pays === 'France').length, 'entités françaises'),
+      kpi(sansSiren.length, 'France sans SIREN'),
+      kpi(aVerifier.length, 'confiance moyenne')
+    ].join('');
+
+    btnIndex.disabled = false;
+    btnCibles.disabled = false;
+
+    const apercu = [...sansSiren, ...aVerifier]
+      .map((p) => `${p.siren ? p.siren : '        '}  ${p.confianceIdentite || '-'}\t${p.nom}\t${p.adresse || ''}`)
+      .join('\n');
+    log(`Index construit : ${index.plateformes.length} entrées.\n\nCibles du chantier B (${sansSiren.length} sans SIREN + ${aVerifier.length} à vérifier) :\n\n${apercu}`);
+  };
+
+  document.getElementById('btn-fetch').addEventListener('click', async () => {
+    log('Chargement de ./data/plateformes-agreees.json …');
+    try {
+      const reponse = await fetch('./data/plateformes-agreees.json', { cache: 'no-store' });
+      if (!reponse.ok) throw new Error(`HTTP ${reponse.status}`);
+      traiter(await reponse.json());
+    } catch (erreur) {
+      log(`Échec du chargement : ${erreur.message}\nUtiliser la sélection de fichier.`);
+    }
+  });
+
+  document.getElementById('file-input').addEventListener('change', (evenement) => {
+    const fichier = evenement.target.files && evenement.target.files[0];
+    if (!fichier) return;
+    const lecteur = new FileReader();
+    lecteur.onload = () => {
+      try {
+        traiter(JSON.parse(lecteur.result));
+      } catch (erreur) {
+        log(`JSON illisible : ${erreur.message}`);
+      }
+    };
+    lecteur.readAsText(fichier, 'utf-8');
+  });
+
+  btnIndex.addEventListener('click', () => telecharger('index-identites.json', index));
+  btnCibles.addEventListener('click', () => telecharger('cibles-chantier-B.json', cibles));
+</script>
+</body>
+</html>
