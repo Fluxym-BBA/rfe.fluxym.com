@@ -1,0 +1,565 @@
+{
+  "_patch": {
+    "id": "E10",
+    "chantier": "E — qualification marché",
+    "auteur": "RFE_WebSite",
+    "dateReleve": "2026-08-20",
+    "nbPlateformes": 10,
+    "note": "Lot d'entités étrangères hors SIRENE : siren, raisonSociale, dateCreation, trancheEffectif, categorieEntreprise, activitePrincipale et dirigeants volontairement non traités (niveau de détail dégradé assumé), donc absents du patch. 10 plateformes sur 10 qualifiées à partir de leur site officiel, aucune en non_qualifie. Champs volontairement absents faute de source : (1) segmentCible pour ADEMICO SOFTWARE, Arratech et B4VALUE.NET — ces trois sites segmentent par rôle (éditeur, prestataire, entreprise) et non par taille d'entreprise ; (2) natureEntite pour Arratech — société récente créée pour l'infrastructure Peppol en général, aucune des trois valeurs autorisées ne s'applique sans extrapolation ; (3) perimetreFonctionnel pour A-Cube — le site décrit une couche fiscale par API sans détailler émission/réception/e-reporting pour la France ; (4) groupeCapitalistique pour A-Cube, ADEMICO SOFTWARE, B4VALUE.NET, BASWARE, BILLIT, CBS Corporate Business Solutions et DOKAPI — aucun actionnaire ni groupe d'appartenance déclaré sur les pages consultées ; (5) solutionsCompatiblesPartenaires : aucune liste nominative d'éditeurs partenaires publiée par ces plateformes, à l'exception de B4VALUE.NET. Réserves à lever : (a) Aruba S.p.A. — aucune page française dédiée à la Plateforme Agréée accessible sur le site officiel du groupe (www.aruba.fr, onesuite.aruba.it et fatturazione-elettronica.aruba.it renvoient des erreurs 500, www.aruba.it/fatturazione-elettronica.aspx un 404). Le positionnement retenu est déduit du bloc « E-invoicing » de la page d'accueil aruba.it, qui décrit une offre italienne pour indépendants, forfaitaires et experts-comptables. Des sources tierces mentionnent une offre France « Aruba OneSuite » : non retenue faute de confirmation sur le site officiel. (b) B4VALUE.NET — les acteurs listés dans solutionsCompatiblesPartenaires (DATEV, Bundesdruckerei, RICOH, SGH, Quadient) sont présentés par b4value.net comme des prestataires du réseau TRAFFIQX ; ce ne sont pas des Solutions Compatibles au sens de la réglementation française et ils ne sont pas nécessairement liés à l'offre France. (c) DIGITAL TECHNOLOGIES — une page « Partner Program » existe dans la navigation du site mais n'a pas été ouverte : fournisseurDeSocle et modeDistributionSocle laissés absents, à qualifier lors d'une prochaine passe. (d) BASWARE — la page France indique que la candidature PA a été acceptée par la DGFiP ; le statut d'immatriculation définitive fait foi côté référentiel, pas cette page. Rappel de cadrage : « marque blanche », « API/embedded » et « fournisseur de socle » décrivent des modèles commerciaux, pas des catégories réglementaires. Chacune des 10 plateformes de ce lot est immatriculée en son nom propre et reste seule responsable devant l'administration ; l'administration ne distingue que la plateforme agréée immatriculée et la Solution Compatible non immatriculée."
+  },
+  "plateformes": [
+    {
+      "nom": "A-Cube",
+      "siteWeb": "https://www.acubeapi.com/en/",
+      "familleOrigine": [
+        "tax"
+      ],
+      "segmentCible": [
+        "tpe_pme",
+        "eti",
+        "grands_comptes"
+      ],
+      "verticale": "generaliste",
+      "natureEntite": "extension_demat",
+      "socleTechnique": {
+        "type": "propre",
+        "operateurSocle": "A-Cube",
+        "preuve": "« A global infrastructure for e-invoicing. A single integration for international tax compliance » — APIs propres exposées en sandbox public par A-Cube.",
+        "source": "https://www.acubeapi.com/en/partners",
+        "confiance": "moyenne"
+      },
+      "fournisseurDeSocle": true,
+      "modeDistributionSocle": [
+        "direct",
+        "API/embedded"
+      ],
+      "descriptionFiche": "A-Cube se présente comme « The API solution for global Tax Compliance » : ses API transforment les obligations fiscales en processus automatisés et s'intègrent « à n'importe quel ERP, plateforme e-commerce ou logiciel de gestion », en Italie comme sur les marchés internationaux. La société revendique plus de cent mille entreprises clientes, « des startups aux progiciels de gestion d'entreprise ». Elle publie un programme partenaires (« Become an A-Cube partner ») présentant son offre comme « une infrastructure mondiale pour la facturation électronique » et « une intégration unique pour la conformité fiscale internationale ». Le positionnement est donc celui d'un fournisseur d'infrastructure API destiné autant aux entreprises qu'aux éditeurs.",
+      "logiquePositionnement": "Cohérent : acteur né de la conformité fiscale par API (marché italien du SDI), l'immatriculation française prolonge une activité de couche fiscale multi-pays. Positionnement de grossiste technique revendiqué par son programme partenaires, et non de logiciel de facturation destiné à l'utilisateur final.",
+      "sourcesEnrichissement": [
+        {
+          "champ": "positionnement",
+          "source": "https://www.acubeapi.com/en/",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        },
+        {
+          "champ": "segmentCible",
+          "source": "https://www.acubeapi.com/en/partners",
+          "dateReleve": "2026-08-20",
+          "confiance": "moyenne"
+        },
+        {
+          "champ": "fournisseurDeSocle",
+          "source": "https://www.acubeapi.com/en/partners",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        },
+        {
+          "champ": "socleTechnique",
+          "source": "https://www.acubeapi.com/en/partners",
+          "dateReleve": "2026-08-20",
+          "confiance": "moyenne"
+        }
+      ]
+    },
+    {
+      "nom": "ADEMICO SOFTWARE",
+      "siteWeb": "https://ademico-software.com/",
+      "familleOrigine": [
+        "pure_player"
+      ],
+      "verticale": "generaliste",
+      "natureEntite": "extension_demat",
+      "perimetreFonctionnel": [
+        "emission",
+        "reception",
+        "ereporting"
+      ],
+      "socleTechnique": {
+        "type": "propre",
+        "operateurSocle": "Ademico Software",
+        "preuve": "« Certified Peppol Access Point », « Certified SMP », ISO/IEC 27001, hébergement UE, SLA 99,9 % — infrastructure exploitée en propre et revendue à des tiers.",
+        "source": "https://ademico-software.com/peppol/",
+        "confiance": "haute"
+      },
+      "fournisseurDeSocle": true,
+      "modeDistributionSocle": [
+        "API/embedded",
+        "marque_blanche"
+      ],
+      "descriptionFiche": "Ademico Software se décrit comme « One Peppol API for international e-invoicing » : une API unique pour connecter un ERP, une plateforme comptable ou une application métier au réseau Peppol. Le site revendique un Access Point et un SMP certifiés, la certification ISO/IEC 27001 et un hébergement européen. Une section « An Approved Platform for France » annonce des services de Plateforme Agréée pour l'e-invoicing et l'e-reporting : échange de factures françaises, statuts du cycle de vie et CDAR, e-reporting, interrogation de l'annuaire par SIREN ou SIRET. La société adresse explicitement les éditeurs et les autres opérateurs Peppol, avec deux offres dédiées : extension de couverture pays et infrastructure managée (Access Point hébergé, PKI Peppol, certificats, à partir de 3 312 €/an), assorties d'options en marque blanche et d'une grille tarifaire préférentielle « For Peppol Providers ».",
+      "logiquePositionnement": "Cohérent : opérateur d'infrastructure Peppol depuis plusieurs années, l'immatriculation française est l'ajout d'une juridiction supplémentaire à un catalogue déjà multi-pays. Son modèle est majoritairement indirect : il vend sa capacité technique à des éditeurs et à d'autres prestataires Peppol qui conservent leur marque et leur relation client.",
+      "sourcesEnrichissement": [
+        {
+          "champ": "positionnement",
+          "source": "https://ademico-software.com/peppol/",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        },
+        {
+          "champ": "perimetreFonctionnel",
+          "source": "https://ademico-software.com/peppol/",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        },
+        {
+          "champ": "fournisseurDeSocle",
+          "source": "https://ademico-software.com/peppol/",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        },
+        {
+          "champ": "socleTechnique",
+          "source": "https://ademico-software.com/peppol/",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "Arratech",
+      "siteWeb": "https://www.arratech.com/",
+      "familleOrigine": [
+        "pure_player"
+      ],
+      "verticale": "generaliste",
+      "perimetreFonctionnel": [
+        "routage_pur"
+      ],
+      "socleTechnique": {
+        "type": "propre",
+        "operateurSocle": "Arratech AB",
+        "preuve": "« A unified API designed for effortless management of Peppol Access Points and SMPs », architecture multi-tenant haut volume exploitée par Arratech.",
+        "source": "https://www.arratech.com/service-providers-businesses",
+        "confiance": "haute"
+      },
+      "fournisseurDeSocle": true,
+      "modeDistributionSocle": [
+        "marque_blanche",
+        "API/embedded"
+      ],
+      "groupeCapitalistique": "Arratech AB, société suédoise indépendante fondée par des dirigeants issus de Tickstar (racheté par Xero en 2021), de Pagero et d'IFS, plusieurs d'entre eux ayant piloté des communautés OpenPeppol.",
+      "descriptionFiche": "Arratech se présente comme « a scalable platform to power e-invoicing for service providers and businesses », avec une API unifiée pour gérer des Access Points et des SMP Peppol. Sa mission affichée est d'outiller « service providers, governments and software vendors » : architecture multi-tenant haut volume, mise en production « en jours plutôt qu'en mois », et « complete white-label freedom » permettant à un client de proposer un Access Point Peppol entièrement à sa marque, Arratech opérant la mécanique en arrière-plan. L'équipe dirigeante revendique une ancienneté forte dans l'écosystème Peppol (co-fondateurs de Tickstar, ex-responsables de communautés OpenPeppol, ancien dirigeant de Pagero et d'IFS).",
+      "logiquePositionnement": "Cohérent et assumé : Arratech ne vise pas l'entreprise assujettie mais l'opérateur qui la sert. Son immatriculation française s'inscrit dans une logique d'infrastructure vendue aux prestataires et éditeurs, ce qui en fait un candidat au rôle de grossiste sur le marché français.",
+      "sourcesEnrichissement": [
+        {
+          "champ": "positionnement",
+          "source": "https://www.arratech.com/service-providers-businesses",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        },
+        {
+          "champ": "fournisseurDeSocle",
+          "source": "https://www.arratech.com/service-providers-businesses",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        },
+        {
+          "champ": "groupeCapitalistique",
+          "source": "https://www.arratech.com/about",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        },
+        {
+          "champ": "socleTechnique",
+          "source": "https://www.arratech.com/service-providers-businesses",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "Aruba S.p.A.",
+      "siteWeb": "https://www.aruba.it/",
+      "familleOrigine": [
+        "facturation_compta"
+      ],
+      "segmentCible": [
+        "micro",
+        "tpe_pme"
+      ],
+      "verticale": "generaliste",
+      "natureEntite": "diversification",
+      "perimetreFonctionnel": [
+        "emission",
+        "reception"
+      ],
+      "socleTechnique": {
+        "type": "propre",
+        "operateurSocle": "Aruba S.p.A.",
+        "preuve": "Aruba exploite ses propres infrastructures (hébergement, cloud, services de confiance, conservation numérique) et opère son service de facturation électronique en son nom via pec.it.",
+        "source": "https://www.aruba.it/",
+        "confiance": "moyenne"
+      },
+      "modeDistributionSocle": [
+        "direct",
+        "via cabinet EC"
+      ],
+      "groupeCapitalistique": "Aruba S.p.A. — groupe italien d'infrastructure numérique : hébergement et noms de domaine (hosting.aruba.it), cloud et serveurs dédiés (ArubaCloud), services de confiance PEC / signature / SPID / horodatage / conservation numérique (pec.it), fibre, eSIM.",
+      "descriptionFiche": "Aruba S.p.A. est un groupe italien d'infrastructure numérique dont le site officiel structure l'offre en hébergement et domaines, cloud et serveurs dédiés, PEC et services de confiance, fibre, et facturation électronique. Le bloc « E-invoicing » du site décrit un service permettant de « créer, envoyer et conserver facilement des factures électroniques en restant conforme à la réglementation », décliné en offres pour les contribuables au forfait, les experts-comptables, l'émission de tickets seuls et des modules de gestion. La facturation électronique est donc une brique d'un catalogue de services numériques bien plus large, adossée aux services de confiance du groupe, et distribuée en direct comme via les cabinets comptables.",
+      "logiquePositionnement": "Diversification cohérente : opérateur d'infrastructure et de services de confiance, Aruba est déjà prestataire de facturation électronique sur son marché domestique italien, où le modèle de clearance est en place depuis 2019. L'immatriculation française prolonge ce métier. Attention toutefois : aucune page française dédiée à la Plateforme Agréée n'a pu être consultée sur le site officiel du groupe, le détail de l'offre France reste donc non qualifié.",
+      "sourcesEnrichissement": [
+        {
+          "champ": "positionnement",
+          "source": "https://www.aruba.it/",
+          "dateReleve": "2026-08-20",
+          "confiance": "moyenne"
+        },
+        {
+          "champ": "segmentCible",
+          "source": "https://www.aruba.it/",
+          "dateReleve": "2026-08-20",
+          "confiance": "moyenne"
+        },
+        {
+          "champ": "groupeCapitalistique",
+          "source": "https://www.aruba.it/",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        },
+        {
+          "champ": "socleTechnique",
+          "source": "https://www.aruba.it/",
+          "dateReleve": "2026-08-20",
+          "confiance": "moyenne"
+        }
+      ]
+    },
+    {
+      "nom": "B4VALUE.NET",
+      "siteWeb": "https://www.b4value.net/en/",
+      "familleOrigine": [
+        "edi"
+      ],
+      "verticale": "generaliste",
+      "natureEntite": "extension_demat",
+      "perimetreFonctionnel": [
+        "emission",
+        "reception"
+      ],
+      "socleTechnique": {
+        "type": "propre",
+        "operateurSocle": "b4value.net GmbH / réseau TRAFFIQX",
+        "preuve": "« The solution from the technology supplier of the TRAFFIQX network » ; certification DIN EN ISO/IEC 27001 pour le « développement, l'exploitation et le support d'une plateforme d'échange de documents et de données ».",
+        "source": "https://www.b4value.net/en/",
+        "confiance": "haute"
+      },
+      "fournisseurDeSocle": true,
+      "modeDistributionSocle": [
+        "direct",
+        "API/embedded"
+      ],
+      "solutionsCompatiblesPartenaires": [
+        "DATEV",
+        "Bundesdruckerei",
+        "RICOH",
+        "SGH",
+        "Quadient"
+      ],
+      "descriptionFiche": "b4value.net se présente comme « le fournisseur de technologie du réseau TRAFFIQX » et met en avant une solution « made in Germany » d'émission et de réception de factures et d'avoirs, étendue aux commandes et bons de livraison. Le site revendique un réseau reliant plus de 150 000 entreprises (250 000 dans la version allemande de la page), animé par des prestataires tels que DATEV, Bundesdruckerei, RICOH, SGH et Quadient, aux côtés de b4value.net elle-même. L'intégration aux ERP, logiciels de comptabilité et logiciels métier se fait individuellement ou via TIA, la « TRAFFIQX Invoice API ». La société est certifiée DIN EN ISO/IEC 27001 et affiche des références de grands comptes allemands (Viessmann, Sodexo, VW Financial Services, enviaM, Bauking...).",
+      "logiquePositionnement": "Cohérent : acteur EDI et échange de documents structurés, fournisseur de la technologie d'un réseau utilisé par d'autres prestataires. Son immatriculation française prolonge un métier d'opérateur de réseau, avec un modèle mixte : vente directe et mise à disposition de sa technologie à des prestataires tiers. Réserve importante : les acteurs cités sont des prestataires du réseau TRAFFIQX au sens allemand, ce ne sont pas des Solutions Compatibles au sens de la réglementation française.",
+      "sourcesEnrichissement": [
+        {
+          "champ": "positionnement",
+          "source": "https://www.b4value.net/en/",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        },
+        {
+          "champ": "fournisseurDeSocle",
+          "source": "https://www.b4value.net/en/",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        },
+        {
+          "champ": "solutionsCompatiblesPartenaires",
+          "source": "https://www.b4value.net/en/",
+          "dateReleve": "2026-08-20",
+          "confiance": "moyenne"
+        },
+        {
+          "champ": "socleTechnique",
+          "source": "https://www.b4value.net/en/",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "BASWARE",
+      "siteWeb": "https://www.basware.com/en/compliance/e-invoicing-mandate-france/why-basware/",
+      "familleOrigine": [
+        "s2p"
+      ],
+      "segmentCible": [
+        "eti",
+        "grands_comptes"
+      ],
+      "verticale": "generaliste",
+      "natureEntite": "extension_demat",
+      "perimetreFonctionnel": [
+        "emission",
+        "reception",
+        "ereporting"
+      ],
+      "socleTechnique": {
+        "type": "propre",
+        "operateurSocle": "Basware",
+        "preuve": "Basware exploite son propre réseau d'échange de factures (« invoices transacted through our network ») et sa propre suite d'automatisation comptes fournisseurs.",
+        "source": "https://www.basware.com/en/compliance/e-invoicing-mandate-france/why-basware/",
+        "confiance": "moyenne"
+      },
+      "descriptionFiche": "Basware positionne son statut de Plateforme Agréée comme le prolongement de son métier historique d'automatisation des comptes fournisseurs : « Choosing Basware as your PA provides world-class AP capabilities and experience, essential for compliance with the mandate. » Le discours est explicitement global : la conformité doit être traitée comme un enjeu mondial et non comme une action tactique pays par pays, avec une couverture revendiquée de plus de 60 pays, plus de 40 ans d'expérience et plus de 350 entreprises françaises clientes. La page France détaille le rôle de la Plateforme Agréée, les formats structurés admis et les obligations d'e-reporting, avec transmission par transfert de fichiers via API.",
+      "logiquePositionnement": "Cohérent : éditeur P2P / automatisation des comptes fournisseurs adressant les directions financières d'ETI et de grands groupes multi-pays. La Plateforme Agréée est un module de conformité intégré à une suite existante, pas un produit autonome, et elle est vendue en direct au client final.",
+      "sourcesEnrichissement": [
+        {
+          "champ": "positionnement",
+          "source": "https://www.basware.com/en/compliance/e-invoicing-mandate-france/why-basware/",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        },
+        {
+          "champ": "segmentCible",
+          "source": "https://www.basware.com/en/compliance/e-invoicing-mandate-france/why-basware/",
+          "dateReleve": "2026-08-20",
+          "confiance": "moyenne"
+        },
+        {
+          "champ": "perimetreFonctionnel",
+          "source": "https://www.basware.com/en/compliance/e-invoicing-mandate-france/why-basware/",
+          "dateReleve": "2026-08-20",
+          "confiance": "moyenne"
+        },
+        {
+          "champ": "socleTechnique",
+          "source": "https://www.basware.com/en/compliance/e-invoicing-mandate-france/why-basware/",
+          "dateReleve": "2026-08-20",
+          "confiance": "moyenne"
+        }
+      ]
+    },
+    {
+      "nom": "BILLIT",
+      "siteWeb": "https://www.billit.eu/fr-fr/",
+      "familleOrigine": [
+        "facturation_compta"
+      ],
+      "segmentCible": [
+        "micro",
+        "tpe_pme",
+        "grands_comptes"
+      ],
+      "verticale": "generaliste",
+      "natureEntite": "extension_demat",
+      "perimetreFonctionnel": [
+        "emission",
+        "reception",
+        "suite_gestion"
+      ],
+      "socleTechnique": {
+        "type": "propre",
+        "operateurSocle": "Billit",
+        "preuve": "Billit exploite son propre point d'accès Peppol et propose de « lier votre logiciel au point d'accès Peppol de Billit ».",
+        "source": "https://www.billit.eu/fr-fr/facturation-electronique-en-france/liez-votre-logiciel-au-point-dacces-peppol-de-billit/",
+        "confiance": "haute"
+      },
+      "fournisseurDeSocle": true,
+      "modeDistributionSocle": [
+        "direct",
+        "API/embedded"
+      ],
+      "descriptionFiche": "Billit est une plateforme belge de facturation qui décline un site français dédié à son statut de Plateforme Agréée. L'offre couvre les ventes, les achats, le traitement automatique et des fonctionnalités complémentaires, avec une segmentation affichée par taille (indépendants et free-lances, PME, grandes entreprises) et par rôle (développeurs, partenaires, fournisseurs de logiciels). Une section entière est consacrée au raccordement d'un logiciel tiers au point d'accès Peppol de Billit — « Ajoutez notre point d'accès à la facturation électronique à votre logiciel » — avec API publique, essai gratuit et grille tarifaire publiée. Billit publie également une liste des pays Peppol couverts.",
+      "logiquePositionnement": "Cohérent : éditeur de facturation et de traitement de documents comptables déjà opérateur Peppol en Belgique et aux Pays-Bas, dont l'immatriculation française prolonge le métier. Modèle double : vente directe aux TPE/PME et mise à disposition de son point d'accès aux éditeurs et intégrateurs, ce qui en fait un candidat au rôle de grossiste.",
+      "sourcesEnrichissement": [
+        {
+          "champ": "positionnement",
+          "source": "https://www.billit.eu/fr-fr/facturation-electronique-en-france/",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        },
+        {
+          "champ": "segmentCible",
+          "source": "https://www.billit.eu/fr-fr/",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        },
+        {
+          "champ": "fournisseurDeSocle",
+          "source": "https://www.billit.eu/fr-fr/pour-qui/prestataires-de-services-erp/",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        },
+        {
+          "champ": "socleTechnique",
+          "source": "https://www.billit.eu/fr-fr/facturation-electronique-en-france/liez-votre-logiciel-au-point-dacces-peppol-de-billit/",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "CBS Corporate Business Solutions",
+      "siteWeb": "https://e-world.cloud/",
+      "familleOrigine": [
+        "integrateur",
+        "edi"
+      ],
+      "segmentCible": [
+        "eti",
+        "grands_comptes"
+      ],
+      "verticale": "generaliste",
+      "natureEntite": "diversification",
+      "perimetreFonctionnel": [
+        "emission",
+        "reception",
+        "ereporting"
+      ],
+      "socleTechnique": {
+        "type": "propre",
+        "operateurSocle": "cbs Corporate Business Solutions (cbs e-world.cloud)",
+        "preuve": "« cbs e-world.cloud is still the only fully SAP process integrated one-stop solution that includes advisory, implementation, legal change and support services » — service managé développé et exploité par cbs, ex-« e-Invoice World Cloud », ex-« LatAm Cloud ».",
+        "source": "https://e-world.cloud/",
+        "confiance": "haute"
+      },
+      "descriptionFiche": "cbs Corporate Business Solutions opère cbs e-world.cloud, plateforme de conformité présentée comme la seule solution « one-stop » entièrement intégrée aux processus SAP, incluant le conseil, la mise en œuvre, le suivi des évolutions réglementaires et le support. Née il y a plus de dix ans sous le nom de LatAm Cloud puis d'e-Invoice World Cloud, l'offre couvre aujourd'hui e-invoicing, e-payment, e-delivery, e-reporting, EDI managé et conseil en conformité, pour des clients SAP ECC, S/4 on-premise ou RISE with SAP. Le discours est celui d'une externalisation complète de la communication légale avec les administrations fiscales, pays par pays.",
+      "logiquePositionnement": "Cohérent : cabinet de conseil et intégrateur SAP dont la plateforme de conformité est la productisation d'une pratique de projet. Le positionnement est celui d'un service managé pour grands comptes internationaux exploitant SAP, très loin d'un logiciel de facturation destiné aux TPE/PME. Le statut de Plateforme Agréée s'ajoute à une couverture pays déjà mondiale.",
+      "sourcesEnrichissement": [
+        {
+          "champ": "positionnement",
+          "source": "https://e-world.cloud/",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        },
+        {
+          "champ": "segmentCible",
+          "source": "https://e-world.cloud/",
+          "dateReleve": "2026-08-20",
+          "confiance": "moyenne"
+        },
+        {
+          "champ": "perimetreFonctionnel",
+          "source": "https://e-world.cloud/",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        },
+        {
+          "champ": "socleTechnique",
+          "source": "https://e-world.cloud/",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "DIGITAL TECHNOLOGIES",
+      "siteWeb": "https://www.digtechs.com/en/",
+      "familleOrigine": [
+        "s2p"
+      ],
+      "segmentCible": [
+        "grands_comptes"
+      ],
+      "verticale": "generaliste",
+      "natureEntite": "extension_demat",
+      "perimetreFonctionnel": [
+        "emission",
+        "reception",
+        "ereporting"
+      ],
+      "socleTechnique": {
+        "type": "propre",
+        "operateurSocle": "Digital Technologies (groupe Namirial)",
+        "preuve": "« an e-invoicing and compliance platform active in over 90 countries », plateforme E-Invoicing & E-Reporting propre, Access Point Peppol, certifications ISO 9001, ISO 27001, ISAE 3402.",
+        "source": "https://www.digtechs.com/en/",
+        "confiance": "haute"
+      },
+      "groupeCapitalistique": "Groupe Namirial (Italie) — Digital Technologies se présente comme « a Namirial Company », société B Corp du groupe, formant avec lui « un écosystème paneuropéen combinant hyperautomatisation, facturation électronique mondiale et confiance numérique » (signature électronique, identité numérique, services de confiance).",
+      "descriptionFiche": "Digital Technologies se décrit comme une société B Corp du groupe Namirial, spécialisée dans les plateformes SaaS d'automatisation des processus finance et supply chain : « We digitize and automate finance and supply chain processes for enterprises, combining AI and hyperautomation with an e-invoicing and compliance platform active in over 90 countries. » Le catalogue affiche une plateforme E-Invoicing & E-Reporting, un plugin SAP, un observatoire réglementaire (E-Invoicing Radar) et un programme partenaires. Les certifications revendiquées sont B Corp, ISO 9001, ISO 27001, ISAE 3402, avec un statut d'Access Point Peppol.",
+      "logiquePositionnement": "Cohérent : éditeur d'hyperautomatisation des flux P2P adossé à un groupe de services de confiance, dont la plateforme de conformité couvre déjà plus de 90 pays. L'immatriculation française est l'ajout d'une juridiction à un socle existant, avec une cible de grandes entreprises et une distribution appuyée sur le plugin SAP et l'écosystème Namirial.",
+      "sourcesEnrichissement": [
+        {
+          "champ": "positionnement",
+          "source": "https://www.digtechs.com/en/",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        },
+        {
+          "champ": "groupeCapitalistique",
+          "source": "https://www.digtechs.com/en/",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        },
+        {
+          "champ": "perimetreFonctionnel",
+          "source": "https://www.digtechs.com/en/",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        },
+        {
+          "champ": "socleTechnique",
+          "source": "https://www.digtechs.com/en/",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "DOKAPI",
+      "siteWeb": "https://www.dokapi.io/",
+      "familleOrigine": [
+        "pure_player"
+      ],
+      "segmentCible": [
+        "eti",
+        "grands_comptes"
+      ],
+      "verticale": "generaliste",
+      "natureEntite": "extension_demat",
+      "perimetreFonctionnel": [
+        "emission",
+        "reception"
+      ],
+      "socleTechnique": {
+        "type": "propre",
+        "operateurSocle": "Dokapi",
+        "preuve": "APIs et portail exploités en propre, portail développeurs dédié, statut revendiqué de « Plateforme Agréée (Registration number 0152) » pour la France.",
+        "source": "https://www.dokapi.io/countries",
+        "confiance": "haute"
+      },
+      "fournisseurDeSocle": true,
+      "modeDistributionSocle": [
+        "API/embedded",
+        "direct"
+      ],
+      "descriptionFiche": "Dokapi est un acteur belge structuré autour d'API de facturation électronique, avec deux entrées explicites : « Solutions for developers » et « Solutions for enterprises ». Son E-Invoicing Portal convertit les factures existantes en factures Peppol conformes grâce à une reconnaissance OCR, puis permet de les envoyer via Peppol, par e-mail ou par dépôt sur un portail, avec suivi des statuts. La page pays revendique une activité dans 30 pays européens et, pour la France, le statut de « Plateforme Agréée (Registration number 0152) » pour la facturation électronique B2B et B2G, ainsi qu'un support complet de la norme EN 16931 via Peppol BIS Billing 3.0 pour l'Allemagne. Un portail développeurs public complète le dispositif.",
+      "logiquePositionnement": "Cohérent : acteur API-first du réseau Peppol dont l'immatriculation française ajoute une juridiction à une couverture européenne déjà large. Le modèle est en partie indirect, l'offre développeurs visant l'intégration de la capacité Dokapi dans des applications tierces, en partie direct via le portail de facturation.",
+      "sourcesEnrichissement": [
+        {
+          "champ": "positionnement",
+          "source": "https://www.dokapi.io/e-invoicing-portal",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        },
+        {
+          "champ": "perimetreFonctionnel",
+          "source": "https://www.dokapi.io/e-invoicing-portal",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        },
+        {
+          "champ": "fournisseurDeSocle",
+          "source": "https://www.dokapi.io/solutions-for-developers",
+          "dateReleve": "2026-08-20",
+          "confiance": "moyenne"
+        },
+        {
+          "champ": "socleTechnique",
+          "source": "https://www.dokapi.io/countries",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        }
+      ]
+    }
+  ]
+}
