@@ -4,7 +4,7 @@
     "title": "Multi-commande / Multi-livraison",
     "desc1": "<strong>Scénario :</strong> Une facture regroupe plusieurs commandes et/ou livraisons.",
     "desc2": "<strong>Particularités :</strong> BT-13 au niveau des lignes. Rapprochement 3-way match ligne par ligne.",
-    "info": "Type 380. Cadre B1. Génère : 2 lignes multi-PO (1 500€ + 1 750€) = 3 250€ HT.",
+    "info": "Type 380. Cadre B1. Profil étendu, EXT-FR-FE-135. Génère : 2 lignes rattachées à 2 commandes distinctes (PO-1001, PO-1002) = 3 250 € HT.",
     "target": "esker",
     "label": "Cas 1 — Multi-commande / Multi-PO"
   },
@@ -21,8 +21,8 @@
     "badge": "Cas 3",
     "title": "Tiers payeur connu (OPCO)",
     "desc1": "<strong>Scénario :</strong> Paiement par un tiers identifié (OPCO, société mère).",
-    "desc2": "<strong>Particularités :</strong> Bloc EXT-FR-FE-BG-02.",
-    "info": "Type 380. Bloc tiers payeur. Génère : formation cybersécurité 5j = 4 450€ HT.",
+    "desc2": "<strong>Particularités :</strong> Un tiers <em>payeur</em> se déclare en BG-02 (<code>cac:PaymentMeans/cac:PaymentMandate/cac:PayerParty</code>), jamais en BG-10 PayeeParty qui désigne le <em>bénéficiaire</em> du paiement. Le règlement reste dû au vendeur.",
+    "info": "Type 380. Profil étendu, BG-02 payeur de la facture. Génère : formation cybersécurité 5j = 4 450 € HT, prise en charge par un OPCO.",
     "target": "esker",
     "label": "Cas 3 — Tiers payeur (OPCO)"
   },
@@ -31,7 +31,7 @@
     "title": "Prise en charge partielle",
     "desc1": "<strong>Scénario :</strong> Un tiers prend en charge une partie du montant.",
     "desc2": "<strong>Particularités :</strong> BT-113 = montant tiers, BT-115 = reste à charge.",
-    "info": "Type 380. BT-113 = 3 000€, BT-115 = 1 320€. Génère : formation IA 3j = 3 600€ HT.",
+    "info": "Type 380. Profil étendu, BG-02 payeur. BT-113 = 3 000 €, BT-115 = 1 320 €. Génère : formation IA 3j = 3 600 € HT.",
     "target": "esker",
     "label": "Cas 4 — Prise en charge partielle"
   },
@@ -120,8 +120,8 @@
     "badge": "Cas 14",
     "title": "Co-traitance B2B",
     "desc1": "<strong>Scénario :</strong> Co-traitant facture, mandataire du marché vise.",
-    "desc2": "<strong>Particularités :</strong> Cadre S6. Le mandataire du marché est porté par EXT-FR-FE-BG-03 (agent de vendeur), et non par BG-11 qui désigne le représentant fiscal.",
-    "info": "Type 380. Cadre S6. Génère : tuyauterie 280m = 51 800€ HT.",
+    "desc2": "<strong>Particularités :</strong> Cadre de facturation S6. Le mandataire du groupement est déclaré en BG-03 AGENT DE VENDEUR (<code>cac:AgentParty</code>), hors socle EN16931 : profil étendu obligatoire.",
+    "info": "Type 380. Cadre S6. Profil étendu, BG-03 agent de vendeur. Note DCL. Génère : tuyauterie 280 m = 51 800 € HT.",
     "target": "esker",
     "label": "Cas 14 — Co-traitance (S6)"
   },
@@ -201,8 +201,8 @@
     "badge": "Cas 26",
     "title": "Réserve contractuelle",
     "desc1": "<strong>Scénario :</strong> Facture émise avant réalisation complète des conditions.",
-    "desc2": "<strong>Particularités :</strong> Statut « Suspendue » possible.",
-    "info": "Type 380. Génère : audit pentest = 6 500€ HT.",
+    "desc2": "<strong>Particularités :</strong> La retenue de garantie ne se traduit pas par un <code>AllowanceCharge</code> : elle fait l'objet d'une mention (BT-21 = ABU) et le net à payer BT-115 reste le montant total dû.",
+    "info": "Type 380. Note ABU. Génère : audit pentest = 6 500 € HT, retenue de garantie de 5 % mentionnée sans réduire le net à payer.",
     "target": "esker",
     "label": "Cas 26 — Réserve contractuelle"
   },
@@ -327,8 +327,8 @@
     "badge": "Cas 40",
     "title": "Netting / Compensation",
     "desc1": "<strong>Scénario :</strong> Créances réciproques, seul le solde est payé.",
-    "desc2": "<strong>Particularités :</strong> Deux factures normales.",
-    "info": "Type 380. Génère : 3j Salesforce CPQ = 3 750€ HT.",
+    "desc2": "<strong>Particularités :</strong> BT-81 = 97 (Clearing between partners). Le montant compensé est porté en BT-113 et le net à payer BT-115 tombe à zéro.",
+    "info": "Type 380. BT-81 = 97 (compensation). Génère : 3 750 € HT soldés par compensation, net à payer 0 €.",
     "target": "esker",
     "label": "Cas 40 — Netting / Compensation"
   },
@@ -426,8 +426,8 @@
     "badge": "Cas 17b",
     "title": "Marketplace + Mandat de facturation",
     "desc1": "<strong>Scénario :</strong> La marketplace émet au nom et pour le compte du vendeur.",
-    "desc2": "<strong>Particularités :</strong> BG-11 = marketplace. Contrat de mandat obligatoire.",
-    "info": "Type 380. BG-11. Génère : abonnement premium = 9 200€ HT.",
+    "desc2": "<strong>Particularités :</strong> Le mandataire de facturation est déclaré en BG-05 FACTURANT (<code>cac:ServiceProviderParty</code>), hors socle EN16931 : profil étendu obligatoire. La mention « facture établie par X au nom et pour le compte de Y » est obligatoire.",
+    "info": "Type 380. Profil étendu, BG-05 facturant. Note DCL. Génère : abonnement marketplace premium = 9 200 € HT.",
     "target": "esker",
     "label": "Cas 17b — Marketplace + Mandat"
   },
@@ -436,7 +436,7 @@
     "title": "Mandat de facturation — Tiers facturant",
     "desc1": "<strong>Scénario :</strong> Un mandataire émet la facture pour le compte du vendeur.",
     "desc2": "<strong>Particularités :</strong> Note DCL obligatoire. Le vendeur reste responsable.",
-    "info": "Type 380. Note DCL. Génère : 2 lignes poisson (bar + sole) = 3 660€ HT.",
+    "info": "Type 380. Profil étendu, BG-05 facturant. Note DCL. Génère : 2 lignes marée (bar + sole) = 3 660 € HT.",
     "target": "esker",
     "label": "Cas 19a — Mandat de facturation"
   },

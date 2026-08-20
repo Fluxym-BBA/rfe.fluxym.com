@@ -240,10 +240,26 @@ Ces six-là ont un **fort rendement de test** : ils exercent des mécanismes de 
 | Incohérences fiche / XML corrigées | `27` annonçait « téléphonie VoIP », `25` « 4 pneus Michelin », `28` « bijoux fantaisie », `35` « API REST » ; doublon de libellé entre `6` et `30` levé |
 | Régression | 54 documents XML produits, tous bien formés · BR-S-08 : 0 écart · 42 cas inchangés au bit près, dont le pack B · 12 triptyques régénérés, PDF valides `qpdf --check` |
 
+### Lot 2 « couverture des typologies » — appliqué le 20/08/2026
+
+Panier de référence porté de **12 à 20 cas** : ajout de `1`, `3`, `14`, `17b`, `26`, `30`, `31`, `40`.
+
+| Action | Détail |
+|---|---|
+| **Bug de conformité corrigé** | Un tiers *payeur* était déclaré en **BG-10 `cac:PayeeParty`**, qui désigne le *bénéficiaire* du paiement. Il est désormais en **BG-02 `cac:PaymentMeans/cac:PaymentMandate/cac:PayerParty`** (cas 3 et 4) |
+| **3 flags morts activés** | `agentVendeur` → BG-03 `cac:Party/cac:AgentParty` (cas 14) · `agentVendeur` → BG-05 `cac:Party/cac:ServiceProviderParty` (cas 17b, 19a) · `multiPO` remplacé par le profil étendu, EXT-FR-FE-135 étant déjà émis via `line.po` |
+| **Profil étendu** | `EXTENDED_CASES` = 1, 3, 4, 14, 17b, 19a → `urn:cen.eu:en16931:2017#conformant#urn.cpro.gouv.fr:1p0:extended-ctc-fr`, obligatoire dès qu'une extension EXT-FR-FE-* est présente |
+| **Retenue de garantie (26)** | Mention BT-21 = `ABU` seule, **sans** `AllowanceCharge` : le net à payer BT-115 reste le montant total dû |
+| **Netting (40)** | BT-81 = `97` (Clearing between partners), BT-113 = montant compensé, BT-115 = `0.00` |
+| **Identifiants invalides** | `999999999`, `888888888`, `000000000` étaient tous **Luhn-invalides**. Cinq tiers ajoutés à `companies.json` avec SIREN et SIRET valides ; pour une personne physique (cas 5), plus aucun identifiant n'est émis, seul BT-59 le nom |
+| **Incohérences de scénario** | Le facturant du cas 19a (criée) et celui du cas 17b (marketplace) étaient un unique prestataire générique ; la fiche 17b citait BG-11 représentant fiscal au lieu de BG-05 |
+| **Positions XML vérifiées** | `cac:AgentParty` et `cac:ServiceProviderParty` sont enfants de `cac:Party` (`PartyType`, positions 16 et 17), **pas** de `cac:AccountingSupplierParty` : `SupplierPartyType` ne les accepte pas. `cac:PayerParty` n'existe que dans `PaymentMandateType` |
+| **Régression** | 54 documents XML bien formés · BR-S-08 : 0 écart · ordre des éléments UBL : 0 erreur · tous les SIRET valides Luhn · 20 lisibles `qpdf --check` OK, 1 page |
+
 ### Reste à faire
 
-1. **Lot 2** — les 8 cas AFNOR complémentaires : `1`, `31`, `3`, `14`, `17b`, `26`, `30`, `40`.
-2. **Lot 3** — les 6 régimes transverses : `T1`, `T2`, `T4`, `T6`, `T7`, `T8`.
+1. **Lot 3** — les 6 régimes transverses : `T1`, `T2`, `T4`, `T6`, `T7`, `T8`.
+2. **Blocs dédiés dans le lisible** — le tiers payeur, le facturant et l'agent de vendeur n'apparaissent aujourd'hui que dans les mentions, pas dans un encadré propre.
 3. **Cas à créer** — facture B2B *externe* d'un assujetti unique (BT-29 schéma `0231`, n° de TVA de l'AU en BT-63) : c'est la seule variante e-invoicing du cas 29.
 4. **Question de design ouverte** — sur les factures courtes, le cadre du tableau du lisible descend jusqu'au bloc de totaux et laisse un vide central. Option : arrêter le cadre après la dernière ligne et remonter les totaux (~3 lignes de code).
 5. **Autres `payeeType` non rendus dans le lisible** — distributeur, collaborateur, tiers payeur (cas `3`, `5`, `12`).

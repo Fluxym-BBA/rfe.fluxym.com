@@ -76,5 +76,82 @@
       },
       "legalForm": "SAS au capital de 500 000 euros - RCS Lyon 999 999 998"
     }
+  ],
+  "thirdParties": [
+    {
+      "id": "opco_formation",
+      "role": "payer",
+      "name": "OPCO FORMATION SUD",
+      "legalName": "OPCO FORMATION SUD - Association loi 1901",
+      "siren": "999999006",
+      "nic": "00003",
+      "vatNumber": "FR26999999006",
+      "address": {
+        "street": "24 boulevard Vivier Merle",
+        "city": "LYON",
+        "zip": "69003",
+        "country": "FR"
+      }
+    },
+    {
+      "id": "marketplace_fr",
+      "role": "facturant",
+      "name": "MARKETPLACE SERVICES",
+      "legalName": "MARKETPLACE SERVICES FRANCE SAS",
+      "siren": "999999014",
+      "nic": "00007",
+      "vatNumber": "FR35999999014",
+      "address": {
+        "street": "8 rue du Sentier",
+        "city": "PARIS",
+        "zip": "75002",
+        "country": "FR"
+      }
+    },
+    {
+      "id": "criee_atlantique",
+      "role": "facturant",
+      "name": "CRIEE ATLANTIQUE",
+      "legalName": "CRIEE ATLANTIQUE SA",
+      "siren": "999999030",
+      "nic": "00003",
+      "vatNumber": "FR62999999030",
+      "address": {
+        "street": "Quai des Pecheurs - Port de peche",
+        "city": "LA TURBALLE",
+        "zip": "44420",
+        "country": "FR"
+      }
+    },
+    {
+      "id": "seller_agent",
+      "role": "agent",
+      "name": "ATLANTIQUE MANDATAIRE",
+      "legalName": "ATLANTIQUE MANDATAIRE SAS",
+      "siren": "999999022",
+      "nic": "00018",
+      "vatNumber": "FR44999999022",
+      "address": {
+        "street": "17 quai des Chartrons",
+        "city": "BORDEAUX",
+        "zip": "33300",
+        "country": "FR"
+      }
+    },
+    {
+      "id": "distri_logistique",
+      "role": "payee",
+      "name": "DISTRI-LOGISTIQUE",
+      "legalName": "DISTRI-LOGISTIQUE SAS",
+      "siren": "999999048",
+      "nic": "00005",
+      "vatNumber": "FR89999999048",
+      "address": {
+        "street": "Parc d'activites de la Plaine, bat. C",
+        "city": "VITROLLES",
+        "zip": "13127",
+        "country": "FR"
+      }
+    }
   ]
 }

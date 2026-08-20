@@ -92,8 +92,35 @@ ${notes.map(n => `\t<cbc:Note>${n}</cbc:Note>`).join('\n')}
 \t\t</cac:Attachment>
 \t</cac:AdditionalDocumentReference>`,
 
+    // Fragment de partie reutilisable, conforme a la sequence de cac:PartyType :
+    // PartyIdentification, PartyName, PostalAddress, PartyTaxScheme, PartyLegalEntity.
+    // t = prefixe de tabulations pour l'indentation.
+    partyFragment: (p, t) => `
+${t}<cac:PartyIdentification><cbc:ID schemeID="0009">${xmlEsc(p.siren)}${xmlEsc(p.nic || "00001")}</cbc:ID></cac:PartyIdentification>
+${t}<cac:PartyName><cbc:Name>${xmlEsc(p.name)}</cbc:Name></cac:PartyName>
+${t}<cac:PostalAddress>
+${t}	<cbc:StreetName>${xmlEsc(p.address.street)}</cbc:StreetName>
+${t}	<cbc:CityName>${xmlEsc(p.address.city)}</cbc:CityName>
+${t}	<cbc:PostalZone>${xmlEsc(p.address.zip)}</cbc:PostalZone>
+${t}	<cac:Country><cbc:IdentificationCode>${xmlEsc(p.address.country)}</cbc:IdentificationCode></cac:Country>
+${t}</cac:PostalAddress>${p.vatNumber ? `
+${t}<cac:PartyTaxScheme>
+${t}	<cbc:CompanyID>${xmlEsc(p.vatNumber)}</cbc:CompanyID>
+${t}	<cac:TaxScheme><cbc:ID>VAT</cbc:ID></cac:TaxScheme>
+${t}</cac:PartyTaxScheme>` : ""}
+${t}<cac:PartyLegalEntity>
+${t}	<cbc:RegistrationName>${xmlEsc(p.legalName || p.name)}</cbc:RegistrationName>
+${t}	<cbc:CompanyID schemeID="0002">${xmlEsc(p.siren)}</cbc:CompanyID>
+${t}</cac:PartyLegalEntity>`,
+
     // 3. Bloc Fournisseur
-    getSupplierParty: (supplier) => `
+    // agent     : EXT-FR-FE-BG-03 AGENT DE VENDEUR -> cac:Party/cac:AgentParty
+    // facturant : EXT-FR-FE-BG-05 FACTURANT       -> cac:Party/cac:ServiceProviderParty
+    // Les deux se placent APRES cac:PartyLegalEntity : cac:PartyType impose
+    // l'ordre ... Contact, Person, AgentParty, ServiceProviderParty ...
+    // Ces deux elements ne font pas partie du socle EN16931 : ils exigent le
+    // profil etendu (customization extended-ctc-fr).
+    getSupplierParty: (supplier, agent = null, facturant = null) => `
 \t<cac:AccountingSupplierParty>
 \t\t<cac:Party>
 \t\t\t<cbc:EndpointID schemeID="0225">${xmlEsc(supplier.siren)}</cbc:EndpointID>
@@ -113,7 +140,13 @@ ${notes.map(n => `\t<cbc:Note>${n}</cbc:Note>`).join('\n')}
 \t\t\t\t<cbc:RegistrationName>${xmlEsc(supplier.legalName)}</cbc:RegistrationName>
 \t\t\t\t<cbc:CompanyID schemeID="0002">${xmlEsc(supplier.siren)}</cbc:CompanyID>${supplier.legalForm ? `
 \t\t\t\t<cbc:CompanyLegalForm>${xmlEsc(supplier.legalForm)}</cbc:CompanyLegalForm>` : ""}
-\t\t\t</cac:PartyLegalEntity>
+\t\t\t</cac:PartyLegalEntity>${agent ? `
+\t\t\t<cac:AgentParty>${UBLTemplates.partyFragment(agent, "\t\t\t\t")}
+\t\t\t</cac:AgentParty>` : ""}${facturant ? `
+\t\t\t<cac:ServiceProviderParty>
+\t\t\t\t<cac:Party>${UBLTemplates.partyFragment(facturant, "\t\t\t\t\t")}
+\t\t\t\t</cac:Party>
+\t\t\t</cac:ServiceProviderParty>` : ""}
 \t\t</cac:Party>
 \t</cac:AccountingSupplierParty>`,
 
@@ -147,23 +180,37 @@ ${notes.map(n => `\t<cbc:Note>${n}</cbc:Note>`).join('\n')}
 \t\t<cbc:Note>${xmlEsc(note)}</cbc:Note>
 \t</cac:PaymentTerms>`,
 
-    // 5. Bloc PayeeParty
+    // 5. Bloc PayeeParty (BG-10)
+    // Seul BT-59 (nom) est obligatoire. Pour une personne physique, aucun
+    // SIRET ni SIREN n'est attribue : on n'emet alors ni PartyIdentification
+    // ni PartyLegalEntity plutot qu'un identifiant invalide.
     getPayeeParty: (id, name, siren) => `
-\t<cac:PayeeParty>
-\t\t<cac:PartyIdentification><cbc:ID schemeID="0009">${xmlEsc(id)}</cbc:ID></cac:PartyIdentification>
-\t\t<cac:PartyName><cbc:Name>${xmlEsc(name)}</cbc:Name></cac:PartyName>
-\t\t<cac:PartyLegalEntity><cbc:CompanyID schemeID="0002">${xmlEsc(siren)}</cbc:CompanyID></cac:PartyLegalEntity>
+\t<cac:PayeeParty>${id ? `
+\t\t<cac:PartyIdentification><cbc:ID schemeID="0009">${xmlEsc(id)}</cbc:ID></cac:PartyIdentification>` : ""}
+\t\t<cac:PartyName><cbc:Name>${xmlEsc(name)}</cbc:Name></cac:PartyName>${siren ? `
+\t\t<cac:PartyLegalEntity><cbc:CompanyID schemeID="0002">${xmlEsc(siren)}</cbc:CompanyID></cac:PartyLegalEntity>` : ""}
 \t</cac:PayeeParty>`,
 
     // 6. Bloc PaymentMeans
     // BG-16 obligatoire (BR-49). BT-84 IBAN requis si code 30 ou 58 (BR-50).
-    getPaymentMeans: (code, iban = null, bic = null) => `
+    // payer : EXT-FR-FE-BG-02 PAYEUR DE LA FACTURE (tiers payeur).
+    //   cac:PayerParty n'existe que dans cac:PaymentMandateType, qui se place
+    //   APRES cac:PayeeFinancialAccount dans cac:PaymentMeansType.
+    //   Hors socle EN16931 : exige le profil etendu.
+    // Attention : un tiers PAYEUR n'est pas un BENEFICIAIRE. BG-10 PayeeParty
+    // designe celui qui RECOIT le paiement (factor, distributeur), jamais
+    // celui qui le verse a la place de l'Acheteur.
+    getPaymentMeans: (code, iban = null, bic = null, payer = null) => `
 \t<cac:PaymentMeans>
 \t\t<cbc:PaymentMeansCode>${code}</cbc:PaymentMeansCode>${(code === "30" || code === "58") && iban ? `
 \t\t<cac:PayeeFinancialAccount>
 \t\t\t<cbc:ID>${xmlEsc(iban)}</cbc:ID>${bic ? `
 \t\t\t<cac:FinancialInstitutionBranch><cbc:ID>${xmlEsc(bic)}</cbc:ID></cac:FinancialInstitutionBranch>` : ""}
-\t\t</cac:PayeeFinancialAccount>` : ""}
+\t\t</cac:PayeeFinancialAccount>` : ""}${payer ? `
+\t\t<cac:PaymentMandate>
+\t\t\t<cac:PayerParty>${UBLTemplates.partyFragment(payer, "\t\t\t\t")}
+\t\t\t</cac:PayerParty>
+\t\t</cac:PaymentMandate>` : ""}
 \t</cac:PaymentMeans>`,
 
     // 7. Blocs Totaux

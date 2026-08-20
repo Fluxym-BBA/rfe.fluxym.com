@@ -76,9 +76,20 @@ const UBLGenerator = {
         return this.VAT[key] || this.VAT.STANDARD;
     },
 
+    // Cas portant une extension EXT-FR-FE-* : le profil etendu est obligatoire.
+    //   1        EXT-FR-FE-135    n° de commande au niveau ligne
+    //   3, 4     EXT-FR-FE-BG-02  payeur de la facture (tiers payeur)
+    //   14       EXT-FR-FE-BG-03  agent de vendeur
+    //   17b, 19a EXT-FR-FE-BG-05  facturant (mandataire de facturation)
+    EXTENDED_CASES: ["1", "3", "4", "14", "17b", "19a"],
+
     getCustomizationId: function(usecase) {
         var profile = this.vatProfiles[usecase] || {};
-        return profile.customization || "urn:cen.eu:en16931:2017";
+        if (profile.customization) return profile.customization;
+        if (this.EXTENDED_CASES.indexOf(usecase) !== -1) {
+            return "urn:cen.eu:en16931:2017#conformant#urn.cpro.gouv.fr:1p0:extended-ctc-fr";
+        }
+        return "urn:cen.eu:en16931:2017";
     },
 
     // Ventilation BG-23 : un sous-total par couple categorie / taux,
@@ -122,8 +133,8 @@ const UBLGenerator = {
 
         // --- B. PAIEMENTS, FRAIS & TIERS PAYEURS ---
         "2":  { typeCode: "380", profile: "S2", zip: false, prepaid: true },
-        "3":  { typeCode: "380", profile: "S1", zip: false, tiersPayeur: true },
-        "4":  { typeCode: "380", profile: "S1", zip: false, partialPrepaid: true },
+        "3":  { typeCode: "380", profile: "S1", zip: false, payer: "opco_formation" },
+        "4":  { typeCode: "380", profile: "S1", zip: false, partialPrepaid: true, payer: "opco_formation" },
         "5":  { typeCode: "380", profile: "S2", zip: false, prepaid: true, payeeType: "collaborateur" },
         "7":  { typeCode: "380", profile: "B2", zip: false, prepaid: true, paymentMeans: "48" },
 
@@ -140,12 +151,12 @@ const UBLGenerator = {
 
         // --- E. SOUS-TRAITANCE & CO-TRAITANCE ---
         "13": { typeCode: "380", profile: "S5", zip: false },
-        "14": { typeCode: "380", profile: "S6", zip: false, agentVendeur: true },
+        "14": { typeCode: "380", profile: "S6", zip: false, agent: "seller_agent" },
 
         // --- F. MARKETPLACE & MANDAT ---
         "17a": { typeCode: "380", profile: "S1", zip: false },
-        "17b": { typeCode: "380", profile: "S1", zip: false, agentVendeur: true },
-        "19a": { typeCode: "380", profile: "S1", zip: false, agentVendeur: true },
+        "17b": { typeCode: "380", profile: "S1", zip: false, facturant: "marketplace_fr" },
+        "19a": { typeCode: "380", profile: "S1", zip: false, facturant: "criee_atlantique" },
         "19b": { typeCode: "389", profile: "S1", zip: false, agentVendeur: true, selfBilling: true },
 
         // --- G. FACTURES COMPLEMENTAIRES (383 interdit par BR-FR-04) ---
@@ -163,7 +174,7 @@ const UBLGenerator = {
         // --- J. CAS SPECIAUX ---
         "23": { typeCode: "380", profile: "S1", zip: false },
         "25": { typeCode: "380", profile: "S1", zip: false },
-        "26": { typeCode: "380", profile: "S1", zip: false },
+        "26": { typeCode: "380", profile: "S1", zip: false, retenue: "5" },
         "28": { typeCode: "380", profile: "S7", zip: false, prepaid: true },
         "30": { typeCode: "380", profile: "S7", zip: false, prepaid: true },
         // 24 arrhes, 27 peages, 29 flux internes d'un assujetti unique :
@@ -179,7 +190,7 @@ const UBLGenerator = {
         "37": { typeCode: "380", profile: "S1", zip: false },
         "38": { typeCode: "380", profile: "S1", zip: false },
         "39": { typeCode: "380", profile: "S8", zip: false },
-        "40": { typeCode: "380", profile: "S1", zip: false },
+        "40": { typeCode: "380", profile: "S1", zip: false, paymentMeans: "97", netting: true },
         "41": { typeCode: "380", profile: "S1", zip: false },
 
         // --- TESTS & PACKS ---
@@ -719,10 +730,12 @@ const UBLGenerator = {
                     ]
                 };
 
+            // 40 : facture soldee par compensation avec la facture reciproque.
+            // BT-81 = 97, BT-113 = montant compense, BT-115 = 0.
             case "40":
                 return {
                     tax: ["3750.00", "750.00"],
-                    totals: ["3750.00", "3750.00", "4500.00", "0.00", "4500.00"],
+                    totals: ["3750.00", "3750.00", "4500.00", "4500.00", "0.00"],
                     lines: [
                         { id: "1", qty: "3.00", amount: "3750.00", desc: "Expertise Salesforce CPQ (jours)", price: "1250.00" }
                     ]
@@ -816,7 +829,8 @@ const UBLGenerator = {
     // entre les donnees structurees et le rendu lisible.
     // Panier de reference : un cas representatif par categorie de cas d'usage,
     // chacun verifie individuellement (montants, TVA, blocs structurants).
-    PDF_CASES: ["nominal", "2", "8", "13", "16", "18", "19b", "20", "21", "22a", "23", "38"],
+    PDF_CASES: ["nominal", "1", "2", "3", "8", "13", "14", "16", "17b", "18", "19b", "20",
+        "21", "22a", "23", "26", "30", "31", "38", "40"],
 
     supportsPdf: function(usecase) {
         return typeof PDFLisible !== 'undefined' && this.PDF_CASES.indexOf(usecase) !== -1;
@@ -895,6 +909,14 @@ const UBLGenerator = {
             }
             var factor = factorId ? data.factors.find(function(f) { return f.id === factorId; }) : data.factors[0];
 
+            // Tiers du referentiel : payeur (BG-02), agent de vendeur (BG-03),
+            // facturant (BG-05). Ils ne sont pas selectionnables dans l'UI :
+            // ils sont attaches au cas d'usage par caseConfig.
+            var findThirdParty = function(id) {
+                if (!id || !data.thirdParties) return null;
+                return data.thirdParties.find(function(t) { return t.id === id; }) || null;
+            };
+
             if (!supplier || !buyer) {
                 alert("Erreur: Donnees d'entreprise introuvables."); return;
             }
@@ -950,7 +972,35 @@ const UBLGenerator = {
             if (usecase === "16") notes.push("#AAI#Debours - Avance de frais pour le compte du client - Hors champ TVA");
             if (usecase === "6" || usecase === "28" || usecase === "30") notes.push("#AAI#TVA deja collectee via e-reporting B2C - Cadre S7");
             if (cfg.typeCode === "393") notes.push("#ACC#Facture cedee par subrogation conventionnelle. Reglement a effectuer exclusivement aupres du Factor.");
-            if (usecase === "19a") notes.push("#DCL#Facture etablie par la Criee sous mandat pour le compte du vendeur.");
+            // Mandat de facturation (BG-05) : mention obligatoire.
+            var facturantParty = findThirdParty(cfg.facturant);
+            if (facturantParty) {
+                notes.push("#DCL#Facture etablie par " + facturantParty.legalName +
+                    " au nom et pour le compte de " + supplier.legalName + ".");
+            }
+            // Agent de vendeur / mandataire de groupement (BG-03).
+            var agentParty = findThirdParty(cfg.agent);
+            if (agentParty) {
+                notes.push("#DCL#" + agentParty.legalName +
+                    " intervient en qualite de mandataire du groupement pour le compte de " +
+                    supplier.legalName + ".");
+            }
+            // Tiers payeur (BG-02) : le beneficiaire reste le vendeur.
+            var payerParty = findThirdParty(cfg.payer);
+            if (payerParty) {
+                notes.push("#PAI#Facture prise en charge par " + payerParty.legalName +
+                    ", tiers payeur, au titre d'un accord de financement. Le beneficiaire du reglement reste " +
+                    supplier.legalName + ".");
+            }
+            // Retenue de garantie : mention seule, le net a payer n'est pas reduit.
+            if (cfg.retenue) {
+                notes.push("#ABU#Retenue de garantie de " + cfg.retenue +
+                    " % appliquee conformement au contrat. Liberation apres reception definitive des travaux.");
+            }
+            // Compensation : la facture est soldee sans mouvement de tresorerie.
+            if (cfg.netting) {
+                notes.push("#AAI#Facture soldee par compensation avec la facture reciproque, conformement a la convention de netting.");
+            }
             if (usecase === "19b") notes.push("#DCL#Auto-facturation au sens de l'article 289-I-2 du CGI. Facture emise par l'acheteur pour le compte du vendeur.");
             if (usecase === "15") notes.push("#DCL#Commande passee par l'UGAP, mandataire transparent, pour le compte de l'acheteur final.");
             if (usecase === "22a" || usecase === "22b") {
@@ -1028,7 +1078,7 @@ const UBLGenerator = {
                     );
                 }
 
-                xml += UBLTemplates.getSupplierParty(supplier);
+                xml += UBLTemplates.getSupplierParty(supplier, findThirdParty(cfg.agent), findThirdParty(cfg.facturant));
                 xml += UBLTemplates.getCustomerParty(buyer);
 
                 // --- Parties speciales ---
@@ -1043,13 +1093,14 @@ const UBLGenerator = {
                     xml += UBLTemplates.getPayeeParty(factor.siren + (factor.nic || "00001"), factor.name, factor.siren);
                 }
                 else if (cfg.payeeType === "distributeur") {
-                    xml += UBLTemplates.getPayeeParty("88888888800001", "DISTRI-LOGISTIQUE SAS", "888888888");
+                    var distri = findThirdParty("distri_logistique");
+                    if (distri) {
+                        xml += UBLTemplates.getPayeeParty(distri.siren + distri.nic, distri.legalName, distri.siren);
+                    }
                 }
                 else if (cfg.payeeType === "collaborateur") {
-                    xml += UBLTemplates.getPayeeParty("00000000000001", "DUPONT Jean (Employe)", "000000000");
-                }
-                if (cfg.tiersPayeur && !(window.COMPANY_MODE === 'custom' && window.CUSTOM_THIRDPARTY)) {
-                    xml += UBLTemplates.getPayeeParty("99999999900001", "Stark Industries (Tiers Payeur)", "999999999");
+                    // Personne physique : ni SIRET ni SIREN, seul BT-59 est renseigne.
+                    xml += UBLTemplates.getPayeeParty(null, "DUPONT Jean (Employe)", null);
                 }
                 // BG-16 est obligatoire (BR-49) : virement (30) par defaut.
                 // BT-84 IBAN ajoute pour les codes 30 et 58 conformement a BR-50.
@@ -1059,7 +1110,9 @@ const UBLGenerator = {
                     xml += UBLTemplates.getDelivery(deliveryDate, deliveryName, deliveryAddress);
                 }
 
-                xml += UBLTemplates.getPaymentMeans(meansCode, payAccount.iban || null, payAccount.bic || null);
+                // Un tiers PAYEUR se declare en BG-02 (PaymentMandate/PayerParty),
+                // jamais en BG-10 PayeeParty qui designe le BENEFICIAIRE.
+                xml += UBLTemplates.getPaymentMeans(meansCode, payAccount.iban || null, payAccount.bic || null, findThirdParty(cfg.payer));
                 xml += UBLTemplates.getPaymentTerms();
 
                 // --- Lignes et Totaux ---
