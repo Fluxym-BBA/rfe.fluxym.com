@@ -1,0 +1,3242 @@
+{
+ "_patch": {
+  "id": "C",
+  "chantier": "C — dirigeants et lisibilite de l'actionnariat",
+  "auteur": "RFE_WebSite",
+  "dateReleve": "2026-08-20",
+  "nbPlateformes": 75,
+  "note": "Chantier C execute sur les 75 entrees du referentiel possedant un siren (verifie : 23 lues directement dans data/plateformes-agreees.json, 52 identifiees via les fiches publiees, total conforme au comptage de cartographie-reste-a-faire.md). Un appel API unitaire par SIREN, le 20/08/2026. dirigeants : la liste RNE est reprise integralement, commissaires aux comptes inclus, conformement au format deja present dans le referentiel. Aucun dirigeant retourne par le RNE pour ESALINK, GEP et PARAGON : le champ dirigeants est donc absent du patch pour ces trois entrees. relationCapitalistique : seules cinq operations sont qualifiees a partir de sources nommees (CEGID, ESKER, GENERIX Group, CEGEDIM, ITESOFT). Les indices RNE (dirigeant personne morale en NAF 66.30Z, chaines de holdings 64.20Z/70.10Z) sont traites comme des indices : ils donnent holding_non_transparente ou non_determinable, jamais fonds_PE, et sont decrits dans descriptionFiche. PENNYLANE : valeur existante fonds_PE volontairement NON modifiee, mais a arbitrer. Les tours de table publies (Sequoia, CapitalG, Meritech, DST, TCV, Blackstone Growth) sont minoritaires — les fondateurs conservent le controle (Compta Online, 04/2025 : « les nouveaux investisseurs ont obtenu 4 % ») ; independante serait defendable. ESKER : le doute est leve, l'operation Bridgepoint / General Atlantic est nommement sourcee ; ESKER HOLDING (66.30Z ? non : 70.22Z) est bien le president actuel, ce qui remplace les deux dirigeants personnes physiques affiches jusqu'ici. A qualifier par recherche presse dans un chantier ulterieur (filiale probable d'un groupe international homonyme, non sourcee ici, donc laissee en non_determinable) : ACCENTURE, DOCUWARE, DEXT, TUNGSTEN AUTOMATION FRANCE, SYMTRAX, LUCCA. descriptionFiche n'est reecrit que lorsqu'un indice est ajoute ; le texte existant est alors repris a l'identique puis complete. sourcesEnrichissement etant un tableau remplace a la fusion, chaque entree reprend l'integralite des sources deja presentes dans le referentiel, plus la source dirigeants et, le cas echeant, la source actionnariat."
+ },
+ "plateformes": [
+  {
+   "nom": "ABBY",
+   "dirigeants": [
+    {
+     "nom": "FILAM",
+     "qualite": "Président de SAS",
+     "type": "personne morale"
+    }
+   ],
+   "sourcesEnrichissement": [
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE)",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    },
+    {
+     "champ": "immatriculation",
+     "source": "Liste officielle DGFiP — impots.gouv.fr",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    },
+    {
+     "champ": "positionnement",
+     "source": "https://www.abby.fr/",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    },
+    {
+     "champ": "dirigeants",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — https://recherche-entreprises.api.gouv.fr/search?q=882470255&per_page=1&minimal=true&include=dirigeants,siege",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "ACCENTURE",
+   "dirigeants": [
+    {
+     "nom": "GIRARD OLIVIER",
+     "qualite": "Président de SAS",
+     "type": "personne physique"
+    },
+    {
+     "nom": "KPMG S.A.",
+     "qualite": "Commissaire aux comptes titulaire",
+     "type": "personne morale"
+    }
+   ],
+   "relationCapitalistique": "non_determinable",
+   "sourcesEnrichissement": [
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — annuaire-entreprises.data.gouv.fr",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    },
+    {
+     "champ": "dirigeants",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — https://recherche-entreprises.api.gouv.fr/search?q=732075312&per_page=1&minimal=true&include=dirigeants,siege",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "actionnariat",
+     "source": "RNE via API Recherche d'entreprises : aucun dirigeant personne morale hors commissaires aux comptes",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    }
+   ]
+  },
+  {
+   "nom": "AGICAP",
+   "dirigeants": [
+    {
+     "nom": "BERTOLA LUCAS ALFRED ALEXIS",
+     "qualite": "Directeur général délégué",
+     "type": "personne physique"
+    },
+    {
+     "nom": "BEYET SEBASTIEN LUCAS",
+     "qualite": "Président de SAS",
+     "type": "personne physique"
+    },
+    {
+     "nom": "BM&A",
+     "qualite": "Commissaire aux comptes titulaire",
+     "type": "personne morale"
+    },
+    {
+     "nom": "ERNST & YOUNG ET AUTRES",
+     "qualite": "Commissaire aux comptes titulaire",
+     "type": "personne morale"
+    }
+   ],
+   "relationCapitalistique": "non_determinable",
+   "sourcesEnrichissement": [
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — annuaire-entreprises.data.gouv.fr",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    },
+    {
+     "champ": "dirigeants",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — https://recherche-entreprises.api.gouv.fr/search?q=823248703&per_page=1&minimal=true&include=dirigeants,siege",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "actionnariat",
+     "source": "RNE via API Recherche d'entreprises : aucun dirigeant personne morale hors commissaires aux comptes",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    }
+   ]
+  },
+  {
+   "nom": "AZOPIO",
+   "dirigeants": [
+    {
+     "nom": "PEYPOUX (CRESPIN) ALINE",
+     "qualite": "Directeur Général",
+     "type": "personne physique"
+    },
+    {
+     "nom": "PEYPOUX SEBASTIEN",
+     "qualite": "Président de SAS",
+     "type": "personne physique"
+    }
+   ],
+   "relationCapitalistique": "non_determinable",
+   "sourcesEnrichissement": [
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — annuaire-entreprises.data.gouv.fr",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    },
+    {
+     "champ": "dirigeants",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — https://recherche-entreprises.api.gouv.fr/search?q=821449634&per_page=1&minimal=true&include=dirigeants,siege",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "actionnariat",
+     "source": "RNE via API Recherche d'entreprises : aucun dirigeant personne morale hors commissaires aux comptes",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    }
+   ]
+  },
+  {
+   "nom": "BC SOLUTIONS",
+   "dirigeants": [
+    {
+     "nom": "CARREIRA DE MATOS (CARREIRA DE MATOS) BRUNO",
+     "qualite": "Gérant",
+     "type": "personne physique"
+    }
+   ],
+   "relationCapitalistique": "non_determinable",
+   "sourcesEnrichissement": [
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — annuaire-entreprises.data.gouv.fr",
+     "dateReleve": "2026-08-19",
+     "confiance": "moyenne"
+    },
+    {
+     "champ": "dirigeants",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — https://recherche-entreprises.api.gouv.fr/search?q=829620434&per_page=1&minimal=true&include=dirigeants,siege",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "actionnariat",
+     "source": "RNE via API Recherche d'entreprises : aucun dirigeant personne morale hors commissaires aux comptes",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    }
+   ]
+  },
+  {
+   "nom": "CECURITY",
+   "dirigeants": [
+    {
+     "nom": "BORGHESI ALAIN",
+     "qualite": "Gérant",
+     "type": "personne physique"
+    }
+   ],
+   "relationCapitalistique": "non_determinable",
+   "sourcesEnrichissement": [
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — annuaire-entreprises.data.gouv.fr",
+     "dateReleve": "2026-08-19",
+     "confiance": "moyenne"
+    },
+    {
+     "champ": "dirigeants",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — https://recherche-entreprises.api.gouv.fr/search?q=488554825&per_page=1&minimal=true&include=dirigeants,siege",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "actionnariat",
+     "source": "RNE via API Recherche d'entreprises : aucun dirigeant personne morale hors commissaires aux comptes",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    }
+   ]
+  },
+  {
+   "nom": "CEGEDIM",
+   "dirigeants": [
+    {
+     "nom": "ABIVEN CATHERINE",
+     "qualite": "Administrateur",
+     "type": "personne physique"
+    },
+    {
+     "nom": "CASSAN JEAN-PIERRE",
+     "qualite": "Administrateur",
+     "type": "personne physique"
+    },
+    {
+     "nom": "DUMENIL (DEBROISE) SANDRINE CHANTAL THERESE",
+     "qualite": "Administrateur",
+     "type": "personne physique"
+    },
+    {
+     "nom": "KAHN MARCEL",
+     "qualite": "Administrateur",
+     "type": "personne physique"
+    },
+    {
+     "nom": "MARYSSE (LABRUNE) AUDE",
+     "qualite": "Administrateur",
+     "type": "personne physique"
+    },
+    {
+     "nom": "LABRUNE JEAN-CLAUDE",
+     "qualite": "Président du conseil d’administration et directeur général",
+     "type": "personne physique"
+    },
+    {
+     "nom": "LABRUNE LAURENT",
+     "qualite": "Directeur général délégué",
+     "type": "personne physique"
+    },
+    {
+     "nom": "SAUNIER (MARTIN DIT NEUVILLE) BEATRICE",
+     "qualite": "Administrateur",
+     "type": "personne physique"
+    },
+    {
+     "nom": "MARUCCHI PIERRE",
+     "qualite": "Directeur général délégué",
+     "type": "personne physique"
+    },
+    {
+     "nom": "GROUPEMENT POUR L'ELABORATION ET LA REALISATION DE STATISTIQUES",
+     "qualite": "Administrateur",
+     "type": "personne morale"
+    },
+    {
+     "nom": "ACA NEXIA",
+     "qualite": "Commissaire aux comptes titulaire",
+     "type": "personne morale"
+    },
+    {
+     "nom": "FCB",
+     "qualite": "Administrateur",
+     "type": "personne morale"
+    },
+    {
+     "nom": "KPMG S.A",
+     "qualite": "Commissaire aux comptes titulaire",
+     "type": "personne morale"
+    }
+   ],
+   "relationCapitalistique": "cotee",
+   "descriptionFiche": "Actionnariat : Cegedim SA est cotee a Paris (Euronext, code CGM puis ALCGM apres transfert sur Euronext Growth effectif le 04/09/2025) et controlee par la holding familiale FCB (SIREN 340651132, NAF 70.10Z), administrateur de la societe.",
+   "sourcesEnrichissement": [
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — annuaire-entreprises.data.gouv.fr",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    },
+    {
+     "champ": "dirigeants",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — https://recherche-entreprises.api.gouv.fr/search?q=350422622&per_page=1&minimal=true&include=dirigeants,siege",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "actionnariat",
+     "source": "Cegedim, communique « Projet de transfert sur Euronext Growth » (09/05/2025) ; Euronext live (FR0000053506) ; Le Revenu (28/02/2022, FCB 53,9 % du capital)",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "CEGI ALFA",
+   "dirigeants": [
+    {
+     "nom": "GUEDJ ERIC",
+     "qualite": "Commissaire aux comptes suppléant",
+     "type": "personne physique"
+    },
+    {
+     "nom": "TAIEB JULIEN MAURICE",
+     "qualite": "Directeur Général",
+     "type": "personne physique"
+    },
+    {
+     "nom": "EXELMANS AUDIT",
+     "qualite": "Commissaire aux comptes titulaire",
+     "type": "personne morale"
+    },
+    {
+     "nom": "GT INFORMATIQUE SAS",
+     "qualite": "Président de SAS",
+     "type": "personne morale"
+    }
+   ],
+   "relationCapitalistique": "filiale_de_groupe",
+   "descriptionFiche": "Le president de CEGI ALFA est GT INFORMATIQUE SAS (SIREN 491292660, NAF 62.09Z) : l'entite est dirigee par une autre societe informatique, indice d'appartenance a un groupe.",
+   "sourcesEnrichissement": [
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — annuaire-entreprises.data.gouv.fr",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    },
+    {
+     "champ": "dirigeants",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — https://recherche-entreprises.api.gouv.fr/search?q=319960142&per_page=1&minimal=true&include=dirigeants,siege",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "actionnariat",
+     "source": "RNE via API Recherche d'entreprises (dirigeants personnes morales)",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    }
+   ]
+  },
+  {
+   "nom": "CEGID",
+   "dirigeants": [
+    {
+     "nom": "CEGID GROUP",
+     "qualite": "Président de SAS",
+     "type": "personne morale"
+    },
+    {
+     "nom": "FORVIS MAZARS",
+     "qualite": "Commissaire aux comptes titulaire",
+     "type": "personne morale"
+    },
+    {
+     "nom": "CABINET GRANT THORNTON",
+     "qualite": "Commissaire aux comptes titulaire",
+     "type": "personne morale"
+    }
+   ],
+   "relationCapitalistique": "fonds_PE",
+   "descriptionFiche": "Editeur lyonnais fonde en 1996, 1000 a 1999 salaries pour l'entite immatriculee. Couvre la comptabilite, la paie, l'ERP et l'expertise comptable, avec une offre dediee aux petites entreprises et une marque Shine pour les cabinets. Actionnariat : Cegid est detenue par le fonds Silver Lake, actionnaire majoritaire depuis le LBO de 2016, aux cotes de KKR et AltaOne (minoritaires depuis juin 2021) et d'Oakley Capital (2022). Le president de l'entite immatriculee est CEGID GROUP (SIREN 327888111, NAF 70.10Z).",
+   "sourcesEnrichissement": [
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE)",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    },
+    {
+     "champ": "immatriculation",
+     "source": "Liste officielle DGFiP — impots.gouv.fr",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    },
+    {
+     "champ": "positionnement",
+     "source": "https://www.cegid.com/fr/",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    },
+    {
+     "champ": "dirigeants",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — https://recherche-entreprises.api.gouv.fr/search?q=410218010&per_page=1&minimal=true&include=dirigeants,siege",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "actionnariat",
+     "source": "Silver Lake (communique « Cegid Enters Into a Definitive Agreement to Combine With Grupo Primavera ») ; Businesswire, « KKR to make Investment in Cegid » (02/06/2021) ; S&P Global Ratings, Claudius Finance Parent (Cegid)",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "CHAINTRUST by Visma",
+   "dirigeants": [
+    {
+     "nom": "CHOPIN PIERRE KHAI MARIE",
+     "qualite": "Directeur Général",
+     "type": "personne physique"
+    },
+    {
+     "nom": "GANDON MIKAEL LOUIS MARIE",
+     "qualite": "Président de SAS",
+     "type": "personne physique"
+    },
+    {
+     "nom": "HERSANT PIERRE-EMMANUEL GILLES",
+     "qualite": "Directeur Général",
+     "type": "personne physique"
+    },
+    {
+     "nom": "EXCELIA AUDIT",
+     "qualite": "Commissaire aux comptes titulaire",
+     "type": "personne morale"
+    }
+   ],
+   "sourcesEnrichissement": [
+    {
+     "champ": "immatriculation",
+     "source": "Liste officielle DGFiP — impots.gouv.fr",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    },
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE)",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    },
+    {
+     "champ": "positionnement",
+     "source": "nom officiel declare a la DGFiP + RNE",
+     "dateReleve": "2026-08-19",
+     "confiance": "moyenne"
+    },
+    {
+     "champ": "dirigeants",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — https://recherche-entreprises.api.gouv.fr/search?q=842804858&per_page=1&minimal=true&include=dirigeants,siege",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "CLEARTAX",
+   "dirigeants": [
+    {
+     "nom": "BONTOUX XAVIER",
+     "qualite": "Gérant",
+     "type": "personne physique"
+    }
+   ],
+   "relationCapitalistique": "non_determinable",
+   "sourcesEnrichissement": [
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — annuaire-entreprises.data.gouv.fr",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    },
+    {
+     "champ": "dirigeants",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — https://recherche-entreprises.api.gouv.fr/search?q=491096350&per_page=1&minimal=true&include=dirigeants,siege",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "actionnariat",
+     "source": "RNE via API Recherche d'entreprises : aucun dirigeant personne morale hors commissaires aux comptes",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    }
+   ]
+  },
+  {
+   "nom": "CYCLOPE",
+   "dirigeants": [
+    {
+     "nom": "RAMI (ANGI) DENISE ANTOINETTE MARIE",
+     "qualite": "Autre",
+     "type": "personne physique"
+    },
+    {
+     "nom": "RAMI MURIEL GISLAINE DANIELLE",
+     "qualite": "Autre",
+     "type": "personne physique"
+    },
+    {
+     "nom": "RAMI THIERRY DANIEL PHILIPPE",
+     "qualite": "Autre",
+     "type": "personne physique"
+    }
+   ],
+   "relationCapitalistique": "non_determinable",
+   "sourcesEnrichissement": [
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — annuaire-entreprises.data.gouv.fr",
+     "dateReleve": "2026-08-19",
+     "confiance": "moyenne"
+    },
+    {
+     "champ": "dirigeants",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — https://recherche-entreprises.api.gouv.fr/search?q=478259682&per_page=1&minimal=true&include=dirigeants,siege",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "actionnariat",
+     "source": "RNE via API Recherche d'entreprises : aucun dirigeant personne morale hors commissaires aux comptes",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    }
+   ]
+  },
+  {
+   "nom": "DEXT",
+   "dirigeants": [
+    {
+     "nom": "DEXTER TOARIKI RICHARD EIMANA",
+     "qualite": null,
+     "type": "personne physique"
+    }
+   ],
+   "relationCapitalistique": "non_determinable",
+   "sourcesEnrichissement": [
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — annuaire-entreprises.data.gouv.fr",
+     "dateReleve": "2026-08-19",
+     "confiance": "moyenne"
+    },
+    {
+     "champ": "dirigeants",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — https://recherche-entreprises.api.gouv.fr/search?q=833856297&per_page=1&minimal=true&include=dirigeants,siege",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "actionnariat",
+     "source": "RNE via API Recherche d'entreprises : aucun dirigeant personne morale hors commissaires aux comptes",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    }
+   ]
+  },
+  {
+   "nom": "DIGIPHARMACIE",
+   "dirigeants": [
+    {
+     "nom": "EQUASENS",
+     "qualite": "Président de SAS",
+     "type": "personne morale"
+    },
+    {
+     "nom": "KPMG SA",
+     "qualite": "Commissaire aux comptes titulaire",
+     "type": "personne morale"
+    }
+   ],
+   "relationCapitalistique": "filiale_de_groupe",
+   "descriptionFiche": "Le president de DIGIPHARMACIE est EQUASENS (SIREN 403561137, NAF 62.02A) : l'entite est une filiale du groupe Equasens.",
+   "sourcesEnrichissement": [
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — annuaire-entreprises.data.gouv.fr",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    },
+    {
+     "champ": "dirigeants",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — https://recherche-entreprises.api.gouv.fr/search?q=850219056&per_page=1&minimal=true&include=dirigeants,siege",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "actionnariat",
+     "source": "RNE via API Recherche d'entreprises (dirigeants personnes morales)",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    }
+   ]
+  },
+  {
+   "nom": "DOCOON",
+   "dirigeants": [
+    {
+     "nom": "LEJEUNE ARNAUD",
+     "qualite": "Directeur Général",
+     "type": "personne physique"
+    },
+    {
+     "nom": "ROZENBAUM PIERRE",
+     "qualite": "Commissaire aux comptes titulaire",
+     "type": "personne physique"
+    },
+    {
+     "nom": "CAROLE NAHUM ET ASSOCIÉS",
+     "qualite": "Commissaire aux comptes suppléant",
+     "type": "personne morale"
+    },
+    {
+     "nom": "DOCOON INVEST",
+     "qualite": "Président de SAS",
+     "type": "personne morale"
+    }
+   ],
+   "relationCapitalistique": "holding_non_transparente",
+   "descriptionFiche": "PME parisienne dont l'entite juridique DOCOON (enseigne DPII) est creee en 1986, 20 a 49 salaries, code activite conseil en systemes informatiques. Le groupe porte une seconde immatriculation distincte, DOCOON IMMO / FREEDZ (Marseille, creee en 2010), dediee a l'immobilier. Le president de DOCOON est DOCOON INVEST (SIREN 917412587, NAF 66.30Z, gestion de fonds) : indice d'une structure de holding ou d'une operation de capital. La nature exacte de l'operation et l'identite des detenteurs ne sont pas publiquement etablies.",
+   "sourcesEnrichissement": [
+    {
+     "champ": "immatriculation",
+     "source": "Liste officielle DGFiP — impots.gouv.fr",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    },
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE)",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    },
+    {
+     "champ": "positionnement",
+     "source": "a_sourcer — site inaccessible au scraping le 19/08/2026",
+     "dateReleve": "2026-08-19",
+     "confiance": "non_qualifie"
+    },
+    {
+     "champ": "dirigeants",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — https://recherche-entreprises.api.gouv.fr/search?q=338698384&per_page=1&minimal=true&include=dirigeants,siege",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "actionnariat",
+     "source": "RNE via API Recherche d'entreprises (dirigeants personnes morales)",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    }
+   ]
+  },
+  {
+   "nom": "DOCOON IMMO / FREEDZ",
+   "dirigeants": [
+    {
+     "nom": "ROZENBAUM PIERRE",
+     "qualite": "Commissaire aux comptes titulaire",
+     "type": "personne physique"
+    },
+    {
+     "nom": "CAROLE NAHUM ET ASSOCIÉS",
+     "qualite": "Commissaire aux comptes suppléant",
+     "type": "personne morale"
+    },
+    {
+     "nom": "EMERCIA CONSULTING",
+     "qualite": "Directeur Général",
+     "type": "personne morale"
+    },
+    {
+     "nom": "DOCOON INVEST",
+     "qualite": "Président de SAS",
+     "type": "personne morale"
+    }
+   ],
+   "sourcesEnrichissement": [
+    {
+     "champ": "immatriculation",
+     "source": "Liste officielle DGFiP — impots.gouv.fr",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    },
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE)",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    },
+    {
+     "champ": "positionnement",
+     "source": "a_sourcer — site inaccessible au scraping le 19/08/2026",
+     "dateReleve": "2026-08-19",
+     "confiance": "non_qualifie"
+    },
+    {
+     "champ": "dirigeants",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — https://recherche-entreprises.api.gouv.fr/search?q=523445211&per_page=1&minimal=true&include=dirigeants,siege",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "DOCPROCESS",
+   "dirigeants": [
+    {
+     "nom": "TRICHET SÉBASTIEN CHRISTOPHE",
+     "qualite": "Directeur Général",
+     "type": "personne physique"
+    },
+    {
+     "nom": "STI",
+     "qualite": "Directeur Général",
+     "type": "personne morale"
+    },
+    {
+     "nom": "CENTAURUS GROUP",
+     "qualite": "Président de SAS",
+     "type": "personne morale"
+    }
+   ],
+   "relationCapitalistique": "holding_non_transparente",
+   "descriptionFiche": "DOCPROCESS FRANCE, creee le 01/03/2018, etablissement a Meylan (38), code activite conseil en systemes informatiques. Immatriculee le 15/12/25. Le president de DOCPROCESS est CENTAURUS GROUP (SIREN 801439985, NAF 64.20Z, holding) et le directeur general est STI (SIREN 490523891, NAF 58.29C) : chaine de detention par holding, dont les beneficiaires ne sont pas publiquement etablis.",
+   "sourcesEnrichissement": [
+    {
+     "champ": "immatriculation",
+     "source": "Liste officielle DGFiP — impots.gouv.fr",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    },
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE)",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    },
+    {
+     "champ": "positionnement",
+     "source": "a_sourcer — site inaccessible au scraping le 19/08/2026",
+     "dateReleve": "2026-08-19",
+     "confiance": "non_qualifie"
+    },
+    {
+     "champ": "dirigeants",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — https://recherche-entreprises.api.gouv.fr/search?q=837863042&per_page=1&minimal=true&include=dirigeants,siege",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "actionnariat",
+     "source": "RNE via API Recherche d'entreprises (dirigeants personnes morales)",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    }
+   ]
+  },
+  {
+   "nom": "DOCUWARE",
+   "dirigeants": [
+    {
+     "nom": "SCHÄFER HERMANN",
+     "qualite": "Gérant",
+     "type": "personne physique"
+    },
+    {
+     "nom": "WIENKE MARTINA",
+     "qualite": "Gérant",
+     "type": "personne physique"
+    },
+    {
+     "nom": "DELOITTE & ASSOCIES",
+     "qualite": "Commissaire aux comptes titulaire",
+     "type": "personne morale"
+    }
+   ],
+   "relationCapitalistique": "non_determinable",
+   "sourcesEnrichissement": [
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — annuaire-entreprises.data.gouv.fr",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    },
+    {
+     "champ": "dirigeants",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — https://recherche-entreprises.api.gouv.fr/search?q=505184754&per_page=1&minimal=true&include=dirigeants,siege",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "actionnariat",
+     "source": "RNE via API Recherche d'entreprises : aucun dirigeant personne morale hors commissaires aux comptes",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    }
+   ]
+  },
+  {
+   "nom": "DOXALLIA",
+   "dirigeants": [
+    {
+     "nom": "BAC RENAUD JEAN-CLAUDE",
+     "qualite": "Directeur Général",
+     "type": "personne physique"
+    },
+    {
+     "nom": "BITON OLIVIER FRANÇOIS ERNEST",
+     "qualite": "Administrateur",
+     "type": "personne physique"
+    },
+    {
+     "nom": "CAMBEFORT PIERRE JOEL MARIE",
+     "qualite": "Administrateur",
+     "type": "personne physique"
+    },
+    {
+     "nom": "FORT PIERRE CLAUDE FRANCOIS",
+     "qualite": "Administrateur",
+     "type": "personne physique"
+    },
+    {
+     "nom": "FROMAGEAU LAURENT",
+     "qualite": "Président du conseil d’administration",
+     "type": "personne physique"
+    },
+    {
+     "nom": "GALVEZ CATHERINE MARIE",
+     "qualite": "Administrateur",
+     "type": "personne physique"
+    },
+    {
+     "nom": "GANZIN MICHEL DANIEL RENE",
+     "qualite": "Administrateur",
+     "type": "personne physique"
+    },
+    {
+     "nom": "LANGEVIN NICOLAS JACQUES HENRI",
+     "qualite": "Administrateur",
+     "type": "personne physique"
+    },
+    {
+     "nom": "LE FLOC H HERVÉ YVES LOUIS",
+     "qualite": "Administrateur",
+     "type": "personne physique"
+    },
+    {
+     "nom": "QUINTARD BENOÎT JEAN-MARIE",
+     "qualite": "Administrateur",
+     "type": "personne physique"
+    },
+    {
+     "nom": "REGNARD GAELLE DENISE MARIE",
+     "qualite": "Administrateur",
+     "type": "personne physique"
+    },
+    {
+     "nom": "VARILLON HERVÉ JEAN-CLAUDE",
+     "qualite": "Administrateur",
+     "type": "personne physique"
+    },
+    {
+     "nom": "ERNST & YOUNG AUDIT",
+     "qualite": "Commissaire aux comptes titulaire",
+     "type": "personne morale"
+    },
+    {
+     "nom": "SARL GEC CONSEIL",
+     "qualite": "Commissaire aux comptes suppléant",
+     "type": "personne morale"
+    },
+    {
+     "nom": "ALBOUY ASSOCIES CONSULT",
+     "qualite": "Commissaire aux comptes titulaire",
+     "type": "personne morale"
+    }
+   ],
+   "relationCapitalistique": "non_determinable",
+   "sourcesEnrichissement": [
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — annuaire-entreprises.data.gouv.fr",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    },
+    {
+     "champ": "dirigeants",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — https://recherche-entreprises.api.gouv.fr/search?q=397775305&per_page=1&minimal=true&include=dirigeants,siege",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "actionnariat",
+     "source": "RNE via API Recherche d'entreprises : aucun dirigeant personne morale hors commissaires aux comptes",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    }
+   ]
+  },
+  {
+   "nom": "EDICOM France",
+   "dirigeants": [
+    {
+     "nom": "CASTEL ALBIN",
+     "qualite": "Personne ayant le pouvoir d’engager à titre habituel la société",
+     "type": "personne physique"
+    },
+    {
+     "nom": "GALCERAN GADEA LUIS",
+     "qualite": "Personne ayant le pouvoir d’engager à titre habituel la société",
+     "type": "personne physique"
+    },
+    {
+     "nom": "VILATA TAMARIT VICENTE",
+     "qualite": "Directeur Général",
+     "type": "personne physique"
+    },
+    {
+     "nom": "AUDIT FRANCE FINANCE",
+     "qualite": "Commissaire aux comptes titulaire",
+     "type": "personne morale"
+    },
+    {
+     "nom": "CARNOT AUDIT",
+     "qualite": "Commissaire aux comptes suppléant",
+     "type": "personne morale"
+    },
+    {
+     "nom": "EDICOM CAPITAL SL",
+     "qualite": "Président de SAS",
+     "type": "personne morale"
+    }
+   ],
+   "sourcesEnrichissement": [
+    {
+     "champ": "immatriculation",
+     "source": "Liste officielle DGFiP — impots.gouv.fr",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    },
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE)",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    },
+    {
+     "champ": "positionnement",
+     "source": "a_sourcer — site inaccessible au scraping le 19/08/2026",
+     "dateReleve": "2026-08-19",
+     "confiance": "non_qualifie"
+    },
+    {
+     "champ": "dirigeants",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — https://recherche-entreprises.api.gouv.fr/search?q=444658181&per_page=1&minimal=true&include=dirigeants,siege",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "EdiEyes Vision Care",
+   "dirigeants": [
+    {
+     "nom": "LEVESQUE JEAN-LUC",
+     "qualite": "Gérant",
+     "type": "personne physique"
+    }
+   ],
+   "relationCapitalistique": "non_determinable",
+   "sourcesEnrichissement": [
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — annuaire-entreprises.data.gouv.fr",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    },
+    {
+     "champ": "dirigeants",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — https://recherche-entreprises.api.gouv.fr/search?q=441304367&per_page=1&minimal=true&include=dirigeants,siege",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "actionnariat",
+     "source": "RNE via API Recherche d'entreprises : aucun dirigeant personne morale hors commissaires aux comptes",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    }
+   ]
+  },
+  {
+   "nom": "EDT",
+   "dirigeants": [
+    {
+     "nom": "DAVID (TOUBOUL) ELODIE",
+     "qualite": "Gérant",
+     "type": "personne physique"
+    }
+   ],
+   "relationCapitalistique": "non_determinable",
+   "sourcesEnrichissement": [
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — annuaire-entreprises.data.gouv.fr",
+     "dateReleve": "2026-08-19",
+     "confiance": "moyenne"
+    },
+    {
+     "champ": "dirigeants",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — https://recherche-entreprises.api.gouv.fr/search?q=809008824&per_page=1&minimal=true&include=dirigeants,siege",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "actionnariat",
+     "source": "RNE via API Recherche d'entreprises : aucun dirigeant personne morale hors commissaires aux comptes",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    }
+   ]
+  },
+  {
+   "nom": "EEZI powered by VAT IT",
+   "dirigeants": [
+    {
+     "nom": "SEGURA JEROME",
+     "qualite": "Liquidateur",
+     "type": "personne physique"
+    }
+   ],
+   "sourcesEnrichissement": [
+    {
+     "champ": "immatriculation",
+     "source": "Liste officielle DGFiP — impots.gouv.fr",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    },
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE)",
+     "dateReleve": "2026-08-19",
+     "confiance": "moyenne"
+    },
+    {
+     "champ": "positionnement",
+     "source": "nom officiel declare a la DGFiP + RNE",
+     "dateReleve": "2026-08-19",
+     "confiance": "moyenne"
+    },
+    {
+     "champ": "dirigeants",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — https://recherche-entreprises.api.gouv.fr/search?q=823517073&per_page=1&minimal=true&include=dirigeants,siege",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "ENERJ",
+   "dirigeants": [
+    {
+     "nom": "AULETTA FERDINANDO",
+     "qualite": "Président de SAS",
+     "type": "personne physique"
+    },
+    {
+     "nom": "HMS",
+     "qualite": "Commissaire aux comptes suppléant",
+     "type": "personne morale"
+    },
+    {
+     "nom": "SAFIGEC AUDIT",
+     "qualite": "Commissaire aux comptes titulaire",
+     "type": "personne morale"
+    },
+    {
+     "nom": "SFH - STEFANO FRASSA'HOLDING",
+     "qualite": "Directeur Général",
+     "type": "personne morale"
+    }
+   ],
+   "relationCapitalistique": "holding_non_transparente",
+   "descriptionFiche": "Le directeur general d'ENERJ est SFH - STEFANO FRASSA'HOLDING (SIREN 809138753, NAF 70.22Z) : detention via une holding personnelle, dont la chaine complete n'est pas publiquement etablie.",
+   "sourcesEnrichissement": [
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — annuaire-entreprises.data.gouv.fr",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    },
+    {
+     "champ": "dirigeants",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — https://recherche-entreprises.api.gouv.fr/search?q=827816968&per_page=1&minimal=true&include=dirigeants,siege",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "actionnariat",
+     "source": "RNE via API Recherche d'entreprises (dirigeants personnes morales)",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    }
+   ]
+  },
+  {
+   "nom": "ENTROPICS",
+   "dirigeants": [
+    {
+     "nom": "CBR INVEST",
+     "qualite": "Président de SAS",
+     "type": "personne morale"
+    }
+   ],
+   "relationCapitalistique": "holding_non_transparente",
+   "descriptionFiche": "Le president d'ENTROPICS est CBR INVEST (SIREN 807966031, NAF 70.10Z, activites des sieges sociaux) : detention via une holding dont les associes ne sont pas publiquement etablis.",
+   "sourcesEnrichissement": [
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — annuaire-entreprises.data.gouv.fr",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    },
+    {
+     "champ": "dirigeants",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — https://recherche-entreprises.api.gouv.fr/search?q=502407950&per_page=1&minimal=true&include=dirigeants,siege",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "actionnariat",
+     "source": "RNE via API Recherche d'entreprises (dirigeants personnes morales)",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    }
+   ]
+  },
+  {
+   "nom": "ESALINK",
+   "sourcesEnrichissement": [
+    {
+     "champ": "immatriculation",
+     "source": "Liste officielle DGFiP — impots.gouv.fr",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    },
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE)",
+     "dateReleve": "2026-08-19",
+     "confiance": "moyenne"
+    },
+    {
+     "champ": "positionnement",
+     "source": "https://www.esalink.com/",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "ESI",
+   "dirigeants": [
+    {
+     "nom": "GAZZAH EMIRA",
+     "qualite": "Président de SAS",
+     "type": "personne physique"
+    }
+   ],
+   "relationCapitalistique": "non_determinable",
+   "sourcesEnrichissement": [
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — annuaire-entreprises.data.gouv.fr",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    },
+    {
+     "champ": "dirigeants",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — https://recherche-entreprises.api.gouv.fr/search?q=102061702&per_page=1&minimal=true&include=dirigeants,siege",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "actionnariat",
+     "source": "RNE via API Recherche d'entreprises : aucun dirigeant personne morale hors commissaires aux comptes",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    }
+   ]
+  },
+  {
+   "nom": "ESKER",
+   "dirigeants": [
+    {
+     "nom": "BEAS",
+     "qualite": "Commissaire aux comptes suppléant",
+     "type": "personne morale"
+    },
+    {
+     "nom": "DELOITTE TOUCHE TOHMATSU",
+     "qualite": "Commissaire aux comptes titulaire",
+     "type": "personne morale"
+    },
+    {
+     "nom": "ESKER HOLDING",
+     "qualite": "Président de SAS",
+     "type": "personne morale"
+    },
+    {
+     "nom": "ORFIS",
+     "qualite": "Commissaire aux comptes titulaire",
+     "type": "personne morale"
+    }
+   ],
+   "relationCapitalistique": "fonds_PE",
+   "descriptionFiche": "Editeur lyonnais fonde en 1985, ETI de 250 a 499 salaries, positionne sur l'ensemble de la chaine financiere : « de l'Order-to-Cash (O2C) au Source-to-Pay (S2P) » pour la direction financiere. Actionnariat : Esker a fait l'objet d'une offre publique d'achat amicale initiee par Bridgepoint en association avec General Atlantic et les actionnaires managers (ouverture 02/12/2024, large succes le 15/01/2025, retrait de la cote effectif le 03/03/2025). Le president de l'entite immatriculee est ESKER HOLDING (SIREN 931131338, NAF 70.22Z).",
+   "sourcesEnrichissement": [
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE)",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    },
+    {
+     "champ": "immatriculation",
+     "source": "Liste officielle DGFiP — impots.gouv.fr",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    },
+    {
+     "champ": "positionnement",
+     "source": "https://www.esker.fr/",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    },
+    {
+     "champ": "dirigeants",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — https://recherche-entreprises.api.gouv.fr/search?q=331518498&per_page=1&minimal=true&include=dirigeants,siege",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "actionnariat",
+     "source": "Esker, communiques « Ouverture / large succes de l'offre publique d'achat amicale initiee par Bridgepoint » ; Bridgepoint, communique « Announcing squeeze-out of Esker » (03/2025)",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "EURO INFORMATION",
+   "dirigeants": [
+    {
+     "nom": "PYLAUTH",
+     "qualite": "Président de SAS",
+     "type": "personne morale"
+    }
+   ],
+   "relationCapitalistique": "holding_non_transparente",
+   "descriptionFiche": "Le president d'EURO INFORMATION est PYLAUTH (SIREN 842524738, NAF 64.20Z, holding) : detention via une holding, dont la chaine capitalistique n'est pas documentee publiquement.",
+   "sourcesEnrichissement": [
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — annuaire-entreprises.data.gouv.fr",
+     "dateReleve": "2026-08-19",
+     "confiance": "moyenne"
+    },
+    {
+     "champ": "dirigeants",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — https://recherche-entreprises.api.gouv.fr/search?q=408172021&per_page=1&minimal=true&include=dirigeants,siege",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "actionnariat",
+     "source": "RNE via API Recherche d'entreprises (dirigeants personnes morales)",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    }
+   ]
+  },
+  {
+   "nom": "FACNOTE PDP",
+   "dirigeants": [
+    {
+     "nom": "JERRAD (TAWFIK) BOUCHERA",
+     "qualite": "Gérant",
+     "type": "personne physique"
+    }
+   ],
+   "sourcesEnrichissement": [
+    {
+     "champ": "immatriculation",
+     "source": "Liste officielle DGFiP — impots.gouv.fr",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    },
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE)",
+     "dateReleve": "2026-08-19",
+     "confiance": "moyenne"
+    },
+    {
+     "champ": "positionnement",
+     "source": "nom officiel declare a la DGFiP + RNE",
+     "dateReleve": "2026-08-19",
+     "confiance": "moyenne"
+    },
+    {
+     "champ": "dirigeants",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — https://recherche-entreprises.api.gouv.fr/search?q=813779691&per_page=1&minimal=true&include=dirigeants,siege",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "FIDUCIAL CLOUD",
+   "dirigeants": [
+    {
+     "nom": "FIDUCIAL TECHNOLOGIES",
+     "qualite": "Président de SAS",
+     "type": "personne morale"
+    },
+    {
+     "nom": "CABINET ESCOFFIER",
+     "qualite": "Commissaire aux comptes titulaire",
+     "type": "personne morale"
+    }
+   ],
+   "relationCapitalistique": "filiale_de_groupe",
+   "descriptionFiche": "Le president de FIDUCIAL CLOUD est FIDUCIAL TECHNOLOGIES (SIREN 753702430, NAF 64.20Z) : l'entite appartient au groupe Fiducial.",
+   "sourcesEnrichissement": [
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — annuaire-entreprises.data.gouv.fr",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    },
+    {
+     "champ": "dirigeants",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — https://recherche-entreprises.api.gouv.fr/search?q=480650712&per_page=1&minimal=true&include=dirigeants,siege",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "actionnariat",
+     "source": "RNE via API Recherche d'entreprises (dirigeants personnes morales)",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    }
+   ]
+  },
+  {
+   "nom": "FLOWIE",
+   "dirigeants": [
+    {
+     "nom": "UP TO TECH",
+     "qualite": "Président de SAS",
+     "type": "personne morale"
+    },
+    {
+     "nom": "LEGORREC CONSULTING",
+     "qualite": "Directeur Général",
+     "type": "personne morale"
+    }
+   ],
+   "relationCapitalistique": "non_determinable",
+   "descriptionFiche": "Le president de FLOWIE est UP TO TECH (SIREN 912494937, NAF 62.02A) et le directeur general LEGORREC CONSULTING (SIREN 920781333, NAF 70.22Z) : societes de dirigeants, sans information publique sur la structure de detention.",
+   "sourcesEnrichissement": [
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — annuaire-entreprises.data.gouv.fr",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    },
+    {
+     "champ": "dirigeants",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — https://recherche-entreprises.api.gouv.fr/search?q=921376265&per_page=1&minimal=true&include=dirigeants,siege",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "actionnariat",
+     "source": "RNE via API Recherche d'entreprises (dirigeants personnes morales)",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    }
+   ]
+  },
+  {
+   "nom": "FULLL",
+   "dirigeants": [
+    {
+     "nom": "AHA AUDIT",
+     "qualite": "Autre",
+     "type": "personne morale"
+    },
+    {
+     "nom": "FALORNI LAURENT SARL",
+     "qualite": "Directeur Général",
+     "type": "personne morale"
+    },
+    {
+     "nom": "LE DANDY",
+     "qualite": "Directeur Général",
+     "type": "personne morale"
+    },
+    {
+     "nom": "LAMOTTE FRANK SARL",
+     "qualite": "Président de SAS",
+     "type": "personne morale"
+    }
+   ],
+   "relationCapitalistique": "non_determinable",
+   "descriptionFiche": "Les dirigeants de FULLL comprennent plusieurs societes de dirigeants (FALORNI LAURENT SARL, LE DANDY, LAMOTTE FRANK SARL) : aucune information publique ne permet de qualifier la detention.",
+   "sourcesEnrichissement": [
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — annuaire-entreprises.data.gouv.fr",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    },
+    {
+     "champ": "dirigeants",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — https://recherche-entreprises.api.gouv.fr/search?q=443516877&per_page=1&minimal=true&include=dirigeants,siege",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "actionnariat",
+     "source": "RNE via API Recherche d'entreprises (dirigeants personnes morales)",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    }
+   ]
+  },
+  {
+   "nom": "GENERIX Group",
+   "dirigeants": [
+    {
+     "nom": "AUDITEX",
+     "qualite": "Commissaire aux comptes suppléant",
+     "type": "personne morale"
+    },
+    {
+     "nom": "CBA",
+     "qualite": "Commissaire aux comptes suppléant",
+     "type": "personne morale"
+    },
+    {
+     "nom": "ERNST & YOUNG ET AUTRES",
+     "qualite": "Commissaire aux comptes titulaire",
+     "type": "personne morale"
+    },
+    {
+     "nom": "MAZARS",
+     "qualite": "Commissaire aux comptes titulaire",
+     "type": "personne morale"
+    },
+    {
+     "nom": "NEW GEN HOLDING",
+     "qualite": "Président de SAS",
+     "type": "personne morale"
+    }
+   ],
+   "relationCapitalistique": "fonds_PE",
+   "descriptionFiche": "Operateur EDI historique fonde en 1990, siege a Lesquin (59) malgre l'adresse parisienne declaree a la DGFiP. Se presente comme l'acteur de « l'economie en reseau », connectant les flux entre entreprises. Actionnariat : Generix Group a ete retire de la cote a l'issue de l'offre publique d'achat de 2022 portee par NEW GEN HOLDING (SIREN 912739760, NAF 66.30Z), concert compose de New Gen Holding, Pleiade Investissement et des fonds Montefiore Investment. NEW GEN HOLDING est president de l'entite immatriculee.",
+   "sourcesEnrichissement": [
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE)",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    },
+    {
+     "champ": "immatriculation",
+     "source": "Liste officielle DGFiP — impots.gouv.fr",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    },
+    {
+     "champ": "positionnement",
+     "source": "https://www.generixgroup.com/fr",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    },
+    {
+     "champ": "dirigeants",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — https://recherche-entreprises.api.gouv.fr/search?q=377619150&per_page=1&minimal=true&include=dirigeants,siege",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "actionnariat",
+     "source": "AMF, note en reponse de Generix Group (D&I 222C1868) ; Montefiore Investment, fiche portefeuille Generix ; Simpson Thacher, communique du 09/06/2025 (« Generix, a portfolio company of Montefiore Investment and Pleiade Investissement »)",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "GEP",
+   "relationCapitalistique": "non_determinable",
+   "sourcesEnrichissement": [
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — annuaire-entreprises.data.gouv.fr",
+     "dateReleve": "2026-08-19",
+     "confiance": "moyenne"
+    },
+    {
+     "champ": "actionnariat",
+     "source": "RNE via API Recherche d'entreprises : aucun dirigeant personne morale hors commissaires aux comptes",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    }
+   ]
+  },
+  {
+   "nom": "GESTAV",
+   "dirigeants": [
+    {
+     "nom": "LEFEBVRE REMI JEAN-MARIE DANIEL ANDRE",
+     "qualite": "Président de SAS",
+     "type": "personne physique"
+    },
+    {
+     "nom": "LEFEBVRE STEPHANIE DANIELE RAYMONDE",
+     "qualite": "Directeur Général",
+     "type": "personne physique"
+    }
+   ],
+   "relationCapitalistique": "non_determinable",
+   "sourcesEnrichissement": [
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — annuaire-entreprises.data.gouv.fr",
+     "dateReleve": "2026-08-19",
+     "confiance": "moyenne"
+    },
+    {
+     "champ": "dirigeants",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — https://recherche-entreprises.api.gouv.fr/search?q=790846679&per_page=1&minimal=true&include=dirigeants,siege",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "actionnariat",
+     "source": "RNE via API Recherche d'entreprises : aucun dirigeant personne morale hors commissaires aux comptes",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    }
+   ]
+  },
+  {
+   "nom": "IAF",
+   "dirigeants": [
+    {
+     "nom": "BENADIBA (BENADIBA) SEBASTIEN",
+     "qualite": "Gérant",
+     "type": "personne physique"
+    },
+    {
+     "nom": "BENADIBA SEBASTIEN STEPHANE",
+     "qualite": "Président de SAS",
+     "type": "personne physique"
+    }
+   ],
+   "relationCapitalistique": "non_determinable",
+   "sourcesEnrichissement": [
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — annuaire-entreprises.data.gouv.fr",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    },
+    {
+     "champ": "dirigeants",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — https://recherche-entreprises.api.gouv.fr/search?q=513569053&per_page=1&minimal=true&include=dirigeants,siege",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "actionnariat",
+     "source": "RNE via API Recherche d'entreprises : aucun dirigeant personne morale hors commissaires aux comptes",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    }
+   ]
+  },
+  {
+   "nom": "INDY",
+   "dirigeants": [
+    {
+     "nom": "TB INVEST",
+     "qualite": "Président de SAS",
+     "type": "personne morale"
+    }
+   ],
+   "relationCapitalistique": "holding_non_transparente",
+   "descriptionFiche": "Le president d'INDY est TB INVEST (SIREN 799061395) : detention via une holding dont les associes ne sont pas publiquement etablis.",
+   "sourcesEnrichissement": [
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — annuaire-entreprises.data.gouv.fr",
+     "dateReleve": "2026-08-19",
+     "confiance": "moyenne"
+    },
+    {
+     "champ": "dirigeants",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — https://recherche-entreprises.api.gouv.fr/search?q=440403442&per_page=1&minimal=true&include=dirigeants,siege",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "actionnariat",
+     "source": "RNE via API Recherche d'entreprises (dirigeants personnes morales)",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    }
+   ]
+  },
+  {
+   "nom": "INFOLOGIC",
+   "dirigeants": [
+    {
+     "nom": "BALDI STEPHANE OLIVIER WILFRID",
+     "qualite": "Gérant",
+     "type": "personne physique"
+    }
+   ],
+   "relationCapitalistique": "non_determinable",
+   "sourcesEnrichissement": [
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — annuaire-entreprises.data.gouv.fr",
+     "dateReleve": "2026-08-19",
+     "confiance": "moyenne"
+    },
+    {
+     "champ": "dirigeants",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — https://recherche-entreprises.api.gouv.fr/search?q=414347856&per_page=1&minimal=true&include=dirigeants,siege",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "actionnariat",
+     "source": "RNE via API Recherche d'entreprises : aucun dirigeant personne morale hors commissaires aux comptes",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    }
+   ]
+  },
+  {
+   "nom": "IOPOLE",
+   "dirigeants": [
+    {
+     "nom": "KEIFLIN DORIAN",
+     "qualite": "Président de SAS",
+     "type": "personne physique"
+    },
+    {
+     "nom": "KEIFLIN YOANN SERGE",
+     "qualite": "Directeur Général",
+     "type": "personne physique"
+    },
+    {
+     "nom": "PALA GABRIEL LOUIS",
+     "qualite": "Directeur Général",
+     "type": "personne physique"
+    },
+    {
+     "nom": "SAUDEMONT NICOLAS JOSE XAVIER",
+     "qualite": "Directeur Général",
+     "type": "personne physique"
+    }
+   ],
+   "sourcesEnrichissement": [
+    {
+     "champ": "immatriculation",
+     "source": "Liste officielle DGFiP — impots.gouv.fr",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    },
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE)",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    },
+    {
+     "champ": "dirigeants",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — https://recherche-entreprises.api.gouv.fr/search?q=922304308&per_page=1&minimal=true&include=dirigeants,siege",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "ITESOFT",
+   "dirigeants": [
+    {
+     "nom": "CHARPENTIER CAROLINE JULIETTE",
+     "qualite": "Administrateur",
+     "type": "personne physique"
+    },
+    {
+     "nom": "CHARPENTIER DIDIER",
+     "qualite": "Président du conseil d’administration",
+     "type": "personne physique"
+    },
+    {
+     "nom": "GUILLEMIN ALAIN",
+     "qualite": "Administrateur",
+     "type": "personne physique"
+    },
+    {
+     "nom": "LEGROS FRANCOIS JEAN MICHEL",
+     "qualite": "Administrateur",
+     "type": "personne physique"
+    },
+    {
+     "nom": "MATRINGE LAURENT MARIE ETIENNE",
+     "qualite": "Directeur général délégué",
+     "type": "personne physique"
+    },
+    {
+     "nom": "MICHEL MAGALI MARTINE JACQUELINE",
+     "qualite": "Administrateur",
+     "type": "personne physique"
+    },
+    {
+     "nom": "PEDRENO JEAN-MARC",
+     "qualite": "Directeur général délégué",
+     "type": "personne physique"
+    },
+    {
+     "nom": "C.B AUDIT",
+     "qualite": "Commissaire aux comptes titulaire",
+     "type": "personne morale"
+    }
+   ],
+   "relationCapitalistique": "acquise",
+   "descriptionFiche": "Actionnariat : Itesoft, anciennement cotee sur Euronext Paris (FR0004026151), est sortie de la cote en 2024 a l'issue d'une offre publique portee par SF2I. Aucun dirigeant personne morale hors commissaire aux comptes n'apparait au RNE.",
+   "sourcesEnrichissement": [
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — annuaire-entreprises.data.gouv.fr",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    },
+    {
+     "champ": "dirigeants",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — https://recherche-entreprises.api.gouv.fr/search?q=330265323&per_page=1&minimal=true&include=dirigeants,siege",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "actionnariat",
+     "source": "CFNEWS, « Itesoft sort de la cote » ; Euronext live (FR0004026151, dernier cours du 16/05/2024) ; projet de note en reponse d'Itesoft (SF2I)",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    }
+   ]
+  },
+  {
+   "nom": "KLEKOON",
+   "dirigeants": [
+    {
+     "nom": "KABLI ALI",
+     "qualite": "Gérant",
+     "type": "personne physique"
+    }
+   ],
+   "relationCapitalistique": "non_determinable",
+   "sourcesEnrichissement": [
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — annuaire-entreprises.data.gouv.fr",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    },
+    {
+     "champ": "dirigeants",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — https://recherche-entreprises.api.gouv.fr/search?q=421401803&per_page=1&minimal=true&include=dirigeants,siege",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "actionnariat",
+     "source": "RNE via API Recherche d'entreprises : aucun dirigeant personne morale hors commissaires aux comptes",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    }
+   ]
+  },
+  {
+   "nom": "KOLECTO PA",
+   "dirigeants": [
+    {
+     "nom": "CHOUKRI NEÏLA",
+     "qualite": "Directeur Général",
+     "type": "personne physique"
+    },
+    {
+     "nom": "DARMON LAURENT",
+     "qualite": "Président de SAS",
+     "type": "personne physique"
+    },
+    {
+     "nom": "FORVIS MAZARS SA",
+     "qualite": "Commissaire aux comptes titulaire",
+     "type": "personne morale"
+    }
+   ],
+   "sourcesEnrichissement": [
+    {
+     "champ": "immatriculation",
+     "source": "Liste officielle DGFiP — impots.gouv.fr",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    },
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE)",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    },
+    {
+     "champ": "positionnement",
+     "source": "nom officiel declare a la DGFiP + RNE",
+     "dateReleve": "2026-08-19",
+     "confiance": "moyenne"
+    },
+    {
+     "champ": "dirigeants",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — https://recherche-entreprises.api.gouv.fr/search?q=993109024&per_page=1&minimal=true&include=dirigeants,siege",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "KOLECTO PDP",
+   "dirigeants": [
+    {
+     "nom": "CHOUKRI NEILA",
+     "qualite": "Directeur Général",
+     "type": "personne physique"
+    },
+    {
+     "nom": "DARMON LAURENT",
+     "qualite": "Président de SAS",
+     "type": "personne physique"
+    },
+    {
+     "nom": "LOTITO JULIA",
+     "qualite": "Directeur Général",
+     "type": "personne physique"
+    },
+    {
+     "nom": "DIAGNOSTIC & INVESTISSEMENT",
+     "qualite": "Commissaire aux comptes titulaire",
+     "type": "personne morale"
+    }
+   ],
+   "sourcesEnrichissement": [
+    {
+     "champ": "immatriculation",
+     "source": "Liste officielle DGFiP — impots.gouv.fr",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    },
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE)",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    },
+    {
+     "champ": "positionnement",
+     "source": "nom officiel declare a la DGFiP + RNE",
+     "dateReleve": "2026-08-19",
+     "confiance": "moyenne"
+    },
+    {
+     "champ": "dirigeants",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — https://recherche-entreprises.api.gouv.fr/search?q=950955542&per_page=1&minimal=true&include=dirigeants,siege",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "LE VILLAGE CONNECTE",
+   "dirigeants": [
+    {
+     "nom": "CHOTEAU LAURENT ERIC GEORGES ANTONIO",
+     "qualite": "Président de SAS",
+     "type": "personne physique"
+    },
+    {
+     "nom": "CLARYSSE JÉRÔME ALBERT ROBERT",
+     "qualite": "Directeur Général",
+     "type": "personne physique"
+    },
+    {
+     "nom": "VEIGAS JOSEPH FRANCIS",
+     "qualite": "Directeur Général",
+     "type": "personne physique"
+    }
+   ],
+   "relationCapitalistique": "non_determinable",
+   "sourcesEnrichissement": [
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — annuaire-entreprises.data.gouv.fr",
+     "dateReleve": "2026-08-19",
+     "confiance": "moyenne"
+    },
+    {
+     "champ": "dirigeants",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — https://recherche-entreprises.api.gouv.fr/search?q=950883231&per_page=1&minimal=true&include=dirigeants,siege",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "actionnariat",
+     "source": "RNE via API Recherche d'entreprises : aucun dirigeant personne morale hors commissaires aux comptes",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    }
+   ]
+  },
+  {
+   "nom": "LOGILEC",
+   "dirigeants": [
+    {
+     "nom": "ROUDAUT BRUNO",
+     "qualite": "Gérant",
+     "type": "personne physique"
+    },
+    {
+     "nom": "GRANT THORNTON",
+     "qualite": "Commissaire aux comptes titulaire",
+     "type": "personne morale"
+    }
+   ],
+   "relationCapitalistique": "non_determinable",
+   "sourcesEnrichissement": [
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — annuaire-entreprises.data.gouv.fr",
+     "dateReleve": "2026-08-19",
+     "confiance": "moyenne"
+    },
+    {
+     "champ": "dirigeants",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — https://recherche-entreprises.api.gouv.fr/search?q=423793785&per_page=1&minimal=true&include=dirigeants,siege",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "actionnariat",
+     "source": "RNE via API Recherche d'entreprises : aucun dirigeant personne morale hors commissaires aux comptes",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    }
+   ]
+  },
+  {
+   "nom": "LUCCA",
+   "dirigeants": [
+    {
+     "nom": "ALLAIN GUILLAUME",
+     "qualite": "Directeur Général",
+     "type": "personne physique"
+    },
+    {
+     "nom": "SATGE GILLES",
+     "qualite": "Président de SAS",
+     "type": "personne physique"
+    },
+    {
+     "nom": "BDO IDF",
+     "qualite": "Commissaire aux comptes titulaire",
+     "type": "personne morale"
+    }
+   ],
+   "relationCapitalistique": "non_determinable",
+   "sourcesEnrichissement": [
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — annuaire-entreprises.data.gouv.fr",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    },
+    {
+     "champ": "dirigeants",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — https://recherche-entreprises.api.gouv.fr/search?q=441637691&per_page=1&minimal=true&include=dirigeants,siege",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "actionnariat",
+     "source": "RNE via API Recherche d'entreprises : aucun dirigeant personne morale hors commissaires aux comptes",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    }
+   ]
+  },
+  {
+   "nom": "MACOMPTA.FR",
+   "dirigeants": [
+    {
+     "nom": "HEURTIER SYLVAIN PIERRE BENOIT",
+     "qualite": "Président du conseil d’administration et directeur général",
+     "type": "personne physique"
+    },
+    {
+     "nom": "HEURTIER THIBAULT",
+     "qualite": "Administrateur",
+     "type": "personne physique"
+    },
+    {
+     "nom": "LEMONNIER JOEL AMAND FERDINAND",
+     "qualite": "Administrateur",
+     "type": "personne physique"
+    },
+    {
+     "nom": "OLIVIER EMMANUEL",
+     "qualite": "Administrateur",
+     "type": "personne physique"
+    },
+    {
+     "nom": "TAMARELLE LOIC JEAN PHILIPPE",
+     "qualite": "Administrateur",
+     "type": "personne physique"
+    },
+    {
+     "nom": "OPEN CONSEIL",
+     "qualite": "Commissaire aux comptes titulaire",
+     "type": "personne morale"
+    }
+   ],
+   "relationCapitalistique": "non_determinable",
+   "sourcesEnrichissement": [
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — annuaire-entreprises.data.gouv.fr",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    },
+    {
+     "champ": "dirigeants",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — https://recherche-entreprises.api.gouv.fr/search?q=499890424&per_page=1&minimal=true&include=dirigeants,siege",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "actionnariat",
+     "source": "RNE via API Recherche d'entreprises : aucun dirigeant personne morale hors commissaires aux comptes",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    }
+   ]
+  },
+  {
+   "nom": "MEDIUS",
+   "dirigeants": [
+    {
+     "nom": "PRICEWATERHOUSECOOPERS AUDIT",
+     "qualite": "Commissaire aux comptes titulaire",
+     "type": "personne morale"
+    },
+    {
+     "nom": "MEDIUS SVERIGE AB",
+     "qualite": "Président de SAS",
+     "type": "personne morale"
+    }
+   ],
+   "relationCapitalistique": "filiale_de_groupe",
+   "descriptionFiche": "Le president de MEDIUS (France) est MEDIUS SVERIGE AB, societe suedoise homonyme : l'entite immatriculee est la filiale francaise du groupe Medius.",
+   "sourcesEnrichissement": [
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — annuaire-entreprises.data.gouv.fr",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    },
+    {
+     "champ": "dirigeants",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — https://recherche-entreprises.api.gouv.fr/search?q=810794610&per_page=1&minimal=true&include=dirigeants,siege",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "actionnariat",
+     "source": "RNE via API Recherche d'entreprises (dirigeants personnes morales)",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    }
+   ]
+  },
+  {
+   "nom": "MY UNISOFT",
+   "dirigeants": [
+    {
+     "nom": "BESNARD BERTRAND",
+     "qualite": "Commissaire aux comptes suppléant",
+     "type": "personne physique"
+    },
+    {
+     "nom": "MH CONSEILS",
+     "qualite": "Commissaire aux comptes titulaire",
+     "type": "personne morale"
+    },
+    {
+     "nom": "MAXIMUS TOPCO",
+     "qualite": "Président de SAS",
+     "type": "personne morale"
+    }
+   ],
+   "relationCapitalistique": "holding_non_transparente",
+   "descriptionFiche": "Le president de MY UNISOFT est MAXIMUS TOPCO (SIREN 938158326, NAF 66.30Z, gestion de fonds) : indice d'une structure de holding ou d'une operation de capital, dont la nature n'est pas publiquement etablie.",
+   "sourcesEnrichissement": [
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — annuaire-entreprises.data.gouv.fr",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    },
+    {
+     "champ": "dirigeants",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — https://recherche-entreprises.api.gouv.fr/search?q=840143275&per_page=1&minimal=true&include=dirigeants,siege",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "actionnariat",
+     "source": "RNE via API Recherche d'entreprises (dirigeants personnes morales)",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    }
+   ]
+  },
+  {
+   "nom": "N2F PDP",
+   "dirigeants": [
+    {
+     "nom": "ARAS FRÉDÉRIC LIONEL",
+     "qualite": "Gérant et associé indéfiniment responsable",
+     "type": "personne physique"
+    },
+    {
+     "nom": "CALMELS NICOLAS PHILIPPE DIDIER",
+     "qualite": "Gérant et associé indéfiniment responsable",
+     "type": "personne physique"
+    },
+    {
+     "nom": "CASSOTTI FRÉDÉRIC NOËL JACQUES",
+     "qualite": "Gérant et associé indéfiniment responsable",
+     "type": "personne physique"
+    }
+   ],
+   "relationCapitalistique": "non_determinable",
+   "sourcesEnrichissement": [
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — annuaire-entreprises.data.gouv.fr",
+     "dateReleve": "2026-08-19",
+     "confiance": "moyenne"
+    },
+    {
+     "champ": "dirigeants",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — https://recherche-entreprises.api.gouv.fr/search?q=949325047&per_page=1&minimal=true&include=dirigeants,siege",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "actionnariat",
+     "source": "RNE via API Recherche d'entreprises : aucun dirigeant personne morale hors commissaires aux comptes",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    }
+   ]
+  },
+  {
+   "nom": "ONE UP",
+   "dirigeants": [
+    {
+     "nom": "MONDION JEAN PHILIPPE",
+     "qualite": "Gérant et associé indéfiniment responsable",
+     "type": "personne physique"
+    },
+    {
+     "nom": "MONDION (PEERE) VERONIQUE",
+     "qualite": "Gérant et associé indéfiniment responsable",
+     "type": "personne physique"
+    },
+    {
+     "nom": "MONDINVEST ",
+     "qualite": "Autre",
+     "type": "personne morale"
+    }
+   ],
+   "relationCapitalistique": "holding_non_transparente",
+   "descriptionFiche": "MONDINVEST (SIREN 824109821, NAF 68.20B) figure parmi les dirigeants de ONE UP : detention via une societe patrimoniale, non documentee publiquement.",
+   "sourcesEnrichissement": [
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — annuaire-entreprises.data.gouv.fr",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    },
+    {
+     "champ": "dirigeants",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — https://recherche-entreprises.api.gouv.fr/search?q=497878181&per_page=1&minimal=true&include=dirigeants,siege",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "actionnariat",
+     "source": "RNE via API Recherche d'entreprises (dirigeants personnes morales)",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    }
+   ]
+  },
+  {
+   "nom": "OPEN BEE",
+   "dirigeants": [
+    {
+     "nom": "COMEXPERT - SOCIETE ANONYME D'EXPERTISE COMPTABLE ET DE COMMISSARIAT AUX COMPTES",
+     "qualite": "Commissaire aux comptes titulaire",
+     "type": "personne morale"
+    },
+    {
+     "nom": "SALUSTRO REYDEL",
+     "qualite": "Commissaire aux comptes suppléant",
+     "type": "personne morale"
+    },
+    {
+     "nom": "KPMG S.A",
+     "qualite": "Commissaire aux comptes titulaire",
+     "type": "personne morale"
+    },
+    {
+     "nom": "DOXSA",
+     "qualite": "Président de SAS",
+     "type": "personne morale"
+    }
+   ],
+   "relationCapitalistique": "non_determinable",
+   "descriptionFiche": "Le president d'OPEN BEE est DOXSA (SIREN 841690712, NAF 62.01Z) : indice d'appartenance a un ensemble, non documente publiquement.",
+   "sourcesEnrichissement": [
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — annuaire-entreprises.data.gouv.fr",
+     "dateReleve": "2026-08-19",
+     "confiance": "moyenne"
+    },
+    {
+     "champ": "dirigeants",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — https://recherche-entreprises.api.gouv.fr/search?q=504389446&per_page=1&minimal=true&include=dirigeants,siege",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "actionnariat",
+     "source": "RNE via API Recherche d'entreprises (dirigeants personnes morales)",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    }
+   ]
+  },
+  {
+   "nom": "PARAGON",
+   "relationCapitalistique": "non_determinable",
+   "sourcesEnrichissement": [
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — annuaire-entreprises.data.gouv.fr",
+     "dateReleve": "2026-08-19",
+     "confiance": "moyenne"
+    },
+    {
+     "champ": "actionnariat",
+     "source": "RNE via API Recherche d'entreprises : aucun dirigeant personne morale hors commissaires aux comptes",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    }
+   ]
+  },
+  {
+   "nom": "PAYFLOWS",
+   "dirigeants": [
+    {
+     "nom": "ASSOULINE JOSEPH",
+     "qualite": "Directeur Général",
+     "type": "personne physique"
+    },
+    {
+     "nom": "GLIKMAN PAULINE",
+     "qualite": "Président de SAS",
+     "type": "personne physique"
+    }
+   ],
+   "relationCapitalistique": "non_determinable",
+   "sourcesEnrichissement": [
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — annuaire-entreprises.data.gouv.fr",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    },
+    {
+     "champ": "dirigeants",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — https://recherche-entreprises.api.gouv.fr/search?q=912610649&per_page=1&minimal=true&include=dirigeants,siege",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "actionnariat",
+     "source": "RNE via API Recherche d'entreprises : aucun dirigeant personne morale hors commissaires aux comptes",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    }
+   ]
+  },
+  {
+   "nom": "PENNYLANE",
+   "dirigeants": [
+    {
+     "nom": "BESNARD TANCREDE",
+     "qualite": "Directeur Général",
+     "type": "personne physique"
+    },
+    {
+     "nom": "BLOSSIER FELIX",
+     "qualite": "Directeur Général",
+     "type": "personne physique"
+    },
+    {
+     "nom": "DE METZ QUENTIN",
+     "qualite": "Directeur Général",
+     "type": "personne physique"
+    },
+    {
+     "nom": "WALLER ARTHUR",
+     "qualite": "Président de SAS",
+     "type": "personne physique"
+    },
+    {
+     "nom": "SOCIETE D'ETUDES FINANCIERES ET D'AUDIT COMPTABLE - SEFAC SOCIETE D'EXPERTISE COMPTABLE ET DE COMMISSARIAT AUX COMPTES",
+     "qualite": "Commissaire aux comptes titulaire",
+     "type": "personne morale"
+    }
+   ],
+   "sourcesEnrichissement": [
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE)",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    },
+    {
+     "champ": "immatriculation",
+     "source": "Liste officielle DGFiP — impots.gouv.fr",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    },
+    {
+     "champ": "positionnement",
+     "source": "https://www.pennylane.com/",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    },
+    {
+     "champ": "dirigeants",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — https://recherche-entreprises.api.gouv.fr/search?q=880265921&per_page=1&minimal=true&include=dirigeants,siege",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "PITNEY BOWES",
+   "dirigeants": [
+    {
+     "nom": "WATISSEE ANTOINE",
+     "qualite": "Directeur Général",
+     "type": "personne physique"
+    },
+    {
+     "nom": "PITNEY BOWES HOLDING SNC",
+     "qualite": "Président de SAS",
+     "type": "personne morale"
+    },
+    {
+     "nom": "FORVIS MAZARS SA",
+     "qualite": "Commissaire aux comptes titulaire",
+     "type": "personne morale"
+    }
+   ],
+   "relationCapitalistique": "filiale_de_groupe",
+   "descriptionFiche": "Le president de PITNEY BOWES (France) est PITNEY BOWES HOLDING SNC (SIREN 399354505, NAF 70.22Z) : l'entite appartient au groupe Pitney Bowes.",
+   "sourcesEnrichissement": [
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — annuaire-entreprises.data.gouv.fr",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    },
+    {
+     "champ": "dirigeants",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — https://recherche-entreprises.api.gouv.fr/search?q=562046235&per_page=1&minimal=true&include=dirigeants,siege",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "actionnariat",
+     "source": "RNE via API Recherche d'entreprises (dirigeants personnes morales)",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    }
+   ]
+  },
+  {
+   "nom": "QONTO",
+   "dirigeants": [
+    {
+     "nom": "ANAVI STEVE",
+     "qualite": "Directeur général délégué",
+     "type": "personne physique"
+    },
+    {
+     "nom": "BEAUFRET JEAN-PASCAL",
+     "qualite": "Président du conseil d’administration",
+     "type": "personne physique"
+    },
+    {
+     "nom": "BRIERS MATTHEW",
+     "qualite": "Administrateur",
+     "type": "personne physique"
+    },
+    {
+     "nom": "BROUGHER FRANCOISE CASALS",
+     "qualite": "Administrateur",
+     "type": "personne physique"
+    },
+    {
+     "nom": "PROT ALEXANDRE",
+     "qualite": "Directeur Général",
+     "type": "personne physique"
+    },
+    {
+     "nom": "DUMAS (ROUSSEL) CLAIRE ELISABETH",
+     "qualite": "Administrateur",
+     "type": "personne physique"
+    },
+    {
+     "nom": "SAVOURNIN REMI",
+     "qualite": "Commissaire aux comptes suppléant",
+     "type": "personne physique"
+    },
+    {
+     "nom": "CAILLIAU DEDOUIT ET ASSOCIES",
+     "qualite": "Commissaire aux comptes titulaire",
+     "type": "personne morale"
+    },
+    {
+     "nom": "FORVIS MAZARS",
+     "qualite": "Commissaire aux comptes titulaire",
+     "type": "personne morale"
+    },
+    {
+     "nom": "VALAR GLOBAL PRINCIPALS FUND III LP",
+     "qualite": null,
+     "type": "personne morale"
+    }
+   ],
+   "relationCapitalistique": "non_determinable",
+   "descriptionFiche": "VALAR GLOBAL PRINCIPALS FUND III LP figure parmi les dirigeants declares de QONTO au RNE : presence d'un fonds au tour de table, sans que la repartition du capital soit publiquement etablie.",
+   "sourcesEnrichissement": [
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — annuaire-entreprises.data.gouv.fr",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    },
+    {
+     "champ": "dirigeants",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — https://recherche-entreprises.api.gouv.fr/search?q=819489626&per_page=1&minimal=true&include=dirigeants,siege",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "actionnariat",
+     "source": "RNE via API Recherche d'entreprises (dirigeants personnes morales)",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    }
+   ]
+  },
+  {
+   "nom": "QWEEBY",
+   "dirigeants": [
+    {
+     "nom": "WANSCOOR ERIC MARC PAUL EMILE",
+     "qualite": "Président de SAS",
+     "type": "personne physique"
+    }
+   ],
+   "relationCapitalistique": "non_determinable",
+   "sourcesEnrichissement": [
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — annuaire-entreprises.data.gouv.fr",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    },
+    {
+     "champ": "dirigeants",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — https://recherche-entreprises.api.gouv.fr/search?q=509919692&per_page=1&minimal=true&include=dirigeants,siege",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "actionnariat",
+     "source": "RNE via API Recherche d'entreprises : aucun dirigeant personne morale hors commissaires aux comptes",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    }
+   ]
+  },
+  {
+   "nom": "SAGE",
+   "dirigeants": [
+    {
+     "nom": "PETIT ARNAUD FRANCOIS",
+     "qualite": "Président de SAS",
+     "type": "personne physique"
+    },
+    {
+     "nom": "SALUSTRO REYDEL",
+     "qualite": "Commissaire aux comptes suppléant",
+     "type": "personne morale"
+    },
+    {
+     "nom": "KPMG SA",
+     "qualite": "Commissaire aux comptes titulaire",
+     "type": "personne morale"
+    }
+   ],
+   "sourcesEnrichissement": [
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE)",
+     "dateReleve": "2026-08-19",
+     "confiance": "moyenne"
+    },
+    {
+     "champ": "immatriculation",
+     "source": "Liste officielle DGFiP — impots.gouv.fr",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    },
+    {
+     "champ": "positionnement",
+     "source": "https://www.sage.com/fr-fr/",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    },
+    {
+     "champ": "dirigeants",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — https://recherche-entreprises.api.gouv.fr/search?q=313966129&per_page=1&minimal=true&include=dirigeants,siege",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "SCRIBEE",
+   "dirigeants": [
+    {
+     "nom": "B'YNVEST",
+     "qualite": "Président de SAS",
+     "type": "personne morale"
+    }
+   ],
+   "relationCapitalistique": "holding_non_transparente",
+   "descriptionFiche": "Le president de SCRIBEE est B'YNVEST (SIREN 984332957, NAF 66.30Z, gestion de fonds) : indice d'une structure de holding, dont les detenteurs ne sont pas publiquement etablis.",
+   "sourcesEnrichissement": [
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — annuaire-entreprises.data.gouv.fr",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    },
+    {
+     "champ": "dirigeants",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — https://recherche-entreprises.api.gouv.fr/search?q=940852817&per_page=1&minimal=true&include=dirigeants,siege",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "actionnariat",
+     "source": "RNE via API Recherche d'entreprises (dirigeants personnes morales)",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    }
+   ]
+  },
+  {
+   "nom": "SERENSIA by Quadient",
+   "dirigeants": [
+    {
+     "nom": "AUCHABIE STÉPHANIE MARIE",
+     "qualite": "Président de SAS",
+     "type": "personne physique"
+    },
+    {
+     "nom": "VENDRELY JULIEN",
+     "qualite": "Directeur Général",
+     "type": "personne physique"
+    },
+    {
+     "nom": "IN EXTENSO IDF AUDIT",
+     "qualite": "Commissaire aux comptes titulaire",
+     "type": "personne morale"
+    }
+   ],
+   "sourcesEnrichissement": [
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE)",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    },
+    {
+     "champ": "immatriculation",
+     "source": "Liste officielle DGFiP — impots.gouv.fr",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    },
+    {
+     "champ": "positionnement",
+     "source": "https://www.serensia.com/",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    },
+    {
+     "champ": "dirigeants",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — https://recherche-entreprises.api.gouv.fr/search?q=477550370&per_page=1&minimal=true&include=dirigeants,siege",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "SERES",
+   "dirigeants": [
+    {
+     "nom": "BIAIS ALBAN",
+     "qualite": "Administrateur",
+     "type": "personne physique"
+    },
+    {
+     "nom": "MORIN JEAN-BAPTISTE",
+     "qualite": "Administrateur",
+     "type": "personne physique"
+    },
+    {
+     "nom": "THILLAYE DU BOULLAY CHARLES",
+     "qualite": "Président du conseil d’administration et directeur général",
+     "type": "personne physique"
+    },
+    {
+     "nom": "DOCAPOSTE",
+     "qualite": "Administrateur",
+     "type": "personne morale"
+    },
+    {
+     "nom": "BULL SAS",
+     "qualite": "Administrateur",
+     "type": "personne morale"
+    },
+    {
+     "nom": "KPMG S.A",
+     "qualite": "Commissaire aux comptes titulaire",
+     "type": "personne morale"
+    }
+   ],
+   "relationCapitalistique": "non_determinable",
+   "descriptionFiche": "DOCAPOSTE (SIREN 493376008, NAF 70.10Z) et BULL SAS (SIREN 642058739) sont administrateurs de SERES : indice d'un actionnariat partage entre groupes, dont la repartition n'est pas publiquement etablie.",
+   "sourcesEnrichissement": [
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — annuaire-entreprises.data.gouv.fr",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    },
+    {
+     "champ": "dirigeants",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — https://recherche-entreprises.api.gouv.fr/search?q=343778163&per_page=1&minimal=true&include=dirigeants,siege",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "actionnariat",
+     "source": "RNE via API Recherche d'entreprises (dirigeants personnes morales)",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    }
+   ]
+  },
+  {
+   "nom": "SPENDESK",
+   "dirigeants": [
+    {
+     "nom": "BURKIN CAROLINE",
+     "qualite": "Administrateur",
+     "type": "personne physique"
+    },
+    {
+     "nom": "DEMAZY AXEL",
+     "qualite": "Président de SAS",
+     "type": "personne physique"
+    },
+    {
+     "nom": "SEPULCHRE DE CONDE AMAURY DEREK MARIE JOSEPH",
+     "qualite": "Administrateur",
+     "type": "personne physique"
+    },
+    {
+     "nom": "VIDAL DOMINIQUE PAUL",
+     "qualite": "Administrateur",
+     "type": "personne physique"
+    },
+    {
+     "nom": "KPMG S.A.",
+     "qualite": "Commissaire aux comptes titulaire",
+     "type": "personne morale"
+    },
+    {
+     "nom": "PF AUDIT",
+     "qualite": "Commissaire aux comptes titulaire",
+     "type": "personne morale"
+    },
+    {
+     "nom": "POINT79 MANAGEMENT LIMITED",
+     "qualite": "Président du conseil d’administration",
+     "type": "personne morale"
+    }
+   ],
+   "relationCapitalistique": "non_determinable",
+   "descriptionFiche": "Le president du conseil d'administration de SPENDESK est POINT79 MANAGEMENT LIMITED : structure etrangere, sans information publique sur la detention.",
+   "sourcesEnrichissement": [
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — annuaire-entreprises.data.gouv.fr",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    },
+    {
+     "champ": "dirigeants",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — https://recherche-entreprises.api.gouv.fr/search?q=821893286&per_page=1&minimal=true&include=dirigeants,siege",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "actionnariat",
+     "source": "RNE via API Recherche d'entreprises (dirigeants personnes morales)",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    }
+   ]
+  },
+  {
+   "nom": "SYMTRAX",
+   "dirigeants": [
+    {
+     "nom": "ALDEBERT BERNARD",
+     "qualite": "Directeur général délégué",
+     "type": "personne physique"
+    },
+    {
+     "nom": "RABIAN KARINE",
+     "qualite": "Administrateur",
+     "type": "personne physique"
+    },
+    {
+     "nom": "ALDEBERT (SALANON) CAROLINE",
+     "qualite": "Administrateur",
+     "type": "personne physique"
+    }
+   ],
+   "relationCapitalistique": "non_determinable",
+   "sourcesEnrichissement": [
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — annuaire-entreprises.data.gouv.fr",
+     "dateReleve": "2026-08-19",
+     "confiance": "moyenne"
+    },
+    {
+     "champ": "dirigeants",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — https://recherche-entreprises.api.gouv.fr/search?q=352073910&per_page=1&minimal=true&include=dirigeants,siege",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "actionnariat",
+     "source": "RNE via API Recherche d'entreprises : aucun dirigeant personne morale hors commissaires aux comptes",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    }
+   ]
+  },
+  {
+   "nom": "TAXERA",
+   "dirigeants": [
+    {
+     "nom": "BACELAR PRATA ANTUNES PAULO NUNO",
+     "qualite": "Président de SAS",
+     "type": "personne physique"
+    }
+   ],
+   "relationCapitalistique": "non_determinable",
+   "sourcesEnrichissement": [
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — annuaire-entreprises.data.gouv.fr",
+     "dateReleve": "2026-08-19",
+     "confiance": "moyenne"
+    },
+    {
+     "champ": "dirigeants",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — https://recherche-entreprises.api.gouv.fr/search?q=919179663&per_page=1&minimal=true&include=dirigeants,siege",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "actionnariat",
+     "source": "RNE via API Recherche d'entreprises : aucun dirigeant personne morale hors commissaires aux comptes",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    }
+   ]
+  },
+  {
+   "nom": "TENOR",
+   "dirigeants": [
+    {
+     "nom": "AURVALIA",
+     "qualite": "Commissaire aux comptes suppléant",
+     "type": "personne morale"
+    },
+    {
+     "nom": "GSPI",
+     "qualite": "Président de SAS",
+     "type": "personne morale"
+    },
+    {
+     "nom": "TC FINANCES",
+     "qualite": "Commissaire aux comptes titulaire",
+     "type": "personne morale"
+    }
+   ],
+   "relationCapitalistique": "holding_non_transparente",
+   "descriptionFiche": "PME lyonnaise (Oullins) creee le 01/06/1988, 50 a 99 salaries, code activite conseil en systemes informatiques. Immatriculee le 15/01/26. Le president de TENOR est GSPI (SIREN 518807532, NAF 66.30Z, gestion de fonds) : indice d'une structure de holding ou d'une operation de capital, dont la nature n'est pas publiquement etablie.",
+   "sourcesEnrichissement": [
+    {
+     "champ": "immatriculation",
+     "source": "Liste officielle DGFiP — impots.gouv.fr",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    },
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE)",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    },
+    {
+     "champ": "dirigeants",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — https://recherche-entreprises.api.gouv.fr/search?q=345021661&per_page=1&minimal=true&include=dirigeants,siege",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "actionnariat",
+     "source": "RNE via API Recherche d'entreprises (dirigeants personnes morales)",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    }
+   ]
+  },
+  {
+   "nom": "TESSI Technologies",
+   "dirigeants": [
+    {
+     "nom": "COURNU (DEGEORGIS) VIRGINIE",
+     "qualite": "Directeur Général",
+     "type": "personne physique"
+    },
+    {
+     "nom": "TESSI",
+     "qualite": "Président de SAS",
+     "type": "personne morale"
+    },
+    {
+     "nom": "PRICEWATERHOUSECOOPERS AUDIT",
+     "qualite": "Commissaire aux comptes titulaire",
+     "type": "personne morale"
+    }
+   ],
+   "relationCapitalistique": "filiale_de_groupe",
+   "descriptionFiche": "Le president de TESSI Technologies est TESSI (SIREN 071501571, NAF 70.10Z, activites des sieges sociaux) : l'entite est la filiale technologique du groupe Tessi.",
+   "sourcesEnrichissement": [
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — annuaire-entreprises.data.gouv.fr",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    },
+    {
+     "champ": "dirigeants",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — https://recherche-entreprises.api.gouv.fr/search?q=382105823&per_page=1&minimal=true&include=dirigeants,siege",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "actionnariat",
+     "source": "RNE via API Recherche d'entreprises (dirigeants personnes morales)",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    }
+   ]
+  },
+  {
+   "nom": "TIIME PDP",
+   "dirigeants": [
+    {
+     "nom": "DIGUE MAXIME",
+     "qualite": "Directeur Général",
+     "type": "personne physique"
+    },
+    {
+     "nom": "LAMBIN GREGOIRE",
+     "qualite": "Président de SAS",
+     "type": "personne physique"
+    },
+    {
+     "nom": "PELLETIER (SCHIEBER) AMELIE",
+     "qualite": "Directeur Général",
+     "type": "personne physique"
+    }
+   ],
+   "relationCapitalistique": "non_determinable",
+   "sourcesEnrichissement": [
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — annuaire-entreprises.data.gouv.fr",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    },
+    {
+     "champ": "dirigeants",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — https://recherche-entreprises.api.gouv.fr/search?q=831280680&per_page=1&minimal=true&include=dirigeants,siege",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "actionnariat",
+     "source": "RNE via API Recherche d'entreprises : aucun dirigeant personne morale hors commissaires aux comptes",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    }
+   ]
+  },
+  {
+   "nom": "TUNGSTEN AUTOMATION FRANCE",
+   "dirigeants": [
+    {
+     "nom": "HEFNER CHRISTIAN",
+     "qualite": "Président de SAS",
+     "type": "personne physique"
+    },
+    {
+     "nom": "OBERHOLZER MARTIN GUSTAV",
+     "qualite": "Directeur Général",
+     "type": "personne physique"
+    },
+    {
+     "nom": "SAOUD JEAN",
+     "qualite": "Commissaire aux comptes suppléant",
+     "type": "personne physique"
+    },
+    {
+     "nom": "MAZARS - SOCIETE ANONYME A DIRECTOIRE ET CONSEIL DE SURVEILLANCE",
+     "qualite": "Commissaire aux comptes titulaire",
+     "type": "personne morale"
+    }
+   ],
+   "relationCapitalistique": "non_determinable",
+   "sourcesEnrichissement": [
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — annuaire-entreprises.data.gouv.fr",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    },
+    {
+     "champ": "dirigeants",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — https://recherche-entreprises.api.gouv.fr/search?q=411088859&per_page=1&minimal=true&include=dirigeants,siege",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "actionnariat",
+     "source": "RNE via API Recherche d'entreprises : aucun dirigeant personne morale hors commissaires aux comptes",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    }
+   ]
+  },
+  {
+   "nom": "TX2 Concept",
+   "dirigeants": [
+    {
+     "nom": "HOTTIN (LE BRUN) ISABELLE ANNICK ANDREE",
+     "qualite": "Président de SAS",
+     "type": "personne physique"
+    }
+   ],
+   "relationCapitalistique": "non_determinable",
+   "sourcesEnrichissement": [
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — annuaire-entreprises.data.gouv.fr",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    },
+    {
+     "champ": "dirigeants",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — https://recherche-entreprises.api.gouv.fr/search?q=429144967&per_page=1&minimal=true&include=dirigeants,siege",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "actionnariat",
+     "source": "RNE via API Recherche d'entreprises : aucun dirigeant personne morale hors commissaires aux comptes",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    }
+   ]
+  },
+  {
+   "nom": "VERYSWING",
+   "dirigeants": [
+    {
+     "nom": "BOMPAS & ASSOCIES",
+     "qualite": "Commissaire aux comptes titulaire",
+     "type": "personne morale"
+    },
+    {
+     "nom": "WORKAGI",
+     "qualite": "Directeur Général",
+     "type": "personne morale"
+    },
+    {
+     "nom": "TELLIAS",
+     "qualite": "Président de SAS",
+     "type": "personne morale"
+    }
+   ],
+   "relationCapitalistique": "holding_non_transparente",
+   "descriptionFiche": "Le president de VERYSWING est TELLIAS (SIREN 908173446, NAF 64.20Z) et le directeur general WORKAGI (SIREN 908092398, NAF 64.20Z) : deux holdings creees la meme annee, chaine de detention dont les beneficiaires ne sont pas publiquement etablis.",
+   "sourcesEnrichissement": [
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — annuaire-entreprises.data.gouv.fr",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    },
+    {
+     "champ": "dirigeants",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — https://recherche-entreprises.api.gouv.fr/search?q=540037603&per_page=1&minimal=true&include=dirigeants,siege",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "actionnariat",
+     "source": "RNE via API Recherche d'entreprises (dirigeants personnes morales)",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    }
+   ]
+  },
+  {
+   "nom": "WEPROC",
+   "dirigeants": [
+    {
+     "nom": "OZIOL STEVEN",
+     "qualite": "Président de SAS",
+     "type": "personne physique"
+    },
+    {
+     "nom": "SPANO VINCENT",
+     "qualite": "Directeur Général",
+     "type": "personne physique"
+    },
+    {
+     "nom": "ZELLER PAUL",
+     "qualite": "Directeur Général",
+     "type": "personne physique"
+    }
+   ],
+   "relationCapitalistique": "non_determinable",
+   "sourcesEnrichissement": [
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — annuaire-entreprises.data.gouv.fr",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    },
+    {
+     "champ": "dirigeants",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — https://recherche-entreprises.api.gouv.fr/search?q=853469161&per_page=1&minimal=true&include=dirigeants,siege",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "actionnariat",
+     "source": "RNE via API Recherche d'entreprises : aucun dirigeant personne morale hors commissaires aux comptes",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    }
+   ]
+  },
+  {
+   "nom": "XELYA",
+   "dirigeants": [
+    {
+     "nom": "REVISION GESTION AUDIT",
+     "qualite": "Commissaire aux comptes suppléant",
+     "type": "personne morale"
+    },
+    {
+     "nom": "EXELMANS AUDIT",
+     "qualite": "Commissaire aux comptes titulaire",
+     "type": "personne morale"
+    },
+    {
+     "nom": "DELTAV",
+     "qualite": "Président de SAS",
+     "type": "personne morale"
+    }
+   ],
+   "relationCapitalistique": "holding_non_transparente",
+   "descriptionFiche": "Le president de XELYA est DELTAV (SIREN 948616354, NAF 66.30Z, gestion de fonds) : indice d'une structure de holding ou d'une operation de capital, dont la nature n'est pas publiquement etablie.",
+   "sourcesEnrichissement": [
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — annuaire-entreprises.data.gouv.fr",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    },
+    {
+     "champ": "dirigeants",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — https://recherche-entreprises.api.gouv.fr/search?q=480607894&per_page=1&minimal=true&include=dirigeants,siege",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "actionnariat",
+     "source": "RNE via API Recherche d'entreprises (dirigeants personnes morales)",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    }
+   ]
+  },
+  {
+   "nom": "YOOZ PDP",
+   "dirigeants": [
+    {
+     "nom": "YOOZ",
+     "qualite": "Président de SAS",
+     "type": "personne morale"
+    }
+   ],
+   "sourcesEnrichissement": [
+    {
+     "champ": "identite_entreprise",
+     "source": "API Recherche d'entreprises (INSEE/RNE)",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    },
+    {
+     "champ": "immatriculation",
+     "source": "Liste officielle DGFiP — impots.gouv.fr",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    },
+    {
+     "champ": "positionnement",
+     "source": "https://www.getyooz.com/fr",
+     "dateReleve": "2026-08-19",
+     "confiance": "haute"
+    },
+    {
+     "champ": "dirigeants",
+     "source": "API Recherche d'entreprises (INSEE/RNE) — https://recherche-entreprises.api.gouv.fr/search?q=949747133&per_page=1&minimal=true&include=dirigeants,siege",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  }
+ ]
+}
