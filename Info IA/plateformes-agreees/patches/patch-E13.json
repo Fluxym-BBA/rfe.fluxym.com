@@ -1,0 +1,169 @@
+{
+  "_patch": {
+    "id": "E13",
+    "chantier": "E — qualification marché",
+    "auteur": "RFE_WebSite",
+    "dateReleve": "2026-08-20",
+    "nbPlateformes": 5,
+    "note": "Lot E13 — 5 entités étrangères absentes de SIRENE. (1) Les champs d'identité légale (siren, raisonSociale, dateCreation, trancheEffectif, categorieEntreprise, activitePrincipale, dirigeants) sont volontairement ABSENTS du patch, et non mis à null : conformément à FORMAT-PATCH.md règle 2, un champ à null écraserait la valeur existante, alors qu'un champ absent la laisse intacte. Niveau de détail dégradé assumé. (2) Vérification des clés de fusion : le référentiel data/plateformes-agreees.json (253 Ko, branche main) n'a pu être récupéré qu'en partie (~85 Ko, ordre alphabétique interrompu après les entrées en E) ; seule l'entrée 'ecosio InterCom, a Vertex Company' a donc été vérifiée caractère pour caractère dans le référentiel. Les 4 autres noms sont repris caractère pour caractère de LOTS-E.md (lot E13), qui est la source du découpage. À contrôler avant fusion. (3) Doublon groupe à arbitrer hors de ce lot : la liste officielle contient à la fois 'ECOSIO' (lot E11) et 'ecosio InterCom, a Vertex Company' (lot E13), soit deux immatriculations distinctes du même groupe (ecosio GmbH, Vienne / ecosio InterCom GmbH, Munich). Ce patch ne traite que la seconde. (4) Aucune page revendiquant le statut de plateforme agréée française n'a été trouvée sur les sites de Transalis, WiseTech Global, ecosio (https://ecosio.com/fr/facturation-electronique-france/ répond 404) et iEDI ; seul Voxel revendique explicitement le statut 'Plateforme Agréée (PA)'. Le positionnement de ces quatre entités est donc déduit de leur offre e-invoicing/EDI décrite sur leur propre site, jamais d'une revendication PA. (5) fournisseurDeSocle et solutionsCompatiblesPartenaires ne sont renseignés que pour ecosio InterCom, seule plateforme du lot publiant un programme partenaires explicite (« ecosio acts as a reliable technology arm » + liste de distribution partners). Pour Transalis (75+ connecteurs ERP/e-commerce), Voxel (150+ intégrations PMS/ERP annoncées sans liste publiée) et WiseTech (Service/Business/Industry Partners d'implémentation), ces listes relèvent de l'intégration ou du déploiement et non de la revente de socle : champs laissés absents pour ne pas assimiler à tort un catalogue de connecteurs à des Solutions Compatibles. (6) groupeCapitalistique absent pour Transalis Limited et iEDI ApS : aucun actionnaire ou groupe d'appartenance identifiable sur leur site. (7) socleTechnique.type = 'inconnu' pour iEDI ApS : le site décrit un accompagnement d'experts EDI et des tests « avec votre PDP » sans nommer de plateforme propriétaire. (8) Rappel méthodologique : 'marque blanche' n'est pas une catégorie réglementaire ; chacune de ces 5 entités est immatriculée en son nom propre et reste seule responsable devant l'administration."
+  },
+  "plateformes": [
+    {
+      "nom": "Transalis Limited",
+      "siteWeb": "https://www.transalis.com/",
+      "familleOrigine": ["edi"],
+      "segmentCible": ["tpe_pme", "eti", "grands_comptes"],
+      "verticale": "retail_grande_distribution",
+      "natureEntite": "extension_demat",
+      "perimetreFonctionnel": ["emission", "reception"],
+      "socleTechnique": {
+        "type": "propre",
+        "operateurSocle": "Transalis (OpenEDI, moteur d'orchestration Spinnaker, supervision DataTrack)",
+        "preuve": "Le site décrit une plateforme propriétaire : « Transalis OpenEDI™ runs on a managed-outcomes model… At the core sits the Spinnaker orchestration engine » et « Transalis DataTrack™ watches every message in real time ». La page eInvoicing revendique « PEPPOL certified », la validation automatisée et l'automatisation AP/AR.",
+        "source": "https://www.transalis.com/edi + https://www.transalis.com/einvoicing",
+        "confiance": "haute"
+      },
+      "modeDistributionSocle": ["direct"],
+      "descriptionFiche": "Opérateur EDI britannique établi à Portsmouth (Ocean House, Kingston Crescent), positionné sur l'EDI entièrement managé plutôt que sur la vente de logiciel. Revendique 15 000+ organisations connectées dans 50+ pays, 100 000 documents traités par jour et « 98% of the UK's electronically-trading retail market », avec des connexions préétablies vers les enseignes britanniques (Tesco, Sainsbury's, ASDA, Morrisons, Boots, Argos). L'offre e-invoicing est présentée comme une brique de cette plateforme : échange de factures structurées, conformité aux mandats fiscaux nationaux, réseau Peppol, automatisation AP et AR. Trois niveaux d'entrée annoncés (Web EDI en navigateur, EDI intégré à l'ERP, Enterprise EDI multi-pays) et une tarification revendiquée à coût fixe, « no per-transaction charges ». 75+ connecteurs ERP, comptabilité, e-commerce, WMS et achats sont publiés dans un « integration network ».",
+      "logiquePositionnement": "Positionnement PA cohérent avec le métier d'origine : le routage inter-entreprises de documents structurés (commande, avis d'expédition, facture) est le cœur d'activité historique, la facture électronique fiscale n'étant qu'un flux supplémentaire sur une infrastructure déjà en place. La logique est celle d'un opérateur de réseau retail/supply chain anglo-saxon qui suit ses clients internationaux sur les mandats successifs (Peppol, mandats nationaux), et non celle d'un acteur construit pour la réforme française : aucune page dédiée à la RFE, au e-reporting ou au statut de plateforme agréée n'est publiée sur le site à la date du relevé. Le socle est propre, la distribution directe, et la valeur mise en avant reste le réseau de partenaires commerciaux accessible « connect once ».",
+      "sourcesEnrichissement": [
+        { "champ": "positionnement", "source": "https://www.transalis.com/edi", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "perimetreFonctionnel", "source": "https://www.transalis.com/einvoicing", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "segmentCible", "source": "https://www.transalis.com/edi", "dateReleve": "2026-08-20", "confiance": "moyenne" },
+        { "champ": "verticale", "source": "https://www.transalis.com/business-network", "dateReleve": "2026-08-20", "confiance": "moyenne" },
+        { "champ": "socleTechnique", "source": "https://www.transalis.com/edi", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "natureEntite", "source": "https://www.transalis.com/contact", "dateReleve": "2026-08-20", "confiance": "moyenne" }
+      ]
+    },
+    {
+      "nom": "VOXEL, an Amadeus company",
+      "siteWeb": "https://www.voxelgroup.net/",
+      "familleOrigine": ["edi", "s2p", "fintech"],
+      "segmentCible": ["tpe_pme", "eti", "grands_comptes"],
+      "verticale": "voyage_hotellerie_restauration",
+      "natureEntite": "extension_demat",
+      "perimetreFonctionnel": ["emission", "reception", "suite_gestion"],
+      "socleTechnique": {
+        "type": "propre",
+        "operateurSocle": "Voxel (plateforme transactionnelle Bavel)",
+        "preuve": "Le site présente Bavel comme la plateforme propriétaire du groupe : « Bavel is a robust and secure transactional platform that complies with legislative requirements », déclinée en Bavel Billing (facturation électronique), Bavel Pay (paiements B2B) et Bavel Procurement (commandes, bons de livraison). Voxel se déclare point d'accès Peppol certifié et annonce une conformité e-invoicing dans plus de 50 pays, avec archivage légal et signature électronique intégrés.",
+        "source": "https://www.voxelgroup.net/compliance/ + https://www.voxelgroup.net/en/about-voxel/",
+        "confiance": "haute"
+      },
+      "modeDistributionSocle": ["direct"],
+      "groupeCapitalistique": "Groupe Amadeus (Amadeus IT Group) — le nom d'inscription lui-même porte la mention « an Amadeus company » ; l'entité juridique opérant le site est Voxel Media, S.L.U., basée à Barcelone (Espagne)",
+      "descriptionFiche": "Éditeur espagnol (Barcelone), plus de 25 ans d'activité, spécialisé dans la digitalisation des processus achats, facturation et paiement, devenu société du groupe Amadeus. Se déclare « leaders in electronic invoicing and payment solutions in the travel and food & hospitality sectors at international level ». Écosystème revendiqué autour de la plateforme Bavel : 70 000+ hôtels, 1 000+ entreprises du voyage, 1 200+ fournisseurs food & beverage, 3 000+ restaurants et franchises, 150+ intégrations PMS et ERP, plus de 100 millions de transactions électroniques par an. Offre structurée en trois briques (facturation électronique, paiements B2B, supply chain) complétée par des services à valeur ajoutée : rapprochement automatique, règles métier, reporting quotidien, archivage numérique. C'est la seule plateforme du lot à revendiquer explicitement le statut français : « Voxel, as a Plateforme Agréée (PA) certified entity, is the ideal technology partner for complying with e-invoicing laws ».",
+      "logiquePositionnement": "Positionnement PA très cohérent et le mieux documenté du lot. Voxel opère déjà une plateforme de facturation électronique multi-pays soumise à des régimes de contrôle continu (CTC) et post-audit, décrit correctement le modèle français (rôle central des Plateformes Agréées, PPF réduit à l'annuaire, calendrier 2026/2027) et publie une page France ainsi qu'un guide dédié. La spécificité est la verticale : l'immatriculation française prolonge une position dominante dans le voyage et la restauration, où Voxel apporte non seulement la conformité fiscale mais aussi l'enrichissement de données propre au secteur (numéro de réservation, commande, bon de livraison) et les paiements B2B. L'appartenance au groupe Amadeus lui donne un adossement capitalistique et une base installée hôtelière que peu de plateformes agréées peuvent revendiquer.",
+      "sourcesEnrichissement": [
+        { "champ": "positionnement", "source": "https://www.voxelgroup.net/en/about-voxel/", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "verticale", "source": "https://www.voxelgroup.net/en/about-voxel/", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "statut PA revendiqué / logiquePositionnement", "source": "https://www.voxelgroup.net/compliance/electronic-invoicing-france/", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "perimetreFonctionnel", "source": "https://www.voxelgroup.net/compliance/", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "socleTechnique", "source": "https://www.voxelgroup.net/compliance/", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "groupeCapitalistique", "source": "https://www.voxelgroup.net/compliance/electronic-invoicing-france/", "dateReleve": "2026-08-20", "confiance": "haute" }
+      ]
+    },
+    {
+      "nom": "WiseTech GLOBAL",
+      "siteWeb": "https://www.wisetechglobal.com/",
+      "familleOrigine": ["erp", "tax"],
+      "segmentCible": ["eti", "grands_comptes"],
+      "verticale": "transport_logistique",
+      "natureEntite": "diversification",
+      "perimetreFonctionnel": ["emission", "reception", "ereporting", "suite_gestion"],
+      "socleTechnique": {
+        "type": "propre",
+        "operateurSocle": "WiseTech Global (suite CargoWise, module Accounting / e-Invoicing & e-Reporting)",
+        "preuve": "La conformité facturation est décrite comme une fonction native de CargoWise : « CargoWise takes care of the tax determination, transaction classification and actual communication of electronic invoice messages between your system and local government electronic invoicing systems », complétée par un « Tax Determination Engine » et une brique « Invoicing Compliance » de transmission aux autorités. Le site liste les administrations fiscales prises en charge pays par pays (Italie, Hongrie, Inde, Vietnam, Égypte, Fidji…).",
+        "source": "https://www.cargowise.com/solutions/cargowise-enterprise/accounting/",
+        "confiance": "moyenne"
+      },
+      "modeDistributionSocle": ["direct"],
+      "groupeCapitalistique": "WiseTech Global, groupe australien coté (siège Sydney), éditeur de CargoWise et propriétaire d'un large portefeuille de sociétés de logiciels douane et logistique en Europe et en Amérique : ACO Informatica (Italie), Intris (Belgique/Pays-Bas), EasyLog (France), DataFreight/LSI Sigma (Royaume-Uni), CustomsMatters (Irlande), CargoIT (Suède), Bysoft (Brésil), Editrade (Chili), EXA-System (Japon), Opentecnologia (Colombie), LSP Solutions (Pays-Bas)",
+      "descriptionFiche": "Éditeur australien de logiciels pour la chaîne logistique internationale, dont le produit phare CargoWise couvre le transit, la douane, le TMS, le WMS et une comptabilité intégrée d'entreprise. La facturation électronique n'est pas un produit autonome mais un module de conformité de la suite : détermination de la TVA, classification des documents fiscaux, émission de factures conformes, échange des messages avec les plateformes gouvernementales et reporting aux autorités, activés pays par pays. Le groupe possède une dizaine d'éditeurs douane et logistique nationaux, dont EasyLog en France, qui opère un lien direct avec la douane française. Le réseau de partenaires publié (Service, Business, Industry et Education Partners) est un réseau d'implémentation et de certification de consultants CargoWise, pas un canal de revente de socle de facturation.",
+      "logiquePositionnement": "Positionnement PA de type diversification défensive : WiseTech ne vend pas de la dématérialisation, il vend le système de gestion des commissionnaires de transport et des transitaires, dont la facturation est un sous-produit à très fort volume et très internationalisé. S'immatriculer en France évite que ses clients doivent extraire leurs factures de CargoWise pour les faire transiter par un tiers, et prolonge une pratique déjà éprouvée sur les mandats italien, hongrois, indien ou vietnamien. La cible est logiquement l'ETI et le grand compte du transport et de la logistique, pas le marché généraliste : aucune page française consacrée à la réforme, au statut de plateforme agréée ou aux tarifs n'est publiée à la date du relevé, ce qui confirme une commercialisation captive, adossée à la base installée CargoWise.",
+      "sourcesEnrichissement": [
+        { "champ": "positionnement", "source": "https://www.cargowise.com/solutions/cargowise-enterprise/accounting/", "dateReleve": "2026-08-20", "confiance": "moyenne" },
+        { "champ": "perimetreFonctionnel", "source": "https://www.cargowise.com/solutions/cargowise-enterprise/accounting/", "dateReleve": "2026-08-20", "confiance": "moyenne" },
+        { "champ": "verticale", "source": "https://www.wisetechglobal.com/what-we-do/our-businesses/", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "groupeCapitalistique", "source": "https://www.wisetechglobal.com/what-we-do/our-businesses/", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "solutionsCompatiblesPartenaires (écarté)", "source": "https://www.cargowise.com/partners/find-a-partner/", "dateReleve": "2026-08-20", "confiance": "haute" }
+      ]
+    },
+    {
+      "nom": "ecosio InterCom, a Vertex Company",
+      "siteWeb": "https://ecosio.com/",
+      "familleOrigine": ["edi"],
+      "segmentCible": ["eti", "grands_comptes"],
+      "verticale": "generaliste",
+      "natureEntite": "extension_demat",
+      "perimetreFonctionnel": ["emission", "reception"],
+      "socleTechnique": {
+        "type": "propre",
+        "operateurSocle": "ecosio (ecosio Integration Hub, offre « EDI as a Service »)",
+        "preuve": "Le site décrit une plateforme propriétaire commercialisée en service managé : « EDI as a Service offers the complete package – effortless EDI and an unparalleled level of integration into ERP system », avec « message exchange via any EDI protocol, a connection to all VANs » et une infrastructure « triple redundant ». L'entité allemande ecosio InterCom GmbH (Munich) figure comme Access Point et SMP Peppol certifiés au registre OpenPeppol sous l'autorité KoSIT.",
+        "source": "https://ecosio.com/en/become-a-partner/ + https://ecosio.com/en/data-protection/",
+        "confiance": "haute"
+      },
+      "fournisseurDeSocle": true,
+      "modeDistributionSocle": ["direct", "API/embedded", "via integrateur"],
+      "solutionsCompatiblesPartenaires": [
+        "4process AG",
+        "SOA People AG",
+        "oneresource",
+        "IT-P",
+        "Business & IT Consulting (B&IT)",
+        "Hermesso",
+        "XFT",
+        "STELACON GmbH",
+        "KPS",
+        "Code10 IT",
+        "eOne Solutions",
+        "Cloudare",
+        "objective partner",
+        "LeverX",
+        "Greenfield",
+        "Eight+ Consulting",
+        "Fourangle Consulting"
+      ],
+      "groupeCapitalistique": "Groupe ecosio — ecosio GmbH (Wiedner Gürtel 9, Vienne, Autriche) et ecosio InterCom GmbH (Maximilianstrasse 35a, Munich, Allemagne) ; le nom d'inscription porte la mention « a Vertex Company », l'éditeur fiscal américain Vertex, Inc. étant la maison mère",
+      "descriptionFiche": "Entité allemande (Munich) du groupe autrichien ecosio, passé sous le contrôle de l'éditeur fiscal américain Vertex. Spécialiste de l'intégration B2B et de l'EDI en service managé, avec trois piliers mis en avant : la plateforme (ecosio Integration Hub, EDI as a Service profondément intégré à l'ERP), le réseau (tous protocoles EDI, connexion à tous les VAN, conformité e-invoicing, Peppol) et le service (ingénieurs d'intégration dédiés pour le paramétrage, l'onboarding et le monitoring). Access Point et SMP Peppol certifiés sous l'autorité allemande KoSIT. Deux modèles de partenariat sont publiés : cabinets de conseil et intégrateurs d'une part, éditeurs et sociétés technologiques d'autre part, ces derniers étant invités à élargir leur catalogue via le socle ecosio. Les secteurs adressés sont volontairement larges (automobile, retail, industrie, banque-assurance, BTP, chimie, pharmacie, agroalimentaire, logistique, textile, santé, secteur public).",
+      "logiquePositionnement": "Positionnement PA parfaitement cohérent avec le métier d'origine : opérateur EDI historique de l'industrie germanophone, ecosio traite déjà des flux facture intégrés aux ERP (SAP, S/4HANA, NetSuite, Dynamics, Oracle, proAlpha, Infor) et la conformité fiscale multi-pays ; la France s'ajoute à un catalogue de mandats. Signal grossiste confirmé, rare et explicite : « ecosio acts as a reliable technology arm, enabling you to expand your product portfolio with EDI functionalities, international e-invoice compliance Peppol connectivity », complété par une liste publiée de partenaires de distribution et de connecteurs ERP développés par des tiers (SAP, NetSuite, Oracle, Business Central), et par un témoignage éditeur assumant l'intégration du socle dans son propre produit (Doxis eDocument Exchange). Une part de l'activité française passera donc par des éditeurs et intégrateurs tiers plutôt que par la vente directe, ces tiers restant des Solutions Compatibles non immatriculées : ecosio InterCom demeure seule immatriculée et seule responsable devant l'administration. Le rachat par Vertex ancre par ailleurs le positionnement sur la conformité fiscale mondiale plus que sur la seule RFE.",
+      "sourcesEnrichissement": [
+        { "champ": "positionnement", "source": "https://ecosio.com/en/become-a-partner/", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "fournisseurDeSocle", "source": "https://ecosio.com/en/become-a-partner/", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "solutionsCompatiblesPartenaires", "source": "https://ecosio.com/en/erp-integrations-and-partners/ + https://ecosio.com/en/become-a-partner/", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "socleTechnique", "source": "https://ecosio.com/en/become-a-partner/", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "verticale", "source": "https://ecosio.com/en/erp-integrations-and-partners/", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "groupeCapitalistique", "source": "https://ecosio.com/en/data-protection/", "dateReleve": "2026-08-20", "confiance": "moyenne" },
+        { "champ": "certification Peppol (AP + SMP, autorité KoSIT)", "source": "https://peppol.org/members/peppol-certified-service-providers/", "dateReleve": "2026-08-20", "confiance": "haute" }
+      ]
+    },
+    {
+      "nom": "iEDI ApS",
+      "siteWeb": "https://iedi.com/",
+      "familleOrigine": ["edi", "integrateur"],
+      "segmentCible": ["eti", "grands_comptes"],
+      "verticale": "generaliste",
+      "natureEntite": "extension_demat",
+      "perimetreFonctionnel": ["emission", "reception"],
+      "socleTechnique": {
+        "type": "inconnu",
+        "operateurSocle": null,
+        "preuve": "Aucune plateforme propriétaire n'est nommée sur les pages consultées. Le site décrit un accompagnement d'experts EDI (« analyse de vos besoins, configuration de la solution, tests avec votre PDP, mise en production, support continu ») et une expertise ERP (SAP, Business Central, Infor M3, Oracle NetSuite), sans page produit, page tarifs ni description d'infrastructure permettant de qualifier le socle.",
+        "source": "https://iedi.com/facturation-electronique-france-2026",
+        "confiance": "faible"
+      },
+      "modeDistributionSocle": ["direct"],
+      "descriptionFiche": "Prestataire EDI danois revendiquant plus de 25 ans d'expérience dans l'automatisation des échanges EDI d'entreprises internationales, avec une forte composante de services (analyse, configuration, tests, mise en production, support). Expertise ERP mise en avant sur SAP, Microsoft Business Central, Infor M3 et Oracle NetSuite. Le site publie deux pages d'atterrissage dédiées à la réforme française, en français et en anglais, avec un calendrier correct (réception obligatoire pour toutes les entreprises et émission pour les grandes et moyennes entreprises au 1er septembre 2026, PME et micro-entreprises au 1er septembre 2027) et une FAQ qui emploie la terminologie à jour de Plateforme Agréée (PA), « anciennement appelée PDP ». Références clients affichées : Saint-Gobain, Kosangas, AMCR. La prise de contact se fait exclusivement par un rendez-vous de 30 minutes avec un spécialiste EDI, en anglais ; aucune grille tarifaire n'est publiée.",
+      "logiquePositionnement": "Positionnement PA cohérent sur le fond mais paradoxal dans le discours, et c'est le signal notable de cette fiche. iEDI est un opérateur et intégrateur EDI, métier dont la facture électronique est un flux naturel ; mais ses propres pages françaises le présentent comme l'accompagnateur d'un projet mené avec une plateforme tierce, non comme la plateforme elle-même : le parcours proposé comprend un « choix de la plateforme PDP » et des « tests avec votre PDP », et la FAQ définit la PA à la troisième personne, sans jamais revendiquer l'immatriculation d'iEDI. L'entité étant pourtant immatriculée en son nom propre sur la liste officielle, l'écart entre le discours commercial et le statut réglementaire mérite d'être signalé : soit la communication n'a pas été mise à jour après l'immatriculation, soit l'entreprise vend d'abord de l'intégration EDI et positionne le rôle de plateforme agréée en second rideau. Cible internationale, anglophone, ETI et grands comptes équipés d'un ERP ; aucune verticale sectorielle exclusive n'est affichée.",
+      "sourcesEnrichissement": [
+        { "champ": "positionnement", "source": "https://iedi.com/facturation-electronique-france-2026", "dateReleve": "2026-08-20", "confiance": "moyenne" },
+        { "champ": "logiquePositionnement", "source": "https://iedi.com/e-invoicing-france-2026", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "segmentCible", "source": "https://iedi.com/e-invoicing-france-2026", "dateReleve": "2026-08-20", "confiance": "moyenne" },
+        { "champ": "socleTechnique", "source": "https://iedi.com/facturation-electronique-france-2026", "dateReleve": "2026-08-20", "confiance": "faible" },
+        { "champ": "familleOrigine", "source": "https://iedi.com/facturation-electronique-france-2026", "dateReleve": "2026-08-20", "confiance": "moyenne" }
+      ]
+    }
+  ]
+}
