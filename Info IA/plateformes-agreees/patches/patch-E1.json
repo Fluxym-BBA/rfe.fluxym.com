@@ -1,0 +1,249 @@
+{
+  "_patch": {
+    "id": "E1",
+    "chantier": "E — qualification marché",
+    "auteur": "RFE_WebSite",
+    "dateReleve": "2026-08-20",
+    "nbPlateformes": 10,
+    "note": "Lot E1 (FR). Référentiel relu sur GitHub Fluxym-BBA/rfe.fluxym.com, branche main, data/plateformes-agreees.json @ 9a71dee (dernier commit touchant le fichier, 19/08/2026). Aucun fichier du dépôt modifié. Identité juridique (chantiers B et C) volontairement non touchée. Champs volontairement ABSENTS faute de source officielle : (1) segmentCible pour AGENA 3000 — le site ne qualifie pas les tailles d'entreprises cibles, seulement « +8000 clients » et un écosystème industriels/marques/distributeurs ; (2) groupeCapitalistique pour AGENA 3000 renseigné (page « Qui sommes-nous »), mais ABSENT pour AGICAP, AGS RECORDS MANAGEMENT, ARTEVA, ATGP, AVALARA, AXELOR, AXONAUT : aucun groupe d'appartenance déclaré sur les pages consultées (la page AGS /fr/qui-sommes-nous/ renvoie un 404, le rattachement au groupe AGS n'est donc pas sourcé) ; (3) fournisseurDeSocle et modeDistributionSocle ABSENTS partout sauf AGENA 3000 : aucune page « devenez partenaire / marque blanche / API pour éditeurs » trouvée sur les autres sites du lot ; (4) solutionsCompatiblesPartenaires ABSENT partout sauf AGENA 3000. Seul grossiste identifié dans ce lot : AGENA 3000, qui publie explicitement « Plateforme Agréée disponible en marque blanche et marque grise » et une liste de partenaires (page /fr/devenir-partenaire) — attention, cette liste est celle du Partner Program global (facture électronique, EDI, TPM, PIM), elle n'est pas présentée comme une liste de Solutions Compatibles au sens de la réforme. Socle technique laissé en type « inconnu » / confiance « non_qualifie » pour AGICAP, AGS RECORDS MANAGEMENT et AXONAUT : ces sites revendiquent leur immatriculation PA mais ne disent rien de l'origine du socle technique. Noms commerciaux distincts du nom d'inscription relevés : ACCENTURE = « eComply & Verify (eC&V) », AGENA 3000 = « A3 E-INVOICING », AGS RECORDS MANAGEMENT = « PA WiDOFACT », ARTEVA = « Orchestrade® eFacture » (ex Orchestrade® PDP), ATGP = « BEE.FACT » (marque commerciale @GP), AXWAY SOFTWARE = « Axway eInvoicing ». Rappel méthodologique : « marque blanche / marque grise » sont des modes de distribution commerciale, pas des catégories réglementaires ; chaque plateforme de ce lot est immatriculée en son nom propre et reste seule responsable devant l'administration. La page axonaut.com/content/facturation-electronique a renvoyé une erreur 500 : la qualification d'Axonaut repose sur sa page d'accueil. La page /fr/e-facture-marque-blanche-partenaires d'AGENA3000 renvoie un 404, la preuve retenue est /fr/devenir-partenaire et /fr/nos-solutions/a3-e-invoicing."
+  },
+  "plateformes": [
+    {
+      "nom": "ACCENTURE",
+      "siteWeb": "https://www.accenture.com/us-en/products/ecomply-verify",
+      "familleOrigine": ["integrateur"],
+      "segmentCible": ["grands_comptes"],
+      "verticale": "generaliste",
+      "natureEntite": "diversification",
+      "perimetreFonctionnel": ["emission", "reception", "ereporting"],
+      "socleTechnique": {
+        "type": "propre",
+        "operateurSocle": "Accenture",
+        "preuve": "« The platform is built and operated by Accenture's in-house teams » et description du moteur maison (Core Compliance Platform + module CRTX) sur la page produit eComply & Verify.",
+        "source": "https://www.accenture.com/us-en/products/ecomply-verify",
+        "confiance": "haute"
+      },
+      "groupeCapitalistique": "Groupe Accenture — cabinet de conseil et d'intégration international, « operating in 120 countries » selon la page produit",
+      "descriptionFiche": "Accenture porte son immatriculation de plateforme agréée sous la marque produit « eComply & Verify » (eC&V), une plateforme SaaS de conformité e-invoicing multi-juridictions. Le site revendique une certification « Plateforme Agréée (PA) in France » et un statut d'Access Point PEPPOL en Europe, avec une API unique, des connecteurs ERP et un moteur global de règles de validation. L'offre est vendue comme un ensemble conseil + intégration + plateforme + support 24/7 : blueprint de conformité, configuration ERP, exploitation SaaS. Le socle est construit et opéré par les équipes internes d'Accenture (Core Compliance + module CRTX). La cible affichée est celle des organisations multi-pays devant absorber plus de 100 mandats CTC dans la décennie.",
+      "logiquePositionnement": "Cohérent avec le métier d'origine : Accenture est un intégrateur et opérateur de processus financiers pour grands comptes internationaux. La PA n'est pas un nouveau métier mais l'industrialisation d'une prestation déjà vendue (mise en conformité ERP, order-to-cash, fiscalité) sous forme de produit SaaS. Diversification produit d'un acteur de services, adressant ses propres clients grands comptes plutôt que le marché PME.",
+      "sourcesEnrichissement": [
+        { "champ": "positionnement", "source": "https://www.accenture.com/us-en/products/ecomply-verify", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "socleTechnique", "source": "https://www.accenture.com/us-en/products/ecomply-verify", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "groupeCapitalistique", "source": "https://www.accenture.com/us-en/products/ecomply-verify", "dateReleve": "2026-08-20", "confiance": "moyenne" }
+      ]
+    },
+    {
+      "nom": "AGENA 3000",
+      "siteWeb": "https://www.agena3000.com/fr/nos-solutions/a3-e-invoicing",
+      "familleOrigine": ["edi", "erp"],
+      "verticale": "distribution et industrie de biens de consommation (industriels, marques et distributeurs, écosystème GS1/GDSN)",
+      "natureEntite": "extension_demat",
+      "perimetreFonctionnel": ["emission", "reception", "ereporting"],
+      "socleTechnique": {
+        "type": "propre",
+        "operateurSocle": "AGENA3000",
+        "preuve": "Solution A3 E-INVOICING éditée par AGENA3000, interfacée à plus de 200 ERP, certifiée ISO 27001 pour le développement, la mise en production et l'exploitation de ses solutions SaaS EDI/PIM/TPM ; plateforme proposée à des tiers en marque blanche et marque grise, ce qui suppose la maîtrise du socle.",
+        "source": "https://www.agena3000.com/fr/nos-solutions/a3-e-invoicing",
+        "confiance": "haute"
+      },
+      "fournisseurDeSocle": true,
+      "modeDistributionSocle": ["direct", "marque_blanche", "marque_grise", "via integrateur"],
+      "solutionsCompatiblesPartenaires": ["Syd", "Adoria", "Brandquad", "Aptesia", "Artis", "Tess France", "Tolteck", "Logiciels Episode", "Cegedim", "Docoon", "Schneider Electric", "NRC", "Proginov", "Satelix", "ITEM Informatique", "SYLEG", "LTTD", "LTG Conseil", "AGI", "Authentic", "Efalia", "Oxalys", "Edicot", "Go Systèmes", "Tolède", "Cetra Informatique", "YggVal", "Pronis"],
+      "groupeCapitalistique": "Groupe AGENA3000 (AGENA3000 Data Management, AGENA3000 Inc, PARANGON, Software Factory Tunisia, ConsoTrust, SRC System Integrators, DocProcess) — créé en 1980, +250 salariés, +8000 clients, implantations France / Canada / Pays-Bas / Roumanie / Tunisie",
+      "descriptionFiche": "AGENA3000 porte son immatriculation sous la marque produit « A3 E-INVOICING ». L'entreprise vient de l'échange de données : ERP à l'origine (1980), puis EDI, puis PIM/GDSN et TPM, avec un positionnement historique auprès des acteurs de la distribution et un partenariat de long cours avec GS1 France (catalogue GDSN). La solution PA s'interface à plus de 200 ERP et s'inscrit dans une gamme data plus large. Point distinctif du lot : AGENA3000 assume publiquement un rôle de grossiste de socle, sa plateforme agréée étant « disponible en marque blanche et marque grise » via un Partner Program ouvert aux éditeurs, intégrateurs et cabinets de conseil, avec une liste de partenaires publiée. Le groupe revendique +250 salariés et +8000 clients, certifié ISO 27001, ISO 9001 et HDS.",
+      "logiquePositionnement": "Très cohérent : quarante-cinq ans d'échange de données inter-entreprises et une base installée EDI dans la distribution constituent le prolongement naturel d'une plateforme agréée. La singularité n'est pas le positionnement PA lui-même mais son modèle de distribution : AGENA3000 ne se contente pas de vendre en direct, il revend son socle à des éditeurs tiers qui restent, eux, des solutions non immatriculées. Le rôle de grossiste est ici explicite et documenté par la plateforme elle-même.",
+      "sourcesEnrichissement": [
+        { "champ": "positionnement", "source": "https://www.agena3000.com/fr/nos-solutions/a3-e-invoicing", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "fournisseurDeSocle", "source": "https://www.agena3000.com/fr/devenir-partenaire", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "modeDistributionSocle", "source": "https://www.agena3000.com/fr/devenir-partenaire", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "solutionsCompatiblesPartenaires", "source": "https://www.agena3000.com/fr/devenir-partenaire", "dateReleve": "2026-08-20", "confiance": "moyenne" },
+        { "champ": "verticale", "source": "https://www.agena3000.com/fr/qui-sommes-nous", "dateReleve": "2026-08-20", "confiance": "moyenne" },
+        { "champ": "groupeCapitalistique", "source": "https://www.agena3000.com/fr/qui-sommes-nous", "dateReleve": "2026-08-20", "confiance": "haute" }
+      ]
+    },
+    {
+      "nom": "AGICAP",
+      "siteWeb": "https://agicap.com/fr/fonctionnalites/plateforme-agreee-facturation-electronique/",
+      "familleOrigine": ["fintech"],
+      "segmentCible": ["tpe_pme", "eti"],
+      "verticale": "generaliste",
+      "natureEntite": "diversification",
+      "perimetreFonctionnel": ["emission", "reception", "ereporting", "suite_gestion"],
+      "socleTechnique": {
+        "type": "inconnu",
+        "preuve": "Les pages consultées revendiquent l'immatriculation PA et les formats Factur-X / UBL / CII, l'archivage 10 ans et la transmission de l'e-reporting, mais ne disent rien de l'origine du socle technique (développement propre ou opérateur tiers).",
+        "source": "https://agicap.com/fr/fonctionnalites/plateforme-agreee-facturation-electronique/",
+        "confiance": "non_qualifie"
+      },
+      "descriptionFiche": "Agicap vient du pilotage de trésorerie et de la prévision de cash, et étend ce socle à la facturation électronique en s'appuyant sur son immatriculation de plateforme agréée. Le discours d'offre est explicitement « cash-first » : la PA sert à alimenter le prévisionnel de trésorerie avec des statuts de cycle de vie de facture fiabilisés, à automatiser le poste fournisseur (approbation, rapprochement à trois facteurs, paiement EBICS/Swift) et le recouvrement client. Formats réglementaires annoncés : Factur-X, UBL, CII, avec archivage à valeur probante 10 ans inclus et transmission de l'e-reporting au portail public. La plateforme revendique plus de 8 000 directions financières utilisatrices.",
+      "logiquePositionnement": "Cohérent mais indirect : le métier d'origine n'est pas la dématérialisation, c'est la trésorerie. L'immatriculation PA est un moyen au service de la proposition de valeur cash — capter le flux de factures à la source pour améliorer la qualité du prévisionnel — plutôt qu'une fin. Ce positionnement suppose que le client accepte de déplacer son canal de facturation vers son outil de trésorerie, ce qui vise plutôt les PME et ETI dotées d'une direction financière structurée que les micro-entreprises.",
+      "sourcesEnrichissement": [
+        { "champ": "positionnement", "source": "https://agicap.com/fr/fonctionnalites/plateforme-agreee-facturation-electronique/", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "segmentCible", "source": "https://agicap.com/fr/article/agicap-plateforme-agreee-facturation-electronique/", "dateReleve": "2026-08-20", "confiance": "moyenne" },
+        { "champ": "socleTechnique", "source": "https://agicap.com/fr/fonctionnalites/plateforme-agreee-facturation-electronique/", "dateReleve": "2026-08-20", "confiance": "non_qualifie" }
+      ]
+    },
+    {
+      "nom": "AGS RECORDS MANAGEMENT",
+      "siteWeb": "https://www.ags-recordsmanagement.com/fr/reforme-facturation-electronique/plateforme-pa-e-facturation/",
+      "familleOrigine": ["ged"],
+      "verticale": "generaliste",
+      "natureEntite": "extension_demat",
+      "perimetreFonctionnel": ["emission", "reception", "ereporting"],
+      "socleTechnique": {
+        "type": "inconnu",
+        "preuve": "La page produit décrit la PA WiDOFACT, son raccordement à l'annuaire central et l'archivage à valeur probante certifié NF 461, mais n'indique pas si le socle de facturation électronique est développé en interne ou fourni par un opérateur tiers.",
+        "source": "https://www.ags-recordsmanagement.com/fr/reforme-facturation-electronique/plateforme-pa-e-facturation/",
+        "confiance": "non_qualifie"
+      },
+      "descriptionFiche": "AGS Records Management se présente comme « créateur de solutions de gestion de l'information » : archivage physique, archivage électronique à valeur probante, numérisation, GED, GEC, SAE, coffres-forts électroniques (RH, SIV) et audit/conseil en archivage. La plateforme agréée est commercialisée sous le nom « PA WiDOFACT », inscrite dans cette gamme documentaire : émission, réception et archivage réglementaire des factures, connexion automatique à l'annuaire central, conservation 10 ans à valeur probante certifiée NF 461. L'entrée en relation est un diagnostic gratuit des flux de facturation et des cas d'usage, avec un plan d'actions sur mesure.",
+      "logiquePositionnement": "Cohérent avec le métier d'origine : l'archivage à valeur probante et la conservation légale sont exactement les briques que la réforme rend obligatoires autour de la facture. WiDOFACT prolonge une gamme GED/SAE existante plutôt que de créer un métier nouveau, et l'argument de vente reste documentaire (valeur probante, durée de conservation, certification) plus que financier ou transactionnel.",
+      "sourcesEnrichissement": [
+        { "champ": "positionnement", "source": "https://www.ags-recordsmanagement.com/fr/reforme-facturation-electronique/plateforme-pa-e-facturation/", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "familleOrigine", "source": "https://www.ags-recordsmanagement.com/fr/", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "socleTechnique", "source": "https://www.ags-recordsmanagement.com/fr/reforme-facturation-electronique/plateforme-pa-e-facturation/", "dateReleve": "2026-08-20", "confiance": "non_qualifie" }
+      ]
+    },
+    {
+      "nom": "ARTEVA",
+      "siteWeb": "https://www.arteva.fr/orchestrade/facturation-electronique/",
+      "familleOrigine": ["edi"],
+      "segmentCible": ["tpe_pme", "eti", "grands_comptes"],
+      "verticale": "generaliste",
+      "natureEntite": "extension_demat",
+      "perimetreFonctionnel": ["emission", "reception", "ereporting", "suite_gestion"],
+      "socleTechnique": {
+        "type": "propre",
+        "operateurSocle": "ARTEVA (plateforme Orchestrade®)",
+        "preuve": "L'offre PA est portée par la plateforme B2B SaaS Orchestrade®, éditée par Artéva et exploitée depuis 2006 pour l'EDI, l'EAI, les API et les portails collaboratifs ; certification ISO/IEC 27001 revendiquée sur la même plateforme.",
+        "source": "https://www.arteva.fr/",
+        "confiance": "moyenne"
+      },
+      "descriptionFiche": "Artéva est un acteur de la digitalisation des échanges B2B depuis 2006 : EDI, EAI, concentrateur d'API, catalogue de connexions préétablies (B2Apps) et portails collaboratifs fournisseurs (P2P) et clients (O2C), le tout sur sa plateforme SaaS Orchestrade®. L'offre de facturation électronique s'appelle « Orchestrade® eFacture », renommage de l'ancienne « Orchestrade® PDP ». Le site indique explicitement la trajectoire : Artéva était positionnée comme opérateur de dématérialisation (solution compatible) et est désormais plateforme agréée immatriculée par l'État. L'offre associe audit/conseil de mise en conformité, traitement des factures client et fournisseur, archivage et intégration au logiciel de facturation ou de comptabilité. Cible affichée : PME, ETI et grandes entreprises, avec des références multi-secteurs (assurance, e-commerce, industrie, logistique).",
+      "logiquePositionnement": "Très cohérent : vingt ans d'EDI et de portails P2P/O2C font de la facture électronique un flux déjà maîtrisé. Le passage d'opérateur de dématérialisation à plateforme agréée est une montée en statut sur un métier inchangé, revendiquée comme telle par la société. Le risque de dilution est faible, la PA venant s'ajouter à une plateforme d'intégration existante plutôt que la remplacer.",
+      "sourcesEnrichissement": [
+        { "champ": "positionnement", "source": "https://www.arteva.fr/orchestrade/facturation-electronique/offre-pdp-orchestrade-factures/", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "natureEntite", "source": "https://www.arteva.fr/", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "segmentCible", "source": "https://www.arteva.fr/", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "socleTechnique", "source": "https://www.arteva.fr/", "dateReleve": "2026-08-20", "confiance": "moyenne" }
+      ]
+    },
+    {
+      "nom": "ATGP",
+      "siteWeb": "https://www.atgp.net/nos-solutions/facture-electronique/",
+      "familleOrigine": ["edi"],
+      "segmentCible": ["tpe_pme", "eti", "grands_comptes"],
+      "verticale": "generaliste",
+      "natureEntite": "extension_demat",
+      "perimetreFonctionnel": ["emission", "reception", "ereporting"],
+      "socleTechnique": {
+        "type": "propre",
+        "operateurSocle": "@GP",
+        "preuve": "« BEE.FACT […] est 100% française, éditée, développée et maintenue par nos équipes internes » (page d'accueil), solution déjà interopérée avec l'annuaire central.",
+        "source": "https://www.atgp.net/",
+        "confiance": "haute"
+      },
+      "descriptionFiche": "@GP (inscription ATGP) est éditeur et intégrateur de solutions de dématérialisation des données et flux commerciaux, avec une gamme @GP 360 : EDI multi-messages, catalogue électronique FICPROD.BEE qualifié GDSN, référentiel fournisseurs/clients, signature électronique BEE.SIGN, documents Prodouane. La plateforme agréée est commercialisée sous le nom « BEE.FACT » et couvre les factures entrantes et sortantes, le e-invoicing, le e-reporting et le cycle de vie. Le site indique une immatriculation définitive obtenue, une solution déjà opérationnelle, l'interopération avec l'annuaire central, les inscriptions clients démarrées et les tests d'interopérabilité avec les autres PA et le concentrateur du PPF en cours. Le socle est présenté comme 100 % français, édité et maintenu en interne. L'adressage est annoncé pour les entreprises de toutes tailles et de tous secteurs, avec une forte empreinte retail/GS1 héritée de l'EDI.",
+      "logiquePositionnement": "Cohérent : @GP transporte déjà des messages commerciaux normalisés (commandes, avis d'expédition, factures) entre partenaires. BEE.FACT ajoute la couche réglementaire à un métier de transport et de normalisation de flux préexistant, et la maîtrise interne du socle est explicitement mise en avant comme argument de confiance.",
+      "sourcesEnrichissement": [
+        { "champ": "positionnement", "source": "https://www.atgp.net/nos-solutions/facture-electronique/", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "familleOrigine", "source": "https://www.atgp.net/", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "segmentCible", "source": "https://www.atgp.net/", "dateReleve": "2026-08-20", "confiance": "moyenne" },
+        { "champ": "socleTechnique", "source": "https://www.atgp.net/", "dateReleve": "2026-08-20", "confiance": "haute" }
+      ]
+    },
+    {
+      "nom": "AVALARA",
+      "siteWeb": "https://www.avalara.com/fr/fr/products/e-invoicing.html",
+      "familleOrigine": ["tax"],
+      "segmentCible": ["eti", "grands_comptes"],
+      "verticale": "generaliste",
+      "natureEntite": "diversification",
+      "perimetreFonctionnel": ["emission", "reception", "ereporting"],
+      "socleTechnique": {
+        "type": "propre",
+        "operateurSocle": "Avalara",
+        "preuve": "Produit « E-Invoicing and Live Reporting » présenté comme une application mondiale unique, « API globale unique, native du cloud », avec connecteurs ERP préintégrés, moteur de règles maintenu de façon centralisée et « accréditation auprès des autorités fiscales locales ».",
+        "source": "https://www.avalara.com/fr/fr/products/e-invoicing.html",
+        "confiance": "haute"
+      },
+      "descriptionFiche": "Avalara vient de la fiscalité indirecte : plus de vingt ans de calcul de taxes, reporting et déclarations, dont la facturation électronique n'est qu'un module. L'offre PA est portée par le produit « E-Invoicing and Live Reporting », vendu comme une application unique couvrant les obligations de nombreux pays via une seule API et un tableau de bord centralisé, avec prise en charge des modèles de validation préalable, de déclaration temps réel et de CTC centralisés comme décentralisés. Les arguments mis en avant sont la substitution aux prestataires locaux pays par pays, l'activation en libre-service de nouvelles obligations, les connecteurs ERP préintégrés (SAP, Oracle, NetSuite, Microsoft, Workday) et une tarification liée au volume de transactions.",
+      "logiquePositionnement": "Cohérent : l'immatriculation française est une brique de conformité de plus dans un catalogue mondial de conformité fiscale indirecte. Le positionnement n'est pas franco-centré — la France est traitée comme une juridiction parmi d'autres — ce qui vise les entreprises multi-pays cherchant à consolider leurs obligations, et non le marché domestique des TPE.",
+      "sourcesEnrichissement": [
+        { "champ": "positionnement", "source": "https://www.avalara.com/fr/fr/products/e-invoicing.html", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "segmentCible", "source": "https://www.avalara.com/fr/fr/products/e-invoicing.html", "dateReleve": "2026-08-20", "confiance": "moyenne" },
+        { "champ": "socleTechnique", "source": "https://www.avalara.com/fr/fr/products/e-invoicing.html", "dateReleve": "2026-08-20", "confiance": "haute" }
+      ]
+    },
+    {
+      "nom": "AXELOR",
+      "siteWeb": "https://axelor.com/fr/facture-electronique/",
+      "familleOrigine": ["erp"],
+      "segmentCible": ["tpe_pme", "eti", "grands_comptes"],
+      "verticale": "generaliste",
+      "natureEntite": "diversification",
+      "perimetreFonctionnel": ["emission", "reception", "suite_gestion"],
+      "socleTechnique": {
+        "type": "inconnu",
+        "preuve": "Le site annonce l'immatriculation définitive obtenue après réussite des tests réglementaires d'interopérabilité, et un positionnement double « éditeur ERP + plateforme agréée », mais ne précise pas l'origine du socle de la plateforme agréée.",
+        "source": "https://axelor.com/fr/axelor-est-desormais-officiellement-plateforme-agreee/",
+        "confiance": "non_qualifie"
+      },
+      "descriptionFiche": "Axelor est un éditeur français de suite de gestion open source et low-code : ERP, CRM, BPM, applications métier configurables, revendiquant plus d'un million d'utilisateurs, de la PME à la grande entreprise. Le positionnement facturation électronique est explicitement double : éditeur d'ERP et plateforme agréée, l'objectif étant d'émettre et recevoir les factures aux formats réglementaires depuis l'ERP lui-même, sans plateforme tierce. Le site annonce l'immatriculation définitive confirmée après réussite des tests réglementaires d'interopérabilité — à noter que la page produit « Facturation électronique » comportait encore, au relevé, une mention « en cours d'immatriculation » non mise à jour, contredite par l'actualité dédiée.",
+      "logiquePositionnement": "Cohérent mais défensif : pour un éditeur d'ERP, la facture est déjà dans le périmètre fonctionnel, et devenir PA évite que le flux — donc la relation client — parte vers un tiers. C'est une diversification de protection de base installée plus qu'un métier nouveau. La question ouverte est la profondeur fonctionnelle réglementaire (e-reporting, cycle de vie) par rapport aux acteurs venus de la dématérialisation : les pages consultées ne la documentent pas.",
+      "sourcesEnrichissement": [
+        { "champ": "positionnement", "source": "https://axelor.com/fr/facture-electronique/", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "natureEntite", "source": "https://axelor.com/fr/axelor-est-desormais-officiellement-plateforme-agreee/", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "segmentCible", "source": "https://axelor.com/fr/", "dateReleve": "2026-08-20", "confiance": "moyenne" },
+        { "champ": "socleTechnique", "source": "https://axelor.com/fr/axelor-est-desormais-officiellement-plateforme-agreee/", "dateReleve": "2026-08-20", "confiance": "non_qualifie" }
+      ]
+    },
+    {
+      "nom": "AXONAUT",
+      "siteWeb": "https://www.axonaut.com/",
+      "familleOrigine": ["facturation_compta"],
+      "segmentCible": ["micro", "tpe_pme"],
+      "verticale": "generaliste",
+      "natureEntite": "extension_demat",
+      "perimetreFonctionnel": ["emission", "reception", "suite_gestion"],
+      "socleTechnique": {
+        "type": "inconnu",
+        "preuve": "La page d'accueil affirme « Axonaut est la Plateforme Agréée qui facilite toute votre gestion » et met en avant un logiciel 100 % français, mais ne documente pas l'origine du socle de la plateforme agréée. La page dédiée /content/facturation-electronique était inaccessible au relevé (erreur 500).",
+        "source": "https://www.axonaut.com/",
+        "confiance": "non_qualifie"
+      },
+      "descriptionFiche": "Axonaut est un logiciel de gestion tout-en-un pour très petites structures et indépendants : CRM, devis et facturation, dépenses, comptabilité, trésorerie, avec un discours produit « fait par des entrepreneurs pour des entrepreneurs » et l'insistance sur le caractère 100 % français (service client, hébergement, compte professionnel à IBAN français). La plateforme agréée est présentée non comme un produit séparé mais comme un attribut du logiciel de gestion : « Axonaut est la Plateforme Agréée qui facilite toute votre gestion », l'argument étant de rester conforme à l'obligation de 2026 sans changer d'outil ni ajouter un intermédiaire.",
+      "logiquePositionnement": "Cohérent avec le métier d'origine : quand la facture est déjà émise dans l'outil, l'immatriculation PA évite de renvoyer l'utilisateur vers un tiers et protège la place d'Axonaut dans le quotidien des TPE. L'enjeu réel n'est pas la conformité en soi mais la simplicité perçue pour une cible micro/TPE qui n'a ni service comptable ni DSI — d'où un discours d'intégration native plutôt que technique.",
+      "sourcesEnrichissement": [
+        { "champ": "positionnement", "source": "https://www.axonaut.com/", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "segmentCible", "source": "https://www.axonaut.com/", "dateReleve": "2026-08-20", "confiance": "moyenne" },
+        { "champ": "socleTechnique", "source": "https://www.axonaut.com/", "dateReleve": "2026-08-20", "confiance": "non_qualifie" }
+      ]
+    },
+    {
+      "nom": "AXWAY SOFTWARE",
+      "siteWeb": "https://www.axway.com/fr/produits/b2b-integration/einvoice",
+      "familleOrigine": ["edi"],
+      "segmentCible": ["grands_comptes", "eti"],
+      "verticale": "generaliste",
+      "natureEntite": "diversification",
+      "perimetreFonctionnel": ["emission", "reception", "ereporting", "routage_pur"],
+      "socleTechnique": {
+        "type": "propre",
+        "operateurSocle": "Axway",
+        "preuve": "Axway eInvoicing est présenté comme une solution cloud gérée par Axway, adossée à sa propre plateforme d'intégration B2B (EDI, API, multi-protocoles), avec connectivité PA (PEPPOL) et PPF (AS4) et prise en charge des formats UBL, CII, Factur-X et e-reporting.",
+        "source": "https://www.axway.com/fr/produits/b2b-integration/einvoice",
+        "confiance": "haute"
+      },
+      "groupeCapitalistique": "74Software — « ©Axway | a proud member of 74Software » ; Axway revendique 1500+ employés dans 18 pays, 338 M€ de chiffre d'affaires et 4000+ clients dans 100 pays",
+      "descriptionFiche": "Axway est un éditeur mondial de logiciels d'intégration : API management, Managed File Transfer et intégration B2B/EDI depuis plus de vingt ans. L'offre de plateforme agréée s'appelle « Axway eInvoicing », solution cloud qui traite la France comme un mandat parmi d'autres dans une approche multi-pays (CTC, DCTCE, Peppol). Les services PA détaillés couvrent l'émission et la réception, la détection de doublons, les contrôles et validations, le reporting au PPF, la connectivité PA (PEPPOL) et PPF (AS4), l'annuaire (inscription et consultation), le cycle de vie, l'archivage, l'e-reporting agrégé ou transactionnel et l'intégration back-office multi-protocoles y compris formats non réglementaires (EDIFACT, iDOC, formats propriétaires). Axway se déclare également membre du FNFE-MPE.",
+      "logiquePositionnement": "Très cohérent : le métier historique est précisément le transport fiable et normalisé de flux inter-entreprises pour de grands comptes. La PA française est un mandat de plus dans un portefeuille de conformité mondial, greffé sur une plateforme d'intégration existante — d'où un discours centré sur la préservation des intégrations en place et la fin de la prolifération de solutions locales, argument qui ne parle qu'à des organisations déjà outillées en EDI.",
+      "sourcesEnrichissement": [
+        { "champ": "positionnement", "source": "https://www.axway.com/fr/produits/b2b-integration/einvoice", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "socleTechnique", "source": "https://www.axway.com/fr/produits/b2b-integration/einvoice", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "familleOrigine", "source": "https://www.axway.com/fr/societe/a-propos", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "groupeCapitalistique", "source": "https://www.axway.com/fr/societe/a-propos", "dateReleve": "2026-08-20", "confiance": "haute" }
+      ]
+    }
+  ]
+}
