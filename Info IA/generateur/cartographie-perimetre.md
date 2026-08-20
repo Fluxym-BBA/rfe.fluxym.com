@@ -149,16 +149,16 @@ Colonnes : **Transco** = présent dans la matrice de transcodification · **Gén
 
 ## 4. Régimes de TVA & situations transverses (T1–T8 de la matrice de transcodification)
 
-Ces entrées ne sont pas des cas AFNOR mais des **variantes techniques transverses**. Elles portent 78 champs obligatoires. Le **lot 3a** en a couvert quatre (T1/T5, T2, T7, T8) ; il reste T4 et T6, qui touchent le moteur de calcul et non la seule ventilation de TVA.
+Ces entrées ne sont pas des cas AFNOR mais des **variantes techniques transverses**. Elles portent 78 champs obligatoires. Le **lot 3a** en a couvert quatre (T1/T5, T2, T7, T8) et le **lot 3b** les deux derniers (T4, T6). Les huit entrées transverses sont désormais traitées.
 
 | Réf | Intitulé | Champs | Périmètre | Générateur |
 |---|---|:--:|:--:|---|
 | `T1` | Autoliquidation de TVA (reverse charge) | 6 | **E-INV** | **fait (lot 3a)** — cas `T1`, catégorie `AE` / `VATEX-FR-AE` |
 | `T2` | Franchise en base de TVA (art. 293 B CGI) | 9 | **E-INV** | **fait (lot 3a)** — cas `T2`, catégorie `E` / `VATEX-FR-FRANCHISE`, BT-31 absent + BT-32 |
 | `T3` | Avoirs et factures rectificatives | 7 | **E-INV** | fait (lot périmètre) — `var. litige-avoir` et `var. litige-rectificative` |
-| `T4` | Facture en devise étrangère (hors EUR) | 4 | **E-INV** | **absent** — `DocumentCurrencyCode` figé à EUR, BT-6/BT-111 non gérés |
+| `T4` | Facture en devise étrangère (hors EUR) | 4 | **E-INV** | **fait (lot 3b)** — cas `T4`, BT-5 = USD, BT-6 = EUR, BT-111 |
 | `T5` | Sous-traitance BTP avec autoliquidation | 7 | **E-INV** | **fait (lot 3a)** — couvert par le cas `T1`, décliné en sous-traitance BTP (cadre S5) |
-| `T6` | Remises, majorations et frais annexes | 28 | **E-INV** | **absent** — BG-20/BG-21 (niveau document et ligne) non générés |
+| `T6` | Remises, majorations et frais annexes | 28 | **E-INV** | **fait (lot 3b)** — cas `T6`, BG-20/BG-21 et BG-27/BG-28 |
 | `T7` | Livraison intracommunautaire de biens | 9 | E-REP | **fait (lot 3a)** — cas `T7`, catégorie `K` / `VATEX-EU-IC`, note `B2BINT` |
 | `T8` | Exportation de biens hors UE | 8 | E-REP | **fait (lot 3a)** — cas `T8`, catégorie `G` / `VATEX-EU-G`, note `B2BINT` |
 
@@ -336,9 +336,7 @@ La clé d'un numéro de TVA français est déterministe : `clé = (12 + 3 × (SI
 
 ### 8.7 Reste à faire
 
-**Lot 3b — les deux régimes qui touchent le moteur de calcul**
-- `T4` devise étrangère : `DocumentCurrencyCode` non-EUR, BT-6 (devise comptable = EUR) et BT-111 (TVA en EUR) obligatoires, taux de change sur le lisible. Deux devises coexistent sur le même document.
-- `T6` remises, majorations et frais annexes : BG-20 / BG-21 au niveau document et BG-27 / BG-28 au niveau ligne. Change l'arithmétique des totaux (BT-109 = BT-106 − BT-107 + BT-108, règles BR-CO-10 à BR-CO-13). 28 champs.
+*(Le lot 3b, décrit en section 9, a traité T4 et T6.)*
 
 **Reste du périmètre**
 - Cas à créer : facture B2B **externe** d'un assujetti unique (BT-29 schéma `0231`, numéro de TVA de l'AU en BT-63) — seule variante e-invoicing du cas 29.
@@ -348,3 +346,95 @@ La clé d'un numéro de TVA français est déterministe : `clé = (12 + 3 × (SI
 - Interface : signaler visuellement que le vendeur ou l'acheteur est imposé par le cas d'usage (`forceSupplier` / `forceBuyer`), aujourd'hui indiqué seulement dans la fiche pédagogique.
 - `orderReference` est figé à `PO-1001` dans `buildRenderData` : cohérent avec l'XML, qui émet lui aussi cette référence de commande sur tous les cas. À revoir si l'on veut des factures sans bon de commande.
 - Étape 2 du plan initial : Factur-X (CII D22B + PDF/A-3), non entamée.
+
+## 9. Lot 3b — devise étrangère et remises / frais annexes (20/08/2026)
+
+Base de départ : `main` @ `fc6b141`, les 7 blobs du lot 3a vérifiés identiques à la copie de travail.
+
+Contrairement au lot 3a, ces deux régimes ne se règlent pas par un code de catégorie de TVA : ils touchent le **moteur de calcul** et le **rendu du lisible**. C'est la raison du découpage.
+
+### 9.1 T4 — facture en devise étrangère
+
+Un fournisseur français facture en dollars la filiale française d'un groupe américain. La prestation reste soumise à la TVA française à 20 %.
+
+| Élément | Valeur |
+|---|---|
+| BT-5 `DocumentCurrencyCode` | `USD` — porté par **tous** les montants du document |
+| BT-6 `TaxCurrencyCode` | `EUR` — obligatoire dès que BT-5 n'est pas l'euro |
+| BT-111 | `1841.62` EUR, dans un **second `cac:TaxTotal` sans sous-total** |
+| Totaux | 10 000,00 USD HT, TVA 2 000,00 USD, TTC 12 000,00 USD |
+
+Deux points de conformité tranchés :
+
+1. **BT-111 est le seul montant du document autorisé à porter une autre devise que BT-5.** Le générateur émet donc exactement deux `cac:TaxTotal` au niveau document : le premier avec les sous-totaux en USD, le second réduit à un `cbc:TaxAmount` en EUR.
+2. **`cac:TaxExchangeRate` n'est pas émis.** Le taux de change n'est pas un champ de la norme et le mapping UBL du socle ne le retient pas : l'émettre exposerait à un rejet pour élément hors périmètre. Le taux est porté en mention BT-22, où il est à la fois conforme et lisible : *« Facture etablie en USD. Taux de change applique : 1 EUR = 1,0860 USD (taux de reference BCE du 19/08/2026). Montant total de TVA en euros : 1 841,62 EUR. »*
+
+Conséquence sur le lisible : il affichait des euros sur une facture en dollars — un document légalement trompeur. Le formateur monétaire prend désormais la devise du document (`CUR_SYMBOLS`, renseigné au début du rendu).
+
+### 9.2 T6 — remises, majorations et frais annexes
+
+Une commande de mobilier qui exerce les **quatre** emplacements prévus par la norme :
+
+| Emplacement | Contenu | Montant | Code |
+|---|---|--:|---|
+| BG-27 (ligne 1) | Remise quantitative palier 30 unités | −200,00 € | `95` (UNTDID 5189) |
+| BG-28 (ligne 2) | Éco-participation mobilier, filière REP | +45,00 € | *motif en clair* |
+| BG-20 (document) | Remise commerciale accord cadre 2026 | −450,00 € | `95` |
+| BG-21 (document) | Frais de port et de manutention | +120,00 € | `FC` (UNTDID 7161) |
+
+Arithmétique produite :
+
+```
+BT-106 total des lignes HT        8 545,00   (7 000,00 + 1 545,00)
+BT-107 remises niveau document      -450,00
+BT-108 frais niveau document        +120,00
+BT-109 base d'imposition          8 215,00   <- BR-CO-10
+BT-117 TVA 20 %                   1 643,00
+BT-112 total TTC                  9 858,00
+```
+
+Trois choses à retenir :
+
+- **Les remises et frais de niveau ligne sont absorbés dans BT-131**, le montant net de la ligne : 30 × 240,00 − 200,00 = 7 000,00. C'est la règle de cohérence de ligne que vérifient les plateformes.
+- **Les remises et frais de niveau document portent chacun leur propre catégorie et taux de TVA** (BR-31 pour BG-20, BR-37 pour BG-21). S'il y a plusieurs taux sur la facture, il faut **un bloc `AllowanceCharge` par couple (catégorie, taux)** — le moteur est écrit pour ça.
+- `computeTaxBreakdown` intègre désormais ces blocs dans la base du sous-total BG-23. Sans cela, BT-116 serait resté à 8 545,00 alors que BT-109 vaut 8 215,00 : incohérence bloquante.
+- L'**éco-participation n'a pas de code dédié** dans la liste UNTDID 7161. Elle est portée par un motif en clair, ce que BR-38 autorise explicitement (motif **ou** code).
+
+### 9.3 Impact sur le lisible
+
+- Le tableau de lignes rend chaque BG-27 / BG-28 en **sous-ligne** sous la désignation, avec son motif et sa base, pour que le lecteur puisse refaire le calcul.
+- Le cartouche des totaux expose BT-106, BT-107 et BT-108 **uniquement** lorsqu'il existe une remise ou un frais de niveau document, afin de ne pas alourdir le cas courant.
+- Le signe moins utilisé est le tiret ASCII : `U+2212 MINUS SIGN` n'existe pas dans `WinAnsiEncoding` et le glyphe serait absent des polices base-14 du générateur.
+
+### 9.4 Généralisation du moteur
+
+Toutes les briques XML acceptent maintenant une devise, avec l'euro par défaut — d'où une non-régression parfaite. Les signatures ont été étendues par un paramètre d'options en fin de liste :
+
+| Brique | Extension |
+|---|---|
+| `getHeader` | `opts.cur` (BT-5), `opts.taxCur` (BT-6) |
+| `getTaxTotal` | `opts.cur`, `opts.taxCur` = `{ code, amount }` (BT-111) |
+| `getLegalMonetaryTotal` | `opts.cur`, `opts.allowanceTotal` (BT-107), `opts.chargeTotal` (BT-108) |
+| `getInvoiceLine` | `opts.cur`, `opts.allowances` (BG-27 / BG-28) |
+| `getAllowanceCharge` | nouvelle brique, BG-20 / BG-21 |
+
+### 9.5 Validation
+
+- 57 cas dans `caseConfig`, **60 documents XML tous bien formés**.
+- Ordre des éléments UBL contrôlé contre **10 séquences** du schéma (`Invoice`, `CreditNote`, `InvoiceLine`, `CreditNoteLine`, `AllowanceCharge`, `LegalMonetaryTotal`, `TaxTotal`, `TaxSubtotal`, `Party`, `TaxCategory`) : **0 erreur sur 60 documents**. La position de `cac:AllowanceCharge` (après `cac:PaymentTerms`, avant `cac:TaxTotal` au niveau document ; après `cac:PaymentTerms`, avant `cac:Item` au niveau ligne) est donc vérifiée, pas supposée.
+- 24 contrôles structurels ciblés sur T4 et T6 : **24/24**, dont BR-CO-10, l'égalité BT-116 = BT-109, la cohérence de ligne BT-131 = quantité × prix unitaire − remises + frais, l'unicité de la devise hors BT-111 et l'absence de `cac:TaxExchangeRate`.
+- **Non-régression** : les **55 cas antérieurs sont identiques bit à bit**, et les **24 lisibles antérieurs également**. Aucune valeur n'a bougé.
+- Les 2 nouveaux lisibles sont valides `qpdf` et tiennent sur une page.
+
+### 9.6 Reste à faire
+
+Les huit régimes transverses de la matrice de transcodification sont traités. Ce qui reste :
+
+- Cas à créer : facture B2B **externe** d'un assujetti unique (BT-29 schéma `0231`, numéro de TVA de l'AU en BT-63) — seule variante e-invoicing du cas 29.
+- Blocs dédiés dans le lisible pour le tiers payeur, le facturant et l'agent de vendeur : aujourd'hui présents dans les mentions seulement.
+- `payeeType` non rendus dans le lisible : distributeur, collaborateur (cas 5, 9, 12).
+- Variante multi-taux de T6 : le moteur la gère, aucun cas ne l'exerce.
+- Question de mise en page jamais tranchée : sur une facture courte, le cadre du tableau descend jusqu'au bloc de totaux et laisse un vide central.
+- Interface : signaler visuellement que le vendeur ou l'acheteur est imposé par le cas d'usage (`forceSupplier` / `forceBuyer`).
+- `orderReference` figé à `PO-1001` dans `buildRenderData`, cohérent avec l'XML qui émet cette référence sur tous les cas.
+- **Étape 2 du plan initial : Factur-X** (CII D22B + PDF/A-3), non entamée. C'est désormais le principal chantier restant.

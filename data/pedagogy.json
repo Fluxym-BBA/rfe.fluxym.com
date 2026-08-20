@@ -519,5 +519,23 @@
     "info": "Type 380. Cadre S1. Catégorie G. Génère : 2 lignes = 8 570 € HT, TVA 0,00 €, acheteur suisse sans identifiant français.",
     "target": "esker",
     "label": "Régime T8 — Exportation hors UE (G)"
+  },
+  "T4": {
+    "badge": "Régime T4",
+    "title": "Facture en devise étrangère",
+    "desc1": "<strong>Scénario :</strong> Un fournisseur français facture en dollars américains la filiale française d'un groupe américain. La prestation est soumise à la TVA française à 20 %.",
+    "desc2": "<strong>Particularités :</strong> BT-5 <code>DocumentCurrencyCode</code> passe à <code>USD</code> et <strong>tous</strong> les montants du document sont exprimés dans cette devise. Mais la TVA doit rester exprimée en euros : BT-6 <code>TaxCurrencyCode</code> = <code>EUR</code> et BT-111 deviennent obligatoires. BT-111 est émis dans un <strong>second</strong> <code>cac:TaxTotal</code> ne contenant qu'un <code>cbc:TaxAmount</code> en euros, sans sous-total — c'est le seul montant du document autorisé à porter une autre devise que BT-5. Le taux de change n'étant pas un champ de la norme, il est porté en mention BT-22.",
+    "info": "Type 380. Cadre S1. Devise USD. Génère : 2 lignes = 10 000,00 USD HT, TVA 2 000,00 USD, TTC 12 000,00 USD, et BT-111 = 1 841,62 EUR au taux 1,0860.",
+    "target": "esker",
+    "label": "Régime T4 — Facture en devise étrangère (USD)"
+  },
+  "T6": {
+    "badge": "Régime T6",
+    "title": "Remises, majorations et frais annexes",
+    "desc1": "<strong>Scénario :</strong> Une commande de mobilier de bureau qui exerce les quatre emplacements de remise et de frais prévus par la norme : une remise quantitative sur une ligne, une éco-participation sur une autre, puis une remise commerciale et des frais de port au niveau du document.",
+    "desc2": "<strong>Particularités :</strong> BG-27 et BG-28 au niveau ligne sont absorbés dans le montant net de la ligne (BT-131). BG-20 et BG-21 au niveau document portent chacun leur propre catégorie de TVA (BR-31 / BR-37) et alimentent BT-107 et BT-108. La base de TVA du sous-total BG-23 est recalculée en conséquence, et BT-109 = BT-106 − BT-107 + BT-108 (BR-CO-10). L'éco-participation n'a pas de code dédié dans la liste UNTDID 7161 : elle est portée par un motif en clair.",
+    "info": "Type 380. Cadre S1. Génère : lignes 8 545,00 € − remise 450,00 € + port 120,00 € = 8 215,00 € HT, TVA 1 643,00 €, TTC 9 858,00 €.",
+    "target": "esker",
+    "label": "Régime T6 — Remises, majorations et frais annexes"
   }
 }

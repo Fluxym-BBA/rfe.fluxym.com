@@ -5,6 +5,13 @@
  *
  * Auteur: Bruno BARTOLI — Fluxym / Re-Form-E
  * Date: 2026-08-20
+ * Changelog v3e — devise etrangere et remises/frais (lot 3b) :
+ *   - Cas T4 : BT-5 devise du document, BT-6 devise de comptabilisation,
+ *     BT-111 montant de TVA en euros (second cac:TaxTotal sans sous-total)
+ *   - Cas T6 : BG-20 / BG-21 au niveau document, BG-27 / BG-28 au niveau ligne,
+ *     BT-107 / BT-108 dans les totaux, base de TVA recalculee (BR-CO-10)
+ *   - computeTaxBreakdown integre les remises et frais de niveau document
+ *   - toutes les briques XML acceptent une devise, EUR par defaut
  * Changelog v3d — regimes de TVA transverses (lot 3a) :
  *   - VAT: AUTOLIQ (AE / VATEX-FR-AE), FRANCHISE (E / VATEX-FR-FRANCHISE),
  *     INTRACOM (K / VATEX-EU-IC) ; EXPORT (G / VATEX-EU-G) reutilise
@@ -117,11 +124,21 @@ const UBLGenerator = {
         var self = this;
         var groups = {};
         var order = [];
-        ld.lines.forEach(function(line) {
-            var vat = self.getLineVat(usecase, line.id);
+        var add = function(vat, amount) {
             var key = vat.category + "|" + vat.percent;
             if (!groups[key]) { groups[key] = { vat: vat, taxable: 0 }; order.push(key); }
-            groups[key].taxable += parseFloat(line.amount);
+            groups[key].taxable += amount;
+        };
+        ld.lines.forEach(function(line) {
+            add(self.getLineVat(usecase, line.id), parseFloat(line.amount));
+        });
+        // BR-S-08 etendue : la base d'un sous-total BG-23 integre les frais de niveau
+        // document (BG-21) et retranche les remises de niveau document (BG-20)
+        // rattaches a la meme categorie et au meme taux. Les remises et frais de
+        // niveau ligne sont deja absorbes dans le montant net de la ligne (BT-131).
+        (ld.allowanceCharges || []).forEach(function(ac) {
+            add({ category: ac.category || "S", percent: ac.percent || "20.00", code: null, reason: null },
+                (ac.charge ? 1 : -1) * parseFloat(ac.amount));
         });
         return order.map(function(key) {
             var g = groups[key];
@@ -225,6 +242,14 @@ const UBLGenerator = {
                 forceBuyer: "technik_gmbh", barCode: "B2BINT" },
         "T8": { typeCode: "380", profile: "S1", zip: false,
                 forceBuyer: "helvetia_sa", barCode: "B2BINT" },
+        // T4 : la devise du document n'est pas l'euro. La TVA doit rester exprimee
+        // en euros, d'ou BT-6 (devise de comptabilisation) et BT-111 (montant de
+        // TVA converti). fxRate = nombre d'unites de devise pour 1 EUR.
+        "T4": { typeCode: "380", profile: "S1", zip: false,
+                currency: "USD", fxRate: "1.0860" },
+        // T6 : remises et frais aux quatre emplacements prevus par la norme,
+        // BG-20 et BG-21 au niveau document, BG-27 et BG-28 au niveau ligne.
+        "T6": { typeCode: "380", profile: "S1", zip: false },
 
         // --- TESTS & PACKS ---
         "A": { typeCode: "999", profile: "S1", zip: false },
@@ -849,6 +874,37 @@ const UBLGenerator = {
                 };
                 // BR-G-08/09: 7680+890 = 8570 base, TVA 0.00 (article 262-I du CGI)
 
+            case "T4":
+                return {
+                    tax: ["10000.00", "2000.00"],
+                    totals: ["10000.00", "10000.00", "12000.00", "0.00", "12000.00"],
+                    lines: [
+                        { id: "1", qty: "20.00", amount: "7600.00", desc: "Licence plateforme analytique - poste utilisateur", price: "380.00" },
+                        { id: "2", qty: "1.00", amount: "2400.00", desc: "Parametrage et reprise des donnees", price: "2400.00" }
+                    ]
+                };
+                // Montants en USD. TVA 20 % = 2000.00 USD, soit 1841.62 EUR au taux 1.0860 (BT-111)
+
+            case "T6":
+                return {
+                    tax: ["8215.00", "1643.00"],
+                    totals: ["8545.00", "8215.00", "9858.00", "0.00", "9858.00"],
+                    // BG-20 / BG-21 : un bloc par couple (categorie de TVA, taux).
+                    allowanceCharges: [
+                        { charge: false, amount: "450.00", reasonCode: "95", reason: "Remise commerciale accord cadre 2026", category: "S", percent: "20.00" },
+                        { charge: true, amount: "120.00", reasonCode: "FC", reason: "Frais de port et de manutention", category: "S", percent: "20.00" }
+                    ],
+                    lines: [
+                        // BG-27 : remise de niveau ligne. 30 x 240.00 = 7200.00 - 200.00 = 7000.00
+                        { id: "1", qty: "30.00", amount: "7000.00", desc: "Fauteuil de bureau ergonomique ERG-450", price: "240.00",
+                          allowances: [{ charge: false, amount: "200.00", baseAmount: "7200.00", reasonCode: "95", reason: "Remise quantitative palier 30 unites" }] },
+                        // BG-28 : frais de niveau ligne. 1 x 1500.00 = 1500.00 + 45.00 = 1545.00
+                        { id: "2", qty: "1.00", amount: "1545.00", desc: "Table de reunion modulaire MOD-12", price: "1500.00",
+                          allowances: [{ charge: true, amount: "45.00", reason: "Eco-participation mobilier (filiere REP)" }] }
+                    ]
+                };
+                // BR-CO-10 : 8545.00 - 450.00 + 120.00 = 8215.00 -> TVA 1643.00 -> TTC 9858.00
+
             default:
                 console.warn("getLineData: cas non gere: " + usecase);
                 return {
@@ -913,7 +969,7 @@ const UBLGenerator = {
     // chacun verifie individuellement (montants, TVA, blocs structurants).
     PDF_CASES: ["nominal", "1", "2", "3", "8", "13", "14", "16", "17b", "18", "19b", "20",
         "21", "22a", "23", "26", "30", "31", "38", "40",
-        "T1", "T2", "T7", "T8"],
+        "T1", "T2", "T4", "T6", "T7", "T8"],
 
     supportsPdf: function(usecase) {
         return typeof PDFLisible !== 'undefined' && this.PDF_CASES.indexOf(usecase) !== -1;
@@ -1058,6 +1114,14 @@ const UBLGenerator = {
             var profileId = cfg.profile;
 
             // 4. Notes
+            // BT-5 devise du document. Des qu'elle n'est pas l'euro, la reglementation
+            // impose que la TVA reste exprimee en euros : BT-6 (devise de
+            // comptabilisation) et BT-111 (montant total de TVA converti) deviennent
+            // obligatoires, et BT-111 est le seul montant du document autorise a
+            // porter une autre devise que BT-5.
+            const docCur = cfg.currency || "EUR";
+            const taxCur = docCur === "EUR" ? null : "EUR";
+
             var notes = [
                 // BR-FR-31 : B2B par defaut, B2BINT des que l'acheteur est hors de France.
                 "#BAR#" + (cfg.barCode || "B2B"),
@@ -1075,6 +1139,18 @@ const UBLGenerator = {
             if (usecase === "T2") notes.push("#AAI#TVA non applicable - article 293 B du CGI. Le vendeur releve du regime de la franchise en base.");
             if (usecase === "T7") notes.push("#AAI#Exoneration de TVA - livraison intracommunautaire - article 262 ter I du CGI. TVA autoliquidee par l'acquereur dans son Etat membre.");
             if (usecase === "T8") notes.push("#AAI#Exoneration de TVA - exportation de biens hors Union europeenne - article 262-I du CGI.");
+            // Le taux de change n'est pas un champ EN16931 et le mapping UBL du socle
+            // ne retient pas cac:TaxExchangeRate : la mention est portee en note.
+            if (taxCur) {
+                const fxLd = this.getLineData(usecase);
+                const fxVat = fxLd ? this.computeTaxBreakdown(usecase, fxLd).reduce(function(t, sub) { return t + parseFloat(sub.amount); }, 0) : 0;
+                const fxEur = (Math.round((fxVat / parseFloat(cfg.fxRate)) * 100) / 100).toFixed(2);
+                const fxEurTxt = fxEur.replace(/\B(?=(\d{3})+\.)/g, " ").replace(".", ",");
+                notes.push("#AAI#Facture etablie en " + docCur + ". Taux de change applique : 1 EUR = "
+                    + cfg.fxRate.replace(".", ",") + " " + docCur + " (taux de reference BCE du "
+                    + dd + "/" + MM + "/" + yyyy + "). Montant total de TVA en euros : " + fxEurTxt + " EUR.");
+            }
+            if (usecase === "T6") notes.push("#BLU#Eco-participation refacturee au titre de la filiere REP mobilier (article L. 541-10-1 du code de l'environnement).");
             if (usecase === "6" || usecase === "28" || usecase === "30") notes.push("#AAI#TVA deja collectee via e-reporting B2C - Cadre S7");
             if (cfg.typeCode === "393") notes.push("#ACC#Facture cedee par subrogation conventionnelle. Reglement a effectuer exclusivement aupres du Factor.");
             // Mandat de facturation (BG-05) : mention obligatoire.
@@ -1160,7 +1236,7 @@ const UBLGenerator = {
                 overrideLineData = overrideLineData || null;
                 attachment = attachment || null;
 
-                var xml = UBLTemplates.getHeader(numFacture, dateFactureXML, dateEcheanceXML, typeCode, profileId, notes, asCreditNote, buyerReference, self.getCustomizationId(usecase));
+                var xml = UBLTemplates.getHeader(numFacture, dateFactureXML, dateEcheanceXML, typeCode, profileId, notes, asCreditNote, buyerReference, self.getCustomizationId(usecase), { cur: docCur, taxCur: taxCur });
 
                 // BT-13 Reference de la commande de l'acheteur
                 if (poNumber) {
@@ -1248,20 +1324,47 @@ const UBLGenerator = {
                         var prepaid = parseFloat(ld.totals[3]);
                         var taxInclusive = Math.round((taxExclusive + vatTotal) * 100) / 100;
 
-                        xml += UBLTemplates.getTaxTotal(breakdown);
+                        // BG-20 / BG-21 : position imposee dans la sequence Invoice,
+                        // apres cac:PaymentTerms et avant cac:TaxTotal.
+                        var docAc = ld.allowanceCharges || [];
+                        docAc.forEach(function(ac) {
+                            xml += UBLTemplates.getAllowanceCharge(ac, docCur);
+                        });
+                        var sumAc = function(isCharge) {
+                            return docAc.reduce(function(t, ac) {
+                                return t + (!!ac.charge === isCharge ? parseFloat(ac.amount) : 0);
+                            }, 0);
+                        };
+                        var allowanceTotal = Math.round(sumAc(false) * 100) / 100;
+                        var chargeTotal = Math.round(sumAc(true) * 100) / 100;
+
+                        // BT-111 : contre-valeur du montant total de TVA dans la devise
+                        // de comptabilisation, arrondie a deux decimales.
+                        var taxCurAmount = taxCur ? {
+                            code: taxCur,
+                            amount: (Math.round((vatTotal / parseFloat(cfg.fxRate)) * 100) / 100).toFixed(2)
+                        } : null;
+
+                        xml += UBLTemplates.getTaxTotal(breakdown, { cur: docCur, taxCur: taxCurAmount });
                         xml += UBLTemplates.getLegalMonetaryTotal(
                             ld.totals[0],
                             ld.totals[1],
                             taxInclusive.toFixed(2),
                             ld.totals[3],
-                            (Math.round((taxInclusive - prepaid) * 100) / 100).toFixed(2)
+                            (Math.round((taxInclusive - prepaid) * 100) / 100).toFixed(2),
+                            {
+                                cur: docCur,
+                                allowanceTotal: allowanceTotal ? allowanceTotal.toFixed(2) : null,
+                                chargeTotal: chargeTotal ? chargeTotal.toFixed(2) : null
+                            }
                         );
                         ld.lines.forEach(function(line, idx) {
                             xml += UBLTemplates.getInvoiceLine(
                                 line.id, line.qty, line.amount, line.desc, line.price,
                                 asCreditNote, line.po || null,
                                 self.getLineVat(usecase, line.id), line.unitCode || "C62",
-                                line.ref || self.makeItemRef(line.desc, idx + 1)
+                                line.ref || self.makeItemRef(line.desc, idx + 1),
+                                { cur: docCur, allowances: line.allowances || null }
                             );
                         });
                     }
@@ -1293,6 +1396,7 @@ const UBLGenerator = {
                     .filter(function(n) { return n.indexOf("#BAR#") !== 0; })
                     .map(function(n) { return n.replace(/^#[A-Z]{3}#/, ""); });
 
+                var pdfAc = ld.allowanceCharges || [];
                 var meansCodePdf = cfg.paymentMeans || "30";
                 var meansLabel = PDFLisible.MEANS_LABELS[meansCodePdf] || ("Code " + meansCodePdf);
                 var withIban = (meansCodePdf === "30" || meansCodePdf === "58");
@@ -1336,6 +1440,15 @@ const UBLGenerator = {
                             reason: sub.reason || ""
                         };
                     }),
+                    // BT-5 : devise reellement facturee.
+                    currency: docCur,
+                    // BT-106 / BT-107 / BT-108 : necessaires pour rendre lisible le
+                    // passage du total des lignes a la base d'imposition.
+                    lineExtensionAmount: ld.totals[0],
+                    allowanceTotal: pdfAc.filter(function(a) { return !a.charge; })
+                        .reduce(function(t, a) { return t + parseFloat(a.amount); }, 0).toFixed(2),
+                    chargeTotal: pdfAc.filter(function(a) { return a.charge; })
+                        .reduce(function(t, a) { return t + parseFloat(a.amount); }, 0).toFixed(2),
                     taxExclusiveAmount: ld.totals[1],
                     taxAmount: vatTotal.toFixed(2),
                     taxInclusiveAmount: taxInclusive.toFixed(2),
@@ -1352,7 +1465,9 @@ const UBLGenerator = {
                             price: line.price,
                             amount: line.amount,
                             vatPercent: vat.percent,
-                            unitCode: line.unitCode || "C62"
+                            unitCode: line.unitCode || "C62",
+                            // BG-27 / BG-28 rendus en sous-lignes du tableau
+                            allowances: line.allowances || null
                         };
                     })
                 };

@@ -163,7 +163,7 @@ const GeneratorUI = {
         { key: "catI", label: "I — Escompte", cases: ["22a","22b"] },
         { key: "catJ", label: "J — Cas spéciaux", cases: ["23","6","28","30","25","26","42"] },
         { key: "catK", label: "K — Cas avancés & régimes spéciaux", cases: ["33","34","35","36","37","38","39","40","41"] },
-        { key: "catL", label: "L — Régimes de TVA transverses", cases: ["T1","T2","T7","T8"] },
+        { key: "catL", label: "L — Régimes de TVA transverses", cases: ["T1","T2","T4","T6","T7","T8"] },
         { key: "tests", label: "Tests de robustesse", cases: ["A"] },
         { key: "packs", label: "Packs de test (ZIP)", cases: ["B"] },
         // Conserves pour leur valeur pedagogique, mais aucune facture n'est produite.

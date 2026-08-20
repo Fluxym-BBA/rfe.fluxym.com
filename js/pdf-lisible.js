@@ -198,7 +198,14 @@ const PDFLisible = {
         return (neg ? '-' : '') + int + ',' + parts[1];
     },
 
-    _money: function (v) { return this._amt(v) + ' \u20ac'; },
+    // Devise du document (BT-5). Le lisible d'une facture libellee en devise
+    // etrangere ne doit pas afficher des euros : la valeur est fixee au debut du
+    // rendu par build(). Seule exception, BT-111 (contre-valeur de la TVA en
+    // euros), porte par une mention BT-22.
+    CUR_SYMBOLS: { EUR: '\u20ac', USD: '$', GBP: '\u00a3', CHF: 'CHF', JPY: '\u00a5' },
+    _cur: '\u20ac',
+
+    _money: function (v) { return this._amt(v) + ' ' + this._cur; },
 
     _qty: function (v) {
         const n = this._num(v);
@@ -347,7 +354,10 @@ const PDFLisible = {
     _rowHeight: function (row) {
         const maxW = this.COL.unit - this.COL.desc - 12;
         const label = ((row.ref || '') + '  ' + (row.desc || '')).trim();
-        return this._wrap(label, 7.7, maxW, 2, true).length === 1 ? 27 : 38;
+        const base = this._wrap(label, 7.7, maxW, 2, true).length === 1 ? 27 : 38;
+        // BG-27 / BG-28 : chaque remise ou frais de niveau ligne occupe une
+        // sous-ligne sous la designation.
+        return base + 11 * ((row.allowances || []).length);
     },
 
     // ============================================================
@@ -494,6 +504,20 @@ const PDFLisible = {
                 { size: 8.0, color: this.C.muted, align: 'right' });
             this._txt(ctx, c.ht, y, this._amt(row.amount), { size: 8.0, bold: true, align: 'right' });
 
+            // BG-27 remise / BG-28 frais de niveau ligne. Le montant total de la
+            // ligne (BT-131) les integre deja : les sous-lignes rendent le calcul
+            // verifiable par le lecteur.
+            let sy = y - (lines.length > 1 ? 21 : 11);
+            (row.allowances || []).forEach((ac) => {
+                const sign = ac.charge ? '+ ' : '- ';
+                const base = ac.baseAmount ? ' (base ' + this._amt(ac.baseAmount) + ')' : '';
+                const amt = (ac.charge ? '' : '-') + this._amt(ac.amount);
+                this._txt(ctx, c.desc + 10, sy, this._fit(sign + (ac.reason || 'Ajustement') + base, 7.1, descW - 12),
+                    { size: 7.1, color: this.C.muted });
+                this._txt(ctx, c.ht, sy, amt, { size: 7.1, color: this.C.muted, align: 'right' });
+                sy -= 11;
+            });
+
             y -= h;
             this._hline(ctx, M, R, y + 7, this.C.hair, 0.35);
         });
@@ -515,7 +539,20 @@ const PDFLisible = {
         const bx = 365, bw = R - 365;
 
         const subs = d.taxSubtotals && d.taxSubtotals.length ? d.taxSubtotals : null;
-        const rows = [['Base HT (BT-109)', d.taxExclusiveAmount]];
+        // BG-20 / BG-21 : on n'expose BT-106, BT-107 et BT-108 que lorsqu'il existe
+        // effectivement une remise ou un frais de niveau document, pour ne pas
+        // alourdir le cartouche du cas courant.
+        const rows = [];
+        if (this._num(d.allowanceTotal) !== 0 || this._num(d.chargeTotal) !== 0) {
+            rows.push(['Total des lignes HT (BT-106)', d.lineExtensionAmount]);
+            if (this._num(d.allowanceTotal) !== 0) {
+                rows.push(['Remises sur facture (BT-107)', -this._num(d.allowanceTotal)]);
+            }
+            if (this._num(d.chargeTotal) !== 0) {
+                rows.push(['Frais annexes (BT-108)', d.chargeTotal]);
+            }
+        }
+        rows.push(['Base HT (BT-109)', d.taxExclusiveAmount]);
         if (subs && subs.length > 1) {
             subs.forEach((s) => {
                 rows.push(['TVA ' + this._amt(s.percent) + ' % sur ' + this._amt(s.taxable), s.amount]);
@@ -714,6 +751,7 @@ const PDFLisible = {
     // ============================================================
     build: function (input) {
         const d = this._normalize(input);
+        this._cur = this.CUR_SYMBOLS[d.currency] || d.currency || '\u20ac';
         const first = this._render(d, 0);
         const pages = this._render(d, first.length);
         const raw = this._assemble(pages, d.docLabel + ' ' + d.invoiceNumber);
