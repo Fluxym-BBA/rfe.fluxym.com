@@ -1,0 +1,704 @@
+{
+ "_patch": {
+  "id": "E7",
+  "chantier": "E — qualification marché",
+  "auteur": "RFE_WebSite",
+  "dateReleve": "2026-08-20",
+  "nbPlateformes": 10,
+  "note": "Lot E7, 10 plateformes, relevé du 20/08/2026 par lecture des sites officiels (accueil, page plateforme agréée / facturation électronique, tarifs, partenaires). Aucune identité juridique retouchée (chantiers B et C). LIMITE DE LECTURE DU RÉFÉRENTIEL : data/plateformes-agreees.json (253 380 octets sur main) n'a pu être récupéré qu'en partie par l'outil de fetch, qui tronque la réponse vers 85 Ko (lecture arrêtée alphabétiquement à ENERJ). Les 10 clés de fusion `nom` de ce lot ont donc été reprises depuis Info IA/plateformes-agreees/LOTS-E.md (même dépôt, branche main), qui les liste en majuscules à l'identique de la liste DGFiP ; à contrôler au moment de la fusion, notamment SUPER PDP (deux mots, espace simple). GROSSISTES IDENTIFIÉS DANS CE LOT : SEQINO (page API dédiée, offres marque blanche permettant à un éditeur de se faire immatriculer PA, et marque grise, avec accompagnement administratif et audits) et SUPER PDP (FAQ tarifaire : intégration en marque grise au tarif de gros pour éditeurs de facturation, d'ERP et de caisse, marque blanche sur demande). Rappel : ces notions sont commerciales, pas réglementaires ; chaque plateforme du lot est immatriculée en son nom propre et seule responsable devant l'administration. NOMS COMMERCIAUX DIFFÉRENTS DU NOM D'INSCRIPTION : SEPTEO = « PA SEPTEO » portée par la ligne Ingeneo (ingeneo.septeo.com) ; SERES = « e-Facture PA » ; SRCI = « iXFacture » ; SYMTRAX = « Compleo Invoice Platform ». CHAMPS VOLONTAIREMENT ABSENTS, faute de source sur le site : `fournisseurDeSocle` pour les 8 autres plateformes (l'absence de page partenaires ou marque blanche n'est pas une preuve de non-fourniture, donc pas de `false` inventé) ; `solutionsCompatiblesPartenaires` sauf SCRIBEE (9 connecteurs éditeurs publiés) et SRCI (SCEPIA et Solare IT annoncés interopérables, statut de Solution Compatible non confirmé par ces éditeurs) ; `groupeCapitalistique` pour QWEEBY, SCRIBEE, SPENDESK, SRCI, SUPER PDP et SYMTRAX ; `segmentCible` pour QWEEBY (aucune cible de taille explicitée sur le site) ; `natureEntite` pour SCRIBEE (aucune information d'antériorité publiée). SOCLE TECHNIQUE : `type` mis à `inconnu` avec confiance `non_qualifie` pour QONTO, SCRIBEE, SEPTEO et SPENDESK, dont les sites ne disent rien de l'origine du socle. Aucune marque blanche n'a été déduite d'une ressemblance d'interface. PAGES INDISPONIBLES RENCONTRÉES (404) : www.scribee.tech/qui-sommes-nous, www.symtrax.com/fr/a-propos-de-nous/, www.spendesk.com/fr/platform/e-invoicing/. Pour SPENDESK, le périmètre de réception seule est sourcé sur le centre d'aide de l'éditeur (helpcenter.spendesk.com), source auto-publiée. VERTICALE : `generaliste` partout dans ce lot. Aucune spécialisation sectorielle n'est revendiquée, y compris pour SEPTEO dont le groupe édite par ailleurs des logiciels juridiques, notariaux et immobiliers : l'offre PA passe par le canal comptable et reste généraliste. SRCI est fortement orienté sphère publique, ce qui est porté par `segmentCible: [public]` et non par une verticale."
+ },
+ "plateformes": [
+  {
+   "nom": "QONTO",
+   "siteWeb": "https://qonto.com/fr/",
+   "familleOrigine": [
+    "fintech"
+   ],
+   "segmentCible": [
+    "micro",
+    "tpe_pme"
+   ],
+   "verticale": "generaliste",
+   "natureEntite": "diversification",
+   "perimetreFonctionnel": [
+    "emission",
+    "reception",
+    "suite_gestion"
+   ],
+   "socleTechnique": {
+    "type": "inconnu",
+    "preuve": "Le site presente Qonto comme Plateforme Agreee operationnelle mais ne documente ni socle propre ni recours a un socle tiers.",
+    "source": "https://qonto.com/fr/invoicing/e-invoicing",
+    "confiance": "non_qualifie"
+   },
+   "modeDistributionSocle": [
+    "direct"
+   ],
+   "groupeCapitalistique": "Qonto (Olinda SAS), etablissement de paiement francais - non requalifie ici, releve des chantiers B et C",
+   "descriptionFiche": "Qonto est une neobanque professionnelle francaise qui adosse son offre de Plateforme Agreee a son compte pro et a son outil de facturation. Le site annonce une PA 'gratuite, sans limite', ouverte aux independants, micro-entreprises et TPE-PME, avec emission et reception de factures electroniques depuis l'interface Qonto. La proposition de valeur mise en avant est le tout-en-un : compte pro, facturation, gestion des depenses, pre-comptabilite dans une seule interface. Une offre dediee aux experts-comptables leur permet d'accompagner leurs clients TPE-PME sur la PA Qonto. Aucun programme de revente de socle a des editeurs tiers n'est publie sur le site.",
+   "logiquePositionnement": "Positionnement coherent avec le metier d'origine : la PA prolonge un outil de facturation et un compte pro deja utilises par la cible micro / TPE-PME, la facture electronique devenant une fonction incluse dans la suite de gestion plutot qu'un produit vendu separement. La gratuite affichee traduit une logique d'acquisition bancaire, pas de revenu de facturation.",
+   "sourcesEnrichissement": [
+    {
+     "champ": "perimetreFonctionnel",
+     "source": "https://qonto.com/fr/invoicing/e-invoicing",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "familleOrigine",
+     "source": "https://qonto.com/fr/invoicing/e-invoicing",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "segmentCible",
+     "source": "https://qonto.com/fr/invoicing/e-invoicing",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    },
+    {
+     "champ": "modeDistributionSocle",
+     "source": "https://qonto.com/fr/accountants/e-invoicing",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    },
+    {
+     "champ": "descriptionFiche",
+     "source": "https://qonto.com/fr/invoicing/e-invoicing",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "QWEEBY",
+   "siteWeb": "https://www.qweeby.fr/",
+   "familleOrigine": [
+    "o2c",
+    "edi"
+   ],
+   "verticale": "generaliste",
+   "natureEntite": "extension_demat",
+   "perimetreFonctionnel": [
+    "emission",
+    "reception"
+   ],
+   "socleTechnique": {
+    "type": "propre",
+    "operateurSocle": "Qweeby",
+    "preuve": "Le site revendique sa propre plateforme de dematerialisation du poste client, operee depuis 2010, deja interconnectee aux reseaux de facturation electronique.",
+    "source": "https://www.qweeby.fr/plateforme-agreee",
+    "confiance": "moyenne"
+   },
+   "modeDistributionSocle": [
+    "direct"
+   ],
+   "descriptionFiche": "Qweeby est un operateur francais de dematerialisation du poste client (order-to-cash), issu du monde EDI et de l'administration des ventes. Le site decrit une plateforme d'emission et de reception de factures multi-canal et multi-format (dont Factur-X), interconnectee aux reseaux de facturation electronique. Le discours commercial porte sur la gestion du poste client et l'automatisation des flux de facturation vers les donneurs d'ordres. L'immatriculation Plateforme Agreee est presentee comme le prolongement reglementaire de cette activite d'operateur.",
+   "logiquePositionnement": "Positionnement tres coherent : l'entreprise operait deja les flux de factures sortantes de ses clients, l'agrement PA securise cette position d'intermediaire face a l'obligation 2026. Aucun glissement de metier.",
+   "sourcesEnrichissement": [
+    {
+     "champ": "familleOrigine",
+     "source": "https://www.qweeby.fr/plateforme-agreee",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "perimetreFonctionnel",
+     "source": "https://www.qweeby.fr/plateforme-agreee",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "natureEntite",
+     "source": "https://www.qweeby.fr/",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    },
+    {
+     "champ": "socleTechnique",
+     "source": "https://www.qweeby.fr/plateforme-agreee",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    },
+    {
+     "champ": "descriptionFiche",
+     "source": "https://www.qweeby.fr/",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "SCRIBEE",
+   "siteWeb": "https://www.scribee.tech/",
+   "familleOrigine": [
+    "portail_ec"
+   ],
+   "segmentCible": [
+    "tpe_pme"
+   ],
+   "verticale": "generaliste",
+   "perimetreFonctionnel": [
+    "emission",
+    "reception",
+    "ereporting"
+   ],
+   "socleTechnique": {
+    "type": "inconnu",
+    "preuve": "Le site decrit les fonctions de la plateforme et ses connecteurs mais ne documente ni le socle technique ni un eventuel operateur tiers.",
+    "source": "https://www.scribee.tech/",
+    "confiance": "non_qualifie"
+   },
+   "modeDistributionSocle": [
+    "direct",
+    "via cabinet EC"
+   ],
+   "solutionsCompatiblesPartenaires": [
+    "ACD",
+    "Cegid",
+    "Fulll",
+    "idocus",
+    "kwote",
+    "MyCompanyFiles",
+    "MyUnisoft",
+    "Pennylane",
+    "Sage"
+   ],
+   "descriptionFiche": "Scribee est une Plateforme Agreee francaise positionnee a la fois vers les entreprises et vers les cabinets d'expertise comptable. Le site annonce un socle commun couvrant l'e-reporting transmis a l'administration, le traitement des formats CII, UBL et Factur-X, et une connexion au reseau Peppol. L'argument central est l'integration a l'environnement existant : neuf connecteurs sont publies vers les principaux editeurs de la profession comptable et outils associes (ACD, Cegid, Fulll, idocus, kwote, MyCompanyFiles, MyUnisoft, Pennylane, Sage), avec une option permettant de conserver un outil de facturation non conforme. Une page dediee invite les editeurs a proposer un partenariat de connexion.",
+   "logiquePositionnement": "Positionnement de plateforme d'interface entre les outils comptables et le dispositif reglementaire : la valeur ajoutee revendiquee n'est pas l'outil de facturation mais la connexion aux logiciels du cabinet et de son client. Le programme de connecteurs est un signal de distribution indirecte, sans que le site revendique pour autant la fourniture de son socle a des tiers.",
+   "sourcesEnrichissement": [
+    {
+     "champ": "perimetreFonctionnel",
+     "source": "https://www.scribee.tech/",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "familleOrigine",
+     "source": "https://www.scribee.tech/nos-connecteurs",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "segmentCible",
+     "source": "https://www.scribee.tech/",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    },
+    {
+     "champ": "solutionsCompatiblesPartenaires",
+     "source": "https://www.scribee.tech/nos-connecteurs",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "modeDistributionSocle",
+     "source": "https://www.scribee.tech/nos-connecteurs",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    },
+    {
+     "champ": "descriptionFiche",
+     "source": "https://www.scribee.tech/",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "SEPTEO",
+   "siteWeb": "https://www.septeo.com/fr",
+   "familleOrigine": [
+    "portail_ec",
+    "facturation_compta"
+   ],
+   "segmentCible": [
+    "tpe_pme",
+    "eti"
+   ],
+   "verticale": "generaliste",
+   "natureEntite": "diversification",
+   "perimetreFonctionnel": [
+    "emission",
+    "reception",
+    "ereporting",
+    "suite_gestion"
+   ],
+   "socleTechnique": {
+    "type": "inconnu",
+    "preuve": "La page 'PA SEPTEO' decrit l'offre et ses fonctions mais ne precise pas si le socle d'echange est developpe par Septeo ou opere par un tiers.",
+    "source": "https://www.ingeneo.septeo.com/plateforme-agreee-facturation-electronique",
+    "confiance": "non_qualifie"
+   },
+   "modeDistributionSocle": [
+    "via cabinet EC",
+    "direct"
+   ],
+   "groupeCapitalistique": "Groupe Septeo, editeur europeen de logiciels metier (juridique, notariat, immobilier, expertise comptable), plus de 250 000 utilisateurs revendiques",
+   "descriptionFiche": "L'immatriculation SEPTEO correspond commercialement a la 'PA SEPTEO', portee par la ligne Ingeneo dediee a l'expertise comptable (ingeneo.septeo.com). L'offre est distribuee via les cabinets : le site revendique plus de 1 200 cabinets utilisateurs et plus de 100 000 societes clientes, avec emission et reception de factures au format Factur-X, suivi des statuts et automatisation de l'e-reporting. La PA s'inscrit dans un portail de services clients plus large (gestion des achats et des ventes, notes de frais, paiements et compte pro, tresorerie, previsionnels). Le groupe Septeo est un editeur de logiciels metier presentant aussi des lignes juridique, notariat et immobilier, mais l'offre PA est generaliste et passe par le canal comptable.",
+   "logiquePositionnement": "Coherence forte avec le metier d'editeur comptable : la PA est un service ajoute au portail cabinet-client, ce qui donne acces a une base installee deja captive. Le canal de distribution est le cabinet d'expertise comptable, pas la vente directe a l'entreprise finale.",
+   "sourcesEnrichissement": [
+    {
+     "champ": "familleOrigine",
+     "source": "https://www.ingeneo.septeo.com/plateforme-agreee-facturation-electronique",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "perimetreFonctionnel",
+     "source": "https://www.ingeneo.septeo.com/plateforme-agreee-facturation-electronique",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "segmentCible",
+     "source": "https://www.ingeneo.septeo.com/plateforme-agreee-facturation-electronique",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    },
+    {
+     "champ": "modeDistributionSocle",
+     "source": "https://www.ingeneo.septeo.com/plateforme-agreee-facturation-electronique",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "groupeCapitalistique",
+     "source": "https://www.septeo.com/fr",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "descriptionFiche",
+     "source": "https://www.ingeneo.septeo.com/plateforme-agreee-facturation-electronique",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "SEQINO",
+   "siteWeb": "https://seqino.com/",
+   "familleOrigine": [
+    "pure_player"
+   ],
+   "segmentCible": [
+    "tpe_pme",
+    "eti"
+   ],
+   "verticale": "generaliste",
+   "natureEntite": "creee_pour_rfe",
+   "perimetreFonctionnel": [
+    "emission",
+    "reception",
+    "ereporting"
+   ],
+   "socleTechnique": {
+    "type": "propre",
+    "operateurSocle": "SEQINO",
+    "preuve": "Le site revendique une infrastructure technologique propre, hebergee sur SecNumCloud, exposee sous forme d'API et mise a disposition de tiers.",
+    "source": "https://seqino.com/api-pdp-marque-blanche-grise-facture-electronique/",
+    "confiance": "haute"
+   },
+   "fournisseurDeSocle": true,
+   "modeDistributionSocle": [
+    "direct",
+    "marque_blanche",
+    "marque_grise",
+    "API/embedded",
+    "via cabinet EC"
+   ],
+   "groupeCapitalistique": "Credit Mutuel Arkea (groupe cooperatif et mutualiste de banque-assurance) depuis 2025",
+   "descriptionFiche": "SEQINO est un editeur francais cree en 2021, dont l'activite est entierement construite autour de la facture electronique et de l'immatriculation Plateforme Agreee. Le site revendique une double activite : une offre directe pour les entreprises et les cabinets comptables, et une activite de grossiste via deux offres d'API explicitement nommees, une API en marque grise pour integrer la conformite rapidement et une API en marque blanche destinee a permettre aux editeurs de se faire immatriculer Plateforme Agreee a leur tour, avec accompagnement administratif, audits de conformite et infrastructure hebergee sur SecNumCloud. SEQINO a rejoint le groupe Credit Mutuel Arkea en 2025.",
+   "logiquePositionnement": "Pure-player de la reforme, avec un modele a deux etages assume : vente directe et fourniture de socle a des tiers. C'est l'un des rares acteurs de ce lot a documenter publiquement le role de grossiste, y compris l'accompagnement a l'immatriculation de ses clients editeurs. Rappel : marque blanche et marque grise sont des pratiques commerciales, non des categories reglementaires, et chaque plateforme immatriculee reste seule responsable devant l'administration.",
+   "sourcesEnrichissement": [
+    {
+     "champ": "fournisseurDeSocle",
+     "source": "https://seqino.com/api-pdp-marque-blanche-grise-facture-electronique/",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "modeDistributionSocle",
+     "source": "https://seqino.com/api-pdp-marque-blanche-grise-facture-electronique/",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "socleTechnique",
+     "source": "https://seqino.com/api-pdp-marque-blanche-grise-facture-electronique/",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "natureEntite",
+     "source": "https://seqino.com/qui-sommes-nous/",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "groupeCapitalistique",
+     "source": "https://seqino.com/qui-sommes-nous/",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "segmentCible",
+     "source": "https://seqino.com/",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    },
+    {
+     "champ": "descriptionFiche",
+     "source": "https://seqino.com/qui-sommes-nous/",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "SERES",
+   "siteWeb": "https://seres.fr/",
+   "familleOrigine": [
+    "edi",
+    "s2p",
+    "o2c"
+   ],
+   "segmentCible": [
+    "eti",
+    "grands_comptes"
+   ],
+   "verticale": "generaliste",
+   "natureEntite": "extension_demat",
+   "perimetreFonctionnel": [
+    "emission",
+    "reception",
+    "ereporting"
+   ],
+   "socleTechnique": {
+    "type": "propre",
+    "operateurSocle": "SERES",
+    "preuve": "Le site presente la plateforme 'e-Facture PA' comme sa propre solution, operee sur ses infrastructures hebergees en France, en continuite de son activite EDI.",
+    "source": "https://seres.fr/facture-electronique/",
+    "confiance": "moyenne"
+   },
+   "modeDistributionSocle": [
+    "direct"
+   ],
+   "groupeCapitalistique": "Docaposte, filiale numerique du groupe La Poste",
+   "descriptionFiche": "SERES est un operateur francais de dematerialisation issu de l'EDI, qui revendique plus de trente ans d'echanges de donnees et environ vingt-cinq ans de facturation electronique. Le service agree est commercialise sous le nom 'e-Facture PA' et couvre l'emission, la reception et la transmission des donnees a l'administration, sur des flux achats (P2P) comme ventes (O2C), pour une clientele de grandes entreprises et d'ETI. Le site met en avant l'hebergement des donnees en France et l'appartenance a Docaposte, filiale numerique du groupe La Poste.",
+   "logiquePositionnement": "Continuite directe du metier d'origine : l'operateur EDI historique transforme son offre de dematerialisation de factures en offre agreee, sur la meme base installee de grands comptes. Le nom commercial 'e-Facture PA' differe du nom d'inscription SERES.",
+   "sourcesEnrichissement": [
+    {
+     "champ": "familleOrigine",
+     "source": "https://seres.fr/facture-electronique/",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "perimetreFonctionnel",
+     "source": "https://seres.fr/facture-electronique/",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "segmentCible",
+     "source": "https://seres.fr/facture-electronique/",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    },
+    {
+     "champ": "groupeCapitalistique",
+     "source": "https://seres.fr/qui-sommes-nous/",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "natureEntite",
+     "source": "https://seres.fr/qui-sommes-nous/",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "descriptionFiche",
+     "source": "https://seres.fr/facture-electronique/",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "SPENDESK",
+   "siteWeb": "https://www.spendesk.com/fr/",
+   "familleOrigine": [
+    "fintech",
+    "s2p"
+   ],
+   "segmentCible": [
+    "tpe_pme",
+    "eti"
+   ],
+   "verticale": "generaliste",
+   "natureEntite": "diversification",
+   "perimetreFonctionnel": [
+    "reception",
+    "suite_gestion"
+   ],
+   "socleTechnique": {
+    "type": "inconnu",
+    "preuve": "Les contenus publies decrivent le perimetre fonctionnel de la plateforme agreee mais ne documentent ni socle propre ni operateur tiers.",
+    "source": "https://helpcenter.spendesk.com/",
+    "confiance": "non_qualifie"
+   },
+   "modeDistributionSocle": [
+    "direct"
+   ],
+   "descriptionFiche": "Spendesk est une fintech francaise de gestion des depenses et des achats (cartes de paiement, notes de frais, factures fournisseurs, validation et pre-comptabilite). Son centre d'aide precise que Spendesk est immatriculee comme Plateforme Agreee de reception uniquement : la plateforme prend en charge la reception des factures fournisseurs et non l'emission des factures de vente, les clients devant conserver une autre plateforme agreee pour leurs flux clients. L'offre s'adresse aux equipes finance de PME et d'ETI, dans le prolongement direct du pilotage des depenses.",
+   "logiquePositionnement": "Diversification coherente mais volontairement partielle : Spendesk agree la seule brique correspondant a son metier, le flux fournisseurs entrant, et assume de ne pas couvrir l'emission. C'est un cas typique de PA de reception adossee a une solution de spend management.",
+   "sourcesEnrichissement": [
+    {
+     "champ": "perimetreFonctionnel",
+     "source": "https://helpcenter.spendesk.com/",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "familleOrigine",
+     "source": "https://www.spendesk.com/fr/",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "segmentCible",
+     "source": "https://www.spendesk.com/fr/",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    },
+    {
+     "champ": "natureEntite",
+     "source": "https://www.spendesk.com/fr/",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    },
+    {
+     "champ": "descriptionFiche",
+     "source": "https://helpcenter.spendesk.com/",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "SRCI",
+   "siteWeb": "https://solutions.srci.fr/",
+   "familleOrigine": [
+    "ged",
+    "edi"
+   ],
+   "segmentCible": [
+    "public"
+   ],
+   "verticale": "generaliste",
+   "natureEntite": "extension_demat",
+   "perimetreFonctionnel": [
+    "emission",
+    "reception",
+    "ereporting"
+   ],
+   "socleTechnique": {
+    "type": "propre",
+    "operateurSocle": "SRCI",
+    "preuve": "Le site presente iXFacture comme une solution de la gamme iX editee et operee par SRCI, aux cotes de ses autres briques de dematerialisation.",
+    "source": "https://solutions.srci.fr/facture-electronique-operateur-dematerialisation/",
+    "confiance": "moyenne"
+   },
+   "modeDistributionSocle": [
+    "direct"
+   ],
+   "solutionsCompatiblesPartenaires": [
+    "SCEPIA",
+    "Solare IT"
+   ],
+   "descriptionFiche": "SRCI est un editeur et operateur francais de dematerialisation securisee, historiquement tres present dans la sphere publique : parapheur electronique, signature, telatransmission des flux comptables Helios, controle de legalite des actes, convocations d'elus, archivage a valeur probatoire, GED, capture LAD/RAD, EDI heberge ou integre et factures Chorus. Le service agree est commercialise sous le nom iXFacture, dans la continuite de la gamme iX. Le site publie des annonces d'interoperabilite entre la Plateforme Agreee SRCI et des logiciels editeurs tiers (SCEPIA, Solare IT).",
+   "logiquePositionnement": "Extension naturelle d'un metier de dematerialisation reglementee : SRCI operait deja des flux contraints (Chorus Pro, Helios, actes) pour des organismes publics, la PA prolonge cette position. Les annonces d'interoperabilite avec des editeurs sont un signal de canal indirect, mais le site ne revendique pas la revente de son socle a des tiers.",
+   "sourcesEnrichissement": [
+    {
+     "champ": "familleOrigine",
+     "source": "https://solutions.srci.fr/",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "segmentCible",
+     "source": "https://solutions.srci.fr/",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    },
+    {
+     "champ": "perimetreFonctionnel",
+     "source": "https://solutions.srci.fr/facture-electronique-operateur-dematerialisation/",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "solutionsCompatiblesPartenaires",
+     "source": "https://solutions.srci.fr/facturation-electronique-scepia-plateforme-agreee-srci/",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    },
+    {
+     "champ": "solutionsCompatiblesPartenaires",
+     "source": "https://solutions.srci.fr/solare-property-facturation-electronique-plateforme-agreee-srci/",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    },
+    {
+     "champ": "descriptionFiche",
+     "source": "https://solutions.srci.fr/",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "SUPER PDP",
+   "siteWeb": "https://www.superpdp.tech/",
+   "familleOrigine": [
+    "pure_player"
+   ],
+   "segmentCible": [
+    "micro",
+    "tpe_pme"
+   ],
+   "verticale": "generaliste",
+   "natureEntite": "creee_pour_rfe",
+   "perimetreFonctionnel": [
+    "emission",
+    "reception",
+    "ereporting"
+   ],
+   "socleTechnique": {
+    "type": "propre",
+    "operateurSocle": "SUPER PDP",
+    "preuve": "'La plateforme SUPER PDP est developpee en interne par notre equipe technique. Nous ne faisons appel a aucun prestataire externe, et n'achetons aucune licence de logiciel tiers.'",
+    "source": "https://www.superpdp.tech/fonctionnalites",
+    "confiance": "haute"
+   },
+   "fournisseurDeSocle": true,
+   "modeDistributionSocle": [
+    "direct",
+    "API/embedded",
+    "marque_grise"
+   ],
+   "descriptionFiche": "SUPER PDP est une Plateforme Agreee francaise dont l'offre se resume a un compte en ligne et a une API : positionnement affiche de 'plateforme agreee la plus simple et la moins chere', gratuite jusqu'a 1 000 factures par mois puis facturee a la facture avec des paliers degressifs. Le perimetre couvre emission, reception, statuts du cycle de vie, e-reporting de facturation et de transactions et paiements, annuaire, archivage dix ans et interconnexion Peppol. La plateforme est developpee en interne, hebergee en France, certifiee ISO 27001 (LNE, aout 2025), Peppol AP et SMP (fevrier 2025), avec une immatriculation definitive obtenue le 22 decembre 2025. La FAQ tarifaire indique que les editeurs de logiciels de facturation, d'ERP ou de caisse peuvent integrer les services en marque grise au tarif de gros, la marque blanche etant proposee sur demande.",
+   "logiquePositionnement": "Pure-player technique de la reforme : aucune activite anterieure de gestion ou de comptabilite, l'offre est un service d'infrastructure vendu au volume. La double distribution, compte en libre-service pour les petites structures et tarif de gros pour les editeurs integrateurs, en fait un fournisseur de socle assume, meme si son nom reste visible a l'inscription du client final.",
+   "sourcesEnrichissement": [
+    {
+     "champ": "socleTechnique",
+     "source": "https://www.superpdp.tech/fonctionnalites",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "perimetreFonctionnel",
+     "source": "https://www.superpdp.tech/fonctionnalites",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "fournisseurDeSocle",
+     "source": "https://www.superpdp.tech/tarifs",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "modeDistributionSocle",
+     "source": "https://www.superpdp.tech/tarifs",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "segmentCible",
+     "source": "https://www.superpdp.tech/tarifs",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    },
+    {
+     "champ": "natureEntite",
+     "source": "https://www.superpdp.tech/a-propos",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    },
+    {
+     "champ": "descriptionFiche",
+     "source": "https://www.superpdp.tech/",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "SYMTRAX",
+   "siteWeb": "https://www.symtrax.com/fr/",
+   "familleOrigine": [
+    "ged",
+    "edi",
+    "tax"
+   ],
+   "segmentCible": [
+    "eti",
+    "grands_comptes"
+   ],
+   "verticale": "generaliste",
+   "natureEntite": "extension_demat",
+   "perimetreFonctionnel": [
+    "emission",
+    "reception"
+   ],
+   "socleTechnique": {
+    "type": "propre",
+    "operateurSocle": "Symtrax",
+    "preuve": "Le site presente 'Compleo Invoice Platform', sa propre solution SaaS, comme etant la plateforme agreee.",
+    "source": "https://www.symtrax.com/fr/lp/facturation-electronique-obligatoire-en-france/",
+    "confiance": "moyenne"
+   },
+   "modeDistributionSocle": [
+    "direct"
+   ],
+   "descriptionFiche": "Symtrax est un editeur de solutions de transformation documentaire et d'automatisation des flux, dont l'offre agreee est commercialisee sous le nom Compleo Invoice Platform. Le site decrit une solution SaaS assurant la reception et la distribution multicanale des factures, avec controle, validation et tracabilite, une integration low-code aux ERP et logiciels comptables (dont SAP) et une architecture modulaire independante du systeme d'information. Le discours est oriente conformite internationale ('reglementations mondiales de la facturation electronique') et automatisation des processus comptabilite clients et fournisseurs, avec plus de 3 000 installations revendiquees dans le monde. Les autres lignes de l'editeur couvrent les workflows de validation et signature, la modernisation des flux EDI par API et la dematerialisation des documents.",
+   "logiquePositionnement": "Extension coherente d'un metier de transformation et de circulation de documents vers le statut agree : la PA devient un module supplementaire d'une plateforme deja installee chez des ETI et grands comptes equipes d'ERP, avec un angle de conformite multi-pays. Le nom commercial (Compleo Invoice Platform) differe du nom d'inscription SYMTRAX.",
+   "sourcesEnrichissement": [
+    {
+     "champ": "familleOrigine",
+     "source": "https://www.symtrax.com/fr/",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "perimetreFonctionnel",
+     "source": "https://www.symtrax.com/fr/lp/facturation-electronique-obligatoire-en-france/",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    },
+    {
+     "champ": "segmentCible",
+     "source": "https://www.symtrax.com/fr/",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    },
+    {
+     "champ": "socleTechnique",
+     "source": "https://www.symtrax.com/fr/lp/facturation-electronique-obligatoire-en-france/",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    },
+    {
+     "champ": "descriptionFiche",
+     "source": "https://www.symtrax.com/fr/",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  }
+ ]
+}
