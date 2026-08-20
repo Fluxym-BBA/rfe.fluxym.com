@@ -426,9 +426,9 @@ Toutes les briques XML acceptent maintenant une devise, avec l'euro par défaut 
 - **Non-régression** : les **55 cas antérieurs sont identiques bit à bit**, et les **24 lisibles antérieurs également**. Aucune valeur n'a bougé.
 - Les 2 nouveaux lisibles sont valides `qpdf` et tiennent sur une page.
 
-### 9.6 Reste à faire
+### 9.6 Reste à faire à l'issue du lot 3b
 
-Les huit régimes transverses de la matrice de transcodification sont traités. Ce qui reste :
+*(État consolidé en section 10.6.)* Les huit régimes transverses de la matrice de transcodification sont traités. Ce qui restait :
 
 - Cas à créer : facture B2B **externe** d'un assujetti unique (BT-29 schéma `0231`, numéro de TVA de l'AU en BT-63) — seule variante e-invoicing du cas 29.
 - Blocs dédiés dans le lisible pour le tiers payeur, le facturant et l'agent de vendeur : aujourd'hui présents dans les mentions seulement.
@@ -438,3 +438,90 @@ Les huit régimes transverses de la matrice de transcodification sont traités. 
 - Interface : signaler visuellement que le vendeur ou l'acheteur est imposé par le cas d'usage (`forceSupplier` / `forceBuyer`).
 - `orderReference` figé à `PO-1001` dans `buildRenderData`, cohérent avec l'XML qui émet cette référence sur tous les cas.
 - **Étape 2 du plan initial : Factur-X** (CII D22B + PDF/A-3), non entamée. C'est désormais le principal chantier restant.
+
+## 10. Lot 4 — pièces jointes multiples (20/08/2026)
+
+Base de départ : `main` @ `1d77093`, les 5 blobs du lot 3b vérifiés identiques à la copie de travail.
+
+Objectif : produire une facture portant **plusieurs** occurrences de BG-24 `cac:AdditionalDocumentReference`, afin d'observer le comportement des plateformes agréées face au multi-pièces jointes. Deux annexes fictives sont générées : un bon de commande et un bon de livraison.
+
+### 10.1 Le point de conformité déterminant
+
+**BT-123 `cbc:DocumentDescription` n'est pas du texte libre : c'est une liste fermée** (BR-FR-17). Les valeurs admises sont :
+
+`RIB` · `LISIBLE` · `FEUILLE_DE_STYLE` · `PJA` · `BORDEREAU_SUIVI` · `DOCUMENT_ANNEXE` · `BON_LIVRAISON` · `BON_COMMANDE` · `BORDEREAU_SUIVI_VALIDATION` · `ETAT_ACOMPTE` · `FACTURE_PAIEMENT_DIRECT` · `RECAPITULATIF_COTRAITANCE`
+
+Deux conséquences :
+
+1. `BON_COMMANDE` et `BON_LIVRAISON` sont des valeurs **normalisées** — pas besoin d'inventer un libellé, et un libellé inventé aurait été rejeté.
+2. `LISIBLE` reste **unique par facture** (BR-FR-18). Les autres valeurs sont répétables.
+
+**Aucun `cbc:DocumentTypeCode` n'est émis** sur ces occurrences : le code `130` est réservé à BT-18 (identifiant de l'objet facturé), et c'est précisément ce code qui permet à un contrôleur de distinguer les deux usages du même conteneur UBL.
+
+### 10.2 Ce qui est produit
+
+Avec l'option activée, chaque cas livre **six** artefacts au lieu de trois :
+
+| Artefact | Contenu |
+|---|---|
+| `…_UBL.xml` | facture nue, sans pièce jointe |
+| `…_UBL_avec_lisible.xml` | 1 occurrence BG-24 : `LISIBLE` |
+| `…_UBL_avec_3_PJ.xml` | 3 occurrences : `LISIBLE`, `BON_COMMANDE`, `BON_LIVRAISON` |
+| `…_lisible.pdf` | le lisible autonome |
+| `…_bon-commande.pdf` | le bon de commande autonome |
+| `…_bon-livraison.pdf` | le bon de livraison autonome |
+
+La variante mono-pièce jointe est **conservée à côté** de la variante à trois : c'est ce qui permet de soumettre les deux formes de la même facture à une plateforme et de comparer son comportement. Sur le cas T6, la facture passe de 8 Ko (nue) à 23 Ko (1 PJ) puis 47 Ko (3 PJ).
+
+### 10.3 Cohérence structurelle
+
+Une pièce jointe ne suffit pas : la norme prévoit des champs pour référencer ces documents, et une plateforme peut faire le rapprochement.
+
+| Document joint | Référence structurelle émise |
+|---|---|
+| `BON_COMMANDE` | BT-13 `cac:OrderReference/cbc:ID` — déjà émis sur tous les cas |
+| `BON_LIVRAISON` | BT-16 `cac:DespatchDocumentReference/cbc:ID` — **nouveau** |
+
+BT-16 n'est émis **que** dans la variante qui porte effectivement le bon de livraison : référencer un avis d'expédition inexistant dans la variante nue serait incohérent. Le numéro est repris du document joint, pas régénéré. Position dans la séquence `Invoice` : après `cac:BillingReference`, avant `cac:AdditionalDocumentReference` — vérifiée contre le schéma.
+
+### 10.4 Les deux documents
+
+Ils sont produits par le nouveau module `js/pdf-annexes.js`, **depuis le même modèle pivot que le lisible** : bon de commande, bon de livraison et facture ne peuvent donc pas se contredire. Le moteur PDF (métriques Helvetica, primitives de dessin, assemblage du fichier, base64) est hérité de `PDFLisible` par `Object.create` — aucune duplication.
+
+**Bon de commande** — émis par l'acheteur vers le vendeur, daté de 21 jours avant la facture :
+- cartouches Donneur d'ordre / Fournisseur, références (n° de commande, date, livraison souhaitée, BT-10, facture rattachée, conditions de règlement) ;
+- tableau valorisé avec quantité, prix unitaire et total, **et les sous-lignes BG-27 / BG-28** pour que le calcul reste vérifiable ;
+- cartouche de totaux reprenant BT-106 / BT-107 / BT-108 quand ils existent ;
+- mentions et deux cadres de signature.
+
+**Bon de livraison** — émis par le vendeur, daté de la date de livraison effective (BT-72) :
+- cartouches Expéditeur / **Livré à**, ce dernier alimenté par BT-70 et BG-15 lorsqu'ils existent, sinon par l'adresse de l'acheteur ;
+- tableau **sans aucun prix** : référence, unité, quantité livrée. Un bon de livraison qui porterait des prix serait un faux document ;
+- mention de réserves de l'article L. 133-3 du code de commerce (trois jours pour notifier une avarie ou un manquant) ;
+- mention explicite « ne vaut pas facture » ;
+- deux cadres de signature, transporteur et destinataire.
+
+Les deux portent en clair qu'ils sont **fictifs et produits à des fins de test**, avec le rappel de leur code BT-123.
+
+### 10.5 Validation
+
+- **7 cas** exercés (nominal, 1, 8, 31, T4, T6, T7), **42 artefacts** produits.
+- Ordre des éléments racine conforme au schéma sur les 7 factures à 3 PJ.
+- BT-123 = `['LISIBLE', 'BON_COMMANDE', 'BON_LIVRAISON']`, toutes dans la liste fermée, **une seule** occurrence `LISIBLE`, **aucun** `DocumentTypeCode`.
+- BT-16 présent et cohérent avec le numéro du bon de livraison joint ; **absent** de la variante mono-pièce jointe.
+- Les 3 objets binaires décodés depuis le base64 sont des PDF valides (en-tête `%PDF-`, terminaison `%%EOF`) et **identiques bit à bit aux PDF autonomes livrés** : le base64 n'est pas une seconde génération.
+- `mimeCode="application/pdf"` et `filename` présents, **nom de fichier sous 50 caractères** (BR-FR-CPRO-41).
+- 21 PDF contrôlés `qpdf` : aucune erreur de syntaxe, une page chacun.
+- **Non-régression** : option décochée, les **57 cas produisent un XML identique bit à bit** et 24 des 26 lisibles également. Les deux qui changent (T7, T8) le font parce que le libellé de pays passe de `DE` / `CH` à `ALLEMAGNE` / `SUISSE` — correction volontaire, une table `COUNTRY_LABELS` remplaçant le test `country === 'FR'`.
+
+### 10.6 Reste à faire
+
+- **Factur-X** (CII D22B + PDF/A-3) : principal chantier restant. Arbitrage à rendre sur la dépendance externe (`pdf-lib` + `fontkit` via CDN) ou ~500 lignes de JS pur supplémentaires.
+- Cas à créer : facture B2B **externe** d'un assujetti unique (BT-29 schéma `0231`, numéro de TVA de l'AU en BT-63) — seule variante e-invoicing du cas 29.
+- Blocs dédiés dans le lisible pour le tiers payeur, le facturant et l'agent de vendeur : présents dans les mentions seulement.
+- `payeeType` non rendus dans le lisible : distributeur, collaborateur (cas 5, 9, 12).
+- Variante multi-taux de T6 : le moteur la gère, aucun cas ne l'exerce.
+- Autres valeurs de BT-123 à exercer si besoin : `RIB`, `ETAT_ACOMPTE`, `RECAPITULATIF_COTRAITANCE` réutilisent le mécanisme sans développement.
+- Interface : signaler visuellement que le vendeur ou l'acheteur est imposé par le cas d'usage (`forceSupplier` / `forceBuyer`).
+- `orderReference` figé à `PO-1001` dans `buildRenderData`, cohérent avec l'XML.
+- Mise en page : sur une facture courte, le cadre du tableau descend jusqu'au bloc de totaux et laisse un vide central.

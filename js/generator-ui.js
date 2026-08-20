@@ -422,7 +422,7 @@ const GeneratorUI = {
         }
 
         var supported = UBLGenerator.supportsPdf(usecase);
-        ['opt-ubl-pdf', 'opt-pdf'].forEach(function(id) {
+        ['opt-ubl-pdf', 'opt-pdf', 'opt-annexes'].forEach(function(id) {
             var input = document.getElementById(id);
             if (!input) return;
             var wasDisabled = input.disabled;
@@ -458,7 +458,10 @@ const GeneratorUI = {
             label = 'Télécharger le pack ZIP';
         } else {
             var opts = UBLGenerator.getArtifactOptions(usecase);
-            var count = (opts.ubl ? 1 : 0) + (opts.ublWithPdf ? 1 : 0) + (opts.pdf ? 1 : 0);
+            // Les annexes ajoutent trois fichiers : la variante UBL a trois
+            // pieces jointes, le bon de commande et le bon de livraison.
+            var count = (opts.ubl ? 1 : 0) + (opts.ublWithPdf ? 1 : 0) + (opts.pdf ? 1 : 0) +
+                (opts.annexes ? 3 : 0);
             if (count > 1) label = 'Télécharger le ZIP (' + count + ' fichiers)';
             else if (opts.pdf) label = 'Télécharger le PDF lisible';
             else label = 'Télécharger la facture UBL';
@@ -467,7 +470,7 @@ const GeneratorUI = {
     },
 
     initArtifactOptions: function() {
-        ['opt-ubl', 'opt-ubl-pdf', 'opt-pdf'].forEach(function(id) {
+        ['opt-ubl', 'opt-ubl-pdf', 'opt-pdf', 'opt-annexes'].forEach(function(id) {
             var input = document.getElementById(id);
             if (input) input.addEventListener('change', function() { GeneratorUI.syncGenerateLabel(); });
         });

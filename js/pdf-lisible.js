@@ -203,6 +203,14 @@ const PDFLisible = {
     // rendu par build(). Seule exception, BT-111 (contre-valeur de la TVA en
     // euros), porte par une mention BT-22.
     CUR_SYMBOLS: { EUR: '\u20ac', USD: '$', GBP: '\u00a3', CHF: 'CHF', JPY: '\u00a5' },
+
+    // Libelles des pays. Un code inconnu est affiche tel quel : mieux vaut le
+    // code ISO 3166-1 alpha-2 que rien du tout.
+    COUNTRY_LABELS: {
+        FR: 'FRANCE', DE: 'ALLEMAGNE', CH: 'SUISSE', BE: 'BELGIQUE', ES: 'ESPAGNE',
+        IT: 'ITALIE', LU: 'LUXEMBOURG', NL: 'PAYS-BAS', PT: 'PORTUGAL', PL: 'POLOGNE',
+        GB: 'ROYAUME-UNI', US: 'ETATS-UNIS', CA: 'CANADA', MC: 'MONACO'
+    },
     _cur: '\u20ac',
 
     _money: function (v) { return this._amt(v) + ' ' + this._cur; },
@@ -298,7 +306,7 @@ const PDFLisible = {
         if (a.street) out.push(a.street);
         const cityLine = ((a.zip || '') + ' ' + (a.city || '')).trim();
         if (cityLine) out.push(cityLine);
-        if (a.country) out.push(a.country === 'FR' ? 'FRANCE' : a.country);
+        if (a.country) out.push(this.COUNTRY_LABELS[a.country] || a.country);
         // Les identifiants sont conditionnels : une partie etablie hors de France
         // n'a ni SIREN ni SIRET, et un vendeur en franchise en base n'a pas de
         // numero de TVA (BT-31) mais un identifiant fiscal de substitution (BT-32).
@@ -326,7 +334,7 @@ const PDFLisible = {
             if (a.street) out.push(a.street);
             const c = ((a.zip || '') + ' ' + (a.city || '')).trim();
             if (c) out.push(c);
-            if (a.country) out.push(a.country === 'FR' ? 'FRANCE' : a.country);
+            if (a.country) out.push(this.COUNTRY_LABELS[a.country] || a.country);
         }
         return out.length ? out : null;
     },

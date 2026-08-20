@@ -61,6 +61,14 @@ ${notes.map(n => `\t<cbc:Note>${n}</cbc:Note>`).join('\n')}
 \t\t<cbc:ID>${xmlEsc(poNumber)}</cbc:ID>
 \t</cac:OrderReference>`,
 
+    // 3ter. BT-16 Reference du bon de livraison (avis d'expedition).
+    // Position imposee dans la sequence Invoice : apres cac:BillingReference,
+    // avant cac:AdditionalDocumentReference.
+    getDespatchDocumentReference: (id) => `
+\t<cac:DespatchDocumentReference>
+\t\t<cbc:ID>${xmlEsc(id)}</cbc:ID>
+\t</cac:DespatchDocumentReference>`,
+
     // 2quater. BG-13 Informations de livraison : BT-72 date effective,
     // BT-70 destinataire, BG-15 adresse de livraison.
     // Position imposee : apres cac:PayeeParty / cac:TaxRepresentativeParty,
@@ -84,8 +92,15 @@ ${notes.map(n => `\t<cbc:Note>${n}</cbc:Note>`).join('\n')}
 \t</cac:Delivery>`,
 
     // 2bis. BG-24 Document justificatif : representation lisible de la facture
-    // BT-122 identifiant, BT-123 = LISIBLE (BR-FR-17), BT-125 objet binaire base64
-    // avec mimeCode et filename obligatoires. Une seule PJ LISIBLE par facture (BR-FR-18).
+    // BT-122 identifiant, BT-123 description, BT-125 objet binaire base64 avec
+    // mimeCode et filename obligatoires.
+    // BT-123 appartient a une LISTE FERMEE (BR-FR-17) : RIB, LISIBLE,
+    // FEUILLE_DE_STYLE, PJA, BORDEREAU_SUIVI, DOCUMENT_ANNEXE, BON_LIVRAISON,
+    // BON_COMMANDE, BORDEREAU_SUIVI_VALIDATION, ETAT_ACOMPTE,
+    // FACTURE_PAIEMENT_DIRECT, RECAPITULATIF_COTRAITANCE.
+    // Une seule occurrence LISIBLE par facture (BR-FR-18) ; les autres valeurs
+    // sont repetables. Aucun cbc:DocumentTypeCode ici : le code 130 est reserve
+    // a BT-18, identifiant de l'objet facture.
     // Position imposee : apres cac:BillingReference, avant cac:AccountingSupplierParty.
     getAdditionalDocumentReference: (id, description, mimeCode, filename, base64) => `
 \t<cac:AdditionalDocumentReference>

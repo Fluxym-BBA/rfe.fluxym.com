@@ -5,6 +5,13 @@
  *
  * Auteur: Bruno BARTOLI — Fluxym / Re-Form-E
  * Date: 2026-08-20
+ * Changelog v3f — pieces jointes multiples (lot 4) :
+ *   - buildXML accepte un tableau de pieces jointes BG-24 : LISIBLE plus
+ *     BON_COMMANDE et BON_LIVRAISON (BT-123, liste fermee BR-FR-17)
+ *   - BT-16 cac:DespatchDocumentReference emis avec le bon de livraison
+ *   - nouvel artefact _UBL_avec_3_PJ.xml, en plus de la variante mono-PJ
+ *   - bon de commande et bon de livraison produits par js/pdf-annexes.js
+ *     depuis le meme modele pivot que le lisible
  * Changelog v3e — devise etrangere et remises/frais (lot 3b) :
  *   - Cas T4 : BT-5 devise du document, BT-6 devise de comptabilisation,
  *     BT-111 montant de TVA en euros (second cac:TaxTotal sans sous-total)
@@ -986,13 +993,16 @@ const UBLGenerator = {
         var opts = {
             ubl: read('opt-ubl', true),
             ublWithPdf: read('opt-ubl-pdf', true),
-            pdf: read('opt-pdf', true)
+            pdf: read('opt-pdf', true),
+            // Variante multi-pieces jointes : LISIBLE + BON_COMMANDE + BON_LIVRAISON
+            annexes: read('opt-annexes', false)
         };
         if (!this.supportsPdf(usecase)) {
             opts.ublWithPdf = false;
             opts.pdf = false;
+            opts.annexes = false;
         }
-        if (!opts.ubl && !opts.ublWithPdf && !opts.pdf) opts.ubl = true;
+        if (!opts.ubl && !opts.ublWithPdf && !opts.pdf && !opts.annexes) opts.ubl = true;
         return opts;
     },
 
@@ -1248,16 +1258,28 @@ const UBLGenerator = {
                     xml += UBLTemplates.getBillingReference(refOriginale, precedingDate || dateFactureXML);
                 }
 
-                // BG-24 Representation lisible embarquee (BT-123 = LISIBLE, BR-FR-17)
-                if (attachment) {
-                    xml += UBLTemplates.getAdditionalDocumentReference(
-                        attachment.id,
-                        "LISIBLE",
-                        "application/pdf",
-                        attachment.filename,
-                        attachment.base64
-                    );
+                // BG-24 Pieces jointes embarquees. Le parametre accepte un objet
+                // unique ou un tableau : une facture peut porter plusieurs
+                // occurrences, avec une seule valeur LISIBLE (BR-FR-18).
+                var attachList = attachment ? (Array.isArray(attachment) ? attachment : [attachment]) : [];
+
+                // BT-16 : la reference du bon de livraison n'est emise que lorsque
+                // le bon de livraison est effectivement joint. Referencer un
+                // document inexistant serait incoherent.
+                var despatchAtt = attachList.filter(function(a) { return a.description === "BON_LIVRAISON"; })[0];
+                if (despatchAtt && despatchAtt.docNumber) {
+                    xml += UBLTemplates.getDespatchDocumentReference(despatchAtt.docNumber);
                 }
+
+                attachList.forEach(function(att) {
+                    xml += UBLTemplates.getAdditionalDocumentReference(
+                        att.id,
+                        att.description || "LISIBLE",
+                        att.mimeCode || "application/pdf",
+                        att.filename,
+                        att.base64
+                    );
+                });
 
                 xml += UBLTemplates.getSupplierParty(supplier, findThirdParty(cfg.agent), findThirdParty(cfg.facturant));
                 xml += UBLTemplates.getCustomerParty(buyer);
@@ -1569,19 +1591,36 @@ const UBLGenerator = {
                 var baseName = numeroFacture + "_Cas_" + usecase + "_" + nomExplicatif;
                 var artifacts = [];
                 var pdfDoc = null;
+                var annexDocs = null;
 
                 // Le PDF est genere UNE SEULE FOIS et sert aux deux usages :
-                // fichier autonome et objet binaire base64 de BT-125.
-                if (opts.pdf || opts.ublWithPdf) {
+                // fichier autonome et objet binaire base64 de BT-125. Les annexes
+                // sont produites depuis le MEME modele pivot, ce qui garantit que
+                // bon de commande, bon de livraison et facture concordent.
+                if (opts.pdf || opts.ublWithPdf || opts.annexes) {
                     var renderData = buildRenderData(numeroFacture, invoiceTypeCode, null);
                     if (renderData) {
                         pdfDoc = PDFLisible.build(renderData);
+                        if (opts.annexes) {
+                            annexDocs = [
+                                PDFAnnexes.buildOrder(renderData),
+                                PDFAnnexes.buildDespatch(renderData)
+                            ];
+                        }
                     } else {
                         opts.pdf = false;
                         opts.ublWithPdf = false;
+                        opts.annexes = false;
                         opts.ubl = true;
                     }
                 }
+
+                var lisibleAtt = pdfDoc ? {
+                    id: numeroFacture + "-LISIBLE",
+                    description: "LISIBLE",
+                    filename: pdfDoc.filename,
+                    base64: pdfDoc.base64
+                } : null;
 
                 if (opts.ubl) {
                     artifacts.push({
@@ -1591,15 +1630,30 @@ const UBLGenerator = {
                     });
                 }
 
-                if (opts.ublWithPdf && pdfDoc) {
-                    var attachment = {
-                        id: numeroFacture + "-LISIBLE",
-                        filename: pdfDoc.filename,
-                        base64: pdfDoc.base64
-                    };
+                if (opts.ublWithPdf && lisibleAtt) {
                     artifacts.push({
                         name: baseName + "_UBL_avec_lisible.xml",
-                        blob: new Blob([buildXML(numeroFacture, invoiceTypeCode, false, precedingRefId, "PO-1001", null, attachment)],
+                        blob: new Blob([buildXML(numeroFacture, invoiceTypeCode, false, precedingRefId, "PO-1001", null, lisibleAtt)],
+                            { type: "application/xml" })
+                    });
+                }
+
+                // Variante a trois pieces jointes, livree EN PLUS de la variante a
+                // une seule : elle permet de comparer le comportement d'une
+                // plateforme sur les deux formes de la meme facture.
+                if (opts.annexes && lisibleAtt && annexDocs) {
+                    var allAtt = [lisibleAtt].concat(annexDocs.map(function(a) {
+                        return {
+                            id: numeroFacture + "-" + a.description,
+                            description: a.description,
+                            filename: a.filename,
+                            base64: a.base64,
+                            docNumber: a.number
+                        };
+                    }));
+                    artifacts.push({
+                        name: baseName + "_UBL_avec_3_PJ.xml",
+                        blob: new Blob([buildXML(numeroFacture, invoiceTypeCode, false, precedingRefId, "PO-1001", null, allAtt)],
                             { type: "application/xml" })
                     });
                 }
@@ -1611,6 +1665,12 @@ const UBLGenerator = {
                     });
                 }
 
+                if (opts.annexes && annexDocs) {
+                    annexDocs.forEach(function(a) {
+                        artifacts.push({ name: a.filename, blob: PDFAnnexes.toBlob(a.raw) });
+                    });
+                }
+
                 if (artifacts.length === 1) {
                     self.triggerDownload(artifacts[0].blob, artifacts[0].name);
                 } else {
@@ -1619,7 +1679,7 @@ const UBLGenerator = {
                     }
                     var zipSimple = new JSZip();
                     artifacts.forEach(function(item) { zipSimple.file(item.name, item.blob); });
-                    var zipSimpleName = "Triptyque_" + trigramme + "_Cas" + usecase + "_" + nomExplicatif +
+                    var zipSimpleName = (opts.annexes ? "Pack_" : "Triptyque_") + trigramme + "_Cas" + usecase + "_" + nomExplicatif +
                         "_" + yyyy + MM + dd + "_" + HH + mm + ss + ".zip";
                     zipSimple.generateAsync({ type: "blob" }).then(function(content) {
                         self.triggerDownload(content, zipSimpleName);
