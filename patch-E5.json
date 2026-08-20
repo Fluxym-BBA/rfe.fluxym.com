@@ -1,0 +1,659 @@
+{
+ "_patch": {
+  "id": "E5",
+  "chantier": "E — qualification marché",
+  "auteur": "RFE_WebSite",
+  "dateReleve": "2026-08-20",
+  "nbPlateformes": 10,
+  "note": "Lot E5, 10 plateformes, toutes qualifiees a partir de leur propre site (aucune non_qualifie). LECTURE DU REFERENTIEL : le brut de data/plateformes-agreees.json (258 995 octets, blob 3a1e0e5, main) est tronque a ~85 Ko par l'outil de fetch, soit jusqu'aux entrees en E ; les 10 cles nom de ce lot ont donc ete reprises caractere pour caractere depuis Info IA/plateformes-agreees/LOTS-E.md (lot E5) et recoupees avec la liste officielle reproduite sur itesoft.com : INFOLOGIC, ITESOFT, KLEKOON, LE VILLAGE CONNECTE, LOGILEC, MACOMPTA.FR, MEDIUS presents a l'identique ; LUCCA, LUNDI MATIN et MY FITECO absents de cette copie datee du 04/03/2026, seule LOTS-E.md fait foi pour ces trois cles. A verifier au moment de la fusion. CHAMPS NON PRODUITS, faute de source sur le site officiel : segmentCible pour INFOLOGIC, ITESOFT, LOGILEC, LUCCA, LUNDI MATIN et MEDIUS (aucun segment revendique en propre, les rubriques ETI/GE et PME/TPE rencontrees ne decrivent que le calendrier de la reforme) ; socleTechnique pour KLEKOON, LOGILEC, LUCCA et LUNDI MATIN ; perimetreFonctionnel et natureEntite pour LOGILEC ; natureEntite pour LUNDI MATIN ; groupeCapitalistique pour INFOLOGIC, ITESOFT, KLEKOON, LUCCA, LUNDI MATIN, MACOMPTA.FR et MEDIUS (aucune information capitalistique publiee sur les sites consultes ; pour MEDIUS, seuls des chiffres d'activite sont publies, pas d'actionnaire) ; fournisseurDeSocle et solutionsCompatiblesPartenaires pour les neuf autres plateformes que LE VILLAGE CONNECTE, aucune n'ayant de page partenaires, marque blanche, API pour editeurs ou liste de Solutions Compatibles publiee. ROLE DE GROSSISTE : un seul cas net dans ce lot, LE VILLAGE CONNECTE, socle mutualise par l'alliance ACD + RCA + COAXIS avec TESSI en collaboration technique, integre dans MEG, i-Suite Expert et WinePilot et distribue via les cabinets d'expertise comptable. Cas intermediaire, MACOMPTA.FR ouvre sa PA par API aux entreprises equipees d'un logiciel de facturation non agree, ce qui est un acces direct par API et non une revente de socle : fournisseurDeSocle laisse absent, seul modeDistributionSocle est renseigne. NOMS COMMERCIAUX DIFFERENTS DE L'INSCRIPTION : INFOLOGIC = « Plateforme Agreee (PA) Copilote » ; ITESOFT = « Streamline Invoices » ; LE VILLAGE CONNECTE = « Plateforme Agreee LVC » ; MY FITECO = espace client My fiteco edite par FITECO ; LUNDI MATIN = ERP LMB. SITES PAUVRES OU MUETS SUR LA PA : logilec.leclerc, page d'accueil de trois blocs de chiffres, aucune page reforme, aucune page tarifs, aucune mention legale exploitable ; lundimatin.fr, aucune page PA, seule une reponse de FAQ sur la conformite de l'ERP, moteur de recherche interne inoperant et pages /blog en 404 ; myfiteco.fr renvoie une erreur, le site utile est myfiteco.fiteco.com. Pages 404 rencontrees et donc non utilisees : fiteco.com/qui-sommes-nous, medius.com/fr/a-propos-de-nous, lucca.fr/facture-electronique et lucca.fr/finance/notes-de-frais (502). IDENTITE JURIDIQUE, statut, SIREN, adresse, pays, siteWeb, annee de creation, actionnariat, volontairement non touches, ils relevent des chantiers B et C. Les descriptions sont ecrites sans accents pour rester homogenes avec le style des fiches existantes du referentiel."
+ },
+ "plateformes": [
+  {
+   "nom": "INFOLOGIC",
+   "familleOrigine": [
+    "erp",
+    "edi"
+   ],
+   "verticale": "agroalimentaire",
+   "natureEntite": "extension_demat",
+   "perimetreFonctionnel": [
+    "emission",
+    "reception",
+    "suite_gestion"
+   ],
+   "socleTechnique": {
+    "type": "propre",
+    "operateurSocle": "Infologic",
+    "preuve": "« La Plateforme Agreee (PA) Copilote est notre solution de gestion des factures electroniques. Elle est 100 % francaise, integralement editee, developpee, installee et maintenue par nos equipes internes. »",
+    "source": "https://www.infologic-copilote.fr/infos-erp-copilote/infologic-facturation-electronique-2026/",
+    "confiance": "haute"
+   },
+   "descriptionFiche": "Editeur-integrateur de l'ERP Copilote, positionne sur l'agroalimentaire (plats cuisines et produits elabores, negoce et distribution) depuis plus de 40 ans. Le service PA est commercialise sous le nom « Plateforme Agreee (PA) Copilote », presente comme 100 % francaise et developpee en interne. L'offre preexistante comprenait deja la dematerialisation EDI, la dematerialisation PDF, l'archivage certifie et l'envoi vers Chorus Pro ; Infologic revendique les certifications ISO 9001, ISO/IEC 27001, GS1 (dematerialisation des factures EDI, art. 289-VII 3 CGI) et Chorus Pro. Immatriculation definitive annoncee le 29/01/2026.",
+   "logiquePositionnement": "Coherence forte : la PA prolonge un metier d'editeur ERP sectoriel deja outille en EDI et en dematerialisation de factures depuis 15 a 20 ans. La plateforme sert d'abord la base installee Copilote (l'entreprise indique accompagner 100 % de ses clients concernes en 2026 et declarer leurs adresses dans l'annuaire PPF), et non un marche ouvert de routage.",
+   "sourcesEnrichissement": [
+    {
+     "champ": "familleOrigine",
+     "source": "https://www.infologic-copilote.fr/infos-erp-copilote/infologic-facturation-electronique-2026/",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "verticale",
+     "source": "https://www.infologic-copilote.fr/",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "natureEntite",
+     "source": "https://www.infologic-copilote.fr/infos-erp-copilote/infologic-facturation-electronique-2026/",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    },
+    {
+     "champ": "perimetreFonctionnel",
+     "source": "https://www.infologic-copilote.fr/infos-erp-copilote/infologic-facturation-electronique-2026/",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "socleTechnique",
+     "source": "https://www.infologic-copilote.fr/infos-erp-copilote/infologic-facturation-electronique-2026/",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "descriptionFiche",
+     "source": "https://www.infologic-copilote.fr/infos-erp-copilote/infologic-facturation-electronique-2026/",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "ITESOFT",
+   "familleOrigine": [
+    "s2p",
+    "ged"
+   ],
+   "verticale": "generaliste",
+   "natureEntite": "extension_demat",
+   "perimetreFonctionnel": [
+    "emission",
+    "reception",
+    "suite_gestion"
+   ],
+   "socleTechnique": {
+    "type": "propre",
+    "operateurSocle": "ITESOFT",
+    "preuve": "La PA est portee par la solution maison Streamline Invoices, presentee comme « la seule Plateforme Agreee plug & play qui traite plus que des factures », avec ses propres briques de capture (OCR, LAD/RAD), de workflow et de connecteurs ERP.",
+    "source": "https://www.itesoft.com/fr/besoins/dematerialisation-factures/",
+    "confiance": "moyenne"
+   },
+   "descriptionFiche": "Editeur de solutions de digitalisation des processus metier (capture documentaire, dematerialisation des factures fournisseur et client, workflows comptables, portail fournisseur, risques et conformite, Procure-to-Pay), revendiquant plus de 650 clients. Le service porte le nom commercial « Streamline Invoices ». ITESOFT se declare Plateforme Agreee immatriculee et Point d'Acces Peppol certifie, et indique avoir ete parmi les premiers a obtenir l'immatriculation definitive.",
+   "logiquePositionnement": "Coherence forte : la PA est l'aboutissement naturel d'un metier historique de dematerialisation de factures et d'automatisation P2P. Le positionnement reste celui d'une suite de traitement de factures (acquisition omnicanal, OCR, workflow, connecteurs ERP) dans laquelle le canal reglementaire s'insere, plutot que celui d'un routeur pur.",
+   "sourcesEnrichissement": [
+    {
+     "champ": "familleOrigine",
+     "source": "https://www.itesoft.com/fr/besoins/dematerialisation-factures/",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "verticale",
+     "source": "https://www.itesoft.com/fr/",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    },
+    {
+     "champ": "natureEntite",
+     "source": "https://www.itesoft.com/fr/besoins/dematerialisation-factures/",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    },
+    {
+     "champ": "perimetreFonctionnel",
+     "source": "https://www.itesoft.com/fr/besoins/dematerialisation-factures/",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "socleTechnique",
+     "source": "https://www.itesoft.com/fr/besoins/dematerialisation-factures/",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    },
+    {
+     "champ": "descriptionFiche",
+     "source": "https://www.itesoft.com/fr/",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "immatriculation_declaree",
+     "source": "https://www.itesoft.com/fr/blog/liste-pdp-plateforme-dematerialisation-partenaire-facture-electronique/",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "KLEKOON",
+   "familleOrigine": [
+    "ged",
+    "facturation_compta"
+   ],
+   "segmentCible": [
+    "micro",
+    "tpe_pme"
+   ],
+   "verticale": "generaliste",
+   "natureEntite": "extension_demat",
+   "perimetreFonctionnel": [
+    "emission",
+    "reception",
+    "suite_gestion"
+   ],
+   "descriptionFiche": "Plateforme historiquement positionnee sur la dematerialisation des marches publics et la veille des appels d'offres (« Facturation electronique, Dematerialisation marches publics, Veille appels d'offres » en accroche de page d'accueil). Elle se presente desormais comme « plateforme agreee DGFIP » couplee a un logiciel de facturation electronique couvrant la creation, l'emission, la transmission et l'archivage des factures B2B, avec support des formats Factur-X, UBL et CII et de Peppol pour les echanges hors de France.",
+   "logiquePositionnement": "Coherence moyenne a bonne : Klekoon transpose une expertise de dematerialisation nee de la commande publique vers la facturation B2B. Le discours cible explicitement les micro-entrepreneurs, TPE et PME (simplicite, conformite), sans revendiquer de specialisation sectorielle sur son offre PA.",
+   "sourcesEnrichissement": [
+    {
+     "champ": "familleOrigine",
+     "source": "https://www.klekoon.com/",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    },
+    {
+     "champ": "segmentCible",
+     "source": "https://www.klekoon.com/facturation-electronique",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    },
+    {
+     "champ": "verticale",
+     "source": "https://www.klekoon.com/facturation-electronique",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    },
+    {
+     "champ": "natureEntite",
+     "source": "https://www.klekoon.com/",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    },
+    {
+     "champ": "perimetreFonctionnel",
+     "source": "https://www.klekoon.com/facturation-electronique",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "descriptionFiche",
+     "source": "https://www.klekoon.com/facturation-electronique",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "LE VILLAGE CONNECTE",
+   "familleOrigine": [
+    "portail_ec"
+   ],
+   "segmentCible": [
+    "micro",
+    "tpe_pme"
+   ],
+   "verticale": "expertise comptable",
+   "natureEntite": "creee_pour_rfe",
+   "perimetreFonctionnel": [
+    "emission",
+    "reception",
+    "ereporting"
+   ],
+   "socleTechnique": {
+    "type": "hybride",
+    "operateurSocle": "Le Village Connecte (alliance ACD, RCA, COAXIS), en collaboration technique avec TESSI",
+    "preuve": "« le LVC a choisi de developper sa propre Plateforme Agreee, specifiquement concue pour les cabinets d'expertise comptable » ; « Cette initiative est portee par l'alliance industrielle des acteurs ACD, RCA et COAXIS, en collaboration technique avec TESSI. »",
+    "source": "https://village-connecte.fr/le-village-connecte/",
+    "confiance": "moyenne"
+   },
+   "fournisseurDeSocle": true,
+   "modeDistributionSocle": [
+    "via cabinet EC",
+    "API/embedded"
+   ],
+   "solutionsCompatiblesPartenaires": [
+    "MEG",
+    "i-Suite Expert",
+    "WinePilot"
+   ],
+   "groupeCapitalistique": "Alliance industrielle ACD + RCA + COAXIS (collaboration technique TESSI)",
+   "descriptionFiche": "Structure dediee a la facture electronique creee pour accompagner les cabinets d'expertise comptable, portee par l'alliance industrielle ACD, RCA et COAXIS avec TESSI en collaboration technique. Le service est commercialise sous le nom « Plateforme Agreee LVC ». Il couvre l'emission et la transmission des factures de vente, la reception des factures d'achat, le e-reporting et le suivi des paiements, avec une « integration 100 % transparente » dans les outils MEG, i-Suite Expert et WinePilot. Chiffres revendiques : plus de 800 000 entreprises utilisatrices des solutions integrees au LVC, 150 millions de factures traitees par an, plus de 25 ans d'experience aupres des experts-comptables.",
+   "logiquePositionnement": "Coherence forte et cas rare de socle mutualise : trois editeurs concurrents sur le marche des cabinets mutualisent une seule PA, distribuee via les cabinets et embarquee dans leurs logiciels metier declares Solutions Compatibles. Le LVC n'adresse pas l'entreprise en direct mais la profession comptable, qui garde la relation client et la maitrise de l'experience utilisateur.",
+   "sourcesEnrichissement": [
+    {
+     "champ": "familleOrigine",
+     "source": "https://village-connecte.fr/le-village-connecte/",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "segmentCible",
+     "source": "https://village-connecte.fr/la-plateforme-agreee-lvc/",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    },
+    {
+     "champ": "verticale",
+     "source": "https://village-connecte.fr/le-village-connecte/",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "natureEntite",
+     "source": "https://village-connecte.fr/le-village-connecte/",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "perimetreFonctionnel",
+     "source": "https://village-connecte.fr/la-plateforme-agreee-lvc/",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "socleTechnique",
+     "source": "https://village-connecte.fr/le-village-connecte/",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    },
+    {
+     "champ": "fournisseurDeSocle",
+     "source": "https://village-connecte.fr/la-plateforme-agreee-lvc/",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    },
+    {
+     "champ": "modeDistributionSocle",
+     "source": "https://village-connecte.fr/la-plateforme-agreee-lvc/",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    },
+    {
+     "champ": "solutionsCompatiblesPartenaires",
+     "source": "https://village-connecte.fr/la-plateforme-agreee-lvc/",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "groupeCapitalistique",
+     "source": "https://village-connecte.fr/le-village-connecte/",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "descriptionFiche",
+     "source": "https://village-connecte.fr/le-village-connecte/",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "LOGILEC",
+   "familleOrigine": [
+    "edi"
+   ],
+   "verticale": "grande distribution",
+   "natureEntite": "extension_demat",
+   "groupeCapitalistique": "Mouvement E.Leclerc",
+   "descriptionFiche": "Entite au service de la supply chain du Mouvement E.Leclerc, qui revendique 20 ans d'expertise en echange de donnees informatisees au sein du Mouvement, 15 ans d'expertise en dematerialisation de factures par EDI et 30 ans en transport et logistique. Le site public ne comporte pas de page dediee a la reforme ni de description de l'offre de plateforme agreee : les champs de positionnement commercial (segment cible, perimetre fonctionnel, socle technique) n'ont pas pu etre sourcees.",
+   "logiquePositionnement": "Coherence forte avec le metier d'origine, mais logique captive : la PA d'un operateur EDI interne a une enseigne de la grande distribution s'inscrit dans la continuite des flux factures du Mouvement E.Leclerc et de ses fournisseurs, non dans une conquete de marche ouverte. A confirmer, le site ne documentant pas l'offre PA.",
+   "sourcesEnrichissement": [
+    {
+     "champ": "familleOrigine",
+     "source": "https://www.logilec.leclerc/",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "verticale",
+     "source": "https://www.logilec.leclerc/",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "natureEntite",
+     "source": "https://www.logilec.leclerc/",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    },
+    {
+     "champ": "groupeCapitalistique",
+     "source": "https://www.logilec.leclerc/",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "descriptionFiche",
+     "source": "https://www.logilec.leclerc/",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    }
+   ]
+  },
+  {
+   "nom": "LUCCA",
+   "familleOrigine": [
+    "s2p"
+   ],
+   "verticale": "generaliste",
+   "natureEntite": "diversification",
+   "perimetreFonctionnel": [
+    "reception",
+    "ereporting"
+   ],
+   "descriptionFiche": "Editeur d'un SIRH modulaire (donnees collaborateurs, conges et absences, entretiens, paie) diversifie vers la finance avec les modules Factures fournisseurs et Notes de frais. Lucca se presente comme « plateforme agreee (PA) par l'Etat » et annonce assurer la conformite « pour la reception des factures electroniques (e-invoicing) et la transmission des donnees obligatoires a l'Etat (e-reporting) ». L'acces a la PA est annonce comme compris dans l'abonnement Notes de frais, avec le cas d'usage specifique des justificatifs de notes de frais (hotel, restaurant au-dela de 150 EUR HT, petits achats) recus au format electronique ; les collaborateurs disposent dans l'application d'un espace pour communiquer au fournisseur l'adresse de la PA a utiliser.",
+   "logiquePositionnement": "Diversification coherente mais volontairement etroite : Lucca ne se positionne pas en PA generaliste de routage, elle immatricule une PA de reception pour securiser deux de ses modules (factures fournisseurs, notes de frais). L'editeur assume d'ailleurs la coexistence de plusieurs PA en reception chez un meme client, une PA pour les notes de frais et une autre pour les factures fournisseurs.",
+   "sourcesEnrichissement": [
+    {
+     "champ": "familleOrigine",
+     "source": "https://www.lucca.fr/finance/achats/",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    },
+    {
+     "champ": "familleOrigine_origine_sirh",
+     "source": "https://www.lucca.fr/",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "verticale",
+     "source": "https://www.lucca.fr/finance/achats/",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    },
+    {
+     "champ": "natureEntite",
+     "source": "https://www.lucca.fr/actualites/facturation-electronique-notes-de-frais/",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    },
+    {
+     "champ": "perimetreFonctionnel",
+     "source": "https://www.lucca.fr/finance/achats/",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "descriptionFiche",
+     "source": "https://www.lucca.fr/actualites/facturation-electronique-notes-de-frais/",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "LUNDI MATIN",
+   "familleOrigine": [
+    "erp"
+   ],
+   "verticale": "commerce de detail, e-commerce et CHR",
+   "perimetreFonctionnel": [
+    "suite_gestion"
+   ],
+   "descriptionFiche": "Editeur de l'ERP omnicanal LMB : logiciel de caisse, site e-commerce, catalogue produits, stocks, achats, connecteurs marketplaces, click & collect, pilotage comptable. Les solutions metier sont organisees autour de trois univers, « Commerce - E-commerce », « Cafe - Hotel - Restaurant » et « Gestion d'activite », avec des references clients grand compte affichees. Sur la reforme, l'editeur se limite a indiquer que son ERP est « entierement conforme a toutes les reglementations actuelles, y compris la reforme de la facturation electronique obligatoire » : aucune page ne decrit son offre de plateforme agreee, son socle ni son perimetre reglementaire.",
+   "logiquePositionnement": "Positionnement d'editeur de suite de gestion : la conformite reglementaire est presentee comme une propriete de l'ERP, pas comme une offre de plateforme distincte. Le detail du positionnement PA (segment, socle, emission/reception, e-reporting) reste a confirmer, le site n'en disant rien.",
+   "sourcesEnrichissement": [
+    {
+     "champ": "familleOrigine",
+     "source": "https://www.lundimatin.fr/",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "verticale",
+     "source": "https://www.lundimatin.fr/",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "perimetreFonctionnel",
+     "source": "https://www.lundimatin.fr/logiciel-gestion/gestion-comptabilite",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    },
+    {
+     "champ": "descriptionFiche",
+     "source": "https://www.lundimatin.fr/logiciel-gestion/gestion-comptabilite",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    }
+   ]
+  },
+  {
+   "nom": "MACOMPTA.FR",
+   "familleOrigine": [
+    "facturation_compta"
+   ],
+   "segmentCible": [
+    "micro",
+    "tpe_pme"
+   ],
+   "verticale": "generaliste",
+   "natureEntite": "extension_demat",
+   "perimetreFonctionnel": [
+    "emission",
+    "reception",
+    "suite_gestion"
+   ],
+   "socleTechnique": {
+    "type": "propre",
+    "operateurSocle": "macompta.fr",
+    "preuve": "« Nos utilisateurs pourront ainsi recevoir leurs factures fournisseurs et generer leurs factures client electroniquement via notre propre plateforme. Celle-ci sera integree a nos logiciels de facturation, comptabilite et declarations fiscales. »",
+    "source": "https://www.macompta.fr/comprendre-facturation-electronique",
+    "confiance": "haute"
+   },
+   "modeDistributionSocle": [
+    "direct",
+    "API/embedded"
+   ],
+   "descriptionFiche": "Editeur en ligne de logiciels de comptabilite, facturation, gestion commerciale, paie et declarations fiscales pour les petites entreprises depuis 2007. La PA est presentee comme « notre propre plateforme », integree aux logiciels maison, avec un tarif forfaitaire mensuel sans facturation au volume de documents, un hebergement redondant en data center certifie SecNumCloud et une certification ISO 27001. L'offre est ouverte : une entreprise equipee d'un logiciel de facturation non agree peut emettre via la PA macompta.fr manuellement ou par API, et exporter ses ecritures vers un autre logiciel de comptabilite.",
+   "logiquePositionnement": "Coherence forte sur le bas du marche, revendiquee comme telle : « une culture de la petite entreprise », en opposition explicite aux « PA qui viennent du marche des grandes entreprises ou sans historique ». La PA sert d'abord a retenir la base installee TPE et micro, tout en restant accessible par API a des utilisateurs d'outils tiers.",
+   "sourcesEnrichissement": [
+    {
+     "champ": "familleOrigine",
+     "source": "https://www.macompta.fr/",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "segmentCible",
+     "source": "https://www.macompta.fr/comprendre-facturation-electronique",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "verticale",
+     "source": "https://www.macompta.fr/comprendre-facturation-electronique",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    },
+    {
+     "champ": "natureEntite",
+     "source": "https://www.macompta.fr/comprendre-facturation-electronique",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "perimetreFonctionnel",
+     "source": "https://www.macompta.fr/comprendre-facturation-electronique",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "socleTechnique",
+     "source": "https://www.macompta.fr/comprendre-facturation-electronique",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "modeDistributionSocle",
+     "source": "https://www.macompta.fr/comprendre-facturation-electronique",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    },
+    {
+     "champ": "descriptionFiche",
+     "source": "https://www.macompta.fr/comprendre-facturation-electronique",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "MEDIUS",
+   "familleOrigine": [
+    "s2p"
+   ],
+   "verticale": "generaliste",
+   "natureEntite": "extension_demat",
+   "perimetreFonctionnel": [
+    "reception"
+   ],
+   "socleTechnique": {
+    "type": "propre",
+    "operateurSocle": "Medius",
+    "preuve": "La PA est adossee a la plateforme maison d'automatisation source-to-pay et a Medius Capture : « Sa solution, alimentee par l'intelligence artificielle, automatise integralement le traitement des factures fournisseurs », capture des donnees, visualisation des factures electroniques, traitement, reconciliation et prise en charge des paiements.",
+    "source": "https://www.medius.com/fr/actualites/medius-repond-aux-enjeux-de-conformite-reglementaire-en-france-en-devenant-une-plateforme-de-dematerialisation-partenaire/",
+    "confiance": "moyenne"
+   },
+   "descriptionFiche": "Acteur de l'automatisation du cycle source-to-pay et de la gestion des notes de frais, qui se decrit comme gerant les depenses de plus de 4 000 clients dans 102 pays et 200 milliards de dollars de depenses annuelles. L'offre francaise est centree sur la comptabilite fournisseurs : Medius Capture, traitement et reconciliation des factures, paiements, avec l'IA comme argument principal. Immatriculation PDP annoncee le 17/12/2024 et immatriculation finale de Plateforme Agreee annoncee le 12/01/2026.",
+   "logiquePositionnement": "Coherence forte cote metier, perimetre volontairement asymetrique : la PA sert la reception et le traitement des factures fournisseurs des directions financieres deja clientes de la suite S2P. Le discours francais est un discours de conformite (« repondre de maniere durable aux enjeux des entreprises realisant des transactions en France »), pas de conquete du marche du routage.",
+   "sourcesEnrichissement": [
+    {
+     "champ": "familleOrigine",
+     "source": "https://www.medius.com/fr/actualites/medius-repond-aux-enjeux-de-conformite-reglementaire-en-france-en-devenant-une-plateforme-de-dematerialisation-partenaire/",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "verticale",
+     "source": "https://www.medius.com/fr/",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    },
+    {
+     "champ": "natureEntite",
+     "source": "https://www.medius.com/fr/actualites/medius-repond-aux-enjeux-de-conformite-reglementaire-en-france-en-devenant-une-plateforme-de-dematerialisation-partenaire/",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    },
+    {
+     "champ": "perimetreFonctionnel",
+     "source": "https://www.medius.com/fr/presentation-des-solutions/ap-automation/facturation-electronique/",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    },
+    {
+     "champ": "socleTechnique",
+     "source": "https://www.medius.com/fr/actualites/medius-repond-aux-enjeux-de-conformite-reglementaire-en-france-en-devenant-une-plateforme-de-dematerialisation-partenaire/",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    },
+    {
+     "champ": "descriptionFiche",
+     "source": "https://www.medius.com/fr/actualites/medius-repond-aux-enjeux-de-conformite-reglementaire-en-france-en-devenant-une-plateforme-de-dematerialisation-partenaire/",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "MY FITECO",
+   "familleOrigine": [
+    "portail_ec"
+   ],
+   "segmentCible": [
+    "micro",
+    "tpe_pme"
+   ],
+   "verticale": "generaliste",
+   "natureEntite": "extension_demat",
+   "perimetreFonctionnel": [
+    "emission",
+    "suite_gestion"
+   ],
+   "socleTechnique": {
+    "type": "propre",
+    "operateurSocle": "FITECO",
+    "preuve": "« Une creation Made by FITECO : My fiteco est une solution concue et developpee par FITECO », espace client dans lequel l'offre PA est presentee (« My fiteco plateforme Agreee facturation electronique »).",
+    "source": "https://myfiteco.fiteco.com/",
+    "confiance": "moyenne"
+   },
+   "modeDistributionSocle": [
+    "via cabinet EC"
+   ],
+   "groupeCapitalistique": "FITECO, reseau francais d'expertise comptable, conseil et audit (depuis 1967, plus de 1 620 collaborateurs, 180 bureaux, 37 800 clients, siege a Change en Mayenne)",
+   "descriptionFiche": "My fiteco est l'espace client numerique concu et developpe par le reseau d'expertise comptable FITECO : indicateurs de pilotage, suivi des operations, tresorerie, GED, consultation des comptes bancaires, gestion des paies, avec une option « Devis - Factures » permettant d'emettre des factures conformes aux obligations legales (abonnement 12,90 EUR HT par mois, option facturation 13,90 EUR HT). FITECO met en avant sur sa page d'accueil « My fiteco plateforme Agreee facturation electronique » et une certification ISO 27001. Le service s'adresse aux clients du reseau, accompagnes par leur bureau FITECO.",
+   "logiquePositionnement": "Coherence forte de type portail cabinet : la PA n'est pas un produit vendu sur le marche ouvert mais l'extension reglementaire de l'espace client d'un reseau comptable, distribuee via les 180 bureaux du reseau a une clientele de TPE, PME et structures patrimoniales (tarif specifique SCI et SCM). L'immatriculation securise la chaine comptable interne du reseau plutot qu'une ambition d'operateur de flux.",
+   "sourcesEnrichissement": [
+    {
+     "champ": "familleOrigine",
+     "source": "https://myfiteco.fiteco.com/",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "segmentCible",
+     "source": "https://myfiteco.fiteco.com/",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    },
+    {
+     "champ": "verticale",
+     "source": "https://www.fiteco.com/",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    },
+    {
+     "champ": "natureEntite",
+     "source": "https://myfiteco.fiteco.com/",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    },
+    {
+     "champ": "perimetreFonctionnel",
+     "source": "https://myfiteco.fiteco.com/",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    },
+    {
+     "champ": "socleTechnique",
+     "source": "https://myfiteco.fiteco.com/",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    },
+    {
+     "champ": "modeDistributionSocle",
+     "source": "https://www.fiteco.com/",
+     "dateReleve": "2026-08-20",
+     "confiance": "moyenne"
+    },
+    {
+     "champ": "groupeCapitalistique",
+     "source": "https://www.fiteco.com/",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "descriptionFiche",
+     "source": "https://myfiteco.fiteco.com/",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  }
+ ]
+}
