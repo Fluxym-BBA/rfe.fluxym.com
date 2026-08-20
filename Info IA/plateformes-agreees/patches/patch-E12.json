@@ -1,0 +1,489 @@
+{
+  "_patch": {
+    "id": "E12",
+    "chantier": "E — qualification marché",
+    "auteur": "RFE_WebSite",
+    "dateReleve": "2026-08-20",
+    "nbPlateformes": 10,
+    "note": "Lot E12 — 10 entites etrangeres. Conformement au brief, siren, raisonSociale, dateCreation, trancheEffectif, categorieEntreprise, activitePrincipale et dirigeants ne sont pas traites et sont absents du patch (non ecrases). LIMITE DE RELECTURE DU REFERENTIEL : data/plateformes-agreees.json (253 380 octets sur main @ 9a71dee) n'a pu etre relu qu'a hauteur d'environ 85 000 caracteres par appel, soit le premier tiers du fichier (jusqu'a la lettre E). Les 10 enregistrements du lot, situes de N a T, n'ont donc PAS pu etre relus directement. Les valeurs de la cle de fusion nom ont ete verrouillees sur Info IA/plateformes-agreees/LOTS-E.md (branche main), ligne du lot E12, caractere pour caractere. A verifier au moment de la fusion. ECART A ARBITRER — Shine : LOTS-E.md classe Shine dans un lot ETRANGER, mais ses mentions legales identifient une entite francaise, Shine France SAS, RCS Paris 828 701 557, siege 122 rue Amelot 75011 Paris, etablissement de paiement agree ACPR n. 71758. Shine est donc probablement eligible a l'enrichissement SIRENE du chantier identite juridique, contrairement a l'hypothese du lot. Aucun champ d'identite juridique n'a ete ecrit ici. CHAMPS NON RENSEIGNES, faute de source : fournisseurDeSocle et solutionsCompatiblesPartenaires ne sont renseignes pour aucune des 10 plateformes. Aucune n'a publie de liste de Solutions Compatibles, de page marque blanche ou d'offre d'API pour editeurs tiers. Attention a un faux positif ecarte : SPS Commerce publie un Partner Directory et un Dev Center, mais il s'agit de partenaires commerciaux et de partenaires commercants de son reseau retail, pas de Solutions Compatibles au sens de la reforme ; le champ a donc ete laisse absent. groupeCapitalistique absent pour SEEBURGER, SNI, ODOO, SOLO, Shine, SPS COMMERCE et TESISQUARE SPA : aucun de ces sites ne documente son actionnariat sur les pages consultees. Pour SOLO, le seul signal observe est que le parcours d'inscription est heberge sur portail-autoentrepreneur.fr ; ce constat est consigne dans descriptionFiche mais n'a pas ete promu en lien capitalistique, faute de preuve. Pour Shine, le cantonnement des fonds clients chez la Societe Generale est un mecanisme prudentiel L.522-17 du CMF et n'a pas ete interprete comme un lien de detention. verticale absent pour SPS COMMERCE et TESISQUARE SPA : leur verticale reelle est le retail et la supply chain, or la liste fermee de data/pa-taxonomie.json ne propose que generaliste, sante_pharma, assurance, optique, immobilier, juridique, transport, agro, btp, esn. Les qualifier de generaliste aurait ete faux, transport aurait ete abusif. Lacune de taxonomie a arbitrer : ajouter une valeur retail_distribution ou supply_chain. SITES PEU DIRECTIFS : SPS COMMERCE ne documente sur aucune page publique consultee son statut de plateforme agreee francaise ni le dispositif RFE ; sa qualification repose sur son positionnement general et reste en confiance moyenne. SNI presente sa page France comme une solution SAP permettant d'echanger via une plateforme agreee, sans revendiquer explicitement sa propre immatriculation. Les URL suivantes ont renvoye 404 au releve : seeburger.com/fr/e-invoicing-france/, tesisquare.com/en/france-e-invoicing/, spscommerce.com/blog/france-e-invoicing-mandate/, solo.fr/facturation-electronique, odoo.com/fr_FR/app/localization-france. NOM COMMERCIAL DISTINCT DU NOM D'INSCRIPTION, signal du brief : l'inscription NTT DATA Business Solutions correspond au produit JOUBINI by NTT DATA, ex it.x-EDIconnect (joubini.bynttdata.com). Pour SAP, le service est porte par SAP Document and Reporting Compliance, cloud edition. Pour SEEBURGER, par le E-Invoicing Hub adosse a la Business Integration Suite. Pour TESISQUARE SPA, par TESI EXTENDED INTEGRATION. Rappel de cadrage : marque blanche, marque grise et socle propre sont des observations de marche et non des categories reglementaires. L'administration ne distingue que la plateforme agreee immatriculee et la Solution Compatible non immatriculee, et chacune des 10 plateformes de ce lot est immatriculee en son nom propre et reste seule responsable devant l'administration. Pour SOLO et Shine, socleTechnique.operateurSocle est volontairement ABSENT et non a null, la fusion cle par cle interpretant un null comme un ecrasement de la valeur existante."
+  },
+  "plateformes": [
+    {
+      "nom": "NTT DATA Business Solutions",
+      "siteWeb": "https://nttdata-solutions.com/fr/",
+      "familleOrigine": [
+        "integrateur",
+        "edi"
+      ],
+      "segmentCible": [
+        "eti",
+        "grands_comptes"
+      ],
+      "verticale": "generaliste",
+      "natureEntite": "extension_demat",
+      "perimetreFonctionnel": [
+        "emission",
+        "reception",
+        "ereporting"
+      ],
+      "socleTechnique": {
+        "type": "propre",
+        "operateurSocle": "NTT DATA Business Solutions — JOUBINI",
+        "preuve": "Le communique officiel presente JOUBINI comme la plateforme EDI cloud ERP-ready de NTT DATA Business Solutions, deja certifiee en Espagne, Pologne et Roumanie, avec une bibliotheque de plus de 15 000 mappings standards et une supervision 24/7. JOUBINI est l'ancien it.x-EDIconnect, produit maison renomme.",
+        "source": "https://nttdata-solutions.com/fr/salle-de-presse/communiques-de-presse-locale/joubini-plateforme-agreee/",
+        "confiance": "haute"
+      },
+      "modeDistributionSocle": "direct",
+      "groupeCapitalistique": "Groupe NTT DATA — NTT DATA Business Solutions, partenaire strategique mondial de SAP, plus de 13 000 collaborateurs dans 30 pays",
+      "descriptionFiche": "Integrateur SAP mondial, filiale du groupe NTT DATA, qui opere sa propre plateforme EDI cloud JOUBINI (anciennement it.x-EDIconnect). Le nom commercial du service PA est JOUBINI by NTT DATA, distinct du nom d'inscription. Plateforme cloud full-service centralisant les flux EDI, e-invoicing et connexions ERP, compatible SAP ECC, SAP S/4HANA et ERP tiers. Prend en charge Factur-X, UBL, XML et EDIFACT ainsi que des formats specifiques a plusieurs marches europeens. Deja certifiee en Espagne, Pologne et Roumanie avant la France. Cible les groupes internationaux aux flux critiques EDI et ERP.",
+      "logiquePositionnement": "Coherent et continu : le metier d'origine est l'integration SAP et l'EDI B2B. Le statut PA prolonge un socle EDI deja en production et deja certifie dans trois autres pays europeens ; la France s'ajoute a une feuille de route de conformite multi-pays plutot qu'elle ne la declenche.",
+      "sourcesEnrichissement": [
+        {
+          "champ": "positionnement",
+          "source": "https://nttdata-solutions.com/fr/salle-de-presse/communiques-de-presse-locale/joubini-plateforme-agreee/",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        },
+        {
+          "champ": "socleTechnique",
+          "source": "https://nttdata-solutions.com/fr/salle-de-presse/communiques-de-presse-locale/joubini-plateforme-agreee/",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        },
+        {
+          "champ": "groupeCapitalistique",
+          "source": "https://nttdata-solutions.com/fr/salle-de-presse/communiques-de-presse-locale/joubini-plateforme-agreee/",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        },
+        {
+          "champ": "nomCommercialService",
+          "source": "https://joubini.bynttdata.com/en/",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "ODOO",
+      "siteWeb": "https://www.odoo.com/fr_FR/electronic-invoicing/france",
+      "familleOrigine": [
+        "erp"
+      ],
+      "segmentCible": [
+        "micro",
+        "tpe_pme",
+        "eti",
+        "grands_comptes"
+      ],
+      "verticale": "generaliste",
+      "natureEntite": "diversification",
+      "perimetreFonctionnel": [
+        "emission",
+        "reception",
+        "suite_gestion"
+      ],
+      "socleTechnique": {
+        "type": "propre",
+        "operateurSocle": "Odoo",
+        "preuve": "Odoo declare sur son site « Odoo est certifie en tant que Plateforme Agreee (PA) » et opere le service depuis sa propre suite ; la documentation produit decrit le module natif « France - Facturation electronique (plateforme agreee) » (l10n_fr_pdp).",
+        "source": "https://www.odoo.com/fr_FR/electronic-invoicing/france",
+        "confiance": "haute"
+      },
+      "modeDistributionSocle": "direct",
+      "descriptionFiche": "Editeur d'une suite ERP tout-en-un modulaire (comptabilite, ventes, stocks, RH, production) qui a ajoute la fonction de plateforme agreee a son perimetre. Odoo se positionne explicitement comme « la PA gratuite » : l'emission et la reception de factures electroniques sont sans surcout, la ou l'editeur souligne que les autres PA facturent au credit ou au document. Le service est active par le module natif l10n_fr_pdp de la localisation francaise. Positionnement revendique pour toutes les tailles d'entreprise, des startups aux grandes entreprises, et tous secteurs.",
+      "logiquePositionnement": "Diversification defensive et coherente : l'ERP est deja le point de production de la facture, le statut PA evite que ses clients aient a s'interfacer avec un tiers. La gratuite du service PA est un argument de retention et d'acquisition sur la suite ERP, pas une ligne de revenu autonome.",
+      "sourcesEnrichissement": [
+        {
+          "champ": "positionnement",
+          "source": "https://www.odoo.com/fr_FR/electronic-invoicing/france",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        },
+        {
+          "champ": "socleTechnique",
+          "source": "https://www.odoo.com/documentation/19.0/fr/applications/finance/fiscal_localizations/france.html",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        },
+        {
+          "champ": "tarification",
+          "source": "https://www.odoo.com/fr_FR/electronic-invoicing/france",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "SAP",
+      "siteWeb": "https://www.sap.com/products/financial-management/document-reporting-compliance.html",
+      "familleOrigine": [
+        "erp",
+        "tax"
+      ],
+      "segmentCible": [
+        "eti",
+        "grands_comptes"
+      ],
+      "verticale": "generaliste",
+      "natureEntite": "diversification",
+      "perimetreFonctionnel": [
+        "emission",
+        "reception",
+        "ereporting"
+      ],
+      "socleTechnique": {
+        "type": "propre",
+        "operateurSocle": "SAP — SAP Document and Reporting Compliance, cloud edition",
+        "preuve": "L'annonce publiee par SAP sur son espace corporate indique que SAP est reconnue Plateforme agreee pour l'e-invoicing et l'e-reporting francais, et rattache les capacites au produit SAP Document and Reporting Compliance, cloud edition.",
+        "source": "https://community.sap.com/t5/financial-management-blog-posts-by-sap/sap-is-now-plateforme-agr%C3%A9%C3%A9e-pa-for-e-invoicing-and-e-reporting/ba-p/14314339",
+        "confiance": "haute"
+      },
+      "modeDistributionSocle": "direct",
+      "groupeCapitalistique": "SAP SE",
+      "descriptionFiche": "Editeur d'ERP mondial qui adosse son statut de plateforme agreee au produit SAP Document and Reporting Compliance, cloud edition. Capacites annoncees : echange securise de factures structurees, transmission automatisee des donnees de transaction et de paiement a l'administration fiscale francaise, alignement sur Factur-X, UBL, CII et les standards d'e-reporting, et couverture du cycle de vie reglementaire. SAP inscrit la France dans une logique de « regulatory-relief-as-a-service » multi-juridictions plutot que dans une offre franco-francaise dediee.",
+      "logiquePositionnement": "Coherent : le socle est le meme ERP qui produit la facture, et la conformite reglementaire multi-pays est deja une ligne de produit constituee. Le statut PA francais est un module de plus dans un catalogue de conformite mondial, ce qui limite l'exposition commerciale mais aussi la specialisation sur les particularites francaises.",
+      "sourcesEnrichissement": [
+        {
+          "champ": "positionnement",
+          "source": "https://community.sap.com/t5/financial-management-blog-posts-by-sap/sap-is-now-plateforme-agr%C3%A9%C3%A9e-pa-for-e-invoicing-and-e-reporting/ba-p/14314339",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        },
+        {
+          "champ": "socleTechnique",
+          "source": "https://community.sap.com/t5/financial-management-blog-posts-by-sap/sap-is-now-plateforme-agr%C3%A9%C3%A9e-pa-for-e-invoicing-and-e-reporting/ba-p/14314339",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        },
+        {
+          "champ": "groupeCapitalistique",
+          "source": "https://community.sap.com/t5/financial-management-blog-posts-by-sap/sap-is-now-plateforme-agr%C3%A9%C3%A9e-pa-for-e-invoicing-and-e-reporting/ba-p/14314339",
+          "dateReleve": "2026-08-20",
+          "confiance": "moyenne"
+        }
+      ]
+    },
+    {
+      "nom": "SEEBURGER",
+      "siteWeb": "https://www.seeburger.com/",
+      "familleOrigine": [
+        "edi"
+      ],
+      "segmentCible": [
+        "eti",
+        "grands_comptes"
+      ],
+      "verticale": "generaliste",
+      "natureEntite": "extension_demat",
+      "perimetreFonctionnel": [
+        "emission",
+        "reception",
+        "ereporting"
+      ],
+      "socleTechnique": {
+        "type": "propre",
+        "operateurSocle": "SEEBURGER — Business Integration Suite (BIS) / E-Invoicing Hub",
+        "preuve": "SEEBURGER ecrit : « As a certified PA, SEEBURGER provides the compliant rails and, based on the Business Integration Suite (BIS), supports the integrations you already run » — EDI, API et integration applicative, livrees en iPaaS, SaaS, cloud ou on-premises.",
+        "source": "https://blog.seeburger.com/e-invoicing-reform-in-france-migrate-now-with-a-certified-pa/",
+        "confiance": "haute"
+      },
+      "modeDistributionSocle": "direct",
+      "descriptionFiche": "Operateur d'integration B2B allemand, present sur l'EDI et la facturation electronique en France depuis plus de 25 ans selon ses propres declarations. Le statut de plateforme agreee est adosse a la Business Integration Suite (BIS) et au SEEBURGER E-Invoicing Hub, disponibles en iPaaS, SaaS, cloud ou on-premises. Le discours commercial cible explicitement les directions financieres et IT d'entreprises a paysage applicatif complexe, avec accelerateurs, templates et services manages. L'entreprise a d'abord ete immatriculee a titre provisoire avant l'immatriculation definitive.",
+      "logiquePositionnement": "Tres coherent : la PA est presentee comme un rail de conformite ajoute a un socle d'integration deja en production chez le client, sans refonte d'architecture. Le risque n'est pas la credibilite technique mais la lisibilite de l'offre pour un acheteur qui cherche une PA et non une plateforme d'integration.",
+      "sourcesEnrichissement": [
+        {
+          "champ": "positionnement",
+          "source": "https://blog.seeburger.com/e-invoicing-reform-in-france-migrate-now-with-a-certified-pa/",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        },
+        {
+          "champ": "socleTechnique",
+          "source": "https://www.seeburger.com/integration-platform/business-integration-suite",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        },
+        {
+          "champ": "perimetreFonctionnel",
+          "source": "https://www.seeburger.com/fr/solution-brief/seeburger-e-invoicing-hub",
+          "dateReleve": "2026-08-20",
+          "confiance": "moyenne"
+        }
+      ]
+    },
+    {
+      "nom": "SNI",
+      "siteWeb": "https://snitechnology.net/",
+      "familleOrigine": [
+        "tax"
+      ],
+      "segmentCible": [
+        "eti",
+        "grands_comptes"
+      ],
+      "verticale": "generaliste",
+      "natureEntite": "extension_demat",
+      "perimetreFonctionnel": [
+        "emission",
+        "ereporting"
+      ],
+      "socleTechnique": {
+        "type": "propre",
+        "operateurSocle": "SNI",
+        "preuve": "SNI presente une solution SAP-integree de bout en bout couvrant extraction, mapping et communication avec la plateforme, avec cockpit de tests et de gestion du risque fiscal, en tant que partenaire SAP.",
+        "source": "https://snitechnology.net/france-e-invoicing/",
+        "confiance": "moyenne"
+      },
+      "modeDistributionSocle": "direct",
+      "descriptionFiche": "Editeur specialise dans la conformite fiscale numerique adossee a SAP : e-invoicing, e-waybill, SAF-T et reporting fiscal sur un large ensemble de juridictions. La page France decrit une solution SAP qui genere les factures au format requis, automatise la conversion XML et l'envoi, et prend en charge extraction, mapping et communication avec la plateforme. Point de vigilance releve : cette page se presente comme une solution permettant d'echanger « through a state-approved platform (PA) or a compatible service connected to a PA », sans revendiquer explicitement l'immatriculation PA de SNI elle-meme.",
+      "logiquePositionnement": "Coherent sur le fond : le metier d'origine est la conformite fiscale multi-pays dans SAP, la France est une juridiction de plus. En revanche le discours public reste celui d'un add-on SAP de conformite plutot que celui d'une plateforme agreee assumee, ce qui cree un ecart entre le statut reglementaire detenu et le positionnement affiche.",
+      "sourcesEnrichissement": [
+        {
+          "champ": "positionnement",
+          "source": "https://snitechnology.net/france-e-invoicing/",
+          "dateReleve": "2026-08-20",
+          "confiance": "moyenne"
+        },
+        {
+          "champ": "socleTechnique",
+          "source": "https://snitechnology.net/",
+          "dateReleve": "2026-08-20",
+          "confiance": "moyenne"
+        }
+      ]
+    },
+    {
+      "nom": "SOLO",
+      "siteWeb": "https://www.solo.fr/",
+      "familleOrigine": [
+        "facturation_compta"
+      ],
+      "segmentCible": [
+        "micro"
+      ],
+      "verticale": "generaliste",
+      "natureEntite": "extension_demat",
+      "perimetreFonctionnel": [
+        "emission",
+        "reception",
+        "suite_gestion"
+      ],
+      "socleTechnique": {
+        "type": "inconnu",
+        "preuve": "Le site revendique le statut « Plateforme agreee par la DGFiP » et annonce l'immatriculation debut 2026, mais ne documente ni l'operateur du socle d'echange ni une architecture technique propre. Aucun element public ne permet de trancher entre socle propre et socle tiers.",
+        "source": "https://www.solo.fr/",
+        "confiance": "faible"
+      },
+      "descriptionFiche": "Logiciel de gestion tout-en-un dedie aux micro-entrepreneurs : devis et factures illimites, tresorerie et rapprochement bancaire, declarations Urssaf, suivi des seuils et gestion de la TVA. Quatre offres publiees : Solo Start gratuit, Solo Go a 12 EUR/mois HT, Solo Pro a 19,90 EUR/mois HT, Solo Premium a 34,90 EUR/mois HT, avec accompagnement telephonique sur l'offre haute. La conformite a la facturation electronique est mise en avant comme argument central. Le parcours d'inscription est heberge sur portail-autoentrepreneur.fr, ce qui rattache Solo a l'ecosysteme du Portail Auto-Entrepreneur. Partenaires commerciaux affiches sur la page d'accueil : Shopify, AlloVoisins, SumUp, Orus, Kandbaz, Qonto.",
+      "logiquePositionnement": "Coherent : positionnement mono-segment assume sur le regime micro, ou le statut PA est un argument de conformite decisif et ou l'offre gratuite sert d'entree de gamme vers les paliers payants. Le perimetre fonctionnel est deliberement etroit et calibre sur les obligations de l'auto-entrepreneur, pas sur l'entreprise generaliste.",
+      "sourcesEnrichissement": [
+        {
+          "champ": "positionnement",
+          "source": "https://www.solo.fr/",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        },
+        {
+          "champ": "tarification",
+          "source": "https://www.solo.fr/",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        },
+        {
+          "champ": "socleTechnique",
+          "source": "https://www.solo.fr/",
+          "dateReleve": "2026-08-20",
+          "confiance": "faible"
+        }
+      ]
+    },
+    {
+      "nom": "SPS COMMERCE",
+      "siteWeb": "https://www.spscommerce.com/",
+      "familleOrigine": [
+        "edi"
+      ],
+      "segmentCible": [
+        "eti",
+        "grands_comptes"
+      ],
+      "natureEntite": "extension_demat",
+      "perimetreFonctionnel": [
+        "emission",
+        "reception"
+      ],
+      "socleTechnique": {
+        "type": "propre",
+        "operateurSocle": "SPS Commerce — Intelligent Supply Chain Network",
+        "preuve": "SPS Commerce opere son propre reseau d'echange (« Intelligent Supply Chain Network ») et publie une offre E-Invoicing dans son catalogue produit, aux cotes de Fulfillment (EDI), EDI Testing and Certification et Analytics.",
+        "source": "https://www.spscommerce.com/products/e-invoicing/",
+        "confiance": "moyenne"
+      },
+      "modeDistributionSocle": "direct",
+      "descriptionFiche": "Operateur d'un reseau EDI et supply chain oriente commerce de detail, distribution, industrie et 3PL, structure autour de l'« Intelligent Supply Chain Network » et d'un catalogue large : Fulfillment (EDI), Order Central, Analytics, EDI Testing and Certification, Revenue Recovery, e-invoicing. L'offre E-Invoicing est presentee comme un moyen d'echanger des documents de facturation conformes sans gerer la diversite des exigences locales. Point de vigilance : au moment du releve, aucune page publique du site ne documente le statut de plateforme agreee francaise ni le dispositif RFE ; la qualification repose donc sur le positionnement general de l'editeur.",
+      "logiquePositionnement": "Coherent sur le plan technique — un operateur de reseau EDI retail dispose deja du routage et de l'onboarding partenaires — mais non instruit sur le plan francais : le discours public reste centre sur la supply chain retail nord-americaine et ne met pas en avant la conformite RFE. Le statut PA ressemble a une extension de couverture reglementaire pour clients internationaux plus qu'a une offre adressee au marche francais.",
+      "sourcesEnrichissement": [
+        {
+          "champ": "positionnement",
+          "source": "https://www.spscommerce.com/",
+          "dateReleve": "2026-08-20",
+          "confiance": "moyenne"
+        },
+        {
+          "champ": "perimetreFonctionnel",
+          "source": "https://www.spscommerce.com/products/e-invoicing/",
+          "dateReleve": "2026-08-20",
+          "confiance": "moyenne"
+        }
+      ]
+    },
+    {
+      "nom": "Shine",
+      "siteWeb": "https://www.shine.fr/facturation-electronique",
+      "familleOrigine": [
+        "fintech"
+      ],
+      "segmentCible": [
+        "micro",
+        "tpe_pme"
+      ],
+      "verticale": "generaliste",
+      "natureEntite": "diversification",
+      "perimetreFonctionnel": [
+        "emission",
+        "reception"
+      ],
+      "socleTechnique": {
+        "type": "inconnu",
+        "preuve": "Shine revendique le statut de Plateforme Agreee et indique que « notre Plateforme Agreee est deja integree a Shine », sans documenter l'operateur du socle d'echange. Aucun element public ne permet de trancher entre socle propre et socle tiers.",
+        "source": "https://www.shine.fr/facturation-electronique",
+        "confiance": "faible"
+      },
+      "descriptionFiche": "Compte pro en ligne pour petites entreprises et independants, etabli comme etablissement de paiement agree et supervise par l'ACPR sous le numero 71758. La plateforme agreee est integree nativement au compte et offerte des l'offre Free : reception et emission de factures electroniques sans surcout ni engagement. Le site adresse deux audiences : petites entreprises et experts-comptables. Editeur du site : Shine France SAS, siege 122 rue Amelot 75011 Paris, RCS Paris 828 701 557, directeur de publication Jean Baptiste Sciandra. Les fonds clients sont cantonnes sur un compte dedie ouvert dans les livres de la Societe Generale, mecanisme de protection au sens de l'article L.522-17 du CMF, qui ne dit rien de l'actionnariat.",
+      "logiquePositionnement": "Diversification classique de neobanque : le compte pro est deja le point d'encaissement, la facturation electronique gratuite sert la retention et l'acquisition sur le coeur bancaire. Coherent avec la cible micro et TPE, ou la gratuite est le premier critere de choix d'une PA.",
+      "sourcesEnrichissement": [
+        {
+          "champ": "positionnement",
+          "source": "https://www.shine.fr/facturation-electronique",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        },
+        {
+          "champ": "identiteJuridique",
+          "source": "https://www.shine.fr/mentions-legales",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        },
+        {
+          "champ": "socleTechnique",
+          "source": "https://www.shine.fr/facturation-electronique",
+          "dateReleve": "2026-08-20",
+          "confiance": "faible"
+        }
+      ]
+    },
+    {
+      "nom": "TESISQUARE SPA",
+      "siteWeb": "https://www.tesisquare.com/",
+      "familleOrigine": [
+        "edi"
+      ],
+      "segmentCible": [
+        "eti",
+        "grands_comptes"
+      ],
+      "natureEntite": "extension_demat",
+      "perimetreFonctionnel": [
+        "emission",
+        "reception"
+      ],
+      "socleTechnique": {
+        "type": "propre",
+        "operateurSocle": "Tesisquare — TESI EXTENDED INTEGRATION",
+        "preuve": "Tesisquare decrit sa plateforme d'integration TESI EXTENDED INTEGRATION comme « one of the pioneer PEPPOL access points in Europe » et comme un B2B iPaaS administrant les canaux entrants et sortants comme un flux unique, avec service de conservation numerique longue duree.",
+        "source": "https://www.tesisquare.com/electronic-invoicing/",
+        "confiance": "moyenne"
+      },
+      "modeDistributionSocle": "direct",
+      "descriptionFiche": "Editeur italien de plateformes de visibilite et de collaboration supply chain, dont la brique d'integration TESI EXTENDED INTEGRATION sert de B2B iPaaS et de point d'acces Peppol en Europe. L'offre facturation electronique s'appuie sur l'anteriorite italienne, l'Italie ayant impose l'e-invoicing avant la France, et inclut la conservation numerique longue duree conforme aux reglementations de plusieurs pays. Clients references sur le site : Lavazza Group, Benetton Group. Tesisquare publie une documentation dediee au marche francais sous forme d'un extrait du rapport Billentis consacre a la France.",
+      "logiquePositionnement": "Coherent : point d'acces Peppol historique et plateforme d'integration deja en production, avec une experience reglementaire acquise sur le mandat italien. Le statut PA francais prolonge une strategie de couverture europeenne des mandats, adressee a des grands comptes industriels et de distribution deja clients de la plateforme supply chain.",
+      "sourcesEnrichissement": [
+        {
+          "champ": "positionnement",
+          "source": "https://www.tesisquare.com/electronic-invoicing/",
+          "dateReleve": "2026-08-20",
+          "confiance": "moyenne"
+        },
+        {
+          "champ": "socleTechnique",
+          "source": "https://www.tesisquare.com/tesisquare-platform/tesi-extended-integration/",
+          "dateReleve": "2026-08-20",
+          "confiance": "moyenne"
+        },
+        {
+          "champ": "references",
+          "source": "https://www.tesisquare.com/",
+          "dateReleve": "2026-08-20",
+          "confiance": "moyenne"
+        }
+      ]
+    },
+    {
+      "nom": "TRADESHIFT BABELWAY",
+      "siteWeb": "https://tradeshift.com/",
+      "familleOrigine": [
+        "s2p",
+        "edi"
+      ],
+      "segmentCible": [
+        "eti",
+        "grands_comptes"
+      ],
+      "verticale": "generaliste",
+      "natureEntite": "extension_demat",
+      "perimetreFonctionnel": [
+        "emission",
+        "reception",
+        "ereporting"
+      ],
+      "socleTechnique": {
+        "type": "propre",
+        "operateurSocle": "Tradeshift — plateforme Tradeshift + middleware Babelway",
+        "preuve": "Tradeshift annonce son immatriculation definitive comme Plateforme Agreee et decrit Babelway comme « our powerful middleware » permettant d'ingerer, transformer et router pratiquement tout format de facture, avec integration directe a SAP, Oracle, Microsoft et des centaines d'autres systemes. Point d'acces Peppol certifie depuis 2014.",
+        "source": "https://tradeshift.com/resources/compliance/france-e-invoicing-plateforme-agreee-tradeshift/",
+        "confiance": "haute"
+      },
+      "modeDistributionSocle": "direct",
+      "groupeCapitalistique": "Tradeshift, qui a integre Babelway comme brique middleware de sa plateforme — le nom d'inscription TRADESHIFT BABELWAY reflete ce rapprochement",
+      "descriptionFiche": "Plateforme B2B de dematerialisation et d'automatisation du cycle achats-fournisseurs, immatriculee definitivement comme Plateforme Agreee. Le socle combine la plateforme Tradeshift et le middleware Babelway, qui ingere, transforme et route pratiquement tout format de facture et s'integre a SAP, Oracle, Microsoft et des centaines d'autres systemes. Point d'acces Peppol certifie depuis 2014, avec une couverture revendiquee de 70 pays soumis a des exigences de facturation electronique dont 12 pays en modele clearance ou CTC. Air France est citee comme client ayant retenu Tradeshift comme plateforme agreee et deja en production dans l'Annuaire.",
+      "logiquePositionnement": "Tres coherent : anteriorite Peppol de plus de dix ans, middleware de transformation multi-format et positionnement grands comptes multi-pays. La France est traitee comme un mandat parmi d'autres dans une offre de conformite mondiale, avec une reference client francaise de premier plan deja en production, ce qui est le signal de credibilite le plus fort du lot.",
+      "sourcesEnrichissement": [
+        {
+          "champ": "positionnement",
+          "source": "https://tradeshift.com/resources/compliance/france-e-invoicing-plateforme-agreee-tradeshift/",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        },
+        {
+          "champ": "socleTechnique",
+          "source": "https://tradeshift.com/resources/compliance/france-e-invoicing-plateforme-agreee-tradeshift/",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        },
+        {
+          "champ": "groupeCapitalistique",
+          "source": "https://tradeshift.com/resources/compliance/france-e-invoicing-plateforme-agreee-tradeshift/",
+          "dateReleve": "2026-08-20",
+          "confiance": "moyenne"
+        },
+        {
+          "champ": "references",
+          "source": "https://tradeshift.com/resources/compliance/france-e-invoicing-plateforme-agreee-tradeshift/",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        }
+      ]
+    }
+  ]
+}
