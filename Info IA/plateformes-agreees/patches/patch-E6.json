@@ -1,0 +1,494 @@
+{
+  "_patch": {
+    "id": "E6",
+    "chantier": "E — qualification marché",
+    "auteur": "RFE_WebSite",
+    "dateReleve": "2026-08-20",
+    "nbPlateformes": 10,
+    "note": "Lot E6 (10 plateformes FR), qualification par lecture des sites officiels le 20/08/2026. Identité juridique volontairement non touchée (chantiers B et C) : aucun champ siren/dateCreation/dirigeants, et aucun champ siteWeb pour ne pas écraser le chantier A. LIMITES ET RÉSERVES : (1) le fetch brut de data/plateformes-agreees.json a été tronqué par la taille du fichier (contenu récupéré jusqu'aux entrées commençant par « E ») ; les 10 clés de fusion `nom` ont donc été reprises caractère pour caractère depuis Info IA/plateformes-agreees/LOTS-E.md, ligne du lot E6, lu sur main @ b419029 — à revérifier au moment de la fusion. (2) NEOTIMO : neotimo.com et ses sous-pages (/faq, /tarifs, /neo-actu) renvoient une erreur 500 à notre robot lors de trois tentatives ; aucun champ n'est rempli, confiance non_qualifie. Les extraits indexés par Google suggèrent une plateforme de facturation électronique gratuite reposant sur une « imprimante virtuelle » compatible Sage/EBP/Cegid/Excel, avec un produit « MyNeotimo » : à confirmer sur le site, non retenu ici. (3) PAYFLOWS : aucune page publique dédiée à la Plateforme Agréée sur payflows.io (page /e-invoicing inexistante, homepage et pages produits en anglais sans mention PA) ; seule la qualification métier générale (finance ops : procurement, AP/AR, trésorerie, comptabilité) est sourcée, perimetreFonctionnel limité à suite_gestion, pas de socleTechnique affirmé. (4) MyKinexo PDP : groupeCapitalistique non rempli, la page mentions légales de kinexo.fr n'a pas répondu (404) ; l'éditeur du site est Kinexo, à confirmer avec le chantier B. (5) socleTechnique.type laissé à « inconnu » pour MY UNISOFT, N2F PDP, OfficeIn et PAYFLOWS : ces sites décrivent une Plateforme Agréée « intégrée » sans nommer d'opérateur technique — aucune déduction faite. (6) Signal grossiste confirmé sur 3 plateformes du lot : PARAGON (page « Vous êtes éditeur : ajouter une brique Plateforme Agréée à votre offre » + écosystème éditeurs et revendeurs-intégrateurs), OPEN BEE (programme partenaires OEM/revendeur/technologique, partenaires OEM nommés) et ONE UP (sa plateforme agréée est le moteur du service VIZUP distribué sous marque SG). Rappel de cadrage : « marque blanche » n'est pas une catégorie réglementaire ; chacune de ces plateformes est immatriculée en son nom propre et reste seule responsable devant l'administration. (7) Noms commerciaux différents du nom d'inscription relevés : PARAGON = « Invoice Paragon Platform (IPP) » (site dédié paragon-pa.com), PITNEY BOWES = « Pitney Bowes Invoice Services », ONE UP = moteur de « VIZUP » (SG), MY UNISOFT = offres « MyU » sur myu.fr, OfficeIn = offre « Coffre-fort » sur coffre-fort.officein.fr. (8) Une seule verticale sectorielle dans ce lot : OfficeIn (pharmacie d'officine). Les 9 autres se présentent comme généralistes, y compris quand elles publient des connecteurs sectoriels (Open Bee : BTP, automobile, santé/médico-social)."
+  },
+  "plateformes": [
+    {
+      "nom": "MY UNISOFT",
+      "familleOrigine": [
+        "portail_ec",
+        "facturation_compta"
+      ],
+      "segmentCible": [
+        "micro",
+        "tpe_pme"
+      ],
+      "verticale": "generaliste",
+      "natureEntite": "extension_demat",
+      "perimetreFonctionnel": [
+        "suite_gestion"
+      ],
+      "socleTechnique": {
+        "type": "inconnu",
+        "preuve": "Les pages publiques consultées annoncent une « solution Plateforme Agréée intégrée (ex PDP) » au sein des offres MyU, sans nommer l'opérateur technique du socle.",
+        "source": "https://myu.fr/tpe-pme/besoins/logiciel-conforme-facture-electronique/",
+        "confiance": "faible"
+      },
+      "modeDistributionSocle": [
+        "via cabinet EC",
+        "direct"
+      ],
+      "groupeCapitalistique": "Société créée en 2018, adossée à plus de 140 cabinets d'expertise comptable actionnaires présents dans les organes de gouvernance ; partenariat avec le fonds britannique Hg depuis 2024.",
+      "descriptionFiche": "MyUnisoft est une plateforme cloud d'expertise comptable créée en 2018, positionnée comme la plateforme de référence des cabinets (comptabilité, gestion financière, gestion des stocks, outils analytiques et IA, souveraineté des données revendiquée). L'offre se décline en deux entrées commerciales sur myu.fr : une entrée « cabinet comptable » et une entrée « TPE / PME » (MyU Gestion Interne), toutes deux présentées avec une Plateforme Agréée intégrée à l'outil de facturation. La gouvernance repose sur plus de 140 cabinets actionnaires, et le groupe Hg est partenaire depuis 2024. Le site adresse explicitement trois audiences dans son formulaire : TPE/PME, cabinet comptable et éditeur partenaire, mais aucune page publique ne décrit d'offre de socle pour éditeurs tiers.",
+      "logiquePositionnement": "Positionnement PA cohérent avec le métier d'origine : MyUnisoft tenait déjà le flux comptable et la facturation du client final via le cabinet ; devenir plateforme agréée sécurise ce flux plutôt que d'ouvrir un nouveau marché. Le canal principal reste le cabinet d'expertise comptable, avec une offre directe TPE/PME en second rideau. Rôle de grossiste non établi : la mention « éditeur partenaire » dans un formulaire newsletter ne suffit pas à l'affirmer.",
+      "sourcesEnrichissement": [
+        {
+          "champ": "positionnement",
+          "source": "https://myu.fr/tpe-pme/besoins/logiciel-conforme-facture-electronique/",
+          "dateReleve": "2026-08-20",
+          "confiance": "moyenne"
+        },
+        {
+          "champ": "segmentCible",
+          "source": "https://myu.fr/cabinet-comptable/besoins/logiciel-facturation-automatise/",
+          "dateReleve": "2026-08-20",
+          "confiance": "moyenne"
+        },
+        {
+          "champ": "groupeCapitalistique",
+          "source": "https://hgcapital.com/portfolio/myunisoft",
+          "dateReleve": "2026-08-20",
+          "confiance": "moyenne"
+        }
+      ]
+    },
+    {
+      "nom": "MyKinexo PDP",
+      "familleOrigine": [
+        "portail_ec",
+        "ged"
+      ],
+      "segmentCible": [
+        "micro",
+        "tpe_pme"
+      ],
+      "verticale": "generaliste",
+      "natureEntite": "extension_demat",
+      "perimetreFonctionnel": [
+        "reception"
+      ],
+      "modeDistributionSocle": [
+        "via cabinet EC"
+      ],
+      "descriptionFiche": "MyKinexo est le « bureau digital » que Kinexo met à disposition des cabinets d'expertise comptable pour leurs clients : coffre-fort documentaire, dépôt de livrables avec approbation et signature électronique, conversations cabinet-client, suivi de l'avancement des missions, application mobile. Côté factures, la page produit met en avant des collecteurs automatiques de factures, la collecte email, des collecteurs sur les plateformes fournisseurs et une imprimante virtuelle mise à disposition du client, avec l'objectif affiché d'« anticiper la Factur-X et la digitalisation obligatoire des factures ». L'offre est vendue au cabinet, qui la déploie auprès de ses clients ; le nom d'inscription porte le suffixe PDP alors que le produit commercial est « myKinexo ».",
+      "logiquePositionnement": "Cohérent : Kinexo captait déjà les factures des clients du cabinet dans un coffre-fort documentaire ; l'agrément prolonge ce rôle de point d'entrée des factures reçues. Le suffixe « PDP » dans le nom d'inscription isole le service agréé au sein d'une gamme de portails, mais la distribution reste intégralement intermédiée par le cabinet d'expertise comptable. Aucune offre de socle pour éditeurs tiers publiée.",
+      "sourcesEnrichissement": [
+        {
+          "champ": "positionnement",
+          "source": "https://www.kinexo.fr/mykinexo/",
+          "dateReleve": "2026-08-20",
+          "confiance": "moyenne"
+        },
+        {
+          "champ": "perimetreFonctionnel",
+          "source": "https://www.kinexo.fr/mykinexo/",
+          "dateReleve": "2026-08-20",
+          "confiance": "faible"
+        }
+      ]
+    },
+    {
+      "nom": "N2F PDP",
+      "familleOrigine": [
+        "s2p",
+        "fintech"
+      ],
+      "segmentCible": [
+        "tpe_pme",
+        "eti",
+        "grands_comptes"
+      ],
+      "verticale": "generaliste",
+      "natureEntite": "diversification",
+      "perimetreFonctionnel": [
+        "emission",
+        "reception",
+        "ereporting",
+        "suite_gestion"
+      ],
+      "socleTechnique": {
+        "type": "inconnu",
+        "preuve": "La page « N2F Plateforme Agréée » revendique une « connexion native aux plateformes », une « communication directe avec l'administration fiscale et les autres Plateformes Agréées » et le suivi du cycle de vie, sans nommer d'opérateur technique de socle.",
+        "source": "https://www.n2f.com/fr/logiciel-factures-fournisseurs/plateforme-agreee-facturation-electronique/",
+        "confiance": "faible"
+      },
+      "modeDistributionSocle": [
+        "direct"
+      ],
+      "descriptionFiche": "N2F est un éditeur français de gestion des dépenses professionnelles : notes de frais (son cœur historique, +20 000 entreprises revendiquées), cartes de paiement et factures fournisseurs. La Plateforme Agréée est présentée comme incluse dans les offres « Notes de frais » et « Factures fournisseurs » : émission et réception des factures électroniques, formats Factur-X, UBL et CII lus, émis et convertis, transmission des données à l'administration, suivi des statuts et horodatage, e-reporting, contrôle de TVA et archivage à valeur probante (NF Z42-013, ISO 14641-1, ISO 27001). Le site revendique plus de 300 logiciels comptables interfacés — des intégrations, pas une liste publiée de Solutions Compatibles.",
+      "logiquePositionnement": "Diversification cohérente : N2F tenait déjà la dépense (notes de frais, cartes, factures fournisseurs) et l'agrément lui permet de garder le flux facture entrante dans son propre outil au lieu de le céder à une plateforme tierce. Positionnement « guichet unique de la dépense » assumé, adressé en direct, sans rôle de grossiste identifié.",
+      "sourcesEnrichissement": [
+        {
+          "champ": "positionnement",
+          "source": "https://www.n2f.com/fr/logiciel-factures-fournisseurs/plateforme-agreee-facturation-electronique/",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        },
+        {
+          "champ": "perimetreFonctionnel",
+          "source": "https://www.n2f.com/fr/logiciel-factures-fournisseurs/plateforme-agreee-facturation-electronique/",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        },
+        {
+          "champ": "segmentCible",
+          "source": "https://www.n2f.com/fr/",
+          "dateReleve": "2026-08-20",
+          "confiance": "moyenne"
+        }
+      ]
+    },
+    {
+      "nom": "NEOTIMO",
+      "sourcesEnrichissement": [
+        {
+          "champ": "positionnement",
+          "source": "https://neotimo.com/",
+          "dateReleve": "2026-08-20",
+          "confiance": "non_qualifie"
+        }
+      ]
+    },
+    {
+      "nom": "ONE UP",
+      "familleOrigine": [
+        "facturation_compta"
+      ],
+      "segmentCible": [
+        "micro",
+        "tpe_pme"
+      ],
+      "verticale": "generaliste",
+      "perimetreFonctionnel": [
+        "suite_gestion"
+      ],
+      "socleTechnique": {
+        "type": "propre",
+        "operateurSocle": "One Up",
+        "preuve": "La FAQ officielle du service VIZUP de SG comporte la question « Comment adhérer à la plateforme agréée OneUp intégrée dans VIZUP ? », et la page conseils de SG présente « notre partenaire One Up, prestataire de VIZUP » comme la partie candidate à l'immatriculation : le socle agréé est celui de One Up.",
+        "source": "https://www.vizup-pro.com/",
+        "confiance": "moyenne"
+      },
+      "fournisseurDeSocle": true,
+      "modeDistributionSocle": [
+        "marque_blanche",
+        "API/embedded"
+      ],
+      "descriptionFiche": "One Up édite un logiciel en ligne de comptabilité, de gestion des stocks et de facturation destiné aux petites structures. Son intérêt dans la réforme est ailleurs : sa plateforme agréée est le moteur de VIZUP, le service de devis, factures, trésorerie et pilotage d'activité distribué par SG (Société Générale) à ses clients professionnels et micro-entrepreneurs. La FAQ VIZUP invite explicitement l'utilisateur à « adhérer à la plateforme agréée OneUp intégrée dans VIZUP », et l'offre Avance Facture de SG Factoring s'y branche. La distribution passe donc majoritairement par un canal bancaire, sous la marque du distributeur.",
+      "logiquePositionnement": "Cas typique de fournisseur de socle : un éditeur de gestion de petite taille dont la valeur se joue non pas sur sa marque mais sur l'embarquement de son service agréé dans le parcours d'un tiers à forte distribution — ici une banque. Précision de cadrage : la distribution sous marque VIZUP ne crée aucune catégorie réglementaire ; One Up est immatriculée en son nom propre et reste seule responsable devant l'administration, SG restant distributeur. Aucune page « devenez partenaire » publique sur son propre site : le signal grossiste provient du site du distributeur, d'où la confiance moyenne.",
+      "sourcesEnrichissement": [
+        {
+          "champ": "positionnement",
+          "source": "https://smallbusiness.oneup.com/fr",
+          "dateReleve": "2026-08-20",
+          "confiance": "faible"
+        },
+        {
+          "champ": "fournisseurDeSocle",
+          "source": "https://www.vizup-pro.com/",
+          "dateReleve": "2026-08-20",
+          "confiance": "moyenne"
+        },
+        {
+          "champ": "modeDistributionSocle",
+          "source": "https://professionnels.sg.fr/nos-conseils/gerer-son-quotidien/facturation-electronique-et-plateformes-de-dematerialisation",
+          "dateReleve": "2026-08-20",
+          "confiance": "moyenne"
+        }
+      ]
+    },
+    {
+      "nom": "OPEN BEE",
+      "familleOrigine": [
+        "ged"
+      ],
+      "segmentCible": [
+        "tpe_pme",
+        "eti"
+      ],
+      "verticale": "generaliste",
+      "natureEntite": "extension_demat",
+      "perimetreFonctionnel": [
+        "emission",
+        "reception",
+        "suite_gestion"
+      ],
+      "socleTechnique": {
+        "type": "propre",
+        "operateurSocle": "Open Bee",
+        "preuve": "« La solution Open Bee est immatriculée plateforme agréée (PA) par l'administration fiscale » et « le module PDP associé à la plateforme GED » : le service agréé est présenté comme un module de la plateforme documentaire maison.",
+        "source": "https://www.openbee.com/plateforme-dematerialisation-partenaire/",
+        "confiance": "moyenne"
+      },
+      "fournisseurDeSocle": true,
+      "modeDistributionSocle": [
+        "direct",
+        "via integrateur",
+        "marque_blanche"
+      ],
+      "solutionsCompatiblesPartenaires": [
+        "Sage",
+        "Cegid",
+        "ACD (Cador)",
+        "Agiris (IsaCompta)",
+        "Divalto Infinity",
+        "Orisha (Onaya)",
+        "Microsoft (Dynamics, Navision)",
+        "Salesforce",
+        "SAP",
+        "EIG",
+        "Carbase",
+        "Lacour Group (Alpha2A)",
+        "8 Sens (8C Compta)",
+        "Evolucare",
+        "Time RH",
+        "AMA",
+        "Optim BTP",
+        "Konica Minolta (OEM)",
+        "Orange Business Services (OEM)",
+        "Berger-Levrault (OEM)",
+        "Toshiba (OEM)"
+      ],
+      "descriptionFiche": "Open Bee est un éditeur français de GED qui a greffé un module de facturation électronique sur sa plateforme documentaire : la « GED-PA » gère l'émission, la réception et la transmission des factures, la conversion des PDF en Factur-X et de l'EDI en UBL, les circuits de validation, la signature électronique et l'archivage (certification NF composant coffre-fort numérique, ISO 27001). La cible affichée est TPE/PME/ETI. Le point distinctif est la distribution indirecte : programme partenaires structuré (OEM, revendeur, technologique), « Organic Club » réservé aux revendeurs agréés et formés, partenaires OEM nommés qui intègrent les solutions Open Bee à leur propre offre (Konica Minolta, Orange Business Services, Berger-Levrault, Toshiba), plus une liste publique de logiciels métier et ERP connectés.",
+      "logiquePositionnement": "Extension logique du métier de GED : Open Bee tenait déjà le stockage et le circuit de validation des factures, l'agrément verrouille l'amont et l'aval du flux. La liste ci-dessus est celle des éditeurs et partenaires publiés par Open Bee (connecteurs GED/ERP et partenariats OEM), et non une liste de Solutions Compatibles au sens de la réforme : elle documente un réseau de distribution et d'intégration, à ne pas lire comme une délégation d'agrément. Le rôle de grossiste est plausible et partiellement démontré (OEM historiques, programme « partenaire technologique » pour éditeurs), mais aucune page ne détaille explicitement la revente du module agréé : confiance moyenne.",
+      "sourcesEnrichissement": [
+        {
+          "champ": "positionnement",
+          "source": "https://www.openbee.com/plateforme-dematerialisation-partenaire/",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        },
+        {
+          "champ": "perimetreFonctionnel",
+          "source": "https://www.openbee.com/plateforme-dematerialisation-partenaire/",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        },
+        {
+          "champ": "fournisseurDeSocle",
+          "source": "https://www.openbee.com/nos-partenaires/",
+          "dateReleve": "2026-08-20",
+          "confiance": "moyenne"
+        },
+        {
+          "champ": "solutionsCompatiblesPartenaires",
+          "source": "https://www.openbee.com/integration-logiciel/",
+          "dateReleve": "2026-08-20",
+          "confiance": "moyenne"
+        }
+      ]
+    },
+    {
+      "nom": "OfficeIn",
+      "familleOrigine": [
+        "s2p"
+      ],
+      "segmentCible": [
+        "micro",
+        "tpe_pme"
+      ],
+      "verticale": "pharmacie d'officine",
+      "natureEntite": "diversification",
+      "perimetreFonctionnel": [
+        "emission",
+        "reception"
+      ],
+      "socleTechnique": {
+        "type": "inconnu",
+        "preuve": "Le site revendique l'indépendance, l'hébergement en France et la certification ISO 27001, et affiche le logo « Plateforme agréée », sans indiquer l'opérateur technique du socle.",
+        "source": "https://coffre-fort.officein.fr/",
+        "confiance": "faible"
+      },
+      "modeDistributionSocle": [
+        "direct"
+      ],
+      "solutionsCompatiblesPartenaires": [
+        "Pharmony",
+        "Vidal",
+        "Claude Bernard",
+        "Pharmaland"
+      ],
+      "descriptionFiche": "OfficeIn est un SaaS français dédié aux pharmacies d'officine, positionné à l'origine sur le contrôle des remises fournisseurs et la vérification automatique des RSF (économie moyenne revendiquée : 15 400 €/an). Son offre agréée est commercialisée sous le nom « Coffre-fort » (coffre-fort.officein.fr) : réception et émission des factures électroniques conformes à la réforme, concentrateur de factures, GED illimitée, archivage à valeur probante 10 ans, espace comptable alimenté par le FEC, synchronisation bancaire et rapprochement des LCR. Tarif affiché : 0 €/mois, explicitement construit en rupture avec les « solutions historiques » du secteur relevées entre 30 et 50 €/mois. Partenaires publiés : Pharmony, Vidal, Claude Bernard, Pharmaland.",
+      "logiquePositionnement": "Verticale sectorielle assumée et cohérente : OfficeIn traitait déjà la facture fournisseur d'officine pour contrôler les remises ; l'agrément transforme une obligation réglementaire en produit d'appel gratuit pour verrouiller ce flux et le canal comptable des pharmaciens. La gratuité affichée est une stratégie de conquête de parc sur une niche, pas une caractéristique du statut d'agrément. Les partenaires publiés sont des acteurs de l'écosystème officinal, pas un réseau de revente de socle : aucun rôle de grossiste identifié.",
+      "sourcesEnrichissement": [
+        {
+          "champ": "positionnement",
+          "source": "https://officein.fr/",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        },
+        {
+          "champ": "perimetreFonctionnel",
+          "source": "https://coffre-fort.officein.fr/",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        },
+        {
+          "champ": "solutionsCompatiblesPartenaires",
+          "source": "https://coffre-fort.officein.fr/",
+          "dateReleve": "2026-08-20",
+          "confiance": "faible"
+        }
+      ]
+    },
+    {
+      "nom": "PARAGON",
+      "familleOrigine": [
+        "ged",
+        "s2p",
+        "o2c"
+      ],
+      "segmentCible": [
+        "eti",
+        "grands_comptes"
+      ],
+      "verticale": "generaliste",
+      "natureEntite": "extension_demat",
+      "perimetreFonctionnel": [
+        "emission",
+        "reception",
+        "suite_gestion"
+      ],
+      "socleTechnique": {
+        "type": "propre",
+        "operateurSocle": "Paragon",
+        "preuve": "« IPP, la Plateforme Agréée, co-construite avec nos clients » : plateforme 100 % cloud, modulaire, présentée comme « sans dette technologique » et développée par Paragon, avec 20+ années d'expérience en dématérialisation de factures revendiquées.",
+        "source": "https://www.paragon-pa.com/",
+        "confiance": "moyenne"
+      },
+      "fournisseurDeSocle": true,
+      "modeDistributionSocle": [
+        "direct",
+        "API/embedded",
+        "via integrateur"
+      ],
+      "groupeCapitalistique": "Entité française du groupe international Paragon (paragon.world), acteur de la communication client et de la dématérialisation documentaire.",
+      "descriptionFiche": "Le service agréé de Paragon est commercialisé sous le nom « Invoice Paragon Platform » (IPP), avec un site dédié (paragon-pa.com) distinct du site groupe. Il s'inscrit dans une offre plus large de dématérialisation documentaire, Procure to Pay et Order to Cash : plateforme cloud modulaire vendue en 4 packs évolutifs, interopérabilité native avec les ERP et systèmes comptables, archivage NF461, tableaux de bord, automatisation et IA, 44 cas d'usage revendiqués. La référence client affichée est le grand compte (logistique, transport, immobilier, industrie, banque, assurance : Vinci, Nexity, Malakoff Humanis, AG2R La Mondiale, Groupe Rocher, SGS…), et une entrée d'offre est explicitement réservée aux entreprises qui veulent changer de Plateforme Agréée.",
+      "logiquePositionnement": "Extension naturelle d'un métier de dématérialisation et d'externalisation documentaire installé depuis plus de vingt ans : l'agrément prolonge une position déjà tenue sur les flux facture entrants et sortants des grands comptes. Signal grossiste net et auto-déclaré : une entrée d'offre « Vous êtes éditeur : vous souhaitez ajouter une brique Plateforme Agréée à votre offre » et un appel à « rejoindre notre écosystème de partenaires : éditeurs et revendeurs-intégrateurs ». À cadrer : cette brique revendue ne transfère aucun statut réglementaire, Paragon restant la plateforme immatriculée et responsable.",
+      "sourcesEnrichissement": [
+        {
+          "champ": "positionnement",
+          "source": "https://www.paragon-pa.com/",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        },
+        {
+          "champ": "segmentCible",
+          "source": "https://www.paragon-pa.com/",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        },
+        {
+          "champ": "fournisseurDeSocle",
+          "source": "https://www.paragon-pa.com/",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        },
+        {
+          "champ": "modeDistributionSocle",
+          "source": "https://www.paragon.world/fr/solutions/plateforme-agreee-ipp",
+          "dateReleve": "2026-08-20",
+          "confiance": "moyenne"
+        },
+        {
+          "champ": "groupeCapitalistique",
+          "source": "https://www.paragon.world/fr/solutions/plateforme-agreee-ipp",
+          "dateReleve": "2026-08-20",
+          "confiance": "moyenne"
+        }
+      ]
+    },
+    {
+      "nom": "PAYFLOWS",
+      "familleOrigine": [
+        "fintech",
+        "s2p"
+      ],
+      "segmentCible": [
+        "eti",
+        "grands_comptes"
+      ],
+      "verticale": "generaliste",
+      "natureEntite": "diversification",
+      "perimetreFonctionnel": [
+        "suite_gestion"
+      ],
+      "modeDistributionSocle": [
+        "direct"
+      ],
+      "descriptionFiche": "Payflows se présente comme une plateforme finance d'entreprise « AI-native », organisée en trois suites : Procurement Suite, Treasury Orchestration et Core Accounting (grand livre, comptabilité fournisseurs et clients, taxes), avec traitement automatisé des factures fournisseurs de la réception au paiement, rapprochements, clôture accélérée et connecteurs ERP préconstruits. Les audiences adressées sont les directions finance, comptabilité, achats, trésorerie, FP&A, juridique et IT, et les références citées sont des scale-ups et ETI (Electra, Evaneos, Swile). Le site est en anglais et ne comporte, au 20/08/2026, aucune page dédiée à la Plateforme Agréée ni à la réforme française : la qualification ci-dessus porte sur le métier, pas sur l'offre agréée.",
+      "logiquePositionnement": "Diversification cohérente sur le papier : une plateforme qui tient déjà l'AP, l'AR et la comptabilité de ses clients a intérêt à contrôler le flux facture réglementaire plutôt qu'à le sous-traiter. Mais le positionnement PA n'est pas documenté sur son propre site : ni page réforme, ni périmètre e-invoicing/e-reporting, ni mention du socle. À réinterroger dès qu'une page française sera publiée.",
+      "sourcesEnrichissement": [
+        {
+          "champ": "positionnement",
+          "source": "https://payflows.io/",
+          "dateReleve": "2026-08-20",
+          "confiance": "moyenne"
+        },
+        {
+          "champ": "perimetreFonctionnel",
+          "source": "https://payflows.io/accounting-teams",
+          "dateReleve": "2026-08-20",
+          "confiance": "faible"
+        }
+      ]
+    },
+    {
+      "nom": "PITNEY BOWES",
+      "familleOrigine": [
+        "ged",
+        "o2c"
+      ],
+      "segmentCible": [
+        "tpe_pme",
+        "eti",
+        "grands_comptes"
+      ],
+      "verticale": "generaliste",
+      "natureEntite": "extension_demat",
+      "perimetreFonctionnel": [
+        "emission",
+        "reception",
+        "ereporting"
+      ],
+      "socleTechnique": {
+        "type": "propre",
+        "operateurSocle": "Pitney Bowes",
+        "preuve": "« L'agrément définitif de Pitney Bowes fait suite à la réussite de l'ensemble des tests techniques d'interopérabilité avec les services du Portail Public de Facturation et les autres plateformes agréées », confirmant que « la solution Pitney Bowes Invoice Services est pleinement opérationnelle ».",
+        "source": "https://www.pitneybowes.com/fr/blog/pitney-bowes-est-plateforme-agreee.html",
+        "confiance": "moyenne"
+      },
+      "modeDistributionSocle": [
+        "direct"
+      ],
+      "groupeCapitalistique": "Entité française du groupe international Pitney Bowes (courrier, expédition, externalisation de la production documentaire).",
+      "descriptionFiche": "Le service agréé est commercialisé sous le nom « Pitney Bowes Invoice Services », rattaché sur le site français à l'activité courrier/expédition et externalisation de la production documentaire. Pitney Bowes revendique une immatriculation définitive obtenue après la réussite des tests d'interopérabilité avec le PPF (annuaire et concentration des données) et les autres plateformes agréées, et un périmètre couvrant l'émission et la réception des factures clients et fournisseurs ainsi que les obligations d'e-invoicing et d'e-reporting. L'offre s'inscrit dans une gamme de dématérialisation plus large (communication client multicanal Relay, bulletins de paie numériques, GED) et s'adresse, selon la FAQ du site, aussi bien aux petites qu'aux grandes structures.",
+      "logiquePositionnement": "Extension classique d'un acteur du courrier et de l'externalisation documentaire : Pitney Bowes produisait déjà, imprimait et envoyait les factures de ses clients, l'agrément lui permet de conserver ce flux quand il bascule en électronique. Positionnement pédagogique marqué (blog, infographie schéma en Y, livres blancs) et vente directe assortie de projets d'implémentation ; aucune offre de socle pour éditeurs tiers publiée.",
+      "sourcesEnrichissement": [
+        {
+          "champ": "positionnement",
+          "source": "https://www.pitneybowes.com/fr/transformation-digitale/facturation-electronique.html",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        },
+        {
+          "champ": "perimetreFonctionnel",
+          "source": "https://www.pitneybowes.com/fr/blog/pitney-bowes-est-plateforme-agreee.html",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        },
+        {
+          "champ": "groupeCapitalistique",
+          "source": "https://www.pitneybowes.com/fr/transformation-digitale/facturation-electronique.html",
+          "dateReleve": "2026-08-20",
+          "confiance": "moyenne"
+        }
+      ]
+    }
+  ]
+}
