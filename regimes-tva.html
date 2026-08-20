@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Régimes de TVA &amp; situations transverses | Re·Form·E</title>
+    <link rel="icon" href="./assets/favicon-Fluxym-V2.png" sizes="32x32" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/pages.css">
+    <style>
+        /* =============================================
+           STYLES SPÉCIFIQUES — Régimes de TVA
+           ============================================= */
+        .regime-ref {
+            font-size: 0.78rem; color: var(--gray-400); font-style: italic;
+            margin-top: -8px; margin-bottom: 14px;
+        }
+        .regime-objectif { font-size: 0.95rem; color: var(--gray-600); }
+        .regime-list { margin: 12px 0 24px; padding-left: 0; list-style: none; }
+        .regime-list li {
+            position: relative; padding: 7px 0 7px 26px;
+            font-size: 0.92rem; color: var(--gray-600); line-height: 1.6;
+        }
+        .regime-list li::before {
+            content: '✓'; position: absolute; left: 0; top: 7px;
+            color: var(--success); font-weight: 800;
+        }
+        .regime-list--errors li::before { content: '✕'; color: var(--danger); }
+        .regime-retenir {
+            display: flex; flex-direction: column; gap: 8px;
+            background: var(--navy); border-radius: var(--radius-md);
+            padding: 20px 24px; margin-top: 24px;
+        }
+        .regime-retenir-label {
+            font-size: 0.7rem; font-weight: 800; letter-spacing: 0.1em;
+            text-transform: uppercase; color: var(--cyan);
+        }
+        .regime-retenir p {
+            margin: 0; color: var(--white); font-size: 0.98rem;
+            font-weight: 600; line-height: 1.6;
+        }
+        .flux-split {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 16px; margin: 20px 0;
+        }
+        .flux-box {
+            background: var(--gray-50); border: 1px solid var(--gray-200);
+            border-left: 4px solid var(--cyan);
+            border-radius: var(--radius-md); padding: 18px 20px;
+        }
+        .flux-box--reporting { border-left-color: var(--purple); }
+        .flux-box--both { border-left-color: var(--warning); }
+        .flux-box h4 {
+            margin: 0 0 10px 0; font-size: 0.8rem; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 0.06em; color: var(--navy);
+        }
+        .flux-box ul { margin: 0; padding-left: 0; list-style: none; }
+        .flux-box li { font-size: 0.86rem; color: var(--gray-600); padding: 4px 0; }
+        .flux-box li strong { color: var(--navy); }
+    </style>
+</head>
+<body>
+
+    <nav id="main-nav"></nav>
+
+    <header class="page-hero">
+        <div class="page-hero-content">
+            <div class="breadcrumb">
+                <a href="./index.html">Accueil</a> <span>/</span> <span>Régimes de TVA &amp; situations transverses</span>
+            </div>
+            <span class="hero-badge">Approfondir</span>
+            <h1>Régimes de TVA &amp; situations transverses</h1>
+            <p>Huit situations structurantes qui ne portent aucun numéro de cas d’usage FNFE, mais que toute transcodification doit traiter.</p>
+        </div>
+    </header>
+
+    <main class="page-main">
+        <div class="page-container page-layout">
+
+            <aside class="page-sidebar">
+                <div class="sidebar-sticky">
+                    <h4>Sur cette page</h4>
+                    <ul class="sidebar-nav">
+                        <li><a href="#articulation" class="sidebar-link">🔀 E-invoicing ou e-reporting ?</a></li>
+                        <li><a href="#autoliquidation" class="sidebar-link active">T1 · Autoliquidation de TVA (reverse charge)</a></li>
+                        <li><a href="#franchise-base" class="sidebar-link">T2 · Franchise en base de TVA (art. 293 B CGI)</a></li>
+                        <li><a href="#avoirs" class="sidebar-link">T3 · Avoirs et factures rectificatives</a></li>
+                        <li><a href="#devise" class="sidebar-link">T4 · Facture en devise étrangère (hors EUR)</a></li>
+                        <li><a href="#btp" class="sidebar-link">T5 · Sous-traitance BTP avec autoliquidation</a></li>
+                        <li><a href="#remises" class="sidebar-link">T6 · Remises, majorations et frais annexes</a></li>
+                        <li><a href="#intracommunautaire" class="sidebar-link">T7 · Livraison intracommunautaire de biens</a></li>
+                        <li><a href="#export" class="sidebar-link">T8 · Exportation de biens hors Union européenne</a></li>
+                    </ul>
+                    <div class="sidebar-nav-pages">
+                        <h4>Aller plus loin</h4>
+                        <a href="./cas-usage.html" class="sidebar-page">📋 Les cas d’usage</a>
+                        <a href="./champs.html" class="sidebar-page">🔧 Les champs BT / BG</a>
+                        <a href="./transcodification.html" class="sidebar-page">🧭 Matrice de transcodification</a>
+                    </div>
+                </div>
+            </aside>
+
+            <article class="page-content">
+
+                <section id="articulation" class="content-section">
+                    <h2>🔀 E-invoicing ou e-reporting ?</h2>
+                    <p>
+                        Ces huit situations ne suivent pas toutes le même circuit. Se tromper de flux est l’une des
+                        erreurs les plus coûteuses d’un projet : la facture est orientée vers le mauvais canal et
+                        rejetée, ou l’obligation déclarative n’est pas remplie.
+                    </p>
+
+                    <div class="flux-split">
+                        <div class="flux-box">
+                            <h4>E-invoicing (flux 1 et 2)</h4>
+                            <ul>
+                            <li><strong>T2</strong> — Franchise en base</li>
+                            <li><strong>T3</strong> — Avoirs et factures rectificatives</li>
+                            <li><strong>T4</strong> — Facture en devise étrangère</li>
+                            <li><strong>T5</strong> — Sous-traitance BTP en autoliquidation</li>
+                            <li><strong>T6</strong> — Remises, majorations et frais annexes</li>
+                            </ul>
+                        </div>
+                        <div class="flux-box flux-box--reporting">
+                            <h4>E-reporting (flux 10.1)</h4>
+                            <ul>
+                            <li><strong>T7</strong> — Livraison intracommunautaire de biens</li>
+                            <li><strong>T8</strong> — Exportation hors Union européenne</li>
+                            </ul>
+                        </div>
+                        <div class="flux-box flux-box--both">
+                            <h4>Les deux, selon le cas</h4>
+                            <ul>
+                            <li><strong>T1</strong> — Autoliquidation de TVA</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <ul class="regime-list">
+                        <li>T1 relève des deux : l'autoliquidation domestique (sous-traitance BTP, déchets) passe par le e-invoicing, tandis que l'autoliquidation sur acquisitions intracommunautaires de services relève du e-reporting des opérations d'achat.</li>
+                        <li>T2, T3, T4, T5 et T6 sont des opérations domestiques B2B assujetties : elles suivent le circuit e-invoicing (flux 1 et 2) et alimentent le e-reporting du statut d'encaissement lorsque la TVE est exigible à l'encaissement.</li>
+                        <li>T7 et T8 sortent du champ du e-invoicing domestique : l'acheteur n'est pas établi en France, seul le e-reporting du flux 10.1 s'applique.</li>
+                    </ul>
+
+                    <div class="callout callout--info">
+                        <span class="callout-icon">🧭</span>
+                        <div class="callout-content">
+                            <p>Ces huit situations sont sélectionnables dans la <a href="./transcodification.html">matrice de transcodification</a> sous la famille « Régimes de TVA &amp; situations transverses », pour produire le classeur de mapping à faire compléter par un client.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="autoliquidation" class="content-section">
+                    <h2>T1 · Autoliquidation de TVA (reverse charge)</h2>
+                    <p class="regime-ref">Réf. EN 16931-1 BR-AE-01 à BR-AE-10 / BR-FR-15 (XP Z12-012)</p>
+                    <p class="regime-objectif"><strong>Objectif.</strong> Traiter les factures où la TVA est due par le preneur (acheteur) en application du mécanisme d'autoliquidation.</p>
+                    <p>L'autoliquidation de TVA (reverse charge) s'applique lorsque le redevable de la TVA est le preneur et non le fournisseur. C'est le cas notamment pour les acquisitions intracommunautaires de services, certaines opérations domestiques (sous-traitance BTP, livraisons de déchets, etc.) et les achats auprès de fournisseurs non établis en France. La facture ne porte pas de TVA collectée mais doit signaler la catégorie AE et le code VATEX approprié.</p>
+
+                    <h3>Suis-je concerné ?</h3>
+                    <ul class="regime-list">
+                            <li>Vous achetez des prestations de services à un prestataire établi hors de France (UE ou hors UE).</li>
+                            <li>Vous êtes sous-traitant de travaux immobiliers pour une entreprise assujettie en France.</li>
+                            <li>Vous vendez ou achetez des déchets neufs d'industrie ou des matériaux de récupération.</li>
+                            <li>Vous facturez des services de communications électroniques à un opérateur assujetti en France.</li>
+                            <li>Vous réalisez des transferts de quotas d'émission de gaz à effet de serre.</li>
+                    </ul>
+
+                    <h3>Mention légale sur la facture</h3>
+                    <div class="callout callout--info">
+                        <span class="callout-icon">📜</span>
+                        <div class="callout-content">
+                            <p>« Autoliquidation » ou « Autoliquidation de TVA » — mention imposée par l'article 242 nonies A du CGI, annexe II, pour toute opération où le preneur est redevable.</p>
+                            <p>Pour la sous-traitance BTP : « Autoliquidation de TVA – art. 283-2 nonies du CGI ».</p>
+                            <p>Pour les prestations de services intracommunautaires : « Autoliquidation – art. 283-2 du CGI » [référence à confirmer sur la formulation exacte retenue par la doctrine].</p>
+                        </div>
+                    </div>
+
+                    <h3>Données à renseigner</h3>
+                    <div class="comparison-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Référence de la norme</th>
+                                    <th>Donnée à fournir</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td><code>BT-118</code></td><td>Code catégorie TVA du BG-23 : AE (autoliquidation)</td></tr>
+                                <tr><td><code>BT-119</code></td><td>Taux de TVA : 0</td></tr>
+                                <tr><td><code>BT-121</code></td><td>Code motif d’exonération : VATEX-FR-AE (domestique) ou VATEX-EU-AE (intracommunautaire / import)</td></tr>
+                                <tr><td><code>BT-120</code></td><td>Motif d’exonération en texte : « Autoliquidation de TVA » ou « Reverse Charge »</td></tr>
+                                <tr><td><code>BT-151</code></td><td>Code catégorie TVA en ligne : AE (sur chaque ligne concernée)</td></tr>
+                                <tr><td><code>BT-152</code></td><td>Taux de TVA en ligne : 0</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h3>Erreurs fréquentes</h3>
+                    <ul class="regime-list regime-list--errors">
+                            <li>Renseigner BT-118 = AE mais laisser un taux de TVA différent de 0 : rejet schematron, règle BR-AE-05 (le taux de TVA d'une ligne AE doit être 0).</li>
+                            <li>Omettre BT-121 = VATEX-FR-AE ou BT-120 : rejet, règle BR-AE-10 exigeant un motif d'exonération pour la catégorie AE.</li>
+                            <li>Renseigner un montant de TVA non nul dans BT-117 pour la ventilation AE : incohérence de la ventilation, règle BR-AE-09.</li>
+                    </ul>
+
+                    <div class="regime-retenir">
+                        <span class="regime-retenir-label">À retenir</span>
+                        <p>Catégorie AE, taux 0, montant de TVA 0 et motif d'exonération obligatoire : les quatre vont toujours ensemble, sinon la facture est rejetée.</p>
+                    </div>
+                </section>
+                <section id="franchise-base" class="content-section">
+                    <h2>T2 · Franchise en base de TVA (art. 293 B CGI)</h2>
+                    <p class="regime-ref">Réf. BR-FR-CO-16 et BR-FR-MAP-08 / BR-FR-MAP-09 (XP Z12-012)</p>
+                    <p class="regime-objectif"><strong>Objectif.</strong> Traiter les factures émises par un assujetti bénéficiant du régime de franchise en base de TVA.</p>
+                    <p>Les assujettis en franchise en base (art. 293 B du CGI) émettent des factures sans TVA avec la mention obligatoire « TVA non applicable, art. 293 B du CGI ». En facturation électronique, la catégorie TVA est E (exonéré) avec le code VATEX-FR-FRANCHISE. Si le vendeur n'a pas de numéro de TVA intracommunautaire, il doit répéter son SIREN en BT-32. Un point de vigilance majeur concerne la transcodification en Flux 1 : la PA doit transcoder BT-118 de E vers Z et supprimer BT-121 et BT-120 (règle BR-FR-MAP-08).</p>
+
+                    <h3>Suis-je concerné ?</h3>
+                    <ul class="regime-list">
+                            <li>Votre chiffre d'affaires annuel reste sous les seuils de la franchise en base et vous n'avez pas opté pour le paiement de la TVA.</li>
+                            <li>Vous êtes micro-entrepreneur et vous ne facturez pas de TVA à vos clients.</li>
+                            <li>Vous êtes un particulier vendant de manière répétée à un professionnel (cas 23), sans avoir opté pour la TVA.</li>
+                            <li>Vous n'avez pas de numéro de TVA intracommunautaire, seulement un SIREN.</li>
+                    </ul>
+
+                    <h3>Mention légale sur la facture</h3>
+                    <div class="callout callout--info">
+                        <span class="callout-icon">📜</span>
+                        <div class="callout-content">
+                            <p>« TVA non applicable, art. 293 B du CGI » — mention obligatoire imposée par l'article 293 B du CGI. La formulation exacte doit être respectée.</p>
+                        </div>
+                    </div>
+
+                    <h3>Données à renseigner</h3>
+                    <div class="comparison-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Référence de la norme</th>
+                                    <th>Donnée à fournir</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td><code>BT-118</code></td><td>Code catégorie TVA du BG-23 : E (exonéré de TVA)</td></tr>
+                                <tr><td><code>BT-119</code></td><td>Taux de TVA : 0</td></tr>
+                                <tr><td><code>BT-121</code></td><td>Code motif d’exonération : VATEX-FR-FRANCHISE</td></tr>
+                                <tr><td><code>BT-120</code></td><td>Motif en texte : « TVA non applicable, art. 293 B du CGI »</td></tr>
+                                <tr><td><code>BT-151</code></td><td>Code catégorie TVA en ligne : E</td></tr>
+                                <tr><td><code>BT-152</code></td><td>Taux de TVA en ligne : 0</td></tr>
+                                <tr><td><code>BT-32</code></td><td>N° d’identification fiscale du vendeur : SIREN répété si pas de N° TVA intracommunautaire (cf. BR-FR-CO-16)</td></tr>
+                                <tr><td><code>BR-FR-MAP-08 (Flux 1)</code></td><td>⚠️ Transcodification PA : BT-118 transcodé de E vers Z, BT-121 et BT-120 supprimés dans le Flux 1</td></tr>
+                                <tr><td><code>BR-FR-MAP-09 (Flux 10)</code></td><td>⚠️ Transcodification PA : même logique E vers Z pour le Flux 10.1 e-reporting</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h3>Erreurs fréquentes</h3>
+                    <ul class="regime-list regime-list--errors">
+                            <li>Renseigner BT-118 = Z (hors champ) au lieu de E (exonéré) dans le Flux 1 amont : la transcodification E vers Z est faite PAR LA PLATEFORME, pas par l'émetteur (règles BR-FR-MAP-08 et BR-FR-MAP-09).</li>
+                            <li>Laisser BT-32 vide alors que l'entreprise n'a pas de numéro de TVA intracommunautaire : rejet, règle BR-FR-CO-16 qui impose de répéter le SIREN.</li>
+                            <li>Conserver BT-121 et BT-120 après transcodification en Z : incohérence, la catégorie Z n'admet pas de motif d'exonération.</li>
+                    </ul>
+
+                    <div class="regime-retenir">
+                        <span class="regime-retenir-label">À retenir</span>
+                        <p>L'émetteur déclare toujours E avec VATEX-FR-FRANCHISE ; c'est la plateforme qui transcode en Z et supprime le motif — ne faites jamais ce travail à sa place.</p>
+                    </div>
+                </section>
+                <section id="avoirs" class="content-section">
+                    <h2>T3 · Avoirs et factures rectificatives</h2>
+                    <p class="regime-ref">Réf. BR-FR-04 (XP Z12-012) / RG G1.32 (DGFIP v3.2)</p>
+                    <p class="regime-objectif"><strong>Objectif.</strong> Traiter l'émission d'un avoir (annulation partielle ou totale) ou d'une facture rectificative (correction et remplacement) référençant un ou plusieurs documents d'origine.</p>
+                    <p>Un avoir (credit note) annule tout ou partie d'une facture antérieure. Une facture rectificative remplace intégralement la facture d'origine, qui doit être annulée. Dans les deux cas, la référence au(x) document(s) d'origine est obligatoire. Pour un avoir, plusieurs factures antérieures peuvent être référencées (cardinalité 1..n). Pour une facture rectificative, une seule référence antérieure est autorisée. Les références peuvent être portées en en-tête (BG-3) ou en ligne (EXT-FR-FE-BG-06), mais pas aux deux niveaux simultanément.</p>
+
+                    <div class="callout callout--warning">
+                        <span class="callout-icon">⚠️</span>
+                        <div class="callout-content">
+                            <p><strong>Point de vigilance.</strong> Règle RG G1.32 (DGFIP v3.2) : en trajectoire Démarrage, BT-25 est obligatoire ; BT-26 le devient également en trajectoire Cible. Si les références sont portées en ligne (EXT-FR-FE-136 / EXT-FR-FE-138), elles ne doivent PAS l'être aussi en BG-3, sous peine de rejet du Flux 1. Facture rectificative : une et une seule référence antérieure. Avoir : au moins une référence, multiples possibles (cardinalité 1..n).</p>
+                        </div>
+                    </div>
+
+                    <h3>Suis-je concerné ?</h3>
+                    <ul class="regime-list">
+                            <li>Vous devez annuler tout ou partie d'une facture déjà émise et transmise.</li>
+                            <li>Vous avez émis une facture comportant une erreur de montant, de TVA ou d'identification et devez la remplacer.</li>
+                            <li>Vous accordez une remise ou un geste commercial après émission de la facture.</li>
+                            <li>Vous devez annuler plusieurs factures antérieures par un seul document.</li>
+                    </ul>
+
+                    <h3>Mention légale sur la facture</h3>
+                    <div class="callout callout--info">
+                        <span class="callout-icon">📜</span>
+                        <div class="callout-content">
+                            <p>Aucune mention légale spécifique obligatoire au-delà des mentions habituelles de facture. En revanche la référence au document d'origine est une donnée obligatoire (BT-25), et non une mention libre.</p>
+                        </div>
+                    </div>
+
+                    <h3>Données à renseigner</h3>
+                    <div class="comparison-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Référence de la norme</th>
+                                    <th>Donnée à fournir</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td><code>BT-3</code></td><td>Code type de facture : 381 (avoir), 384 (facture rectificative), 396 (avoir affacturé), 261 (avoir auto-facturé), 503 (avoir d’acompte), 472 (rectificative affacturée), 471 (rectificative auto-facturée)</td></tr>
+                                <tr><td><code>BG-3</code></td><td>Bloc Référence à une facture antérieure (en en-tête)</td></tr>
+                                <tr><td><code>BT-25</code></td><td>Référence à une facture antérieure : numéro de la facture d’origine (obligatoire)</td></tr>
+                                <tr><td><code>BT-26</code></td><td>Date de la facture antérieure (obligatoire en trajectoire Cible)</td></tr>
+                                <tr><td><code>EXT-FR-FE-BG-06</code></td><td>Bloc Référence à facture antérieure en ligne (alternative à BG-3, profil EXTENDED)</td></tr>
+                                <tr><td><code>EXT-FR-FE-136</code></td><td>Identifiant de la facture antérieure en ligne</td></tr>
+                                <tr><td><code>EXT-FR-FE-138</code></td><td>Date de la facture antérieure en ligne</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h3>Erreurs fréquentes</h3>
+                    <ul class="regime-list regime-list--errors">
+                            <li>Porter les références du document d'origine à la fois en en-tête (BG-3) et en ligne (EXT-FR-FE-BG-06) : rejet du Flux 1, les deux niveaux sont exclusifs.</li>
+                            <li>Référencer plusieurs factures antérieures sur une facture rectificative : interdit, une rectificative ne peut viser qu'une seule facture d'origine (contrairement à l'avoir, cardinalité 1..n).</li>
+                            <li>Omettre BT-26 (date de la facture antérieure) : toléré en trajectoire Démarrage, mais rejeté en trajectoire Cible, règle RG G1.32.</li>
+                    </ul>
+
+                    <div class="regime-retenir">
+                        <span class="regime-retenir-label">À retenir</span>
+                        <p>Avoir = annulation partielle avec références multiples possibles ; rectificative = remplacement intégral avec une seule référence — et jamais de références aux deux niveaux à la fois.</p>
+                    </div>
+                </section>
+                <section id="devise" class="content-section">
+                    <h2>T4 · Facture en devise étrangère (hors EUR)</h2>
+                    <p class="regime-ref">Réf. BR-FR-CO-12 (XP Z12-012)</p>
+                    <p class="regime-objectif"><strong>Objectif.</strong> Traiter une facture dont la devise principale est différente de l'euro, en assurant la déclaration du montant de TVA en euros.</p>
+                    <p>Lorsqu'une facture est émise dans une devise autre que l'euro (USD, GBP, etc.), la réglementation française impose que la devise de comptabilité soit l'euro et que le montant total de TVA soit exprimé en euros. La règle BR-FR-CO-12 rend obligatoires la présence de BT-6 (devise de comptabilité = EUR) et de BT-111 (montant de TVA en devise de comptabilité). Cette exigence est contrôlée par schematron.</p>
+
+                    <h3>Suis-je concerné ?</h3>
+                    <ul class="regime-list">
+                            <li>Vous facturez un client en dollars, en livres sterling ou dans toute devise autre que l'euro.</li>
+                            <li>Votre ERP est paramétré avec une devise de facturation différente de votre devise comptable.</li>
+                            <li>Vous exportez et facturez dans la devise du pays de destination.</li>
+                    </ul>
+
+                    <h3>Mention légale sur la facture</h3>
+                    <div class="callout callout--info">
+                        <span class="callout-icon">📜</span>
+                        <div class="callout-content">
+                            <p>Aucune mention légale spécifique obligatoire. L'obligation porte sur les données : le montant total de TVA doit être exprimé en euros, conformément à l'article 289-II du CGI.</p>
+                        </div>
+                    </div>
+
+                    <h3>Données à renseigner</h3>
+                    <div class="comparison-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Référence de la norme</th>
+                                    <th>Donnée à fournir</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td><code>BT-5</code></td><td>Devise de la facture : code ISO 4217 de la devise étrangère (ex. : USD, GBP)</td></tr>
+                                <tr><td><code>BT-6</code></td><td>Devise de comptabilité : EUR (obligatoire si BT-5 ≠ EUR)</td></tr>
+                                <tr><td><code>BT-111</code></td><td>Montant total de TVA en devise de comptabilité : montant de TVA converti en EUR</td></tr>
+                                <tr><td><code>BT-111-1</code></td><td>Qualifiant de la devise de BT-111 : EUR</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h3>Erreurs fréquentes</h3>
+                    <ul class="regime-list regime-list--errors">
+                            <li>Renseigner BT-5 différent de EUR sans renseigner BT-6 ni BT-111 : rejet schematron, règle BR-FR-CO-12.</li>
+                            <li>Renseigner BT-111 dans la devise de facturation au lieu de l'euro : le contrôle ne le détecte pas toujours mais la déclaration de TVA devient fausse.</li>
+                            <li>Omettre le qualifiant de devise BT-111-1 = EUR : incohérence de la donnée transmise.</li>
+                    </ul>
+
+                    <div class="regime-retenir">
+                        <span class="regime-retenir-label">À retenir</span>
+                        <p>Dès que la facture n'est pas en euros, deux données supplémentaires deviennent obligatoires : la devise de comptabilité (EUR) et le montant de TVA converti en euros.</p>
+                    </div>
+                </section>
+                <section id="btp" class="content-section">
+                    <h2>T5 · Sous-traitance BTP avec autoliquidation</h2>
+                    <p class="regime-ref">Réf. XP Z12-014 §3.2.12 / Art. 283-2 nonies du CGI</p>
+                    <p class="regime-objectif"><strong>Objectif.</strong> Traiter la facture d'un sous-traitant BTP dont la TVA est autoliquidée par le donneur d'ordres en application de l'article 283-2 nonies du CGI.</p>
+                    <p>Dans le secteur du BTP, les prestations de travaux immobiliers réalisées par un sous-traitant pour le compte d'un preneur assujetti relèvent de l'autoliquidation de TVA (art. 283-2 nonies du CGI). Le sous-traitant émet sa facture HT sans TVA avec la mention « Autoliquidation » et le code VATEX-FR-AE. C'est le preneur (titulaire ou donneur d'ordres) qui déclare et déduit la TVA. Ce cas est un sous-ensemble de l'autoliquidation domestique, spécifique au secteur BTP.</p>
+
+                    <h3>Suis-je concerné ?</h3>
+                    <ul class="regime-list">
+                            <li>Vous réalisez des travaux immobiliers en tant que sous-traitant pour une entreprise principale assujettie en France.</li>
+                            <li>Vous intervenez sur un chantier dans le cadre d'un contrat de sous-traitance, et non en direct pour le maître d'ouvrage.</li>
+                            <li>Vos prestations relèvent de la construction, la réparation, le nettoyage, l'entretien, la transformation ou la démolition d'un immeuble.</li>
+                            <li>Vous êtes donneur d'ordres et recevez des factures de sous-traitants BTP sans TVA.</li>
+                    </ul>
+
+                    <h3>Mention légale sur la facture</h3>
+                    <div class="callout callout--info">
+                        <span class="callout-icon">📜</span>
+                        <div class="callout-content">
+                            <p>« Autoliquidation de TVA – art. 283-2 nonies du CGI » — la référence à l'article 283-2 nonies est spécifique au secteur du BTP et doit apparaître.</p>
+                        </div>
+                    </div>
+
+                    <h3>Données à renseigner</h3>
+                    <div class="comparison-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Référence de la norme</th>
+                                    <th>Donnée à fournir</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td><code>BT-118</code></td><td>Code catégorie TVA du BG-23 : AE (autoliquidation)</td></tr>
+                                <tr><td><code>BT-119</code></td><td>Taux de TVA : 0</td></tr>
+                                <tr><td><code>BT-121</code></td><td>Code motif d’exonération : VATEX-FR-AE</td></tr>
+                                <tr><td><code>BT-120</code></td><td>Motif en texte : « Autoliquidation de TVA – art. 283-2 nonies du CGI »</td></tr>
+                                <tr><td><code>BT-151</code></td><td>Code catégorie TVA en ligne : AE</td></tr>
+                                <tr><td><code>BT-152</code></td><td>Taux de TVA en ligne : 0</td></tr>
+                                <tr><td><code>BT-18 / BT-18-1</code></td><td>Objet facturé avec qualifiant UNTDID 1153 : référence de chantier, lot ou marché</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h3>Erreurs fréquentes</h3>
+                    <ul class="regime-list regime-list--errors">
+                            <li>Appliquer l'autoliquidation alors que le preneur n'est pas assujetti : le régime ne s'applique qu'entre assujettis, la TVA reste due par le sous-traitant.</li>
+                            <li>Appliquer l'autoliquidation à une prestation qui n'est pas un travail immobilier (livraison de matériaux sans pose, location de matériel sans opérateur) : redressement.</li>
+                            <li>Omettre la référence de chantier en BT-18 : pas de rejet technique, mais le rapprochement avec le marché devient impossible côté donneur d'ordres.</li>
+                    </ul>
+
+                    <div class="regime-retenir">
+                        <span class="regime-retenir-label">À retenir</span>
+                        <p>Autoliquidation BTP = travaux immobiliers + sous-traitance + preneur assujetti : si l'une des trois conditions manque, la TVA reste due par le sous-traitant.</p>
+                    </div>
+                </section>
+                <section id="remises" class="content-section">
+                    <h2>T6 · Remises, majorations et frais annexes</h2>
+                    <p class="regime-ref">Réf. EN 16931-1 BG-20, BG-21, BG-27, BG-28 / BR-CO-23, BR-CO-24</p>
+                    <p class="regime-objectif"><strong>Objectif.</strong> Traiter les remises (rabais, ristournes) et les charges (frais de port, majorations, frais de déplacement) au niveau du document et des lignes de facture.</p>
+                    <p>Les remises et charges peuvent être appliquées au niveau du document global (BG-20 pour les remises, BG-21 pour les charges) ou au niveau de chaque ligne de facture (BG-27 pour les remises de ligne, BG-28 pour les charges de ligne). Chaque occurrence doit être associée à un motif en texte et/ou un code motif normalisé. Les remises et charges au niveau document participent à la ventilation TVA et doivent porter un code catégorie TVA et un taux.</p>
+
+                    <h3>Suis-je concerné ?</h3>
+                    <ul class="regime-list">
+                            <li>Vous accordez des remises commerciales, rabais ou ristournes sur vos factures.</li>
+                            <li>Vous facturez des frais de port, d'emballage, de déplacement ou de mise en service.</li>
+                            <li>Vous appliquez des remises au niveau de certaines lignes et pas de la facture entière.</li>
+                            <li>Vous facturez des majorations pour petite quantité ou pour urgence.</li>
+                    </ul>
+
+                    <h3>Mention légale sur la facture</h3>
+                    <div class="callout callout--info">
+                        <span class="callout-icon">📜</span>
+                        <div class="callout-content">
+                            <p>Aucune mention légale spécifique obligatoire. En revanche l'article 242 nonies A du CGI impose de faire apparaître distinctement les rabais, remises et ristournes acquis et chiffrables lors de l'opération.</p>
+                        </div>
+                    </div>
+
+                    <h3>Données à renseigner</h3>
+                    <div class="comparison-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Référence de la norme</th>
+                                    <th>Donnée à fournir</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td><code>BG-20</code></td><td>Bloc Remise au niveau du document (répétable)</td></tr>
+                                <tr><td><code>BT-92</code></td><td>Montant de la remise au niveau du document</td></tr>
+                                <tr><td><code>BT-93</code></td><td>Base de calcul de la remise au niveau du document</td></tr>
+                                <tr><td><code>BT-94</code></td><td>Pourcentage de la remise au niveau du document</td></tr>
+                                <tr><td><code>BT-95</code></td><td>Code catégorie TVA de la remise au niveau du document (S, E, AE, K, G, O, Z)</td></tr>
+                                <tr><td><code>BT-96</code></td><td>Taux de TVA de la remise au niveau du document</td></tr>
+                                <tr><td><code>BT-97</code></td><td>Motif de la remise (texte libre, ex. : « Remise commerciale »)</td></tr>
+                                <tr><td><code>BT-98</code></td><td>Code motif de la remise (codelist UNTDID 5189, ex. : 95 = remise)</td></tr>
+                                <tr><td><code>BG-21</code></td><td>Bloc Charges ou frais au niveau du document (répétable)</td></tr>
+                                <tr><td><code>BT-99</code></td><td>Montant des charges au niveau du document</td></tr>
+                                <tr><td><code>BT-100</code></td><td>Base de calcul des charges au niveau du document</td></tr>
+                                <tr><td><code>BT-101</code></td><td>Pourcentage des charges au niveau du document</td></tr>
+                                <tr><td><code>BT-102</code></td><td>Code catégorie TVA des charges</td></tr>
+                                <tr><td><code>BT-103</code></td><td>Taux de TVA des charges</td></tr>
+                                <tr><td><code>BT-104</code></td><td>Motif des charges (texte libre, ex. : « Frais de port »)</td></tr>
+                                <tr><td><code>BT-105</code></td><td>Code motif des charges (codelist UNTDID 7161, ex. : FC = freight charge)</td></tr>
+                                <tr><td><code>BG-27</code></td><td>Bloc Remise de ligne de facture (répétable, au sein de BG-25)</td></tr>
+                                <tr><td><code>BT-136</code></td><td>Montant de la remise de ligne</td></tr>
+                                <tr><td><code>BT-137</code></td><td>Base de calcul de la remise de ligne</td></tr>
+                                <tr><td><code>BT-138</code></td><td>Pourcentage de la remise de ligne</td></tr>
+                                <tr><td><code>BT-139</code></td><td>Motif de la remise de ligne (obligatoire si pas de BT-140, cf. BR-CO-23)</td></tr>
+                                <tr><td><code>BT-140</code></td><td>Code motif de la remise de ligne (UNTDID 5189)</td></tr>
+                                <tr><td><code>BG-28</code></td><td>Bloc Charges ou frais sur ligne de facture (répétable, au sein de BG-25)</td></tr>
+                                <tr><td><code>BT-141</code></td><td>Montant des charges de ligne</td></tr>
+                                <tr><td><code>BT-142</code></td><td>Base de calcul des charges de ligne</td></tr>
+                                <tr><td><code>BT-143</code></td><td>Pourcentage des charges de ligne</td></tr>
+                                <tr><td><code>BT-144</code></td><td>Motif des charges de ligne (obligatoire si pas de BT-145, cf. BR-CO-24)</td></tr>
+                                <tr><td><code>BT-145</code></td><td>Code motif des charges de ligne (UNTDID 7161)</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h3>Erreurs fréquentes</h3>
+                    <ul class="regime-list regime-list--errors">
+                            <li>Renseigner un montant de remise de ligne (BT-136) sans motif ni code motif : rejet, règle BR-CO-23 qui exige BT-139 ou BT-140.</li>
+                            <li>Renseigner des charges de ligne (BT-141) sans motif ni code motif : rejet, règle BR-CO-24 qui exige BT-144 ou BT-145.</li>
+                            <li>Omettre le code catégorie de TVA (BT-95, BT-102) sur les remises et charges de niveau document : la ventilation de TVA devient incohérente avec les totaux.</li>
+                    </ul>
+
+                    <div class="regime-retenir">
+                        <span class="regime-retenir-label">À retenir</span>
+                        <p>Toute remise ou charge doit porter un motif, et celles de niveau document doivent en plus porter leur propre catégorie et taux de TVA.</p>
+                    </div>
+                </section>
+                <section id="intracommunautaire" class="content-section">
+                    <h2>T7 · Livraison intracommunautaire de biens</h2>
+                    <p class="regime-ref">Réf. EN 16931-1 BR-IC-01 à BR-IC-12 / BR-FR-15, BR-FR-20 (XP Z12-012) / Art. 138 Directive 2006/112/CE</p>
+                    <p class="regime-objectif"><strong>Objectif.</strong> Traiter une facture de livraison intracommunautaire de biens exonérée de TVA avec e-reporting obligatoire (flux 10.1).</p>
+                    <p>Les livraisons intracommunautaires de biens entre assujettis sont exonérées de TVA dans le pays de départ (art. 138 Directive 2006/112/CE). La facture porte la catégorie TVA K (exempt for intra-Community supply), un taux de 0 et le code VATEX-EU-IC. Ces opérations ne relèvent pas du e-invoicing domestique (flux 1/2) mais du e-reporting (flux 10.1). La PA du vendeur doit être en mesure de traiter et transmettre l'enregistrement de e-reporting correspondant.</p>
+
+                    <h3>Suis-je concerné ?</h3>
+                    <ul class="regime-list">
+                            <li>Vous vendez des biens expédiés depuis la France vers un client assujetti dans un autre État membre de l'UE.</li>
+                            <li>Vous disposez du numéro de TVA intracommunautaire valide de votre client européen.</li>
+                            <li>Vous pouvez justifier de l'expédition ou du transport des biens hors de France.</li>
+                            <li>Vous réalisez des transferts de stocks vers un autre État membre.</li>
+                    </ul>
+
+                    <h3>Mention légale sur la facture</h3>
+                    <div class="callout callout--info">
+                        <span class="callout-icon">📜</span>
+                        <div class="callout-content">
+                            <p>« Exonération de TVA, article 262 ter, I du CGI » ou « Exonération de TVA – Livraison intracommunautaire – article 138 de la directive 2006/112/CE ». La mention de l'article 262 ter I du CGI est la formulation usuelle en France.</p>
+                        </div>
+                    </div>
+
+                    <h3>Données à renseigner</h3>
+                    <div class="comparison-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Référence de la norme</th>
+                                    <th>Donnée à fournir</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td><code>BT-118</code></td><td>Code catégorie TVA du BG-23 : K (livraison intracommunautaire)</td></tr>
+                                <tr><td><code>BT-119</code></td><td>Taux de TVA : 0</td></tr>
+                                <tr><td><code>BT-121</code></td><td>Code motif d’exonération : VATEX-EU-IC</td></tr>
+                                <tr><td><code>BT-120</code></td><td>Motif en texte : « Exonération de TVA – Livraison intracommunautaire – article 138 Directive 2006/112/CE »</td></tr>
+                                <tr><td><code>BT-151</code></td><td>Code catégorie TVA en ligne : K</td></tr>
+                                <tr><td><code>BT-152</code></td><td>Taux de TVA en ligne : 0</td></tr>
+                                <tr><td><code>BT-48</code></td><td>N° TVA intracommunautaire du vendeur</td></tr>
+                                <tr><td><code>BT-47</code></td><td>N° TVA intracommunautaire de l’acheteur (obligatoire, cf. BR-IC-04/05)</td></tr>
+                                <tr><td><code>BT-21 / BT-22</code></td><td>Note avec code sujet BAR : signale à la PA le traitement e-reporting et non e-invoicing (cf. BR-FR-20)</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h3>Erreurs fréquentes</h3>
+                    <ul class="regime-list regime-list--errors">
+                            <li>Omettre le numéro de TVA intracommunautaire de l'acheteur (BT-47) : rejet, règles BR-IC-04 et BR-IC-05, et perte du droit à exonération.</li>
+                            <li>Traiter ces factures dans le flux e-invoicing domestique : les opérations intracommunautaires relèvent du e-reporting (flux 10.1), pas des flux 1 et 2.</li>
+                            <li>Omettre la note à code sujet BAR (BT-21/BT-22) qui signale à la plateforme le traitement e-reporting : règle BR-FR-20, la facture peut être orientée vers le mauvais flux.</li>
+                    </ul>
+
+                    <div class="regime-retenir">
+                        <span class="regime-retenir-label">À retenir</span>
+                        <p>Catégorie K, numéro de TVA de l'acheteur obligatoire, et surtout : ces factures partent en e-reporting, jamais en e-invoicing domestique.</p>
+                    </div>
+                </section>
+                <section id="export" class="content-section">
+                    <h2>T8 · Exportation de biens hors Union européenne</h2>
+                    <p class="regime-ref">Réf. EN 16931-1 BR-G-01 à BR-G-12 / BR-FR-15, BR-FR-20 (XP Z12-012)</p>
+                    <p class="regime-objectif"><strong>Objectif.</strong> Traiter une facture d'exportation de biens hors UE exonérée de TVA avec e-reporting obligatoire (flux 10.1).</p>
+                    <p>Les exportations de biens à destination d'un pays hors Union européenne sont exonérées de TVA. La facture porte la catégorie TVA G (free export item, tax not charged), un taux de 0 et le code VATEX-EU-G. Comme pour les livraisons intracommunautaires, ces opérations relèvent du e-reporting (flux 10.1) et non du e-invoicing domestique. La PA du vendeur doit pouvoir constituer et transmettre le message de e-reporting correspondant au CdD PPF.</p>
+
+                    <h3>Suis-je concerné ?</h3>
+                    <ul class="regime-list">
+                            <li>Vous vendez des biens expédiés vers un pays hors Union européenne.</li>
+                            <li>Vous disposez de la déclaration d'exportation validée par la douane (document administratif unique).</li>
+                            <li>Vous facturez un client établi dans un pays tiers, y compris dans les DOM pour certaines opérations.</li>
+                            <li>Vous réalisez des ventes en franchise à l'exportation via un commissionnaire.</li>
+                    </ul>
+
+                    <h3>Mention légale sur la facture</h3>
+                    <div class="callout callout--info">
+                        <span class="callout-icon">📜</span>
+                        <div class="callout-content">
+                            <p>« Exonération de TVA, article 262, I du CGI » ou « Exonération de TVA pour exportation ». La référence à l'article 262 I du CGI est la formulation usuelle en France.</p>
+                        </div>
+                    </div>
+
+                    <h3>Données à renseigner</h3>
+                    <div class="comparison-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Référence de la norme</th>
+                                    <th>Donnée à fournir</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td><code>BT-118</code></td><td>Code catégorie TVA du BG-23 : G (export hors UE)</td></tr>
+                                <tr><td><code>BT-119</code></td><td>Taux de TVA : 0</td></tr>
+                                <tr><td><code>BT-121</code></td><td>Code motif d’exonération : VATEX-EU-G</td></tr>
+                                <tr><td><code>BT-120</code></td><td>Motif en texte : « Export hors UE » ou « Exonération de TVA pour exportation »</td></tr>
+                                <tr><td><code>BT-151</code></td><td>Code catégorie TVA en ligne : G</td></tr>
+                                <tr><td><code>BT-152</code></td><td>Taux de TVA en ligne : 0</td></tr>
+                                <tr><td><code>BT-48</code></td><td>N° TVA intracommunautaire du vendeur</td></tr>
+                                <tr><td><code>BT-21 / BT-22</code></td><td>Note avec code sujet BAR : signale à la PA le traitement e-reporting et non e-invoicing (cf. BR-FR-20)</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h3>Erreurs fréquentes</h3>
+                    <ul class="regime-list regime-list--errors">
+                            <li>Appliquer la catégorie K (intracommunautaire) au lieu de G (export hors UE) : erreur de ventilation, le code VATEX attendu est VATEX-EU-G et non VATEX-EU-IC.</li>
+                            <li>Ne pas conserver la preuve douanière de sortie du territoire : l'exonération est remise en cause en cas de contrôle, indépendamment de la conformité de la facture.</li>
+                            <li>Traiter ces factures en e-invoicing domestique au lieu du e-reporting : même erreur d'orientation de flux que pour les livraisons intracommunautaires.</li>
+                    </ul>
+
+                    <div class="regime-retenir">
+                        <span class="regime-retenir-label">À retenir</span>
+                        <p>Export hors UE = catégorie G et VATEX-EU-G, à ne jamais confondre avec la catégorie K des livraisons intracommunautaires.</p>
+                    </div>
+                </section>
+
+                <nav class="page-nav-bottom">
+                    <a href="./cas-usage.html" class="nav-prev">
+                        <span class="nav-label">Voir aussi</span>
+                        <span class="nav-title">← Les cas d’usage</span>
+                    </a>
+                    <a href="./transcodification.html" class="nav-next">
+                        <span class="nav-label">Mettre en pratique</span>
+                        <span class="nav-title">Matrice de transcodification →</span>
+                    </a>
+                </nav>
+            </article>
+        </div>
+    </main>
+
+    <footer id="main-footer"></footer>
+
+    <script src="./js/nav.js"></script>
+    <script src="./js/animations.js"></script>
+</body>
+</html>

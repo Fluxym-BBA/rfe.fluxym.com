@@ -57,6 +57,7 @@ const SiteNav = {
                         <li><a href="./flux.html">📡 Les flux</a></li>
                         <li><a href="./cycle-de-vie.html">🔄 Cycle de vie</a></li>
                         <li><a href="./formats.html">📐 Les formats</a></li>
+                        <li><a href="./regimes-tva.html">🧾 Régimes de TVA</a></li>
                     </ul>
                 </li>
                 <li class="nav-dropdown">
@@ -130,6 +131,7 @@ const SiteNav = {
                             <li><a href="./flux.html">Les flux</a></li>
                             <li><a href="./cycle-de-vie.html">Cycle de vie</a></li>
                             <li><a href="./formats.html">Les formats</a></li>
+                            <li><a href="./regimes-tva.html">Régimes de TVA</a></li>
                         </ul>
                     </div>
                     <div class="footer-col">

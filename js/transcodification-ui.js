@@ -76,13 +76,29 @@ const TranscoTool = {
             </div>`).join('');
     },
 
+    /**
+     * URL de la fiche pédagogique du cas sur le site.
+     * Les cas FNFE numérotés ont une fiche dans data/cas-usage.json
+     * (identifiants de la forme « cas-13 », « cas-17a »).
+     * Les situations transverses (T1…T8) n'en ont pas : le champ « fiche »
+     * du JSON permet de forcer une URL le jour où une page existera.
+     */
+    ficheUrl(cas) {
+        if (cas.fiche) return cas.fiche;
+        return /^\d/.test(cas.id) ? `./cas-detail.html?id=cas-${cas.id}` : null;
+    },
+
     renderCard(cas) {
+        const fiche = this.ficheUrl(cas);
+        const badge = fiche
+            ? `<a href="${this.escapeAttr(fiche)}" class="transco-card-badge transco-card-badge--link" target="_blank" rel="noopener" title="Ouvrir la fiche du ${this.escapeAttr(cas.code)} dans un nouvel onglet">${this.escapeHtml(cas.code)} ↗</a>`
+            : `<span class="transco-card-badge">${this.escapeHtml(cas.code)}</span>`;
         return `
             <label class="transco-card" for="cas-${this.escapeAttr(cas.id)}">
                 <input type="checkbox" id="cas-${this.escapeAttr(cas.id)}" value="${this.escapeAttr(cas.id)}" data-cas>
                 <span class="transco-card-body">
                     <span class="transco-card-head">
-                        <span class="transco-card-badge">${this.escapeHtml(cas.code)}</span>
+                        ${badge}
                         <span class="transco-card-count">${cas.champs.length} champ${cas.champs.length > 1 ? 's' : ''}</span>
                     </span>
                     <span class="transco-card-title">${this.escapeHtml(cas.titre)}</span>
@@ -96,6 +112,14 @@ const TranscoTool = {
     bindEvents() {
         const list = document.getElementById('transco-list');
         if (list) {
+            // Phase de capture : le lien de la fiche est imbriqué dans le <label>.
+            // Sans cela, l'ouverture de la fiche cocherait aussi la case.
+            list.addEventListener('click', event => {
+                if (event.target.closest('.transco-card-badge--link')) {
+                    event.stopPropagation();
+                }
+            }, true);
+
             list.addEventListener('change', event => {
                 const input = event.target.closest('input[data-cas]');
                 if (!input) return;

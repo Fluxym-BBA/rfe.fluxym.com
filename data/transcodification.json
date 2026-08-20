@@ -1,6 +1,6 @@
 {
   "meta": {
-    "version": "1.1",
+    "version": "1.2",
     "dateMiseAJour": "2026-08-20",
     "titre": "Matrice de transcodification — champs obligatoires par cas d’usage",
     "source": "Trame de travail Fluxym (socle + 25 cas) enrichie des entrées P0 validées par RFE_Expert — référentiels : AFNOR XP Z12-014 V1.4 Annexe A, XP Z12-012 V1.4, Règles de gestion DGFiP v3.2, Spécifications externes FE v3.1",
@@ -1037,7 +1037,8 @@
           "ref": "BT-152",
           "label": "Taux de TVA en ligne : 0"
         }
-      ]
+      ],
+      "fiche": "./regimes-tva.html#autoliquidation"
     },
     {
       "id": "T2",
@@ -1084,7 +1085,8 @@
           "ref": "BR-FR-MAP-09 (Flux 10)",
           "label": "⚠️ Transcodification PA : même logique E vers Z pour le Flux 10.1 e-reporting"
         }
-      ]
+      ],
+      "fiche": "./regimes-tva.html#franchise-base"
     },
     {
       "id": "T3",
@@ -1124,7 +1126,8 @@
           "ref": "EXT-FR-FE-138",
           "label": "Date de la facture antérieure en ligne"
         }
-      ]
+      ],
+      "fiche": "./regimes-tva.html#avoirs"
     },
     {
       "id": "T4",
@@ -1151,7 +1154,8 @@
           "ref": "BT-111-1",
           "label": "Qualifiant de la devise de BT-111 : EUR"
         }
-      ]
+      ],
+      "fiche": "./regimes-tva.html#devise"
     },
     {
       "id": "T5",
@@ -1190,7 +1194,8 @@
           "ref": "BT-18 / BT-18-1",
           "label": "Objet facturé avec qualifiant UNTDID 1153 : référence de chantier, lot ou marché"
         }
-      ]
+      ],
+      "fiche": "./regimes-tva.html#btp"
     },
     {
       "id": "T6",
@@ -1313,7 +1318,8 @@
           "ref": "BT-145",
           "label": "Code motif des charges de ligne (UNTDID 7161)"
         }
-      ]
+      ],
+      "fiche": "./regimes-tva.html#remises"
     },
     {
       "id": "T7",
@@ -1360,7 +1366,8 @@
           "ref": "BT-21 / BT-22",
           "label": "Note avec code sujet BAR : signale à la PA le traitement e-reporting et non e-invoicing (cf. BR-FR-20)"
         }
-      ]
+      ],
+      "fiche": "./regimes-tva.html#intracommunautaire"
     },
     {
       "id": "T8",
@@ -1403,7 +1410,8 @@
           "ref": "BT-21 / BT-22",
           "label": "Note avec code sujet BAR : signale à la PA le traitement e-reporting et non e-invoicing (cf. BR-FR-20)"
         }
-      ]
+      ],
+      "fiche": "./regimes-tva.html#export"
     }
   ]
 }
