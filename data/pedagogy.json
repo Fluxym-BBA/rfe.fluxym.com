@@ -46,12 +46,12 @@
   },
   "6": {
     "badge": "Cas 6",
-    "title": "TVA déjà collectée (S7)",
-    "desc1": "<strong>Scénario :</strong> Ticket de caisse B2C puis facture B2B cadre S7.",
-    "desc2": "<strong>Particularités :</strong> S7 évite la double collecte TVA.",
-    "info": "Type 380. Cadre S7. Génère : sac cuir = 850€ HT.",
+    "title": "Frais collaborateur — facture B2B a posteriori",
+    "desc1": "<strong>Scénario :</strong> Un collaborateur règle une dépense à titre personnel. L'entreprise demande ensuite une facture à son nom.",
+    "desc2": "<strong>Particularités :</strong> La TVA a déjà été collectée lors de la vente B2C, e-reportée par le vendeur : la facture est émise en cadre S7 pour éviter une double collecte. Sans demande de l'entreprise, il n'y a pas de facture.",
+    "info": "Type 380. Cadre S7. Génère : 2 nuitées d'hôtel + restauration = 850 € HT, déjà payé.",
     "target": "esker",
-    "label": "Cas 6 — TVA déjà collectée (S7)"
+    "label": "Cas 6 — Frais collaborateur sans facture entreprise (S7)"
   },
   "7": {
     "badge": "Cas 7",
@@ -103,7 +103,7 @@
     "title": "Commissionnaire à la vente",
     "desc1": "<strong>Scénario :</strong> Un intermédiaire agit pour le compte du vendeur.",
     "desc2": "<strong>Particularités :</strong> EXT-FR-FE-BG-03 = agent de vendeur (tiers agissant pour le compte du vendeur). Deux factures.",
-        "info": "Type 380. Bloc EXT-FR-FE-BG-03. Génère : 2 lignes vins (Margaux + St-Émilion) = 24 100€ HT.",
+    "info": "Type 380. Bloc EXT-FR-FE-BG-03. Génère : 2 lignes vins (Margaux + St-Émilion) = 24 100€ HT.",
     "target": "esker",
     "label": "Cas 12 — Commissionnaire à la vente"
   },
@@ -144,13 +144,13 @@
     "label": "Cas 16 — Débours (notaire)"
   },
   "18": {
-        "badge": "Cas 18",
-        "title": "Facture complémentaire (ex-note de débit)",
-        "desc1": "<strong>Scénario :</strong> Refacturation de surcoûts sur une prestation déjà facturée (surcharge carburant, zones difficiles). La facture d'origine était juste : on ne la corrige pas, on facture en plus.",
-        "desc2": "<strong>Particularités :</strong> Le code <strong>383 (note de débit) est interdit en RFE</strong> : BR-FR-04 ferme la liste à 16 codes et 383 n'y figure pas. On émet donc une <strong>facture 380</strong> avec BG-3 en référence informative. Si la facture d'origine avait été <em>erronée</em>, il faudrait une rectificative 384 avec BG-3 obligatoire et le seul différentiel.",
-        "info": "Type 380. BG-3 informatif. Cadre S1. Génère : 2 lignes (carburant + zones difficiles) = 1 735€ HT.",
-        "target": "esker",
-        "label": "Cas 18 — Facture complémentaire (ex-note de débit)"
+    "badge": "Cas 18",
+    "title": "Facture complémentaire (ex-note de débit)",
+    "desc1": "<strong>Scénario :</strong> Refacturation de surcoûts sur une prestation déjà facturée (surcharge carburant, zones difficiles). La facture d'origine était juste : on ne la corrige pas, on facture en plus.",
+    "desc2": "<strong>Particularités :</strong> Le code <strong>383 (note de débit) est interdit en RFE</strong> : BR-FR-04 ferme la liste à 16 codes et 383 n'y figure pas. On émet donc une <strong>facture 380</strong> avec BG-3 en référence informative. Si la facture d'origine avait été <em>erronée</em>, il faudrait une rectificative 384 avec BG-3 obligatoire et le seul différentiel.",
+    "info": "Type 380. BG-3 informatif. Cadre S1. Génère : 2 lignes (carburant + zones difficiles) = 1 735€ HT.",
+    "target": "esker",
+    "label": "Cas 18 — Facture complémentaire (ex-note de débit)"
   },
   "20": {
     "badge": "Cas 20",
@@ -181,21 +181,21 @@
   },
   "24": {
     "badge": "Cas 24",
-    "title": "Gestion des arrhes",
-    "desc1": "<strong>Scénario :</strong> Arrhes versées à la commande (≠ acomptes).",
-    "desc2": "<strong>Particularités :</strong> Arrhes = indemnité, pas de TVA tant que vente non réalisée.",
-    "info": "Type 380. Génère : entretien climatisation = 1 850€ HT.",
+    "title": "Gestion des arrhes — aucune facture",
+    "desc1": "<strong>Scénario :</strong> Des arrhes sont versées à la commande. Elles ne sont pas des acomptes.",
+    "desc2": "<strong>Particularités :</strong> Les arrhes constituent une indemnité d'immobilisation (art. 1590 du Code civil), hors du champ de la TVA : aucune facture n'est émise. La vente qui suit relève du cas 1 ou du cas 20.",
+    "info": "Hors périmètre e-invoicing : aucune facture n'est produite pour ce cas.",
     "target": "esker",
-    "label": "Cas 24 — Arrhes"
+    "label": "Cas 24 — Arrhes (hors périmètre)"
   },
   "25": {
     "badge": "Cas 25",
-    "title": "Bons & cartes cadeaux (BUU / BUM)",
-    "desc1": "<strong>Scénario :</strong> BUU = TVA à l'émission. BUM = TVA à l'utilisation.",
-    "desc2": "<strong>Particularités :</strong> Classification selon connaissance lieu/taux/fournisseur.",
-    "info": "Type 380. Génère : 4 pneus Michelin = 3 200€ HT.",
+    "title": "Bons & cartes cadeaux — cession de BUU entre assujettis",
+    "desc1": "<strong>Scénario :</strong> Un émetteur cède un lot de bons d'achat à usage unique (BUU) à une entreprise cliente.",
+    "desc2": "<strong>Particularités :</strong> Le BUU est taxé dès son émission : la cession donne lieu à une facture. Le bon à usage multiple (BUM) n'est taxé qu'à l'utilisation et ne produit pas de facture à l'émission.",
+    "info": "Type 380. Note AAI. Génère : 200 BUU à 16 € = 3 200 € HT.",
     "target": "esker",
-    "label": "Cas 25 — Bons cadeaux (BUU/BUM)"
+    "label": "Cas 25 — Bons cadeaux : cession de BUU"
   },
   "26": {
     "badge": "Cas 26",
@@ -208,30 +208,30 @@
   },
   "27": {
     "badge": "Cas 27",
-    "title": "Tickets de péage",
-    "desc1": "<strong>Scénario :</strong> Factures récapitulatives mensuelles des autoroutes.",
-    "desc2": "<strong>Particularités :</strong> Facture mensuelle regroupée.",
-    "info": "Type 380. Génère : téléphonie VoIP = 980€ HT.",
+    "title": "Tickets de péage — aucune facture",
+    "desc1": "<strong>Scénario :</strong> Passage au péage réglé par carte, client non identifié par le concessionnaire.",
+    "desc2": "<strong>Particularités :</strong> L'opération est traitée en B2C et relève du e-reporting (flux 10.3 / 10.4). La facture récapitulative mensuelle d'un abonnement badge, elle, relève du cas nominal.",
+    "info": "Hors périmètre e-invoicing : aucune facture n'est produite pour ce cas.",
     "target": "esker",
-    "label": "Cas 27 — Péages"
+    "label": "Cas 27 — Péages (hors périmètre)"
   },
   "28": {
     "badge": "Cas 28",
-    "title": "Notes de restaurant",
-    "desc1": "<strong>Scénario :</strong> Repas B2C puis facture B2B cadre S7.",
-    "desc2": "<strong>Particularités :</strong> Pas de double collecte.",
-    "info": "Type 380. Cadre S7. Génère : bijoux fantaisie = 1 580€ HT.",
+    "title": "Notes de restaurant — facture demandée après la vente",
+    "desc1": "<strong>Scénario :</strong> Repas d'affaires réglé au comptant, facture demandée par l'entreprise cliente.",
+    "desc2": "<strong>Particularités :</strong> La vente a été e-reportée en B2C : la facture est émise en cadre S7. En dessous de 150 € HT et sans demande du client, la note de restaurant reste un simple justificatif.",
+    "info": "Type 380. Cadre S7. Génère : repas 8 couverts + salon privé = 1 580 € HT, déjà payé.",
     "target": "esker",
-    "label": "Cas 28 — Restaurant (S7)"
+    "label": "Cas 28 — Note de restaurant > 150 € HT (S7)"
   },
   "29": {
     "badge": "Cas 29",
-    "title": "Assujetti unique (Art. 256 C du CGI)",
-    "desc1": "<strong>Scénario :</strong> Flux intra-groupe, hors champ TVA mais dans le champ e-invoicing.",
-    "desc2": "<strong>Particularités :</strong> SIREN de l'AU dans BT-29 schéma 0231. TVA = 0.",
-    "info": "Type 380. TVA = 0. Génère : 500 MWh gaz = 21 250€ HT.",
+    "title": "Assujetti unique (art. 256 C du CGI)",
+    "desc1": "<strong>Scénario :</strong> Flux entre deux membres d'un même assujetti unique.",
+    "desc2": "<strong>Particularités :</strong> Les opérations internes sont hors du champ de la TVA : elles ne sont ni facturées ni e-reportées. Seules les factures B2B <em>externes</em> de l'assujetti unique entrent dans le périmètre, avec le SIREN de l'AU en BT-29 schéma 0231 — cas à créer.",
+    "info": "Hors périmètre e-invoicing : aucune facture n'est produite pour ce cas.",
     "target": "esker",
-    "label": "Cas 29 — Assujetti unique (TVA = 0)"
+    "label": "Cas 29 — Assujetti unique (hors périmètre)"
   },
   "30": {
     "badge": "Cas 30",
@@ -254,18 +254,18 @@
   "32": {
     "badge": "Cas 32",
     "title": "Paiements mensuels avant facturation",
-    "desc1": "<strong>Scénario :</strong> Mensualités estimées avant régularisation.",
-    "desc2": "<strong>Particularités :</strong> Chaque mensualité = acompte (cas 20).",
-    "info": "Type 386. Génère : acompte 40% rénovation = 24 000€ HT.",
+    "desc1": "<strong>Scénario :</strong> Énergie ou télécom : mensualités estimées, régularisation à la facture de solde.",
+    "desc2": "<strong>Particularités :</strong> Chaque mensualité B2B est une facture d'acompte (type 386, cas 20). En B2C, les mensualités relèvent du e-reporting et seule la régularisation peut donner lieu à une facture.",
+    "info": "Type 386. Note AAI. Génère : mensualité rénovation = 24 000 € HT.",
     "target": "esker",
-    "label": "Cas 32 — Mensualités (énergie/télécom)"
+    "label": "Cas 32 — Mensualités : acompte B2B"
   },
   "33": {
     "badge": "Cas 33",
     "title": "TVA sur la marge",
-    "desc1": "<strong>Scénario :</strong> Revendeurs biens d'occasion, agences voyage.",
-    "desc2": "<strong>Particularités :</strong> Note AAI Art. 297 A CGI.",
-    "info": "Type 380. Cadre B1. Génère : Porsche 911 = 95 000€.",
+    "desc1": "<strong>Scénario :</strong> Revendeur de véhicules d'occasion : le véhicule relève du régime de la marge, la préparation est taxée au taux normal.",
+    "desc2": "<strong>Particularités :</strong> Deux sous-totaux BG-23 sur la même facture — catégorie E exonérée (VATEX-EU-F) pour la marge, catégorie S à 20 % pour la prestation annexe. Note AAI art. 297 A du CGI.",
+    "info": "Type 380. Cadre B1. Génère : véhicule 95 000 € (marge, 0 %) + préparation 1 200 € HT (20 %).",
     "target": "esker",
     "label": "Cas 33 — TVA sur la marge"
   },
@@ -280,10 +280,10 @@
   },
   "35": {
     "badge": "Cas 35",
-    "title": "Notes d'auteur",
-    "desc1": "<strong>Scénario :</strong> Auteur personne physique facture des droits.",
-    "desc2": "<strong>Particularités :</strong> Régime fiscal spécifique.",
-    "info": "Type 380. Génère : API REST = 8 900€ HT.",
+    "title": "Notes d'auteur — facturation directe par l'auteur",
+    "desc1": "<strong>Scénario :</strong> Un auteur assujetti facture directement ses droits à un éditeur.",
+    "desc2": "<strong>Particularités :</strong> C'est bien une facture e-invoicing. Le relevé de droits établi par l'éditeur pour un auteur non assujetti, lui, n'est pas une facture.",
+    "info": "Type 380. Génère : à-valoir sur droits d'auteur = 8 900 € HT.",
     "target": "esker",
     "label": "Cas 35 — Notes d'auteur"
   },
@@ -343,12 +343,12 @@
   },
   "42": {
     "badge": "Cas 42",
-    "title": "Détaxe (touristes étrangers)",
-    "desc1": "<strong>Scénario :</strong> Touriste non résident UE. Min 100,01€ TTC.",
-    "desc2": "<strong>Particularités :</strong> Catégorie TNT1. Correction e-reporting.",
-    "info": "Type 380. Cadre B7. Note AAI PABLO. Génère : 2 450€ HT.",
+    "title": "Détaxe — refacturation à l'opérateur de détaxe",
+    "desc1": "<strong>Scénario :</strong> Vente à un touriste non résident (min. 100,01 € TTC), puis refacturation au réseau de détaxe.",
+    "desc2": "<strong>Particularités :</strong> La vente initiale est un e-reporting B2C, corrigé après validation PABLO (catégorie TNT1). La facture e-invoicing est celle émise vers l'opérateur de détaxe, assujetti français, en cadre B7.",
+    "info": "Type 380. Cadre B7. Note AAI PABLO. Génère : refacturation détaxe = 2 450 € HT.",
     "target": "esker",
-    "label": "Cas 42 — Détaxe touristes"
+    "label": "Cas 42 — Détaxe : facture à l'opérateur"
   },
   "nominal": {
     "badge": "Nominal",
@@ -400,7 +400,7 @@
     "title": "Litige suivi d'un avoir",
     "desc1": "<strong>Scénario :</strong> L'acheteur met la facture en litige. Le vendeur émet un avoir.",
     "desc2": "<strong>Particularités :</strong> Type 381. BG-3 = référence facture. Génère un ZIP.",
-    "info": "Type 381. BG-3. Génère un ZIP : facture multi-PO 5 921,64€ + avoir 7,58€.",
+    "info": "Type 381. BG-3. Génère un ZIP : facture contestée 3 680 € HT + avoir partiel 480 € HT sur la ligne litigieuse.",
     "target": "esker",
     "label": "Nominal — Litige + Avoir (ZIP)"
   },
@@ -445,7 +445,7 @@
     "title": "Auto-facturation (Self-billing)",
     "desc1": "<strong>Scénario :</strong> L'acheteur émet la facture pour le compte du vendeur.",
     "desc2": "<strong>Particularités :</strong> Type 389. Note DCL Art. 289-I-2 du CGI.",
-    "info": "Type 389. Note DCL. Génère : 2 lignes ferraille/cuivre = 22 472€ HT.",
+    "info": "Type 389. Note DCL. Génère : 2 lignes ferraille/cuivre = 22 472,50 € HT.",
     "target": "esker",
     "label": "Cas 19b — Auto-facturation (389)"
   },

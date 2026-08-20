@@ -161,10 +161,12 @@ const GeneratorUI = {
         { key: "catG", label: "G — Factures complémentaires & rectificatives", cases: ["18"] },
         { key: "catH", label: "H — Acomptes & factures de solde", cases: ["20","21","32"] },
         { key: "catI", label: "I — Escompte", cases: ["22a","22b"] },
-        { key: "catJ", label: "J — Cas spéciaux", cases: ["23","6","28","30","24","25","26","27","29","42"] },
+        { key: "catJ", label: "J — Cas spéciaux", cases: ["23","6","28","30","25","26","42"] },
         { key: "catK", label: "K — Cas avancés & régimes spéciaux", cases: ["33","34","35","36","37","38","39","40","41"] },
         { key: "tests", label: "Tests de robustesse", cases: ["A"] },
-        { key: "packs", label: "Packs de test (ZIP)", cases: ["B"] }
+        { key: "packs", label: "Packs de test (ZIP)", cases: ["B"] },
+        // Conserves pour leur valeur pedagogique, mais aucune facture n'est produite.
+        { key: "noinvoice", label: "Hors périmètre e-invoicing — aucune facture", cases: ["24","27","29"] }
     ],
 
     populateSelects: function() {
@@ -370,12 +372,43 @@ const GeneratorUI = {
     // CONTENU DU TELECHARGEMENT (triptyque)
     // =====================================================
 
+    // Cas hors perimetre e-invoicing : le cas reste consultable pour sa
+    // valeur pedagogique, mais la generation est bloquee et le motif
+    // remplace la ligne de parametres injectes.
+    // Retourne true si le cas selectionne n'est pas productible.
+    syncScopeState: function(usecase) {
+        if (typeof UBLGenerator === 'undefined') return false;
+
+        const reason = UBLGenerator.NO_INVOICE_CASES[usecase] || null;
+        const group = document.getElementById('group-artifacts');
+        const btn = document.getElementById('btn-generate');
+        const box = document.getElementById('info-box');
+        const info = document.getElementById('info-text');
+
+        if (group) group.classList.toggle('hidden', !!reason);
+        if (btn) {
+            btn.disabled = !!reason;
+            btn.classList.toggle('disabled', !!reason);
+        }
+        if (box) box.classList.toggle('out-of-scope', !!reason);
+        if (reason && info) {
+            info.innerHTML = '<strong>Aucune facture à produire.</strong> ' + reason;
+        }
+        return !!reason;
+    },
+
     // Active ou desactive les artefacts selon le cas selectionne :
     // le lisible n'est propose que pour les cas ou sa coherence
     // avec les donnees structurees a ete verifiee (UBLGenerator.PDF_CASES).
     syncArtifactOptions: function(usecase) {
         var group = document.getElementById('group-artifacts');
         if (!group || typeof UBLGenerator === 'undefined') return;
+
+        // Hors perimetre : ni artefact, ni bouton actif.
+        if (GeneratorUI.syncScopeState(usecase)) {
+            GeneratorUI.syncGenerateLabel();
+            return;
+        }
 
         var cfg = UBLGenerator.caseConfig[usecase] || {};
         var hint = document.getElementById('artifacts-hint');
@@ -414,6 +447,11 @@ const GeneratorUI = {
         var usecase = document.getElementById('usecase').value;
         var cfg = UBLGenerator.caseConfig[usecase] || {};
         var label;
+
+        if (UBLGenerator.NO_INVOICE_CASES[usecase]) {
+            btn.innerHTML = '<span class="gen-btn-icon">🚫</span> Aucune facture à produire';
+            return;
+        }
 
         if (cfg.zip) {
             label = 'Télécharger le pack ZIP';

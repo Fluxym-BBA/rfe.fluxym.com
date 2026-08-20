@@ -1,10 +1,17 @@
 /**
- * UBL-GENERATOR.JS v3b
- * 35+ cas d'usage FNFE — donnees uniques et realistes
+ * UBL-GENERATOR.JS v3c
+ * Cas d'usage AFNOR XP Z12-014 — donnees uniques et realistes
  * Config-driven + ZIP pour litige-avoir, litige-rectificative, pack B
  *
  * Auteur: Bruno BARTOLI — Fluxym / Re-Form-E
- * Date: 2026-03-28
+ * Date: 2026-08-20
+ * Changelog v3c — recadrage du perimetre e-invoicing :
+ *   - NO_INVOICE_CASES : cas hors perimetre e-invoicing (aucune facture produite)
+ *     24 arrhes, 27 peages, 29 flux internes d'un assujetti unique
+ *   - Cas MIXTE requalifies sur leur variante e-invoicing explicite (6, 25, 28, 32, 35, 42)
+ *   - 33 TVA sur la marge : base sur la marge (E) + base taxee (S) sur la meme facture
+ *   - nominal-litige-avoir : branche getLineData ajoutee, avoir partiel pilote par
+ *     getCreditNoteData(), bloc avoir hardcode reserve au pack B
  * Changelog v3b:
  *   - nominal-litige-rectificative genere un ZIP (originale 380 + rectificative 384)
  *   - buildXML accepte overrideLineData pour surcharger les donnees de ligne
@@ -30,6 +37,25 @@ const UBLGenerator = {
         EXPORT:    { category: "G", percent: "0.00", code: "VATEX-EU-G", reason: "Exoneration de TVA pour exportation hors UE - article 262-I du CGI" }
     },
 
+    // =====================================================
+    // PERIMETRE : CAS SANS FACTURE E-INVOICING
+    // =====================================================
+    // Ces cas d'usage restent selectionnables pour leur valeur pedagogique
+    // mais ne donnent lieu a AUCUNE facture electronique : l'operation
+    // releve du e-reporting (flux 10) ou est hors du champ de la TVA.
+    // Produire un XML pour ces cas serait trompeur pour un developpeur
+    // qui s'en servirait comme reference.
+    NO_INVOICE_CASES: {
+        "24": "Les arrhes constituent une indemnite d'immobilisation (article 1590 du Code civil) : hors du champ de la TVA, elles ne donnent lieu a aucune facture. La vente qui suit releve du cas 1 ou du cas 20.",
+        "27": "Le client n'est pas identifie au moment du passage au peage : l'operation est traitee en B2C et releve du e-reporting (flux 10.3 / 10.4), sans facture electronique.",
+        "29": "Les operations internes a un assujetti unique sont hors du champ de la TVA (article 256 C du CGI) : aucune facture e-invoicing. Seules les factures B2B externes emises par l'assujetti unique entrent dans le perimetre — cas a creer."
+    },
+
+    // Un cas est productible s'il donne lieu a une facture e-invoicing.
+    isProductible: function(usecase) {
+        return !this.NO_INVOICE_CASES[usecase];
+    },
+
     // Profil de TVA par cas d'usage. vat = profil applique a toutes les lignes.
     // lineVat = profil par identifiant de ligne (facture mixte).
     // customization = CustomizationID specifique (obligatoire si melange O + S).
@@ -38,8 +64,9 @@ const UBLGenerator = {
             lineVat: { "1": "STANDARD", "2": "DEBOURS", "3": "DEBOURS" },
             customization: "urn:cen.eu:en16931:2017#conformant#urn.cpro.gouv.fr:1p0:extended-ctc-fr"
         },
-        "29": { vat: "GROUPE_TVA" },
-        "33": { vat: "MARGE" }
+        // 33 : la marge est exoneree (E / VATEX-EU-F), les prestations
+        // annexes restent taxees au taux normal. Deux sous-totaux BG-23.
+        "33": { lineVat: { "1": "MARGE", "2": "STANDARD" } }
     },
 
     // Profil de TVA applicable a une ligne donnee.
@@ -135,13 +162,12 @@ const UBLGenerator = {
 
         // --- J. CAS SPECIAUX ---
         "23": { typeCode: "380", profile: "S1", zip: false },
-        "24": { typeCode: "380", profile: "S1", zip: false },
         "25": { typeCode: "380", profile: "S1", zip: false },
         "26": { typeCode: "380", profile: "S1", zip: false },
-        "27": { typeCode: "380", profile: "S1", zip: false },
         "28": { typeCode: "380", profile: "S7", zip: false, prepaid: true },
-        "29": { typeCode: "380", profile: "S1", zip: false },
         "30": { typeCode: "380", profile: "S7", zip: false, prepaid: true },
+        // 24 arrhes, 27 peages, 29 flux internes d'un assujetti unique :
+        // hors perimetre e-invoicing, voir NO_INVOICE_CASES.
         "6":  { typeCode: "380", profile: "S7", zip: false, prepaid: true },
         "42": { typeCode: "380", profile: "B7", zip: false, prepaid: true },
 
@@ -221,6 +247,19 @@ const UBLGenerator = {
                         { id: "2", qty: "1.00", amount: "2700.00", desc: "Creation contenu et visuels (15 posts)", price: "2700.00" }
                     ]
                 };
+
+            // nominal-litige-avoir : donnees de la FACTURE CONTESTEE (380).
+            // L'avoir partiel (381) qui l'accompagne est dans getCreditNoteData().
+            case "nominal-litige-avoir":
+                return {
+                    tax: ["3680.00", "736.00"],
+                    totals: ["3680.00", "3680.00", "4416.00", "0.00", "4416.00"],
+                    lines: [
+                        { id: "1", qty: "1.00", amount: "3200.00", desc: "Maintenance preventive CVC - Site de Rungis - T1 2026", price: "3200.00" },
+                        { id: "2", qty: "4.00", amount: "480.00", desc: "Deplacements et frais de mission (poste contexte)", price: "120.00" }
+                    ]
+                };
+                // BR-S-08: 3200+480 = 3680
 
             // nominal-litige-rectificative : donnees de la RECTIFICATIVE (corrigee)
             // Les donnees de la facture ORIGINALE (erronee) sont dans generateFile > ZIP
@@ -531,23 +570,32 @@ const UBLGenerator = {
                     ]
                 };
 
+            // 6 : variante e-invoicing du cas — le collaborateur a paye a titre
+            // personnel, l'entreprise demande une facture a son nom a posteriori.
+            // La TVA a deja ete collectee via le e-reporting B2C : cadre S7.
             case "6":
                 return {
                     tax: ["850.00", "170.00"],
                     totals: ["850.00", "850.00", "1020.00", "1020.00", "0.00"],
                     lines: [
-                        { id: "1", qty: "1.00", amount: "850.00", desc: "Sac cuir artisanal (vente post e-reporting B2C)", price: "850.00" }
+                        { id: "1", qty: "2.00", amount: "620.00", desc: "Nuitee hotel - Seminaire Lyon Part-Dieu (regularisation)", price: "310.00" },
+                        { id: "2", qty: "1.00", amount: "230.00", desc: "Restauration collaborateur - Justificatif du 12/03/2026", price: "230.00" }
                     ]
                 };
+                // BR-S-08: 620+230 = 850
 
+            // 28 : variante e-invoicing du cas — note de restaurant superieure
+            // a 150 EUR HT, facture demandee par l'assujetti apres la vente B2C.
             case "28":
                 return {
                     tax: ["1580.00", "316.00"],
                     totals: ["1580.00", "1580.00", "1896.00", "1896.00", "0.00"],
                     lines: [
-                        { id: "1", qty: "1.00", amount: "1580.00", desc: "Bijoux fantaisie (vente post e-reporting B2C)", price: "1580.00" }
+                        { id: "1", qty: "8.00", amount: "1420.00", desc: "Repas d'affaires - Menu groupe 8 couverts du 05/03/2026", price: "177.50" },
+                        { id: "2", qty: "1.00", amount: "160.00", desc: "Location salon prive - Service et mise en place", price: "160.00" }
                     ]
                 };
+                // BR-S-08: 1420+160 = 1580
 
             case "30":
                 return {
@@ -558,21 +606,15 @@ const UBLGenerator = {
                     ]
                 };
 
-            case "24":
-                return {
-                    tax: ["1850.00", "370.00"],
-                    totals: ["1850.00", "1850.00", "2220.00", "0.00", "2220.00"],
-                    lines: [
-                        { id: "1", qty: "1.00", amount: "1850.00", desc: "Entretien climatisation annuel - Batiment A", price: "1850.00" }
-                    ]
-                };
-
+            // 25 : variante e-invoicing du cas — cession de bons a usage UNIQUE
+            // (BUU) entre assujettis, TVA exigible des l'emission du bon.
+            // Les bons a usage multiple (BUM) ne sont pas taxes a l'emission.
             case "25":
                 return {
                     tax: ["3200.00", "640.00"],
                     totals: ["3200.00", "3200.00", "3840.00", "0.00", "3840.00"],
                     lines: [
-                        { id: "1", qty: "4.00", amount: "3200.00", desc: "Pneus hiver Michelin Pilot Alpin 5 (jeu)", price: "800.00" }
+                        { id: "1", qty: "200.00", amount: "3200.00", desc: "Bons d'achat a usage unique (BUU) - Valeur faciale 16 EUR", price: "16.00" }
                     ]
                 };
 
@@ -585,30 +627,12 @@ const UBLGenerator = {
                     ]
                 };
 
-            case "27":
-                return {
-                    tax: ["980.00", "196.00"],
-                    totals: ["980.00", "980.00", "1176.00", "0.00", "1176.00"],
-                    lines: [
-                        { id: "1", qty: "1.00", amount: "980.00", desc: "Abonnement telephonie VoIP - 12 postes/mois", price: "980.00" }
-                    ]
-                };
-
-            case "29":
-                return {
-                    tax: ["21250.00", "0.00"],
-                    totals: ["21250.00", "21250.00", "21250.00", "0.00", "21250.00"],
-                    lines: [
-                        { id: "1", qty: "500.00", amount: "21250.00", desc: "Gaz naturel (MWh) - Livraison usine mars 2026", price: "42.50" }
-                    ]
-                };
-
             case "42":
                 return {
                     tax: ["2450.00", "490.00"],
                     totals: ["2450.00", "2450.00", "2940.00", "2940.00", "0.00"],
                     lines: [
-                        { id: "1", qty: "1.00", amount: "2450.00", desc: "Articles detaxes - Bordereau PABLO DT2026-789012", price: "2450.00" }
+                        { id: "1", qty: "1.00", amount: "2450.00", desc: "Refacturation vente en detaxe - Bordereau PABLO DT2026-789012", price: "2450.00" }
                     ]
                 };
 
@@ -616,14 +640,19 @@ const UBLGenerator = {
             //  K — CAS AVANCES & REGIMES SPECIAUX
             // ================================================
 
+            // 33 : deux sous-totaux BG-23 sur une meme facture.
+            // Ligne 1 : vehicule d'occasion sous le regime de la marge (E, 0 %).
+            // Ligne 2 : prestation annexe taxee au taux normal (S, 20 %).
             case "33":
                 return {
-                    tax: ["95000.00", "0.00"],
-                    totals: ["95000.00", "95000.00", "95000.00", "0.00", "95000.00"],
+                    tax: ["96200.00", "240.00"],
+                    totals: ["96200.00", "96200.00", "96440.00", "0.00", "96440.00"],
                     lines: [
-                        { id: "1", qty: "1.00", amount: "95000.00", desc: "Porsche 911 Carrera S (2019) - VIN WP0AB2A9XKS123456", price: "95000.00" }
+                        { id: "1", qty: "1.00", amount: "95000.00", desc: "Porsche 911 Carrera S (2019) - VIN WP0AB2A9XKS123456", price: "95000.00" },
+                        { id: "2", qty: "1.00", amount: "1200.00", desc: "Preparation esthetique et controle technique", price: "1200.00" }
                     ]
                 };
+                // BR-S-08 : base S = 1200.00 (ligne 2) / base E = 95000.00 (ligne 1)
 
             case "34":
                 return {
@@ -634,12 +663,15 @@ const UBLGenerator = {
                     ]
                 };
 
+            // 35 : variante e-invoicing du cas — l'auteur assujetti facture
+            // directement ses droits a l'editeur. Les releves de droits
+            // etablis par l'editeur ne sont pas des factures.
             case "35":
                 return {
                     tax: ["8900.00", "1780.00"],
                     totals: ["8900.00", "8900.00", "10680.00", "0.00", "10680.00"],
                     lines: [
-                        { id: "1", qty: "1.00", amount: "8900.00", desc: "Developpement interface API REST sur mesure", price: "8900.00" }
+                        { id: "1", qty: "1.00", amount: "8900.00", desc: "Droits d'auteur - Ouvrage sur la facturation electronique - A-valoir 2026", price: "8900.00" }
                     ]
                 };
 
@@ -735,6 +767,23 @@ const UBLGenerator = {
     },
 
     // =====================================================
+    // DONNEES DE L'AVOIR PARTIEL
+    // Utilisee uniquement par le ZIP nominal-litige-avoir.
+    // Seule la ligne contestee est creditee ; les montants d'un
+    // avoir UBL 381 sont exprimes en positif.
+    // =====================================================
+    getCreditNoteData: function() {
+        return {
+            tax: ["480.00", "96.00"],
+            totals: ["480.00", "480.00", "576.00", "0.00", "576.00"],
+            lines: [
+                { id: "1", qty: "4.00", amount: "480.00", desc: "Avoir sur frais de mission contestes - Geste commercial", price: "120.00" }
+            ]
+        };
+        // BR-S-08: 480 = 480
+    },
+
+    // =====================================================
     // DONNEES DE LA FACTURE ORIGINALE (erronee)
     // Utilisee uniquement par le ZIP rectificative
     // =====================================================
@@ -816,6 +865,14 @@ const UBLGenerator = {
             var trigramme = document.getElementById('trigramme').value.toUpperCase() || "UNK";
             var usecase = document.getElementById('usecase').value;
 
+            // Garde-fou de perimetre : certains cas d'usage ne donnent lieu a
+            // aucune facture e-invoicing. On refuse de produire un XML plutot
+            // que de livrer une facture qui ne devrait pas exister.
+            if (!this.isProductible(usecase)) {
+                console.warn("generateFile: cas hors perimetre e-invoicing: " + usecase);
+                return;
+            }
+
             // BT-10 Reference acheteur (obligatoire, BR-10) : saisie utilisateur prioritaire.
             var buyerRefField = document.getElementById('buyer-reference');
             var buyerRefInput = buyerRefField ? buyerRefField.value.trim() : "";
@@ -888,7 +945,8 @@ const UBLGenerator = {
             ];
 
             if (usecase === "33") notes.push("#AAI#Regime TVA sur la marge - Article 297 A du CGI");
-            if (usecase === "29") notes.push("#AAI#Facturation intra-groupe - Assujetti unique Art. 256 C du CGI");
+            if (usecase === "25") notes.push("#AAI#Cession de bons d'achat a usage unique (BUU) - TVA exigible des l'emission");
+            if (usecase === "32") notes.push("#AAI#Mensualite facturee en acompte - Regularisation a la facture de solde");
             if (usecase === "16") notes.push("#AAI#Debours - Avance de frais pour le compte du client - Hors champ TVA");
             if (usecase === "6" || usecase === "28" || usecase === "30") notes.push("#AAI#TVA deja collectee via e-reporting B2C - Cadre S7");
             if (cfg.typeCode === "393") notes.push("#ACC#Facture cedee par subrogation conventionnelle. Reglement a effectuer exclusivement aupres du Factor.");
@@ -1005,8 +1063,8 @@ const UBLGenerator = {
                 xml += UBLTemplates.getPaymentTerms();
 
                 // --- Lignes et Totaux ---
-                if (asCreditNote) {
-                    // Avoir (cas B ZIP)
+                if (asCreditNote && usecase === "B" && !overrideLineData) {
+                    // Avoir hardcode du pack B : annulation d'une unite du PO 000003
                     xml += UBLTemplates.getTaxTotal([{ taxable: "6.32", amount: "1.26", category: "S", percent: "20.00", code: "", reason: "" }]);
                     xml += UBLTemplates.getLegalMonetaryTotal("6.32", "6.32", "7.58", "0.00", "7.58");
                     xml += UBLTemplates.getInvoiceLine("1", "-1.00", "6.32", "Annulation 1 unite CNT50922", "6.32", true, { line: "000003", id: poNumber });
@@ -1194,18 +1252,26 @@ const UBLGenerator = {
                     var supplierNameClean = supplier.name.replace(/[^a-zA-Z0-9]/g, '-');
                     var csvBaseName = supplierNameClean + "-" + yyyy + "-" + MM + "-" + dd + "-" + HH + "-" + mm;
 
-                    var csvHeaders = UBLTemplates.getPOHeadersCSV();
-                    csvHeaders += UBLTemplates.getPOHeadersRow(poNumber, orderDateCSV);
-                    zip.file(csvBaseName + "__PurchaseorderHeaders__.csv", csvHeaders);
+                    // Les CSV Master Data (commandes) n'ont de sens que pour le
+                    // pack B, construit autour d'un jeu de commandes multi-PO.
+                    if (usecase === "B") {
+                        var csvHeaders = UBLTemplates.getPOHeadersCSV();
+                        csvHeaders += UBLTemplates.getPOHeadersRow(poNumber, orderDateCSV);
+                        zip.file(csvBaseName + "__PurchaseorderHeaders__.csv", csvHeaders);
 
-                    var csvItems = UBLTemplates.getPOItemsCSV();
-                    csvItems += UBLTemplates.getPOItemsRow(poNumber);
-                    zip.file(csvBaseName + "__PurchaseorderItems__.csv", csvItems);
+                        var csvItems = UBLTemplates.getPOItemsCSV();
+                        csvItems += UBLTemplates.getPOItemsRow(poNumber);
+                        zip.file(csvBaseName + "__PurchaseorderItems__.csv", csvItems);
+                    }
+
+                    // L'avoir du cas nominal-litige-avoir est un avoir PARTIEL :
+                    // il ne credite que la ligne contestee, pas la facture entiere.
+                    var creditData = usecase === "B" ? null : self.getCreditNoteData();
 
                     zip.file(originalInvoiceNum + "_Cas_" + usecase + "_Facture_Litige" + ".xml",
                         buildXML(originalInvoiceNum, "380", false, null, poNumber));
                     zip.file(creditNoteNum + "_Cas_" + usecase + "_Avoir" + ".xml",
-                        buildXML(creditNoteNum, "381", true, originalInvoiceNum, poNumber));
+                        buildXML(creditNoteNum, "381", true, originalInvoiceNum, poNumber, creditData));
 
                     zip.generateAsync({ type: "blob" }).then(function(content) {
                         var url = window.URL.createObjectURL(content);
