@@ -1,2 +1,4 @@
+# rfe.fluxym.com — support pédagogique interne Fluxym
+# Site volontairement exclu de l'indexation : aucun robot n'est autorisé à explorer le site.
 User-agent: *
-Disallow:
+Disallow: /

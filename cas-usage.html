@@ -21,8 +21,8 @@
                 <a href="./index.html">Accueil</a> <span>/</span> <span>Niveau 4 — Mettre en pratique</span>
             </div>
             <span class="hero-badge">Niveau 4 — Mettre en pratique</span>
-            <h1>Les cas d'usage</h1>
-            <p>Chaque scénario métier a ses propres règles. Trouvez le vôtre parmi les 11 catégories officielles.</p>
+            <h1>Les 42 cas d'usage</h1>
+            <p>Chaque scénario métier a ses propres règles. 52 fiches détaillées, réparties en 11 catégories officielles.</p>
         </div>
     </header>
 
@@ -64,12 +64,12 @@
                     <h2>Qu'est-ce qu'un cas d'usage ?</h2>
                     <p>Un cas d'usage est un <strong>scénario métier concret</strong> qui décrit comment une opération commerciale doit être traitée dans le système de facturation électronique : <em>« Dans cette situation précise, comment émettre, recevoir ou déclarer ma facture ? »</em></p>
                     <div class="stat-highlight">
-                        <div class="stat-big">40</div>
-                        <div class="stat-desc">cas d'usage documentés sur ce site, sur les <strong>44 cas</strong> de la norme AFNOR XP Z12-014 V1.4. Le <a href="./generateur.html">générateur UBL</a> couvre les cas 1 à 42.</div>
+                        <div class="stat-big">52</div>
+                        <div class="stat-desc">fiches détaillées — les <strong>42 cas d'usage</strong> de la norme AFNOR XP Z12-014 Annexe A v1.4, leurs variantes et les <strong>7 parcours du cas nominal</strong> — réparties en <strong>11 catégories</strong> (A→K)</div>
                     </div>
                     <div class="callout callout--info">
                         <div class="callout-icon">💡</div>
-                        <div class="callout-content">Cliquez sur n'importe quel cas pour accéder à sa <strong>page dédiée</strong> avec diagramme de séquence interactif, points d'attention et données techniques.</div>
+                        <div class="callout-content">Cliquez sur n'importe quel cas pour accéder à sa <strong>page dédiée</strong> : diagramme de séquence interactif, <strong>déroulé pas à pas</strong> (qui fait quoi, quel flux, quel champ), <strong>champs BT/BG spécifiques au cas</strong> et rappel du socle commun, points d'attention et cas liés expliqués.</div>
                     </div>
                 </section>
 
@@ -83,6 +83,30 @@
                             <h4>Flux standard B2B</h4>
                             <p>Le cas de référence. Vendeur émet une facture à un acheteur via PA-E → PPF → PA-R.</p>
                             <div class="cu-meta"><span class="cu-cadre">B1/S1/M1</span><span class="cu-complexity">🟢</span></div>
+                        </a>
+                        <a href="./cas-detail.html?id=nominal-rejet-emission" class="cu-card cu-simple">
+                            <div class="cu-num">Variante</div>
+                            <h4>Rejet à l'émission</h4>
+                            <p>La PA-E détecte une erreur avant transmission : aucun flux 1, aucun flux 2 n'est émis.</p>
+                            <div class="cu-meta"><span class="cu-cadre">B1/S1/M1</span><span class="cu-complexity">🟢</span></div>
+                        </a>
+                        <a href="./cas-detail.html?id=nominal-non-transmise" class="cu-card cu-simple">
+                            <div class="cu-num">Variante</div>
+                            <h4>Facture non transmise</h4>
+                            <p>Le PPF ne parvient pas à router la facture. Elle existe fiscalement malgré tout.</p>
+                            <div class="cu-meta"><span class="cu-cadre">B1/S1/M1</span><span class="cu-complexity">🟢</span></div>
+                        </a>
+                        <a href="./cas-detail.html?id=nominal-rejet-reception" class="cu-card cu-simple">
+                            <div class="cu-num">Variante</div>
+                            <h4>Rejet à la réception</h4>
+                            <p>La PA-R détecte une anomalie technique. Annulation fiscale possible dans la même période.</p>
+                            <div class="cu-meta"><span class="cu-cadre">B1/S1/M1</span><span class="cu-complexity">🟡</span></div>
+                        </a>
+                        <a href="./cas-detail.html?id=nominal-refus" class="cu-card cu-simple">
+                            <div class="cu-num">Variante</div>
+                            <h4>Refus par l'acheteur</h4>
+                            <p>Refus métier après réception. Statut obligatoire, et pas d'avoir : le statut fait justificatif.</p>
+                            <div class="cu-meta"><span class="cu-cadre">B1/S1/M1</span><span class="cu-complexity">🟡</span></div>
                         </a>
                         <a href="./cas-detail.html?id=cas-1" class="cu-card cu-simple">
                             <div class="cu-num">N°1</div>
@@ -268,13 +292,13 @@
                     <p>Ajustements, corrections, avoirs et notes de débit.</p>
                     <div class="cu-grid">
                         <a href="./cas-detail.html?id=nominal-litige-avoir" class="cu-card cu-medium">
-                            <div class="cu-num">nominal-litige-avoir</div>
+                            <div class="cu-num">Variante</div>
                             <h4>Litige suivi d'un avoir</h4>
                             <p>L'acheteur conteste, un litige est ouvert, puis le vendeur émet un avoir.</p>
                             <div class="cu-meta"><span class="cu-cadre">B1/S1</span><span class="cu-complexity">🟡</span></div>
                         </a>
                         <a href="./cas-detail.html?id=nominal-litige-rectificative" class="cu-card cu-medium">
-                            <div class="cu-num">nominal-litige-rectificative</div>
+                            <div class="cu-num">Variante</div>
                             <h4>Litige suivi d'une rectificative</h4>
                             <p>Le vendeur émet une facture rectificative qui remplace l'originale.</p>
                             <div class="cu-meta"><span class="cu-cadre">B1/S1</span><span class="cu-complexity">🟡</span></div>
