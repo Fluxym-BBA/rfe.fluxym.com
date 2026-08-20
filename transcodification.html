@@ -300,5 +300,27 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
     <script src="./js/xlsx-writer.js"></script>
     <script src="./js/transcodification-ui.js"></script>
+    <script>
+        /**
+         * Filet de sécurité : si l'outil ne s'initialise pas (fichier absent,
+         * page ouverte en file://…), on affiche un diagnostic explicite
+         * plutôt qu'un « Chargement… » qui tourne indéfiniment.
+         */
+        window.setTimeout(() => {
+            const loader = document.querySelector('#transco-list .gen-loader');
+            if (!loader) return;
+            const missing = [];
+            if (typeof JSZip === 'undefined') missing.push('JSZip (CDN)');
+            if (typeof XlsxWriter === 'undefined') missing.push('js/xlsx-writer.js');
+            if (typeof TranscoTool === 'undefined') missing.push('js/transcodification-ui.js');
+            if (window.location.protocol === 'file:') {
+                missing.push('page ouverte en file:// — servez le site en HTTP pour autoriser la lecture de data/transcodification.json');
+            }
+            loader.className = 'transco-error';
+            loader.textContent = missing.length
+                ? `Outil non initialisé — ressource(s) manquante(s) : ${missing.join(' · ')}. Ouvrez la console du navigateur (F12) pour le détail.`
+                : 'Outil non initialisé — ouvrez la console du navigateur (F12) pour le détail.';
+        }, 4000);
+    </script>
 </body>
 </html>

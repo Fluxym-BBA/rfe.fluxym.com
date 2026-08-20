@@ -3,11 +3,7 @@
  * Le badge de référentiel est alimenté par data/referentiel.json (source unique).
  */
 const SiteNav = {
-    currentPage: (() => {
-        const page = window.location.pathname.split('/').pop() || 'index.html';
-        const alias = { 'pa-detail.html': 'plateformes-agreees.html', 'cas-detail.html': 'cas-usage.html' };
-        return alias[page] || page;
-    })(),
+    currentPage: window.location.pathname.split('/').pop() || 'index.html',
 
     init() {
         this.renderNav();
@@ -45,7 +41,6 @@ const SiteNav = {
                     <a href="#" class="nav-link nav-link--dropdown">Écosystème <span class="nav-arrow">▾</span></a>
                     <ul class="nav-submenu">
                         <li><a href="./acteurs.html">👥 Les acteurs</a></li>
-                        <li><a href="./plateformes-agreees.html">📇 Les plateformes agréées</a></li>
                         <li><a href="./e-invoicing.html">📨 E-invoicing</a></li>
                         <li><a href="./e-reporting.html">📊 E-reporting</a></li>
                         <li><a href="./chorus-pro.html">🏛️ Chorus Pro</a></li>
@@ -83,7 +78,14 @@ const SiteNav = {
                         <li><a href="./referentiel.html">🏷️ Référentiel & versions</a></li>
                     </ul>
                 </li>
-                <li><a href="./generateur.html" class="nav-link nav-cta">🧪 Générateur</a></li>
+                <li class="nav-dropdown">
+                    <a href="./outils.html" class="nav-link nav-cta">🧰 Outils <span class="nav-arrow">▾</span></a>
+                    <ul class="nav-submenu">
+                        <li><a href="./outils.html">🧰 Tous les outils</a></li>
+                        <li><a href="./generateur.html">🧪 Générateur UBL</a></li>
+                        <li><a href="./transcodification.html">🧭 Matrice de transcodification</a></li>
+                    </ul>
+                </li>
             </ul>
         </div>`;
     },
@@ -114,7 +116,6 @@ const SiteNav = {
                         <h4>Écosystème</h4>
                         <ul>
                             <li><a href="./acteurs.html">Les acteurs</a></li>
-                            <li><a href="./plateformes-agreees.html">Plateformes agréées</a></li>
                             <li><a href="./e-invoicing.html">E-invoicing</a></li>
                             <li><a href="./e-reporting.html">E-reporting</a></li>
                             <li><a href="./chorus-pro.html">Chorus Pro</a></li>
@@ -147,7 +148,9 @@ const SiteNav = {
                             <li><a href="./faq.html">FAQ</a></li>
                             <li><a href="./ressources.html">Liens & outils</a></li>
                             <li><a href="./referentiel.html">🏷️ Référentiel & versions</a></li>
+                            <li><a href="./outils.html">🧰 Les outils</a></li>
                             <li><a href="./generateur.html">🧪 Générateur UBL</a></li>
+                            <li><a href="./transcodification.html">🧭 Matrice de transcodification</a></li>
                         </ul>
                     </div>
                     <div class="footer-col">
