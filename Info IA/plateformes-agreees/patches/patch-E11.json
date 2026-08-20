@@ -1,0 +1,486 @@
+{
+  "_patch": {
+    "id": "E11",
+    "chantier": "E - qualification marché",
+    "auteur": "RFE_WebSite",
+    "dateReleve": "2026-08-20",
+    "referentielSource": "Fluxym-BBA/rfe.fluxym.com @ main - data/plateformes-agreees.json",
+    "cleFusion": "nom",
+    "nbPlateformes": 10,
+    "note": "Lot d'entités étrangères : siren, raisonSociale, dateCreation, trancheEffectif, categorieEntreprise, activitePrincipale et dirigeants sont volontairement absents du patch (aucune identité juridique française disponible, niveau de détail dégradé assumé). Champs non sourcés, donc absents du patch : (1) groupeCapitalistique pour GURUSOFT, aucune information capitalistique publiée ; (2) fournisseurDeSocle et modeDistributionSocle pour EDICOM Group, GURUSOFT, In.Te.S.A. spa, MAROSA et MySupply Aps, et fournisseurDeSocle pour ECOSIO (seuls des connecteurs et intégrations ERP sont publiés, aucune offre de revente de socle) ; (3) solutionsCompatiblesPartenaires pour les dix plateformes : aucune ne publie de liste nominative de Solutions Compatibles. Signaux de grossiste retenus malgré l'absence de liste : Docnova/MELASOFT (« EDI and white label solutions... built for companies, ERP providers and partners »), INVOPOP (option « White-labeled/OEM e-invoicing in my product » dans son formulaire de démonstration) et INDICOM (page « Become Indicom Partner », plus de quarante partenaires dont des software houses). (4) INVOPOP : segmentCible et natureEntite non renseignés, le site ne qualifiant ni la taille des clients finaux ni la date de création de l'entité. Réserves de sourcing : EDICOM Group et Fonoa Technologies Limited ne revendiquent pas explicitement l'immatriculation de plateforme agréée sur les pages de leur site consultées (pour Fonoa, la page France est un guide de TVA daté de janvier 2024) ; leur socleTechnique est en confiance moyenne et aucun statut d'immatriculation ne leur est attribué ici. In.Te.S.A. spa déclare un partenariat Pagero pour l'interopérabilité internationale : socleTechnique laissé à « propre » en confiance moyenne, sans déduction de marque blanche. Rappel de cadrage : « marque blanche » n'est pas une catégorie réglementaire ; chacune de ces dix plateformes est immatriculée en son nom propre et reste seule responsable devant l'administration. Noms commerciaux différents du nom d'inscription repérés : « Docnova, MELASOFT GmbH » -> Docnova ; MAROSA -> VATify ; MySupply Aps -> VAX 360, puis marque Inexchange à partir du 01/10/2026. Vigilance fusion : les inscriptions « ECOSIO » (ce lot) et « ecosio InterCom, a Vertex Company » (lot E13) sont deux lignes distinctes du référentiel, à ne pas confondre. Limite de lecture du référentiel : la récupération brute de data/plateformes-agreees.json sur main a été tronquée vers 85 Ko (entrées A à E seulement). Les clés « nom » de « Docnova, MELASOFT GmbH », « ECOSIO » et « EDICOM Group » ont été vérifiées caractère pour caractère dans le référentiel ; les sept autres ont été reprises telles quelles depuis Info IA/plateformes-agreees/LOTS-E.md (branche main) et doivent être contrôlées au moment de la fusion."
+  },
+  "plateformes": [
+    {
+      "nom": "Docnova, MELASOFT GmbH",
+      "siteWeb": "https://www.melasoft.com/",
+      "familleOrigine": [
+        "erp",
+        "integrateur",
+        "edi"
+      ],
+      "segmentCible": [
+        "eti",
+        "grands_comptes"
+      ],
+      "verticale": "generaliste",
+      "natureEntite": "extension_demat",
+      "perimetreFonctionnel": [
+        "emission",
+        "reception",
+        "ereporting"
+      ],
+      "socleTechnique": {
+        "type": "propre",
+        "operateurSocle": "MELASOFT (plateforme Docnova)",
+        "preuve": "Melasoft écrit sur sa page France « Melasoft is now an officially registered Plateforme Agréée (PA) with France's DGFiP » et opère sa propre plateforme Docnova : SaaS, add-on SAP (on-premise et cloud), API, connectivité Peppol certifiée, EDI, archivage, couverture revendiquée dans plus de 30 pays, ISO 27001 et hébergement UE.",
+        "source": "https://www.melasoft.com/france-e-invoicing-solution",
+        "confiance": "haute"
+      },
+      "fournisseurDeSocle": true,
+      "modeDistributionSocle": [
+        "direct",
+        "marque_blanche",
+        "API/embedded"
+      ],
+      "groupeCapitalistique": "MELASOFT GmbH, société allemande de conseil et de solutions SAP ; aucune appartenance à un groupe plus large n'est publiée sur son site.",
+      "descriptionFiche": "Éditeur et intégrateur allemand centré sur l'écosystème SAP (conseil SAP, solutions SAP, développement logiciel), immatriculé en France sous le nom d'inscription « Docnova, MELASOFT GmbH ». Le nom commercial du service est Docnova : plateforme SaaS d'e-invoicing et d'e-reporting avec add-on SAP, API, connectivité Peppol et EDI, couverture AR et AP de bout en bout, suivi du cycle de vie et archivage. Melasoft revendique une couverture conformité dans plus de 30 pays, une certification ISO 27001, un hébergement dans l'UE et une mise en conformité SAP « en 2 semaines » pour la France. Docnova est explicitement proposé aussi aux éditeurs d'ERP et aux partenaires, avec des « white label solutions » : la plateforme peut donc servir de socle à des tiers, en plus de la vente directe.",
+      "logiquePositionnement": "Cohérent : maison SAP dont le métier est déjà la conformité documentaire et fiscale multi-pays ; la France s'ajoute à un catalogue de mandats existants, sans changement de métier. Le point notable est la double cible, directe (entreprises SAP) et indirecte (éditeurs d'ERP, en marque blanche).",
+      "sourcesEnrichissement": [
+        {
+          "champ": "segmentCible, perimetreFonctionnel, socleTechnique",
+          "source": "https://www.melasoft.com/france-e-invoicing-solution",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        },
+        {
+          "champ": "fournisseurDeSocle, modeDistributionSocle, nom commercial Docnova",
+          "source": "https://docnova.ai/",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        },
+        {
+          "champ": "familleOrigine, natureEntite",
+          "source": "https://www.melasoft.com/",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "ECOSIO",
+      "siteWeb": "https://ecosio.com/fr/",
+      "familleOrigine": [
+        "edi"
+      ],
+      "segmentCible": [
+        "eti",
+        "grands_comptes"
+      ],
+      "verticale": "generaliste",
+      "natureEntite": "extension_demat",
+      "perimetreFonctionnel": [
+        "emission",
+        "reception",
+        "ereporting"
+      ],
+      "socleTechnique": {
+        "type": "propre",
+        "operateurSocle": "ecosio",
+        "preuve": "ecosio exploite sa propre plateforme cloud et son propre réseau (hub d'intégration, ecosio Monitor, connecteurs ERP) et écrit sur son site « ecosio is certified as a plateforme agréée (PA) in France », autorisée à échanger avec les autres PA et à transmettre les données au PPF.",
+        "source": "https://ecosio.com/en/blog/e-invoicing-and-e-reporting-in-france/",
+        "confiance": "haute"
+      },
+      "modeDistributionSocle": [
+        "direct"
+      ],
+      "groupeCapitalistique": "Vertex : son site indique « depuis qu'ecosio a rejoint Vertex en 2024 », rattachant l'éditeur autrichien à l'ensemble Vertex (détermination fiscale, facturation électronique, intégration B2B).",
+      "descriptionFiche": "Opérateur EDI autrichien positionné sur l'échange de données B2B et B2G en mode entièrement géré : EDI as a Service, activation des partenaires commerciaux, conformité e-invoicing mondiale. Le client garde une seule connexion vers son ERP, les flux transitant par la plateforme cloud et le réseau ecosio, avec maintenance continue de la conformité réglementaire. Chiffres publiés sur son site : plus de 100 millions de factures électroniques par an, 99,9 % de disponibilité et de fidélisation client, plus de 250 spécialistes conformité. ecosio a rejoint Vertex en 2024 et se déclare certifiée plateforme agréée en France, avec un accompagnement du pilote 2026. Point de vigilance référentiel : l'inscription « ECOSIO » coexiste avec l'inscription distincte « ecosio InterCom, a Vertex Company » (lot E13) — deux immatriculations à ne pas fusionner.",
+      "logiquePositionnement": "Très cohérent : la réforme française est pour ecosio un mandat de plus dans une activité historique d'EDI et de conformité multi-pays vendue aux ETI et grands comptes. Le rattachement à Vertex renforce l'axe fiscal (détermination de TVA plus facturation électronique).",
+      "sourcesEnrichissement": [
+        {
+          "champ": "familleOrigine, segmentCible, groupeCapitalistique",
+          "source": "https://ecosio.com/fr/",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        },
+        {
+          "champ": "socleTechnique, perimetreFonctionnel",
+          "source": "https://ecosio.com/en/blog/e-invoicing-and-e-reporting-in-france/",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "EDICOM Group",
+      "siteWeb": "https://edicomgroup.com/fr/",
+      "familleOrigine": [
+        "edi"
+      ],
+      "segmentCible": [
+        "eti",
+        "grands_comptes"
+      ],
+      "verticale": "generaliste",
+      "natureEntite": "extension_demat",
+      "perimetreFonctionnel": [
+        "emission",
+        "reception",
+        "ereporting"
+      ],
+      "socleTechnique": {
+        "type": "propre",
+        "operateurSocle": "EDICOM",
+        "preuve": "EDICOM annonce « une plateforme, des solutions infinies » pour l'EDI, la facturation électronique et la déclaration fiscale dans le monde entier, avec une page pays France qui documente la réforme (plateformes agréées, PPF, annuaire, e-reporting, Chorus Pro) : le socle exploité est le sien.",
+        "source": "https://edicomgroup.com/fr/facture-electronique/france",
+        "confiance": "moyenne"
+      },
+      "groupeCapitalistique": "Groupe EDICOM, éditeur d'origine espagnole à couverture mondiale : son site mentionne « les sociétés du groupe EDICOM » dans l'information sur le traitement des données.",
+      "descriptionFiche": "Opérateur international d'EDI et de facturation électronique, organisé en groupe multi-pays avec une page de conformité par juridiction pour plus de quatre-vingt-dix pays. Sa page France détaille le fonctionnement de la réforme (rôle et conditions d'immatriculation des plateformes agréées, PPF, annuaire, e-reporting, Chorus Pro, formats Factur-X, UBL et CII) et positionne EDICOM comme fournisseur unique pour l'EDI, la facturation électronique et la déclaration fiscale à l'échelle mondiale. Cible affichée : entreprises multinationales devant industrialiser des flux dans plusieurs pays simultanément. Réserve de sourcing : aucune des pages consultées ne comporte de déclaration explicite du type « EDICOM est immatriculée plateforme agréée », ce statut n'est donc pas repris ici.",
+      "logiquePositionnement": "Cohérent : acteur EDI historique dont le métier est déjà la conformité pays par pays ; la France est un mandat supplémentaire opéré sur le même socle, avec un discours résolument international plutôt que franco-centré.",
+      "sourcesEnrichissement": [
+        {
+          "champ": "familleOrigine, segmentCible, perimetreFonctionnel, socleTechnique",
+          "source": "https://edicomgroup.com/fr/facture-electronique/france",
+          "dateReleve": "2026-08-20",
+          "confiance": "moyenne"
+        },
+        {
+          "champ": "groupeCapitalistique",
+          "source": "https://edicomgroup.com/fr/facture-electronique/france",
+          "dateReleve": "2026-08-20",
+          "confiance": "moyenne"
+        }
+      ]
+    },
+    {
+      "nom": "Fonoa Technologies Limited",
+      "siteWeb": "https://www.fonoa.com/",
+      "familleOrigine": [
+        "tax"
+      ],
+      "segmentCible": [
+        "eti",
+        "grands_comptes"
+      ],
+      "verticale": "generaliste",
+      "natureEntite": "extension_demat",
+      "perimetreFonctionnel": [
+        "emission",
+        "reception",
+        "ereporting"
+      ],
+      "socleTechnique": {
+        "type": "propre",
+        "operateurSocle": "Fonoa",
+        "preuve": "Fonoa décrit une plateforme unique API-first à modèle de données commun (Validate, Tax Engine, E-Invoicing, Tax Return) avec des « accredited connections to tax authorities » et des « direct government connections in every mandated market ».",
+        "source": "https://www.fonoa.com/platform/e-invoicing",
+        "confiance": "moyenne"
+      },
+      "modeDistributionSocle": [
+        "direct",
+        "API/embedded"
+      ],
+      "groupeCapitalistique": "Société indépendante financée par capital-risque : son site annonce une levée de 110 M$ et l'acquisition de l'activité Indirect Tax Edge de PwC.",
+      "descriptionFiche": "Éditeur de technologie de fiscalité indirecte positionné sur une infrastructure d'API : validation d'identifiants fiscaux dans plus de cent vingt pays, moteur de détermination de TVA, facturation électronique dans plus de cinquante pays et production de déclarations. L'e-invoicing est l'un des quatre modules de la plateforme, avec un modèle de données unique, la couverture des flux sortants et entrants et des connexions accréditées aux administrations fiscales. Cible affichée : entreprises internationales et acteurs de l'économie numérique (plateformes, marketplaces) cherchant une intégration unique pour plusieurs mandats. Réserve de sourcing : aucune page consultée ne revendique explicitement l'immatriculation française de plateforme agréée, la page France disponible étant un guide de TVA daté de janvier 2024.",
+      "logiquePositionnement": "Cohérent, mais fiscal avant tout : Fonoa vient du monde de la fiscalité indirecte, pas de la dématérialisation de facture ; la réforme française est traitée comme un mandat de plus dans une couverture mondiale, ce qui suppose un client déjà international. Le positionnement France reste peu documenté sur son propre site.",
+      "sourcesEnrichissement": [
+        {
+          "champ": "perimetreFonctionnel, socleTechnique, segmentCible",
+          "source": "https://www.fonoa.com/platform/e-invoicing",
+          "dateReleve": "2026-08-20",
+          "confiance": "moyenne"
+        },
+        {
+          "champ": "familleOrigine, groupeCapitalistique",
+          "source": "https://www.fonoa.com/",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        },
+        {
+          "champ": "absence de revendication PA sur la page France",
+          "source": "https://www.fonoa.com/countries/france",
+          "dateReleve": "2026-08-20",
+          "confiance": "moyenne"
+        }
+      ]
+    },
+    {
+      "nom": "GURUSOFT",
+      "siteWeb": "https://guru-soft.com/fr/france/",
+      "familleOrigine": [
+        "pure_player",
+        "erp"
+      ],
+      "segmentCible": [
+        "tpe_pme",
+        "eti",
+        "grands_comptes"
+      ],
+      "verticale": "generaliste",
+      "natureEntite": "extension_demat",
+      "perimetreFonctionnel": [
+        "emission",
+        "reception"
+      ],
+      "socleTechnique": {
+        "type": "propre",
+        "operateurSocle": "GuruSoft",
+        "preuve": "Page France de GuruSoft : « nous sommes certifiés en tant que Plateforme Agréée (PA) », fournisseur de services Peppol certifié, conformité revendiquée à la norme SecNumCloud, add-on maison eDoc et connecteurs natifs SAP R3/ECC/S4HANA, SAP Business One, autres ERP et points de vente.",
+        "source": "https://guru-soft.com/fr/france/",
+        "confiance": "haute"
+      },
+      "descriptionFiche": "Éditeur hispanophone (Espagne et Amérique latine) revendiquant plus de quinze ans d'expérience et une présence dans seize pays, dont le cœur de métier est la facturation électronique intégrée aux ERP. L'offre France s'articule autour de connecteurs natifs SAP R3/ECC/S4HANA et SAP Business One, de l'add-on eDoc permettant de facturer sans quitter les écrans SAP, et d'intégrations avec d'autres ERP et systèmes de points de vente. Arguments mis en avant : certification de plateforme agréée, statut de fournisseur de services Peppol certifié, ISO 27001, conformité revendiquée à la norme SecNumCloud pour la souveraineté des données, support 8x5 ou 24x7. Positionnement de spécialiste technique de l'intégration plutôt que de suite de gestion.",
+      "logiquePositionnement": "Cohérent : acteur venu de marchés où la facture électronique est obligatoire depuis longtemps (Amérique latine), qui applique à la France le même modèle d'intégration à l'ERP. La mise en avant de SecNumCloud montre une adaptation explicite aux attentes du marché français.",
+      "sourcesEnrichissement": [
+        {
+          "champ": "segmentCible, perimetreFonctionnel, socleTechnique",
+          "source": "https://guru-soft.com/fr/france/",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        },
+        {
+          "champ": "familleOrigine, natureEntite",
+          "source": "https://guru-soft.com/home-espana/",
+          "dateReleve": "2026-08-20",
+          "confiance": "moyenne"
+        }
+      ]
+    },
+    {
+      "nom": "INDICOM",
+      "siteWeb": "https://indicom.eu/",
+      "familleOrigine": [
+        "ged",
+        "integrateur"
+      ],
+      "segmentCible": [
+        "tpe_pme",
+        "eti",
+        "grands_comptes"
+      ],
+      "verticale": "generaliste",
+      "natureEntite": "extension_demat",
+      "perimetreFonctionnel": [
+        "emission",
+        "reception"
+      ],
+      "socleTechnique": {
+        "type": "propre",
+        "operateurSocle": "Indicom",
+        "preuve": "Indicom présente son propre service de facturation électronique, opéré depuis l'Italie puis étendu à l'international « including accreditation as a PA (Plateformes Agréées, formerly PDP – Plateforme de Dématérialisation Partenaire) in France », avec 135 millions de factures électroniques gérées depuis 2014 et un milliard de documents archivés.",
+        "source": "https://indicom.eu/en/international-electronic-e-invoicing/",
+        "confiance": "haute"
+      },
+      "fournisseurDeSocle": true,
+      "modeDistributionSocle": [
+        "direct",
+        "via integrateur"
+      ],
+      "groupeCapitalistique": "IDC – Indicom Document Care, groupe italien indépendant (trois bureaux en Italie et une présence française) ; aucune appartenance à un groupe plus large n'est publiée sur son site.",
+      "descriptionFiche": "Prestataire italien de gestion documentaire et d'externalisation de processus : dématérialisation de documents, conservation numérique à valeur probante, facturation électronique. Chiffres publiés sur son site : plus de vingt-cinq ans d'expérience, plus de 500 grandes et moyennes entreprises et plus de 120 micro et petites entreprises clientes, 135 millions de factures électroniques gérées depuis 2014, un milliard de documents archivés. Indicom se présente comme un partenaire spécialisé capable d'opérer le service dans plusieurs pays et déclare son accréditation de plateforme agréée en France. Signal de grossiste : une page « Become Indicom Partner » invite éditeurs et intégrateurs à proposer les services Indicom à leurs propres clients, avec plus de quarante partenaires revendiqués dont des software houses — sans liste nominative publiée.",
+      "logiquePositionnement": "Cohérent : la plateforme agréée prolonge un métier de tiers de confiance documentaire et d'externalisation déjà exercé en Italie, la France étant un marché d'extension. Le modèle de distribution est mixte, direct et via un réseau de partenaires éditeurs et intégrateurs.",
+      "sourcesEnrichissement": [
+        {
+          "champ": "segmentCible, perimetreFonctionnel, socleTechnique",
+          "source": "https://indicom.eu/en/international-electronic-e-invoicing/",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        },
+        {
+          "champ": "fournisseurDeSocle, modeDistributionSocle",
+          "source": "https://indicom.eu/en/become-indicom-partner/",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        },
+        {
+          "champ": "familleOrigine, groupeCapitalistique",
+          "source": "https://indicom.eu/en/idc-home",
+          "dateReleve": "2026-08-20",
+          "confiance": "moyenne"
+        }
+      ]
+    },
+    {
+      "nom": "INVOPOP",
+      "siteWeb": "https://www.invopop.com/",
+      "familleOrigine": [
+        "pure_player"
+      ],
+      "verticale": "generaliste",
+      "perimetreFonctionnel": [
+        "emission",
+        "reception"
+      ],
+      "socleTechnique": {
+        "type": "propre",
+        "operateurSocle": "Invopop",
+        "preuve": "Invopop exploite sa propre plateforme API-first (API, console, workflows, mode sandbox), « proudly built on GOBL, an open source, global invoice format » qu'il publie lui-même, et propose une page dédiée « API to comply with the e-invoicing reform in France ».",
+        "source": "https://www.invopop.com/",
+        "confiance": "haute"
+      },
+      "fournisseurDeSocle": true,
+      "modeDistributionSocle": [
+        "direct",
+        "marque_blanche",
+        "API/embedded"
+      ],
+      "groupeCapitalistique": "Invopop S.L., société espagnole établie à Madrid ; aucune appartenance à un groupe n'est publiée sur son site.",
+      "descriptionFiche": "Pure player espagnol de la facturation électronique par API, construit sur le format ouvert GOBL qu'il publie. L'offre est vendue comme une brique d'infrastructure : une API, des workflows, une console d'administration et un mode sandbox pour émettre des factures conformes dans de nombreux pays, avec une page dédiée à la conformité à la réforme française. Signal de grossiste net : le formulaire de demande de démonstration propose explicitement l'option « White-labeled/OEM e-invoicing in my product, for my customers to create invoices », à côté de l'option de raccordement d'un outil de facturation ou d'un ERP. Cas client mis en avant : la plateforme SaaS Amenitiz, qui s'appuie sur Invopop pour couvrir plus de quarante pays. Le segment de clientèle finale et la date de création de l'entité ne sont pas explicités sur le site : segmentCible et natureEntite ne sont donc pas renseignés.",
+      "logiquePositionnement": "Cohérent et assumé : Invopop ne cherche pas d'abord l'entreprise utilisatrice mais l'éditeur ou la plateforme qui veut embarquer la conformité dans son propre produit. La plateforme agréée française est un marché parmi d'autres pour un socle vendu en OEM.",
+      "sourcesEnrichissement": [
+        {
+          "champ": "familleOrigine, socleTechnique, fournisseurDeSocle, modeDistributionSocle, groupeCapitalistique",
+          "source": "https://www.invopop.com/",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        },
+        {
+          "champ": "perimetreFonctionnel France",
+          "source": "https://www.invopop.com/coverage/plateforme-agreee",
+          "dateReleve": "2026-08-20",
+          "confiance": "moyenne"
+        }
+      ]
+    },
+    {
+      "nom": "In.Te.S.A. spa",
+      "siteWeb": "https://www.intesa.it/",
+      "familleOrigine": [
+        "edi",
+        "ged"
+      ],
+      "segmentCible": [
+        "eti",
+        "grands_comptes",
+        "public"
+      ],
+      "verticale": "generaliste",
+      "natureEntite": "extension_demat",
+      "perimetreFonctionnel": [
+        "emission",
+        "reception"
+      ],
+      "socleTechnique": {
+        "type": "propre",
+        "operateurSocle": "Intesa (B2B Trusted Hub, plateforme Intesa Hive)",
+        "preuve": "Historique publié par Intesa : service EDI dès 1988, plateforme B2B Trusted Hub en 2005, Peppol Access Point en 2017, plateforme Intesa Hive lancée en 2024, centres de données propres, statut de prestataire de services de confiance qualifié. Pour l'international, Intesa indique s'appuyer sur un « partnership with Pagero » pour l'interopérabilité, ce qui ne retire rien à son immatriculation en nom propre en France.",
+        "source": "https://www.intesa.it/en/who-we-are/",
+        "confiance": "moyenne"
+      },
+      "groupeCapitalistique": "Havant Group depuis 2026 selon sa propre chronologie (« 2026 Intesa joins the Havant Group ») ; précédemment groupe Kyndryl à partir de 2021 et société du groupe IBM ; entité fondée en 1987 comme coentreprise entre le groupe Fiat et IBM Italia.",
+      "descriptionFiche": "Acteur italien historique de la dématérialisation et des services de confiance, fondé en 1987 comme coentreprise Fiat / IBM Italia. Métiers : échange de documents B2B (EDI depuis 1988), facturation électronique, conservation à valeur probante, signature électronique et identité numérique, avec statut de prestataire de services de confiance qualifié, Peppol Access Point et centres de données propres. La plateforme unifiée Intesa Hive gère commandes, factures, bons de livraison et plannings de livraison. Pour la facturation électronique internationale, Intesa déclare un partenariat avec Pagero afin d'assurer l'interopérabilité au niveau européen. La société a rejoint le Havant Group en 2026, après avoir appartenu au groupe Kyndryl (2021) et au groupe IBM.",
+      "logiquePositionnement": "Très cohérent : la plateforme agréée s'inscrit dans plus de trente ans de métier de tiers de confiance documentaire et d'EDI, avec une clientèle de grands comptes et d'administrations multi-pays. Point à surveiller : l'articulation entre son socle propre et le réseau Pagero pour les flux hors Italie.",
+      "sourcesEnrichissement": [
+        {
+          "champ": "familleOrigine, socleTechnique, groupeCapitalistique, natureEntite",
+          "source": "https://www.intesa.it/en/who-we-are/",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        },
+        {
+          "champ": "perimetreFonctionnel, segmentCible, partenariat Pagero",
+          "source": "https://www.intesa.it/en/what-we-do/electronic-invoicing/",
+          "dateReleve": "2026-08-20",
+          "confiance": "moyenne"
+        }
+      ]
+    },
+    {
+      "nom": "MAROSA",
+      "siteWeb": "https://marosavat.com/",
+      "familleOrigine": [
+        "tax"
+      ],
+      "segmentCible": [
+        "eti",
+        "grands_comptes"
+      ],
+      "verticale": "generaliste",
+      "natureEntite": "extension_demat",
+      "perimetreFonctionnel": [
+        "emission",
+        "reception"
+      ],
+      "socleTechnique": {
+        "type": "propre",
+        "operateurSocle": "Marosa (logiciel VATify)",
+        "preuve": "Marosa édite et licencie son propre logiciel VATify (licence SaaS, API de raccordement à l'ERP, modules e-invoicing, réconciliation entre données de facturation électronique et déclarations de TVA) et écrit dans son guide France que la première liste de 101 plateformes agréées certifiées comprend « Marosa (VATify) among them ».",
+        "source": "https://marosavat.com/vat-news/e-invoicing-france",
+        "confiance": "haute"
+      },
+      "groupeCapitalistique": "Wolters Kluwer : Marosa annonce sur son site son acquisition par Wolters Kluwer et son rattachement à la division Corporate Performance & ESG (unité Corporate Tax, solution CCH SureTax), le centre d'excellence restant à Vigo ; la société avait auparavant pour partenaire capitalistique Aquiline.",
+      "descriptionFiche": "Éditeur espagnol de conformité TVA fondé par Pedro Pestana et basé à Vigo, dont le produit porte le nom commercial VATify. Offre en trois blocs : déclarations de TVA multi-pays automatisées, facturation électronique (« one integration for all countries », modules d'extraction de données et de réconciliation des factures avec les déclarations) et gouvernance des données. Modèle mixte, logiciel en licence SaaS et accompagnement par des experts fiscaux, avec plus de deux mille clients revendiqués. Marosa publie un guide France détaillé de la réforme et s'y désigne comme plateforme agréée certifiée sous le nom VATify. La société est passée sous le contrôle de Wolters Kluwer.",
+      "logiquePositionnement": "Cohérent : la plateforme agréée prolonge un métier de conformité TVA, avec un argument différenciant clair, la réconciliation entre les données de facturation électronique et les déclarations de TVA. Attention référentiel : nom d'inscription MAROSA, nom commercial VATify.",
+      "sourcesEnrichissement": [
+        {
+          "champ": "perimetreFonctionnel, socleTechnique",
+          "source": "https://marosavat.com/vat-news/e-invoicing-france",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        },
+        {
+          "champ": "familleOrigine, segmentCible, natureEntite",
+          "source": "https://marosavat.com/",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        },
+        {
+          "champ": "groupeCapitalistique",
+          "source": "https://marosavat.com/vat-news/marosa-wolters-kluwer-acquisition",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "MySupply Aps",
+      "siteWeb": "https://mysupply.dk/en/",
+      "familleOrigine": [
+        "edi",
+        "s2p"
+      ],
+      "segmentCible": [
+        "eti",
+        "grands_comptes"
+      ],
+      "verticale": "generaliste",
+      "natureEntite": "extension_demat",
+      "perimetreFonctionnel": [
+        "emission",
+        "reception",
+        "ereporting"
+      ],
+      "socleTechnique": {
+        "type": "propre",
+        "operateurSocle": "mySupply (plateforme VAX 360)",
+        "preuve": "mySupply exploite sa propre solution d'intégration VAX 360 (raccordement aux réseaux NemHandel, Peppol, Digital Post, formats EDIFACT et OIOUBL) et annonce sa certification de plateforme agréée française avec transmission directe des données à la DGFiP « without any detours », gestion du Factur-X, validation automatique des SIREN et SIRET, onboarding et intégration à l'ERP existant du client.",
+        "source": "https://mysupply.dk/en/mysupply-is-now-officially-certified-as-a-french-pa-service-provider/",
+        "confiance": "haute"
+      },
+      "groupeCapitalistique": "Visma : mySupply fusionne avec Inexchange, Maventa et efacto (annonce du 1er juin 2026) pour opérer sous la marque Inexchange à partir du 1er octobre 2026, ensemble présenté comme « Visma's most significant commitment to the e-invoicing category to date ».",
+      "descriptionFiche": "Éditeur danois de gestion documentaire à valeur ajoutée : sa plateforme VAX 360 automatise l'envoi et la réception de factures et d'autres documents commerciaux via les réseaux NemHandel, Peppol ou Digital Post, aux formats EDIFACT et OIOUBL notamment, en intégration avec l'ERP du client (références publiées : Dagrofa, COWI, 10-4, iTools, e-trasborg). Sur la France, mySupply annonce sa certification de plateforme agréée et met en avant une transmission directe vers la DGFiP, le support du Factur-X, la validation des SIREN et SIRET, l'onboarding au nouvel écosystème et l'argument d'un interlocuteur nordique unique pour toute l'Europe (Allemagne ZRE et OZG-RE, Pologne KSeF, France PA). L'entité fusionne au 1er octobre 2026 dans l'ensemble Inexchange (Visma), qui déclare servir PME, grands comptes, secteur public et partenaires éditeurs.",
+      "logiquePositionnement": "Cohérent : intégrateur nordique de flux documentaires qui suit ses clients internationaux sur les mandats européens, la France constituant un mandat de plus. Point de vigilance à suivre : l'immatriculation est portée par MySupply Aps alors que la marque commerciale devient Inexchange à compter du 1er octobre 2026.",
+      "sourcesEnrichissement": [
+        {
+          "champ": "familleOrigine, segmentCible, socleTechnique",
+          "source": "https://mysupply.dk/en/",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        },
+        {
+          "champ": "perimetreFonctionnel, socleTechnique France",
+          "source": "https://mysupply.dk/en/mysupply-is-now-officially-certified-as-a-french-pa-service-provider/",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        },
+        {
+          "champ": "groupeCapitalistique",
+          "source": "https://mysupply.dk/en/four-leading-nordic-e-invoicing-companies-merge-to-build-europes-new-e-invoicing-powerhouse/",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        }
+      ]
+    }
+  ]
+}
