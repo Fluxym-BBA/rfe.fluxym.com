@@ -1,0 +1,2805 @@
+{
+ "_patch": {
+  "id": "A",
+  "chantier": "A — sites web et contacts (source DGFiP)",
+  "auteur": "RFE_WebSite",
+  "dateReleve": "2026-08-20",
+  "nbPlateformes": 147,
+  "note": "Extraction ligne par ligne du XLSX officiel (onglet Feuille1, en-tete sur 2 lignes fusionnees, donnees lignes 3 a 150). Colonnes utilisees : A « Nom commercial », E « Site internet », F « Courriel de contact » — lues sur la meme ligne, jamais recollees. 148 lignes de donnees dans le XLSX pour 147 plateformes au referentiel : la ligne 150 « YTEMS » (https://com.ytems.app/, pa@ytems.co, immatriculee le 03/08/26) ne correspond a aucun `nom` du referentiel. Sa date de delivrance dans le XLSX est le 03/08/26, donc ANTERIEURE au fichier DGFiP du 17/08/2026 sur lequel le referentiel a ete construit : soit la ligne a ete manquee lors de l'extraction depuis le PDF, soit elle a ete ajoutee au fichier apres coup. A arbitrer. Elle n'est PAS incluse dans ce patch : creer une plateforme sort du cadre d'un patch d'enrichissement. Consequence : _meta.nbImmatriculeesDefinitives (147) est desormais a corriger a 148. Aucune valeur manquante : les 147 lignes portent un site et un contact. TRESO2 est publie en http:// et non https:// (http://www.treso2.com) : valeur conservee telle que publiee, non forcee en https pour ne pas inventer une URL non verifiee. 6 plateformes declarent une page de contact et non un courriel (AGENA 3000, AXWAY SOFTWARE, GEP, jefacture.com, NEOTIMO, OPEN BEE) : valeur conservee telle que publiee, conformement au brief. Normalisation appliquee : suppression des espaces de tete/fin et des espaces insecables (DOKAPI, LOGILEC, SEQINO, SOVOS). Aucune autre transformation. Attention : certains `siteWeb` deja presents au referentiel diffèrent de la valeur officielle par la presence ou l'absence de « www » (ex. ABBY : https://www.abby.fr/ au referentiel, https://abby.fr/ dans le XLSX). La valeur DGFiP prime, les ecrasements sont journalises par merge-plateformes.html. A fusionner avec la version corrigee de merge-plateformes.html : l'ancienne version remplace `sourcesEnrichissement` en bloc et effacerait les sources deja presentes."
+ },
+ "plateformes": [
+  {
+   "nom": "A-Cube",
+   "siteWeb": "https://www.acubeapi.com/",
+   "contact": "france@a-cube.io",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "ABBY",
+   "siteWeb": "https://abby.fr/",
+   "contact": "contact@abby.fr",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "ACCENTURE",
+   "siteWeb": "https://www.accenture.com/fr-fr",
+   "contact": "fr.contact.ecv@accenture.com",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "ADEMICO SOFTWARE",
+   "siteWeb": "https://ademico-software.com/",
+   "contact": "info@ademico-software.com",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "AGENA 3000",
+   "siteWeb": "https://www.agena3000.com/fr/nos-solutions/a3-e-facture",
+   "contact": "https://www.agena3000.com/fr/contact",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "AGICAP",
+   "siteWeb": "https://agicap.com/fr/",
+   "contact": "contact-pa@agicap.com",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "AGS RECORDS MANAGEMENT",
+   "siteWeb": "https://www.ags-recordsmanagement.com/",
+   "contact": "supportcommercial@agsrm.com",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "Arratech",
+   "siteWeb": "https://www.arratech.com/",
+   "contact": "contact@arratech.com",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "ARTEVA",
+   "siteWeb": "https://www.arteva.fr",
+   "contact": "contact-pdp@arteva.fr",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "Aruba S.p.A.",
+   "siteWeb": "https://www.arubaonesuite.fr/",
+   "contact": "contact-pa@staff.aruba.it",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "ATGP",
+   "siteWeb": "https://www.atgp.net/",
+   "contact": "contact.pdp@atgp.net",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "AVALARA",
+   "siteWeb": "https://www.avalara.com/eu/fr",
+   "contact": "pdp-contact@avalara.com",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "AXELOR",
+   "siteWeb": "https://axelor.com/fr/",
+   "contact": "pa@axelor.com",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "AXONAUT",
+   "siteWeb": "https://axonaut.com/",
+   "contact": "hello@axonaut.com",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "AXWAY SOFTWARE",
+   "siteWeb": "https://www.axway.com/fr",
+   "contact": "https://www.axway.com/fr",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "AZOPIO",
+   "siteWeb": "https://www.azopio.com/fr/",
+   "contact": "contact@azopio.com",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "B2BRouter",
+   "siteWeb": "https://www.b2brouter.net/fr",
+   "contact": "comercial@b2brouter.net",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "B4VALUE.NET",
+   "siteWeb": "https://www.b4value.net/en/",
+   "contact": "pdp@b4value.net",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "BASWARE",
+   "siteWeb": "https://www.basware.com/fr",
+   "contact": "FranceMandate@basware.com",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "BC SOLUTIONS",
+   "siteWeb": "https://bcsolutions.fr/",
+   "contact": "easinvoice.info@bcsolutions.fr",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "BILLIT",
+   "siteWeb": "https://www.billit.eu/fr-be/",
+   "contact": "support@billit.be",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "CBS Corporate Business Solutions",
+   "siteWeb": "https://www.cbs-consulting.com/en/",
+   "contact": "kontakt@cbs-consulting.de",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "CECURITY",
+   "siteWeb": "https://www.cecurity.com",
+   "contact": "contact_cecurity@cecurity.com",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "CEGEDIM",
+   "siteWeb": "https://www.cegedim.fr",
+   "contact": "sy-pa@cegedim.com",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "CEGI ALFA",
+   "siteWeb": "https://www.cegi.fr/",
+   "contact": "contact-pa@cegialfa.fr",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "CEGID",
+   "siteWeb": "https://www.cegid.com/fr",
+   "contact": "contact-pa@cegid.com",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "CHAINTRUST by Visma",
+   "siteWeb": "https://www.chaintrust.io",
+   "contact": "pdp-contact@visma.com",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "CLEARTAX",
+   "siteWeb": "https://www.cleartax.com/fr",
+   "contact": "sales-europe@clear.in",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "COMARCH SA",
+   "siteWeb": "https://www.comarch.com/",
+   "contact": "contact@comarch.fr",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "CYCLOPE",
+   "siteWeb": "https://cyclope.digital/",
+   "contact": "cyclope@gallo.fr",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "DARVA",
+   "siteWeb": "https://www.darva.com",
+   "contact": "ofeli-pdp@darva.com",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "DEXT",
+   "siteWeb": "https://dext.com/fr/produits/logiciel-facturation",
+   "contact": "pdp@dext.com",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "DIGIPHARMACIE",
+   "siteWeb": "https://digipharmacie.fr/",
+   "contact": "jonathan.blajman@digipharmacie.fr",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "DIGITAL TECHNOLOGIES",
+   "siteWeb": "https://digtechs.com/?lang=fr",
+   "contact": "info@digtechs.com",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "Docnova, MELASOFT GmbH",
+   "siteWeb": "https://www.melasoft.com/",
+   "contact": "info@melasoft.com",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "DOCOON",
+   "siteWeb": "https://docoon.com",
+   "contact": "contact@docoon.com",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "DOCOON IMMO / FREEDZ",
+   "siteWeb": "https://docoon.immo/",
+   "contact": "pdp@docoon.com",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "DOCPROCESS",
+   "siteWeb": "https://doc-process.com/fr",
+   "contact": "contact@doc-process.com",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "DOCUWARE",
+   "siteWeb": "https://start.docuware.com/fr/",
+   "contact": "infoline@docuware.com",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "DOKAPI",
+   "siteWeb": "https://www.dokapi.io/",
+   "contact": "katrien.dewolf@dokapi.io",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "Dougs Facturation gratuite",
+   "siteWeb": "https://www.dougs.fr/logiciel-facturation-gratuit/",
+   "contact": "support@dougs.fr",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "DOXALLIA",
+   "siteWeb": "https://www.doxallia.com",
+   "contact": "contact@doxallia.com",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "ECOSIO",
+   "siteWeb": "https://ecosio.com",
+   "contact": "einvoice@ecosio.com",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "ecosio InterCom, a Vertex Company",
+   "siteWeb": "https://ecosio.com/fr/",
+   "contact": "einvoice@ecosio.com",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "EDICOM France",
+   "siteWeb": "https://edicomgroup.fr",
+   "contact": "info_france@edicomgroup.com",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "EDICOM Group",
+   "siteWeb": "https://edicomgroup.com",
+   "contact": "info_france@edicomgroup.com",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "EDICS France",
+   "siteWeb": "https://edics.fr/",
+   "contact": "support@edics.cloud",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "EdiEyes Vision Care",
+   "siteWeb": "https://www.edieyes.fr/",
+   "contact": "commerce@edieyes.fr",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "EDT",
+   "siteWeb": "https://www.group-edt.fr/",
+   "contact": "marketing@edt.fr",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "EEZI powered by VAT IT",
+   "siteWeb": "https://eezi.io/",
+   "contact": "PDP@eezi.io",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "Effinum by SPEE",
+   "siteWeb": "https://www.effinum.fr/",
+   "contact": "contact@effinum.fr",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "ENERJ",
+   "siteWeb": "https://www.enerj.fr/",
+   "contact": "contact@enerj.fr",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "ENTROPICS",
+   "siteWeb": "https://entropics.fr",
+   "contact": "contact.pdp@entropics.fr",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "ESALINK",
+   "siteWeb": "https://www.esalink.com",
+   "contact": "contact@esalink.com",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "ESI",
+   "siteWeb": "https://www.esi-groupe.com/",
+   "contact": "contact.pdp@esi-groupe.com",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "ESKER",
+   "siteWeb": "https://www.esker.fr",
+   "contact": "contact-pdp@esker.com",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "EURO INFORMATION",
+   "siteWeb": "https://www.e-i.com/fr",
+   "contact": "epithetecontact@epithete.com",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "FACNOTE PDP",
+   "siteWeb": "https://www.facnote.com/",
+   "contact": "pdp@facnote.com",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "FIDUCIAL CLOUD",
+   "siteWeb": "https://www.fiducial.fr",
+   "contact": "contact@fiducialcloud.fr",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "FLOWIE",
+   "siteWeb": "https://www.get-flowie.com/",
+   "contact": "hello.pdp@flowie.fr",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "Fonoa Technologies Limited",
+   "siteWeb": "https://www.fonoa.com/",
+   "contact": "e-invoicing@fonoa.com",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "FULLL",
+   "siteWeb": "https://www.fulll.fr/",
+   "contact": "e-invoicing@fulll.fr",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "GENERIX Group",
+   "siteWeb": "https://www.generixgroup.com/fr",
+   "contact": "pdp@generixgroup.com",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "GEP",
+   "siteWeb": "https://www.gep.com/software/e-invoicing",
+   "contact": "https://www.gep.com",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "GESTAV",
+   "siteWeb": "https://gestav.com/",
+   "contact": "contact@gestav.com",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "GROUPE SIGMA",
+   "siteWeb": "https://www.sigma.fr/",
+   "contact": "produit.lixa.pa@sigma.fr",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "GURUSOFT",
+   "siteWeb": "https://guru-soft.com/fr/france/",
+   "contact": "sales.fr@guru-soft.com",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "IAF",
+   "siteWeb": "https://www.assistances.fr/",
+   "contact": "sebastien.b@iaf.fr",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "ICD International",
+   "siteWeb": "https://icdint.fr",
+   "contact": "commercial@icdint.fr",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "iEDI ApS",
+   "siteWeb": "https://www.iedi.com/",
+   "contact": "ds@iedi.com",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "IGA ASSURANCE",
+   "siteWeb": "https://www.iga-assurance.fr/",
+   "contact": "info@iga-e-invoicing.fr",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "In.Te.S.A. spa",
+   "siteWeb": "https://www.intesa.it/",
+   "contact": "intesa@pec.trustedmail.intesa.it",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "INDICOM",
+   "siteWeb": "https://www.indicom.eu/en/idc-home",
+   "contact": "pdp.contact@indicom.eu",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "INDY",
+   "siteWeb": "https://www.indy.fr/",
+   "contact": "pdp@indy.fr",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "INFOLOGIC",
+   "siteWeb": "https://www.infologic-copilote.fr/",
+   "contact": "facture-elec@infologic.fr",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "INVOPOP",
+   "siteWeb": "https://www.invopop.com/",
+   "contact": "pdp@invopop.com",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "IOPOLE",
+   "siteWeb": "https://www.iopole.com",
+   "contact": "contact@iopole.com",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "iPaidThat",
+   "siteWeb": "https://ipaidthat.io/fr",
+   "contact": "contact@ipaidthat.io",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "ITESOFT",
+   "siteWeb": "https://www.itesoft.com/fr",
+   "contact": "contact@itesoft.com",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "jefacture.com",
+   "siteWeb": "https://www.ecma-solutions.com",
+   "contact": "https://go.jefacture.com/pa",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "KLEKOON",
+   "siteWeb": "https://www.klekoon.com/",
+   "contact": "contact.pa@klekoon.com",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "KOLECTO PA",
+   "siteWeb": "https://www.kolecto.fr",
+   "contact": "admin-pa-client@kolecto.fr",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "KOLECTO PDP",
+   "siteWeb": "https://www.kolecto.fr",
+   "contact": "admin@kolecto.fr",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "LE VILLAGE CONNECTE",
+   "siteWeb": "https://village-connecte.fr/",
+   "contact": "contact-pdp@coaxis.com",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "Legalinvoice by Tinexta Infocert",
+   "siteWeb": "https://www.infocert.it/",
+   "contact": "pdp@infocert.it",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "LOGILEC",
+   "siteWeb": "https://www.logilec.fr/",
+   "contact": "service.clients@logilec.leclerc",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "LUCCA",
+   "siteWeb": "https://www.lucca.fr",
+   "contact": "plateforme-agreee@luccasoftware.com",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "LUNDI MATIN",
+   "siteWeb": "https://www.lundimatin.fr/",
+   "contact": "contact@lundimatin.fr",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "MACOMPTA.FR",
+   "siteWeb": "https://www.macompta.fr/",
+   "contact": "commercial@macompta.fr",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "MAROSA",
+   "siteWeb": "https://marosavat.com/",
+   "contact": "marosanotifications@marosavat.com",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "MEDIUS",
+   "siteWeb": "https://www.medius.com/fr",
+   "contact": "info.france@medius.com",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "MY FITECO",
+   "siteWeb": "https://myfiteco.com/",
+   "contact": "pa+contact@fiteco.com",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "MY UNISOFT",
+   "siteWeb": "https://myunisoft.fr/",
+   "contact": "pa-support@myunisoft.fr",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "MyKinexo PDP",
+   "siteWeb": "https://www.kinexo.fr/",
+   "contact": "contact@kinexo.fr",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "MySupply Aps",
+   "siteWeb": "https://mysupply.dk/en",
+   "contact": "info@mysupply.dk",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "N2F PDP",
+   "siteWeb": "https://www.n2f.com/fr/note-de-frais/",
+   "contact": "sales@n2f.com",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "NEOTIMO",
+   "siteWeb": "https://neotimo.com/",
+   "contact": "https://neotimo.com/contact",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "NTT DATA Business Solutions",
+   "siteWeb": "https://fr.nttdata.com/",
+   "contact": "sol-fr-contact@nttdata.com",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "ODOO",
+   "siteWeb": "https://www.odoo.com/fr_FR",
+   "contact": "pdp-contact@odoo.com",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "OfficeIn",
+   "siteWeb": "https://officein.fr/",
+   "contact": "contact@officein.fr",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "ONE UP",
+   "siteWeb": "https://smallbusiness.oneup.com/fr/",
+   "contact": "purchasing@oneup.com",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "OPEN BEE",
+   "siteWeb": "https://www.openbee.com",
+   "contact": "https://www.openbee.com/nous-contacter/",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "OPENTEXT",
+   "siteWeb": "https://www.opentext.fr",
+   "contact": "pdp.nl@opentext.com",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "PAGERO",
+   "siteWeb": "https://www.pagero.com/fr",
+   "contact": "info@pagero.fr",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "PARAGON",
+   "siteWeb": "https://www.paragon.world/fr",
+   "contact": "ipp@paragon-cc.fr",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "PAYFLOWS",
+   "siteWeb": "https://payflows.io",
+   "contact": "joseph@payflows.io",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "PENNYLANE",
+   "siteWeb": "https://www.pennylane.com/fr",
+   "contact": "portabilite.pa@pennylane.com",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "PITNEY BOWES",
+   "siteWeb": "https://www.pitneybowes.com/fr",
+   "contact": "admin.pdp@pb.com",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "QONTO",
+   "siteWeb": "https://qonto.com/fr",
+   "contact": "contact-pdp@qonto.com",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "QWEEBY",
+   "siteWeb": "https://www.qweeby.fr/",
+   "contact": "hello_pdp@qweeby.com",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "SAGE",
+   "siteWeb": "https://www.sage.com/fr-fr/",
+   "contact": "pdp.france@sage.com",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "SAP",
+   "siteWeb": "https://www.sap.com/france/",
+   "contact": "sap_pdp_contact@sap.com",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "SCRIBEE",
+   "siteWeb": "https://www.scribee.tech/",
+   "contact": "contact@scribee.tech",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "SEEBURGER",
+   "siteWeb": "https://www.seeburger.com/",
+   "contact": "info.fr@seeburger.com",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "SEPTEO",
+   "siteWeb": "https://www.septeopdp.com",
+   "contact": "contact@septeopdp.com",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "SEQINO",
+   "siteWeb": "https://seqino.com",
+   "contact": "contact-pdp@seqino.com",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "SERENSIA by Quadient",
+   "siteWeb": "https://www.serensia.com/",
+   "contact": "contact.marketing@quadient.com",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "SERES",
+   "siteWeb": "https://www.seres.fr",
+   "contact": "contact@seres.fr",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "Shine",
+   "siteWeb": "https://www.shine.fr/",
+   "contact": "contact@shine.co",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "SNI",
+   "siteWeb": "https://snitechnology.net/fr",
+   "contact": "regulation@snitechnology.net",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "SOLO",
+   "siteWeb": "https://www.solo.fr",
+   "contact": "hello@solo.fr",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "SOVOS",
+   "siteWeb": "https://www.saphety.com/fr",
+   "contact": "sovos-pdp_contact@sovos.com",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "SPENDESK",
+   "siteWeb": "https://www.spendesk.com/fr/",
+   "contact": "hello@spendesk.com",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "SPS COMMERCE",
+   "siteWeb": "https://tiekinetix.com/fr",
+   "contact": "pdpcontact@spscommerce.com",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "SRCI",
+   "siteWeb": "https://solutions.srci.fr/",
+   "contact": "commercial@srci.fr",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "STORECOVE",
+   "siteWeb": "https://www.storecove.com/fr/fr",
+   "contact": "info@storecove.com",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "SUPER PDP",
+   "siteWeb": "https://www.superpdp.tech/",
+   "contact": "contact@superpdp.tech",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "SYMTRAX",
+   "siteWeb": "https://www.symtrax.com/fr",
+   "contact": "contact.pdp@symtrax.eu",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "TAXERA",
+   "siteWeb": "https://taxera.tech/",
+   "contact": "france@taxera.tech",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "TeamSystem Sellsy",
+   "siteWeb": "https://go.sellsy.com/",
+   "contact": "contact@sellsy.com",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "TENOR",
+   "siteWeb": "https://tenorsolutions.com",
+   "contact": "contact.pdp@tenorsolutions.com",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "TESISQUARE SPA",
+   "siteWeb": "https://www.tesisquare.com/fr",
+   "contact": "digital_compliance@service.tesisquare.com",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "TESSI Technologies",
+   "siteWeb": "https://www.tessi.eu/fr",
+   "contact": "pdp.support@tessi.fr",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "TIIME PDP",
+   "siteWeb": "https://www.tiime.fr",
+   "contact": "contact@tiimepdp.com",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "TRADESHIFT BABELWAY",
+   "siteWeb": "https://tradeshift.com/fr",
+   "contact": "support@tradeshift.com",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "Transalis Limited",
+   "siteWeb": "https://www.transalis.com/",
+   "contact": "mstares@transalis.com",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "TRESO2",
+   "siteWeb": "http://www.treso2.com",
+   "contact": "contact.pdp@treso2.com",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "TUNGSTEN AUTOMATION FRANCE",
+   "siteWeb": "https://www.tungstenautomation.fr/",
+   "contact": "ruud.vanhilten@tungstenautomation.com",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "TX2 Concept",
+   "siteWeb": "https://tx2.fr",
+   "contact": "adm@tx2.fr",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "VENTYA",
+   "siteWeb": "https://www.ventya.fr",
+   "contact": "contact@ventya.fr",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "VERYSWING",
+   "siteWeb": "https://veryswing.com/",
+   "contact": "einvoicing@veryswing.com",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "VosFactures",
+   "siteWeb": "https://vosfactures.fr/",
+   "contact": "info@vosfactures.fr",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "VOXEL, an Amadeus company",
+   "siteWeb": "https://www.voxelgroup.net/facture-electronique/",
+   "contact": "pdp.contact-voxel@amadeus.com",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "WEPROC",
+   "siteWeb": "https://www.weproc.com/fr/",
+   "contact": "contact-pdp@weproc.com",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "WiseTech GLOBAL",
+   "siteWeb": "https://www.wisetechglobal.com/fr-fr/",
+   "contact": "communications@wisetechglobal.com",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "XELYA",
+   "siteWeb": "https://www.xelya.com/",
+   "contact": "contact-pa@xelya.com",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  },
+  {
+   "nom": "YOOZ PDP",
+   "siteWeb": "https://www.getyooz.com/fr",
+   "contact": "contact@yoozpdp.com",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siteWeb",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    },
+    {
+     "champ": "contact",
+     "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
+     "dateReleve": "2026-08-20",
+     "confiance": "haute"
+    }
+   ]
+  }
+ ]
+}
