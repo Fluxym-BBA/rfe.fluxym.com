@@ -100,6 +100,7 @@
         .xh-attr { color: #c4b5fd; }
         .xh-value { color: #86efac; }
         .xh-comment { color: #64748b; font-style: italic; }
+        .xh-cdata { color: #fdba74; }
         .xh-pi { color: #f0abfc; }
 
         /* ---- Panneau latéral ---- */
@@ -173,6 +174,18 @@
 
         .console-empty { padding: 26px 20px; font-size: .85rem; color: #7d96b8; text-align: center; }
         .console-empty--ok { color: #6ee7b7; }
+
+        .console-error { padding: 20px 24px; color: #cbd5e1; font-size: .84rem; line-height: 1.6; }
+        .console-error h4 { margin: 0 0 10px; font-size: .95rem; color: #fca5a5; }
+        .console-error p { margin: 0 0 10px; max-width: 900px; }
+        .console-error code { font-family: Consolas, monospace; color: #7dd3fc; }
+        .console-error-detail { font-family: Consolas, monospace; font-size: .75rem; color: #fcd34d; }
+        .console-error pre {
+            margin: 0 0 10px; padding: 12px 14px; overflow-x: auto;
+            background: rgba(0,0,0,.35); border-left: 3px solid var(--cyan);
+            border-radius: var(--radius-sm);
+            font-family: Consolas, monospace; font-size: .76rem; color: #86efac;
+        }
 
         .result-row {
             display: grid; grid-template-columns: 106px 1fr; gap: 12px;
@@ -378,6 +391,11 @@
                                 <td>Ce schéma interroge une base de codes externe. Les règles qui en dépendent apparaissent dans l’onglet <strong>Non évaluées</strong> tant que ce fichier n’est pas déposé à côté des schémas.</td>
                             </tr>
                             <tr>
+                                <td>Moteur d’évaluation</td>
+                                <td>✅ Actif</td>
+                                <td>Les Schematron FNFE sont en <code>queryBinding="xslt2"</code> : leur évaluation s’appuie sur le moteur XPath 3.1 <code>fontoxpath</code> (MIT), chargé depuis <code>lib/fontoxpath.js</code> s’il est présent dans le dépôt, sinon depuis un CDN public.</td>
+                            </tr>
+                            <tr>
                                 <td>Validation XSD</td>
                                 <td>🚧 À venir</td>
                                 <td>Aucune API de navigateur ne valide un XSD : cette étape nécessite l’ajout des jeux de schémas XSD et d’un validateur dédié.</td>
@@ -415,7 +433,8 @@
 
     <footer id="main-footer"></footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/fontoxpath@3.33.1/dist/fontoxpath.js"></script>
+    <!-- Le moteur XPath 3.1 est chargé par schematron-engine.js, qui essaie
+         d'abord ./lib/fontoxpath.js (copie locale) puis les CDN publics. -->
     <script src="./js/schematron-engine.js"></script>
     <script src="./js/validator-ui.js"></script>
     <script src="./js/nav.js"></script>

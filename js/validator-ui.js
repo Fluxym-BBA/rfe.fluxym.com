@@ -23,15 +23,61 @@ const ValidatorUI = (() => {
        =================================================================== */
 
     const escapeHtml = (s) => s
-        .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
 
-    const highlightXml = (text) => escapeHtml(text)
-        .replace(/(&lt;!--[\s\S]*?--&gt;)/g, '<span class="xh-comment">$1</span>')
-        .replace(/(&lt;\?[\s\S]*?\?&gt;)/g, '<span class="xh-pi">$1</span>')
-        .replace(/(&lt;\/?)([\w.-]+:)?([\w.-]+)/g,
-            '$1<span class="xh-ns">$2</span><span class="xh-tag">$3</span>')
-        .replace(/([\w.-]+)=(&quot;|")((?:[^"&]|&(?!quot;))*)(&quot;|")/g,
-            '<span class="xh-attr">$1</span>=<span class="xh-value">"$3"</span>');
+    /** Colorise le contenu d'une balise : préfixe, nom local, attributs, valeurs. */
+    const highlightTag = (raw) => {
+        const m = raw.match(/^(&lt;\/?)([^\s/&]+)([\s\S]*?)(\/?&gt;)$/);
+        if (!m) return raw;
+        const [, open, qname, attrs, close] = m;
+        const colon = qname.indexOf(':');
+        const name = colon === -1
+            ? '<span class="xh-tag">' + qname + '</span>'
+            : '<span class="xh-ns">' + qname.slice(0, colon + 1) + '</span>'
+            + '<span class="xh-tag">' + qname.slice(colon + 1) + '</span>';
+        const colored = attrs.replace(
+            /([\w.:-]+)(\s*=\s*)(&quot;[\s\S]*?&quot;|&#39;[\s\S]*?&#39;)/g,
+            (all, attr, eq, value) =>
+                '<span class="xh-attr">' + attr + '</span>' + eq
+                + '<span class="xh-value">' + value + '</span>');
+        return open + name + colored + close;
+    };
+
+    /**
+     * Coloration syntaxique XML en une seule passe.
+     * Le texte est échappé AVANT insertion des balises de couleur : aucune passe
+     * ultérieure ne peut réinterpréter le balisage déjà produit.
+     */
+    const highlightXml = (text) => {
+        let out = '';
+        let i = 0;
+        const wrap = (cls, raw) => '<span class="' + cls + '">' + escapeHtml(raw) + '</span>';
+
+        while (i < text.length) {
+            const lt = text.indexOf('<', i);
+            if (lt === -1) { out += escapeHtml(text.slice(i)); break; }
+            out += escapeHtml(text.slice(i, lt));
+
+            const closeOf = (opener, closer, cls) => {
+                const found = text.indexOf(closer, lt + opener.length);
+                const end = found === -1 ? text.length : found + closer.length;
+                out += wrap(cls, text.slice(lt, end));
+                return end;
+            };
+
+            if (text.startsWith('<!--', lt)) { i = closeOf('<!--', '-->', 'xh-comment'); continue; }
+            if (text.startsWith('<![CDATA[', lt)) { i = closeOf('<![CDATA[', ']]>', 'xh-cdata'); continue; }
+            if (text.startsWith('<?', lt)) { i = closeOf('<?', '?>', 'xh-pi'); continue; }
+            if (text.startsWith('<!', lt)) { i = closeOf('<!', '>', 'xh-pi'); continue; }
+
+            const gt = text.indexOf('>', lt);
+            if (gt === -1) { out += escapeHtml(text.slice(lt)); break; }
+            out += highlightTag(escapeHtml(text.slice(lt, gt + 1)));
+            i = gt + 1;
+        }
+        return out;
+    };
 
     const renderGutter = (lineCount, markers) => {
         const rows = [];
@@ -209,6 +255,7 @@ const ValidatorUI = (() => {
         setStatus('running', 'Validation…');
 
         try {
+            await SchematronEngine.ensureEngine(log);
             const metas = selectedSchemas().map((s) => ({
                 id: s.id, label: s.label, file: s.file, url: s.url,
                 defaultSeverity: s.defaultSeverity,
@@ -224,6 +271,17 @@ const ValidatorUI = (() => {
         } catch (e) {
             log('<span class="log-err">Échec : ' + e.message + '</span>');
             setStatus('error', 'Erreur moteur');
+            el('console-results').innerHTML = e.isEngineMissing
+                ? `<div class="console-error">
+                       <h4>⚠️ Moteur XPath 3.1 indisponible</h4>
+                       <p>Le validateur a besoin du moteur XPath 3.1 <code>fontoxpath</code> (licence MIT) pour interpréter les Schematron FNFE, qui sont en <code>queryBinding="xslt2"</code>. Aucune source n'a répondu :</p>
+                       <p class="console-error-detail">${escapeHtml(e.message)}</p>
+                       <p>Un filtrage réseau bloque probablement les CDN publics. Pour rendre le validateur autonome, déposez une copie du moteur dans le dépôt :</p>
+                       <pre>curl -L -o lib/fontoxpath.js \\
+  https://cdn.jsdelivr.net/npm/fontoxpath@3.33.1/dist/fontoxpath.js</pre>
+                       <p>Elle sera détectée en priorité au prochain chargement de la page.</p>
+                   </div>`
+                : `<div class="console-error"><h4>⚠️ Erreur pendant la validation</h4><p class="console-error-detail">${escapeHtml(e.message)}</p></div>`;
         }
         refreshEditor();
     };
@@ -522,6 +580,8 @@ const ValidatorUI = (() => {
         try {
             await loadManifest();
             log('Paquet de règles chargé : <strong>' + manifest.package + '</strong>');
+            SchematronEngine.ensureEngine(log).catch((e) =>
+                log('<span class="log-err">' + e.message + '</span>'));
         } catch (e) {
             log('<span class="log-err">Chargement des schémas impossible : ' + e.message + '</span>');
             setStatus('error', 'Schémas indisponibles');

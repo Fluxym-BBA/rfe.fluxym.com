@@ -32,9 +32,70 @@ const SchematronEngine = (() => {
     /** Noms des fonctions custom déjà enregistrées auprès de fontoxpath. */
     const registeredFunctions = new Set();
 
+    /**
+     * Sources du moteur XPath, essayées dans l'ordre.
+     * La copie locale passe en premier : elle rend le validateur totalement
+     * autonome, y compris derrière un proxy qui bloque les CDN publics.
+     */
+    const ENGINE_SOURCES = [
+        { kind: 'script', url: './lib/fontoxpath.js', label: 'copie locale du dépôt' },
+        { kind: 'script', url: 'https://cdn.jsdelivr.net/npm/fontoxpath@3.33.1/dist/fontoxpath.js', label: 'jsDelivr' },
+        { kind: 'script', url: 'https://unpkg.com/fontoxpath@3.33.1/dist/fontoxpath.js', label: 'unpkg' },
+        { kind: 'module', url: 'https://cdn.jsdelivr.net/npm/fontoxpath@3.33.1/+esm', label: 'jsDelivr (module ES)' },
+    ];
+
+    let enginePromise = null;
+
+    const loadScript = (url) => new Promise((resolve, reject) => {
+        const tag = document.createElement('script');
+        tag.src = url;
+        tag.async = false;
+        tag.onload = () => resolve();
+        tag.onerror = () => reject(new Error('script non chargé'));
+        document.head.appendChild(tag);
+    });
+
+    /**
+     * Charge le moteur XPath 3.1 en essayant chaque source successivement.
+     * @param {Function} onLog rapporte chaque tentative dans la console de la page
+     */
+    const ensureEngine = (onLog = () => {}) => {
+        if (window.fontoxpath) return Promise.resolve(window.fontoxpath);
+        if (enginePromise) return enginePromise;
+
+        enginePromise = (async () => {
+            const failures = [];
+            for (const source of ENGINE_SOURCES) {
+                try {
+                    if (source.kind === 'script') {
+                        await loadScript(source.url);
+                    } else {
+                        const mod = await import(source.url);
+                        window.fontoxpath = mod.default && mod.default.evaluateXPath ? mod.default : mod;
+                    }
+                    if (window.fontoxpath && window.fontoxpath.evaluateXPath) {
+                        onLog('Moteur XPath 3.1 chargé depuis <strong>' + source.label + '</strong>.');
+                        return window.fontoxpath;
+                    }
+                    failures.push(source.label + ' : chargé mais aucun moteur exposé');
+                } catch (e) {
+                    failures.push(source.label + ' : inaccessible');
+                }
+            }
+            enginePromise = null;
+            const err = new Error('Moteur XPath 3.1 indisponible — ' + failures.join(' · '));
+            err.isEngineMissing = true;
+            throw err;
+        })();
+
+        return enginePromise;
+    };
+
     const fx = () => {
-        if (typeof window.fontoxpath === 'undefined') {
-            throw new Error('Le moteur XPath 3.1 (fontoxpath) n\'est pas chargé.');
+        if (!window.fontoxpath) {
+            const err = new Error('Le moteur XPath 3.1 (fontoxpath) n\'est pas chargé.');
+            err.isEngineMissing = true;
+            throw err;
         }
         return window.fontoxpath;
     };
@@ -547,6 +608,8 @@ const SchematronEngine = (() => {
        =================================================================== */
 
     return {
+        ensureEngine,
+        get isEngineReady() { return Boolean(window.fontoxpath && window.fontoxpath.evaluateXPath); },
         loadSchema,
         loadCodeDatabase,
         validate,
