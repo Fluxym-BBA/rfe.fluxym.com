@@ -1,0 +1,237 @@
+{
+  "_patch": {
+    "id": "E4",
+    "chantier": "E — qualification marché",
+    "auteur": "RFE_WebSite",
+    "dateReleve": "2026-08-20",
+    "nbPlateformes": 10,
+    "note": "Lot E4 (10 plateformes FR). Aucune identité juridique touchée (chantiers B et C). Sources : sites officiels des éditeurs uniquement, relevés le 20/08/2026 ; les comparateurs et annuaires tiers n'ont servi qu'à localiser les URL officielles. Champs volontairement absents faute de source sur le site officiel : segmentCible pour GROUPE SIGMA, IAF, ICD International et IGA ASSURANCE (les sites ne qualifient pas la taille des entreprises cibles) ; natureEntite et groupeCapitalistique pour GEP ; natureEntite pour GESTAV (le site revendique de ne vendre que la facturation électronique et son ERP, ce qui suggère une entité dédiée à la réforme, mais aucune page ne documente la date ni l'objet de création) ; groupeCapitalistique pour FULLL, GEP, IAF et INDY. socleTechnique laissé à 'inconnu' quand le site officiel ne nomme aucun opérateur de socle : FIDUCIAL CLOUD, FULLL, GROUPE SIGMA. Points de vigilance : (1) FULLL — un communiqué Generix Group du 12/07/2023 documente un partenariat industriel où fulll, alors opérateur de dématérialisation, commercialisait la PDP 'Generix Invoice Services' ; fulll est aujourd'hui immatriculée en son nom propre et son site ne dit rien du socle technique actuel, donc aucune conclusion n'est tirée. (2) GROUPE SIGMA — l'ERP Lixa est présenté ailleurs comme basé sur Axelor (lui-même PA) ; sigma.fr ne le dit pas et le socle de Lixa PA n'est pas documenté : piste à vérifier, non retenue. (3) ICD International — homonymie à ne pas confondre : icd-international.com est un groupe automobile de Meurthe-et-Moselle sans lien ; le site de la PA est icdint.fr (produit DEMATRUST). (4) GEP — aucune page gep.com spécifique au dispositif français (immatriculation PA, PPF) n'a été trouvée ; la qualification repose sur la page e-invoicing mondiale. (5) Rôle de grossiste confirmé pour deux plateformes du lot : ICD International (marque blanche pour OD candidats à l'immatriculation, marque grise pour éditeurs ERP, apporteurs d'affaires, intégrateurs) et GESTAV (offre partenaire pour éditeurs de Solutions Compatibles via API AFNOR XP Z12-013, cabinets EC, intégrateurs). Aucune liste publiée de Solutions Compatibles pour ces deux acteurs : seul 'MediaPilot' est nommé publiquement par ICD International. Rappel : 'marque blanche' et 'marque grise' sont des modèles commerciaux, pas des catégories réglementaires — chaque plateforme du lot est immatriculée en son nom propre et reste seule responsable devant l'administration."
+  },
+  "plateformes": [
+    {
+      "nom": "FIDUCIAL CLOUD",
+      "familleOrigine": ["portail_ec", "facturation_compta"],
+      "segmentCible": ["micro", "tpe_pme"],
+      "verticale": "generaliste",
+      "natureEntite": "extension_demat",
+      "perimetreFonctionnel": ["reception", "suite_gestion"],
+      "socleTechnique": {
+        "type": "inconnu",
+        "preuve": "Le site décrit la plateforme agréée FIDUCIAL Cloud et le choix d'intégrer les interactions PA directement dans les logiciels FIDUCIAL (Facilia Achats), mais ne nomme aucun opérateur de socle technique.",
+        "source": "https://www.fiducial.fr/facturation-electronique/actualites-conseils/pourquoi-utiliser-plateforme-agreee-PA-FIDUCIAL-facturation-electronique",
+        "confiance": "non_qualifie"
+      },
+      "modeDistributionSocle": ["direct", "via cabinet EC"],
+      "groupeCapitalistique": "Groupe FIDUCIAL (FIDUCIAL Expertise, FIDUCIAL Banque, FIDUCIAL Informatique)",
+      "descriptionFiche": "Plateforme agréée du groupe FIDUCIAL, commercialisée sous le nom « plateforme agréée FIDUCIAL Cloud ». Le groupe a fait le choix explicite de ne pas exposer d'interface PA autonome : les interactions (consultation, validation ou refus des factures reçues, échéancier, mise en paiement, archivage) sont intégrées dans ses propres logiciels, notamment le logiciel en ligne Facilia Achats. Le dispositif est présenté comme pensé pour les petites et très petites entités, avec transfert automatique des factures validées vers l'agence FIDUCIAL Expertise ou vers le logiciel comptable FIDUCIAL, et accompagnement par le conseiller d'agence. Facilia gère aussi les justificatifs restant au format papier (photographiés via l'application FIDUCIAL).",
+      "logiquePositionnement": "Cohérent : la PA prolonge le métier historique du groupe (expertise comptable et logiciels de gestion pour petites entités) et sert de canal de rétention, la valeur mise en avant n'étant pas la plateforme mais l'accompagnement par le conseiller et la connexion automatique à la production comptable FIDUCIAL.",
+      "sourcesEnrichissement": [
+        { "champ": "positionnement", "source": "https://www.fiducial.fr/facturation-electronique/actualites-conseils/pourquoi-utiliser-plateforme-agreee-PA-FIDUCIAL-facturation-electronique", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "nomCommercial", "source": "https://www.fiducial.fr/facturation-electronique/faq/comment-faire-facture-electronique", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "groupeCapitalistique", "source": "https://www.fiducial.fr/facturation-electronique/faq/comment-faire-facture-electronique", "dateReleve": "2026-08-20", "confiance": "moyenne" }
+      ]
+    },
+    {
+      "nom": "FLOWIE",
+      "familleOrigine": ["s2p"],
+      "segmentCible": ["tpe_pme", "eti", "grands_comptes"],
+      "verticale": "generaliste",
+      "natureEntite": "extension_demat",
+      "perimetreFonctionnel": ["emission", "reception", "suite_gestion"],
+      "socleTechnique": {
+        "type": "propre",
+        "operateurSocle": "Flowie",
+        "preuve": "Plateforme construite sur son propre graphe de connaissances typé « Astral » mis en production en 2023, exposé via Model Context Protocol ; certification PA par la DGFiP annoncée en décembre 2025, ISO 27001:2022, hébergement UE sur Google Cloud (Francfort et Belgique), compatibilité Chorus Pro / Peppol / ViDA.",
+        "source": "https://get-flowie.com/fr/entreprise/a-propos",
+        "confiance": "moyenne"
+      },
+      "groupeCapitalistique": "Société indépendante créée en 2021, siège à Paris, équipes en France, dans l'UE et aux États-Unis",
+      "descriptionFiche": "Plateforme d'orchestration « agentique » de la finance et des achats, créée en 2021 à Paris par des praticiens de la finance et des achats. Le produit se positionne au-dessus de l'ERP (SAP, Sage, Odoo, Dynamics, NetSuite) et non en remplacement, autour d'un graphe de connaissances propriétaire (Astral) sur lequel raisonnent des agents dont chaque action est versionnée et auditée. Le site annonce plus de 20 000 organisations utilisatrices, de la PME au Fortune 500, et revendique un positionnement « Europe d'abord » : certification PA par la DGFiP en décembre 2025, ISO 27001:2022, hébergement UE, compatibilité Chorus Pro / Peppol / ViDA.",
+      "logiquePositionnement": "Cohérent : l'agrément PA sécurise le mandat français 2026 pour une plateforme dont le cœur est déjà l'automatisation des flux fournisseurs et clients ; la conformité est présentée comme un socle de crédibilité européen, pas comme le produit lui-même.",
+      "sourcesEnrichissement": [
+        { "champ": "positionnement", "source": "https://get-flowie.com/fr/entreprise/a-propos", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "socleTechnique", "source": "https://get-flowie.com/fr/entreprise/a-propos", "dateReleve": "2026-08-20", "confiance": "moyenne" },
+        { "champ": "segmentCible", "source": "https://get-flowie.com/fr/entreprise/a-propos", "dateReleve": "2026-08-20", "confiance": "moyenne" }
+      ]
+    },
+    {
+      "nom": "FULLL",
+      "familleOrigine": ["portail_ec"],
+      "segmentCible": ["micro", "tpe_pme"],
+      "verticale": "expertise_comptable",
+      "natureEntite": "extension_demat",
+      "perimetreFonctionnel": ["emission", "reception", "suite_gestion"],
+      "socleTechnique": {
+        "type": "inconnu",
+        "preuve": "Le site fulll.fr affirme l'immatriculation définitive de « la Plateforme Agréée fulll » sans nommer d'opérateur de socle. Un communiqué Generix Group du 12/07/2023 documente un partenariat industriel dans lequel fulll, alors opérateur de dématérialisation, commercialisait la PDP « Generix Invoice Services » auprès des cabinets ; aucune source postérieure ne confirme que ce socle porte la PA actuelle.",
+        "source": "https://www.fulll.fr/facturation-electronique/conformite-flash",
+        "confiance": "faible"
+      },
+      "modeDistributionSocle": ["via cabinet EC"],
+      "descriptionFiche": "Éditeur de logiciels de production comptable et fiscale pour les cabinets d'expertise comptable, opérateur de dématérialisation devenu plateforme agréée en son nom propre. La distribution passe exclusivement par le cabinet : tableau de bord d'invitations, mandats de délégation envoyés en signature et pré-inscription des clients à « la PA fulll », avec un discours assumé de reconquête du flux face aux éditeurs et aux banques. L'offre « Conformité Flash » découple la mise en conformité des clients (portail de réception, portabilité des données) de la migration de la production comptable du cabinet, laissée à son rythme. Les clients finaux disposent de modules achats (exploitation des données Factur-X, workflows de validation, paiements), ventes (devis, commandes, factures, acomptes, avoirs) et paiement via le compte pro fulll.",
+      "logiquePositionnement": "Cohérent : l'agrément prolonge le rôle d'opérateur de dématérialisation au service des cabinets et verrouille la chaîne cabinet-client ; la PA est un argument de fidélisation du cabinet plus qu'un produit vendu en direct aux entreprises.",
+      "sourcesEnrichissement": [
+        { "champ": "positionnement", "source": "https://www.fulll.fr/facturation-electronique", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "modeDistributionSocle", "source": "https://www.fulll.fr/facturation-electronique/conformite-flash", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "natureEntite", "source": "https://www.generixgroup.com/fr/communiques-de-presse/generix-group-annonce-la-creation-dune-plateforme-de-dematerialisation", "dateReleve": "2026-08-20", "confiance": "moyenne" }
+      ]
+    },
+    {
+      "nom": "GEP",
+      "familleOrigine": ["s2p"],
+      "segmentCible": ["eti", "grands_comptes"],
+      "verticale": "generaliste",
+      "perimetreFonctionnel": ["emission", "reception", "suite_gestion"],
+      "socleTechnique": {
+        "type": "propre",
+        "operateurSocle": "GEP",
+        "preuve": "GEP présente son propre réseau d'échange e-invoicing interopérable et Access Point Peppol, un moteur de conformité (reporting temps réel, clearance, CTC/DCTC), 80+ pays couverts, 70+ opérateurs interconnectés et 25+ ans d'antériorité sur l'e-invoicing et l'automatisation AP, adossés à sa plateforme GEP Quantum.",
+        "source": "https://www.gep.com/software/e-invoicing",
+        "confiance": "moyenne"
+      },
+      "descriptionFiche": "Éditeur de solutions source-to-pay et achats, qui adresse la facturation électronique comme un module de conformité mondiale plutôt que comme une offre nationale : émission et réception multi-pays multi-format, moteur de conformité (reporting temps réel, clearance, CTC/DCTC), réseau interopérable et Access Point Peppol, couverture annoncée de plus de 80 pays et 70 opérateurs réseau. L'offre est portée par la plateforme GEP Quantum et son orchestration d'agents pour les directions achats et finance. Aucune page du site ne détaille le dispositif français (immatriculation PA, raccordement au PPF).",
+      "logiquePositionnement": "Cohérent : la PA française n'est qu'un mandat de plus dans un catalogue de conformité mondiale adossé à une suite achats destinée aux grands comptes internationaux ; le positionnement n'est ni franco-centré ni pédagogique.",
+      "sourcesEnrichissement": [
+        { "champ": "positionnement", "source": "https://www.gep.com/software/e-invoicing", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "perimetreFonctionnel", "source": "https://www.gep.com/software/e-invoicing", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "segmentCible", "source": "https://www.gep.com/software/gep-quantum-intelligence", "dateReleve": "2026-08-20", "confiance": "moyenne" }
+      ]
+    },
+    {
+      "nom": "GESTAV",
+      "familleOrigine": ["pure_player", "erp"],
+      "segmentCible": ["micro", "tpe_pme"],
+      "verticale": "generaliste",
+      "perimetreFonctionnel": ["emission", "reception", "ereporting", "suite_gestion"],
+      "socleTechnique": {
+        "type": "propre",
+        "operateurSocle": "Gestav",
+        "preuve": "Plateforme agréée présentée comme éditée par un opérateur français indépendant qui « ne vend rien d'autre que la facturation électronique et son ERP », avec agrément DGFiP en propre, API conforme AFNOR XP Z12-013, environnement de test fourni aux éditeurs, certification ISO 27001 et hébergement HDS en France.",
+        "source": "https://gestav.com/partenaire",
+        "confiance": "moyenne"
+      },
+      "fournisseurDeSocle": true,
+      "modeDistributionSocle": ["direct", "API/embedded", "via cabinet EC", "via integrateur"],
+      "groupeCapitalistique": "Aucun — opérateur français indépendant (auto-déclaré sur le site)",
+      "descriptionFiche": "Plateforme agréée couplée à un ERP léger, positionnée sur le bas du marché avec une grille tarifaire publique : offre Conformité Réception à 24,90 € TTC/an pour les micro-entrepreneurs et professions libérales, Conformité Complète à 69,90 € TTC/an, puis Starter, Pro et Business (jusqu'à 500 factures/mois, e-reporting inclus). Des pages dédiées déclinent l'offre par profil (micro, TPE, PME, exploitations agricoles, professionnels de santé avec PA certifiée HDS) et par flux (réception, émission, e-reporting). L'argumentaire revendique l'indépendance, l'absence de verrouillage et la transparence tarifaire. Une offre partenaire distincte porte l'agrément pour des tiers : éditeurs de Solutions Compatibles connectés via API AFNOR XP Z12-013, cabinets d'expertise comptable mutualisant leurs clients TPE/PME, intégrateurs et groupements, avec forfait partenaire unique et paliers dégressifs séparés en émission et en réception.",
+      "logiquePositionnement": "Cohérent et assumé : l'agrément est le produit. Gestav le monétise deux fois, en direct sur des volumes faibles à prix affiché, et en gros auprès d'acteurs qui agrègent (éditeurs, cabinets, intégrateurs) sans vouloir porter eux-mêmes l'immatriculation.",
+      "sourcesEnrichissement": [
+        { "champ": "positionnement", "source": "https://gestav.com/facturation-electronique", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "fournisseurDeSocle", "source": "https://gestav.com/partenaire", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "modeDistributionSocle", "source": "https://gestav.com/partenaire", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "perimetreFonctionnel", "source": "https://gestav.com/facturation-electronique", "dateReleve": "2026-08-20", "confiance": "haute" }
+      ]
+    },
+    {
+      "nom": "GROUPE SIGMA",
+      "familleOrigine": ["erp", "integrateur"],
+      "verticale": "generaliste",
+      "natureEntite": "extension_demat",
+      "perimetreFonctionnel": ["emission", "reception", "suite_gestion"],
+      "socleTechnique": {
+        "type": "inconnu",
+        "preuve": "Le site présente « Lixa PA (ex PDP) » comme sa propre solution et confirme la présence de Sigma sur la liste des plateformes agréées immatriculées, mais ne nomme aucun opérateur de socle technique.",
+        "source": "https://www.sigma.fr/services-solutions/edition-integration/gestion-entreprise/erp-lixa/lixa-pdp/",
+        "confiance": "non_qualifie"
+      },
+      "groupeCapitalistique": "Groupe Sigma (Sigma Informatique), éditeur et intégrateur français, entreprise à mission",
+      "descriptionFiche": "Éditeur et intégrateur de logiciels de finance depuis plus de cinquante ans, qui commercialise sa plateforme agréée sous le nom « Lixa PA (ex PDP) ». L'argument central est l'intégration : la PA est connectée aux solutions de facturation du groupe (Advantage Finance, Lixa, Linea, iCopitole, Babylone) comme à des outils hors parc Sigma, et traite les flux B2B, B2C et B2B internationaux en émission comme en réception. L'offre s'accompagne d'un portail PA (statistiques personnalisables, alertes d'anomalies, statuts et traçabilité facture par facture) et d'une prestation d'audit des processus de facturation jusqu'au déploiement. Sigma met en avant son statut d'entreprise à mission et son ancrage français.",
+      "logiquePositionnement": "Cohérent : la PA prolonge un catalogue d'ERP et de logiciels financiers déjà installés, et se vend d'abord comme une brique de continuité pour le parc client, l'ouverture aux outils tiers servant à éviter que la réforme ne soit un motif de sortie.",
+      "sourcesEnrichissement": [
+        { "champ": "positionnement", "source": "https://www.sigma.fr/services-solutions/edition-integration/gestion-entreprise/erp-lixa/lixa-pdp/", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "groupeCapitalistique", "source": "https://www.sigma.fr/", "dateReleve": "2026-08-20", "confiance": "moyenne" }
+      ]
+    },
+    {
+      "nom": "IAF",
+      "familleOrigine": ["integrateur"],
+      "verticale": "generaliste",
+      "natureEntite": "diversification",
+      "perimetreFonctionnel": ["emission", "reception"],
+      "socleTechnique": {
+        "type": "propre",
+        "operateurSocle": "IAF",
+        "preuve": "Solution annoncée comme « conçue, hébergée et opérée en France », serveurs et hébergements dans les datacenters de l'entreprise, infrastructure « maîtrisée de A à Z », supervision par ses propres équipes et accompagnement « sans empilement d'intermédiaires » ; Peppol Access Point et SMP, certifications ISO 27001 et HDS, EcoVadis Silver.",
+        "source": "https://www.iaf.fr/facturation-electronique.html",
+        "confiance": "haute"
+      },
+      "descriptionFiche": "Prestataire d'infogérance, d'hébergement, de cybersécurité et de télécoms qui opère sa propre plateforme de facturation électronique dans ses datacenters français. L'argumentaire est celui de la souveraineté et de la maîtrise technique : infrastructure et supervision internes, absence d'intermédiaires, Peppol Access Point et SMP présentés comme différenciant, certifications ISO 27001 et HDS. Trois niveaux d'offre sont annoncés (Essentiel, Avancé, Sur mesure) mais tous mentionnés comme « à venir » au relevé, sans tarif ni volumétrie, avec une entrée commerciale par demande de démonstration.",
+      "logiquePositionnement": "Cohérent sur le plan technique : un hébergeur infogéreur certifié transpose son métier d'exploitation d'infrastructure vers l'exploitation d'une PA, avec la souveraineté comme argument. En revanche l'offre commerciale reste peu formalisée au relevé (paliers annoncés à venir), et le site ne qualifie ni la taille ni le secteur des entreprises visées.",
+      "sourcesEnrichissement": [
+        { "champ": "positionnement", "source": "https://www.iaf.fr/facturation-electronique.html", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "socleTechnique", "source": "https://www.iaf.fr/facturation-electronique.html", "dateReleve": "2026-08-20", "confiance": "haute" }
+      ]
+    },
+    {
+      "nom": "ICD International",
+      "familleOrigine": ["edi"],
+      "verticale": "generaliste",
+      "natureEntite": "extension_demat",
+      "perimetreFonctionnel": ["emission", "reception", "suite_gestion"],
+      "socleTechnique": {
+        "type": "propre",
+        "operateurSocle": "ICD International",
+        "preuve": "Plateforme DEMATRUST présentée comme « Plateforme Agréée 100 % française de dématérialisation de factures », adossée à plus de 35 ans d'expertise en échange de données B2B et gestion documentaire, avec certifications ISO 27001, HDS, point d'accès Peppol et une offre en marque blanche proposée à des tiers — ce qui suppose la maîtrise du socle.",
+        "source": "https://icdint.fr/programme-partenaire",
+        "confiance": "moyenne"
+      },
+      "fournisseurDeSocle": true,
+      "modeDistributionSocle": ["direct", "marque_blanche", "marque_grise", "via integrateur"],
+      "solutionsCompatiblesPartenaires": ["MediaPilot"],
+      "descriptionFiche": "Spécialiste de l'échange de données B2B et de la dématérialisation depuis plus de 35 ans (WEBEDI TRUST et EDI TRUST pour les flux EDI, DATA TRUST pour les documents, SYFLUX et PROFLUX pour les flux synchrones et les approvisionnements), dont la plateforme agréée est commercialisée sous le nom DEMATRUST — conformité annoncée en France et dans plus de 70 pays, processus P2P et O2C, plus de 500 clients accompagnés, certifications ISO 27001, HDS, EcoVadis Bronze et point d'accès Peppol. Le site officiel est icdint.fr, à ne pas confondre avec le groupe automobile homonyme icd-international.com. Un programme partenaire structuré décline quatre modèles : apporteur d'affaires pour experts-comptables et consultants, partenaire intégrateur, partenaire technologique en marque grise pour les éditeurs d'ERP, et une offre en marque blanche destinée aux opérateurs de dématérialisation qui veulent obtenir leur propre immatriculation PA, avec plan d'accompagnement à l'immatriculation, formation, dispositifs marketing et commissions.",
+      "logiquePositionnement": "Cohérent : un opérateur EDI historique valorise son socle deux fois, en direct et en gros. C'est le signal de grossiste le plus net du lot, avec un cas explicite d'accompagnement d'un OD vers sa propre immatriculation — rappel utile : les modèles marque blanche et marque grise sont commerciaux, chaque plateforme reste immatriculée en son nom propre et responsable devant l'administration.",
+      "sourcesEnrichissement": [
+        { "champ": "positionnement", "source": "https://icdint.fr/", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "fournisseurDeSocle", "source": "https://icdint.fr/programme-partenaire", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "modeDistributionSocle", "source": "https://icdint.fr/programme-partenaire", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "solutionsCompatiblesPartenaires", "source": "https://icdint.fr/programme-partenaire", "dateReleve": "2026-08-20", "confiance": "moyenne" }
+      ]
+    },
+    {
+      "nom": "IGA ASSURANCE",
+      "familleOrigine": ["erp"],
+      "verticale": "assurance",
+      "natureEntite": "extension_demat",
+      "perimetreFonctionnel": ["emission", "reception", "ereporting", "suite_gestion"],
+      "socleTechnique": {
+        "type": "propre",
+        "operateurSocle": "IGA Assurance",
+        "preuve": "Immatriculation obtenue au terme d'une démarche d'un an pour « sa plateforme de dématérialisation », présentée comme une solution souveraine 100 % française conçue et hébergée en France, avec ERP VEOS « nativement connecté à notre PA », sans coût de connexion.",
+        "source": "http://www.iga-assurance.fr/facture-electronique-notre-plateforme-agreee-pa-validee-par-la-dgfip/",
+        "confiance": "haute"
+      },
+      "modeDistributionSocle": ["direct"],
+      "groupeCapitalistique": "IGA (IGA Assurance, éditeur et intégrateur pour l'assurance ; activité sœur IGA Voyage)",
+      "descriptionFiche": "Éditeur et intégrateur dédié aux professionnels de l'assurance, éditeur de l'ERP VEOS et opérateur de dématérialisation, immatriculé plateforme agréée en mai 2026 après une année de démarche. Le dispositif annoncé couvre l'émission et la réception des factures électroniques, la transmission des données de transaction et de paiement, l'extraction des données destinées à l'administration, et le traitement et le suivi des factures directement dans VEOS avec des outils de contrôle et d'automatisation. L'ERP est nativement connecté à la PA, sans coût de connexion, et peut alternativement s'interfacer avec une PA tierce. Le positionnement insiste sur la prise en compte des spécificités métier de l'assurance et sur une solution souveraine conçue et hébergée en France.",
+      "logiquePositionnement": "Cohérent : verticale sectorielle assumée. La PA n'est pas vendue seule mais comme le prolongement de l'ERP métier assurance, avec la gratuité de la connexion comme argument de rétention et l'ouverture aux PA tierces comme filet de sécurité commercial.",
+      "sourcesEnrichissement": [
+        { "champ": "positionnement", "source": "http://www.iga-assurance.fr/facture-electronique-notre-plateforme-agreee-pa-validee-par-la-dgfip/", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "verticale", "source": "https://www.iga.fr/", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "perimetreFonctionnel", "source": "http://www.iga-assurance.fr/facture-electronique-notre-plateforme-agreee-pa-validee-par-la-dgfip/", "dateReleve": "2026-08-20", "confiance": "haute" }
+      ]
+    },
+    {
+      "nom": "INDY",
+      "familleOrigine": ["facturation_compta", "fintech"],
+      "segmentCible": ["micro", "tpe_pme"],
+      "verticale": "generaliste",
+      "natureEntite": "extension_demat",
+      "perimetreFonctionnel": ["emission", "reception", "suite_gestion"],
+      "socleTechnique": {
+        "type": "propre",
+        "operateurSocle": "Indy",
+        "preuve": "Indy annonce sur son propre site être « immatriculé PA (ex-PDP) » et permettre d'éditer et de recevoir les factures gratuitement depuis son application ; aucun opérateur de socle tiers n'est mentionné.",
+        "source": "https://www.indy.fr/guide/facturation/electronique/pdp/",
+        "confiance": "moyenne"
+      },
+      "modeDistributionSocle": ["direct"],
+      "descriptionFiche": "Application de comptabilité en ligne, de facturation et de compte professionnel destinée aux indépendants et aux professions libérales, immatriculée plateforme agréée. La conformité est présentée comme incluse et gratuite : édition et réception des factures électroniques sans surcoût, dans le prolongement des modules existants (comptabilité, déclarations, compte pro, création d'entreprise). Le site publie un guide pédagogique complet sur la réforme (définition d'une PA, formats Factur-X, UBL, CII, calendrier 2026-2027) et un simulateur, et se compare explicitement aux autres PA sur le prix d'entrée.",
+      "logiquePositionnement": "Cohérent : la PA prolonge un outil de facturation et de comptabilité déjà utilisé quotidiennement par des micro-entreprises, et la gratuité de la conformité sert d'argument d'acquisition sur un segment très sensible au prix — la PA est un moyen, le compte et la comptabilité restent le produit.",
+      "sourcesEnrichissement": [
+        { "champ": "positionnement", "source": "https://www.indy.fr/guide/facturation/electronique/pdp/", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "perimetreFonctionnel", "source": "https://www.indy.fr/facturation-electronique/", "dateReleve": "2026-08-20", "confiance": "moyenne" },
+        { "champ": "segmentCible", "source": "https://www.indy.fr/prix/", "dateReleve": "2026-08-20", "confiance": "moyenne" }
+      ]
+    }
+  ]
+}
