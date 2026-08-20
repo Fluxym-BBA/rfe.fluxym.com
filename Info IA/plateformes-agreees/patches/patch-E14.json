@@ -1,0 +1,229 @@
+{
+  "_patch": {
+    "id": "E14",
+    "chantier": "E — qualification marché",
+    "auteur": "RFE_WebSite",
+    "dateReleve": "2026-08-20",
+    "nbPlateformes": 10,
+    "note": "Lot CANDIDATE : les 10 plateformes de ce lot figurent sur la liste DGFiP au titre des candidates EN ATTENTE DES TESTS D'INTEROPÉRABILITÉ. Elles ne sont donc PAS encore utilisables comme plateforme agréée par une entreprise : aucun raccordement opérationnel ne peut être contractualisé sur cette base à la date du relevé. La DGFiP ne publie pour elles ni adresse ni date, donc tout provient de leur communication publique. — RAPPEL DE CADRAGE : l'administration ne distingue que la plateforme agréée immatriculée et la Solution Compatible non immatriculée ; « marque blanche » n'est pas une catégorie réglementaire. Chaque plateforme de la liste officielle est immatriculée en son nom propre et reste seule responsable devant l'administration, y compris lorsqu'elle exploite le socle technique d'un tiers (cas CENSE / Chaintrust ci-dessous). — POINTS D'ATTENTION PAR PLATEFORME : (1) FACTUREAPP : aucun site officiel rattachable de façon certaine à l'entité immatriculée. Un service nommé « FactureApp » existe sur factureapp.fr (application Flutter, page sans texte exploitable, /tarifs et /mentions-legales en 404) mais aucun élément ne permet d'établir le lien avec l'inscription DGFiP : tous les champs de qualification sont laissés absents, confiance non_qualifie. (2) KALANDA : le seul site trouvé, kalanda.net (hébergeur souverain, La Ciotat), ne contient AUCUNE page facturation électronique / plateforme agréée ; le rattachement à l'entité immatriculée est probable mais non prouvé par le site lui-même. familleOrigine, segmentCible et perimetreFonctionnel laissés absents ; socleTechnique.type = inconnu. (3) Basikon : site 100 % core-lending / core-leasing, aucune page facturation électronique ni mention du statut PA ; seul le métier d'origine est qualifié, le périmètre fonctionnel PA reste absent. (4) EY Expertises & Transactions : l'URL déclarée renvoie à la page « Expertise comptable » d'EY France, qui ne mentionne ni la réforme, ni le statut PA, ni une offre de plateforme ; périmètre fonctionnel et socle non qualifiés. Par ailleurs AUCUNE valeur de la nomenclature familleOrigine ne convient à un cabinet d'audit / expertise comptable sans portail publié (ni portail_ec, ni integrateur) : champ laissé absent, la nomenclature mériterait une valeur « cabinet_conseil » (à arbitrer par Bruno). (5) FISKALTRUST : fournisseurDeSocle = true, mais la preuve porte sur le middleware de FISCALISATION (NF525 / caisses) revendu aux éditeurs et revendeurs POS, PAS sur un socle de facturation électronique : à ne pas présenter comme un grossiste PA. Aucune page e-invoicing France sur le site. (6) BLG : écart de statut à signaler — blgCloud annonce publiquement être « officiellement Plateforme Agréée » alors que la DGFiP la classe encore parmi les candidates en attente des tests d'interopérabilité. (7) CENSE : socle tiers identifié et sourcé (PA Chaintrust), distribution exclusive via les cabinets du groupe COGEP. (8) Insiders Technologies GmbH, EAGLESSOFT, BE FRESH : positionnement e-invoicing bien documenté (Peppol), mais aucune page dédiée au statut PA français. (9) fournisseurDeSocle et solutionsCompatiblesPartenaires : aucune liste publiée de Solutions Compatibles trouvée sur les 10 sites du lot ; champs laissés absents partout sauf FISKALTRUST. (10) MÉTHODE / RÉSERVE DE SOURCING : la lecture directe de data/plateformes-agreees.json sur main a été tronquée à ~85 Ko (contenu coupé à l'entrée « ENERJ »), les 10 clés nom de ce lot n'ont donc PAS pu être relues dans le référentiel lui-même ; elles ont été reprises caractère pour caractère depuis Info IA/plateformes-agreees/LOTS-E.md (branche main, HEAD b419029, 19/08/2026), qui est lui aussi un fichier du dépôt. À vérifier au moment de la fusion."
+  },
+  "plateformes": [
+    {
+      "nom": "BE FRESH S.à r.l.",
+      "siteWeb": "https://www.befresh.lu/",
+      "familleOrigine": ["edi"],
+      "segmentCible": ["tpe_pme", "public"],
+      "verticale": "generaliste",
+      "natureEntite": "diversification",
+      "perimetreFonctionnel": ["emission", "reception"],
+      "socleTechnique": {
+        "type": "propre",
+        "operateurSocle": "BE FRESH S.à r.l.",
+        "preuve": "Produit BeInvoice développé et exploité par BeFresh : « master your Peppol invoices with BeInvoice », convertisseurs de formats vers l'XML Peppol UBL, API REST JSON, hébergement au Luxembourg en datacenter Tier IV (Bettembourg).",
+        "source": "https://www.befresh.lu/",
+        "confiance": "moyenne"
+      },
+      "modeDistributionSocle": "direct",
+      "groupeCapitalistique": "Indépendant — société à responsabilité limitée simplifiée de droit luxembourgeois, siège 13 rue de l'Innovation, L-1896 Kockelscheuer, RCS Luxembourg B232808 (mentions légales du site).",
+      "descriptionFiche": "Société de services et d'édition logicielle luxembourgeoise (« we provide software solutions and services for organisations that want to accelerate their digital transformation initiatives »), dont l'un des deux projets mis en avant est BeInvoice, solution d'échange de factures Peppol. BeInvoice annonce une mise en service en 24 h si un XML conforme OpenPeppol UBL est fourni, des convertisseurs depuis les formats existants, une API REST JSON d'intégration, un hébergement luxembourgeois Tier IV et un support en luxembourgeois, allemand, français et anglais. Les références affichées sont majoritairement luxembourgeoises et mêlent PME et collectivités (communes de Junglinster et de Mersch, groupes Sales-Lentz, Editpress, bureaux d'ingénierie). Aucune page consacrée au statut de plateforme agréée française n'est publiée à la date du relevé.",
+      "logiquePositionnement": "Cohérent sur le plan technique : l'entité opère déjà l'échange de factures structurées sur le réseau Peppol, socle d'interopérabilité retenu par les plateformes agréées françaises, et sait convertir les formats amont. Le positionnement français est en revanche non documenté : ni offre France, ni communication sur la réforme, ni couverture explicite de l'e-reporting, qui est la marche réglementaire réellement discriminante pour une PA.",
+      "sourcesEnrichissement": [
+        { "champ": "positionnement", "source": "https://www.befresh.lu/", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "perimetreFonctionnel", "source": "https://www.befresh.lu/", "dateReleve": "2026-08-20", "confiance": "moyenne" },
+        { "champ": "groupeCapitalistique", "source": "https://www.befresh.lu/ (mentions légales)", "dateReleve": "2026-08-20", "confiance": "haute" }
+      ]
+    },
+    {
+      "nom": "BLG",
+      "siteWeb": "https://www.blgcloud.fr/",
+      "familleOrigine": ["erp"],
+      "segmentCible": ["tpe_pme", "eti"],
+      "verticale": "distribution, location et après-vente de matériels (machinisme agricole, TP/BTP, poids lourds, manutention, nautisme, automobile)",
+      "natureEntite": "diversification",
+      "perimetreFonctionnel": ["emission", "reception", "ereporting", "suite_gestion"],
+      "socleTechnique": {
+        "type": "propre",
+        "operateurSocle": "BLG (blgCloud)",
+        "preuve": "L'éditeur annonce son propre statut : « blgCloud est désormais officiellement Plateforme Agréée (PA) pour la facturation électronique », reconnue pour « l'émission », « la réception » et « la transmission des données de facturation (e-reporting) », avec une page dédiée /plateforme-agreee.",
+        "source": "https://www.blgcloud.fr/fonctionnalites-produit-etendues/fonctionnalites-produit-etendues-14/blgcloud-devient-plateforme-agreee-pour-la-facturation-electronique-en-france-185",
+        "confiance": "moyenne"
+      },
+      "modeDistributionSocle": "direct",
+      "descriptionFiche": "Éditeur d'une solution cloud de gestion (ERP/CRM) destinée aux concessionnaires, distributeurs, loueurs et réparateurs de matériels, qui adosse la plateforme agréée à son propre progiciel. L'annonce éditeur décrit une « solution unifiée » couvrant l'e-invoicing, la dématérialisation des factures fournisseurs et clients, le rapprochement commande d'achat / facture d'achat, les circuits d'approbation, l'e-reporting réglementaire et la centralisation des flux financiers. L'automatisation revendiquée repose sur la lecture automatique des factures (OCR et LLM), le rapprochement avec les données d'achat, la détection d'écarts et des workflows de validation. La cible est donc l'installé de l'ERP plutôt qu'un marché PA ouvert : aucune offre autonome de plateforme, ni grille tarifaire, ni liste de solutions compatibles n'est publiée.",
+      "logiquePositionnement": "Positionnement PA très cohérent avec le métier d'origine : un éditeur d'ERP verticalisé sécurise son installé en internalisant la conformité plutôt que de laisser ses clients partir chez un tiers, et capitalise sur un P2P déjà présent (rapprochement commande/facture, approbation). Le risque n'est pas fonctionnel mais réglementaire et calendaire : l'éditeur se présente déjà comme « officiellement Plateforme Agréée » alors que la DGFiP le classe encore parmi les candidates en attente des tests d'interopérabilité.",
+      "sourcesEnrichissement": [
+        { "champ": "positionnement", "source": "https://www.blgcloud.fr/fonctionnalites-produit-etendues/fonctionnalites-produit-etendues-14/blgcloud-devient-plateforme-agreee-pour-la-facturation-electronique-en-france-185", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "perimetreFonctionnel", "source": "https://www.blgcloud.fr/fonctionnalites-produit-etendues/fonctionnalites-produit-etendues-14/blgcloud-devient-plateforme-agreee-pour-la-facturation-electronique-en-france-185", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "verticale", "source": "https://www.blgcloud.fr/", "dateReleve": "2026-08-20", "confiance": "moyenne" }
+      ]
+    },
+    {
+      "nom": "Basikon",
+      "siteWeb": "https://www.basikon.com/",
+      "familleOrigine": ["erp"],
+      "segmentCible": ["eti", "grands_comptes"],
+      "verticale": "financement, crédit et leasing (prêteurs, bailleurs, courtiers, distributeurs)",
+      "natureEntite": "diversification",
+      "socleTechnique": {
+        "type": "inconnu",
+        "preuve": "Aucune page facturation électronique, réforme française ou plateforme agréée sur le site (accueil, plateforme, partenaires) à la date du relevé : impossible de qualifier le socle utilisé pour l'activité PA.",
+        "source": "https://www.basikon.com/",
+        "confiance": "non_qualifie"
+      },
+      "groupeCapitalistique": "Éditeur autonome revendiquant plus de 70 collaborateurs dans plus de 8 pays et plus de 30 déploiements clients sur 24 mois (aucun rattachement capitalistique publié).",
+      "descriptionFiche": "Éditeur d'un progiciel de core-lending et core-leasing présenté comme « 100 % API » et low-code (workflows en drag and drop, maintenance sans version, architecture microservices, certification ISO 27001). La cible affichée est constituée d'acteurs du financement : prêteurs, bailleurs, courtiers et distributeurs, avec des références de type Arkéa, Sanofi, Van Breda ou Initiative France. La page partenaires liste des partenaires de conseil et de technologie (Accenture, Deloitte, KPMG, GFT, Onepoint, Experian, Stripe, MongoDB, Mistral…) et revendique plus de 150 interfaces prêtes à l'emploi, mais il s'agit d'un écosystème d'intégration, pas d'une liste de Solutions Compatibles. Aucun contenu relatif à la facturation électronique française n'est publié.",
+      "logiquePositionnement": "Le métier d'origine est clairement établi et le positionnement PA reste, lui, entièrement non documenté. L'hypothèse cohérente serait l'intégration de la conformité au cœur des contrats de crédit et de leasing gérés par la plateforme (échéanciers, factures de loyers, refacturations), mais rien sur le site ne l'énonce : à qualifier lors d'un prochain passage, sans extrapoler d'ici là.",
+      "sourcesEnrichissement": [
+        { "champ": "positionnement", "source": "https://www.basikon.com/", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "verticale", "source": "https://www.basikon.com/", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "solutionsCompatiblesPartenaires", "source": "https://www.basikon.com/en/partners", "dateReleve": "2026-08-20", "confiance": "non_qualifie" }
+      ]
+    },
+    {
+      "nom": "CENSE",
+      "siteWeb": "https://cense.fr/",
+      "familleOrigine": ["portail_ec"],
+      "segmentCible": ["micro", "tpe_pme"],
+      "verticale": "generaliste",
+      "natureEntite": "creee_pour_rfe",
+      "perimetreFonctionnel": ["emission", "reception", "suite_gestion"],
+      "socleTechnique": {
+        "type": "marque_blanche",
+        "operateurSocle": "Chaintrust",
+        "preuve": "Communication du groupe éditeur : « Notre plateforme collaborative s'appuie sur la PA CHAINTRUST, plateforme agréée par l'administration fiscale (DGFiP) depuis plusieurs mois – une antériorité qui garantit un traitement de vos factures fiable et pleinement conforme. »",
+        "source": "https://www.cogep.fr/magazines/cense-est-disponible-la-conformite-et-la-gestion-reunies-dans-un-seul-espace/",
+        "confiance": "haute"
+      },
+      "modeDistributionSocle": "via cabinet EC",
+      "groupeCapitalistique": "Groupe COGEP — cabinet de conseil en gestion d'entreprise réunissant expertise comptable, juridique, financière et sociale ; CENSE est présentée comme « la plateforme digitale du groupe COGEP ».",
+      "descriptionFiche": "Plateforme collaborative lancée en 2026 par le groupe d'expertise comptable COGEP et distribuée exclusivement par ses cabinets : « Derrière CENSE, il y a votre cabinet et l'ensemble de ses domaines d'expertise ». Elle répond d'abord à la réforme de la facturation électronique, puis agrège la gestion : connexion aux comptes bancaires et vue agrégée des flux, paiement des fournisseurs, création et suivi des devis et factures, pilotage des encaissements et relances, partage avec l'expert-comptable, coffre-fort à valeur probante et hébergement européen certifié SecNumCloud. L'entreprise cliente n'a aucune démarche de sélection à faire dès lors qu'elle a signé le mandat de délégation à son cabinet. L'offre est déclinée en quatre formules, avec gratuité annoncée jusqu'au 30 septembre 2026.",
+      "logiquePositionnement": "Cohérence forte : un groupe d'expertise comptable industrialise la mise en conformité de son portefeuille de clients TPE-PME et verrouille la relation en faisant du cabinet le canal unique, la conformité servant de porte d'entrée vers une suite de gestion. Le socle technique n'est pas construit en interne mais repris d'un opérateur tiers (Chaintrust), choix classique d'un acteur dont le métier est le conseil et non l'exploitation d'infrastructure. Rappel : cela ne crée aucune catégorie réglementaire particulière — CENSE est immatriculée en son nom propre et demeure seule responsable devant l'administration, quel que soit l'opérateur du socle.",
+      "sourcesEnrichissement": [
+        { "champ": "positionnement", "source": "https://cense.fr/", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "socleTechnique", "source": "https://www.cogep.fr/magazines/cense-est-disponible-la-conformite-et-la-gestion-reunies-dans-un-seul-espace/", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "groupeCapitalistique", "source": "https://www.cogep.fr/magazines/cense-est-disponible-la-conformite-et-la-gestion-reunies-dans-un-seul-espace/", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "modeDistributionSocle", "source": "https://www.cogep.fr/magazines/cense-est-disponible-la-conformite-et-la-gestion-reunies-dans-un-seul-espace/", "dateReleve": "2026-08-20", "confiance": "haute" }
+      ]
+    },
+    {
+      "nom": "EAGLESSOFT",
+      "siteWeb": "https://eaglessoft.com/",
+      "familleOrigine": ["edi"],
+      "segmentCible": ["tpe_pme", "grands_comptes"],
+      "verticale": "generaliste",
+      "natureEntite": "extension_demat",
+      "perimetreFonctionnel": ["emission", "reception", "suite_gestion"],
+      "socleTechnique": {
+        "type": "propre",
+        "operateurSocle": "EaglesSoft",
+        "preuve": "« As a certified Peppol Access Point, we provide secure and standardized exchange of e-invoices across borders » ; services opérés en propre : Peppol Access Point & SMP, portail e-invoicing, add-on SAP eDocSuite, hub d'intégration ERP Docnaut, validateur de documents, moteur de transformation, e-archivage ; certifications ISO 27001 et ISO 27701 affichées.",
+        "source": "https://eaglessoft.com/",
+        "confiance": "haute"
+      },
+      "descriptionFiche": "Acteur e-invoicing et e-compliance se présentant comme « NextGen E-Invoice Solutions », établi à Zaventem en Belgique (Excelsiorlaan 31, 1930). Il opère un point d'accès Peppol certifié et un SMP (AS4, Peppol BIS Billing 3.0), un portail de facturation destiné aux PME, un add-on SAP natif eDocSuite pour ECC et S/4HANA référencé au catalogue SAP, un hub d'intégration ERP (Docnaut) prenant en charge EDIFACT, XML et formats nationaux, ainsi qu'une solution cloud de gestion Invocit (factures, achats, paiements, stocks). La couverture affichée est multi-pays avec « local format support & tax authority integration » incluant explicitement la France, et une extraction de données par IA. Les partenaires mis en avant (SAP, Odoo, intégrateurs) relèvent de l'écosystème technologique ; aucune liste de Solutions Compatibles n'est publiée.",
+      "logiquePositionnement": "Positionnement PA parfaitement aligné sur le métier d'origine : l'entité vit déjà de l'échange de factures structurées et de la conformité fiscale multi-pays, et la France n'est qu'un marché supplémentaire branché sur un socle Peppol existant. Le profil réel est celui d'un fournisseur d'infrastructure et d'intégration ERP/SAP plus que d'un acteur de la TPE française : l'entrée par l'add-on SAP et le hub d'intégration suggère une cible grands comptes internationaux, avec un portail PME en complément.",
+      "sourcesEnrichissement": [
+        { "champ": "positionnement", "source": "https://eaglessoft.com/", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "perimetreFonctionnel", "source": "https://eaglessoft.com/", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "implantation", "source": "https://eaglessoft.com/contact/", "dateReleve": "2026-08-20", "confiance": "haute" }
+      ]
+    },
+    {
+      "nom": "EY Expertises & Transactions",
+      "siteWeb": "https://www.ey.com/fr_fr/services/expertise-comptable",
+      "segmentCible": ["eti", "grands_comptes"],
+      "verticale": "generaliste",
+      "natureEntite": "diversification",
+      "socleTechnique": {
+        "type": "inconnu",
+        "preuve": "La page de référence de l'entité (« Expertise comptable ») ne mentionne ni la réforme de la facturation électronique, ni le statut de plateforme agréée, ni un service de plateforme : aucun élément sur le socle exploité.",
+        "source": "https://www.ey.com/fr_fr/services/expertise-comptable",
+        "confiance": "non_qualifie"
+      },
+      "groupeCapitalistique": "Réseau EY (Ernst & Young), présent dans 151 pays ; l'équipe Accounting Compliance and Reporting France revendique plus de 420 collaborateurs.",
+      "descriptionFiche": "Entité d'expertise comptable du réseau EY en France : assistance comptable, administrative, financière, fiscale et sociale, externalisation comptable et fiscale, révision et clôture des comptes statutaires, contrôle de gestion et consolidation, transformation opérationnelle et digitale de la fonction comptable et financière, performance de la fonction paie. La cible décrite est constituée de directions comptables et financières et de groupes internationaux appuyés sur le réseau EY. Aucune offre de plateforme, aucune page facturation électronique et aucune grille tarifaire ne sont publiées sous cette entité : le positionnement PA n'est pas exprimé par la plateforme elle-même.",
+      "logiquePositionnement": "Cohérent dans la logique de marché — un cabinet qui produit déjà la comptabilité et les déclarations fiscales de ses clients a intérêt à maîtriser le canal par lequel transiteront factures et données de TVA, dans la continuité de son offre de transformation de la fonction finance. Mais la cohérence s'arrête à la lecture du site : l'entité ne communique pas sur son projet PA, ne décrit ni périmètre fonctionnel, ni socle, ni cible, et n'apparaît pas comme un acteur logiciel. À reprendre dès qu'une page dédiée est publiée.",
+      "sourcesEnrichissement": [
+        { "champ": "positionnement", "source": "https://www.ey.com/fr_fr/services/expertise-comptable", "dateReleve": "2026-08-20", "confiance": "moyenne" },
+        { "champ": "groupeCapitalistique", "source": "https://www.ey.com/fr_fr/services/expertise-comptable", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "perimetreFonctionnel", "source": "https://www.ey.com/fr_fr/services/expertise-comptable", "dateReleve": "2026-08-20", "confiance": "non_qualifie" }
+      ]
+    },
+    {
+      "nom": "FACTUREAPP",
+      "sourcesEnrichissement": [
+        { "champ": "positionnement", "source": "https://www.factureapp.fr/ (application Flutter sans contenu textuel exploitable ; /tarifs et /mentions-legales en 404 ; rattachement à l'entité immatriculée non établi)", "dateReleve": "2026-08-20", "confiance": "non_qualifie" },
+        { "champ": "siteWeb", "source": "https://factureapp.com/ (inaccessible, erreur 500)", "dateReleve": "2026-08-20", "confiance": "non_qualifie" }
+      ]
+    },
+    {
+      "nom": "FISKALTRUST",
+      "siteWeb": "https://fiskaltrust.eu/fr-fr/",
+      "familleOrigine": ["tax"],
+      "segmentCible": ["tpe_pme", "eti", "grands_comptes"],
+      "verticale": "commerce de détail et encaissement (éditeurs et revendeurs de caisses, retail, hôtellerie-restauration)",
+      "natureEntite": "diversification",
+      "socleTechnique": {
+        "type": "propre",
+        "operateurSocle": "fiskaltrust",
+        "preuve": "« Notre produit principal, le Middleware fiskaltrust, est intégré dans les logiciels de caisse par les fabricants et permet une conformité fiscale fiable » ; middleware et API open source, configuration et supervision centralisées via fiskaltrust.Portal, APIs REST et gRPC.",
+        "source": "https://fiskaltrust.eu/fr-fr/partner/",
+        "confiance": "haute"
+      },
+      "fournisseurDeSocle": true,
+      "modeDistributionSocle": "via integrateur",
+      "descriptionFiche": "Opérateur européen de conformité fiscale (« fiscalisation ») dont le cœur d'offre est un middleware et des API open source intégrés dans les logiciels de caisse : signature, scellement, numérotation, pistes d'audit, export et archivage long terme des tickets, avec couverture de la France (article 286 I 3° bis du CGI, NF525, certification LNE et INFOCERT), de l'Allemagne, de l'Autriche, de l'Italie, de l'Espagne, du Portugal et d'autres marchés. Un second volet « Experience » couvre le ticket dématérialisé, les mises en page, la capture de feedback et les intégrations de paiement. La distribution est explicitement indirecte : « fiskaltrust travaille avec des revendeurs de caisses enregistreuses. Vous ajoutez nos produits à votre offre et conservez la relation avec vos clients », avec accord-cadre, remises de volume jusqu'à 50 %, support niveaux 1 et 2 aux concessionnaires et références retail et hôtellerie (Zara, H&M, Kik, Tedi, Subway, Vapiano, Hilton, Hapimag, Zucchetti, Infor). Aucune page facturation électronique ni statut PA français n'est publiée à la date du relevé.",
+      "logiquePositionnement": "Adjacence crédible mais non démontrée. Le métier d'origine est la conformité fiscale sur le flux d'encaissement, très proche de l'e-reporting des transactions B2C, et le modèle indirect en fait un fournisseur de socle naturel pour des éditeurs de caisse : c'est précisément le profil de grossiste recherché. Réserve importante : le rôle de fournisseur de socle est établi pour le middleware de fiscalisation, pas pour un socle de facturation électronique ; aucune offre PA, aucun périmètre e-invoicing et aucune liste de Solutions Compatibles ne sont publiés. Ne pas présenter cet acteur comme un grossiste PA en l'état.",
+      "sourcesEnrichissement": [
+        { "champ": "positionnement", "source": "https://fiskaltrust.eu/fr-fr/", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "fournisseurDeSocle", "source": "https://fiskaltrust.eu/fr-fr/partner/", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "modeDistributionSocle", "source": "https://fiskaltrust.eu/fr-fr/partner/", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "perimetreFonctionnel", "source": "https://fiskaltrust.eu/en-fr/", "dateReleve": "2026-08-20", "confiance": "non_qualifie" }
+      ]
+    },
+    {
+      "nom": "Insiders Technologies GmbH",
+      "siteWeb": "https://insiders-technologies.com/",
+      "familleOrigine": ["ged"],
+      "segmentCible": ["eti", "grands_comptes"],
+      "verticale": "generaliste",
+      "natureEntite": "diversification",
+      "perimetreFonctionnel": ["emission", "reception"],
+      "socleTechnique": {
+        "type": "propre",
+        "operateurSocle": "Insiders Technologies",
+        "preuve": "Suite e-finance exploitée en propre : e-connect (émission et réception, connexions OpenPeppol, ZRE, SDI, Chorus Pro, « certified Peppol Access Point »), e-convert (contrôle EN 16931 et conversion de formats), e-invoice pro (traitement automatisé), add-on e-invoice pilot pour SAP S/4HANA ; label BITMi « Software Hosted in Germany ».",
+        "source": "https://insiders-technologies.com/en/e-invoicing/",
+        "confiance": "haute"
+      },
+      "groupeCapitalistique": "Éditeur allemand présenté comme « the most successful spin-off of the German Research Center for Artificial Intelligence (DFKI) ».",
+      "descriptionFiche": "Éditeur allemand d'automatisation documentaire cognitive (capture, extraction, classification par IA et LLM), spin-off du DFKI, dont la suite e-finance couvre la chaîne facture de bout en bout : réception et émission via e-connect avec raccordements OpenPeppol, ZRE, SDI et Chorus Pro et qualité de point d'accès Peppol certifié ; contrôle EN 16931 et conversion multi-formats via e-convert (XRechnung, ZUGFeRD, Factur-X, Peppol BIS, FatturaPA, FA(2), KSeF) ; traitement automatisé et contrôle de facture via e-invoice pro ; add-on SAP e-invoice pilot ; modules IA d'imputation comptable automatique et de détection de fraude et d'anomalies avec human in the loop. Les secteurs adressés sont l'assurance, la santé, la banque et les services financiers, le secteur public et l'industrie et le commerce, avec des références de type BASF, Thyssenkrupp, Commerzbank, Roche, Baloise, Debeka. Hébergement exclusivement en Allemagne revendiqué (label BITMi). Aucune page dédiée au statut de plateforme agréée française.",
+      "logiquePositionnement": "Positionnement PA cohérent et techniquement crédible : l'entité maîtrise déjà la conversion normée EN 16931, l'échange Peppol et le traitement automatisé des factures entrantes, briques centrales du métier de plateforme agréée. Deux réserves : la communication est centrée sur l'Allemagne et sur des obligations non françaises, et l'argument commercial majeur, l'hébergement et le traitement exclusivement en Allemagne, est une promesse de souveraineté allemande dont il reste à vérifier la déclinaison pour des flux et un e-reporting français.",
+      "sourcesEnrichissement": [
+        { "champ": "positionnement", "source": "https://insiders-technologies.com/en/e-invoicing/", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "perimetreFonctionnel", "source": "https://insiders-technologies.com/en/e-invoicing/", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "familleOrigine", "source": "https://insiders-technologies.com/", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "groupeCapitalistique", "source": "https://insiders-technologies.com/", "dateReleve": "2026-08-20", "confiance": "haute" }
+      ]
+    },
+    {
+      "nom": "KALANDA",
+      "siteWeb": "https://www.kalanda.net/",
+      "verticale": "generaliste",
+      "natureEntite": "diversification",
+      "socleTechnique": {
+        "type": "inconnu",
+        "preuve": "Aucune page facturation électronique, réforme ou plateforme agréée sur kalanda.net au 20/08/2026 (l'URL /facturation-electronique/ renvoie une page non trouvée) : socle non qualifiable.",
+        "source": "https://www.kalanda.net/",
+        "confiance": "non_qualifie"
+      },
+      "descriptionFiche": "Hébergeur et infogéreur français se présentant comme « l'hébergement souverain pour les professionnels », avec des infrastructures situées en France certifiées ISO 27001 et HDS (hébergement de données de santé) depuis 2019. Il revendique la place de leader de l'hébergement WEBDEV et HFSQL (technologies PC SOFT) depuis 2001 et propose serveurs VPS, serveurs HDS, hébergement PHP, Nextcloud, messagerie professionnelle, noms de domaine, conseil en sécurité, ainsi qu'une offre d'IA générative et prédictive privée déployée sur son infrastructure. Aucun contenu relatif à la facturation électronique, à la réforme ou au statut de plateforme agréée n'est publié : le positionnement PA n'est pas exprimé par la plateforme elle-même, et le rattachement de ce site à l'entité immatriculée reste probable mais non prouvé.",
+      "logiquePositionnement": "Métier d'origine documenté (hébergement souverain et infogérance), positionnement PA non documenté. La nomenclature familleOrigine ne comporte aucune valeur correspondant à un hébergeur ou infogéreur : champ laissé absent. Piste à confirmer, mais non sourçable en l'état : la spécialisation historique sur l'écosystème PC SOFT / WEBDEV place cet acteur au contact d'un grand nombre de petits éditeurs de gestion français, configuration qui pourrait déboucher sur un rôle de fournisseur de socle ou d'hébergeur de solutions compatibles. Rien sur le site ne l'atteste aujourd'hui.",
+      "sourcesEnrichissement": [
+        { "champ": "positionnement", "source": "https://www.kalanda.net/", "dateReleve": "2026-08-20", "confiance": "moyenne" },
+        { "champ": "perimetreFonctionnel", "source": "https://www.kalanda.net/", "dateReleve": "2026-08-20", "confiance": "non_qualifie" },
+        { "champ": "familleOrigine", "source": "https://www.kalanda.net/", "dateReleve": "2026-08-20", "confiance": "non_qualifie" }
+      ]
+    }
+  ]
+}
