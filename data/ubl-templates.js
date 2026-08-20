@@ -50,6 +50,35 @@ ${notes.map(n => `\t<cbc:Note>${n}</cbc:Note>`).join('\n')}
 \t\t</cac:InvoiceDocumentReference>
 \t</cac:BillingReference>`,
 
+    // 2ter. BT-13 Reference de la commande de l'acheteur.
+    // Position imposee : apres cbc:BuyerReference, avant cac:BillingReference.
+    getOrderReference: (poNumber) => `
+\t<cac:OrderReference>
+\t\t<cbc:ID>${xmlEsc(poNumber)}</cbc:ID>
+\t</cac:OrderReference>`,
+
+    // 2quater. BG-13 Informations de livraison : BT-72 date effective,
+    // BT-70 destinataire, BG-15 adresse de livraison.
+    // Position imposee : apres cac:PayeeParty / cac:TaxRepresentativeParty,
+    // avant cac:PaymentMeans.
+    // BR-FR-14 rend BG-15 obligatoire au 01/09/2027 lorsque l'adresse de
+    // livraison differe de l'adresse de l'acheteur, pour les biens uniquement.
+    getDelivery: (deliveryDate, deliveryName, address) => `
+\t<cac:Delivery>${deliveryDate ? `
+\t\t<cbc:ActualDeliveryDate>${deliveryDate}</cbc:ActualDeliveryDate>` : ""}${deliveryName ? `
+\t\t<cac:DeliveryParty>
+\t\t\t<cac:PartyName><cbc:Name>${xmlEsc(deliveryName)}</cbc:Name></cac:PartyName>
+\t\t</cac:DeliveryParty>` : ""}${address ? `
+\t\t<cac:DeliveryLocation>
+\t\t\t<cac:Address>
+\t\t\t\t<cbc:StreetName>${xmlEsc(address.street)}</cbc:StreetName>
+\t\t\t\t<cbc:CityName>${xmlEsc(address.city)}</cbc:CityName>
+\t\t\t\t<cbc:PostalZone>${xmlEsc(address.zip)}</cbc:PostalZone>
+\t\t\t\t<cac:Country><cbc:IdentificationCode>${xmlEsc(address.country)}</cbc:IdentificationCode></cac:Country>
+\t\t\t</cac:Address>
+\t\t</cac:DeliveryLocation>` : ""}
+\t</cac:Delivery>`,
+
     // 2bis. BG-24 Document justificatif : representation lisible de la facture
     // BT-122 identifiant, BT-123 = LISIBLE (BR-FR-17), BT-125 objet binaire base64
     // avec mimeCode et filename obligatoires. Une seule PJ LISIBLE par facture (BR-FR-18).
@@ -82,7 +111,8 @@ ${notes.map(n => `\t<cbc:Note>${n}</cbc:Note>`).join('\n')}
 \t\t\t</cac:PartyTaxScheme>
 \t\t\t<cac:PartyLegalEntity>
 \t\t\t\t<cbc:RegistrationName>${xmlEsc(supplier.legalName)}</cbc:RegistrationName>
-\t\t\t\t<cbc:CompanyID schemeID="0002">${xmlEsc(supplier.siren)}</cbc:CompanyID>
+\t\t\t\t<cbc:CompanyID schemeID="0002">${xmlEsc(supplier.siren)}</cbc:CompanyID>${supplier.legalForm ? `
+\t\t\t\t<cbc:CompanyLegalForm>${xmlEsc(supplier.legalForm)}</cbc:CompanyLegalForm>` : ""}
 \t\t\t</cac:PartyLegalEntity>
 \t\t</cac:Party>
 \t</cac:AccountingSupplierParty>`,
@@ -163,13 +193,14 @@ ${prepaidAmt !== "0.00" ? `\t\t<cbc:PrepaidAmount currencyID="EUR">${prepaidAmt}
 \t</cac:LegalMonetaryTotal>`,
 
     // 8. Ligne de Facture / Avoir
-    getInvoiceLine: (id, qty, amount, itemName, price, isCreditNote = false, orderRef = null, vat = { category: "S", percent: "20.00" }, unitCode = "C62") => `
+    getInvoiceLine: (id, qty, amount, itemName, price, isCreditNote = false, orderRef = null, vat = { category: "S", percent: "20.00" }, unitCode = "C62", sellerItemRef = null) => `
 \t<cac:${isCreditNote ? 'CreditNoteLine' : 'InvoiceLine'}>
 \t\t<cbc:ID>${id}</cbc:ID>
 \t\t<cbc:${isCreditNote ? 'CreditedQuantity' : 'InvoicedQuantity'} unitCode="${unitCode}">${qty}</cbc:${isCreditNote ? 'CreditedQuantity' : 'InvoicedQuantity'}>
 \t\t<cbc:LineExtensionAmount currencyID="EUR">${amount}</cbc:LineExtensionAmount>
 ${orderRef ? `\t\t<cac:OrderLineReference><cbc:LineID>${orderRef.line}</cbc:LineID><cac:OrderReference><cbc:ID>${xmlEsc(orderRef.id)}</cbc:ID></cac:OrderReference></cac:OrderLineReference>\n` : ""}\t\t<cac:Item>
-\t\t\t<cbc:Name>${xmlEsc(itemName)}</cbc:Name>
+\t\t\t<cbc:Name>${xmlEsc(itemName)}</cbc:Name>${sellerItemRef ? `
+\t\t\t<cac:SellersItemIdentification><cbc:ID>${xmlEsc(sellerItemRef)}</cbc:ID></cac:SellersItemIdentification>` : ""}
 \t\t\t<cac:ClassifiedTaxCategory><cbc:ID>${vat.category}</cbc:ID><cbc:Percent>${vat.percent}</cbc:Percent><cac:TaxScheme><cbc:ID>VAT</cbc:ID></cac:TaxScheme></cac:ClassifiedTaxCategory>
 \t\t</cac:Item>
 \t\t<cac:Price><cbc:PriceAmount currencyID="EUR">${price}</cbc:PriceAmount></cac:Price>

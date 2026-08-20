@@ -48,10 +48,30 @@ const PDFLisible = {
         '380': 'FACTURE',
         '381': 'AVOIR',
         '383': 'NOTE DE DEBIT',
-        '384': 'FACTURE RECTIFICATIVE',
+        '384': 'FACTURE RECTIF.',
         '386': "FACTURE D'ACOMPTE",
-        '389': 'FACTURE AUTO-FACTUREE',
-        '393': 'FACTURE CEDEE (AFFACTURAGE)'
+        '389': 'AUTO-FACTURATION',
+        '393': 'FACTURE CEDEE'
+    },
+
+    // BT-23 Cadre de facturation. La lettre de tete porte la categorie
+    // d'operation, mention obligatoire au 01/09/2026 : B biens, S services,
+    // M mixte (biens et services non accessoires).
+    PROFILE_CATEGORY: { B: 'Biens', S: 'Services', M: 'Biens et services' },
+    PROFILE_LABELS: {
+        B1: 'Facture de bien', S1: 'Facture de prestation de service',
+        M1: 'Facture double biens et services',
+        B2: 'Facture de bien deja payee', S2: 'Facture de service deja payee',
+        M2: 'Facture double deja payee',
+        S3: 'Demande de paiement sous-traitant',
+        B4: 'Facture de solde apres acompte', S4: 'Facture de solde apres acompte',
+        M4: 'Facture de solde double apres acompte',
+        S5: 'Facture de sous-traitant', S6: 'Facture de co-traitant',
+        B7: 'Facture de bien deja e-reportee', S7: 'Facture de service deja e-reportee',
+        B8: 'Facture multi-vendeurs de biens', S8: 'Facture multi-vendeurs de services',
+        M8: 'Facture double multi-vendeurs',
+        B9: 'Facture bidirectionnelle de biens', S9: 'Facture bidirectionnelle de services',
+        M9: 'Facture double bidirectionnelle'
     },
 
     // Libelles d'unite lisibles a partir du code UN/ECE Rec 20 (BT-130)
@@ -261,7 +281,9 @@ const PDFLisible = {
     // ============================================================
     // BLOCS D'IDENTITE
     // ============================================================
-    _partyLines: function (p) {
+    // Lignes d'identite d'un tiers. `endpoint` porte l'adresse de facturation
+    // electronique BT-34 / BT-49, mention obligatoire au 01/09/2026.
+    _partyLines: function (p, endpoint) {
         if (!p) return ['-'];
         const out = [p.name || '-'];
         if (p.legalName && p.legalName !== p.name) out.push(p.legalName);
@@ -273,7 +295,43 @@ const PDFLisible = {
         let ids = 'SIRET ' + (p.siren || '') + (p.nic || '00001');
         if (p.vatNumber) ids += '  |  TVA ' + p.vatNumber;
         out.push(ids);
+        if (endpoint) out.push('Adr. \u00e9lectronique (0225) : ' + endpoint);
         return out;
+    },
+
+    // Lignes du destinataire de livraison (BT-70 + BG-15).
+    _deliveryLines: function (d) {
+        if (!d.delivery) return null;
+        const out = [];
+        if (d.delivery.name) out.push(d.delivery.name);
+        const a = d.delivery.address;
+        if (a) {
+            if (a.street) out.push(a.street);
+            const c = ((a.zip || '') + ' ' + (a.city || '')).trim();
+            if (c) out.push(c);
+            if (a.country) out.push(a.country === 'FR' ? 'FRANCE' : a.country);
+        }
+        return out.length ? out : null;
+    },
+
+    // Lignes de la carte d'identite du document. La reference a la facture
+    // anterieure (BT-25) y figure quand elle existe : sur une facture
+    // complementaire ou une facture de solde, elle doit etre lisible.
+    _cardRefs: function (d) {
+        const refs = [
+            ['N\u00b0 facture', d.invoiceNumber],
+            ['Date facture', this._date(d.issueDate)],
+            ['\u00c9ch\u00e9ance', d.dueDate ? this._date(d.dueDate) : '-'],
+            ['R\u00e9f\u00e9rence', d.buyerReference || '-']
+        ];
+        if (d.precedingInvoice && d.precedingInvoice.id) {
+            refs.push(['Facture d\u2019origine', d.precedingInvoice.id]);
+        }
+        return refs;
+    },
+
+    _cardHeight: function (d) {
+        return 93 + 15 * (this._cardRefs(d).length - 4);
     },
 
     _rowHeight: function (row) {
@@ -285,23 +343,11 @@ const PDFLisible = {
     // ============================================================
     // EN-TETE DE PAGE (repete a l'identique sur chaque page)
     // ============================================================
-    // Hauteur de l'en-tete : calculee a l'identique par _header et _paginate,
-    // pour que le tableau commence toujours sous le bandeau de colonnes.
+    // Hauteur de l'en-tete. Plutot que de dupliquer la formule de mise en page
+    // (source classique de desynchronisation), on execute _header sur un
+    // tampon jetable et on ne garde que la cote qu'il renvoie.
     _headerBottom: function (d) {
-        const top = this.HEADER_TOP;
-        const supCount = Math.min(this._partyLines(d.supplier).length, 5);
-        const sy = top - 41 - 11 * supCount;
-        const by = top - 97;
-        const partyRows = Math.max(
-            this._partyLines(d.buyer).length,
-            this._partyLines(d.deliveryTo || d.buyer).length
-        );
-        let ay = Math.min(sy + 4, by) - 18;
-        ay -= 13;
-        ay -= 11 * partyRows;
-        ay -= 5;
-        ay -= 25;
-        return ay - 5;
+        return this._header({ buf: [] }, d, 1, 1);
     },
 
     _header: function (ctx, d, pageNo, pageTotal) {
@@ -314,26 +360,26 @@ const PDFLisible = {
         // --- Bloc emetteur (BG-4) ---
         this._txt(ctx, M, top - 25, d.supplier.name, { size: 15, bold: true, color: this.C.navy });
         let sy = top - 41;
-        this._partyLines(d.supplier).slice(0, 5).forEach((l) => {
+        // La premiere ligne est le nom, deja affiche en titre juste au-dessus.
+        this._partyLines(d.supplier, d.supplierEndpoint).slice(1, 8).forEach((l) => {
             this._txt(ctx, M, sy, this._fit(l, 8.0, 300), { size: 8.0, color: this.C.muted });
             sy -= 11;
         });
 
         // --- Carte d'identite du document ---
-        const bx = 365, bw = R - 365, bh = 93, by = top - 97;
+        const bx = 365, bw = R - 365, bh = this._cardHeight(d), by = top - 4 - bh;
         this._roundRect(ctx, bx, by, bw, bh, 5, this.C.light, this.C.rule);
         this._roundRect(ctx, bx, by + bh - 24, bw, 24, 5, this.C.navy, null);
         this._fill(ctx, bx, by + bh - 24, bw, 8, this.C.navy);
-        this._txt(ctx, bx + 10, by + bh - 16, d.docLabel, { size: 11, bold: true, color: this.C.white });
-        this._txt(ctx, R - 10, by + bh - 16, 'Page ' + pageNo + ' / ' + pageTotal,
-            { size: 7.3, color: this.C.white, align: 'right' });
+        // Le libelle est contraint a la place restante pour ne jamais
+        // chevaucher la pagination (cas des types longs : 393, 384, 389).
+        const pageStr = 'Page ' + pageNo + ' / ' + pageTotal;
+        const labelMax = bw - 20 - this._w(pageStr, 7.3) - 10;
+        this._txt(ctx, bx + 10, by + bh - 16, this._fit(d.docLabel, 11, labelMax, true),
+            { size: 11, bold: true, color: this.C.white });
+        this._txt(ctx, R - 10, by + bh - 16, pageStr, { size: 7.3, color: this.C.white, align: 'right' });
 
-        const refs = [
-            ['N\u00b0 facture', d.invoiceNumber],
-            ['Date facture', this._date(d.issueDate)],
-            ['\u00c9ch\u00e9ance', d.dueDate ? this._date(d.dueDate) : '-'],
-            ['R\u00e9f\u00e9rence', d.buyerReference || '-']
-        ];
+        const refs = this._cardRefs(d);
         let ry = by + bh - 39;
         refs.forEach((r) => {
             this._txt(ctx, bx + 10, ry, r[0], { size: 7.1, color: this.C.muted });
@@ -349,8 +395,8 @@ const PDFLisible = {
         this._txt(ctx, M, ay, 'FACTUR\u00c9 \u00c0', { size: 7.4, bold: true, color: this.C.muted });
         this._txt(ctx, M + half, ay, 'LIVR\u00c9 \u00c0', { size: 7.4, bold: true, color: this.C.muted });
         ay -= 13;
-        const left = this._partyLines(d.buyer);
-        const right = this._partyLines(d.deliveryTo || d.buyer);
+        const left = this._partyLines(d.buyer, d.buyerEndpoint);
+        const right = this._deliveryLines(d) || this._partyLines(d.buyer);
         const rows = Math.max(left.length, right.length);
         for (let i = 0; i < rows; i++) {
             const bold = i === 0;
@@ -364,16 +410,30 @@ const PDFLisible = {
             ay -= 11;
         }
 
-        // --- Bandeau conditions de reglement (BT-20) ---
+        // --- Bande de references (BT-23, BT-13, BT-72, BT-20) ---
+        // BT-23 et BT-72 sont des mentions obligatoires : elles doivent etre
+        // lisibles sur le document, pas seulement presentes dans le structure.
         ay -= 5;
-        this._roundRect(ctx, M, ay - 4, R - M, 19, 3, this.C.light, null);
-        this._txt(ctx, M + 8, ay + 2, 'Conditions de r\u00e8glement : ' + (d.paymentTerms || 'Paiement \u00e0 30 jours'),
-            { size: 7.6, color: this.C.muted });
-        if (d.buyerReference) {
-            this._txt(ctx, R - 8, ay + 2, 'Votre r\u00e9f\u00e9rence : ' + d.buyerReference,
-                { size: 7.6, color: this.C.muted, align: 'right' });
-        }
-        ay -= 25;
+        const bandLines = [];
+        const cat = this.PROFILE_CATEGORY[String(d.profileId || '').charAt(0)];
+        bandLines.push([
+            'Cadre de facturation : ' + (d.profileId || '-') + (cat ? ' \u2014 ' + cat : ''),
+            d.orderReference ? 'Bon de commande : ' + d.orderReference : null
+        ]);
+        bandLines.push([
+            'Conditions de r\u00e8glement : ' + (d.paymentTerms || 'Paiement \u00e0 30 jours'),
+            (d.delivery && d.delivery.date) ? 'Date de livraison : ' + this._date(d.delivery.date) : null
+        ]);
+
+        const bandH = 8 + 12 * bandLines.length;
+        this._roundRect(ctx, M, ay + 13 - bandH, R - M, bandH, 3, this.C.light, null);
+        let byy = ay + 2;
+        bandLines.forEach((pair) => {
+            if (pair[0]) this._txt(ctx, M + 8, byy, pair[0], { size: 7.6, color: this.C.muted });
+            if (pair[1]) this._txt(ctx, R - 8, byy, pair[1], { size: 7.6, color: this.C.muted, align: 'right' });
+            byy -= 12;
+        });
+        ay -= (bandH + 6);
 
         // --- En-tete du tableau de lignes ---
         const c = this.COL;
@@ -455,7 +515,8 @@ const PDFLisible = {
         }
         rows.push(['Total TTC (BT-112)', d.taxInclusiveAmount]);
         if (this._num(d.prepaidAmount) !== 0) {
-            rows.push(['Acompte d\u00e9j\u00e0 vers\u00e9 (BT-113)', -this._num(d.prepaidAmount)]);
+            rows.push([(d.prepaidLabel || 'Acompte d\u00e9j\u00e0 vers\u00e9') + ' (BT-113)',
+                -this._num(d.prepaidAmount)]);
         }
 
         const boxH = rows.length * 16 + 29;
@@ -491,16 +552,32 @@ const PDFLisible = {
 
         // --- Bloc paiement (BG-16 / BG-17) ---
         my -= 6;
-        const ph = d.iban ? 59 : 47;
+        const payLines = [
+            "Date d'\u00e9ch\u00e9ance : " + this._date(d.dueDate),
+            'Mode : ' + (d.paymentMeans || 'Virement bancaire')
+        ];
+        // BG-10 : quand le beneficiaire du paiement n'est pas le fournisseur
+        // (facture cedee a un factor, tiers payeur), le lisible doit dire
+        // sans ambiguite a qui le reglement doit etre effectue.
+        if (d.payee && d.payee.name) {
+            payLines.push('R\u00e8glement \u00e0 : ' + d.payee.name +
+                (d.payee.siret ? '  (SIRET ' + d.payee.siret + ')' : ''));
+        }
+        if (d.iban) {
+            payLines.push('IBAN : ' + d.iban + (d.bic ? '   BIC : ' + d.bic : ''));
+        }
+
+        const ph = 20 + 12 * payLines.length + 3;
         if (my - ph > 66) {
-            this._roundRect(ctx, M, my - ph, bx - M - 14, ph, 4, this.C.light, this.C.rule);
-            this._txt(ctx, M + 9, my - 14, 'PAIEMENT', { size: 7.3, bold: true, color: this.C.navy });
-            this._txt(ctx, M + 9, my - 27, "Date d'\u00e9ch\u00e9ance : " + this._date(d.dueDate), { size: 7.3, color: this.C.muted });
-            this._txt(ctx, M + 9, my - 39, 'Mode : ' + (d.paymentMeans || 'Virement bancaire'), { size: 7.3, color: this.C.muted });
-            if (d.iban) {
-                this._txt(ctx, M + 9, my - 51, 'IBAN : ' + d.iban + (d.bic ? '   BIC : ' + d.bic : ''),
-                    { size: 7.3, color: this.C.muted });
-            }
+            const boxW = bx - M - 14;
+            this._roundRect(ctx, M, my - ph, boxW, ph, 4, this.C.light, this.C.rule);
+            this._txt(ctx, M + 9, my - 14, d.payee ? 'PAIEMENT \u2014 R\u00c8GLEMENT \u00c0 UN TIERS' : 'PAIEMENT',
+                { size: 7.3, bold: true, color: this.C.navy });
+            let py = my - 27;
+            payLines.forEach((line) => {
+                this._txt(ctx, M + 9, py, this._fit(line, 7.3, boxW - 18), { size: 7.3, color: this.C.muted });
+                py -= 12;
+            });
         }
     },
 
@@ -514,7 +591,12 @@ const PDFLisible = {
         this._txt(ctx, M, 43, s.name + ' | SIRET ' + (s.siren || '') + (s.nic || '00001') +
             (s.vatNumber ? ' | TVA ' + s.vatNumber : ''), { size: 6.8, color: this.C.muted });
         this._txt(ctx, R, 43, 'Page ' + pageNo + ' / ' + pageTotal, { size: 6.8, color: this.C.muted, align: 'right' });
-        this._txt(ctx, M, 31, isLast
+        // BT-33 : forme juridique et capital social, mention obligatoire sur
+        // tout document commercial (art. R123-237 du Code de commerce).
+        if (s.legalForm) {
+            this._txt(ctx, M, 31, s.legalForm, { size: 6.8, color: this.C.muted });
+        }
+        this._txt(ctx, M, s.legalForm ? 20 : 31, isLast
             ? 'Ce document PDF est la repr\u00e9sentation lisible compl\u00e8te de la facture \u00e9lectronique \u00e9mise au format structur\u00e9 UBL 2.1.'
             : 'Suite de la facture sur la page suivante.', { size: 6.7, color: this.C.muted });
     },
@@ -567,7 +649,8 @@ const PDFLisible = {
             // Motifs d'exoneration remontes en mentions
             d.taxSubtotals.forEach((s) => {
                 if (s.reason && d.notes.indexOf(s.reason) === -1) {
-                    d.notes.push('TVA ' + this._amt(s.percent) + ' % (cat\u00e9gorie ' + s.category + ') : ' + s.reason);
+                    d.notes.push('TVA ' + this._amt(s.percent) + ' % \u2014 cat\u00e9gorie ' + s.category +
+                        (s.code ? ', code ' + s.code : '') + ' : ' + s.reason);
                 }
             });
         }

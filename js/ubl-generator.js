@@ -751,6 +751,13 @@ const UBLGenerator = {
         // Erreur volontaire sur ligne 2 : prix unitaire 1.00 au lieu de 3.20
     },
 
+    // Reference article vendeur (BT-155), derivee du libelle pour rester
+    // stable et plausible sans avoir a saisir un referentiel article.
+    makeItemRef: function(desc, index) {
+        var base = String(desc || "ART").replace(/[^A-Za-z]/g, "").toUpperCase().slice(0, 3);
+        return (base || "ART") + "-" + ("0000" + index).slice(-4);
+    },
+
     // =====================================================
     // TRIPTYQUE : UBL nu / UBL + lisible / PDF lisible
     // =====================================================
@@ -758,7 +765,9 @@ const UBLGenerator = {
     // Cas pour lesquels la representation lisible est disponible.
     // Un cas n'est ajoute ici qu'apres verification de la coherence
     // entre les donnees structurees et le rendu lisible.
-    PDF_CASES: ["nominal"],
+    // Panier de reference : un cas representatif par categorie de cas d'usage,
+    // chacun verifie individuellement (montants, TVA, blocs structurants).
+    PDF_CASES: ["nominal", "2", "8", "13", "16", "18", "19b", "20", "21", "22a", "23", "38"],
 
     supportsPdf: function(usecase) {
         return typeof PDFLisible !== 'undefined' && this.PDF_CASES.indexOf(usecase) !== -1;
@@ -873,9 +882,9 @@ const UBLGenerator = {
             // 4. Notes
             var notes = [
                 "#BAR#B2B",
-                "#PMT#Indemnite forfaitaire pour frais de recouvrement : 40 euros.",
-                "#PMD#En cas de retard de paiement, des penalites egales a 3 fois le taux d'interet legal seront appliquees.",
-                "#AAB#Pas d'escompte pour paiement anticipe."
+                "#PMT#Indemnité forfaitaire pour frais de recouvrement : 40 euros.",
+                "#PMD#En cas de retard de paiement, des pénalités égales à 3 fois le taux d'intérêt légal seront appliquées.",
+                "#AAB#Pas d'escompte pour paiement anticipé."
             ];
 
             if (usecase === "33") notes.push("#AAI#Regime TVA sur la marge - Article 297 A du CGI");
@@ -899,6 +908,38 @@ const UBLGenerator = {
             // les donnees de ligne (ZIP rectificative)
             // ==========================================
             var self = this;
+            // BG-17 : sur une facture cedee, le compte a crediter est celui du
+            // factor (subrogation conventionnelle), pas celui du fournisseur.
+            // Le lisible et le structure lisent la meme variable : ils ne
+            // peuvent pas designer deux beneficiaires differents.
+            var payAccount = (cfg.payeeType === "factor" && factor && factor.iban) ? factor : supplier;
+
+            // BG-10 : beneficiaire du paiement, quand il n'est pas le fournisseur.
+            // Seul le cas du factor est repris ici, les autres payeeType
+            // (distributeur, collaborateur, tiers payeur) restent a couvrir.
+            var payeeForPdf = (cfg.payeeType === "factor" && factor)
+                ? { name: factor.name, siret: factor.siren + (factor.nic || "00001") }
+                : null;
+
+            // BG-3 : reference a la facture anterieure (BT-25 + BT-26).
+            // Attendue sur une facture complementaire comme sur une facture de
+            // solde apres acompte, ou elle justifie le montant deja paye BT-113.
+            var precedingRefId = null;
+            var precedingDate = null;
+            if (cfg.billingRef) {
+                var prevMs = new Date(dateFactureXML + "T00:00:00").getTime() - (30 * 24 * 60 * 60 * 1000);
+                precedingDate = new Date(prevMs).toISOString().slice(0, 10);
+                precedingRefId = trigramme + "-ORIG-" + precedingDate.replace(/-/g, "").slice(2);
+            }
+
+            // BG-13 : la livraison est datee 5 jours avant la facture, ce qui
+            // correspond au cas courant d'une facturation posterieure a la
+            // livraison. BT-72 n'est obligatoire que si elle differe de BT-2.
+            var deliveryDate = new Date(new Date(dateFactureXML + "T00:00:00").getTime() - (5 * 24 * 60 * 60 * 1000))
+                .toISOString().slice(0, 10);
+            var deliveryName = buyer.deliveryName || null;
+            var deliveryAddress = buyer.deliveryAddress || null;
+
             var buildXML = function(numFacture, typeCode, asCreditNote, refOriginale, poNumber, overrideLineData, attachment) {
                 asCreditNote = asCreditNote || false;
                 refOriginale = refOriginale || null;
@@ -908,9 +949,14 @@ const UBLGenerator = {
 
                 var xml = UBLTemplates.getHeader(numFacture, dateFactureXML, dateEcheanceXML, typeCode, profileId, notes, asCreditNote, buyerReference, self.getCustomizationId(usecase));
 
+                // BT-13 Reference de la commande de l'acheteur
+                if (poNumber) {
+                    xml += UBLTemplates.getOrderReference(poNumber);
+                }
+
                 // Billing reference (rectificative ou avoir)
                 if (refOriginale) {
-                    xml += UBLTemplates.getBillingReference(refOriginale, dateFactureXML);
+                    xml += UBLTemplates.getBillingReference(refOriginale, precedingDate || dateFactureXML);
                 }
 
                 // BG-24 Representation lisible embarquee (BT-123 = LISIBLE, BR-FR-17)
@@ -950,7 +996,12 @@ const UBLGenerator = {
                 // BG-16 est obligatoire (BR-49) : virement (30) par defaut.
                 // BT-84 IBAN ajoute pour les codes 30 et 58 conformement a BR-50.
                 var meansCode = cfg.paymentMeans || "30";
-                xml += UBLTemplates.getPaymentMeans(meansCode, supplier.iban || null, supplier.bic || null);
+                // BG-13 Livraison : date effective, destinataire et adresse
+                if (deliveryAddress || deliveryName) {
+                    xml += UBLTemplates.getDelivery(deliveryDate, deliveryName, deliveryAddress);
+                }
+
+                xml += UBLTemplates.getPaymentMeans(meansCode, payAccount.iban || null, payAccount.bic || null);
                 xml += UBLTemplates.getPaymentTerms();
 
                 // --- Lignes et Totaux ---
@@ -989,11 +1040,12 @@ const UBLGenerator = {
                             ld.totals[3],
                             (Math.round((taxInclusive - prepaid) * 100) / 100).toFixed(2)
                         );
-                        ld.lines.forEach(function(line) {
+                        ld.lines.forEach(function(line, idx) {
                             xml += UBLTemplates.getInvoiceLine(
                                 line.id, line.qty, line.amount, line.desc, line.price,
                                 asCreditNote, line.po || null,
-                                self.getLineVat(usecase, line.id), line.unitCode || "C62"
+                                self.getLineVat(usecase, line.id), line.unitCode || "C62",
+                                line.ref || self.makeItemRef(line.desc, idx + 1)
                             );
                         });
                     }
@@ -1033,18 +1085,35 @@ const UBLGenerator = {
                     supplier: supplier,
                     buyer: buyer,
                     typeCode: typeCode,
+                    // BT-23 Cadre de facturation : mention obligatoire au 01/09/2026,
+                    // la lettre de tete portant la categorie d'operation (B/S/M).
                     profileId: profileId,
+                    // BT-34 / BT-49 Adresses de facturation electronique (schemeID 0225)
+                    supplierEndpoint: supplier.siren,
+                    buyerEndpoint: buyer.siren,
+                    // BT-13 Reference de la commande de l'acheteur
+                    orderReference: "PO-1001",
+                    // BG-13 / BG-15 Livraison
+                    delivery: (deliveryAddress || deliveryName) ? {
+                        date: deliveryDate,
+                        name: deliveryName,
+                        address: deliveryAddress
+                    } : null,
                     invoiceNumber: numFacture,
                     issueDate: dateFactureXML,
                     dueDate: dateEcheanceXML,
                     buyerReference: buyerReference,
-                    paymentTerms: cfg.prepaid ? "Paiement comptant" : "Paiement a 30 jours date de facture",
+                    paymentTerms: cfg.prepaid ? "Paiement comptant" : "Paiement à 30 jours date de facture",
                     paymentMeans: meansLabel,
-                    iban: withIban ? (supplier.iban || null) : null,
-                    bic: withIban ? (supplier.bic || null) : null,
+                    iban: withIban ? (payAccount.iban || null) : null,
+                    bic: withIban ? (payAccount.bic || null) : null,
+                    payee: payeeForPdf,
+                    precedingInvoice: precedingRefId ? { id: precedingRefId, date: precedingDate } : null,
+                    prepaidLabel: cfg.prepaid ? "Deja paye" : "Acompte deja verse",
                     taxSubtotals: breakdown.map(function(sub) {
                         return {
                             category: sub.category,
+                            code: sub.code || '',
                             percent: sub.percent,
                             taxable: sub.taxable,
                             amount: sub.amount,
@@ -1057,11 +1126,11 @@ const UBLGenerator = {
                     prepaidAmount: ld.totals[3],
                     payableAmount: (Math.round((taxInclusive - prepaid) * 100) / 100).toFixed(2),
                     notes: pdfNotes,
-                    lines: ld.lines.map(function(line) {
+                    lines: ld.lines.map(function(line, idx) {
                         var vat = self.getLineVat(usecase, line.id);
                         return {
                             id: line.id,
-                            ref: line.ref || "",
+                            ref: line.ref || self.makeItemRef(line.desc, idx + 1),
                             desc: line.desc,
                             qty: line.qty,
                             price: line.price,
@@ -1178,7 +1247,7 @@ const UBLGenerator = {
                 if (opts.ubl) {
                     artifacts.push({
                         name: baseName + "_UBL.xml",
-                        blob: new Blob([buildXML(numeroFacture, invoiceTypeCode, false, null, "PO-1001")],
+                        blob: new Blob([buildXML(numeroFacture, invoiceTypeCode, false, precedingRefId, "PO-1001")],
                             { type: "application/xml" })
                     });
                 }
@@ -1191,7 +1260,7 @@ const UBLGenerator = {
                     };
                     artifacts.push({
                         name: baseName + "_UBL_avec_lisible.xml",
-                        blob: new Blob([buildXML(numeroFacture, invoiceTypeCode, false, null, "PO-1001", null, attachment)],
+                        blob: new Blob([buildXML(numeroFacture, invoiceTypeCode, false, precedingRefId, "PO-1001", null, attachment)],
                             { type: "application/xml" })
                     });
                 }

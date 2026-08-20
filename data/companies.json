@@ -2,19 +2,20 @@
   "suppliers": [
     {
       "id": "acme_fr",
-      "name": "ACME FR",
-      "legalName": "ACME FR LEGAL",
+      "name": "ACME FRANCE",
+      "legalName": "ACME FRANCE SAS",
       "siren": "331518498",
       "vatNumber": "FR53331518498",
       "address": {
-        "street": "12 Rue de la Republique",
+        "street": "12 rue de la République",
         "city": "LYON",
         "zip": "69009",
         "country": "FR"
       },
       "nic": "00018",
       "iban": "FR7630004170100001234567805",
-      "bic": "BNPAFRPPXXX"
+      "bic": "BNPAFRPPXXX",
+      "legalForm": "SAS au capital de 250 000 euros - RCS Lyon 331 518 498"
     },
     {
       "id": "fluxym_fr",
@@ -30,31 +31,50 @@
       },
       "nic": "00007",
       "iban": "FR7630002005500000765432174",
-      "bic": "CRLYFRPPXXX"
+      "bic": "CRLYFRPPXXX",
+      "legalForm": "SAS au capital de 100 000 euros - RCS Paris 442 654 927"
     }
   ],
   "buyers": [
     {
       "id": "kreamob",
       "name": "KREAMOB",
-      "legalName": "KREAMOB Legal entity",
+      "legalName": "KREAMOB SA",
       "siren": "333191120",
       "nic": "28662",
       "vatNumber": "FR12333191120",
       "address": {
-        "street": "10 Avenue du Marechal Foch",
+        "street": "10 avenue du Maréchal Foch",
         "city": "VILLEFRANCHE-SUR-MER",
         "zip": "06230",
         "country": "FR"
       },
-      "buyerReference": "REF-KREAMOB-2026"
+      "buyerReference": "REF-KREAMOB-2026",
+      "deliveryName": "KREAMOB – Entrepôt Logistique Sud",
+      "deliveryAddress": {
+        "street": "ZI des Trois Moulins, 45 chemin des Cistes",
+        "city": "ANTIBES",
+        "zip": "06600",
+        "country": "FR"
+      }
     }
   ],
   "factors": [
     {
       "id": "esker_factor",
       "name": "ESKER FACTOR",
-      "siren": "999999998"
+      "siren": "999999998",
+      "nic": "00001",
+      "iban": "FR7630003036200005012345668",
+      "bic": "SOGEFRPPXXX",
+      "legalName": "ESKER FACTOR SAS",
+      "address": {
+        "street": "10 rue des Émeraudes",
+        "city": "LYON",
+        "zip": "69006",
+        "country": "FR"
+      },
+      "legalForm": "SAS au capital de 500 000 euros - RCS Lyon 999 999 998"
     }
   ]
 }
