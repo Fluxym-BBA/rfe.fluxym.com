@@ -460,8 +460,10 @@ const GeneratorUI = {
             var opts = UBLGenerator.getArtifactOptions(usecase);
             // Les annexes ajoutent trois fichiers : la variante UBL a trois
             // pieces jointes, le bon de commande et le bon de livraison.
+            // Les annexes ajoutent trois fichiers ; le CII en ajoute un, et un
+            // second lorsque les pieces jointes sont demandees.
             var count = (opts.ubl ? 1 : 0) + (opts.ublWithPdf ? 1 : 0) + (opts.pdf ? 1 : 0) +
-                (opts.annexes ? 3 : 0);
+                (opts.annexes ? 3 : 0) + (opts.cii ? 1 : 0) + (opts.cii && opts.annexes ? 1 : 0);
             if (count > 1) label = 'Télécharger le ZIP (' + count + ' fichiers)';
             else if (opts.pdf) label = 'Télécharger le PDF lisible';
             else label = 'Télécharger la facture UBL';
@@ -470,7 +472,7 @@ const GeneratorUI = {
     },
 
     initArtifactOptions: function() {
-        ['opt-ubl', 'opt-ubl-pdf', 'opt-pdf', 'opt-annexes'].forEach(function(id) {
+        ['opt-ubl', 'opt-ubl-pdf', 'opt-pdf', 'opt-annexes', 'opt-cii'].forEach(function(id) {
             var input = document.getElementById(id);
             if (input) input.addEventListener('change', function() { GeneratorUI.syncGenerateLabel(); });
         });

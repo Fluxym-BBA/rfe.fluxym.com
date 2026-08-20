@@ -1,0 +1,363 @@
+/**
+ * CII-TEMPLATES.JS - La bibliotheque de briques XML UN/CEFACT CII D22B
+ *
+ * Message CrossIndustryInvoice, profil EN 16931 / EXTENDED CTC-FR.
+ * Pendant strict de data/ubl-templates.js : les deux fichiers portent la MEME
+ * semantique EN 16931 dans deux syntaxes differentes. Toute evolution de l'un
+ * doit etre repercutee dans l'autre.
+ *
+ * Trois differences structurelles avec l'UBL, sources classiques de rejet :
+ *   1. Facture et avoir partagent la MEME racine rsm:CrossIndustryInvoice.
+ *      Seul ram:TypeCode (380 / 381) les distingue. UBL, lui, change d'element
+ *      racine (Invoice / CreditNote).
+ *   2. @currencyID n'est PAS utilise sur les montants de ligne : la devise est
+ *      heritee de ram:InvoiceCurrencyCode. Il ne subsiste que sur
+ *      ram:TaxTotalAmount, ou il devient obligatoire.
+ *   3. Dans ram:SpecifiedTradeSettlementHeaderMonetarySummation, BT-108
+ *      (ChargeTotalAmount) precede BT-107 (AllowanceTotalAmount). C'est
+ *      l'inverse de l'ordre UBL et l'inverse de l'ordre numerique.
+ *
+ * L'ordre des elements suit la sequence XSD, non l'ordre des BT. Dans
+ * ram:*TradeParty, ram:DefinedTradeContact se place AVANT
+ * ram:PostalTradeAddress.
+ *
+ * xmlEsc est fourni par data/ubl-templates.js, charge avant ce fichier.
+ */
+
+const CIITemplates = {
+
+    // BT-2, BT-26, BT-72 : CII date une facture en AAAAMMJJ (format 102),
+    // la ou UBL emploie la date ISO AAAA-MM-JJ.
+    d8: (iso) => (iso ? String(iso).replace(/-/g, '') : ''),
+
+    // Les notes internes portent un prefixe technique #XXX# qui code le sujet
+    // de la mention. UBL le concatene au texte ; CII le porte dans un element
+    // distinct ram:SubjectCode. Le prefixe est donc separe, jamais recopie.
+    splitNote: (note) => {
+        const m = String(note).match(/^#([A-Z]{3})#([\s\S]*)$/);
+        return m ? { code: m[1], text: m[2] } : { code: null, text: String(note) };
+    },
+
+    // ========================================================================
+    // 1. ENVELOPPE ET CONTEXTE
+    // BT-23 accueille le cadre de facturation francais (S1, B1, M1...) sans
+    // prefixe ni URN. BT-24 porte la meme chaine qu'en UBL : l'identifiant de
+    // specification est une donnee semantique, independante de la syntaxe.
+    // ========================================================================
+    getEnvelope: (businessProcess, guideline) => `<?xml version="1.0" encoding="UTF-8"?>
+<rsm:CrossIndustryInvoice xmlns:rsm="urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100" xmlns:ram="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100" xmlns:qdt="urn:un:unece:uncefact:data:standard:QualifiedDataType:100" xmlns:udt="urn:un:unece:uncefact:data:standard:UnqualifiedDataType:100">
+\t<rsm:ExchangedDocumentContext>
+\t\t<ram:BusinessProcessSpecifiedDocumentContextParameter>
+\t\t\t<ram:ID>${xmlEsc(businessProcess)}</ram:ID>
+\t\t</ram:BusinessProcessSpecifiedDocumentContextParameter>
+\t\t<ram:GuidelineSpecifiedDocumentContextParameter>
+\t\t\t<ram:ID>${xmlEsc(guideline)}</ram:ID>
+\t\t</ram:GuidelineSpecifiedDocumentContextParameter>
+\t</rsm:ExchangedDocumentContext>`,
+
+    // ========================================================================
+    // 2. DOCUMENT : BT-1, BT-3, BT-2, puis BT-22 / BT-21
+    // ========================================================================
+    getDocument: (numeroFacture, typeCode, dateFacture, notes) => `
+\t<rsm:ExchangedDocument>
+\t\t<ram:ID>${xmlEsc(numeroFacture)}</ram:ID>
+\t\t<ram:TypeCode>${typeCode}</ram:TypeCode>
+\t\t<ram:IssueDateTime>
+\t\t\t<udt:DateTimeString format="102">${CIITemplates.d8(dateFacture)}</udt:DateTimeString>
+\t\t</ram:IssueDateTime>${(notes || []).map((n) => {
+        const p = CIITemplates.splitNote(n);
+        return `
+\t\t<ram:IncludedNote>
+\t\t\t<ram:Content>${xmlEsc(p.text)}</ram:Content>${p.code ? `
+\t\t\t<ram:SubjectCode>${p.code}</ram:SubjectCode>` : ''}
+\t\t</ram:IncludedNote>`;
+    }).join('')}
+\t</rsm:ExchangedDocument>
+\t<rsm:SupplyChainTradeTransaction>`,
+
+    // ========================================================================
+    // 3. LIGNE DE FACTURE
+    // Sequence XSD : AssociatedDocumentLineDocument, SpecifiedTradeProduct,
+    // SpecifiedLineTradeAgreement, SpecifiedLineTradeDelivery,
+    // SpecifiedLineTradeSettlement.
+    // Aucun @currencyID : la devise vient de ram:InvoiceCurrencyCode.
+    // ========================================================================
+    getLineItem: (line, vat, orderRef) => `
+\t\t<ram:IncludedSupplyChainTradeLineItem>
+\t\t\t<ram:AssociatedDocumentLineDocument>
+\t\t\t\t<ram:LineID>${line.id}</ram:LineID>
+\t\t\t</ram:AssociatedDocumentLineDocument>
+\t\t\t<ram:SpecifiedTradeProduct>${line.ref ? `
+\t\t\t\t<ram:SellerAssignedID>${xmlEsc(line.ref)}</ram:SellerAssignedID>` : ''}
+\t\t\t\t<ram:Name>${xmlEsc(line.desc)}</ram:Name>
+\t\t\t</ram:SpecifiedTradeProduct>
+\t\t\t<ram:SpecifiedLineTradeAgreement>${orderRef ? `
+\t\t\t\t<ram:BuyerOrderReferencedDocument>
+\t\t\t\t\t<ram:LineID>${xmlEsc(orderRef.line)}</ram:LineID>
+\t\t\t\t</ram:BuyerOrderReferencedDocument>` : ''}
+\t\t\t\t<ram:NetPriceProductTradePrice>
+\t\t\t\t\t<ram:ChargeAmount>${line.price}</ram:ChargeAmount>
+\t\t\t\t</ram:NetPriceProductTradePrice>
+\t\t\t</ram:SpecifiedLineTradeAgreement>
+\t\t\t<ram:SpecifiedLineTradeDelivery>
+\t\t\t\t<ram:BilledQuantity unitCode="${line.unitCode || 'C62'}">${line.qty}</ram:BilledQuantity>
+\t\t\t</ram:SpecifiedLineTradeDelivery>
+\t\t\t<ram:SpecifiedLineTradeSettlement>
+\t\t\t\t<ram:ApplicableTradeTax>
+\t\t\t\t\t<ram:TypeCode>VAT</ram:TypeCode>
+\t\t\t\t\t<ram:CategoryCode>${vat.category}</ram:CategoryCode>
+\t\t\t\t\t<ram:RateApplicablePercent>${vat.percent}</ram:RateApplicablePercent>
+\t\t\t\t</ram:ApplicableTradeTax>${(line.allowances || []).map((ac) => `
+\t\t\t\t<ram:SpecifiedTradeAllowanceCharge>
+\t\t\t\t\t<ram:ChargeIndicator>
+\t\t\t\t\t\t<udt:Indicator>${ac.charge ? 'true' : 'false'}</udt:Indicator>
+\t\t\t\t\t</ram:ChargeIndicator>${ac.baseAmount ? `
+\t\t\t\t\t<ram:BasisAmount>${ac.baseAmount}</ram:BasisAmount>` : ''}
+\t\t\t\t\t<ram:ActualAmount>${ac.amount}</ram:ActualAmount>${ac.reasonCode ? `
+\t\t\t\t\t<ram:ReasonCode>${xmlEsc(ac.reasonCode)}</ram:ReasonCode>` : ''}${ac.reason ? `
+\t\t\t\t\t<ram:Reason>${xmlEsc(ac.reason)}</ram:Reason>` : ''}
+\t\t\t\t</ram:SpecifiedTradeAllowanceCharge>`).join('')}
+\t\t\t\t<ram:SpecifiedTradeSettlementLineMonetarySummation>
+\t\t\t\t\t<ram:LineTotalAmount>${line.amount}</ram:LineTotalAmount>
+\t\t\t\t</ram:SpecifiedTradeSettlementLineMonetarySummation>
+\t\t\t</ram:SpecifiedLineTradeSettlement>
+\t\t</ram:IncludedSupplyChainTradeLineItem>`,
+
+    // ========================================================================
+    // 4. FRAGMENT DE TIERS, commun a Seller, Buyer, Payee et ShipTo
+    // Sequence XSD : ID, GlobalID, Name, Description, SpecifiedLegalOrganization,
+    // DefinedTradeContact, PostalTradeAddress, URIUniversalCommunication,
+    // SpecifiedTaxRegistration.
+    // Les identifiants sont conditionnels : un tiers etabli hors de France n'a
+    // ni SIREN, ni SIRET, ni numero de TVA francais, et une personne physique
+    // n'a aucun des trois.
+    // BT-31 et BT-32 se distinguent par @schemeID (VA / FC) et non par un
+    // conteneur different comme le TaxScheme d'UBL.
+    // ========================================================================
+    partyFragment: (p, ind, opts) => {
+        opts = opts || {};
+        const t = ind;
+        const siret = p.siren ? p.siren + (p.nic || '00001') : null;
+        let x = '';
+        if (siret) x += `\n${t}<ram:GlobalID schemeID="0009">${xmlEsc(siret)}</ram:GlobalID>`;
+        x += `\n${t}<ram:Name>${xmlEsc(p.legalName || p.name)}</ram:Name>`;
+        if (p.siren || (p.name && p.legalName && p.name !== p.legalName)) {
+            x += `\n${t}<ram:SpecifiedLegalOrganization>`;
+            if (p.siren) x += `\n${t}\t<ram:ID schemeID="0002">${xmlEsc(p.siren)}</ram:ID>`;
+            if (p.name && p.legalName && p.name !== p.legalName) {
+                x += `\n${t}\t<ram:TradingBusinessName>${xmlEsc(p.name)}</ram:TradingBusinessName>`;
+            }
+            x += `\n${t}</ram:SpecifiedLegalOrganization>`;
+        }
+        if (p.address) {
+            x += `\n${t}<ram:PostalTradeAddress>`
+               + `\n${t}\t<ram:PostcodeCode>${xmlEsc(p.address.zip)}</ram:PostcodeCode>`
+               + `\n${t}\t<ram:LineOne>${xmlEsc(p.address.street)}</ram:LineOne>`
+               + `\n${t}\t<ram:CityName>${xmlEsc(p.address.city)}</ram:CityName>`
+               + `\n${t}\t<ram:CountryID>${xmlEsc(p.address.country)}</ram:CountryID>`
+               + `\n${t}</ram:PostalTradeAddress>`;
+        }
+        if (opts.endpoint !== false) {
+            x += `\n${t}<ram:URIUniversalCommunication>`
+               + `\n${t}\t<ram:URIID schemeID="${xmlEsc(p.endpointScheme || '0225')}">${xmlEsc(p.endpointId || p.siren)}</ram:URIID>`
+               + `\n${t}</ram:URIUniversalCommunication>`;
+        }
+        if (p.vatNumber) {
+            x += `\n${t}<ram:SpecifiedTaxRegistration>`
+               + `\n${t}\t<ram:ID schemeID="VA">${xmlEsc(p.vatNumber)}</ram:ID>`
+               + `\n${t}</ram:SpecifiedTaxRegistration>`;
+        }
+        if (p.taxRegistrationId) {
+            x += `\n${t}<ram:SpecifiedTaxRegistration>`
+               + `\n${t}\t<ram:ID schemeID="FC">${xmlEsc(p.taxRegistrationId)}</ram:ID>`
+               + `\n${t}</ram:SpecifiedTaxRegistration>`;
+        }
+        return x;
+    },
+
+    // ========================================================================
+    // 5. ApplicableHeaderTradeAgreement
+    // Sequence XSD : BuyerReference, SellerTradeParty, BuyerTradeParty,
+    // SellerTaxRepresentativeTradeParty, BuyerOrderReferencedDocument,
+    // AdditionalReferencedDocument.
+    // BG-24 : ram:Name porte la valeur BT-123 de la liste fermee francaise
+    // (LISIBLE, BON_COMMANDE, BON_LIVRAISON...). ram:TypeCode 916 identifie
+    // une piece jointe, la ou 130 est reserve a BT-18.
+    // ========================================================================
+    getAgreement: (buyerReference, supplier, buyer, poNumber, attachments) => `
+\t\t<ram:ApplicableHeaderTradeAgreement>
+\t\t\t<ram:BuyerReference>${xmlEsc(buyerReference)}</ram:BuyerReference>
+\t\t\t<ram:SellerTradeParty>${CIITemplates.partyFragment(supplier, '\t\t\t\t')}
+\t\t\t</ram:SellerTradeParty>
+\t\t\t<ram:BuyerTradeParty>${CIITemplates.partyFragment(buyer, '\t\t\t\t')}
+\t\t\t</ram:BuyerTradeParty>${poNumber ? `
+\t\t\t<ram:BuyerOrderReferencedDocument>
+\t\t\t\t<ram:IssuerAssignedID>${xmlEsc(poNumber)}</ram:IssuerAssignedID>
+\t\t\t</ram:BuyerOrderReferencedDocument>` : ''}${(attachments || []).map((att) => `
+\t\t\t<ram:AdditionalReferencedDocument>
+\t\t\t\t<ram:IssuerAssignedID>${xmlEsc(att.id)}</ram:IssuerAssignedID>
+\t\t\t\t<ram:TypeCode>916</ram:TypeCode>
+\t\t\t\t<ram:Name>${xmlEsc(att.description || 'DOCUMENT_ANNEXE')}</ram:Name>
+\t\t\t\t<ram:AttachmentBinaryObject mimeCode="${xmlEsc(att.mimeCode || 'application/pdf')}" filename="${xmlEsc(att.filename)}">${att.base64}</ram:AttachmentBinaryObject>
+\t\t\t</ram:AdditionalReferencedDocument>`).join('')}
+\t\t</ram:ApplicableHeaderTradeAgreement>`,
+
+    // ========================================================================
+    // 6. ApplicableHeaderTradeDelivery
+    // Sequence XSD : ShipToTradeParty, ActualDeliverySupplyChainEvent,
+    // DespatchAdviceReferencedDocument.
+    // Le bloc reste obligatoire meme vide : il est emis sans enfant lorsque
+    // aucune donnee de livraison n'est disponible.
+    // ========================================================================
+    getDelivery: (delivery, despatchId) => {
+        const parts = [];
+        if (delivery && (delivery.name || delivery.address)) {
+            const sh = {
+                legalName: delivery.name || null,
+                name: null,
+                siren: null,
+                address: delivery.address || null
+            };
+            parts.push(`\n\t\t\t<ram:ShipToTradeParty>${CIITemplates.partyFragment(sh, '\t\t\t\t', { endpoint: false })}\n\t\t\t</ram:ShipToTradeParty>`);
+        }
+        if (delivery && delivery.date) {
+            parts.push(`\n\t\t\t<ram:ActualDeliverySupplyChainEvent>`
+                + `\n\t\t\t\t<ram:OccurrenceDateTime>`
+                + `\n\t\t\t\t\t<udt:DateTimeString format="102">${CIITemplates.d8(delivery.date)}</udt:DateTimeString>`
+                + `\n\t\t\t\t</ram:OccurrenceDateTime>`
+                + `\n\t\t\t</ram:ActualDeliverySupplyChainEvent>`);
+        }
+        if (despatchId) {
+            parts.push(`\n\t\t\t<ram:DespatchAdviceReferencedDocument>`
+                + `\n\t\t\t\t<ram:IssuerAssignedID>${xmlEsc(despatchId)}</ram:IssuerAssignedID>`
+                + `\n\t\t\t</ram:DespatchAdviceReferencedDocument>`);
+        }
+        return parts.length
+            ? `\n\t\t<ram:ApplicableHeaderTradeDelivery>${parts.join('')}\n\t\t</ram:ApplicableHeaderTradeDelivery>`
+            : `\n\t\t<ram:ApplicableHeaderTradeDelivery/>`;
+    },
+
+    // ========================================================================
+    // 7. ApplicableHeaderTradeSettlement
+    // Sequence XSD : CreditorReferenceID, PaymentReference, TaxCurrencyCode,
+    // InvoiceCurrencyCode, PayeeTradeParty, SpecifiedTradeSettlementPaymentMeans,
+    // ApplicableTradeTax, BillingSpecifiedPeriod, SpecifiedTradeAllowanceCharge,
+    // SpecifiedTradePaymentTerms, SpecifiedTradeSettlementHeaderMonetarySummation,
+    // InvoiceReferencedDocument, ReceivableSpecifiedTradeAccountingAccount.
+    //
+    // BT-6 TaxCurrencyCode precede BT-5 InvoiceCurrencyCode : ordre XSD, non
+    // ordre numerique.
+    // ========================================================================
+    getSettlement: (o) => {
+        const t = o.totals;
+        const withIban = (o.meansCode === '30' || o.meansCode === '58');
+        let x = `\n\t\t<ram:ApplicableHeaderTradeSettlement>`;
+
+        if (o.taxCurrency) x += `\n\t\t\t<ram:TaxCurrencyCode>${o.taxCurrency}</ram:TaxCurrencyCode>`;
+        x += `\n\t\t\t<ram:InvoiceCurrencyCode>${o.currency}</ram:InvoiceCurrencyCode>`;
+
+        // BG-10 : beneficiaire du paiement lorsqu'il n'est pas le vendeur.
+        if (o.payee) {
+            x += `\n\t\t\t<ram:PayeeTradeParty>${CIITemplates.partyFragment(o.payee, '\t\t\t\t', { endpoint: false })}\n\t\t\t</ram:PayeeTradeParty>`;
+        }
+
+        // BG-16 : obligatoire. BT-84 / BT-86 sur les codes 30 et 58.
+        x += `\n\t\t\t<ram:SpecifiedTradeSettlementPaymentMeans>`
+           + `\n\t\t\t\t<ram:TypeCode>${o.meansCode}</ram:TypeCode>`;
+        if (withIban && o.iban) {
+            x += `\n\t\t\t\t<ram:PayeePartyCreditorFinancialAccount>`
+               + `\n\t\t\t\t\t<ram:IBANID>${xmlEsc(o.iban)}</ram:IBANID>`
+               + `\n\t\t\t\t</ram:PayeePartyCreditorFinancialAccount>`;
+            if (o.bic) {
+                x += `\n\t\t\t\t<ram:PayeeSpecifiedCreditorFinancialInstitution>`
+                   + `\n\t\t\t\t\t<ram:BICID>${xmlEsc(o.bic)}</ram:BICID>`
+                   + `\n\t\t\t\t</ram:PayeeSpecifiedCreditorFinancialInstitution>`;
+            }
+        }
+        x += `\n\t\t\t</ram:SpecifiedTradeSettlementPaymentMeans>`;
+
+        // BG-23 : ventilation TVA. Sequence XSD interne : CalculatedAmount,
+        // TypeCode, ExemptionReason, BasisAmount, CategoryCode,
+        // ExemptionReasonCode, RateApplicablePercent.
+        (o.taxSubtotals || []).forEach((s) => {
+            x += `\n\t\t\t<ram:ApplicableTradeTax>`
+               + `\n\t\t\t\t<ram:CalculatedAmount>${s.amount}</ram:CalculatedAmount>`
+               + `\n\t\t\t\t<ram:TypeCode>VAT</ram:TypeCode>`;
+            if (s.reason) x += `\n\t\t\t\t<ram:ExemptionReason>${xmlEsc(s.reason)}</ram:ExemptionReason>`;
+            x += `\n\t\t\t\t<ram:BasisAmount>${s.taxable}</ram:BasisAmount>`
+               + `\n\t\t\t\t<ram:CategoryCode>${s.category}</ram:CategoryCode>`;
+            if (s.code) x += `\n\t\t\t\t<ram:ExemptionReasonCode>${xmlEsc(s.code)}</ram:ExemptionReasonCode>`;
+            x += `\n\t\t\t\t<ram:RateApplicablePercent>${s.percent}</ram:RateApplicablePercent>`
+               + `\n\t\t\t</ram:ApplicableTradeTax>`;
+        });
+
+        // BG-20 / BG-21 : remises et frais de niveau document. La categorie de
+        // TVA y est obligatoire (BR-31, BR-37) et un motif ou un code doit etre
+        // present (BR-33, BR-38).
+        (o.allowanceCharges || []).forEach((ac) => {
+            x += `\n\t\t\t<ram:SpecifiedTradeAllowanceCharge>`
+               + `\n\t\t\t\t<ram:ChargeIndicator>`
+               + `\n\t\t\t\t\t<udt:Indicator>${ac.charge ? 'true' : 'false'}</udt:Indicator>`
+               + `\n\t\t\t\t</ram:ChargeIndicator>`;
+            if (ac.baseAmount) x += `\n\t\t\t\t<ram:BasisAmount>${ac.baseAmount}</ram:BasisAmount>`;
+            x += `\n\t\t\t\t<ram:ActualAmount>${ac.amount}</ram:ActualAmount>`;
+            if (ac.reasonCode) x += `\n\t\t\t\t<ram:ReasonCode>${xmlEsc(ac.reasonCode)}</ram:ReasonCode>`;
+            if (ac.reason) x += `\n\t\t\t\t<ram:Reason>${xmlEsc(ac.reason)}</ram:Reason>`;
+            x += `\n\t\t\t\t<ram:CategoryTradeTax>`
+               + `\n\t\t\t\t\t<ram:TypeCode>VAT</ram:TypeCode>`
+               + `\n\t\t\t\t\t<ram:CategoryCode>${ac.category || 'S'}</ram:CategoryCode>`
+               + `\n\t\t\t\t\t<ram:RateApplicablePercent>${ac.percent || '20.00'}</ram:RateApplicablePercent>`
+               + `\n\t\t\t\t</ram:CategoryTradeTax>`
+               + `\n\t\t\t</ram:SpecifiedTradeAllowanceCharge>`;
+        });
+
+        // BT-20 conditions de paiement, BT-9 date d'echeance.
+        x += `\n\t\t\t<ram:SpecifiedTradePaymentTerms>`
+           + `\n\t\t\t\t<ram:Description>${xmlEsc(o.paymentTerms)}</ram:Description>`;
+        if (o.dueDate) {
+            x += `\n\t\t\t\t<ram:DueDateDateTime>`
+               + `\n\t\t\t\t\t<udt:DateTimeString format="102">${CIITemplates.d8(o.dueDate)}</udt:DateTimeString>`
+               + `\n\t\t\t\t</ram:DueDateDateTime>`;
+        }
+        x += `\n\t\t\t</ram:SpecifiedTradePaymentTerms>`;
+
+        // BG-22 : totaux. ATTENTION, BT-108 ChargeTotalAmount precede BT-107
+        // AllowanceTotalAmount, et BT-114 RoundingAmount s'insere entre BT-110
+        // et BT-112. @currencyID n'apparait que sur ram:TaxTotalAmount, ou il
+        // est obligatoire ; BT-111 est une seconde occurrence exprimee dans la
+        // devise de comptabilisation.
+        x += `\n\t\t\t<ram:SpecifiedTradeSettlementHeaderMonetarySummation>`
+           + `\n\t\t\t\t<ram:LineTotalAmount>${t.lineExtension}</ram:LineTotalAmount>`;
+        if (parseFloat(t.charge) !== 0) x += `\n\t\t\t\t<ram:ChargeTotalAmount>${t.charge}</ram:ChargeTotalAmount>`;
+        if (parseFloat(t.allowance) !== 0) x += `\n\t\t\t\t<ram:AllowanceTotalAmount>${t.allowance}</ram:AllowanceTotalAmount>`;
+        x += `\n\t\t\t\t<ram:TaxBasisTotalAmount>${t.taxExclusive}</ram:TaxBasisTotalAmount>`
+           + `\n\t\t\t\t<ram:TaxTotalAmount currencyID="${o.currency}">${t.taxAmount}</ram:TaxTotalAmount>`;
+        if (o.taxCurrency && t.taxCurrencyAmount) {
+            x += `\n\t\t\t\t<ram:TaxTotalAmount currencyID="${o.taxCurrency}">${t.taxCurrencyAmount}</ram:TaxTotalAmount>`;
+        }
+        x += `\n\t\t\t\t<ram:GrandTotalAmount>${t.taxInclusive}</ram:GrandTotalAmount>`;
+        if (parseFloat(t.prepaid) !== 0) x += `\n\t\t\t\t<ram:TotalPrepaidAmount>${t.prepaid}</ram:TotalPrepaidAmount>`;
+        x += `\n\t\t\t\t<ram:DuePayableAmount>${t.payable}</ram:DuePayableAmount>`
+           + `\n\t\t\t</ram:SpecifiedTradeSettlementHeaderMonetarySummation>`;
+
+        // BG-3 : facture anterieure. FormattedIssueDateTime emploie qdt et non
+        // udt, particularite du CII.
+        if (o.precedingInvoice) {
+            x += `\n\t\t\t<ram:InvoiceReferencedDocument>`
+               + `\n\t\t\t\t<ram:IssuerAssignedID>${xmlEsc(o.precedingInvoice.id)}</ram:IssuerAssignedID>`;
+            if (o.precedingInvoice.date) {
+                x += `\n\t\t\t\t<ram:FormattedIssueDateTime>`
+                   + `\n\t\t\t\t\t<qdt:DateTimeString format="102">${CIITemplates.d8(o.precedingInvoice.date)}</qdt:DateTimeString>`
+                   + `\n\t\t\t\t</ram:FormattedIssueDateTime>`;
+            }
+            x += `\n\t\t\t</ram:InvoiceReferencedDocument>`;
+        }
+
+        x += `\n\t\t</ram:ApplicableHeaderTradeSettlement>`;
+        return x;
+    },
+
+    getFooter: () => `
+\t</rsm:SupplyChainTradeTransaction>
+</rsm:CrossIndustryInvoice>`
+};

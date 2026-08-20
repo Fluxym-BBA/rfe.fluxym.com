@@ -525,3 +525,80 @@ Les deux portent en clair qu'ils sont **fictifs et produits à des fins de test*
 - Interface : signaler visuellement que le vendeur ou l'acheteur est imposé par le cas d'usage (`forceSupplier` / `forceBuyer`).
 - `orderReference` figé à `PO-1001` dans `buildRenderData`, cohérent avec l'XML.
 - Mise en page : sur une facture courte, le cadre du tableau descend jusqu'au bloc de totaux et laisse un vide central.
+
+---
+
+## 11. Lot 5a — génération CII D22B (21/08/2026)
+
+Le générateur ne produisait qu'une syntaxe : UBL 2.1. Il en produit désormais deux. Ce lot ajoute le message **UN/CEFACT CrossIndustryInvoice, version D22B**, qui est la syntaxe attendue par les plateformes issues du monde Factur-X et le socle obligatoire du lot 5b (l'emballage PDF/A-3).
+
+### 11.1 Un pivot partagé, et non un second calcul
+
+Le point d'architecture décisif. Le CII **ne recalcule rien**. Il consomme le même modèle pivot que le PDF lisible, enrichi des données purement techniques que le lisible n'affiche pas :
+
+| Donnée ajoutée au pivot | Pourquoi le lisible n'en avait pas besoin |
+|---|---|
+| `customizationId` (BT-24) | identifiant de spécification, invisible pour un lecteur humain |
+| `notesRaw` (BT-21 + BT-22) | le lisible **retire** le préfixe technique `#XXX#` ; le CII en a besoin |
+| `taxCurrency`, `taxCurrencyAmount` (BT-6, BT-111) | le lisible affiche une mention en clair, pas un montant structuré |
+| `paymentMeansCode` (BT-81) | le pivot ne portait que le libellé humain (« Virement ») |
+| `allowanceCharges` détaillées (BG-20, BG-21) | le lisible n'affiche que les totaux |
+| `attachments`, `despatchId` (BG-24, BT-16) | non représentables sur une page |
+| `vatCategory` par ligne (BT-151) | le lisible n'affiche que le taux |
+| `payee` restreint (BG-10) | EN 16931 n'admet ni adresse ni numéro de TVA sur le bénéficiaire |
+
+Conséquence directe : **un écart de montant entre l'UBL et le CII d'un même cas serait un bug, jamais une différence de format.** `CIIGenerator.verify()` le contrôle à chaque génération et journalise toute incohérence en console.
+
+### 11.2 Les cinq différences structurelles avec l'UBL
+
+Ce sont les pièges du format, et chacun est une cause classique de rejet.
+
+1. **L'avoir ne change pas de racine.** UBL bascule de `<Invoice>` à `<CreditNote>`. CII conserve `<rsm:CrossIndustryInvoice>` et se signale par le seul `ram:TypeCode` valant `381`. C'est visible en clair dans le pack de l'avoir, qui livre les deux syntaxes côte à côte.
+2. **`@currencyID` disparaît des lignes.** En UBL il est obligatoire sur chaque montant. En CII la devise est héritée de `ram:InvoiceCurrencyCode` et l'attribut ne subsiste **que** sur `ram:TaxTotalAmount`, où il devient obligatoire. BT-111 est une seconde occurrence de ce même élément, dans la devise de comptabilisation.
+3. **BT-108 précède BT-107.** Dans `ram:SpecifiedTradeSettlementHeaderMonetarySummation`, les frais (`ChargeTotalAmount`) passent **avant** les remises (`AllowanceTotalAmount`). C'est l'inverse de l'ordre UBL et l'inverse de l'ordre numérique des BT.
+4. **BT-6 précède BT-5.** `TaxCurrencyCode` avant `InvoiceCurrencyCode`, là encore par ordre XSD.
+5. **Les lignes viennent avant les parties.** `rsm:SupplyChainTradeTransaction` commence par les `IncludedSupplyChainTradeLineItem`, puis vient le vendeur. UBL fait l'inverse.
+
+Deux pièges supplémentaires, rencontrés en développement :
+
+- **`ram:LineTotalAmount` existe à deux niveaux** : dans chaque ligne et dans le total du document. Chercher ce nom sur le document entier renvoie la première ligne au lieu du total. Le contrôle `verify()` borne donc sa recherche au bloc des totaux — la première version du contrôle signalait un faux écart pour cette seule raison.
+- **`ram:FormattedIssueDateTime` emploie le préfixe `qdt:`** et non `udt:`, seule exception parmi toutes les dates du document.
+
+### 11.3 Ce qui est produit
+
+Une case à cocher supplémentaire, décochée par défaut : *« Même facture en syntaxe UN/CEFACT CII D22B »*.
+
+| Artefact | Condition |
+|---|---|
+| `..._CII.xml` | option cochée |
+| `..._CII_avec_3_PJ.xml` | option cochée **et** pièces jointes demandées |
+| `..._Facture_Litige_CII.xml` + `..._Avoir_CII.xml` | pack avoir |
+| `..._Facture_Originale_380_CII.xml` + `..._Facture_Rectificative_384_CII.xml` | pack rectificative |
+
+**Couverture : 56 des 57 cas, soit 58 documents CII.** Le seul cas exclu est le pack **B** (Master Data + avoir), qui n'a pas d'entrée dans `getLineData` : ses lignes proviennent directement du `switch`. C'est l'écart d'architecture préexistant qui le prive déjà de lisible, et non une limite du CII.
+
+### 11.4 Écarts relevés dans le mapping de référence
+
+Le mapping BT → XPath a été obtenu auprès de @RFE_Expert, à partir de l'annexe CII de la XP Z12-012 V1.4. Deux points ont dû être arbitrés contre sa première réponse :
+
+- **Ordre de `TradePartyType`** : `ram:DefinedTradeContact` se place **avant** `ram:PostalTradeAddress`, et non après `ram:URIUniversalCommunication`. Écart confirmé et corrigé par l'expert après vérification. Sans objet en pratique aujourd'hui (aucun contact n'est émis), mais structurant dès qu'un BG-6 sera ajouté.
+- **Code EAS français** : la réponse mentionnait `0192`, qui est le schéma norvégien. Le générateur conserve `0225`, valeur déjà utilisée et validée côté UBL.
+
+Confirmations utiles obtenues : les 4 URI de namespaces, BT-23 qui accueille le cadre de facturation français (`S1`, `B1`, `M1`…) **sans URN ni préfixe**, et BT-24 dont la valeur CTC-FR est **identique en CII et en UBL** — l'identifiant de spécification est une donnée sémantique, indépendante de la syntaxe.
+
+### 11.5 Validation
+
+- **58 documents CII** générés : 0 mal formé, **0 erreur d'ordre** sur **27 séquences XSD** contrôlées récursivement (y compris les séquences imbriquées des parties, des remises et des totaux).
+- Les **4 namespaces** sont conformes sur les 58 documents.
+- **54 paires UBL / CII comparées montant par montant** : BT-106 à BT-115, la ventilation BG-23 complète (catégorie, base, montant, taux) et le nombre de lignes. **0 écart.**
+- **42 contrôles ciblés, 0 échec** : T4 (deux `TaxTotalAmount`, USD puis EUR, BT-111 = 1 841,62 EUR), T6 (ordre BT-108 / BT-107, catégorie de TVA obligatoire sur chaque remise, indicateurs `false` puis `true`), avoir (racine inchangée, TypeCode 381, `qdt:` sur la date de référence, BT-9 absent), les 4 régimes T1/T2/T7/T8 (BT-118, BT-120, BT-121, taux à 0,00), les notes (aucun préfixe `#XXX#` résiduel, `SubjectCode` extraits : BAR, PMT, PMD, AAB, AAI), toutes les dates en `AAAAMMJJ format="102"`, et les pièces jointes (3 occurrences, `TypeCode` 916, BT-123 dans la liste fermée, binaires PDF valides, BT-16 présent avec et absent sans).
+- **Non-régression** : les **57 cas produisent un XML UBL identique bit à bit** et les **78 artefacts du lisible sont inchangés**, bien que le pivot ait été enrichi.
+
+### 11.6 Reste à faire
+
+- **Lot 5b — Factur-X** : emballage PDF/A-3. Écriture maison, sans dépendance externe, en étendant le moteur PDF existant. Points durs identifiés : `/AFRelationship` valant `/Data` (et non `/Alternative`, hérité de ZUGFeRD 1.x), le fichier embarqué nommé exactement `factur-x.xml`, les métadonnées XMP de l'extension Factur-X **accompagnées de leur schéma d'extension PDF/A** faute de quoi veraPDF rejette, l'`OutputIntent` avec profil ICC, et le tableau `/AF` au niveau du catalogue.
+- **Question ouverte pour le lot 5b** : le PDF lisible ne peut pas être une pièce jointe de lui-même. En Factur-X, `LISIBLE` disparaît donc du BG-24, le PDF **étant** le document lisible. Les bons de commande et de livraison peuvent alors être soit en base64 dans le XML, soit des fichiers embarqués supplémentaires du PDF/A-3 — les deux se défendent, à trancher.
+- Pack **B** : lui donner une entrée dans `getLineData` lui apporterait d'un coup le lisible **et** le CII.
+- Validation externe du CII au validateur FNFE-MPE, en complément des contrôles internes.
+- Un moteur Schematron existe désormais sur le site (`js/schematron-engine.js`, `data/schematron/`) : il pourrait valider le CII directement en ligne, sous réserve d'y charger les règles CII, distinctes des règles UBL.
+- Les items du lot 4 restent ouverts (cas assujetti unique externe, blocs tiers payeur et facturant dans le lisible, `payeeType` non rendus, variante multi-taux de T6, mise en page des factures courtes).

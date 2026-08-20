@@ -252,6 +252,10 @@
                                     <input type="checkbox" id="opt-annexes">
                                     <span>Bon de commande et bon de livraison fictifs en pièces jointes <code>multi-BG-24</code></span>
                                 </label>
+                                <label class="gen-check" for="opt-cii">
+                                    <input type="checkbox" id="opt-cii">
+                                    <span>Même facture en syntaxe UN/CEFACT <code>CII D22B</code> (socle du Factur-X)</span>
+                                </label>
                             </div>
                             <p class="gen-hint" id="artifacts-hint"></p>
                         </div>
@@ -377,8 +381,10 @@
     <script src="./js/animations.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
     <script src="./data/ubl-templates.js"></script>
+    <script src="./data/cii-templates.js"></script>
     <script src="./js/pdf-lisible.js"></script>
     <script src="./js/pdf-annexes.js"></script>
+    <script src="./js/cii-generator.js"></script>
     <script src="./js/ubl-generator.js"></script>
     <script src="./js/generator-ui.js"></script>
 </body>

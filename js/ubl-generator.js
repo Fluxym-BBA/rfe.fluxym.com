@@ -995,14 +995,18 @@ const UBLGenerator = {
             ublWithPdf: read('opt-ubl-pdf', true),
             pdf: read('opt-pdf', true),
             // Variante multi-pieces jointes : LISIBLE + BON_COMMANDE + BON_LIVRAISON
-            annexes: read('opt-annexes', false)
+            annexes: read('opt-annexes', false),
+            // Syntaxe UN/CEFACT CII D22B : socle du futur Factur-X, et
+            // demonstration qu'une meme facture EN 16931 s'ecrit dans deux
+            // syntaxes sans changer d'un centime.
+            cii: read('opt-cii', false)
         };
         if (!this.supportsPdf(usecase)) {
             opts.ublWithPdf = false;
             opts.pdf = false;
             opts.annexes = false;
         }
-        if (!opts.ubl && !opts.ublWithPdf && !opts.pdf && !opts.annexes) opts.ubl = true;
+        if (!opts.ubl && !opts.ublWithPdf && !opts.pdf && !opts.annexes && !opts.cii) opts.ubl = true;
         return opts;
     },
 
@@ -1487,12 +1491,80 @@ const UBLGenerator = {
                             price: line.price,
                             amount: line.amount,
                             vatPercent: vat.percent,
+                            // BT-151 : le lisible n'affiche que le taux, mais le CII
+                            // exige la categorie dans ram:ApplicableTradeTax.
+                            vatCategory: vat.category,
                             unitCode: line.unitCode || "C62",
                             // BG-27 / BG-28 rendus en sous-lignes du tableau
                             allowances: line.allowances || null
                         };
                     })
                 };
+            };
+
+            // ==========================================
+            // FONCTION INTERNE : buildCiiPivot
+            // ------------------------------------------
+            // Enrichit le pivot du lisible des donnees purement techniques que
+            // le PDF n'affiche pas mais que le CII exige : devise de
+            // comptabilisation, code du moyen de paiement, remises de document
+            // detaillees, identifiant de specification, et notes NON nettoyees.
+            //
+            // Ce dernier point est le plus subtil. Une note interne s'ecrit
+            // "#AAI#texte" : UBL concatene le prefixe au texte dans cbc:Note,
+            // le lisible le supprime, mais CII le veut isole dans
+            // ram:SubjectCode. Les notes brutes sont donc transmises telles
+            // quelles, a charge pour CIITemplates.splitNote de les separer.
+            // ==========================================
+            var buildCiiPivot = function(numFacture, typeCode, overrideLineData, poNumber, attachments, refOriginale) {
+                var p = buildRenderData(numFacture, typeCode, overrideLineData);
+                if (!p) return null;
+                var ld = overrideLineData || self.getLineData(usecase);
+
+                // BT-24 : identifiant de specification, identique en UBL et en CII.
+                p.customizationId = self.getCustomizationId(usecase);
+
+                // BT-21 + BT-22 : notes brutes, prefixe technique conserve.
+                p.notesRaw = notes;
+
+                // BT-6 et BT-111 : seuls montants autorises dans une autre devise
+                // que BT-5. Le calcul reprend celui de la note de taux de change,
+                // afin que le XML et la mention lue par l'humain concordent.
+                p.taxCurrency = taxCur;
+                p.taxCurrencyAmount = (taxCur && cfg.fxRate)
+                    ? (Math.round((parseFloat(p.taxAmount) / parseFloat(cfg.fxRate)) * 100) / 100).toFixed(2)
+                    : null;
+
+                // BT-81 : le pivot du lisible ne porte que le libelle humain.
+                p.paymentMeansCode = cfg.paymentMeans || "30";
+
+                // BG-20 / BG-21 : le lisible n'a besoin que des totaux, le CII
+                // veut chaque remise avec son motif et sa categorie de TVA.
+                p.allowanceCharges = ld.allowanceCharges || [];
+
+                // BG-10 : restreint a BT-59, BT-60 et BT-61. Ni adresse, ni
+                // numero de TVA ne sont admis sur le beneficiaire du paiement.
+                p.payee = (cfg.payeeType === "factor" && factor)
+                    ? { legalName: factor.name, name: null, siren: factor.siren, nic: factor.nic, address: null }
+                    : null;
+
+                // BG-24 et BT-16 : le bon de livraison joint vaut reference
+                // d'avis d'expedition, exactement comme en UBL.
+                p.attachments = attachments || [];
+                var bl = p.attachments.filter(function(a) { return a.description === "BON_LIVRAISON"; })[0];
+                p.despatchId = bl ? (bl.docNumber || null) : null;
+
+                // BT-9 : une date d'echeance n'a pas de sens sur un avoir.
+                if (typeCode === "381") p.dueDate = null;
+
+                // BG-3 : la reference explicite prime, exactement comme dans
+                // buildXML, ou elle alimente getBillingReference.
+                if (refOriginale) {
+                    p.precedingInvoice = { id: refOriginale, date: precedingDate || dateFactureXML };
+                }
+
+                if (poNumber) p.orderReference = poNumber;
+                return p;
             };
 
             // ==========================================
@@ -1521,6 +1593,15 @@ const UBLGenerator = {
                     var rectData = self.getLineData("nominal-litige-rectificative");
                     zip.file(rectNum + "_Facture_Rectificative_384" + ".xml",
                         buildXML(rectNum, "384", false, originalNum, null, rectData));
+
+                    // Les deux memes documents en syntaxe CII, pour comparer
+                    // l'expression d'une rectification dans les deux formats.
+                    if (self.getArtifactOptions(usecase).cii) {
+                        var pOrig = buildCiiPivot(originalNum, "380", originalData, null, null, null);
+                        if (pOrig) zip.file(originalNum + "_Facture_Originale_380_CII.xml", CIIGenerator.build(pOrig));
+                        var pRect = buildCiiPivot(rectNum, "384", rectData, null, null, originalNum);
+                        if (pRect) zip.file(rectNum + "_Facture_Rectificative_384_CII.xml", CIIGenerator.build(pRect));
+                    }
 
                     zip.generateAsync({ type: "blob" }).then(function(content) {
                         var url = window.URL.createObjectURL(content);
@@ -1567,6 +1648,18 @@ const UBLGenerator = {
                         buildXML(originalInvoiceNum, "380", false, null, poNumber));
                     zip.file(creditNoteNum + "_Cas_" + usecase + "_Avoir" + ".xml",
                         buildXML(creditNoteNum, "381", true, originalInvoiceNum, poNumber, creditData));
+
+                    // C'est ici que la difference structurelle entre les deux
+                    // syntaxes se voit le mieux : l'avoir UBL change d'element
+                    // racine (CreditNote au lieu d'Invoice) alors que l'avoir CII
+                    // conserve rsm:CrossIndustryInvoice et se signale par le seul
+                    // ram:TypeCode 381.
+                    if (self.getArtifactOptions(usecase).cii) {
+                        var pFac = buildCiiPivot(originalInvoiceNum, "380", null, poNumber, null, null);
+                        if (pFac) zip.file(originalInvoiceNum + "_Cas_" + usecase + "_Facture_Litige_CII.xml", CIIGenerator.build(pFac));
+                        var pAv = buildCiiPivot(creditNoteNum, "381", creditData, poNumber, null, originalInvoiceNum);
+                        if (pAv) zip.file(creditNoteNum + "_Cas_" + usecase + "_Avoir_CII.xml", CIIGenerator.build(pAv));
+                    }
 
                     zip.generateAsync({ type: "blob" }).then(function(content) {
                         var url = window.URL.createObjectURL(content);
@@ -1656,6 +1749,42 @@ const UBLGenerator = {
                         blob: new Blob([buildXML(numeroFacture, invoiceTypeCode, false, precedingRefId, "PO-1001", null, allAtt)],
                             { type: "application/xml" })
                     });
+                }
+
+                // Meme facture, syntaxe UN/CEFACT CII D22B. Le pivot etant
+                // partage avec l'UBL, un ecart de montant entre les deux fichiers
+                // serait un bug et non une difference de format : CIIGenerator.verify
+                // le controle a chaque generation.
+                if (opts.cii) {
+                    var ciiPivot = buildCiiPivot(numeroFacture, invoiceTypeCode, null, "PO-1001", null);
+                    if (ciiPivot) {
+                        var ciiXml = CIIGenerator.build(ciiPivot);
+                        var ciiErr = CIIGenerator.verify(ciiPivot, ciiXml);
+                        if (ciiErr.length) console.warn("CII : incoherences detectees", ciiErr);
+                        artifacts.push({
+                            name: baseName + "_CII.xml",
+                            blob: new Blob([ciiXml], { type: "application/xml" })
+                        });
+                    }
+                }
+
+                if (opts.cii && opts.annexes && lisibleAtt && annexDocs) {
+                    var ciiAtt = [lisibleAtt].concat(annexDocs.map(function(a) {
+                        return {
+                            id: numeroFacture + "-" + a.description,
+                            description: a.description,
+                            filename: a.filename,
+                            base64: a.base64,
+                            docNumber: a.number
+                        };
+                    }));
+                    var ciiPivotPj = buildCiiPivot(numeroFacture, invoiceTypeCode, null, "PO-1001", ciiAtt);
+                    if (ciiPivotPj) {
+                        artifacts.push({
+                            name: baseName + "_CII_avec_3_PJ.xml",
+                            blob: new Blob([CIIGenerator.build(ciiPivotPj)], { type: "application/xml" })
+                        });
+                    }
                 }
 
                 if (opts.pdf && pdfDoc) {
