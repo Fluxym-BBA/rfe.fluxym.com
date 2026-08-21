@@ -82,21 +82,54 @@ const CIITemplates = {
     // SpecifiedLineTradeSettlement.
     // Aucun @currencyID : la devise vient de ram:InvoiceCurrencyCode.
     // ========================================================================
+    // BG-25 Ligne de facture, version CII.
+    // Sequences imposees :
+    //   ram:SpecifiedTradeProduct : GlobalID (BT-157), SellerAssignedID
+    //     (BT-155), BuyerAssignedID (BT-156), Name (BT-153), Description
+    //     (BT-154), DesignatedProductClassification (BT-158).
+    //     Contrairement a UBL, le nom precede ici la description.
+    //   ram:SpecifiedLineTradeAgreement : GrossPriceProductTradePrice AVANT
+    //     NetPriceProductTradePrice. La remise unitaire (BT-147) est portee par
+    //     ram:AppliedTradeAllowanceCharge DANS le prix brut, alors qu'UBL la
+    //     place dans cac:Price. C'est le piege classique du mapping.
+    //   ram:SpecifiedLineTradeSettlement : ApplicableTradeTax,
+    //     BillingSpecifiedPeriod (BG-26), SpecifiedTradeAllowanceCharge,
+    //     MonetarySummation, ReceivableSpecifiedTradeAccountingAccount (BT-133).
     getLineItem: (line, vat, orderRef) => `
 \t\t<ram:IncludedSupplyChainTradeLineItem>
 \t\t\t<ram:AssociatedDocumentLineDocument>
-\t\t\t\t<ram:LineID>${line.id}</ram:LineID>
+\t\t\t\t<ram:LineID>${line.id}</ram:LineID>${line.note ? `
+\t\t\t\t<ram:IncludedNote>
+\t\t\t\t\t<ram:Content>${xmlEsc(line.note)}</ram:Content>
+\t\t\t\t</ram:IncludedNote>` : ''}
 \t\t\t</ram:AssociatedDocumentLineDocument>
-\t\t\t<ram:SpecifiedTradeProduct>${line.ref ? `
-\t\t\t\t<ram:SellerAssignedID>${xmlEsc(line.ref)}</ram:SellerAssignedID>` : ''}
-\t\t\t\t<ram:Name>${xmlEsc(line.desc)}</ram:Name>
+\t\t\t<ram:SpecifiedTradeProduct>${line.gtin ? `
+\t\t\t\t<ram:GlobalID schemeID="0160">${xmlEsc(line.gtin)}</ram:GlobalID>` : ''}${line.ref ? `
+\t\t\t\t<ram:SellerAssignedID>${xmlEsc(line.ref)}</ram:SellerAssignedID>` : ''}${line.buyerItemRef ? `
+\t\t\t\t<ram:BuyerAssignedID>${xmlEsc(line.buyerItemRef)}</ram:BuyerAssignedID>` : ''}
+\t\t\t\t<ram:Name>${xmlEsc(line.desc)}</ram:Name>${line.description ? `
+\t\t\t\t<ram:Description>${xmlEsc(line.description)}</ram:Description>` : ''}${line.classification ? `
+\t\t\t\t<ram:DesignatedProductClassification>
+\t\t\t\t\t<ram:ClassCode listID="${xmlEsc(line.classification.listId)}">${xmlEsc(line.classification.code)}</ram:ClassCode>
+\t\t\t\t</ram:DesignatedProductClassification>` : ''}
 \t\t\t</ram:SpecifiedTradeProduct>
 \t\t\t<ram:SpecifiedLineTradeAgreement>${orderRef ? `
 \t\t\t\t<ram:BuyerOrderReferencedDocument>
 \t\t\t\t\t<ram:LineID>${xmlEsc(orderRef.line)}</ram:LineID>
-\t\t\t\t</ram:BuyerOrderReferencedDocument>` : ''}
+\t\t\t\t</ram:BuyerOrderReferencedDocument>` : ''}${line.grossPrice ? `
+\t\t\t\t<ram:GrossPriceProductTradePrice>
+\t\t\t\t\t<ram:ChargeAmount>${line.grossPrice}</ram:ChargeAmount>${line.baseQuantity ? `
+\t\t\t\t\t<ram:BasisQuantity unitCode="${line.unitCode || 'C62'}">${line.baseQuantity}</ram:BasisQuantity>` : ''}
+\t\t\t\t\t<ram:AppliedTradeAllowanceCharge>
+\t\t\t\t\t\t<ram:ChargeIndicator>
+\t\t\t\t\t\t\t<udt:Indicator>false</udt:Indicator>
+\t\t\t\t\t\t</ram:ChargeIndicator>
+\t\t\t\t\t\t<ram:ActualAmount>${line.priceDiscount}</ram:ActualAmount>
+\t\t\t\t\t</ram:AppliedTradeAllowanceCharge>
+\t\t\t\t</ram:GrossPriceProductTradePrice>` : ''}
 \t\t\t\t<ram:NetPriceProductTradePrice>
-\t\t\t\t\t<ram:ChargeAmount>${line.price}</ram:ChargeAmount>
+\t\t\t\t\t<ram:ChargeAmount>${line.price}</ram:ChargeAmount>${line.baseQuantity ? `
+\t\t\t\t\t<ram:BasisQuantity unitCode="${line.unitCode || 'C62'}">${line.baseQuantity}</ram:BasisQuantity>` : ''}
 \t\t\t\t</ram:NetPriceProductTradePrice>
 \t\t\t</ram:SpecifiedLineTradeAgreement>
 \t\t\t<ram:SpecifiedLineTradeDelivery>
@@ -107,7 +140,15 @@ const CIITemplates = {
 \t\t\t\t\t<ram:TypeCode>VAT</ram:TypeCode>
 \t\t\t\t\t<ram:CategoryCode>${vat.category}</ram:CategoryCode>
 \t\t\t\t\t<ram:RateApplicablePercent>${vat.percent}</ram:RateApplicablePercent>
-\t\t\t\t</ram:ApplicableTradeTax>${(line.allowances || []).map((ac) => `
+\t\t\t\t</ram:ApplicableTradeTax>${(line.period && (line.period.start || line.period.end)) ? `
+\t\t\t\t<ram:BillingSpecifiedPeriod>${line.period.start ? `
+\t\t\t\t\t<ram:StartDateTime>
+\t\t\t\t\t\t<udt:DateTimeString format="102">${CIITemplates.d8(line.period.start)}</udt:DateTimeString>
+\t\t\t\t\t</ram:StartDateTime>` : ''}${line.period.end ? `
+\t\t\t\t\t<ram:EndDateTime>
+\t\t\t\t\t\t<udt:DateTimeString format="102">${CIITemplates.d8(line.period.end)}</udt:DateTimeString>
+\t\t\t\t\t</ram:EndDateTime>` : ''}
+\t\t\t\t</ram:BillingSpecifiedPeriod>` : ''}${(line.allowances || []).map((ac) => `
 \t\t\t\t<ram:SpecifiedTradeAllowanceCharge>
 \t\t\t\t\t<ram:ChargeIndicator>
 \t\t\t\t\t\t<udt:Indicator>${ac.charge ? 'true' : 'false'}</udt:Indicator>
@@ -119,7 +160,10 @@ const CIITemplates = {
 \t\t\t\t</ram:SpecifiedTradeAllowanceCharge>`).join('')}
 \t\t\t\t<ram:SpecifiedTradeSettlementLineMonetarySummation>
 \t\t\t\t\t<ram:LineTotalAmount>${line.amount}</ram:LineTotalAmount>
-\t\t\t\t</ram:SpecifiedTradeSettlementLineMonetarySummation>
+\t\t\t\t</ram:SpecifiedTradeSettlementLineMonetarySummation>${line.accountingCost ? `
+\t\t\t\t<ram:ReceivableSpecifiedTradeAccountingAccount>
+\t\t\t\t\t<ram:ID>${xmlEsc(line.accountingCost)}</ram:ID>
+\t\t\t\t</ram:ReceivableSpecifiedTradeAccountingAccount>` : ''}
 \t\t\t</ram:SpecifiedLineTradeSettlement>
 \t\t</ram:IncludedSupplyChainTradeLineItem>`,
 

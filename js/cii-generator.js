@@ -220,6 +220,22 @@ const CIIGenerator = {
             }
         });
 
+        // Socle enrichi, niveau ligne. La regle de coherence du prix unitaire
+        // est la seule du lot qui soit reellement bloquante : BT-148 - BT-147
+        // doit egaler BT-146 au centime. On la recalcule ligne par ligne plutot
+        // que de faire confiance au generateur.
+        (p.lines || []).forEach(function(l) {
+            if (!l.grossPrice) return;
+            const net = Math.round((parseFloat(l.grossPrice) - parseFloat(l.priceDiscount)) * 100) / 100;
+            if (net.toFixed(2) !== parseFloat(l.price).toFixed(2)) {
+                errors.push('Ligne ' + l.id + ' : BT-148 ' + l.grossPrice + ' - BT-147 '
+                    + l.priceDiscount + ' = ' + net.toFixed(2) + ', attendu BT-146 ' + l.price);
+            }
+            if (xml.indexOf('<ram:GrossPriceProductTradePrice>') === -1) {
+                errors.push('Ligne ' + l.id + ' : BT-148 calcule mais prix brut absent du CII');
+            }
+        });
+
         // BR-S-08 : pour chaque taux, la base doit egaler la somme des lignes
         // concernees, augmentee des remises et frais de document.
         const sumTax = (p.taxSubtotals || []).reduce(function(t, s) {

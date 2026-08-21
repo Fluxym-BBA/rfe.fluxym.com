@@ -1047,6 +1047,79 @@ const UBLGenerator = {
 
     // Reference article vendeur (BT-155), derivee du libelle pour rester
     // stable et plausible sans avoir a saisir un referentiel article.
+    // Taux de remise commerciale unitaire applique a toutes les lignes.
+    // Il materialise BT-147 et BT-148 : sans lui, le couple prix brut / remise
+    // resterait vide et aucune plateforme ne pourrait etre recettee dessus.
+    LINE_DISCOUNT_RATE: 0.10,
+
+    // ==========================================
+    // enrichLine
+    // Derive les champs de ligne optionnels a partir des donnees deja portees
+    // par le cas d'usage. Le calcul est ici et NULLE PART AILLEURS : buildXML,
+    // buildCiiPivot et le lisible consomment le meme resultat. La triplication
+    // de la cascade de beneficiaire nous a deja coute trois fois le meme bug.
+    // ==========================================
+    enrichLine: function(line, ref, ctx) {
+        var out = {};
+        var price = parseFloat(line.price);
+
+        // BT-148 prix brut et BT-147 remise unitaire.
+        // La remise est obtenue PAR DIFFERENCE, jamais saisie : la regle de
+        // coherence BT-148 - BT-147 = BT-146 ne tolere aucun ecart d'arrondi.
+        // Les lignes a prix nul (debours, detaxe, ligne sans contrepartie) sont
+        // exclues : une remise sur un prix de zero n'a aucun sens.
+        // Sur un prix inferieur au centime, l'arrondi ramenerait la remise a
+        // zero. Emettre un bloc de remise a 0.00 n'apporterait aucune donnee
+        // testable et ferait tiquer les validateurs les plus stricts : on
+        // n'emet alors ni BT-147 ni BT-148, mais le reste de l'enrichissement
+        // de la ligne doit malgre tout se poursuivre.
+        var gross = (!isNaN(price) && price > 0)
+            ? Math.round(price * (1 + this.LINE_DISCOUNT_RATE) * 100) / 100
+            : 0;
+        var disc = Math.round((gross - price) * 100) / 100;
+        if (gross > 0 && disc > 0) {
+            out.grossPrice = gross.toFixed(2);
+            out.priceDiscount = disc.toFixed(2);
+            // BT-127 note de ligne. Elle documente la remise que l'on vient
+            // d'emettre : la mention est donc exacte, et non un texte de
+            // remplissage que le lecteur ne pourrait pas rapprocher du XML.
+            out.note = "Prix net apres remise commerciale de "
+                + Math.round(this.LINE_DISCOUNT_RATE * 100)
+                + " % sur le prix brut catalogue de " + out.grossPrice + " EUR HT.";
+            // BT-154 description de l'article. Elle ne recopie pas BT-153 : elle
+            // detaille la mecanique de prix, ce qui la rend identifiable a
+            // coup sur dans l'application receptrice.
+            out.description = line.desc + " - prix brut " + out.grossPrice
+                + " EUR HT, remise de " + out.priceDiscount
+                + " EUR, prix net " + line.price + " EUR HT.";
+        }
+
+        // BT-149 / BT-150 quantite de base du prix. La valeur 1 est la valeur
+        // par defaut implicite de la norme ; l'emettre explicitement permet de
+        // verifier que le recepteur la lit au lieu de la supposer.
+        out.baseQuantity = "1.00";
+
+        // BT-156 identifiant de l'article chez l'acheteur. Il se derive de la
+        // reference vendeur pour rester stable d'une generation a l'autre.
+        if (ref) out.buyerItemRef = "ACH-" + ref;
+
+        // BG-26 periode de la ligne et BT-133 imputation comptable de ligne,
+        // sous-compte de la reference BT-19 portee par l'acheteur.
+        if (ctx.period) out.period = ctx.period;
+        if (ctx.accountingCost) out.accountingCost = ctx.accountingCost + "-L" + line.id;
+
+        // BT-157 GTIN et BT-158 code de classification restent en attente : ils
+        // n'ont de sens que sur un bien identifie, et aucune ligne ne porte
+        // aujourd'hui d'unite de mesure permettant de distinguer un bien d'une
+        // prestation. Les emettre sur une ligne de conseil produirait une
+        // facture moins realiste, pas plus. Le gabarit les accepte des que le
+        // cas d'usage fournira line.gtin ou line.classification.
+        if (line.gtin) out.gtin = line.gtin;
+        if (line.classification) out.classification = line.classification;
+
+        return out;
+    },
+
     makeItemRef: function(desc, index) {
         var base = String(desc || "ART").replace(/[^A-Za-z]/g, "").toUpperCase().slice(0, 3);
         return (base || "ART") + "-" + ("0000" + index).slice(-4);
@@ -1493,6 +1566,10 @@ const UBLGenerator = {
                 : null;
             var accountName = payAccount.legalName || payAccount.name || null;
 
+            // Contexte d'enrichissement des lignes (BG-26, BT-133), passe a
+            // enrichLine par buildXML comme par buildRenderData.
+            var lineCtx = { period: invoicePeriod, accountingCost: accountingCost };
+
             var buildXML = function(numFacture, typeCode, asCreditNote, refOriginale, poNumber, overrideLineData, attachment) {
                 asCreditNote = asCreditNote || false;
                 refOriginale = refOriginale || null;
@@ -1620,6 +1697,7 @@ const UBLGenerator = {
                             }
                         );
                         ld.lines.forEach(function(line, idx) {
+                            var lineRef = line.ref || (line.noItemRef ? null : self.makeItemRef(line.desc, idx + 1));
                             xml += UBLTemplates.getInvoiceLine(
                                 line.id, line.qty, line.amount, line.desc, line.price,
                                 asCreditNote,
@@ -1628,8 +1706,11 @@ const UBLGenerator = {
                                 // l'execution. On les reunit ici.
                                 line.po ? { line: line.po.line, id: line.po.id || poNumber } : null,
                                 self.getLineVat(usecase, line.id), line.unitCode || "C62",
-                                line.ref || (line.noItemRef ? null : self.makeItemRef(line.desc, idx + 1)),
-                                { cur: docCur, allowances: line.allowances || null }
+                                lineRef,
+                                Object.assign(
+                                    { cur: docCur, allowances: line.allowances || null },
+                                    self.enrichLine(line, lineRef, lineCtx)
+                                )
                             );
                         });
                     }
@@ -1741,7 +1822,7 @@ const UBLGenerator = {
                     notes: pdfNotes,
                     lines: ld.lines.map(function(line, idx) {
                         var vat = self.getLineVat(usecase, line.id);
-                        return {
+                        var base = {
                             id: line.id,
                             ref: line.ref || self.makeItemRef(line.desc, idx + 1),
                             desc: line.desc,
@@ -1756,6 +1837,8 @@ const UBLGenerator = {
                             // BG-27 / BG-28 rendus en sous-lignes du tableau
                             allowances: line.allowances || null
                         };
+                        // Meme enrichissement que buildXML, meme source.
+                        return Object.assign(base, self.enrichLine(line, base.ref, lineCtx));
                     })
                 };
             };

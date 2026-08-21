@@ -379,13 +379,23 @@ const PDFLisible = {
         return 93 + 15 * (this._cardRefs(d).length - 4);
     },
 
+    // BT-147 / BT-148 : sous-ligne de detail du prix. Une facture reelle ne se
+    // contente pas d'afficher le prix net : elle montre le prix brut catalogue
+    // et la remise consentie, faute de quoi l'acheteur ne peut pas verifier que
+    // ses conditions commerciales ont bien ete appliquees.
+    _priceNotes: function (row) {
+        if (!row.grossPrice || !row.priceDiscount) return [];
+        return ['Prix brut ' + this._amt(row.grossPrice) + ' \u20ac  -  remise '
+            + this._amt(row.priceDiscount) + ' \u20ac  =  prix net ' + this._amt(row.price) + ' \u20ac'];
+    },
+
     _rowHeight: function (row) {
         const maxW = this.COL.unit - this.COL.desc - 12;
         const label = ((row.ref || '') + '  ' + (row.desc || '')).trim();
         const base = this._wrap(label, 7.7, maxW, 2, true).length === 1 ? 27 : 38;
         // BG-27 / BG-28 : chaque remise ou frais de niveau ligne occupe une
         // sous-ligne sous la designation.
-        return base + 11 * ((row.allowances || []).length);
+        return base + 11 * ((row.allowances || []).length + this._priceNotes(row).length);
     },
 
     // ============================================================
@@ -548,6 +558,10 @@ const PDFLisible = {
             // ligne (BT-131) les integre deja : les sous-lignes rendent le calcul
             // verifiable par le lecteur.
             let sy = y - (lines.length > 1 ? 21 : 11);
+            this._priceNotes(row).forEach((n) => {
+                this._txt(ctx, c.desc + 10, sy, this._fit(n, 7.1, descW - 12), { size: 7.1, color: this.C.muted });
+                sy -= 11;
+            });
             (row.allowances || []).forEach((ac) => {
                 const sign = ac.charge ? '+ ' : '- ';
                 const base = ac.baseAmount ? ' (base ' + this._amt(ac.baseAmount) + ')' : '';

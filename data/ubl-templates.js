@@ -343,23 +343,56 @@ ${prepaidAmt !== "0.00" ? `\t\t<cbc:PrepaidAmount currencyID="${opts.cur || "EUR
 \t</cac:AllowanceCharge>`,
 
     // 8. Ligne de Facture / Avoir
+    // BG-25 Ligne de facture.
+    // Sequences imposees, toutes trois sensibles :
+    //   cac:InvoiceLine : ID, Note (BT-127), Quantity, LineExtensionAmount,
+    //     AccountingCost (BT-133), InvoicePeriod (BG-26), OrderLineReference,
+    //     AllowanceCharge, Item, Price.
+    //   cac:Item : Description (BT-154) AVANT Name (BT-153), puis
+    //     BuyersItemIdentification (BT-156), SellersItemIdentification (BT-155),
+    //     StandardItemIdentification (BT-157), CommodityClassification (BT-158),
+    //     ClassifiedTaxCategory. L'ordre Description / Name est contre-intuitif.
+    //   cac:Price : PriceAmount (BT-146), BaseQuantity (BT-149/150),
+    //     AllowanceCharge (BT-147 Amount, BT-148 BaseAmount).
+    // La remise unitaire est soumise a une regle de coherence stricte :
+    // BT-148 - BT-147 doit egaler BT-146. Elle est donc calculee par
+    // difference et jamais saisie, faute de quoi un centime d'arrondi
+    // provoquerait un rejet.
     getInvoiceLine: (id, qty, amount, itemName, price, isCreditNote = false, orderRef = null, vat = { category: "S", percent: "20.00" }, unitCode = "C62", sellerItemRef = null, opts = {}) => `
 \t<cac:${isCreditNote ? 'CreditNoteLine' : 'InvoiceLine'}>
-\t\t<cbc:ID>${id}</cbc:ID>
+\t\t<cbc:ID>${id}</cbc:ID>${opts.note ? `
+\t\t<cbc:Note>${xmlEsc(opts.note)}</cbc:Note>` : ""}
 \t\t<cbc:${isCreditNote ? 'CreditedQuantity' : 'InvoicedQuantity'} unitCode="${unitCode}">${qty}</cbc:${isCreditNote ? 'CreditedQuantity' : 'InvoicedQuantity'}>
-\t\t<cbc:LineExtensionAmount currencyID="${opts.cur || "EUR"}">${amount}</cbc:LineExtensionAmount>
+\t\t<cbc:LineExtensionAmount currencyID="${opts.cur || "EUR"}">${amount}</cbc:LineExtensionAmount>${opts.accountingCost ? `
+\t\t<cbc:AccountingCost>${xmlEsc(opts.accountingCost)}</cbc:AccountingCost>` : ""}${opts.period ? `
+\t\t<cac:InvoicePeriod>${opts.period.start ? `
+\t\t\t<cbc:StartDate>${opts.period.start}</cbc:StartDate>` : ""}${opts.period.end ? `
+\t\t\t<cbc:EndDate>${opts.period.end}</cbc:EndDate>` : ""}
+\t\t</cac:InvoicePeriod>` : ""}
 ${orderRef ? `\t\t<cac:OrderLineReference><cbc:LineID>${orderRef.line}</cbc:LineID><cac:OrderReference><cbc:ID>${xmlEsc(orderRef.id)}</cbc:ID></cac:OrderReference></cac:OrderLineReference>\n` : ""}${(opts.allowances || []).map((ac) => `\t\t<cac:AllowanceCharge>
 \t\t\t<cbc:ChargeIndicator>${ac.charge ? "true" : "false"}</cbc:ChargeIndicator>${ac.reasonCode ? `
 \t\t\t<cbc:AllowanceChargeReasonCode>${xmlEsc(ac.reasonCode)}</cbc:AllowanceChargeReasonCode>` : ""}${ac.reason ? `
 \t\t\t<cbc:AllowanceChargeReason>${xmlEsc(ac.reason)}</cbc:AllowanceChargeReason>` : ""}
 \t\t\t<cbc:Amount currencyID="${opts.cur || "EUR"}">${ac.amount}</cbc:Amount>${ac.baseAmount ? `
 \t\t\t<cbc:BaseAmount currencyID="${opts.cur || "EUR"}">${ac.baseAmount}</cbc:BaseAmount>` : ""}
-\t\t</cac:AllowanceCharge>\n`).join("")}\t\t<cac:Item>
-\t\t\t<cbc:Name>${xmlEsc(itemName)}</cbc:Name>${sellerItemRef ? `
-\t\t\t<cac:SellersItemIdentification><cbc:ID>${xmlEsc(sellerItemRef)}</cbc:ID></cac:SellersItemIdentification>` : ""}
+\t\t</cac:AllowanceCharge>\n`).join("")}\t\t<cac:Item>${opts.description ? `
+\t\t\t<cbc:Description>${xmlEsc(opts.description)}</cbc:Description>` : ""}
+\t\t\t<cbc:Name>${xmlEsc(itemName)}</cbc:Name>${opts.buyerItemRef ? `
+\t\t\t<cac:BuyersItemIdentification><cbc:ID>${xmlEsc(opts.buyerItemRef)}</cbc:ID></cac:BuyersItemIdentification>` : ""}${sellerItemRef ? `
+\t\t\t<cac:SellersItemIdentification><cbc:ID>${xmlEsc(sellerItemRef)}</cbc:ID></cac:SellersItemIdentification>` : ""}${opts.gtin ? `
+\t\t\t<cac:StandardItemIdentification><cbc:ID schemeID="0160">${xmlEsc(opts.gtin)}</cbc:ID></cac:StandardItemIdentification>` : ""}${opts.classification ? `
+\t\t\t<cac:CommodityClassification><cbc:ItemClassificationCode listID="${xmlEsc(opts.classification.listId)}">${xmlEsc(opts.classification.code)}</cbc:ItemClassificationCode></cac:CommodityClassification>` : ""}
 \t\t\t<cac:ClassifiedTaxCategory><cbc:ID>${vat.category}</cbc:ID><cbc:Percent>${vat.percent}</cbc:Percent><cac:TaxScheme><cbc:ID>VAT</cbc:ID></cac:TaxScheme></cac:ClassifiedTaxCategory>
 \t\t</cac:Item>
-\t\t<cac:Price><cbc:PriceAmount currencyID="${opts.cur || "EUR"}">${price}</cbc:PriceAmount></cac:Price>
+\t\t<cac:Price>
+\t\t\t<cbc:PriceAmount currencyID="${opts.cur || "EUR"}">${price}</cbc:PriceAmount>${opts.baseQuantity ? `
+\t\t\t<cbc:BaseQuantity unitCode="${unitCode}">${opts.baseQuantity}</cbc:BaseQuantity>` : ""}${opts.grossPrice ? `
+\t\t\t<cac:AllowanceCharge>
+\t\t\t\t<cbc:ChargeIndicator>false</cbc:ChargeIndicator>
+\t\t\t\t<cbc:Amount currencyID="${opts.cur || "EUR"}">${opts.priceDiscount}</cbc:Amount>
+\t\t\t\t<cbc:BaseAmount currencyID="${opts.cur || "EUR"}">${opts.grossPrice}</cbc:BaseAmount>
+\t\t\t</cac:AllowanceCharge>` : ""}
+\t\t</cac:Price>
 \t</cac:${isCreditNote ? 'CreditNoteLine' : 'InvoiceLine'}>`,
 
     getFooter: (isCreditNote = false) => `\n</${isCreditNote ? 'CreditNote' : 'Invoice'}>`,
