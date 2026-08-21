@@ -279,7 +279,10 @@ const UBLGenerator = {
 
         // --- K. CAS AVANCES & REGIMES SPECIAUX ---
         "33": { typeCode: "380", profile: "B1", zip: false },
-        "34": { typeCode: "380", profile: "S1", zip: false },
+        // BT-8 : pour une prestation de services sans option sur les debits,
+        // la TVA est exigible a l'encaissement et non a la date de facture.
+        // Code 432 en UBL, projete sur 72 en CII par CIIGenerator.
+        "34": { typeCode: "380", profile: "S1", zip: false, vatDateCode: "432" },
         "35": { typeCode: "380", profile: "S1", zip: false },
         "36": { typeCode: "380", profile: "S1", zip: false },
         "37": { typeCode: "380", profile: "S1", zip: false },
@@ -822,7 +825,17 @@ const UBLGenerator = {
                     tax: ["2450.00", "490.00"],
                     totals: ["2450.00", "2450.00", "2940.00", "0.00", "2940.00"],
                     lines: [
-                        { id: "1", qty: "5.00", amount: "2450.00", desc: "Support technique N2 (demi-journees)", price: "490.00" }
+                        // Secret professionnel : BT-153 reste volontairement
+                        // generique, le detail est reporte en BT-154. C'est
+                        // l'inverse de tous les autres cas, et c'est le coeur
+                        // de ce cas d'usage : une facture d'avocat ou de
+                        // medecin ne peut pas exposer la nature de la
+                        // prestation dans son intitule.
+                        {
+                            id: "1", qty: "5.00", amount: "2450.00", price: "490.00",
+                            desc: "Prestation de services",
+                            description: "Assistance technique de niveau 2 - 5 demi-journees. Detail des interventions communique separement, sous couvert du secret professionnel."
+                        }
                     ]
                 };
 
@@ -1148,6 +1161,15 @@ const UBLGenerator = {
                 + " EUR, prix net " + line.price + " EUR HT.";
         }
 
+        // Un cas d'usage peut imposer sa propre description, et elle prime.
+        // C'est indispensable au secret professionnel (cas 36) : le nom de
+        // l'article BT-153 doit y rester generique tandis que le detail est
+        // reporte en BT-154. La derivation automatique aurait reintroduit dans
+        // BT-154 le libelle que l'on cherche precisement a ne pas exposer.
+        if (line.description) {
+            out.description = line.description;
+        }
+
         // BT-149 / BT-150 quantite de base du prix. La valeur 1 est la valeur
         // par defaut implicite de la norme ; l'emettre explicitement permet de
         // verifier que le recepteur la lit au lieu de la supposer.
@@ -1162,12 +1184,6 @@ const UBLGenerator = {
         if (ctx.period) out.period = ctx.period;
         if (ctx.accountingCost) out.accountingCost = ctx.accountingCost + "-L" + line.id;
 
-        // BT-157 GTIN et BT-158 code de classification restent en attente : ils
-        // n'ont de sens que sur un bien identifie, et aucune ligne ne porte
-        // aujourd'hui d'unite de mesure permettant de distinguer un bien d'une
-        // prestation. Les emettre sur une ligne de conseil produirait une
-        // facture moins realiste, pas plus. Le gabarit les accepte des que le
-        // cas d'usage fournira line.gtin ou line.classification.
         // BT-157 et BT-158 : le cas d'usage peut les imposer ligne par ligne ;
         // a defaut, ils viennent du catalogue, indexe sur le libelle exact.
         var cat = this.ITEM_CATALOG[line.desc] || {};
@@ -1250,7 +1266,41 @@ const UBLGenerator = {
         //       XML etait deja correct, seule l'entree manquait ici.
         //       A NE PAS "corriger" en y ajoutant un facturant : ce serait
         //       detruire l'opposition pedagogique du couple 17a / 17b.
-        "17a"],
+        "17a",
+        //   33 TVA sur la marge. La mention obligatoire a ete reformulee :
+        //      "Regime particulier - Biens d'occasion", formulation imposee par
+        //      la directive 2006/112 art. 226 point 14 et par l'article 242
+        //      nonies A I 15 de l'annexe II du CGI. Le montant de la marge
+        //      n'apparait pas, et c'est voulu : la ventilation TVA affiche la
+        //      base exoneree et la base taxee, jamais la marge du negociant.
+        //   34 encaissement. BT-8 passe a 432 en UBL et 72 en CII : la TVA sur
+        //      une prestation de services est exigible a l'encaissement, pas a
+        //      la date de facture. Le cas exposait donc un BT-8 faux.
+        //   36 secret professionnel. BT-153 est desormais generique et le
+        //      detail est reporte en BT-154. La facture detaillait la nature de
+        //      la prestation dans son intitule, ce que le secret interdit.
+        //   37 societe en participation. Le vendeur est le gerant, personne
+        //      morale dotee d'un SIREN, qui agit en son nom propre : la SEP
+        //      etant depourvue de personnalite juridique ne peut pas figurer
+        //      comme vendeur. La modelisation etait deja juste.
+        //   41 echange de biens. Mention de l'echange ajoutee, la base
+        //      d'imposition etant la valeur de la contrepartie recue.
+        "33", "34", "36", "37", "41",
+        // Branche ZIP ouverte au Factur-X : chaque document du pack devient un
+        // PDF/A-3B autonome. Les trois cas a pack rejoignent donc la liste.
+        "nominal-litige-avoir", "nominal-litige-rectificative", "B"],
+
+    // Deux cas restent volontairement hors liste, non par prudence d'audit
+    // mais parce que leur modelisation est en defaut :
+    //   35 droits d'auteur : le scenario est incoherent, l'auteur facturant
+    //      directement un editeur alors que le regime du precompte suppose un
+    //      diffuseur. Il manque en outre toute trace de la retenue a la
+    //      source. Arbitrage de perimetre attendu de Bruno.
+    //   39 multi-vendeurs S8 : l'identite des vendeurs est aujourd'hui portee
+    //      par un prefixe dans le libelle de la ligne. Ce n'est pas une
+    //      approximation, c'est faux : le cadre S8 exige une identification
+    //      structuree de chaque vendeur, en profil EXTENDED-CTC-FR, avec des
+    //      sous-lignes GROUP / DETAIL. Reecriture complete a prevoir.
 
     // Le cas A produit deliberement une facture non conforme (InvoiceTypeCode
     // 999 inexistant) pour eprouver le rejet au controle de syntaxe. Il reste
@@ -1456,7 +1506,18 @@ const UBLGenerator = {
                 "#AAB#Pas d'escompte pour paiement anticipé."
             ];
 
-            if (usecase === "33") notes.push("#AAI#Regime TVA sur la marge - Article 297 A du CGI");
+            // Cas 33 : la formulation "Regime particulier" est imposee par la
+            // directive 2006/112 (art. 226, point 14) et reprise a l'article
+            // 242 nonies A I 15 de l'annexe II du CGI. Le seul rappel de
+            // l'article 297 A ne satisfaisait pas la mention obligatoire.
+            if (usecase === "33") notes.push("#AAI#Regime particulier - Biens d'occasion (article 297 A du CGI). Taxation sur la marge beneficiaire.");
+            // Cas 34 : TVA exigible a l'encaissement, regime de droit commun
+            // des prestations de services en l'absence d'option sur les debits.
+            if (usecase === "34") notes.push("#AAI#TVA exigible a l'encaissement du prix - prestations de services, article 269-2-c du CGI.");
+            // Cas 41 : echange de biens. Chaque partie livre un bien et emet sa
+            // propre facture pour la valeur de ce qu'elle livre ; la base
+            // d'imposition est la valeur du bien recu en contrepartie.
+            if (usecase === "41") notes.push("#AAI#Echange de biens - chaque partie emet une facture pour la valeur de la livraison qu'elle realise. Base d'imposition constituee par la valeur de la contrepartie recue.");
             if (usecase === "25") notes.push("#AAI#Cession de bons d'achat a usage unique (BUU) - TVA exigible des l'emission");
             if (usecase === "32") notes.push("#AAI#Mensualite facturee en acompte - Regularisation a la facture de solde");
             if (usecase === "16") notes.push("#AAI#Debours - Avance de frais pour le compte du client - Hors champ TVA");
@@ -2028,6 +2089,39 @@ const UBLGenerator = {
                 }
 
                 var zip = new JSZip();
+                var packComp = self.getComposition(usecase);
+
+                // ==========================================
+                // packFacturX
+                // Produit UN document du pack en Factur-X. La difficulte tenait
+                // ici : buildRenderData ne connait ni le numero de commande ni
+                // la facture d'origine, informations que buildCiiPivot, lui,
+                // recoit en parametres. Un pack produit sans ce recalage aurait
+                // livre un PDF muet sur la facture rectifiee alors que le XML
+                // embarque la referencait : le document lisible et sa charge
+                // utile se seraient contredits.
+                // ==========================================
+                var packFacturX = function(num, typeCode, data, po, refOrig) {
+                    if (typeof PDFFacturX === 'undefined' || typeof PDFLisible === 'undefined') return null;
+                    var rd = buildRenderData(num, typeCode, data);
+                    if (!rd) return null;
+                    if (po) rd.orderReference = po;
+                    if (refOrig) rd.precedingInvoice = { id: refOrig, date: precedingDate || dateFactureXML };
+                    // BT-9 : une date d'echeance n'a pas de sens sur un avoir.
+                    if (typeCode === "381") rd.dueDate = null;
+                    rd.paymentReference = num;
+
+                    var piv = buildCiiPivot(num, typeCode, data, po, null, refOrig);
+                    if (!piv) return null;
+                    // Le PDF ETANT la representation lisible, aucun BG-24 LISIBLE
+                    // n'est emis : un PDF ne peut pas etre sa propre piece jointe.
+                    piv.attachments = [];
+                    var xml = CIIGenerator.build(piv);
+                    var errs = CIIGenerator.verify(piv, xml);
+                    if (errs.length) console.warn("Factur-X (pack) : incoherences detectees sur " + num, errs);
+                    var doc = PDFFacturX.buildFacturX(rd, xml, null);
+                    return doc ? PDFFacturX.toBlob(doc.raw) : null;
+                };
 
                 if (cfg.rectificative) {
                     // ========================================
@@ -2048,11 +2142,20 @@ const UBLGenerator = {
 
                     // Les deux memes documents en syntaxe CII, pour comparer
                     // l'expression d'une rectification dans les deux formats.
-                    if (self.getComposition(usecase).format === 'cii') {
+                    if (packComp.format === 'cii') {
                         var pOrig = buildCiiPivot(originalNum, "380", originalData, null, null, null);
                         if (pOrig) zip.file(originalNum + "_Facture_Originale_380_CII.xml", CIIGenerator.build(pOrig));
                         var pRect = buildCiiPivot(rectNum, "384", rectData, null, null, originalNum);
                         if (pRect) zip.file(rectNum + "_Facture_Rectificative_384_CII.xml", CIIGenerator.build(pRect));
+                    }
+
+                    // Chaque document du pack devient un PDF/A-3B autonome,
+                    // porteur de sa propre representation lisible.
+                    if (packComp.format === 'facturx') {
+                        var fxOrig = packFacturX(originalNum, "380", originalData, null, null);
+                        if (fxOrig) zip.file(originalNum + "_Facture_Originale_380_FACTURX.pdf", fxOrig);
+                        var fxRect = packFacturX(rectNum, "384", rectData, null, originalNum);
+                        if (fxRect) zip.file(rectNum + "_Facture_Rectificative_384_FACTURX.pdf", fxRect);
                     }
 
                     zip.generateAsync({ type: "blob" }).then(function(content) {
@@ -2108,7 +2211,14 @@ const UBLGenerator = {
                     // racine (CreditNote au lieu d'Invoice) alors que l'avoir CII
                     // conserve rsm:CrossIndustryInvoice et se signale par le seul
                     // ram:TypeCode 381.
-                    if (self.getComposition(usecase).format === 'cii') {
+                    if (packComp.format === 'facturx') {
+                        var fxFac = packFacturX(originalInvoiceNum, "380", null, poNumber, null);
+                        if (fxFac) zip.file(originalInvoiceNum + "_Cas_" + usecase + "_Facture_Litige_FACTURX.pdf", fxFac);
+                        var fxAv = packFacturX(creditNoteNum, "381", creditData, poNumber, originalInvoiceNum);
+                        if (fxAv) zip.file(creditNoteNum + "_Cas_" + usecase + "_Avoir_FACTURX.pdf", fxAv);
+                    }
+
+                    if (packComp.format === 'cii') {
                         var pFac = buildCiiPivot(originalInvoiceNum, "380", null, poNumber, null, null);
                         if (pFac) zip.file(originalInvoiceNum + "_Cas_" + usecase + "_Facture_Litige_CII.xml", CIIGenerator.build(pFac));
                         var pAv = buildCiiPivot(creditNoteNum, "381", creditData, poNumber, null, originalInvoiceNum);

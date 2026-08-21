@@ -191,6 +191,12 @@ const PIECES = [
       embedLabel: 'Bon de livraison embarqué', sideLabel: 'Bon de livraison en PDF' }
 ];
 
+// Cas a pack ZIP pour lesquels chaque document du pack dispose d'une
+// representation lisible verifiee, et qui peuvent donc etre produits en
+// Factur-X. Le pack B en fait partie : sa facture comme son avoir sont
+// construits sur les memes lignes declaratives.
+const ZIP_PDF_CASES = ['nominal-litige-avoir', 'nominal-litige-rectificative', 'B'];
+
 const FORMAT_LABELS = { ubl: 'Facture UBL 2.1', cii: 'Facture CII D22B', facturx: 'Factur-X (PDF/A-3B)' };
 
 // =====================================================
@@ -501,37 +507,50 @@ const GeneratorUI = {
             if (sideGroup) sideGroup.classList.add('hidden');
             if (recap) recap.classList.add('hidden');
 
-            // Le Factur-X supposerait de composer chaque document du pack :
-            // c'est un chantier d'architecture, pas une case à cocher.
+            // Les trois syntaxes sont désormais ouvertes au pack. Le Factur-X
+            // demandait de composer une représentation lisible pour CHAQUE
+            // document du pack, et non pour un document unique : c'était bien
+            // un chantier d'architecture, il est fait.
+            // Le pack contient toujours la référence UBL, à laquelle s'ajoute
+            // la syntaxe demandée. C'est ce qui permet de comparer, sur les
+            // mêmes montants, l'expression d'un avoir ou d'une rectification
+            // d'une syntaxe à l'autre.
+            const pdfOkZip = ZIP_PDF_CASES.indexOf(usecase) !== -1;
             FORMATS.forEach((f) => {
                 const input = document.getElementById(f.id);
                 if (!input) return;
-                const available = f.value !== 'facturx';
+                const available = (f.value !== 'facturx') || pdfOkZip;
                 input.disabled = !available;
-                input.checked = available && GeneratorUI.state.format === f.value
-                    && GeneratorUI.state.format !== 'facturx';
+                input.checked = available && GeneratorUI.state.format === f.value;
                 const card = input.closest('.fab-opt');
                 if (card) card.classList.toggle('is-disabled', !available);
             });
-            if (GeneratorUI.state.format === 'facturx') {
+            if (GeneratorUI.state.format === 'facturx' && !pdfOkZip) {
                 const fallback = document.getElementById('fmt-ubl');
                 if (fallback) fallback.checked = true;
             }
 
-            const zipFormat = (GeneratorUI.state.format === 'cii') ? 'cii' : 'ubl';
+            let zipFormat = 'ubl';
+            if (GeneratorUI.state.format === 'cii') zipFormat = 'cii';
+            if (GeneratorUI.state.format === 'facturx' && pdfOkZip) zipFormat = 'facturx';
+
+            const ZIP_HINTS = {
+                ubl: 'Ce scénario produit un pack multi-documents. Son contenu est dicté par le scénario ; seule la syntaxe se choisit.',
+                cii: 'Le pack contiendra chaque document dans les deux syntaxes, UBL et CII, pour les comparer.',
+                facturx: 'Le pack contiendra chaque document en UBL et en Factur-X : un PDF/A-3B par document, portant sa propre représentation lisible.'
+            };
+            const ZIP_BTN = {
+                ubl: 'Télécharger le pack ZIP (UBL)',
+                cii: 'Télécharger le pack ZIP (UBL + CII)',
+                facturx: 'Télécharger le pack ZIP (UBL + Factur-X)'
+            };
             const fmtHintZip = document.getElementById('format-hint');
-            if (fmtHintZip) {
-                fmtHintZip.textContent = zipFormat === 'cii'
-                    ? 'Le pack contiendra chaque document dans les deux syntaxes, UBL et CII, pour les comparer.'
-                    : 'Ce scénario produit un pack multi-documents. Son contenu est dicté par le scénario ; seule la syntaxe se choisit.';
-            }
+            if (fmtHintZip) fmtHintZip.textContent = ZIP_HINTS[zipFormat];
 
             if (btn) {
                 btn.disabled = false;
                 btn.classList.remove('disabled');
-                btn.innerHTML = zipFormat === 'cii'
-                    ? '<span class="gen-btn-icon">📦</span> Télécharger le pack ZIP (UBL + CII)'
-                    : '<span class="gen-btn-icon">📦</span> Télécharger le pack ZIP (UBL)';
+                btn.innerHTML = '<span class="gen-btn-icon">📦</span> ' + ZIP_BTN[zipFormat];
             }
             return;
         }
