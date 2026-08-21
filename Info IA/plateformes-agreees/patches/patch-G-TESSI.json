@@ -1,0 +1,185 @@
+{
+  "_patch": {
+    "id": "G-TESSI",
+    "chantier": "G — analyse 360",
+    "societe": "TESSI Technologies",
+    "auteur": "RFE_WebSite",
+    "dateReleve": "2026-08-21",
+    "nbPlateformes": 1,
+    "note": "Cercle 0, concurrent frontal. CORRECTION APPORTÉE : trancheEffectif passe de 50-99 à 100-199, la donnée INSEE et les comptes déposés convergeant sur un effectif supérieur à cent (159 salariés en 2024). APPORT PRINCIPAL : c'est le premier cas du référentiel où l'entité immatriculée est en croissance et bénéficiaire, ce qui contraste avec les deux autres concurrents frontaux documentés le même jour. Le rapport de taille entre l'entité et son groupe est également le plus déséquilibré rencontré à ce stade : 38,7 M€ contre 545,7 M€, soit environ 7 %. NON TROUVÉ dans cette passe : ventilation du chiffre d'affaires par ligne d'activité, références clients nommées, avis publics agrégés, volume d'offres d'emploi, part de la facturation électronique dans le chiffre d'affaires de l'entité (jamais estimée, par règle)."
+  },
+  "plateformes": [
+    {
+      "nom": "TESSI Technologies",
+      "trancheEffectif": "100-199",
+      "relationCapitalistique": "filiale_de_groupe",
+      "analyse360": {
+        "metierPrincipal": "Édition logicielle et ingénierie documentaire au sein d'un groupe international de gestion des processus métier et de transformation numérique",
+        "activites": [
+          {
+            "libelle": "Groupe — externalisation et transformation des processus métier documentaires, notamment pour la banque, l'assurance et la santé",
+            "poids": "majeur",
+            "source": "Pages institutionnelles Tessi, relevé 21/08/2026"
+          },
+          {
+            "libelle": "Entité immatriculée — édition de logiciels et conseil en systèmes d'information",
+            "poids": "majeur",
+            "source": "APE 62.02A conseil en systèmes et logiciels informatiques, SIREN 382105823"
+          },
+          {
+            "libelle": "Dématérialisation et traitement de la facture, sous la marque DIGITAL INVOICE by Tessi",
+            "poids": "majeur",
+            "source": "tessi.eu, offre DIGITAL INVOICE, relevé 21/08/2026"
+          },
+          {
+            "libelle": "Plateforme agréée pour la facturation électronique en France",
+            "poids": "significatif",
+            "source": "Liste DGFiP ; immatriculation provisoire obtenue dès août 2024"
+          },
+          {
+            "libelle": "Capture documentaire, reconnaissance et traitement automatisé de documents entrants",
+            "poids": "significatif",
+            "source": "Pages solutions Tessi, relevé 21/08/2026"
+          }
+        ],
+        "poidsEconomique": {
+          "caGroupe": {
+            "montantMEUR": 545.7,
+            "exercice": "2025",
+            "nature": "declare_site",
+            "source": "Pages institutionnelles du groupe Tessi et de son actionnaire HLD",
+            "dateReleve": "2026-08-21"
+          },
+          "caEntiteFrancaise": {
+            "montantMEUR": 38.7,
+            "exercice": "2024",
+            "nature": "comptes_deposes",
+            "source": "Comptes annuels déposés au greffe, SIREN 382105823",
+            "dateReleve": "2026-08-21"
+          },
+          "effectifGroupe": 14246,
+          "effectifEntite": "159 salariés en 2024 selon les comptes déposés, contre 149 en 2023",
+          "resultatNet": "Bénéfice de 2,4 M€ en 2024, après 1,7 M€ en 2023. Fonds propres de 15,6 M€ pour un capital social de 300 000 €.",
+          "ventilationParActivite": {
+            "disponible": false,
+            "motif": "Ni le groupe Tessi ni l'entité immatriculée ne publient de ventilation du chiffre d'affaires par ligne d'activité. L'entité immatriculée représente environ 7 % du chiffre d'affaires du groupe, mais la part de la facturation électronique à l'intérieur de ces 38,7 M€ n'est pas publiée et n'est pas estimée.",
+            "derniereVentilationConnue": null
+          }
+        },
+        "centralitePA": {
+          "indice": 2,
+          "niveau": "extension_naturelle",
+          "marqueProduitDediee": "DIGITAL INVOICE by Tessi",
+          "entiteJuridiqueDediee": false,
+          "faisceauIndices": [
+            {
+              "signal": "Marque produit dédiée à l'offre de facturation",
+              "sens": "+",
+              "preuve": "tessi.eu, offre DIGITAL INVOICE by Tessi"
+            },
+            {
+              "signal": "Immatriculation provisoire obtenue dès août 2024, parmi les toutes premières",
+              "sens": "+",
+              "preuve": "Communication Tessi et liste DGFiP"
+            },
+            {
+              "signal": "Positionnement explicite sur les grandes entreprises et les ETI à fortes volumétries",
+              "sens": "+",
+              "preuve": "Communication Tessi sur l'offre DIGITAL INVOICE"
+            },
+            {
+              "signal": "Adresse de support dédiée déclarée à la DGFiP",
+              "sens": "+",
+              "preuve": "Liste DGFiP"
+            },
+            {
+              "signal": "L'entité immatriculée ne représente qu'environ 7 % du chiffre d'affaires du groupe, et la facturation n'est qu'une des lignes de cette entité",
+              "sens": "-",
+              "preuve": "38,7 M€ de chiffre d'affaires déposé contre 545,7 M€ déclarés pour le groupe"
+            },
+            {
+              "signal": "Le métier du groupe est l'externalisation de processus métier documentaires au sens large, la facture n'étant qu'un objet parmi d'autres",
+              "sens": "-",
+              "preuve": "Pages institutionnelles Tessi : 14 246 collaborateurs, 14 pays, plus de 1 400 clients"
+            },
+            {
+              "signal": "Aucun site ni domaine dédiés, aucun canal de gros documenté auprès d'éditeurs tiers",
+              "sens": "-",
+              "preuve": "Relevé de tessi.eu le 21/08/2026"
+            }
+          ],
+          "lecture": "Tessi illustre le cas d'une plateforme agréée réelle et précoce, portée par un groupe pour qui elle reste marginale en poids. Les signaux positifs sont incontestables : marque produit dédiée, immatriculation provisoire obtenue dès août 2024 parmi les toutes premières, positionnement assumé sur les fortes volumétries. Les signaux négatifs sont d'ordre économique : l'entité immatriculée pèse environ 7 % du chiffre d'affaires du groupe, et la facturation n'est qu'une des lignes de cette entité, elle-même l'atelier logiciel d'une maison de 14 246 personnes dont le métier est l'externalisation documentaire. L'indice 2 traduit une extension naturelle du métier, techniquement crédible mais économiquement périphérique à l'échelle du groupe. Le seuil qui n'est pas franchi est celui du canal propre : ni site dédié, ni distribution en gros auprès d'éditeurs tiers, contrairement à d'autres acteurs du même cercle concurrentiel. La plateforme sert d'abord la base installée de donneurs d'ordre du groupe.",
+          "confiance": "moyenne"
+        },
+        "referencesClients": {
+          "nbCiteesSurSite": null,
+          "parSecteur": {},
+          "grandsComptes": [],
+          "referencesPAConfirmees": [],
+          "source": "Aucune référence nommée relevée dans cette passe. Le groupe revendique plus de 1 400 clients, dont des acteurs de la banque, de l'assurance et de la santé, sans liste publique consolidée. À reprendre."
+        },
+        "reputation": {
+          "volumeAvis": null,
+          "synthese": "Aucun relevé d'avis agrégés effectué dans cette passe. Le groupe revendique une médaille d'or EcoVadis, distinction de responsabilité sociale et environnementale et non avis client.",
+          "confiance": "non_qualifie"
+        },
+        "capaciteDeFrappe": {
+          "actionnaires": [
+            "HLD, groupe d'investissement entrepreneurial",
+            "TESSI (SIREN 071501571), président de l'entité immatriculée"
+          ],
+          "typeActionnaire": "fonds_pe",
+          "financementRecent": "Aucune opération de capital publiée dans cette passe. Le groupe est détenu par HLD, groupe d'investissement à horizon long.",
+          "acquisitions": [],
+          "modeleTarifaire": "Sur devis",
+          "tarifPublie": false,
+          "offreGratuite": false
+        },
+        "lectureConcurrentielle": "Tessi est le concurrent le plus solide économiquement des trois acteurs français de la dématérialisation documentés le 21/08/2026, et celui dont l'engagement sur le sujet est le plus difficile à jauger. Solidité : un groupe de 545,7 M€ de chiffre d'affaires et 14 246 collaborateurs dans quatorze pays, adossé à HLD, et une entité immatriculée en croissance — 38,7 M€ après 36,1 M€ — et bénéficiaire de 2,4 M€, avec un effectif qui progresse de 149 à 159 salariés. C'est l'inverse exact du profil des deux autres, dont les entités reculent et perdent de l'argent. Engagement : l'immatriculation provisoire obtenue dès août 2024 place Tessi parmi les tout premiers acteurs à s'être positionnés, et la marque DIGITAL INVOICE existe, mais l'activité reste économiquement périphérique à l'échelle du groupe et ne dispose ni de site dédié ni de canal de distribution en gros. Deux conséquences pratiques. Sur un grand compte à forte volumétrie, notamment en banque, assurance ou santé où Tessi est historiquement implantée, la position de sortant est forte : la facture arrive dans le prolongement de flux documentaires déjà externalisés, et le remplacement suppose de toucher à un dispositif plus large. En dehors de cette base installée, la conquête paraît moins outillée : sans canal indirect ni vitrine dédiée, la plateforme se vend d'abord aux clients du groupe.",
+        "droitDeReponse": {
+          "signale": false,
+          "date": null,
+          "objet": null
+        }
+      },
+      "sourcesEnrichissement": [
+        {
+          "champ": "trancheEffectif",
+          "source": "Comptes annuels déposés au greffe, SIREN 382105823 : 159 salariés en 2024 et 149 en 2023 ; donnée INSEE 100 à 199 salariés. Corrige la valeur 50-99 précédemment enregistrée.",
+          "dateReleve": "2026-08-21",
+          "confiance": "haute"
+        },
+        {
+          "champ": "analyse360.poidsEconomique.caEntite",
+          "source": "Comptes annuels déposés au greffe, TESSI TECHNOLOGIES SIREN 382105823, exercices 2021 à 2024 : chiffre d'affaires 28,4 puis 30,2 puis 36,1 puis 38,7 M€ ; résultat net 2,4 M€ en 2024 et 1,7 M€ en 2023 ; fonds propres 15,6 M€",
+          "dateReleve": "2026-08-21",
+          "confiance": "haute"
+        },
+        {
+          "champ": "identite",
+          "source": "Registre national des entreprises, SIREN 382105823 : SAS, créée en 1991, capital 300 000 €, APE 62.02A, RCS Bordeaux, LEI 969500OI4B20K43LFL84, président TESSI (SIREN 071501571), directrice générale Virginie Cournu",
+          "dateReleve": "2026-08-21",
+          "confiance": "haute"
+        },
+        {
+          "champ": "analyse360.poidsEconomique.caGroupe",
+          "source": "Pages institutionnelles du groupe Tessi et de son actionnaire HLD : 545,7 M€ de chiffre d'affaires, 14 246 collaborateurs, 14 pays, plus de 1 400 clients",
+          "dateReleve": "2026-08-21",
+          "confiance": "moyenne"
+        },
+        {
+          "champ": "analyse360.centralitePA",
+          "source": "Communication Tessi sur l'offre DIGITAL INVOICE : immatriculation provisoire obtenue dès août 2024, positionnement sur les grandes entreprises et ETI à fortes volumétries",
+          "dateReleve": "2026-08-21",
+          "confiance": "moyenne"
+        },
+        {
+          "champ": "analyse360.centralitePA.indice",
+          "source": "Lecture Fluxym sur faisceau d'indices, méthode décrite dans Info IA/plateformes-agreees/cartographie-360-modele.md",
+          "dateReleve": "2026-08-21",
+          "confiance": "moyenne"
+        }
+      ]
+    }
+  ]
+}

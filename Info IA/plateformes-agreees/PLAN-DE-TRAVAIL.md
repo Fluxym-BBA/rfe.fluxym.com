@@ -1,7 +1,7 @@
 # Plan de travail — Référentiel des plateformes agréées
 
 **Emplacement dans le dépôt :** `Info IA/plateformes-agreees/`
-**Dernière mise à jour :** 21/08/2026 (soir — étalonnage Esker, Basware, GEP)
+**Dernière mise à jour :** 21/08/2026 (soir — cercle 0, première vague : Paragon, Seres, Tessi)
 **Fichier cible unique :** `data/plateformes-agreees.json`
 **Définition des champs :** `data/pa-taxonomie.json`
 **Finalité du référentiel :** analyse 360 des entreprises porteuses des plateformes agréées — voir `cartographie-360-modele.md`
@@ -76,13 +76,15 @@ Le code est terminé et en production. **Tout ce qui reste est de la donnée.**
     a. l'indice mesure la place de l'activité **agréée française**, non la proximité du métier avec la facturation électronique ; l'indice 4 est réservé aux sociétés qui n'auraient plus d'objet sans elle ;
     b. la distribution du socle agréé à des tiers est un indice fort de centralité, jamais un critère suffisant à lui seul ;
     c. trois ancrages de poids économique sont distingués et jamais mélangés : chiffre déclaré sur le site, chiffre issu d'un communiqué financier daté, comptes déposés de l'entité ; `caGroupe.nature` dit lequel est retenu ;
-    d. **les agrégateurs de données d'entreprises ne sont pas une source** : constat établi sur Generix (243,7 M$ affichés contre 60,4 M€ déposés) puis sur Basware (185 à 365 M$ selon l'agrégateur) ;
+    d. **distinguer les republicateurs de comptes déposés des agrégateurs qui estiment**, précisé le 21/08/2026 : les données du greffe, du registre national des entreprises et de l'INSEE **sont une source primaire**, elles republient un document légalement déposé, et `caEntiteFrancaise.nature` vaut alors `comptes_deposes` ; les agrégateurs qui **modélisent** un chiffre d'affaires ne sont pas une source — constat établi sur Generix (243,7 M$ affichés contre 60,4 M€ déposés) puis sur Basware (185 à 365 M$ selon l'agrégateur). Critère de tri : le chiffre est-il déposé ou estimé ? ;
     e. une ventilation par **modèle de revenus** (part du SaaS) n'est pas une ventilation par **activité** : elle va dans le motif de non-disponibilité, jamais en réponse à la question posée ;
     f. **périmètre de lecture**, ajoutée le 21/08/2026 sur le cas GEP : quand l'entité immatriculée est une filiale spécialisée d'un groupe diversifié, les deux lectures peuvent s'opposer de 3 points sur 4 (métier de l'entité contre poids dans le groupe). L'indice se lit alors sur l'**investissement observable sur le mandat français** — pages consacrées au dispositif, entité et équipes locales, date d'immatriculation, agrément construit ou hérité — et les deux lectures sont exposées dans le champ `lecture`, pour que le lecteur voie le raisonnement au lieu de subir un chiffre.
 12. **Pour une entité étrangère, la question n'est pas « a-t-elle un SIREN ? » mais « existe-t-il une entité française rattachée ? »**, décidé le 21/08/2026 sur le cas Basware. Le SIREN de la filiale va dans `identiteInternationale.presenceEnFrance.siren` et **jamais** dans le champ `siren` de la fiche, qui reste celui de l'entité immatriculée. `presenceEnFrance` devient l'un des premiers champs à renseigner du chantier F.
-13. **Première étape du chantier F : confronter l'adresse publiée par la DGFiP au siège annoncé par le nom commercial**, décidé le 21/08/2026 sur le cas GEP. Quand les deux divergent, l'adresse a raison. Ce contrôle de trois minutes évite de chercher le SIREN d'une société qui n'en a pas, et détecte le motif « agrément hérité par acquisition d'une filiale spécialisée ». Candidats prioritaires : MEDIUS (`pays` = France, groupe suédois à Linköping) et les 16 entités sans pays renseigné.
-14. **Le relevé des offres d'emploi se fait en une passe unique à date fixe** sur toute la cohorte ETI et grands comptes, et non société par société : un volume d'offres n'a de sens que comparé à une même date.
-15. **Rien ne sera publié sur les conditions réglementaires applicables aux PA étrangères** (établissement stable, représentant, hébergement) avant lecture des textes primaires : art. 290 B CGI, art. 242 nonies B ann. II, décret n° 2024-266.
+13. **Une passe de révision du barème sera faite à dix fiches**, décidé le 21/08/2026. Après sept fiches, les indices se concentrent sur deux valeurs (3 : Esker, Basware, Paragon, Seres ; 2 : Generix, GEP, Tessi) et une tension interne est identifiée : Generix présente une marque dédiée et un socle revendu, deux critères qui ont contribué à justifier un 3 ailleurs. Aucune retouche au coup par coup : relecture comparée des faisceaux d'indices en une seule passe. Rétablir la cohérence sur sept fiches coûte une heure, sur quarante c'est un autre chantier.
+14. **Le poids économique des 79 plateformes disposant d'un SIREN est à renseigner en priorité** depuis les comptes déposés : trois à quatre exercices, résultat net, fonds propres et effectif, en quelques minutes par société. Meilleur rapport valeur/effort identifié sur le référentiel — et seule source donnant une **trajectoire**, donnée bien plus discriminante qu'un chiffre d'affaires isolé.
+15. **Première étape du chantier F : confronter l'adresse publiée par la DGFiP au siège annoncé par le nom commercial**, décidé le 21/08/2026 sur le cas GEP. Quand les deux divergent, l'adresse a raison. Ce contrôle de trois minutes évite de chercher le SIREN d'une société qui n'en a pas, et détecte le motif « agrément hérité par acquisition d'une filiale spécialisée ». Candidats prioritaires : MEDIUS (`pays` = France, groupe suédois à Linköping) et les 16 entités sans pays renseigné.
+16. **Le relevé des offres d'emploi se fait en une passe unique à date fixe** sur toute la cohorte ETI et grands comptes, et non société par société : un volume d'offres n'a de sens que comparé à une même date.
+17. **Rien ne sera publié sur les conditions réglementaires applicables aux PA étrangères** (établissement stable, représentant, hébergement) avant lecture des textes primaires : art. 290 B CGI, art. 242 nonies B ann. II, décret n° 2024-266.
 
 ---
 
@@ -116,7 +118,8 @@ Un patch par société : `patches/patch-G-<NOM>.json`.
 | Pilote | GENERIX Group — `pilote-360-GENERIX.md` | ✅ méthode éprouvée, non fusionné |
 | Étalonnage | ESKER et BASWARE — `ETALONNAGE-360-ESKER-BASWARE.md` | ✅ barème calibré, 5 règles ajoutées, patches `patch-G-ESKER.json` et `patch-G-BASWARE.json` non fusionnés |
 | Étalonnage | GEP — `ANOMALIE-GEP-OPUSCAPITA.md` | ✅ anomalie résolue (entité = GEP Finland Oy, ex-OpusCapita, Espoo), règle de périmètre ajoutée, patch `patch-G-GEP.json` non fusionné |
-| G1 | 30 sociétés par cercles concurrentiels — voir `PRIORISATION-CONCURRENCE.md` | à lancer, 13 concurrents frontaux restants au cercle 0 |
+| G1a | PARAGON, SERES, TESSI — `NOTE-CERCLE-0-VAGUE-1.md` | ✅ 3 patches non fusionnés ; comptes déposés exploités, barème sous surveillance |
+| G1b | 10 concurrents frontaux restants au cercle 0 + MEDIUS, ITESOFT, LUCCA | à lancer, prochaines sociétés : ITESOFT et MEDIUS |
 | G2 | reprise 360 des sociétés déjà qualifiées du cercle 1 (Pagero, Sovos, Comarch, Opentext, Generix, Cegid, Sage) | à lancer |
 | G3 | pure-players et entités créées pour la réforme | à lancer |
 | G4 | cercle 3 — fiches allégées mais sourcées, ~90 sociétés | permanent |

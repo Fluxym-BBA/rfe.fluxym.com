@@ -1,0 +1,166 @@
+{
+  "_patch": {
+    "id": "G-SERES",
+    "chantier": "G — analyse 360",
+    "societe": "SERES",
+    "auteur": "RFE_WebSite",
+    "dateReleve": "2026-08-21",
+    "nbPlateformes": 1,
+    "note": "Cercle 0, concurrent frontal. APPORT PRINCIPAL : les comptes déposés de l'entité immatriculée montrent un chiffre d'affaires en recul trois exercices de suite, un basculement en perte en 2024 et un effectif qui décroît de 118 à 98 salariés. Le rattachement capitalistique est précisé : DOCAPOSTE et BULL SAS figurent comme administrateurs, ce qui inscrit l'entité dans le groupe La Poste tout en conservant une trace de son histoire industrielle. NON TROUVÉ dans cette passe : ventilation du chiffre d'affaires par ligne d'activité, références clients nommées propres à l'offre agréée, avis publics agrégés, volume d'offres d'emploi, effectif consolidé de la ligne facturation électronique. VÉRIFICATION FAITE : l'adresse publiée par la DGFiP, 45 boulevard Paul Vaillant Couturier à Ivry-sur-Seine, correspond bien au siège social au registre, libellé 45-47. Le contrôle d'adresse recommandé par la note ANOMALIE-GEP-OPUSCAPITA.md est donc négatif ici, aucune anomalie. La tranche d'effectif 50-99 de la fiche est confirmée par les comptes déposés (98 salariés en 2024) et n'est pas corrigée, malgré une donnée INSEE plus ancienne indiquant 100 à 199."
+  },
+  "plateformes": [
+    {
+      "nom": "SERES",
+      "relationCapitalistique": "filiale_de_groupe",
+      "analyse360": {
+        "metierPrincipal": "Échange de données informatisé et dématérialisation des flux commerciaux, exercés depuis 1988, au sein du groupe Docaposte",
+        "activites": [
+          {
+            "libelle": "EDI et dématérialisation des flux commerciaux : commandes, avis d'expédition, factures",
+            "poids": "majeur",
+            "source": "seres.fr, relevé 21/08/2026"
+          },
+          {
+            "libelle": "Facturation électronique, revendiquée depuis environ vingt-cinq ans",
+            "poids": "majeur",
+            "source": "seres.fr, relevé 21/08/2026"
+          },
+          {
+            "libelle": "Plateforme agréée pour la facturation électronique en France",
+            "poids": "majeur",
+            "source": "Liste DGFiP, immatriculation du 11/12/2025"
+          },
+          {
+            "libelle": "Signature électronique, archivage et services de confiance numérique",
+            "poids": "significatif",
+            "source": "APE 63.11Z ; positionnement Docaposte sur la confiance numérique"
+          }
+        ],
+        "poidsEconomique": {
+          "caEntiteFrancaise": {
+            "montantMEUR": 23.7,
+            "exercice": "2024",
+            "nature": "comptes_deposes",
+            "source": "Comptes annuels déposés au greffe, SIREN 343778163",
+            "dateReleve": "2026-08-21"
+          },
+          "effectifEntite": "98 salariés en 2024 selon les comptes déposés, après 102 en 2023 et 118 en 2021 ; tranche INSEE 50 à 99",
+          "resultatNet": "Perte de 2,23 M€ en 2024, après un résultat quasi nul en 2023 (+0,10 M€) et un bénéfice de 2,61 M€ en 2022. Fonds propres de 12,7 M€.",
+          "ventilationParActivite": {
+            "disponible": false,
+            "motif": "Les comptes déposés ne ventilent pas le chiffre d'affaires par ligne d'activité, et ni Seres ni Docaposte ne publient la part de la facturation électronique. Le chiffre d'affaires de Docaposte, 879 M€ en 2024 pour environ 6 500 collaborateurs, n'est pas ventilé par filiale. Aucune part attribuable à l'activité de plateforme agréée n'est estimée.",
+            "derniereVentilationConnue": null
+          }
+        },
+        "centralitePA": {
+          "indice": 3,
+          "niveau": "axe_strategique",
+          "marqueProduitDediee": "e-Facture PA",
+          "entiteJuridiqueDediee": false,
+          "faisceauIndices": [
+            {
+              "signal": "Le métier de l'entité est l'échange dématérialisé de documents commerciaux depuis 1988 : la plateforme agréée en est la continuation directe",
+              "sens": "+",
+              "preuve": "seres.fr ; SIREN 343778163, création le 08/02/1988, APE 63.11Z"
+            },
+            {
+              "signal": "Antériorité revendiquée d'environ vingt-cinq ans sur la facturation électronique",
+              "sens": "+",
+              "preuve": "seres.fr, relevé 21/08/2026"
+            },
+            {
+              "signal": "Marque produit dédiée à l'offre agréée",
+              "sens": "+",
+              "preuve": "seres.fr, offre e-Facture PA"
+            },
+            {
+              "signal": "Immatriculation en première vague, le 11/12/2025",
+              "sens": "+",
+              "preuve": "Liste DGFiP"
+            },
+            {
+              "signal": "Adossement à Docaposte, dont le positionnement d'ensemble est la confiance numérique, ce qui fait de l'agrément un actif de groupe et non un produit isolé",
+              "sens": "+",
+              "preuve": "Administrateurs DOCAPOSTE et BULL SAS au registre ; communication de Docaposte sur l'obtention du statut"
+            },
+            {
+              "signal": "Aucun site ni domaine dédiés à l'offre agréée, ni canal de gros documenté auprès d'éditeurs tiers",
+              "sens": "-",
+              "preuve": "Relevé de seres.fr le 21/08/2026"
+            },
+            {
+              "signal": "L'entité recule : chiffre d'affaires en baisse trois exercices de suite, basculement en perte en 2024, effectif passé de 118 à 98 salariés",
+              "sens": "-",
+              "preuve": "Comptes déposés au greffe, exercices 2021 à 2024"
+            }
+          ],
+          "lecture": "Chez Seres, la plateforme agréée n'est pas une diversification : c'est la forme réglementaire que prend un métier exercé depuis 1988. L'entité échange des documents commerciaux dématérialisés depuis trente-huit ans et revendique un quart de siècle sur la facturation électronique ; l'agrément, obtenu en première vague, prolonge cette activité plus qu'il ne l'élargit. L'adossement à Docaposte renforce cette lecture : sur un groupe dont le positionnement d'ensemble est la confiance numérique, l'agrément est un actif de groupe, pas un produit de filiale. L'indice 3 traduit cela. Il n'atteint pas 4 parce que le métier EDI de l'entité subsisterait sans l'agrément français. Une réserve doit être posée sur la trajectoire : le chiffre d'affaires recule depuis trois exercices, l'exercice 2024 est en perte et l'effectif décroît. La réforme arrive donc sur une entité en contraction, ce qui peut aussi bien signifier une opportunité de rebond qu'une capacité d'investissement contrainte.",
+          "confiance": "moyenne"
+        },
+        "referencesClients": {
+          "nbCiteesSurSite": null,
+          "parSecteur": {},
+          "grandsComptes": [],
+          "referencesPAConfirmees": [],
+          "source": "Aucune référence nommée relevée dans cette passe sur seres.fr. À reprendre : le site expose des cas clients dont le détail n'a pas été ouvert."
+        },
+        "reputation": {
+          "volumeAvis": null,
+          "synthese": "Aucun relevé d'avis agrégés effectué dans cette passe.",
+          "confiance": "non_qualifie"
+        },
+        "capaciteDeFrappe": {
+          "actionnaires": [
+            "DOCAPOSTE, administrateur",
+            "BULL SAS, administrateur",
+            "Groupe La Poste, par l'intermédiaire de Docaposte"
+          ],
+          "typeActionnaire": "filiale",
+          "financementRecent": "Aucune opération de capital publiée. Fonds propres de 12,7 M€ pour un capital social de 1 013 786 €. Docaposte a réalisé 879 M€ de chiffre d'affaires en 2024 avec environ 6 500 collaborateurs, 66 sites et 50 000 clients revendiqués.",
+          "acquisitions": [],
+          "modeleTarifaire": "Sur devis",
+          "tarifPublie": false,
+          "offreGratuite": false
+        },
+        "lectureConcurrentielle": "Seres est le concurrent dont la légitimité technique est la moins discutable et la trajectoire économique la plus préoccupante. Légitimité : trente-huit ans d'EDI, un quart de siècle de facturation électronique, une immatriculation en première vague, et l'adossement à Docaposte, bras numérique du groupe La Poste — soit une capacité de réassurance qu'aucun acteur indépendant de taille comparable ne peut offrir. Sur un dossier grands comptes ou parapublic, l'argument du groupe La Poste et de la confiance numérique porte, et il porte particulièrement là où la souveraineté des données est un critère. Trajectoire : l'entité immatriculée a réalisé 23,7 M€ de chiffre d'affaires en 2024, contre 27,6 M€ en 2022, avec une perte de 2,23 M€ et un effectif passé de 118 à 98 salariés. Trois enseignements pratiques. D'abord, la puissance à opposer n'est pas celle de Seres mais celle de Docaposte : c'est le nom du groupe qui sera mis en avant, pas les comptes de la filiale. Ensuite, l'absence de canal éditeurs et de site dédié suggère une distribution restée directe, donc une couverture commerciale plus étroite que celle d'un acteur qui vend en gros. Enfin, la contraction de l'effectif sur une entité qui doit absorber une réforme de cette ampleur est un point de vigilance opérationnel légitime à documenter, sans en tirer de conclusion : un groupe de la taille de Docaposte peut réaffecter des moyens sans que cela apparaisse dans les comptes de la filiale.",
+        "droitDeReponse": {
+          "signale": false,
+          "date": null,
+          "objet": null
+        }
+      },
+      "sourcesEnrichissement": [
+        {
+          "champ": "analyse360.poidsEconomique",
+          "source": "Comptes annuels déposés au greffe, SERES SIREN 343778163, exercices 2021 à 2024 : chiffre d'affaires 27,0 puis 27,6 puis 26,2 puis 23,7 M€ ; résultat net 2,61 M€ en 2022, +0,10 M€ en 2023, -2,23 M€ en 2024 ; effectif 118 en 2021, 102 en 2023, 98 en 2024 ; fonds propres 12,7 M€",
+          "dateReleve": "2026-08-21",
+          "confiance": "haute"
+        },
+        {
+          "champ": "identite",
+          "source": "Registre national des entreprises et répertoire SIRENE, SIREN 343778163 : société anonyme à conseil d'administration, créée le 08/02/1988, 45-47 boulevard Paul Vaillant Couturier 94200 Ivry-sur-Seine, capital 1 013 786 €, TVA FR43343778163, APE 63.11Z, RCS Créteil, président Charles Thillaye du Boullay, administrateurs DOCAPOSTE et BULL SAS, commissaire aux comptes KPMG",
+          "dateReleve": "2026-08-21",
+          "confiance": "haute"
+        },
+        {
+          "champ": "analyse360.capaciteDeFrappe",
+          "source": "Pages institutionnelles Docaposte : 879 M€ de chiffre d'affaires en 2024, environ 6 500 collaborateurs, 66 sites, 50 000 clients revendiqués",
+          "dateReleve": "2026-08-21",
+          "confiance": "moyenne"
+        },
+        {
+          "champ": "analyse360.centralitePA",
+          "source": "seres.fr : métier EDI depuis 1988, environ vingt-cinq ans de facturation électronique, offre e-Facture PA ; liste DGFiP, immatriculation du 11/12/2025",
+          "dateReleve": "2026-08-21",
+          "confiance": "moyenne"
+        },
+        {
+          "champ": "analyse360.centralitePA.indice",
+          "source": "Lecture Fluxym sur faisceau d'indices, méthode décrite dans Info IA/plateformes-agreees/cartographie-360-modele.md",
+          "dateReleve": "2026-08-21",
+          "confiance": "moyenne"
+        }
+      ]
+    }
+  ]
+}

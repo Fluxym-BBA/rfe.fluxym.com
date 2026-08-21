@@ -65,7 +65,7 @@
     const i = pa.identiteInternationale;
     if (!rempli(i)) return;
     const pf = i.presenceEnFrance || {};
-    const typesFr = { filiale: 'Filiale française', succursale: 'Succursale française', representant: 'Représentant en France', aucune_connue: 'Aucune entité française connue' };
+    const typesFr = { filiale: 'Filiale française', succursale: 'Succursale française', representant: 'Représentant en France', aucune_connue: 'Aucune entité française connue', aucune_identifiee: 'Aucune entité française identifiée' };
     document.getElementById('pa-international').innerHTML = dl([
       ['Pays du siège', val(i.paysISO)],
       ['Registre national', val(i.registreNational)],
@@ -98,7 +98,9 @@
         : NON_RELEVE],
       ligneCA(pe.caGroupe, 'Chiffre d\u2019affaires du groupe'),
       ligneCA(pe.caEntiteFrancaise, 'Chiffre d\u2019affaires de l\u2019entité française'),
-      ['Résultat net', rempli(pe.resultatNet) ? euros(pe.resultatNet) : NON_RELEVE],
+      ['Résultat net', rempli(pe.resultatNet)
+        ? (typeof pe.resultatNet === 'number' ? euros(pe.resultatNet) : pe.resultatNet)
+        : NON_RELEVE],
       ['Effectif du groupe', rempli(pe.effectifGroupe) ? String(pe.effectifGroupe) : NON_RELEVE],
       ['Effectif de l\u2019entité', val(pe.effectifEntite)],
       ['Répartition du chiffre d\u2019affaires par activité', vpa.disponible === false

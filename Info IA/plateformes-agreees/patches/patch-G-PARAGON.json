@@ -1,0 +1,220 @@
+{
+  "_patch": {
+    "id": "G-PARAGON",
+    "chantier": "G — analyse 360",
+    "societe": "PARAGON",
+    "auteur": "RFE_WebSite",
+    "dateReleve": "2026-08-21",
+    "nbPlateformes": 1,
+    "note": "Cercle 0, concurrent frontal. APPORT PRINCIPAL : les comptes déposés au greffe de l'entité immatriculée sont disponibles et montrent une trajectoire dégradée — chiffre d'affaires en recul de 13,7 % sur l'exercice clos le 30/06/2025 et trois exercices consécutifs en perte. Les références clients sont ici propres à l'offre agréée, ce qui est rare : 22 sociétés nommées sur le site dédié de la plateforme. NON TROUVÉ dans cette passe : chiffre d'affaires consolidé du groupe Paragon avec sa source primaire (le chiffre de 1,5 Md€ circule dans la presse spécialisée sans que le groupe, non coté, le publie lui-même), ventilation du chiffre d'affaires de l'entité par ligne d'activité, avis publics agrégés, volume d'offres d'emploi. PRÉCISION IMPORTANTE : PARAGON BUSINESS PROCESS SERVICES (SIREN 320496789) ne doit pas être confondue avec PARAGON TRANSACTION (SIREN 775722218), autre société française du même groupe dont le chiffre d'affaires est d'un autre ordre — c'est bien la première qui est immatriculée. ÉCART DE SOURCE : le président de l'entité est la société PARAGON FRANCE (SIREN 905242787) ; le groupe britannique Paragon n'a aucun lien avec Paragon ID, société cotée distincte."
+  },
+  "plateformes": [
+    {
+      "nom": "PARAGON",
+      "relationCapitalistique": "filiale_de_groupe",
+      "analyse360": {
+        "metierPrincipal": "Externalisation de processus documentaires et de gestion de flux clients et fournisseurs, adossée à un groupe britannique de communication et de services aux entreprises",
+        "activites": [
+          {
+            "libelle": "Dématérialisation et traitement de la facture fournisseur et client, revendiqués depuis plus de vingt ans",
+            "poids": "majeur",
+            "source": "paragon-pa.com, relevé 21/08/2026"
+          },
+          {
+            "libelle": "Plateforme agréée pour la facturation électronique, sous la marque IPP — Invoice Paragon Platform, dotée de son propre site",
+            "poids": "majeur",
+            "source": "paragon-pa.com, relevé 21/08/2026"
+          },
+          {
+            "libelle": "Externalisation de processus métier et gestion documentaire pour donneurs d'ordre",
+            "poids": "majeur",
+            "source": "APE 63.11Z traitement de données et hébergement ; pages institutionnelles Paragon"
+          },
+          {
+            "libelle": "Fourniture d'une brique agréée en marque blanche aux éditeurs de logiciels de gestion",
+            "poids": "significatif",
+            "source": "paragon-pa.com, parcours dédié aux éditeurs souhaitant ajouter une brique agréée à leur offre"
+          },
+          {
+            "libelle": "Reprise de clients issus d'une autre plateforme agréée, présentée comme un parcours à part entière",
+            "poids": "mineur",
+            "source": "paragon-pa.com, parcours « changer de plateforme »"
+          }
+        ],
+        "poidsEconomique": {
+          "caEntiteFrancaise": {
+            "montantMEUR": 18.9,
+            "exercice": "clos le 30/06/2025",
+            "nature": "comptes_deposes",
+            "source": "Comptes annuels déposés au greffe, SIREN 320496789",
+            "dateReleve": "2026-08-21"
+          },
+          "effectifEntite": "250 à 499 salariés (INSEE, donnée 2023)",
+          "resultatNet": "Perte de 1,12 M€ sur l'exercice clos le 30/06/2025, après une perte de 1,44 M€ en 2024 et de 2,58 M€ en 2023 ; dernier exercice bénéficiaire en 2022 (+0,59 M€). Fonds propres de 2,28 M€ pour un capital social de 3 M€.",
+          "ventilationParActivite": {
+            "disponible": false,
+            "motif": "Les comptes déposés ne ventilent pas le chiffre d'affaires par ligne d'activité. Le groupe Paragon n'est pas coté et ne publie pas de comptes consolidés accessibles ; le chiffre de 1,5 Md€ et l'effectif de plus de 9 000 personnes circulent dans la presse spécialisée sans source primaire vérifiable. Aucune part attribuable à l'activité de plateforme agréée n'est estimée.",
+            "derniereVentilationConnue": null
+          }
+        },
+        "centralitePA": {
+          "indice": 3,
+          "niveau": "axe_strategique",
+          "marqueProduitDediee": "IPP — Invoice Paragon Platform",
+          "entiteJuridiqueDediee": false,
+          "faisceauIndices": [
+            {
+              "signal": "Site internet entièrement dédié à l'offre agréée, sur un nom de domaine propre",
+              "sens": "+",
+              "preuve": "paragon-pa.com, distinct du site institutionnel du groupe"
+            },
+            {
+              "signal": "Marque produit dédiée, IPP — Invoice Paragon Platform",
+              "sens": "+",
+              "preuve": "paragon-pa.com"
+            },
+            {
+              "signal": "Canal de gros documenté : parcours dédié aux éditeurs de logiciels voulant ajouter une brique agréée à leur offre",
+              "sens": "+",
+              "preuve": "paragon-pa.com, parcours éditeurs"
+            },
+            {
+              "signal": "Parcours de reprise de clients venant d'une autre plateforme agréée, ce qui suppose une intention de conquête et pas seulement de rétention",
+              "sens": "+",
+              "preuve": "paragon-pa.com, parcours « changer de plateforme »"
+            },
+            {
+              "signal": "Références clients propres à l'offre agréée : 22 sociétés nommées, ce qui est exceptionnel dans le référentiel",
+              "sens": "+",
+              "preuve": "paragon-pa.com, page références"
+            },
+            {
+              "signal": "Antériorité revendiquée de plus de vingt ans sur la dématérialisation de factures",
+              "sens": "+",
+              "preuve": "paragon-pa.com"
+            },
+            {
+              "signal": "Aucune entité juridique dédiée : l'immatriculation porte sur la société d'externalisation elle-même",
+              "sens": "-",
+              "preuve": "SIREN 320496789, APE 63.11Z"
+            },
+            {
+              "signal": "L'entité immatriculée est en difficulté économique : chiffre d'affaires en recul de 13,7 % sur le dernier exercice et trois exercices consécutifs en perte",
+              "sens": "-",
+              "preuve": "Comptes déposés au greffe, exercices clos les 30/06/2023, 2024 et 2025"
+            }
+          ],
+          "lecture": "Paragon présente le faisceau d'indices le plus fourni du référentiel à ce stade : un site dédié sur un domaine propre, une marque produit distincte, un canal de gros assumé auprès des éditeurs, un parcours de reprise de clients venant d'une autre plateforme, et surtout vingt-deux références nommées sur l'offre agréée elle-même. Aucun de ces éléments ne s'improvise : ils supposent un budget et une équipe. L'indice 3 est donc solide. Il n'atteint pas 4 parce que le métier de l'entité reste l'externalisation de processus documentaires, dont la facture n'est qu'un objet parmi d'autres. Une réserve doit être posée : cet investissement se déploie dans une entité dont le chiffre d'affaires recule et qui a perdu de l'argent trois exercices de suite. La plateforme agréée ressemble ici moins à une diversification confortable qu'à un pari de croissance sur une activité en repli.",
+          "confiance": "haute"
+        },
+        "referencesClients": {
+          "nbCiteesSurSite": 22,
+          "parSecteur": {
+            "finance": [
+              "AG2R La Mondiale",
+              "Agrica",
+              "Malakoff Humanis",
+              "iQera"
+            ],
+            "transport": [
+              "Air Corsica",
+              "InXpress",
+              "Leaseway",
+              "Alphabet"
+            ],
+            "btp": [
+              "Nexity",
+              "Les Nouveaux Constructeurs",
+              "Vinci"
+            ],
+            "industrie": [
+              "Cetim",
+              "Fichorga",
+              "Mader",
+              "Groupe Rocher"
+            ],
+            "services": [
+              "Gi Group",
+              "Intelcia",
+              "Neoteem",
+              "SGS",
+              "Spirit",
+              "Bayard"
+            ],
+            "sante": [
+              "Domitys"
+            ]
+          },
+          "grandsComptes": [
+            "Vinci",
+            "Nexity",
+            "AG2R La Mondiale",
+            "Malakoff Humanis",
+            "Groupe Rocher",
+            "SGS",
+            "Intelcia"
+          ],
+          "referencesPAConfirmees": [
+            "Les 22 sociétés citées le sont sur le site dédié à la plateforme agréée, et non sur le site institutionnel du groupe : ce sont donc des références de l'offre de dématérialisation de factures, ce qui est un niveau de preuve supérieur à la moyenne du référentiel"
+          ],
+          "source": "paragon-pa.com, page références, relevé le 21/08/2026. Secteurs déclarés par la plateforme : logistique, transport, immobilier, industrie, banque et assurance."
+        },
+        "reputation": {
+          "volumeAvis": null,
+          "synthese": "Aucun relevé d'avis agrégés effectué dans cette passe.",
+          "confiance": "non_qualifie"
+        },
+        "capaciteDeFrappe": {
+          "actionnaires": [
+            "PARAGON FRANCE (SIREN 905242787), président de l'entité",
+            "Groupe Paragon, Royaume-Uni, société non cotée"
+          ],
+          "typeActionnaire": "filiale",
+          "financementRecent": "Aucune opération de capital publiée sur l'entité française. Trésorerie de 5,62 M€ et fonds propres de 2,28 M€ à la clôture du 30/06/2025, pour un capital social de 3 M€.",
+          "acquisitions": [],
+          "modeleTarifaire": "Offre par paliers présentée comme évolutive, du socle de conformité aux services complémentaires ; tarifs non chiffrés publiquement",
+          "tarifPublie": false,
+          "offreGratuite": false
+        },
+        "lectureConcurrentielle": "Paragon est le concurrent qui a le plus investi visiblement dans son offre agréée, et celui dont l'entité porteuse est la plus fragile financièrement. Les deux constats doivent être tenus ensemble. Côté offre : un site dédié, une marque produit, quarante-quatre cas d'usage annoncés, un parcours de reprise de clients d'une autre plateforme, et vingt-deux références nommées sur l'offre elle-même — c'est le meilleur niveau de preuve rencontré dans le référentiel à ce stade. Le positionnement est clairement ETI et grands comptes à forte volumétrie, avec une concentration marquée sur l'assurance et la protection sociale, l'immobilier et la promotion, et les services aux entreprises. Côté entité : 18,9 M€ de chiffre d'affaires sur l'exercice clos au 30/06/2025, en recul de 13,7 %, trois exercices consécutifs en perte et des fonds propres de 2,28 M€ tombés sous le capital social. Deux lectures commerciales en découlent. La première est que Paragon a besoin de ces contrats : sur un appel d'offres, une agressivité tarifaire est plausible, et le canal éditeurs en marque blanche va dans le même sens — c'est un modèle de volume. La seconde est que la question de la pérennité de l'exploitant sera légitimement posée par un directeur financier prudent, la plateforme agréée étant un engagement de long terme sur un processus critique.",
+        "droitDeReponse": {
+          "signale": false,
+          "date": null,
+          "objet": null
+        }
+      },
+      "sourcesEnrichissement": [
+        {
+          "champ": "analyse360.poidsEconomique",
+          "source": "Comptes annuels déposés au greffe, PARAGON BUSINESS PROCESS SERVICES SIREN 320496789, exercices clos les 30/06/2022 à 30/06/2025 : chiffre d'affaires 20,5 puis 18,9 puis 21,9 puis 18,9 M€ ; résultat net +0,59 puis -2,58 puis -1,44 puis -1,12 M€ ; fonds propres 2,28 M€ ; trésorerie 5,62 M€",
+          "dateReleve": "2026-08-21",
+          "confiance": "haute"
+        },
+        {
+          "champ": "identite",
+          "source": "Registre national des entreprises et répertoire SIRENE, SIREN 320496789 : SAS, créée le 03/11/1980, immatriculée au RCS de Lille Métropole le 17/12/1980, 274 boulevard Clemenceau 59700 Marcq-en-Barœul, capital 3 000 000 €, TVA FR92320496789, APE 63.11Z, clôture au 30/06, président PARAGON FRANCE (SIREN 905242787), directeurs généraux Guilhem Boucon, Pauric Crean et Liam Devane",
+          "dateReleve": "2026-08-21",
+          "confiance": "haute"
+        },
+        {
+          "champ": "analyse360.centralitePA",
+          "source": "paragon-pa.com, site dédié à la plateforme agréée : marque IPP — Invoice Paragon Platform, plus de vingt ans de dématérialisation de factures, quarante-quatre cas d'usage, parcours éditeurs pour l'ajout d'une brique agréée, parcours de changement de plateforme, offre par paliers",
+          "dateReleve": "2026-08-21",
+          "confiance": "haute"
+        },
+        {
+          "champ": "analyse360.referencesClients",
+          "source": "paragon-pa.com, page références : AG2R La Mondiale, Agrica, Air Corsica, Alphabet, Bayard, Cetim, Domitys, Fichorga, Gi Group, Groupe Rocher, Intelcia, InXpress, iQera, Leaseway, Les Nouveaux Constructeurs, Mader, Malakoff Humanis, Neoteem, Nexity, SGS, Spirit, Vinci",
+          "dateReleve": "2026-08-21",
+          "confiance": "haute"
+        },
+        {
+          "champ": "analyse360.centralitePA.indice",
+          "source": "Lecture Fluxym sur faisceau d'indices, méthode décrite dans Info IA/plateformes-agreees/cartographie-360-modele.md",
+          "dateReleve": "2026-08-21",
+          "confiance": "moyenne"
+        }
+      ]
+    }
+  ]
+}
