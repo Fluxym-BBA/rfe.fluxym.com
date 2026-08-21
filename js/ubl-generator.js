@@ -1,10 +1,24 @@
 /**
- * UBL-GENERATOR.JS v3c
+ * UBL-GENERATOR.JS v4
  * Cas d'usage AFNOR XP Z12-014 — donnees uniques et realistes
  * Config-driven + ZIP pour litige-avoir, litige-rectificative, pack B
  *
  * Auteur: Bruno BARTOLI — Fluxym / Re-Form-E
  * Date: 2026-08-21
+ * Changelog v4 — composition hierarchique de la facture (refonte ergonomique) :
+ *   - getArtifactOptions (liste plate de 7 artefacts) remplace par getComposition :
+ *     { format, embed, side }. Le format de la facture est un choix EXCLUSIF
+ *     (UBL 2.1, CII D22B ou Factur-X), ce qui est embarque dans le fichier de
+ *     facture est un choix independant, et les PDF autonomes en sont un troisieme
+ *     - le bloc monolithique "3 pieces jointes" n'a plus cours : lisible, bon de
+ *     commande et bon de livraison s'embarquent separement, dans n'importe quelle
+ *     combinaison, en UBL comme en CII
+ *   - demander l'embarquement d'un bon n'impose plus de telecharger son PDF, et
+ *     reciproquement : les etages B et C ne se commandent plus l'un l'autre
+ *   - Factur-X : la representation lisible est vraie par construction (le PDF/A-3B
+ *     EST le lisible), donc aucun BG-24 LISIBLE n'est emis
+ *   - composeSuffix : source unique du nom de fichier, partagee avec le
+ *     recapitulatif affiche avant le clic
  * Changelog v3g — decouplage des pieces jointes (lot 5) :
  *   - getArtifactOptions expose annexFiles, distinct de annexes : embarquer les
  *     bons de commande et de livraison dans le XML (BG-24) et les telecharger en
@@ -989,45 +1003,63 @@ const UBLGenerator = {
         return typeof PDFLisible !== 'undefined' && this.PDF_CASES.indexOf(usecase) !== -1;
     },
 
-    // Lecture des cases a cocher "Contenu du telechargement".
-    // Repli sur l'UBL nu seul si le lisible n'est pas disponible
-    // pour le cas, ou si l'utilisateur a tout decoche.
-    getArtifactOptions: function(usecase) {
-        var read = function(id, fallback) {
+    // Lecture de la composition demandee dans l'etape 3 de la Fabrique.
+    // Le modele est hierarchique et non plus une liste plate d'artefacts :
+    //   format  : la syntaxe de la facture, un choix exclusif
+    //   embed   : ce qui voyage A L'INTERIEUR du fichier de facture (BG-24)
+    //   side    : les memes pieces livrees en PDF autonomes, a cote
+    // Distinguer embed de side est la raison d'etre de ce modele : embarquer
+    // un bon de livraison dans le XML ne doit rien imposer sur les fichiers
+    // telecharges, et inversement.
+    getComposition: function(usecase) {
+        var read = function(id) {
             var el = document.getElementById(id);
-            return el ? el.checked : fallback;
+            return !!(el && el.checked);
         };
-        var opts = {
-            ubl: read('opt-ubl', true),
-            ublWithPdf: read('opt-ubl-pdf', false),
-            pdf: read('opt-pdf', false),
-            // Variante multi-pieces jointes : LISIBLE + BON_COMMANDE + BON_LIVRAISON
-            // embarques dans le XML (BG-24).
-            annexes: read('opt-annexes', false),
-            // Livraison des memes bons de commande et de livraison en PDF
-            // autonomes. Choix INDEPENDANT de l'embarquement : on peut vouloir
-            // le XML multi-PJ sans les PDF a cote, ou l'inverse.
-            annexFiles: read('opt-annexes-files', false),
-            // Syntaxe UN/CEFACT CII D22B : socle du futur Factur-X, et
-            // demonstration qu'une meme facture EN 16931 s'ecrit dans deux
-            // syntaxes sans changer d'un centime.
-            cii: read('opt-cii', false),
-            // Factur-X : PDF/A-3B portant le CII en fichier associe.
-            facturx: read('opt-facturx', false)
+        var picked = document.querySelector('input[name="fab-format"]:checked');
+        var comp = {
+            format: (picked && picked.value) || 'ubl',
+            embed: {
+                lisible:  read('embed-lisible'),
+                order:    read('embed-order'),
+                despatch: read('embed-despatch')
+            },
+            side: {
+                lisible:  read('side-lisible'),
+                order:    read('side-order'),
+                despatch: read('side-despatch')
+            }
         };
-        // Le Factur-X est un PDF/A-3B : il suppose une representation lisible
-        // verifiee pour le cas. Sans elle, on ne produit pas un hybride dont
-        // la face lisible n'aurait pas ete controlee.
+
+        // Le Factur-X EST la representation lisible : le PDF/A-3B porte le
+        // rendu humain par construction. La case est donc vraie d'office,
+        // sans qu'aucun BG-24 LISIBLE ne soit emis (le PDF ne peut pas etre
+        // sa propre piece jointe).
+        if (comp.format === 'facturx') comp.embed.lisible = true;
+
+        // Sans representation lisible verifiee pour le cas, on ne produit ni
+        // PDF, ni hybride, ni piece jointe : la facture reste nue.
         if (!this.supportsPdf(usecase)) {
-            opts.ublWithPdf = false;
-            opts.pdf = false;
-            opts.annexes = false;
-            opts.annexFiles = false;
-            opts.facturx = false;
+            if (comp.format === 'facturx') comp.format = 'ubl';
+            comp.embed = { lisible: false, order: false, despatch: false };
+            comp.side  = { lisible: false, order: false, despatch: false };
         }
-        if (!opts.ubl && !opts.ublWithPdf && !opts.pdf && !opts.annexes &&
-            !opts.annexFiles && !opts.cii && !opts.facturx) opts.ubl = true;
-        return opts;
+        return comp;
+    },
+
+    // Suffixe du fichier de facture, deduit de la composition. Source unique
+    // pour le nom reellement telecharge ET pour le recapitulatif affiche
+    // avant le clic : l'ecart entre les deux serait un bug.
+    composeSuffix: function(format, embed) {
+        var tags = [];
+        if (embed.lisible && format !== 'facturx') tags.push('lisible');
+        if (embed.order) tags.push('BC');
+        if (embed.despatch) tags.push('BL');
+        if (format === 'facturx') {
+            return tags.length ? '_FACTURX_avec_' + tags.join('-') + '.pdf' : '_FACTURX.pdf';
+        }
+        var base = (format === 'cii') ? '_CII' : '_UBL';
+        return tags.length ? base + '_avec_' + tags.join('-') + '.xml' : base + '.xml';
     },
 
     // Declenche le telechargement d'un Blob sous un nom donne.
@@ -1616,7 +1648,7 @@ const UBLGenerator = {
 
                     // Les deux memes documents en syntaxe CII, pour comparer
                     // l'expression d'une rectification dans les deux formats.
-                    if (self.getArtifactOptions(usecase).cii) {
+                    if (self.getComposition(usecase).format === 'cii') {
                         var pOrig = buildCiiPivot(originalNum, "380", originalData, null, null, null);
                         if (pOrig) zip.file(originalNum + "_Facture_Originale_380_CII.xml", CIIGenerator.build(pOrig));
                         var pRect = buildCiiPivot(rectNum, "384", rectData, null, null, originalNum);
@@ -1674,7 +1706,7 @@ const UBLGenerator = {
                     // racine (CreditNote au lieu d'Invoice) alors que l'avoir CII
                     // conserve rsm:CrossIndustryInvoice et se signale par le seul
                     // ram:TypeCode 381.
-                    if (self.getArtifactOptions(usecase).cii) {
+                    if (self.getComposition(usecase).format === 'cii') {
                         var pFac = buildCiiPivot(originalInvoiceNum, "380", null, poNumber, null, null);
                         if (pFac) zip.file(originalInvoiceNum + "_Cas_" + usecase + "_Facture_Litige_CII.xml", CIIGenerator.build(pFac));
                         var pAv = buildCiiPivot(creditNoteNum, "381", creditData, poNumber, null, originalInvoiceNum);
@@ -1697,47 +1729,121 @@ const UBLGenerator = {
 
             } else {
                 // ========================================
-                // FICHIER SIMPLE ou TRIPTYQUE
-                // UBL nu / UBL avec lisible embarque / PDF lisible
+                // COMPOSITION A LA CARTE
+                // Un seul fichier de facture, dans le format choisi, portant
+                // exactement les pieces demandees. Les PDF autonomes ne sont
+                // ajoutes que s'ils ont ete explicitement coches.
                 // ========================================
-                var opts = self.getArtifactOptions(usecase);
+                var comp = self.getComposition(usecase);
                 var baseName = numeroFacture + "_Cas_" + usecase + "_" + nomExplicatif;
                 var artifacts = [];
-                var pdfDoc = null;
-                var annexDocs = null;
+                var renderData = null;
+                var pdfDoc = null, orderDoc = null, despatchDoc = null;
 
-                // Le PDF est genere UNE SEULE FOIS et sert aux deux usages :
-                // fichier autonome et objet binaire base64 de BT-125. Les annexes
-                // sont produites depuis le MEME modele pivot, ce qui garantit que
-                // bon de commande, bon de livraison et facture concordent.
-                if (opts.pdf || opts.ublWithPdf || opts.annexes || opts.annexFiles || opts.facturx) {
-                    var renderData = buildRenderData(numeroFacture, invoiceTypeCode, null);
+                var needLisible  = comp.embed.lisible || comp.side.lisible || comp.format === 'facturx';
+                var needOrder    = comp.embed.order || comp.side.order;
+                var needDespatch = comp.embed.despatch || comp.side.despatch;
+
+                // Le modele pivot est construit UNE SEULE FOIS : lisible, bon de
+                // commande et bon de livraison en descendent tous les trois, ce
+                // qui garantit qu'ils concordent au centime avec la facture.
+                if (needLisible || needOrder || needDespatch) {
+                    renderData = buildRenderData(numeroFacture, invoiceTypeCode, null);
                     if (renderData) {
-                        pdfDoc = PDFLisible.build(renderData);
-                        if (opts.annexes || opts.annexFiles) {
-                            annexDocs = [
-                                PDFAnnexes.buildOrder(renderData),
-                                PDFAnnexes.buildDespatch(renderData)
-                            ];
-                        }
+                        if (needLisible) pdfDoc = PDFLisible.build(renderData);
+                        if (needOrder) orderDoc = PDFAnnexes.buildOrder(renderData);
+                        if (needDespatch) despatchDoc = PDFAnnexes.buildDespatch(renderData);
                     } else {
-                        opts.pdf = false;
-                        opts.ublWithPdf = false;
-                        opts.annexes = false;
-                        opts.annexFiles = false;
-                        opts.facturx = false;
-                        opts.ubl = true;
+                        // Repli : plutot que de livrer un hybride dont la face
+                        // lisible n'a pas pu etre produite, on livre la facture nue.
+                        comp.embed = { lisible: false, order: false, despatch: false };
+                        comp.side  = { lisible: false, order: false, despatch: false };
+                        if (comp.format === 'facturx') comp.format = 'ubl';
                     }
                 }
 
-                var lisibleAtt = pdfDoc ? {
-                    id: numeroFacture + "-LISIBLE",
-                    description: "LISIBLE",
-                    filename: pdfDoc.filename,
-                    base64: pdfDoc.base64
-                } : null;
+                var toAttachment = function(doc) {
+                    return {
+                        id: numeroFacture + "-" + doc.description,
+                        description: doc.description,
+                        filename: doc.filename,
+                        base64: doc.base64,
+                        docNumber: doc.number
+                    };
+                };
 
-                if (opts.ubl) {
+                // BG-24 : les pieces embarquees dans le fichier de facture.
+                // Une seule valeur LISIBLE au maximum (BR-FR-18).
+                var embedded = [];
+                if (comp.embed.lisible && comp.format !== 'facturx' && pdfDoc) {
+                    embedded.push({
+                        id: numeroFacture + "-LISIBLE",
+                        description: "LISIBLE",
+                        filename: pdfDoc.filename,
+                        base64: pdfDoc.base64
+                    });
+                }
+                if (comp.embed.order && orderDoc) embedded.push(toAttachment(orderDoc));
+                if (comp.embed.despatch && despatchDoc) embedded.push(toAttachment(despatchDoc));
+                var attList = embedded.length ? embedded : null;
+
+                var suffix = self.composeSuffix(comp.format, comp.embed);
+
+                if (comp.format === 'ubl') {
+                    artifacts.push({
+                        name: baseName + suffix,
+                        blob: new Blob([buildXML(numeroFacture, invoiceTypeCode, false, precedingRefId, "PO-1001", null, attList)],
+                            { type: "application/xml" })
+                    });
+
+                } else if (comp.format === 'cii') {
+                    // Meme pivot que l'UBL : un ecart de montant entre les deux
+                    // syntaxes serait un bug, pas une difference de format.
+                    var ciiPivot = buildCiiPivot(numeroFacture, invoiceTypeCode, null, "PO-1001", attList);
+                    if (ciiPivot) {
+                        var ciiXml = CIIGenerator.build(ciiPivot);
+                        var ciiErr = CIIGenerator.verify(ciiPivot, ciiXml);
+                        if (ciiErr.length) console.warn("CII : incoherences detectees", ciiErr);
+                        artifacts.push({
+                            name: baseName + suffix,
+                            blob: new Blob([ciiXml], { type: "application/xml" })
+                        });
+                    }
+
+                } else if (comp.format === 'facturx' && renderData) {
+                    // Le PDF ETANT le document lisible, la valeur LISIBLE du
+                    // BT-123 n'a pas lieu d'etre. Les bons demandes voyagent
+                    // comme fichiers associes du PDF/A-3 (relation /Supplement)
+                    // plutot que recopies en base64 dans le XML, mais le BT-16
+                    // reste emis : une reference documentaire garde son sens
+                    // quel que soit le conteneur qui transporte le fichier.
+                    var fxDocs = [];
+                    if (comp.embed.order && orderDoc) fxDocs.push(orderDoc);
+                    if (comp.embed.despatch && despatchDoc) fxDocs.push(despatchDoc);
+
+                    var fxRefs = fxDocs.length ? fxDocs.map(function(a) {
+                        return { description: a.description, docNumber: a.number };
+                    }) : null;
+
+                    var fxPivot = buildCiiPivot(numeroFacture, invoiceTypeCode, null, "PO-1001", fxRefs);
+                    if (fxPivot) {
+                        fxPivot.attachments = [];
+                        var fxXml = CIIGenerator.build(fxPivot);
+                        var fxErr = CIIGenerator.verify(fxPivot, fxXml);
+                        if (fxErr.length) console.warn("Factur-X : incoherences detectees", fxErr);
+                        var fxFiles = fxDocs.length ? fxDocs.map(function(a) {
+                            return { filename: a.filename, desc: a.description, raw: a.raw };
+                        }) : null;
+                        var fxDoc = PDFFacturX.buildFacturX(renderData, fxXml, fxFiles);
+                        artifacts.push({
+                            name: baseName + suffix,
+                            blob: PDFFacturX.toBlob(fxDoc.raw)
+                        });
+                    }
+                }
+
+                // Garde-fou : quoi qu'il arrive, on ne repart jamais les mains vides.
+                if (!artifacts.length) {
                     artifacts.push({
                         name: baseName + "_UBL.xml",
                         blob: new Blob([buildXML(numeroFacture, invoiceTypeCode, false, precedingRefId, "PO-1001")],
@@ -1745,120 +1851,16 @@ const UBLGenerator = {
                     });
                 }
 
-                if (opts.ublWithPdf && lisibleAtt) {
-                    artifacts.push({
-                        name: baseName + "_UBL_avec_lisible.xml",
-                        blob: new Blob([buildXML(numeroFacture, invoiceTypeCode, false, precedingRefId, "PO-1001", null, lisibleAtt)],
-                            { type: "application/xml" })
-                    });
+                // Etage C : les memes pieces en PDF autonomes. Jamais cochees
+                // par defaut, jamais imposees par un choix de l'etage B.
+                if (comp.side.lisible && pdfDoc) {
+                    artifacts.push({ name: pdfDoc.filename, blob: PDFLisible.toBlob(pdfDoc.raw) });
                 }
-
-                // Variante a trois pieces jointes, livree EN PLUS de la variante a
-                // une seule : elle permet de comparer le comportement d'une
-                // plateforme sur les deux formes de la meme facture.
-                if (opts.annexes && lisibleAtt && annexDocs) {
-                    var allAtt = [lisibleAtt].concat(annexDocs.map(function(a) {
-                        return {
-                            id: numeroFacture + "-" + a.description,
-                            description: a.description,
-                            filename: a.filename,
-                            base64: a.base64,
-                            docNumber: a.number
-                        };
-                    }));
-                    artifacts.push({
-                        name: baseName + "_UBL_avec_3_PJ.xml",
-                        blob: new Blob([buildXML(numeroFacture, invoiceTypeCode, false, precedingRefId, "PO-1001", null, allAtt)],
-                            { type: "application/xml" })
-                    });
+                if (comp.side.order && orderDoc) {
+                    artifacts.push({ name: orderDoc.filename, blob: PDFAnnexes.toBlob(orderDoc.raw) });
                 }
-
-                // Meme facture, syntaxe UN/CEFACT CII D22B. Le pivot etant
-                // partage avec l'UBL, un ecart de montant entre les deux fichiers
-                // serait un bug et non une difference de format : CIIGenerator.verify
-                // le controle a chaque generation.
-                if (opts.cii) {
-                    var ciiPivot = buildCiiPivot(numeroFacture, invoiceTypeCode, null, "PO-1001", null);
-                    if (ciiPivot) {
-                        var ciiXml = CIIGenerator.build(ciiPivot);
-                        var ciiErr = CIIGenerator.verify(ciiPivot, ciiXml);
-                        if (ciiErr.length) console.warn("CII : incoherences detectees", ciiErr);
-                        artifacts.push({
-                            name: baseName + "_CII.xml",
-                            blob: new Blob([ciiXml], { type: "application/xml" })
-                        });
-                    }
-                }
-
-                if (opts.cii && opts.annexes && lisibleAtt && annexDocs) {
-                    var ciiAtt = [lisibleAtt].concat(annexDocs.map(function(a) {
-                        return {
-                            id: numeroFacture + "-" + a.description,
-                            description: a.description,
-                            filename: a.filename,
-                            base64: a.base64,
-                            docNumber: a.number
-                        };
-                    }));
-                    var ciiPivotPj = buildCiiPivot(numeroFacture, invoiceTypeCode, null, "PO-1001", ciiAtt);
-                    if (ciiPivotPj) {
-                        artifacts.push({
-                            name: baseName + "_CII_avec_3_PJ.xml",
-                            blob: new Blob([CIIGenerator.build(ciiPivotPj)], { type: "application/xml" })
-                        });
-                    }
-                }
-
-                // FACTUR-X : le PDF/A-3 et le CII reunis dans un seul fichier.
-                // Le PDF ne peut pas etre sa propre piece jointe : la valeur
-                // LISIBLE du BT-123 disparait donc, le PDF ETANT le document
-                // lisible. Les bons de commande et de livraison sont embarques
-                // comme fichiers associes du PDF/A-3, avec la relation
-                // /Supplement, plutot que recopies en base64 dans le XML.
-                //
-                // BT-16 reste neanmoins emis : une reference documentaire garde
-                // son sens meme lorsque le fichier voyage dans le conteneur PDF
-                // et non dans le XML. On transmet donc au pivot des annexes
-                // reduites a leur identite, avant de vider BG-24.
-                if (opts.facturx && renderData) {
-                    var fxRefs = (opts.annexes && annexDocs)
-                        ? annexDocs.map(function(a) {
-                            return { description: a.description, docNumber: a.number };
-                        })
-                        : null;
-                    var fxPivot = buildCiiPivot(numeroFacture, invoiceTypeCode, null, "PO-1001", fxRefs);
-                    if (fxPivot) {
-                        fxPivot.attachments = [];
-                        var fxXml = CIIGenerator.build(fxPivot);
-                        var fxErr = CIIGenerator.verify(fxPivot, fxXml);
-                        if (fxErr.length) console.warn("Factur-X : incoherences detectees", fxErr);
-                        var fxFiles = (opts.annexes && annexDocs)
-                            ? annexDocs.map(function(a) {
-                                return { filename: a.filename, desc: a.description, raw: a.raw };
-                            })
-                            : null;
-                        var fxDoc = PDFFacturX.buildFacturX(renderData, fxXml, fxFiles);
-                        artifacts.push({
-                            name: fxDoc.filename,
-                            blob: PDFFacturX.toBlob(fxDoc.raw)
-                        });
-                    }
-                }
-
-                if (opts.pdf && pdfDoc) {
-                    artifacts.push({
-                        name: pdfDoc.filename,
-                        blob: PDFLisible.toBlob(pdfDoc.raw)
-                    });
-                }
-
-                // Bons de commande et de livraison en PDF autonomes : uniquement
-                // si l'utilisateur les a explicitement demandes. Cocher la
-                // variante XML multi-PJ n'impose plus de les telecharger.
-                if (opts.annexFiles && annexDocs) {
-                    annexDocs.forEach(function(a) {
-                        artifacts.push({ name: a.filename, blob: PDFAnnexes.toBlob(a.raw) });
-                    });
+                if (comp.side.despatch && despatchDoc) {
+                    artifacts.push({ name: despatchDoc.filename, blob: PDFAnnexes.toBlob(despatchDoc.raw) });
                 }
 
                 if (artifacts.length === 1) {

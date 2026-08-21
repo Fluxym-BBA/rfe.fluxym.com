@@ -85,7 +85,7 @@ const SiteNav = {
                     <a href="./outils.html" class="nav-link nav-cta">🧰 Outils <span class="nav-arrow">▾</span></a>
                     <ul class="nav-submenu">
                         <li><a href="./outils.html">🧰 Tous les outils</a></li>
-                        <li><a href="./generateur.html">🏭 La Fabrique</a></li>
+                        <li><a href="./generateur.html">🏭 La Fabrique de factures</a></li>
                         <li><a href="./validateur.html">🔍 Validateur XSD & Schematron</a></li>
                         <li><a href="./transcodification.html">🧭 Matrice de transcodification</a></li>
                         <li><a href="./tutoriels.html">🎬 Guide vidéo</a></li>
@@ -160,7 +160,7 @@ const SiteNav = {
                             <li><a href="./ressources.html">Liens & outils</a></li>
                             <li><a href="./referentiel.html">Référentiel &amp; versions</a></li>
                             <li><a href="./outils.html">Les outils</a></li>
-                            <li><a href="./generateur.html">La Fabrique</a></li>
+                            <li><a href="./generateur.html">La Fabrique de factures</a></li>
                             <li><a href="./validateur.html">Validateur XSD &amp; Schematron</a></li>
                             <li><a href="./transcodification.html">Matrice de transcodification</a></li>
                             <li><a href="./tutoriels.html">Guide vidéo</a></li>

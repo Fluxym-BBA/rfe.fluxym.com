@@ -1,21 +1,25 @@
 /**
- * GENERATOR-UI.JS v4 — La Fabrique de factures électroniques
+ * GENERATOR-UI.JS v5 — La Fabrique de factures électroniques
  * Auteur: Bruno BARTOLI — Fluxym / Re·Form·E
  * Date: 2026-08-21
  *
- * Changelog v4 — refonte ergonomique :
- *   - Parcours en trois étapes : le cas d'usage, les acteurs, les livrables.
- *   - Les livrables ne sont plus une liste de cases : trois formules de départ
- *     (Facture seule / Facture + lisible / Pack complet) et une composition
- *     détaillée repliable, en cartes à bascule groupées par famille.
- *   - Récapitulatif live : l'utilisateur voit ce qu'il va télécharger AVANT
- *     de cliquer, fichier par fichier.
- *   - Plus rien n'est imposé. Par défaut : la facture UBL nue, et rien d'autre.
- *   - Pièces jointes découplées : embarquer le bon de commande et le bon de
- *     livraison dans le XML (opt-annexes) et les récupérer en PDF autonomes
- *     (opt-annexes-files) sont désormais deux choix indépendants.
- *   - La sélection de l'utilisateur est mémorisée : changer de cas d'usage
- *     grise les livrables indisponibles sans effacer l'intention initiale.
+ * Changelog v5 — composition hiérarchique de la facture :
+ *   - L'étape 3 n'est plus une liste plate de livrables mais trois étages
+ *     ordonnés : A le format de la facture (choix exclusif), B ce qui est
+ *     embarqué dans le fichier de facture, C les PDF autonomes à côté.
+ *   - Le format se choisit AVANT le contenu : on ne compose pas une pièce
+ *     jointe sans savoir dans quoi elle voyage.
+ *   - Factur-X : la représentation lisible est cochée et verrouillée, elle est
+ *     inhérente au format (le PDF/A-3B EST le lisible).
+ *   - Embarquer un bon de commande ou de livraison dans la facture et le
+ *     récupérer en PDF autonome sont deux décisions séparées, dans deux étages
+ *     distincts. L'étage C est décoché par défaut, toujours.
+ *   - Les formules de départ (facture / lisible / pack complet) sont retirées :
+ *     la hiérarchie des trois étages rend le raccourci inutile et ambigu.
+ *   - Récapitulatif live : nom de fichier calculé par UBLGenerator.composeSuffix,
+ *     donc strictement identique à ce qui sera téléchargé.
+ *   - L'intention de l'utilisateur est mémorisée : changer de cas d'usage grise
+ *     ce qui n'est pas produisible sans effacer les choix faits.
  */
 
 window.CUSTOM_SUPPLIER = null;
@@ -155,42 +159,47 @@ const renderThirdPartyPreview = (data, warnings) => {
 };
 
 // =====================================================
-// CATALOGUE DES LIVRABLES
+// CATALOGUE DE COMPOSITION
 // =====================================================
-// Une seule source de vérité pour : l'état des cases, le décompte des
-// fichiers, le récapitulatif et le libellé du bouton. Le champ `files`
-// donne le nombre de fichiers réellement produits par l'option, ce qui
-// évite l'écart entre ce qui est annoncé et ce qui est téléchargé.
-// `needsPdf` marque les livrables qui reposent sur la représentation
-// lisible : ils ne sont proposés que pour les cas où sa cohérence avec
-// les données structurées a été vérifiée (UBLGenerator.PDF_CASES).
-const ARTIFACTS = [
-    { id: 'opt-ubl',           key: 'ubl',        files: 1, needsPdf: false, label: 'Facture UBL 2.1', suffix: '_UBL.xml' },
-    { id: 'opt-cii',           key: 'cii',        files: 1, needsPdf: false, label: 'Facture CII D22B', suffix: '_CII.xml' },
-    { id: 'opt-ubl-pdf',       key: 'ublWithPdf', files: 1, needsPdf: true,  label: 'UBL avec lisible embarqué', suffix: '_UBL_avec_lisible.xml' },
-    { id: 'opt-pdf',           key: 'pdf',        files: 1, needsPdf: true,  label: 'PDF lisible autonome', suffix: '.pdf' },
-    { id: 'opt-facturx',       key: 'facturx',    files: 1, needsPdf: true,  label: 'Factur-X (PDF/A-3B)', suffix: '.pdf' },
-    { id: 'opt-annexes',       key: 'annexes',    files: 1, needsPdf: true,  label: 'UBL avec 3 pièces jointes', suffix: '_UBL_avec_3_PJ.xml' },
-    { id: 'opt-annexes-files', key: 'annexFiles', files: 2, needsPdf: true,  label: 'Bon de commande + bon de livraison', suffix: '.pdf ×2' }
+// Étage A — le format de la facture. Choix exclusif : une facture s'écrit
+// dans une syntaxe, pas dans trois. `needsPdf` marque les formats qui
+// reposent sur la représentation lisible et ne sont donc proposés que pour
+// les cas d'usage où sa cohérence avec les données structurées a été
+// vérifiée (UBLGenerator.PDF_CASES).
+const FORMATS = [
+    { id: 'fmt-ubl',     value: 'ubl',     label: 'Facture UBL 2.1',  needsPdf: false },
+    { id: 'fmt-cii',     value: 'cii',     label: 'Facture CII D22B', needsPdf: false },
+    { id: 'fmt-facturx', value: 'facturx', label: 'Factur-X',         needsPdf: true }
 ];
 
-// Formules de départ. Elles ne verrouillent rien : cliquer une carte de
-// livrable bascule simplement l'utilisateur en composition sur mesure.
-const PRESETS = {
-    facture: ['opt-ubl'],
-    lisible: ['opt-ubl', 'opt-ubl-pdf', 'opt-pdf'],
-    complet: ['opt-ubl', 'opt-cii', 'opt-ubl-pdf', 'opt-pdf', 'opt-facturx', 'opt-annexes', 'opt-annexes-files']
-};
+// Étages B et C — les pièces. Une même pièce peut être embarquée dans le
+// fichier de facture (étage B), livrée en PDF autonome (étage C), les deux,
+// ou ni l'une ni l'autre. Toutes reposent sur le modèle pivot du lisible.
+const PIECES = [
+    { key: 'lisible',  embedId: 'embed-lisible',  sideId: 'side-lisible',
+      embedLabel: 'Représentation lisible embarquée', sideLabel: 'PDF lisible autonome' },
+    { key: 'order',    embedId: 'embed-order',    sideId: 'side-order',
+      embedLabel: 'Bon de commande embarqué', sideLabel: 'Bon de commande en PDF' },
+    { key: 'despatch', embedId: 'embed-despatch', sideId: 'side-despatch',
+      embedLabel: 'Bon de livraison embarqué', sideLabel: 'Bon de livraison en PDF' }
+];
+
+const FORMAT_LABELS = { ubl: 'Facture UBL 2.1', cii: 'Facture CII D22B', facturx: 'Factur-X (PDF/A-3B)' };
 
 // =====================================================
 // GENERATOR UI
 // =====================================================
 const GeneratorUI = {
 
-    // Intention de l'utilisateur, indépendante de la disponibilité du cas
-    // en cours : on ne perd pas une case cochée en passant par un cas qui
-    // ne sait pas produire de lisible.
-    desired: new Set(PRESETS.facture),
+    // Intention de l'utilisateur, indépendante de la disponibilité du cas en
+    // cours : on ne perd pas un choix en passant par un cas qui ne sait pas
+    // produire de représentation lisible. Par défaut : une facture UBL nue,
+    // et rien d'autre.
+    state: {
+        format: 'ubl',
+        embed: { lisible: false, order: false, despatch: false },
+        side:  { lisible: false, order: false, despatch: false }
+    },
 
     categories: [
         { key: 'catA', label: 'A — Cas standards', cases: ['nominal', 'nominal-rejet-emission', 'nominal-non-transmise', 'nominal-rejet-reception', 'nominal-refus', 'nominal-litige-avoir', 'nominal-litige-rectificative', '1', '31'] },
@@ -388,45 +397,65 @@ const GeneratorUI = {
     },
 
     // =====================================================
-    // ÉTAPE 3 — LES LIVRABLES
+    // ÉTAPE 3 — LA FACTURE (format, contenu, PDF autonomes)
     // =====================================================
 
-    // Un livrable est disponible si le cas sait le produire. Seule la
-    // famille « lisible » est conditionnée : UBL et CII sont toujours
-    // produisibles dès lors que le cas donne lieu à une facture.
-    isAvailable(artifact, usecase) {
-        if (!artifact.needsPdf) return true;
+    // Le lisible, les bons et le Factur-X reposent tous sur la représentation
+    // lisible : ils ne sont proposés que si le cas d'usage sait la produire.
+    pdfAvailable(usecase) {
         if (typeof UBLGenerator === 'undefined') return false;
         return UBLGenerator.supportsPdf(usecase);
     },
 
-    // Sélection effective = intention de l'utilisateur ∩ livrables disponibles.
-    currentSelection(usecase) {
-        const selected = ARTIFACTS.filter((a) =>
-            GeneratorUI.desired.has(a.id) && GeneratorUI.isAvailable(a, usecase));
-
-        const lines = selected.map((a) => ({ label: a.label, files: a.files, suffix: a.suffix }));
-
-        // La variante CII multi-pièces jointes n'est produite que si les deux
-        // options sont demandées : elle n'a pas de case à elle seule.
-        const wantsCii = selected.some((a) => a.id === 'opt-cii');
-        const wantsAnnexes = selected.some((a) => a.id === 'opt-annexes');
-        if (wantsCii && wantsAnnexes) {
-            lines.push({ label: 'CII avec 3 pièces jointes', files: 1, suffix: '_CII_avec_3_PJ.xml' });
+    // Composition effective = intention de l'utilisateur ∩ ce que le cas
+    // d'usage sait produire. Miroir exact de UBLGenerator.getComposition.
+    effectiveComposition(usecase) {
+        const pdfOk = GeneratorUI.pdfAvailable(usecase);
+        const st = GeneratorUI.state;
+        const comp = {
+            format: (!pdfOk && st.format === 'facturx') ? 'ubl' : st.format,
+            embed: { ...st.embed },
+            side: { ...st.side }
+        };
+        if (comp.format === 'facturx') comp.embed.lisible = true;
+        if (!pdfOk) {
+            comp.embed = { lisible: false, order: false, despatch: false };
+            comp.side  = { lisible: false, order: false, despatch: false };
         }
-
-        const count = lines.reduce((total, l) => total + l.files, 0);
-        return { lines, count };
+        return comp;
     },
 
-    // Applique l'intention à l'état réel des cases + met à jour l'affichage.
-    syncArtifacts() {
+    // Liste des fichiers qui seront réellement téléchargés, dans l'ordre.
+    plannedFiles(usecase) {
+        const comp = GeneratorUI.effectiveComposition(usecase);
+        const suffix = (typeof UBLGenerator !== 'undefined')
+            ? UBLGenerator.composeSuffix(comp.format, comp.embed)
+            : '_UBL.xml';
+
+        const inside = [];
+        if (comp.embed.lisible) inside.push(comp.format === 'facturx' ? 'lisible (PDF/A-3)' : 'lisible');
+        if (comp.embed.order) inside.push('bon de commande');
+        if (comp.embed.despatch) inside.push('bon de livraison');
+
+        const lines = [{
+            label: FORMAT_LABELS[comp.format] + (inside.length ? ` — avec ${inside.join(', ')}` : ' — nue'),
+            suffix
+        }];
+
+        if (comp.side.lisible) lines.push({ label: 'PDF lisible autonome', suffix: '.pdf' });
+        if (comp.side.order) lines.push({ label: 'Bon de commande', suffix: '.pdf' });
+        if (comp.side.despatch) lines.push({ label: 'Bon de livraison', suffix: '.pdf' });
+
+        return { lines, count: lines.length, comp };
+    },
+
+    // Applique l'intention à l'état réel des contrôles + met à jour l'affichage.
+    syncComposition() {
         const usecaseEl = document.getElementById('usecase');
         if (!usecaseEl || typeof UBLGenerator === 'undefined') return;
         const usecase = usecaseEl.value;
 
         const group = document.getElementById('group-artifacts');
-        const hint = document.getElementById('artifacts-hint');
         const btn = document.getElementById('btn-generate');
         const box = document.getElementById('info-box');
         const info = document.getElementById('info-text');
@@ -441,7 +470,6 @@ const GeneratorUI = {
             if (recap) recap.classList.add('hidden');
             if (box) box.classList.add('out-of-scope');
             if (info) info.innerHTML = `<strong>Aucune facture à produire.</strong> ${reason}`;
-            if (hint) hint.textContent = '';
             if (btn) {
                 btn.disabled = true;
                 btn.classList.add('disabled');
@@ -455,7 +483,6 @@ const GeneratorUI = {
         if (cfg.zip) {
             if (group) group.classList.add('hidden');
             if (recap) recap.classList.add('hidden');
-            if (hint) hint.textContent = '';
             if (btn) {
                 btn.disabled = false;
                 btn.classList.remove('disabled');
@@ -467,105 +494,132 @@ const GeneratorUI = {
         if (group) group.classList.remove('hidden');
         if (recap) recap.classList.remove('hidden');
 
-        // --- Cases : cochées si voulues ET disponibles, grisées sinon.
-        let pdfBlocked = false;
-        ARTIFACTS.forEach((a) => {
-            const input = document.getElementById(a.id);
+        const pdfOk = GeneratorUI.pdfAvailable(usecase);
+        const comp = GeneratorUI.effectiveComposition(usecase);
+
+        // --- Étage A : le format.
+        FORMATS.forEach((f) => {
+            const input = document.getElementById(f.id);
             if (!input) return;
-            const available = GeneratorUI.isAvailable(a, usecase);
-            if (!available) pdfBlocked = true;
+            const available = !f.needsPdf || pdfOk;
             input.disabled = !available;
-            input.checked = available && GeneratorUI.desired.has(a.id);
+            input.checked = available && comp.format === f.value;
             const card = input.closest('.fab-opt');
-            if (card) {
-                card.classList.toggle('is-disabled', !available);
-                card.classList.toggle('is-on', input.checked);
-            }
+            if (card) card.classList.toggle('is-disabled', !available);
         });
 
-        if (hint) {
-            hint.innerHTML = pdfBlocked
-                ? '⚠️ La représentation lisible n’a pas encore été vérifiée pour ce cas d’usage : les livrables qui en dépendent (PDF, Factur-X, pièces jointes) sont indisponibles.'
-                : 'Dès que plusieurs fichiers sont sélectionnés, ils sont livrés ensemble dans une archive ZIP. Un seul fichier sélectionné = un seul téléchargement, sans ZIP.';
+        const fmtHint = document.getElementById('format-hint');
+        if (fmtHint) {
+            fmtHint.innerHTML = pdfOk
+                ? 'Une facture s’écrit dans une seule syntaxe. Le contenu choisi ci-dessous s’applique au format retenu.'
+                : '⚠️ La représentation lisible n’a pas encore été vérifiée pour ce cas d’usage : le Factur-X est indisponible, et la facture sera produite nue.';
         }
 
-        GeneratorUI.syncPresetState();
+        // --- Étage B : ce qui voyage dans le fichier de facture.
+        const isFacturx = comp.format === 'facturx';
+        PIECES.forEach((piece) => {
+            const input = document.getElementById(piece.embedId);
+            if (!input) return;
+            const locked = isFacturx && piece.key === 'lisible';
+            const available = pdfOk && !locked;
+            input.disabled = !available;
+            input.checked = comp.embed[piece.key];
+            const card = input.closest('.fab-opt');
+            if (card) card.classList.toggle('is-disabled', !pdfOk);
+        });
+
+        // Le lisible d'un Factur-X n'est pas une option : c'est le format.
+        const tagLisible = document.getElementById('tag-embed-lisible');
+        const descLisible = document.getElementById('desc-embed-lisible');
+        const wrapLisible = document.getElementById('wrap-embed-lisible');
+        if (tagLisible) tagLisible.textContent = isFacturx ? 'inhérent' : 'BT-125';
+        if (descLisible) {
+            descLisible.innerHTML = isFacturx
+                ? 'Le <code>PDF/A-3B</code> <strong>est</strong> la représentation lisible : elle est incluse par construction, sans occurrence <code>BG-24</code>.'
+                : 'Le rendu humain de la facture, encodé en base64 dans une occurrence <code>BG-24</code>.';
+        }
+        if (wrapLisible) wrapLisible.classList.toggle('is-locked', isFacturx);
+
+        const embedHint = document.getElementById('embed-hint');
+        if (embedHint) {
+            embedHint.textContent = pdfOk
+                ? 'Ces pièces voyagent À L’INTÉRIEUR du fichier de facture. Aucune ne génère de fichier séparé.'
+                : 'Indisponible pour ce cas d’usage : aucune pièce jointe ne peut être produite sans représentation lisible vérifiée.';
+        }
+
+        // --- Étage C : les PDF autonomes, décochés par défaut.
+        PIECES.forEach((piece) => {
+            const input = document.getElementById(piece.sideId);
+            if (!input) return;
+            input.disabled = !pdfOk;
+            input.checked = comp.side[piece.key];
+            const card = input.closest('.fab-opt');
+            if (card) card.classList.toggle('is-disabled', !pdfOk);
+        });
+
+        const sideHint = document.getElementById('side-hint');
+        if (sideHint) {
+            sideHint.textContent = pdfOk
+                ? 'Utile pour une démonstration ou un test. Dès qu’une case est cochée ici, la livraison se fait en archive ZIP.'
+                : 'Indisponible pour ce cas d’usage.';
+        }
+
         GeneratorUI.syncRecap(usecase);
     },
 
-    // Met en avant la formule qui correspond exactement à la sélection.
-    syncPresetState() {
-        const selected = ARTIFACTS
-            .filter((a) => GeneratorUI.desired.has(a.id))
-            .map((a) => a.id).sort().join('|');
-
-        document.querySelectorAll('.fab-preset').forEach((el) => {
-            const preset = PRESETS[el.dataset.preset] || [];
-            const signature = preset.slice().sort().join('|');
-            const match = signature === selected;
-            el.classList.toggle('is-active', match);
-            el.setAttribute('aria-pressed', String(match));
-        });
-
-        const custom = document.getElementById('fab-custom-flag');
-        if (custom) {
-            const known = Object.values(PRESETS)
-                .some((p) => p.slice().sort().join('|') === selected);
-            custom.classList.toggle('hidden', known);
-        }
-    },
-
-    // Récapitulatif live : ce qui sera réellement téléchargé.
+    // Récapitulatif live : ce qui sera réellement téléchargé, fichier par fichier.
     syncRecap(usecase) {
-        const { lines, count } = GeneratorUI.currentSelection(usecase);
+        const { lines, count } = GeneratorUI.plannedFiles(usecase);
         const listEl = document.getElementById('fab-recap-list');
         const countEl = document.getElementById('fab-recap-count');
         const miniEl = document.getElementById('fab-mini-count');
         const btn = document.getElementById('btn-generate');
 
         if (listEl) {
-            listEl.innerHTML = lines.length
-                ? lines.map((l) => `<li><span class="fab-recap-name">${l.label}</span><span class="fab-recap-ext">${l.suffix}</span></li>`).join('')
-                : '<li class="fab-recap-empty">Aucun livrable sélectionné.</li>';
+            listEl.innerHTML = lines
+                .map((l) => `<li><span class="fab-recap-name">${l.label}</span><span class="fab-recap-ext">${l.suffix}</span></li>`)
+                .join('');
         }
 
-        const wording = count === 0
-            ? 'Rien à télécharger'
-            : `${count} fichier${count > 1 ? 's' : ''}${count > 1 ? ' · archive ZIP' : ''}`;
+        const wording = count > 1 ? `${count} fichiers · archive ZIP` : '1 fichier';
         if (countEl) countEl.textContent = wording;
         if (miniEl) miniEl.textContent = wording;
 
         if (btn) {
-            btn.disabled = count === 0;
-            btn.classList.toggle('disabled', count === 0);
-            if (count === 0) {
-                btn.innerHTML = '<span class="gen-btn-icon">⚠️</span> Sélectionnez au moins un livrable';
-            } else if (count === 1) {
-                btn.innerHTML = `<span class="gen-btn-icon">📥</span> Télécharger ${lines[0].label}`;
-            } else {
-                btn.innerHTML = `<span class="gen-btn-icon">📦</span> Télécharger le ZIP (${count} fichiers)`;
-            }
+            btn.disabled = false;
+            btn.classList.remove('disabled');
+            btn.innerHTML = count > 1
+                ? `<span class="gen-btn-icon">📦</span> Télécharger le ZIP (${count} fichiers)`
+                : `<span class="gen-btn-icon">📥</span> Télécharger ${lines[0].label.split(' — ')[0]}`;
         }
     },
 
-    initArtifactOptions() {
-        ARTIFACTS.forEach((a) => {
-            const input = document.getElementById(a.id);
+    initCompositionControls() {
+        FORMATS.forEach((f) => {
+            const input = document.getElementById(f.id);
             if (!input) return;
             input.addEventListener('change', () => {
-                if (input.checked) GeneratorUI.desired.add(a.id);
-                else GeneratorUI.desired.delete(a.id);
-                GeneratorUI.syncArtifacts();
+                if (!input.checked) return;
+                GeneratorUI.state.format = f.value;
+                GeneratorUI.syncComposition();
             });
         });
 
-        document.querySelectorAll('.fab-preset').forEach((el) => {
-            el.addEventListener('click', () => {
-                GeneratorUI.desired = new Set(PRESETS[el.dataset.preset] || PRESETS.facture);
-                GeneratorUI.syncArtifacts();
-                const details = document.getElementById('fab-advanced');
-                if (details && el.dataset.preset === 'complet') details.open = true;
-            });
+        PIECES.forEach((piece) => {
+            const embed = document.getElementById(piece.embedId);
+            if (embed) {
+                embed.addEventListener('change', () => {
+                    GeneratorUI.state.embed[piece.key] = embed.checked;
+                    GeneratorUI.syncComposition();
+                });
+            }
+            const side = document.getElementById(piece.sideId);
+            if (side) {
+                side.addEventListener('change', () => {
+                    GeneratorUI.state.side[piece.key] = side.checked;
+                    GeneratorUI.syncComposition();
+                });
+            }
         });
     },
 
@@ -607,7 +661,7 @@ const GeneratorUI = {
             groupFactor.classList.toggle('hidden', cfg.payeeType !== 'factor');
         }
 
-        GeneratorUI.syncArtifacts();
+        GeneratorUI.syncComposition();
         document.getElementById('success-msg').classList.add('hidden');
     },
 
@@ -631,7 +685,7 @@ document.addEventListener('DOMContentLoaded', () => {
         window.APP_DATA = { pedagogy: results[0], companies: results[1] };
 
         GeneratorUI.populateSelects();
-        GeneratorUI.initArtifactOptions();
+        GeneratorUI.initCompositionControls();
         GeneratorUI.updateInfoBox();
         GeneratorUI.initTabs();
         GeneratorUI.initTemplateDownload();

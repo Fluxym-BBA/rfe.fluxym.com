@@ -51,41 +51,27 @@
         }
         .fab-mini a:hover { text-decoration: underline; }
 
-        /* --- Formules de depart --- */
-        .fab-presets {
-            display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 8px;
-        }
-        @media (max-width: 760px) { .fab-presets { grid-template-columns: 1fr; } }
+        /* --- Choix du format (etage A) --- */
+        .fab-fmt .fab-opt-check { border-radius: 50%; }
+        .fab-fmt .fab-opt-name { font-size: 0.9rem; }
+        .fab-opts--3 { grid-template-columns: repeat(3, 1fr); }
+        @media (max-width: 900px) { .fab-opts--3 { grid-template-columns: 1fr; } }
 
-        .fab-preset {
-            text-align: left; cursor: pointer; font-family: 'Inter', sans-serif;
-            background: var(--white); border: 1.5px solid var(--gray-200);
-            border-radius: var(--radius-lg); padding: 18px 16px;
-            transition: all 0.22s ease;
+        /* --- Etage secondaire : les PDF autonomes --- */
+        .fab-group--aside {
+            margin-top: 26px; padding: 18px 18px 6px;
+            background: var(--gray-50); border: 1px dashed var(--gray-200);
+            border-radius: var(--radius-lg);
         }
-        .fab-preset:hover {
-            border-color: var(--cyan); transform: translateY(-3px); box-shadow: var(--shadow-md);
-        }
-        .fab-preset.is-active {
-            border-color: var(--cyan); background: rgba(0,167,225,0.05);
-            box-shadow: 0 0 0 4px rgba(0,167,225,0.10);
-        }
-        .fab-preset-icon { font-size: 1.4rem; display: block; margin-bottom: 8px; }
-        .fab-preset-name {
-            display: block; font-size: 0.92rem; font-weight: 800; color: var(--navy); margin-bottom: 4px;
-        }
-        .fab-preset-desc {
-            display: block; font-size: 0.76rem; color: var(--gray-500); line-height: 1.5;
-        }
-
-        .fab-custom-flag {
-            display: inline-block; margin: 10px 0 0; padding: 4px 12px;
-            background: var(--gray-100); border-radius: var(--radius-full);
-            font-size: 0.72rem; font-weight: 700; color: var(--gray-600);
+        .fab-group--aside .fab-group-title { border-bottom-color: var(--gray-200); }
+        .fab-group-opt {
+            margin-left: 8px; padding: 2px 8px; border-radius: var(--radius-full);
+            background: var(--white); border: 1px solid var(--gray-200);
+            font-size: 0.62rem; font-weight: 800; letter-spacing: 0.6px;
+            color: var(--gray-500); text-transform: uppercase;
         }
 
         /* --- Composition detaillee --- */
-        .fab-advanced { margin: 18px 0 0; }
         .fab-group { margin-bottom: 22px; }
         .fab-group:last-of-type { margin-bottom: 6px; }
         .fab-group-title {
@@ -110,6 +96,11 @@
         }
         .fab-opt input:checked + .fab-opt-box {
             border-color: var(--cyan); background: rgba(0,167,225,0.05);
+        }
+        /* Coche verrouillee : le choix est vrai par construction (Factur-X). */
+        .fab-opt.is-locked { cursor: not-allowed; }
+        .fab-opt.is-locked .fab-opt-box {
+            border-style: dashed; opacity: 0.8;
         }
         .fab-opt.is-disabled { cursor: not-allowed; }
         .fab-opt.is-disabled .fab-opt-box {
@@ -313,8 +304,7 @@
         }
 
         @media (prefers-reduced-motion: reduce) {
-            .fab-preset, .fab-opt-box, .fab-opt-check { transition: none; }
-            .fab-preset:hover { transform: none; }
+            .fab-opt-box, .fab-opt-check { transition: none; }
         }
     </style>
 </head>
@@ -329,7 +319,7 @@
             </div>
             <span class="hero-badge">Outil pratique</span>
             <h1>La Fabrique de factures électroniques</h1>
-            <p>Choisissez un cas d’usage AFNOR, réglez les acteurs, puis composez exactement les livrables dont vous avez besoin : UBL 2.1, CII D22B, Factur-X, PDF lisible et pièces jointes. Rien n’est imposé.</p>
+            <p>Choisissez un cas d’usage AFNOR, réglez les acteurs, puis composez votre facture : d’abord son format — UBL 2.1, CII D22B ou Factur-X — puis ce qu’elle transporte à l’intérieur d’elle-même. Rien n’est imposé.</p>
         </div>
     </header>
 
@@ -342,19 +332,19 @@
                     <ul class="sidebar-nav">
                         <li><a href="#cas" class="sidebar-link active">1 · Le cas d’usage</a></li>
                         <li><a href="#acteurs" class="sidebar-link">2 · Les acteurs</a></li>
-                        <li><a href="#livrables" class="sidebar-link">3 · Les livrables</a></li>
+                        <li><a href="#facture" class="sidebar-link">3 · La facture</a></li>
                     </ul>
 
                     <div class="fab-mini">
                         <span class="fab-mini-label">Votre sélection</span>
                         <strong id="fab-mini-count">1 fichier</strong>
-                        <a href="#livrables">Composer mes livrables ↓</a>
+                        <a href="#facture">Composer ma facture ↓</a>
                     </div>
 
                     <div class="sidebar-nav-pages">
                         <h4>Outils</h4>
                         <a href="./outils.html" class="sidebar-page">🧰 Tous les outils</a>
-                        <a href="./generateur.html" class="sidebar-page active">🏭 La Fabrique</a>
+                        <a href="./generateur.html" class="sidebar-page active">🏭 La Fabrique de factures</a>
                         <a href="./transcodification.html" class="sidebar-page">🧭 Matrice de transcodification</a>
                     </div>
                 </div>
@@ -495,147 +485,153 @@
                     </div>
                 </section>
 
-                <!-- ============ ÉTAPE 3 — LES LIVRABLES ============ -->
-                <section id="livrables" class="content-section">
+                <!-- ============ ÉTAPE 3 — LA FACTURE ============ -->
+                <section id="facture" class="content-section">
                     <div class="fab-step">
                         <span class="fab-step-num" aria-hidden="true">3</span>
                         <div>
-                            <h2>Les livrables</h2>
-                            <p>Partez d’une formule, ou composez à la carte. Un seul fichier sélectionné est téléchargé tel quel ; à partir de deux, ils sont regroupés dans une archive ZIP.</p>
+                            <h2>La facture</h2>
+                            <p>Un choix à la fois : le format de la facture, puis ce qu’elle transporte à l’intérieur de son propre fichier. Les PDF autonomes sont une commodité de démonstration — ils restent décochés par défaut.</p>
                         </div>
                     </div>
 
                     <div id="group-artifacts">
 
-                        <div class="fab-presets">
-                            <button type="button" class="fab-preset is-active" data-preset="facture" aria-pressed="true">
-                                <span class="fab-preset-icon" aria-hidden="true">🧾</span>
-                                <span class="fab-preset-name">Facture seule</span>
-                                <span class="fab-preset-desc">Le XML UBL 2.1 et rien d’autre. Un fichier, pas de ZIP.</span>
-                            </button>
-                            <button type="button" class="fab-preset" data-preset="lisible" aria-pressed="false">
-                                <span class="fab-preset-icon" aria-hidden="true">👁️</span>
-                                <span class="fab-preset-name">Facture + lisible</span>
-                                <span class="fab-preset-desc">L’UBL nu, l’UBL avec le lisible embarqué, et le PDF autonome.</span>
-                            </button>
-                            <button type="button" class="fab-preset" data-preset="complet" aria-pressed="false">
-                                <span class="fab-preset-icon" aria-hidden="true">📦</span>
-                                <span class="fab-preset-name">Pack complet</span>
-                                <span class="fab-preset-desc">Toutes les syntaxes, le Factur-X et les pièces jointes.</span>
-                            </button>
-                        </div>
+                        <!-- ---------- A · LE FORMAT ---------- -->
+                        <div class="fab-group">
+                            <h4 class="fab-group-title">A · Le format de la facture</h4>
+                            <div class="fab-opts fab-opts--3" role="radiogroup" aria-label="Format de la facture">
 
-                        <span class="fab-custom-flag hidden" id="fab-custom-flag">✏️ Composition sur mesure</span>
+                                <label class="fab-opt fab-fmt" for="fmt-ubl">
+                                    <input type="radio" name="fab-format" id="fmt-ubl" value="ubl" checked>
+                                    <span class="fab-opt-box">
+                                        <span class="fab-opt-head">
+                                            <span class="fab-opt-check" aria-hidden="true">✓</span>
+                                            <span class="fab-opt-name">UBL 2.1</span>
+                                            <span class="fab-opt-tag">.xml</span>
+                                        </span>
+                                        <span class="fab-opt-desc">La syntaxe OASIS, conforme <code>EN 16931</code>. Le format de référence du socle français.</span>
+                                    </span>
+                                </label>
 
-                        <details class="gen-advanced fab-advanced" id="fab-advanced">
-                            <summary>Composer mes livrables un par un</summary>
-                            <div class="gen-advanced-content">
+                                <label class="fab-opt fab-fmt" for="fmt-cii">
+                                    <input type="radio" name="fab-format" id="fmt-cii" value="cii">
+                                    <span class="fab-opt-box">
+                                        <span class="fab-opt-head">
+                                            <span class="fab-opt-check" aria-hidden="true">✓</span>
+                                            <span class="fab-opt-name">CII D22B</span>
+                                            <span class="fab-opt-tag">.xml</span>
+                                        </span>
+                                        <span class="fab-opt-desc">La même facture en syntaxe UN/CEFACT, au centime près. Socle du Factur-X.</span>
+                                    </span>
+                                </label>
 
-                                <div class="fab-group">
-                                    <h4 class="fab-group-title">Syntaxe structurée</h4>
-                                    <div class="fab-opts">
-                                        <label class="fab-opt" for="opt-ubl">
-                                            <input type="checkbox" id="opt-ubl" checked>
-                                            <span class="fab-opt-box">
-                                                <span class="fab-opt-head">
-                                                    <span class="fab-opt-check" aria-hidden="true">✓</span>
-                                                    <span class="fab-opt-name">Facture UBL 2.1</span>
-                                                    <span class="fab-opt-tag">.xml</span>
-                                                </span>
-                                                <span class="fab-opt-desc">La facture nue, conforme <code>EN 16931</code>. Le livrable de référence.</span>
-                                            </span>
-                                        </label>
-                                        <label class="fab-opt" for="opt-cii">
-                                            <input type="checkbox" id="opt-cii">
-                                            <span class="fab-opt-box">
-                                                <span class="fab-opt-head">
-                                                    <span class="fab-opt-check" aria-hidden="true">✓</span>
-                                                    <span class="fab-opt-name">Facture CII D22B</span>
-                                                    <span class="fab-opt-tag">.xml</span>
-                                                </span>
-                                                <span class="fab-opt-desc">La même facture en syntaxe UN/CEFACT, au centime près. Socle du Factur-X.</span>
-                                            </span>
-                                        </label>
-                                    </div>
-                                </div>
-
-                                <div class="fab-group">
-                                    <h4 class="fab-group-title">Représentation lisible</h4>
-                                    <div class="fab-opts">
-                                        <label class="fab-opt" for="opt-pdf">
-                                            <input type="checkbox" id="opt-pdf">
-                                            <span class="fab-opt-box">
-                                                <span class="fab-opt-head">
-                                                    <span class="fab-opt-check" aria-hidden="true">✓</span>
-                                                    <span class="fab-opt-name">PDF lisible autonome</span>
-                                                    <span class="fab-opt-tag">.pdf</span>
-                                                </span>
-                                                <span class="fab-opt-desc">Le rendu humain de la facture, en fichier séparé.</span>
-                                            </span>
-                                        </label>
-                                        <label class="fab-opt" for="opt-ubl-pdf">
-                                            <input type="checkbox" id="opt-ubl-pdf">
-                                            <span class="fab-opt-box">
-                                                <span class="fab-opt-head">
-                                                    <span class="fab-opt-check" aria-hidden="true">✓</span>
-                                                    <span class="fab-opt-name">UBL avec lisible embarqué</span>
-                                                    <span class="fab-opt-tag">.xml</span>
-                                                </span>
-                                                <span class="fab-opt-desc">Le même PDF, encodé en base64 dans le XML <code>BG-24</code> / <code>BT-125</code>.</span>
-                                            </span>
-                                        </label>
-                                    </div>
-                                </div>
-
-                                <div class="fab-group">
-                                    <h4 class="fab-group-title">Format hybride</h4>
-                                    <div class="fab-opts">
-                                        <label class="fab-opt" for="opt-facturx">
-                                            <input type="checkbox" id="opt-facturx">
-                                            <span class="fab-opt-box">
-                                                <span class="fab-opt-head">
-                                                    <span class="fab-opt-check" aria-hidden="true">✓</span>
-                                                    <span class="fab-opt-name">Factur-X</span>
-                                                    <span class="fab-opt-tag">.pdf</span>
-                                                </span>
-                                                <span class="fab-opt-desc">Un <code>PDF/A-3B</code> portant le CII en fichier associé : lisible et structuré dans un seul document.</span>
-                                            </span>
-                                        </label>
-                                    </div>
-                                </div>
-
-                                <div class="fab-group">
-                                    <h4 class="fab-group-title">Pièces jointes — bon de commande et bon de livraison</h4>
-                                    <div class="fab-opts">
-                                        <label class="fab-opt" for="opt-annexes">
-                                            <input type="checkbox" id="opt-annexes">
-                                            <span class="fab-opt-box">
-                                                <span class="fab-opt-head">
-                                                    <span class="fab-opt-check" aria-hidden="true">✓</span>
-                                                    <span class="fab-opt-name">Les embarquer dans la facture</span>
-                                                    <span class="fab-opt-tag">.xml</span>
-                                                </span>
-                                                <span class="fab-opt-desc">Produit une variante à trois <code>BG-24</code> (lisible + bon de commande + bon de livraison) et émet le <code>BT-16</code>.</span>
-                                            </span>
-                                        </label>
-                                        <label class="fab-opt" for="opt-annexes-files">
-                                            <input type="checkbox" id="opt-annexes-files">
-                                            <span class="fab-opt-box">
-                                                <span class="fab-opt-head">
-                                                    <span class="fab-opt-check" aria-hidden="true">✓</span>
-                                                    <span class="fab-opt-name">Les télécharger aussi en PDF</span>
-                                                    <span class="fab-opt-tag">.pdf ×2</span>
-                                                </span>
-                                                <span class="fab-opt-desc">Ajoute les deux bons comme fichiers autonomes dans l’archive. Décochez pour ne récupérer que la facture.</span>
-                                            </span>
-                                        </label>
-                                    </div>
-                                </div>
+                                <label class="fab-opt fab-fmt" for="fmt-facturx">
+                                    <input type="radio" name="fab-format" id="fmt-facturx" value="facturx">
+                                    <span class="fab-opt-box">
+                                        <span class="fab-opt-head">
+                                            <span class="fab-opt-check" aria-hidden="true">✓</span>
+                                            <span class="fab-opt-name">Factur-X</span>
+                                            <span class="fab-opt-tag">.pdf</span>
+                                        </span>
+                                        <span class="fab-opt-desc">Un <code>PDF/A-3B</code> hybride : le lisible et le CII réunis dans un seul fichier.</span>
+                                    </span>
+                                </label>
 
                             </div>
-                        </details>
+                            <p class="gen-hint" id="format-hint"></p>
+                        </div>
 
-                        <p class="gen-hint" id="artifacts-hint"></p>
+                        <!-- ---------- B · CE QUE CONTIENT LE FICHIER ---------- -->
+                        <div class="fab-group">
+                            <h4 class="fab-group-title">B · Ce que contient le fichier de facture</h4>
+                            <div class="fab-opts fab-opts--3">
+
+                                <label class="fab-opt" for="embed-lisible" id="wrap-embed-lisible">
+                                    <input type="checkbox" id="embed-lisible">
+                                    <span class="fab-opt-box">
+                                        <span class="fab-opt-head">
+                                            <span class="fab-opt-check" aria-hidden="true">✓</span>
+                                            <span class="fab-opt-name">Représentation lisible</span>
+                                            <span class="fab-opt-tag" id="tag-embed-lisible">BT-125</span>
+                                        </span>
+                                        <span class="fab-opt-desc" id="desc-embed-lisible">Le rendu humain de la facture, encodé en base64 dans une occurrence <code>BG-24</code>.</span>
+                                    </span>
+                                </label>
+
+                                <label class="fab-opt" for="embed-order" id="wrap-embed-order">
+                                    <input type="checkbox" id="embed-order">
+                                    <span class="fab-opt-box">
+                                        <span class="fab-opt-head">
+                                            <span class="fab-opt-check" aria-hidden="true">✓</span>
+                                            <span class="fab-opt-name">Bon de commande</span>
+                                            <span class="fab-opt-tag">BT-122</span>
+                                        </span>
+                                        <span class="fab-opt-desc">Le bon de commande joint à la facture elle-même, dans sa propre occurrence <code>BG-24</code>.</span>
+                                    </span>
+                                </label>
+
+                                <label class="fab-opt" for="embed-despatch" id="wrap-embed-despatch">
+                                    <input type="checkbox" id="embed-despatch">
+                                    <span class="fab-opt-box">
+                                        <span class="fab-opt-head">
+                                            <span class="fab-opt-check" aria-hidden="true">✓</span>
+                                            <span class="fab-opt-name">Bon de livraison</span>
+                                            <span class="fab-opt-tag">BT-16</span>
+                                        </span>
+                                        <span class="fab-opt-desc">Le bon de livraison joint, et la référence <code>BT-16</code> émise en conséquence.</span>
+                                    </span>
+                                </label>
+
+                            </div>
+                            <p class="gen-hint" id="embed-hint"></p>
+                        </div>
+
+                        <!-- ---------- C · LES PDF AUTONOMES ---------- -->
+                        <div class="fab-group fab-group--aside" id="group-sidecars">
+                            <h4 class="fab-group-title">C · Fichiers PDF à côté <span class="fab-group-opt">optionnel</span></h4>
+                            <div class="fab-opts fab-opts--3">
+
+                                <label class="fab-opt" for="side-lisible" id="wrap-side-lisible">
+                                    <input type="checkbox" id="side-lisible">
+                                    <span class="fab-opt-box">
+                                        <span class="fab-opt-head">
+                                            <span class="fab-opt-check" aria-hidden="true">✓</span>
+                                            <span class="fab-opt-name">Le lisible</span>
+                                            <span class="fab-opt-tag">.pdf</span>
+                                        </span>
+                                        <span class="fab-opt-desc">Le même rendu, en fichier PDF séparé.</span>
+                                    </span>
+                                </label>
+
+                                <label class="fab-opt" for="side-order" id="wrap-side-order">
+                                    <input type="checkbox" id="side-order">
+                                    <span class="fab-opt-box">
+                                        <span class="fab-opt-head">
+                                            <span class="fab-opt-check" aria-hidden="true">✓</span>
+                                            <span class="fab-opt-name">Le bon de commande</span>
+                                            <span class="fab-opt-tag">.pdf</span>
+                                        </span>
+                                        <span class="fab-opt-desc">Le bon de commande en PDF autonome.</span>
+                                    </span>
+                                </label>
+
+                                <label class="fab-opt" for="side-despatch" id="wrap-side-despatch">
+                                    <input type="checkbox" id="side-despatch">
+                                    <span class="fab-opt-box">
+                                        <span class="fab-opt-head">
+                                            <span class="fab-opt-check" aria-hidden="true">✓</span>
+                                            <span class="fab-opt-name">Le bon de livraison</span>
+                                            <span class="fab-opt-tag">.pdf</span>
+                                        </span>
+                                        <span class="fab-opt-desc">Le bon de livraison en PDF autonome.</span>
+                                    </span>
+                                </label>
+
+                            </div>
+                            <p class="gen-hint" id="side-hint"></p>
+                        </div>
+
                     </div>
 
                     <div class="fab-launch" id="fab-recap">
