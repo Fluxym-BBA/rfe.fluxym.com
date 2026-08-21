@@ -1,0 +1,276 @@
+{
+  "_patch": {
+    "id": "G-GEP",
+    "chantier": "G — analyse 360",
+    "societe": "GEP",
+    "auteur": "RFE_WebSite",
+    "dateReleve": "2026-08-21",
+    "nbPlateformes": 1,
+    "note": "Troisième société du portefeuille Fluxym traitée en 360, et résolution de l'anomalie ouverte depuis le 21/08/2026. RÉSOLUTION : l'adresse publiée par la DGFiP, « Innopoli 2 Tekniikantie 14 2600 », est le siège finlandais d'OpusCapita, devenue GEP Finland Oy après son rachat par GEP le 01/07/2024. L'entité immatriculée n'est donc pas GEP Worldwide (Clark, New Jersey) mais sa filiale finlandaise, éditeur de facturation électronique fondé en 1985. CHAMPS COMPLÉTÉS : anneeCreation 1985, raisonSociale GEP Finland Oy, natureEntite extension_demat, groupeCapitalistique, relationCapitalistique acquise, identiteInternationale. ÉCART DE SOURCE SIGNALÉ : la DGFiP publie le code postal « 2600 » alors que l'entité publie « 02150 Espoo » sur sa propre page d'adresses ; l'adresse de la fiche n'est pas modifiée, la liste DGFiP restant la source du champ. NON TROUVÉ dans cette passe, et donc absent du patch : chiffre d'affaires du groupe et de l'entité finlandaise (GEP n'est pas cotée et ne publie aucun chiffre ; les agrégateurs sont écartés par règle), Y-tunnus de GEP Finland Oy, numéro de TVA finlandais, LEI, EUID, effectif actuel de l'entité finlandaise (seul l'effectif au moment de l'acquisition est documenté), avis publics agrégés, volume d'offres d'emploi. ENTITÉ FRANÇAISE : recherche effectuée sur l'annuaire des entreprises pour « GEP FRANCE » et « GEP worldwide » — 14 homonymes sans rapport (production d'électricité, SCI logistiques, associations) et aucun résultat respectivement. Aucune entité française rattachée au groupe n'est identifiée à ce stade."
+  },
+  "plateformes": [
+    {
+      "nom": "GEP",
+      "anneeCreation": 1985,
+      "raisonSociale": "GEP Finland Oy (anciennement OpusCapita)",
+      "natureEntite": "extension_demat",
+      "groupeCapitalistique": "GEP (GEP Worldwide), siège à Clark, New Jersey, États-Unis",
+      "relationCapitalistique": "acquise",
+      "identiteInternationale": {
+        "paysISO": "FI",
+        "registreNational": "Registre finlandais du commerce, tenu par le Patentti- ja rekisterihallitus (PRH)",
+        "formeJuridique": "Osakeyhtiö (Oy), société à responsabilité limitée de droit finlandais",
+        "presenceEnFrance": {
+          "type": "aucune_identifiee",
+          "siren": null,
+          "preuve": "Recherche sur annuaire-entreprises.data.gouv.fr le 21/08/2026 : « GEP worldwide » ne renvoie aucun résultat, « GEP FRANCE » renvoie 14 homonymes sans lien avec le groupe (production d'électricité, SCI logistiques, associations). Le site du groupe revendique plus de 30 bureaux dans le monde sans détailler d'implantation française."
+        },
+        "sourceIdentite": "opuscapita.com, pages institutionnelles publiées sous la raison sociale GEP Finland Oy, page d'adresses indiquant « Espoo headquarters, Innopoli 2, Tekniikantie 14, 02150 Espoo, Finlande » ; communiqué GEP du 01/07/2024 sur l'acquisition d'OpusCapita",
+        "confianceIdentite": "moyenne"
+      },
+      "analyse360": {
+        "metierPrincipal": "Filiale finlandaise d'échange de factures électroniques et d'automatisation de la comptabilité fournisseurs, adossée à un groupe américain d'achats et de supply chain exerçant trois métiers : logiciel, conseil et externalisation",
+        "activites": [
+          {
+            "libelle": "Groupe — logiciel achats et supply chain : plateforme GEP Quantum Intelligence, GEP SMART, GEP NEXXE, GEP GREEN",
+            "poids": "majeur",
+            "source": "gep.com, page société, relevé 21/08/2026"
+          },
+          {
+            "libelle": "Groupe — conseil en achats et en supply chain",
+            "poids": "majeur",
+            "source": "gep.com, page société, relevé 21/08/2026"
+          },
+          {
+            "libelle": "Groupe — externalisation des opérations achats et supply chain (managed services, BPO)",
+            "poids": "majeur",
+            "source": "gep.com, page société, relevé 21/08/2026"
+          },
+          {
+            "libelle": "Entité immatriculée — échange de factures électroniques et de documents de chaîne d'approvisionnement, réseau interopérable et Access Point Peppol, couverture annoncée de plus de 80 pays et 70 opérateurs",
+            "poids": "majeur",
+            "source": "gep.com, page e-invoicing, relevé 21/08/2026 ; opuscapita.com, page à propos"
+          },
+          {
+            "libelle": "Entité immatriculée — automatisation de la comptabilité fournisseurs et du poste client",
+            "poids": "majeur",
+            "source": "opuscapita.com, page à propos, relevé 21/08/2026"
+          },
+          {
+            "libelle": "Entité immatriculée — solutions d'achats pour le marché nordique et l'Europe du Nord",
+            "poids": "significatif",
+            "source": "opuscapita.com, page à propos ; communiqué GEP du 01/07/2024"
+          },
+          {
+            "libelle": "Plateforme agréée pour la facturation électronique en France",
+            "poids": "significatif",
+            "source": "Liste DGFiP, immatriculation du 17/06/2026"
+          }
+        ],
+        "poidsEconomique": {
+          "effectifGroupe": 6000,
+          "effectifEntite": "220 salariés pour OpusCapita au moment de son rachat, en juillet 2024, répartis entre les pays nordiques, l'Europe continentale et Pittsburgh aux États-Unis. Effectif actuel de GEP Finland Oy non publié.",
+          "ventilationParActivite": {
+            "disponible": false,
+            "motif": "GEP n'est pas cotée et ne publie aucun chiffre d'affaires, ni pour le groupe ni pour sa filiale finlandaise. Le groupe expose trois métiers — logiciel, conseil, externalisation — sans en chiffrer aucun, et le prix payé pour OpusCapita n'a pas été divulgué. Les valeurs proposées par les agrégateurs de données d'entreprises sont écartées par règle. Aucune part attribuable à l'activité de plateforme agréée n'est donc estimée.",
+            "derniereVentilationConnue": null
+          }
+        },
+        "centralitePA": {
+          "indice": 2,
+          "niveau": "extension_naturelle",
+          "marqueProduitDediee": null,
+          "entiteJuridiqueDediee": false,
+          "faisceauIndices": [
+            {
+              "signal": "Le métier historique de l'entité immatriculée est précisément la facturation électronique, exercé depuis 1985 auprès de 600 clients",
+              "sens": "+",
+              "preuve": "Communiqué GEP du 01/07/2024 : OpusCapita, fondée en 1985, 600 clients, 220 salariés"
+            },
+            {
+              "signal": "Antériorité et profondeur revendiquées sur le sujet : plus de 25 ans sur la facturation électronique, réseau interopérable, Access Point Peppol, plus de 80 pays et 70 opérateurs",
+              "sens": "+",
+              "preuve": "gep.com, page e-invoicing"
+            },
+            {
+              "signal": "L'offre est vendable seule, indépendamment de la suite achats",
+              "sens": "+",
+              "preuve": "gep.com, page e-invoicing : solution S2P complète, offre autonome, ou combinaison de logiciel, de services et de BPO"
+            },
+            {
+              "signal": "Aucune page du site ne traite du dispositif français : ni l'immatriculation, ni le raccordement au PPF, ni le calendrier de la réforme",
+              "sens": "-",
+              "preuve": "Relevé de gep.com et opuscapita.com le 21/08/2026 ; la page opuscapita.com/e-invoicing-france renvoie une erreur 404"
+            },
+            {
+              "signal": "Aucune entité française identifiée, donc aucune équipe locale documentée",
+              "sens": "-",
+              "preuve": "Recherche annuaire-entreprises.data.gouv.fr du 21/08/2026, sans résultat"
+            },
+            {
+              "signal": "Immatriculation tardive, en troisième vague, le 17/06/2026, six mois après les premières",
+              "sens": "-",
+              "preuve": "Liste DGFiP"
+            },
+            {
+              "signal": "L'agrément français n'a pas été construit par le groupe : il est hérité d'une acquisition réalisée le 01/07/2024",
+              "sens": "-",
+              "preuve": "Communiqué GEP du 01/07/2024 sur le rachat d'OpusCapita à PSG Equity"
+            },
+            {
+              "signal": "Au niveau du groupe, la facturation électronique est un module d'une des trois lignes de métier, la ligne logiciel, elle-même dominée par le discours achats et supply chain",
+              "sens": "-",
+              "preuve": "gep.com, page société : logiciel, conseil, externalisation ; 600 milliards de dollars de dépenses gérées par an, plus de 1 000 clients, 120 pays"
+            },
+            {
+              "signal": "La marque de l'entité immatriculée est en cours d'effacement au profit de la marque du groupe",
+              "sens": "-",
+              "preuve": "opuscapita.com : à l'avenir, les clients seront servis mondialement sous la marque GEP"
+            }
+          ],
+          "lecture": "Le cas GEP oblige à préciser à quel périmètre se lit l'indice, parce que les deux lectures s'opposent. Au niveau de l'entité immatriculée, la facturation électronique est le métier même, exercé depuis 1985 : la lecture donnerait 4. Au niveau du groupe, c'est un module d'une des trois lignes de métier, dans une maison qui parle achats, conseil et externalisation : la lecture donnerait 1. Ce qui tranche, c'est l'investissement observable sur le mandat français, conformément à la règle du barème : aucune page consacrée au dispositif français, aucune entité française identifiée, immatriculation tardive en troisième vague, et surtout un agrément qui n'a pas été construit mais hérité d'une acquisition. L'indice 2 traduit cette réalité : une capacité technique réelle et ancienne, portée par une entité dont c'est le métier, mais sans investissement français visible à ce jour. C'est une situation instable : si le groupe décidait de porter le sujet en France, l'indice pourrait bouger vite, la capacité étant déjà là.",
+          "confiance": "moyenne"
+        },
+        "referencesClients": {
+          "parSecteur": {
+            "energie": [
+              "Chevron",
+              "CITGO"
+            ],
+            "industrie": [
+              "Honda North America",
+              "Caterpillar",
+              "Lenovo",
+              "U.S. Steel"
+            ],
+            "sante": [
+              "Bayer",
+              "Siemens Healthineers"
+            ],
+            "agroalimentaire": [
+              "Kellogg's",
+              "Costa Coffee"
+            ],
+            "retail": [
+              "Macy's",
+              "Tesco"
+            ],
+            "finance": [
+              "Citigroup",
+              "Prudential"
+            ],
+            "transport": [
+              "ITA Airways"
+            ],
+            "services": [
+              "Marriott International"
+            ]
+          },
+          "grandsComptes": [
+            "Chevron",
+            "Honda North America",
+            "Caterpillar",
+            "Bayer",
+            "Citigroup",
+            "Marriott International",
+            "Lenovo",
+            "Tesco",
+            "Macy's",
+            "Kellogg's",
+            "Siemens Healthineers",
+            "U.S. Steel",
+            "Prudential"
+          ],
+          "referencesPAConfirmees": [],
+          "source": "Logos publiés sur gep.com, page société, relevé le 21/08/2026. Le groupe revendique plus de 1 000 clients dans plus de 120 pays, dont plus de 550 entreprises du Fortune 500 et du Global 2000, et plus de 600 milliards de dollars de dépenses gérées par an. Références déclaratives, portant sur l'ensemble du catalogue du groupe — logiciel, conseil et externalisation — et non sur la seule activité agréée."
+        },
+        "reputation": {
+          "volumeAvis": null,
+          "synthese": "Aucun relevé d'avis agrégés effectué dans cette passe. GEP revendique une position de leader dans plusieurs Magic Quadrants de Gartner et des citations chez Forrester, IDC, ISG et Spend Matters : il s'agit de distinctions d'analystes et non d'avis clients.",
+          "confiance": "non_qualifie"
+        },
+        "capaciteDeFrappe": {
+          "actionnaires": [
+            "Groupe GEP, société non cotée, dirigée par son cofondateur Subhash Makhija"
+          ],
+          "typeActionnaire": "filiale",
+          "financementRecent": "Aucune opération de capital publiée sur le groupe. L'entité immatriculée a changé de mains le 01/07/2024 : GEP l'a rachetée à PSG Equity, entrée au capital majoritaire en 2019 ; le montant n'a pas été divulgué.",
+          "acquisitions": [
+            "OpusCapita, éditeur finlandais de facturation électronique et d'automatisation de la comptabilité fournisseurs, acquisition effective le 01/07/2024, rachetée à PSG Equity, montant non divulgué"
+          ],
+          "modeleTarifaire": "Sur devis",
+          "tarifPublie": false,
+          "offreGratuite": false
+        },
+        "lectureConcurrentielle": "GEP est le cas où l'apparence et la réalité divergent le plus dans le référentiel. La fiche affiche un éditeur américain d'achats de 6 000 personnes, référencé chez Chevron, Caterpillar, Bayer ou Tesco. L'entité effectivement immatriculée est autre chose : une filiale finlandaise de 220 personnes au moment de son rachat, fondée en 1985, dont la facturation électronique est le métier depuis quarante ans, et qui exploitait auparavant l'un des réseaux d'échange les plus établis d'Europe du Nord. Trois conséquences pratiques. D'abord, la capacité technique ne doit pas être sous-estimée sous prétexte que le groupe parle d'abord d'achats : le socle est ancien, éprouvé, et couvre plus de 80 pays. Ensuite, l'investissement français est aujourd'hui inexistant en surface : aucune page sur le dispositif français, aucune entité française identifiée, immatriculation en troisième vague. Sur un appel d'offres franco-français, GEP arriverait donc sans matériel local, ce qui est une faiblesse commerciale réelle mais purement conjoncturelle. Enfin, l'agrément a été hérité et non construit : sur le marché des grands comptes internationaux, un client GEP dispose désormais d'une plateforme agréée à l'intérieur de sa suite achats, sans avoir à contracter avec un tiers. C'est exactement la situation inverse de celle d'un éditeur de S2P dépourvu d'agrément, dont les clients doivent en chercher un ailleurs.",
+        "droitDeReponse": {
+          "signale": false,
+          "date": null,
+          "objet": null
+        }
+      },
+      "sourcesEnrichissement": [
+        {
+          "champ": "identiteInternationale",
+          "source": "opuscapita.com, page d'adresses : « Espoo headquarters, Innopoli 2, Tekniikantie 14, 02150 Espoo, Finlande », correspondant à l'adresse publiée par la DGFiP pour la plateforme GEP. Pages institutionnelles publiées sous la raison sociale GEP Finland Oy.",
+          "dateReleve": "2026-08-21",
+          "confiance": "haute"
+        },
+        {
+          "champ": "raisonSociale",
+          "source": "opuscapita.com, titres et mentions institutionnelles des pages sous la raison sociale GEP Finland Oy, l'ancienne marque OpusCapita restant employée sur le site",
+          "dateReleve": "2026-08-21",
+          "confiance": "moyenne"
+        },
+        {
+          "champ": "anneeCreation",
+          "source": "Communiqué GEP du 01/07/2024 : OpusCapita, fondée en 1985, acteur de la facturation électronique, de l'automatisation de la comptabilité fournisseurs et de la gestion des documents de chaîne d'approvisionnement, 600 clients, 220 salariés répartis entre les pays nordiques, l'Europe continentale et Pittsburgh",
+          "dateReleve": "2026-08-21",
+          "confiance": "haute"
+        },
+        {
+          "champ": "groupeCapitalistique",
+          "source": "Communiqué GEP du 01/07/2024 : OpusCapita rachetée à PSG Equity, entrée au capital majoritaire en 2019, et exploitée comme filiale autonome de GEP ; montant non divulgué",
+          "dateReleve": "2026-08-21",
+          "confiance": "haute"
+        },
+        {
+          "champ": "analyse360.activites",
+          "source": "gep.com, page société : trois métiers GEP SOFTWARE, GEP STRATEGY et GEP MANAGED SERVICES, plateforme GEP Quantum Intelligence, solutions GEP SMART, GEP NEXXE et GEP GREEN, plus de 600 milliards de dollars de dépenses gérées par an, plus de 1 000 clients, plus de 30 secteurs, plus de 120 pays",
+          "dateReleve": "2026-08-21",
+          "confiance": "haute"
+        },
+        {
+          "champ": "analyse360.activites",
+          "source": "gep.com, page e-invoicing : plus de 80 pays couverts, plus de 70 opérateurs réseau, plus de 25 ans d'antériorité sur la facturation électronique et l'automatisation de la comptabilité fournisseurs, réseau interopérable et Access Point Peppol, moteur de conformité, offre vendable en solution S2P complète, en offre autonome ou en combinaison de logiciel, de services et de BPO",
+          "dateReleve": "2026-08-21",
+          "confiance": "haute"
+        },
+        {
+          "champ": "analyse360.poidsEconomique.effectifGroupe",
+          "source": "Presse spécialisée achats et annuaires de cabinets de conseil : environ 6 000 salariés dans le monde au début de 2025. Chiffre de source tierce, non confirmé par l'entreprise, retenu comme ordre de grandeur.",
+          "dateReleve": "2026-08-21",
+          "confiance": "faible"
+        },
+        {
+          "champ": "analyse360.referencesClients",
+          "source": "gep.com, page société : logos Chevron, Honda North America, Kellogg's, Macy's, Caterpillar, Bayer, Citigroup, Marriott International, Lenovo, ITA Airways, CITGO, Costa Coffee, Siemens Healthineers, Tesco, Prudential, U.S. Steel",
+          "dateReleve": "2026-08-21",
+          "confiance": "moyenne"
+        },
+        {
+          "champ": "identiteInternationale.presenceEnFrance",
+          "source": "annuaire-entreprises.data.gouv.fr, recherches « GEP worldwide » (aucun résultat) et « GEP FRANCE » (14 homonymes sans lien avec le groupe)",
+          "dateReleve": "2026-08-21",
+          "confiance": "moyenne"
+        },
+        {
+          "champ": "analyse360.centralitePA.indice",
+          "source": "Lecture Fluxym sur faisceau d'indices, méthode décrite dans Info IA/plateformes-agreees/cartographie-360-modele.md et règles de barème consignées dans PLAN-DE-TRAVAIL.md",
+          "dateReleve": "2026-08-21",
+          "confiance": "moyenne"
+        }
+      ]
+    }
+  ]
+}
