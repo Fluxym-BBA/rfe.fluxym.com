@@ -61,6 +61,9 @@ const CIIGenerator = {
             currency: p.currency,
             taxCurrency: p.taxCurrency,
             payee: p.payee,
+            // Le tiers payeur n'est transmis au gabarit que sous profil etendu :
+            // le filtre est ici, une seule fois, plutot que disperse dans le XML.
+            payer: p.extendedProfile ? p.payer : null,
             meansCode: p.paymentMeansCode,
             iban: p.iban,
             bic: p.bic,
@@ -153,6 +156,20 @@ const CIIGenerator = {
             const foundPayee = partyName('PayeeTradeParty');
             if (foundPayee && foundPayee !== expectedPayee) {
                 errors.push('BT-59 : attendu ' + expectedPayee + ', trouve ' + foundPayee);
+            }
+        }
+
+        const expectedPayer = (p.extendedProfile && p.payer) ? (p.payer.legalName || p.payer.name) : null;
+        if (expectedPayer && !hasParty('PayerTradeParty')) {
+            errors.push('Tiers payeur "' + expectedPayer + '" declare dans le pivot mais absent du CII');
+        }
+        if (!expectedPayer && hasParty('PayerTradeParty')) {
+            errors.push('ram:PayerTradeParty emis sans tiers payeur dans le pivot, ou hors profil EXTENDED-CTC-FR');
+        }
+        if (expectedPayer) {
+            const foundPayer = partyName('PayerTradeParty');
+            if (foundPayer && foundPayer !== expectedPayer) {
+                errors.push('Tiers payeur : attendu ' + expectedPayer + ', trouve ' + foundPayer);
             }
         }
 

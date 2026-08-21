@@ -261,6 +261,15 @@ const CIITemplates = {
             x += `\n\t\t\t<ram:PayeeTradeParty>${CIITemplates.partyFragment(o.payee, '\t\t\t\t', { endpoint: false })}\n\t\t\t</ram:PayeeTradeParty>`;
         }
 
+        // Tiers PAYEUR, profil EXTENDED-CTC-FR uniquement. Position dans la
+        // sequence XSD de ram:ApplicableHeaderTradeSettlement : apres
+        // ram:PayeeTradeParty, avant ram:TaxApplicableTradeCurrencyExchange et
+        // ram:SpecifiedTradeSettlementPaymentMeans. Un element hors sequence
+        // serait rejete par le validateur, meme avec le bon nom.
+        if (o.payer) {
+            x += `\n\t\t\t<ram:PayerTradeParty>${CIITemplates.partyFragment(o.payer, '\t\t\t\t', { endpoint: false })}\n\t\t\t</ram:PayerTradeParty>`;
+        }
+
         // BG-16 : obligatoire. BT-84 / BT-86 sur les codes 30 et 58.
         x += `\n\t\t\t<ram:SpecifiedTradeSettlementPaymentMeans>`
            + `\n\t\t\t\t<ram:TypeCode>${o.meansCode}</ram:TypeCode>`;

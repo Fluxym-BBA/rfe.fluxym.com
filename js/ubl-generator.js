@@ -10,6 +10,9 @@
  *     meme cascade que buildXML (tiers importe, factor, distributeur,
  *     collaborateur). Le CII perdait auparavant ce tiers pour les cas 5 et 9,
  *     ainsi qu'en mode donnees importees.
+ *   - buildCiiPivot : le tiers PAYEUR (BG-2 etendu) est transporte et emis en
+ *     ram:PayerTradeParty pour les seuls cas en profil EXTENDED-CTC-FR (1, 3, 4,
+ *     14, 17b, 19a). Sous EN 16931 pur, il reste volontairement non emis.
  *   - PDF_CASES : les 4 variantes nominal-* rattachees au lisible nominal,
  *     dont elles partagent le XML a l'identique.
  *   - RESTE OUVERT : le tiers PAYEUR (cfg.payer) n'est toujours pas transporte
@@ -1643,6 +1646,24 @@ const UBLGenerator = {
                     // Personne physique : ni SIREN ni SIRET, BT-59 seul, comme en UBL.
                     p.payee = { legalName: "DUPONT Jean (Employe)", name: null,
                                 siren: null, nic: null, address: null };
+                }
+
+                // Tiers PAYEUR : la partie qui paie la facture sans en etre le
+                // destinataire (un OPCO qui prend en charge une formation, par
+                // exemple). ram:PayerTradeParty existe dans le XSD D22B mais
+                // n'est admis que par le profil EXTENDED-CTC-FR : l'emettre sous
+                // un CustomizationID EN 16931 pur ferait echouer le schematron.
+                // On ne l'emet donc QUE si le cas declare le profil etendu, et
+                // le montant pris en charge continue de passer par BT-113
+                // (TotalPrepaidAmount), qui est du socle et vaut partout.
+                p.extendedProfile = self.getCustomizationId(usecase).indexOf("extended-ctc-fr") !== -1;
+                p.payer = null;
+                if (cfg.payer) {
+                    var payerParty = findThirdParty(cfg.payer);
+                    if (payerParty) {
+                        p.payer = { legalName: payerParty.legalName, name: null,
+                                    siren: payerParty.siren, nic: payerParty.nic, address: null };
+                    }
                 }
 
                 // BG-24 et BT-16 : le bon de livraison joint vaut reference
