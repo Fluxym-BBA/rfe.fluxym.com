@@ -697,18 +697,41 @@ const PDFLisible = {
         d.notes = (d.notes || []).slice();
         d.docLabel = d.docLabel || this.DOC_LABELS[String(d.typeCode)] || 'FACTURE';
 
+        // Les mentions arrivent soit en chaines simples, soit en objets
+        // { code, text } porteurs de leur code sujet BT-21. Le code sert a les
+        // classer : la colonne de gauche n'en affiche que cinq, et l'ordre
+        // d'insertion n'a aucune raison de coincider avec l'ordre d'importance.
+        d.notes = d.notes.map((n) => (typeof n === 'string' ? { code: '', text: n } : n))
+            .filter((n) => n && n.text);
+
         if (d.taxSubtotals && d.taxSubtotals.length) {
             const taxed = d.taxSubtotals.filter((s) => this._num(s.percent) > 0);
             d.taxPercent = d.taxPercent !== undefined ? d.taxPercent
                 : (taxed.length ? taxed[0].percent : d.taxSubtotals[0].percent);
-            // Motifs d'exoneration remontes en mentions
+            // Motifs d'exoneration remontes en mentions. Ce sont des mentions
+            // OBLIGATOIRES (CGI art. 289) : elles passent devant tout le reste.
             d.taxSubtotals.forEach((s) => {
-                if (s.reason && d.notes.indexOf(s.reason) === -1) {
-                    d.notes.push('TVA ' + this._amt(s.percent) + ' % \u2014 cat\u00e9gorie ' + s.category +
-                        (s.code ? ', code ' + s.code : '') + ' : ' + s.reason);
+                if (s.reason && !d.notes.some((n) => n.text.indexOf(s.reason) !== -1)) {
+                    d.notes.push({
+                        code: 'TXE',
+                        text: 'TVA ' + this._amt(s.percent) + ' % \u2014 cat\u00e9gorie ' + s.category +
+                            (s.code ? ', code ' + s.code : '') + ' : ' + s.reason
+                    });
                 }
             });
         }
+
+        // Hierarchie : motif d'exoneration de TVA, puis mention propre au cas,
+        // puis clauses de paiement. Une clause de penalites de retard, qui est
+        // la meme sur les 57 cas, ne doit jamais evincer le motif legal
+        // d'exoneration, qui est la raison d'etre de la facture exoneree.
+        const NOTE_RANK = { TXE: 0, AAI: 1, DCL: 1, PAI: 1, ABU: 1, ACC: 1, BLU: 1,
+                            PMT: 2, PMD: 2, AAB: 2 };
+        d.notes = d.notes
+            .map((n, i) => ({ n: n, r: (NOTE_RANK[n.code] === undefined ? 1 : NOTE_RANK[n.code]), i: i }))
+            .sort((a, b) => (a.r - b.r) || (a.i - b.i))
+            .map((o) => o.n.text)
+            .filter((t, i, arr) => arr.indexOf(t) === i);
         if (d.taxPercent === undefined) d.taxPercent = 0;
         return d;
     },

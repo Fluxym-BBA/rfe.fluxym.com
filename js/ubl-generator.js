@@ -19,6 +19,12 @@
  *     lisible perdait le distributeur du cas 9 et le collaborateur du cas 5,
  *     exactement comme le CII avant correction.
  *   - PDF_CASES : 8 cas de la vague 1 ajoutes apres audit par lecture croisee.
+ * Changelog v4c — lot L2 vague 2 :
+ *   - Les mentions transmises au lisible conservent leur code sujet BT-21, ce
+ *     qui permet de les hierarchiser : un motif d'exoneration de TVA (mention
+ *     obligatoire, CGI art. 289) ne peut plus etre evince des cinq lignes
+ *     affichables par une clause de penalites de retard commune aux 57 cas.
+ *   - PDF_CASES : 7 cas de la vague 2, dont les fondements ont ete valides.
  * Changelog v4a suite :
  *   - Pack B : lignes et avoir passes en modele declaratif (getLineData /
  *     getPackBCreditData). Le cas gagne un modele pivot, donc le CII et
@@ -1083,7 +1089,24 @@ const UBLGenerator = {
         //   11 commissionnaire a l'achat : cadre B1, rendu nominal
         //   12 commissionnaire a la vente : agent porte par la mention #DCL#
         //   15 UGAP : mandataire transparent porte par la mention #DCL#
-        "4", "5", "7", "9", "10", "11", "12", "15"],
+        "4", "5", "7", "9", "10", "11", "12", "15",
+        // Vague 2 (21/08/2026) : cas dont la specificite est portee par une
+        // mention (BT-21/BT-22), desormais garantie visible par la hierarchie
+        // des mentions du lisible. Fondements valides par @RFE_Expert :
+        //   6, 28 cadre S7 : mention "TVA deja collectee via e-reporting B2C".
+        //          Aucun bloc de partie dedie requis (Z12-014 cas 30 et 28).
+        //   25 bons a usage unique : mention d'exigibilite des l'emission
+        //          (CGI art. 256 ter). Cas explicitement non stabilise dans la
+        //          Z12-014 V1.4 : a resurveiller a chaque version.
+        //   32 acompte periodique : mention de regularisation au solde.
+        //   42 detaxe : mention du bordereau PABLO, cadre B7.
+        //   22b escompte sur biens : la clause AAB de droit commun est
+        //          remplacee par la clause d'escompte reelle.
+        //   19a mandat de facturation : mention "Facture etablie par X pour le
+        //          compte de Y", formulation du BOFIP (CGI ann. II art. 242
+        //          nonies A I 13). Un bloc FACTURANT distinct reste recommande
+        //          en profil etendu : ameliration a prevoir, non bloquante.
+        "6", "28", "25", "32", "42", "22b", "19a"],
 
     supportsPdf: function(usecase) {
         return typeof PDFLisible !== 'undefined' && this.PDF_CASES.indexOf(usecase) !== -1;
@@ -1563,11 +1586,17 @@ const UBLGenerator = {
                 var prepaid = parseFloat(ld.totals[3]);
                 var taxInclusive = Math.round((taxExclusive + vatTotal) * 100) / 100;
 
-                // Mentions lisibles : on retire le prefixe technique #XXX#
-                // et la note de cadre #BAR#, non destinee au lecteur humain.
+                // Mentions lisibles : la note de cadre #BAR# est un code de
+                // routage, pas une mention destinee au lecteur humain. Le code
+                // sujet des autres est CONSERVE : le lisible ne peut afficher
+                // que cinq mentions, il lui faut donc de quoi les hierarchiser
+                // par valeur juridique plutot que par ordre d'insertion.
                 var pdfNotes = notes
                     .filter(function(n) { return n.indexOf("#BAR#") !== 0; })
-                    .map(function(n) { return n.replace(/^#[A-Z]{3}#/, ""); });
+                    .map(function(n) {
+                        var m = /^#([A-Z]{3})#/.exec(n);
+                        return { code: m ? m[1] : "", text: n.replace(/^#[A-Z]{3}#/, "") };
+                    });
 
                 var pdfAc = ld.allowanceCharges || [];
                 var meansCodePdf = cfg.paymentMeans || "30";
