@@ -1,0 +1,54 @@
+nom;pays;vague;familleOrigine;natureEntite;verticale;siteWeb;siren;confiance;segmentCible
+EY Expertises & Transactions;;;;diversification;generaliste;https://www.ey.com/fr_fr/services/expertise-comptable;;partielle;eti|grands_comptes
+AXWAY SOFTWARE;France;V2 (févr. – avr. 2026);edi;diversification;generaliste;https://www.axway.com/fr/produits/b2b-integration/einvoice;;qualifiee;eti|grands_comptes
+ECOSIO;Autriche;V1 (déc. 2025 – janv. 2026);edi;extension_demat;generaliste;https://ecosio.com/fr/;;qualifiee;eti|grands_comptes
+EDICOM Group;Espagne;V1 (déc. 2025 – janv. 2026);edi;extension_demat;generaliste;https://edicomgroup.com/fr/;;qualifiee;eti|grands_comptes
+SEEBURGER;Allemagne;V1 (déc. 2025 – janv. 2026);edi;extension_demat;generaliste;https://www.seeburger.com/;;qualifiee;eti|grands_comptes
+SPS COMMERCE;Pays-Bas;V1 (déc. 2025 – janv. 2026);edi;extension_demat;;https://www.spscommerce.com/;;qualifiee;eti|grands_comptes
+TESISQUARE SPA;Italie;V1 (déc. 2025 – janv. 2026);edi;extension_demat;;https://www.tesisquare.com/;;qualifiee;eti|grands_comptes
+ecosio InterCom, a Vertex Company;Allemagne;V2 (févr. – avr. 2026);edi;extension_demat;generaliste;https://ecosio.com/;;qualifiee;eti|grands_comptes
+In.Te.S.A. spa;Italie;V3 (mai – août 2026);edi|ged;extension_demat;generaliste;https://www.intesa.it/;;qualifiee;eti|grands_comptes|public
+iEDI ApS;Danemark;V2 (févr. – avr. 2026);edi|integrateur;extension_demat;generaliste;https://iedi.com/;;partielle;eti|grands_comptes
+DOCPROCESS;France;V1 (déc. 2025 – janv. 2026);edi|o2c;extension_demat;generaliste;https://doc-process.com/fr;837863042;qualifiee;eti|grands_comptes
+GENERIX Group;France;V1 (déc. 2025 – janv. 2026);edi|o2c;extension_demat;generaliste;https://www.generixgroup.com/fr;377619150;qualifiee;eti|grands_comptes
+MySupply Aps;Danemark;V2 (févr. – avr. 2026);edi|s2p;extension_demat;generaliste;https://mysupply.dk/en/;;qualifiee;eti|grands_comptes
+SERES;France;V1 (déc. 2025 – janv. 2026);edi|s2p|o2c;extension_demat;generaliste;https://seres.fr/;343778163;qualifiee;eti|grands_comptes
+VENTYA;France;V3 (mai – août 2026);edi|s2p|o2c;extension_demat;generaliste;https://www.ventya.fr/;821839982;qualifiee;eti|grands_comptes
+EDICOM France;France;V1 (déc. 2025 – janv. 2026);edi|tax;extension_demat;generaliste;https://edicomgroup.fr;444658181;qualifiee;eti|grands_comptes
+PAGERO;Suède;V1 (déc. 2025 – janv. 2026);edi|tax;extension_demat;generaliste;https://www.pagero.com/fr;;qualifiee;eti|grands_comptes
+Basikon;;;erp;diversification;financement_leasing;https://www.basikon.com/;;partielle;eti|grands_comptes
+COMARCH SA;Pologne;V1 (déc. 2025 – janv. 2026);erp|edi;extension_demat;generaliste;https://www.comarch.com/;;qualifiee;eti|grands_comptes
+Docnova, MELASOFT GmbH;Allemagne;V3 (mai – août 2026);erp|integrateur|edi;extension_demat;generaliste;https://www.melasoft.com/;;qualifiee;eti|grands_comptes
+SAP;Allemagne;V1 (déc. 2025 – janv. 2026);erp|tax;diversification;generaliste;https://www.sap.com/products/financial-management/document-reporting-compliance.html;;qualifiee;eti|grands_comptes
+WiseTech GLOBAL;Australie;V1 (déc. 2025 – janv. 2026);erp|tax;diversification;transport;https://www.wisetechglobal.com/;;qualifiee;eti|grands_comptes
+PAYFLOWS;France;V2 (févr. – avr. 2026);fintech|s2p;diversification;generaliste;https://payflows.io;912610649;partielle;eti|grands_comptes
+CECURITY;France;V1 (déc. 2025 – janv. 2026);ged;extension_demat;generaliste;https://www.cecurity.com/;;qualifiee;eti|grands_comptes
+DOXALLIA;France;V1 (déc. 2025 – janv. 2026);ged;extension_demat;generaliste;https://www.doxallia.com;397775305;qualifiee;eti|grands_comptes
+ESI;France;V1 (déc. 2025 – janv. 2026);ged;extension_demat;generaliste;https://www.esi-groupe.com/;102061702;qualifiee;eti|grands_comptes|public
+Insiders Technologies GmbH;;;ged;diversification;generaliste;https://insiders-technologies.com/;;qualifiee;eti|grands_comptes
+OPENTEXT;Pays-Bas;V1 (déc. 2025 – janv. 2026);ged|edi;extension_demat;generaliste;https://www.opentext.fr;;qualifiee;grands_comptes
+SRCI;France;V1 (déc. 2025 – janv. 2026);ged|edi;extension_demat;generaliste;https://solutions.srci.fr/;339144727;qualifiee;public
+SYMTRAX;France;V1 (déc. 2025 – janv. 2026);ged|edi|tax;extension_demat;generaliste;https://www.symtrax.com/fr/;352073910;qualifiee;eti|grands_comptes
+PARAGON;France;V1 (déc. 2025 – janv. 2026);ged|s2p|o2c;extension_demat;generaliste;https://www.paragon.world/fr;320496789;qualifiee;eti|grands_comptes
+TESSI Technologies;France;V1 (déc. 2025 – janv. 2026);ged|s2p|o2c;extension_demat;generaliste;https://www.tessi.eu/fr/digital-invoice-by-tessi/;382105823;qualifiee;eti|grands_comptes
+ACCENTURE;France;V1 (déc. 2025 – janv. 2026);integrateur;diversification;generaliste;https://www.accenture.com/us-en/products/ecomply-verify;732075312;qualifiee;grands_comptes
+CBS Corporate Business Solutions;Allemagne;V2 (févr. – avr. 2026);integrateur|edi;diversification;generaliste;https://e-world.cloud/;;qualifiee;eti|grands_comptes
+NTT DATA Business Solutions;Allemagne;V3 (mai – août 2026);integrateur|edi;extension_demat;generaliste;https://nttdata-solutions.com/fr/;;qualifiee;eti|grands_comptes
+BC SOLUTIONS;France;V1 (déc. 2025 – janv. 2026);o2c|s2p;extension_demat;generaliste;https://bcsolutions.fr/;;qualifiee;eti|grands_comptes|public
+ESKER;France;V1 (déc. 2025 – janv. 2026);o2c|s2p;extension_demat;generaliste;https://www.esker.fr;331518498;qualifiee;eti|grands_comptes
+DOKAPI;Belgique;V3 (mai – août 2026);pure_player;extension_demat;generaliste;https://www.dokapi.io/;;qualifiee;eti|grands_comptes
+BASWARE;Finlande;V1 (déc. 2025 – janv. 2026);s2p;extension_demat;generaliste;https://www.basware.com/en/compliance/e-invoicing-mandate-france/why-basware/;;qualifiee;eti|grands_comptes
+DIGITAL TECHNOLOGIES;Italie;V1 (déc. 2025 – janv. 2026);s2p;extension_demat;generaliste;https://www.digtechs.com/en/;;qualifiee;grands_comptes
+GEP;France;V3 (mai – août 2026);s2p;;generaliste;https://www.gep.com/software/e-invoicing;;qualifiee;eti|grands_comptes
+TRADESHIFT BABELWAY;Belgique;V1 (déc. 2025 – janv. 2026);s2p|edi;extension_demat;generaliste;https://tradeshift.com/;;qualifiee;eti|grands_comptes
+TUNGSTEN AUTOMATION FRANCE;France;V1 (déc. 2025 – janv. 2026);s2p|ged|edi;extension_demat;generaliste;https://www.tungstenautomation.fr/products/einvoice-network;411088859;qualifiee;eti|grands_comptes
+CEGEDIM;France;V1 (déc. 2025 – janv. 2026);s2p|o2c;extension_demat;generaliste;https://www.cegedim-business-services.com/;350422622;qualifiee;eti|grands_comptes
+AVALARA;France;V1 (déc. 2025 – janv. 2026);tax;diversification;generaliste;https://www.avalara.com/fr/fr/products/e-invoicing.html;814232740;qualifiee;eti|grands_comptes
+CLEARTAX;France;V2 (févr. – avr. 2026);tax;extension_demat;generaliste;https://www.cleartax.com/fr;491096350;qualifiee;grands_comptes
+EEZI powered by VAT IT;France;V1 (déc. 2025 – janv. 2026);tax;extension_demat;generaliste;https://eezi.io/;;partielle;eti|grands_comptes
+Fonoa Technologies Limited;Irlande;V2 (févr. – avr. 2026);tax;extension_demat;generaliste;https://www.fonoa.com/;;qualifiee;eti|grands_comptes
+MAROSA;Espagne;V1 (déc. 2025 – janv. 2026);tax;extension_demat;generaliste;https://marosavat.com/;;qualifiee;eti|grands_comptes
+SNI;Slovénie;V2 (févr. – avr. 2026);tax;extension_demat;generaliste;https://snitechnology.net/;;qualifiee;eti|grands_comptes
+SOVOS;Portugal;V1 (déc. 2025 – janv. 2026);tax;extension_demat;generaliste;https://www.saphety.com/fr;;qualifiee;eti|grands_comptes
+TAXERA;France;V3 (mai – août 2026);tax;extension_demat;generaliste;https://taxera.tech/;919179663;qualifiee;eti|grands_comptes
+Taxilla Europe BV;;;tax;extension_demat;generaliste;https://www.taxilla.com/;;qualifiee;eti|grands_comptes

@@ -1,133 +1,158 @@
 # Priorisation concurrentielle du chantier 360
 
 **Emplacement :** `Info IA/plateformes-agreees/PRIORISATION-CONCURRENCE.md`
-**Rédigé le :** 21/08/2026 · **Base nominative :** `LOTS-E.md`, lu sur `main` le 21/08/2026
-**Objet :** dire quelles sociétés sont traitées en premier, et pourquoi.
+**Version :** 2 — **remplace intégralement** la version du 21/08/2026 après-midi, établie sur les seuls noms des lots.
+**Base :** `data/plateformes-agreees.json` complet (163 entrées, relevé DGFiP du 17/08/2026, référentiel daté du 19/08/2026), analysé le 21/08/2026.
+**Annexe :** `cohorte-eti-grands-comptes.csv` — les 53 sociétés du cœur de cible, nominatives.
 
 ---
 
-## 1. Le portefeuille Fluxym, et ce qu'il implique
+## 1. Le portefeuille Fluxym, et un trou dans la raquette
 
-Fluxym distribue et implémente **BASWARE**, **ESKER**, **GEP** et **IVALUA**. Bruno porte l'offre **ESKER**.
+Fluxym distribue **BASWARE**, **ESKER**, **GEP** et **IVALUA**. Bruno porte l'offre **ESKER**.
 
-Conséquence directe sur la priorisation : le segment qui compte est **ETI et grands comptes**, sur les métiers **P2P, automatisation des factures fournisseurs et achats**. Une plateforme agréée qui adresse l'artisan ou la TPE via son expert-comptable n'est pas un concurrent, quelle que soit sa taille.
+Première conclusion, et elle n'est pas anodine :
 
-Bonne nouvelle méthodologique : ce segment est **le mieux documenté du marché**. Les acteurs ETI/GE publient des références clients, communiquent, recrutent, sont notés sur les plateformes d'avis et déposent des comptes. Le chantier 360 y rendra bien plus que sur la longue traîne.
+> **IVALUA n'est pas dans le référentiel des plateformes agréées.** Aucune entrée, ni immatriculée, ni candidate, sur les 163 de la liste DGFiP au 17/08/2026.
 
-Deux points de vigilance, à tenir dès la première fiche :
+Même constat pour **COUPA** et **LIBEO**, deux acteurs qu'on attendrait sur ce marché.
 
-- **Les quatre solutions du portefeuille sont traitées avec exactement le même barème que les autres.** Elles sont dans la liste DGFiP, elles auront leur fiche, sans complaisance ni angle promotionnel. C'est la condition de crédibilité de tout le reste : un référentiel où le partenaire de l'éditeur est mieux traité que ses concurrents ne vaut rien, et se repère en trois fiches.
-- **Aucune information issue d'une mission Fluxym, d'un dossier d'avant-vente ou d'un échange partenaire ne remonte dans le référentiel.** Uniquement des sources publiques. La perte d'un dossier face à un concurrent est une information interne, jamais une donnée de fiche.
+C'est une information de premier ordre pour Fluxym, et elle sort du référentiel sans aucune analyse supplémentaire : un client Ivalua devra passer par **une plateforme agréée tierce** pour ses flux réglementaires. Trois questions en découlent, qui sont commerciales et non documentaires : laquelle, sur quel socle, et qui tient la relation sur ce flux. À confirmer auprès de l'éditeur — l'absence de la liste au 17/08 ne présume pas d'une immatriculation en cours.
 
----
+Les trois autres solutions du portefeuille sont bien présentes, et toutes les trois positionnées **ETI et grands comptes exclusivement** :
 
-## 2. Le cas Payflows, et ce qu'il enseigne
+| Solution | Statut | Vague | Pays | Famille | Nature |
+|---|---|---|---|---|---|
+| **ESKER** | immatriculée | V1 — 11/12/25 | France | O2C + S2P | extension démat |
+| **BASWARE** | immatriculée | V1 — 18/12/25 | Finlande | S2P | extension démat |
+| **GEP** | immatriculée | V3 — 17/06/26 | *voir anomalie ci-dessous* | S2P | non renseignée |
 
-**PAYFLOWS** est immatriculée et figure au lot E6, non qualifiée à ce jour. Un petit acteur a remporté un dossier significatif sur un segment où Fluxym se pensait en concurrence avec les grands noms.
+### Anomalie GEP, à corriger dans les données
 
-C'est exactement le trou que le référentiel doit boucher. La liste DGFiP les met sur la même ligne : un nom, une adresse, une date. Rien n'y distingue un acteur qui monte d'un acteur qui dort. **La valeur du chantier 360 n'est pas de décrire les concurrents connus — elle est de faire apparaître ceux qui ne le sont pas encore.**
-
-### Les six signaux d'angle mort
-
-À relever systématiquement, et à faire remonter en tête de fiche quand au moins trois sont réunis :
-
-1. **Références ETI ou grand compte affichées** alors que le discours produit reste PME — signe d'une montée en gamme en cours.
-2. **Recrutements d'avant-vente ou de commerciaux grands comptes** : un acteur qui recrute des profils « Enterprise » change de terrain de jeu, et cela se voit dans ses offres avant d'apparaître dans son marketing.
-3. **Levée de fonds récente**, surtout avec un fonds spécialisé B2B SaaS : donne les moyens de tenir des prix bas pendant deux à trois ans.
-4. **Partenariat avec un intégrateur ERP** (SAP, Oracle, Microsoft, Sage, Cegid) : c'est le canal d'accès aux grands comptes sans force de vente propre. Cas documenté sur Generix, dont le socle est revendu par un intégrateur tiers.
-5. **Immatriculation en première vague** : indique une équipe conformité structurée, donc une ambition sur les grands comptes multi-pays.
-6. **Recrutements ou contenus orientés conformité internationale** (ViDA, mandats étrangers) : signe d'une cible multinationale.
-
-Ces signaux sont tous **observables et publics**. Aucun ne demande d'information privilégiée.
+L'entrée GEP porte `pays: "France"`, alors que l'adresse publiée par la DGFiP est **« Innopoli 2 Tekniikantie 14 2600 »**, soit Espoo, en Finlande — la même ville que Basware. Le pays a été mal déduit de l'adresse, et `siren`, `anneeCreation` et `natureEntite` sont vides. Trois corrections à porter, et un rappel utile : le champ `pays` est une donnée dérivée, jamais une donnée source.
 
 ---
 
-## 3. Vague G1 — 30 sociétés, par cercles
+## 2. État réel du référentiel, et corrections de nos propres documents
 
-Le positionnement indiqué ci-dessous est une **hypothèse de travail** issue de la connaissance du marché, à confirmer ou infirmer par la fiche 360 elle-même. C'est précisément l'objet du chantier : une hypothèse n'est pas une donnée, et aucune ne sera publiée telle quelle.
+Le référentiel est **beaucoup plus avancé** que ce que décrivent `cartographie-reste-a-faire.md` (19/08) et mes notes de ce matin. Relevé sur le fichier complet :
 
-### Cercle 0 — le portefeuille Fluxym (4 fiches, à faire en premier)
-
-| Société | Lot | Pourquoi en premier |
+| Champ | Rempli | Ce que disaient nos documents |
 |---|---|---|
-| **BASWARE** | E10 (étranger) | Solution portée. Groupe finlandais, sous fonds depuis 2022. Sert de fiche de calibrage sur un cas international bien documenté. |
-| **ESKER** | déjà qualifiée | Solution portée par Bruno. Cotée jusqu'à récemment, donc données financières historiquement riches. Étalon du barème de centralité. |
-| **GEP** | E4 (classée FR) | Solution portée. **Anomalie à vérifier** : GEP est un groupe américain, or l'entrée est classée FR — l'entité immatriculée est probablement la filiale française. À trancher sur pièces. |
-| **IVALUA** | déjà qualifiée | Solution portée. Licorne française, source-to-pay grands comptes. |
+| `siteWeb` | **161 / 163** | « 9 % » — le chantier A est en réalité **quasi terminé** |
+| `descriptionFiche` | 161 / 163 | non mesuré |
+| `contact` | 147 / 163 | « 0 % » |
+| `familleOrigine` | 157 / 163 | — |
+| `segmentCible` | **131 / 163** | « 28 qualifiées, 17 % » — en réalité **80 %** |
+| `reseaux` (Peppol) | **112 / 163** | « 2 % » — le chantier D est largement fait |
+| `siren` | 79 / 163 | cohérent |
+| `dirigeants` | 72 / 163 | cohérent |
+| `trancheEffectif` | 57 / 163 | cohérent |
 
-Faire ces quatre fiches d'abord n'est pas une politesse : ce sont les sociétés que nous connaissons le mieux, donc celles sur lesquelles nous verrons immédiatement si le barème de centralité produit un résultat juste ou faux.
+Niveaux de confiance : **116 qualifiées, 43 partielles, 4 amorcées**.
 
-### Cercle 1 — concurrents directs sur le segment ETI / grands comptes (13 fiches)
+**Trois conséquences directes :**
 
-| Société | Lot | Hypothèse de positionnement |
-|---|---|---|
-| **MEDIUS** | E5 | AP automation ETI/GE, concurrent frontal de Basware |
-| **ITESOFT** | E5 | Capture et automatisation fournisseurs, ETI/GE, acteur français historique |
-| **TUNGSTEN AUTOMATION FRANCE** | E8 | Ex-Kofax, capture et AP automation grands comptes |
-| **TRADESHIFT BABELWAY** | E12 | Réseau B2B et AP automation, grands comptes internationaux |
-| **SAP** | E12 | Ariba et Document and Reporting Compliance, grands comptes |
-| **SEEBURGER** | E12 | Intégration B2B et EDI, grands comptes industriels |
-| **AXWAY SOFTWARE** | E1 | Intégration B2B, grands comptes, acteur français coté |
-| **EDICOM Group** | E11 | Facturation électronique globale, multinationales |
-| **SERES** | E7 | Groupe La Poste / Docaposte, ETI et grands comptes |
-| **TESSI Technologies** | E8 | BPO et dématérialisation, grands comptes |
-| **AVALARA** | E1 | Conformité fiscale internationale, ETI/GE |
-| **PARAGON** | E6 | Dématérialisation documentaire, grands comptes |
-| **NTT DATA Business Solutions** | E12 | Intégrateur SAP, canal d'accès aux grands comptes |
+1. **Les chantiers A et D sont à refermer, pas à lancer.** Il reste 2 sites et une cinquantaine de relevés Peppol, pas 147.
+2. **Le vrai retard est l'identité juridique et le poids économique** : `siren` à 48 %, `trancheEffectif` à 35 %. C'est exactement ce que le chantier 360 va chercher.
+3. **`cartographie-reste-a-faire.md` est périmé** et doit être régénéré depuis le JSON. Tant qu'il ne l'est pas, il conduit à travailler sur des chantiers déjà faits.
 
-À reprendre également en 360, bien qu'elles soient déjà qualifiées marché : **PAGERO**, **SOVOS**, **COMARCH**, **OPENTEXT**, **GENERIX** (pilote fait), **CEGID**, **SAGE**. La qualification marché n'est qu'un sous-ensemble du 360 : elles ont des facettes, pas de poids économique, pas de centralité, pas de références.
+### Le vrai trou de qualification, et il est pile sur notre cible
 
-### Cercle 2 — angles morts à instruire en priorité (13 fiches)
+**27 sociétés ont une `familleOrigine` mais pas de `segmentCible`.** Elles sont donc invisibles de tout filtre par segment. Parmi elles, trois acteurs **S2P** qui sont des concurrents frontaux du portefeuille :
 
-Ce cercle est le plus important stratégiquement, et le plus négligé par tous les comparateurs existants.
+- **MEDIUS** — famille S2P, confiance « qualifiée », segment vide
+- **ITESOFT** — famille S2P + GED, confiance « qualifiée », segment vide
+- **LUCCA** — famille S2P, segment vide
 
-| Société | Lot | Pourquoi c'est un angle mort |
-|---|---|---|
-| **PAYFLOWS** | E6 | **Cas d'école documenté.** Petit acteur, dossier remporté sur le segment. À traiter en tout premier de ce cercle. |
-| **FLOWIE** | E4 | P2P nouvelle génération, discours orienté ETI, jeune et peu identifié |
-| **SPENDESK** | E7 | Parti des dépenses PME, montée en gamme vers l'ETI en cours |
-| **AGICAP** | E1 | Trésorerie, extension vers le poste fournisseurs, forte capacité de financement |
-| **QONTO** | E7 | Base installée massive, capacité d'investissement, extension possible vers l'ETI |
-| **DEXT** | E2 | Écosystème comptable, remontée possible vers l'ETI |
-| **LUCCA** | E5 | Suite de gestion ETI, adjacence directe avec le poste fournisseurs |
-| **TAXERA** | E8 | Conformité fiscale, cible multinationale |
-| **MAROSA** | E11 | Conformité TVA internationale, cible multinationale |
-| **FONOA Technologies** | E11 | Conformité fiscale automatisée, clients technologiques internationaux |
-| **INVOPOP** | E11 | Facturation électronique multi-pays, acteur récent |
-| **SNI** | E12 | Conformité e-invoicing multi-pays, très peu visible en France |
-| **SYMTRAX** | E8 | Édition documentaire adossée aux ERP, canal SAP |
+Un filtre « ETI et grands comptes » les fait aujourd'hui disparaître de l'écran. C'est le correctif le plus urgent du référentiel : trois minutes de travail, et un angle mort qui se referme.
 
-### Cercle 3 — le reste, et il n'est pas abandonné
-
-Les ~90 sociétés restantes sont pour l'essentiel positionnées TPE/PME, souvent via la profession comptable, ou sur des verticales spécifiques (santé, assurance, automobile, pharmacie, juridique).
-
-Elles ne sont pas hors périmètre, pour trois raisons :
-
-1. **Une verticale peut être un concurrent local redoutable** sur un compte donné, même avec dix salariés.
-2. **La montée en gamme est la règle sur ce marché**, pas l'exception : le cercle 2 d'aujourd'hui était le cercle 3 d'il y a deux ans.
-3. **Un référentiel à trous perd sa crédibilité** : c'est la complétude qui donne envie de revenir.
-
-Traitement retenu : un **niveau de fiche allégé mais honnête** — activités, métier principal, segment, centralité, poids économique s'il est déposé. Sans références clients par secteur ni relevé d'avis, sauf remontée du terrain. Environ 12 à 15 minutes par fiche, contre 30 à 45 pour une fiche des cercles 0 à 2. **Allégé ne veut pas dire bâclé** : ce qui est écrit est sourcé et daté, comme partout ailleurs.
+Les 24 autres : ADEMICO SOFTWARE, AGENA 3000, AGS RECORDS MANAGEMENT, Arratech, B4VALUE.NET, CEGI ALFA, DOCUWARE, EDICS France, EDT, ENERJ, ENTROPICS, EURO INFORMATION, GROUPE SIGMA, IAF, ICD International, IGA ASSURANCE, INFOLOGIC, INVOPOP, LOGILEC, LUNDI MATIN, QWEEBY, SWILE, VERYSWING, WAKASTELLAR.
 
 ---
 
-## 4. Ordre d'exécution
+## 3. La cible réelle : 93 plateformes, dont 53 au cœur
 
-| Rang | Périmètre | Fiches | Charge estimée |
-|---|---|---|---|
-| 1 | Cercle 0 — portefeuille Fluxym | 4 | ~3 h |
-| 2 | PAYFLOWS seule, en fiche témoin du cercle 2 | 1 | ~45 min |
-| 3 | Cercle 1 — concurrents directs | 13 | ~9 h |
-| 4 | Cercle 2 — angles morts restants | 12 | ~8 h |
-| 5 | Reprise 360 des 7 déjà qualifiées du cercle 1 | 7 | ~4 h |
-| 6 | Cercle 3 — fiches allégées | ~90 | ~20 h, au fil de l'eau |
+| Périmètre | Nombre | Part |
+|---|---|---|
+| Adressent l'ETI ou le grand compte | **93** | 57 % des 163 |
+| **Exclusivement** ETI / grands comptes (+ public) | **53** | 33 % |
+| Dont familles S2P, O2C ou fintech — concurrence frontale | **16** | 10 % |
 
-Payflows en rang 2, avant le cercle 1, est un choix délibéré : c'est la fiche qui prouvera si le modèle sait détecter un angle mort **avant** qu'il ne coûte un dossier. Si le modèle ne le voit pas sur un cas déjà connu, il ne le verra sur aucun cas inconnu, et il faut le corriger avant d'enchaîner 30 fiches.
+La liste nominative des 53, avec pays, vague, famille, nature, site et SIREN, est dans `cohorte-eti-grands-comptes.csv`.
+
+Le marché ETI/GE n'est donc **pas** un petit sous-ensemble : plus d'une plateforme agréée sur deux revendique ce segment. Mais la concurrence frontale sur le métier du portefeuille se resserre à **16 acteurs**, et c'est là que se joue l'essentiel.
+
+### Les 16 concurrents frontaux — segment ETI/GE exclusif, famille S2P / O2C / fintech
+
+| Société | Famille | Pays | Vague | Nature | Commentaire |
+|---|---|---|---|---|---|
+| **BASWARE** | S2P | Finlande | V1 | extension démat | portefeuille Fluxym |
+| **ESKER** | O2C + S2P | France | V1 | extension démat | portefeuille Fluxym |
+| **GEP** | S2P | *Finlande (à corriger)* | V3 | non renseignée | portefeuille Fluxym |
+| **PAYFLOWS** | fintech + S2P | France | V2 | **diversification** | angle mort documenté, créée en 2022 |
+| **TESSI Technologies** | GED + S2P + O2C | France | V1 | extension démat | BPO, grands comptes |
+| **SERES** | EDI + S2P + O2C | France | V1 | extension démat | groupe Docaposte |
+| **PARAGON** | GED + S2P + O2C | France | V1 | extension démat | démat documentaire |
+| **TUNGSTEN AUTOMATION FRANCE** | S2P + GED + EDI | France | V1 | extension démat | ex-Kofax |
+| **CEGEDIM** | S2P + O2C | France | V1 | extension démat | à ne pas réduire à la santé |
+| **GENERIX Group** | EDI + O2C | France | V1 | extension démat | pilote 360 fait, centralité 2/4 |
+| **DOCPROCESS** | EDI + O2C | France | V1 | extension démat | créée en 2018, peu identifiée |
+| **VENTYA** | EDI + S2P + O2C | France | V3 | extension démat | créée en 2016, V3 |
+| **BC SOLUTIONS** | O2C + S2P | France | V1 | extension démat | peu identifiée |
+| **TRADESHIFT BABELWAY** | S2P + EDI | Belgique | V1 | extension démat | réseau B2B international |
+| **MySupply Aps** | EDI + S2P | Danemark | V2 | extension démat | quasi inconnue en France |
+| **DIGITAL TECHNOLOGIES** | S2P | Italie | V1 | extension démat | quasi inconnue en France |
+
+**À rattacher à cette liste après correction du segment : MEDIUS, ITESOFT et LUCCA** — qui en relèvent manifestement, et dont l'absence ici est un artefact de données, pas une réalité de marché.
+
+### Les autres ETI/GE : 37 acteurs sur des métiers adjacents
+
+Ils n'attaquent pas le même besoin, mais ils croisent les mêmes comptes et peuvent être choisis à la place d'une suite S2P :
+
+- **Conformité fiscale internationale** : SOVOS, PAGERO, AVALARA, MAROSA, TAXERA, CLEARTAX, SNI, Fonoa, EEZI powered by VAT IT, Taxilla Europe, INVOPOP.
+- **EDI et intégration** : SEEBURGER, AXWAY, ECOSIO, ecosio InterCom (Vertex), TESISQUARE, SPS COMMERCE, EDICOM Group, EDICOM France, In.Te.S.A., iEDI, SRCI, SYMTRAX.
+- **ERP et éditeurs globaux** : SAP, COMARCH, WiseTech Global, Basikon.
+- **Intégrateurs** : ACCENTURE, NTT DATA Business Solutions, CBS, Docnova/MELASOFT, EY Expertises & Transactions.
+- **GED et archivage** : OPENTEXT, CECURITY, DOXALLIA, ESI, Insiders Technologies.
+- **Pure player** : DOKAPI.
+
+Point d'attention : **9 de ces acteurs sont étrangers et quasi inconnus sur le marché français** (MySupply, Digital Technologies, SNI, iEDI, TESISQUARE, SPS Commerce, Taxilla, Dokapi, In.Te.S.A.). Tous ont un site renseigné, 38 des 42 étrangères ont déjà un segment. Ce sont des angles morts par défaut de notoriété, pas par défaut de données.
 
 ---
 
-## 5. Ce qu'il me manque pour aller plus vite
+## 4. Payflows : ce que la fiche dit déjà, et pourquoi c'est instructif
 
-Le fichier `data/plateformes-agreees.json` fait environ 500 Ko et se tronque à ~89 Ko en lecture directe. Je n'ai donc pas pu recalculer les segments réels sur les 163 entrées, et la sélection ci-dessus s'appuie sur les noms de `LOTS-E.md` plus la connaissance du marché.
+La fiche existante est de bonne qualité et mérite d'être citée telle quelle : Payflows est immatriculée en **V2, le 15/04/2026**, créée en **2022**, SIREN 912610649, siège 17 rue de la Comète à Paris, positionnée **ETI et grands comptes**, familles **fintech + S2P**, nature **diversification**, confiance « partielle ».
 
-Avec le JSON complet en pièce jointe, je produis un tri automatique par `segmentCible` et `familleOrigine`, et la liste des cercles devient un résultat de données au lieu d'une hypothèse. C'est un gain de fiabilité réel sur la priorisation.
+Et surtout, ce constat déjà consigné le 20/08 : *« le site est en anglais et ne comporte aucune page dédiée à la Plateforme Agréée ni à la réforme française : la qualification porte sur le métier, pas sur l'offre agréée »*.
+
+**C'est la signature type de l'angle mort.** Un acteur qui gagne des dossiers sur le segment ETI sans produire une ligne de contenu sur son statut de plateforme agréée est structurellement invisible pour une veille fondée sur le discours public. Il ne sera jamais détecté par un comparateur, ni par une revue de presse.
+
+Ce qui le rend détectable, en revanche : la **nature `diversification`** combinée à un segment ETI/GE et à une création récente. Sur les 16 concurrents frontaux, **Payflows est la seule** dans cette configuration. Les quinze autres sont des extensions de métier démat installées de longue date.
+
+> **Règle de détection à retenir : `nature = diversification` + segment ETI/GE + création après 2018 = angle mort à instruire en priorité.** C'est un filtre que le référentiel peut appliquer automatiquement, dès aujourd'hui, sans une heure de recherche supplémentaire.
+
+---
+
+## 5. Ordre d'exécution révisé
+
+| Rang | Action | Charge |
+|---|---|---|
+| 1 | **Corriger les données** : segment de MEDIUS, ITESOFT, LUCCA ; pays et identité de GEP | ~30 min |
+| 2 | **Fiche 360 PAYFLOWS** — fiche témoin de la détection d'angle mort | ~45 min |
+| 3 | **Cercle 0** : ESKER, BASWARE, GEP — calibrage du barème sur ce qu'on connaît | ~2 h |
+| 4 | **Vérifier le statut d'IVALUA** auprès de l'éditeur, et documenter le sujet « quelle PA pour un client Ivalua » | à traiter côté Fluxym |
+| 5 | **Les 13 concurrents frontaux restants** + MEDIUS, ITESOFT, LUCCA | ~11 h |
+| 6 | **Les 9 étrangères inconnues du marché français** — meilleur rapport découverte / effort | ~5 h |
+| 7 | **Les 37 ETI/GE adjacents** | ~20 h |
+| 8 | **Régénérer `cartographie-reste-a-faire.md`** depuis le JSON, et refermer les chantiers A et D | ~1 h |
+| 9 | **Les 70 hors cible** — fiches allégées mais sourcées, au fil de l'eau | ~15 h |
+
+---
+
+## 6. Garde-fous, inchangés
+
+- Les solutions du portefeuille sont traitées **avec le même barème que leurs concurrents**, sans angle promotionnel. Un référentiel où le partenaire est mieux traité se repère en trois fiches et ne vaut plus rien.
+- **Aucune information issue d'une mission, d'un dossier d'avant-vente ou d'un échange partenaire** ne remonte dans le référentiel. Sources publiques exclusivement. Qu'un dossier ait été perdu face à un acteur est une information interne, jamais une donnée de fiche.
+- La part de CA de l'activité plateforme agréée n'est jamais estimée.
