@@ -1,0 +1,197 @@
+{
+  "_patch": {
+    "id": "G-GENERIX",
+    "chantier": "G — analyse 360",
+    "societe": "GENERIX Group",
+    "auteur": "RFE_WebSite",
+    "dateReleve": "2026-08-21",
+    "nbPlateformes": 1,
+    "note": "Conversion en patch du pilote de méthode documenté dans Info IA/plateformes-agreees/pilote-360-GENERIX.md. Le pilote a été rédigé le 21/08/2026 mais n'avait jamais été transformé en patch : la fiche Generix du site ne portait donc aucun bloc analyse360, alors que le travail était fait. Anomalie de procédure corrigée. Aucune donnée nouvelle n'est introduite : ce patch reprend exactement les faits, indices et lectures du pilote. NON TROUVÉ, comme indiqué dans le pilote : références clients par secteur, avis publics agrégés, volume d'offres d'emploi, ventilation du chiffre d'affaires par activité. RAPPEL : le chiffre d'affaires groupe (plus de 110 M€, déclaré) et celui de l'entité française (60,4 M€, comptes déposés 2022) portent sur deux périmètres différents et sont enregistrés dans deux champs distincts."
+  },
+  "plateformes": [
+    {
+      "nom": "GENERIX Group",
+      "analyse360": {
+        "metierPrincipal": "Édition de logiciels SaaS de supply chain et des flux financiers associés",
+        "activites": [
+          {
+            "libelle": "Exécution logistique et gestion d'entrepôt (WMS)",
+            "poids": "majeur",
+            "source": "generixgroup.com, relevé 21/08/2026"
+          },
+          {
+            "libelle": "Gestion du transport (TMS), issue de l'acquisition de DDS en 2023",
+            "poids": "majeur",
+            "source": "generixgroup.com, relevé 21/08/2026"
+          },
+          {
+            "libelle": "EDI et intégration B2B, dont TradeXpress Infinity",
+            "poids": "majeur",
+            "source": "generixgroup.com, relevé 21/08/2026"
+          },
+          {
+            "libelle": "Commerce omnicanal, issu de l'acquisition de Keyneo en 2024",
+            "poids": "significatif",
+            "source": "generixgroup.com, relevé 21/08/2026"
+          },
+          {
+            "libelle": "Portails clients et fournisseurs, automatisation de la comptabilité fournisseurs",
+            "poids": "significatif",
+            "source": "generixgroup.com, relevé 21/08/2026"
+          },
+          {
+            "libelle": "Facturation électronique et plateforme agréée, sous la marque GIS — Generix Invoice Services",
+            "poids": "significatif",
+            "source": "generixgroup.com, page produit dédiée ; liste DGFiP, immatriculation du 11/12/2025"
+          }
+        ],
+        "poidsEconomique": {
+          "caGroupe": {
+            "montantMEUR": 110,
+            "exercice": "non précisé sur la page",
+            "nature": "declare_site",
+            "source": "generixgroup.com, page institutionnelle : plus de 110 M€ de chiffre d'affaires",
+            "dateReleve": "2026-08-21"
+          },
+          "caEntiteFrancaise": {
+            "montantMEUR": 60.4,
+            "exercice": "2022",
+            "nature": "comptes_deposes",
+            "source": "Comptes annuels déposés au greffe, GENERIX GROUP SIREN 377619150, clôture au 31/03",
+            "dateReleve": "2026-08-21"
+          },
+          "effectifGroupe": 850,
+          "effectifEntite": "250 à 499 salariés (INSEE, donnée 2023)",
+          "resultatNet": "Bénéfice de 4,2 M€ sur l'exercice 2022 pour l'entité française, avec des fonds propres de 56,8 M€.",
+          "ventilationParActivite": {
+            "disponible": false,
+            "motif": "Generix n'est plus cotée. La ventilation par nature de revenu publiée à l'époque de la cotation n'a plus d'équivalent, et aucune ventilation par activité n'est publiée. Aucune part attribuable à l'activité de plateforme agréée n'est estimée. Un agrégateur affiche par ailleurs 243,7 M$ de chiffre d'affaires, soit plus du double du chiffre déclaré par l'entreprise : valeur écartée.",
+            "derniereVentilationConnue": null
+          }
+        },
+        "centralitePA": {
+          "indice": 2,
+          "niveau": "extension_naturelle",
+          "marqueProduitDediee": "GIS — Generix Invoice Services",
+          "entiteJuridiqueDediee": false,
+          "faisceauIndices": [
+            {
+              "signal": "Marque produit dédiée à l'offre de facturation électronique",
+              "sens": "+",
+              "preuve": "GIS — Generix Invoice Services, generixgroup.com"
+            },
+            {
+              "signal": "Page produit structurée, avec fiche téléchargeable",
+              "sens": "+",
+              "preuve": "generixgroup.com, page plateforme agréée pour la facturation électronique en France"
+            },
+            {
+              "signal": "Immatriculation dès la première vague, le 11/12/2025",
+              "sens": "+",
+              "preuve": "Liste DGFiP"
+            },
+            {
+              "signal": "Socle revendu à un intégrateur tiers, ce qui suppose une industrialisation réelle",
+              "sens": "+",
+              "preuve": "Applium commercialise GenerixByApplium auprès des clients SAP, offre explicitement adossée à la plateforme agréée de Generix"
+            },
+            {
+              "signal": "Le discours institutionnel est centré sur la supply chain, les entrepôts et le transport ; la facture n'apparaît qu'incidemment",
+              "sens": "-",
+              "preuve": "generixgroup.com : 2 000 entrepôts pilotés, 5 millions de transports par jour, plus de 4 milliards de commandes et factures par an"
+            },
+            {
+              "signal": "Aucune entité juridique dédiée : l'immatriculation est portée par GENERIX GROUP elle-même",
+              "sens": "-",
+              "preuve": "SIREN 377619150"
+            },
+            {
+              "signal": "L'offre agréée est rattachée à la rubrique EDI et n'est pas une branche autonome",
+              "sens": "-",
+              "preuve": "Arborescence de generixgroup.com"
+            },
+            {
+              "signal": "Les deux acquisitions récentes portent sur le transport et l'omnicanal, pas sur la facturation : les capitaux vont ailleurs",
+              "sens": "-",
+              "preuve": "DDS en 2023, Keyneo en 2024"
+            },
+            {
+              "signal": "Catalogue de plus de sept lignes d'activité",
+              "sens": "-",
+              "preuve": "generixgroup.com, relevé 21/08/2026"
+            }
+          ],
+          "lecture": "L'activité de plateforme agréée serait chez Generix le prolongement naturel de trente ans de flux EDI B2B, et non une nouvelle orientation stratégique. Elle bénéficierait d'un socle et d'une base installée déjà en place, ce qui expliquerait à la fois l'immatriculation précoce et l'absence d'investissement dédié visible. L'intuition initiale — ce n'est pas vraiment leur métier — est cohérente avec les indices relevés, à une nuance près : l'offre est structurée, nommée et déjà revendue à des tiers, ce qui la distingue nettement d'une simple mise en conformité défensive. Ce qui manquerait pour trancher au-delà de la lecture, c'est la part de chiffre d'affaires de l'activité, qui n'est pas publiée et ne le sera pas.",
+          "confiance": "moyenne"
+        },
+        "referencesClients": {
+          "nbCiteesSurSite": null,
+          "parSecteur": {},
+          "grandsComptes": [],
+          "referencesPAConfirmees": [],
+          "source": "Non relevé dans la passe du 21/08/2026. À extraire des pages clients et études de cas, en séparant les références du catalogue global des références spécifiquement liées à l'offre agréée. Le groupe revendique plus de 3 000 clients et une présence dans plus de 60 pays."
+        },
+        "reputation": {
+          "volumeAvis": null,
+          "synthese": "Non relevé dans la passe du 21/08/2026, par échec technique et non par absence de source. À reprendre.",
+          "confiance": "non_qualifie"
+        },
+        "capaciteDeFrappe": {
+          "actionnaires": [
+            "Montefiore Investment",
+            "Pléiade Investissement, actionnaire historique",
+            "NEW GEN HOLDING, actionnaire de tête"
+          ],
+          "typeActionnaire": "fonds_pe",
+          "financementRecent": "Refinancement assuré en 2025 par Bain Capital Credit et Eurazeo Private Debt. Montefiore Investment est entré au capital aux côtés de l'actionnaire historique Pléiade Investissement.",
+          "acquisitions": [
+            "Ceitel, Influe Illicom, Infolog Solutions, GMI Connectivity et Sologlobe entre 2005 et 2017",
+            "DDS, gestion du transport, 2023",
+            "Keyneo, commerce omnicanal, 2024"
+          ],
+          "modeleTarifaire": "Facturation à la facture traitée selon un comparateur tiers, sans prix public",
+          "tarifPublie": false,
+          "offreGratuite": false
+        },
+        "lectureConcurrentielle": "Generix serait un concurrent dont la plateforme agréée est réelle mais périphérique. La structure de détention — fonds au capital, refinancement par dette privée en 2025 — donne une capacité d'investissement et de tenue de prix supérieure à celle d'une PME indépendante, mais impose aussi une discipline de marge, ce qui joue plutôt contre une politique de prix durablement déficitaire sur une ligne annexe. Le point le plus opérationnel est ailleurs : le socle agréé est revendu par un intégrateur tiers sous la dénomination GenerixByApplium, auprès des clients SAP. On peut donc affronter le socle Generix sans que le nom Generix apparaisse dans l'appel d'offres. Enfin, l'écart de périmètre doit rester présent à l'esprit dans toute comparaison : plus de 110 M€ pour le groupe, 60,4 M€ pour l'entité française qui porte l'immatriculation.",
+        "droitDeReponse": {
+          "signale": false,
+          "date": null,
+          "objet": null
+        }
+      },
+      "sourcesEnrichissement": [
+        {
+          "champ": "analyse360.poidsEconomique",
+          "source": "Comptes déposés et données du greffe, du registre national des entreprises et de l'INSEE, GENERIX GROUP SIREN 377619150 : SASU, créée le 29/03/1990, Arteparc 2 rue des Peupliers 59810 Lesquin, APE 58.29C, TVA FR88377619150, LEI 9695003QNWHLC60H9E89, capital 12 673 364,50 €, 26 établissements, clôture au 31/03, chiffre d'affaires 60,4 M€ et résultat net 4,2 M€ en 2022, fonds propres 56,8 M€, effectif INSEE 250 à 499",
+          "dateReleve": "2026-08-21",
+          "confiance": "haute"
+        },
+        {
+          "champ": "analyse360.activites",
+          "source": "generixgroup.com, pages institutionnelles et catalogue : plus de 110 M€ de chiffre d'affaires, plus de 850 collaborateurs, plus de 3 000 clients, 2 000 entrepôts pilotés, 5 millions de transports par jour, plus de 4 milliards de commandes et factures par an, présence dans 12 pays, clients dans plus de 60, acquisitions DDS en 2023 et Keyneo en 2024",
+          "dateReleve": "2026-08-21",
+          "confiance": "haute"
+        },
+        {
+          "champ": "analyse360.centralitePA",
+          "source": "generixgroup.com, marque GIS — Generix Invoice Services et page dédiée à la plateforme agréée avec fiche téléchargeable ; liste DGFiP, immatriculation du 11/12/2025",
+          "dateReleve": "2026-08-21",
+          "confiance": "haute"
+        },
+        {
+          "champ": "analyse360.capaciteDeFrappe",
+          "source": "generixgroup.com et communiqués : refinancement 2025 par Bain Capital Credit et Eurazeo Private Debt, entrée de Montefiore Investment aux côtés de Pléiade Investissement",
+          "dateReleve": "2026-08-21",
+          "confiance": "moyenne"
+        },
+        {
+          "champ": "analyse360.centralitePA.indice",
+          "source": "Lecture Fluxym sur faisceau d'indices, pilote de méthode documenté dans Info IA/plateformes-agreees/pilote-360-GENERIX.md",
+          "dateReleve": "2026-08-21",
+          "confiance": "moyenne"
+        }
+      ]
+    }
+  ]
+}

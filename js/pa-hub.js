@@ -45,15 +45,15 @@
 
   const signalAngleMort = (pa) => {
     const seg = pa.segmentCible || [];
-    const etiGc = seg.includes('eti') || seg.includes('grands_comptes');
-    if (!etiGc) return null;
+    if (!seg.includes('eti') && !seg.includes('grands_comptes')) return null;
     const an = parseInt(pa.anneeCreation, 10);
     const anneeConnue = Number.isFinite(an);
     const diversification = pa.natureEntite === 'diversification';
     const recent = anneeConnue && an > RECENT;
     const installe = pa.natureEntite === 'extension_demat' && anneeConnue && an <= RECENT;
+    const etranger = Boolean(pa.pays) && pa.pays !== 'France';
     if (diversification && recent) return 'confirme';
-    if (!anneeConnue && !diversification) return 'non_evaluable';
+    if (etranger) return 'notoriete';
     if (diversification || (recent && !installe)) return 'a_surveiller';
     if (!anneeConnue) return 'non_evaluable';
     return null;
@@ -65,7 +65,8 @@
     filtrable: true,
     calculee: true,
     valeurs: [
-      { v: 'confirme', label: 'Motif complet — diversification récente sur ETI / grands comptes' },
+      { v: 'confirme', label: 'Motif de récence — diversification récente sur ETI / grands comptes' },
+      { v: 'notoriete', label: 'Motif de notoriété — entité étrangère sur ETI / grands comptes' },
       { v: 'a_surveiller', label: 'À surveiller — deux critères sur trois' },
       { v: 'non_evaluable', label: 'Non évaluable — année de création manquante' }
     ]
@@ -77,6 +78,7 @@
     if (id === 'trancheAnneeCreation') return trancheAnnee(pa.anneeCreation);
     if (id === 'centralitePA') return bloc(pa, 'centralitePA', 'niveau');
     if (id === 'typeActionnaire') return bloc(pa, 'capaciteDeFrappe', 'typeActionnaire');
+    if (id === 'postureCommerciale') return bloc(pa, 'postureCommerciale', 'valeur');
     if (id === 'secteurReferences') return secteursDe(pa);
     if (id === 'angleMort') return signalAngleMort(pa);
     if (id.includes('.')) return id.split('.').reduce((o, k) => (o ? o[k] : null), pa);
@@ -169,7 +171,7 @@
       pa.pays && pa.pays !== 'France' ? `Entité ${pa.pays}` : null
     ].filter(Boolean);
     return `<a class="pa-card" href="./pa-detail.html?pa=${slugify(pa.nom)}">
-      <div class="pa-card-head"><h3>${pa.nom}</h3>${badge(pa)}${signalAngleMort(pa) === 'confirme' ? '<span class="pa-badge pa-badge--wait" title="Diversification récente positionnée sur l\u2019ETI ou le grand compte : profil susceptible de remporter des dossiers sans etre identifie">Radar : motif complet</span>' : ''}</div>
+      <div class="pa-card-head"><h3>${pa.nom}</h3>${badge(pa)}${['confirme', 'notoriete'].includes(signalAngleMort(pa)) ? '<span class="pa-badge pa-badge--wait" title="Diversification récente positionnée sur l\u2019ETI ou le grand compte : profil susceptible de remporter des dossiers sans etre identifie">Radar : motif de récence</span>' : ''}</div>
       <ul class="pa-card-meta">${meta.map((x) => `<li>${x}</li>`).join('')}</ul>
       ${pa.familleOrigine && pa.familleOrigine.length
         ? `<div class="pa-tags">${pa.familleOrigine.map((f) => `<span class="pa-tag">${labelOf(state.taxo.facettes.find((x) => x.id === 'familleOrigine'), f)}</span>`).join('')}${centraliteTag(pa)}</div>`
@@ -218,6 +220,7 @@
       return n && n !== 'non_qualifie';
     }).length;
     const nbConfirme = pa.filter((p) => signalAngleMort(p) === 'confirme').length;
+    const nbNotoriete = pa.filter((p) => signalAngleMort(p) === 'notoriete').length;
     const nbSurveiller = pa.filter((p) => signalAngleMort(p) === 'a_surveiller').length;
     const nbAveugle = pa.filter((p) => signalAngleMort(p) === 'non_evaluable').length;
     const nbEtiGc = pa.filter((p) => (p.segmentCible || []).some((x) => x === 'eti' || x === 'grands_comptes')).length;
@@ -248,13 +251,14 @@
           <h3>Signaux à instruire</h3>
           <table class="pa-table"><tbody>
             <tr><td>Plateformes adressant l\u2019ETI ou le grand compte</td><td>${nbEtiGc}</td></tr>
-            <tr><td>Radar : motif complet</td><td>${nbConfirme}</td></tr>
+            <tr><td>Radar : motif de récence</td><td>${nbConfirme}</td></tr>
+            <tr><td>Radar : motif de notoriété (entités étrangères)</td><td>${nbNotoriete}</td></tr>
             <tr><td>Radar : à surveiller</td><td>${nbSurveiller}</td></tr>
             <tr><td>Radar : non évaluable, année de création manquante</td><td>${nbAveugle}</td></tr>
           </tbody></table>
         </div>
       </div>
-      <p class="pa-source-note">Le radar signale les acteurs susceptibles d\u2019être actifs sur l\u2019ETI et le grand compte sans être identifiés comme tels. Il reste <strong>aveugle sur ${nbAveugle} plateforme(s)</strong> dont l\u2019année de création n\u2019est pas renseignée : compléter l\u2019identité juridique conditionne directement la fiabilité de cette lecture.</p>
+      <p class="pa-source-note">Le radar signale les acteurs susceptibles d\u2019être actifs sur l\u2019ETI et le grand compte sans être identifiés comme tels, selon deux motifs : la <strong>récence</strong> (une diversification récente) et la <strong>notoriété</strong> (une entité étrangère, invisible par construction d\u2019une veille menée sur le marché français). Il reste <strong>aveugle sur ${nbAveugle} plateforme(s)</strong> française(s) dont l\u2019année de création n\u2019est pas renseignée.</p>
       <p class="pa-source-note">La place de l\u2019activité de plateforme agréée est une lecture Fluxym établie sur un faisceau d\u2019indices publics, jamais sur une part de chiffre d\u2019affaires, qui n\u2019est pas publiée. Méthode détaillée sur la <a href="./methodologie-plateformes.html">page méthodologie</a>. ${nbCentralite ? `Évaluée à ce jour pour <strong>${nbCentralite}</strong> plateforme(s).` : 'Aucune plateforme n\u2019est encore évaluée.'}</p>
       <p class="pa-source-note">Identité juridique appariée avec haute confiance pour <strong>${cov.identiteEntreprise_haute || 0}</strong> plateformes, à vérifier pour <strong>${cov.identiteEntreprise_a_verifier || 0}</strong>, non encore appariée pour <strong>${cov.identiteEntreprise_absente || 0}</strong>. Les répartitions ci-dessus ne portent donc que sur les plateformes identifiées.</p>`;
   };

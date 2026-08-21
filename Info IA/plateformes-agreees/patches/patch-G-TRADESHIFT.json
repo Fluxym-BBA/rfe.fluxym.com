@@ -1,0 +1,188 @@
+{
+  "_patch": {
+    "id": "G-TRADESHIFT",
+    "chantier": "G — analyse 360",
+    "societe": "TRADESHIFT BABELWAY",
+    "auteur": "RFE_WebSite",
+    "dateReleve": "2026-08-21",
+    "nbPlateformes": 1,
+    "note": "Dixième fiche 360, choisie pour éprouver la borne haute du barème sur un réseau d'échange international. APPORT PRINCIPAL : quatrième cas du motif « agrément porté par une filiale acquise » — l'adresse publiée par la DGFiP, code postal 1348, correspond au Chemin du Cyclotron à Ottignies-Louvain-la-Neuve, siège historique de Babelway, société belge rachetée par Tradeshift. Le groupe, d'origine danoise et implanté aux États-Unis, a donc fait porter l'agrément par son entité belge acquise, exactement comme GEP l'a fait porter par sa filiale finlandaise. CHAMPS COMPLÉTÉS : relationCapitalistique acquise. NON TROUVÉ dans cette passe : numéro d'entreprise belge de l'entité immatriculée, année de création de l'entité, chiffre d'affaires du groupe (Tradeshift n'est pas cotée et ne publie pas de chiffre d'affaires ; les estimations d'agrégateurs vont de 250 à 500 millions de dollars et sont écartées par règle), effectif du groupe issu d'une source primaire, comptes de l'entité belge, avis publics agrégés, volume d'offres d'emploi. À SIGNALER : Tradeshift a annoncé son retrait de la coentreprise SemFi constituée avec HSBC, dont les revenus déclarés étaient de 1,1 million de dollars — signal de repli sur un axe de diversification financière, à ne pas confondre avec l'activité de plateforme."
+  },
+  "plateformes": [
+    {
+      "nom": "TRADESHIFT BABELWAY",
+      "relationCapitalistique": "acquise",
+      "analyse360": {
+        "metierPrincipal": "Exploitation d'un réseau mondial d'échange de documents commerciaux, complété par un middleware d'intégration et de transformation de données issu du rachat de Babelway",
+        "activites": [
+          {
+            "libelle": "Réseau d'échange de documents commerciaux entre acheteurs et fournisseurs : commandes, factures, avis d'expédition",
+            "poids": "majeur",
+            "source": "tradeshift.com, relevé 21/08/2026"
+          },
+          {
+            "libelle": "Conformité de facturation électronique multi-juridictions, couverture revendiquée de 70 pays dont 12 en modèle clearance ou contrôle continu",
+            "poids": "majeur",
+            "source": "tradeshift.com, page dédiée à l'immatriculation française, 12/01/2026"
+          },
+          {
+            "libelle": "Middleware d'intégration et de transformation de formats, issu de Babelway, intégré à SAP, Oracle et Microsoft",
+            "poids": "majeur",
+            "source": "tradeshift.com ; champ socleTechnique de la fiche"
+          },
+          {
+            "libelle": "Plateforme agréée pour la facturation électronique en France, point d'accès Peppol certifié depuis 2014",
+            "poids": "majeur",
+            "source": "Liste DGFiP, immatriculation du 06/01/2026 ; tradeshift.com"
+          },
+          {
+            "libelle": "Automatisation du cycle achats-fournisseurs et intégration de services financiers aux fournisseurs",
+            "poids": "significatif",
+            "source": "tradeshift.com, pages institutionnelles"
+          }
+        ],
+        "poidsEconomique": {
+          "effectifEntite": "Entre 50 et 200 salariés sur le périmètre étudié, selon un benchmark sectoriel tiers d'avril 2026",
+          "ventilationParActivite": {
+            "disponible": false,
+            "motif": "Tradeshift n'est pas cotée et ne publie pas de chiffre d'affaires. Les estimations d'agrégateurs consultées s'échelonnent de 250 à 500 millions de dollars, écart de 1 à 2 qui les disqualifie comme source. Les comptes de l'entité belge immatriculée n'ont pas été consultés dans cette passe. Aucune part attribuable à l'activité de plateforme agréée n'est estimée.",
+            "derniereVentilationConnue": null
+          }
+        },
+        "centralitePA": {
+          "indice": 3,
+          "niveau": "axe_strategique",
+          "marqueProduitDediee": null,
+          "entiteJuridiqueDediee": false,
+          "faisceauIndices": [
+            {
+              "signal": "L'échange de documents commerciaux est le métier même de l'entreprise ; le réseau existe indépendamment de tout mandat national",
+              "sens": "+",
+              "preuve": "tradeshift.com, pages institutionnelles"
+            },
+            {
+              "signal": "Point d'accès Peppol certifié depuis 2014, soit une antériorité de douze ans sur l'interopérabilité réglementée",
+              "sens": "+",
+              "preuve": "Champ reseaux de la fiche ; descriptionFiche"
+            },
+            {
+              "signal": "Un poste de responsable marketing produit est explicitement affecté à la conformité de facturation électronique",
+              "sens": "+",
+              "preuve": "tradeshift.com, article du 12/01/2026 signé par une Senior Product Marketing Manager en charge de la conformité"
+            },
+            {
+              "signal": "Page française dédiée à l'immatriculation, publiée dès le 12/01/2026, avec analyse du calendrier de la réforme",
+              "sens": "+",
+              "preuve": "tradeshift.com/resources/compliance, 12/01/2026"
+            },
+            {
+              "signal": "Webinaire dédié au dispositif français le 17/11/2025, co-animé avec un client français de premier plan et démonstration de la solution agréée",
+              "sens": "+",
+              "preuve": "tradeshift.com, webinaire du 17/11/2025 avec Air France"
+            },
+            {
+              "signal": "Une équipe produit et ingénierie travaillait sur le sujet depuis plus d'un an avant l'immatriculation",
+              "sens": "+",
+              "preuve": "tradeshift.com, article du 12/01/2026"
+            },
+            {
+              "signal": "La France est explicitement présentée comme un mandat parmi soixante-dix juridictions couvertes",
+              "sens": "-",
+              "preuve": "tradeshift.com, page conformité"
+            },
+            {
+              "signal": "Aucune marque produit dédiée à l'offre agréée, aucune entité française, l'agrément étant porté par l'entité belge acquise",
+              "sens": "-",
+              "preuve": "Adresse DGFiP, code postal 1348, Ottignies-Louvain-la-Neuve"
+            },
+            {
+              "signal": "Repli sur un axe de diversification : retrait annoncé de la coentreprise SemFi constituée avec HSBC",
+              "sens": "-",
+              "preuve": "Presse financière spécialisée ; revenus déclarés de SemFi de 1,1 million de dollars"
+            }
+          ],
+          "lecture": "Tradeshift arrive sur le mandat français avec la légitimité d'un opérateur de réseau : l'échange de documents commerciaux est son métier, son point d'accès Peppol est certifié depuis 2014 et sa couverture réglementaire est annoncée sur soixante-dix pays. L'investissement français est démontrable et daté : une équipe mobilisée plus d'un an avant l'immatriculation, un webinaire dédié en novembre 2025 co-animé avec un client français de premier plan et incluant une démonstration, une page dédiée dès janvier 2026, un poste de marketing produit affecté à la conformité. D'où l'indice 3. Il n'atteint pas 4 pour la raison qui vaut déjà pour Basware : la France est un mandat parmi soixante-dix, et l'entreprise conserverait son objet sans agrément français. Deux réserves méritent d'être posées. La première est structurelle : l'agrément est porté par l'entité belge issue du rachat de Babelway, sans entité française, ce qui signifie une responsabilité juridique et une équipe hors de France. La seconde est conjoncturelle : le retrait annoncé de la coentreprise constituée avec HSBC montre un groupe qui resserre son périmètre, ce qui invite à surveiller l'affectation durable des moyens.",
+          "confiance": "moyenne"
+        },
+        "referencesClients": {
+          "nbCiteesSurSite": null,
+          "parSecteur": {
+            "transport": [
+              "Air France"
+            ]
+          },
+          "grandsComptes": [
+            "Air France"
+          ],
+          "referencesPAConfirmees": [
+            "Air France, citée par Tradeshift comme cliente ayant retenu sa plateforme agréée, déjà présente en production dans l'Annuaire, et co-animatrice du webinaire du 17/11/2025 avec démonstration de la solution agréée"
+          ],
+          "source": "tradeshift.com, webinaire du 17/11/2025 et article du 12/01/2026. Un benchmark sectoriel tiers d'avril 2026 dénombre par ailleurs une centaine d'entreprises utilisatrices sur le périmètre étudié. La référence Air France est l'une des mieux établies du référentiel : elle est nommée par l'éditeur, sur l'offre agréée, et corroborée par la présence dans l'Annuaire."
+        },
+        "reputation": {
+          "volumeAvis": null,
+          "synthese": "Aucun relevé d'avis clients agrégés dans cette passe. Un comparateur tiers attribue à la plateforme une note composite de 7,4 sur 10 selon sa grille propre, relevant une solidité technique et un bon niveau de conformité, tempérés par une absence de transparence tarifaire et une ergonomie destinée à des équipes projet. Notation de méthodologie tierce, à ne pas confondre avec des avis d'utilisateurs.",
+          "confiance": "faible"
+        },
+        "capaciteDeFrappe": {
+          "actionnaires": [
+            "Actionnariat de capital-risque et d'investisseurs stratégiques, dont HSBC entrée au capital en 2023",
+            "Société non cotée"
+          ],
+          "typeActionnaire": "fonds_pe",
+          "financementRecent": "Environ 1,1 à 1,2 milliard de dollars levés au total sur une vingtaine de tours selon les bases de données de financement, dont un tour de série G de 70 millions de dollars annoncé en août 2023, auquel HSBC a contribué pour 35 millions. Les valorisations avancées par ces mêmes bases ne sont pas retenues comme fait établi.",
+          "acquisitions": [
+            "Babelway, société belge d'intégration et de transformation de données, dont le nom figure dans la dénomination de la plateforme agréée"
+          ],
+          "modeleTarifaire": "Sur devis : abonnement de base complété par une facturation au document, selon un benchmark sectoriel tiers",
+          "tarifPublie": false,
+          "offreGratuite": false
+        },
+        "lectureConcurrentielle": "Tradeshift est le concurrent dont le profil est le plus éloigné des acteurs français du référentiel, et celui qui illustre le mieux une stratégie de conformité mondiale plutôt que nationale. Sa proposition n'est pas « nous sommes agréés en France » mais « nous couvrons soixante-dix pays dont la France », ce qui la rend redoutable face à un groupe multi-pays cherchant à éviter un empilement de plateformes nationales, et beaucoup moins pertinente pour une entreprise purement française. Trois points d'attention. D'abord, la référence Air France est l'une des mieux établies du référentiel : nommée par l'éditeur, portée sur l'offre agréée, corroborée par une présence en production dans l'Annuaire et par un webinaire co-animé — sur un dossier de transport ou de services, elle sera opposée. Ensuite, la porte d'entrée est technique : la valeur mise en avant est l'intégration et la transformation de formats via le middleware Babelway, ce qui déplace la conversation vers la direction des systèmes d'information plutôt que vers la direction financière, et suppose en face une équipe informatique capable de piloter l'intégration. Enfin, un signal financier mérite d'être suivi sans être surinterprété : un groupe ayant levé plus d'un milliard de dollars, mais qui annonce son retrait d'une coentreprise avec HSBC et dont l'entité immatriculée est estimée entre cinquante et deux cents personnes, est un groupe qui resserre son périmètre. La question à poser en soutenance est celle des moyens affectés durablement au mandat français, et de leur localisation.",
+        "droitDeReponse": {
+          "signale": false,
+          "date": null,
+          "objet": null
+        }
+      },
+      "sourcesEnrichissement": [
+        {
+          "champ": "analyse360.centralitePA",
+          "source": "tradeshift.com, article du 12/01/2026 « Tradeshift is permanently registered as a French PA » : immatriculation définitive, équipes produit et ingénierie mobilisées depuis plus d'un an, webinaire du 17/11/2025 co-animé avec Air France incluant une démonstration de la solution agréée, sondage d'audience sur l'avancement des projets, couverture de conformité sur 70 pays",
+          "dateReleve": "2026-08-21",
+          "confiance": "haute"
+        },
+        {
+          "champ": "relationCapitalistique",
+          "source": "Comparateur sectoriel tiers et adresse publiée par la DGFiP : siège au Chemin du Cyclotron à Ottignies-Louvain-la-Neuve, code postal 1348, siège historique de Babelway, société belge rachetée par Tradeshift",
+          "dateReleve": "2026-08-21",
+          "confiance": "moyenne"
+        },
+        {
+          "champ": "analyse360.poidsEconomique.effectifEntite",
+          "source": "The Invoicing Hub, Grand Benchmark des Plateformes Agréées, 3e édition, avril 2026, cité par un comparateur tiers : une centaine de clients sur le périmètre étudié, éditeur de 50 à 200 salariés, origine de la solution dans l'automatisation des commandes et des factures, modèle tarifaire mixte abonnement et facturation au document",
+          "dateReleve": "2026-08-21",
+          "confiance": "moyenne"
+        },
+        {
+          "champ": "analyse360.capaciteDeFrappe",
+          "source": "Bases de données de financement et communiqués : environ 1,1 à 1,2 milliard de dollars levés sur une vingtaine de tours, série G de 70 millions de dollars en août 2023 dont 35 millions apportés par HSBC",
+          "dateReleve": "2026-08-21",
+          "confiance": "moyenne"
+        },
+        {
+          "champ": "analyse360.centralitePA.faisceauIndices",
+          "source": "Presse financière spécialisée : retrait de Tradeshift de la coentreprise SemFi constituée avec HSBC, revenus déclarés de 1,1 million de dollars",
+          "dateReleve": "2026-08-21",
+          "confiance": "moyenne"
+        },
+        {
+          "champ": "analyse360.centralitePA.indice",
+          "source": "Lecture Fluxym sur faisceau d'indices, méthode décrite dans Info IA/plateformes-agreees/cartographie-360-modele.md",
+          "dateReleve": "2026-08-21",
+          "confiance": "moyenne"
+        }
+      ]
+    }
+  ]
+}

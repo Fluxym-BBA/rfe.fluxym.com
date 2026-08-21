@@ -117,8 +117,16 @@
     const v = f ? (f.valeurs || []).find((x) => x.v === c.niveau) : null;
     const indices = c.faisceauIndices || [];
     const signe = (x) => (x.sens === '+' ? '↑' : (x.sens === '-' || x.sens === '\u2212' ? '↓' : '•'));
+    const posture = rempli(bloc(pa, 'postureCommerciale')) && rempli(bloc(pa, 'postureCommerciale', 'valeur'))
+      ? bloc(pa, 'postureCommerciale') : null;
+    const fPost = taxo.facettes.find((x) => x.id === 'postureCommerciale');
+    const vPost = posture && fPost ? (fPost.valeurs || []).find((x) => x.v === posture.valeur) : null;
+    const defPosture = vPost ? vPost.definition : '';
     document.getElementById('pa-centralite').innerHTML = dl([
       ['Niveau', `<strong>${v && v.indice !== null && v.indice !== undefined ? `${v.indice} sur 4 — ` : ''}${v ? v.label : c.niveau}</strong>${v && v.definition ? `<br><span class="pa-conf pa-conf--ok">${v.definition}</span>` : ''}`],
+      ['Posture commerciale', posture
+        ? `<strong>${label(taxo, 'postureCommerciale', posture.valeur)}</strong>${defPosture ? `<br><span class="pa-conf pa-conf--ok">${defPosture}</span>` : ''}${rempli(posture.preuve) ? `<br>${posture.preuve}` : ''}`
+        : TODO],
       ['Marque produit dédiée', val(c.marqueProduitDediee)],
       ['Entité juridique dédiée', c.entiteJuridiqueDediee === null || c.entiteJuridiqueDediee === undefined ? TODO : (c.entiteJuridiqueDediee ? 'Oui' : 'Non')],
       ['Indices relevés', indices.length

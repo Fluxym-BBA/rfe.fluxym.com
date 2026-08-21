@@ -1,0 +1,277 @@
+{
+  "_patch": {
+    "id": "REVISION-BAREME-20260821",
+    "chantier": "G — révision du barème",
+    "societe": "11 sociétés",
+    "auteur": "RFE_WebSite",
+    "dateReleve": "2026-08-21",
+    "nbPlateformes": 11,
+    "note": "Révision du barème prévue à dix fiches. DIAGNOSTIC : sur dix fiches, sept étaient classées à l'indice 3 et trois à l'indice 2, aucune ailleurs. L'échelle ne discriminait plus. CAUSE IDENTIFIÉE : l'indice de centralité mélangeait deux questions distinctes — quelle place l'activité agréée occupe-t-elle dans l'entreprise, et comment cette entreprise la vend-elle. Deux sociétés peuvent accorder la même place à l'activité et la commercialiser de façon radicalement différente. CORRECTION RETENUE : ne pas déplacer les indices, mais sortir la question de la distribution de l'indice et lui donner une facette propre, postureCommerciale, orthogonale à la centralité. AUCUN INDICE N'EST MODIFIÉ par ce patch : la relecture comparée des dix faisceaux n'a fait apparaître aucune erreur d'affectation, seulement une confusion de critères. La tension signalée sur GENERIX est ainsi résolue sans retouche : sa marque dédiée et son socle revendu relevaient de la posture commerciale, non de la centralité. À COMPTER DE CE PATCH, les signaux de distribution présents dans les faisceaux d'indices existants restent affichés comme preuves mais ne comptent plus comme critères de centralité. PAYFLOWS est incluse avec la valeur non_qualifie : l'absence totale de vitrine sur l'activité agréée ne permet pas de conclure, et une société récente ayant déjà gagné des affaires en conquête ne peut être rangée par défaut en posture de base installée."
+  },
+  "plateformes": [
+    {
+      "nom": "ESKER",
+      "analyse360": {
+        "postureCommerciale": {
+          "valeur": "grossiste",
+          "preuve": "Socle agréé distribué à des tiers sous leur propre marque : plateforme TEDD de Flowwa avec plus de 150 PME et ETI raccordées (18/03/2026), Sinari (25/09/2025), Amiltone (17/11/2025)",
+          "confiance": "haute"
+        }
+      },
+      "sourcesEnrichissement": [
+        {
+          "champ": "analyse360.postureCommerciale",
+          "source": "Socle agréé distribué à des tiers sous leur propre marque : plateforme TEDD de Flowwa avec plus de 150 PME et ETI raccordées (18/03/2026), Sinari (25/09/2025), Amiltone (17/11/2025)",
+          "dateReleve": "2026-08-21",
+          "confiance": "haute"
+        },
+        {
+          "champ": "analyse360.postureCommerciale",
+          "source": "Facette introduite par la révision du barème du 21/08/2026, documentée dans Info IA/plateformes-agreees/REVISION-BAREME-10-FICHES.md",
+          "dateReleve": "2026-08-21",
+          "confiance": "moyenne"
+        }
+      ]
+    },
+    {
+      "nom": "BASWARE",
+      "analyse360": {
+        "postureCommerciale": {
+          "valeur": "canal_indirect",
+          "preuve": "Stratégie de partenariats revendiquée comme prioritaire, avec KPMG, Deloitte et Accenture cités nommément ; la marque Basware est conservée",
+          "confiance": "moyenne"
+        }
+      },
+      "sourcesEnrichissement": [
+        {
+          "champ": "analyse360.postureCommerciale",
+          "source": "Stratégie de partenariats revendiquée comme prioritaire, avec KPMG, Deloitte et Accenture cités nommément ; la marque Basware est conservée",
+          "dateReleve": "2026-08-21",
+          "confiance": "moyenne"
+        },
+        {
+          "champ": "analyse360.postureCommerciale",
+          "source": "Facette introduite par la révision du barème du 21/08/2026, documentée dans Info IA/plateformes-agreees/REVISION-BAREME-10-FICHES.md",
+          "dateReleve": "2026-08-21",
+          "confiance": "moyenne"
+        }
+      ]
+    },
+    {
+      "nom": "GENERIX Group",
+      "analyse360": {
+        "postureCommerciale": {
+          "valeur": "grossiste",
+          "preuve": "Revente du socle agréé par Applium sous la dénomination GenerixByApplium, auprès de clients SAP",
+          "confiance": "haute"
+        }
+      },
+      "sourcesEnrichissement": [
+        {
+          "champ": "analyse360.postureCommerciale",
+          "source": "Revente du socle agréé par Applium sous la dénomination GenerixByApplium, auprès de clients SAP",
+          "dateReleve": "2026-08-21",
+          "confiance": "haute"
+        },
+        {
+          "champ": "analyse360.postureCommerciale",
+          "source": "Facette introduite par la révision du barème du 21/08/2026, documentée dans Info IA/plateformes-agreees/REVISION-BAREME-10-FICHES.md",
+          "dateReleve": "2026-08-21",
+          "confiance": "moyenne"
+        }
+      ]
+    },
+    {
+      "nom": "GEP",
+      "analyse360": {
+        "postureCommerciale": {
+          "valeur": "base_installee",
+          "preuve": "Aucune page consacrée au dispositif français, aucune entité française identifiée, offre présentée comme une composante de la suite achats ou une offre autonome à destination des clients du groupe",
+          "confiance": "moyenne"
+        }
+      },
+      "sourcesEnrichissement": [
+        {
+          "champ": "analyse360.postureCommerciale",
+          "source": "Aucune page consacrée au dispositif français, aucune entité française identifiée, offre présentée comme une composante de la suite achats ou une offre autonome à destination des clients du groupe",
+          "dateReleve": "2026-08-21",
+          "confiance": "moyenne"
+        },
+        {
+          "champ": "analyse360.postureCommerciale",
+          "source": "Facette introduite par la révision du barème du 21/08/2026, documentée dans Info IA/plateformes-agreees/REVISION-BAREME-10-FICHES.md",
+          "dateReleve": "2026-08-21",
+          "confiance": "moyenne"
+        }
+      ]
+    },
+    {
+      "nom": "PARAGON",
+      "analyse360": {
+        "postureCommerciale": {
+          "valeur": "grossiste",
+          "preuve": "Parcours dédié aux éditeurs de logiciels souhaitant ajouter une brique agréée à leur offre, sur le site dédié paragon-pa.com",
+          "confiance": "haute"
+        }
+      },
+      "sourcesEnrichissement": [
+        {
+          "champ": "analyse360.postureCommerciale",
+          "source": "Parcours dédié aux éditeurs de logiciels souhaitant ajouter une brique agréée à leur offre, sur le site dédié paragon-pa.com",
+          "dateReleve": "2026-08-21",
+          "confiance": "haute"
+        },
+        {
+          "champ": "analyse360.postureCommerciale",
+          "source": "Facette introduite par la révision du barème du 21/08/2026, documentée dans Info IA/plateformes-agreees/REVISION-BAREME-10-FICHES.md",
+          "dateReleve": "2026-08-21",
+          "confiance": "moyenne"
+        }
+      ]
+    },
+    {
+      "nom": "SERES",
+      "analyse360": {
+        "postureCommerciale": {
+          "valeur": "conquete_directe",
+          "preuve": "Distribution directe déclarée, sans canal éditeurs documenté, adossée à la force commerciale de Docaposte",
+          "confiance": "moyenne"
+        }
+      },
+      "sourcesEnrichissement": [
+        {
+          "champ": "analyse360.postureCommerciale",
+          "source": "Distribution directe déclarée, sans canal éditeurs documenté, adossée à la force commerciale de Docaposte",
+          "dateReleve": "2026-08-21",
+          "confiance": "moyenne"
+        },
+        {
+          "champ": "analyse360.postureCommerciale",
+          "source": "Facette introduite par la révision du barème du 21/08/2026, documentée dans Info IA/plateformes-agreees/REVISION-BAREME-10-FICHES.md",
+          "dateReleve": "2026-08-21",
+          "confiance": "moyenne"
+        }
+      ]
+    },
+    {
+      "nom": "TESSI Technologies",
+      "analyse360": {
+        "postureCommerciale": {
+          "valeur": "base_installee",
+          "preuve": "Ni site dédié ni canal de gros documentés ; la plateforme sert d'abord la base installée de donneurs d'ordre du groupe",
+          "confiance": "moyenne"
+        }
+      },
+      "sourcesEnrichissement": [
+        {
+          "champ": "analyse360.postureCommerciale",
+          "source": "Ni site dédié ni canal de gros documentés ; la plateforme sert d'abord la base installée de donneurs d'ordre du groupe",
+          "dateReleve": "2026-08-21",
+          "confiance": "moyenne"
+        },
+        {
+          "champ": "analyse360.postureCommerciale",
+          "source": "Facette introduite par la révision du barème du 21/08/2026, documentée dans Info IA/plateformes-agreees/REVISION-BAREME-10-FICHES.md",
+          "dateReleve": "2026-08-21",
+          "confiance": "moyenne"
+        }
+      ]
+    },
+    {
+      "nom": "ITESOFT",
+      "analyse360": {
+        "postureCommerciale": {
+          "valeur": "conquete_directe",
+          "preuve": "Marque dédiée Streamline Invoices et positionnement volumétrique explicite à partir de 15 000 factures par mois, sans canal de gros documenté",
+          "confiance": "moyenne"
+        }
+      },
+      "sourcesEnrichissement": [
+        {
+          "champ": "analyse360.postureCommerciale",
+          "source": "Marque dédiée Streamline Invoices et positionnement volumétrique explicite à partir de 15 000 factures par mois, sans canal de gros documenté",
+          "dateReleve": "2026-08-21",
+          "confiance": "moyenne"
+        },
+        {
+          "champ": "analyse360.postureCommerciale",
+          "source": "Facette introduite par la révision du barème du 21/08/2026, documentée dans Info IA/plateformes-agreees/REVISION-BAREME-10-FICHES.md",
+          "dateReleve": "2026-08-21",
+          "confiance": "moyenne"
+        }
+      ]
+    },
+    {
+      "nom": "MEDIUS",
+      "analyse360": {
+        "postureCommerciale": {
+          "valeur": "conquete_directe",
+          "preuve": "Communiqué français du 12/01/2026 ciblant explicitement les ETI et les grandes entreprises, entité française dédiée, sans canal de gros documenté",
+          "confiance": "moyenne"
+        }
+      },
+      "sourcesEnrichissement": [
+        {
+          "champ": "analyse360.postureCommerciale",
+          "source": "Communiqué français du 12/01/2026 ciblant explicitement les ETI et les grandes entreprises, entité française dédiée, sans canal de gros documenté",
+          "dateReleve": "2026-08-21",
+          "confiance": "moyenne"
+        },
+        {
+          "champ": "analyse360.postureCommerciale",
+          "source": "Facette introduite par la révision du barème du 21/08/2026, documentée dans Info IA/plateformes-agreees/REVISION-BAREME-10-FICHES.md",
+          "dateReleve": "2026-08-21",
+          "confiance": "moyenne"
+        }
+      ]
+    },
+    {
+      "nom": "TRADESHIFT BABELWAY",
+      "analyse360": {
+        "postureCommerciale": {
+          "valeur": "conquete_directe",
+          "preuve": "Page française du 12/01/2026 s'adressant à la fois aux clients existants et aux prospects, webinaire de conquête co-animé avec un client, distribution directe déclarée",
+          "confiance": "moyenne"
+        }
+      },
+      "sourcesEnrichissement": [
+        {
+          "champ": "analyse360.postureCommerciale",
+          "source": "Page française du 12/01/2026 s'adressant à la fois aux clients existants et aux prospects, webinaire de conquête co-animé avec un client, distribution directe déclarée",
+          "dateReleve": "2026-08-21",
+          "confiance": "moyenne"
+        },
+        {
+          "champ": "analyse360.postureCommerciale",
+          "source": "Facette introduite par la révision du barème du 21/08/2026, documentée dans Info IA/plateformes-agreees/REVISION-BAREME-10-FICHES.md",
+          "dateReleve": "2026-08-21",
+          "confiance": "moyenne"
+        }
+      ]
+    },
+    {
+      "nom": "PAYFLOWS",
+      "analyse360": {
+        "postureCommerciale": {
+          "valeur": "non_qualifie",
+          "preuve": "Aucune preuve observable : le site est en anglais et ne comporte aucune page consacrée au statut de plateforme agréée ni à la réforme française, aucun parcours partenaires ou éditeurs n'est publié, et aucun canal de distribution n'est déclaré. L'absence de vitrine ne permet pas de conclure à une posture de base installée : la société est récente et a déjà remporté des affaires en conquête. Facette laissée non qualifiée jusqu'à obtention de preuves.",
+          "confiance": "non_qualifie"
+        }
+      },
+      "sourcesEnrichissement": [
+        {
+          "champ": "analyse360.postureCommerciale",
+          "source": "Relevé du site Payflows le 21/08/2026 : aucune page sur le statut de plateforme agréée ni sur la réforme française, aucun parcours partenaires publié",
+          "dateReleve": "2026-08-21",
+          "confiance": "haute"
+        },
+        {
+          "champ": "analyse360.postureCommerciale",
+          "source": "Facette introduite par la révision du barème du 21/08/2026, documentée dans Info IA/plateformes-agreees/REVISION-BAREME-10-FICHES.md",
+          "dateReleve": "2026-08-21",
+          "confiance": "moyenne"
+        }
+      ]
+    }
+  ]
+}
