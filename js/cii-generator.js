@@ -48,11 +48,14 @@ const CIIGenerator = {
         // avant les trois blocs header. L'inverse de l'UBL, ou les parties
         // precedent les lignes.
         p.lines.forEach(function(line) {
-            xml += CIITemplates.getLineItem(
-                line,
-                { category: line.vatCategory || 'S', percent: line.vatPercent },
-                line.orderRef || null
-            );
+            // Une ligne GROUP du cadre S8 ne porte pas de categorie de TVA :
+            // le pivot laisse alors vatCategory a null et le gabarit omet le
+            // bloc ram:ApplicableTradeTax. Le defaut 'S' aurait invente une
+            // categorie sur un agregat.
+            const lineVat = line.vatCategory
+                ? { category: line.vatCategory, percent: line.vatPercent }
+                : null;
+            xml += CIITemplates.getLineItem(line, lineVat, line.orderRef || null);
         });
 
         xml += CIITemplates.getAgreement(
@@ -219,6 +222,45 @@ const CIIGenerator = {
                 errors.push(entry[0] + ' : renseigne dans le pivot mais absent du CII');
             }
         });
+
+        // Cadre S8 : les sommations de document ne portent QUE sur les lignes
+        // DETAIL. Une ligne GROUP est un agregat, la compter reviendrait a
+        // doubler les montants. C'est le defaut le plus probable d'une
+        // reecriture de ce cas, on le verifie donc explicitement.
+        const groupLines = (p.lines || []).filter(function(l) { return l.subtype === 'GROUP'; });
+        if (groupLines.length) {
+            const detail = (p.lines || []).filter(function(l) { return l.subtype === 'DETAIL'; });
+            const sumDetail = Math.round(detail.reduce(function(a, l) { return a + parseFloat(l.amount); }, 0) * 100) / 100;
+            if (p.totals && sumDetail.toFixed(2) !== parseFloat(p.totals.lineExtension).toFixed(2)) {
+                errors.push('Multi-vendeurs : BT-106 ' + p.totals.lineExtension
+                    + ' ne correspond pas a la somme des lignes DETAIL ' + sumDetail.toFixed(2));
+            }
+            groupLines.forEach(function(g) {
+                const kids = detail.filter(function(l) { return l.parentId === g.id; });
+                const sk = Math.round(kids.reduce(function(a, l) { return a + parseFloat(l.amount); }, 0) * 100) / 100;
+                // BR-FR-MV-05
+                if (sk.toFixed(2) !== parseFloat(g.amount).toFixed(2)) {
+                    errors.push('Ligne GROUP ' + g.id + ' : BT-131 ' + g.amount
+                        + ' ne correspond pas a la somme de ses lignes DETAIL ' + sk.toFixed(2));
+                }
+                // BR-FR-MV-10 : EXT-FR-FE-184 = BT-131 + EXT-FR-FE-181
+                if (g.grandTotal && g.lineVatTotal) {
+                    const tt = Math.round((parseFloat(g.amount) + parseFloat(g.lineVatTotal)) * 100) / 100;
+                    if (tt.toFixed(2) !== parseFloat(g.grandTotal).toFixed(2)) {
+                        errors.push('Ligne GROUP ' + g.id + ' : total TTC ' + g.grandTotal
+                            + ' attendu ' + tt.toFixed(2));
+                    }
+                }
+                // BR-FR-MV-07 : les lignes DETAIL reprennent l'AFL de leur GROUP
+                const aflG = (g.lineRefs || []).filter(function(r) { return r.type === 'AFL'; })[0];
+                kids.forEach(function(k) {
+                    const aflK = (k.lineRefs || []).filter(function(r) { return r.type === 'AFL'; })[0];
+                    if (!aflG || !aflK || aflG.id !== aflK.id) {
+                        errors.push('Ligne DETAIL ' + k.id + ' : numero de facture vendeur absent ou different de celui de sa ligne GROUP');
+                    }
+                });
+            });
+        }
 
         // Socle enrichi, niveau ligne. La regle de coherence du prix unitaire
         // est la seule du lot qui soit reellement bloquante : BT-148 - BT-147

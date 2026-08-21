@@ -105,6 +105,10 @@ const UBLGenerator = {
     // =====================================================
     VAT: {
         STANDARD:  { category: "S", percent: "20.00", code: "", reason: "" },
+        // Cession de droits patrimoniaux par l'auteur d'une oeuvre de l'esprit :
+        // taux reduit de 10 %, article 279 g du CGI. Ce n'est pas une
+        // exoneration, la categorie reste S.
+        DROITS_AUTEUR: { category: "S", percent: "10.00", code: "", reason: "" },
         DEBOURS:   { category: "O", percent: "0.00", code: "VATEX-EU-O", reason: "Hors du perimetre d'application de la TVA" },
         GROUPE_TVA:{ category: "O", percent: "0.00", code: "VATEX-EU-O", reason: "Operations internes a l'assujetti unique - article 256 C du CGI" },
         MARGE:     { category: "E", percent: "0.00", code: "VATEX-EU-F", reason: "Regime particulier - Biens d'occasion - article 297 A du CGI" },
@@ -147,6 +151,8 @@ const UBLGenerator = {
         // 33 : la marge est exoneree (E / VATEX-EU-F), les prestations
         // annexes restent taxees au taux normal. Deux sous-totaux BG-23.
         "33": { lineVat: { "1": "MARGE", "2": "STANDARD" } },
+        // 35 : cession de droits d'auteur au taux reduit de 10 %.
+        "35": { vat: "DROITS_AUTEUR" },
         // Regimes de TVA transverses : un seul sous-total BG-23, taux 0.
         "T1": { vat: "AUTOLIQ" },
         "T2": { vat: "FRANCHISE" },
@@ -155,6 +161,14 @@ const UBLGenerator = {
     },
 
     // Profil de TVA applicable a une ligne donnee.
+    // Renvoie null pour les lignes qui ne portent pas de categorie de TVA :
+    // en cadre S8, une ligne GROUP est un agregat et BR-FREXT-CO-04 n'exige
+    // BT-151 que sur les lignes DETAIL.
+    getLineVatOrNull: function(usecase, lineId, line) {
+        if (line && (line.subtype === "GROUP" || line.subtype === "INFORMATION")) return null;
+        return this.getLineVat(usecase, lineId);
+    },
+
     getLineVat: function(usecase, lineId) {
         var profile = this.vatProfiles[usecase] || {};
         var key = (profile.lineVat && profile.lineVat[lineId]) || profile.vat || "STANDARD";
@@ -166,7 +180,10 @@ const UBLGenerator = {
     //   3, 4     EXT-FR-FE-BG-02  payeur de la facture (tiers payeur)
     //   14       EXT-FR-FE-BG-03  agent de vendeur
     //   17b, 19a EXT-FR-FE-BG-05  facturant (mandataire de facturation)
-    EXTENDED_CASES: ["1", "3", "4", "14", "17b", "19a"],
+    EXTENDED_CASES: ["1", "3", "4", "14", "17b", "19a",
+        // 39 : le vendeur de niveau ligne, la hierarchie GROUP / DETAIL et les
+        // totaux de ligne etendus n'existent que dans le profil francais.
+        "39"],
 
     getCustomizationId: function(usecase) {
         var profile = this.vatProfiles[usecase] || {};
@@ -183,13 +200,24 @@ const UBLGenerator = {
         var self = this;
         var groups = {};
         var order = [];
-        var add = function(vat, amount) {
-            var key = vat.category + "|" + vat.percent;
-            if (!groups[key]) { groups[key] = { vat: vat, taxable: 0 }; order.push(key); }
+        var add = function(vat, amount, tag) {
+            var key = (tag || "") + "|" + vat.category + "|" + vat.percent;
+            if (!groups[key]) { groups[key] = { vat: vat, taxable: 0, tag: tag || null }; order.push(key); }
             groups[key].taxable += amount;
         };
         ld.lines.forEach(function(line) {
-            add(self.getLineVat(usecase, line.id), parseFloat(line.amount));
+            // Cadre S8 : une ligne GROUP est un AGREGAT de ses lignes DETAIL.
+            // La sommer reviendrait a compter deux fois les memes montants.
+            // BR-FREXT-CO-10, CO-13 et CO-15 restreignent explicitement les
+            // sommations aux lignes DETAIL, et la meme lecture s'impose a la
+            // base de chaque sous-total BG-23.
+            if (line.subtype === "GROUP" || line.subtype === "INFORMATION") return;
+            var lv = self.getLineVat(usecase, line.id);
+            if (!lv) return;
+            // vatTag : en multi-vendeurs, un sous-total BG-23 est propre a un
+            // vendeur. Deux vendeurs au meme taux donnent donc DEUX sous-totaux,
+            // distingues par le marqueur porte en tete de BT-120 (BR-FR-MV-08).
+            add(lv, parseFloat(line.amount), line.vatTag);
         });
         // BR-S-08 etendue : la base d'un sous-total BG-23 integre les frais de niveau
         // document (BG-21) et retranche les remises de niveau document (BG-20)
@@ -203,13 +231,19 @@ const UBLGenerator = {
             var g = groups[key];
             var taxable = Math.round(g.taxable * 100) / 100;
             var amount = Math.round(taxable * parseFloat(g.vat.percent)) / 100;
+            // BR-FR-MV-08 : le motif BT-120 d'un sous-total multi-vendeurs doit
+            // COMMENCER par le marqueur du numero de facture du vendeur, entoure
+            // de dieses. C'est ce marqueur qui permet a BR-FR-MV-09 de
+            // rattacher la TVA d'une ligne GROUP a ses sous-totaux.
+            var reason = g.vat.reason;
+            if (g.tag) reason = "#" + g.tag + "#" + (reason ? " " + reason : " Ventilation propre au vendeur de la ligne.");
             return {
                 taxable: taxable.toFixed(2),
                 amount: amount.toFixed(2),
                 category: g.vat.category,
                 percent: g.vat.percent,
                 code: g.vat.code,
-                reason: g.vat.reason
+                reason: reason
             };
         });
     },
@@ -811,12 +845,39 @@ const UBLGenerator = {
             // 35 : variante e-invoicing du cas — l'auteur assujetti facture
             // directement ses droits a l'editeur. Les releves de droits
             // etablis par l'editeur ne sont pas des factures.
+            // 35 : cession de droits d'auteur par un artiste-auteur assujetti.
+            //
+            // Le scenario a ete refait. Il decrivait un auteur facturant un
+            // EDITEUR : or lorsque le payeur est un editeur, une societe de
+            // perception ou un producteur, l'article 285 bis du CGI institue
+            // une retenue de TVA a la source et l'operation ne donne pas lieu a
+            // une facture mais a un releve de droits, qui releve du
+            // e-reporting. Notre facture etait donc doublement fausse : elle
+            // existait alors qu'elle n'aurait pas du, et elle ne portait aucune
+            // trace de la retenue qu'elle aurait du subir.
+            //
+            // Configuration retenue : l'auteur, assujetti et redevable, cede
+            // ses droits a un client qui n'est PAS un diffuseur au sens de
+            // l'article 285 bis. Aucune retenue de TVA, aucun precompte a la
+            // source : facture ordinaire, cadre S1, taux reduit de 10 %.
+            //
+            // Le precompte de cotisations sociales n'est volontairement PAS
+            // modelise. Ni EN 16931 ni la norme AFNOR ne prevoient de champ
+            // pour une retenue sociale : BG-20 est une remise commerciale,
+            // BT-113 un acompte deja verse, BG-21 un frais ajoute. Detourner
+            // l'un d'eux fausserait la ventilation de TVA ou BR-CO-16. Le
+            // precompte est une operation de reglement, pas une composante du
+            // prix : la facture porte le montant brut, BT-115 = BT-112.
             case "35":
                 return {
-                    tax: ["8900.00", "1780.00"],
-                    totals: ["8900.00", "8900.00", "10680.00", "0.00", "10680.00"],
+                    tax: ["8900.00", "890.00"],
+                    totals: ["8900.00", "8900.00", "9790.00", "0.00", "9790.00"],
                     lines: [
-                        { id: "1", qty: "1.00", amount: "8900.00", desc: "Droits d'auteur - Ouvrage sur la facturation electronique - A-valoir 2026", price: "8900.00" }
+                        {
+                            id: "1", qty: "1.00", amount: "8900.00", price: "8900.00",
+                            desc: "Cession de droits d'auteur - Illustrations campagne institutionnelle 2026",
+                            description: "Cession des droits patrimoniaux de reproduction et de representation sur une serie de douze illustrations originales, pour une duree de trois ans et le territoire francais."
+                        }
                     ]
                 };
 
@@ -862,20 +923,84 @@ const UBLGenerator = {
                     ]
                 };
 
-            case "39":
+            // ================================================================
+            // 39 : cadre S8, facture consolidee multi-vendeurs.
+            //
+            // Ce cas etait FAUX, pas approximatif. L'identite des vendeurs
+            // etait portee par un prefixe dans le libelle de la ligne
+            // ("[Vendeur 1: ...]") : une chaine de caracteres qu'aucun
+            // recepteur ne peut exploiter, et qui ne permet ni de reconstituer
+            // la TVA due par chaque vendeur, ni de payer le bon beneficiaire.
+            //
+            // Modelisation cible, profil EXTENDED-CTC-FR :
+            //   - le vendeur BG-4 du document est l'intermediaire transparent
+            //     qui emet la facture consolidee ;
+            //   - chaque vendeur reel est identifie de facon STRUCTUREE sur sa
+            //     ligne, par ram:ItemSellerTradeParty ;
+            //   - la hierarchie est PLATE : une ligne GROUP par vendeur, ses
+            //     lignes DETAIL la referencant par ram:ParentLineID. Surtout
+            //     pas de lignes imbriquees.
+            //   - chaque ligne porte, en BT-128, le numero de facture propre au
+            //     vendeur (code AFL) et son cadre de facturation (code AVV) ;
+            //     BR-FR-MV-07 impose que la ligne DETAIL reprenne le meme AFL
+            //     que sa ligne GROUP.
+            //   - la ligne GROUP porte ses totaux agreges : BT-131, la TVA en
+            //     EXT-FR-FE-181 et le TTC en EXT-FR-FE-184.
+            //
+            // Les totaux du document ne comptent QUE les lignes DETAIL
+            // (BR-FREXT-CO-10, CO-13, CO-15) : 1680 + 720 + 1400 + 450 = 4250.
+            // Sommer les lignes GROUP donnerait 8500 et la facture serait
+            // rejetee. C'est le piege central de ce cas d'usage.
+            //
+            // UBL ne peut pas exprimer cette structure : la syntaxe n'a pas de
+            // vendeur de niveau ligne, et aucun exemple UBL multi-vendeurs n'a
+            // ete publie. Ce cas est donc restreint au CII et au Factur-X, cf.
+            // FORMAT_RESTRICTED. Produire un UBL qui perd silencieusement
+            // l'identite des vendeurs serait pire que ne rien produire.
+            // ================================================================
+            case "39": {
+                var v1 = { name: "BLANCHISSERIE EXPRESS SARL", siret: "48123456700021", vat: "FR32481234567", country: "FR" };
+                var v2 = { name: "FLEURS ET DECO SAS", siret: "52987654300014", vat: "FR61529876543", country: "FR" };
+                var afl1 = { id: "FA-2026-0391", type: "AFL" };
+                var afl2 = { id: "FA-2026-0392", type: "AFL" };
+                var avv = { id: "S8", type: "AVV" };
                 return {
                     tax: ["4250.00", "850.00"],
                     totals: ["4250.00", "4250.00", "5100.00", "0.00", "5100.00"],
                     lines: [
-                        { id: "1", qty: "600.00", amount: "1680.00", desc: "[Vendeur 1: Blanchisserie Express] Draps king size", price: "2.80" },
-                        { id: "2", qty: "1200.00", amount: "720.00", desc: "[Vendeur 1] Serviettes", price: "0.60" },
-                        { id: "3", qty: "4.00", amount: "1400.00", desc: "[Vendeur 2: Fleurs & Deco] Compositions florales halls", price: "350.00" },
-                        { id: "4", qty: "1.00", amount: "450.00", desc: "[Vendeur 2] Plantes vertes location mensuelle", price: "450.00" }
+                        // --- Vendeur 1 : agregat puis detail ---
+                        {
+                            id: "1", subtype: "GROUP", amount: "2400.00",
+                            desc: "BLANCHISSERIE EXPRESS SARL - prestations de blanchisserie",
+                            itemSeller: v1, lineRefs: [afl1, avv],
+                            lineVatTotal: "480.00", grandTotal: "2880.00", vatTag: "FA-2026-0391"
+                        },
+                        {
+                            id: "2", parentId: "1", subtype: "DETAIL", qty: "600.00", amount: "1680.00", price: "2.80",
+                            desc: "Draps king size", lineRefs: [afl1, avv], vatTag: "FA-2026-0391"
+                        },
+                        {
+                            id: "3", parentId: "1", subtype: "DETAIL", qty: "1200.00", amount: "720.00", price: "0.60",
+                            desc: "Serviettes de bain", lineRefs: [afl1, avv], vatTag: "FA-2026-0391"
+                        },
+                        // --- Vendeur 2 : agregat puis detail ---
+                        {
+                            id: "4", subtype: "GROUP", amount: "1850.00",
+                            desc: "FLEURS ET DECO SAS - decoration florale",
+                            itemSeller: v2, lineRefs: [afl2, avv],
+                            lineVatTotal: "370.00", grandTotal: "2220.00", vatTag: "FA-2026-0392"
+                        },
+                        {
+                            id: "5", parentId: "4", subtype: "DETAIL", qty: "4.00", amount: "1400.00", price: "350.00",
+                            desc: "Compositions florales hall d'accueil", lineRefs: [afl2, avv], vatTag: "FA-2026-0392"
+                        },
+                        {
+                            id: "6", parentId: "4", subtype: "DETAIL", qty: "1.00", amount: "450.00", price: "450.00",
+                            desc: "Plantes vertes d'interieur - location mensuelle", lineRefs: [afl2, avv], vatTag: "FA-2026-0392"
+                        }
                     ]
                 };
-
-            // 40 : facture soldee par compensation avec la facture reciproque.
-            // BT-81 = 97, BT-113 = montant compense, BT-115 = 0.
+            }
             case "40":
                 return {
                     tax: ["3750.00", "750.00"],
@@ -1128,6 +1253,14 @@ const UBLGenerator = {
     // ==========================================
     enrichLine: function(line, ref, ctx) {
         var out = {};
+
+        // Une ligne GROUP du cadre S8 n'a ni prix unitaire, ni quantite, ni
+        // article : lui deriver une remise commerciale ou un GTIN produirait
+        // des donnees qui ne correspondent a rien de facturable.
+        if (line.subtype === "GROUP" || line.subtype === "INFORMATION") {
+            if (ctx.accountingCost) out.accountingCost = ctx.accountingCost + "-L" + line.id;
+            return out;
+        }
         var price = parseFloat(line.price);
 
         // BT-148 prix brut et BT-147 remise unitaire.
@@ -1288,14 +1421,15 @@ const UBLGenerator = {
         "33", "34", "36", "37", "41",
         // Branche ZIP ouverte au Factur-X : chaque document du pack devient un
         // PDF/A-3B autonome. Les trois cas a pack rejoignent donc la liste.
-        "nominal-litige-avoir", "nominal-litige-rectificative", "B"],
+        "nominal-litige-avoir", "nominal-litige-rectificative", "B",
+        // 35 droits d'auteur : scenario refait en configuration sans retenue
+        //    de TVA a la source, taux reduit de 10 %, mentions ABL et AAI.
+        // 39 multi-vendeurs S8 : reecrit en structure GROUP / DETAIL avec
+        //    vendeur de niveau ligne. Restreint au CII et au Factur-X.
+        "35", "39"],
 
-    // Deux cas restent volontairement hors liste, non par prudence d'audit
-    // mais parce que leur modelisation est en defaut :
-    //   35 droits d'auteur : le scenario est incoherent, l'auteur facturant
-    //      directement un editeur alors que le regime du precompte suppose un
-    //      diffuseur. Il manque en outre toute trace de la retenue a la
-    //      source. Arbitrage de perimetre attendu de Bruno.
+    // Un cas reste hors liste, non par prudence d'audit mais parce que sa
+    // modelisation est en defaut :
     //   39 multi-vendeurs S8 : l'identite des vendeurs est aujourd'hui portee
     //      par un prefixe dans le libelle de la ligne. Ce n'est pas une
     //      approximation, c'est faux : le cadre S8 exige une identification
@@ -1321,6 +1455,23 @@ const UBLGenerator = {
     // Distinguer embed de side est la raison d'etre de ce modele : embarquer
     // un bon de livraison dans le XML ne doit rien imposer sur les fichiers
     // telecharges, et inversement.
+    // ==========================================
+    // FORMAT_RESTRICTED
+    // Cas dont la structure n'est pas exprimable dans toutes les syntaxes.
+    // Le multi-vendeurs S8 en est le seul exemple : UBL n'a pas de vendeur de
+    // niveau ligne, et aucun exemple UBL multi-vendeurs n'a ete publie par la
+    // DGFiP ni par le FNFE. Produire un UBL qui perdrait silencieusement
+    // l'identite des vendeurs serait plus grave que de refuser la syntaxe : le
+    // recepteur ne verrait aucune erreur, seulement une facture fausse.
+    // ==========================================
+    FORMAT_RESTRICTED: {
+        "39": ["cii", "facturx"]
+    },
+
+    allowedFormats: function(usecase) {
+        return this.FORMAT_RESTRICTED[usecase] || ["ubl", "cii", "facturx"];
+    },
+
     getComposition: function(usecase) {
         var read = function(id) {
             var el = document.getElementById(id);
@@ -1349,8 +1500,13 @@ const UBLGenerator = {
 
         // Sans representation lisible verifiee pour le cas, on ne produit ni
         // PDF, ni hybride, ni piece jointe : la facture reste nue.
+        // Une syntaxe non exprimable pour ce cas est ramenee a la premiere
+        // syntaxe autorisee, jamais silencieusement produite.
+        var allowed = this.allowedFormats(usecase);
+        if (allowed.indexOf(comp.format) === -1) comp.format = allowed[0];
+
         if (!this.supportsPdf(usecase)) {
-            if (comp.format === 'facturx') comp.format = 'ubl';
+            if (comp.format === 'facturx') comp.format = allowed.indexOf('ubl') !== -1 ? 'ubl' : allowed[0];
             comp.embed = { lisible: false, order: false, despatch: false };
             comp.side  = { lisible: false, order: false, despatch: false };
         }
@@ -1514,6 +1670,22 @@ const UBLGenerator = {
             // Cas 34 : TVA exigible a l'encaissement, regime de droit commun
             // des prestations de services en l'absence d'option sur les debits.
             if (usecase === "34") notes.push("#AAI#TVA exigible a l'encaissement du prix - prestations de services, article 269-2-c du CGI.");
+            // Cas 35 : la qualite d'artiste-auteur et le regime de TVA
+            // applique doivent apparaitre. La seconde mention est pedagogique
+            // autant que juridique : elle dit pourquoi la retenue de TVA ne
+            // s'applique PAS ici, ce qui est le coeur du cas d'usage.
+            if (usecase === "35") {
+                notes.push("#ABL#Artiste-auteur - cession de droits patrimoniaux. TVA au taux reduit de 10 %, article 279 g du CGI.");
+                notes.push("#AAI#Le client n'est ni editeur, ni societe de perception, ni producteur : la retenue de TVA a la source de l'article 285 bis du CGI ne s'applique pas. L'auteur est redevable de la TVA qu'il facture.");
+            }
+            // Cas A : facture volontairement non conforme. La mention dit
+            // exactement quel controle doit se declencher. Un jeu de test
+            // invalide n'a de valeur que si le rejet est attribuable a UN
+            // defaut identifie : sans cela, on ne sait pas ce que la
+            // plateforme a refuse.
+            if (usecase === "A") {
+                notes.push("#AAI#CAS DE TEST - Facture volontairement non conforme. Le type de document BT-3 vaut 999, valeur absente de la liste UNTDID 1001. Tout le reste de la facture est conforme : le rejet attendu porte sur ce seul point, au controle de syntaxe.");
+            }
             // Cas 41 : echange de biens. Chaque partie livre un bien et emet sa
             // propre facture pour la valeur de ce qu'elle livre ; la base
             // d'imposition est la valeur du bien recu en contrepartie.
@@ -1960,21 +2132,28 @@ const UBLGenerator = {
                     payableAmount: (Math.round((taxInclusive - prepaid) * 100) / 100).toFixed(2),
                     notes: pdfNotes,
                     lines: ld.lines.map(function(line, idx) {
-                        var vat = self.getLineVat(usecase, line.id);
+                        var vat = self.getLineVatOrNull(usecase, line.id, line);
                         var base = {
                             id: line.id,
-                            ref: line.ref || self.makeItemRef(line.desc, idx + 1),
+                            ref: line.subtype === "GROUP" ? null : (line.ref || self.makeItemRef(line.desc, idx + 1)),
                             desc: line.desc,
-                            qty: line.qty,
-                            price: line.price,
+                            qty: line.qty || null,
+                            price: line.price || null,
                             amount: line.amount,
-                            vatPercent: vat.percent,
+                            vatPercent: vat ? vat.percent : null,
                             // BT-151 : le lisible n'affiche que le taux, mais le CII
                             // exige la categorie dans ram:ApplicableTradeTax.
-                            vatCategory: vat.category,
+                            vatCategory: vat ? vat.category : null,
                             unitCode: line.unitCode || "C62",
                             // BG-27 / BG-28 rendus en sous-lignes du tableau
-                            allowances: line.allowances || null
+                            allowances: line.allowances || null,
+                            // --- Cadre S8, multi-vendeurs (EXTENDED-CTC-FR) ---
+                            subtype: line.subtype || null,
+                            parentId: line.parentId || null,
+                            itemSeller: line.itemSeller || null,
+                            lineRefs: line.lineRefs || null,
+                            lineVatTotal: line.lineVatTotal || null,
+                            grandTotal: line.grandTotal || null
                         };
                         // Meme enrichissement que buildXML, meme source.
                         return Object.assign(base, self.enrichLine(line, base.ref, lineCtx));

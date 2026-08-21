@@ -384,9 +384,32 @@ const PDFLisible = {
     // et la remise consentie, faute de quoi l'acheteur ne peut pas verifier que
     // ses conditions commerciales ont bien ete appliquees.
     _priceNotes: function (row) {
-        if (!row.grossPrice || !row.priceDiscount) return [];
-        return ['Prix brut ' + this._amt(row.grossPrice) + ' \u20ac  -  remise '
-            + this._amt(row.priceDiscount) + ' \u20ac  =  prix net ' + this._amt(row.price) + ' \u20ac'];
+        const out = [];
+
+        // Cadre S8 : le vendeur reel de la ligne. C'est l'information que la
+        // modelisation precedente noyait dans le libelle ; elle doit donc etre
+        // lisible ici sans ambiguite, avec les identifiants qui permettent de
+        // rattacher la ligne au bon assujetti.
+        const sel = row.itemSeller;
+        if (sel) {
+            const ids = [];
+            if (sel.siret) ids.push('SIRET ' + sel.siret);
+            if (sel.vat) ids.push('TVA ' + sel.vat);
+            out.push('Vendeur de la ligne : ' + (sel.name || '') + (ids.length ? '  -  ' + ids.join('  -  ') : ''));
+        }
+        const afl = (row.lineRefs || []).filter(function (r) { return r.type === 'AFL'; })[0];
+        if (afl) {
+            let t = 'Facture du vendeur : ' + afl.id;
+            if (row.lineVatTotal) t += '  -  TVA ' + this._amt(row.lineVatTotal) + ' \u20ac';
+            if (row.grandTotal) t += '  -  total TTC ' + this._amt(row.grandTotal) + ' \u20ac';
+            out.push(t);
+        }
+
+        if (row.grossPrice && row.priceDiscount) {
+            out.push('Prix brut ' + this._amt(row.grossPrice) + ' \u20ac  -  remise '
+                + this._amt(row.priceDiscount) + ' \u20ac  =  prix net ' + this._amt(row.price) + ' \u20ac');
+        }
+        return out;
     },
 
     _rowHeight: function (row) {
@@ -540,18 +563,28 @@ const PDFLisible = {
             if (zebra) this._fill(ctx, M + 0.5, y - h + 7, R - M - 1, h, this.C.zebra);
             zebra = !zebra;
 
-            const label = ((row.ref || '') + '  ' + (row.desc || '')).trim();
-            const lines = this._wrap(label, 7.7, descW, 2, true);
+            // Cadre S8 : une ligne GROUP est l'agregat d'un vendeur. Elle n'a
+            // ni quantite, ni prix unitaire, ni taux de TVA de ligne. Y
+            // imprimer "0,00" ferait croire a une ligne gratuite : on laisse
+            // ces colonnes VIDES, ce qui est la seule lecture honnete.
+            const isGroup = row.subtype === 'GROUP';
+            const indent = row.subtype === 'DETAIL' ? 10 : 0;
+            const label = isGroup
+                ? (row.desc || '')
+                : ((row.ref || '') + '  ' + (row.desc || '')).trim();
+            const lines = this._wrap(label, 7.7, descW - indent, 2, true);
             this._txt(ctx, c.line + 2, y, row.id, { size: 8.0, color: this.C.muted });
-            this._txt(ctx, c.desc + 2, y, lines[0], { size: 7.7, bold: true, color: this.C.navy });
+            this._txt(ctx, c.desc + 2 + indent, y, lines[0], { size: 7.7, bold: true, color: this.C.navy });
             if (lines.length > 1) {
-                this._txt(ctx, c.desc + 2, y - 10, this._fit(lines[1], 7.3, descW), { size: 7.3, color: this.C.muted });
+                this._txt(ctx, c.desc + 2 + indent, y - 10, this._fit(lines[1], 7.3, descW - indent), { size: 7.3, color: this.C.muted });
             }
-            this._txt(ctx, c.unit + 2, y, this._unit(row), { size: 7.8, color: this.C.muted });
-            this._txt(ctx, c.qty, y, this._qty(row.qty), { size: 8.0, align: 'right' });
-            this._txt(ctx, c.pu, y, this._amt(row.price), { size: 8.0, align: 'right' });
-            this._txt(ctx, c.vat, y, this._amt(row.vatPercent === undefined ? d.taxPercent : row.vatPercent),
-                { size: 8.0, color: this.C.muted, align: 'right' });
+            if (!isGroup) {
+                this._txt(ctx, c.unit + 2, y, this._unit(row), { size: 7.8, color: this.C.muted });
+                this._txt(ctx, c.qty, y, this._qty(row.qty), { size: 8.0, align: 'right' });
+                this._txt(ctx, c.pu, y, this._amt(row.price), { size: 8.0, align: 'right' });
+                this._txt(ctx, c.vat, y, this._amt(row.vatPercent === undefined ? d.taxPercent : row.vatPercent),
+                    { size: 8.0, color: this.C.muted, align: 'right' });
+            }
             this._txt(ctx, c.ht, y, this._amt(row.amount), { size: 8.0, bold: true, align: 'right' });
 
             // BG-27 remise / BG-28 frais de niveau ligne. Le montant total de la

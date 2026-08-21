@@ -95,10 +95,33 @@ const CIITemplates = {
     //   ram:SpecifiedLineTradeSettlement : ApplicableTradeTax,
     //     BillingSpecifiedPeriod (BG-26), SpecifiedTradeAllowanceCharge,
     //     MonetarySummation, ReceivableSpecifiedTradeAccountingAccount (BT-133).
+    // Extensions EXTENDED-CTC-FR du multi-vendeurs (cadre S8) :
+    //   ram:ParentLineID          EXT-FR-FE-162, rattache une ligne DETAIL a
+    //                             sa ligne GROUP. La hierarchie est PLATE, pas
+    //                             imbriquee : surtout ne pas utiliser
+    //                             cac:SubInvoiceLine ni son equivalent CII.
+    //   ram:LineStatusReasonCode  EXT-FR-FE-163, vaut GROUP, DETAIL ou
+    //                             INFORMATION.
+    //   ram:ItemSellerTradeParty  vendeur reel de la ligne. Position : DERNIER
+    //                             enfant de ram:SpecifiedLineTradeAgreement,
+    //                             apres NetPriceProductTradePrice.
+    //                             EXT-FR-FE-164 nom, 167 SIRET, 168 TVA
+    //                             intracommunautaire, 177 pays.
+    //   ram:TaxTotalAmount        EXT-FR-FE-181, TVA de la ligne GROUP.
+    //   ram:GrandTotalAmount      EXT-FR-FE-184, total TTC de la ligne GROUP.
+    //   ram:AdditionalReferencedDocument avec ReferenceTypeCode AFL et AVV :
+    //                             BT-128, numero de facture et cadre propres au
+    //                             vendeur de la ligne.
+    // Une ligne GROUP n'a ni quantite BT-129, ni prix unitaire BT-146, ni
+    // categorie de TVA BT-151 : c'est un agregat, et BR-FREXT-CO-04 ne les
+    // exige que sur les lignes DETAIL. Les emettre serait inventer une
+    // quantite qui n'existe pas.
     getLineItem: (line, vat, orderRef) => `
 \t\t<ram:IncludedSupplyChainTradeLineItem>
 \t\t\t<ram:AssociatedDocumentLineDocument>
-\t\t\t\t<ram:LineID>${line.id}</ram:LineID>${line.note ? `
+\t\t\t\t<ram:LineID>${line.id}</ram:LineID>${line.parentId ? `
+\t\t\t\t<ram:ParentLineID>${line.parentId}</ram:ParentLineID>` : ''}${line.subtype ? `
+\t\t\t\t<ram:LineStatusReasonCode>${line.subtype}</ram:LineStatusReasonCode>` : ''}${line.note ? `
 \t\t\t\t<ram:IncludedNote>
 \t\t\t\t\t<ram:Content>${xmlEsc(line.note)}</ram:Content>
 \t\t\t\t</ram:IncludedNote>` : ''}
@@ -126,21 +149,33 @@ const CIITemplates = {
 \t\t\t\t\t\t</ram:ChargeIndicator>
 \t\t\t\t\t\t<ram:ActualAmount>${line.priceDiscount}</ram:ActualAmount>
 \t\t\t\t\t</ram:AppliedTradeAllowanceCharge>
-\t\t\t\t</ram:GrossPriceProductTradePrice>` : ''}
+\t\t\t\t</ram:GrossPriceProductTradePrice>` : ''}${line.price ? `
 \t\t\t\t<ram:NetPriceProductTradePrice>
 \t\t\t\t\t<ram:ChargeAmount>${line.price}</ram:ChargeAmount>${line.baseQuantity ? `
 \t\t\t\t\t<ram:BasisQuantity unitCode="${line.unitCode || 'C62'}">${line.baseQuantity}</ram:BasisQuantity>` : ''}
-\t\t\t\t</ram:NetPriceProductTradePrice>
+\t\t\t\t</ram:NetPriceProductTradePrice>` : ''}${line.itemSeller ? `
+\t\t\t\t<ram:ItemSellerTradeParty>${line.itemSeller.name ? `
+\t\t\t\t\t<ram:Name>${xmlEsc(line.itemSeller.name)}</ram:Name>` : ''}${line.itemSeller.siret ? `
+\t\t\t\t\t<ram:SpecifiedLegalOrganization>
+\t\t\t\t\t\t<ram:ID schemeID="0009">${xmlEsc(line.itemSeller.siret)}</ram:ID>
+\t\t\t\t\t</ram:SpecifiedLegalOrganization>` : ''}${line.itemSeller.country ? `
+\t\t\t\t\t<ram:PostalTradeAddress>
+\t\t\t\t\t\t<ram:CountryID>${xmlEsc(line.itemSeller.country)}</ram:CountryID>
+\t\t\t\t\t</ram:PostalTradeAddress>` : ''}${line.itemSeller.vat ? `
+\t\t\t\t\t<ram:SpecifiedTaxRegistration>
+\t\t\t\t\t\t<ram:ID schemeID="VA">${xmlEsc(line.itemSeller.vat)}</ram:ID>
+\t\t\t\t\t</ram:SpecifiedTaxRegistration>` : ''}
+\t\t\t\t</ram:ItemSellerTradeParty>` : ''}
 \t\t\t</ram:SpecifiedLineTradeAgreement>
-\t\t\t<ram:SpecifiedLineTradeDelivery>
+\t\t\t${line.qty ? `<ram:SpecifiedLineTradeDelivery>
 \t\t\t\t<ram:BilledQuantity unitCode="${line.unitCode || 'C62'}">${line.qty}</ram:BilledQuantity>
-\t\t\t</ram:SpecifiedLineTradeDelivery>
-\t\t\t<ram:SpecifiedLineTradeSettlement>
+\t\t\t</ram:SpecifiedLineTradeDelivery>` : '<ram:SpecifiedLineTradeDelivery/>'}
+\t\t\t<ram:SpecifiedLineTradeSettlement>${vat ? `
 \t\t\t\t<ram:ApplicableTradeTax>
 \t\t\t\t\t<ram:TypeCode>VAT</ram:TypeCode>
 \t\t\t\t\t<ram:CategoryCode>${vat.category}</ram:CategoryCode>
 \t\t\t\t\t<ram:RateApplicablePercent>${vat.percent}</ram:RateApplicablePercent>
-\t\t\t\t</ram:ApplicableTradeTax>${(line.period && (line.period.start || line.period.end)) ? `
+\t\t\t\t</ram:ApplicableTradeTax>` : ''}${(line.period && (line.period.start || line.period.end)) ? `
 \t\t\t\t<ram:BillingSpecifiedPeriod>${line.period.start ? `
 \t\t\t\t\t<ram:StartDateTime>
 \t\t\t\t\t\t<udt:DateTimeString format="102">${CIITemplates.d8(line.period.start)}</udt:DateTimeString>
@@ -159,8 +194,15 @@ const CIITemplates = {
 \t\t\t\t\t<ram:Reason>${xmlEsc(ac.reason)}</ram:Reason>` : ''}
 \t\t\t\t</ram:SpecifiedTradeAllowanceCharge>`).join('')}
 \t\t\t\t<ram:SpecifiedTradeSettlementLineMonetarySummation>
-\t\t\t\t\t<ram:LineTotalAmount>${line.amount}</ram:LineTotalAmount>
-\t\t\t\t</ram:SpecifiedTradeSettlementLineMonetarySummation>${line.accountingCost ? `
+\t\t\t\t\t<ram:LineTotalAmount>${line.amount}</ram:LineTotalAmount>${line.lineVatTotal ? `
+\t\t\t\t\t<ram:TaxTotalAmount>${line.lineVatTotal}</ram:TaxTotalAmount>` : ''}${line.grandTotal ? `
+\t\t\t\t\t<ram:GrandTotalAmount>${line.grandTotal}</ram:GrandTotalAmount>` : ''}
+\t\t\t\t</ram:SpecifiedTradeSettlementLineMonetarySummation>${(line.lineRefs || []).map((r) => `
+\t\t\t\t<ram:AdditionalReferencedDocument>
+\t\t\t\t\t<ram:IssuerAssignedID>${xmlEsc(r.id)}</ram:IssuerAssignedID>
+\t\t\t\t\t<ram:TypeCode>130</ram:TypeCode>
+\t\t\t\t\t<ram:ReferenceTypeCode>${xmlEsc(r.type)}</ram:ReferenceTypeCode>
+\t\t\t\t</ram:AdditionalReferencedDocument>`).join('')}${line.accountingCost ? `
 \t\t\t\t<ram:ReceivableSpecifiedTradeAccountingAccount>
 \t\t\t\t\t<ram:ID>${xmlEsc(line.accountingCost)}</ram:ID>
 \t\t\t\t</ram:ReceivableSpecifiedTradeAccountingAccount>` : ''}

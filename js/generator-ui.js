@@ -565,10 +565,17 @@ const GeneratorUI = {
         const comp = GeneratorUI.effectiveComposition(usecase);
 
         // --- Étage A : le format.
+        // Certains cas ne sont pas exprimables dans toutes les syntaxes : le
+        // multi-vendeurs S8 n'existe pas en UBL, faute de vendeur de niveau
+        // ligne. On grise la syntaxe plutôt que de produire un fichier qui
+        // perdrait l'information sans le dire.
+        const allowedFmt = (typeof UBLGenerator !== 'undefined' && UBLGenerator.allowedFormats)
+            ? UBLGenerator.allowedFormats(usecase)
+            : ['ubl', 'cii', 'facturx'];
         FORMATS.forEach((f) => {
             const input = document.getElementById(f.id);
             if (!input) return;
-            const available = !f.needsPdf || pdfOk;
+            const available = (!f.needsPdf || pdfOk) && allowedFmt.indexOf(f.value) !== -1;
             input.disabled = !available;
             input.checked = available && comp.format === f.value;
             const card = input.closest('.fab-opt');
@@ -577,9 +584,13 @@ const GeneratorUI = {
 
         const fmtHint = document.getElementById('format-hint');
         if (fmtHint) {
-            fmtHint.innerHTML = pdfOk
-                ? 'Une facture s’écrit dans une seule syntaxe. Le contenu choisi ci-dessous s’applique au format retenu.'
-                : '⚠️ La représentation lisible n’a pas encore été vérifiée pour ce cas d’usage : le Factur-X est indisponible, et la facture sera produite nue.';
+            if (allowedFmt.indexOf('ubl') === -1) {
+                fmtHint.innerHTML = '⚠️ Ce cas d’usage repose sur des extensions du profil français <strong>EXTENDED-CTC-FR</strong> qui n’ont pas d’équivalent en UBL : la syntaxe est indisponible. Un UBL perdrait silencieusement l’identité des vendeurs de chaque ligne.';
+            } else if (pdfOk) {
+                fmtHint.innerHTML = 'Une facture s’écrit dans une seule syntaxe. Le contenu choisi ci-dessous s’applique au format retenu.';
+            } else {
+                fmtHint.innerHTML = '⚠️ La représentation lisible n’a pas encore été vérifiée pour ce cas d’usage : le Factur-X est indisponible, et la facture sera produite nue.';
+            }
         }
 
         // --- Étage B : ce qui voyage dans le fichier de facture.
