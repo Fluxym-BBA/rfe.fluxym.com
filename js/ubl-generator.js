@@ -13,6 +13,11 @@
  *   - buildCiiPivot : le tiers PAYEUR (BG-2 etendu) est transporte et emis en
  *     ram:PayerTradeParty pour les seuls cas en profil EXTENDED-CTC-FR (1, 3, 4,
  *     14, 17b, 19a). Sous EN 16931 pur, il reste volontairement non emis.
+ *   - Pack B : lignes et avoir passes en modele declaratif (getLineData /
+ *     getPackBCreditData). Le cas gagne un modele pivot, donc le CII et
+ *     l'eligibilite au lisible ; l'UBL reste identique au bloc cable.
+ *   - Branche generique : BT-132 (ligne de commande) declaratif, et opt-out
+ *     noItemRef pour les libelles qui sont deja des codes article.
  *   - PDF_CASES : les 4 variantes nominal-* rattachees au lisible nominal,
  *     dont elles partagent le XML a l'identique.
  *   - RESTE OUVERT : le tiers PAYEUR (cfg.payer) n'est toujours pas transporte
@@ -301,6 +306,20 @@ const UBLGenerator = {
     // DONNEES DE LIGNE PAR CAS — Donnees uniques
     // BR-S-08 verifie pour chaque cas
     // =====================================================
+    // Avoir du pack B : annulation d'une unite du PO 000003. Declaratif pour
+    // les memes raisons que le pack lui-meme. Montants du bloc cable.
+    getPackBCreditData: function() {
+        return {
+            tax: ["6.32", "1.26"],
+            totals: ["6.32", "6.32", "7.58", "0.00", "7.58"],
+            lines: [
+                { id: "1", qty: "-1.00", amount: "6.32", desc: "Annulation 1 unite CNT50922",
+                  price: "6.32", po: { line: "000003" }, noItemRef: true }
+            ]
+        };
+        // BR-S-08: base 6.32 = ligne 6.32, TVA 20% = 1.26
+    },
+
     getLineData: function(usecase) {
         switch(usecase) {
 
@@ -863,8 +882,29 @@ const UBLGenerator = {
                     ]
                 };
 
+            // Pack B : jeu de commandes multi-PO. Les lignes etaient cablees
+            // dans le switch de buildXML, ce qui privait le cas de modele
+            // pivot, donc de CII, de lisible et de Factur-X. Les montants
+            // repris ici sont ceux du bloc cable, au centime.
+            //
+            // po.line porte la reference de ligne de commande (BT-132) ; le
+            // numero de commande lui-meme (BT-13) est genere a l'execution et
+            // injecte par buildXML. noItemRef reproduit l'absence de
+            // cac:SellersItemIdentification du bloc cable : ces libelles SONT
+            // deja des codes article, une reference derivee ferait doublon.
             case "B":
-                return null;
+                return {
+                    tax: ["4934.70", "986.94"],
+                    totals: ["4934.70", "4934.70", "5921.64", "0.00", "5921.64"],
+                    lines: [
+                        { id: "1", qty: "1.00",    amount: "0.38",    desc: "CNT01160", price: "0.38",   po: { line: "000001" }, noItemRef: true },
+                        { id: "2", qty: "100.00",  amount: "136.00",  desc: "CNT31421", price: "1.36",   po: { line: "000002" }, noItemRef: true },
+                        { id: "3", qty: "186.00",  amount: "1175.52", desc: "CNT50922", price: "6.32",   po: { line: "000003" }, noItemRef: true },
+                        { id: "4", qty: "30.00",   amount: "2113.20", desc: "CNTUSB20", price: "70.44",  po: { line: "000010" }, noItemRef: true },
+                        { id: "5", qty: "1110.00", amount: "1509.60", desc: "CNT00443", price: "1.36",   po: { line: "000020" }, noItemRef: true }
+                    ]
+                };
+                // BR-S-08: 0.38+136.00+1175.52+2113.20+1509.60 = 4934.70
 
             // ================================================
             //  L — REGIMES DE TVA TRANSVERSES
@@ -1399,24 +1439,9 @@ const UBLGenerator = {
                 xml += UBLTemplates.getPaymentTerms();
 
                 // --- Lignes et Totaux ---
-                if (asCreditNote && usecase === "B" && !overrideLineData) {
-                    // Avoir hardcode du pack B : annulation d'une unite du PO 000003
-                    xml += UBLTemplates.getTaxTotal([{ taxable: "6.32", amount: "1.26", category: "S", percent: "20.00", code: "", reason: "" }]);
-                    xml += UBLTemplates.getLegalMonetaryTotal("6.32", "6.32", "7.58", "0.00", "7.58");
-                    xml += UBLTemplates.getInvoiceLine("1", "-1.00", "6.32", "Annulation 1 unite CNT50922", "6.32", true, { line: "000003", id: poNumber });
-                }
-                else if (usecase === "B" && !overrideLineData) {
-                    // Cas B : bloc hardcode multi-PO
-                    xml += UBLTemplates.getTaxTotal([{ taxable: "4934.70", amount: "986.94", category: "S", percent: "20.00", code: "", reason: "" }]);
-                    xml += UBLTemplates.getLegalMonetaryTotal("4934.70", "4934.70", "5921.64", "0.00", "5921.64");
-                    xml += UBLTemplates.getInvoiceLine("1", "1.00", "0.38", "CNT01160", "0.38", false, { line: "000001", id: poNumber });
-                    xml += UBLTemplates.getInvoiceLine("2", "100.00", "136.00", "CNT31421", "1.36", false, { line: "000002", id: poNumber });
-                    xml += UBLTemplates.getInvoiceLine("3", "186.00", "1175.52", "CNT50922", "6.32", false, { line: "000003", id: poNumber });
-                    xml += UBLTemplates.getInvoiceLine("4", "30.00", "2113.20", "CNTUSB20", "70.44", false, { line: "000010", id: poNumber });
-                    xml += UBLTemplates.getInvoiceLine("5", "1110.00", "1509.60", "CNT00443", "1.36", false, { line: "000020", id: poNumber });
-                }
-                else {
-                    // Tous les autres cas : overrideLineData OU getLineData()
+                {
+                    // Tous les cas passent par le modele declaratif : plus aucun
+                    // bloc de lignes cable dans cette fonction.
                     var ld = overrideLineData || self.getLineData(usecase);
                     if (ld) {
                         // Ventilation recalculee depuis les lignes (BG-23, BR-S-08, BR-CO-*)
@@ -1463,9 +1488,13 @@ const UBLGenerator = {
                         ld.lines.forEach(function(line, idx) {
                             xml += UBLTemplates.getInvoiceLine(
                                 line.id, line.qty, line.amount, line.desc, line.price,
-                                asCreditNote, line.po || null,
+                                asCreditNote,
+                                // BT-132 : la ligne de commande est declarative,
+                                // le numero de commande (BT-13) est genere a
+                                // l'execution. On les reunit ici.
+                                line.po ? { line: line.po.line, id: line.po.id || poNumber } : null,
                                 self.getLineVat(usecase, line.id), line.unitCode || "C62",
-                                line.ref || self.makeItemRef(line.desc, idx + 1),
+                                line.ref || (line.noItemRef ? null : self.makeItemRef(line.desc, idx + 1)),
                                 { cur: docCur, allowances: line.allowances || null }
                             );
                         });
@@ -1760,7 +1789,9 @@ const UBLGenerator = {
 
                     // L'avoir du cas nominal-litige-avoir est un avoir PARTIEL :
                     // il ne credite que la ligne contestee, pas la facture entiere.
-                    var creditData = usecase === "B" ? null : self.getCreditNoteData();
+                    // L'avoir du cas nominal-litige-avoir est un avoir PARTIEL ;
+                    // celui du pack B annule une unite d'une ligne de commande.
+                    var creditData = usecase === "B" ? self.getPackBCreditData() : self.getCreditNoteData();
 
                     zip.file(originalInvoiceNum + "_Cas_" + usecase + "_Facture_Litige" + ".xml",
                         buildXML(originalInvoiceNum, "380", false, null, poNumber));

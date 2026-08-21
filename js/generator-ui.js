@@ -3,6 +3,13 @@
  * Auteur: Bruno BARTOLI — Fluxym / Re·Form·E
  * Date: 2026-08-21
  *
+ * Changelog v5a — les packs ZIP gardent le choix de la syntaxe :
+ *   - Pour un cas à pack imposé (avoir de litige, rectificative, pack B),
+ *     l'étage A reste affiché et l'utilisateur choisit UBL ou CII ; les étages
+ *     B et C sont masqués, faute de prise sur un pack multi-documents.
+ *   - Le Factur-X y reste désactivé : composer chaque document d'un pack est un
+ *     chantier d'architecture, pas une case à cocher.
+ *
  * Changelog v5 — composition hiérarchique de la facture :
  *   - L'étape 3 n'est plus une liste plate de livrables mais trois étages
  *     ordonnés : A le format de la facture (choix exclusif), B ce qui est
@@ -456,6 +463,9 @@ const GeneratorUI = {
         const usecase = usecaseEl.value;
 
         const group = document.getElementById('group-artifacts');
+        const formatGroup = document.getElementById('group-format');
+        const embedGroup = document.getElementById('group-embed');
+        const sideGroup = document.getElementById('group-sidecars');
         const btn = document.getElementById('btn-generate');
         const box = document.getElementById('info-box');
         const info = document.getElementById('info-text');
@@ -479,19 +489,57 @@ const GeneratorUI = {
         }
         if (box) box.classList.remove('out-of-scope');
 
-        // --- Cas à pack imposé : le contenu est dicté par le scénario.
+        // --- Cas à pack imposé : le CONTENU de chaque document est dicté par le
+        // scénario (facture + avoir, ou originale + rectificative, plus les CSV
+        // de données de référence), mais la SYNTAXE reste un choix légitime :
+        // demander son pack en CII n'a rien d'absurde. On garde donc l'étage A
+        // et on masque les étages B et C, qui n'ont pas de prise ici.
         if (cfg.zip) {
-            if (group) group.classList.add('hidden');
+            if (group) group.classList.remove('hidden');
+            if (formatGroup) formatGroup.classList.remove('hidden');
+            if (embedGroup) embedGroup.classList.add('hidden');
+            if (sideGroup) sideGroup.classList.add('hidden');
             if (recap) recap.classList.add('hidden');
+
+            // Le Factur-X supposerait de composer chaque document du pack :
+            // c'est un chantier d'architecture, pas une case à cocher.
+            FORMATS.forEach((f) => {
+                const input = document.getElementById(f.id);
+                if (!input) return;
+                const available = f.value !== 'facturx';
+                input.disabled = !available;
+                input.checked = available && GeneratorUI.state.format === f.value
+                    && GeneratorUI.state.format !== 'facturx';
+                const card = input.closest('.fab-opt');
+                if (card) card.classList.toggle('is-disabled', !available);
+            });
+            if (GeneratorUI.state.format === 'facturx') {
+                const fallback = document.getElementById('fmt-ubl');
+                if (fallback) fallback.checked = true;
+            }
+
+            const zipFormat = (GeneratorUI.state.format === 'cii') ? 'cii' : 'ubl';
+            const fmtHintZip = document.getElementById('format-hint');
+            if (fmtHintZip) {
+                fmtHintZip.textContent = zipFormat === 'cii'
+                    ? 'Le pack contiendra chaque document dans les deux syntaxes, UBL et CII, pour les comparer.'
+                    : 'Ce scénario produit un pack multi-documents. Son contenu est dicté par le scénario ; seule la syntaxe se choisit.';
+            }
+
             if (btn) {
                 btn.disabled = false;
                 btn.classList.remove('disabled');
-                btn.innerHTML = '<span class="gen-btn-icon">📦</span> Télécharger le pack ZIP';
+                btn.innerHTML = zipFormat === 'cii'
+                    ? '<span class="gen-btn-icon">📦</span> Télécharger le pack ZIP (UBL + CII)'
+                    : '<span class="gen-btn-icon">📦</span> Télécharger le pack ZIP (UBL)';
             }
             return;
         }
 
         if (group) group.classList.remove('hidden');
+        if (formatGroup) formatGroup.classList.remove('hidden');
+        if (embedGroup) embedGroup.classList.remove('hidden');
+        if (sideGroup) sideGroup.classList.remove('hidden');
         if (recap) recap.classList.remove('hidden');
 
         const pdfOk = GeneratorUI.pdfAvailable(usecase);
