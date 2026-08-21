@@ -110,7 +110,7 @@ const CIITemplates = {
 \t\t\t\t<ram:Name>${xmlEsc(line.desc)}</ram:Name>${line.description ? `
 \t\t\t\t<ram:Description>${xmlEsc(line.description)}</ram:Description>` : ''}${line.classification ? `
 \t\t\t\t<ram:DesignatedProductClassification>
-\t\t\t\t\t<ram:ClassCode listID="${xmlEsc(line.classification.listId)}">${xmlEsc(line.classification.code)}</ram:ClassCode>
+\t\t\t\t\t<ram:ClassCode listID="${xmlEsc(line.classification.listId)}"${line.classification.version ? ` listVersionID="${xmlEsc(line.classification.version)}"` : ''}>${xmlEsc(line.classification.code)}</ram:ClassCode>
 \t\t\t\t</ram:DesignatedProductClassification>` : ''}
 \t\t\t</ram:SpecifiedTradeProduct>
 \t\t\t<ram:SpecifiedLineTradeAgreement>${orderRef ? `

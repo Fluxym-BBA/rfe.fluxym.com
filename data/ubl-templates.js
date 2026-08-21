@@ -381,7 +381,7 @@ ${orderRef ? `\t\t<cac:OrderLineReference><cbc:LineID>${orderRef.line}</cbc:Line
 \t\t\t<cac:BuyersItemIdentification><cbc:ID>${xmlEsc(opts.buyerItemRef)}</cbc:ID></cac:BuyersItemIdentification>` : ""}${sellerItemRef ? `
 \t\t\t<cac:SellersItemIdentification><cbc:ID>${xmlEsc(sellerItemRef)}</cbc:ID></cac:SellersItemIdentification>` : ""}${opts.gtin ? `
 \t\t\t<cac:StandardItemIdentification><cbc:ID schemeID="0160">${xmlEsc(opts.gtin)}</cbc:ID></cac:StandardItemIdentification>` : ""}${opts.classification ? `
-\t\t\t<cac:CommodityClassification><cbc:ItemClassificationCode listID="${xmlEsc(opts.classification.listId)}">${xmlEsc(opts.classification.code)}</cbc:ItemClassificationCode></cac:CommodityClassification>` : ""}
+\t\t\t<cac:CommodityClassification><cbc:ItemClassificationCode listID="${xmlEsc(opts.classification.listId)}"${opts.classification.version ? ` listVersionID="${xmlEsc(opts.classification.version)}"` : ""}>${xmlEsc(opts.classification.code)}</cbc:ItemClassificationCode></cac:CommodityClassification>` : ""}
 \t\t\t<cac:ClassifiedTaxCategory><cbc:ID>${vat.category}</cbc:ID><cbc:Percent>${vat.percent}</cbc:Percent><cac:TaxScheme><cbc:ID>VAT</cbc:ID></cac:TaxScheme></cac:ClassifiedTaxCategory>
 \t\t</cac:Item>
 \t\t<cac:Price>

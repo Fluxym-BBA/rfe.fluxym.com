@@ -1047,6 +1047,60 @@ const UBLGenerator = {
 
     // Reference article vendeur (BT-155), derivee du libelle pour rester
     // stable et plausible sans avoir a saisir un referentiel article.
+    // ==========================================
+    // ITEM_CATALOG
+    // BT-157 GTIN et BT-158 code de classification, indexes sur le libelle
+    // exact de la ligne (BT-153).
+    //
+    // Pourquoi une table et non une derivation automatique : aucune ligne du
+    // generateur ne porte d'unite de mesure, elles retombent toutes sur C62.
+    // Rien ne permet donc de distinguer par le code une ramette de papier
+    // d'une journee de conseil. Une regle lexicale se serait trompee, et un
+    // GTIN sur une prestation intellectuelle rendrait la facture MOINS
+    // realiste, pas plus. La table est explicite, relisible, et ne touche
+    // aucun des 57 cas d'usage.
+    //
+    // GTIN : EAN-13 dont la cle de controle est valide. Les recepteurs qui
+    // verifient la cle rejetteraient un numero inconnu, mais un numero
+    // arithmetiquement faux serait rejete par TOUS. Prefixe 340 = France.
+    // Une exception : le gel douche porte deja son EAN dans son libelle, on
+    // reprend cette valeur plutot que d'en inventer une seconde.
+    //
+    // BT-158 : nomenclature UNSPSC, code TST de la liste UNTDID 7143, version
+    // dans BT-158-2. Aucune nomenclature n'est imposee par la DGFiP, le champ
+    // etant libre. La table ne porte donc QUE des codes verifies : sur une
+    // facture pedagogique, un code approximatif serait recopie en production
+    // par un lecteur de bonne foi. Mieux vaut le silence qu'une contre-verite.
+    // ==========================================
+    UNSPSC_VERSION: "24.0501",
+
+    ITEM_CATALOG: {
+        "Gel douche Bio Lavande 250ml (EAN 3401234567890)": { gtin: "3401234567890" },
+        "Ramettes papier A4 80g recycle": { gtin: "3401411100018", unspsc: "14111507" },
+        "Toner HP LaserJet 26X": { gtin: "3401441030019" },
+        "Serveur rack Dell PowerEdge R760": { gtin: "3401432110010", unspsc: "43211507" },
+        "Switch reseau Cisco Catalyst 9300": { gtin: "3401432220016" },
+        "Fauteuil de bureau ergonomique ERG-450": { gtin: "3401561120010" },
+        "Chaise Herman Miller Aeron Remastered": { gtin: "3401561120027" },
+        "Table de reunion modulaire MOD-12": { gtin: "3401561010014" },
+        "Classeurs levier A4 dos 80mm": { gtin: "3401441220014" },
+        "Ecrans interactifs 75 pouces salle de reunion": { gtin: "3401451110015" },
+        "Imprimantes multifonctions A3 couleur": { gtin: "3401432120019" },
+        "Chateau Margaux 2019 - Caisse 6 bouteilles": { gtin: "3401502020010" },
+        "Saint-Emilion Grand Cru 2020 - Caisse 12": { gtin: "3401502020027" },
+        "Monture Rayban RB5154 Clubmaster": { gtin: "3401421420014" },
+        "Verres progressifs antireflet": { gtin: "3401421420021" },
+        "Module capteur industriel MCI-200": { gtin: "3401411120016" },
+        "Vanne de regulation haute pression VRP-40": { gtin: "3401401410011" },
+        "Visserie inox speciale M8x25": { gtin: "3401311610013" },
+        "Connecteurs LC duplex": { gtin: "3401261210011" },
+        "Cable fibre optique OS2 monomode (bobine 500m)": { gtin: "3401261210028" },
+        "Composants electroniques PCB-X200": { gtin: "3401321010018" },
+        "Kit videosurveillance 8 cameras": { gtin: "3401461710014" },
+        "Licence logiciel ERP Cloud - 12 mois": { unspsc: "43232701" },
+        "Jours de consulting Fluxym": { unspsc: "80101507" }
+    },
+
     // Taux de remise commerciale unitaire applique a toutes les lignes.
     // Il materialise BT-147 et BT-148 : sans lui, le couple prix brut / remise
     // resterait vide et aucune plateforme ne pourrait etre recettee dessus.
@@ -1114,8 +1168,16 @@ const UBLGenerator = {
         // prestation. Les emettre sur une ligne de conseil produirait une
         // facture moins realiste, pas plus. Le gabarit les accepte des que le
         // cas d'usage fournira line.gtin ou line.classification.
-        if (line.gtin) out.gtin = line.gtin;
-        if (line.classification) out.classification = line.classification;
+        // BT-157 et BT-158 : le cas d'usage peut les imposer ligne par ligne ;
+        // a defaut, ils viennent du catalogue, indexe sur le libelle exact.
+        var cat = this.ITEM_CATALOG[line.desc] || {};
+        var gtin = line.gtin || cat.gtin || null;
+        if (gtin) out.gtin = gtin;
+        if (line.classification) {
+            out.classification = line.classification;
+        } else if (cat.unspsc) {
+            out.classification = { listId: "TST", version: this.UNSPSC_VERSION, code: cat.unspsc };
+        }
 
         return out;
     },
@@ -1179,7 +1241,23 @@ const UBLGenerator = {
         //          compte de Y", formulation du BOFIP (CGI ann. II art. 242
         //          nonies A I 13). Un bloc FACTURANT distinct reste recommande
         //          en profil etendu : ameliration a prevoir, non bloquante.
-        "6", "28", "25", "32", "42", "22b", "19a"],
+        "6", "28", "25", "32", "42", "22b", "19a",
+        // Vague 3 (21/08/2026), arbitrage @RFE_Expert :
+        //   17a marketplace OPAQUE. La plateforme agit en son nom propre : elle
+        //       achete puis revend, elle EST le vendeur. La facture est donc
+        //       ordinaire, sans mandat de facturation ni bloc facturant, et
+        //       c'est precisement ce qui l'oppose au cas 17b, transparent. Le
+        //       XML etait deja correct, seule l'entree manquait ici.
+        //       A NE PAS "corriger" en y ajoutant un facturant : ce serait
+        //       detruire l'opposition pedagogique du couple 17a / 17b.
+        "17a"],
+
+    // Le cas A produit deliberement une facture non conforme (InvoiceTypeCode
+    // 999 inexistant) pour eprouver le rejet au controle de syntaxe. Il reste
+    // volontairement HORS de PDF_CASES : une plateforme qui rejette le flux
+    // n'exploitera jamais la representation lisible, et un PDF d'apparence
+    // normale adosse a une facture qui doit etre rejetee enverrait un signal
+    // pedagogique contradictoire. Arbitrage confirme par @RFE_Expert.
 
     supportsPdf: function(usecase) {
         return typeof PDFLisible !== 'undefined' && this.PDF_CASES.indexOf(usecase) !== -1;
