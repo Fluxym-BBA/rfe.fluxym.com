@@ -71,7 +71,8 @@ Le code est terminé et en production. **Tout ce qui reste est de la donnée.**
 7. **Publication intégrale assumée**, décidée par Bruno le 21/08/2026 : l'analyse concurrentielle est publiée sur rfe.fluxym.com, y compris réputation, dynamique et lecture stratégique. Contrepartie non négociable : les 9 règles de publication du § 6 de `cartographie-360-modele.md` (source et date sur tout, séparation fait / lecture, aucun jugement ni classement, agrégats d'avis seulement, aucune donnée personnelle, pas de turnover, droit de réponse ouvert, déclaration du statut d'acteur de marché de Fluxym, même barème pour tous).
 8. **La ventilation du CA par activité n'est jamais estimée.** Elle n'est publique que pour les sociétés cotées. `ventilationParActivite.disponible: false` est une réponse valide et attendue.
 9. **CA groupe et CA de l'entité française sont deux champs distincts.** Les confondre est la faute la plus fréquente du marché (cas Generix : 110 M€ groupe contre 60,4 M€ pour l'entité).
-10. **Rien ne sera publié sur les conditions réglementaires applicables aux PA étrangères** (établissement stable, représentant, hébergement) avant lecture des textes primaires : art. 290 B CGI, art. 242 nonies B ann. II, décret n° 2024-266.
+10. **Le référentiel n'est pas indexable.** Toute nouvelle page porte `<meta name="robots" content="noindex, nofollow">`, conformément à la consigne applicable à l'ensemble du site.
+11. **Rien ne sera publié sur les conditions réglementaires applicables aux PA étrangères** (établissement stable, représentant, hébergement) avant lecture des textes primaires : art. 290 B CGI, art. 242 nonies B ann. II, décret n° 2024-266.
 
 ---
 
@@ -103,12 +104,14 @@ Un patch par société : `patches/patch-G-<NOM>.json`.
 | Vague | Périmètre | Statut |
 |---|---|---|
 | Pilote | GENERIX Group — `pilote-360-GENERIX.md` | ✅ méthode éprouvée, non fusionné |
-| G1 | top 30 par notoriété et par recouvrement avec Fluxym | à lancer |
-| G2 | ~20 pure-players et entités créées pour la réforme | à lancer |
-| G3 | groupes internationaux | à lancer |
-| G4 | longue traîne, au fil de l'eau | permanent |
+| G1 | 30 sociétés par cercles concurrentiels — voir `PRIORISATION-CONCURRENCE.md` | à lancer |
+| G2 | reprise 360 des sociétés déjà qualifiées du cercle 1 (Pagero, Sovos, Comarch, Opentext, Generix, Cegid, Sage) | à lancer |
+| G3 | pure-players et entités créées pour la réforme | à lancer |
+| G4 | cercle 3 — fiches allégées mais sourcées, ~90 sociétés | permanent |
 
-**Charge estimée :** 30 à 45 min par société correctement sourcée, soit ~90 h pour 147. Ce chantier ne se termine pas, il s'entretient.
+**Charge estimée :** 30 à 45 min par société des cercles 0 à 2, 12 à 15 min pour une fiche allégée du cercle 3. Ce chantier ne se termine pas, il s'entretient.
+
+**Périmètre commercial Fluxym :** BASWARE, ESKER, GEP et IVALUA sont distribuées par Fluxym. Elles sont traitées avec le même barème que toutes les autres, sans angle promotionnel, et aucune information issue d'une mission ou d'un dossier d'avant-vente ne remonte dans le référentiel. Sources publiques exclusivement.
 
 ## Prérequis technique du chantier F
 
