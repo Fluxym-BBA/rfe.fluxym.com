@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fiche plateforme agréée | Re·Form·E</title>
-    <meta name="description" content="Fiche détaillée d'une plateforme agréée : identité juridique, positionnement, socle technique, actionnariat et concurrents.">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="description" content="Fiche détaillée d'une plateforme agréée : identité juridique, activités et poids économique, place de l'activité agréée, clients, socle technique, actionnariat et concurrents.">
     <link rel="icon" href="./assets/favicon-Fluxym-V2.png" sizes="32x32" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./css/pages.css">
@@ -34,10 +35,15 @@
                     <h4>Sur cette fiche</h4>
                     <ul class="sidebar-nav">
                         <li><a href="#identite" class="sidebar-link active">🪪 Carte d'identité</a></li>
+                        <li id="nav-international" hidden><a href="#international" class="sidebar-link">🌍 Identité (registre étranger)</a></li>
                         <li><a href="#positionnement" class="sidebar-link">🎯 Positionnement</a></li>
+                        <li id="nav-activite" hidden><a href="#activite" class="sidebar-link">🏢 Activités et poids économique</a></li>
+                        <li id="nav-centralite" hidden><a href="#centralite" class="sidebar-link">📊 Place de l'activité agréée</a></li>
                         <li><a href="#socle" class="sidebar-link">⚙️ Socle technique</a></li>
                         <li><a href="#actionnariat" class="sidebar-link">🏛️ Actionnariat</a></li>
+                        <li id="nav-marche" hidden><a href="#marche" class="sidebar-link">👥 Clients et dynamique</a></li>
                         <li><a href="#concurrents" class="sidebar-link">⚔️ Sur le même segment</a></li>
+                        <li id="nav-lecture" hidden><a href="#lecture" class="sidebar-link">🧭 Lecture Fluxym</a></li>
                         <li class="sidebar-sep"></li>
                         <li><a href="#sources" class="sidebar-link">🔍 Sources et relevé</a></li>
                     </ul>
@@ -45,6 +51,7 @@
                         <h4>Pages liées</h4>
                         <a href="./plateformes-agreees.html" class="sidebar-page-link">📇 Retour à l'annuaire</a>
                         <a href="./acteurs.html" class="sidebar-page-link">👥 Les acteurs de la réforme</a>
+                        <a href="./methodologie-plateformes.html" class="sidebar-page-link">🔍 Méthodologie du référentiel</a>
                         <a href="./se-preparer.html" class="sidebar-page-link">🚀 Se préparer</a>
                     </div>
                 </div>
@@ -58,9 +65,24 @@
                     <div id="pa-identite"></div>
                 </section>
 
+                <section class="content-section" id="sec-international" hidden>
+                    <h2 id="international">🌍 Identité (registre étranger)</h2>
+                    <div id="pa-international"></div>
+                </section>
+
                 <section class="content-section">
                     <h2 id="positionnement">🎯 Positionnement</h2>
                     <div id="pa-positionnement"></div>
+                </section>
+
+                <section class="content-section" id="sec-activite" hidden>
+                    <h2 id="activite">🏢 Activités et poids économique</h2>
+                    <div id="pa-activite"></div>
+                </section>
+
+                <section class="content-section" id="sec-centralite" hidden>
+                    <h2 id="centralite">📊 Place de l'activité de plateforme agréée</h2>
+                    <div id="pa-centralite"></div>
                 </section>
 
                 <section class="content-section">
@@ -73,9 +95,19 @@
                     <div id="pa-actionnariat"></div>
                 </section>
 
+                <section class="content-section" id="sec-marche" hidden>
+                    <h2 id="marche">👥 Clients, avis et dynamique</h2>
+                    <div id="pa-marche"></div>
+                </section>
+
                 <section class="content-section">
                     <h2 id="concurrents">⚔️ Sur le même segment</h2>
                     <div id="pa-concurrents"></div>
+                </section>
+
+                <section class="content-section" id="sec-lecture" hidden>
+                    <h2 id="lecture">🧭 Lecture Fluxym</h2>
+                    <div id="pa-lecture-concurrentielle"></div>
                 </section>
 
                 <section class="content-section">

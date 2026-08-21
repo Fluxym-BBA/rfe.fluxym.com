@@ -17,10 +17,68 @@
     return 'depuis 2021';
   };
 
+  /* --- Données dérivées du bloc analyse360 --- */
+
+  const bloc = (pa, ...cles) => cles.reduce((o, k) => (o ? o[k] : null), pa.analyse360 || null);
+
+  const secteursDe = (pa) => {
+    const parSecteur = bloc(pa, 'referencesClients', 'parSecteur');
+    if (!parSecteur) return [];
+    return Object.entries(parSecteur).filter(([, v]) => Array.isArray(v) && v.length).map(([k]) => k);
+  };
+
+  /**
+   * Radar « angle mort » — trois niveaux, et non un booléen.
+   *
+   * Motif recherché : un acteur qui adresse l'ETI ou le grand compte sans être
+   * un acteur installé de la dématérialisation, donc susceptible de remporter des
+   * dossiers sur ce segment sans être identifié par une veille fondée sur le
+   * discours public. Règle documentée dans
+   * Info IA/plateformes-agreees/PRIORISATION-CONCURRENCE.md.
+   *
+   *   confirme      : diversification + ETI/GC + création postérieure à 2018
+   *   a_surveiller  : deux des trois critères réunis
+   *   non_evaluable : ETI/GC dont l'année de création est inconnue — le radar est
+   *                   aveugle tant que l'identité juridique n'est pas renseignée
+   */
+  const RECENT = 2018;
+
+  const signalAngleMort = (pa) => {
+    const seg = pa.segmentCible || [];
+    const etiGc = seg.includes('eti') || seg.includes('grands_comptes');
+    if (!etiGc) return null;
+    const an = parseInt(pa.anneeCreation, 10);
+    const anneeConnue = Number.isFinite(an);
+    const diversification = pa.natureEntite === 'diversification';
+    const recent = anneeConnue && an > RECENT;
+    const installe = pa.natureEntite === 'extension_demat' && anneeConnue && an <= RECENT;
+    if (diversification && recent) return 'confirme';
+    if (!anneeConnue && !diversification) return 'non_evaluable';
+    if (diversification || (recent && !installe)) return 'a_surveiller';
+    if (!anneeConnue) return 'non_evaluable';
+    return null;
+  };
+
+  const FACETTE_ANGLE_MORT = {
+    id: 'angleMort',
+    label: 'Radar angle mort',
+    filtrable: true,
+    calculee: true,
+    valeurs: [
+      { v: 'confirme', label: 'Motif complet — diversification récente sur ETI / grands comptes' },
+      { v: 'a_surveiller', label: 'À surveiller — deux critères sur trois' },
+      { v: 'non_evaluable', label: 'Non évaluable — année de création manquante' }
+    ]
+  };
+
   const state = { data: null, taxo: null, filters: new Map(), query: '' };
 
   const getValue = (pa, id) => {
     if (id === 'trancheAnneeCreation') return trancheAnnee(pa.anneeCreation);
+    if (id === 'centralitePA') return bloc(pa, 'centralitePA', 'niveau');
+    if (id === 'typeActionnaire') return bloc(pa, 'capaciteDeFrappe', 'typeActionnaire');
+    if (id === 'secteurReferences') return secteursDe(pa);
+    if (id === 'angleMort') return signalAngleMort(pa);
     if (id.includes('.')) return id.split('.').reduce((o, k) => (o ? o[k] : null), pa);
     return pa[id];
   };
@@ -94,6 +152,15 @@
     ? '<span class="pa-badge pa-badge--ok">Immatriculée</span>'
     : '<span class="pa-badge pa-badge--wait">En attente interop.</span>';
 
+  const centraliteTag = (pa) => {
+    const niveau = bloc(pa, 'centralitePA', 'niveau');
+    if (!niveau || niveau === 'non_qualifie') return '';
+    const f = state.taxo.facettes.find((x) => x.id === 'centralitePA');
+    const val = f ? (f.valeurs || []).find((x) => x.v === niveau) : null;
+    const indice = val && val.indice !== null && val.indice !== undefined ? `${val.indice}/4 — ` : '';
+    return `<span class="pa-tag">Activité PA : ${indice}${val ? val.label : niveau}</span>`;
+  };
+
   const card = (pa) => {
     const meta = [
       pa.dateImmatriculation ? `Immatriculée le ${pa.dateImmatriculation}` : 'Date d\u2019immatriculation à venir',
@@ -102,10 +169,10 @@
       pa.pays && pa.pays !== 'France' ? `Entité ${pa.pays}` : null
     ].filter(Boolean);
     return `<a class="pa-card" href="./pa-detail.html?pa=${slugify(pa.nom)}">
-      <div class="pa-card-head"><h3>${pa.nom}</h3>${badge(pa)}</div>
+      <div class="pa-card-head"><h3>${pa.nom}</h3>${badge(pa)}${signalAngleMort(pa) === 'confirme' ? '<span class="pa-badge pa-badge--wait" title="Diversification récente positionnée sur l\u2019ETI ou le grand compte : profil susceptible de remporter des dossiers sans etre identifie">Radar : motif complet</span>' : ''}</div>
       <ul class="pa-card-meta">${meta.map((x) => `<li>${x}</li>`).join('')}</ul>
       ${pa.familleOrigine && pa.familleOrigine.length
-        ? `<div class="pa-tags">${pa.familleOrigine.map((f) => `<span class="pa-tag">${labelOf(state.taxo.facettes.find((x) => x.id === 'familleOrigine'), f)}</span>`).join('')}</div>`
+        ? `<div class="pa-tags">${pa.familleOrigine.map((f) => `<span class="pa-tag">${labelOf(state.taxo.facettes.find((x) => x.id === 'familleOrigine'), f)}</span>`).join('')}${centraliteTag(pa)}</div>`
         : '<div class="pa-tags"><span class="pa-tag pa-tag--todo">Qualification en cours</span></div>'}
     </a>`;
   };
@@ -142,6 +209,18 @@
     const parAnciennete = tranches.map((t) => [t, pa.filter((p) => trancheAnnee(p.anneeCreation) === t).length]);
     const parCategorie = ['PME', 'ETI', 'GE'].map((c) => [c, pa.filter((p) => p.categorieEntreprise === c).length]);
     const rows = (arr) => arr.filter(([, n]) => n).map(([k, n]) => `<tr><td>${k}</td><td>${n}</td></tr>`).join('');
+    const fCent = state.taxo.facettes.find((x) => x.id === 'centralitePA');
+    const parCentralite = ((fCent && fCent.valeurs) || [])
+      .filter((v) => v.v !== 'non_qualifie')
+      .map((v) => [`${v.indice}/4 — ${v.label}`, pa.filter((p) => getValue(p, 'centralitePA') === v.v).length]);
+    const nbCentralite = pa.filter((p) => {
+      const n = getValue(p, 'centralitePA');
+      return n && n !== 'non_qualifie';
+    }).length;
+    const nbConfirme = pa.filter((p) => signalAngleMort(p) === 'confirme').length;
+    const nbSurveiller = pa.filter((p) => signalAngleMort(p) === 'a_surveiller').length;
+    const nbAveugle = pa.filter((p) => signalAngleMort(p) === 'non_evaluable').length;
+    const nbEtiGc = pa.filter((p) => (p.segmentCible || []).some((x) => x === 'eti' || x === 'grands_comptes')).length;
     document.getElementById('pa-lecture').innerHTML = `
       <div class="pa-datablocks">
         <div class="pa-datablock">
@@ -160,6 +239,23 @@
           </tbody></table>
         </div>
       </div>
+      <div class="pa-datablocks">
+        <div class="pa-datablock">
+          <h3>Place de l\u2019activité plateforme agréée</h3>
+          <table class="pa-table"><tbody>${rows(parCentralite)}</tbody></table>
+        </div>
+        <div class="pa-datablock">
+          <h3>Signaux à instruire</h3>
+          <table class="pa-table"><tbody>
+            <tr><td>Plateformes adressant l\u2019ETI ou le grand compte</td><td>${nbEtiGc}</td></tr>
+            <tr><td>Radar : motif complet</td><td>${nbConfirme}</td></tr>
+            <tr><td>Radar : à surveiller</td><td>${nbSurveiller}</td></tr>
+            <tr><td>Radar : non évaluable, année de création manquante</td><td>${nbAveugle}</td></tr>
+          </tbody></table>
+        </div>
+      </div>
+      <p class="pa-source-note">Le radar signale les acteurs susceptibles d\u2019être actifs sur l\u2019ETI et le grand compte sans être identifiés comme tels. Il reste <strong>aveugle sur ${nbAveugle} plateforme(s)</strong> dont l\u2019année de création n\u2019est pas renseignée : compléter l\u2019identité juridique conditionne directement la fiabilité de cette lecture.</p>
+      <p class="pa-source-note">La place de l\u2019activité de plateforme agréée est une lecture Fluxym établie sur un faisceau d\u2019indices publics, jamais sur une part de chiffre d\u2019affaires, qui n\u2019est pas publiée. Méthode détaillée sur la <a href="./methodologie-plateformes.html">page méthodologie</a>. ${nbCentralite ? `Évaluée à ce jour pour <strong>${nbCentralite}</strong> plateforme(s).` : 'Aucune plateforme n\u2019est encore évaluée.'}</p>
       <p class="pa-source-note">Identité juridique appariée avec haute confiance pour <strong>${cov.identiteEntreprise_haute || 0}</strong> plateformes, à vérifier pour <strong>${cov.identiteEntreprise_a_verifier || 0}</strong>, non encore appariée pour <strong>${cov.identiteEntreprise_absente || 0}</strong>. Les répartitions ci-dessus ne portent donc que sur les plateformes identifiées.</p>`;
   };
 
@@ -167,6 +263,7 @@
     const [data, taxo] = await Promise.all([fetch(DATA).then((r) => r.json()), fetch(TAXO).then((r) => r.json())]);
     state.data = data;
     state.taxo = taxo;
+    if (!state.taxo.facettes.some((f) => f.id === FACETTE_ANGLE_MORT.id)) state.taxo.facettes.push(FACETTE_ANGLE_MORT);
     renderCounters();
     renderFacets();
     renderGrid();
