@@ -5,6 +5,16 @@
  *
  * Auteur: Bruno BARTOLI — Fluxym / Re-Form-E
  * Date: 2026-08-21
+ * Changelog v4a — fidelite du pivot CII (lot L1) :
+ *   - buildCiiPivot : le beneficiaire du paiement (BG-10) suit desormais la
+ *     meme cascade que buildXML (tiers importe, factor, distributeur,
+ *     collaborateur). Le CII perdait auparavant ce tiers pour les cas 5 et 9,
+ *     ainsi qu'en mode donnees importees.
+ *   - PDF_CASES : les 4 variantes nominal-* rattachees au lisible nominal,
+ *     dont elles partagent le XML a l'identique.
+ *   - RESTE OUVERT : le tiers PAYEUR (cfg.payer) n'est toujours pas transporte
+ *     dans le pivot CII, faute d'element normalise identifie dans la sequence
+ *     XSD de ram:ApplicableHeaderTradeSettlement. Voir lot L1, point 1.
  * Changelog v4 — composition hierarchique de la facture (refonte ergonomique) :
  *   - getArtifactOptions (liste plate de 7 artefacts) remplace par getComposition :
  *     { format, embed, side }. Le format de la facture est un choix EXCLUSIF
@@ -995,9 +1005,20 @@ const UBLGenerator = {
     // entre les donnees structurees et le rendu lisible.
     // Panier de reference : un cas representatif par categorie de cas d'usage,
     // chacun verifie individuellement (montants, TVA, blocs structurants).
+    // Liste blanche des cas dont la representation lisible a ete verifiee
+    // individuellement (concordance des montants, de la ventilation de TVA et
+    // des blocs de parties avec les donnees structurees).
+    //
+    // Les quatre variantes nominal-* y entrent sans audit propre : elles
+    // decrivent un STATUT DE CYCLE DE VIE (flux 2 : rejet a l'emission, non
+    // transmise, rejet a la reception, refus), pas une facture differente.
+    // Leur XML EST celui du cas nominal, donc leur lisible aussi, au centime
+    // pres. Les auditer une par une n'aurait rien verifie de plus.
     PDF_CASES: ["nominal", "1", "2", "3", "8", "13", "14", "16", "17b", "18", "19b", "20",
         "21", "22a", "23", "26", "30", "31", "38", "40",
-        "T1", "T2", "T4", "T6", "T7", "T8"],
+        "T1", "T2", "T4", "T6", "T7", "T8",
+        "nominal-rejet-emission", "nominal-non-transmise",
+        "nominal-rejet-reception", "nominal-refus"],
 
     supportsPdf: function(usecase) {
         return typeof PDFLisible !== 'undefined' && this.PDF_CASES.indexOf(usecase) !== -1;
@@ -1596,9 +1617,33 @@ const UBLGenerator = {
 
                 // BG-10 : restreint a BT-59, BT-60 et BT-61. Ni adresse, ni
                 // numero de TVA ne sont admis sur le beneficiaire du paiement.
-                p.payee = (cfg.payeeType === "factor" && factor)
-                    ? { legalName: factor.name, name: null, siren: factor.siren, nic: factor.nic, address: null }
-                    : null;
+                //
+                // Le beneficiaire est resolu selon EXACTEMENT la meme cascade
+                // que buildXML : tiers importe, puis factor, distributeur,
+                // collaborateur. Le pivot ne connaissait auparavant que le
+                // factor, si bien que le CII perdait silencieusement un tiers
+                // que l'UBL declarait (cas 5 et 9), sans qu'aucun controle ne
+                // le signale. Toute divergence entre les deux cascades est un
+                // bug : elles decrivent le meme fait.
+                p.payee = null;
+                if (window.COMPANY_MODE === 'custom' && window.CUSTOM_THIRDPARTY) {
+                    var tpPayee = window.CUSTOM_THIRDPARTY;
+                    p.payee = { legalName: tpPayee.name, name: null, siren: tpPayee.siren,
+                                nic: tpPayee.nic || "00001", address: null };
+                } else if (cfg.payeeType === "factor" && factor) {
+                    p.payee = { legalName: factor.name, name: null, siren: factor.siren,
+                                nic: factor.nic, address: null };
+                } else if (cfg.payeeType === "distributeur") {
+                    var distriPayee = findThirdParty("distri_logistique");
+                    if (distriPayee) {
+                        p.payee = { legalName: distriPayee.legalName, name: null,
+                                    siren: distriPayee.siren, nic: distriPayee.nic, address: null };
+                    }
+                } else if (cfg.payeeType === "collaborateur") {
+                    // Personne physique : ni SIREN ni SIRET, BT-59 seul, comme en UBL.
+                    p.payee = { legalName: "DUPONT Jean (Employe)", name: null,
+                                siren: null, nic: null, address: null };
+                }
 
                 // BG-24 et BT-16 : le bon de livraison joint vaut reference
                 // d'avis d'expedition, exactement comme en UBL.

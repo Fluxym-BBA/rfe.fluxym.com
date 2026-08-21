@@ -127,6 +127,35 @@ const CIIGenerator = {
                 + ' mais BT-109 = ' + p.taxExclusiveAmount);
         }
 
+        // Les tiers ne sont pas des montants, mais leur disparition est une
+        // perte de sens aussi grave qu'un ecart de centime. verify() ne
+        // regardait que les totaux : un CII pouvait perdre un beneficiaire de
+        // paiement sans qu'aucun controle ne bronche. Un controle qui ne voit
+        // pas ce qu'il perd n'est pas un controle.
+        const hasParty = function(tag) {
+            return xml.indexOf('<ram:' + tag + '>') !== -1;
+        };
+        const partyName = function(tag) {
+            const m = xml.match(new RegExp('<ram:' + tag + '>[\\s\\S]*?<ram:Name>([^<]+)</ram:Name>'));
+            return m ? m[1] : null;
+        };
+        if (!hasParty('SellerTradeParty')) errors.push('BG-4 : ram:SellerTradeParty absent');
+        if (!hasParty('BuyerTradeParty')) errors.push('BG-7 : ram:BuyerTradeParty absent');
+
+        const expectedPayee = p.payee ? (p.payee.legalName || p.payee.name) : null;
+        if (expectedPayee && !hasParty('PayeeTradeParty')) {
+            errors.push('BG-10 : beneficiaire "' + expectedPayee + '" declare dans le pivot mais absent du CII');
+        }
+        if (!expectedPayee && hasParty('PayeeTradeParty')) {
+            errors.push('BG-10 : ram:PayeeTradeParty emis alors que le pivot ne declare aucun beneficiaire');
+        }
+        if (expectedPayee) {
+            const foundPayee = partyName('PayeeTradeParty');
+            if (foundPayee && foundPayee !== expectedPayee) {
+                errors.push('BT-59 : attendu ' + expectedPayee + ', trouve ' + foundPayee);
+            }
+        }
+
         // BR-S-08 : pour chaque taux, la base doit egaler la somme des lignes
         // concernees, augmentee des remises et frais de document.
         const sumTax = (p.taxSubtotals || []).reduce(function(t, s) {
