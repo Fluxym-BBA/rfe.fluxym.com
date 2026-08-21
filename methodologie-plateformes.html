@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Méthodologie du référentiel des plateformes agréées | Re·Form·E</title>
+    <meta name="description" content="Comment le référentiel des plateformes agréées de Re·Form·E est construit : sources, indice de centralité, règles de publication, droit de réponse et déclaration d'intérêt.">
+    <link rel="icon" href="./assets/favicon-Fluxym-V2.png" sizes="32x32" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/pages.css">
+    <style>
+        .metho-declaration { background: #fffbeb; border-left: 4px solid var(--warning); border-radius: var(--radius-md); padding: 20px 24px; margin: 8px 0 28px; }
+        .metho-declaration strong { color: var(--gray-900); }
+        .metho-regles { counter-reset: regle; list-style: none; margin: 0; padding: 0; }
+        .metho-regles > li { counter-increment: regle; position: relative; padding: 16px 20px 16px 60px; margin-bottom: 10px; background: var(--gray-50); border-radius: var(--radius-md); line-height: 1.65; }
+        .metho-regles > li::before { content: counter(regle); position: absolute; left: 18px; top: 16px; width: 28px; height: 28px; border-radius: var(--radius-full); background: var(--navy); color: var(--white); font-weight: 700; font-size: 13px; display: flex; align-items: center; justify-content: center; }
+        .metho-echelle { display: grid; gap: 10px; margin: 18px 0 8px; }
+        .metho-niveau { display: grid; grid-template-columns: 54px 1fr; gap: 16px; align-items: start; padding: 16px 18px; border-radius: var(--radius-md); border: 1px solid var(--gray-200); background: var(--white); }
+        .metho-indice { width: 42px; height: 42px; border-radius: var(--radius-full); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 18px; color: var(--white); }
+        .metho-indice--4 { background: var(--success); }
+        .metho-indice--3 { background: var(--cyan); }
+        .metho-indice--2 { background: var(--purple); }
+        .metho-indice--1 { background: var(--warning); }
+        .metho-indice--0 { background: var(--gray-400); }
+        .metho-niveau h4 { margin: 2px 0 4px; font-size: 15.5px; }
+        .metho-niveau p { margin: 0; font-size: 14px; color: var(--gray-600); line-height: 1.6; }
+        .metho-table { width: 100%; border-collapse: collapse; font-size: 14.5px; margin: 16px 0; }
+        .metho-table th, .metho-table td { text-align: left; padding: 11px 14px; border-bottom: 1px solid var(--gray-200); vertical-align: top; }
+        .metho-table th { background: var(--gray-50); font-weight: 600; color: var(--gray-900); }
+        .metho-oui { color: #047857; font-weight: 600; }
+        .metho-non { color: #b91c1c; font-weight: 600; }
+        .metho-partiel { color: #b45309; font-weight: 600; }
+        .metho-callout { border-left: 3px solid var(--cyan); background: var(--gray-50); border-radius: var(--radius-md); padding: 16px 20px; margin: 20px 0; line-height: 1.7; }
+    </style>
+</head>
+<body>
+    <nav id="main-nav"></nav>
+
+    <header class="page-hero">
+        <div class="page-container">
+            <div class="breadcrumb">
+                <a href="./index.html">Accueil</a>
+                <span>›</span>
+                <a href="./plateformes-agreees.html">Plateformes agréées</a>
+                <span>›</span>
+                <span>Méthodologie</span>
+            </div>
+            <div class="hero-badge">🔍 Transparence</div>
+            <h1>Comment ce référentiel est construit</h1>
+            <p>Les sources, les règles de publication, ce que nous mesurons, ce que nous refusons de mesurer, et comment demander une correction.</p>
+        </div>
+    </header>
+
+    <main class="page-main">
+        <div class="page-container page-layout">
+            <aside class="page-sidebar">
+                <div class="sidebar-sticky">
+                    <nav class="sidebar-nav">
+                        <a href="#declaration" class="sidebar-link">Déclaration d'intérêt</a>
+                        <a href="#objet" class="sidebar-link">Ce que décrit le référentiel</a>
+                        <a href="#centralite" class="sidebar-link">L'indice de centralité</a>
+                        <a href="#sources" class="sidebar-link">Nos sources</a>
+                        <a href="#disponibilite" class="sidebar-link">Ce qui est public, ce qui ne l'est pas</a>
+                        <a href="#regles" class="sidebar-link">Les 9 règles de publication</a>
+                        <a href="#refus" class="sidebar-link">Ce que nous ne publions pas</a>
+                        <a href="#correction" class="sidebar-link">Droit de réponse</a>
+                    </nav>
+                </div>
+            </aside>
+
+            <article class="page-content">
+
+                <section id="declaration" class="content-section reveal-on-scroll">
+                    <h2>Déclaration d'intérêt</h2>
+                    <div class="metho-declaration">
+                        <strong>Re·Form·E est édité par Fluxym, cabinet de conseil spécialisé dans la dématérialisation des processus financiers.</strong>
+                        Fluxym est donc un acteur du marché que ce référentiel décrit, et intervient auprès d'entreprises qui choisissent une plateforme agréée.
+                        Nous préférons l'écrire ici, en haut de page, plutôt que de laisser le lecteur le découvrir : c'est ce qui lui permet de lire nos analyses en connaissance de cause.
+                    </div>
+                    <p>Ce que cela implique concrètement, et que nous nous engageons à tenir :</p>
+                    <ul>
+                        <li>aucune plateforme n'est mise en avant contre rémunération, et aucun classement n'est publié ;</li>
+                        <li>le même barème et les mêmes sources s'appliquent à toutes les plateformes, y compris à celles avec lesquelles Fluxym travaille ;</li>
+                        <li>chaque affirmation porte sa source et sa date, pour être vérifiable sans nous faire confiance.</li>
+                    </ul>
+                </section>
+
+                <section id="objet" class="content-section reveal-on-scroll">
+                    <h2>Ce que décrit le référentiel</h2>
+                    <p>
+                        La liste officielle des plateformes agréées est publiée par la DGFiP. Elle contient un nom commercial, une adresse, un site internet, un courriel et une date d'immatriculation. C'est tout, et c'est peu pour choisir.
+                    </p>
+                    <p>
+                        Ce référentiel décrit donc <strong>les entreprises qui portent ces plateformes</strong> : ce qu'elles font, de quoi elles vivent, qui sont leurs clients, comment elles évoluent. Une plateforme agréée n'existe pas dans le vide : elle est portée par une société qui a une histoire, un métier d'origine, des actionnaires et d'autres activités.
+                    </p>
+                    <div class="metho-callout">
+                        <strong>La question qui structure tout le référentiel :</strong> l'activité de plateforme agréée est-elle le cœur du métier de cette entreprise, ou une ligne parmi vingt&nbsp;?
+                        Un éditeur créé pour la réforme et un groupe logiciel de 850 personnes dont la facturation électronique est une extension de son offre EDI ne présentent ni les mêmes forces, ni les mêmes risques, ni la même trajectoire probable. Rien dans la liste officielle ne permet de les distinguer.
+                    </div>
+                </section>
+
+                <section id="centralite" class="content-section reveal-on-scroll">
+                    <h2>L'indice de centralité</h2>
+                    <p>
+                        Nous aimerions publier la part du chiffre d'affaires que représente l'activité de plateforme agréée. Cette donnée n'est pratiquement jamais publique : seules les sociétés cotées publient une ventilation par activité, et la plupart des plateformes agréées ne sont pas cotées.
+                        <strong>Nous ne l'estimons donc pas.</strong> Un pourcentage inventé serait plus trompeur qu'une absence.
+                    </p>
+                    <p>
+                        À la place, nous évaluons une <strong>intensité d'engagement</strong>, à partir d'indices observables et vérifiables : existe-t-il une marque produit dédiée&nbsp;? une entité juridique dédiée&nbsp;? la facturation électronique figure-t-elle dans le menu principal du site&nbsp;? combien de communiqués sur douze mois&nbsp;? combien d'offres d'emploi la mentionnent&nbsp;? l'offre est-elle revendue par des partenaires&nbsp;?
+                    </p>
+
+                    <div class="metho-echelle">
+                        <div class="metho-niveau">
+                            <div class="metho-indice metho-indice--4">4</div>
+                            <div><h4>Cœur de métier</h4><p>La plateforme agréée <em>est</em> l'activité. Sans elle, l'entreprise n'a pas d'objet. Typiquement une société créée pour la réforme, ou un éditeur mono-produit.</p></div>
+                        </div>
+                        <div class="metho-niveau">
+                            <div class="metho-indice metho-indice--3">3</div>
+                            <div><h4>Axe stratégique</h4><p>Une des deux ou trois lignes majeures, avec un investissement visible : marque dédiée, recrutements dédiés, communication régulière.</p></div>
+                        </div>
+                        <div class="metho-niveau">
+                            <div class="metho-indice metho-indice--2">2</div>
+                            <div><h4>Extension naturelle</h4><p>Prolongement d'un métier existant — dématérialisation, EDI, comptabilité. L'offre existe et elle est structurée, mais le discours de l'entreprise porte ailleurs.</p></div>
+                        </div>
+                        <div class="metho-niveau">
+                            <div class="metho-indice metho-indice--1">1</div>
+                            <div><h4>Activité annexe</h4><p>Une ligne dans un catalogue large, peu portée commercialement : une page produit, pas de contenu récent, pas de recrutement dédié.</p></div>
+                        </div>
+                        <div class="metho-niveau">
+                            <div class="metho-indice metho-indice--0">0</div>
+                            <div><h4>Conformité défensive</h4><p>L'immatriculation existe pour ne pas perdre des clients ou des fournisseurs, sans offre commercialisée activement.</p></div>
+                        </div>
+                    </div>
+
+                    <div class="metho-callout">
+                        <strong>Ce que l'indice n'est pas.</strong> Ce n'est pas une note de qualité : une plateforme à l'indice 1 peut très bien servir parfaitement ses clients, et un indice 4 ne garantit rien.
+                        Ce n'est pas non plus un poids économique déguisé : nous ne le convertissons jamais en pourcentage de chiffre d'affaires.
+                        C'est une lecture, adossée à des indices que nous publions un par un, avec leur preuve, pour que vous puissiez ne pas être d'accord avec notre conclusion.
+                    </div>
+                </section>
+
+                <section id="sources" class="content-section reveal-on-scroll">
+                    <h2>Nos sources</h2>
+                    <table class="metho-table">
+                        <thead><tr><th>Information</th><th>Sources de premier rang</th></tr></thead>
+                        <tbody>
+                            <tr><td>Immatriculation, adresse, date</td><td>Liste officielle des plateformes agréées, DGFiP</td></tr>
+                            <tr><td>Identité juridique française</td><td>INSEE, Registre national des entreprises, annuaire-entreprises.data.gouv.fr</td></tr>
+                            <tr><td>Identité juridique étrangère</td><td>VIES pour la TVA intracommunautaire, registres nationaux, EUID via l'interconnexion européenne, LEI via GLEIF</td></tr>
+                            <tr><td>Chiffre d'affaires, résultat, effectif</td><td>Comptes annuels déposés au greffe, communiqués de l'entreprise</td></tr>
+                            <tr><td>Activités et positionnement</td><td>Site de l'éditeur : menu, catalogue, pages produit, communiqués</td></tr>
+                            <tr><td>Actionnariat, financement, acquisitions</td><td>Greffe, presse économique, historique publié par l'entreprise</td></tr>
+                            <tr><td>Références clients</td><td>Pages clients, témoignages et études de cas publiés par l'entreprise elle-même</td></tr>
+                            <tr><td>Avis publics</td><td>Plateformes d'avis professionnelles, en agrégat uniquement</td></tr>
+                            <tr><td>Dynamique de recrutement</td><td>Site carrières de l'entreprise, offres publiées</td></tr>
+                            <tr><td>Interopérabilité</td><td>Annuaire Peppol, liste des points d'accès</td></tr>
+                        </tbody>
+                    </table>
+                    <p>
+                        Les agrégateurs commerciaux de données d'entreprise ne sont pas retenus comme source de valeur. Nous relevons régulièrement, chez eux, des chiffres d'affaires éloignés de plusieurs fois ceux des comptes déposés. Ils peuvent servir d'indice à confirmer, jamais de référence.
+                    </p>
+                </section>
+
+                <section id="disponibilite" class="content-section reveal-on-scroll">
+                    <h2>Ce qui est public, ce qui ne l'est pas</h2>
+                    <p>Un référentiel honnête dit aussi ce qu'il ne peut pas savoir. Voici l'état réel de la disponibilité de l'information.</p>
+                    <table class="metho-table">
+                        <thead><tr><th>Donnée</th><th>Disponible&nbsp;?</th><th>Pourquoi</th></tr></thead>
+                        <tbody>
+                            <tr><td>Activités et lignes de métier</td><td class="metho-oui">Oui</td><td>Publiées par l'entreprise elle-même</td></tr>
+                            <tr><td>Chiffre d'affaires de l'entité française</td><td class="metho-oui">Souvent</td><td>Comptes déposés, sauf option de confidentialité</td></tr>
+                            <tr><td>Chiffre d'affaires groupe</td><td class="metho-partiel">Variable</td><td>Communiqué ou page institutionnelle, périmètre parfois imprécis</td></tr>
+                            <tr><td>Répartition du CA par activité</td><td class="metho-non">Quasi jamais</td><td>Réservée aux sociétés cotées</td></tr>
+                            <tr><td>Part du CA de l'activité plateforme agréée</td><td class="metho-non">Jamais</td><td>Aucune entreprise ne la publie. Nous ne l'estimons pas.</td></tr>
+                            <tr><td>Références clients</td><td class="metho-partiel">Déclaratives</td><td>Publiées par l'entreprise, portant sur tout son catalogue</td></tr>
+                            <tr><td>Références clients de l'activité PA</td><td class="metho-partiel">Rares</td><td>Identifiables seulement via des études de cas datées</td></tr>
+                            <tr><td>Avis clients</td><td class="metho-partiel">Inégaux</td><td>Volume très variable, parfois nul</td></tr>
+                            <tr><td>Dynamique de recrutement</td><td class="metho-oui">Observable</td><td>Offres publiées, à une date de relevé</td></tr>
+                            <tr><td>Turnover</td><td class="metho-non">Non</td><td>Non mesurable de l'extérieur. Nous ne le publions pas.</td></tr>
+                            <tr><td>Tarifs</td><td class="metho-partiel">Rares</td><td>Peu de grilles publiques sur ce marché</td></tr>
+                            <tr><td>Matricule d'immatriculation de la plateforme</td><td class="metho-non">Non public</td><td>Identifiant technique de l'annuaire, non publié par la DGFiP</td></tr>
+                        </tbody>
+                    </table>
+                    <p>
+                        Une information manquante apparaît comme telle sur les fiches, et n'est jamais remplacée par une approximation. <strong>Une absence expliquée vaut mieux qu'un chiffre inventé.</strong>
+                    </p>
+                </section>
+
+                <section id="regles" class="content-section reveal-on-scroll">
+                    <h2>Les 9 règles de publication</h2>
+                    <p>Elles s'appliquent à chaque fiche, sans exception, y compris lorsque la fiche concerne un concurrent direct de Fluxym.</p>
+                    <ol class="metho-regles">
+                        <li><strong>Toute information publiée porte sa source et sa date de relevé.</strong> Une affirmation sans source n'est pas publiée.</li>
+                        <li><strong>Le fait et la lecture sont séparés.</strong> Le fait est daté et sourcé. Notre interprétation est signalée comme telle, dans un bloc distinct et rédigée au conditionnel.</li>
+                        <li><strong>Aucun jugement, aucun classement, aucun comparatif nominatif.</strong> Nous décrivons, nous ne notons pas, et nous ne mettons jamais deux plateformes en concurrence dans une même phrase.</li>
+                        <li><strong>Les avis clients ne sont publiés qu'en agrégat</strong> — plateforme, note moyenne, nombre d'avis, date. Aucun avis individuel n'est cité, ni résumé, ni reformulé.</li>
+                        <li><strong>Aucune donnée personnelle.</strong> Les dirigeants ne sont mentionnés que dans leur fonction publique. Rien sur des salariés identifiables, rien issu de profils individuels.</li>
+                        <li><strong>Le turnover n'est pas publié.</strong> Un volume d'offres d'emploi n'est pas un taux de rotation, et le présenter comme tel serait faux.</li>
+                        <li><strong>La part de chiffre d'affaires de l'activité plateforme agréée n'est jamais estimée.</strong> Elle n'est pas publique.</li>
+                        <li><strong>Chiffre d'affaires groupe et chiffre d'affaires de l'entité française sont distingués.</strong> Les confondre fait varier un chiffre du simple au double.</li>
+                        <li><strong>Le droit de réponse est ouvert en permanence</strong>, et toute correction sourcée est appliquée, datée et tracée.</li>
+                    </ol>
+                </section>
+
+                <section id="refus" class="content-section reveal-on-scroll">
+                    <h2>Ce que nous ne publions pas</h2>
+                    <ul>
+                        <li>aucun classement, palmarès, note globale ou étoiles ;</li>
+                        <li>aucun avis client individuel, même public, même favorable ;</li>
+                        <li>aucune information sur des salariés identifiables ;</li>
+                        <li>aucune donnée transmise à titre confidentiel dans le cadre d'une mission Fluxym — <strong>le référentiel est construit exclusivement à partir de sources publiques</strong> ;</li>
+                        <li>aucune information sur la santé financière présentée comme une prédiction ;</li>
+                        <li>aucune donnée de contact nominative, alors même que nous en disposons : elles ne sont pas exposées à l'aspiration automatisée ;</li>
+                        <li>aucune affirmation sur les conditions réglementaires applicables aux plateformes étrangères, aussi longtemps que nous n'aurons pas vérifié les textes primaires.</li>
+                    </ul>
+                </section>
+
+                <section id="correction" class="content-section reveal-on-scroll">
+                    <h2>Droit de réponse et correction</h2>
+                    <p>
+                        Si vous représentez une plateforme agréée et qu'une information de votre fiche est inexacte, incomplète ou périmée, écrivez-nous&nbsp;: la correction sera appliquée dès lors qu'elle est sourcée. Nous n'exigeons pas plus de vous que de nous-mêmes — une source vérifiable et une date.
+                    </p>
+                    <p>Sont corrigés sans discussion&nbsp;: un chiffre erroné, un exercice comptable mal daté, une activité mal décrite, un actionnariat obsolète, une référence client publiée par erreur, un lien mort.</p>
+                    <p>
+                        Sur notre indice de centralité, un désaccord d'appréciation est légitime&nbsp;: il s'agit d'une lecture, pas d'un fait. Apportez-nous des indices contraires — une marque produit dédiée, des recrutements, un volume de clients sur cette activité — et l'indice est revu. La demande est alors tracée sur la fiche, pour que le lecteur sache que l'entreprise s'est exprimée.
+                    </p>
+                    <div class="metho-callout">
+                        <strong>Fréquence de mise à jour.</strong> Chaque fiche porte sa date de relevé. Le marché des plateformes agréées bouge vite — immatriculations, rachats, changements d'offre — et une fiche non datée serait sans valeur. Une date ancienne est une information en soi&nbsp;: elle vous dit que la fiche mérite d'être recoupée.
+                    </div>
+                </section>
+
+            </article>
+        </div>
+    </main>
+
+    <footer id="main-footer"></footer>
+
+    <script src="./js/nav.js"></script>
+    <script src="./js/animations.js"></script>
+</body>
+</html>

@@ -18,13 +18,6 @@
         .merge-err { color: #b91c1c; }
         .merge-rules { background: var(--gray-50); border-left: 3px solid var(--cyan); border-radius: var(--radius-md); padding: 14px 18px; font-size: 13.5px; line-height: 1.7; }
         .merge-rules ul { margin: 8px 0 0 18px; }
-        .merge-actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin: 22px 0 16px; }
-        .merge-btn { font-family: inherit; font-size: 14px; font-weight: 600; padding: 11px 20px; border: 0; border-radius: var(--radius-full); background: var(--navy); color: var(--white); cursor: pointer; }
-        .merge-btn:hover:not(:disabled) { background: var(--navy-light); }
-        .merge-btn:disabled { opacity: .45; cursor: not-allowed; }
-        .merge-btn--cyan { background: var(--cyan); }
-        .merge-btn--cyan:hover:not(:disabled) { background: #0090c4; }
-        .merge-hint { font-size: 13px; color: var(--gray-500); }
     </style>
 </head>
 <body>
@@ -36,24 +29,20 @@
             <strong>Règles de fusion appliquées</strong>
             <ul>
                 <li><code>sourcesEnrichissement</code> est <strong>cumulé</strong>, dédoublonné sur le couple (<code>champ</code>, <code>source</code>) : un patch ne déclare que ses propres sources, jamais celles des autres.</li>
-                <li><code>socleTechnique</code> est fusionné clé par clé, les sous-clés absentes du patch sont conservées.</li>
+                <li><code>socleTechnique</code>, <code>identiteInternationale</code> et <code>analyse360</code> sont fusionnés <strong>clé par clé, récursivement</strong> : les sous-clés absentes du patch sont conservées. Un patch peut donc renseigner <code>analyse360.centralitePA</code> sans effacer <code>analyse360.poidsEconomique</code>.</li>
+                <li>La liste des blocs à fusion profonde est lue dans <code>data/pa-taxonomie.json</code> → <code>blocsStructures.fusionProfonde</code>. Ajouter un bloc au schéma suffit : cet utilitaire n'est pas à modifier.</li>
+                <li>Rappel de méthode : un patch du chantier G porte sur <strong>une seule société</strong>, et <code>ventilationParActivite.disponible: false</code> est une valeur attendue, pas un champ à combler.</li>
                 <li>Les autres tableaux et les valeurs simples sont <strong>remplacés</strong>. Tout écrasement d'une valeur déjà renseignée est signalé dans le journal.</li>
                 <li><code>lot</code> n'est plus écrasé : les lots contributeurs sont cumulés dans <code>lotsContributeurs</code>.</li>
                 <li>L'ordre de dépôt des patchs n'a aucune incidence sur le résultat, sauf pour un champ simple écrit par deux patchs différents — cas signalé en jaune.</li>
-                <li>La fusion ne peut être lancée <strong>qu'une fois par ouverture de page</strong> : le référentiel en mémoire est déjà modifié. Pour refaire une passe, recharger la page.</li>
             </ul>
         </div>
 
         <p><strong>Référentiel de base :</strong> <span id="base-state">chargement…</span></p>
 
-        <div class="merge-actions">
-            <button type="button" id="load-repo" class="merge-btn merge-btn--cyan" disabled>⬇️ Charger tous les patchs du dépôt</button>
-            <span class="merge-hint">lit <code>Info IA/plateformes-agreees/patches/patch-*.json</code> directement depuis <code>main</code> — aucun téléchargement manuel</span>
-        </div>
-
         <div class="merge-drop" id="drop">
-            <strong>… ou déposer ici des fichiers <code>patch-*.json</code></strong><br>
-            <span style="font-size:13px;color:var(--gray-500)">voie manuelle, pour un patch non encore versionné — plusieurs patchs acceptés d'un coup</span>
+            <strong>Déposer ici les fichiers <code>patch-*.json</code></strong><br>
+            <span style="font-size:13px;color:var(--gray-500)">ou cliquer pour les sélectionner — plusieurs patchs acceptés d'un coup</span>
             <input type="file" id="file" accept=".json" multiple hidden>
         </div>
 
@@ -68,15 +57,34 @@
         (() => {
             'use strict';
             const BASE = './data/plateformes-agreees.json';
-            const PATCH_DIR = './Info IA/plateformes-agreees/patches/';
-            const PATCH_INDEX = 'https://api.github.com/repos/Fluxym-BBA/rfe.fluxym.com/contents/Info%20IA/plateformes-agreees/patches?ref=main';
+            const TAXO = './data/pa-taxonomie.json';
+
+            // Blocs fusionnés clé par clé. Chemins relatifs à une plateforme.
+            // Source de vérité : data/pa-taxonomie.json → blocsStructures.fusionProfonde.
+            // La constante ci-dessous est le repli si la taxonomie n'est pas lisible.
+            const PROFONDS_DEFAUT = [
+                'socleTechnique',
+                'identiteInternationale',
+                'identiteInternationale.presenceEnFrance',
+                'analyse360',
+                'analyse360.poidsEconomique',
+                'analyse360.poidsEconomique.caGroupe',
+                'analyse360.poidsEconomique.caEntiteFrancaise',
+                'analyse360.poidsEconomique.ventilationParActivite',
+                'analyse360.centralitePA',
+                'analyse360.dynamique',
+                'analyse360.reputation',
+                'analyse360.referencesClients',
+                'analyse360.capaciteDeFrappe',
+                'analyse360.droitDeReponse'
+            ];
+            let profonds = new Set(PROFONDS_DEFAUT);
             const log = document.getElementById('log');
             const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
             const say = (msg, cls = '') => { log.innerHTML += `<span class="${cls}">${msg}</span>\n`; log.scrollTop = log.scrollHeight; };
             const rempli = (v) => !(v === null || v === undefined || v === '' || (Array.isArray(v) && !v.length));
 
             let base = null;
-            let fusionFaite = false;
             let touched = 0;
             let ecrasements = 0;
             let rejets = 0;
@@ -84,10 +92,16 @@
             const load = async () => {
                 try {
                     base = await fetch(BASE).then((r) => r.json());
+                    try {
+                        const taxo = await fetch(TAXO).then((r) => r.json());
+                        const liste = taxo && taxo.blocsStructures && taxo.blocsStructures.fusionProfonde;
+                        if (Array.isArray(liste) && liste.length) profonds = new Set(liste);
+                    } catch (e) {
+                        say(`Taxonomie illisible — repli sur la liste de blocs profonds intégrée.`, 'merge-warn');
+                    }
                     document.getElementById('base-state').textContent =
                         `${base.plateformes.length} plateformes, relevé du ${base._meta.dateReleve}`;
                     log.innerHTML = 'En attente de patchs…\n';
-                    document.getElementById('load-repo').disabled = false;
                 } catch (e) {
                     document.getElementById('base-state').textContent = 'échec du chargement';
                     say(`Impossible de charger ${BASE} : ${esc(e.message)}`, 'merge-err');
@@ -110,18 +124,33 @@
                 return { nouvelles, remplacees, total: cible.sourcesEnrichissement.length };
             };
 
-            const fusionnerSocle = (cible, patchSocle) => {
-                const avant = cible.socleTechnique || {};
-                const sousCles = [];
-                Object.entries(patchSocle).forEach(([k, v]) => {
+            const estObjet = (v) => typeof v === 'object' && v !== null && !Array.isArray(v);
+
+            /**
+             * Fusionne un bloc clé par clé. Une sous-clé absente du patch est conservée.
+             * Une sous-clé elle-même déclarée profonde est fusionnée récursivement,
+             * ce qui permet à un patch de ne renseigner que analyse360.centralitePA
+             * sans effacer analyse360.poidsEconomique.
+             */
+            const fusionnerProfond = (parent, cle, patchBloc, chemin) => {
+                const avant = estObjet(parent[cle]) ? parent[cle] : {};
+                const resultat = { ...avant };
+                Object.entries(patchBloc).forEach(([k, v]) => {
+                    const sousChemin = `${chemin}.${k}`;
+                    if (profonds.has(sousChemin) && estObjet(v)) {
+                        fusionnerProfond(resultat, k, v, sousChemin);
+                        return;
+                    }
                     if (rempli(avant[k]) && JSON.stringify(avant[k]) !== JSON.stringify(v)) {
-                        say(`      ⚠ socleTechnique.${k} : « ${esc(avant[k])} » → « ${esc(v)} »`, 'merge-warn');
+                        const a = estObjet(avant[k]) || Array.isArray(avant[k]) ? JSON.stringify(avant[k]) : avant[k];
+                        const b = estObjet(v) || Array.isArray(v) ? JSON.stringify(v) : v;
+                        say(`      ⚠ ${esc(sousChemin)} : « ${esc(a)} » → « ${esc(b)} »`, 'merge-warn');
                         ecrasements += 1;
                     }
-                    sousCles.push(k);
+                    resultat[k] = v;
                 });
-                cible.socleTechnique = { ...avant, ...patchSocle };
-                return sousCles;
+                parent[cle] = resultat;
+                return Object.keys(patchBloc);
             };
 
             const apply = (patch, filename) => {
@@ -141,9 +170,9 @@
                     const champs = [];
                     Object.entries(p).forEach(([k, v]) => {
                         if (k === 'nom') return;
-                        if (k === 'socleTechnique' && typeof v === 'object' && v !== null && !Array.isArray(v)) {
-                            fusionnerSocle(cible, v);
-                            champs.push('socleTechnique');
+                        if (profonds.has(k) && estObjet(v)) {
+                            const sousCles = fusionnerProfond(cible, k, v, k);
+                            champs.push(`${k} (${sousCles.length} sous-clé(s) : ${sousCles.join(', ')})`);
                             return;
                         }
                         if (k === 'sourcesEnrichissement') {
@@ -196,6 +225,16 @@
                     reseaux_renseignes: P.filter((x) => rempli(x.reseaux)).length,
                     dirigeants_renseignes: P.filter((x) => rempli(x.dirigeants)).length,
                     fichesSansAucunEnrichissement: P.filter((x) => !rempli(x.sourcesEnrichissement)).length,
+                    analyse360_entamee: P.filter((x) => rempli(x.analyse360)).length,
+                    analyse360_activites: P.filter((x) => rempli(x.analyse360 && x.analyse360.activites)).length,
+                    analyse360_centralite: P.filter((x) => x.analyse360 && x.analyse360.centralitePA && rempli(x.analyse360.centralitePA.niveau) && x.analyse360.centralitePA.niveau !== 'non_qualifie').length,
+                    analyse360_caGroupe: P.filter((x) => x.analyse360 && x.analyse360.poidsEconomique && x.analyse360.poidsEconomique.caGroupe && rempli(x.analyse360.poidsEconomique.caGroupe.montantMEUR)).length,
+                    analyse360_caEntiteFrancaise: P.filter((x) => x.analyse360 && x.analyse360.poidsEconomique && x.analyse360.poidsEconomique.caEntiteFrancaise && rempli(x.analyse360.poidsEconomique.caEntiteFrancaise.montantMEUR)).length,
+                    analyse360_referencesClients: P.filter((x) => x.analyse360 && x.analyse360.referencesClients && rempli(x.analyse360.referencesClients.parSecteur)).length,
+                    analyse360_reputation: P.filter((x) => x.analyse360 && x.analyse360.reputation && rempli(x.analyse360.reputation.avis)).length,
+                    identiteInternationale_renseignee: P.filter((x) => rempli(x.identiteInternationale)).length,
+                    entitesEtrangeres: P.filter((x) => rempli(x.pays) && x.pays !== 'France').length,
+                    droitDeReponse_signale: P.filter((x) => x.analyse360 && x.analyse360.droitDeReponse && x.analyse360.droitDeReponse.signale).length,
                     dateDerniereFusion: new Date().toISOString().slice(0, 10)
                 };
                 say(`\n── Couverture après fusion`);
@@ -208,89 +247,18 @@
                 document.getElementById('dl').disabled = false;
             };
 
-            const collator = new Intl.Collator('fr', { numeric: true });
-
-            const prete = () => {
-                if (!base) { say(`Référentiel de base non chargé — fusion impossible.`, 'merge-err'); return false; }
-                if (fusionFaite) {
-                    say(`\nFusion déjà effectuée sur cette page. Recharge la page avant d'en lancer une autre, sinon les patchs s'empilent sur un référentiel déjà modifié.`, 'merge-err');
-                    return false;
-                }
-                return true;
-            };
-
-            const fusionner = (entrees) => {
-                entrees.sort((a, b) => collator.compare(a.nom, b.nom));
-                entrees.forEach(({ nom, texte }) => {
+            const read = async (files) => {
+                if (!base) { say(`Référentiel de base non chargé — fusion impossible.`, 'merge-err'); return; }
+                const liste = [...files].sort((a, b) => a.name.localeCompare(b.name, 'fr'));
+                for (const f of liste) {
                     try {
-                        apply(JSON.parse(texte), nom);
+                        apply(JSON.parse(await f.text()), f.name);
                     } catch (e) {
-                        say(`✗ ${esc(nom)} : JSON invalide — ${esc(e.message)}`, 'merge-err');
-                        rejets += 1;
+                        say(`✗ ${esc(f.name)} : JSON invalide — ${esc(e.message)}`, 'merge-err');
                     }
-                });
-                fusionFaite = true;
+                }
                 recount();
             };
-
-            const read = async (files) => {
-                if (!prete()) return;
-                const entrees = [];
-                for (const f of [...files]) {
-                    entrees.push({ nom: f.name, texte: await f.text() });
-                }
-                fusionner(entrees);
-            };
-
-            const listerPatchs = async () => {
-                const rep = await fetch(PATCH_INDEX);
-                if (!rep.ok) throw new Error(`index GitHub HTTP ${rep.status}`);
-                return (await rep.json())
-                    .filter((e) => e.type === 'file' && /^patch-.+\.json$/i.test(e.name))
-                    .map((e) => e.name)
-                    .sort(collator.compare);
-            };
-
-            const chargerDepuisDepot = async () => {
-                if (!prete()) return;
-                const bouton = document.getElementById('load-repo');
-                bouton.disabled = true;
-                let noms = [];
-                try {
-                    noms = await listerPatchs();
-                } catch (e) {
-                    say(`✗ Impossible de lister les patchs du dépôt : ${esc(e.message)}`, 'merge-err');
-                    say(`   Utilise la voie manuelle ci-dessous (dépôt de fichiers).`, 'merge-warn');
-                    bouton.disabled = false;
-                    return;
-                }
-                if (!noms.length) {
-                    say(`Aucun fichier patch-*.json trouvé dans le dépôt.`, 'merge-err');
-                    bouton.disabled = false;
-                    return;
-                }
-                say(`${noms.length} patch(s) détecté(s) dans le dépôt : ${esc(noms.join(', '))}`);
-
-                const entrees = [];
-                for (const nom of noms) {
-                    try {
-                        const rep = await fetch(encodeURI(PATCH_DIR + nom));
-                        if (!rep.ok) throw new Error(`HTTP ${rep.status}`);
-                        entrees.push({ nom, texte: await rep.text() });
-                    } catch (e) {
-                        say(`✗ ${esc(nom)} : téléchargement impossible — ${esc(e.message)}`, 'merge-err');
-                        rejets += 1;
-                    }
-                }
-                if (!entrees.length) {
-                    say(`Aucun patch n'a pu être lu. Fusion abandonnée.`, 'merge-err');
-                    bouton.disabled = false;
-                    return;
-                }
-                fusionner(entrees);
-            };
-
-            document.getElementById('load-repo').addEventListener('click', chargerDepuisDepot);
 
             const drop = document.getElementById('drop');
             const input = document.getElementById('file');
