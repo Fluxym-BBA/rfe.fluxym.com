@@ -412,13 +412,34 @@ const PDFLisible = {
         return out;
     },
 
+    // Largeur reellement disponible pour une sous-ligne de note. Les colonnes
+    // unite / quantite / prix / TVA ne portent une valeur que sur la premiere
+    // ligne de l'article : une note ecrite en dessous peut donc s'etendre
+    // jusqu'a la colonne des montants sans rien recouvrir. Le cadre S8 impose
+    // des notes longues (raison sociale + SIRET + numero de TVA du vendeur de
+    // la ligne) que la largeur de la seule colonne designation tronquait.
+    _noteWidth: function () {
+        return this.COL.ht - (this.COL.desc + 10) - 8;
+    },
+
+    // Note deja decoupee en lignes physiques. Sert a la fois au calcul de la
+    // hauteur de rang et au rendu, afin que les deux ne puissent pas diverger.
+    _noteLines: function (row) {
+        const w = this._noteWidth();
+        const out = [];
+        this._priceNotes(row).forEach((n) => {
+            this._wrap(n, 7.1, w, 2).forEach((l) => out.push(l));
+        });
+        return out;
+    },
+
     _rowHeight: function (row) {
         const maxW = this.COL.unit - this.COL.desc - 12;
         const label = ((row.ref || '') + '  ' + (row.desc || '')).trim();
         const base = this._wrap(label, 7.7, maxW, 2, true).length === 1 ? 27 : 38;
         // BG-27 / BG-28 : chaque remise ou frais de niveau ligne occupe une
         // sous-ligne sous la designation.
-        return base + 11 * ((row.allowances || []).length + this._priceNotes(row).length);
+        return base + 11 * ((row.allowances || []).length + this._noteLines(row).length);
     },
 
     // ============================================================
@@ -591,8 +612,8 @@ const PDFLisible = {
             // ligne (BT-131) les integre deja : les sous-lignes rendent le calcul
             // verifiable par le lecteur.
             let sy = y - (lines.length > 1 ? 21 : 11);
-            this._priceNotes(row).forEach((n) => {
-                this._txt(ctx, c.desc + 10, sy, this._fit(n, 7.1, descW - 12), { size: 7.1, color: this.C.muted });
+            this._noteLines(row).forEach((n) => {
+                this._txt(ctx, c.desc + 10, sy, n, { size: 7.1, color: this.C.muted });
                 sy -= 11;
             });
             (row.allowances || []).forEach((ac) => {
