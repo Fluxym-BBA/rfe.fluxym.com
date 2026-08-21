@@ -13,6 +13,13 @@
  *   - buildCiiPivot : le tiers PAYEUR (BG-2 etendu) est transporte et emis en
  *     ram:PayerTradeParty pour les seuls cas en profil EXTENDED-CTC-FR (1, 3, 4,
  *     14, 17b, 19a). Sous EN 16931 pur, il reste volontairement non emis.
+ * Changelog v4b — lot L2 vague 1 :
+ *   - resolvePayee : la cascade du beneficiaire du paiement est unifiee. Elle
+ *     etait ecrite trois fois (UBL, pivot CII, lisible) et avait divergé : le
+ *     lisible perdait le distributeur du cas 9 et le collaborateur du cas 5,
+ *     exactement comme le CII avant correction.
+ *   - PDF_CASES : 8 cas de la vague 1 ajoutes apres audit par lecture croisee.
+ * Changelog v4a suite :
  *   - Pack B : lignes et avoir passes en modele declaratif (getLineData /
  *     getPackBCreditData). Le cas gagne un modele pivot, donc le CII et
  *     l'eligibilite au lisible ; l'UBL reste identique au bloc cable.
@@ -1061,7 +1068,22 @@ const UBLGenerator = {
         "21", "22a", "23", "26", "30", "31", "38", "40",
         "T1", "T2", "T4", "T6", "T7", "T8",
         "nominal-rejet-emission", "nominal-non-transmise",
-        "nominal-rejet-reception", "nominal-refus"],
+        "nominal-rejet-reception", "nominal-refus",
+        // Vague 1 (21/08/2026) : cas dont le rendu etait deja en place. Audit
+        // par lecture croisee getLineData / buildRenderData / PDFLisible :
+        //   4  prise en charge partielle : BT-113 rendu en ligne de deduction,
+        //      tiers payeur OPCO porte par la mention #PAI#
+        //   5  note de frais : beneficiaire personne physique, desormais rendu
+        //      dans le bloc PAIEMENT sans SIRET (BT-59 seul)
+        //   7  carte logee : BT-81 code 48 libelle "Carte bancaire", aucun IBAN
+        //      affiche puisque hors virement, mention "Paiement comptant"
+        //   9  distributeur : beneficiaire desormais rendu avec son SIRET
+        //   10 subrogation apres emission : aucune specificite structurelle,
+        //      le rendu nominal est donc exact
+        //   11 commissionnaire a l'achat : cadre B1, rendu nominal
+        //   12 commissionnaire a la vente : agent porte par la mention #DCL#
+        //   15 UGAP : mandataire transparent porte par la mention #DCL#
+        "4", "5", "7", "9", "10", "11", "12", "15"],
 
     supportsPdf: function(usecase) {
         return typeof PDFLisible !== 'undefined' && this.PDF_CASES.indexOf(usecase) !== -1;
@@ -1336,8 +1358,44 @@ const UBLGenerator = {
             // BG-10 : beneficiaire du paiement, quand il n'est pas le fournisseur.
             // Seul le cas du factor est repris ici, les autres payeeType
             // (distributeur, collaborateur, tiers payeur) restent a couvrir.
-            var payeeForPdf = (cfg.payeeType === "factor" && factor)
-                ? { name: factor.name, siret: factor.siren + (factor.nic || "00001") }
+            // ------------------------------------------------------------
+            // BG-10 BENEFICIAIRE DU PAIEMENT : une cascade, trois usages
+            // ------------------------------------------------------------
+            // Le beneficiaire etait resolu TROIS fois, dans trois cascades
+            // separees : une dans buildXML, une dans le pivot CII, une pour le
+            // lisible. Elles avaient fini par divergent : le CII et le PDF ne
+            // connaissaient que le factor et perdaient le distributeur du cas 9
+            // comme le collaborateur du cas 5, que l'UBL declarait pourtant.
+            // Une seule source, donc, et la divergence devient impossible.
+            var resolvePayee = function() {
+                if (window.COMPANY_MODE === 'custom' && window.CUSTOM_THIRDPARTY) {
+                    var tp = window.CUSTOM_THIRDPARTY;
+                    return { legalName: tp.name, siren: tp.siren, nic: tp.nic || "00001" };
+                }
+                if (cfg.payeeType === "factor" && factor) {
+                    return { legalName: factor.name, siren: factor.siren, nic: factor.nic || "00001" };
+                }
+                if (cfg.payeeType === "distributeur") {
+                    var distri = findThirdParty("distri_logistique");
+                    return distri
+                        ? { legalName: distri.legalName, siren: distri.siren, nic: distri.nic }
+                        : null;
+                }
+                if (cfg.payeeType === "collaborateur") {
+                    // Personne physique : ni SIREN ni SIRET, BT-59 seul.
+                    return { legalName: "DUPONT Jean (Employe)", siren: null, nic: null };
+                }
+                return null;
+            };
+            var payeeParty = resolvePayee();
+            var payeeSiret = (payeeParty && payeeParty.siren)
+                ? payeeParty.siren + (payeeParty.nic || "00001")
+                : null;
+
+            // Le lisible affiche le beneficiaire dans son bloc PAIEMENT :
+            // "Reglement a : X (SIRET ...)". Sans SIRET, le seul nom suffit.
+            var payeeForPdf = payeeParty
+                ? { name: payeeParty.legalName, siret: payeeSiret }
                 : null;
 
             // BG-3 : reference a la facture anterieure (BT-25 + BT-26).
@@ -1405,25 +1463,9 @@ const UBLGenerator = {
                 xml += UBLTemplates.getCustomerParty(buyer);
 
                 // --- Parties speciales ---
-                // Si mode custom et tiers uploade : priorite aux donnees custom
-                if (window.COMPANY_MODE === 'custom' && window.CUSTOM_THIRDPARTY) {
-                    var tp = window.CUSTOM_THIRDPARTY;
-                    var tpSiret = tp.siren + (tp.nic || '00001');
-                    xml += UBLTemplates.getPayeeParty(tpSiret, tp.name, tp.siren);
-                }
-                // Sinon : comportement existant (donnees predefinies)
-                else if (cfg.payeeType === "factor" && factor) {
-                    xml += UBLTemplates.getPayeeParty(factor.siren + (factor.nic || "00001"), factor.name, factor.siren);
-                }
-                else if (cfg.payeeType === "distributeur") {
-                    var distri = findThirdParty("distri_logistique");
-                    if (distri) {
-                        xml += UBLTemplates.getPayeeParty(distri.siren + distri.nic, distri.legalName, distri.siren);
-                    }
-                }
-                else if (cfg.payeeType === "collaborateur") {
-                    // Personne physique : ni SIRET ni SIREN, seul BT-59 est renseigne.
-                    xml += UBLTemplates.getPayeeParty(null, "DUPONT Jean (Employe)", null);
+                // BG-10 : un seul point d'emission, alimente par resolvePayee.
+                if (payeeParty) {
+                    xml += UBLTemplates.getPayeeParty(payeeSiret, payeeParty.legalName, payeeParty.siren);
                 }
                 // BG-16 est obligatoire (BR-49) : virement (30) par defaut.
                 // BT-84 IBAN ajoute pour les codes 30 et 58 conformement a BR-50.
@@ -1657,25 +1699,10 @@ const UBLGenerator = {
                 // que l'UBL declarait (cas 5 et 9), sans qu'aucun controle ne
                 // le signale. Toute divergence entre les deux cascades est un
                 // bug : elles decrivent le meme fait.
-                p.payee = null;
-                if (window.COMPANY_MODE === 'custom' && window.CUSTOM_THIRDPARTY) {
-                    var tpPayee = window.CUSTOM_THIRDPARTY;
-                    p.payee = { legalName: tpPayee.name, name: null, siren: tpPayee.siren,
-                                nic: tpPayee.nic || "00001", address: null };
-                } else if (cfg.payeeType === "factor" && factor) {
-                    p.payee = { legalName: factor.name, name: null, siren: factor.siren,
-                                nic: factor.nic, address: null };
-                } else if (cfg.payeeType === "distributeur") {
-                    var distriPayee = findThirdParty("distri_logistique");
-                    if (distriPayee) {
-                        p.payee = { legalName: distriPayee.legalName, name: null,
-                                    siren: distriPayee.siren, nic: distriPayee.nic, address: null };
-                    }
-                } else if (cfg.payeeType === "collaborateur") {
-                    // Personne physique : ni SIREN ni SIRET, BT-59 seul, comme en UBL.
-                    p.payee = { legalName: "DUPONT Jean (Employe)", name: null,
-                                siren: null, nic: null, address: null };
-                }
+                p.payee = payeeParty
+                    ? { legalName: payeeParty.legalName, name: null, siren: payeeParty.siren,
+                        nic: payeeParty.nic, address: null }
+                    : null;
 
                 // Tiers PAYEUR : la partie qui paie la facture sans en etre le
                 // destinataire (un OPCO qui prend en charge une formation, par
