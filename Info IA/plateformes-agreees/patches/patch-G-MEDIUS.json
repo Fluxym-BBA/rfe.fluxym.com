@@ -1,0 +1,182 @@
+{
+  "_patch": {
+    "id": "G-MEDIUS",
+    "chantier": "G — analyse 360",
+    "societe": "MEDIUS",
+    "auteur": "RFE_WebSite",
+    "dateReleve": "2026-08-21",
+    "nbPlateformes": 1,
+    "note": "Cercle 0. AUTOCORRECTION IMPORTANTE : la note du 21/08/2026 signalait une anomalie de pays sur MEDIUS, au motif que le groupe est suédois et basé à Linköping. Vérification faite, cette anomalie n'existe pas. L'entité immatriculée est MEDIUS, SAS française, SIREN 810794610, créée le 10/04/2015, dont le siège est au 33 rue du Louvre 75002 Paris. Le champ pays vaut donc bien France, et il est exact. L'anomalie soupçonnée est levée. CORRECTIONS APPORTÉES : trancheEffectif renseignée à 50-99 (donnée INSEE 2023, la valeur était nulle) ; segmentCible passe de vide à eti + grands_comptes, ce qui rend la fiche visible aux filtres de segment ; groupeCapitalistique renseigné. ÉCART DE SOURCE SIGNALÉ : la DGFiP publie l'adresse 35 rue des Jeûneurs 75002 Paris alors que le siège social au registre est au 33 rue du Louvre, dans le même arrondissement ; le champ adresse n'est pas modifié, la liste DGFiP restant la source de ce champ. HYPOTHÈSE NON CONFIRMÉE, à ne pas publier en l'état : l'entité française pourrait être l'ancienne société Expensya, rachetée par Medius en 2023 et renommée. Quatre signaux convergent — création en 2015, année de fondation d'Expensya ; siège parisien ; code d'activité programmation informatique ; effectif de 50 à 99 salariés cohérent ; et la présence de la gestion des notes de frais, métier d'Expensya, dans l'offre française de Medius. Aucune preuve directe : le registre des bénéficiaires effectifs n'est plus accessible depuis juillet 2024, aucune annonce BODACC n'est publiée pour cette société et aucun dirigeant n'est exposé. Vérification à faire sur l'historique des dénominations au greffe ou sur un extrait INPI. NON TROUVÉ dans cette passe : comptes déposés de l'entité française, chiffre d'affaires du groupe issu d'une source primaire, ventilation par activité, avis publics agrégés, volume d'offres d'emploi."
+  },
+  "plateformes": [
+    {
+      "nom": "MEDIUS",
+      "trancheEffectif": "50-99",
+      "segmentCible": [
+        "eti",
+        "grands_comptes"
+      ],
+      "groupeCapitalistique": "Medius AB, Suède, société fondée en 2001 et implantée à Linköping",
+      "analyse360": {
+        "metierPrincipal": "Automatisation de la comptabilité fournisseurs et gestion des dépenses, au sein d'un groupe logiciel suédois",
+        "activites": [
+          {
+            "libelle": "Automatisation de la comptabilité fournisseurs : capture, traitement, rapprochement et paiement des factures",
+            "poids": "majeur",
+            "source": "medius.com/fr, relevé 21/08/2026"
+          },
+          {
+            "libelle": "Plateforme agréée pour la facturation électronique en France",
+            "poids": "majeur",
+            "source": "Liste DGFiP, immatriculation du 08/01/2026 ; communiqué Medius du 12/01/2026"
+          },
+          {
+            "libelle": "Gestion des notes de frais et des dépenses professionnelles",
+            "poids": "significatif",
+            "source": "medius.com/fr ; acquisition d'Expensya en 2023"
+          },
+          {
+            "libelle": "Groupe — automatisation du cycle source-to-pay et pilotage de la dépense, avec l'intelligence artificielle comme argument central",
+            "poids": "majeur",
+            "source": "medius.com, pages institutionnelles"
+          }
+        ],
+        "poidsEconomique": {
+          "effectifGroupe": 500,
+          "effectifEntite": "50 à 99 salariés (INSEE, donnée 2023)",
+          "ventilationParActivite": {
+            "disponible": false,
+            "motif": "Le groupe Medius n'est pas coté et ne publie pas de chiffre d'affaires. Les seules valeurs disponibles proviennent de la presse spécialisée des fusions-acquisitions, qui cite environ 137 millions de dollars de revenus pour 2024 en croissance d'environ 25 % : cette donnée n'est pas confirmée par l'entreprise et n'est pas retenue comme chiffre de référence. Les comptes de l'entité française n'ont pas été consultés dans cette passe. Aucune part attribuable à l'activité de plateforme agréée n'est estimée.",
+            "derniereVentilationConnue": null
+          }
+        },
+        "centralitePA": {
+          "indice": 3,
+          "niveau": "axe_strategique",
+          "marqueProduitDediee": null,
+          "entiteJuridiqueDediee": false,
+          "faisceauIndices": [
+            {
+              "signal": "L'agrément est porté par une entité française du groupe, et non par la maison mère suédoise : le groupe a choisi de s'immatriculer en France",
+              "sens": "+",
+              "preuve": "SIREN 810794610, MEDIUS SAS, 75002 Paris"
+            },
+            {
+              "signal": "Positionnement français très précoce : immatriculation annoncée dès le 17/12/2024, plus d'un an avant l'immatriculation définitive",
+              "sens": "+",
+              "preuve": "Communications Medius des 17/12/2024 et 12/01/2026"
+            },
+            {
+              "signal": "Communiqué français dédié à l'immatriculation définitive, daté de Paris",
+              "sens": "+",
+              "preuve": "Communiqué Medius du 12/01/2026"
+            },
+            {
+              "signal": "Ciblage explicite des ETI et des grandes entreprises dans la communication française",
+              "sens": "+",
+              "preuve": "Communiqué Medius du 12/01/2026"
+            },
+            {
+              "signal": "Adresse de contact française dédiée",
+              "sens": "+",
+              "preuve": "info.france@medius.com, adresse déclarée à la DGFiP"
+            },
+            {
+              "signal": "L'automatisation de la comptabilité fournisseurs est le métier du groupe : l'agrément prolonge ce métier plutôt qu'il ne l'élargit",
+              "sens": "+",
+              "preuve": "medius.com, pages institutionnelles"
+            },
+            {
+              "signal": "Aucune marque produit distincte pour l'offre agréée",
+              "sens": "-",
+              "preuve": "Relevé de medius.com/fr le 21/08/2026"
+            },
+            {
+              "signal": "La France est l'un des marchés d'un groupe présent dans plus de cent pays, l'entité française pesant de 50 à 99 salariés sur environ 500",
+              "sens": "-",
+              "preuve": "medius.com : plus de 4 000 clients, plus de 100 pays"
+            },
+            {
+              "signal": "Aucun canal de gros documenté auprès d'éditeurs tiers",
+              "sens": "-",
+              "preuve": "Relevé de medius.com/fr le 21/08/2026"
+            }
+          ],
+          "lecture": "Medius est le seul cas documenté à ce jour où un groupe étranger a choisi de faire porter l'agrément par sa filiale française plutôt que par sa maison mère. Ce choix n'est pas neutre : il suppose une structure locale, des interlocuteurs français et une responsabilité juridique établie en France. Ajouté à un positionnement annoncé dès décembre 2024, à un communiqué français dédié et à un ciblage explicite des ETI et des grandes entreprises, le faisceau plaide pour un investissement réel, d'où l'indice 3. Il n'atteint pas 4 parce que la France reste un marché parmi plus de cent et que l'entité française ne représente qu'une fraction de l'effectif du groupe. Absences notables : aucune marque produit dédiée à l'offre agréée et aucun canal de distribution en gros.",
+          "confiance": "moyenne"
+        },
+        "referencesClients": {
+          "nbCiteesSurSite": null,
+          "parSecteur": {},
+          "grandsComptes": [],
+          "referencesPAConfirmees": [],
+          "source": "Aucune référence nommée relevée dans cette passe. Le groupe revendique plus de 4 000 clients dans plus de cent pays et environ 300 milliards de dollars de dépenses traitées annuellement, sans liste publique consolidée. À reprendre."
+        },
+        "reputation": {
+          "volumeAvis": null,
+          "synthese": "Aucun relevé d'avis agrégés effectué dans cette passe.",
+          "confiance": "non_qualifie"
+        },
+        "capaciteDeFrappe": {
+          "actionnaires": [
+            "Marlin Equity Partners, actionnaire majoritaire",
+            "Advent International, actionnaire minoritaire"
+          ],
+          "typeActionnaire": "fonds_pe",
+          "financementRecent": "Marlin Equity Partners est actionnaire majoritaire, Advent International minoritaire. La presse financière a fait état à l'automne 2025 d'une possible cession du groupe, évoquant une valorisation de l'ordre de deux milliards de dollars : information de source secondaire, non confirmée par l'entreprise, mentionnée pour mémoire et non retenue comme fait établi.",
+          "acquisitions": [
+            "Expensya, gestion des notes de frais, franco-tunisienne, acquisition annoncée en 2023",
+            "Waxx Digital"
+          ],
+          "modeleTarifaire": "Sur devis",
+          "tarifPublie": false,
+          "offreGratuite": false
+        },
+        "lectureConcurrentielle": "Medius est un concurrent qu'il serait facile de sous-estimer en le lisant comme une PME française de 50 à 99 salariés, ce qu'indique la fiche administrative. C'est en réalité la filiale française d'un groupe suédois d'environ 500 personnes, revendiquant plus de 4 000 clients dans plus de cent pays et quelque 300 milliards de dollars de dépenses traitées par an, détenu majoritairement par Marlin Equity Partners avec Advent International au minoritaire. La capacité de frappe financière est donc d'un tout autre ordre que ce que suggère l'entité immatriculée. Trois points d'attention. D'abord, le positionnement est frontal sur le poste fournisseurs pour les ETI et les grandes entreprises, revendiqué comme tel dans la communication française, sans volet Order-to-Cash. Ensuite, l'acquisition d'Expensya donne au groupe une carte que peu de concurrents ont sur ce segment : la note de frais traitée dans le même ensemble que la facture fournisseur, ce qui élargit le périmètre de la conversation avec une direction financière. Enfin, un actionnariat de fonds et une rumeur de cession à l'automne 2025 signalent un actif en phase de valorisation : dans cette configuration, la croissance du nombre de clients prime généralement sur la marge unitaire, ce qui rend une agressivité tarifaire plausible.",
+        "droitDeReponse": {
+          "signale": false,
+          "date": null,
+          "objet": null
+        }
+      },
+      "sourcesEnrichissement": [
+        {
+          "champ": "pays",
+          "source": "annuaire-entreprises.data.gouv.fr, MEDIUS SIREN 810794610 : SAS française créée le 10/04/2015, siège 33 rue du Louvre 75002 Paris, APE 62.01Z, capital 148 920,40 €, TVA FR08810794610, 50 à 99 salariés en 2023, 5 établissements dont 1 en activité, clôture au 31/12. Confirme que le champ pays vaut bien France et lève l'anomalie soupçonnée le 21/08/2026.",
+          "dateReleve": "2026-08-21",
+          "confiance": "haute"
+        },
+        {
+          "champ": "trancheEffectif",
+          "source": "INSEE via annuaire-entreprises.data.gouv.fr, SIREN 810794610 : 50 à 99 salariés, donnée 2023. Renseigne un champ jusque-là nul.",
+          "dateReleve": "2026-08-21",
+          "confiance": "haute"
+        },
+        {
+          "champ": "segmentCible",
+          "source": "Communiqué Medius du 12/01/2026 sur l'immatriculation définitive, daté de Paris : offre destinée aux ETI et aux grandes entreprises. Corrige un segmentCible vide qui rendait la fiche invisible aux filtres.",
+          "dateReleve": "2026-08-21",
+          "confiance": "haute"
+        },
+        {
+          "champ": "groupeCapitalistique",
+          "source": "Pages institutionnelles Medius et communiqués de Marlin Equity Partners : groupe fondé en 2001, implanté à Linköping en Suède, environ 500 salariés, plus de 4 000 clients, plus de 100 pays, environ 300 milliards de dollars de dépenses traitées par an",
+          "dateReleve": "2026-08-21",
+          "confiance": "moyenne"
+        },
+        {
+          "champ": "analyse360.capaciteDeFrappe",
+          "source": "Communiqués Marlin Equity Partners et Advent International : Marlin actionnaire majoritaire, Advent minoritaire ; acquisitions d'Expensya en 2023 et de Waxx Digital",
+          "dateReleve": "2026-08-21",
+          "confiance": "moyenne"
+        },
+        {
+          "champ": "analyse360.centralitePA.indice",
+          "source": "Lecture Fluxym sur faisceau d'indices, méthode décrite dans Info IA/plateformes-agreees/cartographie-360-modele.md",
+          "dateReleve": "2026-08-21",
+          "confiance": "moyenne"
+        }
+      ]
+    }
+  ]
+}

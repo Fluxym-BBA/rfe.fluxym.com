@@ -1,0 +1,211 @@
+{
+  "_patch": {
+    "id": "G-ITESOFT",
+    "chantier": "G — analyse 360",
+    "societe": "ITESOFT",
+    "auteur": "RFE_WebSite",
+    "dateReleve": "2026-08-21",
+    "nbPlateformes": 1,
+    "note": "Cercle 0. CORRECTIONS APPORTÉES : segmentCible passe de vide à eti + grands_comptes, ce qui rend enfin la fiche visible aux filtres de segment du hub — c'était l'un des trois cas signalés comme invisibles ; relationCapitalistique passe de acquise à independante, la société ayant été retirée de la cote en 2024 au profit du concert familial de son fondateur et non acquise par un tiers ; groupeCapitalistique renseigné. APPORT PRINCIPAL : ITESOFT a fait l'objet d'une offre publique de retrait à 4,00 € par action, suivie d'un retrait obligatoire le 04/06/2024. La société n'est donc plus cotée depuis juin 2024, ce qui explique qu'elle ne publie plus de comptes consolidés — les seules données fiables sont désormais les comptes sociaux déposés au greffe. NON TROUVÉ dans cette passe : comptes consolidés postérieurs au retrait de cote, ventilation du chiffre d'affaires par ligne d'activité, avis publics agrégés, volume d'offres d'emploi, répartition exacte du capital après le retrait obligatoire. ÉCART DE SOURCE SIGNALÉ : un fournisseur de données de marché diffuse encore un chiffre d'affaires 2025 de 20,5 M€ et un résultat net de 1,08 M€, valeurs incompatibles avec les comptes sociaux déposés (22,1 M€ et 1,7 M€ en 2024) ; ces valeurs de source secondaire ne sont pas retenues."
+  },
+  "plateformes": [
+    {
+      "nom": "ITESOFT",
+      "segmentCible": [
+        "eti",
+        "grands_comptes"
+      ],
+      "relationCapitalistique": "independante",
+      "groupeCapitalistique": "Concert familial Charpentier, à la suite du retrait de la cote de juin 2024",
+      "analyse360": {
+        "metierPrincipal": "Édition de solutions de capture documentaire et de dématérialisation des factures, avec une antériorité revendiquée sur la facture depuis 1995",
+        "activites": [
+          {
+            "libelle": "Dématérialisation des factures fournisseur et client, cœur historique de l'offre",
+            "poids": "majeur",
+            "source": "itesoft.com ; Le Figaro, entretien du 23/09/2025"
+          },
+          {
+            "libelle": "Plateforme agréée pour la facturation électronique, sous le nom commercial Streamline Invoices",
+            "poids": "majeur",
+            "source": "Liste DGFiP, immatriculation du 15/01/2026 ; itesoft.com"
+          },
+          {
+            "libelle": "Capture documentaire et reconnaissance automatique de documents entrants",
+            "poids": "majeur",
+            "source": "itesoft.com, relevé 21/08/2026"
+          },
+          {
+            "libelle": "Workflows comptables, portail fournisseur et Procure-to-Pay",
+            "poids": "significatif",
+            "source": "itesoft.com, relevé 21/08/2026"
+          },
+          {
+            "libelle": "Maîtrise des risques et conformité documentaire, notamment détection de fraude",
+            "poids": "significatif",
+            "source": "itesoft.com, relevé 21/08/2026"
+          },
+          {
+            "libelle": "Raccordement à Chorus Pro pour les flux vers le secteur public",
+            "poids": "mineur",
+            "source": "Sources tierces spécialisées, relevé 21/08/2026"
+          }
+        ],
+        "poidsEconomique": {
+          "caEntiteFrancaise": {
+            "montantMEUR": 22.1,
+            "exercice": "2024",
+            "nature": "comptes_deposes",
+            "source": "Comptes annuels déposés au greffe, SIREN 330265323",
+            "dateReleve": "2026-08-21"
+          },
+          "effectifEntite": "100 à 199 salariés ; environ 186 personnes selon les publications antérieures au retrait de la cote",
+          "resultatNet": "Bénéfice de 1,7 M€ en 2024, après 739 k€ en 2023. Fonds propres de 11,9 M€, trésorerie de 2,56 M€. Effort de recherche et développement d'environ 17 % du chiffre d'affaires.",
+          "ventilationParActivite": {
+            "disponible": false,
+            "motif": "Les comptes sociaux déposés ne ventilent pas le chiffre d'affaires par ligne d'activité, et la société ne publie plus de comptes consolidés depuis son retrait de la cote en juin 2024. La part de la facturation électronique n'est donc pas publiée et n'est pas estimée. Seule indication de répartition géographique disponible : la France représentait environ 86 % de l'activité.",
+            "derniereVentilationConnue": null
+          }
+        },
+        "centralitePA": {
+          "indice": 3,
+          "niveau": "axe_strategique",
+          "marqueProduitDediee": "Streamline Invoices",
+          "entiteJuridiqueDediee": false,
+          "faisceauIndices": [
+            {
+              "signal": "Antériorité revendiquée sur la facture depuis 1995 : la plateforme agréée prolonge le métier historique",
+              "sens": "+",
+              "preuve": "Sources spécialisées et communication ITESOFT"
+            },
+            {
+              "signal": "Marque produit dédiée à l'offre agréée",
+              "sens": "+",
+              "preuve": "Streamline Invoices, itesoft.com"
+            },
+            {
+              "signal": "Point d'accès Peppol certifié, en complément de l'agrément français",
+              "sens": "+",
+              "preuve": "Déclaration ITESOFT ; champ reseaux de la fiche"
+            },
+            {
+              "signal": "Immatriculation définitive revendiquée parmi les premières, le 15/01/2026",
+              "sens": "+",
+              "preuve": "Liste DGFiP et communication ITESOFT"
+            },
+            {
+              "signal": "Couverture internationale annoncée sur plus de 35 pays pour l'offre de facturation",
+              "sens": "+",
+              "preuve": "Le Figaro, entretien du 23/09/2025"
+            },
+            {
+              "signal": "Positionnement volumétrique explicite : dossiers étudiés à partir de 15 000 factures par mois",
+              "sens": "+",
+              "preuve": "Benchmark sectoriel tiers, avril 2025"
+            },
+            {
+              "signal": "Aucune entité juridique dédiée ; l'agrément porte sur la société d'édition",
+              "sens": "-",
+              "preuve": "SIREN 330265323"
+            },
+            {
+              "signal": "Le catalogue reste large — capture, workflows, conformité, Procure-to-Pay — la facture n'étant qu'une de ses composantes",
+              "sens": "-",
+              "preuve": "itesoft.com, relevé 21/08/2026"
+            },
+            {
+              "signal": "Aucun canal de gros documenté auprès d'éditeurs tiers",
+              "sens": "-",
+              "preuve": "Relevé de itesoft.com le 21/08/2026"
+            }
+          ],
+          "lecture": "ITESOFT présente le profil le plus resserré du cercle concurrentiel : une société de taille moyenne dont le métier est la facture depuis trente ans, avec une marque dédiée à l'offre agréée, un point d'accès Peppol certifié, une immatriculation définitive parmi les premières et un positionnement volumétrique assumé à partir de quinze mille factures par mois. L'indice 3 est cohérent avec ce faisceau. Il n'atteint pas 4 parce que le catalogue reste plus large que la seule facture — capture documentaire, workflows comptables, conformité — et que l'entreprise conserverait un objet sans l'agrément français. Une caractéristique distingue toutefois ITESOFT des autres acteurs classés au même niveau : la concentration sur le marché français, qui représentait environ 86 % de l'activité. Là où un Basware ou un Esker répartissent l'enjeu réglementaire sur plusieurs dizaines de pays, ITESOFT joue une part beaucoup plus grande de son avenir sur cette seule réforme.",
+          "confiance": "haute"
+        },
+        "referencesClients": {
+          "parSecteur": {
+            "services": [
+              "Sodexo"
+            ],
+            "public": [
+              "CNAM — Caisse nationale de l'assurance maladie"
+            ],
+            "finance": [
+              "MACIF"
+            ]
+          },
+          "grandsComptes": [
+            "Sodexo",
+            "CNAM",
+            "MACIF"
+          ],
+          "referencesPAConfirmees": [
+            "Sodexo, CNAM et MACIF sont citées comme références de l'offre Streamline Invoices, c'est-à-dire de l'offre agréée elle-même, dans un benchmark sectoriel tiers"
+          ],
+          "source": "Benchmark sectoriel tiers consacré aux plateformes agréées, avril 2025, et publications spécialisées. Le groupe revendique plus de 650 clients toutes solutions confondues. Références de source secondaire, non relevées sur le site de l'éditeur dans cette passe."
+        },
+        "reputation": {
+          "volumeAvis": null,
+          "synthese": "Aucun relevé d'avis agrégés effectué dans cette passe.",
+          "confiance": "non_qualifie"
+        },
+        "capaciteDeFrappe": {
+          "actionnaires": [
+            "Concert familial Charpentier, autour de Didier Charpentier, président et fondateur",
+            "Managers salariés apporteurs de titres lors du retrait de la cote"
+          ],
+          "typeActionnaire": "fondateurs",
+          "financementRecent": "Offre publique de retrait à 4,00 € par action, suivie d'un retrait obligatoire réalisé le 04/06/2024. La société n'est plus cotée sur Euronext Paris depuis cette date. Avant l'opération, le groupe familial Charpentier détenait environ 74 % du capital et 77 % des droits de vote ; l'offre portait sur les 4,38 % du capital non détenus par le concert.",
+          "acquisitions": [],
+          "modeleTarifaire": "Sur devis",
+          "tarifPublie": false,
+          "offreGratuite": false
+        },
+        "lectureConcurrentielle": "ITESOFT est le concurrent dont la trajectoire est la plus lisible et l'exposition à la réforme la plus forte. Lisible, parce que les comptes déposés montrent une société en croissance et bénéficiaire — 22,1 M€ de chiffre d'affaires en 2024 contre 20,0 M€ en 2023, un résultat net multiplié par plus de deux, des fonds propres de 11,9 M€ et un effort de recherche et développement d'environ 17 % du chiffre d'affaires, ce qui est élevé pour une entreprise de cette taille. Exposition, parce que la France représentait environ 86 % de l'activité : la réforme n'est pas pour ITESOFT un marché national parmi trente-cinq, c'est le marché. Trois conséquences pratiques. D'abord, l'engagement sur le sujet est structurellement supérieur à celui d'un acteur multi-pays, et le discours commercial le reflétera. Ensuite, le positionnement volumétrique est haut — dossiers examinés à partir de quinze mille factures par mois — donc la concurrence se joue sur les gros volumes et non sur le milieu de marché. Enfin, le retrait de la cote de juin 2024 au profit du concert familial du fondateur a deux effets opposés : il libère la société de la contrainte de publication et allonge son horizon de décision, mais il réduit aussi sa capacité à lever des fonds face à des concurrents adossés à des fonds d'investissement disposant de plusieurs centaines de millions d'euros.",
+        "droitDeReponse": {
+          "signale": false,
+          "date": null,
+          "objet": null
+        }
+      },
+      "sourcesEnrichissement": [
+        {
+          "champ": "analyse360.poidsEconomique",
+          "source": "Comptes annuels déposés au greffe, ITESOFT SIREN 330265323 : chiffre d'affaires 22,1 M€ en 2024 contre 20,0 M€ en 2023, résultat net 1,7 M€ contre 739 k€, fonds propres 11,9 M€, trésorerie 2,56 M€",
+          "dateReleve": "2026-08-21",
+          "confiance": "haute"
+        },
+        {
+          "champ": "identite",
+          "source": "Registre national des entreprises et répertoire SIRENE, SIREN 330265323 : société anonyme à conseil d'administration, créée le 01/07/1984, Chemin du Mas d'Andron 30470 Aimargues, capital 368 029,68 €, APE 62.02B, LEI 969500HZ36JO2ODTSW29, président Didier Charpentier, directeurs généraux délégués Jean-Marc Pedreno et Laurent Matringe",
+          "dateReleve": "2026-08-21",
+          "confiance": "haute"
+        },
+        {
+          "champ": "analyse360.capaciteDeFrappe",
+          "source": "Documents d'offre publique et décision de conformité de l'Autorité des marchés financiers : offre publique de retrait à 4,00 € par action visant 268 364 actions, soit 4,38 % du capital, groupe familial Charpentier détenant environ 74 % du capital et 77 % des droits de vote ; retrait obligatoire réalisé le 04/06/2024",
+          "dateReleve": "2026-08-21",
+          "confiance": "haute"
+        },
+        {
+          "champ": "segmentCible",
+          "source": "Le Figaro, entretien ITESOFT du 23/09/2025 : Streamline Invoices s'adresse à l'ensemble des grands comptes et ETI dans plus de 35 pays. Corrige un segmentCible vide qui rendait la fiche invisible aux filtres.",
+          "dateReleve": "2026-08-21",
+          "confiance": "haute"
+        },
+        {
+          "champ": "analyse360.referencesClients",
+          "source": "Benchmark sectoriel tiers consacré aux plateformes agréées, avril 2025 : offre Streamline Invoices, références Sodexo, CNAM et MACIF, 650 clients toutes solutions confondues, débuts sur la facture en 1995, dossiers étudiés à partir de 15 000 factures par mois",
+          "dateReleve": "2026-08-21",
+          "confiance": "moyenne"
+        },
+        {
+          "champ": "analyse360.centralitePA.indice",
+          "source": "Lecture Fluxym sur faisceau d'indices, méthode décrite dans Info IA/plateformes-agreees/cartographie-360-modele.md",
+          "dateReleve": "2026-08-21",
+          "confiance": "moyenne"
+        }
+      ]
+    }
+  ]
+}
