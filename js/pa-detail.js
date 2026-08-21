@@ -126,7 +126,7 @@
     montrer('sec-centralite', 'nav-centralite');
   };
 
-  const renderMarche = (pa) => {
+  const renderMarche = (pa, taxo) => {
     const rc = bloc(pa, 'referencesClients') || {};
     const rep = bloc(pa, 'reputation') || {};
     const dyn = bloc(pa, 'dynamique') || {};
@@ -136,7 +136,7 @@
     const avis = (rep.avis || []).filter((a) => rempli(a.note) || rempli(a.nbAvis));
     document.getElementById('pa-marche').innerHTML = dl([
       ['Références clients par secteur', secteurs.length
-        ? `<ul>${secteurs.map(([sec, l]) => `<li><strong>${sec}</strong> — ${l.join(', ')}</li>`).join('')}</ul>`
+        ? `<ul>${secteurs.map(([sec, l]) => `<li><strong>${label(taxo, 'secteurReferences', sec)}</strong> — ${l.join(', ')}</li>`).join('')}</ul>`
         : NON_RELEVE],
       ['Références citées sur le site', rempli(rc.nbCiteesSurSite) ? String(rc.nbCiteesSurSite) : NON_RELEVE],
       ['Références de l\u2019activité agréée confirmées', (rc.referencesPAConfirmees || []).length ? rc.referencesPAConfirmees.join(', ') : NON_RELEVE],
@@ -150,14 +150,14 @@
     montrer('sec-marche', 'nav-marche');
   };
 
-  const renderLectureConcurrentielle = (pa) => {
+  const renderLectureConcurrentielle = (pa, taxo) => {
     const texte = bloc(pa, 'lectureConcurrentielle');
     const cf = bloc(pa, 'capaciteDeFrappe') || {};
     const dr = bloc(pa, 'droitDeReponse') || {};
     if (!rempli(texte) && !rempli(cf)) return;
     const html = dl([
       ['Actionnaires', (cf.actionnaires || []).length ? cf.actionnaires.join(', ') : NON_RELEVE],
-      ['Type d\u2019actionnaire', val(cf.typeActionnaire)],
+      ['Type d\u2019actionnaire', cf.typeActionnaire ? label(taxo, 'typeActionnaire', cf.typeActionnaire) : TODO],
       ['Financement récent', val(cf.financementRecent)],
       ['Acquisitions', (cf.acquisitions || []).length ? `<ul>${cf.acquisitions.map((x) => `<li>${x}</li>`).join('')}</ul>` : NON_RELEVE],
       ['Modèle tarifaire', val(cf.modeleTarifaire)],
@@ -229,8 +229,8 @@
     renderInternational(pa);
     renderActivite(pa);
     renderCentralite(pa, taxo);
-    renderMarche(pa);
-    renderLectureConcurrentielle(pa);
+    renderMarche(pa, taxo);
+    renderLectureConcurrentielle(pa, taxo);
 
     const meme = all.filter((x) => x.nom !== pa.nom
       && (x.familleOrigine || []).some((f) => (pa.familleOrigine || []).includes(f))

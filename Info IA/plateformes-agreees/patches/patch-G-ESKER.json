@@ -1,0 +1,258 @@
+{
+  "_patch": {
+    "id": "G-ESKER",
+    "chantier": "G — analyse 360",
+    "societe": "ESKER",
+    "auteur": "RFE_WebSite",
+    "dateReleve": "2026-08-21",
+    "nbPlateformes": 1,
+    "note": "Fiche d'étalonnage du chantier 360 sur une société très documentée, afin de calibrer l'indice de centralité avant de le généraliser. CORRECTION APPORTÉE : trancheEffectif passe de 250-499 à 500-999 (INSEE, donnée 2023) ; la descriptionFiche reprenait la tranche erronée, elle est réécrite. NON TROUVÉ dans cette passe, et donc absent du patch : chiffre d'affaires et résultat de la seule entité française (les chiffres publiés sont consolidés et ne permettent pas d'isoler l'entité SIREN 331518498 sur les exercices 2024 et 2025), ventilation du chiffre d'affaires par ligne d'activité (Esker publie une ventilation par modèle de revenus, pas par activité), volume d'offres d'emploi ouvertes (relevé non effectué), part du chiffre d'affaires attribuable à l'activité de plateforme agréée (jamais estimée, par règle). ÉCARTS DE SOURCE SIGNALÉS : le capital social est de 12 144 846 € au RNE (mise à jour du 18/08/2026) et de 12 049 040 € dans les mentions légales du site ; la forme juridique est SAS au répertoire SIRENE et au RNE alors que la dénomination reste SA ESKER et que les mentions légales indiquent encore société anonyme. Le chiffre d'affaires 2025 retenu est celui déclaré par l'entreprise sur son site (environ 250 M€) ; le dernier chiffre issu d'un communiqué financier est 205,3 M€ pour 2024, dont 167,9 M€ de SaaS."
+  },
+  "plateformes": [
+    {
+      "nom": "ESKER",
+      "trancheEffectif": "500-999",
+      "descriptionFiche": "Éditeur lyonnais fondé en 1985, ETI de 500 à 999 salariés en France et de plus de 1 200 salariés dans le monde, positionné sur l'ensemble de la chaîne financière : du Source-to-Pay (achats et fournisseurs) à l'Order-to-Cash (commandes et clients) pour la direction financière. Esker a obtenu le numéro d'immatriculation 0005 de plateforme agréée, délivré le 11/12/2025, et a annoncé son immatriculation définitive le 05/01/2026 ; la plateforme est hébergée en France et certifiée ISO 27001. Actionnariat : Esker a fait l'objet d'une offre publique d'achat amicale initiée par Bridgepoint en association avec General Atlantic et les actionnaires managers (ouverture 02/12/2024, large succès le 15/01/2025, retrait de la cote effectif le 03/03/2025). Le président de l'entité immatriculée est ESKER HOLDING (SIREN 931131338, NAF 70.22Z).",
+      "analyse360": {
+        "metierPrincipal": "Édition d'une suite cloud d'automatisation des processus de la direction financière, sur les deux cycles Source-to-Pay et Order-to-Cash",
+        "activites": [
+          {
+            "libelle": "Order-to-Cash : commandes clients, facturation client, recouvrement, encaissements",
+            "poids": "majeur",
+            "source": "esker.com, pages solutions, relevé 21/08/2026"
+          },
+          {
+            "libelle": "Source-to-Pay : achats, gestion des fournisseurs, comptabilité fournisseurs",
+            "poids": "majeur",
+            "source": "esker.com, pages solutions, relevé 21/08/2026"
+          },
+          {
+            "libelle": "Conformité de facturation électronique internationale, revendiquée dans plus de 60 pays",
+            "poids": "significatif",
+            "source": "Communiqué Esker du 05/01/2026"
+          },
+          {
+            "libelle": "Plateforme agréée pour la facturation électronique en France",
+            "poids": "significatif",
+            "source": "Liste DGFiP, immatriculation n° 0005 du 11/12/2025 ; communiqué Esker du 05/01/2026"
+          },
+          {
+            "libelle": "Services historiques de dématérialisation documentaire, courrier et fax externalisés",
+            "poids": "mineur",
+            "source": "esker.com, page À propos, dates clés 2001-2007, relevé 21/08/2026"
+          }
+        ],
+        "poidsEconomique": {
+          "caGroupe": {
+            "montantMEUR": 250,
+            "exercice": "2025",
+            "nature": "declare_site",
+            "source": "esker.com, page À propos : environ 250 millions d'euros de chiffre d'affaires en 2025",
+            "dateReleve": "2026-08-21"
+          },
+          "effectifGroupe": 1200,
+          "effectifEntite": "500 à 999 salariés (INSEE, donnée 2023)",
+          "ventilationParActivite": {
+            "disponible": false,
+            "motif": "Esker publie une ventilation par modèle de revenus et non par ligne d'activité : le chiffre d'affaires SaaS représentait 82 % de l'activité totale en 2024, soit 167,9 M€ sur 205,3 M€. Aucune ventilation entre Source-to-Pay, Order-to-Cash et facturation électronique n'est publiée, et donc aucune part attribuable à l'activité de plateforme agréée.",
+            "derniereVentilationConnue": null
+          }
+        },
+        "centralitePA": {
+          "indice": 3,
+          "niveau": "axe_strategique",
+          "marqueProduitDediee": null,
+          "entiteJuridiqueDediee": false,
+          "faisceauIndices": [
+            {
+              "signal": "Immatriculation très précoce : numéro 0005, délivré le 11/12/2025 dès la première vague",
+              "sens": "+",
+              "preuve": "Liste DGFiP ; blog Esker mentionnant l'immatriculation n° 0005"
+            },
+            {
+              "signal": "Communiqué de presse consacré à la seule immatriculation définitive, le 05/01/2026",
+              "sens": "+",
+              "preuve": "esker.com, communiqué du 05/01/2026"
+            },
+            {
+              "signal": "Adresse de contact dédiée à l'activité agréée, distincte du contact commercial",
+              "sens": "+",
+              "preuve": "contact-pdp@esker.com, adresse déclarée à la DGFiP"
+            },
+            {
+              "signal": "Participation déclarée aux instances de normalisation : AFNOR, DGFiP, AIFE, FNFE",
+              "sens": "+",
+              "preuve": "esker.com, communiqué du 05/01/2026"
+            },
+            {
+              "signal": "Le socle agréé est distribué à des tiers, ce qui en fait un canal de revenus et pas seulement une brique interne",
+              "sens": "+",
+              "preuve": "Communiqués du 18/03/2026 (plateforme TEDD de Flowwa), du 25/09/2025 (Sinari) et du 17/11/2025 (Amiltone)"
+            },
+            {
+              "signal": "La conformité de facturation électronique est portée comme un enjeu mondial, avec une couverture revendiquée dans plus de 60 pays et une référence explicite à ViDA",
+              "sens": "+",
+              "preuve": "esker.com, communiqué du 05/01/2026"
+            },
+            {
+              "signal": "Aucune marque produit distincte pour l'offre agréée : elle est présentée comme une capacité de la plateforme Esker",
+              "sens": "-",
+              "preuve": "Relevé des pages solutions de esker.com le 21/08/2026"
+            },
+            {
+              "signal": "Aucune entité juridique dédiée : l'immatriculation porte sur la société d'édition elle-même",
+              "sens": "-",
+              "preuve": "SIREN 331518498, entité unique"
+            },
+            {
+              "signal": "Le discours institutionnel principal porte sur l'IA agentique au service de la direction financière, la conformité venant en appui",
+              "sens": "-",
+              "preuve": "esker.com, page À propos et communiqués 2025-2026"
+            }
+          ],
+          "lecture": "Chez Esker, l'activité de plateforme agréée ne serait ni le métier, ni une simple mise en conformité : elle se lirait comme l'un des axes majeurs d'une stratégie de conformité réglementaire mondiale, adossée à un métier de dématérialisation exercé depuis quarante ans. Plusieurs indices convergent : immatriculation en cinquième position, communiqué dédié, contact dédié, présence dans les instances de normalisation, et surtout distribution du socle agréé à des tiers, ce qui transforme l'agrément en canal de revenus et pas seulement en brique de conformité pour la base installée. Deux indices tirent en sens inverse : il n'existe ni marque produit ni entité juridique dédiées, et le discours institutionnel met l'IA agentique au premier plan. L'indice 3 traduit cet équilibre. Il ne serait pas 4 parce que l'entreprise conserverait un objet même sans agrément français, son activité étant l'automatisation des processus financiers et non l'échange réglementaire de factures.",
+          "confiance": "haute"
+        },
+        "referencesClients": {
+          "parSecteur": {
+            "industrie": [
+              "NVIDIA",
+              "Samsung",
+              "Sony",
+              "Siemens",
+              "Whirlpool",
+              "Trek"
+            ],
+            "agroalimentaire": [
+              "Heineken",
+              "Valrhona"
+            ],
+            "retail": [
+              "Linpepco",
+              "McDonald's Force"
+            ],
+            "transport": [
+              "Lufthansa Group Business Services"
+            ]
+          },
+          "grandsComptes": [
+            "NVIDIA",
+            "Samsung",
+            "Sony",
+            "Siemens",
+            "Whirlpool",
+            "Heineken",
+            "Lufthansa Group Business Services"
+          ],
+          "referencesPAConfirmees": [
+            "Plus de 150 PME et ETI raccordées via la plateforme TEDD de Flowwa, adossée au socle agréé Esker (communiqué du 18/03/2026)"
+          ],
+          "source": "Logos et références publiés sur esker.com (page À propos, relevé 21/08/2026) et communiqués de presse Esker 2025-2026. Références déclaratives, portant sur l'ensemble du catalogue et non sur la seule activité agréée."
+        },
+        "reputation": {
+          "avis": [
+            {
+              "plateforme": "Gartner Peer Insights, marché Source-to-Pay Suites",
+              "note": "4,5 sur 5",
+              "nbAvis": 123,
+              "dateReleve": "2026-08-21",
+              "url": "https://www.gartner.com/reviews/market/source-to-pay-suites"
+            }
+          ],
+          "volumeAvis": "eleve",
+          "synthese": "Volume d'avis élevé et note moyenne élevée sur le marché Source-to-Pay de Gartner Peer Insights. Esker revendique par ailleurs une position de Strong Performer dans le Gartner Voice of the Customer Invoice-to-Cash 2025, avec 97 % de clients se déclarant prêts à recommander la solution. Aucun avis individuel n'est repris ici.",
+          "confiance": "moyenne"
+        },
+        "capaciteDeFrappe": {
+          "actionnaires": [
+            "Bridgepoint",
+            "General Atlantic",
+            "actionnaires managers"
+          ],
+          "typeActionnaire": "fonds_pe",
+          "financementRecent": "Offre publique d'achat amicale Bridgepoint et General Atlantic : ouverture le 02/12/2024, large succès annoncé le 15/01/2025, retrait de la cote effectif le 03/03/2025",
+          "acquisitions": [
+            "Cinq sociétés acquises aux États-Unis et en Australie après l'introduction en bourse de 1997 (historique publié par l'entreprise)"
+          ],
+          "modeleTarifaire": "Sur devis",
+          "tarifPublie": false,
+          "offreGratuite": false
+        },
+        "lectureConcurrentielle": "Esker serait, sur le segment ETI et grands comptes, l'un des rares acteurs à cumuler trois atouts rarement réunis : une taille conséquente pour un éditeur français, avec environ 250 M€ de chiffre d'affaires déclarés en 2025 et plus de 1 200 salariés ; une couverture fonctionnelle sur les deux cycles, Source-to-Pay et Order-to-Cash, là où beaucoup de concurrents ne couvrent qu'un des deux ; et une conformité réglementaire revendiquée dans plus de 60 pays, argument décisif face à des groupes multi-pays qui cherchent à éviter un empilement de plateformes nationales. La sortie de la cote en mars 2025, au profit de Bridgepoint et General Atlantic, changerait par ailleurs la nature de sa capacité de frappe : moins de contrainte de publication périodique, et un actionnariat de fonds dont la logique habituelle est l'accélération par acquisitions et l'investissement produit, ici visiblement dirigé vers l'IA agentique. Point le plus notable pour un intégrateur : le socle agréé Esker est distribué par des tiers, sous la marque de l'éditeur partenaire, ce qui signifie que l'on peut se trouver en concurrence avec le socle Esker sans que le nom Esker apparaisse dans l'appel d'offres. Trois cas sont documentés en moins d'un an : Flowwa avec la plateforme TEDD et plus de 150 PME et ETI raccordées, Sinari, et Amiltone.",
+        "droitDeReponse": {
+          "signale": false,
+          "date": null,
+          "objet": null
+        }
+      },
+      "sourcesEnrichissement": [
+        {
+          "champ": "trancheEffectif",
+          "source": "INSEE via annuaire-entreprises.data.gouv.fr, SIREN 331518498 : 500 à 999 salariés, donnée 2023, catégorie ETI. Corrige la valeur 250-499 précédemment enregistrée.",
+          "dateReleve": "2026-08-21",
+          "confiance": "haute"
+        },
+        {
+          "champ": "identite",
+          "source": "annuaire-entreprises.data.gouv.fr et RNE, SIREN 331518498 : dénomination SA ESKER, forme juridique SAS, création le 02/01/1985, immatriculation RNE le 07/02/1985, 113 boulevard de la bataille de Stalingrad 69100 Villeurbanne, APE 58.29C, TVA FR53331518498, capital social 12 144 846 €, clôture au 31/12, 7 établissements dont 2 en activité",
+          "dateReleve": "2026-08-21",
+          "confiance": "haute"
+        },
+        {
+          "champ": "analyse360.poidsEconomique.caGroupe",
+          "source": "esker.com, page À propos : environ 250 millions d'euros de chiffre d'affaires en 2025, plus de 1 200 employés, 15 bureaux, plus de 3 000 clients, plus de 1 120 000 utilisateurs",
+          "dateReleve": "2026-08-21",
+          "confiance": "moyenne"
+        },
+        {
+          "champ": "analyse360.poidsEconomique.ventilationParActivite",
+          "source": "Communiqué Esker du 14/01/2025, activité commerciale du 4e trimestre 2024 : ventes annuelles du groupe 205,3 M€, chiffre d'affaires SaaS 167,9 M€, soit 82 % du total",
+          "dateReleve": "2026-08-21",
+          "confiance": "haute"
+        },
+        {
+          "champ": "analyse360.centralitePA",
+          "source": "Communiqué Esker du 05/01/2026, immatriculation définitive comme plateforme agréée : connexion validée à l'annuaire central et au concentrateur du PPF, interopérabilité validée avec au moins une autre plateforme agréée, hébergement en France, certification ISO 27001, membre AFNOR, DGFiP, AIFE et FNFE, conformité revendiquée dans plus de 60 pays, chiffre d'affaires 2024 de 205,3 M€ dont plus des deux tiers à l'international",
+          "dateReleve": "2026-08-21",
+          "confiance": "haute"
+        },
+        {
+          "champ": "analyse360.centralitePA",
+          "source": "Blog Esker, page consacrée à la liste des plateformes agréées : immatriculation n° 0005",
+          "dateReleve": "2026-08-21",
+          "confiance": "moyenne"
+        },
+        {
+          "champ": "analyse360.centralitePA.faisceauIndices",
+          "source": "Communiqués Esker du 18/03/2026 (plateforme TEDD de Flowwa, plus de 150 PME et ETI), du 25/09/2025 (Sinari) et du 17/11/2025 (Amiltone), attestant la distribution du socle agréé à des tiers",
+          "dateReleve": "2026-08-21",
+          "confiance": "haute"
+        },
+        {
+          "champ": "analyse360.referencesClients",
+          "source": "esker.com, page À propos : logos et références NVIDIA, Whirlpool, Sony, Trek, Heineken, Samsung, Siemens, Linpepco. Communiqués Esker du 02/07/2026 (Valrhona), du 25/03/2026 (McDonald's Force) et du 04/09/2025 (Lufthansa Group Business Services)",
+          "dateReleve": "2026-08-21",
+          "confiance": "moyenne"
+        },
+        {
+          "champ": "analyse360.reputation",
+          "source": "Gartner Peer Insights, marché Source-to-Pay Suites : note 4,5 sur 5 pour 123 avis. Esker, page analystes : Strong Performer au Gartner Voice of the Customer Invoice-to-Cash 2025, 97 % de willingness to recommend",
+          "dateReleve": "2026-08-21",
+          "confiance": "moyenne"
+        },
+        {
+          "champ": "analyse360.capaciteDeFrappe",
+          "source": "Communiqués Esker et Bridgepoint sur l'offre publique d'achat amicale : ouverture 02/12/2024, large succès 15/01/2025, retrait de la cote 03/03/2025",
+          "dateReleve": "2026-08-20",
+          "confiance": "haute"
+        },
+        {
+          "champ": "analyse360.centralitePA.indice",
+          "source": "Lecture Fluxym sur faisceau d'indices, méthode décrite dans Info IA/plateformes-agreees/cartographie-360-modele.md",
+          "dateReleve": "2026-08-21",
+          "confiance": "moyenne"
+        }
+      ]
+    }
+  ]
+}

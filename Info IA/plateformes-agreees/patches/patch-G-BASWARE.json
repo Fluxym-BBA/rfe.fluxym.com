@@ -1,0 +1,228 @@
+{
+  "_patch": {
+    "id": "G-BASWARE",
+    "chantier": "G — analyse 360",
+    "societe": "BASWARE",
+    "auteur": "RFE_WebSite",
+    "dateReleve": "2026-08-21",
+    "nbPlateformes": 1,
+    "note": "Seconde fiche d'étalonnage du chantier 360, choisie pour éprouver le modèle sur une entité dont le siège est étranger. APPORT PRINCIPAL : l'entité immatriculée est finlandaise, mais il existe une filiale française, BASWARE SAS, SIREN 452052780, 20 rue de Caumartin 75009 Paris, créée le 01/01/2004, capital 74 000 €, APE 46.51Z, 20 à 49 salariés en 2023, TVA FR91452052780, dirigeants Jason Kurtz et Martti Nurminen. Ce SIREN est renseigné dans identiteInternationale.presenceEnFrance et NON dans le champ siren de la fiche, qui doit rester celui de l'entité immatriculée : la fiche conserve donc siren à null, ce qui est conforme au modèle et non un manque de donnée. NON TROUVÉ dans cette passe, et donc absent du patch : chiffre d'affaires du groupe (Basware n'est plus cotée depuis le retrait de 2022 et ne publie plus de chiffre d'affaires ; les agrégateurs consultés donnent des valeurs incohérentes entre elles, de 185 à 365 millions de dollars, et sont donc écartés), chiffre d'affaires de la filiale française (comptes non consultés dans cette passe), résultat net, identifiant au registre du commerce finlandais (Y-tunnus non relevé), numéro de TVA finlandais, LEI, EUID, volume d'offres d'emploi, avis publics agrégés (relevé non effectué sur les plateformes d'avis). À SIGNALER POUR LA SUITE : la page de mentions légales du site français et la page clients renvoient une erreur 404 ; les références clients retenues proviennent donc des communiqués et du texte institutionnel."
+  },
+  "plateformes": [
+    {
+      "nom": "BASWARE",
+      "identiteInternationale": {
+        "paysISO": "FI",
+        "registreNational": "Registre finlandais du commerce, tenu par le Patentti- ja rekisterihallitus (PRH)",
+        "formeJuridique": "Osakeyhtiö (Oy), société à responsabilité limitée de droit finlandais, après le retrait de la cote de l'ancienne Basware Oyj",
+        "presenceEnFrance": {
+          "type": "filiale",
+          "siren": "452052780",
+          "preuve": "BASWARE SAS, SIREN 452052780, Édouard VII Building, 20 rue de Caumartin 75009 Paris, créée le 01/01/2004, immatriculée au RNE le 16/02/2004, capital social 74 000 €, APE 46.51Z commerce de gros de logiciels, 20 à 49 salariés en 2023, TVA FR91452052780, 3 établissements dont 1 en activité, dirigeants Jason Kurtz et Martti Nurminen"
+        },
+        "sourceIdentite": "annuaire-entreprises.data.gouv.fr pour la filiale française ; mentions institutionnelles et communiqués du site basware.com pour l'entité finlandaise",
+        "confianceIdentite": "moyenne"
+      },
+      "analyse360": {
+        "metierPrincipal": "Édition d'une plateforme de gestion du cycle de vie de la facture fournisseur, adossée à un réseau propriétaire d'échange de factures",
+        "activites": [
+          {
+            "libelle": "Automatisation de la comptabilité fournisseurs : capture, rapprochement, validation, comptabilisation",
+            "poids": "majeur",
+            "source": "basware.com et communiqué du 12/02/2025"
+          },
+          {
+            "libelle": "Réseau d'échange de factures et conformité de facturation électronique, plus de 50 réglementations couvertes",
+            "poids": "majeur",
+            "source": "Communiqué Basware du 03/09/2024"
+          },
+          {
+            "libelle": "Procure-to-Pay : demandes d'achat, commandes, suivi budgétaire, automatisation des paiements",
+            "poids": "majeur",
+            "source": "basware.com, pages solutions, relevé 21/08/2026"
+          },
+          {
+            "libelle": "Détection de fraude et de trop-payés, audit de récupération (AP Protect, socle Glantus)",
+            "poids": "significatif",
+            "source": "Communiqués Basware sur l'acquisition de Glantus (18/10/2023) et le lancement d'AP Protect (2024)"
+          },
+          {
+            "libelle": "Analyse et pilotage du poste fournisseurs, restitution générative (Basware Insights, CFO Cockpit)",
+            "poids": "significatif",
+            "source": "Communiqué Basware du 12/02/2025"
+          },
+          {
+            "libelle": "Plateforme agréée pour la facturation électronique en France",
+            "poids": "significatif",
+            "source": "Liste DGFiP, immatriculation du 18/12/2025 ; communiqué Basware du 03/09/2024"
+          }
+        ],
+        "poidsEconomique": {
+          "effectifGroupe": 1350,
+          "effectifEntite": "20 à 49 salariés pour BASWARE SAS (INSEE, donnée 2023)",
+          "ventilationParActivite": {
+            "disponible": false,
+            "motif": "Basware n'est plus cotée depuis l'offre publique d'achat de 2022 et ne publie plus ni chiffre d'affaires ni ventilation. Les valeurs proposées par les agrégateurs de données d'entreprises sont incohérentes entre elles et ne sont pas retenues. Aucune part attribuable à l'activité de plateforme agréée n'est donc estimée.",
+            "derniereVentilationConnue": null
+          }
+        },
+        "centralitePA": {
+          "indice": 3,
+          "niveau": "axe_strategique",
+          "marqueProduitDediee": null,
+          "entiteJuridiqueDediee": false,
+          "faisceauIndices": [
+            {
+              "signal": "L'échange de factures est le métier même de l'entreprise : plus de deux milliards de factures traitées depuis 1985, dont environ 230 millions sur la seule année 2024",
+              "sens": "+",
+              "preuve": "Communiqué Basware du 12/02/2025"
+            },
+            {
+              "signal": "La conformité est érigée en axe stratégique, avec la création d'un poste de responsable mondial de la conformité",
+              "sens": "+",
+              "preuve": "Communiqué Basware sur la nomination de Markus Hornburg, Head of Global Compliance"
+            },
+            {
+              "signal": "Communiqué dédié à l'obtention du statut français, publié dès le 03/09/2024, plus de quinze mois avant l'immatriculation",
+              "sens": "+",
+              "preuve": "news.basware.com, communiqué du 03/09/2024"
+            },
+            {
+              "signal": "Participation déclarée au groupe de travail plateformes mis en place par la DGFiP",
+              "sens": "+",
+              "preuve": "Communiqué Basware du 03/09/2024"
+            },
+            {
+              "signal": "Adresse de contact dédiée au dispositif français",
+              "sens": "+",
+              "preuve": "FranceMandate@basware.com, adresse déclarée à la DGFiP"
+            },
+            {
+              "signal": "Le dispositif français est explicitement présenté comme une pièce parmi plus de cinquante réglementations couvertes, et non comme une offre nationale autonome",
+              "sens": "-",
+              "preuve": "Communiqué Basware du 03/09/2024, présentant la France comme une pièce supplémentaire d'une couverture mondiale"
+            },
+            {
+              "signal": "Aucune marque produit ni entité juridique dédiées à l'offre agréée : l'immatriculation porte sur l'entité finlandaise",
+              "sens": "-",
+              "preuve": "Liste DGFiP, adresse Linnoitustie 2, Espoo, Finlande"
+            },
+            {
+              "signal": "Le discours produit met en avant l'automatisation du poste fournisseurs et le retour sur investissement, la conformité venant en appui",
+              "sens": "-",
+              "preuve": "basware.com et communiqué du 12/02/2025"
+            }
+          ],
+          "lecture": "Le cas Basware éclaire une limite du barème : l'échange de factures est ici le métier même de l'entreprise, ce qui pourrait plaider pour l'indice 4, mais l'agrément français n'est pas l'activité, il en est la déclinaison réglementaire dans une juridiction parmi plus de cinquante. L'indice 3 traduit ce raisonnement : la conformité réglementaire mondiale serait un axe stratégique explicite, doté d'un responsable mondial et d'une communication propre, sans être un produit vendu pour lui-même. Réserve utile pour la suite du chantier : l'indice mesure la place de l'activité agréée française, non la proximité du métier avec la facturation électronique en général. Deux entreprises au métier identique peuvent donc recevoir des indices différents selon l'investissement observable sur la France.",
+          "confiance": "moyenne"
+        },
+        "referencesClients": {
+          "nbCiteesSurSite": null,
+          "parSecteur": {
+            "transport": [
+              "DHL"
+            ],
+            "agroalimentaire": [
+              "Heineken"
+            ],
+            "industrie": [
+              "Sony",
+              "Billerud"
+            ]
+          },
+          "grandsComptes": [
+            "DHL",
+            "Heineken",
+            "Sony",
+            "Billerud"
+          ],
+          "referencesPAConfirmees": [],
+          "source": "Communiqué Basware du 12/02/2025 et pages institutionnelles : plus de 6 500 clients dans 16 pays, dont 1 100 clients sur la comptabilité fournisseurs, références citées DHL, Heineken et Sony, témoignage client Billerud. Basware revendique par ailleurs plus de 350 entreprises françaises clientes. Références déclaratives, portant sur l'ensemble du catalogue et non sur la seule activité agréée."
+        },
+        "reputation": {
+          "volumeAvis": null,
+          "synthese": "Aucun relevé d'avis agrégés effectué dans cette passe. Basware est citée comme Leader dans le Forrester Wave Accounts Payable Invoice Automation du troisième trimestre 2024 : il s'agit d'une distinction d'analyste et non d'un avis client.",
+          "confiance": "non_qualifie"
+        },
+        "capaciteDeFrappe": {
+          "actionnaires": [
+            "Accel-KKR",
+            "Long Path Partners",
+            "Briarwood Capital"
+          ],
+          "typeActionnaire": "fonds_pe",
+          "financementRecent": "Offre publique d'achat volontaire du consortium Accel-KKR, Long Path et Briarwood, finalisée en 2022, valorisant Basware autour de 620 millions d'euros et suivie du retrait de la cote d'Helsinki",
+          "acquisitions": [
+            "Glantus Holdings PLC, éditeur irlandais d'audit de récupération et de prévention de la fraude, acquisition effective le 18/10/2023",
+            "AP Matching, rapprochement de relevés fournisseurs, 2024"
+          ],
+          "modeleTarifaire": "Sur devis, abonnement combiné à une facturation au document selon les sources tierces",
+          "tarifPublie": false,
+          "offreGratuite": false
+        },
+        "lectureConcurrentielle": "Basware serait un concurrent d'une nature différente de celle des acteurs français du référentiel : éditeur finlandais de plus de 1 350 salariés dans 16 pays, revendiquant plus de 6 500 clients et environ 230 millions de factures traitées par an, dont le métier est précisément l'objet de la réforme. Trois traits méritent l'attention. D'abord une capacité de frappe adossée à des fonds d'investissement : le consortium Accel-KKR, Long Path et Briarwood a racheté la société pour environ 620 millions d'euros en 2022, et deux acquisitions ont suivi, Glantus en 2023 puis AP Matching en 2024, ce qui traduit une stratégie de consolidation active. Ensuite un positionnement assumé sur le seul poste fournisseurs : la couverture est profonde sur le Procure-to-Pay mais ne comporte pas de volet Order-to-Cash, ce qui laisse une place à un discours de couverture des deux cycles. Enfin une stratégie de partenariats revendiquée comme prioritaire, avec KPMG, Deloitte et Accenture cités nommément : sur un grand compte, Basware peut arriver portée par un cabinet de conseil plutôt que par un cycle de vente direct. Point d'attention pour la France : le référentiel enregistre une entité finlandaise, mais il existe une filiale française de 20 à 49 salariés à Paris depuis 2004, donc une présence commerciale locale ancienne, sans commune mesure avec la taille de l'entité immatriculée.",
+        "droitDeReponse": {
+          "signale": false,
+          "date": null,
+          "objet": null
+        }
+      },
+      "sourcesEnrichissement": [
+        {
+          "champ": "identiteInternationale.presenceEnFrance",
+          "source": "annuaire-entreprises.data.gouv.fr, BASWARE SAS SIREN 452052780 : 20 rue de Caumartin 75009 Paris, création 01/01/2004, immatriculation RNE 16/02/2004, capital 74 000 €, APE 46.51Z, 20 à 49 salariés en 2023, TVA FR91452052780, dirigeants Jason Kurtz et Martti Nurminen",
+          "dateReleve": "2026-08-21",
+          "confiance": "haute"
+        },
+        {
+          "champ": "analyse360.activites",
+          "source": "news.basware.com, communiqué du 12/02/2025 : plus de deux milliards de factures traitées, 230 millions sur douze mois, 10 100 milliards de dollars de dépenses gérées, plus de 6 500 clients dont 1 100 sur la comptabilité fournisseurs, dans 16 pays, lancement d'AP Protect et du CFO Cockpit, Leader au Forrester Wave AP Invoice Automation T3 2024",
+          "dateReleve": "2026-08-21",
+          "confiance": "haute"
+        },
+        {
+          "champ": "analyse360.centralitePA",
+          "source": "news.basware.com, communiqué du 03/09/2024 : enregistrement officiel auprès de la DGFiP, membre du groupe de travail plateformes, plus de 50 réglementations locales couvertes, plus de 40 ans d'expertise, plus de 220 millions de factures par an",
+          "dateReleve": "2026-08-21",
+          "confiance": "haute"
+        },
+        {
+          "champ": "analyse360.poidsEconomique.effectifGroupe",
+          "source": "basware.com, page anniversaire des 40 ans : plus de 1 350 salariés dans 16 pays, 35 nationalités",
+          "dateReleve": "2026-08-21",
+          "confiance": "moyenne"
+        },
+        {
+          "champ": "analyse360.capaciteDeFrappe",
+          "source": "Communiqués Accel-KKR sur l'offre publique d'achat volontaire portant sur la totalité des actions Basware et sur sa finalisation ; presse spécialisée mentionnant un prix d'acquisition d'environ 620 millions d'euros",
+          "dateReleve": "2026-08-21",
+          "confiance": "moyenne"
+        },
+        {
+          "champ": "analyse360.capaciteDeFrappe.acquisitions",
+          "source": "news.basware.com, communiqués sur l'acquisition de Glantus Holdings PLC, effective le 18/10/2023, et sur l'acquisition d'AP Matching en 2024",
+          "dateReleve": "2026-08-21",
+          "confiance": "haute"
+        },
+        {
+          "champ": "analyse360.referencesClients",
+          "source": "news.basware.com, communiqué du 12/02/2025, section institutionnelle : clients cités DHL, Heineken et Sony, témoignage Billerud. Page française de Basware consacrée à la réforme : plus de 350 entreprises françaises clientes",
+          "dateReleve": "2026-08-21",
+          "confiance": "moyenne"
+        },
+        {
+          "champ": "analyse360.capaciteDeFrappe.modeleTarifaire",
+          "source": "Comparateur tiers citant le Grand Benchmark des Plateformes Agréées de The Invoicing Hub, 3e édition, avril 2026 : modèle combinant abonnement et facturation au document, tarif sur devis",
+          "dateReleve": "2026-08-21",
+          "confiance": "faible"
+        },
+        {
+          "champ": "analyse360.centralitePA.indice",
+          "source": "Lecture Fluxym sur faisceau d'indices, méthode décrite dans Info IA/plateformes-agreees/cartographie-360-modele.md",
+          "dateReleve": "2026-08-21",
+          "confiance": "moyenne"
+        }
+      ]
+    }
+  ]
+}

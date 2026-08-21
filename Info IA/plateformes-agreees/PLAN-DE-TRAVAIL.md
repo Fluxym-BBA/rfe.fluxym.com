@@ -1,7 +1,7 @@
 # Plan de travail — Référentiel des plateformes agréées
 
 **Emplacement dans le dépôt :** `Info IA/plateformes-agreees/`
-**Dernière mise à jour :** 21/08/2026 (soir — réorientation 360)
+**Dernière mise à jour :** 21/08/2026 (soir — étalonnage du barème sur Esker et Basware)
 **Fichier cible unique :** `data/plateformes-agreees.json`
 **Définition des champs :** `data/pa-taxonomie.json`
 **Finalité du référentiel :** analyse 360 des entreprises porteuses des plateformes agréées — voir `cartographie-360-modele.md`
@@ -72,7 +72,15 @@ Le code est terminé et en production. **Tout ce qui reste est de la donnée.**
 8. **La ventilation du CA par activité n'est jamais estimée.** Elle n'est publique que pour les sociétés cotées. `ventilationParActivite.disponible: false` est une réponse valide et attendue.
 9. **CA groupe et CA de l'entité française sont deux champs distincts.** Les confondre est la faute la plus fréquente du marché (cas Generix : 110 M€ groupe contre 60,4 M€ pour l'entité).
 10. **Le référentiel n'est pas indexable.** Toute nouvelle page porte `<meta name="robots" content="noindex, nofollow">`, conformément à la consigne applicable à l'ensemble du site.
-11. **Rien ne sera publié sur les conditions réglementaires applicables aux PA étrangères** (établissement stable, représentant, hébergement) avant lecture des textes primaires : art. 290 B CGI, art. 242 nonies B ann. II, décret n° 2024-266.
+11. **Barème de centralité — cinq règles actées le 21/08/2026** après étalonnage sur Esker et Basware (détail et démonstration dans `ETALONNAGE-360-ESKER-BASWARE.md`) :
+    a. l'indice mesure la place de l'activité **agréée française**, non la proximité du métier avec la facturation électronique ; l'indice 4 est réservé aux sociétés qui n'auraient plus d'objet sans elle ;
+    b. la distribution du socle agréé à des tiers est un indice fort de centralité, jamais un critère suffisant à lui seul ;
+    c. trois ancrages de poids économique sont distingués et jamais mélangés : chiffre déclaré sur le site, chiffre issu d'un communiqué financier daté, comptes déposés de l'entité ; `caGroupe.nature` dit lequel est retenu ;
+    d. **les agrégateurs de données d'entreprises ne sont pas une source** : constat établi sur Generix (243,7 M$ affichés contre 60,4 M€ déposés) puis sur Basware (185 à 365 M$ selon l'agrégateur) ;
+    e. une ventilation par **modèle de revenus** (part du SaaS) n'est pas une ventilation par **activité** : elle va dans le motif de non-disponibilité, jamais en réponse à la question posée.
+12. **Pour une entité étrangère, la question n'est pas « a-t-elle un SIREN ? » mais « existe-t-il une entité française rattachée ? »**, décidé le 21/08/2026 sur le cas Basware. Le SIREN de la filiale va dans `identiteInternationale.presenceEnFrance.siren` et **jamais** dans le champ `siren` de la fiche, qui reste celui de l'entité immatriculée. `presenceEnFrance` devient l'un des premiers champs à renseigner du chantier F.
+13. **Le relevé des offres d'emploi se fait en une passe unique à date fixe** sur toute la cohorte ETI et grands comptes, et non société par société : un volume d'offres n'a de sens que comparé à une même date.
+14. **Rien ne sera publié sur les conditions réglementaires applicables aux PA étrangères** (établissement stable, représentant, hébergement) avant lecture des textes primaires : art. 290 B CGI, art. 242 nonies B ann. II, décret n° 2024-266.
 
 ---
 
@@ -104,7 +112,8 @@ Un patch par société : `patches/patch-G-<NOM>.json`.
 | Vague | Périmètre | Statut |
 |---|---|---|
 | Pilote | GENERIX Group — `pilote-360-GENERIX.md` | ✅ méthode éprouvée, non fusionné |
-| G1 | 30 sociétés par cercles concurrentiels — voir `PRIORISATION-CONCURRENCE.md` | à lancer |
+| Étalonnage | ESKER et BASWARE — `ETALONNAGE-360-ESKER-BASWARE.md` | ✅ barème calibré, 5 règles ajoutées, patches `patch-G-ESKER.json` et `patch-G-BASWARE.json` non fusionnés |
+| G1 | 30 sociétés par cercles concurrentiels — voir `PRIORISATION-CONCURRENCE.md` | à lancer, prochaine société : GEP |
 | G2 | reprise 360 des sociétés déjà qualifiées du cercle 1 (Pagero, Sovos, Comarch, Opentext, Generix, Cegid, Sage) | à lancer |
 | G3 | pure-players et entités créées pour la réforme | à lancer |
 | G4 | cercle 3 — fiches allégées mais sourcées, ~90 sociétés | permanent |
@@ -116,6 +125,7 @@ Un patch par société : `patches/patch-G-<NOM>.json`.
 ## Prérequis technique du chantier F
 
 `merge-plateformes.html` doit fusionner les blocs `identiteInternationale` **et** `analyse360` **clé par clé**, comme il le fait déjà pour `socleTechnique`. À faire **avant** le dépôt du premier patch F ou G.
+→ **Fait** (version 3 du fichier, 21/08/2026) : fusion profonde générique pilotée par `blocsStructures.fusionProfonde` de `data/pa-taxonomie.json`, et `sourcesEnrichissement` cumulatif avec dédoublonnage. Fusion des deux patches d'étalonnage simulée à blanc le 21/08/2026 : deux écrasements, tous deux intentionnels (`ESKER.trancheEffectif`, `ESKER.descriptionFiche`), 11 sources ajoutées à Esker sur 8 conservées, 9 ajoutées à Basware sur 7 conservées.
 
 ## Prérequis d'affichage du chantier G
 
