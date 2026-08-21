@@ -31,6 +31,7 @@
                 <li><code>sourcesEnrichissement</code> est <strong>cumulé</strong>, dédoublonné sur le couple (<code>champ</code>, <code>source</code>) : un patch ne déclare que ses propres sources, jamais celles des autres.</li>
                 <li><code>socleTechnique</code>, <code>identiteInternationale</code> et <code>analyse360</code> sont fusionnés <strong>clé par clé, récursivement</strong> : les sous-clés absentes du patch sont conservées. Un patch peut donc renseigner <code>analyse360.centralitePA</code> sans effacer <code>analyse360.poidsEconomique</code>.</li>
                 <li>La liste des blocs à fusion profonde est lue dans <code>data/pa-taxonomie.json</code> → <code>blocsStructures.fusionProfonde</code>. Ajouter un bloc au schéma suffit : cet utilitaire n'est pas à modifier.</li>
+                <li><code>sourcesEnrichissement</code> est <strong>cumulatif</strong> : les entrées du patch sont ajoutées à celles déjà présentes, avec dédoublonnage à l'identique. Un patch qui documente un seul champ n'efface plus l'historique de sourçage de la fiche.</li>
                 <li>Rappel de méthode : un patch du chantier G porte sur <strong>une seule société</strong>, et <code>ventilationParActivite.disponible: false</code> est une valeur attendue, pas un champ à combler.</li>
                 <li>Les autres tableaux et les valeurs simples sont <strong>remplacés</strong>. Tout écrasement d'une valeur déjà renseignée est signalé dans le journal.</li>
                 <li><code>lot</code> n'est plus écrasé : les lots contributeurs sont cumulés dans <code>lotsContributeurs</code>.</li>
@@ -79,6 +80,11 @@
                 'analyse360.droitDeReponse'
             ];
             let profonds = new Set(PROFONDS_DEFAUT);
+
+            // Champs cumulatifs : un patch AJOUTE ses entrées au lieu de remplacer le tableau.
+            // Les sources d'enrichissement sont par nature cumulatives : un patch qui ne
+            // documente qu'un champ ne doit pas effacer l'historique de sourçage des autres.
+            const CUMULATIFS = ['sourcesEnrichissement'];
             const log = document.getElementById('log');
             const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
             const say = (msg, cls = '') => { log.innerHTML += `<span class="${cls}">${msg}</span>\n`; log.scrollTop = log.scrollHeight; };
@@ -170,6 +176,14 @@
                     const champs = [];
                     Object.entries(p).forEach(([k, v]) => {
                         if (k === 'nom') return;
+                        if (CUMULATIFS.includes(k) && Array.isArray(v)) {
+                            const existant = Array.isArray(cible[k]) ? cible[k] : [];
+                            const vus = new Set(existant.map((e) => JSON.stringify(e)));
+                            const ajouts = v.filter((e) => !vus.has(JSON.stringify(e)));
+                            cible[k] = [...existant, ...ajouts];
+                            champs.push(`${k} (+${ajouts.length}, ${existant.length} conservée(s))`);
+                            return;
+                        }
                         if (profonds.has(k) && estObjet(v)) {
                             const sousCles = fusionnerProfond(cible, k, v, k);
                             champs.push(`${k} (${sousCles.length} sous-clé(s) : ${sousCles.join(', ')})`);

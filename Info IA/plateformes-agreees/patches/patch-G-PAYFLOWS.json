@@ -1,0 +1,64 @@
+{
+  "_patch": {
+    "id": "G-PAYFLOWS",
+    "chantier": "G — analyse 360",
+    "societe": "PAYFLOWS",
+    "auteur": "RFE_WebSite",
+    "dateReleve": "2026-08-21",
+    "nbPlateformes": 1,
+    "note": "Fiche témoin du chantier 360, choisie parce que Payflows est un angle mort documenté : acteur récent et de petite taille, positionné sur le segment ETI et grands comptes. NON TROUVÉ dans cette passe, et donc absent du patch : chiffre d'affaires et résultat (aucun compte déposé accessible publiquement, société créée en 2022), montant et tour de table des levées de fonds (aucune source primaire fiable), références clients nominatives (aucune page client publique identifiée), avis publics (aucun avis identifié sur les plateformes professionnelles), offres d'emploi (relevé non effectué). L'effectif retenu est celui de l'INSEE, donnée 2023, donc ancienne : à réactualiser. Observation majeure conservée de la qualification du 20/08 : le site est en anglais et ne comporte aucune page dédiée à la plateforme agréée ni à la réforme française."
+  },
+  "plateformes": [
+    {
+      "nom": "PAYFLOWS",
+      "analyse360": {
+        "metierPrincipal": "Édition d'une plateforme de gestion financière modulaire, en surcouche du grand livre comptable",
+        "activites": [
+          { "libelle": "Comptabilité fournisseurs (AP) et clients (AR)", "poids": "majeur", "source": "Annuaire public de plateformes agréées, relevé 21/08/2026" },
+          { "libelle": "Achats : demandes d'achat et contrats fournisseurs", "poids": "majeur", "source": "Annuaire public de plateformes agréées, relevé 21/08/2026" },
+          { "libelle": "Trésorerie, paiements et rapprochement bancaire", "poids": "majeur", "source": "Annuaire public de plateformes agréées, relevé 21/08/2026" },
+          { "libelle": "Automatisation financière par agents IA", "poids": "significatif", "source": "Presse spécialisée, relevé 21/08/2026" },
+          { "libelle": "Plateforme agréée pour la facturation électronique", "poids": "significatif", "source": "Liste DGFiP, immatriculation du 15/04/2026" }
+        ],
+        "poidsEconomique": {
+          "effectifEntite": "10 à 19 salariés",
+          "ventilationParActivite": {
+            "disponible": false,
+            "motif": "Société non cotée, créée en 2022, aucun compte déposé accessible publiquement. Aucune ventilation par activité, et donc aucune part attribuable à l'activité de plateforme agréée."
+          }
+        },
+        "centralitePA": {
+          "indice": 2,
+          "niveau": "extension_naturelle",
+          "marqueProduitDediee": null,
+          "entiteJuridiqueDediee": false,
+          "faisceauIndices": [
+            { "signal": "Le métier d'origine est l'automatisation du poste fournisseurs et clients : la facturation électronique en est le prolongement direct", "sens": "+", "preuve": "Description de la plateforme : demandes d'achat, contrats fournisseurs, paiements, rapprochement bancaire" },
+            { "signal": "Immatriculation en vague 2, le 15/04/2026, soit tôt pour une société de moins de vingt salariés", "sens": "+", "preuve": "Liste DGFiP" },
+            { "signal": "Aucune page du site consacrée à la plateforme agréée ni à la réforme française", "sens": "-", "preuve": "Relevé du site, 20/08/2026 : site en anglais, aucun contenu sur le sujet" },
+            { "signal": "Aucune marque produit dédiée à l'offre agréée", "sens": "-", "preuve": "Relevé du site, 21/08/2026" },
+            { "signal": "Le discours produit porte sur l'automatisation financière et l'IA, pas sur la conformité réglementaire", "sens": "-", "preuve": "Presse spécialisée et site, relevé 21/08/2026" }
+          ],
+          "lecture": "L'activité de plateforme agréée serait chez Payflows une brique de conformité intégrée à une plateforme financière plus large, et non une offre commercialisée pour elle-même. L'immatriculation précoce, rapportée à la taille de la société, suggérerait toutefois un choix délibéré plutôt qu'une mise en conformité subie : elle permet de traiter le flux réglementaire sans dépendre d'un tiers, donc de conserver la maîtrise complète du poste fournisseurs de ses clients. Cette lecture reste à confirmer, notamment par un relevé des offres d'emploi.",
+          "confiance": "moyenne"
+        },
+        "capaciteDeFrappe": {
+          "modeleTarifaire": "Sur devis",
+          "tarifPublie": false,
+          "offreGratuite": false
+        },
+        "lectureConcurrentielle": "Payflows présenterait le profil type de l'angle mort sur le segment ETI : société récente, créée en avril 2022, effectif INSEE de 10 à 19 salariés en 2023, capital social nominal de 1 826,90 euros caractéristique d'un financement par augmentations de capital successives, et pourtant un positionnement explicite sur les directions financières d'ETI et de grands groupes. Sa visibilité sur le marché français de la facturation électronique serait quasi nulle — site en anglais, aucun contenu sur la réforme, aucune marque produit dédiée — ce qui la rend indétectable par une veille fondée sur le discours public. Sur les seize plateformes en concurrence frontale sur ce segment, elle serait la seule de nature diversification, les quinze autres étant des extensions de métier de dématérialisation installées de longue date. Cette configuration — nature diversification, segment ETI ou grands comptes, création postérieure à 2018 — constitue le motif de détection à surveiller sur l'ensemble du référentiel.",
+        "droitDeReponse": { "signale": false, "date": null, "objet": null }
+      },
+      "sourcesEnrichissement": [
+        { "champ": "identite", "source": "annuaire-entreprises.data.gouv.fr, SIREN 912610649 — SAS créée le 09/04/2022, 17 rue de la Comète 75007 Paris, APE 58.29C édition de logiciels applicatifs, TVA FR72912610649, capital social 1 826,90 euros, clôture au 31/12, 1 établissement", "dateReleve": "2026-08-21", "confiance": "haute" },
+        { "champ": "analyse360.poidsEconomique.effectifEntite", "source": "INSEE via annuaire-entreprises.data.gouv.fr — 10 à 19 salariés, donnée 2023, catégorie PME", "dateReleve": "2026-08-21", "confiance": "haute" },
+        { "champ": "analyse360.activites", "source": "Annuaire public de plateformes agréées — plateforme de gestion financière couvrant achats, trésorerie, comptabilité fournisseurs et clients ; traitement des demandes d'achat, contrats fournisseurs, paiements et rapprochement bancaire", "dateReleve": "2026-08-21", "confiance": "moyenne" },
+        { "champ": "analyse360.activites", "source": "Presse spécialisée — positionnement sur l'automatisation financière par agents IA, en surcouche du grand livre", "dateReleve": "2026-08-21", "confiance": "moyenne" },
+        { "champ": "analyse360.centralitePA", "source": "Relevé du site payflows.io le 20/08/2026 : site en anglais, aucune page dédiée à la plateforme agréée ni à la réforme française", "dateReleve": "2026-08-20", "confiance": "haute" },
+        { "champ": "analyse360.capaciteDeFrappe.modeleTarifaire", "source": "Annuaire public de plateformes agréées — tarification sur devis, aucune page de tarifs publique", "dateReleve": "2026-08-21", "confiance": "moyenne" },
+        { "champ": "analyse360.centralitePA.indice", "source": "Lecture Fluxym sur faisceau d'indices, méthode décrite dans Info IA/plateformes-agreees/cartographie-360-modele.md", "dateReleve": "2026-08-21", "confiance": "moyenne" }
+      ]
+    }
+  ]
+}

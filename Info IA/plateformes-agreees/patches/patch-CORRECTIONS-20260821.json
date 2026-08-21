@@ -1,0 +1,42 @@
+{
+  "_patch": {
+    "id": "CORRECTIONS-20260821",
+    "chantier": "Corrections de données — segments manquants et pays mal déduit",
+    "auteur": "RFE_WebSite",
+    "dateReleve": "2026-08-21",
+    "nbPlateformes": 4,
+    "note": "Corrections issues de l'analyse du référentiel complet du 21/08/2026. 1) Trois acteurs de famille s2p portaient une familleOrigine sans segmentCible : ils étaient donc invisibles de tout filtre par segment, alors que deux d'entre eux sont des concurrents frontaux du portefeuille Fluxym. 2) GEP portait pays=France alors que l'adresse publiée par la DGFiP est à Espoo, en Finlande : le pays est une donnée déduite de l'adresse et la déduction était fausse. L'entité immatriculée correspond à l'héritage du rachat d'OpusCapita, éditeur finlandais, ce qui rend l'adresse cohérente. natureEntite complété en conséquence. Le siren de GEP reste absent : aucune source publique fiable trouvée pour une entité française, ce qui est cohérent avec une entité finlandaise. 3) LUCCA est corrigée en tpe_pme + eti et non en eti + grands_comptes : les sources publiques convergent sur une cible PME et ETI, contrairement à l'hypothèse de travail de la note de priorisation. 4) NON TRAITÉ, à vérifier : MEDIUS porte pays=France alors que le groupe est suédois (Linköping). L'adresse publiée par la DGFiP n'a pas été vérifiée dans cette passe : la correction n'est donc pas appliquée."
+  },
+  "plateformes": [
+    {
+      "nom": "ITESOFT",
+      "segmentCible": ["eti", "grands_comptes"],
+      "sourcesEnrichissement": [
+        { "champ": "segmentCible", "source": "Le Figaro, 23/09/2025 — l'offre Streamline Invoices s'adresse à l'ensemble des grands comptes et ETI, dans plus de 35 pays", "dateReleve": "2026-08-21", "confiance": "haute" }
+      ]
+    },
+    {
+      "nom": "MEDIUS",
+      "segmentCible": ["eti", "grands_comptes"],
+      "sourcesEnrichissement": [
+        { "champ": "segmentCible", "source": "Comparateur public de plateformes agréées — Medius, éditeur suédois de Linköping, suite P2P déployée dans 116 pays, plus de 4 000 clients ETI et grands comptes", "dateReleve": "2026-08-21", "confiance": "moyenne" }
+      ]
+    },
+    {
+      "nom": "LUCCA",
+      "segmentCible": ["tpe_pme", "eti"],
+      "sourcesEnrichissement": [
+        { "champ": "segmentCible", "source": "Annuaires publics de plateformes agréées — Lucca positionnée sur les PME et ETI, tarification à la facture. Cible grands comptes non documentée.", "dateReleve": "2026-08-21", "confiance": "moyenne" }
+      ]
+    },
+    {
+      "nom": "GEP",
+      "pays": "Finlande",
+      "natureEntite": "extension_demat",
+      "sourcesEnrichissement": [
+        { "champ": "pays", "source": "Liste DGFiP des plateformes agréées — adresse publiée : Innopoli 2, Tekniikantie 14, 02600 Espoo, Finlande. Le champ pays valait France par déduction erronée de l'adresse.", "dateReleve": "2026-08-21", "confiance": "haute" },
+        { "champ": "natureEntite", "source": "Comparateur public de plateformes agréées — le module de facturation électronique de la suite achats et supply chain de GEP est hérité du rachat d'OpusCapita, éditeur finlandais : émission, réception et conformité dans plus de 80 pays, raccordement Peppol. Cohérent avec l'adresse d'Espoo.", "dateReleve": "2026-08-21", "confiance": "moyenne" }
+      ]
+    }
+  ]
+}
