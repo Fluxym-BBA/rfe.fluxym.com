@@ -321,6 +321,14 @@ const PDFLisible = {
         // (9930 numero de TVA allemand, 9927 numero IDE suisse...).
         const ep = p.endpointId || endpoint;
         if (ep) out.push('Adr. \u00e9lectronique (' + (p.endpointScheme || '0225') + ') : ' + ep);
+        // BG-6 / BG-9 : le point de contact. C'est par lui que passent les
+        // relances et les litiges : une facture reelle l'imprime, il doit donc
+        // etre lisible et pas seulement structure.
+        const c = p.contact;
+        if (c && c.name) out.push('Contact : ' + c.name);
+        if (c && (c.phone || c.email)) {
+            out.push([c.phone, c.email].filter(function (v) { return v; }).join('  |  '));
+        }
         return out;
     },
 
@@ -332,10 +340,17 @@ const PDFLisible = {
         const a = d.delivery.address;
         if (a) {
             if (a.street) out.push(a.street);
+            // BT-36 : la ligne d'adresse complementaire porte le batiment, le
+            // quai de reception ou l'etage. La perdre au rendu rendrait
+            // l'adresse inexploitable pour une livraison reelle.
+            if (a.street2) out.push(a.street2);
             const c = ((a.zip || '') + ' ' + (a.city || '')).trim();
             if (c) out.push(c);
             if (a.country) out.push(this.COUNTRY_LABELS[a.country] || a.country);
         }
+        // BT-71 : identifiant du lieu de livraison, le SIRET de l'etablissement
+        // livre lorsqu'il differe du siege de l'acheteur.
+        if (d.delivery.locationId) out.push('SIRET du lieu livr\u00e9 : ' + d.delivery.locationId);
         return out.length ? out : null;
     },
 
@@ -352,6 +367,11 @@ const PDFLisible = {
         if (d.precedingInvoice && d.precedingInvoice.id) {
             refs.push(['Facture d\u2019origine', d.precedingInvoice.id]);
         }
+        // BT-12 et BT-19 : le numero de contrat et l'imputation comptable de
+        // l'acheteur sont ce qui permet a son service comptable de rapprocher
+        // la facture. Ils appartiennent a la carte d'identite du document.
+        if (d.contractRef) refs.push(['Contrat', d.contractRef]);
+        if (d.accountingCost) refs.push(['R\u00e9f. comptable', d.accountingCost]);
         return refs;
     },
 
@@ -389,7 +409,10 @@ const PDFLisible = {
         this._txt(ctx, M, top - 25, d.supplier.name, { size: 15, bold: true, color: this.C.navy });
         let sy = top - 41;
         // La premiere ligne est le nom, deja affiche en titre juste au-dessus.
-        this._partyLines(d.supplier, d.supplierEndpoint).slice(1, 8).forEach((l) => {
+        // La borne haute suit le nombre reel de lignes d'identite : depuis
+        // l'ajout de BG-6, l'emetteur en compte jusqu'a neuf et une borne fixe
+        // aurait silencieusement coupe le point de contact.
+        this._partyLines(d.supplier, d.supplierEndpoint).slice(1, 10).forEach((l) => {
             this._txt(ctx, M, sy, this._fit(l, 8.0, 300), { size: 8.0, color: this.C.muted });
             sy -= 11;
         });
@@ -452,6 +475,15 @@ const PDFLisible = {
             'Conditions de r\u00e8glement : ' + (d.paymentTerms || 'Paiement \u00e0 30 jours'),
             (d.delivery && d.delivery.date) ? 'Date de livraison : ' + this._date(d.delivery.date) : null
         ]);
+        // BG-14 : periode couverte par la facture. Mention attendue des qu'une
+        // prestation s'etale dans le temps, et point de controle de l'exercice
+        // de rattachement pour la comptabilite de l'acheteur.
+        if (d.period && (d.period.start || d.period.end)) {
+            bandLines.push([
+                'P\u00e9riode de facturation : ' + this._date(d.period.start) + ' au ' + this._date(d.period.end),
+                null
+            ]);
+        }
 
         const bandH = 8 + 12 * bandLines.length;
         this._roundRect(ctx, M, ay + 13 - bandH, R - M, bandH, 3, this.C.light, null);
@@ -620,6 +652,15 @@ const PDFLisible = {
         }
         if (d.iban) {
             payLines.push('IBAN : ' + d.iban + (d.bic ? '   BIC : ' + d.bic : ''));
+            // BT-85 : titulaire du compte credite. Sur une facture affacturee,
+            // il ne porte pas le nom du vendeur : l'afficher evite au payeur de
+            // croire a une fraude au changement de coordonnees bancaires.
+            if (d.accountName) payLines.push('Titulaire du compte : ' + d.accountName);
+        }
+        // BT-83 : reference que le payeur doit rappeler en libelle de virement.
+        // Sans elle, l'encaissement ne peut pas etre lettre automatiquement.
+        if (d.paymentReference) {
+            payLines.push('R\u00e9f\u00e9rence \u00e0 rappeler : ' + d.paymentReference);
         }
 
         const ph = 20 + 12 * payLines.length + 3;

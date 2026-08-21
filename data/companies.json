@@ -10,12 +10,18 @@
         "street": "12 rue de la République",
         "city": "LYON",
         "zip": "69009",
-        "country": "FR"
+        "country": "FR",
+        "street2": "Batiment A - 3e etage"
       },
       "nic": "00018",
       "iban": "FR7630004170100001234567805",
       "bic": "BNPAFRPPXXX",
-      "legalForm": "SAS au capital de 250 000 euros - RCS Lyon 331 518 498"
+      "legalForm": "SAS au capital de 250 000 euros - RCS Lyon 331 518 498",
+      "contact": {
+        "name": "Service Facturation Clients",
+        "phone": "+33 4 72 85 31 20",
+        "email": "facturation@acme-france.fr"
+      }
     },
     {
       "id": "fluxym_fr",
@@ -27,12 +33,18 @@
         "street": "3 rue de la Faisanderie",
         "city": "PARIS",
         "zip": "75116",
-        "country": "FR"
+        "country": "FR",
+        "street2": "Immeuble Le Faisan - 2e etage"
       },
       "nic": "00007",
       "iban": "FR7630002005500000765432174",
       "bic": "CRLYFRPPXXX",
-      "legalForm": "SAS au capital de 100 000 euros - RCS Paris 442 654 927"
+      "legalForm": "SAS au capital de 100 000 euros - RCS Paris 442 654 927",
+      "contact": {
+        "name": "Service Administration des Ventes",
+        "phone": "+33 1 53 70 24 10",
+        "email": "adv@fluxym.com"
+      }
     }
   ],
   "buyers": [
@@ -47,7 +59,8 @@
         "street": "10 avenue du Maréchal Foch",
         "city": "VILLEFRANCHE-SUR-MER",
         "zip": "06230",
-        "country": "FR"
+        "country": "FR",
+        "street2": "Batiment Le Phare - 4e etage"
       },
       "buyerReference": "REF-KREAMOB-2026",
       "deliveryName": "KREAMOB – Entrepôt Logistique Sud",
@@ -55,8 +68,17 @@
         "street": "ZI des Trois Moulins, 45 chemin des Cistes",
         "city": "ANTIBES",
         "zip": "06600",
-        "country": "FR"
-      }
+        "country": "FR",
+        "street2": "Quai 7 - Reception marchandises"
+      },
+      "contact": {
+        "name": "Service Comptabilite Fournisseurs",
+        "phone": "+33 4 93 76 55 41",
+        "email": "compta.fournisseurs@kreamob.fr"
+      },
+      "accountingCost": "CC-4521-ACHATS-GEN",
+      "contractRef": "CONTRAT-2025-KRE-0147",
+      "deliveryLocationId": "33319112000042"
     }
   ],
   "factors": [
@@ -72,9 +94,15 @@
         "street": "10 rue des Émeraudes",
         "city": "LYON",
         "zip": "69006",
-        "country": "FR"
+        "country": "FR",
+        "street2": "Immeuble Les Emeraudes - 5e etage"
       },
-      "legalForm": "SAS au capital de 500 000 euros - RCS Lyon 999 999 998"
+      "legalForm": "SAS au capital de 500 000 euros - RCS Lyon 999 999 998",
+      "contact": {
+        "name": "Service Recouvrement",
+        "phone": "+33 4 26 68 71 30",
+        "email": "recouvrement@eskerfactor.fr"
+      }
     }
   ],
   "thirdParties": [
@@ -90,7 +118,13 @@
         "street": "24 boulevard Vivier Merle",
         "city": "LYON",
         "zip": "69003",
-        "country": "FR"
+        "country": "FR",
+        "street2": "Tour Oxygene - 8e etage"
+      },
+      "contact": {
+        "name": "Service Prise en Charge",
+        "phone": "+33 4 72 91 08 55",
+        "email": "prisencharge@opco-formation-sud.fr"
       }
     },
     {
@@ -105,7 +139,13 @@
         "street": "8 rue du Sentier",
         "city": "PARIS",
         "zip": "75002",
-        "country": "FR"
+        "country": "FR",
+        "street2": "Batiment Sentier - 3e etage"
+      },
+      "contact": {
+        "name": "Service Vendeurs Partenaires",
+        "phone": "+33 1 84 25 63 10",
+        "email": "vendeurs@marketplace-services.fr"
       }
     },
     {
@@ -120,7 +160,13 @@
         "street": "Quai des Pecheurs - Port de peche",
         "city": "LA TURBALLE",
         "zip": "44420",
-        "country": "FR"
+        "country": "FR",
+        "street2": "Halle de vente - Bureau 12"
+      },
+      "contact": {
+        "name": "Service Ventes Criee",
+        "phone": "+33 2 40 23 91 07",
+        "email": "ventes@criee-atlantique.fr"
       }
     },
     {
@@ -135,7 +181,13 @@
         "street": "17 quai des Chartrons",
         "city": "BORDEAUX",
         "zip": "33300",
-        "country": "FR"
+        "country": "FR",
+        "street2": "Batiment Chartrons - 1er etage"
+      },
+      "contact": {
+        "name": "Service Mandats",
+        "phone": "+33 5 56 44 12 80",
+        "email": "mandats@atlantique-mandataire.fr"
       }
     },
     {
@@ -150,7 +202,13 @@
         "street": "Parc d'activites de la Plaine, bat. C",
         "city": "VITROLLES",
         "zip": "13127",
-        "country": "FR"
+        "country": "FR",
+        "street2": "Batiment C - Quai 3"
+      },
+      "contact": {
+        "name": "Service Reglements",
+        "phone": "+33 4 42 89 30 55",
+        "email": "reglements@distri-logistique.fr"
       }
     },
     {
@@ -165,11 +223,17 @@
         "street": "14 rue des Compagnons",
         "city": "BRUGES",
         "zip": "33520",
-        "country": "FR"
+        "country": "FR",
+        "street2": "ZA de Bruges Nord - Lot 14"
       },
       "iban": "FR7630006000111234567890136",
       "bic": "AGRIFRPPXXX",
-      "legalForm": "SARL au capital de 50 000 euros - RCS Bordeaux 999 999 055"
+      "legalForm": "SARL au capital de 50 000 euros - RCS Bordeaux 999 999 055",
+      "contact": {
+        "name": "Service Facturation",
+        "phone": "+33 5 56 11 47 22",
+        "email": "facturation@sotrabat.fr"
+      }
     },
     {
       "id": "constructeur_general",
@@ -183,7 +247,8 @@
         "street": "8 avenue de l'Industrie",
         "city": "MERIGNAC",
         "zip": "33700",
-        "country": "FR"
+        "country": "FR",
+        "street2": "Parc Merignac Phare - Batiment D"
       },
       "buyerReference": "REF-BATIGRAND-2026",
       "deliveryName": "BATIGRAND – Chantier Les Terrasses du Lac",
@@ -191,8 +256,17 @@
         "street": "12 allée des Peupliers",
         "city": "BORDEAUX",
         "zip": "33300",
-        "country": "FR"
-      }
+        "country": "FR",
+        "street2": "Acces chantier - Portail Nord"
+      },
+      "contact": {
+        "name": "Service Comptabilite Chantiers",
+        "phone": "+33 5 56 34 78 90",
+        "email": "compta.chantiers@batigrand.fr"
+      },
+      "accountingCost": "CC-7700-CHANTIERS",
+      "contractRef": "MARCHE-2026-BTG-0088",
+      "deliveryLocationId": "99999906300019"
     },
     {
       "id": "micro_conseil",
@@ -206,11 +280,17 @@
         "street": "5 rue Sainte-Catherine",
         "city": "BORDEAUX",
         "zip": "33000",
-        "country": "FR"
+        "country": "FR",
+        "street2": "Residence Sainte-Catherine - Porte 3"
       },
       "iban": "FR7610907000529876543210943",
       "bic": "CCBPFRPPBDX",
-      "legalForm": "Entrepreneur individuel - RCS Bordeaux 999 999 071"
+      "legalForm": "Entrepreneur individuel - RCS Bordeaux 999 999 071",
+      "contact": {
+        "name": "MERCIER Audrey",
+        "phone": "+33 6 12 45 78 96",
+        "email": "contact@audreymercier-conseil.fr"
+      }
     },
     {
       "id": "technik_gmbh",
@@ -224,7 +304,8 @@
         "street": "Hafenstrasse 42",
         "city": "HAMBURG",
         "zip": "20359",
-        "country": "DE"
+        "country": "DE",
+        "street2": "Gebaeude 3 - 2. OG"
       },
       "buyerReference": "BESTELL-2026-0442",
       "deliveryName": "Technik Nord GmbH – Lager Altona",
@@ -232,8 +313,16 @@
         "street": "Hafenstrasse 42",
         "city": "HAMBURG",
         "zip": "20359",
-        "country": "DE"
-      }
+        "country": "DE",
+        "street2": "Lager Altona - Tor 2"
+      },
+      "contact": {
+        "name": "Buchhaltung Kreditoren",
+        "phone": "+49 40 55 12 34 60",
+        "email": "kreditoren@techniknord.de"
+      },
+      "accountingCost": "KST-4400-EINKAUF",
+      "contractRef": "RAHMENVERTRAG-2025-TN-311"
     },
     {
       "id": "helvetia_sa",
@@ -246,7 +335,8 @@
         "street": "Industriestrasse 18",
         "city": "WINTERTHUR",
         "zip": "8404",
-        "country": "CH"
+        "country": "CH",
+        "street2": "Halle West - Buero 21"
       },
       "buyerReference": "CMD-CH-2026-1187",
       "deliveryName": "Helvetia Precision SA – Werk Winterthur",
@@ -254,8 +344,16 @@
         "street": "Industriestrasse 18",
         "city": "WINTERTHUR",
         "zip": "8404",
-        "country": "CH"
-      }
+        "country": "CH",
+        "street2": "Werk Winterthur - Rampe 4"
+      },
+      "contact": {
+        "name": "Service Comptabilite",
+        "phone": "+41 52 235 41 60",
+        "email": "comptabilite@helvetia-precision.ch"
+      },
+      "accountingCost": "CC-CH-3300-ACHATS",
+      "contractRef": "CONTRAT-CH-2025-0912"
     }
   ]
 }

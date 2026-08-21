@@ -139,6 +139,8 @@ const CIITemplates = {
         const t = ind;
         const siret = p.siren ? p.siren + (p.nic || '00001') : null;
         let x = '';
+        // ram:ID precede ram:GlobalID dans la sequence de ram:TradePartyType.
+        if (p.shipToId) x += `\n${t}<ram:ID>${xmlEsc(p.shipToId)}</ram:ID>`;
         if (siret) x += `\n${t}<ram:GlobalID schemeID="0009">${xmlEsc(siret)}</ram:GlobalID>`;
         x += `\n${t}<ram:Name>${xmlEsc(p.legalName || p.name)}</ram:Name>`;
         if (p.siren || (p.name && p.legalName && p.name !== p.legalName)) {
@@ -149,11 +151,36 @@ const CIITemplates = {
             }
             x += `\n${t}</ram:SpecifiedLegalOrganization>`;
         }
+        // BG-6 / BG-9 : point de contact. ram:DefinedTradeContact se place
+        // AVANT ram:PostalTradeAddress dans la sequence de ram:TradePartyType,
+        // a l'inverse d'UBL ou cac:Contact vient apres l'adresse.
+        // BT-41 PersonName, BT-42 TelephoneUniversalCommunication,
+        // BT-43 EmailURIUniversalCommunication.
+        if (p.contact && (p.contact.name || p.contact.phone || p.contact.email)) {
+            x += `\n${t}<ram:DefinedTradeContact>`;
+            if (p.contact.name) x += `\n${t}\t<ram:PersonName>${xmlEsc(p.contact.name)}</ram:PersonName>`;
+            if (p.contact.phone) {
+                x += `\n${t}\t<ram:TelephoneUniversalCommunication>`
+                   + `\n${t}\t\t<ram:CompleteNumber>${xmlEsc(p.contact.phone)}</ram:CompleteNumber>`
+                   + `\n${t}\t</ram:TelephoneUniversalCommunication>`;
+            }
+            if (p.contact.email) {
+                x += `\n${t}\t<ram:EmailURIUniversalCommunication>`
+                   + `\n${t}\t\t<ram:URIID schemeID="SMTP">${xmlEsc(p.contact.email)}</ram:URIID>`
+                   + `\n${t}\t</ram:EmailURIUniversalCommunication>`;
+            }
+            x += `\n${t}</ram:DefinedTradeContact>`;
+        }
         if (p.address) {
+            // Sequence de ram:TradeAddressType : PostcodeCode, LineOne, LineTwo,
+            // LineThree, CityName, CountryID, CountrySubDivisionName.
+            // BT-36 -> LineTwo, BT-162 -> LineThree.
             x += `\n${t}<ram:PostalTradeAddress>`
                + `\n${t}\t<ram:PostcodeCode>${xmlEsc(p.address.zip)}</ram:PostcodeCode>`
-               + `\n${t}\t<ram:LineOne>${xmlEsc(p.address.street)}</ram:LineOne>`
-               + `\n${t}\t<ram:CityName>${xmlEsc(p.address.city)}</ram:CityName>`
+               + `\n${t}\t<ram:LineOne>${xmlEsc(p.address.street)}</ram:LineOne>`;
+            if (p.address.street2) x += `\n${t}\t<ram:LineTwo>${xmlEsc(p.address.street2)}</ram:LineTwo>`;
+            if (p.address.street3) x += `\n${t}\t<ram:LineThree>${xmlEsc(p.address.street3)}</ram:LineThree>`;
+            x += `\n${t}\t<ram:CityName>${xmlEsc(p.address.city)}</ram:CityName>`
                + `\n${t}\t<ram:CountryID>${xmlEsc(p.address.country)}</ram:CountryID>`
                + `\n${t}</ram:PostalTradeAddress>`;
         }
@@ -184,7 +211,7 @@ const CIITemplates = {
     // (LISIBLE, BON_COMMANDE, BON_LIVRAISON...). ram:TypeCode 916 identifie
     // une piece jointe, la ou 130 est reserve a BT-18.
     // ========================================================================
-    getAgreement: (buyerReference, supplier, buyer, poNumber, attachments) => `
+    getAgreement: (buyerReference, supplier, buyer, poNumber, attachments, contractRef) => `
 \t\t<ram:ApplicableHeaderTradeAgreement>
 \t\t\t<ram:BuyerReference>${xmlEsc(buyerReference)}</ram:BuyerReference>
 \t\t\t<ram:SellerTradeParty>${CIITemplates.partyFragment(supplier, '\t\t\t\t')}
@@ -193,7 +220,10 @@ const CIITemplates = {
 \t\t\t</ram:BuyerTradeParty>${poNumber ? `
 \t\t\t<ram:BuyerOrderReferencedDocument>
 \t\t\t\t<ram:IssuerAssignedID>${xmlEsc(poNumber)}</ram:IssuerAssignedID>
-\t\t\t</ram:BuyerOrderReferencedDocument>` : ''}${(attachments || []).map((att) => `
+\t\t\t</ram:BuyerOrderReferencedDocument>` : ''}${contractRef ? `
+\t\t\t<ram:ContractReferencedDocument>
+\t\t\t\t<ram:IssuerAssignedID>${xmlEsc(contractRef)}</ram:IssuerAssignedID>
+\t\t\t</ram:ContractReferencedDocument>` : ''}${(attachments || []).map((att) => `
 \t\t\t<ram:AdditionalReferencedDocument>
 \t\t\t\t<ram:IssuerAssignedID>${xmlEsc(att.id)}</ram:IssuerAssignedID>
 \t\t\t\t<ram:TypeCode>916</ram:TypeCode>
@@ -216,7 +246,11 @@ const CIITemplates = {
                 legalName: delivery.name || null,
                 name: null,
                 siren: null,
-                address: delivery.address || null
+                address: delivery.address || null,
+                // BT-71 : en CII l'identifiant du lieu de livraison est porte
+                // par ram:ID du ShipToTradeParty, la ou UBL utilise un
+                // conteneur cac:DeliveryLocation distinct.
+                shipToId: delivery.locationId || null
             };
             parts.push(`\n\t\t\t<ram:ShipToTradeParty>${CIITemplates.partyFragment(sh, '\t\t\t\t', { endpoint: false })}\n\t\t\t</ram:ShipToTradeParty>`);
         }
@@ -253,6 +287,9 @@ const CIITemplates = {
         const withIban = (o.meansCode === '30' || o.meansCode === '58');
         let x = `\n\t\t<ram:ApplicableHeaderTradeSettlement>`;
 
+        // BT-83 information de remise. ram:PaymentReference ouvre la sequence
+        // de ram:ApplicableHeaderTradeSettlement, avant les codes devise.
+        if (o.paymentReference) x += `\n\t\t\t<ram:PaymentReference>${xmlEsc(o.paymentReference)}</ram:PaymentReference>`;
         if (o.taxCurrency) x += `\n\t\t\t<ram:TaxCurrencyCode>${o.taxCurrency}</ram:TaxCurrencyCode>`;
         x += `\n\t\t\t<ram:InvoiceCurrencyCode>${o.currency}</ram:InvoiceCurrencyCode>`;
 
@@ -271,12 +308,25 @@ const CIITemplates = {
         }
 
         // BG-16 : obligatoire. BT-84 / BT-86 sur les codes 30 et 58.
+        // Sequence interne : TypeCode, Information, ApplicableTradeSettlement-
+        // FinancialCard, PayerPartyDebtorFinancialAccount,
+        // PayeePartyCreditorFinancialAccount, PayeeSpecifiedCreditorFinancial-
+        // Institution. BT-82 est donc un ELEMENT en CII, la ou UBL en fait un
+        // attribut @name de cbc:PaymentMeansCode.
         x += `\n\t\t\t<ram:SpecifiedTradeSettlementPaymentMeans>`
            + `\n\t\t\t\t<ram:TypeCode>${o.meansCode}</ram:TypeCode>`;
+        if (o.meansLabel) x += `\n\t\t\t\t<ram:Information>${xmlEsc(o.meansLabel)}</ram:Information>`;
+        if (o.payerIban) {
+            x += `\n\t\t\t\t<ram:PayerPartyDebtorFinancialAccount>`
+               + `\n\t\t\t\t\t<ram:IBANID>${xmlEsc(o.payerIban)}</ram:IBANID>`
+               + `\n\t\t\t\t</ram:PayerPartyDebtorFinancialAccount>`;
+        }
         if (withIban && o.iban) {
             x += `\n\t\t\t\t<ram:PayeePartyCreditorFinancialAccount>`
-               + `\n\t\t\t\t\t<ram:IBANID>${xmlEsc(o.iban)}</ram:IBANID>`
-               + `\n\t\t\t\t</ram:PayeePartyCreditorFinancialAccount>`;
+               + `\n\t\t\t\t\t<ram:IBANID>${xmlEsc(o.iban)}</ram:IBANID>`;
+            // BT-85 nom du titulaire du compte credite.
+            if (o.accountName) x += `\n\t\t\t\t\t<ram:AccountName>${xmlEsc(o.accountName)}</ram:AccountName>`;
+            x += `\n\t\t\t\t</ram:PayeePartyCreditorFinancialAccount>`;
             if (o.bic) {
                 x += `\n\t\t\t\t<ram:PayeeSpecifiedCreditorFinancialInstitution>`
                    + `\n\t\t\t\t\t<ram:BICID>${xmlEsc(o.bic)}</ram:BICID>`
@@ -296,9 +346,32 @@ const CIITemplates = {
             x += `\n\t\t\t\t<ram:BasisAmount>${s.taxable}</ram:BasisAmount>`
                + `\n\t\t\t\t<ram:CategoryCode>${s.category}</ram:CategoryCode>`;
             if (s.code) x += `\n\t\t\t\t<ram:ExemptionReasonCode>${xmlEsc(s.code)}</ram:ExemptionReasonCode>`;
+            // BT-8 code de date d'exigibilite de la TVA. En CII il se repete
+            // dans chaque ram:ApplicableTradeTax, la ou UBL le porte une seule
+            // fois dans cac:InvoicePeriod. La liste de codes differe aussi :
+            // 5 = date de facture, 29 = date de livraison, 72 = date
+            // d'encaissement, contre 3 / 35 / 432 en UBL.
+            if (o.vatDueDateTypeCode) x += `\n\t\t\t\t<ram:DueDateTypeCode>${o.vatDueDateTypeCode}</ram:DueDateTypeCode>`;
             x += `\n\t\t\t\t<ram:RateApplicablePercent>${s.percent}</ram:RateApplicablePercent>`
                + `\n\t\t\t</ram:ApplicableTradeTax>`;
         });
+
+        // BG-14 periode de facturation. Position imposee : APRES les blocs
+        // ram:ApplicableTradeTax et AVANT ram:SpecifiedTradeAllowanceCharge.
+        if (o.period && (o.period.start || o.period.end)) {
+            x += `\n\t\t\t<ram:BillingSpecifiedPeriod>`;
+            if (o.period.start) {
+                x += `\n\t\t\t\t<ram:StartDateTime>`
+                   + `\n\t\t\t\t\t<udt:DateTimeString format="102">${CIITemplates.d8(o.period.start)}</udt:DateTimeString>`
+                   + `\n\t\t\t\t</ram:StartDateTime>`;
+            }
+            if (o.period.end) {
+                x += `\n\t\t\t\t<ram:EndDateTime>`
+                   + `\n\t\t\t\t\t<udt:DateTimeString format="102">${CIITemplates.d8(o.period.end)}</udt:DateTimeString>`
+                   + `\n\t\t\t\t</ram:EndDateTime>`;
+            }
+            x += `\n\t\t\t</ram:BillingSpecifiedPeriod>`;
+        }
 
         // BG-20 / BG-21 : remises et frais de niveau document. La categorie de
         // TVA y est obligatoire (BR-31, BR-37) et un motif ou un code doit etre
@@ -360,6 +433,14 @@ const CIITemplates = {
                    + `\n\t\t\t\t</ram:FormattedIssueDateTime>`;
             }
             x += `\n\t\t\t</ram:InvoiceReferencedDocument>`;
+        }
+
+        // BT-19 reference comptable de l'acheteur. Dernier element de la
+        // sequence, apres ram:InvoiceReferencedDocument.
+        if (o.accountingCost) {
+            x += `\n\t\t\t<ram:ReceivableSpecifiedTradeAccountingAccount>`
+               + `\n\t\t\t\t<ram:ID>${xmlEsc(o.accountingCost)}</ram:ID>`
+               + `\n\t\t\t</ram:ReceivableSpecifiedTradeAccountingAccount>`;
         }
 
         x += `\n\t\t</ram:ApplicableHeaderTradeSettlement>`;

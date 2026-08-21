@@ -28,10 +28,52 @@ const UBLTemplates = {
     // Expose l'echappeur pour les appelants qui construisent du XML hors templates.
     esc: xmlEsc,
 
+    // BG-5 / BG-8 / BG-15 : bloc d'adresse postale, source unique.
+    // Il etait auparavant recopie a l'identique dans quatre gabarits, ce qui
+    // garantissait qu'un enrichissement en oublierait un.
+    // Sequence imposee par cac:AddressType : StreetName, AdditionalStreetName,
+    // ..., CityName, PostalZone, CountrySubentity, Country, AddressLine.
+    // BT-36 ligne d'adresse complementaire est tres courante en France
+    // (batiment, etage, zone d'activite) ; BT-162 prend une troisieme ligne.
+    // BT-39 / BT-51 subdivision de pays n'est volontairement pas emis :
+    // l'adressage francais n'a pas d'equivalent d'un etat ou d'une province.
+    addressFragment: (a, t) => `
+${t}<cac:PostalAddress>
+${t}\t<cbc:StreetName>${xmlEsc(a.street)}</cbc:StreetName>${a.street2 ? `
+${t}\t<cbc:AdditionalStreetName>${xmlEsc(a.street2)}</cbc:AdditionalStreetName>` : ""}
+${t}\t<cbc:CityName>${xmlEsc(a.city)}</cbc:CityName>
+${t}\t<cbc:PostalZone>${xmlEsc(a.zip)}</cbc:PostalZone>
+${t}\t<cac:Country><cbc:IdentificationCode>${xmlEsc(a.country)}</cbc:IdentificationCode></cac:Country>${a.street3 ? `
+${t}\t<cac:AddressLine><cbc:Line>${xmlEsc(a.street3)}</cbc:Line></cac:AddressLine>` : ""}
+${t}</cac:PostalAddress>`,
+
+    // BG-6 contact du vendeur (BT-41 / BT-42 / BT-43) et BG-9 contact de
+    // l'acheteur (BT-56 / BT-57 / BT-58).
+    // Une facture reelle porte quasi systematiquement un point de contact :
+    // c'est par lui que passent les relances et les litiges. Le laisser vide
+    // rendait la donnee intestable de bout en bout.
+    // Position imposee par cac:PartyType : APRES cac:PartyLegalEntity, avant
+    // cac:AgentParty et cac:ServiceProviderParty.
+    contactFragment: (c, t) => c ? `
+${t}<cac:Contact>${c.name ? `
+${t}\t<cbc:Name>${xmlEsc(c.name)}</cbc:Name>` : ""}${c.phone ? `
+${t}\t<cbc:Telephone>${xmlEsc(c.phone)}</cbc:Telephone>` : ""}${c.email ? `
+${t}\t<cbc:ElectronicMail>${xmlEsc(c.email)}</cbc:ElectronicMail>` : ""}
+${t}</cac:Contact>` : "",
+
     // 1. En-tête (Invoice ou CreditNote) avec TOUS les espaces de noms
     // opts.cur   : BT-5 devise du document (EUR par defaut)
     // opts.taxCur: BT-6 devise de comptabilisation de la TVA, obligatoire des que
     //              BT-5 n'est pas l'euro (la TVA doit etre exprimee en euros).
+    // opts.accountingCost : BT-19 reference comptable de l'acheteur. Position
+    //              imposee : apres cbc:TaxCurrencyCode, avant cbc:BuyerReference.
+    // opts.period : BG-14 periode de facturation (BT-73 start, BT-74 end) et
+    //              BT-8 code de date d'exigibilite de la TVA, porte par
+    //              cbc:DescriptionCode DANS cac:InvoicePeriod. Le PPF attend la
+    //              valeur 3 en UBL (exigibilite a la date de facture) ; 35 pour
+    //              la date de livraison, 432 pour la date d'encaissement.
+    //              BT-7 cac:TaxPointDate n'est JAMAIS emis : BR-CO-3 le rend
+    //              mutuellement exclusif de BT-8 et le rejet est immediat.
     getHeader: (numeroFacture, dateFacture, dateEcheance, invoiceTypeCode, profileId, notes, isCreditNote = false, buyerReference = "", customizationId = "urn:cen.eu:en16931:2017", opts = {}) => `<?xml version="1.0" encoding="UTF-8"?>
 <${isCreditNote ? 'CreditNote' : 'Invoice'} xmlns="urn:oasis:names:specification:ubl:schema:xsd:${isCreditNote ? 'CreditNote' : 'Invoice'}-2" xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:qdt="urn:oasis:names:specification:ubl:schema:xsd:QualifiedDatatypes-2" xmlns:udt="urn:oasis:names:specification:ubl:schema:xsd:UnqualifiedDataTypes-2">
 \t<cbc:UBLVersionID>2.1</cbc:UBLVersionID>
@@ -42,8 +84,14 @@ const UBLTemplates = {
 ${!isCreditNote ? `\t<cbc:DueDate>${dateEcheance}</cbc:DueDate>\n` : ''}\t<cbc:${isCreditNote ? 'CreditNoteTypeCode' : 'InvoiceTypeCode'}>${invoiceTypeCode}</cbc:${isCreditNote ? 'CreditNoteTypeCode' : 'InvoiceTypeCode'}>
 ${notes.map(n => `\t<cbc:Note>${n}</cbc:Note>`).join('\n')}
 \t<cbc:DocumentCurrencyCode>${opts.cur || "EUR"}</cbc:DocumentCurrencyCode>${opts.taxCur ? `
-\t<cbc:TaxCurrencyCode>${opts.taxCur}</cbc:TaxCurrencyCode>` : ""}
-\t<cbc:BuyerReference>${xmlEsc(buyerReference)}</cbc:BuyerReference>`,
+\t<cbc:TaxCurrencyCode>${opts.taxCur}</cbc:TaxCurrencyCode>` : ""}${opts.accountingCost ? `
+\t<cbc:AccountingCost>${xmlEsc(opts.accountingCost)}</cbc:AccountingCost>` : ""}
+\t<cbc:BuyerReference>${xmlEsc(buyerReference)}</cbc:BuyerReference>${opts.period ? `
+\t<cac:InvoicePeriod>${opts.period.start ? `
+\t\t<cbc:StartDate>${opts.period.start}</cbc:StartDate>` : ""}${opts.period.end ? `
+\t\t<cbc:EndDate>${opts.period.end}</cbc:EndDate>` : ""}${opts.period.code ? `
+\t\t<cbc:DescriptionCode>${opts.period.code}</cbc:DescriptionCode>` : ""}
+\t</cac:InvoicePeriod>` : ""}`,
 
     // 2. BillingReference AVEC LA DATE (Obligatoire pour les Avoirs)
     getBillingReference: (originalInvoiceNumber, dateFactureXML) => `
@@ -61,6 +109,16 @@ ${notes.map(n => `\t<cbc:Note>${n}</cbc:Note>`).join('\n')}
 \t\t<cbc:ID>${xmlEsc(poNumber)}</cbc:ID>
 \t</cac:OrderReference>`,
 
+    // 2quinquies. BT-12 Reference du contrat.
+    // Position imposee dans la sequence Invoice : apres
+    // cac:OriginatorDocumentReference, avant cac:AdditionalDocumentReference.
+    // BR-FR-CO-03 la rend obligatoire, avec BG-14, pour un avoir de remise
+    // globale (BT-3 = 262).
+    getContractDocumentReference: (id) => `
+\t<cac:ContractDocumentReference>
+\t\t<cbc:ID>${xmlEsc(id)}</cbc:ID>
+\t</cac:ContractDocumentReference>`,
+
     // 3ter. BT-16 Reference du bon de livraison (avis d'expedition).
     // Position imposee dans la sequence Invoice : apres cac:BillingReference,
     // avant cac:AdditionalDocumentReference.
@@ -75,20 +133,22 @@ ${notes.map(n => `\t<cbc:Note>${n}</cbc:Note>`).join('\n')}
     // avant cac:PaymentMeans.
     // BR-FR-14 rend BG-15 obligatoire au 01/09/2027 lorsque l'adresse de
     // livraison differe de l'adresse de l'acheteur, pour les biens uniquement.
-    getDelivery: (deliveryDate, deliveryName, address) => `
+    getDelivery: (deliveryDate, deliveryName, address, locationId = null) => `
 \t<cac:Delivery>${deliveryDate ? `
-\t\t<cbc:ActualDeliveryDate>${deliveryDate}</cbc:ActualDeliveryDate>` : ""}${deliveryName ? `
-\t\t<cac:DeliveryParty>
-\t\t\t<cac:PartyName><cbc:Name>${xmlEsc(deliveryName)}</cbc:Name></cac:PartyName>
-\t\t</cac:DeliveryParty>` : ""}${address ? `
-\t\t<cac:DeliveryLocation>
+\t\t<cbc:ActualDeliveryDate>${deliveryDate}</cbc:ActualDeliveryDate>` : ""}${(address || locationId) ? `
+\t\t<cac:DeliveryLocation>${locationId ? `
+\t\t\t<cbc:ID schemeID="0009">${xmlEsc(locationId)}</cbc:ID>` : ""}${address ? `
 \t\t\t<cac:Address>
-\t\t\t\t<cbc:StreetName>${xmlEsc(address.street)}</cbc:StreetName>
+\t\t\t\t<cbc:StreetName>${xmlEsc(address.street)}</cbc:StreetName>${address.street2 ? `
+\t\t\t\t<cbc:AdditionalStreetName>${xmlEsc(address.street2)}</cbc:AdditionalStreetName>` : ""}
 \t\t\t\t<cbc:CityName>${xmlEsc(address.city)}</cbc:CityName>
 \t\t\t\t<cbc:PostalZone>${xmlEsc(address.zip)}</cbc:PostalZone>
 \t\t\t\t<cac:Country><cbc:IdentificationCode>${xmlEsc(address.country)}</cbc:IdentificationCode></cac:Country>
-\t\t\t</cac:Address>
-\t\t</cac:DeliveryLocation>` : ""}
+\t\t\t</cac:Address>` : ""}
+\t\t</cac:DeliveryLocation>` : ""}${deliveryName ? `
+\t\t<cac:DeliveryParty>
+\t\t\t<cac:PartyName><cbc:Name>${xmlEsc(deliveryName)}</cbc:Name></cac:PartyName>
+\t\t</cac:DeliveryParty>` : ""}
 \t</cac:Delivery>`,
 
     // 2bis. BG-24 Document justificatif : representation lisible de la facture
@@ -116,13 +176,7 @@ ${notes.map(n => `\t<cbc:Note>${n}</cbc:Note>`).join('\n')}
     // t = prefixe de tabulations pour l'indentation.
     partyFragment: (p, t) => `
 ${t}<cac:PartyIdentification><cbc:ID schemeID="0009">${xmlEsc(p.siren)}${xmlEsc(p.nic || "00001")}</cbc:ID></cac:PartyIdentification>
-${t}<cac:PartyName><cbc:Name>${xmlEsc(p.name)}</cbc:Name></cac:PartyName>
-${t}<cac:PostalAddress>
-${t}	<cbc:StreetName>${xmlEsc(p.address.street)}</cbc:StreetName>
-${t}	<cbc:CityName>${xmlEsc(p.address.city)}</cbc:CityName>
-${t}	<cbc:PostalZone>${xmlEsc(p.address.zip)}</cbc:PostalZone>
-${t}	<cac:Country><cbc:IdentificationCode>${xmlEsc(p.address.country)}</cbc:IdentificationCode></cac:Country>
-${t}</cac:PostalAddress>${p.vatNumber ? `
+${t}<cac:PartyName><cbc:Name>${xmlEsc(p.name)}</cbc:Name></cac:PartyName>${UBLTemplates.addressFragment(p.address, t)}${p.vatNumber ? `
 ${t}<cac:PartyTaxScheme>
 ${t}	<cbc:CompanyID>${xmlEsc(p.vatNumber)}</cbc:CompanyID>
 ${t}	<cac:TaxScheme><cbc:ID>VAT</cbc:ID></cac:TaxScheme>
@@ -130,7 +184,7 @@ ${t}</cac:PartyTaxScheme>` : ""}
 ${t}<cac:PartyLegalEntity>
 ${t}	<cbc:RegistrationName>${xmlEsc(p.legalName || p.name)}</cbc:RegistrationName>
 ${t}	<cbc:CompanyID schemeID="0002">${xmlEsc(p.siren)}</cbc:CompanyID>
-${t}</cac:PartyLegalEntity>`,
+${t}</cac:PartyLegalEntity>${UBLTemplates.contactFragment(p.contact, t)}`,
 
     // 3. Bloc Fournisseur
     // agent     : EXT-FR-FE-BG-03 AGENT DE VENDEUR -> cac:Party/cac:AgentParty
@@ -144,13 +198,7 @@ ${t}</cac:PartyLegalEntity>`,
 \t\t<cac:Party>
 \t\t\t<cbc:EndpointID schemeID="${xmlEsc(supplier.endpointScheme || "0225")}">${xmlEsc(supplier.endpointId || supplier.siren)}</cbc:EndpointID>${supplier.siren ? `
 \t\t\t<cac:PartyIdentification><cbc:ID schemeID="0009">${xmlEsc(supplier.siren)}${xmlEsc(supplier.nic || "00001")}</cbc:ID></cac:PartyIdentification>` : ""}
-\t\t\t<cac:PartyName><cbc:Name>${xmlEsc(supplier.name)}</cbc:Name></cac:PartyName>
-\t\t\t<cac:PostalAddress>
-\t\t\t\t<cbc:StreetName>${xmlEsc(supplier.address.street)}</cbc:StreetName>
-\t\t\t\t<cbc:CityName>${xmlEsc(supplier.address.city)}</cbc:CityName>
-\t\t\t\t<cbc:PostalZone>${xmlEsc(supplier.address.zip)}</cbc:PostalZone>
-\t\t\t\t<cac:Country><cbc:IdentificationCode>${xmlEsc(supplier.address.country)}</cbc:IdentificationCode></cac:Country>
-\t\t\t</cac:PostalAddress>${supplier.vatNumber ? `
+\t\t\t<cac:PartyName><cbc:Name>${xmlEsc(supplier.name)}</cbc:Name></cac:PartyName>${UBLTemplates.addressFragment(supplier.address, "\t\t\t")}${supplier.vatNumber ? `
 \t\t\t<cac:PartyTaxScheme>
 \t\t\t\t<cbc:CompanyID>${xmlEsc(supplier.vatNumber)}</cbc:CompanyID>
 \t\t\t\t<cac:TaxScheme><cbc:ID>VAT</cbc:ID></cac:TaxScheme>
@@ -163,7 +211,7 @@ ${t}</cac:PartyLegalEntity>`,
 \t\t\t\t<cbc:RegistrationName>${xmlEsc(supplier.legalName)}</cbc:RegistrationName>${supplier.siren ? `
 \t\t\t\t<cbc:CompanyID schemeID="0002">${xmlEsc(supplier.siren)}</cbc:CompanyID>` : ""}${supplier.legalForm ? `
 \t\t\t\t<cbc:CompanyLegalForm>${xmlEsc(supplier.legalForm)}</cbc:CompanyLegalForm>` : ""}
-\t\t\t</cac:PartyLegalEntity>${agent ? `
+\t\t\t</cac:PartyLegalEntity>${UBLTemplates.contactFragment(supplier.contact, "\t\t\t")}${agent ? `
 \t\t\t<cac:AgentParty>${UBLTemplates.partyFragment(agent, "\t\t\t\t")}
 \t\t\t</cac:AgentParty>` : ""}${facturant ? `
 \t\t\t<cac:ServiceProviderParty>
@@ -182,13 +230,7 @@ ${t}</cac:PartyLegalEntity>`,
 \t\t<cac:Party>
 \t\t\t<cbc:EndpointID schemeID="${xmlEsc(buyer.endpointScheme || "0225")}">${xmlEsc(buyer.endpointId || buyer.siren)}</cbc:EndpointID>${buyer.siren ? `
 \t\t\t<cac:PartyIdentification><cbc:ID schemeID="0009">${xmlEsc(buyer.siren)}${xmlEsc(buyer.nic || "00001")}</cbc:ID></cac:PartyIdentification>` : ""}
-\t\t\t<cac:PartyName><cbc:Name>${xmlEsc(buyer.name)}</cbc:Name></cac:PartyName>
-\t\t\t<cac:PostalAddress>
-\t\t\t\t<cbc:StreetName>${xmlEsc(buyer.address.street)}</cbc:StreetName>
-\t\t\t\t<cbc:CityName>${xmlEsc(buyer.address.city)}</cbc:CityName>
-\t\t\t\t<cbc:PostalZone>${xmlEsc(buyer.address.zip)}</cbc:PostalZone>
-\t\t\t\t<cac:Country><cbc:IdentificationCode>${xmlEsc(buyer.address.country)}</cbc:IdentificationCode></cac:Country>
-\t\t\t</cac:PostalAddress>${buyer.vatNumber ? `
+\t\t\t<cac:PartyName><cbc:Name>${xmlEsc(buyer.name)}</cbc:Name></cac:PartyName>${UBLTemplates.addressFragment(buyer.address, "\t\t\t")}${buyer.vatNumber ? `
 \t\t\t<cac:PartyTaxScheme>
 \t\t\t\t<cbc:CompanyID>${xmlEsc(buyer.vatNumber)}</cbc:CompanyID>
 \t\t\t\t<cac:TaxScheme><cbc:ID>VAT</cbc:ID></cac:TaxScheme>
@@ -196,7 +238,7 @@ ${t}</cac:PartyLegalEntity>`,
 \t\t\t<cac:PartyLegalEntity>
 \t\t\t\t<cbc:RegistrationName>${xmlEsc(buyer.legalName)}</cbc:RegistrationName>${buyer.siren ? `
 \t\t\t\t<cbc:CompanyID schemeID="0002">${xmlEsc(buyer.siren)}</cbc:CompanyID>` : ""}
-\t\t\t</cac:PartyLegalEntity>
+\t\t\t</cac:PartyLegalEntity>${UBLTemplates.contactFragment(buyer.contact, "\t\t\t")}
 \t\t</cac:Party>
 \t</cac:AccountingCustomerParty>`,
 
@@ -226,16 +268,20 @@ ${t}</cac:PartyLegalEntity>`,
     // Attention : un tiers PAYEUR n'est pas un BENEFICIAIRE. BG-10 PayeeParty
     // designe celui qui RECOIT le paiement (factor, distributeur), jamais
     // celui qui le verse a la place de l'Acheteur.
-    getPaymentMeans: (code, iban = null, bic = null, payer = null) => `
+    getPaymentMeans: (code, iban = null, bic = null, payer = null, opts = {}) => `
 \t<cac:PaymentMeans>
-\t\t<cbc:PaymentMeansCode>${code}</cbc:PaymentMeansCode>${(code === "30" || code === "58") && iban ? `
+\t\t<cbc:PaymentMeansCode${opts.meansLabel ? ` name="${xmlEsc(opts.meansLabel)}"` : ""}>${code}</cbc:PaymentMeansCode>${opts.paymentId ? `
+\t\t<cbc:PaymentID>${xmlEsc(opts.paymentId)}</cbc:PaymentID>` : ""}${(code === "30" || code === "58") && iban ? `
 \t\t<cac:PayeeFinancialAccount>
-\t\t\t<cbc:ID>${xmlEsc(iban)}</cbc:ID>${bic ? `
+\t\t\t<cbc:ID>${xmlEsc(iban)}</cbc:ID>${opts.accountName ? `
+\t\t\t<cbc:Name>${xmlEsc(opts.accountName)}</cbc:Name>` : ""}${bic ? `
 \t\t\t<cac:FinancialInstitutionBranch><cbc:ID>${xmlEsc(bic)}</cbc:ID></cac:FinancialInstitutionBranch>` : ""}
-\t\t</cac:PayeeFinancialAccount>` : ""}${payer ? `
-\t\t<cac:PaymentMandate>
+\t\t</cac:PayeeFinancialAccount>` : ""}${(payer || opts.mandateId) ? `
+\t\t<cac:PaymentMandate>${opts.mandateId ? `
+\t\t\t<cbc:ID>${xmlEsc(opts.mandateId)}</cbc:ID>` : ""}${payer ? `
 \t\t\t<cac:PayerParty>${UBLTemplates.partyFragment(payer, "\t\t\t\t")}
-\t\t\t</cac:PayerParty>
+\t\t\t</cac:PayerParty>` : ""}${opts.payerIban ? `
+\t\t\t<cac:PayerFinancialAccount><cbc:ID>${xmlEsc(opts.payerIban)}</cbc:ID></cac:PayerFinancialAccount>` : ""}
 \t\t</cac:PaymentMandate>` : ""}
 \t</cac:PaymentMeans>`,
 

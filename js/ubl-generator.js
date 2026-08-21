@@ -1439,6 +1439,59 @@ const UBLGenerator = {
                 .toISOString().slice(0, 10);
             var deliveryName = buyer.deliveryName || null;
             var deliveryAddress = buyer.deliveryAddress || null;
+            // BT-71 : identifiant du lieu de livraison, en pratique le SIRET de
+            // l'etablissement livre. BR-FR-09 impose que ses neuf premiers
+            // chiffres reprennent le SIREN de l'acheteur.
+            var deliveryLocationId = buyer.deliveryLocationId || null;
+
+            // ----------------------------------------------------------------
+            // SOCLE ENRICHI
+            // Une facture de test n'a d'interet que si les champs que les
+            // plateformes doivent restituer sont effectivement peuples : un
+            // champ laisse vide parce que la norme l'autorise est un champ que
+            // la recette ne pourra jamais verifier. Les valeurs ci-dessous sont
+            // donc systematiquement emises, sauf lorsqu'elles n'ont pas de sens
+            // pour le cas d'usage.
+            // ----------------------------------------------------------------
+
+            // BG-14 : periode de facturation, calee sur le mois de la facture.
+            // BT-8 (cbc:DescriptionCode) porte le code de date d'exigibilite de
+            // la TVA : 3 = date de facture, retenue par defaut car nos dates de
+            // livraison et de facture appartiennent au meme mois. BT-7
+            // cac:TaxPointDate n'est jamais emis, BR-CO-3 l'interdisant en
+            // presence de BT-8.
+            var invoicePeriod = (function() {
+                var d = new Date(dateFactureXML + "T00:00:00");
+                var pad = function(n) { return (n < 10 ? "0" : "") + n; };
+                var y = d.getFullYear();
+                var m = d.getMonth();
+                var last = new Date(y, m + 1, 0).getDate();
+                return {
+                    start: y + "-" + pad(m + 1) + "-01",
+                    end: y + "-" + pad(m + 1) + "-" + pad(last),
+                    code: cfg.vatDateCode || "3"
+                };
+            })();
+
+            // BT-19 reference comptable de l'acheteur et BT-12 reference de
+            // contrat : portees par le referentiel acheteur, elles n'existent
+            // donc que pour les acheteurs qui en declarent une.
+            var accountingCost = buyer.accountingCost || null;
+            var contractRef = buyer.contractRef || null;
+
+            // BT-82 libelle du moyen de paiement et BT-85 nom du titulaire du
+            // compte credite.
+            // ATTENTION : BT-85 qualifie le titulaire du compte porte par
+            // BT-84, PAS le beneficiaire BG-10. Les deux divergent : au cas 5,
+            // le beneficiaire est le collaborateur alors que l'IBAN reste celui
+            // du vendeur. Nommer le beneficiaire ici aurait laisse croire a un
+            // detournement de coordonnees bancaires. On suit donc payAccount,
+            // qui est la seule source du BT-84 reellement emis.
+            var meansCodeSocle = cfg.paymentMeans || "30";
+            var meansLabelSocle = (typeof PDFLisible !== "undefined" && PDFLisible.MEANS_LABELS[meansCodeSocle])
+                ? PDFLisible.MEANS_LABELS[meansCodeSocle]
+                : null;
+            var accountName = payAccount.legalName || payAccount.name || null;
 
             var buildXML = function(numFacture, typeCode, asCreditNote, refOriginale, poNumber, overrideLineData, attachment) {
                 asCreditNote = asCreditNote || false;
@@ -1447,7 +1500,7 @@ const UBLGenerator = {
                 overrideLineData = overrideLineData || null;
                 attachment = attachment || null;
 
-                var xml = UBLTemplates.getHeader(numFacture, dateFactureXML, dateEcheanceXML, typeCode, profileId, notes, asCreditNote, buyerReference, self.getCustomizationId(usecase), { cur: docCur, taxCur: taxCur });
+                var xml = UBLTemplates.getHeader(numFacture, dateFactureXML, dateEcheanceXML, typeCode, profileId, notes, asCreditNote, buyerReference, self.getCustomizationId(usecase), { cur: docCur, taxCur: taxCur, accountingCost: accountingCost, period: invoicePeriod });
 
                 // BT-13 Reference de la commande de l'acheteur
                 if (poNumber) {
@@ -1472,6 +1525,13 @@ const UBLGenerator = {
                     xml += UBLTemplates.getDespatchDocumentReference(despatchAtt.docNumber);
                 }
 
+                // BT-12 : reference de contrat. Position imposee dans la
+                // sequence Invoice, apres cac:OriginatorDocumentReference et
+                // avant cac:AdditionalDocumentReference.
+                if (contractRef) {
+                    xml += UBLTemplates.getContractDocumentReference(contractRef);
+                }
+
                 attachList.forEach(function(att) {
                     xml += UBLTemplates.getAdditionalDocumentReference(
                         att.id,
@@ -1494,13 +1554,22 @@ const UBLGenerator = {
                 // BT-84 IBAN ajoute pour les codes 30 et 58 conformement a BR-50.
                 var meansCode = cfg.paymentMeans || "30";
                 // BG-13 Livraison : date effective, destinataire et adresse
-                if (deliveryAddress || deliveryName) {
-                    xml += UBLTemplates.getDelivery(deliveryDate, deliveryName, deliveryAddress);
+                if (deliveryAddress || deliveryName || deliveryLocationId) {
+                    xml += UBLTemplates.getDelivery(deliveryDate, deliveryName, deliveryAddress, deliveryLocationId);
                 }
 
                 // Un tiers PAYEUR se declare en BG-02 (PaymentMandate/PayerParty),
                 // jamais en BG-10 PayeeParty qui designe le BENEFICIAIRE.
-                xml += UBLTemplates.getPaymentMeans(meansCode, payAccount.iban || null, payAccount.bic || null, findThirdParty(cfg.payer));
+                // BT-82 libelle, BT-83 information de remise (la reference que
+                // le vendeur attend en libelle de virement pour lettrer son
+                // encaissement) et BT-85 nom du titulaire du compte.
+                xml += UBLTemplates.getPaymentMeans(meansCode, payAccount.iban || null, payAccount.bic || null, findThirdParty(cfg.payer), {
+                    meansLabel: meansLabelSocle,
+                    paymentId: numFacture,
+                    accountName: accountName,
+                    mandateId: cfg.mandateId || null,
+                    payerIban: cfg.payerIban || null
+                });
                 xml += UBLTemplates.getPaymentTerms();
 
                 // --- Lignes et Totaux ---
@@ -1616,10 +1685,12 @@ const UBLGenerator = {
                     // BT-13 Reference de la commande de l'acheteur
                     orderReference: "PO-1001",
                     // BG-13 / BG-15 Livraison
-                    delivery: (deliveryAddress || deliveryName) ? {
+                    delivery: (deliveryAddress || deliveryName || deliveryLocationId) ? {
                         date: deliveryDate,
                         name: deliveryName,
-                        address: deliveryAddress
+                        address: deliveryAddress,
+                        // BT-71 identifiant du lieu de livraison
+                        locationId: deliveryLocationId
                     } : null,
                     invoiceNumber: numFacture,
                     issueDate: dateFactureXML,
@@ -1627,6 +1698,17 @@ const UBLGenerator = {
                     buyerReference: buyerReference,
                     paymentTerms: cfg.prepaid ? "Paiement comptant" : "Paiement à 30 jours date de facture",
                     paymentMeans: meansLabel,
+                    // --- Socle enrichi, commun a l'UBL, au CII et au lisible ---
+                    // BT-19 reference comptable de l'acheteur
+                    accountingCost: accountingCost,
+                    // BT-12 reference du contrat
+                    contractRef: contractRef,
+                    // BG-14 periode de facturation + BT-8 code de date d'exigibilite
+                    period: invoicePeriod,
+                    // BT-83 information de remise : reference a rappeler au virement
+                    paymentReference: numFacture,
+                    // BT-85 nom du titulaire du compte credite
+                    accountName: accountName,
                     iban: withIban ? (payAccount.iban || null) : null,
                     bic: withIban ? (payAccount.bic || null) : null,
                     payee: payeeForPdf,
@@ -1767,6 +1849,12 @@ const UBLGenerator = {
                 }
 
                 if (poNumber) p.orderReference = poNumber;
+
+                // BT-83 : l'information de remise porte le numero de la facture
+                // reellement emise, qui n'est pas celui du document pivot quand
+                // buildCiiPivot est appele pour un avoir ou une rectificative.
+                p.paymentReference = numFacture;
+
                 return p;
             };
 

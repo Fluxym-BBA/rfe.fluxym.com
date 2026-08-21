@@ -18,6 +18,14 @@
 
 const CIIGenerator = {
 
+    // BT-8 : la liste de codes n'est pas la meme dans les deux syntaxes.
+    // Le pivot raisonne en codes UBL (cbc:DescriptionCode) ; cette table les
+    // projette sur les codes CII (ram:DueDateTypeCode).
+    //   3   -> 5   date de facture
+    //   35  -> 29  date de livraison
+    //   432 -> 72  date d'encaissement
+    VAT_DATE_CODE_CII: { '3': '5', '35': '29', '432': '72' },
+
     // Profils rencontres, pour information de l'utilisateur.
     PROFILES: {
         EN16931: 'urn:cen.eu:en16931:2017',
@@ -52,7 +60,9 @@ const CIIGenerator = {
             p.supplier,
             p.buyer,
             p.orderReference,
-            p.attachments
+            p.attachments,
+            // BT-12 reference du contrat
+            p.contractRef || null
         );
 
         xml += CIITemplates.getDelivery(p.delivery, p.despatchId);
@@ -65,8 +75,21 @@ const CIIGenerator = {
             // le filtre est ici, une seule fois, plutot que disperse dans le XML.
             payer: p.extendedProfile ? p.payer : null,
             meansCode: p.paymentMeansCode,
+            // BT-82 libelle du moyen de paiement, BT-83 information de remise,
+            // BT-85 nom du titulaire du compte credite.
+            meansLabel: p.paymentMeans || null,
+            paymentReference: p.paymentReference || null,
+            accountName: p.accountName || null,
+            payerIban: p.payerIban || null,
             iban: p.iban,
             bic: p.bic,
+            // BG-14 periode de facturation, BT-8 exigibilite de la TVA,
+            // BT-19 reference comptable de l'acheteur.
+            period: p.period || null,
+            vatDueDateTypeCode: (p.period && p.period.code)
+                ? (CIIGenerator.VAT_DATE_CODE_CII[p.period.code] || null)
+                : null,
+            accountingCost: p.accountingCost || null,
             taxSubtotals: p.taxSubtotals,
             allowanceCharges: p.allowanceCharges,
             paymentTerms: p.paymentTerms,
@@ -172,6 +195,30 @@ const CIIGenerator = {
                 errors.push('Tiers payeur : attendu ' + expectedPayer + ', trouve ' + foundPayer);
             }
         }
+
+        // ------------------------------------------------------------------
+        // SOCLE ENRICHI
+        // Ces champs sont optionnels au sens de la norme, donc leur absence ne
+        // declenche aucune alerte de schematron : c'est precisement pourquoi une
+        // regression passerait inapercue. Le controle est donc fait ici.
+        // ------------------------------------------------------------------
+        const socle = [
+            ['BT-83 information de remise', p.paymentReference, /<ram:PaymentReference>/],
+            ['BT-12 reference de contrat', p.contractRef, /<ram:ContractReferencedDocument>/],
+            ['BT-19 reference comptable acheteur', p.accountingCost, /<ram:ReceivableSpecifiedTradeAccountingAccount>/],
+            ['BG-14 periode de facturation', p.period && p.period.start, /<ram:BillingSpecifiedPeriod>/],
+            ['BT-8 exigibilite de la TVA', p.period && p.period.code, /<ram:DueDateTypeCode>/],
+            ['BT-85 titulaire du compte', p.accountName && p.iban, /<ram:AccountName>/],
+            ['BT-82 libelle du moyen de paiement', p.paymentMeans, /<ram:Information>/],
+            ['BT-71 identifiant du lieu de livraison', p.delivery && p.delivery.locationId, /<ram:ShipToTradeParty>\s*<ram:ID>/],
+            ['BG-6 contact du vendeur', p.supplier && p.supplier.contact, /<ram:SellerTradeParty>[\s\S]*?<ram:DefinedTradeContact>/],
+            ['BG-9 contact de l\'acheteur', p.buyer && p.buyer.contact, /<ram:BuyerTradeParty>[\s\S]*?<ram:DefinedTradeContact>/]
+        ];
+        socle.forEach(function(entry) {
+            if (entry[1] && !entry[2].test(xml)) {
+                errors.push(entry[0] + ' : renseigne dans le pivot mais absent du CII');
+            }
+        });
 
         // BR-S-08 : pour chaque taux, la base doit egaler la somme des lignes
         // concernees, augmentee des remises et frais de document.
