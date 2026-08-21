@@ -5,7 +5,7 @@
     "socleNormatif": "AFNOR PR XP Z12-012 V1.4",
     "socleDate": "2026-06-30",
     "specsExternes": "3.2",
-    "resume": "L'intégralité des contenus techniques de ce site (champs BT/BG, règles de gestion, codes, cycle de vie, cas d'usage du générateur) est alignée sur la version 1.4 des normes AFNOR publiée le 30 juin 2026.",
+    "resume": "L'intégralité des contenus techniques de ce site (champs BT/BG, règles de gestion, codes, cycle de vie, cas d'usage de la Fabrique) est alignée sur la version 1.4 des normes AFNOR publiée le 30 juin 2026.",
     "normes": [
       {
         "code": "PR XP Z12-012",
@@ -28,7 +28,7 @@
         "version": "1.4",
         "date": "2026-06-30",
         "titre": "Cas d'usage de la facturation électronique",
-        "usage": "Cas d'usage du générateur UBL",
+        "usage": "Cas d'usage de la Fabrique de factures",
         "statut": "Référencée"
       },
       {
@@ -83,7 +83,7 @@
       }
     ],
     "couverture": [
-      { "domaine": "Générateur UBL — arithmétique (BR-S-08, BR-CO-10/15/16)", "etat": "complet", "detail": "52 cas vérifiés, 0 écart" },
+      { "domaine": "La Fabrique de factures — arithmétique (BR-S-08, BR-CO-10/15/16)", "etat": "complet", "detail": "52 scénarios vérifiés, 0 écart — contrôle antérieur à l'ajout des régimes de TVA (60 scénarios aujourd'hui)" },
       { "domaine": "Codes type de facture BT-3 (BR-FR-04)", "etat": "complet", "detail": "16 codes sur 16" },
       { "domaine": "Cadres de facturation BT-23 (BR-FR-08)", "etat": "complet", "detail": "20 valeurs sur 20" },
       { "domaine": "Champs BT/BG", "etat": "partiel", "detail": "175 champs documentés sur 477" },
@@ -104,7 +104,7 @@
           "BT-147 (rabais sur le prix de l'article) : cardinalité 0..1 → 0..n",
           "BT-151 (code de type de TVA de l'article) : cardinalité 1..1 → 0..1",
           "BT-1 : longueur portée de 20 à 35 caractères pour le flux 1, applicable au 01/09/2026",
-          "Générateur UBL : retrait du code type 383 (note de débit), non autorisé par BR-FR-04",
+          "La Fabrique de factures : retrait du code type 383 (note de débit), non autorisé par BR-FR-04",
           "Création de cette page de transparence sur le référentiel utilisé"
         ]
       }
