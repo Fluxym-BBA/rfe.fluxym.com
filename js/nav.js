@@ -41,6 +41,7 @@ const SiteNav = {
                     <a href="#" class="nav-link nav-link--dropdown">Écosystème <span class="nav-arrow">▾</span></a>
                     <ul class="nav-submenu">
                         <li><a href="./acteurs.html">👥 Les acteurs</a></li>
+                        <li><a href="./plateformes-agreees.html">🏢 Plateformes agréées</a></li>
                         <li><a href="./e-invoicing.html">📨 E-invoicing</a></li>
                         <li><a href="./e-reporting.html">📊 E-reporting</a></li>
                         <li><a href="./chorus-pro.html">🏛️ Chorus Pro</a></li>
@@ -65,6 +66,7 @@ const SiteNav = {
                     <ul class="nav-submenu">
                         <li><a href="./champs.html">🔧 Les champs</a></li>
                         <li><a href="./cas-usage.html">📋 Cas d'usage</a></li>
+                        <li><a href="./validation.html">🔍 Validation</a></li>
                         <li><a href="./technique.html">⚙️ APIs & technique</a></li>
                         <li><a href="./regles.html">📏 Les règles</a></li>
                         <li><a href="./se-preparer.html">🚀 Se préparer</a></li>
@@ -84,7 +86,9 @@ const SiteNav = {
                     <ul class="nav-submenu">
                         <li><a href="./outils.html">🧰 Tous les outils</a></li>
                         <li><a href="./generateur.html">🏭 La Fabrique</a></li>
+                        <li><a href="./validateur.html">🔍 Validateur XSD & Schematron</a></li>
                         <li><a href="./transcodification.html">🧭 Matrice de transcodification</a></li>
+                        <li><a href="./tutoriels.html">🎬 Guide vidéo</a></li>
                     </ul>
                 </li>
             </ul>
@@ -117,9 +121,12 @@ const SiteNav = {
                         <h4>Écosystème</h4>
                         <ul>
                             <li><a href="./acteurs.html">Les acteurs</a></li>
+                            <li><a href="./plateformes-agreees.html">Plateformes agréées</a></li>
                             <li><a href="./e-invoicing.html">E-invoicing</a></li>
                             <li><a href="./e-reporting.html">E-reporting</a></li>
                             <li><a href="./chorus-pro.html">Chorus Pro</a></li>
+                            <li><a href="./b2g.html">B2G / G2B</a></li>
+                            <li><a href="./tva-preremplie.html">TVA pré-remplie</a></li>
                             <li><a href="./peppol.html">Peppol</a></li>
                             <li><a href="./sanctions.html">Sanctions</a></li>
                         </ul>
@@ -137,7 +144,9 @@ const SiteNav = {
                     <div class="footer-col">
                         <h4>Mettre en pratique</h4>
                         <ul>
+                            <li><a href="./champs.html">Les champs</a></li>
                             <li><a href="./cas-usage.html">Cas d'usage</a></li>
+                            <li><a href="./validation.html">Validation</a></li>
                             <li><a href="./technique.html">APIs & technique</a></li>
                             <li><a href="./regles.html">Les règles</a></li>
                             <li><a href="./se-preparer.html">Se préparer</a></li>
@@ -149,10 +158,12 @@ const SiteNav = {
                             <li><a href="./glossaire.html">Glossaire A→Z</a></li>
                             <li><a href="./faq.html">FAQ</a></li>
                             <li><a href="./ressources.html">Liens & outils</a></li>
-                            <li><a href="./referentiel.html">🏷️ Référentiel & versions</a></li>
-                            <li><a href="./outils.html">🧰 Les outils</a></li>
-                            <li><a href="./generateur.html">🏭 La Fabrique</a></li>
-                            <li><a href="./transcodification.html">🧭 Matrice de transcodification</a></li>
+                            <li><a href="./referentiel.html">Référentiel &amp; versions</a></li>
+                            <li><a href="./outils.html">Les outils</a></li>
+                            <li><a href="./generateur.html">La Fabrique</a></li>
+                            <li><a href="./validateur.html">Validateur XSD &amp; Schematron</a></li>
+                            <li><a href="./transcodification.html">Matrice de transcodification</a></li>
+                            <li><a href="./tutoriels.html">Guide vidéo</a></li>
                         </ul>
                     </div>
                     <div class="footer-col">
