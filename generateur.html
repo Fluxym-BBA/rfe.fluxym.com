@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex, nofollow">
-    <title>Générateur UBL | Re·Form·E</title>
+    <title>La Fabrique de factures électroniques | Re·Form·E</title>
+    <meta name="description" content="Composez une facture électronique conforme EN 16931 : cas d'usage AFNOR, UBL 2.1, CII D22B, Factur-X, PDF lisible et pièces jointes, à la carte.">
     <link rel="icon" href="./assets/favicon-Fluxym-V2.png" sizes="32x32" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,10 +13,179 @@
     <link rel="stylesheet" href="./css/pages.css">
     <style>
         /* =============================================
-           STYLES v3c — Palette pages.css (theme clair)
+           LA FABRIQUE — styles specifiques a la page
+           Palette pages.css, theme clair.
            Navy #0B2046 | Cyan #00A7E1 | White bg
            WCAG AA : contraste minimum 4.5:1
            ============================================= */
+
+        /* --- En-tete d'etape --- */
+        .fab-step {
+            display: flex; align-items: flex-start; gap: 16px; margin-bottom: 24px;
+        }
+        .fab-step-num {
+            flex: 0 0 auto; width: 38px; height: 38px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            background: linear-gradient(135deg, var(--cyan), var(--navy));
+            color: var(--white); font-weight: 800; font-size: 0.95rem;
+            box-shadow: var(--shadow-cyan);
+        }
+        .fab-step h2 { margin: 0 0 4px; }
+        .fab-step p { margin: 0; font-size: 0.88rem; color: var(--gray-500); line-height: 1.6; }
+
+        /* --- Recap dans la sidebar --- */
+        .fab-mini {
+            margin-top: 20px; padding: 16px;
+            background: linear-gradient(135deg, rgba(0,167,225,0.06), rgba(99,102,241,0.04));
+            border: 1px solid rgba(0,167,225,0.18);
+            border-radius: var(--radius-md);
+        }
+        .fab-mini-label {
+            display: block; font-size: 0.66rem; font-weight: 800; letter-spacing: 1px;
+            text-transform: uppercase; color: var(--gray-400); margin-bottom: 6px;
+        }
+        .fab-mini strong { display: block; font-size: 0.9rem; color: var(--navy); }
+        .fab-mini a {
+            display: inline-block; margin-top: 10px; font-size: 0.78rem;
+            font-weight: 700; color: var(--cyan); text-decoration: none;
+        }
+        .fab-mini a:hover { text-decoration: underline; }
+
+        /* --- Formules de depart --- */
+        .fab-presets {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 8px;
+        }
+        @media (max-width: 760px) { .fab-presets { grid-template-columns: 1fr; } }
+
+        .fab-preset {
+            text-align: left; cursor: pointer; font-family: 'Inter', sans-serif;
+            background: var(--white); border: 1.5px solid var(--gray-200);
+            border-radius: var(--radius-lg); padding: 18px 16px;
+            transition: all 0.22s ease;
+        }
+        .fab-preset:hover {
+            border-color: var(--cyan); transform: translateY(-3px); box-shadow: var(--shadow-md);
+        }
+        .fab-preset.is-active {
+            border-color: var(--cyan); background: rgba(0,167,225,0.05);
+            box-shadow: 0 0 0 4px rgba(0,167,225,0.10);
+        }
+        .fab-preset-icon { font-size: 1.4rem; display: block; margin-bottom: 8px; }
+        .fab-preset-name {
+            display: block; font-size: 0.92rem; font-weight: 800; color: var(--navy); margin-bottom: 4px;
+        }
+        .fab-preset-desc {
+            display: block; font-size: 0.76rem; color: var(--gray-500); line-height: 1.5;
+        }
+
+        .fab-custom-flag {
+            display: inline-block; margin: 10px 0 0; padding: 4px 12px;
+            background: var(--gray-100); border-radius: var(--radius-full);
+            font-size: 0.72rem; font-weight: 700; color: var(--gray-600);
+        }
+
+        /* --- Composition detaillee --- */
+        .fab-advanced { margin: 18px 0 0; }
+        .fab-group { margin-bottom: 22px; }
+        .fab-group:last-of-type { margin-bottom: 6px; }
+        .fab-group-title {
+            font-size: 0.7rem; font-weight: 800; letter-spacing: 1.2px;
+            text-transform: uppercase; color: var(--gray-400);
+            margin: 0 0 10px; padding-bottom: 6px; border-bottom: 1px solid var(--gray-100);
+        }
+        .fab-opts { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        @media (max-width: 760px) { .fab-opts { grid-template-columns: 1fr; } }
+
+        .fab-opt { display: block; cursor: pointer; margin: 0; }
+        .fab-opt input { position: absolute; opacity: 0; width: 0; height: 0; }
+
+        .fab-opt-box {
+            display: block; padding: 14px 16px; height: 100%;
+            background: var(--white); border: 1.5px solid var(--gray-200);
+            border-radius: var(--radius-md); transition: all 0.2s ease;
+        }
+        .fab-opt:hover .fab-opt-box { border-color: var(--cyan); }
+        .fab-opt input:focus-visible + .fab-opt-box {
+            outline: none; box-shadow: 0 0 0 4px rgba(0,167,225,0.18);
+        }
+        .fab-opt input:checked + .fab-opt-box {
+            border-color: var(--cyan); background: rgba(0,167,225,0.05);
+        }
+        .fab-opt.is-disabled { cursor: not-allowed; }
+        .fab-opt.is-disabled .fab-opt-box {
+            opacity: 0.42; border-style: dashed; background: var(--gray-50);
+        }
+
+        .fab-opt-head {
+            display: flex; align-items: center; gap: 8px; margin-bottom: 6px;
+        }
+        .fab-opt-check {
+            flex: 0 0 auto; width: 18px; height: 18px; border-radius: 5px;
+            border: 1.5px solid var(--gray-200); background: var(--white);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 11px; color: transparent; transition: all 0.2s ease;
+        }
+        .fab-opt input:checked + .fab-opt-box .fab-opt-check {
+            background: var(--cyan); border-color: var(--cyan); color: var(--white);
+        }
+        .fab-opt-name {
+            font-size: 0.85rem; font-weight: 700; color: var(--navy); line-height: 1.3;
+        }
+        .fab-opt-tag {
+            margin-left: auto; font-size: 0.66rem; font-weight: 700;
+            color: var(--gray-500); background: var(--gray-100);
+            padding: 2px 8px; border-radius: var(--radius-full); white-space: nowrap;
+        }
+        .fab-opt-desc {
+            display: block; font-size: 0.76rem; color: var(--gray-500);
+            line-height: 1.5; padding-left: 26px;
+        }
+        .fab-opt-desc code {
+            font-size: 0.72rem; color: var(--navy); background: var(--gray-100);
+            padding: 1px 5px; border-radius: 4px;
+        }
+
+        .gen-hint {
+            margin: 14px 0 0; font-size: 0.76rem; color: var(--gray-500); line-height: 1.5;
+        }
+
+        /* --- Bloc de lancement --- */
+        .fab-launch {
+            margin-top: 24px; padding: 24px;
+            background: var(--navy); border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-navy);
+        }
+        .fab-recap-head {
+            display: flex; align-items: baseline; justify-content: space-between;
+            gap: 12px; margin-bottom: 12px;
+        }
+        .fab-recap-title {
+            font-size: 0.7rem; font-weight: 800; letter-spacing: 1.2px;
+            text-transform: uppercase; color: rgba(255,255,255,0.5);
+        }
+        #fab-recap-count { font-size: 0.85rem; font-weight: 800; color: var(--cyan); }
+        #fab-recap-list { list-style: none; margin: 0; padding: 0; }
+        #fab-recap-list li {
+            display: flex; align-items: center; gap: 10px;
+            padding: 7px 0; border-bottom: 1px solid rgba(255,255,255,0.08);
+            font-size: 0.82rem; color: rgba(255,255,255,0.88);
+        }
+        #fab-recap-list li:last-child { border-bottom: none; }
+        .fab-recap-name { flex: 1 1 auto; }
+        .fab-recap-ext {
+            font-family: 'SF Mono', 'Fira Code', monospace; font-size: 0.7rem;
+            color: rgba(255,255,255,0.5); white-space: nowrap;
+        }
+        .fab-recap-empty { color: rgba(255,255,255,0.45) !important; font-style: italic; }
+        .fab-launch .gen-btn { margin-top: 18px; }
+
+        /* --- Etats --- */
+        .gen-btn:disabled, .gen-btn.disabled {
+            opacity: 0.45; cursor: not-allowed; box-shadow: none; transform: none;
+        }
+        .gen-info-box.out-of-scope {
+            border-color: var(--warning); background: rgba(245, 158, 11, 0.06);
+        }
 
         /* --- Tabs donnees predefinies / import --- */
         .gen-tabs {
@@ -76,6 +246,11 @@
             margin: 0 0 12px 0; font-size: 0.9rem;
             color: var(--navy); font-weight: 600;
         }
+        .gen-upload-card .gen-upload-note {
+            font-size: 0.78rem; color: var(--gray-500); margin-bottom: 12px;
+        }
+        .gen-upload-card .gen-upload-note strong { color: var(--navy); }
+        .gen-upload-card--thirdparty { margin-top: 16px; }
 
         /* --- Zone drag & drop --- */
         .gen-upload-area {
@@ -102,6 +277,7 @@
 
         /* --- Preview donnees chargees --- */
         .gen-upload-preview { margin-top: 12px; font-size: 0.82rem; color: var(--gray-600); line-height: 1.6; }
+        .gen-preview-body { margin-top: 8px; line-height: 1.6; }
         .gen-upload-preview .company-name { color: var(--navy); font-weight: 700; }
         .gen-upload-preview .company-siren { color: var(--gray-600); }
         .gen-upload-preview .company-addr { color: var(--gray-500); }
@@ -132,37 +308,13 @@
         .gen-separator::before { left: 0; }
         .gen-separator::after { right: 0; }
 
-        /* --- Contenu du telechargement (triptyque UBL / UBL+lisible / PDF) --- */
-        .gen-field .gen-checks {
-            display: flex; flex-direction: column; gap: 9px; margin-top: 2px;
-        }
-        .gen-field .gen-check {
-            display: flex; align-items: flex-start; gap: 9px; margin: 0;
-            font-size: 0.84rem; font-weight: 400; color: var(--gray-600);
-            text-transform: none; letter-spacing: normal;
-            line-height: 1.35; cursor: pointer;
-        }
-        .gen-field .gen-check input[type="checkbox"] {
-            width: 16px; height: 16px; margin: 1px 0 0 0; flex: 0 0 auto;
-            accent-color: var(--cyan); cursor: pointer;
-        }
-        .gen-field .gen-check code {
-            font-size: 0.78rem; color: var(--navy); background: var(--gray-100);
-            padding: 1px 5px; border-radius: 4px;
-        }
-        .gen-field .gen-check.disabled { opacity: 0.45; cursor: not-allowed; }
-        .gen-field .gen-check.disabled input { cursor: not-allowed; }
-        .gen-hint {
-            margin: 10px 0 0; font-size: 0.76rem; color: var(--gray-500); line-height: 1.45;
+        .gen-companies h3 {
+            font-size: 1rem; color: var(--navy); margin-bottom: 12px;
         }
 
-        /* --- Cas hors perimetre e-invoicing : generation bloquee --- */
-        .gen-btn:disabled, .gen-btn.disabled {
-            opacity: 0.45; cursor: not-allowed; box-shadow: none; transform: none;
-        }
-        .gen-info-box.out-of-scope {
-            border-color: var(--warning);
-            background: rgba(245, 158, 11, 0.06);
+        @media (prefers-reduced-motion: reduce) {
+            .fab-preset, .fab-opt-box, .fab-opt-check { transition: none; }
+            .fab-preset:hover { transform: none; }
         }
     </style>
 </head>
@@ -173,11 +325,11 @@
     <header class="page-hero">
         <div class="page-hero-content">
             <div class="breadcrumb">
-                <a href="./index.html">Accueil</a> <span>/</span> <a href="./outils.html">Les outils</a> <span>/</span> <span>Générateur UBL</span>
+                <a href="./index.html">Accueil</a> <span>/</span> <a href="./outils.html">Les outils</a> <span>/</span> <span>La Fabrique</span>
             </div>
             <span class="hero-badge">Outil pratique</span>
-            <h1>Générateur de flux UBL</h1>
-            <p>Sélectionnez un cas d’usage FNFE, visualisez la fiche pédagogique et téléchargez la facture XML correspondante.</p>
+            <h1>La Fabrique de factures électroniques</h1>
+            <p>Choisissez un cas d’usage AFNOR, réglez les acteurs, puis composez exactement les livrables dont vous avez besoin : UBL 2.1, CII D22B, Factur-X, PDF lisible et pièces jointes. Rien n’est imposé.</p>
         </div>
     </header>
 
@@ -186,15 +338,23 @@
 
             <aside class="page-sidebar">
                 <div class="sidebar-sticky">
-                    <h4>Sur cette page</h4>
+                    <h4>Les trois étapes</h4>
                     <ul class="sidebar-nav">
-                        <li><a href="#pedagogy" class="sidebar-link active">📚 Fiche pédagogique</a></li>
-                        <li><a href="#generator" class="sidebar-link">⚙️ Générateur</a></li>
+                        <li><a href="#cas" class="sidebar-link active">1 · Le cas d’usage</a></li>
+                        <li><a href="#acteurs" class="sidebar-link">2 · Les acteurs</a></li>
+                        <li><a href="#livrables" class="sidebar-link">3 · Les livrables</a></li>
                     </ul>
+
+                    <div class="fab-mini">
+                        <span class="fab-mini-label">Votre sélection</span>
+                        <strong id="fab-mini-count">1 fichier</strong>
+                        <a href="#livrables">Composer mes livrables ↓</a>
+                    </div>
+
                     <div class="sidebar-nav-pages">
                         <h4>Outils</h4>
                         <a href="./outils.html" class="sidebar-page">🧰 Tous les outils</a>
-                        <a href="./generateur.html" class="sidebar-page active">🧪 Générateur UBL</a>
+                        <a href="./generateur.html" class="sidebar-page active">🏭 La Fabrique</a>
                         <a href="./transcodification.html" class="sidebar-page">🧭 Matrice de transcodification</a>
                     </div>
                 </div>
@@ -202,74 +362,59 @@
 
             <article class="page-content">
 
-                <section id="pedagogy" class="content-section">
-                    <h2>📚 Fiche pédagogique</h2>
-                    <p>La fiche se met à jour automatiquement lorsque vous changez de cas d’usage ci-dessous.</p>
+                <!-- ============ ÉTAPE 1 — LE CAS D'USAGE ============ -->
+                <section id="cas" class="content-section">
+                    <div class="fab-step">
+                        <span class="fab-step-num" aria-hidden="true">1</span>
+                        <div>
+                            <h2>Le cas d’usage</h2>
+                            <p>La fiche pédagogique et les paramètres injectés se mettent à jour automatiquement.</p>
+                        </div>
+                    </div>
+
                     <div class="gen-field">
-                        <label for="usecase">Cas d’usage FNFE</label>
+                        <label for="usecase">Cas d’usage AFNOR XP Z12-014</label>
                         <select id="usecase"></select>
                     </div>
+
                     <div class="gen-pedagogy-card" id="theory-content">
                         <div class="gen-loader">Chargement des données…</div>
                     </div>
+
                     <div class="gen-info-box" id="info-box">
                         <h4>📋 Paramètres injectés</h4>
                         <p id="info-text">Sélectionnez un cas…</p>
                     </div>
                 </section>
 
-                <section id="generator" class="content-section">
-                    <h2>⚙️ Générateur de flux</h2>
-                    <p>Configurez les paramètres puis téléchargez la facture UBL ou le pack ZIP.</p>
+                <!-- ============ ÉTAPE 2 — LES ACTEURS ============ -->
+                <section id="acteurs" class="content-section">
+                    <div class="fab-step">
+                        <span class="fab-step-num" aria-hidden="true">2</span>
+                        <div>
+                            <h2>Les acteurs et les références</h2>
+                            <p>Utilisez le jeu de données de démonstration, ou importez vos propres entreprises. Tout reste dans votre navigateur : aucune donnée n’est transmise.</p>
+                        </div>
+                    </div>
 
                     <div class="gen-form">
-                        <div class="gen-field">
-                            <label for="trigramme">Consultant (Trigramme)</label>
-                            <input type="text" id="trigramme" placeholder="Ex: BBA" maxlength="3" value="BBA">
-                        </div>
-
-                        <div class="gen-field">
-                            <label for="buyer-reference">Référence acheteur BT-10 (obligatoire AFNOR)</label>
-                            <input type="text" id="buyer-reference" placeholder="Ex: REF-KREAMOB-2026" maxlength="60">
-                        </div>
-
-                        <div class="gen-field" id="group-artifacts">
-                            <label>Contenu du téléchargement</label>
-                            <div class="gen-checks">
-                                <label class="gen-check" for="opt-ubl">
-                                    <input type="checkbox" id="opt-ubl" checked>
-                                    <span>Facture UBL nue (.xml)</span>
-                                </label>
-                                <label class="gen-check" for="opt-ubl-pdf">
-                                    <input type="checkbox" id="opt-ubl-pdf" checked>
-                                    <span>Facture UBL avec lisible PDF embarqué en base64 <code>BG-24</code></span>
-                                </label>
-                                <label class="gen-check" for="opt-pdf">
-                                    <input type="checkbox" id="opt-pdf" checked>
-                                    <span>PDF lisible autonome</span>
-                                </label>
-                                <label class="gen-check" for="opt-annexes">
-                                    <input type="checkbox" id="opt-annexes">
-                                    <span>Bon de commande et bon de livraison fictifs en pièces jointes <code>multi-BG-24</code></span>
-                                </label>
-                                <label class="gen-check" for="opt-cii">
-                                    <input type="checkbox" id="opt-cii">
-                                    <span>Même facture en syntaxe UN/CEFACT <code>CII D22B</code> (socle du Factur-X)</span>
-                                </label>
-                                <label class="gen-check" for="opt-facturx">
-                                    <input type="checkbox" id="opt-facturx">
-                                    <span>Facture hybride <code>Factur-X</code> : PDF/A-3B avec le CII embarqué</span>
-                                </label>
+                        <div class="gen-row">
+                            <div class="gen-field">
+                                <label for="trigramme">Consultant (trigramme)</label>
+                                <input type="text" id="trigramme" placeholder="Ex : BBA" maxlength="3" value="BBA">
                             </div>
-                            <p class="gen-hint" id="artifacts-hint"></p>
+                            <div class="gen-field">
+                                <label for="buyer-reference">Référence acheteur BT-10 (obligatoire)</label>
+                                <input type="text" id="buyer-reference" placeholder="Ex : REF-KREAMOB-2026" maxlength="60">
+                            </div>
                         </div>
 
                         <div class="gen-companies">
-                            <h3 style="font-size:1rem; margin-bottom:12px;">📋 Données des tiers</h3>
+                            <h3>📋 Données des tiers</h3>
 
-                            <div class="gen-tabs" id="company-tabs">
-                                <button class="gen-tab active" data-mode="default" type="button">Données prédéfinies</button>
-                                <button class="gen-tab" data-mode="custom" type="button">Importer mes données</button>
+                            <div class="gen-tabs" id="company-tabs" role="tablist">
+                                <button class="gen-tab active" data-mode="default" type="button" role="tab" aria-selected="true">Données prédéfinies</button>
+                                <button class="gen-tab" data-mode="custom" type="button" role="tab" aria-selected="false">Importer mes données</button>
                             </div>
 
                             <div id="mode-default" class="gen-tab-content">
@@ -295,9 +440,7 @@
     <span class="json-key">"country"</span>: <span class="json-str">"FR"</span>
   }
 }</code></pre>
-                                    <p style="font-size:0.75rem; color:#64748b; margin-top:8px;">
-                                        ℹ️ <strong>SIRET</strong> = SIREN (9 chiffres) + NIC (5 chiffres). Le NIC est <span style="color:#ffd700;">optionnel</span> : s’il est absent, la valeur 00001 sera utilisée par défaut.
-                                    </p>
+                                    <p>ℹ️ <strong>SIRET</strong> = SIREN (9 chiffres) + NIC (5 chiffres). Le NIC est <span>optionnel</span> : s’il est absent, la valeur 00001 sera utilisée par défaut.</p>
                                 </div>
 
                                 <button class="gen-btn-small" id="btn-download-template" type="button">
@@ -308,21 +451,21 @@
 
                                 <div class="gen-upload-grid">
                                     <div class="gen-upload-card">
-                                        <h5>🏭 Fournisseur (Émetteur)</h5>
+                                        <h5>🏭 Fournisseur (émetteur)</h5>
                                         <div class="gen-upload-area" id="area-supplier">
                                             <span class="gen-upload-icon">📁</span>
                                             <span class="gen-upload-text">Glissez un .json ici ou cliquez</span>
-                                            <span class="gen-upload-hint">Drag & drop ou clic</span>
+                                            <span class="gen-upload-hint">Drag &amp; drop ou clic</span>
                                             <input type="file" id="file-supplier" accept=".json" hidden>
                                         </div>
                                         <div class="gen-upload-preview" id="preview-supplier"></div>
                                     </div>
                                     <div class="gen-upload-card">
-                                        <h5>🏢 Acheteur (Récepteur)</h5>
+                                        <h5>🏢 Acheteur (récepteur)</h5>
                                         <div class="gen-upload-area" id="area-buyer">
                                             <span class="gen-upload-icon">📁</span>
                                             <span class="gen-upload-text">Glissez un .json ici ou cliquez</span>
-                                            <span class="gen-upload-hint">Drag & drop ou clic</span>
+                                            <span class="gen-upload-hint">Drag &amp; drop ou clic</span>
                                             <input type="file" id="file-buyer" accept=".json" hidden>
                                         </div>
                                         <div class="gen-upload-preview" id="preview-buyer"></div>
@@ -330,11 +473,9 @@
                                 </div>
 
                                 <!-- ZONE TIERS (conditionnelle — cas 5, 7, 8, 9, 10) -->
-                                <div class="gen-upload-card hidden" id="card-thirdparty" style="margin-top:16px;">
-                                    <h5>🤝 Tiers (Factor / Mandataire / Payeur)</h5>
-                                    <p style="font-size:0.78rem; color:var(--gray-500); margin-bottom:12px;">
-                                        Ce cas d'usage implique un tiers. Seuls le <strong style="color:var(--navy);">nom</strong> et le <strong style="color:var(--navy);">SIREN</strong> sont requis.
-                                    </p>
+                                <div class="gen-upload-card gen-upload-card--thirdparty hidden" id="card-thirdparty">
+                                    <h5>🤝 Tiers (factor / mandataire / payeur)</h5>
+                                    <p class="gen-upload-note">Ce cas d’usage implique un tiers. Seuls le <strong>nom</strong> et le <strong>SIREN</strong> sont requis.</p>
                                     <div class="gen-upload-area" id="area-thirdparty">
                                         <span class="gen-upload-icon">📁</span>
                                         <span class="gen-upload-text">Glissez un .json ici ou cliquez</span>
@@ -348,20 +489,172 @@
                         </div>
 
                         <div class="gen-field hidden" id="group-factor">
-                            <label>Factor (Affacturage)</label>
+                            <label for="adv-factor">Factor (affacturage)</label>
                             <select id="adv-factor"></select>
                         </div>
+                    </div>
+                </section>
 
-                        <button class="gen-btn" id="btn-generate" type="button">
-                            <span class="gen-btn-icon">📥</span>
-                            Télécharger la facture UBL
-                        </button>
-
-                        <div id="success-msg" class="gen-success hidden">
-                            <span class="gen-success-icon">✅</span>
-                            <p>Génération réussie ! Le fichier a été téléchargé.</p>
-                            <strong id="filename-display"></strong>
+                <!-- ============ ÉTAPE 3 — LES LIVRABLES ============ -->
+                <section id="livrables" class="content-section">
+                    <div class="fab-step">
+                        <span class="fab-step-num" aria-hidden="true">3</span>
+                        <div>
+                            <h2>Les livrables</h2>
+                            <p>Partez d’une formule, ou composez à la carte. Un seul fichier sélectionné est téléchargé tel quel ; à partir de deux, ils sont regroupés dans une archive ZIP.</p>
                         </div>
+                    </div>
+
+                    <div id="group-artifacts">
+
+                        <div class="fab-presets">
+                            <button type="button" class="fab-preset is-active" data-preset="facture" aria-pressed="true">
+                                <span class="fab-preset-icon" aria-hidden="true">🧾</span>
+                                <span class="fab-preset-name">Facture seule</span>
+                                <span class="fab-preset-desc">Le XML UBL 2.1 et rien d’autre. Un fichier, pas de ZIP.</span>
+                            </button>
+                            <button type="button" class="fab-preset" data-preset="lisible" aria-pressed="false">
+                                <span class="fab-preset-icon" aria-hidden="true">👁️</span>
+                                <span class="fab-preset-name">Facture + lisible</span>
+                                <span class="fab-preset-desc">L’UBL nu, l’UBL avec le lisible embarqué, et le PDF autonome.</span>
+                            </button>
+                            <button type="button" class="fab-preset" data-preset="complet" aria-pressed="false">
+                                <span class="fab-preset-icon" aria-hidden="true">📦</span>
+                                <span class="fab-preset-name">Pack complet</span>
+                                <span class="fab-preset-desc">Toutes les syntaxes, le Factur-X et les pièces jointes.</span>
+                            </button>
+                        </div>
+
+                        <span class="fab-custom-flag hidden" id="fab-custom-flag">✏️ Composition sur mesure</span>
+
+                        <details class="gen-advanced fab-advanced" id="fab-advanced">
+                            <summary>Composer mes livrables un par un</summary>
+                            <div class="gen-advanced-content">
+
+                                <div class="fab-group">
+                                    <h4 class="fab-group-title">Syntaxe structurée</h4>
+                                    <div class="fab-opts">
+                                        <label class="fab-opt" for="opt-ubl">
+                                            <input type="checkbox" id="opt-ubl" checked>
+                                            <span class="fab-opt-box">
+                                                <span class="fab-opt-head">
+                                                    <span class="fab-opt-check" aria-hidden="true">✓</span>
+                                                    <span class="fab-opt-name">Facture UBL 2.1</span>
+                                                    <span class="fab-opt-tag">.xml</span>
+                                                </span>
+                                                <span class="fab-opt-desc">La facture nue, conforme <code>EN 16931</code>. Le livrable de référence.</span>
+                                            </span>
+                                        </label>
+                                        <label class="fab-opt" for="opt-cii">
+                                            <input type="checkbox" id="opt-cii">
+                                            <span class="fab-opt-box">
+                                                <span class="fab-opt-head">
+                                                    <span class="fab-opt-check" aria-hidden="true">✓</span>
+                                                    <span class="fab-opt-name">Facture CII D22B</span>
+                                                    <span class="fab-opt-tag">.xml</span>
+                                                </span>
+                                                <span class="fab-opt-desc">La même facture en syntaxe UN/CEFACT, au centime près. Socle du Factur-X.</span>
+                                            </span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="fab-group">
+                                    <h4 class="fab-group-title">Représentation lisible</h4>
+                                    <div class="fab-opts">
+                                        <label class="fab-opt" for="opt-pdf">
+                                            <input type="checkbox" id="opt-pdf">
+                                            <span class="fab-opt-box">
+                                                <span class="fab-opt-head">
+                                                    <span class="fab-opt-check" aria-hidden="true">✓</span>
+                                                    <span class="fab-opt-name">PDF lisible autonome</span>
+                                                    <span class="fab-opt-tag">.pdf</span>
+                                                </span>
+                                                <span class="fab-opt-desc">Le rendu humain de la facture, en fichier séparé.</span>
+                                            </span>
+                                        </label>
+                                        <label class="fab-opt" for="opt-ubl-pdf">
+                                            <input type="checkbox" id="opt-ubl-pdf">
+                                            <span class="fab-opt-box">
+                                                <span class="fab-opt-head">
+                                                    <span class="fab-opt-check" aria-hidden="true">✓</span>
+                                                    <span class="fab-opt-name">UBL avec lisible embarqué</span>
+                                                    <span class="fab-opt-tag">.xml</span>
+                                                </span>
+                                                <span class="fab-opt-desc">Le même PDF, encodé en base64 dans le XML <code>BG-24</code> / <code>BT-125</code>.</span>
+                                            </span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="fab-group">
+                                    <h4 class="fab-group-title">Format hybride</h4>
+                                    <div class="fab-opts">
+                                        <label class="fab-opt" for="opt-facturx">
+                                            <input type="checkbox" id="opt-facturx">
+                                            <span class="fab-opt-box">
+                                                <span class="fab-opt-head">
+                                                    <span class="fab-opt-check" aria-hidden="true">✓</span>
+                                                    <span class="fab-opt-name">Factur-X</span>
+                                                    <span class="fab-opt-tag">.pdf</span>
+                                                </span>
+                                                <span class="fab-opt-desc">Un <code>PDF/A-3B</code> portant le CII en fichier associé : lisible et structuré dans un seul document.</span>
+                                            </span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="fab-group">
+                                    <h4 class="fab-group-title">Pièces jointes — bon de commande et bon de livraison</h4>
+                                    <div class="fab-opts">
+                                        <label class="fab-opt" for="opt-annexes">
+                                            <input type="checkbox" id="opt-annexes">
+                                            <span class="fab-opt-box">
+                                                <span class="fab-opt-head">
+                                                    <span class="fab-opt-check" aria-hidden="true">✓</span>
+                                                    <span class="fab-opt-name">Les embarquer dans la facture</span>
+                                                    <span class="fab-opt-tag">.xml</span>
+                                                </span>
+                                                <span class="fab-opt-desc">Produit une variante à trois <code>BG-24</code> (lisible + bon de commande + bon de livraison) et émet le <code>BT-16</code>.</span>
+                                            </span>
+                                        </label>
+                                        <label class="fab-opt" for="opt-annexes-files">
+                                            <input type="checkbox" id="opt-annexes-files">
+                                            <span class="fab-opt-box">
+                                                <span class="fab-opt-head">
+                                                    <span class="fab-opt-check" aria-hidden="true">✓</span>
+                                                    <span class="fab-opt-name">Les télécharger aussi en PDF</span>
+                                                    <span class="fab-opt-tag">.pdf ×2</span>
+                                                </span>
+                                                <span class="fab-opt-desc">Ajoute les deux bons comme fichiers autonomes dans l’archive. Décochez pour ne récupérer que la facture.</span>
+                                            </span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </details>
+
+                        <p class="gen-hint" id="artifacts-hint"></p>
+                    </div>
+
+                    <div class="fab-launch" id="fab-recap">
+                        <div class="fab-recap-head">
+                            <span class="fab-recap-title">Ce que vous allez télécharger</span>
+                            <span id="fab-recap-count">1 fichier</span>
+                        </div>
+                        <ul id="fab-recap-list"></ul>
+                    </div>
+
+                    <button class="gen-btn" id="btn-generate" type="button">
+                        <span class="gen-btn-icon">📥</span>
+                        Télécharger la facture UBL 2.1
+                    </button>
+
+                    <div id="success-msg" class="gen-success hidden">
+                        <span class="gen-success-icon">✅</span>
+                        <p>Génération réussie ! Le fichier a été téléchargé.</p>
+                        <strong id="filename-display"></strong>
                     </div>
                 </section>
 
@@ -370,9 +663,9 @@
                         <span class="nav-label">Retour</span>
                         <span class="nav-title">← Les outils</span>
                     </a>
-                    <a href="./comprendre.html" class="nav-next">
-                        <span class="nav-label">Continuer</span>
-                        <span class="nav-title">Comprendre la réforme →</span>
+                    <a href="./formats.html" class="nav-next">
+                        <span class="nav-label">Pour aller plus loin</span>
+                        <span class="nav-title">Les formats →</span>
                     </a>
                 </nav>
             </article>

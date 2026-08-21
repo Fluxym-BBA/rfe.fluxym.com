@@ -4,7 +4,14 @@
  * Config-driven + ZIP pour litige-avoir, litige-rectificative, pack B
  *
  * Auteur: Bruno BARTOLI — Fluxym / Re-Form-E
- * Date: 2026-08-20
+ * Date: 2026-08-21
+ * Changelog v3g — decouplage des pieces jointes (lot 5) :
+ *   - getArtifactOptions expose annexFiles, distinct de annexes : embarquer les
+ *     bons de commande et de livraison dans le XML (BG-24) et les telecharger en
+ *     PDF autonomes sont desormais deux choix independants
+ *   - le Factur-X est desactive pour les cas sans representation lisible verifiee
+ *   - aucune valeur par defaut ne force un artefact : seul l'UBL nu est coche
+ *   - nom d'archive unifie (Pack_...) — le "triptyque" n'a plus cours
  * Changelog v3f — pieces jointes multiples (lot 4) :
  *   - buildXML accepte un tableau de pieces jointes BG-24 : LISIBLE plus
  *     BON_COMMANDE et BON_LIVRAISON (BT-123, liste fermee BR-FR-17)
@@ -992,10 +999,15 @@ const UBLGenerator = {
         };
         var opts = {
             ubl: read('opt-ubl', true),
-            ublWithPdf: read('opt-ubl-pdf', true),
-            pdf: read('opt-pdf', true),
+            ublWithPdf: read('opt-ubl-pdf', false),
+            pdf: read('opt-pdf', false),
             // Variante multi-pieces jointes : LISIBLE + BON_COMMANDE + BON_LIVRAISON
+            // embarques dans le XML (BG-24).
             annexes: read('opt-annexes', false),
+            // Livraison des memes bons de commande et de livraison en PDF
+            // autonomes. Choix INDEPENDANT de l'embarquement : on peut vouloir
+            // le XML multi-PJ sans les PDF a cote, ou l'inverse.
+            annexFiles: read('opt-annexes-files', false),
             // Syntaxe UN/CEFACT CII D22B : socle du futur Factur-X, et
             // demonstration qu'une meme facture EN 16931 s'ecrit dans deux
             // syntaxes sans changer d'un centime.
@@ -1003,12 +1015,18 @@ const UBLGenerator = {
             // Factur-X : PDF/A-3B portant le CII en fichier associe.
             facturx: read('opt-facturx', false)
         };
+        // Le Factur-X est un PDF/A-3B : il suppose une representation lisible
+        // verifiee pour le cas. Sans elle, on ne produit pas un hybride dont
+        // la face lisible n'aurait pas ete controlee.
         if (!this.supportsPdf(usecase)) {
             opts.ublWithPdf = false;
             opts.pdf = false;
             opts.annexes = false;
+            opts.annexFiles = false;
+            opts.facturx = false;
         }
-        if (!opts.ubl && !opts.ublWithPdf && !opts.pdf && !opts.annexes && !opts.cii && !opts.facturx) opts.ubl = true;
+        if (!opts.ubl && !opts.ublWithPdf && !opts.pdf && !opts.annexes &&
+            !opts.annexFiles && !opts.cii && !opts.facturx) opts.ubl = true;
         return opts;
     },
 
@@ -1692,11 +1710,11 @@ const UBLGenerator = {
                 // fichier autonome et objet binaire base64 de BT-125. Les annexes
                 // sont produites depuis le MEME modele pivot, ce qui garantit que
                 // bon de commande, bon de livraison et facture concordent.
-                if (opts.pdf || opts.ublWithPdf || opts.annexes || opts.facturx) {
+                if (opts.pdf || opts.ublWithPdf || opts.annexes || opts.annexFiles || opts.facturx) {
                     var renderData = buildRenderData(numeroFacture, invoiceTypeCode, null);
                     if (renderData) {
                         pdfDoc = PDFLisible.build(renderData);
-                        if (opts.annexes) {
+                        if (opts.annexes || opts.annexFiles) {
                             annexDocs = [
                                 PDFAnnexes.buildOrder(renderData),
                                 PDFAnnexes.buildDespatch(renderData)
@@ -1706,6 +1724,7 @@ const UBLGenerator = {
                         opts.pdf = false;
                         opts.ublWithPdf = false;
                         opts.annexes = false;
+                        opts.annexFiles = false;
                         opts.facturx = false;
                         opts.ubl = true;
                     }
@@ -1833,7 +1852,10 @@ const UBLGenerator = {
                     });
                 }
 
-                if (opts.annexes && annexDocs) {
+                // Bons de commande et de livraison en PDF autonomes : uniquement
+                // si l'utilisateur les a explicitement demandes. Cocher la
+                // variante XML multi-PJ n'impose plus de les telecharger.
+                if (opts.annexFiles && annexDocs) {
                     annexDocs.forEach(function(a) {
                         artifacts.push({ name: a.filename, blob: PDFAnnexes.toBlob(a.raw) });
                     });
@@ -1847,7 +1869,7 @@ const UBLGenerator = {
                     }
                     var zipSimple = new JSZip();
                     artifacts.forEach(function(item) { zipSimple.file(item.name, item.blob); });
-                    var zipSimpleName = (opts.annexes ? "Pack_" : "Triptyque_") + trigramme + "_Cas" + usecase + "_" + nomExplicatif +
+                    var zipSimpleName = "Pack_" + trigramme + "_Cas" + usecase + "_" + nomExplicatif +
                         "_" + yyyy + MM + dd + "_" + HH + mm + ss + ".zip";
                     zipSimple.generateAsync({ type: "blob" }).then(function(content) {
                         self.triggerDownload(content, zipSimpleName);
