@@ -112,7 +112,7 @@ sans qu'aucun ne soit signalé comme tel :
 | Groupe | Immatriculations portées |
 |---|---|
 | **AGENA3000** | AGENA 3000 (11/12/2025) + DOCPROCESS (15/12/2025) |
-| **Tessi (HLD)** | TESSI Technologies + LE VILLAGE CONNECTE |
+| ~~Tessi (HLD)~~ | ~~TESSI Technologies + LE VILLAGE CONNECTE~~ — **FAUX, corrigé le 22/08/2026 après-midi** : Le Village Connecté est une alliance RCA + ACD + Coaxis, Tessi n'y est que partenaire technique (voir `RECENSEMENT-GROUPES.md`) |
 | **EDICOM** | EDICOM France + EDICOM Group |
 | **Visma** | CHAINTRUST by Visma + MySupply Aps |
 
@@ -127,7 +127,9 @@ Mais cela a trois conséquences directes :
 3. **Un même socle peut se présenter sous plusieurs noms dans une même consultation**, ce qui est la version aggravée
    du constat des trois grossistes (Esker, Paragon, Generix) fait à la révision du barème.
 
-**Action à programmer** (chantier transversal, une passe) : parcourir les 163 entrées, regrouper par
+**Correction du 22/08/2026 (après-midi)** : le recensement a été fait (voir `RECENSEMENT-GROUPES.md`). Il a confirmé quatre groupes et **infirmé le cas Tessi**, exactement pour la raison annoncée ci-dessous. Deux groupes supplémentaires ont été trouvés : le groupe Crédit Agricole (marque Kolecto) et Docoon.
+
+**Action programmée puis exécutée** (chantier transversal, une passe) : parcourir les 163 entrées, regrouper par
 `groupeCapitalistique` normalisé, et publier le compte réel de groupes distincts. Le comptage automatique fait ce jour
 sur une liste de mots-clés est un sondage, pas un recensement.
 

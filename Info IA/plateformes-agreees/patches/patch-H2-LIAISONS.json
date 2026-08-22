@@ -1,0 +1,308 @@
+{
+  "_patch": {
+    "id": "H2-LIAISONS",
+    "chantier": "H2 — recensement des groupes portant plusieurs immatriculations",
+    "societe": "13 fiches",
+    "auteur": "RFE_WebSite",
+    "dateReleve": "2026-08-22",
+    "nbPlateformes": 13,
+    "note": "Première application de la règle 21 sous forme de donnée publiée, et non plus de note interne. Six groupes portant deux immatriculations sont établis sur pièces : VISMA, AGENA3000, EDICOM, ecosio/Vertex, Docoon et le groupe Crédit Agricole (marque Kolecto). Un nouveau champ immatriculationsLiees est introduit, avec sa facette filtrable et son affichage dans la fiche. CORRECTION IMPORTANTE : le groupe Tessi ne porte PAS deux immatriculations. Le Village Connecté est une alliance industrielle entre RCA, ACD et Coaxis, Tessi n'y étant que partenaire technique — l'hypothèse inverse, publiée ce matin dans deux notes internes, provenait d'un sondage par mots-clés et était fausse. Piste non retenue faute de preuve : SEQINO (filiale du Crédit Mutuel Arkéa) et TRESO2 (adossée à des partenaires bancaires dont Arkéa) — le lien capitalistique de TRESO2 n'est pas établi. CONSÉQUENCE DE FOND : 163 entrées ne font pas 163 acteurs. Au moins six groupes comptent double, soit six acteurs de moins que le décompte apparent, et le recensement n'est pas terminé : 75 fiches n'ont aucun groupe renseigné.",
+    "nouveauxChamps": [
+      "immatriculationsLiees"
+    ]
+  },
+  "plateformes": [
+    {
+      "nom": "CHAINTRUST by Visma",
+      "immatriculationsLiees": {
+        "groupe": "VISMA (fonds Hg)",
+        "entrees": [
+          "CHAINTRUST by Visma",
+          "MySupply Aps"
+        ],
+        "type": "deux_offres_deux_cibles",
+        "lecture": "Le groupe adresse les deux extrémités du marché avec deux agréments distincts : Chaintrust par les cabinets d'expertise comptable et leurs clients très petites et petites entreprises, MySupply par les acheteurs publics et grandes organisations nordiques. Visma détient par ailleurs l'éditeur comptable français Inqom, non immatriculé.",
+        "source": "Liste DGFiP ; https://www.chaintrust.io/ (« plateforme agréée du groupe Visma ») ; communiqué Visma de janvier 2024 sur l'acquisition de Chaintrust ; comptes danois de mySupply ApS (CVR 25894375) rattachés à VISMA DANMARK HOLDING A/S",
+        "dateReleve": "2026-08-22"
+      },
+      "sourcesEnrichissement": [
+        {
+          "champ": "immatriculationsLiees",
+          "source": "Liste DGFiP ; https://www.chaintrust.io/ (« plateforme agréée du groupe Visma ») ; communiqué Visma de janvier 2024 sur l'acquisition de Chaintrust ; comptes danois de mySupply ApS (CVR 25894375) rattachés à VISMA DANMARK HOLDING A/S",
+          "dateReleve": "2026-08-22",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "MySupply Aps",
+      "immatriculationsLiees": {
+        "groupe": "VISMA (fonds Hg)",
+        "entrees": [
+          "CHAINTRUST by Visma",
+          "MySupply Aps"
+        ],
+        "type": "deux_offres_deux_cibles",
+        "lecture": "Le groupe adresse les deux extrémités du marché avec deux agréments distincts : Chaintrust par les cabinets d'expertise comptable et leurs clients très petites et petites entreprises, MySupply par les acheteurs publics et grandes organisations nordiques. Visma détient par ailleurs l'éditeur comptable français Inqom, non immatriculé.",
+        "source": "Liste DGFiP ; https://www.chaintrust.io/ (« plateforme agréée du groupe Visma ») ; communiqué Visma de janvier 2024 sur l'acquisition de Chaintrust ; comptes danois de mySupply ApS (CVR 25894375) rattachés à VISMA DANMARK HOLDING A/S",
+        "dateReleve": "2026-08-22"
+      },
+      "sourcesEnrichissement": [
+        {
+          "champ": "immatriculationsLiees",
+          "source": "Liste DGFiP ; https://www.chaintrust.io/ (« plateforme agréée du groupe Visma ») ; communiqué Visma de janvier 2024 sur l'acquisition de Chaintrust ; comptes danois de mySupply ApS (CVR 25894375) rattachés à VISMA DANMARK HOLDING A/S",
+          "dateReleve": "2026-08-22",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "AGENA 3000",
+      "immatriculationsLiees": {
+        "groupe": "Groupe AGENA3000",
+        "entrees": [
+          "AGENA 3000",
+          "DOCPROCESS"
+        ],
+        "type": "deux_offres_deux_cibles",
+        "lecture": "Deux logiques complémentaires depuis le rachat de DocProcess le 17/09/2025 : le socle d'AGENA 3000 est vendu en gros à des éditeurs tiers, tandis que DocProcess porte une offre en propre orientée distribution et biens de consommation. Les deux immatriculations ont été obtenues à quatre jours d'intervalle, avant le rapprochement.",
+        "source": "Liste DGFiP (AGENA 3000 le 11/12/2025, DOCPROCESS le 15/12/2025) ; communiqué AGENA3000 du 19/09/2025 sur l'acquisition de DocProcess",
+        "dateReleve": "2026-08-22"
+      },
+      "sourcesEnrichissement": [
+        {
+          "champ": "immatriculationsLiees",
+          "source": "Liste DGFiP (AGENA 3000 le 11/12/2025, DOCPROCESS le 15/12/2025) ; communiqué AGENA3000 du 19/09/2025 sur l'acquisition de DocProcess",
+          "dateReleve": "2026-08-22",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "DOCPROCESS",
+      "immatriculationsLiees": {
+        "groupe": "Groupe AGENA3000",
+        "entrees": [
+          "AGENA 3000",
+          "DOCPROCESS"
+        ],
+        "type": "deux_offres_deux_cibles",
+        "lecture": "Deux logiques complémentaires depuis le rachat de DocProcess le 17/09/2025 : le socle d'AGENA 3000 est vendu en gros à des éditeurs tiers, tandis que DocProcess porte une offre en propre orientée distribution et biens de consommation. Les deux immatriculations ont été obtenues à quatre jours d'intervalle, avant le rapprochement.",
+        "source": "Liste DGFiP (AGENA 3000 le 11/12/2025, DOCPROCESS le 15/12/2025) ; communiqué AGENA3000 du 19/09/2025 sur l'acquisition de DocProcess",
+        "dateReleve": "2026-08-22"
+      },
+      "sourcesEnrichissement": [
+        {
+          "champ": "immatriculationsLiees",
+          "source": "Liste DGFiP (AGENA 3000 le 11/12/2025, DOCPROCESS le 15/12/2025) ; communiqué AGENA3000 du 19/09/2025 sur l'acquisition de DocProcess",
+          "dateReleve": "2026-08-22",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "EDICOM France",
+      "immatriculationsLiees": {
+        "groupe": "EDICOM",
+        "entrees": [
+          "EDICOM France",
+          "EDICOM Group"
+        ],
+        "type": "entite_locale_et_groupe",
+        "lecture": "Le même groupe est immatriculé deux fois le même jour, une fois par son entité française et une fois au niveau du groupe espagnol. Un client peut donc être en relation avec l'une ou l'autre selon le contrat, avec des conséquences pratiques sur l'interlocuteur, la langue de service et le droit applicable.",
+        "source": "Liste DGFiP : deux entrées EDICOM immatriculées le 11/12/2025, l'une française, l'autre espagnole",
+        "dateReleve": "2026-08-22"
+      },
+      "sourcesEnrichissement": [
+        {
+          "champ": "immatriculationsLiees",
+          "source": "Liste DGFiP : deux entrées EDICOM immatriculées le 11/12/2025, l'une française, l'autre espagnole",
+          "dateReleve": "2026-08-22",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "EDICOM Group",
+      "immatriculationsLiees": {
+        "groupe": "EDICOM",
+        "entrees": [
+          "EDICOM France",
+          "EDICOM Group"
+        ],
+        "type": "entite_locale_et_groupe",
+        "lecture": "Le même groupe est immatriculé deux fois le même jour, une fois par son entité française et une fois au niveau du groupe espagnol. Un client peut donc être en relation avec l'une ou l'autre selon le contrat, avec des conséquences pratiques sur l'interlocuteur, la langue de service et le droit applicable.",
+        "source": "Liste DGFiP : deux entrées EDICOM immatriculées le 11/12/2025, l'une française, l'autre espagnole",
+        "dateReleve": "2026-08-22"
+      },
+      "sourcesEnrichissement": [
+        {
+          "champ": "immatriculationsLiees",
+          "source": "Liste DGFiP : deux entrées EDICOM immatriculées le 11/12/2025, l'une française, l'autre espagnole",
+          "dateReleve": "2026-08-22",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "ECOSIO",
+      "immatriculationsLiees": {
+        "groupe": "ecosio / Vertex",
+        "entrees": [
+          "ECOSIO",
+          "ecosio InterCom, a Vertex Company"
+        ],
+        "type": "meme_marque_deux_entites",
+        "lecture": "La marque ecosio apparaît deux fois : l'entité autrichienne historique et l'entité allemande issue du rapprochement avec Vertex. Une seule offre commerciale, deux immatriculations, deux pays.",
+        "source": "Liste DGFiP : ECOSIO (Autriche) et ecosio InterCom (Allemagne, société du groupe Vertex) ; champs groupeCapitalistique des deux fiches",
+        "dateReleve": "2026-08-22"
+      },
+      "sourcesEnrichissement": [
+        {
+          "champ": "immatriculationsLiees",
+          "source": "Liste DGFiP : ECOSIO (Autriche) et ecosio InterCom (Allemagne, société du groupe Vertex) ; champs groupeCapitalistique des deux fiches",
+          "dateReleve": "2026-08-22",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "ecosio InterCom, a Vertex Company",
+      "immatriculationsLiees": {
+        "groupe": "ecosio / Vertex",
+        "entrees": [
+          "ECOSIO",
+          "ecosio InterCom, a Vertex Company"
+        ],
+        "type": "meme_marque_deux_entites",
+        "lecture": "La marque ecosio apparaît deux fois : l'entité autrichienne historique et l'entité allemande issue du rapprochement avec Vertex. Une seule offre commerciale, deux immatriculations, deux pays.",
+        "source": "Liste DGFiP : ECOSIO (Autriche) et ecosio InterCom (Allemagne, société du groupe Vertex) ; champs groupeCapitalistique des deux fiches",
+        "dateReleve": "2026-08-22"
+      },
+      "sourcesEnrichissement": [
+        {
+          "champ": "immatriculationsLiees",
+          "source": "Liste DGFiP : ECOSIO (Autriche) et ecosio InterCom (Allemagne, société du groupe Vertex) ; champs groupeCapitalistique des deux fiches",
+          "dateReleve": "2026-08-22",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "DOCOON",
+      "immatriculationsLiees": {
+        "groupe": "Docoon",
+        "entrees": [
+          "DOCOON",
+          "DOCOON IMMO / FREEDZ"
+        ],
+        "type": "meme_marque_deux_entites",
+        "lecture": "La marque Docoon apparaît deux fois : l'entité parisienne généraliste et une entité marseillaise dédiée à la verticale immobilière. Une seule maison, deux immatriculations, deux terrains.",
+        "source": "Liste DGFiP : DOCOON (Paris, SIREN 338698384) et DOCOON IMMO / FREEDZ (Marseille, SIREN 523445211) ; champs groupeCapitalistique des deux fiches",
+        "dateReleve": "2026-08-22"
+      },
+      "sourcesEnrichissement": [
+        {
+          "champ": "immatriculationsLiees",
+          "source": "Liste DGFiP : DOCOON (Paris, SIREN 338698384) et DOCOON IMMO / FREEDZ (Marseille, SIREN 523445211) ; champs groupeCapitalistique des deux fiches",
+          "dateReleve": "2026-08-22",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "DOCOON IMMO / FREEDZ",
+      "immatriculationsLiees": {
+        "groupe": "Docoon",
+        "entrees": [
+          "DOCOON",
+          "DOCOON IMMO / FREEDZ"
+        ],
+        "type": "meme_marque_deux_entites",
+        "lecture": "La marque Docoon apparaît deux fois : l'entité parisienne généraliste et une entité marseillaise dédiée à la verticale immobilière. Une seule maison, deux immatriculations, deux terrains.",
+        "source": "Liste DGFiP : DOCOON (Paris, SIREN 338698384) et DOCOON IMMO / FREEDZ (Marseille, SIREN 523445211) ; champs groupeCapitalistique des deux fiches",
+        "dateReleve": "2026-08-22"
+      },
+      "sourcesEnrichissement": [
+        {
+          "champ": "immatriculationsLiees",
+          "source": "Liste DGFiP : DOCOON (Paris, SIREN 338698384) et DOCOON IMMO / FREEDZ (Marseille, SIREN 523445211) ; champs groupeCapitalistique des deux fiches",
+          "dateReleve": "2026-08-22",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "KOLECTO PA",
+      "immatriculationsLiees": {
+        "groupe": "Groupe Crédit Agricole — marque Kolecto",
+        "entrees": [
+          "KOLECTO PA",
+          "KOLECTO PDP"
+        ],
+        "type": "meme_marque_deux_entites",
+        "lecture": "La marque Kolecto, filiale du groupe Crédit Agricole, apparaît deux fois : une entité immatriculée en 2025 et une seconde en 2026, à des adresses différentes. Une seule offre commerciale, deux immatriculations — configuration à surveiller, car elle peut préluder à une bascule d'une entité vers l'autre.",
+        "source": "Liste DGFiP : KOLECTO PDP (SIREN 950955542, immatriculée le 11/12/2025) et KOLECTO PA (SIREN 993109024, immatriculée le 15/04/2026) ; Kolecto présentée comme filiale à 100 % du groupe Crédit Agricole",
+        "dateReleve": "2026-08-22"
+      },
+      "sourcesEnrichissement": [
+        {
+          "champ": "immatriculationsLiees",
+          "source": "Liste DGFiP : KOLECTO PDP (SIREN 950955542, immatriculée le 11/12/2025) et KOLECTO PA (SIREN 993109024, immatriculée le 15/04/2026) ; Kolecto présentée comme filiale à 100 % du groupe Crédit Agricole",
+          "dateReleve": "2026-08-22",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "KOLECTO PDP",
+      "immatriculationsLiees": {
+        "groupe": "Groupe Crédit Agricole — marque Kolecto",
+        "entrees": [
+          "KOLECTO PA",
+          "KOLECTO PDP"
+        ],
+        "type": "meme_marque_deux_entites",
+        "lecture": "La marque Kolecto, filiale du groupe Crédit Agricole, apparaît deux fois : une entité immatriculée en 2025 et une seconde en 2026, à des adresses différentes. Une seule offre commerciale, deux immatriculations — configuration à surveiller, car elle peut préluder à une bascule d'une entité vers l'autre.",
+        "source": "Liste DGFiP : KOLECTO PDP (SIREN 950955542, immatriculée le 11/12/2025) et KOLECTO PA (SIREN 993109024, immatriculée le 15/04/2026) ; Kolecto présentée comme filiale à 100 % du groupe Crédit Agricole",
+        "dateReleve": "2026-08-22"
+      },
+      "sourcesEnrichissement": [
+        {
+          "champ": "immatriculationsLiees",
+          "source": "Liste DGFiP : KOLECTO PDP (SIREN 950955542, immatriculée le 11/12/2025) et KOLECTO PA (SIREN 993109024, immatriculée le 15/04/2026) ; Kolecto présentée comme filiale à 100 % du groupe Crédit Agricole",
+          "dateReleve": "2026-08-22",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "LE VILLAGE CONNECTE",
+      "immatriculationsLiees": {
+        "groupe": "Alliance RCA + ACD + Coaxis",
+        "entrees": [
+          "LE VILLAGE CONNECTE"
+        ],
+        "type": "alliance_industrielle",
+        "lecture": "Le Village Connecté n'est pas une filiale : c'est une offre commune portée par trois sociétés indépendantes du monde de l'expertise comptable — RCA, ACD et Coaxis — Tessi n'intervenant qu'en partenaire technique. Le rapprochement automatique par mots-clés avait conclu à tort à une seconde immatriculation du groupe Tessi : il n'y en a qu'une, celle de TESSI Technologies.",
+        "source": "Communication publique de l'alliance et des trois sociétés qui la portent (RCA, ACD, Coaxis), relevé du 22/08/2026 ; contrôle du champ groupeCapitalistique de la fiche",
+        "dateReleve": "2026-08-22"
+      },
+      "relationCapitalistique": "independante",
+      "sourcesEnrichissement": [
+        {
+          "champ": "immatriculationsLiees + relationCapitalistique",
+          "source": "Communication publique de l'alliance et des trois sociétés qui la portent (RCA, ACD, Coaxis), relevé du 22/08/2026 ; contrôle du champ groupeCapitalistique de la fiche",
+          "dateReleve": "2026-08-22",
+          "confiance": "haute"
+        },
+        {
+          "champ": "correction",
+          "source": "Correction d'une hypothèse erronée du 22/08/2026 matin : Le Village Connecté avait été présenté comme la seconde immatriculation du groupe Tessi sur la base d'un sondage par mots-clés. Tessi n'est que partenaire technique de l'alliance RCA + ACD + Coaxis",
+          "dateReleve": "2026-08-22",
+          "confiance": "haute"
+        }
+      ]
+    }
+  ]
+}

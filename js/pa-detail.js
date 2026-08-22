@@ -249,8 +249,22 @@
         : TODO]
     ]) + `<div class="callout callout--warning"><div class="callout-icon">⚠️</div><div class="callout-content"><strong>Rappel.</strong> « Marque blanche » et « marque grise » sont des notions commerciales, pas réglementaires. ${pa.nom} est immatriculée en son nom propre, a passé ses propres tests d\u2019interopérabilité et reste seule responsable devant l\u2019administration, quelle que soit l\u2019origine de son socle technique.</div></div>`;
 
+    const liees = pa.immatriculationsLiees;
+    const ligneLiees = () => {
+      if (!liees || !(liees.entrees || []).length) return TODO;
+      const autres = liees.entrees.filter((n) => n !== pa.nom);
+      const liens = autres.length
+        ? `<div class="pa-segment-list">${autres.map((n) => `<a href="./pa-detail.html?pa=${slugify(n)}">${n}</a>`).join('')}</div>`
+        : '';
+      const type = liees.type ? label(taxo, 'liaisonImmatriculations', liees.type) : '';
+      return `<strong>${liees.groupe}</strong>${type ? ` <span class="pa-conf pa-conf--ok">${type}</span>` : ''}
+        ${liens}${liees.lecture ? `<p>${liees.lecture}</p>` : ''}
+        ${liees.source ? `<p class="pa-partner-count">${liees.source}${liees.dateReleve ? ` — relevé du ${liees.dateReleve}` : ''}</p>` : ''}`;
+    };
+
     document.getElementById('pa-actionnariat').innerHTML = dl([
       ['Groupe d\u2019appartenance', val(pa.groupeCapitalistique)],
+      ['Autres immatriculations du m\u00eame groupe', ligneLiees()],
       ['Nature de l\u2019actionnariat', pa.relationCapitalistique ? label(taxo, 'relationCapitalistique', pa.relationCapitalistique) : TODO],
       ['Dirigeants (RNE)', (pa.dirigeants || []).length ? `<ul>${pa.dirigeants.map((d) => `<li>${d.nom}${d.qualite ? ` — ${d.qualite}` : ''}</li>`).join('')}</ul>` : TODO],
       ['Levées de fonds', val(pa.leveeDeFonds)],

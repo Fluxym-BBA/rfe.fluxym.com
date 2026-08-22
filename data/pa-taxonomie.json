@@ -549,6 +549,34 @@
           "label": "Non qualifie"
         }
       ]
+    },
+    {
+      "id": "liaisonImmatriculations",
+      "label": "Liaison entre immatriculations",
+      "filtrable": true,
+      "description": "Qualifie le lien entre plusieurs immatriculations portées par un même groupe. Le nombre d'entrées du référentiel n'est pas le nombre d'acteurs : un groupe peut porter deux agréments, sur deux entités, deux marques ou deux cibles.",
+      "valeurs": [
+        {
+          "v": "meme_marque_deux_entites",
+          "label": "Même marque, deux entités — deux immatriculations pour une seule offre commerciale"
+        },
+        {
+          "v": "deux_offres_deux_cibles",
+          "label": "Deux offres, deux cibles — le groupe adresse des segments différents avec deux agréments"
+        },
+        {
+          "v": "entite_locale_et_groupe",
+          "label": "Entité locale et entité de groupe — l'agrément est porté deux fois, au niveau national et au niveau du groupe"
+        },
+        {
+          "v": "alliance_industrielle",
+          "label": "Alliance industrielle — plusieurs sociétés indépendantes portent une offre commune"
+        },
+        {
+          "v": "non_qualifie",
+          "label": "Lien constaté, nature non établie"
+        }
+      ]
     }
   ],
   "fiche": [
@@ -701,7 +729,8 @@
       "analyse360.reputation",
       "identiteInternationale",
       "identiteInternationale.presenceEnFrance",
-      "socleTechnique"
+      "socleTechnique",
+      "immatriculationsLiees"
     ],
     "analyse360": {
       "metierPrincipal": "chaine",

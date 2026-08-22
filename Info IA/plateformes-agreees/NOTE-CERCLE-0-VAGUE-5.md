@@ -120,11 +120,12 @@ disparaîtrait sans l'agrément français.
 |---|---|---|
 | **VISMA** (Hg) | CHAINTRUST by Visma + MySupply Aps | bas de marché par les cabinets / haut de marché nordique |
 | **AGENA3000** | AGENA 3000 + DOCPROCESS | socle vendu en gros / offre en propre |
-| **Tessi** (HLD) | TESSI Technologies + LE VILLAGE CONNECTE | à qualifier |
+| ~~Tessi (HLD)~~ | ~~TESSI Technologies + LE VILLAGE CONNECTE~~ | **FAUX, corrigé le 22/08/2026 après-midi** : alliance RCA + ACD + Coaxis, Tessi seulement partenaire technique |
 | **EDICOM** | EDICOM France + EDICOM Group | entité française / entité groupe |
 
-Le recensement complet sur les 163 entrées reste à faire : ces quatre cas sortent d'un sondage par mots-clés, pas d'un
-inventaire.
+**Mise à jour du 22/08/2026 (après-midi)** : le recensement a été fait (`RECENSEMENT-GROUPES.md`). Il porte le total à
+**six groupes établis** — Visma, AGENA3000, EDICOM, ecosio/Vertex, Docoon et le groupe Crédit Agricole (marque Kolecto) —
+et il a **infirmé le cas Tessi**. Le tableau ci-dessus est donc à lire avec cette correction.
 
 ---
 

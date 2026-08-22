@@ -79,6 +79,7 @@
     if (id === 'centralitePA') return bloc(pa, 'centralitePA', 'niveau');
     if (id === 'typeActionnaire') return bloc(pa, 'capaciteDeFrappe', 'typeActionnaire');
     if (id === 'postureCommerciale') return bloc(pa, 'postureCommerciale', 'valeur');
+    if (id === 'liaisonImmatriculations') return pa.immatriculationsLiees ? pa.immatriculationsLiees.type : null;
     if (id === 'secteurReferences') return secteursDe(pa);
     if (id === 'angleMort') return signalAngleMort(pa);
     if (id.includes('.')) return id.split('.').reduce((o, k) => (o ? o[k] : null), pa);
