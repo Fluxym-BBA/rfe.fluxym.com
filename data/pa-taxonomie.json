@@ -575,6 +575,10 @@
     {
      "v": "non_qualifie",
      "label": "Lien constaté, nature non établie"
+    },
+    {
+     "v": "controle_personnel_commun",
+     "label": "contrôle personnel commun (dirigeant et siège partagés, chaîne capitalistique non établie)"
     }
    ]
   }
