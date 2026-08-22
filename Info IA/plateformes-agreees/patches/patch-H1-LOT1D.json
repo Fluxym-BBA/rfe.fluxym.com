@@ -1,0 +1,60 @@
+{
+ "_patch": {
+  "id": "H1-LOT1D",
+  "chantier": "H1 — poids économique et rattachement capitalistique",
+  "societe": "Lot 1D : ouverture des holdings — SEPTEO via SEVEN TOPCO, CEGID via CEGID GROUP, FLOWIE via UP TO TECH",
+  "auteur": "RFE_WebSite",
+  "dateReleve": "2026-08-22",
+  "nbPlateformes": 3,
+  "note": "Quatrième lot du chantier H1, consacré à l'ouverture des holdings repérées aux lots précédents. RESULTAT PRINCIPAL : le chiffre d'affaires consolidé du groupe Septeo, porté comme NON TROUVE au lot 1C, est déposé par la société de tête SEVEN TOPCO et non par l'entité immatriculée : 227 M€ (2021), 288 M€ (2022), 338 M€ (2023), avec un EBITDA de 98,1 M€ soit 29,0 % du chiffre d'affaires. Le groupe Septeo est donc un acteur de plus de 300 M€ très rentable au niveau opérationnel, ce que ni les 48,7 M€ de la holding animatrice ni les pertes de la TopCo ne laissaient voir (règle 40). DEUXIEME RESULTAT : la chaîne de CEGID comporte au moins trois étages — CEGID, puis CEGID GROUP (code 70.10Z, zéro salarié, 824 M€ de dettes financières pour 3,71 M€ d'honoraires), puis CLAUDIUS FRANCE (SIREN 821096039), non ouverte. Une holding peut en cacher une autre (règle 39). TROISIEME RESULTAT : la présidente de FLOWIE, UP TO TECH, est une EURL au capital de 100 € sans salarié, domiciliée à la même adresse, dont le gérant est Yann Ravel-Sibillot, née en septembre 1992 ; elle dépose elle aussi ses comptes sous déclaration de confidentialité. L'opacité de cet acteur est systématique sur les deux étages. AVERTISSEMENT DE METHODE INSCRIT DANS LES FICHES : les dettes financières des différents étages d'un montage ne se cumulent pas, elles se recoupent (règle 41). NON TROUVE : CLAUDIUS FRANCE (SIREN 821096039) et LEGORREC CONSULTING (SIREN 920781333), non ouvertes ; effectif consolidé du groupe Septeo ; comptes consolidés du groupe Cegid ; identité des fonds au sommet des deux montages."
+ },
+ "plateformes": [
+  {
+   "nom": "SEPTEO",
+   "analyse360": {
+    "poidsEconomique": {
+     "caGroupe": {
+      "montantMEUR": 338,
+      "exercice": "2023",
+      "nature": "comptes_deposes",
+      "commentaire": "TAILLE REELLE DU GROUPE, enfin documentée : les comptes consolidés ne sont pas déposés par l'entité immatriculée mais par la société de tête du montage, SEVEN TOPCO (SIREN 888803988). Ils affichent 227 M€ (2021), 288 M€ (2022) et 338 M€ (2023) de chiffre d'affaires consolidé, en croissance de +26,6 % puis +17,4 %, pour un EBITDA de 98,1 M€ (29,0 % du chiffre d'affaires) et un résultat d'exploitation de 75,6 M€ (22,4 %). Le groupe Septeo est donc un acteur de plus de 300 M€ très rentable au niveau opérationnel — à ne pas confondre avec les 48,7 M€ de refacturation de la holding animatrice immatriculée, ni avec les pertes de la société de tête.",
+      "source": "TAILLE REELLE DU GROUPE, enfin documentée : les comptes consolidés ne sont pas déposés par l'entité immatriculée mais par la société de tête du montage, SEVEN TOPCO (SIREN 888803988). Ils affichent 227 M€ (2021), 288 M€ (2022) et 338 M€ (2023) de chiffre d'affaires consolidé, en croissance de +26,6 % puis +17,4 %, pour un EBITDA de 98,1 M€ (29,0 % du chiffre d'affaires) et un résultat d'exploitation de 75,6 M€ (22,4 %). Le groupe Septeo est donc un acteur de plus de 300 M€ très rentable au niveau opérationnel — à ne pas confondre avec les 48,7 M€ de refacturation de la holding animatrice immatriculée, ni avec les pertes de la société de tête.",
+      "dateReleve": "2026-08-22"
+     },
+     "resultatNet": "Il faut distinguer trois étages, sans jamais les additionner. (1) Au niveau opérationnel consolidé, le groupe dégage 98,1 M€ d'EBITDA et 75,6 M€ de résultat d'exploitation en 2023, soit 29,0 % et 22,4 % du chiffre d'affaires : la performance est forte. (2) La société de tête SEVEN TOPCO, SAS de Lattes au capital de 54,3 M€ dirigée par Hugues Galambrun, enregistre des pertes croissantes — −12,6 M€ (2022), −16,8 M€ (2023), −17,7 M€ (2024), −22,0 M€ (2025) — pour 307 M€ de dettes financières et 460 M€ de fonds propres : c'est le coût du levier d'acquisition, non un signe de faiblesse opérationnelle. (3) La holding animatrice immatriculée SEPTEO porte, elle, les mouvements de restructuration décrits par ailleurs. Les dettes financières des différents étages ne se cumulent pas : elles se recoupent.",
+     "effectifGroupe": "Non publié au consolidé à ce relevé. Pour mémoire, SEVEN TOPCO n'emploie que 5 salariés et SEPTEO 200 : ni l'une ni l'autre ne mesure l'effectif du groupe."
+    }
+   },
+   "groupeCapitalistique": "Groupe Septeo, éditeur européen de logiciels métier (juridique, notariat, immobilier, expertise comptable), plus de 250 000 utilisateurs revendiqués. Structure à trois étages, désormais documentée. (1) L'entité immatriculée SEPTEO (SIREN 790675037) est la holding animatrice : SAS de Lattes, capital 7 017 550 €, code d'activité 70.22Z, et non une société d'exploitation. (2) Son dirigeant est SEVEN TOPCO (SIREN 888803988), société de tête du montage, SAS de Lattes au capital de 54 334 787,80 €, code 64.20Z, 5 salariés, dirigée par Hugues Galambrun — fondateur du groupe. C'est SEVEN TOPCO qui dépose les comptes consolidés. (3) Le levier d'acquisition est logé à cet étage : 307 M€ de dettes financières en 2025 pour 460 M€ de fonds propres, avec des pertes annuelles de 12,6 à 22,0 M€ sur quatre exercices, correspondant au coût de la dette. Le groupe est donc sous montage à effet de levier, mais dirigé par son fondateur.",
+   "sourcesEnrichissement": [
+    {
+     "url": "https://www.pappers.fr/entreprise/seven-topco-888803988",
+     "libelle": "Fiche registre et comptes sociaux et consolidés de SEVEN TOPCO (RCS Montpellier), republiés par Pappers",
+     "dateReleve": "2026-08-22"
+    }
+   ]
+  },
+  {
+   "nom": "CEGID",
+   "groupeCapitalistique": "Chaîne de contrôle à trois étages au moins, et non un seul comme la fiche le laissait croire. (1) L'entité immatriculée CEGID (SIREN 410218010) est la société d'exploitation : 664 M€ de chiffre d'affaires en 2024, 2 540 salariés, présidée par une personne morale. (2) Son président est CEGID GROUP (SIREN 327888111), SASU de Lyon au capital de 9 515 423,25 €, code d'activité 70.10Z (activités des sièges sociaux), zéro salarié, 57 établissements, numéro LEI attribué. Cette holding ne réalise que 3,71 M€ d'honoraires en 2024 mais porte 824 M€ de dettes financières — en hausse continue depuis 659 M€ en 2021 — pour 313 M€ de fonds propres, 8 k€ de trésorerie et 27,5 % d'autonomie financière. Repère historique de périmètre : CEGID GROUP affichait 308 M€ de chiffre d'affaires et 28,6 M€ de résultat en 2016, avant réorganisation ; les séries anciennes et récentes ne sont pas comparables. (3) Au-dessus, le président de CEGID GROUP est encore une personne morale : CLAUDIUS FRANCE (SIREN 821096039), depuis le 27/03/2018 — étage non ouvert à ce relevé. AVERTISSEMENT : les 748 M€ de dettes financières de l'entité d'exploitation et les 824 M€ de la holding ne se cumulent pas, ils se recoupent au sein du montage.",
+   "sourcesEnrichissement": [
+    {
+     "url": "https://www.pappers.fr/entreprise/cegid-group-327888111",
+     "libelle": "Fiche registre et comptes sociaux de CEGID GROUP (RCS Lyon), republiés par Pappers",
+     "dateReleve": "2026-08-22"
+    }
+   ]
+  },
+  {
+   "nom": "FLOWIE",
+   "groupeCapitalistique": "Société indépendante, créée le 31/10/2022 — et non en 2021 comme l'indiquait la fiche — siège 229 rue Saint-Honoré à Paris 1er, capital porté à 502 620,81 € par augmentations successives (novembre 2023, octobre 2024, août 2026). Les deux mandataires sociaux sont des personnes morales, ce qui masquait les personnes physiques. Le premier étage est désormais ouvert : UP TO TECH (SIREN 912494937), présidente de FLOWIE depuis le 14/11/2022, est une EURL au capital de 100 €, sans salarié, domiciliée à la même adresse que FLOWIE, dont le gérant est Yann Ravel-Sibillot, né en septembre 1992. UP TO TECH ne dirige aucune autre entreprise que FLOWIE, n'a jamais publié d'information financière, et a déposé ses comptes 2022 et 2023 le 08/12/2024 accompagnés d'une déclaration de confidentialité — comme FLOWIE elle-même. La seconde mandataire, LEGORREC CONSULTING (SIREN 920781333), n'a pas été ouverte à ce relevé. L'opacité est donc systématique et cohérente sur les deux étages : à chaque niveau, les comptes sont déposés sous confidentialité. Aucun actionnaire de contrôle extérieur n'est identifié.",
+   "sourcesEnrichissement": [
+    {
+     "url": "https://www.pappers.fr/entreprise/up-to-tech-912494937",
+     "libelle": "Fiche registre, dépôts de comptes et annonces BODACC de UP TO TECH (RCS Paris), republiés par Pappers",
+     "dateReleve": "2026-08-22"
+    }
+   ]
+  }
+ ]
+}
