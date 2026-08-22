@@ -1,0 +1,183 @@
+{
+  "_patch": {
+    "id": "G-LUCCA",
+    "chantier": "G — analyse 360",
+    "societe": "LUCCA",
+    "auteur": "RFE_WebSite",
+    "dateReleve": "2026-08-22",
+    "nbPlateformes": 1,
+    "note": "Dix-neuvième fiche 360, et PREMIER INDICE 1 DU RÉFÉRENTIEL. Lucca est un éditeur de logiciels de gestion des ressources humaines et de finance qui a obtenu l'agrément pour sécuriser deux de ses modules — notes de frais et factures fournisseurs — et non pour vendre une plateforme. Le statut est affiché sur les pages produit, jamais comme une offre autonome, et la couverture annoncée se limite à la réception et à l'e-reporting. CORRECTION : trancheEffectif passe de 250-499 à 500-999 (donnée INSEE 2023, 478 salariés aux comptes 2023, plus de 740 collaborateurs déclarés en 2024). Comptes déposés exploités sur quatre exercices : croissance très forte financée par des pertes croissantes. NON TROUVÉ : comptes 2024 et 2025 (non déposés à date), répartition du capital entre fondateurs et fonds d'investissement, références clients nommées sur l'offre agréée, avis agrégés indépendants."
+  },
+  "plateformes": [
+    {
+      "nom": "LUCCA",
+      "trancheEffectif": "500-999",
+      "analyse360": {
+        "metierPrincipal": "Éditeur français de logiciels de gestion des ressources humaines et de processus financiers en mode abonnement — congés, temps, paie, notes de frais, factures fournisseurs — dont l'agrément sert à rendre deux modules conformes à la réforme",
+        "activites": [
+          {
+            "libelle": "Suite de gestion des ressources humaines : congés et absences, temps, entretiens, rémunérations, dossiers du personnel",
+            "poids": "majeur",
+            "source": "https://www.lucca.fr/, relevé 22/08/2026"
+          },
+          {
+            "libelle": "Gestion des notes de frais (Cleemy), produit historique et vitrine du groupe, désormais présenté comme « prêt pour la facturation électronique »",
+            "poids": "majeur",
+            "source": "https://www.lucca.fr/finance/notes-de-frais/, relevé 22/08/2026"
+          },
+          {
+            "libelle": "Gestion des factures fournisseurs, où le statut de plateforme agréée est mobilisé pour la réception des factures électroniques et la transmission des données à l'administration",
+            "poids": "significatif",
+            "source": "https://www.lucca.fr/finance/achats/, relevé 22/08/2026"
+          },
+          {
+            "libelle": "Fonction de plateforme agréée limitée, dans le discours public, à la réception et à l'e-reporting — l'émission n'est pas mise en avant",
+            "poids": "mineur",
+            "source": "https://www.lucca.fr/finance/achats/, relevé 22/08/2026"
+          }
+        ],
+        "poidsEconomique": {
+          "caGroupe": {
+            "montantMEUR": 58.4,
+            "exercice": "2024",
+            "nature": "declare_site",
+            "commentaire": "Revenus récurrents annuels déclarés par l'entreprise pour 2024 : 58,4 M€, en croissance de 38 %, dont 56,1 M€ en France, pour environ 8 300 clients et 3,3 millions d'utilisateurs, avec un investissement en recherche et développement annoncé de 20,8 M€. Chiffre déclaré, non un chiffre d'affaires comptable : les deux ne se comparent pas.",
+            "source": "Communication de l'entreprise sur ses résultats 2024",
+            "dateReleve": "2026-08-22"
+          },
+          "caEntiteFrancaise": {
+            "montantMEUR": 40.9,
+            "exercice": "2023",
+            "nature": "comptes_deposes",
+            "commentaire": "Trajectoire des comptes déposés : 15,2 M€ (2020), 21,5 M€ (2021), 29,1 M€ (2022), 40,9 M€ (2023, +40,8 %). Les comptes 2024 et 2025 ne sont pas déposés à la date du relevé. Chiffre d'affaires à l'export de 1,61 M€ seulement : l'activité est française à plus de 96 %.",
+            "source": "Comptes sociaux déposés, SIREN 441637691",
+            "dateReleve": "2026-08-22"
+          },
+          "resultatNet": "Pertes croissantes sur les quatre exercices connus, assumées au service de la croissance : −1,51 M€ (2020), −2,57 M€ (2021), −6,10 M€ (2022), −10,2 M€ (2023). Les salaires et charges atteignent 40,3 M€, soit 98,4 % du chiffre d'affaires. Capitaux propres de 19,2 M€ et trésorerie de 22,8 M€ au 31/12/2023, tenus par la levée de 65 M€ de 2022.",
+          "effectifGroupe": "Plus de 740 collaborateurs déclarés en 2024, après 220 recrutements sur l'année",
+          "effectifEntite": "478 salariés aux comptes 2023 ; tranche INSEE de 500 à 999 salariés (donnée 2023)",
+          "ventilationParActivite": {
+            "disponible": false,
+            "motif": "L'entreprise communique un revenu récurrent global et une répartition par pays, mais aucune ventilation par module : ni la part des produits financiers, ni a fortiori celle de l'activité agréée ne sont publiées. Aucune part attribuable à l'activité agréée n'est estimée.",
+            "derniereVentilationConnue": null
+          }
+        },
+        "centralitePA": {
+          "indice": 1,
+          "niveau": "activite_annexe",
+          "marqueProduitDediee": "Aucune : le statut est mentionné sous la marque Lucca, à l'intérieur des pages des modules Achats et Notes de frais",
+          "entiteJuridiqueDediee": false,
+          "faisceauIndices": [
+            {
+              "signal": "Le statut est affiché sur les pages produit et sert d'argument de conformité : « Lucca, plateforme agréée par l'État, assure votre conformité avec la réforme »",
+              "sens": "+",
+              "preuve": "https://www.lucca.fr/finance/achats/ et https://www.lucca.fr/finance/notes-de-frais/, relevé 22/08/2026"
+            },
+            {
+              "signal": "La société a fait la démarche d'obtenir l'agrément elle-même plutôt que de s'adosser à un tiers, ce qui suppose un investissement de conformité réel",
+              "sens": "+",
+              "preuve": "Liste DGFiP"
+            },
+            {
+              "signal": "Contenu pédagogique produit sur le sujet, notamment sur l'articulation entre notes de frais et facturation électronique",
+              "sens": "+",
+              "preuve": "Publications de l'éditeur, relevé 22/08/2026"
+            },
+            {
+              "signal": "Aucune offre de plateforme autonome : pas de page dédiée à l'offre agréée, et l'adresse la plus évidente d'une telle page renvoie une erreur 404",
+              "sens": "-",
+              "preuve": "https://www.lucca.fr/facturation-electronique, code 404 au 22/08/2026"
+            },
+            {
+              "signal": "Périmètre annoncé restreint : réception des factures et transmission des données à l'administration ; l'émission n'apparaît pas dans le discours public",
+              "sens": "-",
+              "preuve": "https://www.lucca.fr/finance/achats/, relevé 22/08/2026"
+            },
+            {
+              "signal": "L'éditeur suggère lui-même à ses clients d'utiliser plusieurs plateformes agréées — une pour les notes de frais, une autre pour les factures fournisseurs — ce qui revient à assumer un rôle partiel",
+              "sens": "-",
+              "preuve": "Publication de l'éditeur sur les notes de frais et la réforme, relevé 22/08/2026"
+            },
+            {
+              "signal": "Le cœur du métier et de la croissance est la gestion des ressources humaines, très loin de la facture",
+              "sens": "-",
+              "preuve": "https://www.lucca.fr/, relevé 22/08/2026 ; communication sur les résultats 2024"
+            }
+          ],
+          "lecture": "Premier indice 1 du référentiel, et il est assumé comme tel. Lucca n'a pas construit une offre de plateforme : elle a obtenu un agrément pour que deux de ses modules — notes de frais et factures fournisseurs — restent utilisables après la réforme, et elle le dit ainsi sur ses pages produit. Trois éléments l'établissent : il n'existe aucune page consacrée à l'offre agréée, le périmètre annoncé se limite à la réception et à l'e-reporting, et l'éditeur invite lui-même ses clients à combiner plusieurs plateformes selon les flux. Ce n'est pas une critique : c'est une stratégie cohérente d'éditeur de logiciels de gestion qui sécurise son parc. L'indice 1 dit exactement cela — activité annexe, réelle mais périphérique — et il évite de compter Lucca comme un concurrent de plateforme qu'elle ne cherche pas à être. L'indice serait relevé si une offre de plateforme autonome, incluant l'émission, apparaissait.",
+          "confiance": "moyenne"
+        },
+        "postureCommerciale": {
+          "valeur": "base_installee",
+          "preuve": "Le statut agréé est présenté comme un attribut de l'abonnement existant, sur les pages des modules déjà vendus, à destination d'un parc d'environ 8 300 clients. Aucune vitrine de conquête ni programme partenaires portant sur l'offre agréée n'a été relevé.",
+          "confiance": "haute"
+        },
+        "referencesClients": {
+          "nbCiteesSurSite": 0,
+          "parSecteur": {},
+          "grandsComptes": [],
+          "referencesPAConfirmees": [],
+          "source": "Aucune référence nommée sur l'offre agréée au 22/08/2026. L'éditeur revendique environ 8 300 clients et 3,3 millions d'utilisateurs sur l'ensemble de sa suite, sans lien avec le périmètre agréé."
+        },
+        "reputation": {
+          "volumeAvis": null,
+          "synthese": "Aucun relevé d'avis clients agrégés indépendants dans cette passe.",
+          "confiance": "faible"
+        },
+        "capaciteDeFrappe": {
+          "actionnaires": [
+            "Fondateur toujours président de la société",
+            "ONE PEAK, fonds de croissance européen, entré au capital en mars 2022 lors d'une levée de 65 M€ dont environ 30 M€ de rachat de titres existants",
+            "Répartition exacte du capital non établie : la levée est présentée comme une opération de croissance, non comme une prise de contrôle"
+          ],
+          "typeActionnaire": "fondateurs",
+          "financementRecent": "Levée de 65 M€ en mars 2022 auprès d'un fonds de croissance, dont environ 30 M€ affectés au rachat de titres existants. Trésorerie de 22,8 M€ fin 2023 pour une perte annuelle de 10,2 M€ : l'entreprise finance sa croissance sur cette levée.",
+          "acquisitions": [
+            "Non relevé dans cette passe"
+          ],
+          "modeleTarifaire": "Abonnement par utilisateur, grille publiée pour partie sur le site",
+          "tarifPublie": true,
+          "offreGratuite": false
+        },
+        "lectureConcurrentielle": "Lucca n'est pas un concurrent de plateforme et ne prétend pas l'être : son agrément sert à protéger ses modules de notes de frais et de factures fournisseurs, pas à vendre un service de transport de factures. Sa présence dans le référentiel est néanmoins utile à connaître pour deux raisons. La première est un effet d'occupation du terrain : avec environ 8 300 clients et 3,3 millions d'utilisateurs, l'éditeur est déjà installé dans les directions des ressources humaines et, de plus en plus, dans les directions financières de petites et moyennes entreprises et d'entreprises de taille intermédiaire. Quand la question de la plateforme se posera, la réponse la plus simple pour ces clients sera « nous l'avons déjà dans Lucca », même si le périmètre couvert est partiel — réception et e-reporting, sans émission mise en avant. La seconde est une configuration à repérer en avant-vente : l'éditeur suggère lui-même de combiner plusieurs plateformes selon les flux, une pour les notes de frais et une autre pour les factures fournisseurs. Autrement dit, sur un même client, une plateforme agréée peut cohabiter avec Lucca sans conflit, et cela peut être un argument d'entrée plutôt qu'un obstacle. Sur le plan économique, enfin : croissance déclarée forte (58,4 M€ de revenus récurrents annoncés pour 2024, en hausse de 38 %) mais pertes croissantes dans les derniers comptes déposés — 10,2 M€ en 2023 pour 40,9 M€ de chiffre d'affaires, avec des charges de personnel à 98,4 % du chiffre — et des comptes 2024 et 2025 non déposés à ce jour.",
+        "droitDeReponse": {
+          "signale": false,
+          "date": null,
+          "objet": null
+        }
+      },
+      "sourcesEnrichissement": [
+        {
+          "champ": "trancheEffectif + analyse360.poidsEconomique",
+          "source": "Comptes sociaux déposés, LUCCA, SIREN 441637691, société créée le 01/03/2002, siège à Paris 13e, capital 59 410 € : chiffre d'affaires 15,2 M€ (2020), 21,5 M€ (2021), 29,1 M€ (2022), 40,9 M€ (2023), résultat net −1,51 / −2,57 / −6,10 / −10,2 M€, salaires et charges 40,3 M€, capitaux propres 19,2 M€, trésorerie 22,8 M€, export 1,61 M€, 478 salariés aux comptes 2023, tranche INSEE 500 à 999 salariés — la fiche indiquait 250-499",
+          "dateReleve": "2026-08-22",
+          "confiance": "haute"
+        },
+        {
+          "champ": "analyse360.poidsEconomique.caGroupe",
+          "source": "Communication de l'entreprise sur ses résultats 2024 : 58,4 M€ de revenus récurrents annuels (+38 %), dont 56,1 M€ en France, environ 8 300 clients, 3,3 millions d'utilisateurs, 20,8 M€ investis en recherche et développement, plus de 740 collaborateurs après 220 recrutements",
+          "dateReleve": "2026-08-22",
+          "confiance": "moyenne"
+        },
+        {
+          "champ": "analyse360.centralitePA + postureCommerciale",
+          "source": "https://www.lucca.fr/finance/achats/ (« Lucca, plateforme agréée (PA) par l'État, assure votre conformité avec la réforme pour la réception des factures électroniques et la transmission des données obligatoires ») et https://www.lucca.fr/finance/notes-de-frais/ (« Lucca est immatriculée comme Plateforme Agréée ») ; publication de l'éditeur invitant à utiliser plusieurs plateformes selon les flux ; absence de page dédiée à l'offre agréée (404 sur https://www.lucca.fr/facturation-electronique)",
+          "dateReleve": "2026-08-22",
+          "confiance": "haute"
+        },
+        {
+          "champ": "analyse360.capaciteDeFrappe",
+          "source": "Communication publique sur la levée de 65 M€ de mars 2022 auprès du fonds de croissance One Peak, dont environ 30 M€ de rachat de titres existants",
+          "dateReleve": "2026-08-22",
+          "confiance": "moyenne"
+        },
+        {
+          "champ": "analyse360.centralitePA.indice",
+          "source": "Lecture Fluxym sur faisceau d'indices, règle 11a du plan de travail — premier indice 1 attribué",
+          "dateReleve": "2026-08-22",
+          "confiance": "moyenne"
+        }
+      ]
+    }
+  ]
+}

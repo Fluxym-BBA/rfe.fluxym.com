@@ -1,0 +1,180 @@
+{
+  "_patch": {
+    "id": "G-CHAINTRUST",
+    "chantier": "G — analyse 360",
+    "societe": "CHAINTRUST by Visma",
+    "auteur": "RFE_WebSite",
+    "dateReleve": "2026-08-22",
+    "nbPlateformes": 1,
+    "note": "Dix-huitième fiche 360, produite dans la même passe que MySupply Aps au titre de la règle 21 : même groupe, VISMA, deux immatriculations, deux cibles opposées — les experts-comptables et leurs clients d'un côté, les acheteurs publics nordiques de l'autre. Fait notable : la société ne publie pas son chiffre d'affaires mais publie ses résultats, et ceux-ci se retournent nettement, de −1,02 M€ en 2022 à +1,25 M€ en 2025. Le fondateur est toujours président après le rachat. NON TROUVÉ : chiffre d'affaires (non publié dans les comptes déposés), date précise de prise de contrôle au registre, part du capital détenue par Visma, nombre de cabinets réellement équipés de l'offre agréée, offres d'emploi."
+  },
+  "plateformes": [
+    {
+      "nom": "CHAINTRUST by Visma",
+      "analyse360": {
+        "metierPrincipal": "Éditeur français d'une solution d'automatisation de la production comptable par intelligence artificielle, destinée aux cabinets d'expertise comptable, à laquelle s'ajoute depuis la réforme un service de plateforme agréée pour les clients de ces cabinets",
+        "activites": [
+          {
+            "libelle": "Automatisation de la pré-comptabilité et de la production comptable pour les cabinets : collecte, reconnaissance et imputation des pièces",
+            "poids": "majeur",
+            "source": "https://www.chaintrust.io/, relevé 22/08/2026"
+          },
+          {
+            "libelle": "Plateforme agréée présentée explicitement comme « la plateforme agréée du groupe Visma », adressée aux cabinets pour le compte de leurs clients",
+            "poids": "majeur",
+            "source": "https://www.chaintrust.io/, relevé 22/08/2026"
+          },
+          {
+            "libelle": "Interopérabilité revendiquée avec la totalité des logiciels de production comptable du marché (Fulll, Inqom, ACD, Agiris, Sage, MyUnisoft et autres)",
+            "poids": "majeur",
+            "source": "https://www.chaintrust.io/, relevé 22/08/2026"
+          },
+          {
+            "libelle": "Intégration à l'écosystème du groupe Visma, dont l'éditeur comptable français Inqom, racheté en 2022",
+            "poids": "significatif",
+            "source": "https://www.chaintrust.io/ ; communiqué Visma de janvier 2024"
+          }
+        ],
+        "poidsEconomique": {
+          "caGroupe": {
+            "montantMEUR": 1553.0,
+            "exercice": "2025 (premier semestre)",
+            "nature": "communique_financier",
+            "commentaire": "Groupe VISMA : 1 553 M€ sur le premier semestre 2025 (+13,1 %), excédent brut d'exploitation ajusté de 493 M€, environ 2,7 millions de clients, plus de 15 000 collaborateurs, détenu par le fonds britannique Hg, introduction en bourse repoussée à 2027.",
+            "source": "Communication financière du groupe Visma, premier semestre 2025",
+            "dateReleve": "2026-08-22"
+          },
+          "caEntiteFrancaise": {
+            "montantMEUR": null,
+            "exercice": "2025",
+            "nature": "non_publie",
+            "commentaire": "Les comptes déposés de l'entité ne comportent pas de chiffre d'affaires publié. Seuls les résultats sont disponibles, et ils dessinent un retournement net : −1,02 M€ en 2022, −844 k€ en 2023, +531 k€ en 2024, +1,25 M€ en 2025.",
+            "source": "Comptes sociaux déposés, SIREN 842804858",
+            "dateReleve": "2026-08-22"
+          },
+          "resultatNet": "Retournement en quatre exercices : −1,02 M€ (2022), −844 k€ (2023), +531 k€ (2024), +1,25 M€ (2025). Capitaux propres portés à 3,91 M€ et trésorerie à 3,49 M€ : la société est passée de la phase d'amorçage à l'autofinancement, ce qui est cohérent avec un rachat en 2024 suivi d'une industrialisation.",
+          "effectifGroupe": "Groupe Visma : plus de 15 000 collaborateurs déclarés",
+          "effectifEntite": "Entre 20 et 49 salariés (tranche INSEE, donnée 2023)",
+          "ventilationParActivite": {
+            "disponible": false,
+            "motif": "Aucun chiffre d'affaires publié, donc aucune ventilation possible entre l'automatisation comptable et le service de plateforme agréée. Aucune part attribuable à l'activité agréée n'est estimée.",
+            "derniereVentilationConnue": null
+          }
+        },
+        "centralitePA": {
+          "indice": 2,
+          "niveau": "extension_naturelle",
+          "marqueProduitDediee": "Pas de marque distincte : l'offre agréée est portée par la marque Chaintrust elle-même, présentée comme « la plateforme agréée du groupe Visma »",
+          "entiteJuridiqueDediee": false,
+          "faisceauIndices": [
+            {
+              "signal": "Page dédiée à l'offre agréée et revendication explicite du statut au nom du groupe : c'est cette entité qui porte l'agrément pour Visma en France",
+              "sens": "+",
+              "preuve": "https://www.chaintrust.io/, relevé 22/08/2026"
+            },
+            {
+              "signal": "Le métier d'origine — capter et traiter les factures des petites entreprises pour le compte des cabinets — mène naturellement à la fonction de plateforme",
+              "sens": "+",
+              "preuve": "https://www.chaintrust.io/, relevé 22/08/2026"
+            },
+            {
+              "signal": "Canal de distribution déjà constitué et revendiqué : plus d'un millier de cabinets d'expertise comptable utilisateurs",
+              "sens": "+",
+              "preuve": "https://www.chaintrust.io/, relevé 22/08/2026"
+            },
+            {
+              "signal": "Interopérabilité revendiquée avec l'ensemble des logiciels de production comptable, y compris ceux des concurrents du groupe : condition nécessaire pour que l'agrément serve à quelque chose dans ce canal",
+              "sens": "+",
+              "preuve": "https://www.chaintrust.io/, relevé 22/08/2026"
+            },
+            {
+              "signal": "Le cœur du produit reste l'automatisation comptable ; l'agrément est un service ajouté à une offre qui existait avant et qui existerait sans lui",
+              "sens": "-",
+              "preuve": "https://www.chaintrust.io/, relevé 22/08/2026"
+            },
+            {
+              "signal": "Entité de vingt à quarante-neuf personnes dans un groupe de plus de quinze mille, qui détient une seconde immatriculation française",
+              "sens": "-",
+              "preuve": "Tranche INSEE 2023 ; liste DGFiP"
+            },
+            {
+              "signal": "Cible déclarée très petites entreprises et petites et moyennes entreprises : hors du segment de compétition principal du référentiel",
+              "sens": "-",
+              "preuve": "Champ segmentCible de la fiche ; positionnement du site"
+            }
+          ],
+          "lecture": "L'agrément est ici un service greffé sur un métier de production comptable, et ce greffon est parfaitement logique : quand on traite déjà les factures de plusieurs milliers de très petites entreprises pour le compte de leurs cabinets, devenir plateforme agréée est la suite naturelle du même geste. Cela vaut un indice 2 : la société existerait sans l'agrément, mais l'agrément protège et prolonge son métier. Deux éléments de contexte comptent davantage que l'indice. D'abord la puissance du canal : plus d'un millier de cabinets, avec une interopérabilité revendiquée sur tous les logiciels comptables du marché. Ensuite l'appartenance au groupe : Visma détient aussi Inqom en France et MySupply au Danemark, elle-même immatriculée. Le même groupe adresse donc les deux extrémités du marché avec deux agréments distincts.",
+          "confiance": "moyenne"
+        },
+        "postureCommerciale": {
+          "valeur": "canal_indirect",
+          "preuve": "L'offre est vendue aux cabinets d'expertise comptable, qui l'installent chez leurs clients : plus d'un millier de cabinets utilisateurs revendiqués, interopérabilité annoncée avec tous les logiciels de production comptable. La marque Chaintrust reste visible, ce qui exclut la qualification de grossiste, mais l'entreprise cliente n'est presque jamais celle qui choisit : c'est son cabinet qui décide. Ce canal est le plus difficile à concurrencer frontalement, parce qu'il ne se joue pas dans un appel d'offres.",
+          "confiance": "haute"
+        },
+        "referencesClients": {
+          "nbCiteesSurSite": 0,
+          "parSecteur": {
+            "services_comptables": [
+              "Plus de 1 000 cabinets d'expertise comptable revendiqués, non nommés"
+            ]
+          },
+          "grandsComptes": [],
+          "referencesPAConfirmees": [],
+          "source": "https://www.chaintrust.io/, relevé 22/08/2026 : plus d'un millier de cabinets utilisateurs revendiqués, sans liste nominative. Des avis Google sont republiés par l'éditeur sur son propre site ; s'agissant d'une sélection opérée par l'éditeur, ils ne sont pas retenus comme mesure de satisfaction."
+        },
+        "reputation": {
+          "volumeAvis": null,
+          "synthese": "Des avis Google sont affichés sur le site de l'éditeur, majoritairement favorables, mais il s'agit d'une sélection republiée par l'entreprise elle-même : aucun relevé indépendant n'a été fait dans cette passe.",
+          "confiance": "faible"
+        },
+        "capaciteDeFrappe": {
+          "actionnaires": [
+            "Groupe VISMA, entré au capital en janvier 2024 par acquisition d'une participation majoritaire, première opération du groupe cette année-là et prolongement du rachat de l'éditeur comptable français Inqom en 2022",
+            "Le fondateur reste président de la société après l'opération",
+            "Groupe Visma détenu par le fonds britannique Hg"
+          ],
+          "typeActionnaire": "fonds_pe",
+          "financementRecent": "Rachat par Visma annoncé en janvier 2024, montant non communiqué. Aucune levée de fonds propre depuis.",
+          "acquisitions": [
+            "Opération subie : Chaintrust est la cible"
+          ],
+          "modeleTarifaire": "Sur devis, aucun tarif publié",
+          "tarifPublie": false,
+          "offreGratuite": false
+        },
+        "lectureConcurrentielle": "Chaintrust n'est pas un concurrent de terrain sur les dossiers de taille intermédiaire ou de grand compte : sa cible est la très petite et la petite entreprise, atteinte par l'intermédiaire de son cabinet comptable. C'est précisément ce qui la rend intéressante à surveiller. Le canal des cabinets est le seul du marché où la décision de plateforme se prend sans appel d'offres, par recommandation, à l'échelle de portefeuilles entiers de clients — plus de mille cabinets revendiqués, et une interopérabilité annoncée avec tous les logiciels comptables, y compris ceux des concurrents. À moyen terme, ce canal fabrique un parc installé considérable en nombre d'entreprises, dont certaines grandiront. Il faut aussi lire cette fiche avec celle de MySupply : le même groupe, Visma, porte deux immatriculations françaises, l'une par le bas du marché avec Chaintrust et l'autre par le haut avec MySupply, en plus de posséder l'éditeur comptable Inqom. C'est le groupe le plus puissant du référentiel — plus de quinze mille collaborateurs, 1 553 M€ de chiffre d'affaires sur un seul semestre — et sa stratégie française est bicéphale. Enfin, un fait à retenir sans en tirer de conclusion hâtive : la société a basculé de −1,02 M€ de résultat en 2022 à +1,25 M€ en 2025, ce qui indique une offre désormais industrialisée.",
+        "droitDeReponse": {
+          "signale": false,
+          "date": null,
+          "objet": null
+        }
+      },
+      "sourcesEnrichissement": [
+        {
+          "champ": "analyse360.poidsEconomique + capaciteDeFrappe",
+          "source": "Comptes sociaux déposés, CHAINTRUST, SIREN 842804858, société créée le 03/10/2018, siège à Paris 2e, capital 5 088,41 €, tranche d'effectif 20 à 49 salariés (2023), fondateur toujours président : résultat net −1,02 M€ (2022), −844 k€ (2023), +531 k€ (2024), +1,25 M€ (2025), capitaux propres 3,91 M€, trésorerie 3,49 M€ ; aucun chiffre d'affaires publié",
+          "dateReleve": "2026-08-22",
+          "confiance": "haute"
+        },
+        {
+          "champ": "analyse360.activites + centralitePA + postureCommerciale",
+          "source": "https://www.chaintrust.io/, relevé 22/08/2026 : positionnement « plateforme agréée du groupe Visma », page dédiée à l'offre agréée, plus de 1 000 cabinets d'expertise comptable utilisateurs, interopérabilité revendiquée avec l'ensemble des logiciels de production comptable",
+          "dateReleve": "2026-08-22",
+          "confiance": "haute"
+        },
+        {
+          "champ": "analyse360.capaciteDeFrappe.actionnaires",
+          "source": "Communiqué du groupe Visma, janvier 2024 : acquisition d'une participation majoritaire dans Chaintrust, première opération du groupe pour l'année, dans le prolongement du rachat d'Inqom en 2022 ; groupe présenté comme comptant plus de 15 000 collaborateurs et plus de 1,6 million de clients à cette date",
+          "dateReleve": "2026-08-22",
+          "confiance": "moyenne"
+        },
+        {
+          "champ": "analyse360.centralitePA.indice",
+          "source": "Lecture Fluxym sur faisceau d'indices, règles 11a et 21 du plan de travail",
+          "dateReleve": "2026-08-22",
+          "confiance": "moyenne"
+        }
+      ]
+    }
+  ]
+}
