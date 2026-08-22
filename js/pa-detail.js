@@ -61,6 +61,8 @@
     chiffre_declare_site: 'chiffre déclaré par l\u2019entreprise',
     communique_financier: 'communiqué financier',
     non_publie: 'non publié',
+    comptes_confidentiels: 'comptes déposés sous déclaration de confidentialité',
+    aucun_compte_depose: 'aucun compte déposé',
     sans_objet: 'sans objet'
   };
 

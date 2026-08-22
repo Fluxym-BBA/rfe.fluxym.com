@@ -1,0 +1,263 @@
+{
+ "_patch": {
+  "id": "H1-LOT1A",
+  "chantier": "H1 — poids économique et rattachement capitalistique",
+  "societe": "Lot 1A : CEGID, SAGE, DOXALLIA, SERENSIA by Quadient, FLOWIE, YOOZ PDP",
+  "auteur": "RFE_WebSite",
+  "dateReleve": "2026-08-22",
+  "nbPlateformes": 6,
+  "note": "Premier lot du chantier H1. Six plateformes ciblant l'ETI ou les grands comptes, lues sur leurs comptes déposés (source primaire : registre, republiée par Pappers). TROIS ENSEIGNEMENTS STRUCTURELS. (1) Entité ad hoc : YOOZ PDP est une SASU au capital de 10 000 € créée en mars 2023 pour porter l'agrément, sans aucun compte déposé — le poids économique se lit sur la société mère. (2) Opacité licite : FLOWIE dépose ses comptes sous déclaration de confidentialité (art. L. 232-25 du code de commerce) ; aucune donnée financière n'est légalement accessible. (3) Publication partielle : SERENSIA dépose des comptes sans chiffre d'affaires restitué ; seul le résultat net est exploitable, et il ne permet aucune déduction du chiffre d'affaires. DEUX CORRECTIONS DE TRANCHE D'EFFECTIF : CEGID 1000-1999 vers 2000-4999 (2 540 salariés aux comptes 2023), DOXALLIA 100-199 vers 250-499 (404 salariés aux comptes 2024). PISTE OUVERTE NON PUBLIEE : deux indices convergents suggèrent un rattachement de DOXALLIA au groupe Crédit agricole (convention collective des caisses régionales appliquée, entrée d'Hervé Varillon au conseil d'administration le 06/11/2025) ; en application de la règle 29, aucune liaison n'est publiée sans pièce probante. Si elle était établie, le groupe Crédit agricole porterait trois immatriculations avec les deux entités Kolecto. NON TROUVE : comptes consolidés des groupes Cegid, Sage et Quadient ; exercice 2025 de CEGID et DOXALLIA déposé mais non encore restitué ; bénéficiaires effectifs de FLOWIE et SERENSIA. TROIS VALEURS DELIBEREMENT NON MODIFIEES pour ne pas dégrader une qualification plus fine déjà présente : CEGID reste `fonds_PE` (et non `filiale_de_groupe`), SAGE reste `cotee`, SERENSIA reste `acquise`. Une seule montée en qualification : FLOWIE passe de `non_determinable` à `independante`, aucun actionnaire de contrôle extérieur n'étant identifié. UNE CORRECTION DE FAIT : FLOWIE a été créée le 31/10/2022, la fiche indiquait 2021."
+ },
+ "plateformes": [
+  {
+   "nom": "CEGID",
+   "trancheEffectif": "2000-4999",
+   "groupeCapitalistique": "Détenue à 100 % par CEGID GROUP (SIREN 327888111), tête de groupe française du même ensemble : la société agréée est une SASU dont le président est une personne morale, CEGID GROUP, et la fiche registre ne fait apparaître aucun dirigeant personne physique. Au-dessus de CEGID GROUP, la fiche qualifiait déjà un actionnariat de capital-investissement, non revérifié à ce relevé. Le profil de bilan de l'entité agréée est cohérent avec ce montage : 748 M€ de dettes financières fin 2024, en hausse continue depuis 581 M€ en 2021, pour 1,26 M€ de trésorerie, soit un levier de 2,6 fois l'EBITDA.",
+   "analyse360": {
+    "poidsEconomique": {
+     "caEntiteFrancaise": {
+      "montantMEUR": 664,
+      "exercice": "2024",
+      "nature": "comptes_deposes",
+      "commentaire": "Trajectoire des comptes déposés de l'entité agréée : 461 M€ (2021), 557 M€ (2022), 627 M€ (2023), 664 M€ (2024). Le rythme de croissance décélère nettement : +20,9 % en 2022, +12,5 % en 2023, +6,0 % en 2024. Chiffre d'affaires à l'export nul sur les quatre exercices : cette entité est le véhicule français du groupe. Les comptes de l'exercice 2025 ont été déposés le 28/07/2026 et n'étaient pas encore restitués au relevé — trajectoire à compléter.",
+      "source": "Trajectoire des comptes déposés de l'entité agréée : 461 M€ (2021), 557 M€ (2022), 627 M€ (2023), 664 M€ (2024). Le rythme de croissance décélère nettement : +20,9 % en 2022, +12,5 % en 2023, +6,0 % en 2024. Chiffre d'affaires à l'export nul sur les quatre exercices : cette entité est le véhicule français du groupe. Les comptes de l'exercice 2025 ont été déposés le 28/07/2026 et n'étaient pas encore restitués au relevé — trajectoire à compléter.",
+      "dateReleve": "2026-08-22",
+      "valeur": null
+     },
+     "caGroupe": {
+      "montantMEUR": null,
+      "exercice": null,
+      "nature": "non_publie",
+      "commentaire": "Aucun compte consolidé du groupe Cegid n'est exploité à ce stade. Le chiffre lu ici est celui de la seule entité CEGID (SIREN 410218010) ; le périmètre consolidé, plus large, n'est pas publié sous une forme opposable. Aucune part attribuable à l'activité agréée n'est estimée.",
+      "source": "Aucun compte consolidé du groupe Cegid n'est exploité à ce stade. Le chiffre lu ici est celui de la seule entité CEGID (SIREN 410218010) ; le périmètre consolidé, plus large, n'est pas publié sous une forme opposable. Aucune part attribuable à l'activité agréée n'est estimée.",
+      "dateReleve": "2026-08-22",
+      "valeur": null
+     },
+     "resultatNet": "Bénéficiaire et élevé sur les quatre exercices : 107 M€ (2021), 119 M€ (2022), 124 M€ (2023), 120 M€ (2024), pour une marge nette de 18,1 % en 2024. EBITDA de 285 M€, soit 43 % du chiffre d'affaires. Fonds propres de 1,26 Md€. Point de structure à noter : 748 M€ de dettes financières fin 2024, en hausse continue (581 M€ en 2021), pour une trésorerie de 1,26 M€ — profil d'endettement caractéristique d'un montage à effet de levier, avec un taux de levier de 2,6 fois l'EBITDA. Salaires et charges de 233 M€, soit 35 % du chiffre d'affaires.",
+     "effectifEntite": "2 540 salariés déclarés aux comptes 2023 ; tranche INSEE entre 2 000 et 4 999 salariés (donnée 2023). La fiche portait auparavant la tranche 1 000-1 999 : corrigée au relevé.",
+     "effectifGroupe": "Non relevé pour le périmètre consolidé.",
+     "ventilationParActivite": {
+      "disponible": false,
+      "motif": "Le groupe ne publie pas de ventilation permettant d'isoler la facturation électronique de ses autres lignes (paie, ERP, fiscalité, retail, expertise comptable). Aucune part attribuable à l'activité agréée n'est estimée.",
+      "derniereVentilationConnue": null
+     }
+    }
+   },
+   "sourcesEnrichissement": [
+    {
+     "url": "https://www.pappers.fr/entreprise/cegid-410218010",
+     "libelle": "Fiche registre et comptes sociaux déposés (RCS Lyon), republiés par Pappers",
+     "dateReleve": "2026-08-22"
+    }
+   ]
+  },
+  {
+   "nom": "SAGE",
+   "groupeCapitalistique": "Entité française du groupe britannique Sage Group plc, coté à Londres. La société agréée est SAGE (SIREN 313966129), SASU au capital de 6 750 000 €, siège Tour Hekla à Puteaux, présidée par Arnaud Petit depuis le 05/06/2023, exercice clos au 30 septembre. Les comptes consolidés du groupe n'ont pas été exploités à ce relevé. Un indice de flux intragroupe figure au bilan de l'entité : un besoin en fonds de roulement de 325 M€, soit 312 jours de chiffre d'affaires, dont l'essentiel hors exploitation.",
+   "analyse360": {
+    "poidsEconomique": {
+     "caEntiteFrancaise": {
+      "montantMEUR": 380,
+      "exercice": "2025",
+      "nature": "comptes_deposes",
+      "commentaire": "Trajectoire des comptes déposés de l'entité française, exercice clos au 30 septembre : 310 M€ (2022), 320 M€ (2023), 340 M€ (2024), 380 M€ (2025). Contrairement à Cegid, le rythme accélère : +3,2 %, +6,4 %, puis +11,7 % sur le dernier exercice. Chiffre d'affaires à l'export de 30,9 M€ en 2025, soit 8,1 % du total : l'entité française porte aussi une part d'activité hors de France.",
+      "source": "Trajectoire des comptes déposés de l'entité française, exercice clos au 30 septembre : 310 M€ (2022), 320 M€ (2023), 340 M€ (2024), 380 M€ (2025). Contrairement à Cegid, le rythme accélère : +3,2 %, +6,4 %, puis +11,7 % sur le dernier exercice. Chiffre d'affaires à l'export de 30,9 M€ en 2025, soit 8,1 % du total : l'entité française porte aussi une part d'activité hors de France.",
+      "dateReleve": "2026-08-22",
+      "valeur": null
+     },
+     "caGroupe": {
+      "montantMEUR": null,
+      "exercice": null,
+      "nature": "non_publie",
+      "commentaire": "Les comptes consolidés du groupe Sage, société cotée au Royaume-Uni, n'ont pas été exploités à ce relevé. Seule l'entité française est documentée ici. Aucune part attribuable à l'activité agréée n'est estimée.",
+      "source": "Les comptes consolidés du groupe Sage, société cotée au Royaume-Uni, n'ont pas été exploités à ce relevé. Seule l'entité française est documentée ici. Aucune part attribuable à l'activité agréée n'est estimée.",
+      "dateReleve": "2026-08-22",
+      "valeur": null
+     },
+     "resultatNet": "Fortement bénéficiaire sur les quatre exercices : 83,9 M€ (2022), 50,6 M€ (2023), 60,8 M€ (2024), 73 M€ (2025), pour une marge nette de 19,2 %. EBITDA de 78 M€. Fonds propres de 497 M€. Salaires et charges de 147 M€, soit 38,6 % du chiffre d'affaires. Deux points de structure : un délai de paiement clients de 142 jours et un besoin en fonds de roulement de 325 M€, soit 312 jours de chiffre d'affaires, dont l'essentiel hors exploitation — caractéristique d'une entité qui porte des flux intragroupe.",
+     "effectifEntite": "1 400 salariés déclarés aux comptes 2023 ; tranche INSEE entre 1 000 et 1 999 salariés (donnée 2023).",
+     "effectifGroupe": "Non relevé.",
+     "ventilationParActivite": {
+      "disponible": false,
+      "motif": "L'entité française ne publie aucune ventilation par ligne de produit. Aucune part attribuable à l'activité agréée n'est estimée.",
+      "derniereVentilationConnue": null
+     }
+    }
+   },
+   "sourcesEnrichissement": [
+    {
+     "url": "https://www.pappers.fr/entreprise/sage-313966129",
+     "libelle": "Fiche registre et comptes sociaux déposés (RCS Nanterre), republiés par Pappers",
+     "dateReleve": "2026-08-22"
+    }
+   ]
+  },
+  {
+   "nom": "DOXALLIA",
+   "trancheEffectif": "250-499",
+   "groupeCapitalistique": "Dénomination légale EDK DOXALLIA, siège Causse Comtal, 12340 Bozouls (Aveyron). Société à conseil d'administration, présidé par Laurent Fromageau depuis le 18/09/2024. Deux indices convergents, non suffisants pour établir un rattachement : la société applique, en plus de la convention Syntec, la convention collective des caisses régionales du Crédit agricole, et son conseil d'administration a accueilli le 06/11/2025 Hervé Varillon et Olivier Biton. Le rattachement capitalistique n'est pas publié faute de pièce probante.",
+   "relationCapitalistique": "non_determinable",
+   "analyse360": {
+    "poidsEconomique": {
+     "caEntiteFrancaise": {
+      "montantMEUR": 63,
+      "exercice": "2024",
+      "nature": "comptes_deposes",
+      "commentaire": "Trajectoire des comptes déposés : 37,3 M€ (2021), 54,1 M€ (2022), 60,3 M€ (2023), 63 M€ (2024). Croissance forte puis ralentie : +44,9 %, +11,5 %, +4,4 %. Chiffre d'affaires à l'export nul. Les comptes de l'exercice 2025 ont été déposés le 23/07/2026 et n'étaient pas encore restitués au relevé.",
+      "source": "Trajectoire des comptes déposés : 37,3 M€ (2021), 54,1 M€ (2022), 60,3 M€ (2023), 63 M€ (2024). Croissance forte puis ralentie : +44,9 %, +11,5 %, +4,4 %. Chiffre d'affaires à l'export nul. Les comptes de l'exercice 2025 ont été déposés le 23/07/2026 et n'étaient pas encore restitués au relevé.",
+      "dateReleve": "2026-08-22",
+      "valeur": null
+     },
+     "caGroupe": {
+      "montantMEUR": null,
+      "exercice": null,
+      "nature": "non_publie",
+      "commentaire": "Aucun périmètre de groupe établi à ce relevé.",
+      "source": "Aucun périmètre de groupe établi à ce relevé.",
+      "dateReleve": "2026-08-22",
+      "valeur": null
+     },
+     "resultatNet": "C'est le point saillant du dossier : la croissance du chiffre d'affaires ne se traduit pas en résultat. Après un exercice 2021 bénéficiaire de 412 k€, la société enchaîne trois pertes — −4,34 M€ (2022), −4,2 M€ (2023), −2,17 M€ (2024) — avec un EBITDA négatif sur les trois mêmes exercices et un résultat d'exploitation négatif de 2,37 M€ en 2024. La perte se réduit, mais la trésorerie est passée de 34,9 M€ en 2021 à 4,38 M€ en 2024, et les fonds propres de 47,3 M€ à 36,6 M€. L'effectif a fait plus que doubler sur la période (139 salariés en 2021, 404 en 2024) pour 23,6 M€ de salaires et charges.",
+     "effectifEntite": "404 salariés déclarés aux comptes 2024 ; tranche INSEE entre 250 et 499 salariés (donnée 2023). La fiche portait auparavant la tranche 100-199 : corrigée au relevé.",
+     "effectifGroupe": "Non relevé.",
+     "ventilationParActivite": {
+      "disponible": false,
+      "motif": "Aucune ventilation publiée entre éditique, gestion documentaire et facturation électronique. Aucune part attribuable à l'activité agréée n'est estimée.",
+      "derniereVentilationConnue": null
+     }
+    }
+   },
+   "sourcesEnrichissement": [
+    {
+     "url": "https://www.pappers.fr/entreprise/doxallia-397775305",
+     "libelle": "Fiche registre EDK DOXALLIA et comptes sociaux déposés (RCS Rodez), republiés par Pappers",
+     "dateReleve": "2026-08-22"
+    }
+   ]
+  },
+  {
+   "nom": "SERENSIA by Quadient",
+   "groupeCapitalistique": "Dénomination légale SERENSIA, avec les noms commerciaux ARADUS et SERENSIA BY QUADIENT enregistrés au registre. SAS au capital de 1 021 422,30 €, siège 15 rue des Mathurins à Paris 9e, créée le 25/06/2004. Deux éléments objectivent le rattachement à Quadient : le nom commercial déposé et le changement de date de clôture d'exercice, portée au 31 janvier, qui est celle du groupe Quadient. Direction très mouvante : cinq présidents depuis 2021, Stéphanie Auchabie présidente depuis le 02/06/2025 et Julien Vendrely directeur général depuis le 01/12/2025, après un directeur général resté six semaines.",
+   "analyse360": {
+    "poidsEconomique": {
+     "caEntiteFrancaise": {
+      "montantMEUR": null,
+      "exercice": "2024",
+      "nature": "comptes_confidentiels",
+      "commentaire": "La société dépose ses comptes mais son chiffre d'affaires n'est pas restitué : seuls le résultat net et les postes de bilan sont exploitables. Aucun chiffre d'affaires n'est donc publié ici, et aucun n'est déduit du résultat ou des fonds propres.",
+      "source": "La société dépose ses comptes mais son chiffre d'affaires n'est pas restitué : seuls le résultat net et les postes de bilan sont exploitables. Aucun chiffre d'affaires n'est donc publié ici, et aucun n'est déduit du résultat ou des fonds propres.",
+      "dateReleve": "2026-08-22",
+      "valeur": null
+     },
+     "caGroupe": {
+      "montantMEUR": null,
+      "exercice": null,
+      "nature": "non_publie",
+      "commentaire": "Les comptes consolidés du groupe Quadient, société cotée, n'ont pas été exploités à ce relevé.",
+      "source": "Les comptes consolidés du groupe Quadient, société cotée, n'ont pas été exploités à ce relevé.",
+      "dateReleve": "2026-08-22",
+      "valeur": null
+     },
+     "resultatNet": "Dégradation nette et continue : 252 k€ (2021), 418 k€ (2022), −127 k€ (2023), −1,4 M€ (2024). Les fonds propres reculent de 3,94 M€ à 2,42 M€ et la trésorerie de 2,93 M€ à 1,68 M€ sur la même période. L'endettement financier reste négligeable (105 k€). Effectif de 26 salariés aux comptes 2024. Une perte de 1,4 M€ pour 26 salariés est un ordre de grandeur significatif à cette taille : l'entité consomme des ressources, ce qui est cohérent avec un investissement produit, mais n'est pas établi comme tel faute de pièce.",
+     "effectifEntite": "26 salariés déclarés aux comptes 2024 ; tranche INSEE entre 20 et 49 salariés (donnée 2023).",
+     "effectifGroupe": "Non relevé.",
+     "ventilationParActivite": {
+      "disponible": false,
+      "motif": "Le chiffre d'affaires lui-même n'étant pas publié, aucune ventilation n'est possible.",
+      "derniereVentilationConnue": null
+     }
+    }
+   },
+   "sourcesEnrichissement": [
+    {
+     "url": "https://www.pappers.fr/entreprise/serensia-477550370",
+     "libelle": "Fiche registre SERENSIA et comptes sociaux déposés (RCS Paris), republiés par Pappers",
+     "dateReleve": "2026-08-22"
+    }
+   ]
+  },
+  {
+   "nom": "FLOWIE",
+   "groupeCapitalistique": "Société indépendante, créée le 31/10/2022 — et non en 2021 comme l'indiquait la fiche — siège 229 rue Saint-Honoré à Paris 1er, capital porté à 502 620,81 € par augmentations successives (novembre 2023, octobre 2024, août 2026). Les deux mandataires sociaux sont des personnes morales : UP TO TECH (SIREN 912494937) présidente et LEGORREC CONSULTING (SIREN 920781333) directrice générale, soit des holdings de fondateurs. Les données de bénéficiaires effectifs ne sont pas publiquement accessibles. Aucun actionnaire de contrôle extérieur n'est identifié : la relation capitalistique passe de « non déterminable » à « indépendante ».",
+   "relationCapitalistique": "independante",
+   "analyse360": {
+    "poidsEconomique": {
+     "caEntiteFrancaise": {
+      "montantMEUR": null,
+      "exercice": "2024",
+      "nature": "comptes_confidentiels",
+      "commentaire": "Fait notable : la société dépose bien ses comptes — exercice 2024 déposé le 14/08/2026 — mais accompagnés d'une déclaration de confidentialité au titre de l'article L. 232-25 du code de commerce. Aucune donnée financière n'est donc légalement accessible : ni chiffre d'affaires, ni résultat, ni bilan. Ce n'est pas une donnée manquante, c'est une opacité choisie et licite, ouverte aux petites entreprises.",
+      "source": "Fait notable : la société dépose bien ses comptes — exercice 2024 déposé le 14/08/2026 — mais accompagnés d'une déclaration de confidentialité au titre de l'article L. 232-25 du code de commerce. Aucune donnée financière n'est donc légalement accessible : ni chiffre d'affaires, ni résultat, ni bilan. Ce n'est pas une donnée manquante, c'est une opacité choisie et licite, ouverte aux petites entreprises.",
+      "dateReleve": "2026-08-22",
+      "valeur": null
+     },
+     "caGroupe": {
+      "montantMEUR": null,
+      "exercice": null,
+      "nature": "sans_objet",
+      "commentaire": "Société indépendante, sans périmètre de groupe.",
+      "source": "Société indépendante, sans périmètre de groupe.",
+      "dateReleve": "2026-08-22",
+      "valeur": null
+     },
+     "resultatNet": "Non accessible : comptes déposés sous déclaration de confidentialité.",
+     "effectifEntite": "« Au moins 1 salarié » (donnée INSEE 2026), seule tranche publiée. La fiche du référentiel annonce 6 à 9 salariés.",
+     "effectifGroupe": "Sans objet.",
+     "ventilationParActivite": {
+      "disponible": false,
+      "motif": "Aucune donnée financière accessible.",
+      "derniereVentilationConnue": null
+     }
+    }
+   },
+   "sourcesEnrichissement": [
+    {
+     "url": "https://www.pappers.fr/entreprise/flowie-921376265",
+     "libelle": "Fiche registre, dépôts d'actes et annonces BODACC (RCS Paris), republiés par Pappers",
+     "dateReleve": "2026-08-22"
+    }
+   ]
+  },
+  {
+   "nom": "YOOZ PDP",
+   "groupeCapitalistique": "Filiale de YOOZ (SIREN 808386148, créée en 2014, 250 à 499 salariés). L'entité agréée est une SASU distincte, YOOZ PDP (SIREN 949747133), créée le 09/03/2023 au capital de 10 000 €, siège Parc d'Andron, Le Séquoia, 30470 Aimargues, dont le président est la société YOOZ elle-même. Ce n'est donc pas la société opérationnelle : c'est une structure dédiée, constituée quelques semaines avant l'ouverture du dispositif pour porter l'activité agréée, et qui n'a jamais déposé de comptes. Le poids économique doit être lu sur YOOZ (808386148).",
+   "analyse360": {
+    "poidsEconomique": {
+     "caEntiteFrancaise": {
+      "montantMEUR": null,
+      "exercice": null,
+      "nature": "aucun_compte_depose",
+      "commentaire": "Aucun compte annuel n'a jamais été déposé depuis la création en mars 2023, et aucune donnée financière n'est disponible. Capital social de 10 000 €. Effectif publié : « au moins 1 salarié » (donnée INSEE 2026). L'entité agréée est une structure juridique dédiée : lire le poids économique sur la société mère YOOZ (SIREN 808386148).",
+      "source": "Aucun compte annuel n'a jamais été déposé depuis la création en mars 2023, et aucune donnée financière n'est disponible. Capital social de 10 000 €. Effectif publié : « au moins 1 salarié » (donnée INSEE 2026). L'entité agréée est une structure juridique dédiée : lire le poids économique sur la société mère YOOZ (SIREN 808386148).",
+      "dateReleve": "2026-08-22",
+      "valeur": null
+     },
+     "caGroupe": {
+      "montantMEUR": null,
+      "exercice": null,
+      "nature": "non_publie",
+      "commentaire": "Société mère YOOZ (SIREN 808386148) non traitée à ce relevé : à documenter au lot suivant.",
+      "source": "Société mère YOOZ (SIREN 808386148) non traitée à ce relevé : à documenter au lot suivant.",
+      "dateReleve": "2026-08-22",
+      "valeur": null
+     },
+     "resultatNet": "Aucun compte déposé.",
+     "effectifEntite": "« Au moins 1 salarié » (donnée INSEE 2026). La fiche du référentiel annonce 3 à 5 salariés.",
+     "effectifGroupe": "Non relevé — à documenter sur YOOZ (SIREN 808386148).",
+     "ventilationParActivite": {
+      "disponible": false,
+      "motif": "Aucune donnée financière sur l'entité agréée.",
+      "derniereVentilationConnue": null
+     }
+    }
+   },
+   "sourcesEnrichissement": [
+    {
+     "url": "https://www.pappers.fr/entreprise/yooz-pdp-949747133",
+     "libelle": "Fiche registre, dépôts d'actes et annonces BODACC (RCS Nîmes), republiés par Pappers",
+     "dateReleve": "2026-08-22"
+    }
+   ]
+  }
+ ]
+}
