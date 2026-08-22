@@ -1,0 +1,224 @@
+{
+  "_patch": {
+    "id": "G-BCSOLUTIONS",
+    "chantier": "G — analyse 360",
+    "societe": "BC SOLUTIONS",
+    "auteur": "RFE_WebSite",
+    "dateReleve": "2026-08-22",
+    "nbPlateformes": 1,
+    "note": "Quatorzième fiche 360, et un SIREN manquant en moins. La dénomination légale est BUSINESS COMMUNICATION SOLUTIONS (SIREN 445023427, Aix-en-Provence), introuvable sous le nom commercial « BCSolutions » publié par la DGFiP : nouvelle confirmation de la cause racine du chantier SIREN. Société indépendante, dirigée par ses trois gérants, sans actionnaire financier. Comptes déposés exploités sur trois exercices. NON TROUVÉ : références clients nommées, avis publics agrégés, volume d'offres d'emploi, nature exacte du partenariat Sovos sur le périmètre agréé. CORRECTION IMPORTANTE : la fiche portait un dirigeant erroné (« CARREIRA DE MATOS BRUNO »), vestige d'un rapprochement automatique sur une homonymie du nom commercial. Les trois gérants réels, en fonction depuis le 01/10/2012, le remplacent. Le format de trancheEffectif est aligné sur celui du référentiel (« 20-49 »)."
+  },
+  "plateformes": [
+    {
+      "nom": "BC SOLUTIONS",
+      "siren": "445023427",
+      "anneeCreation": 2003,
+      "trancheEffectif": "20-49",
+      "dirigeants": [
+        {
+          "nom": "HOUILLONS HERVE",
+          "qualite": "Gérant",
+          "type": "personne physique"
+        },
+        {
+          "nom": "DI VINCENZO JEROME",
+          "qualite": "Gérant",
+          "type": "personne physique"
+        },
+        {
+          "nom": "GARCIA GILLES",
+          "qualite": "Gérant",
+          "type": "personne physique"
+        }
+      ],
+      "relationCapitalistique": "independante",
+      "analyse360": {
+        "metierPrincipal": "Intégration et édition de solutions de dématérialisation documentaire pour les grandes organisations — facturation électronique, éditique, gestion de contenu — sur un socle propre complété par les technologies de deux éditeurs partenaires",
+        "activites": [
+          {
+            "libelle": "eas'Invoice, sa propre solution de facturation électronique, présentée comme couvrant les services de plateforme agréée et d'opérateur de dématérialisation, et répondant depuis 2017 aux exigences fiscales en France et à l'international",
+            "poids": "majeur",
+            "source": "https://bcsolutions.fr/, relevé 22/08/2026"
+          },
+          {
+            "libelle": "Intégration OpenText : gestion de contenu, dématérialisation entrante, et notamment Vendor Invoice Management pour SAP",
+            "poids": "majeur",
+            "source": "https://bcsolutions.fr/, relevé 22/08/2026"
+          },
+          {
+            "libelle": "Éditique : création, personnalisation et distribution de documents sortants",
+            "poids": "significatif",
+            "source": "https://bcsolutions.fr/, relevé 22/08/2026"
+          },
+          {
+            "libelle": "eas'eFlow, middleware documentaire d'orchestration et de supervision de processus",
+            "poids": "significatif",
+            "source": "https://bcsolutions.fr/, relevé 22/08/2026"
+          },
+          {
+            "libelle": "Gestion électronique de documents et archivage",
+            "poids": "significatif",
+            "source": "https://bcsolutions.fr/, relevé 22/08/2026"
+          },
+          {
+            "libelle": "Offre dédiée aux éditeurs d'ERP et de solutions métiers : intégration des flux d'e-invoicing et d'e-reporting par interfaces de programmation, avec services à la carte (archivage probant, signature, génération du visuel)",
+            "poids": "significatif",
+            "source": "https://bcsolutions.fr/, relevé 22/08/2026"
+          },
+          {
+            "libelle": "Production partiellement délocalisée : la société annonce deux sites, Aix-en-Provence et Casablanca",
+            "poids": "significatif",
+            "source": "Présentation de la société, reprise dans la fiche du référentiel ; https://bcsolutions.fr/, relevé 22/08/2026"
+          }
+        ],
+        "poidsEconomique": {
+          "caGroupe": {
+            "montantMEUR": null,
+            "exercice": null,
+            "nature": "sans_objet",
+            "commentaire": "Société indépendante sans groupe : le chiffre de l'entité est le chiffre de la société.",
+            "source": "Société indépendante sans groupe : le chiffre de l'entité est le chiffre de la société.",
+            "dateReleve": "2026-08-22",
+            "valeur": null
+          },
+          "caEntiteFrancaise": {
+            "montantMEUR": 3.67,
+            "exercice": "2024",
+            "nature": "comptes_deposes",
+            "commentaire": "Trajectoire des comptes déposés : 3,45 M€ en 2022, 3,10 M€ en 2023 (−10,1 %), 3,67 M€ en 2024 (+18,2 %). Chiffre d'affaires à l'export de 338 k€ en 2024, soit 9 %. Marge brute supérieure au chiffre d'affaires et charges de personnel à 42,1 % : structure d'intégrateur, où une partie du chiffre est de la revente de licences et de services partenaires.",
+            "source": "Trajectoire des comptes déposés : 3,45 M€ en 2022, 3,10 M€ en 2023 (−10,1 %), 3,67 M€ en 2024 (+18,2 %). Chiffre d'affaires à l'export de 338 k€ en 2024, soit 9 %. Marge brute supérieure au chiffre d'affaires et charges de personnel à 42,1 % : structure d'intégrateur, où une partie du chiffre est de la revente de licences et de services partenaires.",
+            "dateReleve": "2026-08-22",
+            "valeur": null
+          },
+          "resultatNet": "246 k€ en 2024, après 1,1 k€ en 2023 et 137 k€ en 2022 : rentabilité réelle mais étroite, et volatile d'un exercice à l'autre. Fonds propres de 396 k€ seulement, pour une trésorerie de 599 k€ : la société est saine mais peu capitalisée, ce qui limite sa capacité d'investissement propre.",
+          "effectifGroupe": null,
+          "effectifEntite": "Entre 20 et 49 salariés (tranche INSEE, donnée 2022) ; 40 collaborateurs déclarés sur son site",
+          "ventilationParActivite": {
+            "disponible": false,
+            "motif": "Aucune ventilation publiée entre eas'Invoice, l'intégration OpenText, l'éditique et la gestion de contenu. Aucune part attribuable à l'activité agréée n'est estimée.",
+            "derniereVentilationConnue": null
+          }
+        },
+        "centralitePA": {
+          "indice": 3,
+          "niveau": "axe_strategique",
+          "marqueProduitDediee": "eas'Invoice, marque produit antérieure à la réforme (2017), qui porte l'offre agréée",
+          "entiteJuridiqueDediee": false,
+          "faisceauIndices": [
+            {
+              "signal": "Produit propre dédié à la dématérialisation fiscale depuis 2017, donc antérieur à la réforme et non créé pour elle",
+              "sens": "+",
+              "preuve": "https://bcsolutions.fr/easinvoice/, relevé 22/08/2026"
+            },
+            {
+              "signal": "Le dispositif structure la page d'accueil : bandeau, compte à rebours en jours, heures, minutes et secondes, actualité consacrée à l'immatriculation définitive",
+              "sens": "+",
+              "preuve": "https://bcsolutions.fr/ et https://bcsolutions.fr/immatriculation-definitive/, relevé 22/08/2026"
+            },
+            {
+              "signal": "Investissement de conformité engagé pour le mandat : certification ISO 27001 obtenue en 2025, effort lourd pour une société de cette taille",
+              "sens": "+",
+              "preuve": "https://bcsolutions.fr/certification-iso-27001/, relevé 22/08/2026"
+            },
+            {
+              "signal": "Double statut revendiqué, plateforme agréée et opérateur de dématérialisation, avec services complémentaires à la carte",
+              "sens": "+",
+              "preuve": "https://bcsolutions.fr/, relevé 22/08/2026"
+            },
+            {
+              "signal": "Offre spécifique construite pour les éditeurs d'ERP, avec intégration par interfaces de programmation : un canal de distribution monté pour l'agrément",
+              "sens": "+",
+              "preuve": "https://bcsolutions.fr/, bloc « Éditeurs d'ERP ou de solutions métiers », relevé 22/08/2026"
+            },
+            {
+              "signal": "L'activité historique et probablement majoritaire reste l'intégration de technologies tierces — OpenText, Sovos, SAP — et l'éditique : la société existerait sans l'agrément",
+              "sens": "-",
+              "preuve": "https://bcsolutions.fr/, présentation « À propos » ; marge brute supérieure au chiffre d'affaires dans les comptes 2024"
+            },
+            {
+              "signal": "Moyens propres limités : 3,67 M€ de chiffre d'affaires, 396 k€ de fonds propres, résultat net revenu à 1,1 k€ en 2023",
+              "sens": "-",
+              "preuve": "Comptes déposés 2022 à 2024, SIREN 445023427"
+            },
+            {
+              "signal": "Aucune référence client nommée sur l'offre agréée",
+              "sens": "-",
+              "preuve": "Relevé du site le 22/08/2026 : 150 clients revendiqués, aucun nom"
+            }
+          ],
+          "lecture": "Le faisceau est net et rare pour une société de cette taille : produit propre antérieur à la réforme, certification ISO 27001 passée en 2025, double statut, compte à rebours en page d'accueil et canal éditeurs monté spécialement. L'agrément est bien un axe stratégique, au sens où il oriente les investissements récents d'une société de trente-cinq à quarante personnes. Il n'est pas le cœur de métier : le métier d'origine, l'intégration de technologies tierces et l'éditique, reste probablement majoritaire, et la structure des comptes le confirme. L'indice 3 est donc pris au niveau de l'entité, avec une réserve de moyens : 396 k€ de fonds propres, c'est peu pour tenir dix ans d'obligations réglementaires évolutives, et c'est un point à examiner dans une consultation, pas un jugement.",
+          "confiance": "moyenne"
+        },
+        "postureCommerciale": {
+          "valeur": "grossiste",
+          "preuve": "La société adresse explicitement les éditeurs d'ERP et de solutions métiers : « Intégrez simplement la facturation électronique dans votre solution et offrez à vos clients la conformité complète à la réforme 2026 », avec intégration par interfaces de programmation et services à la carte. Le client final voit alors la solution de son éditeur, et l'on peut affronter ce socle sans que le nom de son opérateur apparaisse. Réserve explicite : le site n'emploie pas les termes de marque blanche ou de marque grise, et la nature exacte de la marque exposée au client final n'est pas documentée — d'où une confiance moyenne. La société conserve par ailleurs une vitrine et une démarche commerciale en propre.",
+          "confiance": "moyenne"
+        },
+        "referencesClients": {
+          "nbCiteesSurSite": 0,
+          "parSecteur": {},
+          "grandsComptes": [],
+          "referencesPAConfirmees": [],
+          "source": "Aucune référence nommée sur le site au 22/08/2026 : 150 clients et 40 collaborateurs revendiqués, sans logos ni témoignages. Le positionnement se lit surtout dans les technologies servies — OpenText, module Vendor Invoice Management pour SAP — qui désignent des organisations équipées de SAP, donc des grandes entreprises et des entreprises de taille intermédiaire."
+        },
+        "reputation": {
+          "volumeAvis": null,
+          "synthese": "Aucun relevé d'avis clients agrégés dans cette passe.",
+          "confiance": "faible"
+        },
+        "capaciteDeFrappe": {
+          "actionnaires": [
+            "Société à responsabilité limitée indépendante, dirigée par ses trois gérants, dont l'un en fonction depuis 2012",
+            "Aucun actionnaire financier ni groupe identifié"
+          ],
+          "typeActionnaire": "fondateurs",
+          "financementRecent": "Aucune opération de capital identifiée. Capital social de 12 000 €, fonds propres de 396 k€ : le développement est autofinancé.",
+          "acquisitions": [
+            "Aucune"
+          ],
+          "modeleTarifaire": "Sur devis, aucun tarif publié. Services complémentaires annoncés « à la carte » (archivage probant, signature électronique, génération du visuel)",
+          "tarifPublie": false,
+          "offreGratuite": false
+        },
+        "lectureConcurrentielle": "BCSolutions n'attaque pas par la direction financière mais par l'écosystème SAP et OpenText : c'est l'intégrateur que l'on retrouve sur les projets de traitement de factures fournisseurs adossés au module Vendor Invoice Management, et l'agrément lui permet désormais de fermer la boucle sans passer par un tiers. Deux angles morts à signaler. Le premier est le canal éditeurs : la société vend son socle agréé aux éditeurs d'ERP et de solutions métiers par interfaces de programmation, ce qui signifie qu'on peut le rencontrer sous le nom d'un autre logiciel. Le second est la proximité avec Sovos, éditeur de conformité fiscale internationale dont elle est partenaire : une même consultation peut faire apparaître les deux noms sans que le client perçoive la répartition des rôles, et la question de savoir qui porte réellement l'obligation mérite d'être posée. À l'inverse, deux limites objectives sont opposables sans agressivité : une structure de trente-cinq à quarante personnes avec 396 k€ de fonds propres et un résultat tombé à 1,1 k€ en 2023 dispose de peu de marge pour absorber dix ans d'évolutions réglementaires, et aucune référence nommée n'est publiée sur l'offre agréée. En face, sa force est réelle : ISO 27001, produit maison depuis 2017, double statut, et une connaissance fine des chaînes SAP. Dernier élément à verser au dossier, tiré de sa propre présentation : la société annonce deux sites, Aix-en-Provence et Casablanca. Une partie de la production est donc délocalisée, ce qui explique à la fois la maîtrise des coûts d'une structure de quarante personnes et les 338 k€ de chiffre d'affaires à l'export, et constitue un point à clarifier pour un client sensible à la localisation du traitement de ses données.",
+        "droitDeReponse": {
+          "signale": false,
+          "date": null,
+          "objet": null
+        }
+      },
+      "sourcesEnrichissement": [
+        {
+          "champ": "siren + anneeCreation + trancheEffectif + dirigeants + relationCapitalistique",
+          "source": "Registre national des entreprises et répertoire SIRENE : BUSINESS COMMUNICATION SOLUTIONS, SIREN 445023427, SARL créée le 01/02/2003, siège à Aix-en-Provence, capital 12 000 €, code 62.02A, trois gérants, tranche d'effectif de 20 à 49 salariés (2022), commissaire aux comptes IN EXTENSO PROVENCE depuis 2020. Le nom commercial publié par la DGFiP (« BCSolutions ») ne correspond pas à la dénomination légale, d'où l'échec des recherches antérieures",
+          "dateReleve": "2026-08-22",
+          "confiance": "haute"
+        },
+        {
+          "champ": "analyse360.poidsEconomique",
+          "source": "Comptes sociaux déposés, SIREN 445023427, exercices 2022 à 2024 : chiffre d'affaires 3,45 / 3,10 / 3,67 M€, marge brute 3,36 / 3,27 / 3,73 M€, résultat net 137 k€ / 1,1 k€ / 246 k€, fonds propres 396 k€, trésorerie 599 k€, salaires et charges 1,54 M€ (42,1 % du CA), export 338 k€",
+          "dateReleve": "2026-08-22",
+          "confiance": "haute"
+        },
+        {
+          "champ": "analyse360.activites + centralitePA + postureCommerciale",
+          "source": "https://bcsolutions.fr/ : eas'Invoice (services PA et OD, depuis 2017), eas'eFlow, éditique, GED et archivage, partenariats OpenText et Sovos, module Vendor Invoice Management pour SAP, offre dédiée aux éditeurs d'ERP avec intégration par API, certification ISO 27001 obtenue en 2025, actualité d'immatriculation définitive, compte à rebours de la réforme, 40 collaborateurs et 150 clients revendiqués",
+          "dateReleve": "2026-08-22",
+          "confiance": "haute"
+        },
+        {
+          "champ": "analyse360.centralitePA.indice",
+          "source": "Lecture Fluxym sur faisceau d'indices, règle 11a du plan de travail",
+          "dateReleve": "2026-08-22",
+          "confiance": "moyenne"
+        },
+        {
+          "champ": "dirigeants",
+          "source": "Registre national des entreprises, BUSINESS COMMUNICATION SOLUTIONS SIREN 445023427 : trois gérants en fonction depuis le 01/10/2012. Remplace une valeur erronée issue d'un rapprochement sur homonymie",
+          "dateReleve": "2026-08-22",
+          "confiance": "haute"
+        }
+      ]
+    }
+  ]
+}

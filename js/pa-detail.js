@@ -54,11 +54,32 @@
 
   const euros = (m) => (m === null || m === undefined ? null : `${String(m).replace('.', ',')} M€`);
 
+  /** Libellés des trois ancrages de chiffre d'affaires (règle 11c) et des cas sans montant. */
+  const naturesCA = {
+    comptes_deposes: 'comptes déposés',
+    declare_site: 'chiffre déclaré par l\u2019entreprise',
+    chiffre_declare_site: 'chiffre déclaré par l\u2019entreprise',
+    communique_financier: 'communiqué financier',
+    non_publie: 'non publié',
+    sans_objet: 'sans objet'
+  };
+
   const ligneCA = (ca, intitule) => {
-    if (!ca || !rempli(ca.montantMEUR)) return [intitule, NON_RELEVE];
-    const det = [ca.exercice ? `exercice ${ca.exercice}` : null, ca.nature === 'comptes_deposes' ? 'comptes déposés'
-      : (ca.nature === 'declare_site' ? 'chiffre déclaré par l\u2019entreprise' : ca.nature)].filter(Boolean).join(', ');
-    return [intitule, `<strong>${euros(ca.montantMEUR)}</strong>${det ? ` <span class="pa-conf pa-conf--ok">${det}</span>` : ''}`];
+    if (!ca) return [intitule, NON_RELEVE];
+    // Tolérance de format : montant en millions (canonique) ou montant en euros.
+    const montant = rempli(ca.montantMEUR)
+      ? ca.montantMEUR
+      : (typeof ca.valeur === 'number' ? Math.round((ca.valeur / 1e6) * 100) / 100 : null);
+    const note = rempli(ca.commentaire) ? ca.commentaire : '';
+    if (!rempli(montant)) {
+      const absence = naturesCA[ca.nature];
+      return [intitule, absence
+        ? `<span class="pa-todo">${absence}</span>${note ? ` — ${note}` : ''}`
+        : (note ? `${NON_RELEVE} — ${note}` : NON_RELEVE)];
+    }
+    const det = [ca.exercice ? `exercice ${ca.exercice}` : null, naturesCA[ca.nature] || ca.nature]
+      .filter(Boolean).join(', ');
+    return [intitule, `<strong>${euros(montant)}</strong>${det ? ` <span class="pa-conf pa-conf--ok">${det}</span>` : ''}${note ? `<br>${note}` : ''}`];
   };
 
   const renderInternational = (pa) => {

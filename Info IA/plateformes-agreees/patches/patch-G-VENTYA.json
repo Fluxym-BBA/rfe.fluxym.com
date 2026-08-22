@@ -1,0 +1,184 @@
+{
+  "_patch": {
+    "id": "G-VENTYA",
+    "chantier": "G — analyse 360",
+    "societe": "VENTYA",
+    "auteur": "RFE_WebSite",
+    "dateReleve": "2026-08-22",
+    "nbPlateformes": 1,
+    "note": "Treizième fiche 360. APPORT PRINCIPAL : la chaîne capitalistique. VENTYA SAS, qui se présente comme « 100 % française », est détenue depuis le 12/04/2022 par le groupe EVERWIN, lui-même détenu à 100 % par N. Harris Computer Corporation, filiale du canadien CONSTELLATION SOFTWARE (Toronto, TSX : CSU) — un des plus gros éditeurs mondiaux, qui déclare 45 000 collaborateurs et plus de 8,5 Md$ de chiffre d'affaires. Troisième acquisition française de Harris. Comptes déposés exploités sur quatre exercices. NON TROUVÉ : références clients nommées (aucune page de références en ligne, la page attendue renvoie une erreur 404), avis publics agrégés, volume d'offres d'emploi, comptes consolidés du groupe Everwin (seuls des chiffres déclarés sur son site)."
+  },
+  "plateformes": [
+    {
+      "nom": "VENTYA",
+      "groupeCapitalistique": "Groupe EVERWIN (Étampes) — filiales Sigma, Ventya, Global P.O.S, Azursoft, Alliance Réseaux, 37,5 M€ de chiffre d'affaires et 290 collaborateurs déclarés — détenu à 100 % par N. Harris Computer Corporation, filiale de CONSTELLATION SOFTWARE INC. (Toronto, TSX : CSU), qui déclare 45 000 collaborateurs et plus de 8,5 Md$ de chiffre d'affaires",
+      "relationCapitalistique": "acquise",
+      "analyse360": {
+        "metierPrincipal": "Édition et exploitation de plateformes d'échanges électroniques interentreprises — facturation électronique, supply chain, plateformes de réservation et plateformes collaboratives — avec un savoir-faire d'origine EDI",
+        "activites": [
+          {
+            "libelle": "Plateforme de facturation électronique Clear'Invoice, couvrant les cycles achats-fournisseurs et ventes-clients ainsi que l'e-reporting",
+            "poids": "majeur",
+            "source": "https://www.ventya.fr/, relevé 22/08/2026"
+          },
+          {
+            "libelle": "Échanges EDI et flux supply chain, métier d'origine de la société",
+            "poids": "majeur",
+            "source": "https://www.ventya.fr/, relevé 22/08/2026"
+          },
+          {
+            "libelle": "Plateformes de réservation et plateformes collaboratives sectorielles (assistance, dépannage, location de véhicules, voyage d'affaires)",
+            "poids": "significatif",
+            "source": "https://www.ventya.fr/, relevé 22/08/2026"
+          },
+          {
+            "libelle": "Services d'exploitation et d'accompagnement, présentés avec un engagement de résultat",
+            "poids": "significatif",
+            "source": "https://www.ventya.fr/, relevé 22/08/2026"
+          }
+        ],
+        "poidsEconomique": {
+          "caGroupe": {
+            "montantMEUR": 37.5,
+            "exercice": null,
+            "nature": "chiffre_declare_site",
+            "commentaire": "Chiffre déclaré par le groupe Everwin sur son site pour l'ensemble de ses cinq filiales, sans exercice précisé et sans comptes consolidés publiés. Au-dessus, Constellation Software déclare 45 000 collaborateurs et plus de 8,5 Md$ : ordre de grandeur du groupe ultime, sans rapport avec les moyens affectés à la France. Repère de comptes déposés sur la société mère directe : EVERWIN (SIREN 400208435) a déposé 20,7 M€ de chiffre d'affaires en 2025 pour 143 salariés.",
+            "source": "Chiffre déclaré par le groupe Everwin sur son site pour l'ensemble de ses cinq filiales, sans exercice précisé et sans comptes consolidés publiés. Au-dessus, Constellation Software déclare 45 000 collaborateurs et plus de 8,5 Md$ : ordre de grandeur du groupe ultime, sans rapport avec les moyens affectés à la France. Repère de comptes déposés sur la société mère directe : EVERWIN (SIREN 400208435) a déposé 20,7 M€ de chiffre d'affaires en 2025 pour 143 salariés.",
+            "dateReleve": "2026-08-22",
+            "valeur": null
+          },
+          "caEntiteFrancaise": {
+            "montantMEUR": 7.18,
+            "exercice": "2025",
+            "nature": "comptes_deposes",
+            "commentaire": "Trajectoire des comptes déposés : 3,3 M€ en 2022 (exercice atypique, la société déclarait 6 M€ de chiffre d'affaires en 2021 au moment de son rachat), 7,18 M€ en 2023, 7,59 M€ en 2024, 7,18 M€ en 2025, soit un recul de 5,4 % sur le dernier exercice. Chiffre d'affaires à l'export négligeable (16,4 k€) : l'activité est française, ce qui est cohérent avec le discours de souveraineté.",
+            "source": "Trajectoire des comptes déposés : 3,3 M€ en 2022 (exercice atypique, la société déclarait 6 M€ de chiffre d'affaires en 2021 au moment de son rachat), 7,18 M€ en 2023, 7,59 M€ en 2024, 7,18 M€ en 2025, soit un recul de 5,4 % sur le dernier exercice. Chiffre d'affaires à l'export négligeable (16,4 k€) : l'activité est française, ce qui est cohérent avec le discours de souveraineté.",
+            "dateReleve": "2026-08-22",
+            "valeur": null
+          },
+          "resultatNet": "Bénéficiaire sur les quatre exercices connus, en progression continue : 297 k€ (2022), 432 k€ (2023), 542 k€ (2024), 619 k€ (2025). Fonds propres portés à 3,03 M€. Salaires et charges de 4,67 M€, soit 65,1 % du chiffre d'affaires. Trésorerie ramenée de 1,97 M€ à 891 k€ sur le dernier exercice sans dégradation du résultat : mouvement compatible avec une remontée de trésorerie vers la société mère, pratique usuelle dans ce type de groupe, non confirmée par une pièce.",
+          "effectifGroupe": "290 collaborateurs déclarés pour le groupe Everwin ; 45 000 déclarés pour Constellation Software",
+          "effectifEntite": "Entre 20 et 49 salariés (tranche INSEE, donnée 2022) ; 41 salariés déclarés aux comptes de l'exercice 2022",
+          "ventilationParActivite": {
+            "disponible": false,
+            "motif": "Ni Ventya, ni Everwin, ni Constellation Software ne publient de ventilation permettant d'isoler la facturation électronique des autres familles de plateformes. Aucune part attribuable à l'activité agréée n'est estimée.",
+            "derniereVentilationConnue": null
+          }
+        },
+        "centralitePA": {
+          "indice": 3,
+          "niveau": "axe_strategique",
+          "marqueProduitDediee": "Clear'Invoice, marque dédiée à l'offre de plateforme agréée",
+          "entiteJuridiqueDediee": false,
+          "faisceauIndices": [
+            {
+              "signal": "Marque produit dédiée, Clear'Invoice, mise en avant sur la page d'accueil avec le statut de plateforme agréée et la date de levée des réserves",
+              "sens": "+",
+              "preuve": "https://www.ventya.fr/, relevé 22/08/2026 : immatriculation définitive annoncée au 18/12/2025"
+            },
+            {
+              "signal": "Couverture fonctionnelle complète revendiquée sur le dispositif : émission, réception, e-reporting, cycles achats et ventes",
+              "sens": "+",
+              "preuve": "https://www.ventya.fr/, relevé 22/08/2026"
+            },
+            {
+              "signal": "Argument de souveraineté explicite et vérifiable dans les comptes : plateforme « pensée, développée et opérée en France », chiffre d'affaires à l'export de 16,4 k€ sur 7,18 M€",
+              "sens": "+",
+              "preuve": "https://www.ventya.fr/ ; comptes déposés 2025, SIREN 821839982"
+            },
+            {
+              "signal": "Présence commerciale propre sur le sujet : salons professionnels et manifestations dédiées à la facture électronique",
+              "sens": "+",
+              "preuve": "https://www.ventya.fr/, agenda et actualités, relevé 22/08/2026"
+            },
+            {
+              "signal": "Le métier d'origine est l'échange électronique interentreprises, dont la facture est une déclinaison naturelle et non un ajout de circonstance",
+              "sens": "+",
+              "preuve": "Code d'activité 63.11Z ; https://www.ventya.fr/"
+            },
+            {
+              "signal": "La facturation électronique n'est qu'une des quatre familles de plateformes exploitées, aux côtés de la supply chain, des plateformes de réservation et des plateformes collaboratives",
+              "sens": "-",
+              "preuve": "https://www.ventya.fr/, relevé 22/08/2026"
+            },
+            {
+              "signal": "L'entité pèse 7,18 M€ au sein d'un groupe dont le cœur de métier est l'ERP pour les sociétés de services, lui-même filiale d'un acquéreur mondial : l'agrément n'est pas un actif structurant à l'échelle du propriétaire",
+              "sens": "-",
+              "preuve": "Comptes déposés 2025 ; https://everwin.fr/groupe-everwin/"
+            },
+            {
+              "signal": "Aucune référence client nommée publiée : la page de références du site renvoie une erreur 404",
+              "sens": "-",
+              "preuve": "https://www.ventya.fr/nos-references/, relevé 22/08/2026, code 404"
+            }
+          ],
+          "lecture": "Lue au niveau de l'entité immatriculée, l'activité agréée est clairement un axe stratégique : marque dédiée, couverture fonctionnelle complète, immatriculation définitive obtenue en décembre 2025, argument de souveraineté cohérent avec des comptes sans export, et présence sur les salons du sujet. Elle n'atteint pas le rang de cœur de métier parce que la société exploite quatre familles de plateformes et que la facture n'en est qu'une. La lecture de périmètre, elle, tire dans l'autre sens : Ventya pèse 7,18 M€ dans un groupe de 37,5 M€ déclarés, lui-même détenu par un acquéreur qui déclare 45 000 collaborateurs. Ce n'est pas un motif d'abaissement de l'indice — la règle 11a mesure la place de l'activité agréée dans la société immatriculée, pas dans son propriétaire ultime — mais c'est un élément de lecture concurrentielle décisif, et c'est exactement le type d'écart que le référentiel doit rendre visible : une plateforme qui se présente comme 100 % française appartient à un groupe coté canadien.",
+          "confiance": "moyenne"
+        },
+        "postureCommerciale": {
+          "valeur": "conquete_directe",
+          "preuve": "Vitrine propre, marque Clear'Invoice visible, présence sur les salons et manifestations consacrés à la facture électronique, argumentaire de souveraineté et engagement de résultat : la société a des moyens de conquête propres, au-delà de sa base installée EDI. Un canal indirect existe en complément et ne fait pas basculer la posture, car la marque reste visible : les cinq filiales ERP du groupe Everwin constituent un canal captif, et au moins un partenaire tiers communique publiquement sur « notre partenaire Ventya, plateforme agréée ».",
+          "confiance": "moyenne"
+        },
+        "referencesClients": {
+          "nbCiteesSurSite": 0,
+          "parSecteur": {},
+          "grandsComptes": [],
+          "referencesPAConfirmees": [],
+          "source": "Aucune référence nommée publiée : la page de références du site renvoie une erreur 404 au 22/08/2026. Le site cite en revanche des secteurs servis — assurance, assistance, finance, voyage d'affaires, location de véhicules, dépannage, édition, industrie, distribution — ce qui donne le terrain de chasse sans donner les noms."
+        },
+        "reputation": {
+          "volumeAvis": null,
+          "synthese": "Aucun relevé d'avis clients agrégés dans cette passe.",
+          "confiance": "faible"
+        },
+        "capaciteDeFrappe": {
+          "actionnaires": [
+            "EVERWIN (SIREN 400208435) est président de la société depuis le 13/04/2022",
+            "EVERWIN est détenue à 100 % par N. Harris Computer Corporation, filiale de CONSTELLATION SOFTWARE INC. (Toronto, TSX : CSU)"
+          ],
+          "typeActionnaire": "cote",
+          "financementRecent": "Rachat du 12 avril 2022 par Everwin, troisième acquisition française du groupe Harris. Montant non communiqué. Aucune levée de fonds : le financement est celui d'un groupe coté qui achète des éditeurs et les conserve.",
+          "acquisitions": [
+            "Opération subie : Ventya est la cible, rachetée en 2022. Le groupe acquéreur, lui, enchaîne les acquisitions françaises (Everwin 2020, Sigma 2021, Ventya, Global P.O.S et Azursoft 2022, Alliance Réseaux 2023)"
+          ],
+          "modeleTarifaire": "Sur devis, aucun tarif publié",
+          "tarifPublie": false,
+          "offreGratuite": false
+        },
+        "lectureConcurrentielle": "Ventya est un concurrent de taille moyenne mais rentable, positionné sur des secteurs très identifiables : assurance, assistance, dépannage, location de véhicules, voyage d'affaires, autant de filières où les flux ne sont pas seulement des factures mais des ordres de mission, des interventions et des règlements. C'est son angle : la facture arrive par la chaîne métier, pas par la direction financière. Son argumentaire de souveraineté est, pour une fois, vérifiable dans les comptes — 16,4 k€ d'export sur 7,18 M€, tout est opéré en France — et il porte, en particulier dans le secteur public élargi et l'assurance. La nuance à connaître est ailleurs : cette plateforme « 100 % française » appartient depuis 2022 à un groupe canadien coté qui a bâti son modèle sur le rachat et la conservation durable d'éditeurs de niche, avec une discipline de prix et de marge reconnue. Ce n'est ni un reproche ni un pronostic, c'est un fait daté à connaître, et il coupe court à toute opposition simpliste entre acteurs français et acteurs étrangers. Deux fragilités opposables : aucune référence client nommée n'est publiée, et le chiffre d'affaires recule de 5,4 % sur le dernier exercice — dans un marché porté par l'échéance réglementaire, c'est un signal à interroger.",
+        "droitDeReponse": {
+          "signale": false,
+          "date": null,
+          "objet": null
+        }
+      },
+      "sourcesEnrichissement": [
+        {
+          "champ": "groupeCapitalistique + relationCapitalistique + analyse360.capaciteDeFrappe",
+          "source": "https://everwin.fr/groupe-everwin/ (Everwin détenue à 100 % par le groupe Harris, filiale de Constellation Software, 45 000 collaborateurs et plus de 8,5 Md$ déclarés ; groupe Everwin 37,5 M€ et 290 collaborateurs, cinq filiales dont Ventya acquise en 2022) et registre national des entreprises (EVERWIN, SIREN 400208435, président de VENTYA depuis le 13/04/2022 ; HARRIS FRANCE, SIREN 887500536, président d'EVERWIN)",
+          "dateReleve": "2026-08-22",
+          "confiance": "haute"
+        },
+        {
+          "champ": "analyse360.poidsEconomique",
+          "source": "Comptes sociaux déposés de VENTYA SAS, SIREN 821839982, exercices 2022 à 2025 : chiffre d'affaires 3,3 / 7,18 / 7,59 / 7,18 M€, résultat net 297 / 432 / 542 / 619 k€, fonds propres 3,03 M€, trésorerie 891 k€, salaires et charges 4,67 M€ (65,1 % du CA), export 16,4 k€, capital 100 000 €, effectif 41 aux comptes 2022. Repère société mère : EVERWIN, SIREN 400208435, 20,7 M€ de CA et 143 salariés en 2025",
+          "dateReleve": "2026-08-22",
+          "confiance": "haute"
+        },
+        {
+          "champ": "analyse360.activites + centralitePA + postureCommerciale",
+          "source": "https://www.ventya.fr/ : marque Clear'Invoice, immatriculation définitive annoncée au 18/12/2025, plateforme « pensée, développée et opérée en France », couverture P2P, O2C et e-reporting, quatre familles de plateformes, secteurs servis, présence sur les salons. Page de références absente (404 au 22/08/2026)",
+          "dateReleve": "2026-08-22",
+          "confiance": "haute"
+        },
+        {
+          "champ": "analyse360.centralitePA.indice",
+          "source": "Lecture Fluxym sur faisceau d'indices, règles 11a et 11f du plan de travail",
+          "dateReleve": "2026-08-22",
+          "confiance": "moyenne"
+        }
+      ]
+    }
+  ]
+}

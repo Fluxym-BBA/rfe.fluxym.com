@@ -6,7 +6,8 @@
     "auteur": "RFE_WebSite",
     "dateReleve": "2026-08-22",
     "nbPlateformes": 1,
-    "note": "Douzième fiche 360. APPORT MAJEUR : la chaîne de détention qualifiée de « holding non transparente » dans la fiche est résolue. DOCPROCESS FRANCE a été rachetée le 17/09/2025 par AGENA3000 (Cholet), qui est elle-même une plateforme agréée immatriculée le 11/12/2025 — soit quatre jours avant DOCPROCESS. Le groupe porte donc deux immatriculations, dont l'une est explicitement vendue en gros à des éditeurs tiers. Cette découverte fonde la règle 21 du plan de travail. Le rachat marque la sortie complète du fonds roumain Morphosis Capital et des fondateurs. CHAMPS CORRIGÉS : groupeCapitalistique, relationCapitalistique, trancheEffectif, descriptionFiche, socleTechnique, logiquePositionnement. COMPTES DÉPOSÉS EXPLOITÉS : quatre exercices de l'entité française. NON TROUVÉ dans cette passe : comptes de l'entité roumaine, chiffre d'affaires consolidé du groupe AGENA3000, prix de la transaction, articulation annoncée entre les deux plateformes agréées du groupe, avis publics agrégés, volume d'offres d'emploi."
+    "note": "Douzième fiche 360. APPORT MAJEUR : la chaîne de détention qualifiée de « holding non transparente » dans la fiche est résolue. DOCPROCESS FRANCE a été rachetée le 17/09/2025 par AGENA3000 (Cholet), qui est elle-même une plateforme agréée immatriculée le 11/12/2025 — soit quatre jours avant DOCPROCESS. Le groupe porte donc deux immatriculations, dont l'une est explicitement vendue en gros à des éditeurs tiers. Cette découverte fonde la règle 21 du plan de travail. Le rachat marque la sortie complète du fonds roumain Morphosis Capital et des fondateurs. CHAMPS CORRIGÉS : groupeCapitalistique, relationCapitalistique, trancheEffectif, descriptionFiche, socleTechnique, logiquePositionnement. COMPTES DÉPOSÉS EXPLOITÉS : quatre exercices de l'entité française. NON TROUVÉ dans cette passe : comptes de l'entité roumaine, chiffre d'affaires consolidé du groupe AGENA3000, prix de la transaction, articulation annoncée entre les deux plateformes agréées du groupe, avis publics agrégés, volume d'offres d'emploi. ⚠️ VERSION CORRIGÉE : les blocs caGroupe et caEntiteFrancaise étaient exprimés en euros sous la clé « valeur », alors que l'affichage attend un montant en millions sous la clé « montantMEUR ». Le chiffre d'affaires ne s'affichait donc pas. Ce patch rétablit le format canonique ; si la version précédente a déjà été fusionnée, refusionner celle-ci neutralise l'ancienne clé.",
+    "version": "corrigée 22/08/2026 (après-midi) — remplace la version livrée dans pa-cercle0-vague3.zip"
   },
   "plateformes": [
     {
@@ -59,16 +60,22 @@
         ],
         "poidsEconomique": {
           "caGroupe": {
-            "valeur": 4200000,
-            "nature": "communique_financier",
+            "montantMEUR": 4.2,
             "exercice": "2024",
-            "commentaire": "Chiffre du périmètre DocProcess avant rachat, annoncé dans le communiqué de sortie du fonds actionnaire : plus de 4,2 M€ de chiffre d'affaires et 1,1 M€ d'excédent brut d'exploitation en 2024, pour 43 salariés à Bucarest, Paris et Grenoble. Ce n'est pas le chiffre du groupe acquéreur AGENA3000, qui n'a pas publié de comptes consolidés : à titre de repère, sa filiale AGENA 3000 DATA MANAGEMENT a déposé 13,6 M€ de chiffre d'affaires et 1,95 M€ de résultat net en 2024."
+            "nature": "communique_financier",
+            "commentaire": "Chiffre du périmètre DocProcess avant rachat, annoncé dans le communiqué de sortie du fonds actionnaire : plus de 4,2 M€ de chiffre d'affaires et 1,1 M€ d'excédent brut d'exploitation en 2024, pour 43 salariés à Bucarest, Paris et Grenoble. Ce n'est pas le chiffre du groupe acquéreur AGENA3000, qui n'a pas publié de comptes consolidés : à titre de repère, sa filiale AGENA 3000 DATA MANAGEMENT a déposé 13,6 M€ de chiffre d'affaires et 1,95 M€ de résultat net en 2024.",
+            "source": "Chiffre du périmètre DocProcess avant rachat, annoncé dans le communiqué de sortie du fonds actionnaire : plus de 4,2 M€ de chiffre d'affaires et 1,1 M€ d'excédent brut d'exploitation en 2024, pour 43 salariés à Bucarest, Paris et Grenoble. Ce n'est pas le chiffre du groupe acquéreur AGENA3000, qui n'a pas publié de comptes consolidés : à titre de repère, sa filiale AGENA 3000 DATA MANAGEMENT a déposé 13,6 M€ de chiffre d'affaires et 1,95 M€ de résultat net en 2024.",
+            "dateReleve": "2026-08-22",
+            "valeur": null
           },
           "caEntiteFrancaise": {
-            "valeur": 1260000,
-            "nature": "comptes_deposes",
+            "montantMEUR": 1.26,
             "exercice": "2025",
-            "commentaire": "Trajectoire des comptes déposés de DOCPROCESS FRANCE : 1,33 M€ en 2024, 1,26 M€ en 2025, soit un recul de 5,2 %, sans chiffre d'affaires à l'export. Les salaires et charges représentent 87,5 % du chiffre d'affaires : structure de recherche et de développement et de vente, dont l'activité est largement adossée au groupe, et non centre de profit autonome."
+            "nature": "comptes_deposes",
+            "commentaire": "Trajectoire des comptes déposés de DOCPROCESS FRANCE : 1,33 M€ en 2024, 1,26 M€ en 2025, soit un recul de 5,2 %, sans chiffre d'affaires à l'export. Les salaires et charges représentent 87,5 % du chiffre d'affaires : structure de recherche et de développement et de vente, dont l'activité est largement adossée au groupe, et non centre de profit autonome.",
+            "source": "Trajectoire des comptes déposés de DOCPROCESS FRANCE : 1,33 M€ en 2024, 1,26 M€ en 2025, soit un recul de 5,2 %, sans chiffre d'affaires à l'export. Les salaires et charges représentent 87,5 % du chiffre d'affaires : structure de recherche et de développement et de vente, dont l'activité est largement adossée au groupe, et non centre de profit autonome.",
+            "dateReleve": "2026-08-22",
+            "valeur": null
           },
           "resultatNet": "Perte de 40,9 k€ en 2025, après un bénéfice de 53,3 k€ en 2024 et deux exercices lourdement déficitaires (−529 k€ en 2023, −558 k€ en 2022). Fonds propres redevenus positifs à 233 k€ en 2025 après trois exercices négatifs, trésorerie de 410 k€.",
           "effectifGroupe": "Plus de 250 salariés revendiqués par le groupe AGENA3000 après le rachat, dont 43 apportés par DocProcess",

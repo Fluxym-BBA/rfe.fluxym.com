@@ -1,0 +1,185 @@
+{
+  "_patch": {
+    "id": "G-CEGEDIM",
+    "chantier": "G — analyse 360",
+    "societe": "CEGEDIM",
+    "auteur": "RFE_WebSite",
+    "dateReleve": "2026-08-22",
+    "nbPlateformes": 1,
+    "note": "Quinzième fiche 360, et PREMIER CAS DU RÉFÉRENTIEL OÙ UNE VENTILATION PAR ACTIVITÉ EST RÉELLEMENT PUBLIÉE. Cegedim SA est cotée sur Euronext Growth et publie son chiffre d'affaires par division, jusqu'au segment e-business : 649,2 M€ en 2025, division Flux 106,4 M€, dont e-business 62,9 M€ (+7,6 %). Le groupe attribue explicitement la croissance de ce segment au « segment Facture & Achat en France à l'approche de la première phase de la réforme ». Le champ ventilationParActivite passe donc à disponible pour la première fois. Précision d'entité : l'immatriculation est publiée au nom de CEGEDIM (SIREN 350422622, la société cotée), mais l'offre est portée par Cegedim Business Services sous la marque SY business. NON TROUVÉ : chiffre d'affaires propre de Cegedim Business Services, part du segment Facture & Achat France dans les 62,9 M€ (non isolée par le groupe et non estimée ici), références clients nommées sur l'offre agréée, avis publics agrégés, volume d'offres d'emploi."
+  },
+  "plateformes": [
+    {
+      "nom": "CEGEDIM",
+      "analyse360": {
+        "metierPrincipal": "Groupe technologique spécialisé dans la gestion des flux numériques de l'écosystème santé et B2B et dans l'édition de logiciels métiers pour les professionnels de santé et de l'assurance ; l'offre agréée est portée par la division Flux, via Cegedim Business Services et la marque SY business",
+        "activites": [
+          {
+            "libelle": "Logiciels et services métiers pour les professionnels de santé et l'assurance — division la plus importante du groupe (292,7 M€ en 2025)",
+            "poids": "majeur",
+            "source": "Communiqué de chiffre d'affaires annuel 2025, Cegedim SA"
+          },
+          {
+            "libelle": "Flux : dématérialisation et échange de flux, dont le segment e-business (62,9 M€ en 2025) qui porte la facturation électronique, et le tiers payant santé (43,5 M€) — division de 106,4 M€, en croissance de 6,1 %",
+            "poids": "majeur",
+            "source": "Communiqué de chiffre d'affaires annuel 2025, Cegedim SA"
+          },
+          {
+            "libelle": "Données et marketing (127,8 M€ en 2025)",
+            "poids": "majeur",
+            "source": "Communiqué de chiffre d'affaires annuel 2025, Cegedim SA"
+          },
+          {
+            "libelle": "Externalisation de processus métiers, assurances et services aux entreprises (83,6 M€ en 2025)",
+            "poids": "significatif",
+            "source": "Communiqué de chiffre d'affaires annuel 2025, Cegedim SA"
+          },
+          {
+            "libelle": "Infogérance, hébergement et support (38,7 M€ en 2025) — la plateforme agréée est hébergée sur les infrastructures propres du groupe, en France",
+            "poids": "significatif",
+            "source": "Communiqué de chiffre d'affaires annuel 2025 ; communiqué SY business du 16/12/2025"
+          },
+          {
+            "libelle": "Plateforme agréée SY business : couverture des processus achats-fournisseurs et ventes-clients, transmission et réception des factures, transmission des données à l'administration, e-reporting",
+            "poids": "significatif",
+            "source": "Communiqué Cegedim Business Services du 16/12/2025"
+          }
+        ],
+        "poidsEconomique": {
+          "caGroupe": {
+            "montantMEUR": 649.2,
+            "exercice": "2025",
+            "nature": "communique_financier",
+            "commentaire": "Chiffre d'affaires consolidé 2025 de Cegedim SA : 649,2 M€, en recul de 0,8 % en publié et en hausse de 1,1 % en organique, après 654,5 M€ en 2024. Société cotée sur Euronext Growth (ALCGM), près de 6 700 collaborateurs dans plus de dix pays.",
+            "source": "Chiffre d'affaires consolidé 2025 de Cegedim SA : 649,2 M€, en recul de 0,8 % en publié et en hausse de 1,1 % en organique, après 654,5 M€ en 2024. Société cotée sur Euronext Growth (ALCGM), près de 6 700 collaborateurs dans plus de dix pays.",
+            "dateReleve": "2026-08-22",
+            "valeur": null
+          },
+          "caEntiteFrancaise": {
+            "montantMEUR": null,
+            "exercice": null,
+            "nature": "non_publie",
+            "commentaire": "Cegedim Business Services, qui opère la plateforme, ne publie pas de chiffre d'affaires propre. Le repère publié le plus proche est le segment e-business de la division Flux : 62,9 M€ en 2025, soit 9,7 % du chiffre d'affaires du groupe (rapport de deux chiffres publiés, non une estimation). Ce segment comprend d'autres activités que la facturation électronique française, dont la part n'est pas isolée par le groupe et n'est pas estimée ici.",
+            "source": "Cegedim Business Services, qui opère la plateforme, ne publie pas de chiffre d'affaires propre. Le repère publié le plus proche est le segment e-business de la division Flux : 62,9 M€ en 2025, soit 9,7 % du chiffre d'affaires du groupe (rapport de deux chiffres publiés, non une estimation). Ce segment comprend d'autres activités que la facturation électronique française, dont la part n'est pas isolée par le groupe et n'est pas estimée ici.",
+            "dateReleve": "2026-08-22",
+            "valeur": null
+          },
+          "resultatNet": "Non repris dans cette passe : seul le communiqué de chiffre d'affaires annuel a été exploité. Le groupe annonce viser une progression du résultat opérationnel courant d'au moins 15 % sur l'exercice.",
+          "effectifGroupe": "Près de 6 700 collaborateurs dans plus de dix pays (groupe Cegedim)",
+          "effectifEntite": "Plus de 2 000 collaborateurs déclarés pour Cegedim Business Services, entité qui opère la plateforme",
+          "ventilationParActivite": {
+            "disponible": true,
+            "motif": "Premier cas du référentiel : société cotée publiant son chiffre d'affaires par division et par segment. Exercice 2025 — Logiciels et services 292,7 M€ ; Flux 106,4 M€ (+6,1 %), dont e-business 62,9 M€ (+7,6 %) et tiers payant 43,5 M€ ; Données et marketing 127,8 M€ ; externalisation de processus 83,6 M€ ; infogérance et support 38,7 M€ ; total 649,2 M€. Le groupe précise que la croissance de l'e-business est « notablement portée par le segment Facture & Achat en France à l'approche de la première phase de la réforme ». La part de l'activité agréée elle-même n'est pas publiée et n'est pas estimée.",
+            "derniereVentilationConnue": "Exercice 2025, communiqué de chiffre d'affaires annuel de Cegedim SA"
+          }
+        },
+        "centralitePA": {
+          "indice": 2,
+          "niveau": "extension_naturelle",
+          "marqueProduitDediee": "SY business, marque dédiée à la plateforme agréée",
+          "entiteJuridiqueDediee": false,
+          "faisceauIndices": [
+            {
+              "signal": "Marque dédiée et entité opérationnelle dédiée de plus de 2 000 collaborateurs — Cegedim Business Services — avec plus de trente ans d'expérience sur les processus finance, achats et RH",
+              "sens": "+",
+              "preuve": "Communiqué du 16/12/2025"
+            },
+            {
+              "signal": "Antériorité forte sur la facture dématérialisée publique : le groupe se présente comme premier remettant de factures sur Chorus Pro",
+              "sens": "+",
+              "preuve": "Communiqué du 16/12/2025"
+            },
+            {
+              "signal": "Immatriculation définitive obtenue le 11 décembre 2025, parmi les premières, et participation au pilote de l'AIFE avec plus d'une vingtaine de clients prêts",
+              "sens": "+",
+              "preuve": "Communiqué du 16/12/2025"
+            },
+            {
+              "signal": "Croissance explicitement attribuée à la réforme dans la communication financière : le segment e-business croît de 7,6 % en 2025, « notablement porté par le segment Facture & Achat en France »",
+              "sens": "+",
+              "preuve": "Communiqué de chiffre d'affaires annuel 2025"
+            },
+            {
+              "signal": "Souveraineté technique : plateforme hébergée en France sur les infrastructures propres du groupe",
+              "sens": "+",
+              "preuve": "Communiqué du 16/12/2025"
+            },
+            {
+              "signal": "Le cœur du groupe est ailleurs : logiciels et services santé et assurance, données et marketing représentent ensemble 420,5 M€ des 649,2 M€ de 2025",
+              "sens": "-",
+              "preuve": "Communiqué de chiffre d'affaires annuel 2025"
+            },
+            {
+              "signal": "Le segment qui porte la facturation électronique pèse 62,9 M€, soit 9,7 % du chiffre d'affaires du groupe, et il comprend d'autres activités que le mandat français",
+              "sens": "-",
+              "preuve": "Communiqué de chiffre d'affaires annuel 2025"
+            },
+            {
+              "signal": "L'agrément est publié au nom de la société cotée, et non d'une entité dédiée : le mandat est logé au sommet du groupe et non isolé",
+              "sens": "-",
+              "preuve": "Liste DGFiP : CEGEDIM, SIREN 350422622, adresse du siège de Boulogne-Billancourt"
+            }
+          ],
+          "lecture": "C'est le seul dossier du référentiel où l'on peut chiffrer la question au lieu de l'interpréter. Le segment qui porte la facturation électronique pèse 62,9 M€ sur 649,2 M€, soit moins d'un dixième d'un groupe dont le cœur est le logiciel de santé et l'assurance. Les signaux d'investissement sont pourtant sérieux : marque dédiée, entité de plus de deux mille personnes, immatriculation définitive dès le 11 décembre 2025, pilote de l'AIFE avec plus de vingt clients, hébergement propre en France, et une croissance que la communication financière attribue elle-même à la réforme. Le dossier est donc à la frontière entre l'indice 2 et l'indice 3, et il est arbitré par la règle de l'étalon unique : Tessi, entité de 38,7 M€ dans un groupe de 545,7 M€ avec une marque dédiée, a été classée 2. Le rapport est ici du même ordre, l'indice retenu est le même. Ce que la fiche gagne malgré tout est plus précieux qu'un point d'indice : une ventilation publiée, opposable, et une phrase de communication financière qui dit explicitement que la réforme française fait croître le segment.",
+          "confiance": "haute"
+        },
+        "postureCommerciale": {
+          "valeur": "base_installee",
+          "preuve": "Le dispositif observable s'adresse d'abord aux clients existants : le pilote de l'AIFE est mené « avec à ses côtés plus d'une vingtaine de ses clients », et l'argumentaire est celui de l'accompagnement long terme d'une base servie depuis plus de trente ans sur la facturation, les achats et la paie. Aucun programme de revente ni offre en marque blanche n'a été relevé dans cette passe. Réserve : la vitrine SY business n'a pas été explorée page par page ici, et la posture devra être revue si un canal partenaires est documenté.",
+          "confiance": "moyenne"
+        },
+        "referencesClients": {
+          "nbCiteesSurSite": 0,
+          "parSecteur": {},
+          "grandsComptes": [],
+          "referencesPAConfirmees": [],
+          "source": "Aucune référence nommée relevée sur l'offre agréée au 22/08/2026 : le communiqué du 16/12/2025 évoque « plus d'une vingtaine de clients » engagés dans le pilote de l'AIFE, sans les nommer. Le positionnement sectoriel se lit dans le métier du groupe : écosystème santé, assurance, et fonctions finance, achats et RH des grandes organisations."
+        },
+        "reputation": {
+          "volumeAvis": null,
+          "synthese": "Aucun relevé d'avis clients agrégés dans cette passe.",
+          "confiance": "faible"
+        },
+        "capaciteDeFrappe": {
+          "actionnaires": [
+            "Cegedim SA, société cotée sur Euronext Growth Paris (ALCGM), fondée en 1969"
+          ],
+          "typeActionnaire": "cote",
+          "financementRecent": "Financement de marché. Le groupe a annoncé viser en 2025 une progression du résultat opérationnel courant d'au moins 15 %.",
+          "acquisitions": [
+            "Non relevé dans cette passe : seul le communiqué de chiffre d'affaires annuel a été exploité"
+          ],
+          "modeleTarifaire": "Sur devis, aucun tarif publié",
+          "tarifPublie": false,
+          "offreGratuite": false
+        },
+        "lectureConcurrentielle": "Cegedim est un concurrent que l'on croise rarement sur un appel d'offres généraliste et presque systématiquement sur trois terrains : la santé, l'assurance et les grandes organisations dont il opère déjà la paie, les achats ou le tiers payant. Sa force n'est pas le produit mais l'antériorité et la position institutionnelle : premier remettant sur Chorus Pro, immatriculation définitive parmi les premières, participation au pilote de l'AIFE avec plus de vingt clients, hébergement souverain sur ses propres infrastructures. Face à une direction financière prudente, cet alignement avec l'administration est un argument redoutable, et il est difficile à contrer autrement que sur le terrain fonctionnel. Deux éléments de contexte à garder en tête. D'une part, l'activité agréée reste une extension : le segment qui la porte pèse 62,9 M€ sur 649,2 M€, dans un groupe dont le cœur est le logiciel de santé — la profondeur d'investissement produit sur la facture, comparée à celle d'un éditeur dont c'est l'unique métier, est une question légitime. D'autre part, le groupe communique lui-même sur le fait que la réforme tire son segment e-business : la dynamique commerciale est réelle et le nom sortira de plus en plus souvent, y compris chez des clients qui ne l'associaient pas à la facturation. Enfin, un point utile en soutenance : le mandat est porté par la société cotée elle-même et opéré par une entité de plus de deux mille personnes dont l'essentiel du métier est l'externalisation de processus — la question du modèle de service, plateforme logicielle ou service géré, mérite d'être clarifiée dès le cahier des charges.",
+        "droitDeReponse": {
+          "signale": false,
+          "date": null,
+          "objet": null
+        }
+      },
+      "sourcesEnrichissement": [
+        {
+          "champ": "analyse360.poidsEconomique + ventilationParActivite",
+          "source": "Communiqué de chiffre d'affaires annuel 2025 de Cegedim SA (cegedim.fr) : 649,2 M€ (−0,8 % publié, +1,1 % organique), Logiciels et services 292,7 M€, Flux 106,4 M€ (+6,1 %) dont e-business 62,9 M€ (+7,6 %) et tiers payant 43,5 M€, Données et marketing 127,8 M€, externalisation de processus 83,6 M€, infogérance et support 38,7 M€ ; croissance de l'e-business attribuée au segment Facture & Achat en France à l'approche de la première phase de la réforme ; objectif de progression du résultat opérationnel courant d'au moins 15 %",
+          "dateReleve": "2026-08-22",
+          "confiance": "haute"
+        },
+        {
+          "champ": "analyse360.centralitePA + activites + postureCommerciale",
+          "source": "Communiqué de presse Cegedim Business Services du 16/12/2025 : immatriculation définitive de la plateforme agréée SY business délivrée par la DGFiP le 11/12/2025, couverture P2P et O2C, hébergement en France sur infrastructures propres, premier remettant de factures sur Chorus Pro, plus de 30 ans d'expérience, plus de 2 000 collaborateurs, pilote de l'AIFE avec plus d'une vingtaine de clients dès la mise en service du portail public en février 2026 ; groupe Cegedim fondé en 1969, près de 6 700 collaborateurs, plus de dix pays, plus de 654 M€ de chiffre d'affaires en 2024, coté Euronext Growth (ALCGM)",
+          "dateReleve": "2026-08-22",
+          "confiance": "haute"
+        },
+        {
+          "champ": "analyse360.centralitePA.indice",
+          "source": "Lecture Fluxym sur faisceau d'indices, règles 9 (même étalon pour tous, comparaison avec le cas Tessi), 11a et 11f du plan de travail",
+          "dateReleve": "2026-08-22",
+          "confiance": "haute"
+        }
+      ]
+    }
+  ]
+}

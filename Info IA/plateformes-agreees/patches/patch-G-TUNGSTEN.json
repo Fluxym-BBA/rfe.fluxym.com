@@ -6,7 +6,8 @@
     "auteur": "RFE_WebSite",
     "dateReleve": "2026-08-22",
     "nbPlateformes": 1,
-    "note": "Onzième fiche 360, premier concurrent frontal de la vague G1d. APPORT PRINCIPAL : variante du motif d'acquisition. Ce n'est pas l'agrément qui a été hérité d'une filiale acquise, c'est l'activité elle-même : le réseau de facturation électronique vient du rachat de Tungsten Corporation (ex-OB10, société cotée à Londres) par Kofax en juin 2022 pour 53,7 millions de livres, tandis que l'agrément est porté par la filiale commerciale française historique, créée en 1997 sous le nom Kofax France et renommée en janvier 2024. Deux changements de dénomination expliquent pourquoi la recherche SIREN par nom commercial échouait. COMPTES DÉPOSÉS EXPLOITÉS : quatre exercices, avec une trajectoire qui se retourne en 2024. NON TROUVÉ dans cette passe : chiffre d'affaires du groupe (détenu par des fonds, non publié ; les estimations d'agrégateurs sont écartées par la règle 11d), effectif exact de l'entité française pour 2024, programme partenaires ou revente de l'offre agréée, avis publics agrégés, volume d'offres d'emploi."
+    "note": "Onzième fiche 360, premier concurrent frontal de la vague G1d. APPORT PRINCIPAL : variante du motif d'acquisition. Ce n'est pas l'agrément qui a été hérité d'une filiale acquise, c'est l'activité elle-même : le réseau de facturation électronique vient du rachat de Tungsten Corporation (ex-OB10, société cotée à Londres) par Kofax en juin 2022 pour 53,7 millions de livres, tandis que l'agrément est porté par la filiale commerciale française historique, créée en 1997 sous le nom Kofax France et renommée en janvier 2024. Deux changements de dénomination expliquent pourquoi la recherche SIREN par nom commercial échouait. COMPTES DÉPOSÉS EXPLOITÉS : quatre exercices, avec une trajectoire qui se retourne en 2024. NON TROUVÉ dans cette passe : chiffre d'affaires du groupe (détenu par des fonds, non publié ; les estimations d'agrégateurs sont écartées par la règle 11d), effectif exact de l'entité française pour 2024, programme partenaires ou revente de l'offre agréée, avis publics agrégés, volume d'offres d'emploi. ⚠️ VERSION CORRIGÉE : les blocs caGroupe et caEntiteFrancaise étaient exprimés en euros sous la clé « valeur », alors que l'affichage attend un montant en millions sous la clé « montantMEUR ». Le chiffre d'affaires ne s'affichait donc pas. Ce patch rétablit le format canonique ; si la version précédente a déjà été fusionnée, refusionner celle-ci neutralise l'ancienne clé.",
+    "version": "corrigée 22/08/2026 (après-midi) — remplace la version livrée dans pa-cercle0-vague3.zip"
   },
   "plateformes": [
     {
@@ -47,16 +48,22 @@
         ],
         "poidsEconomique": {
           "caGroupe": {
-            "valeur": null,
-            "nature": "non_publie",
+            "montantMEUR": null,
             "exercice": null,
-            "commentaire": "Le groupe n'est pas coté et ne publie pas de chiffre d'affaires depuis son passage sous contrôle de fonds. Les estimations d'agrégateurs sont écartées par la règle 11d."
+            "nature": "non_publie",
+            "commentaire": "Le groupe n'est pas coté et ne publie pas de chiffre d'affaires depuis son passage sous contrôle de fonds. Les estimations d'agrégateurs sont écartées par la règle 11d.",
+            "source": "Le groupe n'est pas coté et ne publie pas de chiffre d'affaires depuis son passage sous contrôle de fonds. Les estimations d'agrégateurs sont écartées par la règle 11d.",
+            "dateReleve": "2026-08-22",
+            "valeur": null
           },
           "caEntiteFrancaise": {
-            "valeur": 27200000,
-            "nature": "comptes_deposes",
+            "montantMEUR": 27.2,
             "exercice": "2024",
-            "commentaire": "Trajectoire des comptes déposés : 24,2 M€ en 2021, 24,2 M€ en 2022, 29,0 M€ en 2023, 27,2 M€ en 2024, soit un recul de 6,2 % sur le dernier exercice. Code d'activité de commerce de gros : une partie de ce chiffre correspond à la revente du catalogue du groupe sur le marché français, et non à une production locale."
+            "nature": "comptes_deposes",
+            "commentaire": "Trajectoire des comptes déposés : 24,2 M€ en 2021, 24,2 M€ en 2022, 29,0 M€ en 2023, 27,2 M€ en 2024, soit un recul de 6,2 % sur le dernier exercice. Code d'activité de commerce de gros : une partie de ce chiffre correspond à la revente du catalogue du groupe sur le marché français, et non à une production locale.",
+            "source": "Trajectoire des comptes déposés : 24,2 M€ en 2021, 24,2 M€ en 2022, 29,0 M€ en 2023, 27,2 M€ en 2024, soit un recul de 6,2 % sur le dernier exercice. Code d'activité de commerce de gros : une partie de ce chiffre correspond à la revente du catalogue du groupe sur le marché français, et non à une production locale.",
+            "dateReleve": "2026-08-22",
+            "valeur": null
           },
           "resultatNet": "Perte de 43,5 k€ en 2024, après trois exercices bénéficiaires : 865 k€ en 2021, 772 k€ en 2022, 823 k€ en 2023. Fonds propres de 6,98 M€ au 31/12/2024. Salaires et charges de 8,01 M€, soit 29,5 % du chiffre d'affaires.",
           "effectifGroupe": "Environ 2 200 salariés annoncés par l'actionnaire au moment de la prise de contrôle",
