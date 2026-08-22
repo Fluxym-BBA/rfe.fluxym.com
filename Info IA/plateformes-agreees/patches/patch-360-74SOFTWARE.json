@@ -1,0 +1,178 @@
+{
+ "_patch": {
+  "id": "360-74SOFTWARE",
+  "chantier": "Analyse 360 — 74SOFTWARE (fiche AXWAY SOFTWARE)",
+  "auteur": "RFE_WebSite",
+  "dateReleve": "2026-08-22",
+  "nbPlateformes": 1,
+  "note": "Fiche 360 complète de la plus grosse entrée non encore analysée du référentiel, ancrée le 22/08/2026 sous sa dénomination réelle 74SOFTWARE. Poids économique : groupe coté à 707,2 M€ de chiffre d'affaires 2025, 40,8 M€ de résultat net, 4 571 salariés, dont 213,8 M€ réalisés en France. Trois ancrages de chiffre d'affaires sont exposés côte à côte sans jamais être mélangés (règle 11c) : consolidé du groupe 707,2 M€ (2025), comptes déposés de l'entité immatriculée 461,9 M€ (2024), chiffre d'affaires réalisé en France 213,8 M€ (2025). Ventilation par activité **publiée par l'acteur** et donc retenue (règle 25) : Axway 337,9 M€ contre SBS 371,2 M€, et pour la marque Axway une répartition d'ARR par ligne de produit. Aucune part attribuable à la facturation électronique n'est estimée, l'acteur ne la publiant pas. Indice de centralité **2 — extension naturelle**, avec un faisceau de quatre signaux dont deux négatifs : l'agrément prolonge un métier d'échange de flux préexistant, et la facturation électronique n'apparaît pas parmi les moteurs de croissance commentés du communiqué annuel. Posture **base_installee** : l'offre est vendue comme une capacité supplémentaire à des clients qui font déjà passer leurs flux par la plateforme, avec l'argument d'éviter la multiplication des PA locales. Signal de dynamique relevé : l'effectif du groupe recule de 216 personnes en un an, de 4 787 à 4 571, pendant que le chiffre d'affaires progresse. Cinq références grands comptes relevées, avec la réserve explicite qu'aucune n'est présentée comme cliente de l'activité agréée française. Deux valeurs d'énumération corrigées avant livraison après contrôle contre la taxonomie (règle 23) : `typeActionnaire` vaut `cote` et non `cotee`, et les clés de `parSecteur` sont `transport` et `sante`, pas `transport_logistique` ni `sante_pharmacie`."
+ },
+ "plateformes": [
+  {
+   "nom": "AXWAY SOFTWARE",
+   "analyse360": {
+    "metierPrincipal": "Édition de logiciels d'infrastructure d'échange de données : transfert de fichiers managé (MFT), intégration B2B et EDI, gestion d'API. L'activité est portée par la marque Axway, l'une des deux marques du groupe coté 74Software, l'autre étant SBS (logiciels bancaires). La facturation électronique n'est pas un métier en soi mais une capacité de conformité greffée sur l'offre d'intégration B2B, commercialisée sous le nom Axway eInvoicing.",
+    "activites": [
+     {
+      "libelle": "Marque Axway — intégration de flux, MFT, API management, EDI et B2B : 337,9 M€ de chiffre d'affaires en 2025, en croissance organique de 4,6 %, soit 47,8 % du chiffre d'affaires du groupe",
+      "poids": "majeur",
+      "source": "Communiqué de résultats annuels 2025, 74Software, 25/02/2026"
+     },
+     {
+      "libelle": "Marque SBS — logiciels bancaires (core banking, financement, conformité réglementaire) : 371,2 M€ en 2025, en croissance organique de 3,0 %, soit 52,2 % du chiffre d'affaires du groupe. Activité sans rapport avec la facturation électronique",
+      "poids": "majeur",
+      "source": "Communiqué de résultats annuels 2025, 74Software, 25/02/2026"
+     },
+     {
+      "libelle": "Au sein de l'ARR de la marque Axway (273,0 M€ fin 2025), la répartition publiée par ligne de produit est stable sur deux exercices : MFT 42 à 43 %, intégration B2B 23 %, API management 18 %, autres 16 à 17 %. La facturation électronique est un cas d'usage de la ligne B2B, elle n'est pas isolée dans cette répartition",
+      "poids": "significatif",
+      "source": "Communiqué de résultats annuels 2025, 74Software, 25/02/2026"
+     },
+     {
+      "libelle": "Axway eInvoicing — conformité de facturation électronique multi-pays : réforme française (plateforme agréée, e-reporting TVA, Factur-X), modèles CTC centralisés (Italie, Roumanie, Pologne), réseau Peppol, mandats Allemagne, Espagne, Émirats arabes unis, DBNA aux États-Unis",
+      "poids": "mineur",
+      "source": "https://www.axway.com/fr/produits/b2b-integration/einvoice"
+     },
+     {
+      "libelle": "Membre du Forum National de la Facture Électronique et des Marchés Publics Électroniques (FNFE-MPE)",
+      "poids": "mineur",
+      "source": "https://www.axway.com/fr/produits/b2b-integration/einvoice"
+     }
+    ],
+    "poidsEconomique": {
+     "caGroupe": {
+      "montantMEUR": 707.2,
+      "exercice": "2025",
+      "nature": "communique_financier",
+      "commentaire": "Chiffre d'affaires consolidé du groupe coté 74Software : 707,2 M€ en 2025, contre 690,0 M€ en 2024, soit +2,5 % en publié et +3,8 % en organique. Ventilation publiée par l'acteur lui-même : Axway 337,9 M€ (+4,6 % organique) et SBS 371,2 M€ (+3,0 % organique). Rentabilité : marge brute de 476,1 M€ (67,3 %), résultat opérationnel d'activité de 107,3 M€ (15,2 %), résultat opérationnel de 73,3 M€ (10,4 %), résultat net de 40,8 M€ (5,8 %), bénéfice par action de 1,39 €. Le chiffre d'affaires réalisé en France est de 213,8 M€, soit 30,2 % du total. Aucune part attribuable à l'activité de plateforme agréée n'est estimée : l'acteur ne la publie pas.",
+      "source": "Communiqué de résultats annuels 2025, 74Software, 25/02/2026",
+      "dateReleve": "2026-08-22"
+     },
+     "caEntiteFrancaise": {
+      "montantMEUR": 461.878,
+      "exercice": "2024",
+      "nature": "comptes_deposes",
+      "commentaire": "Comptes déposés par l'entité immatriculée 74SOFTWARE (SIREN 433 977 980) pour l'exercice 2024. Ce chiffre n'est ni le chiffre d'affaires du groupe (690,0 M€ en 2024) ni celui réalisé en France (213,8 M€ en 2025) : ce sont trois ancrages distincts, qui ne se comparent pas et ne s'additionnent pas (règle 11c). L'entité est la société mère cotée, ses comptes sociaux comprennent des flux intra-groupe.",
+      "source": "https://recherche-entreprises.api.gouv.fr/search?q=433977980",
+      "dateReleve": "2026-08-22"
+     },
+     "resultatNet": 39251000,
+     "effectifGroupe": 4571,
+     "effectifEntite": "250 à 499 salariés pour l'entité 74SOFTWARE (INSEE, millésime 2023), 5 établissements ouverts",
+     "ventilationParActivite": {
+      "disponible": true,
+      "motif": "L'acteur publie lui-même la ventilation de son chiffre d'affaires entre ses deux marques, ainsi que la répartition de l'ARR par ligne de produit pour la marque Axway. En revanche, il ne publie aucune ventilation isolant la facturation électronique : la retenir serait une estimation, ce que le référentiel s'interdit (règle 25).",
+      "derniereVentilationConnue": "Exercice 2025 : Axway 337,9 M€ (47,8 %) et SBS 371,2 M€ (52,2 %). ARR Axway par ligne de produit : MFT 42 à 43 %, B2B 23 %, API management 18 %, autres 16 à 17 %."
+     }
+    },
+    "centralitePA": {
+     "indice": 2,
+     "niveau": "extension_naturelle",
+     "marqueProduitDediee": "Axway eInvoicing",
+     "entiteJuridiqueDediee": false,
+     "faisceauIndices": [
+      {
+       "signal": "L'agrément prolonge un métier d'échange de flux inter-entreprises exercé depuis des décennies : MFT, EDI et intégration B2B. La facturation électronique est présentée comme une capacité de conformité de la ligne B2B Integration, pas comme une offre autonome",
+       "sens": "+",
+       "preuve": "https://www.axway.com/fr/produits/b2b-integration/einvoice"
+      },
+      {
+       "signal": "La ligne B2B représente 23 % de l'ARR de la marque Axway, laquelle représente 47,8 % du chiffre d'affaires du groupe. L'activité agréée est donc un sous-ensemble non isolé d'un sous-ensemble",
+       "sens": "-",
+       "preuve": "Communiqué de résultats annuels 2025, 74Software, 25/02/2026"
+      },
+      {
+       "signal": "Le communiqué de résultats annuels 2025 ne mentionne pas la facturation électronique parmi les moteurs de croissance commentés : les relais cités sont le MFT, l'API management et les composants bancaires",
+       "sens": "-",
+       "preuve": "Communiqué de résultats annuels 2025, 74Software, 25/02/2026"
+      },
+      {
+       "signal": "L'offre est réellement outillée et documentée en propre, avec une page produit dédiée, un positionnement multi-pays (CTC, Peppol, DCTCE) et une adhésion au FNFE-MPE",
+       "sens": "+",
+       "preuve": "https://www.axway.com/fr/produits/b2b-integration/einvoice"
+      }
+     ],
+     "lecture": "Indice 2 : extension naturelle. L'agrément ne crée pas une activité, il ajoute une obligation réglementaire à un tuyau qui existait déjà et qui transportait déjà des factures au format EDI. Le groupe ne construit pas sa croissance sur la réforme française et ne la met pas en avant dans sa communication financière ; il protège et prolonge une position d'intégration de flux chez ses clients. Ce n'est pas pour autant un indice 0 : l'offre est nommée, outillée, documentée et portée dans les instances de la réforme.",
+     "confiance": "haute"
+    },
+    "postureCommerciale": {
+     "valeur": "base_installee",
+     "preuve": "L'argumentaire est explicitement adressé à une base installée d'intégration : la facturation électronique est vendue comme une capacité supplémentaire d'Axway eInvoicing au sein de la plateforme B2B Integration, avec l'argument d'éviter « la multiplication des PDP/PA locales » et de centraliser la conformité multi-pays depuis un environnement déjà en place. Aucune offre en marque blanche ni programme de revente de l'immatriculation n'a été relevé dans cette passe. Réserve : le groupe opère aussi par intégrateurs et partenaires, canal non exploré page par page ici — la posture devra être revue si un programme partenaires dédié à la facturation électronique est documenté.",
+     "confiance": "moyenne"
+    },
+    "referencesClients": {
+     "nbCiteesSurSite": null,
+     "parSecteur": {
+      "transport": [
+       "DB Schenker"
+      ],
+      "industrie": [
+       "Bosch"
+      ],
+      "energie": [
+       "Equinor",
+       "TotalEnergies"
+      ],
+      "sante": [
+       "Cencora"
+      ]
+     },
+     "grandsComptes": [
+      "DB Schenker",
+      "Bosch",
+      "Equinor",
+      "TotalEnergies",
+      "Cencora"
+     ],
+     "referencesPAConfirmees": [],
+     "source": "Bandeau de logos clients de la page produit Axway eInvoicing, relevé le 22/08/2026. Ces logos illustrent la page de la solution de facturation électronique, mais aucune de ces références n'est présentée comme cliente de l'activité de plateforme agréée française : ce sont des références du groupe. Aucune référence PA confirmée n'est publiée à ce stade."
+    },
+    "reputation": {
+     "volumeAvis": null,
+     "synthese": "Aucun relevé d'avis agrégés effectué dans cette passe. Deux signaux publics de nature différente sont en revanche disponibles : la société est cotée sur Euronext Paris, donc soumise à publication trimestrielle, et elle a relevé sa guidance de croissance organique à 3-5 % par an sur trois ans avec un objectif de marge opérationnelle de 20 % à fin 2028.",
+     "confiance": "non_qualifie"
+    },
+    "capaciteDeFrappe": {
+     "actionnaires": [
+      "Société cotée sur Euronext Paris (mnémonique 74SW). Pierre Pasquier, fondateur de Sopra Steria, siège au conseil d'administration de l'entité immatriculée. Structure détaillée de l'actionnariat non relevée dans cette passe."
+     ],
+     "typeActionnaire": "cote",
+     "financementRecent": "Groupe issu du rapprochement d'Axway Software et de Sopra Banking Software, renommé 74Software à la suite d'un vote d'assemblée générale, la nouvelle dénomination étant effective en 2025. Le SIREN historique d'Axway Software (433 977 980) est conservé. Trajectoire financière annoncée : croissance organique de 3 à 5 % par an sur trois ans et marge opérationnelle de 20 % à fin 2028.",
+     "acquisitions": [],
+     "modeleTarifaire": "Sur devis, aucun tarif public. Modèle d'abonnement en forte progression : le récurrent représente 92 % du chiffre d'affaires produit, avec un ARR de 273,0 M€ pour la marque Axway (+11,8 % en organique) et de 243,8 M€ pour SBS (+8,9 %).",
+     "tarifPublie": false,
+     "offreGratuite": false
+    },
+    "lectureConcurrentielle": "Concurrent d'une nature particulière : ce n'est pas un éditeur de facturation qui se met en conformité, c'est un éditeur d'infrastructure d'échange qui absorbe la facturation dans son tuyau. Le point de contact avec l'offre portée par Fluxym n'est donc pas le même : la discussion ne commence pas dans la direction financière mais dans la direction des systèmes d'information, chez un client qui fait déjà passer ses flux EDI et ses transferts de fichiers par la plateforme. L'argument avancé est la centralisation multi-pays, opposée à « la multiplication des PA locales ». Deux éléments de contexte à garder : le groupe pèse 707,2 M€ et 4 571 personnes, mais son effectif a reculé de 216 personnes en un an, et la facturation électronique n'apparaît nulle part dans les moteurs de croissance commentés de son communiqué annuel. Fluxym est un acteur du marché : ce référentiel est publié par un intégrateur qui distribue des solutions concurrentes, et cette lecture est une lecture de marché, pas une évaluation.",
+    "droitDeReponse": {
+     "signale": false,
+     "date": null,
+     "objet": null
+    }
+   },
+   "sourcesEnrichissement": [
+    {
+     "champ": "analyse360.poidsEconomique.caGroupe",
+     "source": "https://www.74software.com/",
+     "dateReleve": "2026-08-22",
+     "confiance": "haute",
+     "preuve": "Communiqué de résultats annuels 2025 publié le 25/02/2026 : chiffre d'affaires de 707,2 M€ (+2,5 % en publié, +3,8 % en organique), Axway 337,9 M€ (+4,6 % organique), SBS 371,2 M€ (+3,0 % organique), marge brute 476,1 M€ (67,3 %), résultat opérationnel d'activité 107,3 M€ (15,2 %), résultat net 40,8 M€ (5,8 %), bénéfice par action 1,39 €. France 213,8 M€, soit 30,2 % du chiffre d'affaires. Effectif de 4 571 personnes au 31/12/2025 contre 4 787 au 31/12/2024, réparti en Europe 2 965, Amériques 360, Asie-Pacifique 824, Moyen-Orient et Afrique 422. ARR Axway 273,0 M€ (+11,8 % organique), ARR SBS 243,8 M€ (+8,9 %). Récurrent à 92 % du chiffre d'affaires produit. Guidance relevée à 3-5 % de croissance organique par an et 20 % de marge opérationnelle à fin 2028."
+    },
+    {
+     "champ": "analyse360.centralitePA",
+     "source": "https://www.axway.com/fr/produits/b2b-integration/einvoice",
+     "dateReleve": "2026-08-22",
+     "confiance": "haute",
+     "preuve": "Page produit Axway eInvoicing relevée le 22/08/2026 : « Axway est officiellement accréditée en tant que Plateforme Agréée (PA) [...] Formellement désignée comme Plateforme de Dématérialisation Partenaire (PDP) ». L'offre couvre la réforme française (PA, PPF, e-reporting TVA, Factur-X), les modèles CTC centralisés (France, Italie, Roumanie, Pologne), le réseau Peppol, les mandats allemand, espagnol et émirati, ainsi que DBNA aux États-Unis. Le groupe se déclare membre du FNFE-MPE. L'offre est présentée comme une capacité de la plateforme B2B Integration, et non comme une activité autonome."
+    },
+    {
+     "champ": "analyse360.referencesClients",
+     "source": "https://www.axway.com/fr/produits/b2b-integration/einvoice",
+     "dateReleve": "2026-08-22",
+     "confiance": "moyenne",
+     "preuve": "Bandeau de logos clients de la page produit Axway eInvoicing : DB Schenker, Cencora, Bosch, Equinor, TotalEnergies. Réserve explicite : ces logos illustrent la page de la solution, aucune de ces références n'est présentée comme cliente de l'activité de plateforme agréée française."
+    }
+   ]
+  }
+ ]
+}
