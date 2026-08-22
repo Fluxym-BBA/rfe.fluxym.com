@@ -1,0 +1,262 @@
+{
+ "_patch": {
+  "id": "CONTROLE-SIREN-20260822",
+  "chantier": "Passe de contrôle d'identité — 79 SIREN et 6 blocs de dirigeants non ancrés",
+  "societe": "ESI, CECURITY, INFOLOGIC, INDY, N2F PDP, EEZI powered by VAT IT",
+  "auteur": "RFE_WebSite",
+  "dateReleve": "2026-08-22",
+  "nbPlateformes": 6,
+  "note": "Passe de contrôle d'identité sur la totalité des 79 fiches à SIREN du référentiel, réalisée le 22/08/2026 à partir de l'API Recherche d'entreprises (état administratif, établissements ouverts, code NAF, date de création, diffusion INSEE). RÉSULTAT PRINCIPAL RASSURANT : 74 fiches sur 79 ne portent aucun signal, et les deux seuls faux positifs sont ceux déjà identifiés au lot 1G (CLEARTAX, société cessée depuis le 31/12/2018 ; ESI, société sans code d'activité créée le 23/01/2026). Trois fiches portent un signal bénin de création récente, toutes légitimes (CYCLOPE, KOLECTO PA, SCRIBEE). La contamination redoutée n'a pas lieu. SECOND RÉSULTAT, PLUS SÉVÈRE : le contrôle a porté sur un angle mort. Six fiches stockaient des dirigeants nommés SANS AUCUN SIREN d'ancrage, donc obtenus par appariement sur le nom commercial. Les six sont fausses : BC SOLUTIONS, déjà corrigée au cercle 0, et les cinq traitées ici. Quatre identités sont rétablies sur preuve (ESI, INFOLOGIC, INDY, N2F PDP), une cinquième sur faisceau (CECURITY), une sixième reste non identifiée (EEZI powered by VAT IT). Deux enseignements de méthode : les mentions légales de l'éditeur contredisent deux fois l'appariement par nom — INFOLOGIC désigne INFOLOGIC - ENGINEERING et non INFOLOGIC, et N2F désigne N2JSOFT ; et l'indicateur confianceIdentite était hérité du processus d'appariement, ESI portant une confiance « haute » sur un SIREN de salon lyonnais créé en 2026."
+ },
+ "plateformes": [
+  {
+   "nom": "ESI",
+   "siren": "380605238",
+   "raisonSociale": "EDITIONS ET SERVICES INFORMATIQUES (ESI)",
+   "dateCreation": "1991-01-18",
+   "activitePrincipale": "63.11Z",
+   "trancheEffectif": "20-49",
+   "categorieEntreprise": "PME",
+   "confianceIdentite": "haute",
+   "dirigeants": [
+    {
+     "nom": "VAREON SERGE",
+     "qualite": "Président de SAS",
+     "type": "personne physique"
+    },
+    {
+     "nom": "BOURRIN JEAN-FRANCOIS",
+     "qualite": "Commissaire aux comptes titulaire",
+     "type": "personne physique"
+    },
+    {
+     "nom": "VELOZZO FREDERIC",
+     "qualite": "Commissaire aux comptes suppléant",
+     "type": "personne physique"
+    }
+   ],
+   "relationCapitalistique": "independante",
+   "groupeCapitalistique": "Identité rétablie le 22/08/2026 après retrait d'un SIREN faux. L'entité est EDITIONS ET SERVICES INFORMATIQUES, sigle ESI, SIREN 380 605 238, SAS créée le 18/01/1991, code APE 63.11Z (traitement de données, hébergement), 20 à 49 salariés (INSEE 2023), catégorie PME, active, un seul établissement ouvert. Son siège INSEE est « MULTIPARC DE PARILLY - BATIMENT I2, 50 RUE JEAN ZAY, 69800 SAINT-PRIEST » : c'est mot pour mot l'adresse publiée par l'éditeur sur esi-groupe.com. L'ancienneté concorde également avec la présentation de la société, qui revendique plus de trente ans d'activité. Président : Serge Vareon. Commissaires aux comptes : Jean-François Bourrin (titulaire) et Frédéric Velozzo (suppléant). Aucune personne morale au capital : société indépendante.",
+   "sourcesEnrichissement": [
+    {
+     "url": "https://recherche-entreprises.api.gouv.fr/search?q=380605238",
+     "libelle": "API Recherche d'entreprises : identité, siège, effectif et mandataires d'EDITIONS ET SERVICES INFORMATIQUES (ESI), SIREN 380 605 238",
+     "dateReleve": "2026-08-22"
+    },
+    {
+     "url": "https://www.esi-groupe.com/",
+     "libelle": "Site de l'éditeur : adresse du siège 50 rue Jean Zay, Multiparc de Parilly, 69800 Saint-Priest, concordante avec le siège INSEE",
+     "dateReleve": "2026-08-22"
+    }
+   ]
+  },
+  {
+   "nom": "CECURITY",
+   "siren": "434330338",
+   "raisonSociale": "CECURITY.COM",
+   "dateCreation": "2001-01-11",
+   "activitePrincipale": "58.29C",
+   "trancheEffectif": "20-49",
+   "categorieEntreprise": "ETI",
+   "confianceIdentite": "moyenne",
+   "dirigeants": [
+    {
+     "nom": "SAVALLE JEAN-MARIE",
+     "qualite": "Président du conseil d'administration",
+     "type": "personne physique"
+    },
+    {
+     "nom": "RILHAC EMMANUEL",
+     "qualite": "Directeur général",
+     "type": "personne physique"
+    },
+    {
+     "nom": "HARDION THIERRY",
+     "qualite": "Administrateur",
+     "type": "personne physique"
+    },
+    {
+     "nom": "JOCQUEVIEL JEAN-PIERRE",
+     "qualite": "Administrateur",
+     "type": "personne physique"
+    },
+    {
+     "nom": "SAVALLE MATHIEU",
+     "qualite": "Administrateur",
+     "type": "personne physique"
+    },
+    {
+     "nom": "SARL GEC CONSEIL",
+     "qualite": "Commissaire aux comptes titulaire",
+     "type": "personne morale"
+    }
+   ],
+   "relationCapitalistique": "filiale_de_groupe",
+   "groupeCapitalistique": "Filiale du groupe ISAGRI, présenté par Cecurity.com comme « leader européen de l'informatique pour l'agriculture, la viticulture et la profession comptable ». Cecurity.com est entré dans le groupe à la suite d'une offre de rachat des actions initiée par Groupe ISAGRI. Identité de l'entité rétablie le 22/08/2026 : le dirigeant précédemment porté à cette fiche, « BORGHESI ALAIN », provenait d'un appariement par nom sans SIREN d'ancrage — il est faux et retiré. L'entité est CECURITY.COM, SIREN 434 330 338, société anonyme à conseil d'administration créée le 11/01/2001, siège 75 rue Saint-Lazare à Paris 9e, code APE 58.29C (édition de logiciels), 20 à 49 salariés (INSEE 2023), catégorie ETI, active. Président du conseil d'administration : Jean-Marie Savalle, fondateur ; directeur général Emmanuel Rilhac ; administrateurs Thierry Hardion, Jean-Pierre Jocqueviel et Mathieu Savalle ; commissaire aux comptes SARL GEC CONSEIL. Le maintien d'un conseil d'administration présidé par le fondateur au sein d'un groupe actionnaire est cohérent avec un rachat d'actions plutôt qu'avec une absorption. Trois sociétés sœurs historiques (CECURITY SERVICES, CECURITY CONSULTING, CECURITY OUTSOURCING) sont cessées. Confiance d'identité qualifiée de moyenne et non haute : la page de mentions légales du site n'a pas pu être lue, l'identification repose sur la coïncidence entre la dénomination légale et le nom de domaine, sur la catégorie ETI et sur l'activité d'édition de logiciels.",
+   "sourcesEnrichissement": [
+    {
+     "url": "https://recherche-entreprises.api.gouv.fr/search?q=434330338",
+     "libelle": "API Recherche d'entreprises : identité, siège, effectif et mandataires de CECURITY.COM, SIREN 434 330 338",
+     "dateReleve": "2026-08-22"
+    }
+   ]
+  },
+  {
+   "nom": "INFOLOGIC",
+   "siren": "484937222",
+   "raisonSociale": "INFOLOGIC - ENGINEERING",
+   "dateCreation": "2005-10-01",
+   "activitePrincipale": "62.02A",
+   "trancheEffectif": "20-49",
+   "categorieEntreprise": "ETI",
+   "confianceIdentite": "haute",
+   "dirigeants": [
+    {
+     "nom": "INFOLOGIC GROUPE",
+     "qualite": "Président de SAS",
+     "type": "personne morale"
+    },
+    {
+     "nom": "BOLOMEY VINCENT",
+     "qualite": "Directeur général",
+     "type": "personne physique"
+    },
+    {
+     "nom": "CHABERT ANDRE",
+     "qualite": "Directeur général",
+     "type": "personne physique"
+    },
+    {
+     "nom": "SORGEC AUDIT",
+     "qualite": "Commissaire aux comptes titulaire",
+     "type": "personne morale"
+    }
+   ],
+   "relationCapitalistique": "filiale_de_groupe",
+   "groupeCapitalistique": "Le dirigeant précédemment porté à cette fiche, « BALDI STEPHANE OLIVIER WILFRID », provenait d'un appariement par nom sans SIREN d'ancrage : il est faux et retiré. L'identification est ici certaine parce qu'elle vient des mentions légales du site infologic-copilote.fr, qui nomment l'éditeur : capital 1 800 000 €, siège 99 avenue de Lyon à 26500 Bourg-lès-Valence, RCS Romans, numéro 484 937 222. Ce n'est donc pas la société INFOLOGIC (414 347 856) que l'appariement par nom aurait désignée, mais INFOLOGIC - ENGINEERING, créée le 01/10/2005, code APE 62.02A, 20 à 49 salariés (INSEE 2023), catégorie ETI, active — le siège INSEE reprend exactement l'adresse des mentions légales. Son président est une personne morale, INFOLOGIC GROUPE (SIREN 415 293 646), niveau non ouvert à ce stade ; directeurs généraux Vincent Bolomey et André Chabert ; commissaire aux comptes SORGEC AUDIT.",
+   "sourcesEnrichissement": [
+    {
+     "url": "https://www.infologic-copilote.fr/mentions-legales/",
+     "libelle": "Mentions légales de l'éditeur : capital, siège et numéro RCS 484 937 222",
+     "dateReleve": "2026-08-22"
+    },
+    {
+     "url": "https://recherche-entreprises.api.gouv.fr/search?q=484937222",
+     "libelle": "API Recherche d'entreprises : identité, siège, effectif et mandataires d'INFOLOGIC - ENGINEERING",
+     "dateReleve": "2026-08-22"
+    }
+   ]
+  },
+  {
+   "nom": "INDY",
+   "siren": "820648830",
+   "raisonSociale": "INDY.FR",
+   "dateCreation": "2016-06-01",
+   "activitePrincipale": "58.29C",
+   "trancheEffectif": "200-249",
+   "categorieEntreprise": "PME",
+   "confianceIdentite": "haute",
+   "dirigeants": [
+    {
+     "nom": "FOUQUES CÔME",
+     "qualite": "Président de SAS",
+     "type": "personne physique"
+    },
+    {
+     "nom": "ALVEN CAPITAL PARTNERS",
+     "qualite": "Actionnaire ou personne ayant le contrôle",
+     "type": "personne morale"
+    },
+    {
+     "nom": "BLACKFIN CAPITAL PARTNERS",
+     "qualite": "Actionnaire ou personne ayant le contrôle",
+     "type": "personne morale"
+    },
+    {
+     "nom": "KÉRALA III",
+     "qualite": "Actionnaire ou personne ayant le contrôle",
+     "type": "personne morale"
+    },
+    {
+     "nom": "SINGULAR CAPITAL PARTNERS",
+     "qualite": "Actionnaire ou personne ayant le contrôle",
+     "type": "personne morale"
+    },
+    {
+     "nom": "ERNST & YOUNG AUDIT",
+     "qualite": "Commissaire aux comptes titulaire",
+     "type": "personne morale"
+    }
+   ],
+   "relationCapitalistique": "fonds_PE",
+   "groupeCapitalistique": "Le dirigeant précédemment porté à cette fiche, « TB INVEST », provenait d'un appariement par nom sans SIREN d'ancrage : il est faux et retiré. L'appariement par nom était d'ailleurs voué à l'échec, les cinq premières sociétés nommées INDY au registre étant une boucherie, une pâtisserie et trois sociétés immobilières. Les mentions légales du site indy.fr nomment l'éditeur : SAS Indy.fr, RCS Lyon 820 648 830, siège 94 rue Robert à Lyon 6e. L'entité est INDY.FR, créée le 01/06/2016, code APE 58.29C (édition de logiciels), **200 à 249 salariés** (INSEE 2023) — de loin la plus grosse des fiches redressées dans cette passe. Président : Côme Fouques. Le registre expose directement l'actionnariat : ALVEN CAPITAL PARTNERS, BLACKFIN CAPITAL PARTNERS, KÉRALA III et SINGULAR CAPITAL PARTNERS figurent comme personnes exerçant le contrôle, ce qui qualifie sans ambiguïté un adossement à des fonds. Commissaire aux comptes : ERNST & YOUNG AUDIT.",
+   "sourcesEnrichissement": [
+    {
+     "url": "https://www.indy.fr/mentions-legales/",
+     "libelle": "Mentions légales de l'éditeur : SAS Indy.fr, RCS Lyon 820 648 830, siège 94 rue Robert, 69006 Lyon",
+     "dateReleve": "2026-08-22"
+    },
+    {
+     "url": "https://recherche-entreprises.api.gouv.fr/search?q=820648830",
+     "libelle": "API Recherche d'entreprises : identité, siège, effectif, actionnaires et mandataires d'INDY.FR",
+     "dateReleve": "2026-08-22"
+    }
+   ]
+  },
+  {
+   "nom": "N2F PDP",
+   "siren": "814572236",
+   "raisonSociale": "N2JSOFT",
+   "dateCreation": "2015-11-01",
+   "activitePrincipale": "62.01Z",
+   "trancheEffectif": "50-99",
+   "categorieEntreprise": "PME",
+   "confianceIdentite": "moyenne",
+   "dirigeants": [
+    {
+     "nom": "NEXUS HOLDCO",
+     "qualite": "Président de SAS",
+     "type": "personne morale"
+    },
+    {
+     "nom": "SAS ORIAL",
+     "qualite": "Commissaire aux comptes titulaire",
+     "type": "personne morale"
+    }
+   ],
+   "relationCapitalistique": "holding_non_transparente",
+   "groupeCapitalistique": "Les trois dirigeants précédemment portés à cette fiche (« ARAS FRÉDÉRIC LIONEL », « CALMELS NICOLAS PHILIPPE DIDIER », « CASSOTTI FRÉDÉRIC NOËL JACQUES ») provenaient d'un appariement par nom sans SIREN d'ancrage : ils sont faux et retirés. Les cinq premières sociétés nommées N2F au registre relèvent de l'immobilier, de la maçonnerie et de la restauration. Les mentions légales du site n2f.com donnent le RCS de Bourg-en-Bresse n° 814 572 236, qui correspond à **N2JSOFT** : la marque N2F ne porte pas le nom de la société. Entité créée le 01/11/2015, code APE 62.01Z, siège 233 chemin des Grandes Terres à Montagnat (01), 50 à 99 salariés (INSEE 2023), catégorie PME, active. Son président est une personne morale, NEXUS HOLDCO (SIREN 942 579 707), holding récente dont la présence indique un adossement financier à documenter ; commissaire aux comptes SAS ORIAL. Confiance d'identité qualifiée de moyenne pour une raison précise : aucune entité distincte « N2F PDP » n'existe au registre, le suffixe PDP est un libellé de la liste DGFiP, et il reste à établir que l'agrément est bien porté par N2JSOFT et non par une entité sœur non identifiée.",
+   "sourcesEnrichissement": [
+    {
+     "url": "https://www.n2f.com/fr/mentions-legales/",
+     "libelle": "Mentions légales de l'éditeur : RCS Bourg-en-Bresse n° 814 572 236, TVA FR85814572236",
+     "dateReleve": "2026-08-22"
+    },
+    {
+     "url": "https://recherche-entreprises.api.gouv.fr/search?q=814572236",
+     "libelle": "API Recherche d'entreprises : identité, siège, effectif et mandataires de N2JSOFT",
+     "dateReleve": "2026-08-22"
+    }
+   ]
+  },
+  {
+   "nom": "EEZI powered by VAT IT",
+   "_supprimerChamps": [
+    "dirigeants"
+   ],
+   "groupeCapitalistique": "VAT IT. Identité de l'entité française non établie au 22/08/2026 : le dirigeant précédemment porté à cette fiche, « SEGURA JEROME », provenait d'un appariement par nom sans SIREN d'ancrage — il est faux et retiré, d'autant qu'il y figurait avec la qualité de liquidateur. La seule société nommée EEZI au registre français (SIREN 823 517 073) relève de l'activité immobilière et est cessée. La page juridique du site eezi.io ne comporte ni SIREN, ni RCS, ni numéro de TVA français : aucune entité française n'est identifiée et aucune ne sera avancée. L'entité du groupe VAT IT porteuse de l'agrément reste à établir.",
+   "sourcesEnrichissement": [
+    {
+     "url": "https://eezi.io/legal",
+     "libelle": "Page juridique du site : aucune immatriculation française mentionnée (consultée le 22/08/2026)",
+     "dateReleve": "2026-08-22"
+    },
+    {
+     "url": "https://recherche-entreprises.api.gouv.fr/search?q=EEZI",
+     "libelle": "API Recherche d'entreprises : la seule société EEZI au registre est cessée et relève de l'immobilier",
+     "dateReleve": "2026-08-22"
+    }
+   ]
+  }
+ ]
+}

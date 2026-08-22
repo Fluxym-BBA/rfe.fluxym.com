@@ -1,0 +1,399 @@
+{
+ "_patch": {
+  "id": "RECUP-SIREN-20260822",
+  "chantier": "Récupération des SIREN manquants par les mentions légales des éditeurs",
+  "societe": "ATGP, LUNDI MATIN, AGENA 3000, TRESO2, AXONAUT, Dougs, iPaidThat, GROUPE SIGMA, SEQINO, OfficeIn",
+  "auteur": "RFE_WebSite",
+  "dateReleve": "2026-08-22",
+  "nbPlateformes": 10,
+  "note": "Deuxième volet de la passe d'identité : récupération des SIREN manquants par les mentions légales des éditeurs, méthode validée la veille par la règle 56. Dix fiches françaises jusqu'ici dépourvues de SIREN sont désormais ancrées, toutes sur preuve produite par l'éditeur lui-même et toutes confirmées au registre (dénomination, siège, ressort du greffe, effectif, mandataires). RÉSULTAT DE MÉTHODE MASSIF : dans HUIT CAS SUR DIX la dénomination légale diffère du nom commercial — ATGP est @GP, AXONAUT est DIGITICA, TRESO2 est PYTHEAS CAPITAL ADVISORS, SEQINO est AXE-INNOVATION, OfficeIn est SAS SYLVESTRE, GROUPE SIGMA est SIGMA INFORMATIQUE, AGENA 3000 est CENTAURUS GROUP, iPaidThat est IPT TECHNOLOGIE. L'appariement automatique sur le nom n'avait donc aucune chance : ce n'était pas une défaillance d'outil mais une impossibilité structurelle. TROIS QUESTIONS ANCIENNES SONT CLOSES : le SIREN d'AGENA 3000, cherché depuis le chantier H2 entre deux candidats erronés, est celui de sa holding CENTAURUS GROUP ; le faux positif de liaison SEQINO / TRESO2 est définitivement écarté, les deux sociétés n'ayant aucun lien ; l'hypothèse WiseTech sur GROUPE SIGMA est écartée de même. TROIS DÉCOUVERTES : GROUPE SIGMA est une ETI de 500 à 999 salariés créée en 1972, la plus grosse entité de la passe ; Dougs est un cabinet d'expertise comptable (code APE 69.20Z) et non un éditeur, ce qui change sa lecture concurrentielle ; iPaidThat a BPCE inscrit au registre comme président de SAS."
+ },
+ "plateformes": [
+  {
+   "nom": "ATGP",
+   "siren": "429321201",
+   "raisonSociale": "@GP",
+   "dateCreation": "2000-02-01",
+   "activitePrincipale": "58.29A",
+   "dirigeants": [
+    {
+     "nom": "GOBERVILLE VINCENT",
+     "qualite": "Président de SAS",
+     "type": "personne physique"
+    },
+    {
+     "nom": "GERMAIN JACQUES",
+     "qualite": "Commissaire aux comptes titulaire",
+     "type": "personne physique"
+    },
+    {
+     "nom": "MELOTEAU HERVE",
+     "qualite": "Commissaire aux comptes suppléant",
+     "type": "personne physique"
+    }
+   ],
+   "relationCapitalistique": "independante",
+   "confianceIdentite": "haute",
+   "groupeCapitalistique": "Identité établie le 22/08/2026 par les mentions légales du site atgp.net, qui donnent le RCS de Romans-sur-Isère sous le numéro 429 321 201 et la TVA FR40429321201. La dénomination légale n'est pas ATGP mais **@GP** : l'appariement par nom ne pouvait pas la trouver. SAS créée le 01/02/2000, code APE 58.29A (édition de logiciels système et de réseau), siège ZA Les Tilleuls, 20 rue des Acacias à Montélier (26) — commune du ressort du greffe de Romans, ce qui confirme le rapprochement. 50 à 99 salariés (INSEE 2023), catégorie PME, active, un établissement. Président : Vincent Goberville. Commissaires aux comptes : Jacques Germain (titulaire) et Hervé Meloteau (suppléant). Aucune personne morale au capital : société indépendante.",
+   "sourcesEnrichissement": [
+    {
+     "url": "https://www.atgp.net/mentions-legales/",
+     "libelle": "Mentions légales de l'éditeur : RCS Romans-sur-Isère 429 321 201, TVA FR40429321201",
+     "dateReleve": "2026-08-22"
+    },
+    {
+     "url": "https://recherche-entreprises.api.gouv.fr/search?q=429321201",
+     "libelle": "API Recherche d'entreprises : identité, siège, effectif et mandataires de @GP",
+     "dateReleve": "2026-08-22"
+    }
+   ],
+   "trancheEffectif": "50-99",
+   "categorieEntreprise": "PME"
+  },
+  {
+   "nom": "LUNDI MATIN",
+   "siren": "499092930",
+   "raisonSociale": "LUNDIMATIN",
+   "dateCreation": "2007-07-01",
+   "activitePrincipale": "58.29C",
+   "dirigeants": [
+    {
+     "nom": "HOLDING CHALANDE",
+     "qualite": "Président de SAS",
+     "type": "personne morale"
+    },
+    {
+     "nom": "MA3C",
+     "qualite": "Commissaire aux comptes titulaire",
+     "type": "personne morale"
+    },
+    {
+     "nom": "CONS@UDIT EXPERTS",
+     "qualite": "Commissaire aux comptes suppléant",
+     "type": "personne morale"
+    }
+   ],
+   "relationCapitalistique": "holding_non_transparente",
+   "confianceIdentite": "haute",
+   "groupeCapitalistique": "Identité établie le 22/08/2026 par les mentions légales du site lundimatin.fr, qui donnent le RCS de Montpellier 499 092 930 et le siège 1025 rue Henri Becquerel à Montpellier — adresse reprise à l'identique par le registre (bâtiment 24, 1025 avenue Henri Becquerel, 34000 Montpellier). Dénomination légale LUNDIMATIN, sigles LUNDI MATIN et LM. SAS créée le 01/07/2007, code APE 58.29C (édition de logiciels applicatifs), 50 à 99 salariés (INSEE 2023), catégorie PME, active. Son président est une personne morale, **HOLDING CHALANDE** (SIREN 833 511 033), niveau non ouvert à ce stade : le rattachement est donc une holding non transparente, sans qu'aucun fonds ni groupe ne soit établi. Commissaires aux comptes : MA3C (titulaire) et CONS@UDIT EXPERTS (suppléant).",
+   "sourcesEnrichissement": [
+    {
+     "url": "https://www.lundimatin.fr/mentions-legales",
+     "libelle": "Mentions légales de l'éditeur : RCS Montpellier 499 092 930, siège 1025 rue Henri Becquerel",
+     "dateReleve": "2026-08-22"
+    },
+    {
+     "url": "https://recherche-entreprises.api.gouv.fr/search?q=499092930",
+     "libelle": "API Recherche d'entreprises : identité, siège, effectif et mandataires de LUNDIMATIN",
+     "dateReleve": "2026-08-22"
+    }
+   ],
+   "trancheEffectif": "50-99",
+   "categorieEntreprise": "PME"
+  },
+  {
+   "nom": "AGENA 3000",
+   "siren": "801439985",
+   "raisonSociale": "CENTAURUS GROUP",
+   "dateCreation": "2014-04-01",
+   "activitePrincipale": "64.20Z",
+   "dirigeants": [
+    {
+     "nom": "TRICHET SEBASTIEN CHRISTOPHE",
+     "qualite": "Président de SAS",
+     "type": "personne physique"
+    },
+    {
+     "nom": "COGEP AUDIT",
+     "qualite": "Commissaire aux comptes titulaire",
+     "type": "personne morale"
+    }
+   ],
+   "relationCapitalistique": "independante",
+   "confianceIdentite": "moyenne",
+   "groupeCapitalistique": "Groupe AGENA3000 (AGENA3000 Data Management, AGENA3000 Inc, PARANGON, Software Factory Tunisia, ConsoTrust, SRC System Integrators, DocProcess) — créé en 1980, plus de 250 salariés, plus de 8 000 clients, implantations France, Canada, Pays-Bas, Roumanie et Tunisie. La société de tête est identifiée le 22/08/2026, question ouverte depuis le chantier H2 et jusqu'ici cherchée entre deux candidats erronés (AGENA 3000 DATA MANAGEMENT 824 561 450 et AGENA 3000 ERP 880 231 014). Les mentions légales du site agena3000.com donnent le SIRET 80143998500020 et le « RCS : 801 439 985 Angers », qui correspond à **CENTAURUS GROUP**, SAS créée le 01/04/2014, siège 88 rue du Paradis à Cholet — commune du ressort du greffe d'Angers, ce qui valide le rapprochement. Son code APE est **64.20Z, activité de société holding** : l'éditeur publie l'immatriculation de sa société de tête et non celle de l'entité qui exploite la plateforme, d'où une confiance d'identité qualifiée de moyenne. 20 à 49 salariés au niveau de la holding (INSEE 2023), catégorie PME, active. Président : Sébastien Trichet, personne physique, ce qui fait de ce groupe un ensemble indépendant à tête nommée. Commissaire aux comptes : COGEP AUDIT. Le groupe détient une seconde immatriculation au référentiel, DOCPROCESS, rachetée le 17/09/2025.",
+   "sourcesEnrichissement": [
+    {
+     "url": "https://www.agena3000.com/fr/mentions-legales/",
+     "libelle": "Mentions légales de l'éditeur : SIRET 80143998500020, RCS 801 439 985 Angers",
+     "dateReleve": "2026-08-22"
+    },
+    {
+     "url": "https://recherche-entreprises.api.gouv.fr/search?q=801439985",
+     "libelle": "API Recherche d'entreprises : identité, siège, code APE 64.20Z et mandataires de CENTAURUS GROUP",
+     "dateReleve": "2026-08-22"
+    }
+   ],
+   "trancheEffectif": "20-49",
+   "categorieEntreprise": "PME"
+  },
+  {
+   "nom": "TRESO2",
+   "siren": "807708243",
+   "raisonSociale": "PYTHEAS CAPITAL ADVISORS",
+   "dateCreation": "2014-11-07",
+   "activitePrincipale": "70.22Z",
+   "dirigeants": [
+    {
+     "nom": "SARDA LUDOVIC",
+     "qualite": "Président de SAS",
+     "type": "personne physique"
+    },
+    {
+     "nom": "AUDITEURS EXPERTS ASSOCIES",
+     "qualite": "Commissaire aux comptes titulaire",
+     "type": "personne morale"
+    }
+   ],
+   "confianceIdentite": "haute",
+   "groupeCapitalistique": "Adossée à des partenaires bancaires français : Bpifrance et Crédit Mutuel Arkéa (Arkéa Banque Entreprises et Institutionnels, Arkéa Asset Management, Suravenir). Identité de l'entité établie le 22/08/2026 par les mentions légales du site treso2.com : RCS de Paris 807 708 243, SIREN 807708243, TVA FR42807708243. La dénomination légale n'est pas TRESO2 mais **PYTHEAS CAPITAL ADVISORS** : Treso2 est une marque. SAS créée le 07/11/2014, code APE 70.22Z (conseil pour les affaires et la gestion), siège 35 rue des Mathurins à Paris 8e, deux établissements, 20 à 49 salariés (INSEE 2023), catégorie PME, active. Président : Ludovic Sarda ; commissaire aux comptes AUDITEURS EXPERTS ASSOCIES. Point de prudence : le registre n'inscrit aucune personne morale mandataire, ce qui ne permet pas de trancher si l'adossement bancaire mentionné plus haut est un lien capitalistique ou un partenariat de distribution ; la relation capitalistique reste donc non qualifiée. Cette identification lève en revanche définitivement le doute sur la liaison SEQINO / TRESO2 écartée précédemment comme faux positif : PYTHEAS CAPITAL ADVISORS à Paris et AXE-INNOVATION à Gif-sur-Yvette sont deux sociétés sans lien.",
+   "sourcesEnrichissement": [
+    {
+     "url": "https://www.treso2.com/mentions-legales/",
+     "libelle": "Mentions légales de l'éditeur : RCS Paris 807 708 243, SIREN 807708243, TVA FR42807708243",
+     "dateReleve": "2026-08-22"
+    },
+    {
+     "url": "https://recherche-entreprises.api.gouv.fr/search?q=807708243",
+     "libelle": "API Recherche d'entreprises : identité, siège, effectif et mandataires de PYTHEAS CAPITAL ADVISORS",
+     "dateReleve": "2026-08-22"
+    }
+   ],
+   "trancheEffectif": "20-49",
+   "categorieEntreprise": "PME"
+  },
+  {
+   "nom": "AXONAUT",
+   "siren": "809022643",
+   "raisonSociale": "DIGITICA",
+   "dateCreation": "2015-01-09",
+   "activitePrincipale": "58.29C",
+   "dirigeants": [
+    {
+     "nom": "RICARD NICOLAS",
+     "qualite": "Président de SAS",
+     "type": "personne physique"
+    },
+    {
+     "nom": "MICHEL NICOLAS",
+     "qualite": "Directeur général",
+     "type": "personne physique"
+    }
+   ],
+   "relationCapitalistique": "independante",
+   "confianceIdentite": "haute",
+   "groupeCapitalistique": "Identité établie le 22/08/2026 par les mentions légales du site axonaut.com, qui donnent le RCS de Toulouse 809 022 643. La dénomination légale n'est pas AXONAUT mais **DIGITICA** : Axonaut est la marque du produit. SAS créée le 09/01/2015, code APE 58.29C (édition de logiciels applicatifs), siège 12 rue Louis Renault à Balma (31), dans le ressort du greffe de Toulouse, deux établissements, 20 à 49 salariés (INSEE 2023), catégorie PME, active. Président : Nicolas Ricard ; directeur général : Nicolas Michel. Aucune personne morale au capital, aucun commissaire aux comptes inscrit : société indépendante de fondateurs.",
+   "sourcesEnrichissement": [
+    {
+     "url": "https://www.axonaut.com/mentions-legales",
+     "libelle": "Mentions légales de l'éditeur : RCS Toulouse 809 022 643",
+     "dateReleve": "2026-08-22"
+    },
+    {
+     "url": "https://recherche-entreprises.api.gouv.fr/search?q=809022643",
+     "libelle": "API Recherche d'entreprises : identité, siège, effectif et mandataires de DIGITICA",
+     "dateReleve": "2026-08-22"
+    }
+   ],
+   "trancheEffectif": "20-49",
+   "categorieEntreprise": "PME"
+  },
+  {
+   "nom": "Dougs Facturation gratuite",
+   "siren": "810319517",
+   "raisonSociale": "DOUGS",
+   "dateCreation": "2015-03-04",
+   "activitePrincipale": "69.20Z",
+   "dirigeants": [
+    {
+     "nom": "MAURICE PATRICK",
+     "qualite": "Président de SAS",
+     "type": "personne physique"
+    },
+    {
+     "nom": "RÉL CONSEIL",
+     "qualite": "Commissaire aux comptes titulaire",
+     "type": "personne morale"
+    }
+   ],
+   "relationCapitalistique": "independante",
+   "confianceIdentite": "haute",
+   "groupeCapitalistique": "Identité établie le 22/08/2026 par les mentions légales du site dougs.fr, qui donnent le SIREN 810 319 517 et la TVA FR47810319517. SAS créée le 04/03/2015, siège 7 avenue Adolphe Max à Lyon 5e, trois établissements, **100 à 199 salariés** (INSEE 2023), catégorie PME, active. Point notable : son code APE est **69.20Z, activités comptables** — ce n'est pas un éditeur de logiciels mais un cabinet d'expertise comptable en ligne, dont la plateforme agréée prolonge le service comptable. La lecture concurrentielle en est changée : l'agrément protège une offre comptable, il ne vend pas une plateforme. Président : Patrick Maurice. Commissaire aux comptes : RÉL CONSEIL.",
+   "sourcesEnrichissement": [
+    {
+     "url": "https://www.dougs.fr/mentions-legales/",
+     "libelle": "Mentions légales de l'éditeur : SIREN 810 319 517, TVA FR47810319517",
+     "dateReleve": "2026-08-22"
+    },
+    {
+     "url": "https://recherche-entreprises.api.gouv.fr/search?q=810319517",
+     "libelle": "API Recherche d'entreprises : identité, siège, effectif, code APE 69.20Z et mandataires de DOUGS",
+     "dateReleve": "2026-08-22"
+    }
+   ],
+   "trancheEffectif": "100-199",
+   "categorieEntreprise": "PME"
+  },
+  {
+   "nom": "iPaidThat",
+   "siren": "829997451",
+   "raisonSociale": "IPT TECHNOLOGIE",
+   "dateCreation": "2017-05-01",
+   "activitePrincipale": "62.01Z",
+   "dirigeants": [
+    {
+     "nom": "BPCE",
+     "qualite": "Président de SAS",
+     "type": "personne morale"
+    },
+    {
+     "nom": "PUGA PEREIRA EMMANUEL",
+     "qualite": "Président du conseil d'administration",
+     "type": "personne physique"
+    },
+    {
+     "nom": "CLAEYS SEBASTIEN",
+     "qualite": "Directeur général",
+     "type": "personne physique"
+    },
+    {
+     "nom": "OCALAN JEAN-PIERRE",
+     "qualite": "Directeur général",
+     "type": "personne physique"
+    },
+    {
+     "nom": "BIDARRA KATTIA",
+     "qualite": "Administrateur",
+     "type": "personne physique"
+    }
+   ],
+   "relationCapitalistique": "filiale_de_groupe",
+   "confianceIdentite": "haute",
+   "groupeCapitalistique": "Identité établie le 22/08/2026 par les mentions légales du site ipaidthat.io, qui donnent le RCS de Paris sous le n° 829 997 451. La dénomination légale n'est pas iPaidThat mais **IPT TECHNOLOGIE**. Société créée le 01/05/2017, code APE 62.01Z, siège 198 avenue de France à Paris 13e, deux établissements, 20 à 49 salariés (INSEE 2023), catégorie PME, active. Le registre inscrit **BPCE (SIREN 493 455 042) comme président de SAS** : la plateforme est adossée au groupe bancaire BPCE, ce qui la range parmi les acteurs à distribution bancaire et non parmi les éditeurs indépendants. Une réserve de lecture : le registre fait coexister ce mandat avec un président du conseil d'administration personne physique, Emmanuel Puga Pereira, ce qu'une même forme sociale ne permet pas ; le registre ne résout pas la contradiction et elle n'est donc pas interprétée ici. Autres mandataires : Sébastien Claeys et Jean-Pierre Ocalan, directeurs généraux, Kattia Bidarra, administratrice.",
+   "sourcesEnrichissement": [
+    {
+     "url": "https://ipaidthat.io/mentions-legales/",
+     "libelle": "Mentions légales de l'éditeur : RCS Paris n° 829 997 451",
+     "dateReleve": "2026-08-22"
+    },
+    {
+     "url": "https://recherche-entreprises.api.gouv.fr/search?q=829997451",
+     "libelle": "API Recherche d'entreprises : identité, siège, effectif et mandataires d'IPT TECHNOLOGIE, dont BPCE",
+     "dateReleve": "2026-08-22"
+    }
+   ],
+   "trancheEffectif": "20-49",
+   "categorieEntreprise": "PME"
+  },
+  {
+   "nom": "GROUPE SIGMA",
+   "siren": "872803390",
+   "raisonSociale": "SIGMA INFORMATIQUE",
+   "dateCreation": "1972-01-01",
+   "activitePrincipale": "62.03Z",
+   "dirigeants": [
+    {
+     "nom": "SIG-ALTAÏR",
+     "qualite": "Président de SAS",
+     "type": "personne morale"
+    },
+    {
+     "nom": "CABINET VILAINE ET ASSOCIES",
+     "qualite": "Commissaire aux comptes titulaire",
+     "type": "personne morale"
+    },
+    {
+     "nom": "ROSSIGNOL & ASSOCIES",
+     "qualite": "Commissaire aux comptes titulaire",
+     "type": "personne morale"
+    }
+   ],
+   "relationCapitalistique": "holding_non_transparente",
+   "confianceIdentite": "haute",
+   "groupeCapitalistique": "Groupe Sigma (Sigma Informatique), éditeur et intégrateur français, entreprise à mission. Identité de l'entité établie le 22/08/2026 par les mentions légales du site sigma.fr, qui donnent la TVA intracommunautaire FR39 872 803 390. La dénomination légale est **SIGMA INFORMATIQUE**, sigles SIGMA et SIGMA INFORMATIQUE. Société créée en 1972, code APE 62.03Z (gestion d'installations informatiques), siège ZAC de la Gesvrine, rue Newton à La Chapelle-sur-Erdre (44), **cinq établissements ouverts**, **500 à 999 salariés** (INSEE 2023), catégorie **ETI**, active : de loin la plus grosse entité identifiée dans cette passe, et un acteur historique de l'infogérance de l'Ouest. Son président est une personne morale, **SIG-ALTAÏR** (SIREN 814 458 303), niveau non ouvert à ce stade. Deux commissaires aux comptes titulaires : CABINET VILAINE ET ASSOCIES et ROSSIGNOL & ASSOCIES. Cette identification écarte définitivement l'hypothèse d'un lien avec WiseTech, examinée puis abandonnée comme faux positif.",
+   "sourcesEnrichissement": [
+    {
+     "url": "https://www.sigma.fr/mentions-legales/",
+     "libelle": "Mentions légales de l'éditeur : TVA intracommunautaire FR39 872 803 390",
+     "dateReleve": "2026-08-22"
+    },
+    {
+     "url": "https://recherche-entreprises.api.gouv.fr/search?q=872803390",
+     "libelle": "API Recherche d'entreprises : identité, siège, effectif, catégorie ETI et mandataires de SIGMA INFORMATIQUE",
+     "dateReleve": "2026-08-22"
+    }
+   ],
+   "trancheEffectif": "500-999",
+   "categorieEntreprise": "ETI"
+  },
+  {
+   "nom": "SEQINO",
+   "siren": "897734687",
+   "raisonSociale": "AXE-INNOVATION (A.X.I.)",
+   "dateCreation": "2021-03-01",
+   "activitePrincipale": "62.01Z",
+   "dirigeants": [
+    {
+     "nom": "GARSUAULT PHILIPPE MARIE MICHEL",
+     "qualite": "Président de SAS",
+     "type": "personne physique"
+    },
+    {
+     "nom": "FOUCQUE CHARLES NICOLAS",
+     "qualite": "Directeur général",
+     "type": "personne physique"
+    }
+   ],
+   "confianceIdentite": "haute",
+   "groupeCapitalistique": "Crédit Mutuel Arkéa (groupe coopératif et mutualiste de banque-assurance) depuis 2025. Identité de l'entité établie le 22/08/2026 par les mentions légales du site seqino.com : RCS d'Évry 897 734 687, TVA FR43897734687. La dénomination légale n'est pas SEQINO mais **AXE-INNOVATION**, sigle A.X.I. SAS créée le 01/03/2021, code APE 62.01Z, siège 2 route de la Noue à Gif-sur-Yvette (91), dans le ressort du greffe d'Évry, un établissement, 6 à 9 salariés (INSEE 2023), catégorie PME, active. Président : Philippe Garsuault ; directeur général : Charles Foucque. Point de prudence : le registre n'inscrit aucune personne morale mandataire, de sorte que le rattachement à Crédit Mutuel Arkéa mentionné plus haut n'est pas confirmé par le registre — il peut s'agir d'une participation minoritaire ou d'un partenariat, et la relation capitalistique reste non qualifiée. Cette identification, avec celle de TRESO2, clôt le faux positif de liaison entre les deux fiches.",
+   "sourcesEnrichissement": [
+    {
+     "url": "https://seqino.com/mentions-legales/",
+     "libelle": "Mentions légales de l'éditeur : RCS Évry 897 734 687, TVA FR43897734687",
+     "dateReleve": "2026-08-22"
+    },
+    {
+     "url": "https://recherche-entreprises.api.gouv.fr/search?q=897734687",
+     "libelle": "API Recherche d'entreprises : identité, siège, effectif et mandataires d'AXE-INNOVATION",
+     "dateReleve": "2026-08-22"
+    }
+   ],
+   "trancheEffectif": "6-9",
+   "categorieEntreprise": "PME"
+  },
+  {
+   "nom": "OfficeIn",
+   "siren": "987637923",
+   "raisonSociale": "SAS SYLVESTRE",
+   "dateCreation": "2024-03-14",
+   "activitePrincipale": "62.01Z",
+   "dirigeants": [
+    {
+     "nom": "LABORDERIE WILLIAM",
+     "qualite": "Président de SAS",
+     "type": "personne physique"
+    },
+    {
+     "nom": "NANCY THÉO RÉMI LOUIS",
+     "qualite": "Directeur général",
+     "type": "personne physique"
+    }
+   ],
+   "relationCapitalistique": "independante",
+   "confianceIdentite": "haute",
+   "groupeCapitalistique": "Identité établie le 22/08/2026 par les mentions légales du site officein.fr, qui nomment explicitement « la SAS Sylvestre », immatriculée au RCS de Paris sous le numéro 987 637 923, siège 15 rue Pierre Lescot, TVA FR87987637923. La dénomination légale n'est donc pas OfficeIn mais **SAS SYLVESTRE**. Société créée le **14/03/2024**, code APE 62.01Z, siège Paris 1er, un établissement. L'effectif n'est pas renseigné à l'INSEE et aucune catégorie d'entreprise n'est attribuée : la société est trop récente pour que le registre l'ait classée. Président : William Laborderie ; directeur général : Théo Nancy. Aucune personne morale au capital.",
+   "sourcesEnrichissement": [
+    {
+     "url": "https://officein.fr/mentions-legales/",
+     "libelle": "Mentions légales de l'éditeur : SAS Sylvestre, RCS Paris 987 637 923, TVA FR87987637923",
+     "dateReleve": "2026-08-22"
+    },
+    {
+     "url": "https://recherche-entreprises.api.gouv.fr/search?q=987637923",
+     "libelle": "API Recherche d'entreprises : identité, siège et mandataires de SAS SYLVESTRE",
+     "dateReleve": "2026-08-22"
+    }
+   ]
+  }
+ ]
+}
