@@ -1,0 +1,43 @@
+{
+  "_patch": {
+    "id": "CORRECTIONS-20260822",
+    "chantier": "corrections ciblées",
+    "societe": "AGENA 3000",
+    "auteur": "RFE_WebSite",
+    "dateReleve": "2026-08-22",
+    "nbPlateformes": 1,
+    "note": "Retombée de la fiche DOCPROCESS : le groupe AGENA3000 porte deux immatriculations. La fiche AGENA 3000 est complétée du rachat de DocProcess (17/09/2025) et de sa posture commerciale de grossiste de socle, déjà documentée dans sa propre description mais non qualifiée en facette. Le SIREN n'est volontairement pas renseigné : deux sociétés du groupe sont domiciliées à l'adresse publiée par la DGFiP, AGENA 3000 DATA MANAGEMENT (824561450, traitement de données et hébergement, 13,6 M€ en 2024) et AGENA 3000 ERP (880231014, édition de logiciels). La première est la plus plausible, aucune pièce ne le prouve, et un SIREN faux serait pire qu'un SIREN absent (décision 3). À vérifier sur les mentions légales de la vitrine A3 E-INVOICING."
+  },
+  "plateformes": [
+    {
+      "nom": "AGENA 3000",
+      "analyse360": {
+        "postureCommerciale": {
+          "valeur": "grossiste",
+          "preuve": "La plateforme agréée est annoncée par AGENA3000 lui-même comme disponible « en marque blanche et marque grise » via un programme partenaires ouvert aux éditeurs, intégrateurs et cabinets de conseil, avec liste de partenaires publiée. Le socle peut donc être affronté sans que le nom de son opérateur apparaisse. Depuis le 17/09/2025, le groupe détient en outre une seconde plateforme agréée, DOCPROCESS.",
+          "confiance": "haute"
+        }
+      },
+      "sourcesEnrichissement": [
+        {
+          "champ": "analyse360.postureCommerciale",
+          "source": "Site AGENA3000, programme partenaires de l'offre A3 E-INVOICING (marque blanche et marque grise), constat déjà consigné dans le champ descriptionFiche de la fiche",
+          "dateReleve": "2026-08-22",
+          "confiance": "haute"
+        },
+        {
+          "champ": "groupeCapitalistique",
+          "source": "Communiqué AGENA3000 du 19/09/2025 : acquisition de DocProcess le 17/09/2025, groupe de plus de 250 salariés, présence France, Canada, Tunisie, Pays-Bas et Roumanie, 30 % de l'activité à l'international. Le groupe porte deux plateformes agréées, AGENA 3000 (11/12/2025) et DOCPROCESS (15/12/2025)",
+          "dateReleve": "2026-08-22",
+          "confiance": "haute"
+        },
+        {
+          "champ": "siren",
+          "source": "Non renseigné à dessein : deux entités du groupe sont domiciliées 88 rue du Paradis à Cholet, AGENA 3000 DATA MANAGEMENT (SIREN 824561450, code 63.11Z) et AGENA 3000 ERP (SIREN 880231014, code 58.29C). L'entité porteuse de l'agrément n'est pas établie sur pièces",
+          "dateReleve": "2026-08-22",
+          "confiance": "non_qualifie"
+        }
+      ]
+    }
+  ]
+}

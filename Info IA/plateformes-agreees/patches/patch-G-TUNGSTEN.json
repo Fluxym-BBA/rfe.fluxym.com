@@ -1,0 +1,207 @@
+{
+  "_patch": {
+    "id": "G-TUNGSTEN",
+    "chantier": "G — analyse 360",
+    "societe": "TUNGSTEN AUTOMATION FRANCE",
+    "auteur": "RFE_WebSite",
+    "dateReleve": "2026-08-22",
+    "nbPlateformes": 1,
+    "note": "Onzième fiche 360, premier concurrent frontal de la vague G1d. APPORT PRINCIPAL : variante du motif d'acquisition. Ce n'est pas l'agrément qui a été hérité d'une filiale acquise, c'est l'activité elle-même : le réseau de facturation électronique vient du rachat de Tungsten Corporation (ex-OB10, société cotée à Londres) par Kofax en juin 2022 pour 53,7 millions de livres, tandis que l'agrément est porté par la filiale commerciale française historique, créée en 1997 sous le nom Kofax France et renommée en janvier 2024. Deux changements de dénomination expliquent pourquoi la recherche SIREN par nom commercial échouait. COMPTES DÉPOSÉS EXPLOITÉS : quatre exercices, avec une trajectoire qui se retourne en 2024. NON TROUVÉ dans cette passe : chiffre d'affaires du groupe (détenu par des fonds, non publié ; les estimations d'agrégateurs sont écartées par la règle 11d), effectif exact de l'entité française pour 2024, programme partenaires ou revente de l'offre agréée, avis publics agrégés, volume d'offres d'emploi."
+  },
+  "plateformes": [
+    {
+      "nom": "TUNGSTEN AUTOMATION FRANCE",
+      "analyse360": {
+        "metierPrincipal": "Édition et distribution de logiciels d'automatisation documentaire — capture et lecture automatique de documents, orchestration de processus, gestion d'impression — complétées par un réseau mondial d'échange de factures électroniques issu du rachat de Tungsten Corporation",
+        "activites": [
+          {
+            "libelle": "Capture et lecture automatique de documents, socle historique de la société sous le nom Kofax (Kofax Capture, ReadSoft, TotalAgility)",
+            "poids": "majeur",
+            "source": "tungstenautomation.fr, relevé 22/08/2026 ; objet social déposé de l'entité française"
+          },
+          {
+            "libelle": "Tungsten e-Invoice Network : réseau d'échange de factures électroniques reliant entreprises, fournisseurs et institutions financières, avec veille de conformité annoncée sur plus de 140 pays",
+            "poids": "majeur",
+            "source": "tungstenautomation.fr/products/einvoice-network, relevé 22/08/2026"
+          },
+          {
+            "libelle": "Tungsten InvoiceAgility : offre combinant le réseau et la capture de factures, présentée comme « immatriculée Plateforme Agréée »",
+            "poids": "majeur",
+            "source": "tungstenautomation.fr/products/invoiceagility et /products/e-invoice-connect, relevé 22/08/2026"
+          },
+          {
+            "libelle": "Embarquement des fournisseurs à l'échelle internationale, vendu comme service et mis en avant par un témoignage client industriel",
+            "poids": "significatif",
+            "source": "tungstenautomation.fr, témoignage Schneider Electric"
+          },
+          {
+            "libelle": "Automatisation robotisée des processus, signature électronique, gestion documentaire et gestion d'impression, reste du catalogue hérité de Kofax",
+            "poids": "significatif",
+            "source": "tungstenautomation.fr, catalogue produits"
+          },
+          {
+            "libelle": "Distribution de logiciels et de matériels de numérisation : l'entité française est immatriculée sous un code de commerce de gros (46.51Z)",
+            "poids": "significatif",
+            "source": "Répertoire SIRENE / RNE, SIREN 411088859"
+          }
+        ],
+        "poidsEconomique": {
+          "caGroupe": {
+            "valeur": null,
+            "nature": "non_publie",
+            "exercice": null,
+            "commentaire": "Le groupe n'est pas coté et ne publie pas de chiffre d'affaires depuis son passage sous contrôle de fonds. Les estimations d'agrégateurs sont écartées par la règle 11d."
+          },
+          "caEntiteFrancaise": {
+            "valeur": 27200000,
+            "nature": "comptes_deposes",
+            "exercice": "2024",
+            "commentaire": "Trajectoire des comptes déposés : 24,2 M€ en 2021, 24,2 M€ en 2022, 29,0 M€ en 2023, 27,2 M€ en 2024, soit un recul de 6,2 % sur le dernier exercice. Code d'activité de commerce de gros : une partie de ce chiffre correspond à la revente du catalogue du groupe sur le marché français, et non à une production locale."
+          },
+          "resultatNet": "Perte de 43,5 k€ en 2024, après trois exercices bénéficiaires : 865 k€ en 2021, 772 k€ en 2022, 823 k€ en 2023. Fonds propres de 6,98 M€ au 31/12/2024. Salaires et charges de 8,01 M€, soit 29,5 % du chiffre d'affaires.",
+          "effectifGroupe": "Environ 2 200 salariés annoncés par l'actionnaire au moment de la prise de contrôle",
+          "effectifEntite": "Entre 20 et 49 salariés (tranche INSEE, donnée 2023) ; 35 salariés déclarés aux comptes de l'exercice 2021",
+          "ventilationParActivite": {
+            "disponible": false,
+            "motif": "Le groupe n'est pas coté et ne publie aucune ventilation. L'entité française dépose des comptes agrégés, sans distinction entre capture, réseau de facturation, impression et services. Aucune part attribuable à l'activité de plateforme agréée n'est estimée.",
+            "derniereVentilationConnue": null
+          }
+        },
+        "centralitePA": {
+          "indice": 2,
+          "niveau": "extension_naturelle",
+          "marqueProduitDediee": "Aucune marque dédiée à l'offre agréée française : les marques mises en avant, Tungsten e-Invoice Network et Tungsten InvoiceAgility, sont mondiales et antérieures à l'agrément",
+          "entiteJuridiqueDediee": false,
+          "faisceauIndices": [
+            {
+              "signal": "Le réseau de facturation électronique est un métier constitué, acquis d'une société cotée qui en avait fait son objet unique, avec une veille de conformité annoncée sur plus de 140 pays",
+              "sens": "+",
+              "preuve": "tungstenautomation.fr/products/einvoice-network ; rachat de Tungsten Corporation par Kofax en juin 2022"
+            },
+            {
+              "signal": "Le statut d'immatriculation est affiché sur les pages produit françaises, et l'offre InvoiceAgility est présentée comme « immatriculée Plateforme Agréée »",
+              "sens": "+",
+              "preuve": "tungstenautomation.fr/products/einvoice-network et /products/e-invoice-connect, relevé 22/08/2026"
+            },
+            {
+              "signal": "Une filiale française existe depuis 1997 et porte elle-même l'agrément, avec une équipe locale",
+              "sens": "+",
+              "preuve": "SIREN 411088859, création du 03/02/1997, siège 18 boulevard Malesherbes Paris"
+            },
+            {
+              "signal": "L'agrément s'inscrit dans un catalogue très large — capture, automatisation robotisée, impression, signature, PDF — où la facturation électronique est une ligne parmi d'autres",
+              "sens": "-",
+              "preuve": "tungstenautomation.fr, catalogue produits, relevé 22/08/2026"
+            },
+            {
+              "signal": "Aucune vitrine française dédiée au dispositif réglementaire : pas de page consacrée au calendrier de la réforme, pas de webinaire français identifié dans cette passe",
+              "sens": "-",
+              "preuve": "Relevé du site français le 22/08/2026 : le sujet est traité dans les pages produit, pas dans un parcours dédié"
+            },
+            {
+              "signal": "Le vocabulaire du site français n'est pas actualisé : la page du réseau parle encore de « Plateforme de Dématérialisation Partenaire (PDP) immatriculée » huit mois après le changement d'appellation officielle",
+              "sens": "-",
+              "preuve": "tungstenautomation.fr/products/einvoice-network, relevé 22/08/2026"
+            },
+            {
+              "signal": "L'entité française est immatriculée sous un code de commerce de gros de matériel informatique, et son objet déposé est la distribution : elle est une filiale de vente, pas un centre de production de l'offre",
+              "sens": "-",
+              "preuve": "Répertoire SIRENE / RNE : code APE 46.51Z"
+            },
+            {
+              "signal": "La France est un mandat parmi plus de cent quarante juridictions suivies : le groupe conserverait son objet sans agrément français",
+              "sens": "-",
+              "preuve": "tungstenautomation.fr, page de conformité pays"
+            }
+          ],
+          "lecture": "Deux lectures se superposent, et la règle de périmètre s'applique. Au niveau du groupe, l'échange de factures est un métier réel, acheté cher à une société cotée qui n'avait pas d'autre objet, et servi par une veille de conformité mondiale : lue ainsi, l'activité mériterait un indice élevé. Au niveau du mandat français, les preuves d'investissement sont beaucoup plus minces que chez les acteurs comparables du référentiel : pas de vitrine dédiée au dispositif, pas de marque française, pas de parcours de réforme, et une page produit qui utilisait encore en août 2026 l'appellation « PDP » abandonnée depuis janvier. À cela s'ajoute la nature de l'entité immatriculée : une filiale de distribution, immatriculée sous un code de commerce de gros, dont la mission est de revendre en France un catalogue conçu ailleurs. L'indice 2 traduit cet écart entre un métier légitime et un mandat français traité comme une case de conformité à cocher dans un catalogue. Il sera relevé sans hésiter si une vitrine française, une équipe ou des références nommées sur l'offre agréée apparaissent.",
+          "confiance": "moyenne"
+        },
+        "postureCommerciale": {
+          "valeur": "base_installee",
+          "preuve": "Lecture Fluxym par défaut d'éléments contraires : le statut agréé est présenté à l'intérieur des pages produit existantes, sans vitrine de conquête ni parcours dédié, et le seul témoignage mis en avant sur le réseau est celui d'un grand compte industriel déjà client. Aucun programme partenaires, aucune offre en marque blanche ou grise portant sur l'offre agréée n'a été trouvée sur le site français au 22/08/2026. Réserve explicite : le modèle historique de Kofax reposait largement sur un réseau de revendeurs, et l'entité française est immatriculée en commerce de gros ; si un programme partenaires portant sur l'offre agréée est documenté, la posture devra basculer en canal indirect.",
+          "confiance": "faible"
+        },
+        "referencesClients": {
+          "nbCiteesSurSite": null,
+          "parSecteur": {
+            "industrie": [
+              "Schneider Electric"
+            ]
+          },
+          "grandsComptes": [
+            "Schneider Electric"
+          ],
+          "referencesPAConfirmees": [],
+          "source": "tungstenautomation.fr, page du réseau de facturation électronique, témoignage d'un responsable des décaissements de Schneider Electric portant sur le choix du réseau et les services d'embarquement des fournisseurs, relevé 22/08/2026. Ce témoignage porte sur le réseau mondial, pas sur l'offre agréée française : aucune référence de l'activité agréée n'est confirmée à ce stade."
+        },
+        "reputation": {
+          "volumeAvis": null,
+          "synthese": "Aucun relevé d'avis clients agrégés dans cette passe. Les produits historiques du catalogue sont abondamment commentés sur les places d'avis logiciels, mais ces avis portent sur la capture documentaire, pas sur l'offre agréée : les reprendre ici induirait en erreur.",
+          "confiance": "faible"
+        },
+        "capaciteDeFrappe": {
+          "actionnaires": [
+            "Clearlake Capital Group et TA Associates, actionnaires majoritaires depuis juillet 2022, rachat effectué auprès de Thoma Bravo",
+            "Société non cotée depuis 2017"
+          ],
+          "typeActionnaire": "fonds_pe",
+          "financementRecent": "Passage sous contrôle de Clearlake Capital et TA Associates en juillet 2022. La direction du groupe a évoqué publiquement une sortie possible des actionnaires à l'horizon 2027 dans la presse financière spécialisée. Aucun montant de transaction confirmé par le groupe lui-même n'est retenu ici.",
+          "acquisitions": [
+            "Tungsten Corporation, société cotée à Londres opérant le réseau de facturation électronique ex-OB10, rachetée en juin 2022 pour 53,7 millions de livres : c'est de là que vient l'activité agréée",
+            "Ephesoft, lecture automatique de documents, 2022",
+            "Printix, gestion d'impression en nuage, 2021",
+            "Changement de dénomination du groupe de Kofax en Tungsten Automation le 16 janvier 2024, et de la filiale française dans la foulée"
+          ],
+          "modeleTarifaire": "Sur devis. Le site avance un coût moyen de traitement de 2 dollars par facture, comparé à une moyenne mondiale annoncée de 10,89 dollars : argument de coût unitaire, non un tarif publié.",
+          "tarifPublie": false,
+          "offreGratuite": false
+        },
+        "lectureConcurrentielle": "Tungsten Automation est un concurrent frontal sur l'automatisation du poste fournisseurs des grandes organisations, et son angle est celui du réseau : capacité à embarquer des milliers de fournisseurs dans de nombreux pays, veille de conformité multi-juridictions, capture de tous les formats entrants. Sur un dossier international à forte volumétrie fournisseurs, c'est un argumentaire solide, et le nom peut apparaître tardivement dans une consultation parce qu'il est souvent porté par la direction des systèmes d'information ou par un site étranger du groupe client plutôt que par la direction financière française. Trois points d'attention pour une soutenance. D'abord, l'écart entre le discours mondial et l'investissement français observable : pas de vitrine consacrée au dispositif, appellation réglementaire non actualisée en août 2026, aucune référence nommée sur l'offre agréée. Ensuite, la trajectoire de l'entité française : après trois exercices bénéficiaires, 2024 se referme sur un chiffre d'affaires en recul de 6,2 % et une perte, sur une structure immatriculée en commerce de gros dont la mission est de revendre un catalogue conçu ailleurs. Enfin, l'horizon actionnarial : un groupe détenu par deux fonds depuis 2022, dont la direction évoque une sortie vers 2027, est un groupe dont la feuille de route produit et l'organisation peuvent être rebattues au milieu d'un déploiement de facturation — question légitime à poser, sans en faire un procès. Point de méthode utile au référentiel : ici l'activité agréée a été achetée, pas construite, et elle a été achetée à une société cotée dont c'était l'unique métier. C'est une variante du motif déjà relevé sur GEP et Tradeshift, et elle change la question à poser : non pas « qui porte l'agrément ? » mais « les équipes qui faisaient tourner le réseau sont-elles encore là ? ».",
+        "droitDeReponse": {
+          "signale": false,
+          "date": null,
+          "objet": null
+        }
+      },
+      "sourcesEnrichissement": [
+        {
+          "champ": "analyse360.poidsEconomique",
+          "source": "Comptes sociaux déposés de TUNGSTEN AUTOMATION FRANCE, SIREN 411088859, exercices 2021 à 2024, republiés par le registre national des entreprises et consultés le 22/08/2026 : chiffre d'affaires 24,2 M€ / 24,2 M€ / 29,0 M€ / 27,2 M€, résultat net 865 k€ / 772 k€ / 823 k€ / −43,5 k€, fonds propres 6,98 M€, salaires et charges 8,01 M€, capital social 193 528,50 €",
+          "dateReleve": "2026-08-22",
+          "confiance": "haute"
+        },
+        {
+          "champ": "analyse360.activites",
+          "source": "https://www.tungstenautomation.fr/products/einvoice-network et https://www.tungstenautomation.fr/products/e-invoice-connect : réseau d'échange, InvoiceAgility présentée comme immatriculée Plateforme Agréée, veille de conformité annoncée sur plus de 140 pays, coût moyen annoncé de 2 dollars par facture",
+          "dateReleve": "2026-08-22",
+          "confiance": "haute"
+        },
+        {
+          "champ": "analyse360.capaciteDeFrappe",
+          "source": "Communiqués et presse financière : prise de contrôle par Clearlake Capital et TA Associates en juillet 2022 auprès de Thoma Bravo ; rachat de Tungsten Corporation (ex-OB10) par Kofax en juin 2022 pour 53,7 M£ ; rachats d'Ephesoft en 2022 et de Printix en 2021 ; changement de dénomination du groupe le 16/01/2024 ; effectif groupe d'environ 2 200 salariés annoncé par l'actionnaire ; horizon de sortie évoqué par la direction à 2027",
+          "dateReleve": "2026-08-22",
+          "confiance": "moyenne"
+        },
+        {
+          "champ": "analyse360.referencesClients",
+          "source": "https://www.tungstenautomation.fr/products/einvoice-network : témoignage nominatif d'un responsable des décaissements de Schneider Electric sur le choix du réseau et les services d'embarquement des fournisseurs",
+          "dateReleve": "2026-08-22",
+          "confiance": "haute"
+        },
+        {
+          "champ": "analyse360.postureCommerciale",
+          "source": "Lecture Fluxym : absence de programme partenaires, de marque blanche ou de vitrine de conquête sur l'offre agréée relevée sur le site français ; statut agréé présenté à l'intérieur des pages produit",
+          "dateReleve": "2026-08-22",
+          "confiance": "faible"
+        },
+        {
+          "champ": "analyse360.centralitePA.indice",
+          "source": "Lecture Fluxym sur faisceau d'indices, méthode décrite dans Info IA/plateformes-agreees/cartographie-360-modele.md, règles 11a, 11d et 11f du plan de travail",
+          "dateReleve": "2026-08-22",
+          "confiance": "moyenne"
+        }
+      ]
+    }
+  ]
+}
