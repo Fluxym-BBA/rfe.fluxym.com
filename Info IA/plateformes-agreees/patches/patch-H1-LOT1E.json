@@ -1,0 +1,78 @@
+{
+ "_patch": {
+  "id": "H1-LOT1E",
+  "chantier": "H1 — poids économique et rattachement capitalistique",
+  "societe": "Lot 1E : CEGID (sommet du montage via CLAUDIUS FRANCE), FLOWIE (via LEGORREC CONSULTING), EDICOM France",
+  "auteur": "RFE_WebSite",
+  "dateReleve": "2026-08-22",
+  "nbPlateformes": 3,
+  "note": "Cinquième lot du chantier H1. LES DEUX CHAINES OUVERTES AU LOT 1D SONT MAINTENANT COMPLETES. (1) Sommet du montage CEGID : CLAUDIUS FRANCE (SIREN 821096039), SAS de Lyon au capital de 9,86 M€, code 70.10Z, deux salariés, 755 M€ de fonds propres, conseil composé d'administrateurs représentant les investisseurs et non de dirigeants opérationnels. Fait nouveau et invisible sur l'entité agréée : le montage se désendette par le haut, les dettes financières passant de 365 M€ en 2022 à 197 M€ en 2025 tandis que les fonds propres montent de 562 à 755 M€ et que le résultat atteint +75,4 M€ (règle 43). L'identité des fonds actionnaires n'est pas établie au registre et n'est donc pas publiée (règle 42). (2) FLOWIE est entièrement cartographiée : LEGORREC CONSULTING (SIREN 920781333), SASU au capital de 1 000 € présidée par Rémi Legorrec, complète UP TO TECH, EURL au capital de 100 € gérée par Yann Ravel-Sibillot. Les TROIS sociétés déposent leurs comptes sous déclaration de confidentialité : l'opacité est systématique sur les trois niveaux, et les deux personnes physiques sont désormais nommées. (3) EDICOM France, dénomination légale EDICOM, est le dossier financièrement le plus sain du chantier : 19,9 M€ en 2025 avec une croissance qui ACCELERE quatre exercices de suite (+11,3, +14,2, +15,1, +16,9 %), 20,3 % de marge nette, aucune dette, 25,9 M€ de trésorerie pour 27,2 M€ de fonds propres. Mais des salaires à 5,2 % du chiffre d'affaires et une activité déclarée de représentation commerciale établissent qu'il s'agit d'une filiale de distribution : sa rentabilité mesure un canal commercial, pas une plateforme (règle 44). NON TROUVE : identité des fonds actionnaires de CLAUDIUS FRANCE ; comptes du groupe espagnol EDICOM et de EDICOM CAPITAL SL ; toute donnée financière sur UP TO TECH et LEGORREC CONSULTING, légalement inaccessible."
+ },
+ "plateformes": [
+  {
+   "nom": "CEGID",
+   "groupeCapitalistique": "Chaîne de contrôle à trois étages, désormais remontée jusqu'à son sommet français. (1) L'entité immatriculée CEGID (SIREN 410218010) est la société d'exploitation : 664 M€ de chiffre d'affaires en 2024, 2 540 salariés, 748 M€ de dettes financières, présidée par une personne morale. (2) CEGID GROUP (SIREN 327888111), SASU de Lyon au capital de 9 515 423,25 €, code 70.10Z, zéro salarié, 57 établissements : 3,71 M€ d'honoraires seulement, mais 824 M€ de dettes financières pour 313 M€ de fonds propres et 8 k€ de trésorerie. (3) CLAUDIUS FRANCE (SIREN 821096039), SAS de Lyon au capital de 9 860 279 €, code 70.10Z, deux salariés, dont l'objet déclaré est l'acquisition et la gestion de participations : c'est le sommet français du montage, avec 755 M€ de fonds propres en 2025. Son conseil n'est pas composé de dirigeants opérationnels mais d'administrateurs représentant les investisseurs — Bruno Vaffier président depuis le 01/05/2025, et cinq administrateurs dont deux en fonction depuis 2018 et 2021 ; le commissaire aux comptes titulaire est Forvis Mazars. L'identité des fonds actionnaires n'est pas établie au registre et n'est donc pas publiée. AVERTISSEMENT : les dettes financières des trois étages — 748 M€, 824 M€ et 197 M€ — ne se cumulent pas, elles se recoupent au sein du montage.",
+   "analyse360": {
+    "poidsEconomique": {
+     "resultatNet": "Trois lectures à distinguer, sans jamais les additionner. (1) L'entité d'exploitation CEGID est solidement bénéficiaire : 107 M€ (2021), 119 M€ (2022), 124 M€ (2023), 120 M€ (2024), pour une marge nette de 18,1 %, un EBITDA de 285 M€ soit 43 % du chiffre d'affaires, et 1,26 Md€ de fonds propres. Elle porte 748 M€ de dettes financières, en hausse depuis 581 M€ en 2021, pour 1,26 M€ de trésorerie, soit un levier de 2,6 fois l'EBITDA. Salaires et charges de 233 M€, soit 35 % du chiffre d'affaires. (2) La holding intermédiaire CEGID GROUP porte 824 M€ de dettes pour 313 M€ de fonds propres. (3) LE FAIT NOUVEAU EST AU SOMMET : chez CLAUDIUS FRANCE, les dettes financières reculent de 365 M€ (2022) à 369, puis 304 et 197 M€ (2025), tandis que les fonds propres progressent de 562 à 755 M€ et que le résultat net atteint +65,5 M€ puis +75,4 M€ sur les deux derniers exercices. Le montage se désendette donc nettement par le haut — information totalement invisible sur la fiche de l'entité agréée."
+    }
+   },
+   "sourcesEnrichissement": [
+    {
+     "url": "https://www.pappers.fr/entreprise/claudius-france-821096039",
+     "libelle": "Fiche registre et comptes sociaux de CLAUDIUS FRANCE (RCS Lyon), sommet français du montage, republiés par Pappers",
+     "dateReleve": "2026-08-22"
+    }
+   ]
+  },
+  {
+   "nom": "FLOWIE",
+   "groupeCapitalistique": "Société indépendante, créée le 31/10/2022 — et non en 2021 comme l'indiquait la fiche — siège 229 rue Saint-Honoré à Paris 1er, capital porté à 502 620,81 € par augmentations successives (novembre 2023, octobre 2024, août 2026). Les deux mandataires sociaux sont des personnes morales, et les deux étages sont désormais ouverts. (1) UP TO TECH (SIREN 912494937), présidente depuis le 14/11/2022 : EURL au capital de 100 €, sans salarié, domiciliée à la même adresse que FLOWIE, gérée par Yann Ravel-Sibillot, né en septembre 1992. (2) LEGORREC CONSULTING (SIREN 920781333), directrice générale depuis le 13/01/2023 : SASU au capital de 1 000 €, 60 avenue Claude Vellefaux à Paris 10e, présidée par Rémi Legorrec, né en juillet 1991. Ni l'une ni l'autre ne dirige d'autre entreprise que FLOWIE, et aucune ne publie d'information financière. FAIT REMARQUABLE : les trois sociétés déposent leurs comptes accompagnés d'une déclaration de confidentialité au titre de l'article L. 232-25 du code de commerce — FLOWIE pour 2024, UP TO TECH pour 2022 et 2023, LEGORREC CONSULTING pour 2023 et 2024. L'opacité est donc systématique et cohérente sur les trois niveaux. Les deux personnes physiques sont désormais nommées, et aucun actionnaire de contrôle extérieur n'est identifié.",
+   "sourcesEnrichissement": [
+    {
+     "url": "https://www.pappers.fr/entreprise/legorrec-consulting-920781333",
+     "libelle": "Fiche registre, dépôts de comptes et annonces BODACC de LEGORREC CONSULTING (RCS Paris), republiés par Pappers",
+     "dateReleve": "2026-08-22"
+    }
+   ]
+  },
+  {
+   "nom": "EDICOM France",
+   "groupeCapitalistique": "Dénomination légale EDICOM, et non EDICOM France comme dans la liste DGFiP. SASU créée le 02/12/2002, siège 54 rue de Londres à Paris 8e, capital de 564 000 €, six établissements, numéro LEI attribué. Le président est une personne morale espagnole, EDICOM CAPITAL SL, en fonction depuis le 15/12/2022, ce qui confirme le rattachement au groupe espagnol déjà identifié par la liaison d'immatriculations avec EDICOM Group. Deux personnes physiques disposent du pouvoir d'engager la société depuis le 25/11/2020, Luis Galceran Gadea et Albin Castel ; le précédent directeur général, Vicente Vilata Tamarit, a quitté ses fonctions le 26/05/2026. Deux commissaires aux comptes en place depuis 2014.",
+   "analyse360": {
+    "poidsEconomique": {
+     "caEntiteFrancaise": {
+      "montantMEUR": 19.9,
+      "exercice": "2025",
+      "nature": "comptes_deposes",
+      "commentaire": "Trajectoire des comptes déposés, remarquable par sa régularité : 12,9 M€ (2022), 14,8 M€ (2023), 17,0 M€ (2024), 19,9 M€ (2025). Le taux de croissance ne fléchit pas, il accélère : +11,3 %, +14,2 %, +15,1 %, +16,9 % sur quatre exercices consécutifs. C'est le seul dossier du chantier H1 dont la croissance s'accélère quatre années de suite. Chiffre d'affaires à l'export de 5,5 M€ en 2025, soit 27,6 % du total.",
+      "source": "Trajectoire des comptes déposés, remarquable par sa régularité : 12,9 M€ (2022), 14,8 M€ (2023), 17,0 M€ (2024), 19,9 M€ (2025). Le taux de croissance ne fléchit pas, il accélère : +11,3 %, +14,2 %, +15,1 %, +16,9 % sur quatre exercices consécutifs. C'est le seul dossier du chantier H1 dont la croissance s'accélère quatre années de suite. Chiffre d'affaires à l'export de 5,5 M€ en 2025, soit 27,6 % du total.",
+      "dateReleve": "2026-08-22"
+     },
+     "caGroupe": {
+      "montantMEUR": null,
+      "exercice": null,
+      "nature": "non_publie",
+      "commentaire": "Les comptes du groupe espagnol EDICOM et de la société de tête EDICOM CAPITAL SL n'ont pas été exploités à ce relevé ; le droit espagnol ne restitue pas les mêmes agrégats.",
+      "source": "Les comptes du groupe espagnol EDICOM et de la société de tête EDICOM CAPITAL SL n'ont pas été exploités à ce relevé ; le droit espagnol ne restitue pas les mêmes agrégats.",
+      "dateReleve": "2026-08-22"
+     },
+     "resultatNet": "Le dossier financièrement le plus sain du chantier H1. Résultat net de 2,71 M€ (2022), 2,66 M€ (2023), 3,12 M€ (2024), 4,04 M€ (2025), soit une marge nette de 20,3 % et un EBITDA de 25,6 %. Aucune dette financière : le ratio d'endettement est négatif (−0,9), l'autonomie financière atteint 94,4 %, et la trésorerie de 25,9 M€ est du même ordre que les fonds propres de 27,2 M€. Capacité d'autofinancement de 4,37 M€, soit 22 % du chiffre d'affaires, et délai de paiement clients maîtrisé à 49 jours. POINT DE LECTURE ESSENTIEL : les salaires et charges ne représentent que 5,2 % du chiffre d'affaires (1,03 M€ pour 19,9 M€) et la valeur ajoutée 31 %. L'activité déclarée au registre est explicite — vente de solutions EDI et représentation commerciale sur la région parisienne. Cette entité est donc une filiale de distribution : la production est assurée par le groupe et facturée en interne, la France encaisse la marge de revente. Sa rentabilité mesure la performance d'un canal commercial, pas celle d'une plateforme.",
+     "effectifEntite": "Tranche INSEE de 10 à 19 salariés (donnée 2022) ; effectif déclaré nul aux comptes 2023, ce qui est cohérent avec une structure de représentation commerciale.",
+     "ventilationParActivite": {
+      "disponible": false,
+      "motif": "Aucune ventilation publiée ; le chiffre d'affaires de l'entité française est celui d'une activité de revente, non décomposée par ligne.",
+      "derniereVentilationConnue": null
+     }
+    }
+   },
+   "sourcesEnrichissement": [
+    {
+     "url": "https://www.pappers.fr/entreprise/edicom-france-444658181",
+     "libelle": "Fiche registre EDICOM (RCS Paris) et comptes sociaux déposés, republiés par Pappers",
+     "dateReleve": "2026-08-22"
+    }
+   ]
+  }
+ ]
+}
