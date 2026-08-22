@@ -1,0 +1,131 @@
+{
+ "_patch": {
+  "id": "H1-LOT1F",
+  "chantier": "H1 — poids économique et rattachement capitalistique",
+  "societe": "Lot 1F : ACCENTURE, PITNEY BOWES, IOPOLE",
+  "auteur": "RFE_WebSite",
+  "dateReleve": "2026-08-22",
+  "nbPlateformes": 3,
+  "note": "Sixième lot du chantier H1. TROIS PROFILS INEDITS DANS LE REFERENTIEL. (1) ACCENTURE est de très loin le premier acteur par la taille : 2,18 Md€ de chiffre d'affaires sur l'exercice clos au 31/08/2025 et entre 5 000 et 9 999 salariés — la fiche annonçait 2 000 à 4 999, tranche corrigée. Mais c'est un intégrateur : il cumule le rôle de conseil et celui de plateforme agréée, ce qui en fait un concurrent d'un type nouveau, capable d'être à la fois prescripteur et fournisseur dans le même projet (règle 45). Sa croissance se retourne : −5,0 % en 2025 après +27,7 % en 2022, tandis que le résultat progresse de 22 %. Marge nette de 2,8 % seulement, profil de métier de main-d'oeuvre. (2) PITNEY BOWES est le seul dossier dont le chiffre d'affaires recule chaque année — 74,1 puis 72,1, 71,3 et 68,4 M€ — tout en dégageant 16,2 % de marge nette, 28,6 % d'EBITDA et 40,1 % de rentabilité sur fonds propres. Un déclin structurel n'empêche donc pas une forte rentabilité, et l'agrément s'adosse ici à une base installée héritée du courrier, en érosion lente (règle 46). (3) IOPOLE n'a déposé qu'un seul exercice, 2023, pour 119 k€ de chiffre d'affaires : c'est le plus petit montant documenté du chantier, très éloigné de la visibilité de cet acteur dans l'écosystème, avec deux exercices manquants et trois augmentations de capital depuis. POINT DE METHODE : chez ACCENTURE comme chez PITNEY BOWES, une trésorerie très faible coexiste avec une rentabilité élevée et aucune dette ; c'est une centralisation de trésorerie au niveau du groupe, lisible sur le besoin en fonds de roulement hors exploitation, et non une fragilité (règle 47). NON TROUVE : comptes consolidés des groupes Accenture et Pitney Bowes ; périmètre de PITNEY BOWES HOLDING SNC (SIREN 399354505) ; comptes 2024 et 2025 d'IOPOLE ; effectif d'IOPOLE ; actionnariat d'IOPOLE."
+ },
+ "plateformes": [
+  {
+   "nom": "ACCENTURE",
+   "trancheEffectif": "5000-9999",
+   "groupeCapitalistique": "Groupe Accenture — cabinet de conseil et d'intégration international, « operating in 120 countries » selon la page produit. L'entité immatriculée est la société française : SASU au capital de 18 161 069 €, siège 118 avenue de France à Paris 13e, 41 établissements, numéro LEI attribué, présidée par Olivier Girard depuis le 23/10/2018, exercice clos au 31 août, commissaire aux comptes KPMG depuis 2005. Elle dirige elle-même plusieurs filiales françaises du groupe. Signal de rattachement au trésor du groupe : un besoin en fonds de roulement hors exploitation de −419 M€, caractéristique d'une centralisation de trésorerie.",
+   "relationCapitalistique": "filiale_de_groupe",
+   "analyse360": {
+    "poidsEconomique": {
+     "caEntiteFrancaise": {
+      "montantMEUR": 2180,
+      "exercice": "2025",
+      "nature": "comptes_deposes",
+      "commentaire": "C'est de très loin le premier chiffre d'affaires du référentiel : 2,00 Md€ (2022), 2,27 Md€ (2023), 2,29 Md€ (2024), 2,18 Md€ (2025), exercice clos au 31 août. Le retournement est net : après +27,7 % puis +13,5 %, la croissance tombe à +0,9 % en 2024 puis à −5,0 % en 2025 — premier recul après trois exercices de hausse. Chiffre d'affaires à l'export nul : l'entité facture le marché français. Attention à la comparaison : ce montant est celui d'une activité de conseil et d'intégration, pas d'une activité de plateforme.",
+      "source": "C'est de très loin le premier chiffre d'affaires du référentiel : 2,00 Md€ (2022), 2,27 Md€ (2023), 2,29 Md€ (2024), 2,18 Md€ (2025), exercice clos au 31 août. Le retournement est net : après +27,7 % puis +13,5 %, la croissance tombe à +0,9 % en 2024 puis à −5,0 % en 2025 — premier recul après trois exercices de hausse. Chiffre d'affaires à l'export nul : l'entité facture le marché français. Attention à la comparaison : ce montant est celui d'une activité de conseil et d'intégration, pas d'une activité de plateforme.",
+      "dateReleve": "2026-08-22"
+     },
+     "caGroupe": {
+      "montantMEUR": null,
+      "exercice": null,
+      "nature": "non_publie",
+      "commentaire": "Les comptes consolidés du groupe Accenture, société cotée, n'ont pas été exploités à ce relevé. Aucune part attribuable à l'activité agréée n'est estimée.",
+      "source": "Les comptes consolidés du groupe Accenture, société cotée, n'ont pas été exploités à ce relevé. Aucune part attribuable à l'activité agréée n'est estimée.",
+      "dateReleve": "2026-08-22"
+     },
+     "resultatNet": "Rentabilité faible en pourcentage mais massive en valeur, profil typique d'un métier de main-d'œuvre : résultat net de 48,3 M€ (2022), 42,2 M€ (2023), 50,4 M€ (2024), 61,5 M€ (2025), soit une marge nette de 2,8 % seulement, pour un EBITDA de 125 M€ (5,7 %) et une rentabilité sur fonds propres de 15,7 %. Les salaires et charges atteignent 739 M€, soit 33,9 % du chiffre d'affaires, et la valeur ajoutée 44,2 %. Fait notable : la marge brute est de 100 %, aucune dette financière, mais seulement 172 k€ de trésorerie pour 391 M€ de fonds propres — la trésorerie est centralisée par le groupe, ce que confirme un besoin en fonds de roulement hors exploitation de −419 M€. Il ne faut donc pas lire cette trésorerie comme une fragilité. Point remarquable : le résultat progresse de 22 % en 2025 alors que le chiffre d'affaires recule de 5 %.",
+     "effectifEntite": "Entre 5 000 et 9 999 salariés (donnée INSEE 2023). La fiche portait auparavant la tranche 2 000-4 999 : corrigée au relevé. C'est le premier employeur du référentiel.",
+     "ventilationParActivite": {
+      "disponible": false,
+      "motif": "Aucune ventilation publiée par l'entité française. La part de l'activité de plateforme agréée dans un chiffre d'affaires de conseil et d'intégration de 2,18 Md€ n'est pas estimée.",
+      "derniereVentilationConnue": null
+     }
+    }
+   },
+   "sourcesEnrichissement": [
+    {
+     "url": "https://www.pappers.fr/entreprise/accenture-732075312",
+     "libelle": "Fiche registre ACCENTURE (RCS Paris) et comptes sociaux déposés, republiés par Pappers",
+     "dateReleve": "2026-08-22"
+    }
+   ]
+  },
+  {
+   "nom": "PITNEY BOWES",
+   "groupeCapitalistique": "Entité française du groupe international Pitney Bowes (courrier, expédition, externalisation de la production documentaire). SAS au capital de 12 233 534,81 €, siège 5 rue Francis de Pressensé à Saint-Denis, 48 établissements. Le président est une personne morale, PITNEY BOWES HOLDING SNC (SIREN 399354505), en fonction depuis le 07/08/2015 ; Antoine Watissee est directeur général depuis le 02/02/2022. Commissaire aux comptes Forvis Mazars depuis 2022, après PricewaterhouseCoopers. Le code d'activité déclaré est 77.33Z, location et location-bail de machines de bureau, et l'activité inscrite au registre porte sur les équipements commerciaux, l'automatisation, la technologie et les services : l'origine du métier est le courrier et l'affranchissement, non la facturation électronique.",
+   "relationCapitalistique": "filiale_de_groupe",
+   "analyse360": {
+    "poidsEconomique": {
+     "caEntiteFrancaise": {
+      "montantMEUR": 68.4,
+      "exercice": "2024",
+      "nature": "comptes_deposes",
+      "commentaire": "Déclin continu sur quatre exercices, sans exception : 74,1 M€ (2021), 72,1 M€ (2022), 71,3 M€ (2023), 68,4 M€ (2024), soit −6,7 %, −2,6 %, −1,2 % puis −4,1 %. C'est le seul dossier du chantier H1 dont le chiffre d'affaires recule chaque année. Chiffre d'affaires à l'export de 325 k€ seulement.",
+      "source": "Déclin continu sur quatre exercices, sans exception : 74,1 M€ (2021), 72,1 M€ (2022), 71,3 M€ (2023), 68,4 M€ (2024), soit −6,7 %, −2,6 %, −1,2 % puis −4,1 %. C'est le seul dossier du chantier H1 dont le chiffre d'affaires recule chaque année. Chiffre d'affaires à l'export de 325 k€ seulement.",
+      "dateReleve": "2026-08-22"
+     },
+     "caGroupe": {
+      "montantMEUR": null,
+      "exercice": null,
+      "nature": "non_publie",
+      "commentaire": "Les comptes du groupe américain Pitney Bowes n'ont pas été exploités à ce relevé.",
+      "source": "Les comptes du groupe américain Pitney Bowes n'ont pas été exploités à ce relevé.",
+      "dateReleve": "2026-08-22"
+     },
+     "resultatNet": "Le contraste est le point remarquable du dossier : un chiffre d'affaires qui décline chaque année, et une rentabilité élevée qui progresse. Résultat net de 8,71 M€ (2021), 7,76 M€ (2022), 11,2 M€ (2023), 11,1 M€ (2024), soit une marge nette de 16,2 %, un EBITDA de 28,6 % et une rentabilité sur fonds propres de 40,1 %. Aucune dette financière, 27,7 M€ de fonds propres, une capacité d'autofinancement de 18,1 M€ soit 26,4 % du chiffre d'affaires. La trésorerie, en revanche, fond de 9,23 M€ (2021) à 753 k€ (2024) : avec une telle capacité d'autofinancement et aucune dette, cela traduit une remontée du cash vers le groupe, non une difficulté. Lecture d'ensemble : une base installée héritée du courrier, très profitable et en érosion lente, sur laquelle l'agrément vient s'adosser.",
+     "effectifEntite": "300 salariés déclarés aux comptes 2021 ; tranche INSEE de 250 à 499 salariés (donnée 2022).",
+     "ventilationParActivite": {
+      "disponible": false,
+      "motif": "Aucune ventilation publiée entre l'affranchissement, la logistique d'expédition et la dématérialisation. Aucune part attribuable à l'activité agréée n'est estimée.",
+      "derniereVentilationConnue": null
+     }
+    }
+   },
+   "sourcesEnrichissement": [
+    {
+     "url": "https://www.pappers.fr/entreprise/pitney-bowes-562046235",
+     "libelle": "Fiche registre PITNEY BOWES (RCS Bobigny) et comptes sociaux déposés, republiés par Pappers",
+     "dateReleve": "2026-08-22"
+    }
+   ]
+  },
+  {
+   "nom": "IOPOLE",
+   "groupeCapitalistique": "SAS créée le 08/12/2022, siège 145 impasse John Locke à Pérols (Hérault), capital porté à 84 090 €. Quatre mandataires sociaux, tous personnes physiques : Dorian Keiflin président et Nicolas Saudemont directeur général depuis le 16/05/2023, Gabriel Pala et Yoann Keiflin directeurs généraux depuis le 19/12/2022. Deux modifications de capital ont été enregistrées le 27/08/2025 puis les 01/07 et 24/07/2026, avec certificat du dépositaire : la société se recapitalise à l'approche de l'échéance. Les données de bénéficiaires effectifs ne sont pas accessibles ; aucun actionnaire de contrôle extérieur n'est identifié.",
+   "relationCapitalistique": "independante",
+   "analyse360": {
+    "poidsEconomique": {
+     "caEntiteFrancaise": {
+      "montantMEUR": 0.119,
+      "exercice": "2023",
+      "nature": "comptes_deposes",
+      "commentaire": "Un seul exercice déposé, 2023, pour un chiffre d'affaires de 119 k€. Les exercices 2024 et 2025 n'ont pas été déposés. C'est le plus petit chiffre d'affaires documenté du chantier H1, et l'écart avec la visibilité de cet acteur dans l'écosystème de la réforme est considérable — sans qu'on puisse en déduire quoi que ce soit sur sa taille actuelle : deux exercices manquent, et la société a augmenté son capital à trois reprises depuis.",
+      "source": "Un seul exercice déposé, 2023, pour un chiffre d'affaires de 119 k€. Les exercices 2024 et 2025 n'ont pas été déposés. C'est le plus petit chiffre d'affaires documenté du chantier H1, et l'écart avec la visibilité de cet acteur dans l'écosystème de la réforme est considérable — sans qu'on puisse en déduire quoi que ce soit sur sa taille actuelle : deux exercices manquent, et la société a augmenté son capital à trois reprises depuis.",
+      "dateReleve": "2026-08-22"
+     },
+     "caGroupe": {
+      "montantMEUR": null,
+      "exercice": null,
+      "nature": "sans_objet",
+      "commentaire": "Société indépendante, sans périmètre de groupe.",
+      "source": "Société indépendante, sans périmètre de groupe.",
+      "dateReleve": "2026-08-22"
+     },
+     "resultatNet": "Sur le seul exercice déposé (2023) : résultat net de +7,33 k€ pour 119 k€ de chiffre d'affaires, un EBITDA de 2,14 k€, 67,3 k€ de fonds propres, 43,6 k€ de trésorerie et 53 k€ de salaires et charges. Ordres de grandeur d'une société en amorçage, à sa première année pleine. Aucune donnée postérieure à 2023 n'est opposable.",
+     "effectifEntite": "Aucun effectif publié à l'INSEE ; 53 k€ de salaires et charges aux comptes 2023.",
+     "ventilationParActivite": {
+      "disponible": false,
+      "motif": "Un seul exercice déposé, sans ventilation.",
+      "derniereVentilationConnue": null
+     }
+    }
+   },
+   "sourcesEnrichissement": [
+    {
+     "url": "https://www.pappers.fr/entreprise/iopole-922304308",
+     "libelle": "Fiche registre IOPOLE (RCS Montpellier), comptes 2023 et dépôts d'actes, republiés par Pappers",
+     "dateReleve": "2026-08-22"
+    }
+   ]
+  }
+ ]
+}
