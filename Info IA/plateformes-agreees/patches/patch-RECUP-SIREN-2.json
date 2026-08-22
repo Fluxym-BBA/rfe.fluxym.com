@@ -1,0 +1,396 @@
+{
+ "_patch": {
+  "id": "RECUP-SIREN-2",
+  "chantier": "Identité — récupération de SIREN, deuxième passe (sites résistants)",
+  "auteur": "RFE_WebSite",
+  "dateReleve": "2026-08-22",
+  "nbPlateformes": 9,
+  "note": "Deuxième passe de récupération de SIREN, sur les 9 sites qui avaient résisté à la passe du 22/08 (matin). Route suivie : CGV, informations légales enfouies et politique de traitement des données, plutôt que la seule URL /mentions-legales. **7 fiches ancrées sur 9.** 6 dénominations légales sur 7 diffèrent du nom déclaré à la DGFiP : AXWAY SOFTWARE est 74SOFTWARE, MY FITECO est FITECO, MyKinexo PDP est NEXCER, SUPER PDP est SUPER G, Effinum by SPEE est SOLUTIONS PROFESSIONNELLES D’ÉCHANGES ÉLECTRONIQUES, jefacture.com est EXPERT-COMPTABLE MÉDIA ASSOCIATION, VosFactures est FACTUALI. Toutes les concordances d’adresse sont caractère pour caractère avec le siège INSEE, et les ressorts de greffe sont cohérents. Deux poids économiques majeurs entrent au référentiel : 74SOFTWARE, 461,9 M€ de chiffre d’affaires et 39,3 M€ de résultat net en 2024 ; FITECO, 282,1 M€ et 18,4 M€ en 2025. Deux entités déposent un chiffre d’affaires nul (NEXCER, SPEE). Trois particularités : le porteur de jefacture.com est une **association loi 1901** et non une société commerciale ; la mention légale d’Axway affiche une dénomination périmée alors que le SIREN reste exact ; SPEE est une société anonyme à conseil d’administration de huit membres, sans effectif renseigné et sans chiffre d’affaires. 2 fiches restent sans SIREN et c’est un résultat : ICD International ne publie aucune page légale, NEOTIMO renvoie une erreur 500 à chaque requête. Aucun rapprochement sur le nom n’a été tenté sur ces deux cas. Aucune adresse n’est réécrite : les fiches portent déjà l’adresse déclarée à la DGFiP, qui prime (règle 18) ; les sièges INSEE relevés sont consignés dans les preuves de sources. Le champ `natureEntite`, d’abord envisagé pour porter la forme associative de jefacture.com, a été retiré du patch : c’est une facette à valeurs contraintes qui qualifie la logique de positionnement, pas la forme juridique (règle 23). Le fait est porté par `groupeCapitalistique`."
+ },
+ "plateformes": [
+  {
+   "nom": "AXWAY SOFTWARE",
+   "raisonSociale": "74SOFTWARE",
+   "siren": "433977980",
+   "dateCreation": "2000-12-18",
+   "trancheEffectif": "250-499",
+   "categorieEntreprise": "ETI",
+   "activitePrincipale": "58.29A",
+   "confianceIdentite": "haute",
+   "dirigeants": [
+    {
+     "nom": "DONOVAN PATRICK MARTIN",
+     "qualite": "Directeur Général",
+     "type": "personne physique"
+    },
+    {
+     "nom": "BIERRY ERIC",
+     "qualite": "Directeur général délégué",
+     "type": "personne physique"
+    },
+    {
+     "nom": "PASQUIER PIERRE LOUIS",
+     "qualite": "Administrateur",
+     "type": "personne physique"
+    },
+    {
+     "nom": "FORVIS MAZARS SA",
+     "qualite": "Commissaire aux comptes titulaire",
+     "type": "personne morale"
+    },
+    {
+     "nom": "AUDITEURS ET CONSEILS ASSOCIES",
+     "qualite": "Commissaire aux comptes titulaire",
+     "type": "personne morale"
+    }
+   ],
+   "analyse360": {
+    "poidsEconomique": {
+     "caEntiteFrancaise": {
+      "montantMEUR": 461.878,
+      "exercice": "2024",
+      "nature": "comptes_deposes",
+      "commentaire": "Comptes déposés par l’entité immatriculée 74SOFTWARE (SIREN 433 977 980), toutes activités confondues — intégration de flux, API management, MFT, e-invoicing. La part de l’activité de plateforme agréée n’y est pas isolée et n’est pas estimée. La société est cotée : le chiffre consolidé du groupe est à lire dans le rapport annuel, il n’est pas repris ici.",
+      "source": "https://recherche-entreprises.api.gouv.fr/search?q=433977980",
+      "dateReleve": "2026-08-22"
+     },
+     "resultatNet": 39251000,
+     "effectifEntite": "250 à 499 salariés (millésime 2023, INSEE), 5 établissements ouverts"
+    }
+   },
+   "sourcesEnrichissement": [
+    {
+     "champ": "siren",
+     "source": "https://www.axway.com/fr/mentions-legales",
+     "dateReleve": "2026-08-22",
+     "confiance": "haute",
+     "preuve": "Mentions légales de l’éditeur : « Axway Software, au capital de 42 450 762 €, arrêté au 31 décembre 2019 [...] immatriculée au RCS d’Annecy sous le numéro 433977980 », TVA FR 49 433 977 980, siège PAE — Les Glaisins, 74940 Annecy-le-Vieux."
+    },
+    {
+     "champ": "raisonSociale",
+     "source": "https://recherche-entreprises.api.gouv.fr/search?q=433977980",
+     "dateReleve": "2026-08-22",
+     "confiance": "haute",
+     "preuve": "Fiche ouverte du répertoire SIRENE : le SIREN 433 977 980 porte désormais la dénomination **74SOFTWARE**, siège PAE Les Glaisins, 3 rue du Pré Faucon, 74000 Annecy. La mention légale du site est antérieure au changement de dénomination (capital arrêté au 31/12/2019) : le SIREN reste exact, la dénomination qu’elle affiche est périmée. ETI, code APE 58.29A, 250 à 499 salariés, 5 établissements. Comptes 2024 : chiffre d’affaires de 461,9 M€ et résultat net de 39,3 M€."
+    }
+   ]
+  },
+  {
+   "nom": "MY FITECO",
+   "raisonSociale": "FITECO",
+   "siren": "557150067",
+   "dateCreation": "1971-01-01",
+   "trancheEffectif": "2000-4999",
+   "categorieEntreprise": "ETI",
+   "activitePrincipale": "69.20Z",
+   "confianceIdentite": "haute",
+   "dirigeants": [
+    {
+     "nom": "OLLIVIER YANNICK LOIC PATRICK",
+     "qualite": "Président de SAS",
+     "type": "personne physique"
+    },
+    {
+     "nom": "VANDERGUCHT JEAN-MARIE",
+     "qualite": "Directeur Général",
+     "type": "personne physique"
+    },
+    {
+     "nom": "BAKER TILLY STREGO",
+     "qualite": "Commissaire aux comptes titulaire",
+     "type": "personne morale"
+    },
+    {
+     "nom": "FIBA",
+     "qualite": "Commissaire aux comptes titulaire",
+     "type": "personne morale"
+    }
+   ],
+   "analyse360": {
+    "poidsEconomique": {
+     "caEntiteFrancaise": {
+      "montantMEUR": 282.119,
+      "exercice": "2025",
+      "nature": "comptes_deposes",
+      "commentaire": "Comptes déposés par l’entité immatriculée FITECO (SIREN 557 150 067), cabinet d’expertise comptable de 178 établissements : le chiffre d’affaires mesure l’activité comptable du réseau, pas la plateforme MY FITECO, dont la part n’est pas isolée ni estimée.",
+      "source": "https://recherche-entreprises.api.gouv.fr/search?q=557150067",
+      "dateReleve": "2026-08-22"
+     },
+     "resultatNet": 18390000,
+     "effectifEntite": "2 000 à 4 999 salariés (millésime 2023, INSEE), 178 établissements ouverts"
+    }
+   },
+   "sourcesEnrichissement": [
+    {
+     "champ": "siren",
+     "source": "https://www.fiteco.com/mentions-legales",
+     "dateReleve": "2026-08-22",
+     "confiance": "haute",
+     "preuve": "Mentions légales de l’éditeur : « FITECO, société par actions simplifiée au capital de 8 613 930 €, immatriculée au RCS de LAVAL sous le numéro 557 150 067 », siège Parc Technopole, rue Albert Einstein, 53810 Changé. Adresse concordante caractère pour caractère avec le siège INSEE ; ressort de Laval cohérent avec un siège en Mayenne (règle 61)."
+    },
+    {
+     "champ": "analyse360.poidsEconomique",
+     "source": "https://recherche-entreprises.api.gouv.fr/search?q=557150067",
+     "dateReleve": "2026-08-22",
+     "confiance": "haute",
+     "preuve": "Fiche ouverte du répertoire SIRENE : FITECO, catégorie ETI, code APE 69.20Z, 2 000 à 4 999 salariés (millésime 2023), 178 établissements ouverts, président Yannick Ollivier. Comptes 2025 : chiffre d’affaires de 282,1 M€ et résultat net de 18,4 M€."
+    }
+   ]
+  },
+  {
+   "nom": "MyKinexo PDP",
+   "raisonSociale": "NEXCER",
+   "siren": "834979387",
+   "dateCreation": "2018-01-08",
+   "categorieEntreprise": "PME",
+   "activitePrincipale": "58.29C",
+   "confianceIdentite": "haute",
+   "dirigeants": [
+    {
+     "nom": "JFD CONSEIL",
+     "qualite": "Président de SAS",
+     "type": "personne morale"
+    },
+    {
+     "nom": "PASSILLY ROMAIN NICOLAS",
+     "qualite": "Directeur Général",
+     "type": "personne physique"
+    }
+   ],
+   "analyse360": {
+    "poidsEconomique": {
+     "caEntiteFrancaise": {
+      "montantMEUR": 0.0,
+      "exercice": "2023",
+      "nature": "comptes_deposes",
+      "commentaire": "Comptes déposés par l’entité immatriculée NEXCER (SIREN 834 979 387) : la source ouverte restitue un chiffre d’affaires nul pour l’exercice 2023, avec un résultat net négatif. Aucune tranche d’effectif n’est renseignée au répertoire.",
+      "source": "https://recherche-entreprises.api.gouv.fr/search?q=834979387",
+      "dateReleve": "2026-08-22"
+     },
+     "resultatNet": -662728
+    }
+   },
+   "groupeCapitalistique": "L’entité immatriculée est NEXCER (SIREN 834 979 387), qui exploite la marque MyKinexo. Son président inscrit au registre est la personne morale JFD CONSEIL ; la direction générale est assurée par Romain Passilly. Étage supérieur non ouvert à ce stade : le rattachement s’arrête au dernier niveau documenté (règle 42).",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siren",
+     "source": "https://www.kinexo.fr/mentions-legales/",
+     "dateReleve": "2026-08-22",
+     "confiance": "haute",
+     "preuve": "Mentions légales de l’éditeur : « Le site kinexo.fr est édité par la société Nexcer SAS [...] 10 rue Alain Gerbault, 35000 Rennes, immatriculée au RCS de Rennes sous le numéro 834 979 387 ». Adresse concordante caractère pour caractère avec le siège INSEE ; ressort de Rennes cohérent (règle 61)."
+    },
+    {
+     "champ": "analyse360.poidsEconomique",
+     "source": "https://recherche-entreprises.api.gouv.fr/search?q=834979387",
+     "dateReleve": "2026-08-22",
+     "confiance": "haute",
+     "preuve": "Fiche ouverte du répertoire SIRENE : NEXCER, PME, code APE 58.29C, créée le 08/01/2018, un seul établissement, tranche d’effectif non renseignée. Comptes 2023 : chiffre d’affaires nul, résultat net de −662,7 k€."
+    }
+   ]
+  },
+  {
+   "nom": "SUPER PDP",
+   "raisonSociale": "SUPER G",
+   "siren": "853322915",
+   "dateCreation": "2019-09-01",
+   "trancheEffectif": "3-5",
+   "categorieEntreprise": "PME",
+   "activitePrincipale": "62.01Z",
+   "confianceIdentite": "haute",
+   "dirigeants": [
+    {
+     "nom": "OTTENWAELTER MARTIN",
+     "qualite": "Président de SAS",
+     "type": "personne physique"
+    },
+    {
+     "nom": "PONTET TRISTAN PHILIPPE",
+     "qualite": "Directeur Général",
+     "type": "personne physique"
+    }
+   ],
+   "sourcesEnrichissement": [
+    {
+     "champ": "siren",
+     "source": "https://www.superpdp.tech/legal/16",
+     "dateReleve": "2026-08-22",
+     "confiance": "haute",
+     "preuve": "Informations légales de l’éditeur : « SUPER G, SAS au capital de 50 000 €, dont le siège social est situé 6 rue de la Dhuis, 75020 Paris, immatriculée au RCS de Paris sous le numéro 853 322 915 ». Adresse concordante caractère pour caractère avec le siège INSEE ; ressort de Paris cohérent (règle 61)."
+    },
+    {
+     "champ": "trancheEffectif",
+     "source": "https://recherche-entreprises.api.gouv.fr/search?q=853322915",
+     "dateReleve": "2026-08-22",
+     "confiance": "haute",
+     "preuve": "Fiche ouverte du répertoire SIRENE : SUPER G, PME, code APE 62.01Z, créée le 01/09/2019, 3 à 5 salariés (millésime 2023), un seul établissement. Aucun compte n’est restitué par la source ouverte."
+    }
+   ]
+  },
+  {
+   "nom": "Effinum by SPEE",
+   "raisonSociale": "SOLUTIONS PROFESSIONNELLES D'ÉCHANGES ÉLECTRONIQUES (SPEE)",
+   "siren": "904987815",
+   "dateCreation": "2021-11-01",
+   "categorieEntreprise": "PME",
+   "activitePrincipale": "62.01Z",
+   "confianceIdentite": "haute",
+   "dirigeants": [
+    {
+     "nom": "MARTEAU PHILIPPE",
+     "qualite": "Président du conseil d’administration",
+     "type": "personne physique"
+    },
+    {
+     "nom": "BARBAUX SANDRINE",
+     "qualite": "Administrateur",
+     "type": "personne physique"
+    },
+    {
+     "nom": "BEURIENNE LAURENT",
+     "qualite": "Administrateur",
+     "type": "personne physique"
+    },
+    {
+     "nom": "EYMARD (CHANELLIÈRE) MURIEL",
+     "qualite": "Administrateur",
+     "type": "personne physique"
+    },
+    {
+     "nom": "DENYS GREGORY",
+     "qualite": "Administrateur",
+     "type": "personne physique"
+    },
+    {
+     "nom": "GOUTTEQUILLET YVAN",
+     "qualite": "Administrateur",
+     "type": "personne physique"
+    },
+    {
+     "nom": "PETIT (LEBOUCHER) AGNES",
+     "qualite": "Administrateur",
+     "type": "personne physique"
+    },
+    {
+     "nom": "ROULLEAUX GERARD",
+     "qualite": "Administrateur",
+     "type": "personne physique"
+    }
+   ],
+   "analyse360": {
+    "poidsEconomique": {
+     "caEntiteFrancaise": {
+      "montantMEUR": 0.0,
+      "exercice": "2022",
+      "nature": "comptes_deposes",
+      "commentaire": "Comptes déposés par l’entité immatriculée SPEE (SIREN 904 987 815) : la source ouverte restitue un chiffre d’affaires nul pour l’exercice 2022, avec un résultat net négatif. Aucune tranche d’effectif n’est renseignée au répertoire.",
+      "source": "https://recherche-entreprises.api.gouv.fr/search?q=904987815",
+      "dateReleve": "2026-08-22"
+     },
+     "resultatNet": -138892
+    }
+   },
+   "groupeCapitalistique": "SPEE. L’entité immatriculée est SOLUTIONS PROFESSIONNELLES D’ÉCHANGES ÉLECTRONIQUES, sigle SPEE (SIREN 904 987 815), créée le 01/11/2021. Fait relevé et non interprété : c’est une société anonyme à conseil d’administration de huit membres, présidé par Philippe Marteau, pour une entité d’un seul établissement sans effectif renseigné et sans chiffre d’affaires — une structure de gouvernance de type collectif dont l’actionnariat n’est pas publié sur le site.",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siren",
+     "source": "https://www.effinum.fr/mentions-legales",
+     "dateReleve": "2026-08-22",
+     "confiance": "haute",
+     "preuve": "Mentions légales de l’éditeur : « Le site effinum.fr est édité par SPEE — 18 rue de l’Armorique, 75015 Paris », représenté par Philippe Marteau, Président de SPEE. Double concordance avec le répertoire : adresse du siège caractère pour caractère et qualité du président du conseil d’administration."
+    },
+    {
+     "champ": "dirigeants",
+     "source": "https://recherche-entreprises.api.gouv.fr/search?q=904987815",
+     "dateReleve": "2026-08-22",
+     "confiance": "haute",
+     "preuve": "Fiche ouverte du répertoire SIRENE : SOLUTIONS PROFESSIONNELLES D’ÉCHANGES ÉLECTRONIQUES (SPEE), PME, code APE 62.01Z, un établissement, tranche d’effectif non renseignée, conseil d’administration de huit membres, président du conseil Philippe Marteau. Comptes 2022 : chiffre d’affaires nul, résultat net de −138,9 k€."
+    }
+   ]
+  },
+  {
+   "nom": "jefacture.com",
+   "raisonSociale": "EXPERT-COMPTABLE MÉDIA ASSOCIATION (ECMA)",
+   "siren": "403156540",
+   "dateCreation": "1995-05-15",
+   "trancheEffectif": "20-49",
+   "categorieEntreprise": "PME",
+   "activitePrincipale": "63.12Z",
+   "confianceIdentite": "haute",
+   "groupeCapitalistique": "ECMA, éditeur des services numériques de la profession comptable (jedeclare.com, jesignexpert.com, jefacture.com, conformexpert.com, jedataviz.com) ; taille du groupe non publiée sur le site. Le porteur de l’immatriculation n’est pas une société commerciale mais une **association loi 1901** : EXPERT-COMPTABLE MÉDIA ASSOCIATION (ECMA), SIREN 403 156 540, nature juridique 9220 au répertoire, créée le 15/05/1995, code APE 63.12Z (portails Internet), 20 à 49 salariés (millésime 2023), un seul établissement. Elle édite également jedeclare.com. Aucun capital social, aucun dirigeant inscrit au répertoire des entreprises et aucun compte déposé au greffe : les états financiers d’une association ne suivent pas le régime de dépôt des sociétés commerciales. Les mentions légales désignent Damien Charrier comme président et directeur de la publication.",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siren",
+     "source": "https://www.jedeclare.com/mentions-legales",
+     "dateReleve": "2026-08-22",
+     "confiance": "haute",
+     "preuve": "Mentions légales de l’éditeur : « Expert-Comptable Média Association (ECMA), association loi 1901, immeuble Le Jour, 200-216 rue Raymond Losserand, 75680 PARIS CEDEX 14, SIREN 403 156 540 », représentée par Damien Charrier, Président. Coquille relevée sur la même page : le paragraphe 2.1 cite un « SIREN 403 154 540 » qui ne correspond à aucune entité du répertoire — le numéro retenu est celui dont l’adresse concorde."
+    },
+    {
+     "champ": "natureEntite",
+     "source": "https://recherche-entreprises.api.gouv.fr/search?q=403156540",
+     "dateReleve": "2026-08-22",
+     "confiance": "haute",
+     "preuve": "Fiche ouverte du répertoire SIRENE : EXPERT-COMPTABLE MEDIA ASSOCIATION, sigle ECMASSOCIATION, nature juridique 9220 (association déclarée), siège 200-216 rue Raymond Losserand 75014 Paris, code APE 63.12Z, 20 à 49 salariés, aucun dirigeant et aucun compte restitués."
+    }
+   ]
+  },
+  {
+   "nom": "VosFactures",
+   "raisonSociale": "FACTUALI",
+   "siren": "880286232",
+   "dateCreation": "2019-11-18",
+   "trancheEffectif": "1-2",
+   "categorieEntreprise": "PME",
+   "activitePrincipale": "63.11Z",
+   "confianceIdentite": "haute",
+   "dirigeants": [
+    {
+     "nom": "GHELFI JUSTINE CHLOE",
+     "qualite": "Président de SAS",
+     "type": "personne physique"
+    }
+   ],
+   "groupeCapitalistique": "L’entité qui traite les données du service est FACTUALI SAS (SIREN 880 286 232), créée le 18/11/2019, siège à Nice, code APE 63.11Z, 1 à 2 salariés (millésime 2023), présidente Justine Ghelfi. Aucun compte n’est restitué par la source ouverte. Indice technique relevé et non interprété : le site français et le site polonais fakturownia.pl servent leurs ressources depuis le même hébergeur d’actifs (fs.siteor.com), avec des espaces de noms distincts. Le lien capitalistique avec l’éditeur polonais n’est pas établi et n’est donc pas publié (règle 29).",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siren",
+     "source": "https://vosfactures.fr/traitement-donnees",
+     "dateReleve": "2026-08-22",
+     "confiance": "haute",
+     "preuve": "Aucune page de mentions légales ni de CGV n’est accessible sur le domaine — toutes les URL testées renvoient la même page de consentement. La page de traitement des données nomme l’entité responsable : « Vos données sont traitées, dans le respect de la réglementation en vigueur, par FACTUALI SAS ». Le répertoire ne contient qu’une seule entité de cette dénomination."
+    },
+    {
+     "champ": "dirigeants",
+     "source": "https://recherche-entreprises.api.gouv.fr/search?q=FACTUALI",
+     "dateReleve": "2026-08-22",
+     "confiance": "haute",
+     "preuve": "Recherche au répertoire SIRENE sur la dénomination nommée par l’éditeur : un seul résultat, FACTUALI (SIREN 880 286 232), PME, code APE 63.11Z (traitement de données, hébergement), créée le 18/11/2019, un établissement, 1 à 2 salariés, présidente Justine Chloé Ghelfi."
+    }
+   ]
+  },
+  {
+   "nom": "ICD International",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siren",
+     "source": "https://icdint.fr/",
+     "dateReleve": "2026-08-22",
+     "confiance": "non_qualifie",
+     "preuve": "Aucune page légale publiée sur le domaine : /mentions-legales, /legal, /politique-de-confidentialite, /contact et /nous-connaitre ne restituent aucune identité d’éditeur, et aucune adresse postale n’est publiée sur le site. Le SIREN reste à établir : il n’est pas déduit du nom commercial (règle 24)."
+    }
+   ]
+  },
+  {
+   "nom": "NEOTIMO",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siren",
+     "source": "https://neotimo.com/",
+     "dateReleve": "2026-08-22",
+     "confiance": "non_qualifie",
+     "preuve": "Site inaccessible à toute lecture automatisée : la racine et les chemins /mentions-legales, /legal et www.neotimo.com renvoient une erreur serveur 500 à chaque requête du 22/08/2026, et l’archive publique disponible ne contient pas de page légale. Le SIREN reste à établir : il n’est pas déduit du nom commercial (règle 24)."
+    }
+   ]
+  }
+ ]
+}
