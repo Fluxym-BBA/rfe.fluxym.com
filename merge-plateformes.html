@@ -94,6 +94,7 @@
             let touched = 0;
             let ecrasements = 0;
             let rejets = 0;
+            let suppressions = 0;
 
             const load = async () => {
                 try {
@@ -174,8 +175,27 @@
                         return;
                     }
                     const champs = [];
+                    if (Array.isArray(p._supprimerChamps)) {
+                        p._supprimerChamps.forEach((chemin) => {
+                            const parts = String(chemin).split('.');
+                            let noeud = cible;
+                            for (let i = 0; i < parts.length - 1; i += 1) {
+                                if (!estObjet(noeud[parts[i]])) { noeud = null; break; }
+                                noeud = noeud[parts[i]];
+                            }
+                            const feuille = parts[parts.length - 1];
+                            if (noeud && Object.prototype.hasOwnProperty.call(noeud, feuille)) {
+                                say(`      ⊘ ${esc(chemin)} supprimé : « ${esc(JSON.stringify(noeud[feuille]))} »`, 'merge-warn');
+                                delete noeud[feuille];
+                                suppressions += 1;
+                                champs.push(`−${chemin}`);
+                            } else {
+                                say(`      · ${esc(chemin)} déjà absent, rien à supprimer`, 'merge-ok');
+                            }
+                        });
+                    }
                     Object.entries(p).forEach(([k, v]) => {
-                        if (k === 'nom') return;
+                        if (k === 'nom' || k === '_supprimerChamps') return;
                         if (CUMULATIFS.includes(k) && Array.isArray(v)) {
                             const existant = Array.isArray(cible[k]) ? cible[k] : [];
                             const vus = new Set(existant.map((e) => JSON.stringify(e)));
@@ -255,7 +275,7 @@
                 Object.entries(base._meta.couverture).forEach(([k, v]) => {
                     if (typeof v !== 'object') say(`   ${k} : ${v}`);
                 });
-                say(`\n${touched} enregistrement(s) modifié(s), ${ecrasements} écrasement(s) de valeur existante, ${rejets} ligne(s) rejetée(s).`, ecrasements || rejets ? 'merge-warn' : 'merge-ok');
+                say(`\n${touched} enregistrement(s) modifié(s), ${ecrasements} écrasement(s) de valeur existante, ${suppressions} champ(s) supprimé(s), ${rejets} ligne(s) rejetée(s).`, ecrasements || rejets || suppressions ? 'merge-warn' : 'merge-ok');
                 if (rejets) say(`Relis les noms rejetés : la clé de fusion « nom » doit être identique caractère pour caractère.`, 'merge-err');
                 say(`Fichier prêt.`, 'merge-ok');
                 document.getElementById('dl').disabled = false;

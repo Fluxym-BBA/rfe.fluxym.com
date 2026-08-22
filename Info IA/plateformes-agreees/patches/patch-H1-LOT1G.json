@@ -1,0 +1,470 @@
+{
+ "_patch": {
+  "id": "H1-LOT1G",
+  "chantier": "H1 — poids économique et rattachement capitalistique",
+  "societe": "Lot 1G : AVALARA, AXELOR, CLEARTAX, DOCOON, DOCOON IMMO / FREEDZ, EdiEyes Vision Care, ESALINK, ESI, OPEN BEE, TAXERA, WEPROC",
+  "auteur": "RFE_WebSite",
+  "dateReleve": "2026-08-22",
+  "nbPlateformes": 11,
+  "note": "Septième et dernier lot du chantier H1 : il solde la cible prioritaire, les plateformes agréées adressant les ETI et grands comptes et disposant d'un SIREN. Onze fiches. DEUX RÉSULTATS SORTENT DU CADRE Habituel. (1) Deux SIREN portes au référentiel sont de purs faux positifs : celui de CLEARTAX désigne une société de conseil radiée depuis le 19/06/2019, celui d'ESI un salon de coiffure lyonnais immatriculé le 23/01/2026. Tous deux sont retirés au moyen du nouveau mécanisme _supprimerChamps ajouté au fusionneur : un identifiant faux fait afficher les dirigeants et les comptes d'un tiers, c'est pire qu'une donnée absente. (2) OPEN BEE est en procédure collective, ainsi que sa société de tête DOXSA : redressement judiciaire ouvert le 15/09/2025 et clôture le 05/08/2026, puis jugement du 3 août 2026 prononçant l'ouverture d'une procédure de redressement judiciaire. C'est un fait public, sourcé et date, publie comme tel et sans pronostic. AUTRES ENSEIGNEMENTS. AVALARA FRANCE réalise 241 k EUR de chiffre d'affaires dont 95 % à l'export avec des fonds propres négatifs depuis quatre ans : une entité de refacturation, et son premier président inscrit au RCS était INPOSIA SOLUTIONS GMBH, ce qui documente une reprise d'entité plutôt qu'une création pour la réforme. Le groupe DOCOON est le contre-exemple parfait de la lecture par entité : les deux sociétés immatriculées sont rentables (10,6 M EUR à 4,0 % de marge, 4,64 M EUR à 23,5 %), tandis que la holding DOCOON INVEST porté 17,6 M EUR de dettes financières pour 900 k EUR de produits. AXELOR, 50 à 99 salariés, ne restitue pas son chiffre d'affaires. TAXERA et WEPROC n'ont jamais dépose de comptes ; EDIEYES dépose sous confidentialité partielle et son dernier exercice à quatre ans ; ESALINK n'a pas dépose les deux exercices qui précèdent l'echeance. Sur onze plateformes de la cible prioritaire, quatre seulement livrent un chiffre d'affaires récent et fiable."
+ },
+ "plateformes": [
+  {
+   "nom": "AVALARA",
+   "groupeCapitalistique": "L'entité immatriculée est AVALARA FRANCE, SAS créée le 15/10/2015, siège à Paris, capital 315 000 EUR, code APE 63.11Z (traitement de données). L'historique des mandats au RCS est instructif : le premier président inscrit est INPOSIA SOLUTIONS GMBH, société allemande. L'entité française n'a donc pas été créée pour la réforme : c'est l'ancienne antenne française d'Inposia, éditeur allemand de conformité fiscale, passée sous l'enseigne Avalara. Depuis, la présidence a changé quatre fois en deux ans : Alesia Pinney, puis Carmel Ann Comiskey, puis Gareth Rowlands (25/11/2025), puis Alexander Baulf (DAU du 06/06/2026). Les deux directeurs généraux nommés le 17/06/2026, Kseniia Proshina et Nicholas Quant, remplacent Pierre Dorier ; le dernier dirigeant résident en France (Carlos Mercuriali) a démissionné au 01/01/2026. Commissaire aux comptes : IFEC. Aucun bénéficiaire effectif accessible : le rattachement au groupe Avalara se lit dans la chaîne des mandats, pas dans une déclaration de détention publique.",
+   "relationCapitalistique": "filiale_de_groupe",
+   "analyse360": {
+    "poidsEconomique": {
+     "caEntiteFrancaise": {
+      "montantMEUR": 0.241,
+      "exercice": "2024",
+      "nature": "comptes_deposes",
+      "commentaire": "241 k EUR en 2024, après 99,6 k EUR, 126 k EUR puis 76,3 k EUR sur les trois exercices précédents. La croissance affichée de +216 % ne dit rien d'un marché : elle porte sur des montants d'ordre artisanal. Surtout, 229 k EUR de ce chiffre d'affaires, soit 95 %, sont réalisés à l'export, et les salaires représentent 83,5 % du chiffre d'affaires. Le profil est celui d'une entité qui refacture des prestations à son groupe, pas celui d'une structure qui vend une plateforme sur le marché français.",
+      "source": "Comptes sociaux AVALARA FRANCE 2021 à 2024 (SIREN 814 232 740), greffe de Paris, republiés par Pappers ; relevé du 22/08/2026.",
+      "dateReleve": "2026-08-22"
+     },
+     "caGroupe": {
+      "montantMEUR": null,
+      "exercice": null,
+      "nature": "non_publie",
+      "commentaire": "Avalara Inc. n'est plus cotée et ne publie plus de comptes consolidés. Aucun chiffre d'affaires groupe opposable n'a été établi dans cette passe : il ne sera pas estimé.",
+      "source": "Absence de publication constatée le 22/08/2026.",
+      "dateReleve": "2026-08-22"
+     },
+     "resultatNet": "Quatre exercices de pertes : -101 k EUR, -105 k EUR, -183 k EUR puis -32,8 k EUR en 2024. Les fonds propres sont négatifs sur toute la période, à -79,9 k EUR fin 2024, pour un capital social de 315 000 EUR. Trésorerie 111 k EUR, dettes financières 199 k EUR. Une entité structurellement déficitaire et à fonds propres négatifs, ce qui n'a aucune signification prudentielle dans un groupe : elle est financée par sa maison mère.",
+     "effectifEntite": "Entre 1 et 2 salariés (INSEE, donnée 2022). Aucun dirigeant résident en France depuis le 01/01/2026.",
+     "ventilationParActivite": {
+      "disponible": false,
+      "motif": "Comptes sociaux d'une entité de refacturation : aucune ventilation par activité n'y figure, et le groupe ne publie plus.",
+      "derniereVentilationConnue": null
+     }
+    }
+   },
+   "sourcesEnrichissement": [
+    {
+     "url": "https://www.pappers.fr/entreprise/814232740",
+     "libelle": "Fiche registre AVALARA FRANCE (RCS Paris), comptes 2021-2024, historique des mandats et annonces BODACC, republiés par Pappers",
+     "dateReleve": "2026-08-22"
+    }
+   ]
+  },
+  {
+   "nom": "AXELOR",
+   "groupeCapitalistique": "SAS créée le 21/02/2005, siège à Champs-sur-Marne, capital 151 720 EUR porté par augmentations successives (39 300 EUR souscrits en numéraire le 05/05/2022), code APE 58.29C (édition de logiciels applicatifs). Présidence stable : Laith Jubair, fondateur. Deux directeurs généraux délégués ont été nommés récemment, Geoffrey Dubaux (direction de projet et R&D) et Dominique Sevesque (direction commerciale) : la société se dote d'un étage de direction opérationnelle. Les données de bénéficiaires effectifs ne sont pas accessibles et aucun actionnaire de contrôle n'est identifie ; le quadruplement des fonds propres en un exercice (1,34 puis 6,16 M EUR) est compatible avec une entrée d'investisseurs au capital, sans qu'aucun document ne permette de la nommer. Le rattachement reste donc non déterminable.",
+   "relationCapitalistique": "non_determinable",
+   "analyse360": {
+    "poidsEconomique": {
+     "caEntiteFrancaise": {
+      "montantMEUR": null,
+      "exercice": "2022",
+      "nature": "non_publie",
+      "commentaire": "Axelor dépose ses comptes mais n'y restitue pas son chiffre d'affaires : la seule indication disponible est la fourchette « inférieur à 12 M EUR » pour l'exercice 2022. Ce n'est pas une lacune de collecte, c'est un choix de présentation. Les grandeurs de bilan sont en revanche publiées et donnent l'ordre de grandeur : 6,79 M EUR de fonds propres fin 2023, 2,21 M EUR de trésorerie, 314 k EUR de dettes financières seulement.",
+      "source": "Comptes sociaux AXELOR 2020 à 2023 (SIREN 480 879 733), greffe de Meaux, republiés par Pappers ; relevé du 22/08/2026.",
+      "dateReleve": "2026-08-22"
+     },
+     "caGroupe": {
+      "montantMEUR": null,
+      "exercice": null,
+      "nature": "sans_objet",
+      "commentaire": "Aucun périmètre de groupe identifie.",
+      "source": "Constat du 22/08/2026.",
+      "dateReleve": "2026-08-22"
+     },
+     "resultatNet": "Résultat net de 98,2 k EUR sur l'un des exercices anciens, puis 1,00 M EUR sur l'exercice suivant ; les deux derniers exercices ne restituent pas le résultat. Les fonds propres passent de 366 k EUR à 1,34 M EUR, puis 6,16 M EUR et 6,79 M EUR : une progression de facteur 18 en quatre exercices, que le seul résultat accumulé n'explique pas. La trésorerie retombe de 5,67 à 2,21 M EUR en 2023, soit une consommation de 3,4 M EUR sur l'exercice.",
+     "effectifEntite": "Entre 50 et 99 salariés (INSEE, donnée 2022) : l'un des rares éditeurs français de cette taille dont le chiffre d'affaires n'est pas public.",
+     "ventilationParActivite": {
+      "disponible": false,
+      "motif": "Chiffre d'affaires non restitue : aucune ventilation possible. Axelor ne publie pas de répartition entre l'ERP open sourcé, l'integration et l'activité de plateforme.",
+      "derniereVentilationConnue": null
+     }
+    }
+   },
+   "sourcesEnrichissement": [
+    {
+     "url": "https://www.pappers.fr/entreprise/480879733",
+     "libelle": "Fiche registre AXELOR (RCS Meaux), comptes 2020-2023, statuts et actes de nomination, republiés par Pappers",
+     "dateReleve": "2026-08-22"
+    }
+   ]
+  },
+  {
+   "nom": "CLEARTAX",
+   "_supprimerChamps": [
+    "siren"
+   ],
+   "analyse360": {
+    "poidsEconomique": {
+     "caEntiteFrancaise": {
+      "montantMEUR": null,
+      "exercice": null,
+      "nature": "sans_objet",
+      "commentaire": "Aucun chiffre d'affaires n'est rattachable à cette fiche : le SIREN qui y figurait, 491 096 350, est un faux positif. Cette société existe bien mais elle s'appelait CLEARTAX, exerçait le conseil de gestion (code APE 70.22Z) au 43-47 avenue de la Grande Armée à Paris, avait pour dirigeant Xavier Bontoux, un capital de 15 000 EUR, et surtout elle est Radiée Depuis LE 19/06/2019. Elle n'a aucun lien avec le groupe ClearTax / Clear. Le SIREN est retiré de la fiche : conserver un identifiant faux revient à afficher les dirigeants, l'adresse et les comptes d'un tiers.",
+      "source": "Fiche registre de la société radiée CLEARTAX (SIREN 491 096 350), consultée le 22/08/2026.",
+      "dateReleve": "2026-08-22"
+     },
+     "caGroupe": {
+      "montantMEUR": null,
+      "exercice": null,
+      "nature": "non_publie",
+      "commentaire": "Le groupe ClearTax / Clear n'est pas immatriculé en France sous une entité identifiée à ce stade. Aucun chiffre d'affaires ne sera avancé avant d'avoir établi l'entité réellement porteuse de l'agrement.",
+      "source": "Constat du 22/08/2026.",
+      "dateReleve": "2026-08-22"
+     },
+     "resultatNet": "Sans objet en l'absence d'entité française identifiée.",
+     "effectifEntite": "Non établi.",
+     "ventilationParActivite": {
+      "disponible": false,
+      "motif": "Entité française non identifiée.",
+      "derniereVentilationConnue": null
+     }
+    }
+   },
+   "sourcesEnrichissement": [
+    {
+     "url": "https://www.pappers.fr/entreprise/491096350",
+     "libelle": "Fiche registre de la société CLEARTAX radiée le 19/06/2019 (SIREN 491 096 350) : preuve que le SIREN porté à la fiche était un faux positif",
+     "dateReleve": "2026-08-22"
+    }
+   ]
+  },
+  {
+   "nom": "DOCOON",
+   "groupeCapitalistique": "L'entité immatriculée est DPII DOCOON, dénomination légale D.P.I.I. - DPII TELECOM ET SERVICES, SAS créée le 01/08/1986, siège 81 rue Réaumur à Paris 2e, capital 200 400 EUR, code APE 62.02A, numéro LEI 894500W5ER2TS6DGGB90. Ce n'est donc pas une jeune pousse de la réforme mais une société d'échanges de données de quarante ans. Son président est DOCOON INVEST (SIREN 917 412 587), holding créée le 08/07/2022, capital 8 795 451,60 EUR, code 66.30Z, dont le président est lui-même une personne morale, LBM PARTNER (SIREN 793 822 222), avec Arnaud Lejeune pour directeur général — également nommé directeur général de DPII DOCOON le 19/05/2025. Le premier président de DOCOON INVEST, du 11/07 au 02/09/2022, était Laurent Mezrahi. DOCOON INVEST dirige aussi DOCOON IMMO (autre immatriculation du groupe) et ODYSSEY MESSAGING : le périmètre compte au moins trois sociétés opérationnelles. La chaîne est ouverte jusqu'a LBM PARTNER, niveau au-dela duquel aucun actionnaire n'est établi.",
+   "relationCapitalistique": "filiale_de_groupe",
+   "analyse360": {
+    "poidsEconomique": {
+     "caEntiteFrancaise": {
+      "montantMEUR": 10.6,
+      "exercice": "2025",
+      "nature": "comptes_deposes",
+      "commentaire": "10,6 M EUR sur l'exercice 2025, en repli de 1,2 %, après 10,8 M EUR en 2024 et 10,4 M EUR en 2023. L'exercice 2023 avait bondi de +194 % (3,53 M EUR en 2022) : une variation de cette ampleur ne s'explique pas par une conquête commerciale et signale une opération de périmètre, apport ou fusion, non documentée à ce stade. La valeur ajoutée ne représente que 28,5 % du chiffre d'affaires et les salaires 20,9 % : une part importante de l'activité est achetée à l'extérieur et revendue. Export nul.",
+      "source": "Comptes sociaux DPII DOCOON 2022 à 2025 (SIREN 338 698 384), greffe de Paris, republiés par Pappers ; relevé du 22/08/2026.",
+      "dateReleve": "2026-08-22"
+     },
+     "caGroupe": {
+      "montantMEUR": 15.2,
+      "exercice": "2025",
+      "nature": "comptes_deposes",
+      "commentaire": "Aucun compte consolidé n'est publie. En additionnant les deux entités immatriculées dont les comptes sociaux sont disponibles, DPII DOCOON (10,6 M EUR) et DOCOON IMMO (4,64 M EUR), le périmètre approche 15,2 M EUR pour 2025 ; la troisième société dirigée par la holding, ODYSSEY MESSAGING, n'est pas comprise. Il s'agit d'une somme d'entités, pas d'un consolidé : les flux internes ne sont pas éliminés.",
+      "source": "Somme des comptes sociaux 2025 de DPII DOCOON et DOCOON IMMO, greffe de Paris, republiés par Pappers ; relevé du 22/08/2026.",
+      "dateReleve": "2026-08-22"
+     },
+     "resultatNet": "420 k EUR en 2025, après 337 k EUR en 2024 et 685 k EUR en 2023 : une marge nette de 4,0 % qui s'est érodée depuis 8,9 % en 2022. EBITDA 950 k EUR, trésorerie 2,25 M EUR, dettes financières quasi nulles (34,5 k EUR), délai de paiement clients très sain à 58,6 jours. L'entité opérationnelle est saine. L'endettement du groupe est ailleurs : la holding DOCOON INVEST porté 17,6 M EUR de dettes financières pour 900 k EUR de produits, un levier de 125 fois son EBITDA, et a enregistré -1,23 M EUR puis -1,32 M EUR de résultat avant un retour à +1,23 M EUR en 2025. Lire le risque sur la fiche de la plateforme seule conduirait à le manquer entièrement.",
+     "effectifEntite": "Entre 10 et 19 salariés à l'INSEE (donnée 2022), alors que la fiche du référentiel annonce 20 à 49 : l'ecart n'est pas tranchée ici, les deux valeurs venant de la même sourcé à des dates différentes. La tranche du référentiel est conservée.",
+     "ventilationParActivite": {
+      "disponible": false,
+      "motif": "Aucune ventilation publiée. Le groupe sépare ses marchés par entité juridique (échanges B2B chez DPII DOCOON, immobilier chez DOCOON IMMO) plutôt que par ligne dans un compte de résultat.",
+      "derniereVentilationConnue": null
+     }
+    }
+   },
+   "sourcesEnrichissement": [
+    {
+     "url": "https://www.pappers.fr/entreprise/338698384",
+     "libelle": "Fiche registre DPII DOCOON (RCS Paris), comptes 2022-2025 et mandats, republiés par Pappers",
+     "dateReleve": "2026-08-22"
+    },
+    {
+     "url": "https://www.pappers.fr/entreprise/917412587",
+     "libelle": "Fiche registre DOCOON INVEST (SIREN 917 412 587), comptes 2023-2025 de la holding, republiés par Pappers",
+     "dateReleve": "2026-08-22"
+    }
+   ]
+  },
+  {
+   "nom": "DOCOON IMMO / FREEDZ",
+   "analyse360": {
+    "poidsEconomique": {
+     "caEntiteFrancaise": {
+      "montantMEUR": 4.64,
+      "exercice": "2025",
+      "nature": "comptes_deposes",
+      "commentaire": "4,64 M EUR en 2025, après 4,36 M EUR, 3,71 M EUR et 3,23 M EUR : quatre exercices de croissance ininterrompue, +7,3 %, +14,8 %, +17,4 % puis +6,4 %. Petite taille, mais la plus régulièrement rentable du lot : 23,5 % de marge nette, 31,3 % de marge d'EBITDA, une valeur ajoutée à 75,8 % du chiffre d'affaires et des salaires à 44,4 %. C'est le profil comptable d'un éditeur qui vend son propre logiciel, la ou l'autre entité du groupe revend largement de la prestation achetée.",
+      "source": "Comptes sociaux DOCOON IMMO 2022 à 2025 (SIREN 523 445 211), greffe de Marseille, republiés par Pappers ; relevé du 22/08/2026.",
+      "dateReleve": "2026-08-22"
+     },
+     "caGroupe": {
+      "montantMEUR": 15.2,
+      "exercice": "2025",
+      "nature": "comptes_deposes",
+      "commentaire": "Périmètre Docoon : 15,2 M EUR en additionnant les comptes sociaux 2025 de DPII DOCOON (10,6 M EUR) et de DOCOON IMMO (4,64 M EUR), hors ODYSSEY MESSAGING. Somme d'entités, non consolidée.",
+      "source": "Somme des comptes sociaux 2025 des deux entités immatriculées, republiés par Pappers ; relevé du 22/08/2026.",
+      "dateReleve": "2026-08-22"
+     },
+     "resultatNet": "1,09 M EUR en 2025, après 1,08 M EUR, 1,03 M EUR et 733 k EUR : quatre exercices à plus de 22 % de marge nette. Rentabilité sur fonds propres de 90,5 %, trésorerie 1,85 M EUR pour 881 k EUR de dettes financières, délai clients 59,3 jours. La société distribue vraisemblablement l'essentiel de son résultat, ses fonds propres restant stables autour de 1,2 M EUR malgré les bénéfices accumulés — cohérent avec une remontée de dividendes vers la holding qui porté la dette du groupe.",
+     "effectifEntite": "Entre 10 et 19 salariés à l'INSEE (donnée 2022) contre 20 à 49 dans la fiche du référentiel ; écart de millésime non tranche, tranche du référentiel conservée. Siège à Marseille, code APE 71.12B (ingénierie), président DOCOON INVEST, directeur général EMERCIA CONSULTING (SIREN 812 698 983), commissaire aux comptes Pierre Rozenbaum.",
+     "ventilationParActivite": {
+      "disponible": false,
+      "motif": "Entité mono-marché par construction : la marque Freedz adresse la gestion immobilière. Aucune ventilation interne publiée.",
+      "derniereVentilationConnue": null
+     }
+    }
+   },
+   "sourcesEnrichissement": [
+    {
+     "url": "https://www.pappers.fr/entreprise/523445211",
+     "libelle": "Fiche registre DOCOON IMMO (RCS Marseille), comptes 2022-2025 et mandats, republiés par Pappers",
+     "dateReleve": "2026-08-22"
+    }
+   ]
+  },
+  {
+   "nom": "EdiEyes Vision Care",
+   "groupeCapitalistique": "SARL créée le 19/03/2002, siège à Angers, capital 7 500 EUR, code APE 58.29C. Gérant unique et personne physique : Jean-Luc Levesque, en fonction depuis le 19/11/2015. Aucun actionnaire personne morale, aucun rattachement de groupe : société indépendante, de très petite taille, positionnée sur une niche sectorielle (échanges de données de la filière optique et vision).",
+   "relationCapitalistique": "independante",
+   "analyse360": {
+    "poidsEconomique": {
+     "caEntiteFrancaise": {
+      "montantMEUR": null,
+      "exercice": "2022",
+      "nature": "comptes_confidentiels",
+      "commentaire": "La société dépose ses comptes sous confidentialité partielle : le chiffre d'affaires n'est pas restitue, seuls le bilan et le résultat le sont. Ce n'est pas une lacune de collecte mais un droit exercé. Le dernier exercice dépose est clos le 31/10/2022 : trois exercices manquent (2023, 2024, 2025). Toute lecture de la taille actuelle de cette société serait une conjecture.",
+      "source": "Comptes sociaux EDIEYES Vision CARE (SIREN 441 304 367), greffe d'Angers, exercices 2019 à 2022, republiés par Pappers ; relevé du 22/08/2026.",
+      "dateReleve": "2026-08-22"
+     },
+     "caGroupe": {
+      "montantMEUR": null,
+      "exercice": null,
+      "nature": "sans_objet",
+      "commentaire": "Société indépendante, sans périmètre de groupe.",
+      "source": "Constat du 22/08/2026.",
+      "dateReleve": "2026-08-22"
+     },
+     "resultatNet": "Trajectoire lisible malgré l'absence de chiffre d'affaires : +9,47 k EUR sur l'exercice 2019, puis -258 k EUR, -256 k EUR et -11,8 k EUR. Deux années de pertes lourdes rapportées à la taille de la société ont ramené les fonds propres de 706 k EUR à 181 k EUR, pour 171 k EUR de dettes financières et 12,7 k EUR de trésorerie à fin 2022. L'autonomie financière tombe à 14,2 %. Ces chiffres ont quatre ans : ils décrivent une situation tendue à cette date, pas la situation d'aujourd'hui.",
+     "effectifEntite": "Entre 6 et 9 salariés (INSEE, donnée 2023).",
+     "ventilationParActivite": {
+      "disponible": false,
+      "motif": "Chiffre d'affaires non restitue, aucune ventilation possible.",
+      "derniereVentilationConnue": null
+     }
+    }
+   },
+   "sourcesEnrichissement": [
+    {
+     "url": "https://www.pappers.fr/entreprise/441304367",
+     "libelle": "Fiche registre EDIEYES Vision CARE (RCS Angers), comptes 2019-2022 déposés sous confidentialité partielle, republiés par Pappers",
+     "dateReleve": "2026-08-22"
+    }
+   ]
+  },
+  {
+   "nom": "ESALINK",
+   "relationCapitalistique": "filiale_de_groupe",
+   "analyse360": {
+    "poidsEconomique": {
+     "caEntiteFrancaise": {
+      "montantMEUR": 2.21,
+      "exercice": "2023",
+      "nature": "comptes_deposes",
+      "commentaire": "2,21 M EUR sur l'exercice 2023, après 1,89 M EUR, 1,30 M EUR et 334 k EUR : le chiffre d'affaires a été multiplié par 6,6 en trois ans, avec +45,5 % en 2022 puis +17,4 % en 2023. Mais 2023 est le dernier exercice dépose : deux exercices manquent, 2024 et 2025, ceux qui précèdent immédiatement l'entree en vigueur. La dénomination légale est ESALINK B2B SERVICES, SASU créée le 01/08/2017, capital 100 000 EUR, siège à Bezannes près de Reims, code APE 70.22Z (conseil) alors que l'activité réelle relevait de l'expertise EDI.",
+      "source": "Comptes sociaux ESALINK B2B SERVICES 2020 à 2023 (SIREN 832 449 219), greffe de Reims, republiés par Pappers ; relevé du 22/08/2026.",
+      "dateReleve": "2026-08-22"
+     },
+     "caGroupe": {
+      "montantMEUR": null,
+      "exercice": null,
+      "nature": "non_publie",
+      "commentaire": "La holding EsaLink Group (SIREN 953 718 855, créée le 21/06/2023, code 66.30Z) figure déjà à la fiche mais ne publie pas de comptes consolidés. Aucun chiffre d'affaires de périmètre n'est établi.",
+      "source": "Constat du 22/08/2026.",
+      "dateReleve": "2026-08-22"
+     },
+     "resultatNet": "144 k EUR en 2023, après 165 k EUR, 202 k EUR et 98,2 k EUR. La croissance se paie : la marge nette recule de 29,4 % en 2020 à 15,6 %, 8,7 % puis 6,5 % en 2023, et l'EBITDA baisse en valeur absolue (279 puis 233 puis 142 k EUR) alors que le chiffre d'affaires monte. Dans le même temps la trésorerie fond de 547 à 174 k EUR, les dettes financières montent à 473 k EUR et le délai de paiement clients passe de 51 à 96 jours. Le profil est celui d'une petite structure qui finance sa croissance sur son fonds de roulement.",
+     "effectifEntite": "Entre 20 et 49 salariés (INSEE, donnée 2023), cohérent avec la fiche. Présidence familiale : Eser Sarikan, après Erdal Sarikan.",
+     "ventilationParActivite": {
+      "disponible": false,
+      "motif": "Aucune ventilation publiée entre le conseil EDI et l'activité de plateforme.",
+      "derniereVentilationConnue": null
+     }
+    }
+   },
+   "sourcesEnrichissement": [
+    {
+     "url": "https://www.pappers.fr/entreprise/832449219",
+     "libelle": "Fiche registre ESALINK B2B SERVICES (RCS Reims), comptes 2020-2023 et mandats, republiés par Pappers",
+     "dateReleve": "2026-08-22"
+    }
+   ]
+  },
+  {
+   "nom": "ESI",
+   "_supprimerChamps": [
+    "siren"
+   ],
+   "analyse360": {
+    "poidsEconomique": {
+     "caEntiteFrancaise": {
+      "montantMEUR": null,
+      "exercice": null,
+      "nature": "sans_objet",
+      "commentaire": "Aucun chiffre d'affaires n'est rattachable à cette fiche : le SIREN qui y figurait, 102 061 702, est un faux positif caractérisé. Il correspond à STUDIO 7 ESI, un salon de coiffure lyonnais immatriculé le 23/01/2026. Le rapprochement a manifestement été fait sur le sigle. Le SIREN est retiré : le laisser en place ferait afficher sur la fiche d'une plateforme agréée l'adresse, l'activité et les dirigeants d'un commerce de proximité sans aucun lien avec elle.",
+      "source": "Fiche registre STUDIO 7 ESI (SIREN 102 061 702), consultée le 22/08/2026.",
+      "dateReleve": "2026-08-22"
+     },
+     "caGroupe": {
+      "montantMEUR": null,
+      "exercice": null,
+      "nature": "non_publie",
+      "commentaire": "Entité française réellement porteuse de l'agrement non identifiée à ce stade. Rien ne sera avancé avant de l'avoir établie sur une mention légale de l'editeur.",
+      "source": "Constat du 22/08/2026.",
+      "dateReleve": "2026-08-22"
+     },
+     "resultatNet": "Sans objet en l'absence d'entité identifiée.",
+     "effectifEntite": "Non établi.",
+     "ventilationParActivite": {
+      "disponible": false,
+      "motif": "Entité non identifiée.",
+      "derniereVentilationConnue": null
+     }
+    }
+   },
+   "sourcesEnrichissement": [
+    {
+     "url": "https://www.pappers.fr/entreprise/102061702",
+     "libelle": "Fiche registre STUDIO 7 ESI (SIREN 102 061 702) : preuve que le SIREN porté à la fiche était un faux positif",
+     "dateReleve": "2026-08-22"
+    }
+   ]
+  },
+  {
+   "nom": "OPEN BEE",
+   "groupeCapitalistique": "OPEN BEE FRANCE, SAS créée le 13/05/2008 à Epagny Metz-Tessy près d'Annecy, capital 2 370 800 EUR, code APE 62.02A. Son président est DOXSA (SIREN 841 690 712), société de Wasquehal depuis le 14/12/2023, dont le directeur général est Giovanni Giusti et le président une autre personne morale, DOXENSE EUROPE (SIREN 797 659 562). DOXSA dirige également MY DATA (SIREN 813 822 582). Point déterminant : DOXSA est elle-même en procédure collective. Ses propres comptes montrent un chiffre d'affaires qui s'effondre de 1,03 M EUR à 374 k EUR entre 2021 et 2023 avec un EBITDA de -1,73 M EUR, mais un résultat net 2023 de +32,5 M EUR et 19,7 M EUR de trésorerie : un profit exceptionnel de cession, cohérent avec la cession de sa participation à Sages Informatique le 30/11/2023, et non un résultat d'exploitation. La chaîne s'arrete a DOXENSE EUROPE, niveau au-dela duquel aucun actionnaire n'est établi.",
+   "relationCapitalistique": "filiale_de_groupe",
+   "analyse360": {
+    "poidsEconomique": {
+     "caEntiteFrancaise": {
+      "montantMEUR": 8.76,
+      "exercice": "2024",
+      "nature": "comptes_deposes",
+      "commentaire": "8,76 M EUR sur l'exercice 2024, en hausse de 40,8 % après 6,22 M EUR en 2023 ; les exercices antérieurs n'étaient publiés que sous la fourchette « inférieur à 12 M EUR ». C'est le seul dossier du chantier où une forte croissance et une procédure collective se succèdent immédiatement : la même année, le résultat basculait de +308 k EUR à -1,05 M EUR et le délai de paiement clients passait de 115 à 178 jours.",
+      "source": "Comptes sociaux OPEN BEE FRANCE 2021 à 2024 (SIREN 504 389 446), greffe d'Annecy, republiés par Pappers ; relevé du 22/08/2026.",
+      "dateReleve": "2026-08-22"
+     },
+     "caGroupe": {
+      "montantMEUR": null,
+      "exercice": null,
+      "nature": "non_publie",
+      "commentaire": "Aucun compte consolidé publie au niveau DOXSA / DOXENSE EUROPE. Les comptes sociaux de DOXSA (374 k EUR de chiffre d'affaires en 2023) ne mesurent pas une activité : c'est une société de tête.",
+      "source": "Constat du 22/08/2026.",
+      "dateReleve": "2026-08-22"
+     },
+     "resultatNet": "Rupture nette. Trois exercices bénéficiaires modestes (+186 k EUR, +275 k EUR, +308 k EUR) puis -1,05 M EUR en 2024, avec un résultat d'exploitation de -1,33 M EUR. Les dettes financières montent à 4,35 M EUR pour un EBITDA de 299 k EUR, soit 13 fois ; l'autonomie financière tombe à 20,6 %, la trésorerie à 468 k EUR et le délai clients atteint 178 jours. La suite est un fait public et non une interprétation : un redressement judiciaire ouvert le 15/09/2025 et clôture le 05/08/2026, puis un jugement du 3 août 2026 prononçant l'ouverture d'une procédure de redressement judiciaire ; le lien exact entre les deux mentions n'est pas établi ici et n'est donc pas interprété. La presse professionnelle rapporte une crise de trésorerie consécutive au retrait d'un investisseur fin février, et une société qui mise sur l'IA et la facture électronique pour rebondir en 2026. Aucun pronostic n'est formulé : la situation est datée au 22/08/2026.",
+     "effectifEntite": "Entre 50 et 99 salariés (INSEE), 53 salariés dans les comptes 2024. Commissaire aux comptes Comexpert.",
+     "ventilationParActivite": {
+      "disponible": false,
+      "motif": "Aucune ventilation publiée entre la GED historique et l'activité de plateforme agréée.",
+      "derniereVentilationConnue": null
+     }
+    }
+   },
+   "sourcesEnrichissement": [
+    {
+     "url": "https://www.pappers.fr/entreprise/504389446",
+     "libelle": "Fiche registre OPEN BEE FRANCE (RCS Annecy), comptes 2021-2024 et mention de procédure collective (redressement judiciaire du 15/09/2025 au 05/08/2026), republiés par Pappers",
+     "dateReleve": "2026-08-22"
+    },
+    {
+     "url": "https://www.pappers.fr/entreprise/841690712",
+     "libelle": "Fiche registre DOXSA (RCS Lille Metropole), comptes 2021-2023 et procédure collective en cours, republiés par Pappers",
+     "dateReleve": "2026-08-22"
+    },
+    {
+     "url": "https://www.lagazettefrance.fr/annonce-légale/91394077",
+     "libelle": "Annonce légale SAS OPEN BEE FRANCE : jugement du 3 août 2026 prononçant l'ouverture d'une procédure de redressement judiciaire",
+     "dateReleve": "2026-08-22"
+    },
+    {
+     "url": "https://www.doxense.com/en/doxsa-allies-with-open-bee/",
+     "libelle": "Doxense : cession de la participation de Doxsa à Sages Informatique le 30/11/2023 et rapprochement avec Open Bee",
+     "dateReleve": "2026-08-22"
+    }
+   ]
+  },
+  {
+   "nom": "TAXERA",
+   "relationCapitalistique": "filiale_de_groupe",
+   "analyse360": {
+    "poidsEconomique": {
+     "caEntiteFrancaise": {
+      "montantMEUR": null,
+      "exercice": null,
+      "nature": "aucun_compte_depose",
+      "commentaire": "TAXERA TECHNOLOGIES FRANCE, SAS créée le 07/04/2022 et immatriculée le 12/09/2022 au greffe de Paris, capital 3 000 EUR, code APE 58.29A, n'a déposé aucun compte annuel : quatre exercices, aucun dépôt. Il n'existe donc aucun chiffre d'affaires opposable pour l'entité immatriculée. Un élément public compense partiellement cette absence : le Registre national des entreprises porte sur la société une alerte « capitaux propres inférieurs à la moitié du capital social ». Sur un capital de 3 000 EUR l'information est de portée limitée, mais elle est publique et datée.",
+      "source": "Fiche registre et absence de comptes annuels TAXERA TECHNOLOGIES FRANCE (SIREN 919 179 663), alerte RNE, republiées par Pappers ; relevé du 22/08/2026.",
+      "dateReleve": "2026-08-22"
+     },
+     "caGroupe": {
+      "montantMEUR": null,
+      "exercice": null,
+      "nature": "non_publie",
+      "commentaire": "Le groupe Taxera Technologies, déjà rattache à la fiche via son entité suisse, ne publie pas de comptes consolidés accessibles. Sa dimension se lit dans ses partenariats plutôt que dans ses comptes : éditeur référencé par SAP pour la conformité fiscale indirecte, et partenaire d'Amadeus depuis avril 2024 pour porter sa technologie de facturation électronique auprès des partenaires du voyagiste dans le monde. Aucun chiffre ne sera avancé.",
+      "source": "Pages partenaires SAP et communique Amadeus du 04/04/2024 ; relevé du 22/08/2026.",
+      "dateReleve": "2026-08-22"
+     },
+     "resultatNet": "Aucun compte dépose : aucun résultat publie. La seule donnée de situation nette disponible est l'alerte RNE mentionnée ci-dessus.",
+     "effectifEntite": "Au moins un salarié (INSEE, donnée 2023) ; aucune tranche plus précise publiée. Présidence changée le 10/06/2025 : Paulo Bacelar Prata Antunes (ne en 12/1996) remplace Florent Aubail, l'ancien directeur général Paulo Bacelar Prata Antunes (ne en 12/1966) cessant ses fonctions à la même date. Statuts mis à jour le 23/04/2026 et décisions de modification les 07/04 et 22/05/2026.",
+     "ventilationParActivite": {
+      "disponible": false,
+      "motif": "Aucun compte dépose pour l'entité, aucun consolidé pour le groupe.",
+      "derniereVentilationConnue": null
+     }
+    }
+   },
+   "sourcesEnrichissement": [
+    {
+     "url": "https://www.pappers.fr/entreprise/919179663",
+     "libelle": "Fiche registre TAXERA TECHNOLOGIES FRANCE (RCS Paris) : absence totale de comptes déposés, alerte RNE sur les capitaux propres, historique des mandats",
+     "dateReleve": "2026-08-22"
+    },
+    {
+     "url": "https://www.sap.com/products/erp/partners/taxera-technologies-smart-indirect-tax-compliance.html",
+     "libelle": "SAP : référencement de Taxera Technologies comme plateforme globale de conformité fiscale indirecte",
+     "dateReleve": "2026-08-22"
+    },
+    {
+     "url": "https://amadeus.com/en/newsroom/press-releases/amadeus-partners-with-taxera-to-bring-e-invoicing-technology-to-partners-worldwide",
+     "libelle": "Amadeus, communique du 04/04/2024 : partenariat avec Taxera pour la facturation électronique",
+     "dateReleve": "2026-08-22"
+    }
+   ]
+  },
+  {
+   "nom": "WEPROC",
+   "groupeCapitalistique": "SAS créée le 01/09/2019, siège bâtiment Beaux-Arts, 2 parvis des Ecoles à Toulon, capital 46 000 EUR, code APE 70.22Z. Gouvernance de fondateurs, tous personnes physiques et tous nés en 1993 : Steven Oziol président depuis le 10/02/2023, Paul Zeller directeur général depuis le 17/01/2023, Vincent Spano directeur général depuis le 12/04/2024. La dénomination sociale a été modifiée le 18/10/2023 et la date de clôture de l'exercice déplacée le 15/10/2024, après une ordonnance du président du tribunal prorogeant le délai de tenue de l'assemblee générale le 23/04/2024. Aucune personne morale au capital identifiée : société indépendante.",
+   "relationCapitalistique": "independante",
+   "analyse360": {
+    "poidsEconomique": {
+     "caEntiteFrancaise": {
+      "montantMEUR": null,
+      "exercice": null,
+      "nature": "aucun_compte_depose",
+      "commentaire": "Aucun compte annuel n'est disponible : sept exercices depuis la création en 2019, aucun dépôt. Une alerte est enregistrée sur la société. La date de clôture a été déplacée en octobre 2024 et le délai de tenue de l'assemblee générale avait été prorogé par ordonnance du président du tribunal en avril 2024 : ces deux éléments sont publics et documentent un calendrier comptable décalé, sans permettre d'en tirer une conclusion sur l'activité. Aucun chiffre d'affaires ne sera avancé.",
+      "source": "Fiche registre WEPROC (SIREN 853 469 161), greffe de Toulon : absence de comptes annuels, actes de 2019 à 2025, republiés par Pappers ; relevé du 22/08/2026.",
+      "dateReleve": "2026-08-22"
+     },
+     "caGroupe": {
+      "montantMEUR": null,
+      "exercice": null,
+      "nature": "sans_objet",
+      "commentaire": "Société indépendante, sans périmètre de groupe.",
+      "source": "Constat du 22/08/2026.",
+      "dateReleve": "2026-08-22"
+     },
+     "resultatNet": "Aucun compte dépose : aucun résultat publie.",
+     "effectifEntite": "Entre 1 et 2 salariés (INSEE, donnée 2023) pour trois mandataires sociaux — l'essentiel de la force de travail n'est pas salarié de la société. Trois établissements déclarés.",
+     "ventilationParActivite": {
+      "disponible": false,
+      "motif": "Aucun compte dépose.",
+      "derniereVentilationConnue": null
+     }
+    }
+   },
+   "sourcesEnrichissement": [
+    {
+     "url": "https://www.pappers.fr/entreprise/853469161",
+     "libelle": "Fiche registre WEPROC (RCS Toulon) : absence de comptes annuels, actes et mandats 2019-2025, republiés par Pappers",
+     "dateReleve": "2026-08-22"
+    }
+   ]
+  }
+ ]
+}
