@@ -1,0 +1,203 @@
+{
+ "_patch": {
+  "id": "H1-LOT1C",
+  "chantier": "H1 — poids économique et rattachement capitalistique",
+  "societe": "Lot 1C : TX2 Concept, DARVA, ARTEVA, SEPTEO, PENNYLANE, TENOR (via GSPI)",
+  "auteur": "RFE_WebSite",
+  "dateReleve": "2026-08-22",
+  "nbPlateformes": 6,
+  "note": "Troisième lot du chantier H1. DEUX ENSEIGNEMENTS DE METHODE. (1) Les comptes sociaux d'une holding animatrice ne mesurent pas une activité : SEPTEO, dont le dirigeant est SEVEN TOPCO, affiche 48,7 M€ de chiffre d'affaires en code 70.22Z avec un délai de paiement clients de 201 jours et un besoin en fonds de roulement hors exploitation de −804 M€ ; ces chiffres décrivent une réorganisation de dette, pas une performance commerciale, et ne sont pas comparables à ceux d'une société d'exploitation (règle 36). (2) Le levier peut être porté par la holding et non par l'exploitation : TENOR est saine, mais sa holding de contrôle GSPI affiche 164 k€ de fonds propres pour 804 k€ de dettes financières et un résultat négatif (règle 37). TROISIEME ANGLE MORT COMPTABLE : PENNYLANE n'a rien déposé depuis l'exercice 2022, soit trois exercices manquants, après AGICAP (2019) et SPENDESK (2020) — le segment des fintechs financées est structurellement opaque. DEUX DOSSIERS REMARQUABLES A L'OPPOSE : TX2 Concept dégage 15,6 % de marge nette et 42,8 % de rentabilité sur fonds propres sans aucune dette, et DARVA croît de 30,2 à 45,4 M€ en quatre ans avec une marge nette volontairement contenue à 2,6 % pour 25 M€ de fonds propres, profil cohérent avec une plateforme sectorielle détenue par ses utilisateurs — hypothèse explicitement non publiée faute d'accès aux bénéficiaires effectifs. NON TROUVE : actionnariat de DARVA, de TX2 Concept, d'ARTEVA et de PENNYLANE ; comptes consolidés du groupe Septeo ; comptes de PENNYLANE postérieurs à 2022 ; chiffre d'affaires 2024 d'ARTEVA, non restitué."
+ },
+ "plateformes": [
+  {
+   "nom": "TX2 Concept",
+   "groupeCapitalistique": "SAS créée le 24/01/2000, siège 655 rue Marcel Belot à Olivet (Loiret), capital de 200 000 €, présidée par Isabelle Hottin, née Le Brun, depuis le 12/11/2019. Aucun actionnaire de contrôle extérieur identifié ; le commissaire aux comptes a quitté ses fonctions le 26/10/2024 pour fin de mission.",
+   "relationCapitalistique": "independante",
+   "analyse360": {
+    "poidsEconomique": {
+     "caEntiteFrancaise": {
+      "montantMEUR": 5.52,
+      "exercice": "2024",
+      "nature": "comptes_deposes",
+      "commentaire": "Trajectoire des comptes déposés : 4,69 M€ (2021), 4,87 M€ (2022), 4,96 M€ (2023), 5,52 M€ (2024), soit une accélération sur le dernier exercice (+11,4 % après +1,8 %). Chiffre d'affaires à l'export nul en 2024, alors qu'il atteignait 839 k€ en 2022.",
+      "source": "Trajectoire des comptes déposés : 4,69 M€ (2021), 4,87 M€ (2022), 4,96 M€ (2023), 5,52 M€ (2024), soit une accélération sur le dernier exercice (+11,4 % après +1,8 %). Chiffre d'affaires à l'export nul en 2024, alors qu'il atteignait 839 k€ en 2022.",
+      "dateReleve": "2026-08-22"
+     },
+     "caGroupe": {
+      "montantMEUR": null,
+      "exercice": null,
+      "nature": "sans_objet",
+      "commentaire": "Société indépendante, sans périmètre de groupe identifié.",
+      "source": "Société indépendante, sans périmètre de groupe identifié.",
+      "dateReleve": "2026-08-22"
+     },
+     "resultatNet": "C'est la société la plus rentable du chantier H1 à ce stade : résultat net de 1,04 M€ (2021), 788 k€ (2022), 736 k€ (2023), 860 k€ (2024), soit une marge nette de 15,6 % et une rentabilité sur fonds propres de 42,8 %. L'EBITDA ressort à 1,14 M€, soit 20,7 % du chiffre d'affaires. Aucune dette financière, 1,79 M€ de trésorerie pour 2,01 M€ de fonds propres, et des salaires contenus à 44,4 % du chiffre d'affaires. Le contraste avec les fintechs du même référentiel est frappant : une petite structure de 20 à 49 salariés dégage un résultat positif là où des sociétés dix fois plus financées perdent des dizaines de millions.",
+     "effectifEntite": "Tranche INSEE de 20 à 49 salariés (donnée 2022)."
+    }
+   },
+   "sourcesEnrichissement": [
+    {
+     "url": "https://www.pappers.fr/entreprise/tx2-concept-429144967",
+     "libelle": "Fiche registre TX2 CONCEPT (RCS Orléans) et comptes sociaux déposés, republiés par Pappers",
+     "dateReleve": "2026-08-22"
+    }
+   ]
+  },
+  {
+   "nom": "DARVA",
+   "groupeCapitalistique": "Dénomination légale DARVA — DEVELOPPEMENT D'APPLICATION SUR RESEAUX A VALEUR AJOUTEE, SAS créée le 02/05/1988, siège à Chauray (Deux-Sèvres, agglomération de Niort), capital de 6 680 190 €, numéro LEI attribué, présidée par Christian Garrez depuis le 29/10/2018. L'activité déclarée est l'animation et la gestion d'un centre serveur et d'un réseau à valeur ajoutée. Deux éléments singularisent ce dossier : un capital social de 6,68 M€, très supérieur à la norme du référentiel, et un chiffre d'affaires à l'export nul sur quatre exercices, pour une implantation au cœur du pôle assurance niortais. L'hypothèse d'une plateforme sectorielle détenue par ses utilisateurs est cohérente avec ces éléments mais n'est pas établie : les données de bénéficiaires effectifs ne sont pas accessibles. Aucun rattachement n'est donc publié.",
+   "analyse360": {
+    "poidsEconomique": {
+     "caEntiteFrancaise": {
+      "montantMEUR": 45.4,
+      "exercice": "2024",
+      "nature": "comptes_deposes",
+      "commentaire": "Trajectoire des comptes déposés : 30,2 M€ (2021), 36,4 M€ (2022), 39,5 M€ (2023), 45,4 M€ (2024). Croissance forte et régulière sur quatre exercices : +12,8 %, +20,5 %, +8,4 %, +15,0 %. Chiffre d'affaires à l'export nul : l'activité est intégralement française.",
+      "source": "Trajectoire des comptes déposés : 30,2 M€ (2021), 36,4 M€ (2022), 39,5 M€ (2023), 45,4 M€ (2024). Croissance forte et régulière sur quatre exercices : +12,8 %, +20,5 %, +8,4 %, +15,0 %. Chiffre d'affaires à l'export nul : l'activité est intégralement française.",
+      "dateReleve": "2026-08-22"
+     },
+     "caGroupe": {
+      "montantMEUR": null,
+      "exercice": null,
+      "nature": "non_publie",
+      "commentaire": "Aucun périmètre de groupe établi ; l'actionnariat n'est pas accessible.",
+      "source": "Aucun périmètre de groupe établi ; l'actionnariat n'est pas accessible.",
+      "dateReleve": "2026-08-22"
+     },
+     "resultatNet": "Profil atypique : une croissance soutenue pour une rentabilité volontairement faible. Résultat net de 1,5 M€ (2021), 1,43 M€ (2022), 832 k€ (2023), 1,18 M€ (2024), soit une marge nette de 2,6 % seulement, alors que l'EBITDA atteint 5,38 M€ (11,8 %). Les fonds propres sont de 25 M€ pour 5,14 M€ de trésorerie et 2,16 M€ de dettes financières, et les salaires représentent 45,9 % du chiffre d'affaires. Une marge nette de 2,6 % sur 45 M€ avec 25 M€ de fonds propres n'est pas le profil d'une société qui cherche le profit : c'est celui d'une structure qui restitue la valeur à ses utilisateurs. Cette lecture reste une hypothèse, l'actionnariat n'étant pas accessible.",
+     "effectifEntite": "189 salariés déclarés aux comptes 2023 ; tranche INSEE de 100 à 199 salariés (donnée 2022)."
+    }
+   },
+   "sourcesEnrichissement": [
+    {
+     "url": "https://www.pappers.fr/entreprise/darva-345133128",
+     "libelle": "Fiche registre DARVA (RCS Niort) et comptes sociaux déposés, republiés par Pappers",
+     "dateReleve": "2026-08-22"
+    }
+   ]
+  },
+  {
+   "nom": "ARTEVA",
+   "groupeCapitalistique": "SAS créée le 01/07/2006, siège à Limonest (Rhône), capital de 102 000 €, présidée par Fabienne Duclos depuis le 31/03/2017, exercice clos au 30 septembre. Aucun actionnaire de contrôle extérieur identifié.",
+   "relationCapitalistique": "independante",
+   "analyse360": {
+    "poidsEconomique": {
+     "caEntiteFrancaise": {
+      "montantMEUR": 1.71,
+      "exercice": "2025",
+      "nature": "comptes_deposes",
+      "commentaire": "Trajectoire des comptes déposés, exercice clos au 30 septembre : 1,37 M€ (2022), 1,5 M€ (2023), chiffre non restitué en 2024, puis 1,71 M€ (2025). C'est la plus petite société traitée dans le chantier H1. Chiffre d'affaires à l'export nul.",
+      "source": "Trajectoire des comptes déposés, exercice clos au 30 septembre : 1,37 M€ (2022), 1,5 M€ (2023), chiffre non restitué en 2024, puis 1,71 M€ (2025). C'est la plus petite société traitée dans le chantier H1. Chiffre d'affaires à l'export nul.",
+      "dateReleve": "2026-08-22"
+     },
+     "caGroupe": {
+      "montantMEUR": null,
+      "exercice": null,
+      "nature": "sans_objet",
+      "commentaire": "Société indépendante, sans périmètre de groupe.",
+      "source": "Société indépendante, sans périmètre de groupe.",
+      "dateReleve": "2026-08-22"
+     },
+     "resultatNet": "Rentable sur les quatre exercices, mais avec une marge qui s'érode de plus de moitié : 297 k€ (2022), 204 k€ (2023), 118 k€ (2024), 156 k€ (2025), soit une marge nette qui passe de 21,6 % à 9,2 %. L'EBITDA reste solide à 325 k€, soit 19,1 % du chiffre d'affaires. Structure saine : 900 k€ de fonds propres, 881 k€ de trésorerie, 631 € de dettes financières, et une autonomie financière de 70,4 %. Salaires et charges à 56,5 % du chiffre d'affaires.",
+     "effectifEntite": "Tranche INSEE de 10 à 19 salariés (donnée 2022)."
+    }
+   },
+   "sourcesEnrichissement": [
+    {
+     "url": "https://www.pappers.fr/entreprise/arteva-490794427",
+     "libelle": "Fiche registre ARTEVA (RCS Lyon) et comptes sociaux déposés, republiés par Pappers",
+     "dateReleve": "2026-08-22"
+    }
+   ]
+  },
+  {
+   "nom": "SEPTEO",
+   "groupeCapitalistique": "Groupe Septeo, éditeur européen de logiciels métier (juridique, notariat, immobilier, expertise comptable), plus de 250 000 utilisateurs revendiqués. L'entité immatriculée est la holding animatrice du groupe : SAS créée le 19/12/2012, siège Font de la Banquière, 194 avenue de la Gare Sud de France à Lattes (Hérault), capital de 7 017 550 €, code d'activité 70.22Z (conseil de gestion) — et non une société d'exploitation. Son dirigeant est une personne morale, SEVEN TOPCO (SIREN 888803988), dénomination caractéristique d'un montage à effet de levier structuré en TopCo, MidCo et BidCo. Conséquence de lecture : les comptes sociaux de cette entité décrivent la structure financière du montage, pas l'activité commerciale du groupe.",
+   "analyse360": {
+    "poidsEconomique": {
+     "caEntiteFrancaise": {
+      "montantMEUR": 48.7,
+      "exercice": "2025",
+      "nature": "comptes_deposes",
+      "commentaire": "AVERTISSEMENT DE LECTURE : ce chiffre est celui d'une holding animatrice, non d'une activité commerciale. Les comptes déposés affichent 22,9 M€ (2022), 29,1 M€ (2023), 37,6 M€ (2024), 48,7 M€ (2025), avec un code d'activité 70.22Z (conseil de gestion) : il s'agit très majoritairement de refacturation de prestations aux filiales. Trois signaux le confirment : un délai de paiement clients de 201 jours en 2025, monté jusqu'à 513 jours en 2023, un besoin en fonds de roulement hors exploitation de plusieurs centaines de millions d'euros, et un chiffre d'affaires à l'export nul. Ce montant ne mesure donc pas la taille du groupe Septeo, qui n'est pas documentée ici, et ne doit pas être comparé aux chiffres d'affaires des sociétés d'exploitation du référentiel.",
+      "source": "AVERTISSEMENT DE LECTURE : ce chiffre est celui d'une holding animatrice, non d'une activité commerciale. Les comptes déposés affichent 22,9 M€ (2022), 29,1 M€ (2023), 37,6 M€ (2024), 48,7 M€ (2025), avec un code d'activité 70.22Z (conseil de gestion) : il s'agit très majoritairement de refacturation de prestations aux filiales. Trois signaux le confirment : un délai de paiement clients de 201 jours en 2025, monté jusqu'à 513 jours en 2023, un besoin en fonds de roulement hors exploitation de plusieurs centaines de millions d'euros, et un chiffre d'affaires à l'export nul. Ce montant ne mesure donc pas la taille du groupe Septeo, qui n'est pas documentée ici, et ne doit pas être comparé aux chiffres d'affaires des sociétés d'exploitation du référentiel.",
+      "dateReleve": "2026-08-22"
+     },
+     "caGroupe": {
+      "montantMEUR": null,
+      "exercice": null,
+      "nature": "non_publie",
+      "commentaire": "Les comptes consolidés du groupe Septeo n'ont pas été exploités à ce relevé. À titre de repère historique, l'entité affichait 105 M€ de chiffre d'affaires en 2017 pour un résultat de 14,7 M€, avant une réorganisation de périmètre : les séries anciennes et récentes ne sont pas comparables.",
+      "source": "Les comptes consolidés du groupe Septeo n'ont pas été exploités à ce relevé. À titre de repère historique, l'entité affichait 105 M€ de chiffre d'affaires en 2017 pour un résultat de 14,7 M€, avant une réorganisation de périmètre : les séries anciennes et récentes ne sont pas comparables.",
+      "dateReleve": "2026-08-22"
+     },
+     "resultatNet": "Les comptes sociaux de la holding décrivent une restructuration financière de grande ampleur, et non une performance opérationnelle. Résultat net de +16,9 M€ (2022) et +23,8 M€ (2023), puis −9,93 M€ (2024) et −44,7 M€ (2025). Les fonds propres s'effondrent de 46,7 M€ à 2,98 M€ en un exercice, l'autonomie financière tombe à 0,3 %, et les dettes financières passent de 838 M€ en 2024 à 23,2 M€ en 2025, avec un besoin en fonds de roulement hors exploitation qui bascule de +166 M€ à −804 M€. Ces mouvements relèvent d'une réorganisation de la dette et des titres au sein du montage, pas de l'exploitation : le résultat d'exploitation, lui, redevient positif à 744 k€ en 2025 après trois exercices négatifs. Aucune conclusion sur la santé du groupe Septeo ne peut être tirée de ces comptes.",
+     "effectifEntite": "200 salariés déclarés aux comptes 2023 ; tranche INSEE de 100 à 199 salariés (donnée 2022). Il s'agit de l'effectif de la holding, non de celui du groupe."
+    }
+   },
+   "sourcesEnrichissement": [
+    {
+     "url": "https://www.pappers.fr/entreprise/septeo-790675037",
+     "libelle": "Fiche registre SEPTEO (RCS Montpellier) et comptes sociaux déposés, republiés par Pappers",
+     "dateReleve": "2026-08-22"
+    }
+   ]
+  },
+  {
+   "nom": "PENNYLANE",
+   "groupeCapitalistique": "Société financée par capital-investissement — la fiche qualifie déjà un actionnariat de type fonds, non revérifié à ce relevé. SAS créée le 30/12/2019, siège 2 rue Jules Lefebvre à Paris 9e, capital de 242 249,57 €, numéro LEI attribué. Quatre mandataires sociaux, tous fondateurs : Arthur Waller président, Tancrède Besnard directeur général, Félix Blossier et Quentin de Metz. Société inscrite à l'ORIAS comme mandataire en opérations de banque et services de paiement. Signal de structuration : ERNST & YOUNG AUDIT a été nommé commissaire aux comptes titulaire le 19/06/2026, aux côtés du cabinet en place depuis 2021. Le profil de bilan du dernier exercice déposé est cohérent avec un financement par capitaux propres : 57,7 M€ de fonds propres, 48,3 M€ de trésorerie et 93 % d'autonomie financière.",
+   "analyse360": {
+    "poidsEconomique": {
+     "caEntiteFrancaise": {
+      "montantMEUR": 3.92,
+      "exercice": "2022",
+      "nature": "comptes_deposes",
+      "commentaire": "Derniers comptes déposés : exercice 2022, déposés le 28/10/2024, avec un chiffre d'affaires de 3,92 M€ après 1,53 M€ en 2021 et 133 k€ en 2020. Trois exercices manquent — 2023, 2024 et 2025. Ce chiffre a donc une valeur strictement historique : il ne dit rien de la taille actuelle de la société, dont l'effectif est passé dans la tranche 250 à 499 salariés. Tout montant récent circulant sur Pennylane relève de l'estimation, pas des comptes.",
+      "source": "Derniers comptes déposés : exercice 2022, déposés le 28/10/2024, avec un chiffre d'affaires de 3,92 M€ après 1,53 M€ en 2021 et 133 k€ en 2020. Trois exercices manquent — 2023, 2024 et 2025. Ce chiffre a donc une valeur strictement historique : il ne dit rien de la taille actuelle de la société, dont l'effectif est passé dans la tranche 250 à 499 salariés. Tout montant récent circulant sur Pennylane relève de l'estimation, pas des comptes.",
+      "dateReleve": "2026-08-22"
+     },
+     "caGroupe": {
+      "montantMEUR": null,
+      "exercice": null,
+      "nature": "non_publie",
+      "commentaire": "Aucun périmètre de groupe établi ; l'actionnariat n'est pas restitué au registre.",
+      "source": "Aucun périmètre de groupe établi ; l'actionnariat n'est pas restitué au registre.",
+      "dateReleve": "2026-08-22"
+     },
+     "resultatNet": "Sur le dernier exercice déposé (2022) : perte de 20,4 M€ pour 3,92 M€ de chiffre d'affaires, avec un EBITDA de −19,2 M€ et des salaires et charges de 17,8 M€, soit 454 % du chiffre d'affaires. La société disposait alors de 48,3 M€ de trésorerie et de 57,7 M€ de fonds propres pour 200 k€ de dettes financières, avec une autonomie financière de 93 % : croissance intégralement financée par capitaux propres, à un stade où la rentabilité n'était pas recherchée. Aucun élément postérieur à 2022 n'est opposable.",
+     "effectifEntite": "Tranche INSEE de 250 à 499 salariés (donnée 2023), sans confirmation par des comptes récents."
+    }
+   },
+   "sourcesEnrichissement": [
+    {
+     "url": "https://www.pappers.fr/entreprise/pennylane-880265921",
+     "libelle": "Fiche registre PENNYLANE (RCS Paris) et comptes sociaux 2022, republiés par Pappers",
+     "dateReleve": "2026-08-22"
+    }
+   ]
+  },
+  {
+   "nom": "TENOR",
+   "groupeCapitalistique": "SASU créée le 01/06/1988, siège 5 rue des Anciennes Tanneries à Oullins-Pierre-Bénite, capital de 150 000 €. Le président est une personne morale : la holding GSPI (SIREN 518807532), SARL de Communay au capital de 50 000 €, code d'activité 66.30Z (gestion de fonds), en fonction depuis le 01/05/2018. Le gérant de GSPI est André Ferrari, qui était précédemment président de TENOR en direct : il n'a donc pas quitté la société, il l'a placée sous sa holding. GSPI ne dirige aucune autre entreprise que TENOR. POINT DE VIGILANCE : la holding de contrôle est nettement plus fragile que la société d'exploitation. Sur ses propres comptes, GSPI affiche un chiffre d'affaires d'honoraires de 268 k€ (2025), un résultat net passé de +129 k€ (2022) à −36,7 k€ (2025), des fonds propres tombés de 472 k€ à 164 k€, des dettes financières montées de 526 k€ à 804 k€, une autonomie financière de 16 % et un taux de levier de 16,8 fois l'EBITDA. Le levier de cet acteur est porté par la holding, pas par l'exploitation.",
+   "analyse360": {
+    "poidsEconomique": {
+     "caGroupe": {
+      "montantMEUR": 0.268,
+      "exercice": "2025",
+      "nature": "comptes_deposes",
+      "commentaire": "Chiffre d'affaires de la holding de contrôle GSPI (SIREN 518807532) : 254 k€ (2022), 258 k€ (2023), 265 k€ (2024), 268 k€ (2025). Il s'agit d'honoraires de gestion, non d'une activité commerciale : ce montant ne s'ajoute pas au chiffre d'affaires de TENOR et ne mesure aucune activité de facturation électronique.",
+      "source": "Chiffre d'affaires de la holding de contrôle GSPI (SIREN 518807532) : 254 k€ (2022), 258 k€ (2023), 265 k€ (2024), 268 k€ (2025). Il s'agit d'honoraires de gestion, non d'une activité commerciale : ce montant ne s'ajoute pas au chiffre d'affaires de TENOR et ne mesure aucune activité de facturation électronique.",
+      "dateReleve": "2026-08-22"
+     }
+    }
+   },
+   "sourcesEnrichissement": [
+    {
+     "url": "https://www.pappers.fr/entreprise/gspi-518807532",
+     "libelle": "Fiche registre et comptes sociaux de la holding GSPI (RCS Lyon), republiés par Pappers",
+     "dateReleve": "2026-08-22"
+    }
+   ]
+  }
+ ]
+}
