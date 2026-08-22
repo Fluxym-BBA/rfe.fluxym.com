@@ -1,0 +1,435 @@
+{
+ "_patch": {
+  "id": "PAYS-16",
+  "chantier": "Identité — qualification du pays des 16 fiches sans pays",
+  "auteur": "RFE_WebSite",
+  "dateReleve": "2026-08-22",
+  "nbPlateformes": 16,
+  "note": "Passe de qualification du dernier trou d’identité du référentiel : les 16 entrées sans champ `pays`, toutes candidates en attente des tests d’interopérabilité. Méthode : mention légale de l’éditeur d’abord (règles 56 et 59), puis contrôle au répertoire SIRENE pour les entités françaises (règle 55). 13 pays établis sur 16 : 9 France, 2 Belgique, 1 Allemagne, 1 Luxembourg. 6 SIREN nouveaux (FISKALTRUST, KALANDA, NUMERIA, RATIOO, SWILE, WAKASTELLAR), dont 4 portés par une dénomination légale différente du nom déclaré à la DGFiP. 3 fiches restent sans pays et c’est un résultat, pas un oubli : Basikon (aucune mention légale publiée, quatre URL testées en 404), FACTUREAPP et MY-EDDY (aucun site web publié par la DGFiP). Aucun pays n’est déduit d’un nom, d’un domaine seul ou d’une forme juridique. Deux corrections structurantes : FISKALTRUST est une entité française, filiale d’un groupe autrichien, et non une entité étrangère ; Taxilla Europe BV est belge et non néerlandaise. Discordance relevée et non arbitrée sur FISKALTRUST : mention légale annonçant un siège parisien et un RCS de Paris, siège INSEE à Lyon 6e. Écart relevé et non interprété sur KALANDA : ancienneté revendiquée depuis 2001 pour une entité créée en 2023. Conséquence sur `_meta.couverture` : 114 entités françaises, 46 étrangères, 3 non établies — la note qui annonce 44 étrangères reste à corriger hors patch."
+ },
+ "plateformes": [
+  {
+   "nom": "Basikon",
+   "sourcesEnrichissement": [
+    {
+     "champ": "pays",
+     "source": "https://www.basikon.com/",
+     "dateReleve": "2026-08-22",
+     "confiance": "non_qualifie",
+     "preuve": "Aucune page de mentions légales publiée : /legal-notice, /mentions-legales, /contact et /about-us renvoient une erreur 404 le 22/08/2026, et aucune page légale n’est indexée sur le domaine. Le pays du siège de l’entité immatriculée reste donc non établi."
+    }
+   ]
+  },
+  {
+   "nom": "BE FRESH S.à r.l.",
+   "pays": "Luxembourg",
+   "identiteInternationale": {
+    "paysISO": "LU",
+    "registreNational": "Registre de commerce et des sociétés (RCS) Luxembourg",
+    "identifiantRegistre": "B232808"
+   },
+   "sourcesEnrichissement": [
+    {
+     "champ": "pays",
+     "source": "https://www.befresh.lu/",
+     "dateReleve": "2026-08-22",
+     "confiance": "haute",
+     "preuve": "Mentions légales du site de l’éditeur relevées le 20/08/2026 : société de droit luxembourgeois immatriculée au RCS Luxembourg sous le numéro B232808. Aucune immatriculation au répertoire SIRENE n’est donc attendue."
+    }
+   ]
+  },
+  {
+   "nom": "BLG",
+   "pays": "France",
+   "confianceIdentite": "moyenne",
+   "sourcesEnrichissement": [
+    {
+     "champ": "pays",
+     "source": "https://www.casa-csm.fr/page/mentions-legales-1",
+     "dateReleve": "2026-08-22",
+     "confiance": "moyenne",
+     "preuve": "Faisceau convergent : annuaire Peppol rattachant le participant BLG à la France, domaine de l’éditeur en .fr, et mentions légales d’un client citant l’hébergeur « BLG Cloud, 1 rue de la Sous Préfecture, 60200 COMPIÈGNE ». La page de mentions légales du site de l’éditeur (/page/mentions-legales-40) ne restitue aucun contenu exploitable : le SIREN reste à établir."
+    }
+   ]
+  },
+  {
+   "nom": "CENSE",
+   "pays": "France",
+   "confianceIdentite": "moyenne",
+   "groupeCapitalistique": "Groupe COGEP — cabinet de conseil en gestion d'entreprise réunissant expertise comptable, juridique, financière et sociale ; CENSE est présentée comme « la plateforme digitale du groupe COGEP ». Entité de tête établie au registre : SA COGEP, SIREN 400 833 596, immatriculée au RCS de Bourges, siège 2658 route d’Orléans, 18230 Saint-Doulchard, code APE 69.20Z (activités comptables), créée le 01/04/1995, 78 établissements ouverts, catégorie ETI, tranche d’effectif 1 000 à 1 999 salariés (millésime 2023). Comptes déposés : chiffre d’affaires de 126,4 M€ et résultat net de 11,2 M€ sur l’exercice 2023. L’entité juridique portant l’immatriculation CENSE elle-même n’est pas établie à ce stade : aucune mention légale n’est publiée sur cense.fr, dont l’URL /mentions-legales renvoie la page d’accueil.",
+   "sourcesEnrichissement": [
+    {
+     "champ": "pays",
+     "source": "https://www.cogep.fr/mentions-legales/",
+     "dateReleve": "2026-08-22",
+     "confiance": "moyenne",
+     "preuve": "Mentions légales de l’éditeur du site du groupe : SA COGEP, RCS Bourges 400 833 596, siège à Saint-Doulchard (18)."
+    },
+    {
+     "champ": "groupeCapitalistique",
+     "source": "https://recherche-entreprises.api.gouv.fr/search?q=400833596",
+     "dateReleve": "2026-08-22",
+     "confiance": "haute",
+     "preuve": "Fiche ouverte du répertoire SIRENE pour le SIREN 400 833 596 : dénomination COGEP, catégorie ETI, 78 établissements ouverts, comptes 2023 déposés."
+    }
+   ]
+  },
+  {
+   "nom": "EAGLESSOFT",
+   "pays": "Belgique",
+   "identiteInternationale": {
+    "paysISO": "BE"
+   },
+   "sourcesEnrichissement": [
+    {
+     "champ": "pays",
+     "source": "https://eaglessoft.com/",
+     "dateReleve": "2026-08-22",
+     "confiance": "haute",
+     "preuve": "Site de l’éditeur relevé le 22/08/2026 : adresse belge (Excelsiorlaan, 1930 Zaventem), numéro de contact en +32, et référencement du prestataire dans l’annuaire Peppol au titre de la Belgique. Aucune page de mentions légales ni numéro d’entreprise BCE ne sont publiés : /legal-notice renvoie une erreur 404 et la politique de confidentialité ne porte aucun identifiant de registre."
+    }
+   ]
+  },
+  {
+   "nom": "EY Expertises & Transactions",
+   "pays": "France",
+   "confianceIdentite": "moyenne",
+   "sourcesEnrichissement": [
+    {
+     "champ": "pays",
+     "source": "https://www.ey.com/fr_fr/legal-and-privacy/legal-statement",
+     "dateReleve": "2026-08-22",
+     "confiance": "moyenne",
+     "preuve": "Déclaration juridique du réseau EY pour la France relevée le 22/08/2026 : entité membre française du réseau, exerçant en France. La déclaration ne publie ni dénomination sociale complète ni numéro d’immatriculation : le SIREN de l’entité portant l’agrément reste à établir."
+    }
+   ]
+  },
+  {
+   "nom": "FACTUREAPP",
+   "sourcesEnrichissement": [
+    {
+     "champ": "pays",
+     "source": "https://www.impots.gouv.fr/",
+     "dateReleve": "2026-08-22",
+     "confiance": "non_qualifie",
+     "preuve": "Aucun site web n’est publié pour cette entrée dans la liste DGFiP, et aucune adresse n’est restituée pour les candidates en attente des tests d’interopérabilité. En l’absence de source primaire nommant l’entité, le pays du siège reste non établi : il n’est pas déduit du nom."
+    }
+   ]
+  },
+  {
+   "nom": "FISKALTRUST",
+   "pays": "France",
+   "raisonSociale": "FISKALTRUST FRANCE SAS",
+   "siren": "841590243",
+   "dateCreation": "2018-08-03",
+   "trancheEffectif": "1-2",
+   "categorieEntreprise": "PME",
+   "activitePrincipale": "62.02A",
+   "adresse": "132 rue Bossuet 69006 Lyon",
+   "confianceIdentite": "haute",
+   "dirigeants": [
+    {
+     "nom": "FISKALTRUST CONSULTING GMBH",
+     "qualite": "Président de SAS",
+     "type": "personne morale"
+    }
+   ],
+   "groupeCapitalistique": "Filiale française d’un groupe autrichien : le président inscrit au registre est FISKALTRUST CONSULTING GMBH, société de droit autrichien. L’entité française est une PME de 1 à 2 salariés (millésime 2023), code APE 62.02A (conseil en systèmes et logiciels informatiques), créée le 03/08/2018. Le seul exercice publié au registre est 2019 : chiffre d’affaires nul et résultat net de −232,8 k€. L’hébergement du site européen est assuré depuis l’Autriche (Gurten).",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siren",
+     "source": "https://fiskaltrust.eu/fr-fr/imprint/",
+     "dateReleve": "2026-08-22",
+     "confiance": "haute",
+     "preuve": "Mentions légales de l’éditeur : « Site édité par fiskaltrust SAS », capital social de 30 000 €, RCS Paris 841 590 243, TVA intracommunautaire FR33841590243. Le numéro de TVA porte le SIREN 841 590 243."
+    },
+    {
+     "champ": "pays",
+     "source": "https://recherche-entreprises.api.gouv.fr/search?q=841590243",
+     "dateReleve": "2026-08-22",
+     "confiance": "haute",
+     "preuve": "Fiche ouverte du répertoire SIRENE : FISKALTRUST FRANCE SAS, siège 132 rue Bossuet 69006 Lyon, président FISKALTRUST CONSULTING GMBH. Discordance relevée et non arbitrée : la mention légale annonce un siège parisien (102 avenue des Champs-Élysées) et un RCS de Paris, la source INSEE situe le siège à Lyon 6e."
+    }
+   ]
+  },
+  {
+   "nom": "Insiders Technologies GmbH",
+   "pays": "Allemagne",
+   "adresse": "Brüsseler Straße 1, DE-67657 Kaiserslautern",
+   "identiteInternationale": {
+    "paysISO": "DE",
+    "registreNational": "Handelsregister — Amtsgericht Kaiserslautern",
+    "identifiantRegistre": "HRB 3831",
+    "numeroTVAIntracom": "DE223304264",
+    "tvaVerifieeVIES": false,
+    "formeJuridique": "Gesellschaft mit beschränkter Haftung (GmbH)"
+   },
+   "dirigeants": [
+    {
+     "nom": "Werner Weiss",
+     "qualite": "Geschäftsführer",
+     "type": "personne physique"
+    },
+    {
+     "nom": "Andree Albrecht",
+     "qualite": "Geschäftsführer",
+     "type": "personne physique"
+    }
+   ],
+   "sourcesEnrichissement": [
+    {
+     "champ": "identiteInternationale",
+     "source": "https://insiders-technologies.com/impressum/",
+     "dateReleve": "2026-08-22",
+     "confiance": "haute",
+     "preuve": "Impressum de l’éditeur relevé le 22/08/2026 : Insiders Technologies GmbH, Brüsseler Straße 1, DE-67657 Kaiserslautern, registre du tribunal d’instance de Kaiserslautern sous le numéro HRB 3831, numéro de TVA DE 223 304 264, gérants Werner Weiss et Andree Albrecht. Numéro de TVA non vérifié à VIES à ce stade."
+    }
+   ]
+  },
+  {
+   "nom": "KALANDA",
+   "pays": "France",
+   "raisonSociale": "KALANDA",
+   "siren": "951341379",
+   "dateCreation": "2023-03-28",
+   "trancheEffectif": "3-5",
+   "categorieEntreprise": "PME",
+   "activitePrincipale": "62.01Z",
+   "adresse": "ZAC Athélia 2, 94 avenue de la Sarriette 13600 La Ciotat",
+   "confianceIdentite": "haute",
+   "dirigeants": [
+    {
+     "nom": "JAUBERT CHRISTIAN ANTOINE GÉRARD",
+     "qualite": "Président de SAS",
+     "type": "personne physique"
+    }
+   ],
+   "sourcesEnrichissement": [
+    {
+     "champ": "siren",
+     "source": "https://www.kalanda.net/mentions-legales/",
+     "dateReleve": "2026-08-22",
+     "confiance": "haute",
+     "preuve": "Mentions légales de l’éditeur : « Propriétaire : KALANDA SAS, numéro de TVA FR36951341379, 94 avenue de la Sarriette, ZAC Athelia 2, 13600 LA CIOTAT ». Le numéro de TVA porte le SIREN 951 341 379 et l’adresse concorde caractère pour caractère avec le siège INSEE."
+    },
+    {
+     "champ": "pays",
+     "source": "https://recherche-entreprises.api.gouv.fr/search?q=951341379",
+     "dateReleve": "2026-08-22",
+     "confiance": "haute",
+     "preuve": "Fiche ouverte du répertoire SIRENE : KALANDA, créée le 28/03/2023, code APE 62.01Z, 3 à 5 salariés (millésime 2023), président Christian Jaubert. Écart relevé et non interprété : le site revendique une activité d’hébergement spécialisé depuis 2001, alors que l’entité immatriculée a été créée en 2023."
+    }
+   ]
+  },
+  {
+   "nom": "MY-EDDY",
+   "sourcesEnrichissement": [
+    {
+     "champ": "pays",
+     "source": "https://www.impots.gouv.fr/",
+     "dateReleve": "2026-08-22",
+     "confiance": "non_qualifie",
+     "preuve": "Aucun site web n’est publié pour cette entrée dans la liste DGFiP, et aucune adresse n’est restituée pour les candidates en attente des tests d’interopérabilité. Le pays du siège reste non établi : il n’est pas déduit du nom."
+    }
+   ]
+  },
+  {
+   "nom": "NUMERIA",
+   "pays": "France",
+   "raisonSociale": "INFO SERVICE EUROPE",
+   "siren": "384315552",
+   "dateCreation": "1992-01-01",
+   "trancheEffectif": "6-9",
+   "categorieEntreprise": "PME",
+   "activitePrincipale": "62.02A",
+   "adresse": "5 rue Rosa Luxemburg 95610 Éragny",
+   "confianceIdentite": "haute",
+   "dirigeants": [
+    {
+     "nom": "SOFTNEXT",
+     "qualite": "Président de SAS",
+     "type": "personne morale"
+    },
+    {
+     "nom": "MAURER JEAN-MICHEL",
+     "qualite": "Directeur Général",
+     "type": "personne physique"
+    }
+   ],
+   "groupeCapitalistique": "Groupe Numeria — société INFO SERVICE EUROPE (SAS, RCS Pontoise 384 315 552, capital 271 000 €), Eragny-sur-Oise (95), activité depuis 1974, code NAF 6202A. Identité confirmée au répertoire : l’entité immatriculée est bien INFO SERVICE EUROPE (SIREN 384 315 552), qui exploite la marque NUMERIA, créée le 01/01/1992, 6 à 9 salariés (millésime 2023). Son président inscrit au registre est la personne morale SOFTNEXT ; la direction générale est assurée par Jean-Michel Maurer. Étage supérieur non ouvert à ce stade : le rattachement s’arrête au dernier niveau documenté (règle 42). Comptes 2024 déposés : chiffre d’affaires restitué à zéro par la source ouverte, résultat net de 693,2 k€. Écart relevé et non interprété : le site revendique une activité depuis 1974, l’entité immatriculée date de 1992.",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siren",
+     "source": "https://www.numeria.fr/mentions-legales.htm",
+     "dateReleve": "2026-08-22",
+     "confiance": "haute",
+     "preuve": "Mentions légales de l’éditeur : RCS Pontoise 384315552, SIRET 38431555200057."
+    },
+    {
+     "champ": "pays",
+     "source": "https://recherche-entreprises.api.gouv.fr/search?q=384315552",
+     "dateReleve": "2026-08-22",
+     "confiance": "haute",
+     "preuve": "Fiche ouverte du répertoire SIRENE : INFO SERVICE EUROPE, siège 5 rue Rosa Luxemburg 95610 Éragny, président SOFTNEXT, directeur général Jean-Michel Maurer, 6 à 9 salariés."
+    }
+   ]
+  },
+  {
+   "nom": "RATIOO",
+   "pays": "France",
+   "raisonSociale": "DATAE",
+   "siren": "834331704",
+   "dateCreation": "2018-01-02",
+   "trancheEffectif": "1-2",
+   "categorieEntreprise": "PME",
+   "activitePrincipale": "70.22Z",
+   "adresse": "117 avenue Victor Hugo 92100 Boulogne-Billancourt",
+   "confianceIdentite": "moyenne",
+   "dirigeants": [
+    {
+     "nom": "CORNET (RICQUEBOURG) EMMANUELLE COLETTE FRANÇOISE",
+     "qualite": "Président de SAS",
+     "type": "personne physique"
+    }
+   ],
+   "sourcesEnrichissement": [
+    {
+     "champ": "siren",
+     "source": "https://ratioo.fr/mentions-legales",
+     "dateReleve": "2026-08-22",
+     "confiance": "haute",
+     "preuve": "Mentions légales de l’éditeur : « Ratioo, dont le numéro SIREN est 834 331 704, et le siège social est situé au 117 avenue Victor Hugo, 92100 Boulogne-Billancourt »."
+    },
+    {
+     "champ": "confianceIdentite",
+     "source": "https://recherche-entreprises.api.gouv.fr/search?q=834331704",
+     "dateReleve": "2026-08-22",
+     "confiance": "moyenne",
+     "preuve": "Fiche ouverte du répertoire SIRENE : le SIREN 834 331 704 désigne DATAE SAS, code APE 70.22Z (conseil pour les affaires et autres conseils de gestion), 1 à 2 salariés. L’adresse du siège concorde caractère pour caractère avec la mention légale, mais le code APE est un code de conseil et non d’édition (règle 60) : confiance ramenée à moyenne, l’entité porteuse de l’agrément reste à confirmer."
+    }
+   ]
+  },
+  {
+   "nom": "SWILE",
+   "pays": "France",
+   "raisonSociale": "SWILE",
+   "siren": "824012173",
+   "dateCreation": "2016-11-24",
+   "trancheEffectif": "250-499",
+   "categorieEntreprise": "ETI",
+   "activitePrincipale": "66.19B",
+   "adresse": "Immeuble L’Altis bâtiment A, @7Center, 561 rue Georges Méliès 34000 Montpellier",
+   "confianceIdentite": "haute",
+   "dirigeants": [
+    {
+     "nom": "SOUBEYRAND LOIC PAUL HUBERT",
+     "qualite": "Président de SAS",
+     "type": "personne physique"
+    },
+    {
+     "nom": "ERNST & YOUNG ET AUTRES",
+     "qualite": "Commissaire aux comptes titulaire",
+     "type": "personne morale"
+    },
+    {
+     "nom": "INSTITUT FIDUCIAIRE D’EXPERTISE COMPTABLE - IFEC",
+     "qualite": "Commissaire aux comptes titulaire",
+     "type": "personne morale"
+    }
+   ],
+   "analyse360": {
+    "poidsEconomique": {
+     "caEntiteFrancaise": {
+      "montantMEUR": 204.141,
+      "exercice": "2024",
+      "nature": "comptes_deposes",
+      "commentaire": "Chiffre d’affaires de l’entité immatriculée SWILE (SIREN 824 012 173), toutes activités confondues : l’activité de plateforme agréée n’y est pas isolée et sa part n’est pas estimée.",
+      "source": "https://recherche-entreprises.api.gouv.fr/search?q=824012173",
+      "dateReleve": "2026-08-22"
+     },
+     "resultatNet": 2000000,
+     "effectifEntite": "250 à 499 salariés (millésime 2023, INSEE)"
+    }
+   },
+   "sourcesEnrichissement": [
+    {
+     "champ": "siren",
+     "source": "https://www.swile.co/legal/cgps-titres-resto-affilies",
+     "dateReleve": "2026-08-22",
+     "confiance": "haute",
+     "preuve": "Conditions générales de prestation de services aux affiliés : « Swile, société par actions simplifiée, dont le siège social est situé au @7center, Immeuble L’Altis, Bâtiment A, 561 rue Georges Méliès - 34000 Montpellier, immatriculée au RCS de Montpellier sous le numéro 824 012 173 ». Ressort du greffe et siège INSEE concordants (règle 61)."
+    },
+    {
+     "champ": "analyse360.poidsEconomique",
+     "source": "https://recherche-entreprises.api.gouv.fr/search?q=824012173",
+     "dateReleve": "2026-08-22",
+     "confiance": "haute",
+     "preuve": "Fiche ouverte du répertoire SIRENE : SWILE, catégorie ETI, code APE 66.19B, 250 à 499 salariés (millésime 2023), comptes 2024 déposés — chiffre d’affaires de 204,1 M€ et résultat net de 2,0 M€."
+    }
+   ]
+  },
+  {
+   "nom": "Taxilla Europe BV",
+   "pays": "Belgique",
+   "adresse": "Rue des Colonies 11, 1000 Bruxelles",
+   "identiteInternationale": {
+    "paysISO": "BE",
+    "formeJuridique": "Besloten vennootschap (BV) de droit belge"
+   },
+   "groupeCapitalistique": "Entité européenne du groupe Taxilla (plateforme de conformité et d'automatisation financière revendiquant plus de 100 clients grands comptes et une couverture multi-juridictions ; structure de détention non publiée sur le site). La société de tête publiée est Taxilla Inc. Le site du groupe publie cinq autres implantations : Inde (Hyderabad, Telangana), États-Unis, Australie (Taxilla Pty Ltd), Malaisie (Taxilla Sdn Bhd) et Émirats arabes unis. Le numéro d’entreprise belge (BCE) n’est pas publié : aucune page de mentions légales n’existe sur le domaine, seulement une politique de confidentialité au nom de Taxilla Inc.",
+   "sourcesEnrichissement": [
+    {
+     "champ": "pays",
+     "source": "https://www.taxilla.com/contact",
+     "dateReleve": "2026-08-22",
+     "confiance": "haute",
+     "preuve": "Page contact de l’éditeur relevée le 22/08/2026 : « Belgium — Taxilla Europe BV, Rue des Colonies 11, Brussels, 1000, Belgium ». Correction structurante : le suffixe « BV » avait été lu comme une forme néerlandaise, alors qu’il désigne aussi, depuis la réforme du Code des sociétés de 2019, la société à responsabilité limitée de droit belge."
+    }
+   ]
+  },
+  {
+   "nom": "WAKASTELLAR",
+   "pays": "France",
+   "raisonSociale": "WAKASTELLAR",
+   "siren": "107956120",
+   "dateCreation": "2026-07-22",
+   "activitePrincipale": "62.01Z",
+   "adresse": "115 le Clos Papin 44310 Saint-Philbert-de-Grand-Lieu",
+   "confianceIdentite": "haute",
+   "dirigeants": [
+    {
+     "nom": "JDS CONSEIL",
+     "qualite": "Président de SAS",
+     "type": "personne morale"
+    },
+    {
+     "nom": "LOU CONSEIL",
+     "qualite": "Directeur Général",
+     "type": "personne morale"
+    },
+    {
+     "nom": "FLO CONSEIL",
+     "qualite": "Directeur Général",
+     "type": "personne morale"
+    }
+   ],
+   "groupeCapitalistique": "Groupe Wakastellar, créé en 2025 par JDS pour regrouper ses briques logicielles historiques : CTOOLS (1992), DataExchanger (1995, EAI/ETL), Documalis (2004, GED et archivage) et SoWeSign (2017, cédé en 2022 au groupe HSW). L’entité immatriculée est une société par actions simplifiée au capital de 10 000 €, créée le 22/07/2026, dirigée par trois personnes morales : JDS CONSEIL (président), LOU CONSEIL et FLO CONSEIL (directeurs généraux). Aucun de ces trois étages n’est ouvert à ce stade : le rattachement s’arrête au dernier niveau documenté (règle 42). Aucune tranche d’effectif ni catégorie d’entreprise n’est renseignée au répertoire, et aucun compte n’a pu être déposé, l’entité n’ayant pas encore clos d’exercice.",
+   "sourcesEnrichissement": [
+    {
+     "champ": "siren",
+     "source": "https://www.wakastellar.com/mentions-legales",
+     "dateReleve": "2026-08-22",
+     "confiance": "haute",
+     "preuve": "Informations légales de l’éditeur : « Wakastellar, société par actions simplifiée au capital social de 10 000 €, immatriculée au Registre du Commerce et des Sociétés de Nantes sous le numéro 107 956 120. Son siège social est situé au 115 le clos papin, 44310 SAINT PHILBERT DE GRAND LIEU, France ». Adresse concordante caractère pour caractère avec le siège INSEE, ressort de Nantes cohérent avec un siège en Loire-Atlantique (règle 61)."
+    },
+    {
+     "champ": "dateCreation",
+     "source": "https://recherche-entreprises.api.gouv.fr/search?q=107956120",
+     "dateReleve": "2026-08-22",
+     "confiance": "haute",
+     "preuve": "Fiche ouverte du répertoire SIRENE : WAKASTELLAR, créée le 22/07/2026, code APE 62.01Z, tranche d’effectif non renseignée, présidence et directions générales assurées par trois personnes morales."
+    }
+   ]
+  }
+ ]
+}
