@@ -5,7 +5,7 @@
   "auteur": "RFE_WebSite",
   "dateReleve": "2026-08-24",
   "nbPlateformes": 6,
-  "note": "Premier lot 360 consacré non pas à des éditeurs mais à un canal : la profession comptable. Six plateformes agréées portées par des réseaux d'expertise comptable, par l'association de solutions de la profession, par un éditeur détenu par des cabinets et par la filiale technique d'un groupe pluridisciplinaire. Constat central : pour cinq de ces six fiches, l'agrément ne crée aucune activité et ne produit aucun chiffre d'affaires propre — il protège une relation client. Les chiffres d'affaires exposés (FITECO 282,1 M€ en 2025, COGEP 126,4 M€ en 2023, DOUGS 24,7 M€ en 2024, MY UNISOFT 9,8 M€ en 2024) mesurent des honoraires comptables ou une licence logicielle, jamais l'activité agréée, et aucune part attribuable n'est estimée. ECMA est une association loi 1901 sans comptes déposés ni actionnaire, et FIDUCIAL CLOUD est une filiale de 20 à 49 salariés qui sert environ 334 000 clients de groupe : dans ces deux cas le poids économique ne se lit pas dans les comptes de l'entité immatriculée. Indices de centralité : 3 pour jefacture.com, 2 pour MY UNISOFT et FIDUCIAL CLOUD, 1 pour MY FITECO, CENSE et Dougs. Postures : canal_indirect pour jefacture.com et MY UNISOFT, base_installee pour MY FITECO, CENSE et FIDUCIAL CLOUD, conquete_directe pour Dougs. Deux singularités relevées : MY UNISOFT est détenue par 125 cabinets qui sont aussi ses clients, avec HG Capital majoritaire depuis décembre 2024 ; COGEP est le seul réseau du lot à monétiser explicitement sa plateforme par abonnements publiés de 9 à 99 €. Aucune référence client nominative n'est publiée par aucun des six acteurs : la seule grandeur comparable est le volume, et il est exprimé dans des unités différentes — cabinets, clients, dossiers — qui ne sont pas interchangeables."
+  "note": "Premier lot 360 consacré non pas à des éditeurs mais à un canal : la profession comptable. Six plateformes agréées portées par des réseaux d'expertise comptable, par l'association de solutions de la profession, par un éditeur détenu par des cabinets et par la filiale technique d'un groupe pluridisciplinaire. Constat central : pour cinq de ces six fiches, l'agrément ne crée aucune activité et ne produit aucun chiffre d'affaires propre — il protège une relation client. Les chiffres d'affaires exposés (FITECO 282,1 M€ en 2025, COGEP 126,4 M€ en 2023, DOUGS 24,7 M€ en 2024, MY UNISOFT 9,8 M€ en 2024) mesurent des honoraires comptables ou une licence logicielle, jamais l'activité agréée, et aucune part attribuable n'est estimée. ECMA est une association loi 1901 sans comptes déposés ni actionnaire, et FIDUCIAL CLOUD est une filiale de 20 à 49 salariés qui sert environ 334 000 clients de groupe : dans ces deux cas le poids économique ne se lit pas dans les comptes de l'entité immatriculée. Indices de centralité : 3 pour jefacture.com, 2 pour MY UNISOFT et FIDUCIAL CLOUD, 1 pour MY FITECO, CENSE et Dougs. Postures : canal_indirect pour jefacture.com et MY UNISOFT, base_installee pour MY FITECO, CENSE et FIDUCIAL CLOUD, conquete_directe pour Dougs. Deux singularités relevées : MY UNISOFT est détenue par 125 cabinets qui sont aussi ses clients, avec HG Capital majoritaire depuis décembre 2024 ; COGEP est le seul réseau du lot à monétiser explicitement sa plateforme par abonnements publiés de 9 à 99 €. Aucune référence client nominative n'est publiée par aucun des six acteurs : la seule grandeur comparable est le volume, et il est exprimé dans des unités différentes — cabinets, clients, dossiers — qui ne sont pas interchangeables. VERSION CORRIGÉE du 25/08/2026 : la fiche CENSE avait été rédigée sans intégrer un champ déjà présent au référentiel, `socleTechnique`, qui établit sur citation littérale de l'éditeur que CENSE est une marque blanche sur le socle de la plateforme agréée CHAINTRUST, contrôlée majoritairement par le groupe norvégien Visma. Le faisceau d'indices, la lecture de centralité, le modèle tarifaire et la lecture concurrentielle de cette fiche sont corrigés en conséquence (règles 94 et 95). La preuve de posture de jefacture.com est par ailleurs complétée de sa qualité de fournisseur de socle en marque grise, également déjà présente au référentiel."
  },
  "plateformes": [
   {
@@ -91,7 +91,7 @@
     },
     "postureCommerciale": {
      "valeur": "canal_indirect",
-     "preuve": "Le cabinet d'expertise comptable est le canal : il s'abonne, puis invite ses clients entreprises, avec un modèle de mandat fourni pour l'inscription à l'annuaire national. Près de 4 000 cabinets sont annoncés abonnés, l'usage de la plateforme par le cabinet pour ses propres factures étant gratuit. L'inscription directe d'une entreprise sans invitation préalable d'un cabinet est possible depuis une évolution documentée dans le centre d'aide, ce qui ouvre un canal direct secondaire sans remettre en cause la logique principale. Des intégrations avec des éditeurs de gestion commerciale tiers existent également, jefacture.com étant listée comme solution partenaire.",
+     "preuve": "Le cabinet d'expertise comptable est le canal : il s'abonne, puis invite ses clients entreprises, avec un modèle de mandat fourni pour l'inscription à l'annuaire national. Près de 4 000 cabinets sont annoncés abonnés, l'usage de la plateforme par le cabinet pour ses propres factures étant gratuit. L'inscription directe d'une entreprise sans invitation préalable d'un cabinet est possible depuis une évolution documentée dans le centre d'aide, ce qui ouvre un canal direct secondaire sans remettre en cause la logique principale. Des intégrations avec des éditeurs de gestion commerciale tiers existent également, jefacture.com étant listée comme solution partenaire. Le référentiel qualifie par ailleurs cet acteur de fournisseur de socle distribuant en marque grise et par API embarquée : il ne se contente donc pas d'équiper les cabinets, il met sa conformité à disposition de solutions tierces.",
      "confiance": "haute"
     },
     "referencesClients": {
@@ -241,7 +241,8 @@
    "sourcesEnrichissement": [
     "https://annuaire-entreprises.data.gouv.fr/entreprise/400833596",
     "https://cense.fr/",
-    "https://www.cogep.fr/magazines/cense-le-cockpit-digital-de-votre-gestion-dentreprise/"
+    "https://www.cogep.fr/magazines/cense-le-cockpit-digital-de-votre-gestion-dentreprise/",
+    "https://www.cogep.fr/magazines/cense-est-disponible/"
    ],
    "analyse360": {
     "metierPrincipal": "Expertise comptable, audit, conseil et services associés. L'immatriculation est adossée à SA COGEP (SIREN 400 833 596), groupe d'expertise comptable français exploitant 78 établissements. CENSE est la plateforme digitale déployée par COGEP auprès de ses clients, présentée comme un « cockpit » de gestion intégrant sa propre plateforme agréée.",
@@ -257,7 +258,7 @@
       "source": "https://www.cogep.fr/"
      },
      {
-      "libelle": "CENSE — plateforme digitale client intégrant la plateforme agréée, un coffre-fort numérique à valeur probante, la facturation, la trésorerie, les notes de frais et des comptes bancaires et moyens de paiement intégrés",
+      "libelle": "CENSE — plateforme digitale client intégrant la fonction de plateforme agréée, un coffre-fort numérique à valeur probante, la facturation, la trésorerie, les notes de frais et des comptes bancaires et moyens de paiement intégrés. Point déterminant : COGEP n'opère pas le socle de conformité. Sa propre communication indique que la plateforme collaborative « s'appuie sur la PA CHAINTRUST, plateforme agréée par l'administration fiscale (DGFiP) depuis plusieurs mois ». CENSE est donc une marque blanche sur le socle d'un tiers",
       "poids": "mineur",
       "source": "https://cense.fr/"
      }
@@ -306,9 +307,14 @@
        "signal": "La cible reste la clientèle du cabinet : « votre expert-comptable COGEP vous présentera très prochainement les offres », formulation qui exclut une commercialisation hors base",
        "sens": "-",
        "preuve": "https://www.cogep.fr/magazines/cense-le-cockpit-digital-de-votre-gestion-dentreprise/"
+      },
+      {
+       "signal": "COGEP n'opère pas le socle de conformité : sa propre communication indique que CENSE s'appuie sur la plateforme agréée CHAINTRUST, elle-même immatriculée au référentiel et contrôlée majoritairement par le groupe norvégien Visma depuis janvier 2024. Le groupe a donc acheté sa conformité au lieu de la construire, ce qui borne fortement ce qu'il a réellement investi dans l'activité agréée",
+       "sens": "-",
+       "preuve": "https://www.cogep.fr/magazines/cense-est-disponible/"
       }
      ],
-     "lecture": "Indice 1 : activité annexe, mais l'un des indices 1 les plus outillés du référentiel. COGEP ne se transforme pas en éditeur : le métier reste l'honoraire comptable. En revanche le groupe monétise explicitement la plateforme par abonnements étagés et y agrège des services financiers, ce qui la rapproche d'une offre produit. Le plafond reste la base clients du cabinet.",
+     "lecture": "Indice 1 : activité annexe. COGEP ne se transforme pas en éditeur — le métier reste l'honoraire comptable — et il ne construit pas non plus sa conformité : le socle de plateforme agréée est celui d'un tiers, CHAINTRUST, exploité en marque blanche. Ce qui appartient en propre au groupe, c'est l'interface, l'agrégation de services financiers et la grille tarifaire de 9 à 99 € par mois, pas le moteur de conformité. L'indice reste 1 et le plafond reste la base clients du cabinet.",
      "confiance": "haute"
     },
     "postureCommerciale": {
@@ -335,11 +341,11 @@
      "typeActionnaire": "non_qualifie",
      "financementRecent": "Aucune opération relevée. Développement autofinancé par l'activité du groupe.",
      "acquisitions": [],
-     "modeleTarifaire": "Socle de conformité inclus dans la relation de mission, puis abonnements publiés de 9 à 99 € par mois pour des fonctionnalités élargies : facturation, trésorerie, notes de frais, comptes bancaires et moyens de paiement. Aucune offre gratuite autonome hors clientèle du cabinet.",
+     "modeleTarifaire": "Socle de conformité inclus dans la relation de mission, puis abonnements publiés de 9 à 99 € par mois pour des fonctionnalités élargies : facturation, trésorerie, notes de frais, comptes bancaires et moyens de paiement. Aucune offre gratuite autonome hors clientèle du cabinet. À noter que le socle de conformité étant acheté à un tiers, une part du prix payé par le client final rémunère l'opérateur du socle : le montant de cette part n'est pas public et n'est pas estimé.",
      "tarifPublie": true,
      "offreGratuite": false
     },
-    "lectureConcurrentielle": "Même logique de canal que les autres réseaux comptables du référentiel, avec une nuance qui mérite d'être notée : COGEP ne se contente pas de fournir une conformité, il vend un abonnement et y adosse des services bancaires. C'est le premier signe, dans ce lot, d'un réseau comptable qui transforme la réforme en ligne de revenu et pas seulement en ligne de coût. Si ce modèle réussit, il change la nature du canal cabinet : le cabinet devient un distributeur de logiciel qui facture, avec une force de frappe locale de 78 implantations. Fluxym est un acteur du marché : ce référentiel est publié par un intégrateur qui distribue des solutions concurrentes, et cette lecture est une lecture de marché, pas une évaluation.",
+    "lectureConcurrentielle": "Même logique de canal que les autres réseaux comptables du référentiel, avec deux nuances qui méritent d'être notées. Première nuance : COGEP ne se contente pas de fournir une conformité, il vend un abonnement de 9 à 99 € par mois et y adosse des services bancaires. C'est le premier signe, dans ce lot, d'un réseau comptable qui transforme la réforme en ligne de revenu et pas seulement en ligne de coût — et si ce modèle réussit, le cabinet devient un distributeur de logiciel qui facture, avec une force de frappe locale de 78 implantations. Seconde nuance, de portée plus large : la conformité elle-même est achetée à un tiers, la plateforme agréée CHAINTRUST, contrôlée majoritairement par le groupe norvégien Visma. Un flux de facturation confié à un réseau comptable français aboutit donc sur le socle d'un groupe scandinave, sans que rien dans l'identité de l'entité immatriculée ne le laisse voir. C'est une route de présence étrangère invisible, et elle est traitée comme telle par le chantier H2 (règle 95). Fluxym est un acteur du marché : ce référentiel est publié par un intégrateur qui distribue des solutions concurrentes, et cette lecture est une lecture de marché, pas une évaluation.",
     "droitDeReponse": {
      "signale": false,
      "date": null,

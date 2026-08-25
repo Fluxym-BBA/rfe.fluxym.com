@@ -1,0 +1,64 @@
+{
+ "_patch": {
+  "id": "H2-88-CONTROLE-ETRANGER",
+  "chantier": "H2 relu à la lumière de la règle 88 — routes indirectes de présence étrangère (4 fiches)",
+  "auteur": "RFE_WebSite",
+  "dateReleve": "2026-08-25",
+  "nbPlateformes": 4,
+  "note": "Première passe du chantier H2 rejoué avec la règle 88 : un groupe étranger peut atteindre le marché français des plateformes agréées sans figurer au registre de l'entité immatriculée. Résultat de cette passe : le groupe norvégien Visma est présent dans le référentiel par quatre routes distinctes, dont deux seulement sont visibles au niveau de l'entité. Route 1, immatriculation directe : CHAINTRUST by Visma, participation majoritaire annoncée en janvier 2024. Route 2, immatriculation directe à l'étranger : MySupply Aps au Danemark, dont le groupe a annoncé le regroupement sous la marque Inexchange au 01/10/2026. Route 3, socle en marque blanche : le réseau comptable français COGEP exploite CENSE sur le socle de CHAINTRUST, ce que sa propre communication établit — l'entité immatriculée est française, son actionnariat est français, et rien n'en laisse voir la dépendance. Route 4, participation minoritaire : Visma est entré en 2026 au capital de fulll, filiale d'In Extenso également immatriculée, à gouvernance partagée. Cette quatrième route est publiée comme fait mais délibérément exclue de la liaison d'immatriculations, une participation minoritaire n'établissant pas l'appartenance à un groupe (règle 97). Le patch pose donc une liaison deux_offres_deux_cibles entre CHAINTRUST by Visma et MySupply Aps, et enrichit les blocs groupeCapitalistique de CHAINTRUST, FULLL et CENSE. Trois de ces quatre groupeCapitalistique préexistaient et sont réécrits en intégrant leur texte d'origine en tête ; celui de FULLL était vide."
+ },
+ "plateformes": [
+  {
+   "nom": "CHAINTRUST by Visma",
+   "sourcesEnrichissement": [
+    "https://www.visma.com/newsroom/visma-acquires-majority-stake-in-chaintrust",
+    "https://www.visma.com/newsroom/visma-et-in-extenso-concluent-un-partenariat-strategique-pour-renforcer-la-solution-fulll-en-france-1",
+    "https://www.cogep.fr/magazines/cense-est-disponible/"
+   ],
+   "groupeCapitalistique": "Visma. Précisions apportées le 25/08/2026 : le groupe norvégien Visma a annoncé en janvier 2024 l'acquisition d'une participation majoritaire dans Chaintrust, société parisienne fondée en 2018. Visma est présent en France sur le marché du cabinet d'expertise comptable avec plusieurs actifs, dont Inqom, et a par ailleurs acquis en 2026 une participation minoritaire dans fulll, filiale logicielle du groupe In Extenso, dans le cadre d'un partenariat à gouvernance partagée. Le groupe détient également MySupply Aps au Danemark, immatriculée au référentiel, dont il a annoncé le regroupement avec Inexchange, Maventa et efacto sous la marque Inexchange à compter du 01/10/2026, présenté comme son engagement le plus significatif à ce jour dans la facturation électronique.",
+   "immatriculationsLiees": {
+    "groupe": "Visma",
+    "type": "deux_offres_deux_cibles",
+    "entrees": [
+     "CHAINTRUST by Visma",
+     "MySupply Aps"
+    ],
+    "lecture": "Le groupe norvégien Visma porte deux immatriculations distinctes au référentiel, sur deux marchés et deux cibles : CHAINTRUST by Visma en France, adossée au canal du cabinet d'expertise comptable, et MySupply Aps au Danemark, sur le domaine des achats. Une troisième route existe, de nature différente et sans immatriculation propre : le réseau français COGEP exploite sa plateforme CENSE en marque blanche sur le socle de CHAINTRUST, ce que sa propre communication établit. Cette relation n'est pas une liaison d'immatriculations et n'est donc pas comptée ici, mais elle porte la présence de Visma dans une troisième entrée du référentiel. Enfin, la participation minoritaire prise en 2026 dans fulll, également immatriculée, est délibérément exclue de cette liaison : une participation minoritaire à gouvernance partagée n'établit pas l'appartenance à un groupe (règle 97).",
+    "source": "Communiqués Visma sur l'acquisition majoritaire de Chaintrust et sur le partenariat In Extenso / fulll ; communication COGEP sur le socle de CENSE",
+    "dateReleve": "2026-08-25"
+   }
+  },
+  {
+   "nom": "MySupply Aps",
+   "sourcesEnrichissement": [
+    "https://www.visma.com/newsroom/visma-acquires-majority-stake-in-chaintrust"
+   ],
+   "immatriculationsLiees": {
+    "groupe": "Visma",
+    "type": "deux_offres_deux_cibles",
+    "entrees": [
+     "CHAINTRUST by Visma",
+     "MySupply Aps"
+    ],
+    "lecture": "Seconde immatriculation du groupe norvégien Visma au référentiel, sur une cible et un pays différents de ceux de CHAINTRUST by Visma : le domaine des achats au Danemark d'un côté, le canal du cabinet d'expertise comptable en France de l'autre. Le groupe a annoncé le regroupement de cette entité avec Inexchange, Maventa et efacto sous la marque Inexchange à compter du 01/10/2026 : la dénomination portée au référentiel est donc susceptible de ne plus correspondre à la marque commerciale après cette date, ce qui devra être vérifié au relevé DGFiP suivant.",
+    "source": "Communiqués du groupe Visma",
+    "dateReleve": "2026-08-25"
+   }
+  },
+  {
+   "nom": "FULLL",
+   "sourcesEnrichissement": [
+    "https://www.visma.com/newsroom/visma-et-in-extenso-concluent-un-partenariat-strategique-pour-renforcer-la-solution-fulll-en-france-1",
+    "https://www.laprofessioncomptable.com/article/france/visma-et-in-extenso-concluent-un-partenariat-strategique-pour-renforcer-fulll"
+   ],
+   "groupeCapitalistique": "Groupe In Extenso, réseau français indépendant d'expertise comptable et de services aux TPE et PME, qui a fondé fulll en 2021 comme sa filiale logicielle destinée aux cabinets. Fait nouveau relevé le 25/08/2026 : le groupe norvégien Visma a acquis une participation minoritaire au capital de fulll, annoncée le 10/03/2026 et finalisée à l'été 2026, dans le cadre d'un partenariat présenté comme un co-actionnariat à gouvernance partagée. Les deux parties précisent que fulll n'est pas cédé et reste sous contrôle d'In Extenso. La participation est minoritaire : elle est publiée comme un fait, mais elle n'établit pas l'appartenance de cette immatriculation au groupe Visma et aucune liaison d'immatriculations n'est créée sur ce fondement (règle 97). Volume revendiqué par les communiqués : plus de 250 000 clients équipés en comptabilité via la plateforme."
+  },
+  {
+   "nom": "CENSE",
+   "sourcesEnrichissement": [
+    "https://www.visma.com/newsroom/visma-acquires-majority-stake-in-chaintrust"
+   ],
+   "groupeCapitalistique": "Groupe COGEP — cabinet de conseil en gestion d'entreprise réunissant expertise comptable, juridique, financière et sociale ; CENSE est présentée comme « la plateforme digitale du groupe COGEP ». Complément relevé le 25/08/2026 : le contrôle capitalistique de l'entité immatriculée est français, mais le socle de conformité ne l'est pas. La communication du groupe établit que CENSE s'appuie sur la plateforme agréée CHAINTRUST, elle-même immatriculée au référentiel et contrôlée majoritairement depuis janvier 2024 par le groupe norvégien Visma. Cette dépendance n'apparaît ni dans le pays de l'entité, ni dans son actionnariat : elle n'est lisible que dans le champ socleTechnique (règle 95)."
+  }
+ ]
+}
