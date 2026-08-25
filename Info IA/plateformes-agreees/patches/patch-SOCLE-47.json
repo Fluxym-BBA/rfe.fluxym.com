@@ -1,0 +1,272 @@
+{
+  "_patch": {
+    "id": "SOCLE-47",
+    "chantier": "H2 passe 2 — interrogation des 47 zones aveugles de socle technique (règles 95 et 96)",
+    "societe": "11 fiches",
+    "auteur": "RFE_WebSite",
+    "dateReleve": "2026-08-25",
+    "nbPlateformes": 11,
+    "note": "Interrogation des 47 fiches dont le socle technique n'est pas établi (34 en type inconnu, 13 sans type). Résultat de la passe : 6 socles levés (Shine, Legalinvoice, EEZI, XELYA, SEPTEO, KLEKOON), tous en socle propre, aucun en marque blanche ; 5 fiches enrichies sans levée. Le référentiel passe de 47 à 41 zones aveugles. Enseignement de méthode dominant : les pages produit ne répondent jamais à la question du socle, alors que deux familles de documents y répondent souvent, les conditions générales et politiques de confidentialité d'une part, les déclarations de tiers consommateurs d'autre part. C'est ainsi que Shine, Klekoon, Septeo et Xelya ont été levées. Deux découvertes de fond hors socle : Effinum est la plateforme du réseau Cerfrance, ce qui ajoute un troisième réseau d'expertise comptable au bloc profession comptable après jefacture.com et MyKinexo ; et VosFactures pourrait être une filiale de l'éditeur polonais Fakturownia, piste non corroborée qui ferait entrer un dixième pays au référentiel. Aucune nouvelle route de contrôle étranger par marque blanche n'a été trouvée dans cette passe : l'asymétrie de la règle 96 reste entière.",
+    "nouveauxChamps": [],
+    "ecrasementsIntentionnels": {
+      "nombre": 17,
+      "commentaire": "Tous les écrasements sont intentionnels : ils remplacent une qualification provisoire par une qualification établie sur pièce. Les valeurs d'origine sont conservées ci-dessous pour que la progression reste vérifiable. Aucun champ hors socleTechnique n'est écrasé, à l'exception d'aucun : groupeCapitalistique n'est renseigné que sur VosFactures, où il était vide.",
+      "detail": [
+        {
+          "nom": "Shine",
+          "valeursRemplacees": {
+            "type": "inconnu",
+            "preuve": "Shine revendique le statut de Plateforme Agreee et indique que « notre Plateforme Agreee est deja integree a Shine », sans documenter l'operateur du socle d'echange. Aucun element public ne permet de trancher entre socle propre et socle tiers.",
+            "source": "https://www.shine.fr/facturation-electronique",
+            "confiance": "faible"
+          }
+        },
+        {
+          "nom": "XELYA",
+          "valeursRemplacees": {
+            "type": "inconnu",
+            "preuve": "Aucune page dediee a la Plateforme Agreee sur xelya.com ; la seule communication produit trouvee est portee par le site du logiciel Ximi, qui annonce une \"PA Xelya\" integree nativement, sans indiquer si le socle technique est developpe en interne ou fourni par un tiers.",
+            "source": "https://www.ximi.fr/facturation-electronique/",
+            "confiance": "faible"
+          }
+        },
+        {
+          "nom": "SEPTEO",
+          "valeursRemplacees": {
+            "type": "inconnu",
+            "preuve": "La page 'PA SEPTEO' decrit l'offre et ses fonctions mais ne precise pas si le socle d'echange est developpe par Septeo ou opere par un tiers.",
+            "source": "https://www.ingeneo.septeo.com/plateforme-agreee-facturation-electronique"
+          }
+        },
+        {
+          "nom": "FIDUCIAL CLOUD",
+          "valeursRemplacees": {
+            "preuve": "Le site décrit la plateforme agréée FIDUCIAL Cloud et le choix d'intégrer les interactions PA directement dans les logiciels FIDUCIAL (Facilia Achats), mais ne nomme aucun opérateur de socle technique.",
+            "source": "https://www.fiducial.fr/facturation-electronique/actualites-conseils/pourquoi-utiliser-plateforme-agreee-PA-FIDUCIAL-facturation-electronique"
+          }
+        },
+        {
+          "nom": "FULLL",
+          "valeursRemplacees": {
+            "preuve": "Le site fulll.fr affirme l'immatriculation définitive de « la Plateforme Agréée fulll » sans nommer d'opérateur de socle. Un communiqué Generix Group du 12/07/2023 documente un partenariat industriel dans lequel fulll, alors opérateur de dématérialisation, commercialisait la PDP « Generix Invoice Services » auprès des cabinets ; aucune source postérieure ne confirme que ce socle porte la PA actuelle.",
+            "source": "https://www.fulll.fr/facturation-electronique/conformite-flash"
+          }
+        },
+        {
+          "nom": "VosFactures",
+          "valeursRemplacees": {
+            "preuve": "Le site annonce que « le logiciel de facturation VosFactures est également Plateforme Agréée officielle » et décrit la conversion des factures par sa propre brique agréée, mais ne documente ni l'architecture, ni l'opérateur du socle, ni les certifications obtenues.",
+            "source": "https://vosfactures.fr/facturation-electronique-plateforme-agreee/"
+          }
+        }
+      ]
+    }
+  },
+  "plateformes": [
+    {
+      "nom": "Shine",
+      "socleTechnique": {
+        "type": "propre",
+        "operateurSocle": "Shine Denmark ApS",
+        "preuve": "Les conditions générales d'utilisation, document contractuel opposable, nomment l'entité qui opère la plateforme : « des fonctionnalités de facturation électronique fournies par Shine Denmark ApS en qualité de Plateforme Agréée (PA) immatriculée auprès de l'administration fiscale française sous le numéro 0147 ». Réserve : les CGU établissent l'entité porteuse et opératrice de l'immatriculation, elles n'établissent pas l'origine du code du socle d'échange. L'entité porteuse est danoise alors que le service est commercialisé sous une marque française.",
+        "source": "https://shine.co/fr/legal/terms (conditions d'utilisation, art. 1, 4 et 8.9)",
+        "confiance": "moyenne"
+      },
+      "sourcesEnrichissement": [
+        {
+          "champ": "socleTechnique",
+          "source": "https://shine.co/fr/legal/terms (conditions d'utilisation, art. 1, 4 et 8.9)",
+          "dateReleve": "2026-08-25",
+          "confiance": "moyenne"
+        }
+      ]
+    },
+    {
+      "nom": "Legalinvoice by Tinexta Infocert",
+      "socleTechnique": {
+        "type": "propre",
+        "operateurSocle": "InfoCert S.p.A. (groupe Tinexta)",
+        "preuve": "Communiqué de l'opérateur lui-même annonçant l'accréditation : « Legalinvoice has achieved full accreditation as a Plateforme Agréée (PA) in France, officially joining the list of certified platforms approved by the DGFiP ». Legalinvoice est la plateforme de facturation électronique éditée et opérée par InfoCert, tiers de confiance italien qui opère déjà le SdI italien pour ses clients ; le socle est celui du groupe, porté en France sous la même marque.",
+        "source": "https://infocert.digital/news-event/legalinvoice-accredited-as-plateforme-agreee-in-france-strengthening-its-international-e-invoicing-leadership/",
+        "confiance": "haute"
+      },
+      "sourcesEnrichissement": [
+        {
+          "champ": "socleTechnique",
+          "source": "https://infocert.digital/news-event/legalinvoice-accredited-as-plateforme-agreee-in-france-strengthening-its-international-e-invoicing-leadership/",
+          "dateReleve": "2026-08-25",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "EEZI powered by VAT IT",
+      "socleTechnique": {
+        "type": "propre",
+        "operateurSocle": "VAT IT Group",
+        "preuve": "La dénomination commerciale déclare le socle (« powered by VAT IT ») et le groupe le confirme sur son propre site : « eezi gère la facturation électronique mondiale de bout en bout, du formatage à la traduction et à la validation jusqu'à la soumission finale ». eezi est le produit e-invoicing du groupe VAT IT, spécialiste international de la récupération et de la conformité TVA ; le socle est celui du groupe, l'immatriculation française en est une déclinaison nationale.",
+        "source": "https://vatit.com/fr/eezi/",
+        "confiance": "moyenne"
+      },
+      "sourcesEnrichissement": [
+        {
+          "champ": "socleTechnique",
+          "source": "https://vatit.com/fr/eezi/",
+          "dateReleve": "2026-08-25",
+          "confiance": "moyenne"
+        }
+      ]
+    },
+    {
+      "nom": "XELYA",
+      "socleTechnique": {
+        "type": "propre",
+        "operateurSocle": "Xelya",
+        "preuve": "La preuve vient d'un tiers consommateur et non de l'opérateur : Themisia, logiciel de gestion de cabinet d'avocats, déclare que « Xelya est officiellement agréée par la DGFiP comme Plateforme Agréée et figure sur la liste officielle des plateformes agréées. Les utilisateurs de Themisia [en bénéficient] ». Xelya opère donc un socle qu'elle met à disposition d'au moins deux logiciels (Ximi, Themisia). Réserve : la mise à disposition est établie, l'origine interne du code ne l'est que par défaut d'indice contraire.",
+        "source": "https://themisia.paris/fonctionnalites/facturation-electronique ; https://www.ximi.fr/facturation-electronique/",
+        "confiance": "moyenne"
+      },
+      "sourcesEnrichissement": [
+        {
+          "champ": "socleTechnique",
+          "source": "https://themisia.paris/fonctionnalites/facturation-electronique ; https://www.ximi.fr/facturation-electronique/",
+          "dateReleve": "2026-08-25",
+          "confiance": "moyenne"
+        }
+      ]
+    },
+    {
+      "nom": "SEPTEO",
+      "socleTechnique": {
+        "type": "propre",
+        "operateurSocle": "Groupe Septeo",
+        "preuve": "Preuve par un tiers interne au groupe : Teogest, solution Septeo destinée aux experts-comptables, déclare « En tant que solution du groupe Septeo, Teogest s'appuie sur la Plateforme Agréée de facturation électronique du groupe ». Le groupe est par ailleurs Certified Access Point Peppol en propre. Le socle est donc mutualisé entre les marques du groupe et opéré par lui, ce qui fait de Septeo un fournisseur de socle interne pour son propre portefeuille de logiciels métier.",
+        "source": "https://www.teogest.com/ ; https://www.septeo.com/fr/articles/plateforme-agreee-facturation-electronique-septeo",
+        "confiance": "moyenne"
+      },
+      "sourcesEnrichissement": [
+        {
+          "champ": "socleTechnique",
+          "source": "https://www.teogest.com/ ; https://www.septeo.com/fr/articles/plateforme-agreee-facturation-electronique-septeo",
+          "dateReleve": "2026-08-25",
+          "confiance": "moyenne"
+        }
+      ]
+    },
+    {
+      "nom": "KLEKOON",
+      "socleTechnique": {
+        "type": "propre",
+        "operateurSocle": "Klekoon",
+        "preuve": "La politique de confidentialité, document contractuel, décrit un service opéré en propre : « Notre Service inclut une plateforme de veille commerciale et de dématérialisation des marchés publics, ainsi qu'une Plateforme agréée (ci-après « PA ») » et « En tant que Plateforme de Dématérialisation Partenaire (PDP) immatriculée, Klekoon traite les données nécessaires à la facturation électronique et à la transmission des données à l'administration fiscale ». Aucun sous-traitant de socle n'est mentionné au registre des traitements exposé.",
+        "source": "https://www.klekoon.com/politique-de-confidentialite",
+        "confiance": "moyenne"
+      },
+      "sourcesEnrichissement": [
+        {
+          "champ": "socleTechnique",
+          "source": "https://www.klekoon.com/politique-de-confidentialite",
+          "dateReleve": "2026-08-25",
+          "confiance": "moyenne"
+        }
+      ]
+    },
+    {
+      "nom": "MyKinexo PDP",
+      "socleTechnique": {
+        "type": "inconnu",
+        "operateurSocle": null,
+        "preuve": "Passage de non qualifié à inconnu. L'immatriculation est annoncée par Kinexo lui-même, éditeur à destination des cabinets d'expertise comptable, et relayée par des cabinets du réseau Cerfrance auprès de leurs clients : « MyKinexo a obtenu son immatriculation en tant que plateforme agréée dite PA ». Le communiqué décrit la portée réglementaire et la cible mais ne dit rien de l'origine du socle. Position dans la chaîne établie (canal cabinets), socle non établi.",
+        "source": "https://www.kinexo.fr/facture-electronique-mykinexo-rejoint-la-liste-officielle-des-pdp-immatriculees/",
+        "confiance": "non_qualifie"
+      },
+      "sourcesEnrichissement": [
+        {
+          "champ": "socleTechnique",
+          "source": "https://www.kinexo.fr/facture-electronique-mykinexo-rejoint-la-liste-officielle-des-pdp-immatriculees/",
+          "dateReleve": "2026-08-25",
+          "confiance": "non_qualifie"
+        }
+      ]
+    },
+    {
+      "nom": "Effinum by SPEE",
+      "socleTechnique": {
+        "type": "inconnu",
+        "operateurSocle": null,
+        "preuve": "Passage de non qualifié à inconnu. Fait nouveau : Effinum n'est pas l'offre d'un éditeur mais celle d'un réseau d'expertise comptable. Les cabinets Cerfrance la présentent comme leur plateforme : « Pour vous accompagner, le Réseau Cerfrance a conçu et mis en place la plateforme Effinum » et « La Plateforme Agréée (PA) du réseau CERFRANCE EFFINUM ». Effinum se déclare immatriculée par la DGFiP depuis 2024. La maîtrise d'ouvrage est donc établie (le réseau Cerfrance, via la structure SPEE), la maîtrise d'œuvre du socle ne l'est pas.",
+        "source": "https://provence-alpes-mediterranee.cerfrance.fr/expertises/facture-electronique-1 ; https://garonne-et-tarn.cerfrance.fr/pages/la-facture-electronique ; https://effinum.fr/",
+        "confiance": "non_qualifie"
+      },
+      "sourcesEnrichissement": [
+        {
+          "champ": "socleTechnique",
+          "source": "https://provence-alpes-mediterranee.cerfrance.fr/expertises/facture-electronique-1 ; https://garonne-et-tarn.cerfrance.fr/pages/la-facture-electronique ; https://effinum.fr/",
+          "dateReleve": "2026-08-25",
+          "confiance": "non_qualifie"
+        }
+      ]
+    },
+    {
+      "nom": "FIDUCIAL CLOUD",
+      "socleTechnique": {
+        "type": "inconnu",
+        "operateurSocle": null,
+        "preuve": "Socle toujours non établi, mais deux précisions utiles. D'abord la distinction produit/plateforme : Facilia est le nom commercial des deux modules (Facilia Ventes pour l'émission, Facilia Achats pour la réception), FIDUCIAL CLOUD est le nom de la plateforme agréée qui les porte ; la confusion entre les deux circule dans les annuaires tiers. Ensuite, la page produit fiducial.fr/facilia comporte un bloc intitulé « Partenaires » dont le contenu n'est constitué que d'images sans texte alternatif exploitable : la réponse à la question du socle s'y trouve peut-être et n'est accessible que par capture de page rendue. Reste à faire identifié.",
+        "source": "https://www.fiducial.fr/facilia",
+        "confiance": "non_qualifie"
+      },
+      "sourcesEnrichissement": [
+        {
+          "champ": "socleTechnique",
+          "source": "https://www.fiducial.fr/facilia",
+          "dateReleve": "2026-08-25",
+          "confiance": "non_qualifie"
+        }
+      ]
+    },
+    {
+      "nom": "FULLL",
+      "socleTechnique": {
+        "type": "inconnu",
+        "operateurSocle": null,
+        "preuve": "Socle toujours non établi. Le communiqué Generix évoqué dans la première rédaction de cette fiche est confirmé sur pièce, et sur le site de fulll lui-même : « Ce partenariat permettra à fulll de compléter son offre d'opérateur de dématérialisation et à Generix Group d'adresser le marché des [cabinets] ». La source primaire remplace donc la source secondaire. La réserve reste entière : le partenariat date de 2023, il porte sur l'offre d'opérateur de dématérialisation antérieure à l'immatriculation, et aucune source postérieure ne dit que ce socle porte la plateforme agréée actuelle. À rapprocher de la prise de participation minoritaire de Visma dans fulll (2026), qui ouvre une seconde hypothèse de socle.",
+        "source": "https://www.fulll.fr/blllog/facture-electronique-generix-group-et-fulll",
+        "confiance": "faible"
+      },
+      "sourcesEnrichissement": [
+        {
+          "champ": "socleTechnique",
+          "source": "https://www.fulll.fr/blllog/facture-electronique-generix-group-et-fulll",
+          "dateReleve": "2026-08-25",
+          "confiance": "faible"
+        }
+      ]
+    },
+    {
+      "nom": "VosFactures",
+      "socleTechnique": {
+        "type": "inconnu",
+        "operateurSocle": null,
+        "preuve": "Socle non établi. Piste de rattachement capitalistique relevée dans un annuaire tiers et non corroborée à ce jour : VosFactures serait édité par Factuali SAS, à Nice, filiale de l'éditeur polonais Fakturownia. Si elle se vérifie au registre, cette fiche fait entrer un dixième pays au référentiel par la voie d'une société française à marque française. Le même annuaire signale un hébergement AWS Dublin et affirme que l'immatriculation ne serait pas définitive, deux points en contradiction possible avec le référentiel : à trancher sur source primaire avant toute publication.",
+        "source": "https://www.infos-pa.com/plateformes/vosfactures (annuaire tiers, à corroborer)",
+        "confiance": "faible"
+      },
+      "groupeCapitalistique": "Piste non corroborée : Factuali SAS (Nice), présentée comme filiale de Fakturownia sp. z o.o. (Pologne). À vérifier au registre du commerce avant d'être tenue pour acquise.",
+      "sourcesEnrichissement": [
+        {
+          "champ": "socleTechnique",
+          "source": "https://www.infos-pa.com/plateformes/vosfactures",
+          "dateReleve": "2026-08-25",
+          "confiance": "faible"
+        },
+        {
+          "champ": "groupeCapitalistique",
+          "source": "https://www.infos-pa.com/plateformes/vosfactures (annuaire tiers, à corroborer)",
+          "dateReleve": "2026-08-25",
+          "confiance": "faible"
+        }
+      ]
+    }
+  ]
+}
