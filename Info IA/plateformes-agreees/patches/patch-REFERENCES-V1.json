@@ -1,0 +1,105 @@
+{
+  "_patch": {
+    "id": "REFERENCES-V1",
+    "chantier": "Passe transversale « références clients par secteur » — vague 1 et validation de méthode",
+    "societe": "1 fiche",
+    "auteur": "RFE_WebSite",
+    "dateReleve": "2026-08-25",
+    "nbPlateformes": 1,
+    "nouveauxChamps": [
+      "analyse360.referencesClients.perimetre",
+      "analyse360.referencesClients.libellesSecteursEditeur"
+    ],
+    "note": "Première vague de la passe transversale sur les références clients, décidée après l'arbitrage du 25/08 en faveur des passes transversales plutôt que des fiches acteur par acteur. Objet réel de cette vague : établir une méthode reproductible avant de l'appliquer aux 163 entrées. Deux champs nouveaux sont introduits. Le champ perimetre tranche la question qui rendait le bloc referencesClients inexploitable jusqu'ici : une référence est-elle une référence de groupe, tout catalogue confondu, ou une référence de l'activité de plateforme agréée ? Sans ce champ, un argumentaire commercial pourrait présenter Carrefour comme client de l'offre agréée de Generix, ce qui serait faux. Le champ libellesSecteursEditeur conserve la nomenclature sectorielle publiée par l'acteur, distincte de la traduction vers la facette secteurReferences du référentiel : Generix publie treize libellés dont trois désignent le même secteur (Retail, Grande distribution, Commerce de détail et biens de consommation), ce qui interdit de reprendre ces libellés tels quels. Résultat de la vague : 24 sociétés nommées, réparties en 7 secteurs du référentiel, et zéro référence agréée confirmée."
+  },
+  "plateformes": [
+    {
+      "nom": "GENERIX Group",
+      "analyse360": {
+        "referencesClients": {
+          "nbCiteesSurSite": 24,
+          "perimetre": "references_groupe",
+          "parSecteur": {
+            "grande_distribution": [
+              "Carrefour",
+              "Auchan",
+              "Intermarché",
+              "Conforama",
+              "Maisons du Monde"
+            ],
+            "distribution_professionnelle": [
+              "Sonepar",
+              "Rexel",
+              "JJA"
+            ],
+            "agroalimentaire": [
+              "Danone",
+              "Andros",
+              "AB InBev",
+              "Coroos",
+              "Brivio & Vigano"
+            ],
+            "transport": [
+              "Petit Forestier",
+              "Kuehne+Nagel",
+              "ID Logistics",
+              "FM Logistic",
+              "FM Logistic Brazil",
+              "Imprex Europe"
+            ],
+            "industrie": [
+              "Saint-Gobain",
+              "Safran"
+            ],
+            "energie": [
+              "EDF",
+              "Soven (Engie Solutions)"
+            ],
+            "services": [
+              "Elior"
+            ]
+          },
+          "libellesSecteursEditeur": [
+            "Agroalimentaire",
+            "Automobile",
+            "Banque",
+            "Commerce de détail et biens de consommation",
+            "Energie et ressources",
+            "Grande distribution",
+            "Industry/Manufacturing",
+            "Logistique et chaîne d'approvisionnement",
+            "Presse et médias",
+            "Retail",
+            "Santé",
+            "Services",
+            "Transport et logistique"
+          ],
+          "grandsComptes": [
+            "Carrefour",
+            "Auchan",
+            "Danone",
+            "Saint-Gobain",
+            "Safran",
+            "EDF",
+            "Sonepar",
+            "Rexel",
+            "Kuehne+Nagel",
+            "AB InBev",
+            "Intermarché",
+            "Elior"
+          ],
+          "referencesPAConfirmees": [],
+          "source": "Page « Clients & Partenaires Success Stories » de Generix Group, relevée le 25/08/2026. Generix revendique « plus de 3 000 clients à l'échelle mondiale ». 24 sociétés sont nommées, par le texte des cas clients et par les noms de fichiers des logos du bandeau « Generix, le choix des leaders ». Point décisif de périmètre : la page offre un filtre par produit dont la liste comprend explicitement « e-Invoicing », et aucun cas client ne remonte sous ce filtre. Tous les cas nommés portent sur Generix WMS, TMS, EDI Services, TradeXpress ou Vendor Managed Inventory. L'absence de référence publiée sur l'activité de plateforme agréée est donc établie par la nomenclature de Generix lui-même, et non déduite d'un silence. Aucune de ces 24 références ne peut être présentée comme cliente de l'offre agréée."
+        }
+      },
+      "sourcesEnrichissement": [
+        {
+          "champ": "analyse360.referencesClients",
+          "source": "https://www.generixgroup.com/fr/partenaires-clients/clients",
+          "dateReleve": "2026-08-25",
+          "confiance": "haute"
+        }
+      ]
+    }
+  ]
+}
