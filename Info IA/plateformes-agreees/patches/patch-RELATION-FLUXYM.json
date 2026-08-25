@@ -1,0 +1,71 @@
+{
+  "_patch": {
+    "id": "RELATION-FLUXYM",
+    "chantier": "Champ nouveau relationFluxym — consignation des solutions distribuées par Fluxym",
+    "societe": "3 fiches",
+    "auteur": "RFE_WebSite",
+    "dateReleve": "2026-08-25",
+    "nbPlateformes": 3,
+    "nouveauxChamps": [
+      "relationFluxym"
+    ],
+    "reglesProposees": [],
+    "observationsTiers": [
+      "IVALUA n'a aucune entrée dans le référentiel. Sur les quatre solutions distribuées par Fluxym, trois portent une immatriculation recensée et la quatrième n'apparaît pas. Deux hypothèses à trancher : soit Ivalua ne porte pas d'immatriculation de plateforme agréée, soit c'est une lacune du référentiel. Le second cas serait grave, puisqu'il signifierait que la liste des immatriculations n'a pas été recoupée avec le catalogue de l'entreprise. À vérifier en priorité."
+    ],
+    "note": "Introduction du champ relationFluxym, absent du référentiel jusqu'ici. Le défaut relevé n'est pas de forme mais de fond : les 163 fiches ne portaient aucune information sur la position de Fluxym vis-à-vis de l'acteur décrit, alors que trois des fiches 360 déjà produites concernent des solutions que Fluxym distribue. Rédigées sans cette information, BASWARE, ESKER et GEP se lisent comme des analyses d'adversaires, ce qui est faux et exploitable à contresens par quiconque consulterait le référentiel. Le champ devient obligatoire sur toute fiche, y compris quand il vaut neutre : un champ vide laisse le lecteur déduire une hostilité qui n'existe peut-être pas. Ce patch pose le champ sur les trois fiches concernées et signale que leur bloc lectureConcurrentielle doit être réécrit — ce n'est pas fait ici, parce que réécrire une lecture concurrentielle demande de reprendre la fiche entière et relève de la file de travail, pas d'un patch de champ."
+  },
+  "plateformes": [
+    {
+      "nom": "BASWARE",
+      "relationFluxym": {
+        "nature": "solution_distribuee",
+        "precision": "Solution distribuée par Fluxym. La fiche 360 de BASWARE a été rédigée le 21/08/2026 dans le cadre de l'étalonnage du barème de centralité, sans que cette relation soit consignée : elle doit être relue sous cet angle. Le bloc lectureConcurrentielle est à réécrire pour décrire contre qui Fluxym défend cette solution, et non comment on l'affronte.",
+        "source": "Catalogue de distribution Fluxym, information interne confirmée par Bruno Bartoli le 25/08/2026.",
+        "dateReleve": "2026-08-25"
+      },
+      "sourcesEnrichissement": [
+        {
+          "champ": "relationFluxym",
+          "source": "Catalogue de distribution Fluxym, information interne confirmée par Bruno Bartoli le 25/08/2026.",
+          "dateReleve": "2026-08-25",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "ESKER",
+      "relationFluxym": {
+        "nature": "solution_distribuee",
+        "precision": "Solution distribuée par Fluxym. Même réserve que BASWARE : fiche 360 produite lors de l'étalonnage du 21/08/2026, relation de distribution non consignée à l'époque, bloc lectureConcurrentielle à réécrire.",
+        "source": "Catalogue de distribution Fluxym, information interne confirmée par Bruno Bartoli le 25/08/2026.",
+        "dateReleve": "2026-08-25"
+      },
+      "sourcesEnrichissement": [
+        {
+          "champ": "relationFluxym",
+          "source": "Catalogue de distribution Fluxym, information interne confirmée par Bruno Bartoli le 25/08/2026.",
+          "dateReleve": "2026-08-25",
+          "confiance": "haute"
+        }
+      ]
+    },
+    {
+      "nom": "GEP",
+      "relationFluxym": {
+        "nature": "solution_distribuee",
+        "precision": "Solution distribuée par Fluxym. Fiche 360 produite le 21/08/2026, avec résolution de l'anomalie d'entité (l'immatriculation est portée par GEP Finland Oy, ex-OpusCapita, à Espoo). Relation de distribution non consignée à l'époque, bloc lectureConcurrentielle à réécrire.",
+        "source": "Catalogue de distribution Fluxym, information interne confirmée par Bruno Bartoli le 25/08/2026.",
+        "dateReleve": "2026-08-25"
+      },
+      "sourcesEnrichissement": [
+        {
+          "champ": "relationFluxym",
+          "source": "Catalogue de distribution Fluxym, information interne confirmée par Bruno Bartoli le 25/08/2026.",
+          "dateReleve": "2026-08-25",
+          "confiance": "haute"
+        }
+      ]
+    }
+  ]
+}

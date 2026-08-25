@@ -118,7 +118,7 @@ Trois façons de sortir de là :
 
 **B — Traitement par question, et non par acteur.** On arrête les fiches et on mène des passes transversales sur les 163 entrées : une passe références clients, une passe avis et recrutements, une passe socle, une passe actionnariat. Chaque passe est homogène, mécanisable et datée d'un seul relevé. Avantage : le référentiel devient comparable, ce qu'il n'est pas aujourd'hui puisque 29 fiches sont riches et 134 pauvres.
 
-**C — Priorité au besoin commercial.** On traite d'abord les concurrents directs sur les affaires Fluxym — BASWARE, ESKER, GEP, IVALUA sont distribués par Fluxym, donc leurs concurrents sur les mêmes appels d'offres — et la cartographie sectorielle des clients. Le reste attend.
+**C — Priorité au besoin commercial.** **BASWARE, ESKER, GEP et IVALUA sont les solutions que Fluxym distribue** : ce sont les références de son catalogue, pas des cibles. On traite donc d'abord les acteurs qui se présentent en face d'elles sur une affaire, ainsi que la cartographie sectorielle des clients. Le reste attend.
 
 **Ma recommandation : B puis A.** La comparabilité est le premier défaut du référentiel aujourd'hui. Une facette renseignée sur 29 fiches sur 163 ne permet aucun tri, aucun filtre, aucun graphique honnête — donc le hub ne peut rien exposer d'utile, ce qui est aussi la vraie raison pour laquelle le volet publication reste bloqué. Deux passes transversales bien menées rendraient le référentiel exploitable plus vite que dix lots de fiches.
 
@@ -126,7 +126,7 @@ Trois façons de sortir de là :
 
 ## 6. Ce qui est solide, et qu'il faut protéger
 
-- **101 règles de méthode** documentées et datées. C'est l'actif principal : il rend le référentiel défendable si un acteur cité conteste.
+- **109 règles de méthode** documentées et datées. C'est l'actif principal : il rend le référentiel défendable si un acteur cité conteste.
 - **Un journal de fusion** dans `_meta.fusions`, qui permet de reconstituer l'état à toute date.
 - **Une taxonomie contrôlée** dans `pa-taxonomie.json`, avec des facettes définies plutôt que du texte libre.
 - **Le principe de non-estimation** : aucune part de chiffre d'affaires attribuable à la facturation électronique n'a jamais été inventée. Tenu sur 63 fiches, sans exception.

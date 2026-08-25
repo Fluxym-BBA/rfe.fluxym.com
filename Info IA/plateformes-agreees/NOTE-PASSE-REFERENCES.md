@@ -76,7 +76,7 @@ Quatre URL chargées, **une seule page exploitable**. Le coût par acteur est de
 
 Ordre proposé pour les vagues suivantes :
 
-1. **Concurrents directs sur les affaires Fluxym** — ceux qui se présentent face à BASWARE, ESKER, GEP et IVALUA. C'est là que la donnée sert immédiatement.
+1. **Les acteurs qui croisent Fluxym sur ses affaires.** Précision nécessaire, car la première rédaction de cette note était ambiguë : **BASWARE, ESKER, GEP et IVALUA sont les solutions que Fluxym distribue**, ce sont les références de son catalogue et non des adversaires. Les acteurs à relever en priorité sont donc ceux qui se présentent *en face* de ces solutions sur une affaire. Sur les solutions distribuées elles-mêmes, le relevé des références clients garde tout son intérêt, mais il sert à armer Fluxym, pas à l'attaquer.
 2. **Les 5 grossistes** déjà qualifiés en posture : leurs références sont des plateformes, pas des entreprises, et cela documente les routes indirectes.
 3. **Les grands éditeurs internationaux** du chantier G2 : Pagero, Sovos, Comarch, Opentext, Cegid, Sage.
 4. **Balayage du reste**, en acceptant les blocs vides motivés.
