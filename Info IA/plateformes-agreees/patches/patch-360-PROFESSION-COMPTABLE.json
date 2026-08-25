@@ -1,0 +1,703 @@
+{
+ "_patch": {
+  "id": "360-PROFESSION-COMPTABLE",
+  "chantier": "Analyses 360 — bloc profession comptable (6 fiches)",
+  "auteur": "RFE_WebSite",
+  "dateReleve": "2026-08-24",
+  "nbPlateformes": 6,
+  "note": "Premier lot 360 consacré non pas à des éditeurs mais à un canal : la profession comptable. Six plateformes agréées portées par des réseaux d'expertise comptable, par l'association de solutions de la profession, par un éditeur détenu par des cabinets et par la filiale technique d'un groupe pluridisciplinaire. Constat central : pour cinq de ces six fiches, l'agrément ne crée aucune activité et ne produit aucun chiffre d'affaires propre — il protège une relation client. Les chiffres d'affaires exposés (FITECO 282,1 M€ en 2025, COGEP 126,4 M€ en 2023, DOUGS 24,7 M€ en 2024, MY UNISOFT 9,8 M€ en 2024) mesurent des honoraires comptables ou une licence logicielle, jamais l'activité agréée, et aucune part attribuable n'est estimée. ECMA est une association loi 1901 sans comptes déposés ni actionnaire, et FIDUCIAL CLOUD est une filiale de 20 à 49 salariés qui sert environ 334 000 clients de groupe : dans ces deux cas le poids économique ne se lit pas dans les comptes de l'entité immatriculée. Indices de centralité : 3 pour jefacture.com, 2 pour MY UNISOFT et FIDUCIAL CLOUD, 1 pour MY FITECO, CENSE et Dougs. Postures : canal_indirect pour jefacture.com et MY UNISOFT, base_installee pour MY FITECO, CENSE et FIDUCIAL CLOUD, conquete_directe pour Dougs. Deux singularités relevées : MY UNISOFT est détenue par 125 cabinets qui sont aussi ses clients, avec HG Capital majoritaire depuis décembre 2024 ; COGEP est le seul réseau du lot à monétiser explicitement sa plateforme par abonnements publiés de 9 à 99 €. Aucune référence client nominative n'est publiée par aucun des six acteurs : la seule grandeur comparable est le volume, et il est exprimé dans des unités différentes — cabinets, clients, dossiers — qui ne sont pas interchangeables."
+ },
+ "plateformes": [
+  {
+   "nom": "jefacture.com",
+   "sourcesEnrichissement": [
+    "https://annuaire-entreprises.data.gouv.fr/entreprise/403156540",
+    "https://ecma-solutions.com/produits-expert-comptable/jefacture",
+    "https://support.jefacture.com/fr/articles/380881-decouvrir-les-tarifs-jefacture-com",
+    "https://www.compta-online.com/facturation-electronique-jefacture-com-ao7751"
+   ],
+   "analyse360": {
+    "metierPrincipal": "Production et commercialisation de solutions numériques pour la profession d'expert-comptable. ECMA (Expert-Comptable Média Association) n'est pas un éditeur commercial classique : c'est une association loi 1901 immatriculée sous le SIREN 403 156 540, créée le 15/05/1995, dont l'objet est d'outiller les cabinets d'expertise comptable. jefacture.com est l'un de ses cinq produits, aux côtés de jedeclare.com (portail déclaratif historique de la profession), jesignexpert.com (signature électronique), conformexpert et jedataviz.",
+    "activites": [
+     {
+      "libelle": "jedeclare.com — portail déclaratif de la profession comptable (télétransmission fiscale et sociale), produit historique et socle de la relation avec les cabinets",
+      "poids": "majeur",
+      "source": "https://ecma-solutions.com/"
+     },
+     {
+      "libelle": "jefacture.com — plateforme agréée de facturation électronique destinée aux cabinets et à leurs clients TPE-PME, incluant devis, facture, règlement, compte pro et application mobile",
+      "poids": "significatif",
+      "source": "https://ecma-solutions.com/produits-expert-comptable/jefacture"
+     },
+     {
+      "libelle": "jesignexpert.com — signature électronique dédiée aux lettres de mission et documents du cabinet",
+      "poids": "significatif",
+      "source": "https://ecma-solutions.com/produits-expert-comptable/jesignexpert"
+     },
+     {
+      "libelle": "conformexpert et jedataviz — conformité réglementaire du cabinet et restitution de données clients",
+      "poids": "mineur",
+      "source": "https://ecma-solutions.com/"
+     }
+    ],
+    "poidsEconomique": {
+     "caGroupe": null,
+     "caEntiteFrancaise": {
+      "montantMEUR": null,
+      "exercice": "aucun",
+      "nature": "aucun_compte_depose",
+      "commentaire": "ECMA est une association loi 1901 (nature juridique 9220). Aucun compte n'est déposé au greffe et aucun dirigeant n'est publié au registre des entreprises : c'est le régime normal de cette forme juridique, ce n'est pas de l'opacité (règle 68). Le poids économique de l'activité n'est donc pas mesurable par le chiffre d'affaires, et aucun montant n'est estimé.",
+      "source": "https://annuaire-entreprises.data.gouv.fr/entreprise/403156540",
+      "dateReleve": "2026-08-24"
+     },
+     "resultatNet": null,
+     "effectifGroupe": null,
+     "effectifEntite": "20 à 49 salariés (INSEE, millésime 2023). Siège Immeuble Le Jour, 200-216 rue Raymond Losserand, 75014 Paris. APE 63.12Z (portails Internet).",
+     "ventilationParActivite": {
+      "disponible": false,
+      "motif": "Aucune ventilation n'est publiée, et la forme associative ne produit pas de comptes déposés exploitables. Retenir une part attribuable à jefacture.com serait une estimation, ce que le référentiel s'interdit (règle 25).",
+      "derniereVentilationConnue": null
+     }
+    },
+    "centralitePA": {
+     "indice": 3,
+     "niveau": "axe_strategique",
+     "marqueProduitDediee": "jefacture.com",
+     "entiteJuridiqueDediee": false,
+     "faisceauIndices": [
+      {
+       "signal": "L'agrément est porté par un produit nommé, doté de sa propre marque, de son propre site, de son propre centre d'aide et de sa propre application mobile publiée sur les stores",
+       "sens": "+",
+       "preuve": "https://ecma-solutions.com/produits-expert-comptable/jefacture"
+      },
+      {
+       "signal": "L'acteur revendique le positionnement de « plateforme agréée de la profession », c'est-à-dire une réponse collective au nom des experts-comptables : la réforme est le sujet structurant de sa communication produit",
+       "sens": "+",
+       "preuve": "https://ecma-solutions.com/produits-expert-comptable/jefacture"
+      },
+      {
+       "signal": "jefacture.com reste l'un de cinq produits, adossé à un portail déclaratif préexistant qui demeure le socle de la relation avec les cabinets : la plateforme agréée prolonge une position acquise, elle ne la crée pas",
+       "sens": "-",
+       "preuve": "https://ecma-solutions.com/"
+      },
+      {
+       "signal": "Un mandat type est fourni aux cabinets pour inscrire leurs clients à l'annuaire national, ce qui traduit un outillage opérationnel de la réforme et pas une simple mise en conformité",
+       "sens": "+",
+       "preuve": "https://support.jefacture.com/fr/articles/403633-comprendre-telecharger-et-signer-le-modele-de-mandat-propose-par-jefacture-com"
+      }
+     ],
+     "lecture": "Indice 3 : axe stratégique. Pour ECMA, la réforme n'est pas une contrainte à absorber, c'est l'occasion d'étendre au flux de facturation la position déjà tenue sur le flux déclaratif. L'association n'a pas créé d'entité dédiée ni changé de métier : elle a ajouté un produit majeur à un catalogue existant, avec l'argument que la plateforme agréée de la profession doit rester dans le périmètre de la profession.",
+     "confiance": "haute"
+    },
+    "postureCommerciale": {
+     "valeur": "canal_indirect",
+     "preuve": "Le cabinet d'expertise comptable est le canal : il s'abonne, puis invite ses clients entreprises, avec un modèle de mandat fourni pour l'inscription à l'annuaire national. Près de 4 000 cabinets sont annoncés abonnés, l'usage de la plateforme par le cabinet pour ses propres factures étant gratuit. L'inscription directe d'une entreprise sans invitation préalable d'un cabinet est possible depuis une évolution documentée dans le centre d'aide, ce qui ouvre un canal direct secondaire sans remettre en cause la logique principale. Des intégrations avec des éditeurs de gestion commerciale tiers existent également, jefacture.com étant listée comme solution partenaire.",
+     "confiance": "haute"
+    },
+    "referencesClients": {
+     "nbCiteesSurSite": null,
+     "parSecteur": {},
+     "grandsComptes": [],
+     "referencesPAConfirmees": [],
+     "source": "Aucun logo client n'est publié : l'acteur ne communique pas par références nominatives mais par volume de cabinets abonnés, près de 4 000 selon un article de la presse professionnelle relevé le 24/08/2026. Ce volume compte des cabinets, pas des entreprises utilisatrices, et pas des factures : les trois grandeurs ne sont pas interchangeables (règle 80)."
+    },
+    "reputation": {
+     "volumeAvis": null,
+     "synthese": "Aucun relevé d'avis agrégés effectué dans cette passe. Signal public de nature différente : l'application mobile jefacture.com est publiée sur les stores, ce qui expose une notation utilisateur non relevée ici.",
+     "confiance": "non_qualifie"
+    },
+    "capaciteDeFrappe": {
+     "actionnaires": [
+      "Association loi 1901 : il n'y a pas d'actionnaire au sens capitalistique, mais des membres issus de la profession comptable. La création à l'initiative des instances de la profession est mentionnée par des sources tierces et n'a pas été vérifiée sur un document primaire dans cette passe."
+     ],
+     "typeActionnaire": "non_qualifie",
+     "financementRecent": "Aucune levée de fonds ni opération capitalistique : la forme associative l'exclut. Le financement est porté par les abonnements des cabinets et de leurs clients.",
+     "acquisitions": [],
+     "modeleTarifaire": "Tarification publiée. Le dossier du cabinet lui-même (factures d'achat et de vente) est à 0 € HT ; les dossiers des entreprises relèvent d'abonnements étagés, avec utilisateur supplémentaire à 5 €/mois et fonctionnalités croissantes (collaboration comptable, comptes bancaires liés, API).",
+     "tarifPublie": true,
+     "offreGratuite": true
+    },
+    "lectureConcurrentielle": "Ce n'est pas un concurrent frontal de l'offre portée par Fluxym : ni le segment, ni le canal, ni le circuit de décision ne se croisent. L'intérêt de la fiche est ailleurs. ECMA est l'acteur qui institutionnalise le canal cabinet : lorsque près de 4 000 cabinets disposent gratuitement d'une plateforme agréée pour leurs propres flux et d'un mandat type pour y raccorder leurs clients, la question du choix de la plateforme est tranchée en amont, sans mise en concurrence, pour un très grand nombre de TPE et de PME. Le risque à surveiller n'est pas la perte d'un appel d'offres ETI, c'est l'installation d'un réflexe : la plateforme agréée est l'affaire de l'expert-comptable. Fluxym est un acteur du marché : ce référentiel est publié par un intégrateur qui distribue des solutions concurrentes, et cette lecture est une lecture de marché, pas une évaluation.",
+    "droitDeReponse": {
+     "signale": false,
+     "date": null,
+     "objet": null
+    }
+   }
+  },
+  {
+   "nom": "MY FITECO",
+   "sourcesEnrichissement": [
+    "https://annuaire-entreprises.data.gouv.fr/entreprise/557150067",
+    "https://myfiteco.fiteco.com/",
+    "https://www.fiteco.com/actualites/my-fiteco-officiellement-plateforme-agreee-pa/"
+   ],
+   "analyse360": {
+    "metierPrincipal": "Expertise comptable, audit, conseil, juridique, social et gestion de patrimoine. FITECO est un réseau français de cabinets, immatriculé sous le SIREN 557 150 067, dont le siège est à Changé (53) et qui exploite 178 établissements. My fiteco n'est pas un produit vendu sur un marché logiciel : c'est l'espace client numérique du réseau, développé en interne, auquel la fonction de plateforme agréée a été ajoutée.",
+    "activites": [
+     {
+      "libelle": "Expertise comptable, tenue et révision des comptes pour une clientèle de TPE, PME et exploitations agricoles, sur un maillage de 178 établissements",
+      "poids": "majeur",
+      "source": "https://annuaire-entreprises.data.gouv.fr/entreprise/557150067"
+     },
+     {
+      "libelle": "Audit et commissariat aux comptes, conseil juridique et fiscal, paie et conseil social",
+      "poids": "significatif",
+      "source": "https://www.fiteco.com/"
+     },
+     {
+      "libelle": "My fiteco — espace client digital lancé en 2019, application mobile iOS et Android, module Devis Factures, et depuis 2026 fonction de plateforme agréée",
+      "poids": "mineur",
+      "source": "https://myfiteco.fiteco.com/"
+     }
+    ],
+    "poidsEconomique": {
+     "caGroupe": null,
+     "caEntiteFrancaise": {
+      "montantMEUR": 282.1,
+      "exercice": "2025",
+      "nature": "comptes_deposes",
+      "commentaire": "Comptes déposés par FITECO pour l'exercice 2025 : 282,1 M€ de chiffre d'affaires et 18,4 M€ de résultat net. Ce montant mesure des honoraires d'expertise comptable, d'audit et de conseil, pas une activité logicielle : pour cet acteur la plateforme agréée est une ligne de coût interne, pas une ligne de revenu (règle 77).",
+      "source": "https://annuaire-entreprises.data.gouv.fr/entreprise/557150067",
+      "dateReleve": "2026-08-24"
+     },
+     "resultatNet": 18400000,
+     "effectifGroupe": null,
+     "effectifEntite": "2 000 à 4 999 salariés (INSEE, millésime 2023), 178 établissements, catégorie ETI. Entité créée en 1971, APE 69.20Z.",
+     "ventilationParActivite": {
+      "disponible": false,
+      "motif": "Aucune ventilation du chiffre d'affaires par métier n'est publiée, et aucune n'est estimée. La part attribuable à l'activité de plateforme agréée est par construction nulle ou marginale en revenu : l'outil est inclus dans la relation de mission.",
+      "derniereVentilationConnue": null
+     }
+    },
+    "centralitePA": {
+     "indice": 1,
+     "niveau": "activite_annexe",
+     "marqueProduitDediee": "My fiteco",
+     "entiteJuridiqueDediee": false,
+     "faisceauIndices": [
+      {
+       "signal": "L'immatriculation est portée par la société d'expertise comptable elle-même, sans création d'entité dédiée : le métier reste l'expertise comptable",
+       "sens": "-",
+       "preuve": "https://annuaire-entreprises.data.gouv.fr/entreprise/557150067"
+      },
+      {
+       "signal": "My fiteco préexiste largement à la réforme : l'espace client est lancé en 2019 et la fonction de plateforme agréée y est ajoutée, ce qui en fait une extension d'un outil de relation client",
+       "sens": "-",
+       "preuve": "https://myfiteco.fiteco.com/"
+      },
+      {
+       "signal": "Le réseau a néanmoins fait le choix d'une plateforme développée en propre plutôt que d'un socle tiers, et communique publiquement sur son immatriculation, ce qui traduit un investissement réel et une volonté de garder la main sur le flux de ses clients",
+       "sens": "+",
+       "preuve": "https://www.fiteco.com/actualites/my-fiteco-officiellement-plateforme-agreee-pa/"
+      },
+      {
+       "signal": "Aucun tarif n'est publié et l'accès passe par la relation de mission : la plateforme n'est pas commercialisée comme un produit autonome sur le marché",
+       "sens": "-",
+       "preuve": "https://myfiteco.fiteco.com/"
+      }
+     ],
+     "lecture": "Indice 1 : activité annexe. L'agrément protège un produit et une relation, il ne construit pas une activité (règle 27). My fiteco existe pour que les clients du réseau n'aient pas à aller chercher une plateforme ailleurs, et pour que les flux de facturation continuent d'alimenter la production comptable du cabinet. Ce n'est pas un indice 0 : le réseau a développé la plateforme lui-même et communique dessus, ce qui suppose un investissement assumé.",
+     "confiance": "haute"
+    },
+    "postureCommerciale": {
+     "valeur": "base_installee",
+     "preuve": "L'offre est adressée aux clients du réseau, via l'espace client et l'accompagnement des agences. Un volume de 70 000 clients depuis le lancement de l'espace en 2019 est repris par un comparateur de plateformes agréées, relevé le 24/08/2026, chiffre non confirmé sur le site de l'acteur. Aucun tarif public, aucun canal de revente, aucun programme partenaire éditeur relevé dans cette passe.",
+     "confiance": "moyenne"
+    },
+    "referencesClients": {
+     "nbCiteesSurSite": null,
+     "parSecteur": {},
+     "grandsComptes": [],
+     "referencesPAConfirmees": [],
+     "source": "Aucun logo client n'est publié : un réseau d'expertise comptable ne communique pas par références nominatives, contrainte déontologique et commerciale. La seule grandeur disponible est un volume de clients de l'espace numérique, qui ne dit rien du nombre d'entreprises effectivement raccordées à la plateforme agréée (règle 80)."
+    },
+    "reputation": {
+     "volumeAvis": null,
+     "synthese": "Aucun relevé d'avis agrégés effectué dans cette passe. Signal public de nature différente : FITECO est inscrite aux tableaux de l'Ordre des experts-comptables des régions Bretagne–Pays de la Loire, Orléans, Paris Île-de-France, Rouen-Normandie et Limoges, information publiée dans les mentions légales de My fiteco.",
+     "confiance": "non_qualifie"
+    },
+    "capaciteDeFrappe": {
+     "actionnaires": [
+      "Structure de détention non établie dans cette passe. FITECO est un réseau d'expertise comptable français dont le président est Yannick Ollivier et le directeur général Jean-Marie Vandergucht ; commissaires aux comptes BAKER TILLY STREGO et FIBA. Aucune chaîne de contrôle documentée au-delà de l'entité immatriculée."
+     ],
+     "typeActionnaire": "non_qualifie",
+     "financementRecent": "Aucune opération relevée. Le développement de la plateforme est autofinancé par l'activité du réseau.",
+     "acquisitions": [],
+     "modeleTarifaire": "Aucun tarif publié : l'accès à My fiteco passe par la relation de mission avec le cabinet, un comparateur mentionnant une tarification sur devis.",
+     "tarifPublie": false,
+     "offreGratuite": false
+    },
+    "lectureConcurrentielle": "À lire comme un canal, pas comme un éditeur. FITECO ne vendra jamais une plateforme agréée à une ETI industrielle et ne croisera pas l'offre portée par Fluxym sur un appel d'offres. En revanche, un réseau de 178 implantations et 282,1 M€ d'honoraires qui décide de développer sa propre plateforme plutôt que d'en distribuer une soustrait mécaniquement au marché les flux de plusieurs dizaines de milliers de TPE et PME, et le fait sans qu'aucune décision d'achat de logiciel ne soit prise. C'est le mode d'occupation du terrain le plus difficile à contester, parce qu'il ne passe pas par un prix. Fluxym est un acteur du marché : ce référentiel est publié par un intégrateur qui distribue des solutions concurrentes, et cette lecture est une lecture de marché, pas une évaluation.",
+    "droitDeReponse": {
+     "signale": false,
+     "date": null,
+     "objet": null
+    }
+   }
+  },
+  {
+   "nom": "CENSE",
+   "sourcesEnrichissement": [
+    "https://annuaire-entreprises.data.gouv.fr/entreprise/400833596",
+    "https://cense.fr/",
+    "https://www.cogep.fr/magazines/cense-le-cockpit-digital-de-votre-gestion-dentreprise/"
+   ],
+   "analyse360": {
+    "metierPrincipal": "Expertise comptable, audit, conseil et services associés. L'immatriculation est adossée à SA COGEP (SIREN 400 833 596), groupe d'expertise comptable français exploitant 78 établissements. CENSE est la plateforme digitale déployée par COGEP auprès de ses clients, présentée comme un « cockpit » de gestion intégrant sa propre plateforme agréée.",
+    "activites": [
+     {
+      "libelle": "Expertise comptable et conseil auprès d'une clientèle de TPE, PME, professions libérales et agriculteurs, sur un maillage de 78 établissements",
+      "poids": "majeur",
+      "source": "https://annuaire-entreprises.data.gouv.fr/entreprise/400833596"
+     },
+     {
+      "libelle": "Audit, conseil juridique et fiscal, social et paie",
+      "poids": "significatif",
+      "source": "https://www.cogep.fr/"
+     },
+     {
+      "libelle": "CENSE — plateforme digitale client intégrant la plateforme agréée, un coffre-fort numérique à valeur probante, la facturation, la trésorerie, les notes de frais et des comptes bancaires et moyens de paiement intégrés",
+      "poids": "mineur",
+      "source": "https://cense.fr/"
+     }
+    ],
+    "poidsEconomique": {
+     "caGroupe": null,
+     "caEntiteFrancaise": {
+      "montantMEUR": 126.4,
+      "exercice": "2023",
+      "nature": "comptes_deposes",
+      "commentaire": "Comptes déposés par SA COGEP pour l'exercice 2023 : 126,4 M€ de chiffre d'affaires et 11,2 M€ de résultat net. Comme pour les autres réseaux d'expertise comptable du référentiel, ce montant mesure des honoraires et non une activité logicielle (règle 77). Exercice 2023 : ce n'est pas un chiffre courant, il est daté comme tel (règle 34).",
+      "source": "https://annuaire-entreprises.data.gouv.fr/entreprise/400833596",
+      "dateReleve": "2026-08-24"
+     },
+     "resultatNet": 11200000,
+     "effectifGroupe": null,
+     "effectifEntite": "1 000 à 1 999 salariés (INSEE, millésime 2023), 78 établissements, catégorie ETI.",
+     "ventilationParActivite": {
+      "disponible": false,
+      "motif": "Aucune ventilation publiée par l'acteur, aucune estimée. L'activité de plateforme agréée n'est pas isolée dans les comptes.",
+      "derniereVentilationConnue": null
+     }
+    },
+    "centralitePA": {
+     "indice": 1,
+     "niveau": "activite_annexe",
+     "marqueProduitDediee": "CENSE",
+     "entiteJuridiqueDediee": false,
+     "faisceauIndices": [
+      {
+       "signal": "L'immatriculation est portée par le groupe d'expertise comptable, sans entité dédiée, et la plateforme est présentée comme le prolongement de la relation avec l'expert-comptable",
+       "sens": "-",
+       "preuve": "https://www.cogep.fr/cense/"
+      },
+      {
+       "signal": "Le produit dispose de sa propre marque, de son propre nom de domaine et d'une grille tarifaire propre de 9 à 99 € par mois : il est commercialisé, pas seulement fourni",
+       "sens": "+",
+       "preuve": "https://www.cogep.fr/magazines/cense-le-cockpit-digital-de-votre-gestion-dentreprise/"
+      },
+      {
+       "signal": "Le périmètre annoncé dépasse la conformité : coffre-fort à valeur probante, trésorerie, notes de frais, comptes bancaires et moyens de paiement intégrés, hébergement présenté comme de type SecNumCloud chez un hébergeur français",
+       "sens": "+",
+       "preuve": "https://cense.fr/"
+      },
+      {
+       "signal": "La cible reste la clientèle du cabinet : « votre expert-comptable COGEP vous présentera très prochainement les offres », formulation qui exclut une commercialisation hors base",
+       "sens": "-",
+       "preuve": "https://www.cogep.fr/magazines/cense-le-cockpit-digital-de-votre-gestion-dentreprise/"
+      }
+     ],
+     "lecture": "Indice 1 : activité annexe, mais l'un des indices 1 les plus outillés du référentiel. COGEP ne se transforme pas en éditeur : le métier reste l'honoraire comptable. En revanche le groupe monétise explicitement la plateforme par abonnements étagés et y agrège des services financiers, ce qui la rapproche d'une offre produit. Le plafond reste la base clients du cabinet.",
+     "confiance": "haute"
+    },
+    "postureCommerciale": {
+     "valeur": "base_installee",
+     "preuve": "Le déploiement est annoncé auprès des clients du groupe, présenté par leur expert-comptable COGEP, avec des offres d'abonnement de 9 à 99 € pour des fonctionnalités élargies. Aucun canal de revente, aucun programme partenaire éditeur, aucune commercialisation hors clientèle du cabinet relevés dans cette passe.",
+     "confiance": "haute"
+    },
+    "referencesClients": {
+     "nbCiteesSurSite": null,
+     "parSecteur": {},
+     "grandsComptes": [],
+     "referencesPAConfirmees": [],
+     "source": "Aucun logo client publié, aucun volume d'entreprises raccordées communiqué. Le seul ordre de grandeur disponible est structurel : 78 établissements et 1 000 à 1 999 salariés, ce qui borne la taille du portefeuille sans le mesurer."
+    },
+    "reputation": {
+     "volumeAvis": null,
+     "synthese": "Aucun relevé d'avis agrégés effectué dans cette passe. La plateforme est de déploiement récent, ce qui limite structurellement le volume d'avis disponibles.",
+     "confiance": "non_qualifie"
+    },
+    "capaciteDeFrappe": {
+     "actionnaires": [
+      "Structure de détention non établie dans cette passe. SA COGEP est une société anonyme d'expertise comptable française ; aucune chaîne de contrôle n'a été documentée au-delà de l'entité immatriculée."
+     ],
+     "typeActionnaire": "non_qualifie",
+     "financementRecent": "Aucune opération relevée. Développement autofinancé par l'activité du groupe.",
+     "acquisitions": [],
+     "modeleTarifaire": "Socle de conformité inclus dans la relation de mission, puis abonnements publiés de 9 à 99 € par mois pour des fonctionnalités élargies : facturation, trésorerie, notes de frais, comptes bancaires et moyens de paiement. Aucune offre gratuite autonome hors clientèle du cabinet.",
+     "tarifPublie": true,
+     "offreGratuite": false
+    },
+    "lectureConcurrentielle": "Même logique de canal que les autres réseaux comptables du référentiel, avec une nuance qui mérite d'être notée : COGEP ne se contente pas de fournir une conformité, il vend un abonnement et y adosse des services bancaires. C'est le premier signe, dans ce lot, d'un réseau comptable qui transforme la réforme en ligne de revenu et pas seulement en ligne de coût. Si ce modèle réussit, il change la nature du canal cabinet : le cabinet devient un distributeur de logiciel qui facture, avec une force de frappe locale de 78 implantations. Fluxym est un acteur du marché : ce référentiel est publié par un intégrateur qui distribue des solutions concurrentes, et cette lecture est une lecture de marché, pas une évaluation.",
+    "droitDeReponse": {
+     "signale": false,
+     "date": null,
+     "objet": null
+    }
+   }
+  },
+  {
+   "nom": "Dougs Facturation gratuite",
+   "sourcesEnrichissement": [
+    "https://annuaire-entreprises.data.gouv.fr/entreprise/810319517",
+    "https://www.pappers.fr/entreprise/dougs-810319517",
+    "https://www.dougs.fr/",
+    "https://www.usine-digitale.fr/article/dougs-leve-25-millions-d-euros-pour-sa-solution-d-expertise-comptable-en-ligne.N2149642"
+   ],
+   "analyse360": {
+    "metierPrincipal": "Expertise comptable en ligne. DOUGS (SIREN 810 319 517) est un cabinet d'expertise comptable constitué en SAS, créé le 04/03/2015, siège 7 avenue Adolphe Max à Lyon 5e, APE 69.20Z, qui vend un abonnement d'expertise comptable adossé à un logiciel développé en interne. La plateforme agréée n'est pas le produit : c'est une brique gratuite du parcours.",
+    "activites": [
+     {
+      "libelle": "Expertise comptable en ligne par abonnement pour indépendants, TPE et, depuis 2025, commerçants au moyen de la comptabilité de caisse",
+      "poids": "majeur",
+      "source": "https://www.dougs.fr/blog/retrospective-annee/"
+     },
+     {
+      "libelle": "Édition du logiciel de tenue et de pilotage utilisé par ses propres clients (synchronisation bancaire, tableau de bord, déclarations)",
+      "poids": "significatif",
+      "source": "https://www.dougs.fr/"
+     },
+     {
+      "libelle": "Facturation électronique et plateforme agréée, proposées gratuitement",
+      "poids": "mineur",
+      "source": "https://www.dougs.fr/"
+     }
+    ],
+    "poidsEconomique": {
+     "caGroupe": null,
+     "caEntiteFrancaise": {
+      "montantMEUR": 24.7,
+      "exercice": "2024",
+      "nature": "comptes_deposes",
+      "commentaire": "Chiffre d'affaires de 24,7 M€ en 2024, contre 15,7 M€ en 2023 et 6,04 M€ en 2021 : la trajectoire est une multiplication par quatre en trois exercices. Montant issu d'un republieur de comptes déposés, relevé le 24/08/2026 ; le portail public d'annuaire des entreprises ne restitue pas d'indicateur financier pour cette entité. Le résultat net n'est pas relevé dans cette passe ; l'entreprise se déclarait rentable en 2023 lors de sa levée de fonds.",
+      "source": "https://www.pappers.fr/entreprise/dougs-810319517",
+      "dateReleve": "2026-08-24"
+     },
+     "resultatNet": null,
+     "effectifGroupe": null,
+     "effectifEntite": "100 à 199 salariés (INSEE, millésime 2023), 3 établissements, catégorie PME, capital social 10 000 €. Un effectif d'environ 250 personnes était évoqué dans la presse au moment de la levée de fonds de 2023 : les deux grandeurs ne se recoupent pas et sont laissées côte à côte, datées.",
+     "ventilationParActivite": {
+      "disponible": false,
+      "motif": "Aucune ventilation publiée. Le modèle est un abonnement unique d'expertise comptable : la facturation électronique n'a pas de prix propre, donc pas de chiffre d'affaires propre (règle 78).",
+      "derniereVentilationConnue": null
+     }
+    },
+    "centralitePA": {
+     "indice": 1,
+     "niveau": "activite_annexe",
+     "marqueProduitDediee": "Dougs Facturation gratuite",
+     "entiteJuridiqueDediee": false,
+     "faisceauIndices": [
+      {
+       "signal": "L'immatriculation est portée par le cabinet d'expertise comptable lui-même, dont l'APE est 69.20Z : le métier déclaré est la comptabilité, pas l'édition de logiciel",
+       "sens": "-",
+       "preuve": "https://annuaire-entreprises.data.gouv.fr/entreprise/810319517"
+      },
+      {
+       "signal": "L'offre de facturation est explicitement gratuite, y compris dans le nom sous lequel la plateforme figure au référentiel : elle n'a pas de modèle économique propre",
+       "sens": "-",
+       "preuve": "https://www.dougs.fr/"
+      },
+      {
+       "signal": "Le produit est nommé et poussé comme point d'entrée gratuit vers l'abonnement comptable : la gratuité est un levier d'acquisition, ce qui en fait un investissement commercial réel",
+       "sens": "+",
+       "preuve": "https://www.dougs.fr/"
+      },
+      {
+       "signal": "La croissance de l'acteur est portée par l'élargissement de sa cible (commerçants éligibles depuis 2025) et par l'acquisition en ligne, pas par la réforme",
+       "sens": "-",
+       "preuve": "https://www.dougs.fr/blog/retrospective-annee/"
+      }
+     ],
+     "lecture": "Indice 1 : activité annexe. La plateforme agréée sert à faire entrer des indépendants et des TPE dans l'entonnoir, puis à leur vendre une mission comptable. C'est un produit d'appel, pas une activité : il n'a ni prix, ni compte de résultat, ni équipe commerciale propre identifiée. L'indice ne descend pas à 0 parce que la gratuité est ici une stratégie assumée et outillée, pas une case à cocher réglementaire.",
+     "confiance": "haute"
+    },
+    "postureCommerciale": {
+     "valeur": "conquete_directe",
+     "preuve": "L'acquisition est directe et en ligne, sans intermédiaire : site grand public, contenus, publicité, offre de facturation gratuite ouverte. Le nombre de clients passe de 14 000 en 2023 à 27 000 en 2025 selon la presse économique, et 49 000 sont revendiqués sur le site de l'acteur en 2026 ; un objectif de 100 000 clients a été annoncé. Ces trois chiffres ne proviennent pas de la même source et sont laissés datés côte à côte.",
+     "confiance": "haute"
+    },
+    "referencesClients": {
+     "nbCiteesSurSite": null,
+     "parSecteur": {},
+     "grandsComptes": [],
+     "referencesPAConfirmees": [],
+     "source": "Aucun logo client, aucune référence nominative : la clientèle est composée d'indépendants et de très petites entreprises, communiquée en volume et non en noms. Le référentiel ne publie aucune donnée nominative de client final."
+    },
+    "reputation": {
+     "volumeAvis": null,
+     "synthese": "Aucun relevé d'avis agrégés effectué dans cette passe, alors que cet acteur en est très largement pourvu : sa clientèle est grand public et les sites comparatifs de cabinets en ligne l'évaluent régulièrement. Ce relevé est identifié comme reste à faire.",
+     "confiance": "non_qualifie"
+    },
+    "capaciteDeFrappe": {
+     "actionnaires": [
+      "Fondateurs présents, complétés en 2023 par le fonds de croissance britannique Expedition Growth Capital, entré à l'occasion d'une première levée de fonds de 25 M€. La répartition du capital n'est pas publiée : la qualification retenue signale la présence d'un fonds, elle ne préjuge pas du contrôle."
+     ],
+     "typeActionnaire": "fonds_pe",
+     "financementRecent": "Première levée de fonds de 25 M€ en 2023 auprès d'Expedition Growth Capital. L'entreprise se déclarait alors rentable, avec 14 000 clients et un revenu annuel récurrent d'environ 15 M€.",
+     "acquisitions": [],
+     "modeleTarifaire": "Abonnement d'expertise comptable en ligne, tarifs publiés sur le site. La facturation électronique et la plateforme agréée sont annoncées gratuites, y compris pour des utilisateurs non abonnés à la mission comptable.",
+     "tarifPublie": true,
+     "offreGratuite": true
+    },
+    "lectureConcurrentielle": "Concurrent nul sur le segment ETI et grands comptes, mais cas d'école du modèle qui rend le prix de la conformité nul. Dougs ne vend pas une plateforme agréée : il l'offre pour capter une mission comptable à 24,7 M€ de chiffre d'affaires cumulé et une base annoncée à 49 000 clients. Pour l'offre portée par Fluxym, l'enseignement n'est pas concurrentiel mais argumentaire : la gratuité affichée par ce type d'acteur devient la référence mentale des dirigeants, y compris quand ils dirigent des entreprises hors de sa cible. Fluxym est un acteur du marché : ce référentiel est publié par un intégrateur qui distribue des solutions concurrentes, et cette lecture est une lecture de marché, pas une évaluation.",
+    "droitDeReponse": {
+     "signale": false,
+     "date": null,
+     "objet": null
+    }
+   }
+  },
+  {
+   "nom": "MY UNISOFT",
+   "sourcesEnrichissement": [
+    "https://annuaire-entreprises.data.gouv.fr/entreprise/840143275",
+    "https://annuaire-entreprises.data.gouv.fr/donnees-financieres/840143275",
+    "https://careers.myunisoft.fr/pages/notre-histoire",
+    "https://myu.fr/"
+   ],
+   "analyse360": {
+    "metierPrincipal": "Édition de logiciels applicatifs (APE 58.29C) : production comptable en ligne pour les cabinets d'expertise comptable. MY UNISOFT (SIREN 840 143 275) est une SAS créée le 01/06/2018, dont l'originalité est d'avoir été fondée par des cabinets d'expertise comptable et d'être restée détenue en partie par eux : ses clients sont ses actionnaires.",
+    "activites": [
+     {
+      "libelle": "Plateforme de production comptable en ligne pour cabinets, revendiquant le dépassement de 200 000 dossiers gérés en mai 2025",
+      "poids": "majeur",
+      "source": "https://careers.myunisoft.fr/pages/notre-histoire"
+     },
+     {
+      "libelle": "Outils périphériques du cabinet : Dayboard (gestion interne), Dataviz, MyUnisoft Predict issu de l'acquisition d'Emersio",
+      "poids": "significatif",
+      "source": "https://careers.myunisoft.fr/pages/notre-histoire"
+     },
+     {
+      "libelle": "Limpyd — gestion commerciale destinée aux chefs d'entreprise clients des cabinets, lancée en 2022",
+      "poids": "significatif",
+      "source": "https://careers.myunisoft.fr/pages/notre-histoire"
+     },
+     {
+      "libelle": "Fonction de plateforme agréée de facturation électronique intégrée à l'environnement cabinet-entreprise",
+      "poids": "mineur",
+      "source": "https://myu.fr/"
+     }
+    ],
+    "poidsEconomique": {
+     "caGroupe": null,
+     "caEntiteFrancaise": {
+      "montantMEUR": 9.8,
+      "exercice": "2024",
+      "nature": "comptes_deposes",
+      "commentaire": "Comptes déposés pour l'exercice 2024 : 9,8 M€ de chiffre d'affaires et un résultat net négatif de 1,8 M€. Profil d'éditeur en phase d'investissement, financé par apports successifs : le capital social atteint 7 804 250 €, très au-dessus du niveau habituel d'une PME de cette taille, ce qui traduit sept années de levées auprès de cabinets actionnaires.",
+      "source": "https://annuaire-entreprises.data.gouv.fr/donnees-financieres/840143275",
+      "dateReleve": "2026-08-24"
+     },
+     "resultatNet": -1800000,
+     "effectifGroupe": null,
+     "effectifEntite": "100 à 199 salariés (INSEE, millésime 2023), 6 établissements dont 3 en activité, catégorie PME. Siège Immeuble Le Carré, 2 rue Georges Stephenson, 78180 Montigny-le-Bretonneux.",
+     "ventilationParActivite": {
+      "disponible": false,
+      "motif": "Aucune ventilation publiée par produit ni par module. L'acteur communique en volume de dossiers gérés, pas en chiffre d'affaires par ligne.",
+      "derniereVentilationConnue": null
+     }
+    },
+    "centralitePA": {
+     "indice": 2,
+     "niveau": "extension_naturelle",
+     "marqueProduitDediee": "MyUnisoft",
+     "entiteJuridiqueDediee": false,
+     "faisceauIndices": [
+      {
+       "signal": "Le métier est l'édition d'un outil de production comptable : la facture entrante et sortante est déjà la matière première du logiciel, l'agrément prolonge un flux existant",
+       "sens": "+",
+       "preuve": "https://annuaire-entreprises.data.gouv.fr/entreprise/840143275"
+      },
+      {
+       "signal": "L'acteur a lancé dès 2022 une solution de gestion commerciale destinée aux entreprises clientes des cabinets, ce qui prépositionnait l'émission de facture avant la réforme",
+       "sens": "+",
+       "preuve": "https://careers.myunisoft.fr/pages/notre-histoire"
+      },
+      {
+       "signal": "La chronologie publiée par l'acteur ne mentionne pas la réforme de la facturation électronique parmi ses jalons : les jalons cités sont les levées de fonds, les volumes de dossiers et les acquisitions",
+       "sens": "-",
+       "preuve": "https://careers.myunisoft.fr/pages/notre-histoire"
+      },
+      {
+       "signal": "Aucune marque produit distincte n'est donnée à la plateforme agréée, qui est présentée comme une fonction de l'environnement et non comme une offre autonome",
+       "sens": "-",
+       "preuve": "https://myu.fr/"
+      }
+     ],
+     "lecture": "Indice 2 : extension naturelle. L'agrément est cohérent avec le métier et utile au produit, mais il n'est pas le moteur : ce qui fait croître cet acteur, c'est le nombre de dossiers comptables migrés et le nombre de cabinets entrés au capital. La facturation électronique sécurise l'usage plutôt qu'elle ne crée un marché nouveau.",
+     "confiance": "moyenne"
+    },
+    "postureCommerciale": {
+     "valeur": "canal_indirect",
+     "preuve": "Le client direct est le cabinet d'expertise comptable, qui déploie ensuite l'environnement chez ses clients entreprises ; le formulaire public de l'acteur distingue explicitement trois qualités de visiteur, « TPE / PME », « Cabinet comptable » et « Éditeur partenaire », ce dernier attestant l'existence d'un canal éditeur. La particularité est que le canal et l'actionnariat se confondent : 125 cabinets d'expertise comptable étaient actionnaires fin 2024.",
+     "confiance": "haute"
+    },
+    "referencesClients": {
+     "nbCiteesSurSite": null,
+     "parSecteur": {},
+     "grandsComptes": [],
+     "referencesPAConfirmees": [],
+     "source": "Aucun logo client publié. Les seules références nominatives disponibles sont les quatre cabinets fondateurs cités par l'acteur dans sa propre chronologie — Recci, Eccentive, RSM et Exponens — mais ce sont des actionnaires fondateurs, pas des références commerciales, et ils ne sont pas comptés comme telles ici. La grandeur communiquée est un volume de dossiers comptables gérés, plus de 200 000 en mai 2025, qui ne mesure ni des entreprises raccordées à la plateforme agréée ni des factures (règle 80)."
+    },
+    "reputation": {
+     "volumeAvis": null,
+     "synthese": "Aucun relevé d'avis agrégés effectué dans cette passe. Signal public de nature différente : la progression des volumes publiée par l'acteur lui-même, de 3 900 dossiers en mai 2021 à plus de 200 000 en mai 2025, constitue une trajectoire d'adoption vérifiable dans le temps.",
+     "confiance": "non_qualifie"
+    },
+    "capaciteDeFrappe": {
+     "actionnaires": [
+      "HG Capital, actionnaire majoritaire depuis une levée de fonds de décembre 2024, aux côtés de 125 cabinets d'expertise comptable déjà actionnaires. Actionnariat d'origine : quatre cabinets fondateurs en 2018 (Recci, Eccentive, RSM, Exponens), rejoints par vagues successives lors de cinq levées de fonds entre 2019 et 2024, dont Drakarys en 2021."
+     ],
+     "typeActionnaire": "fonds_pe",
+     "financementRecent": "Cinq levées de fonds entre juillet 2019 et décembre 2024, la dernière faisant entrer HG Capital comme actionnaire majoritaire. Le capital social au registre s'élève à 7 804 250 €.",
+     "acquisitions": [
+      "Emersio, startup acquise en septembre 2024, à l'origine de l'offre MyUnisoft Predict",
+      "Sociétés éditrices des solutions Dayboard et Limpyd, acquises en mars 2025"
+     ],
+     "modeleTarifaire": "Aucun tarif public relevé : la commercialisation passe par la démonstration et le contrat cabinet.",
+     "tarifPublie": false,
+     "offreGratuite": false
+    },
+    "lectureConcurrentielle": "Le cas le plus singulier du lot : une plateforme agréée dont les clients sont les actionnaires. Cent vingt-cinq cabinets d'expertise comptable ont mis de l'argent dans l'outil qu'ils utilisent, avant qu'un fonds britannique n'en prenne la majorité fin 2024. Cette structure verrouille la base d'une manière qu'aucun argument commercial ne défait : un cabinet actionnaire ne migre pas. Pour l'offre portée par Fluxym, la conséquence n'est pas une confrontation directe — la cible reste la TPE et la PME servie par un cabinet — mais la disparition durable d'un vivier : plus de 200 000 dossiers comptables, dont les flux de facturation ont désormais une destination par défaut. À surveiller : l'arrivée d'un fonds majoritaire dans un actionnariat de praticiens crée une tension entre la logique de service à la profession et la logique de rendement, tension dont la résolution déterminera si cet acteur reste un outil de cabinets ou devient un éditeur comme les autres. Fluxym est un acteur du marché : ce référentiel est publié par un intégrateur qui distribue des solutions concurrentes, et cette lecture est une lecture de marché, pas une évaluation.",
+    "droitDeReponse": {
+     "signale": false,
+     "date": null,
+     "objet": null
+    }
+   }
+  },
+  {
+   "nom": "FIDUCIAL CLOUD",
+   "sourcesEnrichissement": [
+    "https://annuaire-entreprises.data.gouv.fr/entreprise/480650712",
+    "https://www.ladepeche.fr/2026/06/26/facturation-electronique-fiducial-au-coeur-de-la-transition-numerique-des-entreprises-13439797.php",
+    "https://jobs.fiducial.fr/qui-sommes-nous"
+   ],
+   "analyse360": {
+    "metierPrincipal": "Traitement de données, hébergement et activités connexes (APE 63.11Z). FIDUCIAL CLOUD, dénomination registre « FIDUCIAL CLOUD (NEXTO) », SIREN 480 650 712, est la filiale d'infrastructure et de services numériques du groupe FIDUCIAL. Elle n'exerce pas un métier de marché autonome : elle outille les 334 000 clients d'un groupe pluridisciplinaire dont le métier principal est l'expertise comptable.",
+    "activites": [
+     {
+      "libelle": "Hébergement et traitement de données pour le groupe et ses clients, dans des centres de données présentés comme propriétaires et situés en France",
+      "poids": "majeur",
+      "source": "https://www.ladepeche.fr/2026/06/26/facturation-electronique-fiducial-au-coeur-de-la-transition-numerique-des-entreprises-13439797.php"
+     },
+     {
+      "libelle": "Plateforme agréée de facturation électronique du groupe, à laquelle est connecté Facilia, logiciel en ligne lancé fin 2024 comportant un module factures fournisseurs et un module facturation client",
+      "poids": "significatif",
+      "source": "https://www.ladepeche.fr/2026/06/26/facturation-electronique-fiducial-au-coeur-de-la-transition-numerique-des-entreprises-13439797.php"
+     },
+     {
+      "libelle": "Solutions informatiques et services cloud aux petites entreprises, activité héritée de NEXTO, société marseillaise acquise par le groupe en 2013",
+      "poids": "significatif",
+      "source": "https://annuaire-entreprises.data.gouv.fr/entreprise/480650712"
+     }
+    ],
+    "poidsEconomique": {
+     "caGroupe": {
+      "montantMEUR": null,
+      "exercice": "2025",
+      "nature": "non_publie",
+      "commentaire": "Le groupe FIDUCIAL ne publie pas de comptes consolidés accessibles dans cette passe, et les ordres de grandeur qui circulent divergent : le site de recrutement du groupe annonce 1,310 Md€ de chiffre d'affaires en Europe avec 860 agences, 17 500 collaborateurs et 334 000 clients, tandis qu'un article de presse régionale de juin 2026 cite 860 agences, plus de 13 500 collaborateurs et environ 334 000 clients, et qu'une source encyclopédique avance 1,94 Md$ pour 2025. Ces chiffres ne sont pas retenus comme un montant de référence : la discordance est publiée telle quelle, elle n'est pas arbitrée.",
+      "source": "https://jobs.fiducial.fr/qui-sommes-nous",
+      "dateReleve": "2026-08-24"
+     },
+     "caEntiteFrancaise": {
+      "montantMEUR": null,
+      "exercice": "aucun",
+      "nature": "comptes_confidentiels",
+      "commentaire": "Aucun indicateur financier n'est restitué pour l'entité immatriculée FIDUCIAL CLOUD (NEXTO) par le portail public d'annuaire des entreprises. Le seul ancrage disponible sur cette entité est historique et sans valeur courante : la société NEXTO déclarait 3,4 M€ de chiffre d'affaires et une trentaine de collaborateurs en 2012, avant son rachat par le groupe (règle 34).",
+      "source": "https://annuaire-entreprises.data.gouv.fr/entreprise/480650712",
+      "dateReleve": "2026-08-24"
+     },
+     "resultatNet": null,
+     "effectifGroupe": null,
+     "effectifEntite": "20 à 49 salariés (INSEE, millésime 2023) pour l'entité immatriculée, 8 établissements dont 4 en activité, capital social 1 249 597,16 €, entité créée le 03/01/2005. L'INSEE la classe pourtant en « Grande Entreprise » : cette catégorie est calculée au niveau du groupe d'appartenance, ce qui confirme par une donnée statistique l'adossement capitalistique.",
+     "ventilationParActivite": {
+      "disponible": false,
+      "motif": "Aucune ventilation publiée, ni au niveau du groupe ni au niveau de l'entité. Le décalage est ici structurel : l'entité immatriculée compte 20 à 49 salariés alors que le périmètre servi dépasse 300 000 clients — le poids économique de l'activité ne se lit donc pas dans ses comptes (règle 36).",
+      "derniereVentilationConnue": null
+     }
+    },
+    "centralitePA": {
+     "indice": 2,
+     "niveau": "extension_naturelle",
+     "marqueProduitDediee": "FIDUCIAL CLOUD, avec le logiciel Facilia en amont",
+     "entiteJuridiqueDediee": false,
+     "faisceauIndices": [
+      {
+       "signal": "L'immatriculation est portée par la filiale technique du groupe et non par la société d'expertise comptable : la fonction est logée là où sont l'hébergement et l'exploitation",
+       "sens": "+",
+       "preuve": "https://annuaire-entreprises.data.gouv.fr/entreprise/480650712"
+      },
+      {
+       "signal": "Le groupe revendique une stratégie explicite de propriété de ses outils, motivée par le refus de dépendre de sociétés informatiques dont il ne maîtriserait pas les coûts, et l'hébergement des données dans ses propres centres en France",
+       "sens": "+",
+       "preuve": "https://www.ladepeche.fr/2026/06/26/facturation-electronique-fiducial-au-coeur-de-la-transition-numerique-des-entreprises-13439797.php"
+      },
+      {
+       "signal": "La plateforme agréée n'est pas commercialisée comme un produit de marché : elle est le raccordement réglementaire de Facilia, lui-même distribué via les agences du groupe à ses propres clients",
+       "sens": "-",
+       "preuve": "https://www.ladepeche.fr/2026/06/26/facturation-electronique-fiducial-au-coeur-de-la-transition-numerique-des-entreprises-13439797.php"
+      },
+      {
+       "signal": "L'entité immatriculée exerce un métier d'hébergement et de traitement de données antérieur de vingt ans à la réforme : l'agrément s'ajoute à une infrastructure existante",
+       "sens": "+",
+       "preuve": "https://annuaire-entreprises.data.gouv.fr/entreprise/480650712"
+      }
+     ],
+     "lecture": "Indice 2 : extension naturelle. L'agrément prolonge une infrastructure et une doctrine d'internalisation qui préexistaient. Ce n'est pas un axe stratégique au sens d'une nouvelle activité à vendre, mais ce n'est pas non plus une conformité subie : le groupe a décidé de faire, plutôt que d'acheter, et a engagé ses propres centres de données et son propre logiciel de facturation dès fin 2024.",
+     "confiance": "moyenne"
+    },
+    "postureCommerciale": {
+     "valeur": "base_installee",
+     "preuve": "La distribution passe par les 860 agences du groupe auprès de ses propres clients, avec formation présentielle ou à distance assurée par les agences. Aucune commercialisation hors clientèle du groupe, aucun programme de revente, aucun tarif public relevés dans cette passe.",
+     "confiance": "haute"
+    },
+    "referencesClients": {
+     "nbCiteesSurSite": null,
+     "parSecteur": {},
+     "grandsComptes": [],
+     "referencesPAConfirmees": [],
+     "source": "Aucun logo client publié. La clientèle décrite par le groupe est composée d'artisans, de commerçants, de professions libérales et d'agriculteurs, soit un périmètre d'environ 334 000 clients servis par 860 agences en Europe, chiffres publiés par l'acteur et relevés le 24/08/2026. Ce volume est celui du groupe, pas celui de la plateforme agréée."
+    },
+    "reputation": {
+     "volumeAvis": null,
+     "synthese": "Aucun relevé d'avis agrégés effectué dans cette passe.",
+     "confiance": "non_qualifie"
+    },
+    "capaciteDeFrappe": {
+     "actionnaires": [
+      "Filiale du groupe FIDUCIAL, groupe français créé en 1970 et dirigé par son fondateur Christian Latouche, dont le siège est à Lyon : le capital de la tête de groupe est de nature familiale, ce qui justifie la valeur retenue plutôt que celle de filiale de groupe étranger. La chaîne de détention précise entre l'entité immatriculée et la tête de groupe n'a pas été documentée dans cette passe et s'arrête donc au dernier niveau établi (règle 42)."
+     ],
+     "typeActionnaire": "fondateurs",
+     "financementRecent": "Aucune opération récente relevée sur l'entité. Historique : l'entité résulte de l'acquisition en 2013 de la société marseillaise NEXTO, dont la dénomination subsiste au registre entre parenthèses.",
+     "acquisitions": [
+      "NEXTO, société marseillaise de services cloud, acquise par le groupe en 2013"
+     ],
+     "modeleTarifaire": "Aucun tarif public. L'accès s'inscrit dans la relation de mission et dans l'offre globale de services du groupe, l'argument avancé étant précisément la maîtrise des coûts par l'internalisation des outils.",
+     "tarifPublie": false,
+     "offreGratuite": false
+    },
+    "lectureConcurrentielle": "Le plus gros canal comptable du référentiel, et le plus fermé. Un groupe de 860 agences et environ 334 000 clients qui décide d'héberger lui-même, d'éditer lui-même son logiciel de facturation et de porter lui-même son immatriculation ne se dispute pas : il se soustrait. La doctrine est énoncée sans détour par l'acteur — ne pas dépendre d'un tiers informatique pour ne pas subir ses prix. Pour l'offre portée par Fluxym, aucun point de contact commercial n'est attendu ; l'intérêt de la fiche est de mesurer combien de flux de TPE sortent du marché adressable par décision interne d'un seul groupe. À noter enfin le décalage entre le poids servi et le poids comptable de l'entité immatriculée, qui compte 20 à 49 salariés : lire la puissance de cet acteur dans les comptes de sa filiale technique conduirait à un contresens complet. Fluxym est un acteur du marché : ce référentiel est publié par un intégrateur qui distribue des solutions concurrentes, et cette lecture est une lecture de marché, pas une évaluation.",
+    "droitDeReponse": {
+     "signale": false,
+     "date": null,
+     "objet": null
+    }
+   }
+  }
+ ]
+}
