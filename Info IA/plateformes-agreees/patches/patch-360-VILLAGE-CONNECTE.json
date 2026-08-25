@@ -1,0 +1,175 @@
+{
+ "_patch": {
+  "id": "360-VILLAGE-CONNECTE",
+  "chantier": "Analyse 360 — LE VILLAGE CONNECTÉ + liaison TeamSystem (2 fiches)",
+  "auteur": "RFE_WebSite",
+  "dateReleve": "2026-08-25",
+  "nbPlateformes": 2,
+  "note": "Ce patch est né d'un échec utile : chercher à traiter ACD Groupe pour lui-même a établi qu'ACD ne porte aucune immatriculation. ACD est l'un des trois membres — avec RCA et COAXIS ASP — de l'alliance qui porte l'immatriculation du VILLAGE CONNECTÉ. Conséquence : la prise de contrôle d'ACD Groupe par le groupe italien TeamSystem en avril 2026 fait entrer ce groupe dans le tour de table d'une seconde plateforme agréée française, alors qu'il en détient déjà une via SELLSY. Le patch livre donc la fiche 360 complète du VILLAGE CONNECTÉ et pose la liaison sur les deux entrées concernées. Poids économique des trois membres, cités séparément et non additionnés : ACD environ 37 M€ et plus de 300 collaborateurs, RCA environ 42 M€ et environ 300 collaborateurs avec plus de 205 000 entreprises déclarées connectées à MEG, COAXIS ASP 12,27 M€ sur l'exercice clos le 30/06/2025. L'entité immatriculée, elle, compte 1 à 2 salariés et ne dépose aucun compte : c'est un véhicule, pas une entreprise. Premier indice de centralité 4 coeur_de_metier du référentiel, assorti d'une contrepartie explicite — l'indice qualifie le véhicule, pas la puissance, qui est chez les membres. Posture canal_indirect. typeActionnaire industriel. Réserve publiée sur les volumes : ACD et RCA annoncent chacun environ 3 500 cabinets, un cabinet pouvant être client des deux, ces nombres ne s'additionnent pas et le nombre réel de cabinets couverts n'est pas établi. Le bloc immatriculationsLiees du VILLAGE CONNECTÉ est réécrit intégralement : il reprend en tête la composition de l'alliance déjà établie par le chantier H2 et y ajoute le fait TeamSystem."
+ },
+ "plateformes": [
+  {
+   "nom": "LE VILLAGE CONNECTE",
+   "sourcesEnrichissement": [
+    "https://annuaire-entreprises.data.gouv.fr/entreprise/950883231",
+    "https://annuaire-entreprises.data.gouv.fr/entreprise/528553654",
+    "https://annuaire-entreprises.data.gouv.fr/entreprise/418348231",
+    "https://annuaire-entreprises.data.gouv.fr/entreprise/432577898",
+    "https://www.acd-groupe.fr/facture-electronique/",
+    "https://www.teamsystem.com/press/teamsystem-acquisisce-il-controllo-di-acd-groupe/"
+   ],
+   "immatriculationsLiees": {
+    "groupe": "Alliance LE VILLAGE CONNECTÉ — ACD, RCA, COAXIS ASP, avec TeamSystem en amont d'ACD",
+    "type": "alliance_industrielle",
+    "entrees": [
+     "LE VILLAGE CONNECTE",
+     "TeamSystem Sellsy"
+    ],
+    "lecture": "LE VILLAGE CONNECTÉ est le véhicule commun de trois éditeurs et hébergeurs du marché du cabinet d'expertise comptable : ACD (SIREN 528 553 654, Tours), RCA (SIREN 418 348 231, Saint-Herblain) et COAXIS ASP (SIREN 432 577 898, Fauguerolles). Cette composition est publiée par les membres eux-mêmes. S'y ajoute un fait établi postérieurement : le groupe italien TeamSystem a annoncé en avril 2026 avoir pris le contrôle d'ACD Groupe. TeamSystem ne porte donc pas l'immatriculation du VILLAGE CONNECTÉ, mais il contrôle l'un de ses trois membres, tout en détenant par ailleurs l'entité SELLSY qui porte sa propre immatriculation sous l'entrée « TeamSystem Sellsy ». La liaison est publiée parce que les deux faits qui la composent sont documentés séparément : la composition de l'alliance par l'un de ses membres, la prise de contrôle par l'acquéreur (règle 29). Le degré d'influence de TeamSystem sur les décisions de l'alliance n'est pas établi et n'est pas supposé.",
+    "source": "Page « facture électronique » d'ACD Groupe pour la composition de l'alliance ; communiqué de presse TeamSystem pour la prise de contrôle d'ACD Groupe",
+    "dateReleve": "2026-08-25"
+   },
+   "analyse360": {
+    "metierPrincipal": "Aucun métier propre. LE VILLAGE CONNECTÉ (SIREN 950 883 231) est un véhicule d'alliance : une société créée le 23/03/2023, qui compte 1 à 2 salariés, dont le seul objet est de porter une immatriculation de plateforme agréée mutualisée pour le compte de trois acteurs du marché du cabinet d'expertise comptable — ACD, RCA et COAXIS ASP. Le métier, les effectifs, les revenus et les clients sont chez les membres, pas dans l'entité immatriculée.",
+    "activites": [
+     {
+      "libelle": "ACD (SIREN 528 553 654, Tours) — édition de logiciels de production comptable, fiscale, sociale et juridique pour cabinets, via la suite i-Suite Expert ; environ 37 M€ de chiffre d'affaires et plus de 300 collaborateurs annoncés, pour environ 3 500 cabinets clients. Sous contrôle du groupe italien TeamSystem depuis avril 2026",
+      "poids": "majeur",
+      "source": "https://www.teamsystem.com/press/teamsystem-acquisisce-il-controllo-di-acd-groupe/"
+     },
+     {
+      "libelle": "RCA (SIREN 418 348 231, Saint-Herblain) — édition de la plateforme de gestion MEG destinée aux entreprises clientes des cabinets, environ 42 M€ de chiffre d'affaires et environ 300 collaborateurs annoncés, plus de 205 000 entreprises déclarées connectées et environ 3 500 cabinets partenaires",
+      "poids": "majeur",
+      "source": "https://annuaire-entreprises.data.gouv.fr/entreprise/418348231"
+     },
+     {
+      "libelle": "COAXIS ASP (SIREN 432 577 898, Fauguerolles) — hébergement et infogérance pour cabinets d'expertise comptable, 12,27 M€ de chiffre d'affaires sur l'exercice clos le 30/06/2025, 20 à 49 salariés ; détenue par la holding COAXIS INVEST (SIREN 897 589 024). C'est également l'adresse à laquelle l'entité immatriculée est domiciliée",
+      "poids": "significatif",
+      "source": "https://annuaire-entreprises.data.gouv.fr/entreprise/432577898"
+     },
+     {
+      "libelle": "Fonction de plateforme agréée mutualisée : raccordement des solutions des membres — i-Suite Expert pour ACD, MEG pour RCA — et point d'accès Peppol",
+      "poids": "significatif",
+      "source": "https://www.acd-groupe.fr/facture-electronique/"
+     }
+    ],
+    "poidsEconomique": {
+     "caGroupe": {
+      "montantMEUR": null,
+      "exercice": "2025",
+      "nature": "sans_objet",
+      "commentaire": "Il n'y a pas de groupe, donc pas de chiffre d'affaires de groupe. L'alliance réunit trois sociétés indépendantes dont les comptes sont séparés : ACD environ 37 M€, RCA environ 42 M€, COAXIS ASP 12,27 M€ sur l'exercice clos le 30/06/2025. Ces trois montants sont cités un par un et ne s'additionnent pas : additionner les chiffres d'affaires de membres d'une alliance produirait un agrégat qui ne correspond à aucune entité, à aucune consolidation et à aucun périmètre de responsabilité (règle 86). Ils donnent en revanche un ordre de grandeur de la capacité d'investissement mobilisable derrière la plateforme, très supérieure à ce que les comptes de l'entité immatriculée laissent voir.",
+      "source": "https://www.acd-groupe.fr/facture-electronique/",
+      "dateReleve": "2026-08-25"
+     },
+     "caEntiteFrancaise": {
+      "montantMEUR": null,
+      "exercice": "aucun",
+      "nature": "aucun_compte_depose",
+      "commentaire": "Aucun chiffre d'affaires n'est restitué pour l'entité immatriculée, créée le 23/03/2023 et dotée de 1 à 2 salariés. C'est cohérent avec sa fonction : elle porte une immatriculation, elle n'exploite pas une activité. Lire le poids de cette plateforme dans les comptes de son véhicule juridique conduirait au contresens le plus complet du référentiel, puisque les membres annoncent viser plusieurs centaines de milliers d'entreprises (règle 36).",
+      "source": "https://annuaire-entreprises.data.gouv.fr/entreprise/950883231",
+      "dateReleve": "2026-08-25"
+     },
+     "resultatNet": null,
+     "effectifGroupe": "Additionner les effectifs des trois membres reviendrait à construire un groupe qui n'existe pas. Séparément : plus de 300 collaborateurs annoncés chez ACD, environ 300 chez RCA, 20 à 49 salariés chez COAXIS ASP. Ces effectifs servent l'ensemble de leurs activités, dont la plateforme n'est qu'une composante.",
+     "effectifEntite": "1 à 2 salariés (INSEE, millésime 2023) pour l'entité immatriculée, domiciliée à Fauguerolles (47) — à l'adresse de COAXIS ASP, l'un des trois membres. Cette concordance d'adresse est un indice documenté d'hébergement opérationnel par un membre, elle n'établit aucun lien capitalistique (règle 89).",
+     "ventilationParActivite": {
+      "disponible": false,
+      "motif": "Sans objet : il n'y a ni comptes consolidés ni activité logée dans l'entité immatriculée. La ventilation pertinente serait celle de chacun des trois membres, aucun ne la publiant.",
+      "derniereVentilationConnue": null
+     }
+    },
+    "centralitePA": {
+     "indice": 4,
+     "niveau": "coeur_de_metier",
+     "marqueProduitDediee": "LE VILLAGE CONNECTÉ",
+     "entiteJuridiqueDediee": true,
+     "faisceauIndices": [
+      {
+       "signal": "L'entité a été créée le 23/03/2023, soit après l'annonce de la réforme, et n'a aucune autre activité que de porter l'immatriculation : c'est la définition même d'une entité dédiée",
+       "sens": "+",
+       "preuve": "https://annuaire-entreprises.data.gouv.fr/entreprise/950883231"
+      },
+      {
+       "signal": "Trois sociétés concurrentes sur leurs marchés respectifs ont accepté de mutualiser un véhicule commun pour porter l'agrément : le coût politique d'une telle décision atteste que la conformité était considérée comme trop structurante pour être traitée séparément",
+       "sens": "+",
+       "preuve": "https://www.acd-groupe.fr/facture-electronique/"
+      },
+      {
+       "signal": "La gouvernance de l'entité associe les membres — la direction générale est notamment exercée par le fondateur de RCA — ce qui traduit un engagement des dirigeants et pas une délégation à une structure ad hoc",
+       "sens": "+",
+       "preuve": "https://annuaire-entreprises.data.gouv.fr/entreprise/950883231"
+      },
+      {
+       "signal": "La plateforme est le point de raccordement obligé des produits phares des membres : i-Suite Expert pour ACD, MEG pour RCA, dont plus de 205 000 entreprises sont déclarées connectées",
+       "sens": "+",
+       "preuve": "https://www.acd-groupe.fr/facture-electronique/"
+      },
+      {
+       "signal": "Contrepoint de méthode : l'indice qualifie l'entité immatriculée, dont l'agrément est effectivement l'unique raison d'être. Pour chacun des trois membres pris séparément, l'indice serait bien plus bas, la plateforme n'étant qu'une brique de conformité de leur offre",
+       "sens": "-",
+       "preuve": "https://www.acd-groupe.fr/facture-electronique/"
+      }
+     ],
+     "lecture": "Indice 4 : cœur de métier. C'est mécanique et c'est le premier indice 4 du référentiel — l'entité n'a pas d'autre activité que l'agrément. Mais cet indice doit se lire avec sa contrepartie : il qualifie un véhicule, pas une puissance. La force de cette plateforme n'est pas dans l'entité qui la porte, elle est dans les trois sociétés qui l'ont créée et dans les bases installées qu'elles y raccordent. C'est exactement l'inverse du cas FIDUCIAL CLOUD, où une filiale technique de 20 à 49 salariés sert un groupe de 334 000 clients : ici trois entreprises de 37, 42 et 12 M€ de chiffre d'affaires servent une coquille de 1 à 2 salariés.",
+     "confiance": "haute"
+    },
+    "postureCommerciale": {
+     "valeur": "canal_indirect",
+     "preuve": "La plateforme ne se vend pas : elle est raccordée aux solutions des membres, elles-mêmes distribuées par et via les cabinets d'expertise comptable. Aucun tarif propre n'est publié par l'entité immatriculée, aucune force de vente ne lui est attachée, et la relation client appartient aux membres. Volumes annoncés par les membres, non consolidés : environ 3 500 cabinets clients pour ACD, environ 3 500 cabinets partenaires pour RCA, plus de 205 000 entreprises déclarées connectées à MEG. Le fait que les deux membres annoncent le même nombre de cabinets impose une réserve explicite : un cabinet peut être client des deux, ces volumes ne s'additionnent pas et le nombre réel de cabinets couverts par l'alliance n'est pas établi (règle 87).",
+     "confiance": "haute"
+    },
+    "referencesClients": {
+     "nbCiteesSurSite": null,
+     "parSecteur": {},
+     "grandsComptes": [],
+     "referencesPAConfirmees": [],
+     "source": "Aucun logo client publié par l'entité immatriculée, ce qui est cohérent avec sa nature de véhicule : ses seuls clients directs sont ses trois membres. Les références nominatives éventuelles se trouveraient chez ACD, RCA et COAXIS ASP, dont le relevé n'a pas été effectué dans cette passe. Aucune référence n'est présentée comme cliente de l'activité agréée."
+    },
+    "reputation": {
+     "volumeAvis": null,
+     "synthese": "Aucun avis agrégé n'existe sur l'entité immatriculée : elle n'a pas d'utilisateur direct. Les avis pertinents portent sur les produits des membres, i-Suite Expert et MEG, et leur relevé constitue un reste à faire distinct.",
+     "confiance": "non_qualifie"
+    },
+    "capaciteDeFrappe": {
+     "actionnaires": [
+      "Véhicule commun détenu par les trois membres de l'alliance : ACD (SIREN 528 553 654), RCA (SIREN 418 348 231) et COAXIS ASP (SIREN 432 577 898). La répartition exacte du capital n'est pas publiée et n'est pas supposée",
+      "En amont d'ACD : le groupe italien TeamSystem, qui a annoncé en avril 2026 avoir pris le contrôle d'ACD Groupe. TeamSystem détient par ailleurs SELLSY, qui porte sa propre immatriculation au référentiel. Cette liaison est publiée sur la foi de deux faits documentés séparément ; le degré d'influence effectif sur l'alliance n'est pas établi",
+      "En amont de COAXIS ASP : la holding COAXIS INVEST (SIREN 897 589 024), établie à la même adresse. La chaîne s'arrête à ce niveau documenté (règle 42)"
+     ],
+     "typeActionnaire": "industriel",
+     "financementRecent": "Aucune levée de fonds relevée sur l'entité immatriculée. Le financement de la plateforme est porté par les trois membres, dont la capacité cumulée est indiquée par leurs chiffres d'affaires respectifs, cités sans être additionnés.",
+     "acquisitions": [],
+     "modeleTarifaire": "Aucun tarif publié par l'entité immatriculée. La plateforme est intégrée aux offres des membres, et c'est chez eux que se forme le prix. Un point d'accès Peppol est associé au dispositif.",
+     "tarifPublie": false,
+     "offreGratuite": false
+    },
+    "lectureConcurrentielle": "Cette fiche est la conséquence directe de la précédente, et elle en change la portée. En cherchant à traiter ACD Groupe pour lui-même, un fait s'est imposé : ACD ne porte aucune immatriculation. Il est l'un des trois membres de l'alliance qui porte celle du VILLAGE CONNECTÉ. Autrement dit, en prenant le contrôle d'ACD en avril 2026, le groupe italien TeamSystem n'a pas seulement acheté 3 500 cabinets et 37 M€ de chiffre d'affaires : il est entré dans le tour de table d'une seconde plateforme agréée française, alors qu'il en détient déjà une par SELLSY. Cela a une conséquence de méthode sérieuse pour le référentiel : le recensement du contrôle étranger sur les plateformes agréées françaises est faux s'il ne regarde que les entités immatriculées, parce qu'un groupe étranger peut entrer par un membre d'alliance sans jamais apparaître au registre de la plateforme (règle 88). Pour l'offre portée par Fluxym, l'enseignement reste indirect — la cible est le cabinet et sa clientèle de TPE et PME, pas l'ETI — mais l'ordre de grandeur mérite d'être posé : trois éditeurs et hébergeurs pesant séparément 37, 42 et 12 M€, deux fois 3 500 cabinets annoncés, plus de 205 000 entreprises déclarées connectées à l'une de leurs plateformes, et désormais un actionnaire de référence à un milliard d'euros derrière l'un des trois. Ce n'est plus une alliance défensive de fournisseurs de cabinets, c'est un canal doté d'un bilan. Fluxym est un acteur du marché : ce référentiel est publié par un intégrateur qui distribue des solutions concurrentes, et cette lecture est une lecture de marché, pas une évaluation.",
+    "droitDeReponse": {
+     "signale": false,
+     "date": null,
+     "objet": null
+    }
+   }
+  },
+  {
+   "nom": "TeamSystem Sellsy",
+   "sourcesEnrichissement": [
+    "https://www.acd-groupe.fr/facture-electronique/",
+    "https://www.teamsystem.com/press/teamsystem-acquisisce-il-controllo-di-acd-groupe/",
+    "https://annuaire-entreprises.data.gouv.fr/entreprise/528553654"
+   ],
+   "immatriculationsLiees": {
+    "groupe": "TeamSystem — deux voies d'accès au marché français des plateformes agréées",
+    "type": "alliance_industrielle",
+    "entrees": [
+     "TeamSystem Sellsy",
+     "LE VILLAGE CONNECTE"
+    ],
+    "lecture": "Le groupe italien TeamSystem est présent deux fois dans le référentiel, par deux mécanismes différents. En direct : il détient SELLSY (SIREN 509 961 074), qui porte l'immatriculation sous l'entrée « TeamSystem Sellsy ». Indirectement : il a annoncé en avril 2026 avoir pris le contrôle d'ACD Groupe (SIREN 528 553 654), lequel est l'un des trois membres — avec RCA et COAXIS ASP — de l'alliance qui porte l'immatriculation du VILLAGE CONNECTÉ. ACD ne porte donc aucune immatriculation en propre, mais son acquisition fait entrer TeamSystem dans le tour de table d'une seconde plateforme agréée française. Le degré d'influence effectif de TeamSystem sur les décisions de cette alliance n'est pas établi et n'est pas supposé : seuls les deux faits qui composent la liaison sont documentés, la composition de l'alliance publiée par l'un de ses membres et la prise de contrôle publiée par l'acquéreur (règle 29).",
+    "source": "Communiqué de presse TeamSystem sur la prise de contrôle d'ACD Groupe ; page « facture électronique » d'ACD Groupe pour la composition de l'alliance LE VILLAGE CONNECTÉ",
+    "dateReleve": "2026-08-25"
+   }
+  }
+ ]
+}
