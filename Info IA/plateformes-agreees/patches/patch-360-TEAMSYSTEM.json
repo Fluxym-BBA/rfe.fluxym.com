@@ -1,0 +1,163 @@
+{
+ "_patch": {
+  "id": "360-TEAMSYSTEM",
+  "chantier": "Analyse 360 — TeamSystem (fiche TeamSystem Sellsy)",
+  "auteur": "RFE_WebSite",
+  "dateReleve": "2026-08-25",
+  "nbPlateformes": 1,
+  "note": "Fiche 360 de l'entrée « TeamSystem Sellsy » (SELLSY, SIREN 509 961 074), traitée au niveau du groupe qui la détient. Trois ancrages de poids économique tenus séparés : groupe TeamSystem 1,15 Md€ en 2025 avec un EBITDA normalisé de 579 M€, entité française immatriculée 16,72 M€ pour l'exercice clos le 30/12/2024 avec un résultat net de −826,3 k€, et ventilation partielle par division publiée par la voie des rapports aux porteurs obligataires (Micro 302 M€, Enterprise 191 M€ en 2024). Ces montants ne s'additionnent pas et aucune part attribuable à l'activité agréée française n'est estimée. Indice de centralité 3, axe stratégique, avec double lecture explicite : indice 2 si l'entité est lue seule, indice 3 au niveau du groupe, dont le modèle est né de l'obligation italienne de facturation électronique et se prolonge en services financiers adossés au flux. Posture conquete_directe pour l'entité aujourd'hui, avec un basculement engagé vers le canal indirect par la prise de contrôle d'ACD Groupe en avril 2026 (3 500 cabinets, 37 M€ de chiffre d'affaires). typeActionnaire fonds_pe : Hellman & Friedman contrôle le groupe depuis 2016, Silver Lake minoritaire depuis 2023. Point de vigilance publié sans pronostic : endettement de l'ordre de 3,4 Md€ relevé en juillet 2025, environ trois fois le chiffre d'affaires, dont une partie a financé une distribution aux actionnaires. Bloc referencesClients laissé vide et motivé : les pages de références de l'acteur sont rendues côté client et n'ont pas pu être relevées. Bloc dynamique ouvert mais non renseigné, en attente de la passe unique de comptage des offres d'emploi (règle 19)."
+ },
+ "plateformes": [
+  {
+   "nom": "TeamSystem Sellsy",
+   "sourcesEnrichissement": [
+    "https://annuaire-entreprises.data.gouv.fr/entreprise/509961074",
+    "https://annuaire-entreprises.data.gouv.fr/donnees-financieres/509961074",
+    "https://www.teamsystem.com/il-gruppo/",
+    "https://cosasposta.substack.com/p/teamsystem-ha-un-sacco-di-debito",
+    "https://www.anitec-assinform.it/i-nostri-associati/aggiornamenti/comunicati/teamsystem-accelera-su-ai-e-internazionalizzazione-e-spinge-i-ricavi-a-1-15-miliardi.kl",
+    "https://www.teamsystem.com/press/teamsystem-acquisisce-il-controllo-di-acd-groupe/",
+    "https://www.confindustria.it/pubblicazioni/nota-metodologica-rtt-index-un-nuovo-indicatore-real-time-di-attivita-basato-sul-fatturato"
+   ],
+   "analyse360": {
+    "metierPrincipal": "Édition de logiciels de gestion pour petites et moyennes entreprises et pour cabinets libéraux, avec extension revendiquée vers les services financiers. L'entité immatriculée est SELLSY (SIREN 509 961 074), SAS créée le 16/01/2009, siège 22 rue Fleming à La Rochelle, APE 58.29C, 100 à 199 salariés. Elle appartient au groupe italien TeamSystem, fondé le 30/07/1979 à l'initiative de Giovanni Ranocchi, qui déclare 1,15 Md€ de chiffre d'affaires en 2025, plus de 3 millions de clients et plus de 5 000 salariés. TeamSystem n'est pas un éditeur qui se met en conformité : c'est l'acteur qui s'est construit sur la réforme italienne de la facturation électronique et qui applique en France le même schéma.",
+    "activites": [
+     {
+      "libelle": "Logiciels de gestion pour très petites entreprises et indépendants (division Micro / Small Business), 302 M€ de chiffre d'affaires en 2024 selon les comptes rendus aux porteurs obligataires, en croissance de 67 % dont 24,5 % en organique, marge brute d'environ 85 %",
+      "poids": "majeur",
+      "source": "https://cosasposta.substack.com/p/teamsystem-ha-un-sacco-di-debito"
+     },
+     {
+      "libelle": "Logiciels pour cabinets libéraux — experts-comptables, conseils du travail, avocats — cœur historique du groupe en Italie et cible de son développement français",
+      "poids": "majeur",
+      "source": "https://www.teamsystem.com/il-gruppo/"
+     },
+     {
+      "libelle": "Solutions de gestion pour entreprises de taille moyenne et grande (division Enterprise), 191 M€ en 2024, croissance organique de 5,3 %",
+      "poids": "significatif",
+      "source": "https://cosasposta.substack.com/p/teamsystem-ha-un-sacco-di-debito"
+     },
+     {
+      "libelle": "Services fintech adossés aux flux de facturation : notation des PME, financement, moyens de paiement — extension explicitement présentée comme une monétisation de la donnée de facturation",
+      "poids": "significatif",
+      "source": "https://www.teamsystem.com/il-gruppo/"
+     },
+     {
+      "libelle": "Verticaux et briques périphériques : ressources humaines, e-commerce, cybersécurité, restitution de données (ClicData en France)",
+      "poids": "significatif",
+      "source": "https://www.teamsystem.com/il-gruppo/"
+     },
+     {
+      "libelle": "Sellsy — suite française de gestion commerciale et de facturation (CRM, devis, facturation, trésorerie, précomptabilité), plateforme agréée pour la réforme française",
+      "poids": "significatif",
+      "source": "https://annuaire-entreprises.data.gouv.fr/entreprise/509961074"
+     }
+    ],
+    "poidsEconomique": {
+     "caGroupe": {
+      "montantMEUR": 1150.0,
+      "exercice": "2025",
+      "nature": "communique_financier",
+      "commentaire": "Chiffre d'affaires du groupe TeamSystem : 1,15 Md€ en 2025, en croissance de 12 % en organique, après 1 Md€ en 2024 (+19 %) — le groupe a franchi le milliard en 2024. EBITDA normalisé de 579 M€ en 2025, soit une marge de 50,2 %, après 468,8 M€ et 46,5 % en 2024. Revenu récurrent annuel supérieur à 1 Md€, part récurrente d'environ 88 %. Contrepartie de ce profil : un endettement de l'ordre de 3,4 Md€ relevé en juillet 2025, soit près de trois fois le chiffre d'affaires et environ six fois l'EBITDA, alimenté par des émissions obligataires dont une partie a financé une distribution aux actionnaires. Ces éléments proviennent d'un communiqué relayé par la presse professionnelle et d'une analyse indépendante citant les rapports adressés aux porteurs obligataires : le groupe n'étant pas coté, il n'existe pas de comptes consolidés publiés en accès libre, et la donnée d'endettement est signalée comme de confiance moyenne.",
+      "source": "https://www.anitec-assinform.it/i-nostri-associati/aggiornamenti/comunicati/teamsystem-accelera-su-ai-e-internazionalizzazione-e-spinge-i-ricavi-a-1-15-miliardi.kl",
+      "dateReleve": "2026-08-25"
+     },
+     "caEntiteFrancaise": {
+      "montantMEUR": 16.72,
+      "exercice": "2024",
+      "nature": "comptes_deposes",
+      "commentaire": "Comptes de SELLSY clos le 30/12/2024 : 16,72 M€ de chiffre d'affaires contre 8,42 M€ l'exercice précédent, soit un quasi-doublement, pour une marge brute de 11,77 M€ et un résultat net négatif de 826,3 k€ (contre −553,8 k€). Deux réserves. D'une part le portail public d'annuaire des entreprises ne restitue aucun indicateur financier pour cette entité : les montants proviennent de republieurs de comptes déposés, relevés le 25/08/2026. D'autre part une progression de 98,5 % en un exercice ne s'explique pas par la seule croissance commerciale : elle suggère une opération de périmètre, non documentée dans cette passe, et le rapprochement avec le fait que l'établissement siège a été recréé le 05/12/2025 pour 9 établissements dont 2 seulement en activité renforce cette hypothèse sans l'établir. Le chiffre est publié tel quel, avec sa réserve.",
+      "source": "https://annuaire-entreprises.data.gouv.fr/donnees-financieres/509961074",
+      "dateReleve": "2026-08-25"
+     },
+     "resultatNet": -826300,
+     "effectifGroupe": "Plus de 5 000 salariés, dont plus de 1 000 ingénieurs logiciels travaillant en mode agile dans 80 % des cas (site du groupe, relevé le 25/08/2026). Un plan d'investissement de 1 Md€ en recherche et développement sur cinq ans a été annoncé en 2023.",
+     "effectifEntite": "100 à 199 salariés (INSEE, millésime 2023) pour SELLSY, 9 établissements dont 2 en activité, capital social 50 532 €. L'INSEE classe l'entité en « Petite ou Moyenne Entreprise » : cette catégorie n'est consolidée qu'au niveau des groupes français, si bien qu'une filiale de groupe étranger apparaît à sa taille propre. Le contraste avec FIDUCIAL CLOUD, classée « Grande Entreprise » pour 20 à 49 salariés, illustre la limite de cet indicateur.",
+     "ventilationParActivite": {
+      "disponible": true,
+      "motif": "Ventilation partielle et indirecte. Le groupe ne publie pas de compte de résultat par division, mais des chiffres par division circulent via les rapports adressés aux porteurs obligataires, repris par une analyse indépendante : division Micro 302 M€ et division Enterprise 191 M€ en 2024, sur un total d'environ 1 Md€. Cette ventilation n'isole pas l'activité de facturation électronique et n'isole pas la France : elle est retenue telle quelle, sans être complétée ni estimée (règles 25 et 74).",
+      "derniereVentilationConnue": "Exercice 2024 : division Micro 302 M€ (+67 % dont +24,5 % en organique, marge brute environ 85 %), division Enterprise 191 M€ (+5,3 % en organique). Le solde, non ventilé publiquement, correspond aux cabinets libéraux, à la fintech et aux verticaux. Source : analyse indépendante citant les rapports aux porteurs obligataires, relevée le 25/08/2026."
+     }
+    },
+    "centralitePA": {
+     "indice": 3,
+     "niveau": "axe_strategique",
+     "marqueProduitDediee": "Sellsy (aucune marque distincte n'est donnée à la fonction de plateforme agréée)",
+     "entiteJuridiqueDediee": false,
+     "faisceauIndices": [
+      {
+       "signal": "La facturation électronique n'est pas une fonction périphérique du groupe mais sa matière première : plus de 500 millions de factures électroniques transitent chaque année sur ses plateformes, pour plus de 1 100 milliards d'euros de transactions",
+       "sens": "+",
+       "preuve": "https://www.teamsystem.com/il-gruppo/"
+      },
+      {
+       "signal": "La densité de cette position est telle que Confindustria, la principale organisation patronale italienne, construit un indicateur d'activité économique en temps réel à partir des données de facturation de TeamSystem : c'est une preuve externe et institutionnelle de centralité, indépendante du discours de l'acteur",
+       "sens": "+",
+       "preuve": "https://www.confindustria.it/pubblicazioni/nota-metodologica-rtt-index-un-nuovo-indicatore-real-time-di-attivita-basato-sul-fatturato"
+      },
+      {
+       "signal": "Le groupe construit en France un ensemble cohérent par acquisitions successives — Sellsy pour la gestion commerciale, Clémentine pour l'expertise comptable en ligne, ClicData pour la donnée, ACD Groupe pour le logiciel de cabinet — dont l'assemblage recompose exactement le dispositif qui lui a réussi en Italie",
+       "sens": "+",
+       "preuve": "https://www.teamsystem.com/press/teamsystem-acquisisce-il-controllo-di-acd-groupe/"
+      },
+      {
+       "signal": "Les services fintech du groupe (notation, financement, paiement) sont adossés aux flux de facturation : la plateforme n'est pas une fin, c'est le capteur qui alimente une seconde ligne de revenu",
+       "sens": "+",
+       "preuve": "https://www.teamsystem.com/il-gruppo/"
+      },
+      {
+       "signal": "Aucune marque produit distincte n'est donnée à la plateforme agréée française, présentée comme une fonction de Sellsy et non comme une offre autonome, et l'entité immatriculée ne pèse que 16,72 M€ face à 1,15 Md€ de groupe",
+       "sens": "-",
+       "preuve": "https://annuaire-entreprises.data.gouv.fr/entreprise/509961074"
+      }
+     ],
+     "lecture": "Indice 3 : axe stratégique, avec une double lecture assumée (règle 11f). Au niveau de l'entité immatriculée, la plateforme agréée est l'extension réglementaire d'une suite de gestion commerciale française : lue seule, Sellsy justifierait un indice 2. Au niveau du groupe qui la détient, la facturation électronique est le socle du modèle — construit sur l'obligation italienne, prolongé en services financiers, et répliqué en France par un build-up dont le calendrier suit celui de la réforme. C'est cette seconde lecture qui détermine l'indice, parce que c'est elle qui détermine les moyens engagés. L'indice ne monte pas à 4 : le groupe reste un éditeur de gestion généraliste, dont la majorité du chiffre d'affaires provient de logiciels métier et non de la facturation.",
+     "confiance": "haute"
+    },
+    "postureCommerciale": {
+     "valeur": "conquete_directe",
+     "preuve": "Sellsy pratique une acquisition directe en ligne, en libre-service, avec des tarifs publiés à partir d'environ 29 € HT par utilisateur et par mois et une offre d'entrée plafonnée en nombre de factures. La base revendiquée varie selon les sources et les unités : plus de 50 000 utilisateurs sur le site de l'acteur, 18 000 entreprises clientes pour 48 000 utilisateurs selon une fiche de comparateur logiciel, plus de 65 000 entreprises selon un comparateur de plateformes agréées — trois chiffres relevés le 25/08/2026 et laissés côte à côte. Un basculement est toutefois engagé : l'acquisition du contrôle d'ACD Groupe en avril 2026 apporte au groupe 3 500 cabinets d'expertise comptable et environ 30 000 utilisateurs, soit un canal indirect de taille industrielle qui n'existait pas dans le périmètre français. La posture retenue qualifie l'entité immatriculée aujourd'hui ; elle est susceptible de changer.",
+     "confiance": "haute"
+    },
+    "referencesClients": {
+     "nbCiteesSurSite": null,
+     "parSecteur": {},
+     "grandsComptes": [],
+     "referencesPAConfirmees": [],
+     "source": "Aucun relevé de logos n'a pu être effectué sur le site de l'acteur : les pages de références et la page produit dédiée à la réforme sont rendues côté client et ne restituent aucun contenu exploitable par récupération directe. Des noms de clients circulent sur des sites tiers de comparaison logicielle, mais ils ne sont pas publiés par l'acteur lui-même et ne sont donc pas retenus ici (le référentiel ne compte que les références que l'acteur assume sur son propre site). Le relevé des logos par capture de la page rendue est identifié comme reste à faire. Aucune référence n'est présentée par l'acteur comme cliente de l'activité agréée française."
+    },
+    "reputation": {
+     "volumeAvis": 172,
+     "synthese": "Volume d'avis substantiel et note globalement favorable sur les plateformes d'avis grand public : environ 4,3 sur 5 pour 167 avis relevés en juin 2026 sur une plateforme d'avis vérifiés, 172 avis à la date du présent relevé, et un volume inférieur à cent avis sur un comparateur logiciel spécialisé. Ces agrégats portent sur la suite Sellsy dans son ensemble, pas sur la fonction de plateforme agréée, dont le déploiement est trop récent pour être évalué séparément. Aucun avis individuel n'est reproduit et aucune donnée personnelle n'est reprise.",
+     "confiance": "moyenne"
+    },
+    "capaciteDeFrappe": {
+     "actionnaires": [
+      "Hellman & Friedman, fonds d'investissement américain, actionnaire de contrôle du groupe TeamSystem depuis 2016, réinvesti en 2021 lors d'une opération entre ses propres fonds sur une valorisation d'environ 2,9 Md€",
+      "Silver Lake, entré en 2023 au capital comme actionnaire minoritaire pour environ 600 M€, sur une valorisation supérieure à 6 Md€",
+      "Investisseurs minoritaires additionnels cités par les analyses de place : le fonds souverain d'Abou Dhabi ADIA et CapitalG, véhicule d'investissement de croissance d'Alphabet",
+      "Actionnaires antérieurs, à titre historique : Bain Capital, puis HgCapital jusqu'à la reprise par Hellman & Friedman",
+      "Lecture complémentaire : l'entité française immatriculée est par ailleurs, structurellement, la filiale d'un groupe étranger — les deux lectures sont exactes, la valeur retenue qualifie la nature du contrôle ultime"
+     ],
+     "typeActionnaire": "fonds_pe",
+     "financementRecent": "Émissions obligataires de grande ampleur en juillet 2025, pour un endettement total de l'ordre de 3,4 Md€, dont une partie a financé une distribution aux actionnaires plafonnée à environ 700 M€. Notation de crédit B- avec perspective stable auprès d'une agence internationale. Des discussions de place font état d'une valorisation potentielle supérieure à 8 Md€. Ces éléments proviennent d'analyses de place et non d'une communication du groupe : confiance moyenne.",
+     "acquisitions": [
+      "Plus de soixante-dix acquisitions réalisées depuis le changement de gouvernance de 2000, dont Fatture in Cloud, Danea Soft, AliasLab et MBM Italia en Italie",
+      "France : Sellsy (gestion commerciale), Clémentine (expertise comptable en ligne), ClicData (restitution de données)",
+      "France : prise de contrôle d'ACD Groupe annoncée en avril 2026, apportant 3 500 cabinets d'expertise comptable, environ 30 000 utilisateurs et 37 M€ de chiffre d'affaires",
+      "International : Software del Sol en Espagne, Green Invoice en Israël, Mikrogrup et DIA Yazılım en Turquie"
+     ],
+     "modeleTarifaire": "Tarification publiée, en libre-service, par utilisateur et par mois, à partir d'environ 29 € HT, avec une offre d'entrée plafonnée en volume de factures. Modèle très majoritairement récurrent, environ 88 % du chiffre d'affaires du groupe, avec un revenu récurrent annuel dépassant le milliard d'euros. La capacité à consentir des prix bas est réelle sur le segment micro, où la marge brute déclarée approche 85 %, mais elle est encadrée par le service d'une dette de 3,4 Md€.",
+     "tarifPublie": true,
+     "offreGratuite": false
+    },
+    "lectureConcurrentielle": "C'est l'angle mort le plus important identifié depuis le début du chantier. Aucune des grilles de lecture habituelles ne fait apparaître TeamSystem : le référentiel ne le connaît que sous le nom d'une PME rochelaise de 16,72 M€ de chiffre d'affaires, classée PME par l'INSEE, et rien dans cette fiche ne laissait deviner un groupe de 1,15 Md€ appuyé sur 3 millions de clients et 500 millions de factures électroniques par an. La ressemblance avec le cas 74SOFTWARE est frappante — un poids lourd invisible parce que mal nommé au registre — mais la nature du risque est ici tout autre. TeamSystem est le seul acteur du référentiel qui a déjà fait, dans son pays, exactement ce que la réforme française rend possible : partir d'une obligation de facturation électronique, capter le flux de plusieurs millions d'entreprises, puis monétiser ce flux en services financiers. Il ne découvre pas le sujet, il le rejoue. Deux enseignements pour l'offre portée par Fluxym. Premier point, la confrontation frontale sur le segment ETI et grands comptes n'est pas immédiate : la division Enterprise ne pèse que 191 M€ sur 1 Md€ et croît lentement, 5,3 % en organique, alors que la division micro croît de 24,5 %. La menace de court terme est donc par le bas, sur la PME, avec des prix que 85 % de marge brute autorisent à comprimer. Second point, et c'est le plus structurant : la prise de contrôle d'ACD Groupe en avril 2026 branche ce groupe sur 3 500 cabinets d'expertise comptable français. Rapproché du lot précédent, cela signifie qu'un acteur d'un milliard d'euros vient de s'acheter l'accès au canal comptable français, celui-là même dont il a été établi qu'il tranche la question de la plateforme avant qu'elle ne soit posée. Le point de vigilance à surveiller est le levier : trois fois le chiffre d'affaires de dette, environ six fois l'EBITDA, et une distribution aux actionnaires financée par emprunt — une structure qui impose une discipline de prix et de croissance, et qui peut tout aussi bien pousser à l'agressivité commerciale qu'à la hausse des tarifs sur base installée. Fluxym est un acteur du marché : ce référentiel est publié par un intégrateur qui distribue des solutions concurrentes, et cette lecture est une lecture de marché, pas une évaluation.",
+    "droitDeReponse": {
+     "signale": false,
+     "date": null,
+     "objet": null
+    }
+   }
+  }
+ ]
+}
