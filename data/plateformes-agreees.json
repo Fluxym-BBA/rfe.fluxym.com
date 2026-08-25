@@ -56,9 +56,9 @@
    ]
   },
   "couverture": {
-   "identiteEntreprise_haute": 83,
+   "identiteEntreprise_haute": 90,
    "identiteEntreprise_a_verifier": 19,
-   "identiteEntreprise_absente": 65,
+   "identiteEntreprise_absente": 58,
    "qualificationMarche_faite": 157,
    "fournisseursDeSocle_identifies": 38,
    "entitesCreeesPourLaReforme": 9,
@@ -66,21 +66,21 @@
    "siteWeb_rempli": 161,
    "contact_rempli": 147,
    "reseaux_renseignes": 112,
-   "dirigeants_renseignes": 88,
+   "dirigeants_renseignes": 94,
    "fichesSansAucunEnrichissement": 0,
-   "dateDerniereFusion": "2026-08-22",
+   "dateDerniereFusion": "2026-08-25",
    "verticale_sectorielle": 22,
    "socleTechnique_identifie": 116,
    "consommateursDeSocleTiers_identifies": 3,
    "confiance_qualifiee": 116,
    "confiance_partielle": 43,
    "confiance_amorcee": 4,
-   "analyse360_entamee": 52,
-   "analyse360_activites": 20,
-   "analyse360_centralite": 20,
-   "analyse360_caGroupe": 14,
-   "analyse360_caEntiteFrancaise": 31,
-   "analyse360_referencesClients": 19,
+   "analyse360_entamee": 63,
+   "analyse360_activites": 29,
+   "analyse360_centralite": 29,
+   "analyse360_caGroupe": 16,
+   "analyse360_caEntiteFrancaise": 39,
+   "analyse360_referencesClients": 28,
    "analyse360_reputation": 1,
    "identiteInternationale_renseignee": 6,
    "entitesEtrangeres": 47,
@@ -599,6 +599,69 @@
     "lignesAnnoncees": 11,
     "lignesAppliquees": 11,
     "dateFusion": "2026-08-22"
+   },
+   {
+    "lot": "360-74SOFTWARE",
+    "chantier": "Analyse 360 — 74SOFTWARE (fiche AXWAY SOFTWARE)",
+    "fichier": "patch-360-74SOFTWARE.json",
+    "dateReleve": "2026-08-22",
+    "lignesAnnoncees": 1,
+    "lignesAppliquees": 1,
+    "dateFusion": "2026-08-25"
+   },
+   {
+    "lot": "360-PROFESSION-COMPTABLE",
+    "chantier": "Analyses 360 — bloc profession comptable (6 fiches)",
+    "fichier": "patch-360-PROFESSION-COMPTABLE.json",
+    "dateReleve": "2026-08-24",
+    "lignesAnnoncees": 6,
+    "lignesAppliquees": 6,
+    "dateFusion": "2026-08-25"
+   },
+   {
+    "lot": "360-TEAMSYSTEM",
+    "chantier": "Analyse 360 — TeamSystem (fiche TeamSystem Sellsy)",
+    "fichier": "patch-360-TEAMSYSTEM.json",
+    "dateReleve": "2026-08-25",
+    "lignesAnnoncees": 1,
+    "lignesAppliquees": 1,
+    "dateFusion": "2026-08-25"
+   },
+   {
+    "lot": "360-VILLAGE-CONNECTE",
+    "chantier": "Analyse 360 — LE VILLAGE CONNECTÉ + liaison TeamSystem (2 fiches)",
+    "fichier": "patch-360-VILLAGE-CONNECTE.json",
+    "dateReleve": "2026-08-25",
+    "lignesAnnoncees": 2,
+    "lignesAppliquees": 2,
+    "dateFusion": "2026-08-25"
+   },
+   {
+    "lot": "H2-88-CONTROLE-ETRANGER",
+    "chantier": "H2 relu à la lumière de la règle 88 — routes indirectes de présence étrangère (4 fiches)",
+    "fichier": "patch-H2-88-CONTROLE-ETRANGER.json",
+    "dateReleve": "2026-08-25",
+    "lignesAnnoncees": 4,
+    "lignesAppliquees": 4,
+    "dateFusion": "2026-08-25"
+   },
+   {
+    "lot": "RECUP-SIREN-2",
+    "chantier": "Identité — récupération de SIREN, deuxième passe (sites résistants)",
+    "fichier": "patch-RECUP-SIREN-2.json",
+    "dateReleve": "2026-08-22",
+    "lignesAnnoncees": 9,
+    "lignesAppliquees": 9,
+    "dateFusion": "2026-08-25"
+   },
+   {
+    "lot": "SOCLE-47",
+    "chantier": "H2 passe 2 — interrogation des 47 zones aveugles de socle technique (règles 95 et 96)",
+    "fichier": "patch-SOCLE-47.json",
+    "dateReleve": "2026-08-25",
+    "lignesAnnoncees": 11,
+    "lignesAppliquees": 11,
+    "dateFusion": "2026-08-25"
    }
   ],
   "dateDerniereConsolidation": "2026-08-20"
@@ -2378,7 +2441,7 @@
    "verticale": "generaliste",
    "logiquePositionnement": "Très cohérent : le métier historique est précisément le transport fiable et normalisé de flux inter-entreprises pour de grands comptes. La PA française est un mandat de plus dans un portefeuille de conformité mondial, greffé sur une plateforme d'intégration existante — d'où un discours centré sur la préservation des intégrations en place et la fin de la prolifération de solutions locales, argument qui ne parle qu'à des organisations déjà outillées en EDI.",
    "anneeCreation": null,
-   "siren": null,
+   "siren": "433977980",
    "descriptionFiche": "Axway est un éditeur mondial de logiciels d'intégration : API management, Managed File Transfer et intégration B2B/EDI depuis plus de vingt ans. L'offre de plateforme agréée s'appelle « Axway eInvoicing », solution cloud qui traite la France comme un mandat parmi d'autres dans une approche multi-pays (CTC, DCTCE, Peppol). Les services PA détaillés couvrent l'émission et la réception, la détection de doublons, les contrôles et validations, le reporting au PPF, la connectivité PA (PEPPOL) et PPF (AS4), l'annuaire (inscription et consultation), le cycle de vie, l'archivage, l'e-reporting agrégé ou transactionnel et l'intégration back-office multi-protocoles y compris formats non réglementaires (EDIFACT, iDOC, formats propriétaires). Axway se déclare également membre du FNFE-MPE.",
    "sourcesEnrichissement": [
     {
@@ -2423,6 +2486,41 @@
      "source": "https://www.axway.com/fr/societe/a-propos",
      "dateReleve": "2026-08-20",
      "confiance": "haute"
+    },
+    {
+     "champ": "analyse360.poidsEconomique.caGroupe",
+     "source": "https://www.74software.com/",
+     "dateReleve": "2026-08-22",
+     "confiance": "haute",
+     "preuve": "Communiqué de résultats annuels 2025 publié le 25/02/2026 : chiffre d'affaires de 707,2 M€ (+2,5 % en publié, +3,8 % en organique), Axway 337,9 M€ (+4,6 % organique), SBS 371,2 M€ (+3,0 % organique), marge brute 476,1 M€ (67,3 %), résultat opérationnel d'activité 107,3 M€ (15,2 %), résultat net 40,8 M€ (5,8 %), bénéfice par action 1,39 €. France 213,8 M€, soit 30,2 % du chiffre d'affaires. Effectif de 4 571 personnes au 31/12/2025 contre 4 787 au 31/12/2024, réparti en Europe 2 965, Amériques 360, Asie-Pacifique 824, Moyen-Orient et Afrique 422. ARR Axway 273,0 M€ (+11,8 % organique), ARR SBS 243,8 M€ (+8,9 %). Récurrent à 92 % du chiffre d'affaires produit. Guidance relevée à 3-5 % de croissance organique par an et 20 % de marge opérationnelle à fin 2028."
+    },
+    {
+     "champ": "analyse360.centralitePA",
+     "source": "https://www.axway.com/fr/produits/b2b-integration/einvoice",
+     "dateReleve": "2026-08-22",
+     "confiance": "haute",
+     "preuve": "Page produit Axway eInvoicing relevée le 22/08/2026 : « Axway est officiellement accréditée en tant que Plateforme Agréée (PA) [...] Formellement désignée comme Plateforme de Dématérialisation Partenaire (PDP) ». L'offre couvre la réforme française (PA, PPF, e-reporting TVA, Factur-X), les modèles CTC centralisés (France, Italie, Roumanie, Pologne), le réseau Peppol, les mandats allemand, espagnol et émirati, ainsi que DBNA aux États-Unis. Le groupe se déclare membre du FNFE-MPE. L'offre est présentée comme une capacité de la plateforme B2B Integration, et non comme une activité autonome."
+    },
+    {
+     "champ": "analyse360.referencesClients",
+     "source": "https://www.axway.com/fr/produits/b2b-integration/einvoice",
+     "dateReleve": "2026-08-22",
+     "confiance": "moyenne",
+     "preuve": "Bandeau de logos clients de la page produit Axway eInvoicing : DB Schenker, Cencora, Bosch, Equinor, TotalEnergies. Réserve explicite : ces logos illustrent la page de la solution, aucune de ces références n'est présentée comme cliente de l'activité de plateforme agréée française."
+    },
+    {
+     "champ": "siren",
+     "source": "https://www.axway.com/fr/mentions-legales",
+     "dateReleve": "2026-08-22",
+     "confiance": "haute",
+     "preuve": "Mentions légales de l’éditeur : « Axway Software, au capital de 42 450 762 €, arrêté au 31 décembre 2019 [...] immatriculée au RCS d’Annecy sous le numéro 433977980 », TVA FR 49 433 977 980, siège PAE — Les Glaisins, 74940 Annecy-le-Vieux."
+    },
+    {
+     "champ": "raisonSociale",
+     "source": "https://recherche-entreprises.api.gouv.fr/search?q=433977980",
+     "dateReleve": "2026-08-22",
+     "confiance": "haute",
+     "preuve": "Fiche ouverte du répertoire SIRENE : le SIREN 433 977 980 porte désormais la dénomination **74SOFTWARE**, siège PAE Les Glaisins, 3 rue du Pré Faucon, 74000 Annecy. La mention légale du site est antérieure au changement de dénomination (capital arrêté au 31/12/2019) : le SIREN reste exact, la dénomination qu’elle affiche est périmée. ETI, code APE 58.29A, 250 à 499 salariés, 5 établissements. Comptes 2024 : chiffre d’affaires de 461,9 M€ et résultat net de 39,3 M€."
     }
    ],
    "confiance": "qualifiee",
@@ -2439,9 +2537,11 @@
    "relationCapitalistique": null,
    "partenariats": [],
    "lotsContributeurs": [
+    "360-74SOFTWARE",
     "A",
     "D",
-    "E1"
+    "E1",
+    "RECUP-SIREN-2"
    ],
    "reseaux": [
     "peppol_ap"
@@ -2452,6 +2552,179 @@
     "reception",
     "ereporting",
     "routage_pur"
+   ],
+   "analyse360": {
+    "metierPrincipal": "Édition de logiciels d'infrastructure d'échange de données : transfert de fichiers managé (MFT), intégration B2B et EDI, gestion d'API. L'activité est portée par la marque Axway, l'une des deux marques du groupe coté 74Software, l'autre étant SBS (logiciels bancaires). La facturation électronique n'est pas un métier en soi mais une capacité de conformité greffée sur l'offre d'intégration B2B, commercialisée sous le nom Axway eInvoicing.",
+    "activites": [
+     {
+      "libelle": "Marque Axway — intégration de flux, MFT, API management, EDI et B2B : 337,9 M€ de chiffre d'affaires en 2025, en croissance organique de 4,6 %, soit 47,8 % du chiffre d'affaires du groupe",
+      "poids": "majeur",
+      "source": "Communiqué de résultats annuels 2025, 74Software, 25/02/2026"
+     },
+     {
+      "libelle": "Marque SBS — logiciels bancaires (core banking, financement, conformité réglementaire) : 371,2 M€ en 2025, en croissance organique de 3,0 %, soit 52,2 % du chiffre d'affaires du groupe. Activité sans rapport avec la facturation électronique",
+      "poids": "majeur",
+      "source": "Communiqué de résultats annuels 2025, 74Software, 25/02/2026"
+     },
+     {
+      "libelle": "Au sein de l'ARR de la marque Axway (273,0 M€ fin 2025), la répartition publiée par ligne de produit est stable sur deux exercices : MFT 42 à 43 %, intégration B2B 23 %, API management 18 %, autres 16 à 17 %. La facturation électronique est un cas d'usage de la ligne B2B, elle n'est pas isolée dans cette répartition",
+      "poids": "significatif",
+      "source": "Communiqué de résultats annuels 2025, 74Software, 25/02/2026"
+     },
+     {
+      "libelle": "Axway eInvoicing — conformité de facturation électronique multi-pays : réforme française (plateforme agréée, e-reporting TVA, Factur-X), modèles CTC centralisés (Italie, Roumanie, Pologne), réseau Peppol, mandats Allemagne, Espagne, Émirats arabes unis, DBNA aux États-Unis",
+      "poids": "mineur",
+      "source": "https://www.axway.com/fr/produits/b2b-integration/einvoice"
+     },
+     {
+      "libelle": "Membre du Forum National de la Facture Électronique et des Marchés Publics Électroniques (FNFE-MPE)",
+      "poids": "mineur",
+      "source": "https://www.axway.com/fr/produits/b2b-integration/einvoice"
+     }
+    ],
+    "poidsEconomique": {
+     "caGroupe": {
+      "montantMEUR": 707.2,
+      "exercice": "2025",
+      "nature": "communique_financier",
+      "commentaire": "Chiffre d'affaires consolidé du groupe coté 74Software : 707,2 M€ en 2025, contre 690,0 M€ en 2024, soit +2,5 % en publié et +3,8 % en organique. Ventilation publiée par l'acteur lui-même : Axway 337,9 M€ (+4,6 % organique) et SBS 371,2 M€ (+3,0 % organique). Rentabilité : marge brute de 476,1 M€ (67,3 %), résultat opérationnel d'activité de 107,3 M€ (15,2 %), résultat opérationnel de 73,3 M€ (10,4 %), résultat net de 40,8 M€ (5,8 %), bénéfice par action de 1,39 €. Le chiffre d'affaires réalisé en France est de 213,8 M€, soit 30,2 % du total. Aucune part attribuable à l'activité de plateforme agréée n'est estimée : l'acteur ne la publie pas.",
+      "source": "Communiqué de résultats annuels 2025, 74Software, 25/02/2026",
+      "dateReleve": "2026-08-22"
+     },
+     "caEntiteFrancaise": {
+      "montantMEUR": 461.878,
+      "exercice": "2024",
+      "nature": "comptes_deposes",
+      "commentaire": "Comptes déposés par l’entité immatriculée 74SOFTWARE (SIREN 433 977 980), toutes activités confondues — intégration de flux, API management, MFT, e-invoicing. La part de l’activité de plateforme agréée n’y est pas isolée et n’est pas estimée. La société est cotée : le chiffre consolidé du groupe est à lire dans le rapport annuel, il n’est pas repris ici.",
+      "source": "https://recherche-entreprises.api.gouv.fr/search?q=433977980",
+      "dateReleve": "2026-08-22"
+     },
+     "resultatNet": 39251000,
+     "effectifGroupe": 4571,
+     "effectifEntite": "250 à 499 salariés (millésime 2023, INSEE), 5 établissements ouverts",
+     "ventilationParActivite": {
+      "disponible": true,
+      "motif": "L'acteur publie lui-même la ventilation de son chiffre d'affaires entre ses deux marques, ainsi que la répartition de l'ARR par ligne de produit pour la marque Axway. En revanche, il ne publie aucune ventilation isolant la facturation électronique : la retenir serait une estimation, ce que le référentiel s'interdit (règle 25).",
+      "derniereVentilationConnue": "Exercice 2025 : Axway 337,9 M€ (47,8 %) et SBS 371,2 M€ (52,2 %). ARR Axway par ligne de produit : MFT 42 à 43 %, B2B 23 %, API management 18 %, autres 16 à 17 %."
+     }
+    },
+    "centralitePA": {
+     "indice": 2,
+     "niveau": "extension_naturelle",
+     "marqueProduitDediee": "Axway eInvoicing",
+     "entiteJuridiqueDediee": false,
+     "faisceauIndices": [
+      {
+       "signal": "L'agrément prolonge un métier d'échange de flux inter-entreprises exercé depuis des décennies : MFT, EDI et intégration B2B. La facturation électronique est présentée comme une capacité de conformité de la ligne B2B Integration, pas comme une offre autonome",
+       "sens": "+",
+       "preuve": "https://www.axway.com/fr/produits/b2b-integration/einvoice"
+      },
+      {
+       "signal": "La ligne B2B représente 23 % de l'ARR de la marque Axway, laquelle représente 47,8 % du chiffre d'affaires du groupe. L'activité agréée est donc un sous-ensemble non isolé d'un sous-ensemble",
+       "sens": "-",
+       "preuve": "Communiqué de résultats annuels 2025, 74Software, 25/02/2026"
+      },
+      {
+       "signal": "Le communiqué de résultats annuels 2025 ne mentionne pas la facturation électronique parmi les moteurs de croissance commentés : les relais cités sont le MFT, l'API management et les composants bancaires",
+       "sens": "-",
+       "preuve": "Communiqué de résultats annuels 2025, 74Software, 25/02/2026"
+      },
+      {
+       "signal": "L'offre est réellement outillée et documentée en propre, avec une page produit dédiée, un positionnement multi-pays (CTC, Peppol, DCTCE) et une adhésion au FNFE-MPE",
+       "sens": "+",
+       "preuve": "https://www.axway.com/fr/produits/b2b-integration/einvoice"
+      }
+     ],
+     "lecture": "Indice 2 : extension naturelle. L'agrément ne crée pas une activité, il ajoute une obligation réglementaire à un tuyau qui existait déjà et qui transportait déjà des factures au format EDI. Le groupe ne construit pas sa croissance sur la réforme française et ne la met pas en avant dans sa communication financière ; il protège et prolonge une position d'intégration de flux chez ses clients. Ce n'est pas pour autant un indice 0 : l'offre est nommée, outillée, documentée et portée dans les instances de la réforme.",
+     "confiance": "haute"
+    },
+    "postureCommerciale": {
+     "valeur": "base_installee",
+     "preuve": "L'argumentaire est explicitement adressé à une base installée d'intégration : la facturation électronique est vendue comme une capacité supplémentaire d'Axway eInvoicing au sein de la plateforme B2B Integration, avec l'argument d'éviter « la multiplication des PDP/PA locales » et de centraliser la conformité multi-pays depuis un environnement déjà en place. Aucune offre en marque blanche ni programme de revente de l'immatriculation n'a été relevé dans cette passe. Réserve : le groupe opère aussi par intégrateurs et partenaires, canal non exploré page par page ici — la posture devra être revue si un programme partenaires dédié à la facturation électronique est documenté.",
+     "confiance": "moyenne"
+    },
+    "referencesClients": {
+     "nbCiteesSurSite": null,
+     "parSecteur": {
+      "transport": [
+       "DB Schenker"
+      ],
+      "industrie": [
+       "Bosch"
+      ],
+      "energie": [
+       "Equinor",
+       "TotalEnergies"
+      ],
+      "sante": [
+       "Cencora"
+      ]
+     },
+     "grandsComptes": [
+      "DB Schenker",
+      "Bosch",
+      "Equinor",
+      "TotalEnergies",
+      "Cencora"
+     ],
+     "referencesPAConfirmees": [],
+     "source": "Bandeau de logos clients de la page produit Axway eInvoicing, relevé le 22/08/2026. Ces logos illustrent la page de la solution de facturation électronique, mais aucune de ces références n'est présentée comme cliente de l'activité de plateforme agréée française : ce sont des références du groupe. Aucune référence PA confirmée n'est publiée à ce stade."
+    },
+    "reputation": {
+     "volumeAvis": null,
+     "synthese": "Aucun relevé d'avis agrégés effectué dans cette passe. Deux signaux publics de nature différente sont en revanche disponibles : la société est cotée sur Euronext Paris, donc soumise à publication trimestrielle, et elle a relevé sa guidance de croissance organique à 3-5 % par an sur trois ans avec un objectif de marge opérationnelle de 20 % à fin 2028.",
+     "confiance": "non_qualifie"
+    },
+    "capaciteDeFrappe": {
+     "actionnaires": [
+      "Société cotée sur Euronext Paris (mnémonique 74SW). Pierre Pasquier, fondateur de Sopra Steria, siège au conseil d'administration de l'entité immatriculée. Structure détaillée de l'actionnariat non relevée dans cette passe."
+     ],
+     "typeActionnaire": "cote",
+     "financementRecent": "Groupe issu du rapprochement d'Axway Software et de Sopra Banking Software, renommé 74Software à la suite d'un vote d'assemblée générale, la nouvelle dénomination étant effective en 2025. Le SIREN historique d'Axway Software (433 977 980) est conservé. Trajectoire financière annoncée : croissance organique de 3 à 5 % par an sur trois ans et marge opérationnelle de 20 % à fin 2028.",
+     "acquisitions": [],
+     "modeleTarifaire": "Sur devis, aucun tarif public. Modèle d'abonnement en forte progression : le récurrent représente 92 % du chiffre d'affaires produit, avec un ARR de 273,0 M€ pour la marque Axway (+11,8 % en organique) et de 243,8 M€ pour SBS (+8,9 %).",
+     "tarifPublie": false,
+     "offreGratuite": false
+    },
+    "lectureConcurrentielle": "Concurrent d'une nature particulière : ce n'est pas un éditeur de facturation qui se met en conformité, c'est un éditeur d'infrastructure d'échange qui absorbe la facturation dans son tuyau. Le point de contact avec l'offre portée par Fluxym n'est donc pas le même : la discussion ne commence pas dans la direction financière mais dans la direction des systèmes d'information, chez un client qui fait déjà passer ses flux EDI et ses transferts de fichiers par la plateforme. L'argument avancé est la centralisation multi-pays, opposée à « la multiplication des PA locales ». Deux éléments de contexte à garder : le groupe pèse 707,2 M€ et 4 571 personnes, mais son effectif a reculé de 216 personnes en un an, et la facturation électronique n'apparaît nulle part dans les moteurs de croissance commentés de son communiqué annuel. Fluxym est un acteur du marché : ce référentiel est publié par un intégrateur qui distribue des solutions concurrentes, et cette lecture est une lecture de marché, pas une évaluation.",
+    "droitDeReponse": {
+     "signale": false,
+     "date": null,
+     "objet": null
+    }
+   },
+   "raisonSociale": "74SOFTWARE",
+   "dateCreation": "2000-12-18",
+   "trancheEffectif": "250-499",
+   "categorieEntreprise": "ETI",
+   "activitePrincipale": "58.29A",
+   "confianceIdentite": "haute",
+   "dirigeants": [
+    {
+     "nom": "DONOVAN PATRICK MARTIN",
+     "qualite": "Directeur Général",
+     "type": "personne physique"
+    },
+    {
+     "nom": "BIERRY ERIC",
+     "qualite": "Directeur général délégué",
+     "type": "personne physique"
+    },
+    {
+     "nom": "PASQUIER PIERRE LOUIS",
+     "qualite": "Administrateur",
+     "type": "personne physique"
+    },
+    {
+     "nom": "FORVIS MAZARS SA",
+     "qualite": "Commissaire aux comptes titulaire",
+     "type": "personne morale"
+    },
+    {
+     "nom": "AUDITEURS ET CONSEILS ASSOCIES",
+     "qualite": "Commissaire aux comptes titulaire",
+     "type": "personne morale"
+    }
    ]
   },
   {
@@ -4783,7 +5056,12 @@
      "dateReleve": "2026-08-22",
      "confiance": "haute",
      "preuve": "Fiche ouverte du répertoire SIRENE pour le SIREN 400 833 596 : dénomination COGEP, catégorie ETI, 78 établissements ouverts, comptes 2023 déposés."
-    }
+    },
+    "https://annuaire-entreprises.data.gouv.fr/entreprise/400833596",
+    "https://cense.fr/",
+    "https://www.cogep.fr/magazines/cense-le-cockpit-digital-de-votre-gestion-dentreprise/",
+    "https://www.cogep.fr/magazines/cense-est-disponible/",
+    "https://www.visma.com/newsroom/visma-acquires-majority-stake-in-chaintrust"
    ],
    "confiance": "qualifiee",
    "socleTechnique": {
@@ -4797,7 +5075,7 @@
    "modeDistributionSocle": [
     "via cabinet EC"
    ],
-   "groupeCapitalistique": "Groupe COGEP — cabinet de conseil en gestion d'entreprise réunissant expertise comptable, juridique, financière et sociale ; CENSE est présentée comme « la plateforme digitale du groupe COGEP ». Entité de tête établie au registre : SA COGEP, SIREN 400 833 596, immatriculée au RCS de Bourges, siège 2658 route d’Orléans, 18230 Saint-Doulchard, code APE 69.20Z (activités comptables), créée le 01/04/1995, 78 établissements ouverts, catégorie ETI, tranche d’effectif 1 000 à 1 999 salariés (millésime 2023). Comptes déposés : chiffre d’affaires de 126,4 M€ et résultat net de 11,2 M€ sur l’exercice 2023. L’entité juridique portant l’immatriculation CENSE elle-même n’est pas établie à ce stade : aucune mention légale n’est publiée sur cense.fr, dont l’URL /mentions-legales renvoie la page d’accueil.",
+   "groupeCapitalistique": "Groupe COGEP — cabinet de conseil en gestion d'entreprise réunissant expertise comptable, juridique, financière et sociale ; CENSE est présentée comme « la plateforme digitale du groupe COGEP ». Complément relevé le 25/08/2026 : le contrôle capitalistique de l'entité immatriculée est français, mais le socle de conformité ne l'est pas. La communication du groupe établit que CENSE s'appuie sur la plateforme agréée CHAINTRUST, elle-même immatriculée au référentiel et contrôlée majoritairement depuis janvier 2024 par le groupe norvégien Visma. Cette dépendance n'apparaît ni dans le pays de l'entité, ni dans son actionnariat : elle n'est lisible que dans le champ socleTechnique (règle 95).",
    "relationCapitalistique": null,
    "partenariats": [],
    "natureEntite": "creee_pour_rfe",
@@ -4807,10 +5085,120 @@
     "suite_gestion"
    ],
    "lotsContributeurs": [
+    "360-PROFESSION-COMPTABLE",
     "E14",
+    "H2-88-CONTROLE-ETRANGER",
     "PAYS-16"
    ],
-   "confianceIdentite": "moyenne"
+   "confianceIdentite": "moyenne",
+   "analyse360": {
+    "metierPrincipal": "Expertise comptable, audit, conseil et services associés. L'immatriculation est adossée à SA COGEP (SIREN 400 833 596), groupe d'expertise comptable français exploitant 78 établissements. CENSE est la plateforme digitale déployée par COGEP auprès de ses clients, présentée comme un « cockpit » de gestion intégrant sa propre plateforme agréée.",
+    "activites": [
+     {
+      "libelle": "Expertise comptable et conseil auprès d'une clientèle de TPE, PME, professions libérales et agriculteurs, sur un maillage de 78 établissements",
+      "poids": "majeur",
+      "source": "https://annuaire-entreprises.data.gouv.fr/entreprise/400833596"
+     },
+     {
+      "libelle": "Audit, conseil juridique et fiscal, social et paie",
+      "poids": "significatif",
+      "source": "https://www.cogep.fr/"
+     },
+     {
+      "libelle": "CENSE — plateforme digitale client intégrant la fonction de plateforme agréée, un coffre-fort numérique à valeur probante, la facturation, la trésorerie, les notes de frais et des comptes bancaires et moyens de paiement intégrés. Point déterminant : COGEP n'opère pas le socle de conformité. Sa propre communication indique que la plateforme collaborative « s'appuie sur la PA CHAINTRUST, plateforme agréée par l'administration fiscale (DGFiP) depuis plusieurs mois ». CENSE est donc une marque blanche sur le socle d'un tiers",
+      "poids": "mineur",
+      "source": "https://cense.fr/"
+     }
+    ],
+    "poidsEconomique": {
+     "caGroupe": null,
+     "caEntiteFrancaise": {
+      "montantMEUR": 126.4,
+      "exercice": "2023",
+      "nature": "comptes_deposes",
+      "commentaire": "Comptes déposés par SA COGEP pour l'exercice 2023 : 126,4 M€ de chiffre d'affaires et 11,2 M€ de résultat net. Comme pour les autres réseaux d'expertise comptable du référentiel, ce montant mesure des honoraires et non une activité logicielle (règle 77). Exercice 2023 : ce n'est pas un chiffre courant, il est daté comme tel (règle 34).",
+      "source": "https://annuaire-entreprises.data.gouv.fr/entreprise/400833596",
+      "dateReleve": "2026-08-24"
+     },
+     "resultatNet": 11200000,
+     "effectifGroupe": null,
+     "effectifEntite": "1 000 à 1 999 salariés (INSEE, millésime 2023), 78 établissements, catégorie ETI.",
+     "ventilationParActivite": {
+      "disponible": false,
+      "motif": "Aucune ventilation publiée par l'acteur, aucune estimée. L'activité de plateforme agréée n'est pas isolée dans les comptes.",
+      "derniereVentilationConnue": null
+     }
+    },
+    "centralitePA": {
+     "indice": 1,
+     "niveau": "activite_annexe",
+     "marqueProduitDediee": "CENSE",
+     "entiteJuridiqueDediee": false,
+     "faisceauIndices": [
+      {
+       "signal": "L'immatriculation est portée par le groupe d'expertise comptable, sans entité dédiée, et la plateforme est présentée comme le prolongement de la relation avec l'expert-comptable",
+       "sens": "-",
+       "preuve": "https://www.cogep.fr/cense/"
+      },
+      {
+       "signal": "Le produit dispose de sa propre marque, de son propre nom de domaine et d'une grille tarifaire propre de 9 à 99 € par mois : il est commercialisé, pas seulement fourni",
+       "sens": "+",
+       "preuve": "https://www.cogep.fr/magazines/cense-le-cockpit-digital-de-votre-gestion-dentreprise/"
+      },
+      {
+       "signal": "Le périmètre annoncé dépasse la conformité : coffre-fort à valeur probante, trésorerie, notes de frais, comptes bancaires et moyens de paiement intégrés, hébergement présenté comme de type SecNumCloud chez un hébergeur français",
+       "sens": "+",
+       "preuve": "https://cense.fr/"
+      },
+      {
+       "signal": "La cible reste la clientèle du cabinet : « votre expert-comptable COGEP vous présentera très prochainement les offres », formulation qui exclut une commercialisation hors base",
+       "sens": "-",
+       "preuve": "https://www.cogep.fr/magazines/cense-le-cockpit-digital-de-votre-gestion-dentreprise/"
+      },
+      {
+       "signal": "COGEP n'opère pas le socle de conformité : sa propre communication indique que CENSE s'appuie sur la plateforme agréée CHAINTRUST, elle-même immatriculée au référentiel et contrôlée majoritairement par le groupe norvégien Visma depuis janvier 2024. Le groupe a donc acheté sa conformité au lieu de la construire, ce qui borne fortement ce qu'il a réellement investi dans l'activité agréée",
+       "sens": "-",
+       "preuve": "https://www.cogep.fr/magazines/cense-est-disponible/"
+      }
+     ],
+     "lecture": "Indice 1 : activité annexe. COGEP ne se transforme pas en éditeur — le métier reste l'honoraire comptable — et il ne construit pas non plus sa conformité : le socle de plateforme agréée est celui d'un tiers, CHAINTRUST, exploité en marque blanche. Ce qui appartient en propre au groupe, c'est l'interface, l'agrégation de services financiers et la grille tarifaire de 9 à 99 € par mois, pas le moteur de conformité. L'indice reste 1 et le plafond reste la base clients du cabinet.",
+     "confiance": "haute"
+    },
+    "postureCommerciale": {
+     "valeur": "base_installee",
+     "preuve": "Le déploiement est annoncé auprès des clients du groupe, présenté par leur expert-comptable COGEP, avec des offres d'abonnement de 9 à 99 € pour des fonctionnalités élargies. Aucun canal de revente, aucun programme partenaire éditeur, aucune commercialisation hors clientèle du cabinet relevés dans cette passe.",
+     "confiance": "haute"
+    },
+    "referencesClients": {
+     "nbCiteesSurSite": null,
+     "parSecteur": {},
+     "grandsComptes": [],
+     "referencesPAConfirmees": [],
+     "source": "Aucun logo client publié, aucun volume d'entreprises raccordées communiqué. Le seul ordre de grandeur disponible est structurel : 78 établissements et 1 000 à 1 999 salariés, ce qui borne la taille du portefeuille sans le mesurer."
+    },
+    "reputation": {
+     "volumeAvis": null,
+     "synthese": "Aucun relevé d'avis agrégés effectué dans cette passe. La plateforme est de déploiement récent, ce qui limite structurellement le volume d'avis disponibles.",
+     "confiance": "non_qualifie"
+    },
+    "capaciteDeFrappe": {
+     "actionnaires": [
+      "Structure de détention non établie dans cette passe. SA COGEP est une société anonyme d'expertise comptable française ; aucune chaîne de contrôle n'a été documentée au-delà de l'entité immatriculée."
+     ],
+     "typeActionnaire": "non_qualifie",
+     "financementRecent": "Aucune opération relevée. Développement autofinancé par l'activité du groupe.",
+     "acquisitions": [],
+     "modeleTarifaire": "Socle de conformité inclus dans la relation de mission, puis abonnements publiés de 9 à 99 € par mois pour des fonctionnalités élargies : facturation, trésorerie, notes de frais, comptes bancaires et moyens de paiement. Aucune offre gratuite autonome hors clientèle du cabinet. À noter que le socle de conformité étant acheté à un tiers, une part du prix payé par le client final rémunère l'opérateur du socle : le montant de cette part n'est pas public et n'est pas estimé.",
+     "tarifPublie": true,
+     "offreGratuite": false
+    },
+    "lectureConcurrentielle": "Même logique de canal que les autres réseaux comptables du référentiel, avec deux nuances qui méritent d'être notées. Première nuance : COGEP ne se contente pas de fournir une conformité, il vend un abonnement de 9 à 99 € par mois et y adosse des services bancaires. C'est le premier signe, dans ce lot, d'un réseau comptable qui transforme la réforme en ligne de revenu et pas seulement en ligne de coût — et si ce modèle réussit, le cabinet devient un distributeur de logiciel qui facture, avec une force de frappe locale de 78 implantations. Seconde nuance, de portée plus large : la conformité elle-même est achetée à un tiers, la plateforme agréée CHAINTRUST, contrôlée majoritairement par le groupe norvégien Visma. Un flux de facturation confié à un réseau comptable français aboutit donc sur le socle d'un groupe scandinave, sans que rien dans l'identité de l'entité immatriculée ne le laisse voir. C'est une route de présence étrangère invisible, et elle est traitée comme telle par le chantier H2 (règle 95). Fluxym est un acteur du marché : ce référentiel est publié par un intégrateur qui distribue des solutions concurrentes, et cette lecture est une lecture de marché, pas une évaluation.",
+    "droitDeReponse": {
+     "signale": false,
+     "date": null,
+     "objet": null
+    }
+   }
   },
   {
    "nom": "CHAINTRUST by Visma",
@@ -4907,7 +5295,10 @@
      "source": "Liste DGFiP ; https://www.chaintrust.io/ (« plateforme agréée du groupe Visma ») ; communiqué Visma de janvier 2024 sur l'acquisition de Chaintrust ; comptes danois de mySupply ApS (CVR 25894375) rattachés à VISMA DANMARK HOLDING A/S",
      "dateReleve": "2026-08-22",
      "confiance": "haute"
-    }
+    },
+    "https://www.visma.com/newsroom/visma-acquires-majority-stake-in-chaintrust",
+    "https://www.visma.com/newsroom/visma-et-in-extenso-concluent-un-partenariat-strategique-pour-renforcer-la-solution-fulll-en-france-1",
+    "https://www.cogep.fr/magazines/cense-est-disponible/"
    ],
    "confiance": "partielle",
    "socleTechnique": {
@@ -4919,7 +5310,7 @@
    },
    "fournisseurDeSocle": null,
    "modeDistributionSocle": [],
-   "groupeCapitalistique": "Visma",
+   "groupeCapitalistique": "Visma. Précisions apportées le 25/08/2026 : le groupe norvégien Visma a annoncé en janvier 2024 l'acquisition d'une participation majoritaire dans Chaintrust, société parisienne fondée en 2018. Visma est présent en France sur le marché du cabinet d'expertise comptable avec plusieurs actifs, dont Inqom, et a par ailleurs acquis en 2026 une participation minoritaire dans fulll, filiale logicielle du groupe In Extenso, dans le cadre d'un partenariat à gouvernance partagée. Le groupe détient également MySupply Aps au Danemark, immatriculée au référentiel, dont il a annoncé le regroupement avec Inexchange, Maventa et efacto sous la marque Inexchange à compter du 01/10/2026, présenté comme son engagement le plus significatif à ce jour dans la facturation électronique.",
    "relationCapitalistique": "acquise",
    "partenariats": [],
    "indiceRelationDansLeNom": "CHAINTRUST by Visma",
@@ -4962,6 +5353,7 @@
     "C",
     "D",
     "G-CHAINTRUST",
+    "H2-88-CONTROLE-ETRANGER",
     "H2-LIAISONS",
     "L3"
    ],
@@ -5107,15 +5499,15 @@
     }
    },
    "immatriculationsLiees": {
-    "groupe": "VISMA (fonds Hg)",
+    "groupe": "Visma",
     "entrees": [
      "CHAINTRUST by Visma",
      "MySupply Aps"
     ],
     "type": "deux_offres_deux_cibles",
-    "lecture": "Le groupe adresse les deux extrémités du marché avec deux agréments distincts : Chaintrust par les cabinets d'expertise comptable et leurs clients très petites et petites entreprises, MySupply par les acheteurs publics et grandes organisations nordiques. Visma détient par ailleurs l'éditeur comptable français Inqom, non immatriculé.",
-    "source": "Liste DGFiP ; https://www.chaintrust.io/ (« plateforme agréée du groupe Visma ») ; communiqué Visma de janvier 2024 sur l'acquisition de Chaintrust ; comptes danois de mySupply ApS (CVR 25894375) rattachés à VISMA DANMARK HOLDING A/S",
-    "dateReleve": "2026-08-22"
+    "lecture": "Le groupe norvégien Visma porte deux immatriculations distinctes au référentiel, sur deux marchés et deux cibles : CHAINTRUST by Visma en France, adossée au canal du cabinet d'expertise comptable, et MySupply Aps au Danemark, sur le domaine des achats. Une troisième route existe, de nature différente et sans immatriculation propre : le réseau français COGEP exploite sa plateforme CENSE en marque blanche sur le socle de CHAINTRUST, ce que sa propre communication établit. Cette relation n'est pas une liaison d'immatriculations et n'est donc pas comptée ici, mais elle porte la présence de Visma dans une troisième entrée du référentiel. Enfin, la participation minoritaire prise en 2026 dans fulll, également immatriculée, est délibérément exclue de cette liaison : une participation minoritaire à gouvernance partagée n'établit pas l'appartenance à un groupe (règle 97).",
+    "source": "Communiqués Visma sur l'acquisition majoritaire de Chaintrust et sur le partenariat In Extenso / fulll ; communication COGEP sur le socle de CENSE",
+    "dateReleve": "2026-08-25"
    }
   },
   {
@@ -7238,7 +7630,11 @@
      "url": "https://recherche-entreprises.api.gouv.fr/search?q=810319517",
      "libelle": "API Recherche d'entreprises : identité, siège, effectif, code APE 69.20Z et mandataires de DOUGS",
      "dateReleve": "2026-08-22"
-    }
+    },
+    "https://annuaire-entreprises.data.gouv.fr/entreprise/810319517",
+    "https://www.pappers.fr/entreprise/dougs-810319517",
+    "https://www.dougs.fr/",
+    "https://www.usine-digitale.fr/article/dougs-leve-25-millions-d-euros-pour-sa-solution-d-expertise-comptable-en-ligne.N2149642"
    ],
    "confiance": "partielle",
    "socleTechnique": {
@@ -7256,6 +7652,7 @@
    "relationCapitalistique": "independante",
    "partenariats": [],
    "lotsContributeurs": [
+    "360-PROFESSION-COMPTABLE",
     "A",
     "E3",
     "RECUP-SIREN-20260822"
@@ -7284,7 +7681,110 @@
    ],
    "confianceIdentite": "haute",
    "trancheEffectif": "100-199",
-   "categorieEntreprise": "PME"
+   "categorieEntreprise": "PME",
+   "analyse360": {
+    "metierPrincipal": "Expertise comptable en ligne. DOUGS (SIREN 810 319 517) est un cabinet d'expertise comptable constitué en SAS, créé le 04/03/2015, siège 7 avenue Adolphe Max à Lyon 5e, APE 69.20Z, qui vend un abonnement d'expertise comptable adossé à un logiciel développé en interne. La plateforme agréée n'est pas le produit : c'est une brique gratuite du parcours.",
+    "activites": [
+     {
+      "libelle": "Expertise comptable en ligne par abonnement pour indépendants, TPE et, depuis 2025, commerçants au moyen de la comptabilité de caisse",
+      "poids": "majeur",
+      "source": "https://www.dougs.fr/blog/retrospective-annee/"
+     },
+     {
+      "libelle": "Édition du logiciel de tenue et de pilotage utilisé par ses propres clients (synchronisation bancaire, tableau de bord, déclarations)",
+      "poids": "significatif",
+      "source": "https://www.dougs.fr/"
+     },
+     {
+      "libelle": "Facturation électronique et plateforme agréée, proposées gratuitement",
+      "poids": "mineur",
+      "source": "https://www.dougs.fr/"
+     }
+    ],
+    "poidsEconomique": {
+     "caGroupe": null,
+     "caEntiteFrancaise": {
+      "montantMEUR": 24.7,
+      "exercice": "2024",
+      "nature": "comptes_deposes",
+      "commentaire": "Chiffre d'affaires de 24,7 M€ en 2024, contre 15,7 M€ en 2023 et 6,04 M€ en 2021 : la trajectoire est une multiplication par quatre en trois exercices. Montant issu d'un republieur de comptes déposés, relevé le 24/08/2026 ; le portail public d'annuaire des entreprises ne restitue pas d'indicateur financier pour cette entité. Le résultat net n'est pas relevé dans cette passe ; l'entreprise se déclarait rentable en 2023 lors de sa levée de fonds.",
+      "source": "https://www.pappers.fr/entreprise/dougs-810319517",
+      "dateReleve": "2026-08-24"
+     },
+     "resultatNet": null,
+     "effectifGroupe": null,
+     "effectifEntite": "100 à 199 salariés (INSEE, millésime 2023), 3 établissements, catégorie PME, capital social 10 000 €. Un effectif d'environ 250 personnes était évoqué dans la presse au moment de la levée de fonds de 2023 : les deux grandeurs ne se recoupent pas et sont laissées côte à côte, datées.",
+     "ventilationParActivite": {
+      "disponible": false,
+      "motif": "Aucune ventilation publiée. Le modèle est un abonnement unique d'expertise comptable : la facturation électronique n'a pas de prix propre, donc pas de chiffre d'affaires propre (règle 78).",
+      "derniereVentilationConnue": null
+     }
+    },
+    "centralitePA": {
+     "indice": 1,
+     "niveau": "activite_annexe",
+     "marqueProduitDediee": "Dougs Facturation gratuite",
+     "entiteJuridiqueDediee": false,
+     "faisceauIndices": [
+      {
+       "signal": "L'immatriculation est portée par le cabinet d'expertise comptable lui-même, dont l'APE est 69.20Z : le métier déclaré est la comptabilité, pas l'édition de logiciel",
+       "sens": "-",
+       "preuve": "https://annuaire-entreprises.data.gouv.fr/entreprise/810319517"
+      },
+      {
+       "signal": "L'offre de facturation est explicitement gratuite, y compris dans le nom sous lequel la plateforme figure au référentiel : elle n'a pas de modèle économique propre",
+       "sens": "-",
+       "preuve": "https://www.dougs.fr/"
+      },
+      {
+       "signal": "Le produit est nommé et poussé comme point d'entrée gratuit vers l'abonnement comptable : la gratuité est un levier d'acquisition, ce qui en fait un investissement commercial réel",
+       "sens": "+",
+       "preuve": "https://www.dougs.fr/"
+      },
+      {
+       "signal": "La croissance de l'acteur est portée par l'élargissement de sa cible (commerçants éligibles depuis 2025) et par l'acquisition en ligne, pas par la réforme",
+       "sens": "-",
+       "preuve": "https://www.dougs.fr/blog/retrospective-annee/"
+      }
+     ],
+     "lecture": "Indice 1 : activité annexe. La plateforme agréée sert à faire entrer des indépendants et des TPE dans l'entonnoir, puis à leur vendre une mission comptable. C'est un produit d'appel, pas une activité : il n'a ni prix, ni compte de résultat, ni équipe commerciale propre identifiée. L'indice ne descend pas à 0 parce que la gratuité est ici une stratégie assumée et outillée, pas une case à cocher réglementaire.",
+     "confiance": "haute"
+    },
+    "postureCommerciale": {
+     "valeur": "conquete_directe",
+     "preuve": "L'acquisition est directe et en ligne, sans intermédiaire : site grand public, contenus, publicité, offre de facturation gratuite ouverte. Le nombre de clients passe de 14 000 en 2023 à 27 000 en 2025 selon la presse économique, et 49 000 sont revendiqués sur le site de l'acteur en 2026 ; un objectif de 100 000 clients a été annoncé. Ces trois chiffres ne proviennent pas de la même source et sont laissés datés côte à côte.",
+     "confiance": "haute"
+    },
+    "referencesClients": {
+     "nbCiteesSurSite": null,
+     "parSecteur": {},
+     "grandsComptes": [],
+     "referencesPAConfirmees": [],
+     "source": "Aucun logo client, aucune référence nominative : la clientèle est composée d'indépendants et de très petites entreprises, communiquée en volume et non en noms. Le référentiel ne publie aucune donnée nominative de client final."
+    },
+    "reputation": {
+     "volumeAvis": null,
+     "synthese": "Aucun relevé d'avis agrégés effectué dans cette passe, alors que cet acteur en est très largement pourvu : sa clientèle est grand public et les sites comparatifs de cabinets en ligne l'évaluent régulièrement. Ce relevé est identifié comme reste à faire.",
+     "confiance": "non_qualifie"
+    },
+    "capaciteDeFrappe": {
+     "actionnaires": [
+      "Fondateurs présents, complétés en 2023 par le fonds de croissance britannique Expedition Growth Capital, entré à l'occasion d'une première levée de fonds de 25 M€. La répartition du capital n'est pas publiée : la qualification retenue signale la présence d'un fonds, elle ne préjuge pas du contrôle."
+     ],
+     "typeActionnaire": "fonds_pe",
+     "financementRecent": "Première levée de fonds de 25 M€ en 2023 auprès d'Expedition Growth Capital. L'entreprise se déclarait alors rentable, avec 14 000 clients et un revenu annuel récurrent d'environ 15 M€.",
+     "acquisitions": [],
+     "modeleTarifaire": "Abonnement d'expertise comptable en ligne, tarifs publiés sur le site. La facturation électronique et la plateforme agréée sont annoncées gratuites, y compris pour des utilisateurs non abonnés à la mission comptable.",
+     "tarifPublie": true,
+     "offreGratuite": true
+    },
+    "lectureConcurrentielle": "Concurrent nul sur le segment ETI et grands comptes, mais cas d'école du modèle qui rend le prix de la conformité nul. Dougs ne vend pas une plateforme agréée : il l'offre pour capter une mission comptable à 24,7 M€ de chiffre d'affaires cumulé et une base annoncée à 49 000 clients. Pour l'offre portée par Fluxym, l'enseignement n'est pas concurrentiel mais argumentaire : la gratuité affichée par ce type d'acteur devient la référence mentale des dirigeants, y compris quand ils dirigent des entreprises hors de sa cible. Fluxym est un acteur du marché : ce référentiel est publié par un intégrateur qui distribue des solutions concurrentes, et cette lecture est une lecture de marché, pas une évaluation.",
+    "droitDeReponse": {
+     "signale": false,
+     "date": null,
+     "objet": null
+    }
+   }
   },
   {
    "nom": "DOXALLIA",
@@ -8583,15 +9083,21 @@
      "url": "https://recherche-entreprises.api.gouv.fr/search?q=EEZI",
      "libelle": "API Recherche d'entreprises : la seule société EEZI au registre est cessée et relève de l'immobilier",
      "dateReleve": "2026-08-22"
+    },
+    {
+     "champ": "socleTechnique",
+     "source": "https://vatit.com/fr/eezi/",
+     "dateReleve": "2026-08-25",
+     "confiance": "moyenne"
     }
    ],
    "confiance": "partielle",
    "socleTechnique": {
-    "type": null,
-    "operateurSocle": null,
-    "preuve": null,
-    "source": null,
-    "confiance": "non_qualifie"
+    "type": "propre",
+    "operateurSocle": "VAT IT Group",
+    "preuve": "La dénomination commerciale déclare le socle (« powered by VAT IT ») et le groupe le confirme sur son propre site : « eezi gère la facturation électronique mondiale de bout en bout, du formatage à la traduction et à la validation jusqu'à la soumission finale ». eezi est le produit e-invoicing du groupe VAT IT, spécialiste international de la récupération et de la conformité TVA ; le socle est celui du groupe, l'immatriculation française en est une déclinaison nationale.",
+    "source": "https://vatit.com/fr/eezi/",
+    "confiance": "moyenne"
    },
    "fournisseurDeSocle": null,
    "modeDistributionSocle": [],
@@ -8616,7 +9122,8 @@
     "B1",
     "C",
     "CONTROLE-SIREN-20260822",
-    "L3"
+    "L3",
+    "SOCLE-47"
    ]
   },
   {
@@ -8638,7 +9145,7 @@
    "verticale": "generaliste",
    "logiquePositionnement": "A qualifier entierement : le nom d'inscription indique un service (Effinum) porte par une societe (SPEE), sans element public suffisant a ce stade.",
    "anneeCreation": null,
-   "siren": null,
+   "siren": "904987815",
    "descriptionFiche": "Immatriculee le 11/12/25, etablie 18 rue de l'Armorique a Paris. Aucune entite « Effinum » ni « SPEE » retrouvee au RNE par recherche de nom : identite juridique a confirmer.",
    "sourcesEnrichissement": [
     {
@@ -8664,19 +9171,39 @@
      "source": "Liste officielle DGFiP — https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/listes_plateformes_agreees/liste_pa_attente_rapport_audit.xlsx",
      "dateReleve": "2026-08-20",
      "confiance": "haute"
+    },
+    {
+     "champ": "siren",
+     "source": "https://www.effinum.fr/mentions-legales",
+     "dateReleve": "2026-08-22",
+     "confiance": "haute",
+     "preuve": "Mentions légales de l’éditeur : « Le site effinum.fr est édité par SPEE — 18 rue de l’Armorique, 75015 Paris », représenté par Philippe Marteau, Président de SPEE. Double concordance avec le répertoire : adresse du siège caractère pour caractère et qualité du président du conseil d’administration."
+    },
+    {
+     "champ": "dirigeants",
+     "source": "https://recherche-entreprises.api.gouv.fr/search?q=904987815",
+     "dateReleve": "2026-08-22",
+     "confiance": "haute",
+     "preuve": "Fiche ouverte du répertoire SIRENE : SOLUTIONS PROFESSIONNELLES D’ÉCHANGES ÉLECTRONIQUES (SPEE), PME, code APE 62.01Z, un établissement, tranche d’effectif non renseignée, conseil d’administration de huit membres, président du conseil Philippe Marteau. Comptes 2022 : chiffre d’affaires nul, résultat net de −138,9 k€."
+    },
+    {
+     "champ": "socleTechnique",
+     "source": "https://provence-alpes-mediterranee.cerfrance.fr/expertises/facture-electronique-1 ; https://garonne-et-tarn.cerfrance.fr/pages/la-facture-electronique ; https://effinum.fr/",
+     "dateReleve": "2026-08-25",
+     "confiance": "non_qualifie"
     }
    ],
    "confiance": "partielle",
    "socleTechnique": {
-    "type": null,
+    "type": "inconnu",
     "operateurSocle": null,
-    "preuve": null,
-    "source": null,
+    "preuve": "Passage de non qualifié à inconnu. Fait nouveau : Effinum n'est pas l'offre d'un éditeur mais celle d'un réseau d'expertise comptable. Les cabinets Cerfrance la présentent comme leur plateforme : « Pour vous accompagner, le Réseau Cerfrance a conçu et mis en place la plateforme Effinum » et « La Plateforme Agréée (PA) du réseau CERFRANCE EFFINUM ». Effinum se déclare immatriculée par la DGFiP depuis 2024. La maîtrise d'ouvrage est donc établie (le réseau Cerfrance, via la structure SPEE), la maîtrise d'œuvre du socle ne l'est pas.",
+    "source": "https://provence-alpes-mediterranee.cerfrance.fr/expertises/facture-electronique-1 ; https://garonne-et-tarn.cerfrance.fr/pages/la-facture-electronique ; https://effinum.fr/",
     "confiance": "non_qualifie"
    },
    "fournisseurDeSocle": null,
    "modeDistributionSocle": [],
-   "groupeCapitalistique": "SPEE",
+   "groupeCapitalistique": "SPEE. L’entité immatriculée est SOLUTIONS PROFESSIONNELLES D’ÉCHANGES ÉLECTRONIQUES, sigle SPEE (SIREN 904 987 815), créée le 01/11/2021. Fait relevé et non interprété : c’est une société anonyme à conseil d’administration de huit membres, présidé par Philippe Marteau, pour une entité d’un seul établissement sans effectif renseigné et sans chiffre d’affaires — une structure de gouvernance de type collectif dont l’actionnariat n’est pas publié sur le site.",
    "relationCapitalistique": "filiale_de_groupe",
    "partenariats": [],
    "indiceRelationDansLeNom": "Effinum by SPEE",
@@ -8688,8 +9215,70 @@
    ],
    "lotsContributeurs": [
     "A",
-    "L3"
-   ]
+    "L3",
+    "RECUP-SIREN-2",
+    "SOCLE-47"
+   ],
+   "raisonSociale": "SOLUTIONS PROFESSIONNELLES D'ÉCHANGES ÉLECTRONIQUES (SPEE)",
+   "dateCreation": "2021-11-01",
+   "categorieEntreprise": "PME",
+   "activitePrincipale": "62.01Z",
+   "confianceIdentite": "haute",
+   "dirigeants": [
+    {
+     "nom": "MARTEAU PHILIPPE",
+     "qualite": "Président du conseil d’administration",
+     "type": "personne physique"
+    },
+    {
+     "nom": "BARBAUX SANDRINE",
+     "qualite": "Administrateur",
+     "type": "personne physique"
+    },
+    {
+     "nom": "BEURIENNE LAURENT",
+     "qualite": "Administrateur",
+     "type": "personne physique"
+    },
+    {
+     "nom": "EYMARD (CHANELLIÈRE) MURIEL",
+     "qualite": "Administrateur",
+     "type": "personne physique"
+    },
+    {
+     "nom": "DENYS GREGORY",
+     "qualite": "Administrateur",
+     "type": "personne physique"
+    },
+    {
+     "nom": "GOUTTEQUILLET YVAN",
+     "qualite": "Administrateur",
+     "type": "personne physique"
+    },
+    {
+     "nom": "PETIT (LEBOUCHER) AGNES",
+     "qualite": "Administrateur",
+     "type": "personne physique"
+    },
+    {
+     "nom": "ROULLEAUX GERARD",
+     "qualite": "Administrateur",
+     "type": "personne physique"
+    }
+   ],
+   "analyse360": {
+    "poidsEconomique": {
+     "caEntiteFrancaise": {
+      "montantMEUR": 0,
+      "exercice": "2022",
+      "nature": "comptes_deposes",
+      "commentaire": "Comptes déposés par l’entité immatriculée SPEE (SIREN 904 987 815) : la source ouverte restitue un chiffre d’affaires nul pour l’exercice 2022, avec un résultat net négatif. Aucune tranche d’effectif n’est renseignée au répertoire.",
+      "source": "https://recherche-entreprises.api.gouv.fr/search?q=904987815",
+      "dateReleve": "2026-08-22"
+     },
+     "resultatNet": -138892
+    }
+   }
   },
   {
    "nom": "ENERJ",
@@ -10116,14 +10705,23 @@
      "source": "https://www.fiducial.fr/facturation-electronique/faq/comment-faire-facture-electronique",
      "dateReleve": "2026-08-20",
      "confiance": "moyenne"
+    },
+    "https://annuaire-entreprises.data.gouv.fr/entreprise/480650712",
+    "https://www.ladepeche.fr/2026/06/26/facturation-electronique-fiducial-au-coeur-de-la-transition-numerique-des-entreprises-13439797.php",
+    "https://jobs.fiducial.fr/qui-sommes-nous",
+    {
+     "champ": "socleTechnique",
+     "source": "https://www.fiducial.fr/facilia",
+     "dateReleve": "2026-08-25",
+     "confiance": "non_qualifie"
     }
    ],
    "confiance": "partielle",
    "socleTechnique": {
     "type": "inconnu",
     "operateurSocle": null,
-    "preuve": "Le site décrit la plateforme agréée FIDUCIAL Cloud et le choix d'intégrer les interactions PA directement dans les logiciels FIDUCIAL (Facilia Achats), mais ne nomme aucun opérateur de socle technique.",
-    "source": "https://www.fiducial.fr/facturation-electronique/actualites-conseils/pourquoi-utiliser-plateforme-agreee-PA-FIDUCIAL-facturation-electronique",
+    "preuve": "Socle toujours non établi, mais deux précisions utiles. D'abord la distinction produit/plateforme : Facilia est le nom commercial des deux modules (Facilia Ventes pour l'émission, Facilia Achats pour la réception), FIDUCIAL CLOUD est le nom de la plateforme agréée qui les porte ; la confusion entre les deux circule dans les annuaires tiers. Ensuite, la page produit fiducial.fr/facilia comporte un bloc intitulé « Partenaires » dont le contenu n'est constitué que d'images sans texte alternatif exploitable : la réponse à la question du socle s'y trouve peut-être et n'est accessible que par capture de page rendue. Reste à faire identifié.",
+    "source": "https://www.fiducial.fr/facilia",
     "confiance": "non_qualifie"
    },
    "fournisseurDeSocle": null,
@@ -10153,10 +10751,12 @@
    ],
    "confianceIdentite": "haute",
    "lotsContributeurs": [
+    "360-PROFESSION-COMPTABLE",
     "A",
     "C",
     "D",
-    "E4"
+    "E4",
+    "SOCLE-47"
    ],
    "reseaux": [
     "peppol_ap"
@@ -10165,7 +10765,119 @@
    "perimetreFonctionnel": [
     "reception",
     "suite_gestion"
-   ]
+   ],
+   "analyse360": {
+    "metierPrincipal": "Traitement de données, hébergement et activités connexes (APE 63.11Z). FIDUCIAL CLOUD, dénomination registre « FIDUCIAL CLOUD (NEXTO) », SIREN 480 650 712, est la filiale d'infrastructure et de services numériques du groupe FIDUCIAL. Elle n'exerce pas un métier de marché autonome : elle outille les 334 000 clients d'un groupe pluridisciplinaire dont le métier principal est l'expertise comptable.",
+    "activites": [
+     {
+      "libelle": "Hébergement et traitement de données pour le groupe et ses clients, dans des centres de données présentés comme propriétaires et situés en France",
+      "poids": "majeur",
+      "source": "https://www.ladepeche.fr/2026/06/26/facturation-electronique-fiducial-au-coeur-de-la-transition-numerique-des-entreprises-13439797.php"
+     },
+     {
+      "libelle": "Plateforme agréée de facturation électronique du groupe, à laquelle est connecté Facilia, logiciel en ligne lancé fin 2024 comportant un module factures fournisseurs et un module facturation client",
+      "poids": "significatif",
+      "source": "https://www.ladepeche.fr/2026/06/26/facturation-electronique-fiducial-au-coeur-de-la-transition-numerique-des-entreprises-13439797.php"
+     },
+     {
+      "libelle": "Solutions informatiques et services cloud aux petites entreprises, activité héritée de NEXTO, société marseillaise acquise par le groupe en 2013",
+      "poids": "significatif",
+      "source": "https://annuaire-entreprises.data.gouv.fr/entreprise/480650712"
+     }
+    ],
+    "poidsEconomique": {
+     "caGroupe": {
+      "montantMEUR": null,
+      "exercice": "2025",
+      "nature": "non_publie",
+      "commentaire": "Le groupe FIDUCIAL ne publie pas de comptes consolidés accessibles dans cette passe, et les ordres de grandeur qui circulent divergent : le site de recrutement du groupe annonce 1,310 Md€ de chiffre d'affaires en Europe avec 860 agences, 17 500 collaborateurs et 334 000 clients, tandis qu'un article de presse régionale de juin 2026 cite 860 agences, plus de 13 500 collaborateurs et environ 334 000 clients, et qu'une source encyclopédique avance 1,94 Md$ pour 2025. Ces chiffres ne sont pas retenus comme un montant de référence : la discordance est publiée telle quelle, elle n'est pas arbitrée.",
+      "source": "https://jobs.fiducial.fr/qui-sommes-nous",
+      "dateReleve": "2026-08-24"
+     },
+     "caEntiteFrancaise": {
+      "montantMEUR": null,
+      "exercice": "aucun",
+      "nature": "comptes_confidentiels",
+      "commentaire": "Aucun indicateur financier n'est restitué pour l'entité immatriculée FIDUCIAL CLOUD (NEXTO) par le portail public d'annuaire des entreprises. Le seul ancrage disponible sur cette entité est historique et sans valeur courante : la société NEXTO déclarait 3,4 M€ de chiffre d'affaires et une trentaine de collaborateurs en 2012, avant son rachat par le groupe (règle 34).",
+      "source": "https://annuaire-entreprises.data.gouv.fr/entreprise/480650712",
+      "dateReleve": "2026-08-24"
+     },
+     "resultatNet": null,
+     "effectifGroupe": null,
+     "effectifEntite": "20 à 49 salariés (INSEE, millésime 2023) pour l'entité immatriculée, 8 établissements dont 4 en activité, capital social 1 249 597,16 €, entité créée le 03/01/2005. L'INSEE la classe pourtant en « Grande Entreprise » : cette catégorie est calculée au niveau du groupe d'appartenance, ce qui confirme par une donnée statistique l'adossement capitalistique.",
+     "ventilationParActivite": {
+      "disponible": false,
+      "motif": "Aucune ventilation publiée, ni au niveau du groupe ni au niveau de l'entité. Le décalage est ici structurel : l'entité immatriculée compte 20 à 49 salariés alors que le périmètre servi dépasse 300 000 clients — le poids économique de l'activité ne se lit donc pas dans ses comptes (règle 36).",
+      "derniereVentilationConnue": null
+     }
+    },
+    "centralitePA": {
+     "indice": 2,
+     "niveau": "extension_naturelle",
+     "marqueProduitDediee": "FIDUCIAL CLOUD, avec le logiciel Facilia en amont",
+     "entiteJuridiqueDediee": false,
+     "faisceauIndices": [
+      {
+       "signal": "L'immatriculation est portée par la filiale technique du groupe et non par la société d'expertise comptable : la fonction est logée là où sont l'hébergement et l'exploitation",
+       "sens": "+",
+       "preuve": "https://annuaire-entreprises.data.gouv.fr/entreprise/480650712"
+      },
+      {
+       "signal": "Le groupe revendique une stratégie explicite de propriété de ses outils, motivée par le refus de dépendre de sociétés informatiques dont il ne maîtriserait pas les coûts, et l'hébergement des données dans ses propres centres en France",
+       "sens": "+",
+       "preuve": "https://www.ladepeche.fr/2026/06/26/facturation-electronique-fiducial-au-coeur-de-la-transition-numerique-des-entreprises-13439797.php"
+      },
+      {
+       "signal": "La plateforme agréée n'est pas commercialisée comme un produit de marché : elle est le raccordement réglementaire de Facilia, lui-même distribué via les agences du groupe à ses propres clients",
+       "sens": "-",
+       "preuve": "https://www.ladepeche.fr/2026/06/26/facturation-electronique-fiducial-au-coeur-de-la-transition-numerique-des-entreprises-13439797.php"
+      },
+      {
+       "signal": "L'entité immatriculée exerce un métier d'hébergement et de traitement de données antérieur de vingt ans à la réforme : l'agrément s'ajoute à une infrastructure existante",
+       "sens": "+",
+       "preuve": "https://annuaire-entreprises.data.gouv.fr/entreprise/480650712"
+      }
+     ],
+     "lecture": "Indice 2 : extension naturelle. L'agrément prolonge une infrastructure et une doctrine d'internalisation qui préexistaient. Ce n'est pas un axe stratégique au sens d'une nouvelle activité à vendre, mais ce n'est pas non plus une conformité subie : le groupe a décidé de faire, plutôt que d'acheter, et a engagé ses propres centres de données et son propre logiciel de facturation dès fin 2024.",
+     "confiance": "moyenne"
+    },
+    "postureCommerciale": {
+     "valeur": "base_installee",
+     "preuve": "La distribution passe par les 860 agences du groupe auprès de ses propres clients, avec formation présentielle ou à distance assurée par les agences. Aucune commercialisation hors clientèle du groupe, aucun programme de revente, aucun tarif public relevés dans cette passe.",
+     "confiance": "haute"
+    },
+    "referencesClients": {
+     "nbCiteesSurSite": null,
+     "parSecteur": {},
+     "grandsComptes": [],
+     "referencesPAConfirmees": [],
+     "source": "Aucun logo client publié. La clientèle décrite par le groupe est composée d'artisans, de commerçants, de professions libérales et d'agriculteurs, soit un périmètre d'environ 334 000 clients servis par 860 agences en Europe, chiffres publiés par l'acteur et relevés le 24/08/2026. Ce volume est celui du groupe, pas celui de la plateforme agréée."
+    },
+    "reputation": {
+     "volumeAvis": null,
+     "synthese": "Aucun relevé d'avis agrégés effectué dans cette passe.",
+     "confiance": "non_qualifie"
+    },
+    "capaciteDeFrappe": {
+     "actionnaires": [
+      "Filiale du groupe FIDUCIAL, groupe français créé en 1970 et dirigé par son fondateur Christian Latouche, dont le siège est à Lyon : le capital de la tête de groupe est de nature familiale, ce qui justifie la valeur retenue plutôt que celle de filiale de groupe étranger. La chaîne de détention précise entre l'entité immatriculée et la tête de groupe n'a pas été documentée dans cette passe et s'arrête donc au dernier niveau établi (règle 42)."
+     ],
+     "typeActionnaire": "fondateurs",
+     "financementRecent": "Aucune opération récente relevée sur l'entité. Historique : l'entité résulte de l'acquisition en 2013 de la société marseillaise NEXTO, dont la dénomination subsiste au registre entre parenthèses.",
+     "acquisitions": [
+      "NEXTO, société marseillaise de services cloud, acquise par le groupe en 2013"
+     ],
+     "modeleTarifaire": "Aucun tarif public. L'accès s'inscrit dans la relation de mission et dans l'offre globale de services du groupe, l'argument avancé étant précisément la maîtrise des coûts par l'internalisation des outils.",
+     "tarifPublie": false,
+     "offreGratuite": false
+    },
+    "lectureConcurrentielle": "Le plus gros canal comptable du référentiel, et le plus fermé. Un groupe de 860 agences et environ 334 000 clients qui décide d'héberger lui-même, d'éditer lui-même son logiciel de facturation et de porter lui-même son immatriculation ne se dispute pas : il se soustrait. La doctrine est énoncée sans détour par l'acteur — ne pas dépendre d'un tiers informatique pour ne pas subir ses prix. Pour l'offre portée par Fluxym, aucun point de contact commercial n'est attendu ; l'intérêt de la fiche est de mesurer combien de flux de TPE sortent du marché adressable par décision interne d'un seul groupe. À noter enfin le décalage entre le poids servi et le poids comptable de l'entité immatriculée, qui compte 20 à 49 salariés : lire la puissance de cet acteur dans les comptes de sa filiale technique conduirait à un contresens complet. Fluxym est un acteur du marché : ce référentiel est publié par un intégrateur qui distribue des solutions concurrentes, et cette lecture est une lecture de marché, pas une évaluation.",
+    "droitDeReponse": {
+     "signale": false,
+     "date": null,
+     "objet": null
+    }
+   }
   },
   {
    "nom": "FISKALTRUST",
@@ -10598,21 +11310,29 @@
      "source": "https://www.generixgroup.com/fr/communiques-de-presse/generix-group-annonce-la-creation-dune-plateforme-de-dematerialisation",
      "dateReleve": "2026-08-20",
      "confiance": "moyenne"
+    },
+    "https://www.visma.com/newsroom/visma-et-in-extenso-concluent-un-partenariat-strategique-pour-renforcer-la-solution-fulll-en-france-1",
+    "https://www.laprofessioncomptable.com/article/france/visma-et-in-extenso-concluent-un-partenariat-strategique-pour-renforcer-fulll",
+    {
+     "champ": "socleTechnique",
+     "source": "https://www.fulll.fr/blllog/facture-electronique-generix-group-et-fulll",
+     "dateReleve": "2026-08-25",
+     "confiance": "faible"
     }
    ],
    "confiance": "partielle",
    "socleTechnique": {
     "type": "inconnu",
     "operateurSocle": null,
-    "preuve": "Le site fulll.fr affirme l'immatriculation définitive de « la Plateforme Agréée fulll » sans nommer d'opérateur de socle. Un communiqué Generix Group du 12/07/2023 documente un partenariat industriel dans lequel fulll, alors opérateur de dématérialisation, commercialisait la PDP « Generix Invoice Services » auprès des cabinets ; aucune source postérieure ne confirme que ce socle porte la PA actuelle.",
-    "source": "https://www.fulll.fr/facturation-electronique/conformite-flash",
+    "preuve": "Socle toujours non établi. Le communiqué Generix évoqué dans la première rédaction de cette fiche est confirmé sur pièce, et sur le site de fulll lui-même : « Ce partenariat permettra à fulll de compléter son offre d'opérateur de dématérialisation et à Generix Group d'adresser le marché des [cabinets] ». La source primaire remplace donc la source secondaire. La réserve reste entière : le partenariat date de 2023, il porte sur l'offre d'opérateur de dématérialisation antérieure à l'immatriculation, et aucune source postérieure ne dit que ce socle porte la plateforme agréée actuelle. À rapprocher de la prise de participation minoritaire de Visma dans fulll (2026), qui ouvre une seconde hypothèse de socle.",
+    "source": "https://www.fulll.fr/blllog/facture-electronique-generix-group-et-fulll",
     "confiance": "faible"
    },
    "fournisseurDeSocle": null,
    "modeDistributionSocle": [
     "via cabinet EC"
    ],
-   "groupeCapitalistique": null,
+   "groupeCapitalistique": "Groupe In Extenso, réseau français indépendant d'expertise comptable et de services aux TPE et PME, qui a fondé fulll en 2021 comme sa filiale logicielle destinée aux cabinets. Fait nouveau relevé le 25/08/2026 : le groupe norvégien Visma a acquis une participation minoritaire au capital de fulll, annoncée le 10/03/2026 et finalisée à l'été 2026, dans le cadre d'un partenariat présenté comme un co-actionnariat à gouvernance partagée. Les deux parties précisent que fulll n'est pas cédé et reste sous contrôle d'In Extenso. La participation est minoritaire : elle est publiée comme un fait, mais elle n'établit pas l'appartenance de cette immatriculation au groupe Visma et aucune liaison d'immatriculations n'est créée sur ce fondement (règle 97). Volume revendiqué par les communiqués : plus de 250 000 clients équipés en comptabilité via la plateforme.",
    "relationCapitalistique": "non_determinable",
    "partenariats": [],
    "raisonSociale": "FULLL (FULLL)",
@@ -10647,7 +11367,9 @@
     "A",
     "C",
     "D",
-    "E4"
+    "E4",
+    "H2-88-CONTROLE-ETRANGER",
+    "SOCLE-47"
    ],
    "reseaux": [
     "peppol_ap"
@@ -11905,6 +12627,13 @@
      "source": "https://icdint.fr/programme-partenaire",
      "dateReleve": "2026-08-20",
      "confiance": "moyenne"
+    },
+    {
+     "champ": "siren",
+     "source": "https://icdint.fr/",
+     "dateReleve": "2026-08-22",
+     "confiance": "non_qualifie",
+     "preuve": "Aucune page légale publiée sur le domaine : /mentions-legales, /legal, /politique-de-confidentialite, /contact et /nous-connaitre ne restituent aucune identité d’éditeur, et aucune adresse postale n’est publiée sur le site. Le SIREN reste à établir : il n’est pas déduit du nom commercial (règle 24)."
     }
    ],
    "confiance": "qualifiee",
@@ -11928,7 +12657,8 @@
    "lotsContributeurs": [
     "A",
     "D",
-    "E4"
+    "E4",
+    "RECUP-SIREN-2"
    ],
    "reseaux": [
     "peppol_ap"
@@ -13595,7 +14325,7 @@
    "verticale": "generaliste",
    "logiquePositionnement": "Positionnement tres coherent : ECMA operait deja les portails de dematerialisation de la profession (declarations via jedeclare.com, signature electronique via jesignexpert.com) et prolonge cet ecosysteme avec une PA dediee au meme canal de distribution, le cabinet. C'est aussi l'un des rares acteurs a assumer publiquement un role de grossiste : page \"devenir partenaire\" explicite, offre de la PA en marque grise sans frais de mise en place et paiement a l'usage, API gratuites pour les partenaires techniques, comite partenaires et cellule editeur, avec une liste de partenaires publiee (section signalee \"en cours de mise a jour\" sur le site). A rappeler : la marque grise n'est pas une categorie reglementaire ; jefacture.com est immatriculee en son nom propre et reste seule responsable devant l'administration, les logiciels partenaires restant des Solutions Compatibles non immatriculees.",
    "anneeCreation": null,
-   "siren": null,
+   "siren": "403156540",
    "descriptionFiche": "Plateforme Agreee de la profession comptable, editee par ECMA et presentee comme la PA \"des experts-comptables et de leurs 3 millions de clients entreprises\" (immatriculation n0055 revendiquee sur le site, plateforme annoncee operationnelle depuis 2020). Fonctionnellement : creation de factures, collecte multi-canal (e-mail, collecteurs marchands, API, photo, chargement manuel, Chorus Pro, autres plateformes privees), OCR et video-codage, controles legaux et de coherence, transformation en Factur-X, scellement avec le cachet de l'Ordre des experts-comptables, distribution (e-mail avec bouton de paiement, Chorus Pro, autre dossier jefacture.com), reglement des factures d'achat via Banqup et archivage 10 ans en France chez Orange Business Services. Le modele de distribution passe par le cabinet d'expertise comptable, qui reste au coeur des flux de son client.",
    "sourcesEnrichissement": [
     {
@@ -13633,6 +14363,24 @@
      "source": "https://ecma-solutions.com/partenaires/jefacture",
      "dateReleve": "2026-08-20",
      "confiance": "moyenne"
+    },
+    "https://annuaire-entreprises.data.gouv.fr/entreprise/403156540",
+    "https://ecma-solutions.com/produits-expert-comptable/jefacture",
+    "https://support.jefacture.com/fr/articles/380881-decouvrir-les-tarifs-jefacture-com",
+    "https://www.compta-online.com/facturation-electronique-jefacture-com-ao7751",
+    {
+     "champ": "siren",
+     "source": "https://www.jedeclare.com/mentions-legales",
+     "dateReleve": "2026-08-22",
+     "confiance": "haute",
+     "preuve": "Mentions légales de l’éditeur : « Expert-Comptable Média Association (ECMA), association loi 1901, immeuble Le Jour, 200-216 rue Raymond Losserand, 75680 PARIS CEDEX 14, SIREN 403 156 540 », représentée par Damien Charrier, Président. Coquille relevée sur la même page : le paragraphe 2.1 cite un « SIREN 403 154 540 » qui ne correspond à aucune entité du répertoire — le numéro retenu est celui dont l’adresse concorde."
+    },
+    {
+     "champ": "natureEntite",
+     "source": "https://recherche-entreprises.api.gouv.fr/search?q=403156540",
+     "dateReleve": "2026-08-22",
+     "confiance": "haute",
+     "preuve": "Fiche ouverte du répertoire SIRENE : EXPERT-COMPTABLE MEDIA ASSOCIATION, sigle ECMASSOCIATION, nature juridique 9220 (association déclarée), siège 200-216 rue Raymond Losserand 75014 Paris, code APE 63.12Z, 20 à 49 salariés, aucun dirigeant et aucun compte restitués."
     }
    ],
    "confiance": "qualifiee",
@@ -13649,12 +14397,14 @@
     "API/embedded",
     "via cabinet EC"
    ],
-   "groupeCapitalistique": "ECMA, editeur des services numeriques de la profession comptable (jedeclare.com, jesignexpert.com, jefacture.com, conformexpert.com, jedataviz.com) ; taille du groupe non publiee sur le site",
+   "groupeCapitalistique": "ECMA, éditeur des services numériques de la profession comptable (jedeclare.com, jesignexpert.com, jefacture.com, conformexpert.com, jedataviz.com) ; taille du groupe non publiée sur le site. Le porteur de l’immatriculation n’est pas une société commerciale mais une **association loi 1901** : EXPERT-COMPTABLE MÉDIA ASSOCIATION (ECMA), SIREN 403 156 540, nature juridique 9220 au répertoire, créée le 15/05/1995, code APE 63.12Z (portails Internet), 20 à 49 salariés (millésime 2023), un seul établissement. Elle édite également jedeclare.com. Aucun capital social, aucun dirigeant inscrit au répertoire des entreprises et aucun compte déposé au greffe : les états financiers d’une association ne suivent pas le régime de dépôt des sociétés commerciales. Les mentions légales désignent Damien Charrier comme président et directeur de la publication.",
    "relationCapitalistique": null,
    "partenariats": [],
    "lotsContributeurs": [
+    "360-PROFESSION-COMPTABLE",
     "A",
-    "E9"
+    "E9",
+    "RECUP-SIREN-2"
    ],
    "natureEntite": "extension_demat",
    "perimetreFonctionnel": [
@@ -13682,7 +14432,121 @@
     "Welyb",
     "transferFACT",
     "Evoliz"
-   ]
+   ],
+   "analyse360": {
+    "metierPrincipal": "Production et commercialisation de solutions numériques pour la profession d'expert-comptable. ECMA (Expert-Comptable Média Association) n'est pas un éditeur commercial classique : c'est une association loi 1901 immatriculée sous le SIREN 403 156 540, créée le 15/05/1995, dont l'objet est d'outiller les cabinets d'expertise comptable. jefacture.com est l'un de ses cinq produits, aux côtés de jedeclare.com (portail déclaratif historique de la profession), jesignexpert.com (signature électronique), conformexpert et jedataviz.",
+    "activites": [
+     {
+      "libelle": "jedeclare.com — portail déclaratif de la profession comptable (télétransmission fiscale et sociale), produit historique et socle de la relation avec les cabinets",
+      "poids": "majeur",
+      "source": "https://ecma-solutions.com/"
+     },
+     {
+      "libelle": "jefacture.com — plateforme agréée de facturation électronique destinée aux cabinets et à leurs clients TPE-PME, incluant devis, facture, règlement, compte pro et application mobile",
+      "poids": "significatif",
+      "source": "https://ecma-solutions.com/produits-expert-comptable/jefacture"
+     },
+     {
+      "libelle": "jesignexpert.com — signature électronique dédiée aux lettres de mission et documents du cabinet",
+      "poids": "significatif",
+      "source": "https://ecma-solutions.com/produits-expert-comptable/jesignexpert"
+     },
+     {
+      "libelle": "conformexpert et jedataviz — conformité réglementaire du cabinet et restitution de données clients",
+      "poids": "mineur",
+      "source": "https://ecma-solutions.com/"
+     }
+    ],
+    "poidsEconomique": {
+     "caGroupe": null,
+     "caEntiteFrancaise": {
+      "montantMEUR": null,
+      "exercice": "aucun",
+      "nature": "aucun_compte_depose",
+      "commentaire": "ECMA est une association loi 1901 (nature juridique 9220). Aucun compte n'est déposé au greffe et aucun dirigeant n'est publié au registre des entreprises : c'est le régime normal de cette forme juridique, ce n'est pas de l'opacité (règle 68). Le poids économique de l'activité n'est donc pas mesurable par le chiffre d'affaires, et aucun montant n'est estimé.",
+      "source": "https://annuaire-entreprises.data.gouv.fr/entreprise/403156540",
+      "dateReleve": "2026-08-24"
+     },
+     "resultatNet": null,
+     "effectifGroupe": null,
+     "effectifEntite": "20 à 49 salariés (INSEE, millésime 2023). Siège Immeuble Le Jour, 200-216 rue Raymond Losserand, 75014 Paris. APE 63.12Z (portails Internet).",
+     "ventilationParActivite": {
+      "disponible": false,
+      "motif": "Aucune ventilation n'est publiée, et la forme associative ne produit pas de comptes déposés exploitables. Retenir une part attribuable à jefacture.com serait une estimation, ce que le référentiel s'interdit (règle 25).",
+      "derniereVentilationConnue": null
+     }
+    },
+    "centralitePA": {
+     "indice": 3,
+     "niveau": "axe_strategique",
+     "marqueProduitDediee": "jefacture.com",
+     "entiteJuridiqueDediee": false,
+     "faisceauIndices": [
+      {
+       "signal": "L'agrément est porté par un produit nommé, doté de sa propre marque, de son propre site, de son propre centre d'aide et de sa propre application mobile publiée sur les stores",
+       "sens": "+",
+       "preuve": "https://ecma-solutions.com/produits-expert-comptable/jefacture"
+      },
+      {
+       "signal": "L'acteur revendique le positionnement de « plateforme agréée de la profession », c'est-à-dire une réponse collective au nom des experts-comptables : la réforme est le sujet structurant de sa communication produit",
+       "sens": "+",
+       "preuve": "https://ecma-solutions.com/produits-expert-comptable/jefacture"
+      },
+      {
+       "signal": "jefacture.com reste l'un de cinq produits, adossé à un portail déclaratif préexistant qui demeure le socle de la relation avec les cabinets : la plateforme agréée prolonge une position acquise, elle ne la crée pas",
+       "sens": "-",
+       "preuve": "https://ecma-solutions.com/"
+      },
+      {
+       "signal": "Un mandat type est fourni aux cabinets pour inscrire leurs clients à l'annuaire national, ce qui traduit un outillage opérationnel de la réforme et pas une simple mise en conformité",
+       "sens": "+",
+       "preuve": "https://support.jefacture.com/fr/articles/403633-comprendre-telecharger-et-signer-le-modele-de-mandat-propose-par-jefacture-com"
+      }
+     ],
+     "lecture": "Indice 3 : axe stratégique. Pour ECMA, la réforme n'est pas une contrainte à absorber, c'est l'occasion d'étendre au flux de facturation la position déjà tenue sur le flux déclaratif. L'association n'a pas créé d'entité dédiée ni changé de métier : elle a ajouté un produit majeur à un catalogue existant, avec l'argument que la plateforme agréée de la profession doit rester dans le périmètre de la profession.",
+     "confiance": "haute"
+    },
+    "postureCommerciale": {
+     "valeur": "canal_indirect",
+     "preuve": "Le cabinet d'expertise comptable est le canal : il s'abonne, puis invite ses clients entreprises, avec un modèle de mandat fourni pour l'inscription à l'annuaire national. Près de 4 000 cabinets sont annoncés abonnés, l'usage de la plateforme par le cabinet pour ses propres factures étant gratuit. L'inscription directe d'une entreprise sans invitation préalable d'un cabinet est possible depuis une évolution documentée dans le centre d'aide, ce qui ouvre un canal direct secondaire sans remettre en cause la logique principale. Des intégrations avec des éditeurs de gestion commerciale tiers existent également, jefacture.com étant listée comme solution partenaire. Le référentiel qualifie par ailleurs cet acteur de fournisseur de socle distribuant en marque grise et par API embarquée : il ne se contente donc pas d'équiper les cabinets, il met sa conformité à disposition de solutions tierces.",
+     "confiance": "haute"
+    },
+    "referencesClients": {
+     "nbCiteesSurSite": null,
+     "parSecteur": {},
+     "grandsComptes": [],
+     "referencesPAConfirmees": [],
+     "source": "Aucun logo client n'est publié : l'acteur ne communique pas par références nominatives mais par volume de cabinets abonnés, près de 4 000 selon un article de la presse professionnelle relevé le 24/08/2026. Ce volume compte des cabinets, pas des entreprises utilisatrices, et pas des factures : les trois grandeurs ne sont pas interchangeables (règle 80)."
+    },
+    "reputation": {
+     "volumeAvis": null,
+     "synthese": "Aucun relevé d'avis agrégés effectué dans cette passe. Signal public de nature différente : l'application mobile jefacture.com est publiée sur les stores, ce qui expose une notation utilisateur non relevée ici.",
+     "confiance": "non_qualifie"
+    },
+    "capaciteDeFrappe": {
+     "actionnaires": [
+      "Association loi 1901 : il n'y a pas d'actionnaire au sens capitalistique, mais des membres issus de la profession comptable. La création à l'initiative des instances de la profession est mentionnée par des sources tierces et n'a pas été vérifiée sur un document primaire dans cette passe."
+     ],
+     "typeActionnaire": "non_qualifie",
+     "financementRecent": "Aucune levée de fonds ni opération capitalistique : la forme associative l'exclut. Le financement est porté par les abonnements des cabinets et de leurs clients.",
+     "acquisitions": [],
+     "modeleTarifaire": "Tarification publiée. Le dossier du cabinet lui-même (factures d'achat et de vente) est à 0 € HT ; les dossiers des entreprises relèvent d'abonnements étagés, avec utilisateur supplémentaire à 5 €/mois et fonctionnalités croissantes (collaboration comptable, comptes bancaires liés, API).",
+     "tarifPublie": true,
+     "offreGratuite": true
+    },
+    "lectureConcurrentielle": "Ce n'est pas un concurrent frontal de l'offre portée par Fluxym : ni le segment, ni le canal, ni le circuit de décision ne se croisent. L'intérêt de la fiche est ailleurs. ECMA est l'acteur qui institutionnalise le canal cabinet : lorsque près de 4 000 cabinets disposent gratuitement d'une plateforme agréée pour leurs propres flux et d'un mandat type pour y raccorder leurs clients, la question du choix de la plateforme est tranchée en amont, sans mise en concurrence, pour un très grand nombre de TPE et de PME. Le risque à surveiller n'est pas la perte d'un appel d'offres ETI, c'est l'installation d'un réflexe : la plateforme agréée est l'affaire de l'expert-comptable. Fluxym est un acteur du marché : ce référentiel est publié par un intégrateur qui distribue des solutions concurrentes, et cette lecture est une lecture de marché, pas une évaluation.",
+    "droitDeReponse": {
+     "signale": false,
+     "date": null,
+     "objet": null
+    }
+   },
+   "raisonSociale": "EXPERT-COMPTABLE MÉDIA ASSOCIATION (ECMA)",
+   "dateCreation": "1995-05-15",
+   "trancheEffectif": "20-49",
+   "categorieEntreprise": "PME",
+   "activitePrincipale": "63.12Z",
+   "confianceIdentite": "haute"
   },
   {
    "nom": "KALANDA",
@@ -13863,15 +14727,21 @@
      "source": "https://www.klekoon.com/facturation-electronique",
      "dateReleve": "2026-08-20",
      "confiance": "haute"
+    },
+    {
+     "champ": "socleTechnique",
+     "source": "https://www.klekoon.com/politique-de-confidentialite",
+     "dateReleve": "2026-08-25",
+     "confiance": "moyenne"
     }
    ],
    "confiance": "partielle",
    "socleTechnique": {
-    "type": null,
-    "operateurSocle": null,
-    "preuve": null,
-    "source": null,
-    "confiance": "non_qualifie"
+    "type": "propre",
+    "operateurSocle": "Klekoon",
+    "preuve": "La politique de confidentialité, document contractuel, décrit un service opéré en propre : « Notre Service inclut une plateforme de veille commerciale et de dématérialisation des marchés publics, ainsi qu'une Plateforme agréée (ci-après « PA ») » et « En tant que Plateforme de Dématérialisation Partenaire (PDP) immatriculée, Klekoon traite les données nécessaires à la facturation électronique et à la transmission des données à l'administration fiscale ». Aucun sous-traitant de socle n'est mentionné au registre des traitements exposé.",
+    "source": "https://www.klekoon.com/politique-de-confidentialite",
+    "confiance": "moyenne"
    },
    "fournisseurDeSocle": null,
    "modeDistributionSocle": [],
@@ -13895,7 +14765,8 @@
     "A",
     "C",
     "D",
-    "E5"
+    "E5",
+    "SOCLE-47"
    ],
    "reseaux": [
     "peppol_ap"
@@ -14318,7 +15189,16 @@
      "source": "Correction d'une hypothèse erronée du 22/08/2026 matin : Le Village Connecté avait été présenté comme la seconde immatriculation du groupe Tessi sur la base d'un sondage par mots-clés. Tessi n'est que partenaire technique de l'alliance RCA + ACD + Coaxis",
      "dateReleve": "2026-08-22",
      "confiance": "haute"
-    }
+    },
+    "https://annuaire-entreprises.data.gouv.fr/entreprise/950883231",
+    "https://annuaire-entreprises.data.gouv.fr/entreprise/528553654",
+    "https://annuaire-entreprises.data.gouv.fr/entreprise/418348231",
+    "https://annuaire-entreprises.data.gouv.fr/entreprise/432577898",
+    "https://www.acd-groupe.fr/facture-electronique/",
+    "https://www.teamsystem.com/press/teamsystem-acquisisce-il-controllo-di-acd-groupe/",
+    "https://www.pappers.fr/entreprise/rca-realisations-pour-la-comptabilite-etl-audit-418348231",
+    "https://www.lejournaldesentreprises.com/breve/lediteur-nantais-de-logiciels-rca-investit-16-million-deuros-dans-lia-agentique-2141331",
+    "https://www.laprofessioncomptable.com/article/editeurs-de-logiciels/le-nouveau-meg-de-rca-1ere-etape-vers-la-facture-electronique"
    ],
    "confiance": "qualifiee",
    "socleTechnique": {
@@ -14360,6 +15240,7 @@
    ],
    "confianceIdentite": "moyenne",
    "lotsContributeurs": [
+    "360-VILLAGE-CONNECTE",
     "A",
     "B2",
     "C",
@@ -14382,14 +15263,142 @@
     "WinePilot"
    ],
    "immatriculationsLiees": {
-    "groupe": "Alliance RCA + ACD + Coaxis",
+    "groupe": "Alliance LE VILLAGE CONNECTÉ — ACD, RCA, COAXIS ASP, avec TeamSystem en amont d'ACD",
     "entrees": [
-     "LE VILLAGE CONNECTE"
+     "LE VILLAGE CONNECTE",
+     "TeamSystem Sellsy"
     ],
     "type": "alliance_industrielle",
-    "lecture": "Le Village Connecté n'est pas une filiale : c'est une offre commune portée par trois sociétés indépendantes du monde de l'expertise comptable — RCA, ACD et Coaxis — Tessi n'intervenant qu'en partenaire technique. Le rapprochement automatique par mots-clés avait conclu à tort à une seconde immatriculation du groupe Tessi : il n'y en a qu'une, celle de TESSI Technologies.",
-    "source": "Communication publique de l'alliance et des trois sociétés qui la portent (RCA, ACD, Coaxis), relevé du 22/08/2026 ; contrôle du champ groupeCapitalistique de la fiche",
-    "dateReleve": "2026-08-22"
+    "lecture": "LE VILLAGE CONNECTÉ est le véhicule commun de trois éditeurs et hébergeurs du marché du cabinet d'expertise comptable : ACD (SIREN 528 553 654, Tours), RCA (SIREN 418 348 231, Saint-Herblain) et COAXIS ASP (SIREN 432 577 898, Fauguerolles). Cette composition est publiée par les membres eux-mêmes. S'y ajoute un fait établi postérieurement : le groupe italien TeamSystem a annoncé en avril 2026 avoir pris le contrôle d'ACD Groupe. TeamSystem ne porte donc pas l'immatriculation du VILLAGE CONNECTÉ, mais il contrôle l'un de ses trois membres, tout en détenant par ailleurs l'entité SELLSY qui porte sa propre immatriculation sous l'entrée « TeamSystem Sellsy ». La liaison est publiée parce que les deux faits qui la composent sont documentés séparément : la composition de l'alliance par l'un de ses membres, la prise de contrôle par l'acquéreur (règle 29). Le degré d'influence de TeamSystem sur les décisions de l'alliance n'est pas établi et n'est pas supposé.",
+    "source": "Page « facture électronique » d'ACD Groupe pour la composition de l'alliance ; communiqué de presse TeamSystem pour la prise de contrôle d'ACD Groupe",
+    "dateReleve": "2026-08-25"
+   },
+   "analyse360": {
+    "metierPrincipal": "Aucun métier propre. LE VILLAGE CONNECTÉ (SIREN 950 883 231) est un véhicule d'alliance : une société créée le 23/03/2023, qui compte 1 à 2 salariés, dont le seul objet est de porter une immatriculation de plateforme agréée mutualisée pour le compte de trois acteurs du marché du cabinet d'expertise comptable — ACD, RCA et COAXIS ASP. Le métier, les effectifs, les revenus et les clients sont chez les membres, pas dans l'entité immatriculée.",
+    "activites": [
+     {
+      "libelle": "ACD (SIREN 528 553 654, Tours) — édition de logiciels de production comptable, fiscale, sociale et juridique pour cabinets, via la suite i-Suite Expert ; environ 37 M€ de chiffre d'affaires et plus de 300 collaborateurs annoncés, pour environ 3 500 cabinets clients. Sous contrôle du groupe italien TeamSystem depuis avril 2026",
+      "poids": "majeur",
+      "source": "https://www.teamsystem.com/press/teamsystem-acquisisce-il-controllo-di-acd-groupe/"
+     },
+     {
+      "libelle": "RCA (SIREN 418 348 231, Saint-Herblain) — édition de la plateforme de gestion MEG destinée aux entreprises clientes des cabinets. Comptes déposés : 33,4 M€ de chiffre d'affaires en 2025, après 27,8 M€ en 2024, 24,2 M€ en 2023 et 20,8 M€ en 2022, soit une progression de 60 % en trois exercices. Environ 300 collaborateurs annoncés pour 200 à 249 salariés au sens de l'INSEE, plus de 205 000 entreprises déclarées connectées et environ 3 500 cabinets partenaires. L'acteur annonce par ailleurs des objectifs — près de 50 M€ pour 2026 et 60 M€ à horizon 2030 — qui sont des cibles et non des chiffres réalisés (règle 90)",
+      "poids": "majeur",
+      "source": "https://www.pappers.fr/entreprise/rca-realisations-pour-la-comptabilite-etl-audit-418348231"
+     },
+     {
+      "libelle": "COAXIS ASP (SIREN 432 577 898, Fauguerolles) — hébergement et infogérance pour cabinets d'expertise comptable, 12,27 M€ de chiffre d'affaires sur l'exercice clos le 30/06/2025, 20 à 49 salariés ; détenue par la holding COAXIS INVEST (SIREN 897 589 024). C'est également l'adresse à laquelle l'entité immatriculée est domiciliée",
+      "poids": "significatif",
+      "source": "https://annuaire-entreprises.data.gouv.fr/entreprise/432577898"
+     },
+     {
+      "libelle": "Fonction de plateforme agréée mutualisée : raccordement des solutions des membres — i-Suite Expert pour ACD, MEG pour RCA — et point d'accès Peppol",
+      "poids": "significatif",
+      "source": "https://www.acd-groupe.fr/facture-electronique/"
+     },
+     {
+      "libelle": "Collaboration technique avec TESSI, déjà présent au référentiel avec sa propre immatriculation et sa propre fiche 360 (indice 2, posture base_installee). Cette collaboration est déclarée dans le champ socleTechnique de la fiche ; elle n'est pas un lien capitalistique et n'en crée aucun",
+      "poids": "mineur",
+      "source": "Champ socleTechnique de la fiche LE VILLAGE CONNECTE au référentiel"
+     }
+    ],
+    "poidsEconomique": {
+     "caGroupe": {
+      "montantMEUR": null,
+      "exercice": "2025",
+      "nature": "sans_objet",
+      "commentaire": "Il n'y a pas de groupe, donc pas de chiffre d'affaires de groupe. L'alliance réunit trois sociétés indépendantes dont les comptes sont séparés : ACD environ 37 M€ (chiffre annoncé lors de l'acquisition d'avril 2026, l'entité 528 553 654 ne restituant aucun indicateur financier), RCA 33,4 M€ sur l'exercice 2025 d'après ses comptes déposés, COAXIS ASP 12,27 M€ sur l'exercice clos le 30/06/2025. Ces trois montants sont cités un par un et ne s'additionnent pas : additionner les chiffres d'affaires de membres d'une alliance produirait un agrégat qui ne correspond à aucune entité, à aucune consolidation et à aucun périmètre de responsabilité (règle 86). Ils donnent en revanche un ordre de grandeur de la capacité d'investissement mobilisable derrière la plateforme, très supérieure à ce que les comptes de l'entité immatriculée laissent voir.",
+      "source": "https://www.pappers.fr/entreprise/rca-realisations-pour-la-comptabilite-etl-audit-418348231",
+      "dateReleve": "2026-08-25"
+     },
+     "caEntiteFrancaise": {
+      "montantMEUR": null,
+      "exercice": "aucun",
+      "nature": "aucun_compte_depose",
+      "commentaire": "Aucun chiffre d'affaires n'est restitué pour l'entité immatriculée, créée le 23/03/2023 et dotée de 1 à 2 salariés. C'est cohérent avec sa fonction : elle porte une immatriculation, elle n'exploite pas une activité. Lire le poids de cette plateforme dans les comptes de son véhicule juridique conduirait au contresens le plus complet du référentiel, puisque les membres annoncent viser plusieurs centaines de milliers d'entreprises (règle 36).",
+      "source": "https://annuaire-entreprises.data.gouv.fr/entreprise/950883231",
+      "dateReleve": "2026-08-25"
+     },
+     "resultatNet": null,
+     "effectifGroupe": "Additionner les effectifs des trois membres reviendrait à construire un groupe qui n'existe pas. Séparément : plus de 300 collaborateurs annoncés chez ACD, environ 300 annoncés chez RCA pour 200 à 249 salariés au sens de l'INSEE, 20 à 49 salariés chez COAXIS ASP. Ces effectifs servent l'ensemble de leurs activités, dont la plateforme n'est qu'une composante.",
+     "effectifEntite": "1 à 2 salariés (INSEE, millésime 2023) pour l'entité immatriculée, domiciliée à Fauguerolles (47) — à l'adresse de COAXIS ASP, l'un des trois membres. Cette concordance d'adresse est un indice documenté d'hébergement opérationnel par un membre, elle n'établit aucun lien capitalistique (règle 89).",
+     "ventilationParActivite": {
+      "disponible": false,
+      "motif": "Sans objet : il n'y a ni comptes consolidés ni activité logée dans l'entité immatriculée. La ventilation pertinente serait celle de chacun des trois membres, aucun ne la publiant.",
+      "derniereVentilationConnue": null
+     }
+    },
+    "centralitePA": {
+     "indice": 4,
+     "niveau": "coeur_de_metier",
+     "marqueProduitDediee": "LE VILLAGE CONNECTÉ",
+     "entiteJuridiqueDediee": true,
+     "faisceauIndices": [
+      {
+       "signal": "L'entité a été créée le 23/03/2023, soit après l'annonce de la réforme, et n'a aucune autre activité que de porter l'immatriculation : c'est la définition même d'une entité dédiée",
+       "sens": "+",
+       "preuve": "https://annuaire-entreprises.data.gouv.fr/entreprise/950883231"
+      },
+      {
+       "signal": "Trois sociétés concurrentes sur leurs marchés respectifs ont accepté de mutualiser un véhicule commun pour porter l'agrément : le coût politique d'une telle décision atteste que la conformité était considérée comme trop structurante pour être traitée séparément",
+       "sens": "+",
+       "preuve": "https://www.acd-groupe.fr/facture-electronique/"
+      },
+      {
+       "signal": "La gouvernance de l'entité associe les membres — la direction générale est notamment exercée par le fondateur de RCA — ce qui traduit un engagement des dirigeants et pas une délégation à une structure ad hoc",
+       "sens": "+",
+       "preuve": "https://annuaire-entreprises.data.gouv.fr/entreprise/950883231"
+      },
+      {
+       "signal": "La plateforme est le point de raccordement obligé des produits phares des membres : i-Suite Expert pour ACD, MEG pour RCA, dont plus de 205 000 entreprises sont déclarées connectées",
+       "sens": "+",
+       "preuve": "https://www.acd-groupe.fr/facture-electronique/"
+      },
+      {
+       "signal": "Contrepoint de méthode : l'indice qualifie l'entité immatriculée, dont l'agrément est effectivement l'unique raison d'être. Pour chacun des trois membres pris séparément, l'indice serait bien plus bas, la plateforme n'étant qu'une brique de conformité de leur offre",
+       "sens": "-",
+       "preuve": "https://www.acd-groupe.fr/facture-electronique/"
+      }
+     ],
+     "lecture": "Indice 4 : cœur de métier. C'est mécanique et c'est le premier indice 4 du référentiel — l'entité n'a pas d'autre activité que l'agrément. Mais cet indice doit se lire avec sa contrepartie : il qualifie un véhicule, pas une puissance. La force de cette plateforme n'est pas dans l'entité qui la porte, elle est dans les trois sociétés qui l'ont créée et dans les bases installées qu'elles y raccordent. C'est exactement l'inverse du cas FIDUCIAL CLOUD, où une filiale technique de 20 à 49 salariés sert un groupe de 334 000 clients : ici trois entreprises de 37, 42 et 12 M€ de chiffre d'affaires servent une coquille de 1 à 2 salariés.",
+     "confiance": "haute"
+    },
+    "postureCommerciale": {
+     "valeur": "canal_indirect",
+     "preuve": "La plateforme ne se vend pas : elle est raccordée aux solutions des membres, elles-mêmes distribuées par et via les cabinets d'expertise comptable. Aucun tarif propre n'est publié par l'entité immatriculée, aucune force de vente ne lui est attachée, et la relation client appartient aux membres. Volumes annoncés par les membres, non consolidés : environ 3 500 cabinets clients pour ACD, environ 3 500 cabinets partenaires pour RCA, plus de 205 000 entreprises déclarées connectées à MEG. Le fait que les deux membres annoncent le même nombre de cabinets impose une réserve explicite : un cabinet peut être client des deux, ces volumes ne s'additionnent pas et le nombre réel de cabinets couverts par l'alliance n'est pas établi (règle 87).",
+     "confiance": "haute"
+    },
+    "referencesClients": {
+     "nbCiteesSurSite": null,
+     "parSecteur": {},
+     "grandsComptes": [],
+     "referencesPAConfirmees": [],
+     "source": "Aucun logo client publié par l'entité immatriculée, ce qui est cohérent avec sa nature de véhicule : ses seuls clients directs sont ses trois membres. Les références nominatives éventuelles se trouveraient chez ACD, RCA et COAXIS ASP, dont le relevé n'a pas été effectué dans cette passe. Aucune référence n'est présentée comme cliente de l'activité agréée."
+    },
+    "reputation": {
+     "volumeAvis": null,
+     "synthese": "Aucun avis agrégé n'existe sur l'entité immatriculée : elle n'a pas d'utilisateur direct. Les avis pertinents portent sur les produits des membres, i-Suite Expert et MEG, et leur relevé constitue un reste à faire distinct.",
+     "confiance": "non_qualifie"
+    },
+    "capaciteDeFrappe": {
+     "actionnaires": [
+      "Véhicule commun détenu par les trois membres de l'alliance : ACD (SIREN 528 553 654), RCA (SIREN 418 348 231) et COAXIS ASP (SIREN 432 577 898). La répartition exacte du capital n'est pas publiée et n'est pas supposée",
+      "En amont d'ACD : le groupe italien TeamSystem, qui a annoncé en avril 2026 avoir pris le contrôle d'ACD Groupe. TeamSystem détient par ailleurs SELLSY, qui porte sa propre immatriculation au référentiel. Cette liaison est publiée sur la foi de deux faits documentés séparément ; le degré d'influence effectif sur l'alliance n'est pas établi",
+      "En amont de COAXIS ASP : la holding COAXIS INVEST (SIREN 897 589 024), établie à la même adresse. La chaîne s'arrête à ce niveau documenté (règle 42)"
+     ],
+     "typeActionnaire": "industriel",
+     "financementRecent": "Aucune levée de fonds relevée sur l'entité immatriculée. Le financement de la plateforme est porté par les trois membres, dont la capacité cumulée est indiquée par leurs chiffres d'affaires respectifs, cités sans être additionnés.",
+     "acquisitions": [],
+     "modeleTarifaire": "Aucun tarif publié par l'entité immatriculée. La plateforme est intégrée aux offres des membres, et c'est chez eux que se forme le prix. Un point d'accès Peppol est associé au dispositif.",
+     "tarifPublie": false,
+     "offreGratuite": false
+    },
+    "lectureConcurrentielle": "Cette fiche est la conséquence directe de la précédente, et elle en change la portée. En cherchant à traiter ACD Groupe pour lui-même, un fait s'est imposé : ACD ne porte aucune immatriculation. Il est l'un des trois membres de l'alliance qui porte celle du VILLAGE CONNECTÉ. Autrement dit, en prenant le contrôle d'ACD en avril 2026, le groupe italien TeamSystem n'a pas seulement acheté 3 500 cabinets et 37 M€ de chiffre d'affaires : il est entré dans le tour de table d'une seconde plateforme agréée française, alors qu'il en détient déjà une par SELLSY. Cela a une conséquence de méthode sérieuse pour le référentiel : le recensement du contrôle étranger sur les plateformes agréées françaises est faux s'il ne regarde que les entités immatriculées, parce qu'un groupe étranger peut entrer par un membre d'alliance sans jamais apparaître au registre de la plateforme (règle 88). Pour l'offre portée par Fluxym, l'enseignement reste indirect — la cible est le cabinet et sa clientèle de TPE et PME, pas l'ETI — mais l'ordre de grandeur mérite d'être posé : trois éditeurs et hébergeurs pesant séparément environ 37 M€, 33,4 M€ et 12,27 M€, deux fois 3 500 cabinets annoncés, plus de 205 000 entreprises déclarées connectées à l'une de leurs plateformes, et désormais un actionnaire de référence à un milliard d'euros derrière l'un des trois. À noter que le membre le plus dynamique de l'alliance n'est pas celui qui a été racheté : RCA progresse de 60 % en trois exercices et annonce viser 60 M€ à horizon 2030 sans actionnaire financier, son fondateur déclarant publiquement détenir le capital avec son seul associé. Ce n'est plus une alliance défensive de fournisseurs de cabinets, c'est un canal doté d'un bilan. Fluxym est un acteur du marché : ce référentiel est publié par un intégrateur qui distribue des solutions concurrentes, et cette lecture est une lecture de marché, pas une évaluation.",
+    "droitDeReponse": {
+     "signale": false,
+     "date": null,
+     "objet": null
+    }
    }
   },
   {
@@ -14446,15 +15455,21 @@
      "preuve": "Ligne « Infocert S.p.A. (Italie, AGID) », colonne « Access Point (AP) » = « AP Certified ». Annuaire OpenPeppol des Peppol Certified Service Providers, liste mise à jour le 19/08/2026.",
      "dateReleve": "2026-08-20",
      "confiance": "moyenne"
+    },
+    {
+     "champ": "socleTechnique",
+     "source": "https://infocert.digital/news-event/legalinvoice-accredited-as-plateforme-agreee-in-france-strengthening-its-international-e-invoicing-leadership/",
+     "dateReleve": "2026-08-25",
+     "confiance": "haute"
     }
    ],
    "confiance": "partielle",
    "socleTechnique": {
-    "type": null,
-    "operateurSocle": null,
-    "preuve": null,
-    "source": null,
-    "confiance": "non_qualifie"
+    "type": "propre",
+    "operateurSocle": "InfoCert S.p.A. (groupe Tinexta)",
+    "preuve": "Communiqué de l'opérateur lui-même annonçant l'accréditation : « Legalinvoice has achieved full accreditation as a Plateforme Agréée (PA) in France, officially joining the list of certified platforms approved by the DGFiP ». Legalinvoice est la plateforme de facturation électronique éditée et opérée par InfoCert, tiers de confiance italien qui opère déjà le SdI italien pour ses clients ; le socle est celui du groupe, porté en France sous la même marque.",
+    "source": "https://infocert.digital/news-event/legalinvoice-accredited-as-plateforme-agreee-in-france-strengthening-its-international-e-invoicing-leadership/",
+    "confiance": "haute"
    },
    "fournisseurDeSocle": null,
    "modeDistributionSocle": [],
@@ -14471,7 +15486,8 @@
    "lotsContributeurs": [
     "A",
     "D",
-    "L3"
+    "L3",
+    "SOCLE-47"
    ],
    "reseaux": [
     "peppol_ap"
@@ -15660,7 +16676,7 @@
    "verticale": "generaliste",
    "logiquePositionnement": "Coherence forte de type portail cabinet : la PA n'est pas un produit vendu sur le marche ouvert mais l'extension reglementaire de l'espace client d'un reseau comptable, distribuee via les 180 bureaux du reseau a une clientele de TPE, PME et structures patrimoniales (tarif specifique SCI et SCM). L'immatriculation securise la chaine comptable interne du reseau plutot qu'une ambition d'operateur de flux.",
    "anneeCreation": null,
-   "siren": null,
+   "siren": "557150067",
    "descriptionFiche": "My fiteco est l'espace client numerique concu et developpe par le reseau d'expertise comptable FITECO : indicateurs de pilotage, suivi des operations, tresorerie, GED, consultation des comptes bancaires, gestion des paies, avec une option « Devis - Factures » permettant d'emettre des factures conformes aux obligations legales (abonnement 12,90 EUR HT par mois, option facturation 13,90 EUR HT). FITECO met en avant sur sa page d'accueil « My fiteco plateforme Agreee facturation electronique » et une certification ISO 27001. Le service s'adresse aux clients du reseau, accompagnes par leur bureau FITECO.",
    "sourcesEnrichissement": [
     {
@@ -15735,6 +16751,23 @@
      "source": "https://myfiteco.fiteco.com/",
      "dateReleve": "2026-08-20",
      "confiance": "haute"
+    },
+    "https://annuaire-entreprises.data.gouv.fr/entreprise/557150067",
+    "https://myfiteco.fiteco.com/",
+    "https://www.fiteco.com/actualites/my-fiteco-officiellement-plateforme-agreee-pa/",
+    {
+     "champ": "siren",
+     "source": "https://www.fiteco.com/mentions-legales",
+     "dateReleve": "2026-08-22",
+     "confiance": "haute",
+     "preuve": "Mentions légales de l’éditeur : « FITECO, société par actions simplifiée au capital de 8 613 930 €, immatriculée au RCS de LAVAL sous le numéro 557 150 067 », siège Parc Technopole, rue Albert Einstein, 53810 Changé. Adresse concordante caractère pour caractère avec le siège INSEE ; ressort de Laval cohérent avec un siège en Mayenne (règle 61)."
+    },
+    {
+     "champ": "analyse360.poidsEconomique",
+     "source": "https://recherche-entreprises.api.gouv.fr/search?q=557150067",
+     "dateReleve": "2026-08-22",
+     "confiance": "haute",
+     "preuve": "Fiche ouverte du répertoire SIRENE : FITECO, catégorie ETI, code APE 69.20Z, 2 000 à 4 999 salariés (millésime 2023), 178 établissements ouverts, président Yannick Ollivier. Comptes 2025 : chiffre d’affaires de 282,1 M€ et résultat net de 18,4 M€."
     }
    ],
    "confiance": "qualifiee",
@@ -15753,9 +16786,11 @@
    "relationCapitalistique": null,
    "partenariats": [],
    "lotsContributeurs": [
+    "360-PROFESSION-COMPTABLE",
     "A",
     "D",
-    "E5"
+    "E5",
+    "RECUP-SIREN-2"
    ],
    "reseaux": [
     "peppol_ap"
@@ -15764,6 +16799,137 @@
    "perimetreFonctionnel": [
     "emission",
     "suite_gestion"
+   ],
+   "analyse360": {
+    "metierPrincipal": "Expertise comptable, audit, conseil, juridique, social et gestion de patrimoine. FITECO est un réseau français de cabinets, immatriculé sous le SIREN 557 150 067, dont le siège est à Changé (53) et qui exploite 178 établissements. My fiteco n'est pas un produit vendu sur un marché logiciel : c'est l'espace client numérique du réseau, développé en interne, auquel la fonction de plateforme agréée a été ajoutée.",
+    "activites": [
+     {
+      "libelle": "Expertise comptable, tenue et révision des comptes pour une clientèle de TPE, PME et exploitations agricoles, sur un maillage de 178 établissements",
+      "poids": "majeur",
+      "source": "https://annuaire-entreprises.data.gouv.fr/entreprise/557150067"
+     },
+     {
+      "libelle": "Audit et commissariat aux comptes, conseil juridique et fiscal, paie et conseil social",
+      "poids": "significatif",
+      "source": "https://www.fiteco.com/"
+     },
+     {
+      "libelle": "My fiteco — espace client digital lancé en 2019, application mobile iOS et Android, module Devis Factures, et depuis 2026 fonction de plateforme agréée",
+      "poids": "mineur",
+      "source": "https://myfiteco.fiteco.com/"
+     }
+    ],
+    "poidsEconomique": {
+     "caGroupe": null,
+     "caEntiteFrancaise": {
+      "montantMEUR": 282.119,
+      "exercice": "2025",
+      "nature": "comptes_deposes",
+      "commentaire": "Comptes déposés par l’entité immatriculée FITECO (SIREN 557 150 067), cabinet d’expertise comptable de 178 établissements : le chiffre d’affaires mesure l’activité comptable du réseau, pas la plateforme MY FITECO, dont la part n’est pas isolée ni estimée.",
+      "source": "https://recherche-entreprises.api.gouv.fr/search?q=557150067",
+      "dateReleve": "2026-08-22"
+     },
+     "resultatNet": 18390000,
+     "effectifGroupe": null,
+     "effectifEntite": "2 000 à 4 999 salariés (millésime 2023, INSEE), 178 établissements ouverts",
+     "ventilationParActivite": {
+      "disponible": false,
+      "motif": "Aucune ventilation du chiffre d'affaires par métier n'est publiée, et aucune n'est estimée. La part attribuable à l'activité de plateforme agréée est par construction nulle ou marginale en revenu : l'outil est inclus dans la relation de mission.",
+      "derniereVentilationConnue": null
+     }
+    },
+    "centralitePA": {
+     "indice": 1,
+     "niveau": "activite_annexe",
+     "marqueProduitDediee": "My fiteco",
+     "entiteJuridiqueDediee": false,
+     "faisceauIndices": [
+      {
+       "signal": "L'immatriculation est portée par la société d'expertise comptable elle-même, sans création d'entité dédiée : le métier reste l'expertise comptable",
+       "sens": "-",
+       "preuve": "https://annuaire-entreprises.data.gouv.fr/entreprise/557150067"
+      },
+      {
+       "signal": "My fiteco préexiste largement à la réforme : l'espace client est lancé en 2019 et la fonction de plateforme agréée y est ajoutée, ce qui en fait une extension d'un outil de relation client",
+       "sens": "-",
+       "preuve": "https://myfiteco.fiteco.com/"
+      },
+      {
+       "signal": "Le réseau a néanmoins fait le choix d'une plateforme développée en propre plutôt que d'un socle tiers, et communique publiquement sur son immatriculation, ce qui traduit un investissement réel et une volonté de garder la main sur le flux de ses clients",
+       "sens": "+",
+       "preuve": "https://www.fiteco.com/actualites/my-fiteco-officiellement-plateforme-agreee-pa/"
+      },
+      {
+       "signal": "Aucun tarif n'est publié et l'accès passe par la relation de mission : la plateforme n'est pas commercialisée comme un produit autonome sur le marché",
+       "sens": "-",
+       "preuve": "https://myfiteco.fiteco.com/"
+      }
+     ],
+     "lecture": "Indice 1 : activité annexe. L'agrément protège un produit et une relation, il ne construit pas une activité (règle 27). My fiteco existe pour que les clients du réseau n'aient pas à aller chercher une plateforme ailleurs, et pour que les flux de facturation continuent d'alimenter la production comptable du cabinet. Ce n'est pas un indice 0 : le réseau a développé la plateforme lui-même et communique dessus, ce qui suppose un investissement assumé.",
+     "confiance": "haute"
+    },
+    "postureCommerciale": {
+     "valeur": "base_installee",
+     "preuve": "L'offre est adressée aux clients du réseau, via l'espace client et l'accompagnement des agences. Un volume de 70 000 clients depuis le lancement de l'espace en 2019 est repris par un comparateur de plateformes agréées, relevé le 24/08/2026, chiffre non confirmé sur le site de l'acteur. Aucun tarif public, aucun canal de revente, aucun programme partenaire éditeur relevé dans cette passe.",
+     "confiance": "moyenne"
+    },
+    "referencesClients": {
+     "nbCiteesSurSite": null,
+     "parSecteur": {},
+     "grandsComptes": [],
+     "referencesPAConfirmees": [],
+     "source": "Aucun logo client n'est publié : un réseau d'expertise comptable ne communique pas par références nominatives, contrainte déontologique et commerciale. La seule grandeur disponible est un volume de clients de l'espace numérique, qui ne dit rien du nombre d'entreprises effectivement raccordées à la plateforme agréée (règle 80)."
+    },
+    "reputation": {
+     "volumeAvis": null,
+     "synthese": "Aucun relevé d'avis agrégés effectué dans cette passe. Signal public de nature différente : FITECO est inscrite aux tableaux de l'Ordre des experts-comptables des régions Bretagne–Pays de la Loire, Orléans, Paris Île-de-France, Rouen-Normandie et Limoges, information publiée dans les mentions légales de My fiteco.",
+     "confiance": "non_qualifie"
+    },
+    "capaciteDeFrappe": {
+     "actionnaires": [
+      "Structure de détention non établie dans cette passe. FITECO est un réseau d'expertise comptable français dont le président est Yannick Ollivier et le directeur général Jean-Marie Vandergucht ; commissaires aux comptes BAKER TILLY STREGO et FIBA. Aucune chaîne de contrôle documentée au-delà de l'entité immatriculée."
+     ],
+     "typeActionnaire": "non_qualifie",
+     "financementRecent": "Aucune opération relevée. Le développement de la plateforme est autofinancé par l'activité du réseau.",
+     "acquisitions": [],
+     "modeleTarifaire": "Aucun tarif publié : l'accès à My fiteco passe par la relation de mission avec le cabinet, un comparateur mentionnant une tarification sur devis.",
+     "tarifPublie": false,
+     "offreGratuite": false
+    },
+    "lectureConcurrentielle": "À lire comme un canal, pas comme un éditeur. FITECO ne vendra jamais une plateforme agréée à une ETI industrielle et ne croisera pas l'offre portée par Fluxym sur un appel d'offres. En revanche, un réseau de 178 implantations et 282,1 M€ d'honoraires qui décide de développer sa propre plateforme plutôt que d'en distribuer une soustrait mécaniquement au marché les flux de plusieurs dizaines de milliers de TPE et PME, et le fait sans qu'aucune décision d'achat de logiciel ne soit prise. C'est le mode d'occupation du terrain le plus difficile à contester, parce qu'il ne passe pas par un prix. Fluxym est un acteur du marché : ce référentiel est publié par un intégrateur qui distribue des solutions concurrentes, et cette lecture est une lecture de marché, pas une évaluation.",
+    "droitDeReponse": {
+     "signale": false,
+     "date": null,
+     "objet": null
+    }
+   },
+   "raisonSociale": "FITECO",
+   "dateCreation": "1971-01-01",
+   "trancheEffectif": "2000-4999",
+   "categorieEntreprise": "ETI",
+   "activitePrincipale": "69.20Z",
+   "confianceIdentite": "haute",
+   "dirigeants": [
+    {
+     "nom": "OLLIVIER YANNICK LOIC PATRICK",
+     "qualite": "Président de SAS",
+     "type": "personne physique"
+    },
+    {
+     "nom": "VANDERGUCHT JEAN-MARIE",
+     "qualite": "Directeur Général",
+     "type": "personne physique"
+    },
+    {
+     "nom": "BAKER TILLY STREGO",
+     "qualite": "Commissaire aux comptes titulaire",
+     "type": "personne morale"
+    },
+    {
+     "nom": "FIBA",
+     "qualite": "Commissaire aux comptes titulaire",
+     "type": "personne morale"
+    }
    ]
   },
   {
@@ -15844,7 +17010,11 @@
      "source": "https://hgcapital.com/portfolio/myunisoft",
      "dateReleve": "2026-08-20",
      "confiance": "moyenne"
-    }
+    },
+    "https://annuaire-entreprises.data.gouv.fr/entreprise/840143275",
+    "https://annuaire-entreprises.data.gouv.fr/donnees-financieres/840143275",
+    "https://careers.myunisoft.fr/pages/notre-histoire",
+    "https://myu.fr/"
    ],
    "confiance": "partielle",
    "socleTechnique": {
@@ -15886,6 +17056,7 @@
    ],
    "confianceIdentite": "haute",
    "lotsContributeurs": [
+    "360-PROFESSION-COMPTABLE",
     "A",
     "C",
     "D",
@@ -15897,7 +17068,118 @@
    "natureEntite": "extension_demat",
    "perimetreFonctionnel": [
     "suite_gestion"
-   ]
+   ],
+   "analyse360": {
+    "metierPrincipal": "Édition de logiciels applicatifs (APE 58.29C) : production comptable en ligne pour les cabinets d'expertise comptable. MY UNISOFT (SIREN 840 143 275) est une SAS créée le 01/06/2018, dont l'originalité est d'avoir été fondée par des cabinets d'expertise comptable et d'être restée détenue en partie par eux : ses clients sont ses actionnaires.",
+    "activites": [
+     {
+      "libelle": "Plateforme de production comptable en ligne pour cabinets, revendiquant le dépassement de 200 000 dossiers gérés en mai 2025",
+      "poids": "majeur",
+      "source": "https://careers.myunisoft.fr/pages/notre-histoire"
+     },
+     {
+      "libelle": "Outils périphériques du cabinet : Dayboard (gestion interne), Dataviz, MyUnisoft Predict issu de l'acquisition d'Emersio",
+      "poids": "significatif",
+      "source": "https://careers.myunisoft.fr/pages/notre-histoire"
+     },
+     {
+      "libelle": "Limpyd — gestion commerciale destinée aux chefs d'entreprise clients des cabinets, lancée en 2022",
+      "poids": "significatif",
+      "source": "https://careers.myunisoft.fr/pages/notre-histoire"
+     },
+     {
+      "libelle": "Fonction de plateforme agréée de facturation électronique intégrée à l'environnement cabinet-entreprise",
+      "poids": "mineur",
+      "source": "https://myu.fr/"
+     }
+    ],
+    "poidsEconomique": {
+     "caGroupe": null,
+     "caEntiteFrancaise": {
+      "montantMEUR": 9.8,
+      "exercice": "2024",
+      "nature": "comptes_deposes",
+      "commentaire": "Comptes déposés pour l'exercice 2024 : 9,8 M€ de chiffre d'affaires et un résultat net négatif de 1,8 M€. Profil d'éditeur en phase d'investissement, financé par apports successifs : le capital social atteint 7 804 250 €, très au-dessus du niveau habituel d'une PME de cette taille, ce qui traduit sept années de levées auprès de cabinets actionnaires.",
+      "source": "https://annuaire-entreprises.data.gouv.fr/donnees-financieres/840143275",
+      "dateReleve": "2026-08-24"
+     },
+     "resultatNet": -1800000,
+     "effectifGroupe": null,
+     "effectifEntite": "100 à 199 salariés (INSEE, millésime 2023), 6 établissements dont 3 en activité, catégorie PME. Siège Immeuble Le Carré, 2 rue Georges Stephenson, 78180 Montigny-le-Bretonneux.",
+     "ventilationParActivite": {
+      "disponible": false,
+      "motif": "Aucune ventilation publiée par produit ni par module. L'acteur communique en volume de dossiers gérés, pas en chiffre d'affaires par ligne.",
+      "derniereVentilationConnue": null
+     }
+    },
+    "centralitePA": {
+     "indice": 2,
+     "niveau": "extension_naturelle",
+     "marqueProduitDediee": "MyUnisoft",
+     "entiteJuridiqueDediee": false,
+     "faisceauIndices": [
+      {
+       "signal": "Le métier est l'édition d'un outil de production comptable : la facture entrante et sortante est déjà la matière première du logiciel, l'agrément prolonge un flux existant",
+       "sens": "+",
+       "preuve": "https://annuaire-entreprises.data.gouv.fr/entreprise/840143275"
+      },
+      {
+       "signal": "L'acteur a lancé dès 2022 une solution de gestion commerciale destinée aux entreprises clientes des cabinets, ce qui prépositionnait l'émission de facture avant la réforme",
+       "sens": "+",
+       "preuve": "https://careers.myunisoft.fr/pages/notre-histoire"
+      },
+      {
+       "signal": "La chronologie publiée par l'acteur ne mentionne pas la réforme de la facturation électronique parmi ses jalons : les jalons cités sont les levées de fonds, les volumes de dossiers et les acquisitions",
+       "sens": "-",
+       "preuve": "https://careers.myunisoft.fr/pages/notre-histoire"
+      },
+      {
+       "signal": "Aucune marque produit distincte n'est donnée à la plateforme agréée, qui est présentée comme une fonction de l'environnement et non comme une offre autonome",
+       "sens": "-",
+       "preuve": "https://myu.fr/"
+      }
+     ],
+     "lecture": "Indice 2 : extension naturelle. L'agrément est cohérent avec le métier et utile au produit, mais il n'est pas le moteur : ce qui fait croître cet acteur, c'est le nombre de dossiers comptables migrés et le nombre de cabinets entrés au capital. La facturation électronique sécurise l'usage plutôt qu'elle ne crée un marché nouveau.",
+     "confiance": "moyenne"
+    },
+    "postureCommerciale": {
+     "valeur": "canal_indirect",
+     "preuve": "Le client direct est le cabinet d'expertise comptable, qui déploie ensuite l'environnement chez ses clients entreprises ; le formulaire public de l'acteur distingue explicitement trois qualités de visiteur, « TPE / PME », « Cabinet comptable » et « Éditeur partenaire », ce dernier attestant l'existence d'un canal éditeur. La particularité est que le canal et l'actionnariat se confondent : 125 cabinets d'expertise comptable étaient actionnaires fin 2024.",
+     "confiance": "haute"
+    },
+    "referencesClients": {
+     "nbCiteesSurSite": null,
+     "parSecteur": {},
+     "grandsComptes": [],
+     "referencesPAConfirmees": [],
+     "source": "Aucun logo client publié. Les seules références nominatives disponibles sont les quatre cabinets fondateurs cités par l'acteur dans sa propre chronologie — Recci, Eccentive, RSM et Exponens — mais ce sont des actionnaires fondateurs, pas des références commerciales, et ils ne sont pas comptés comme telles ici. La grandeur communiquée est un volume de dossiers comptables gérés, plus de 200 000 en mai 2025, qui ne mesure ni des entreprises raccordées à la plateforme agréée ni des factures (règle 80)."
+    },
+    "reputation": {
+     "volumeAvis": null,
+     "synthese": "Aucun relevé d'avis agrégés effectué dans cette passe. Signal public de nature différente : la progression des volumes publiée par l'acteur lui-même, de 3 900 dossiers en mai 2021 à plus de 200 000 en mai 2025, constitue une trajectoire d'adoption vérifiable dans le temps.",
+     "confiance": "non_qualifie"
+    },
+    "capaciteDeFrappe": {
+     "actionnaires": [
+      "HG Capital, actionnaire majoritaire depuis une levée de fonds de décembre 2024, aux côtés de 125 cabinets d'expertise comptable déjà actionnaires. Actionnariat d'origine : quatre cabinets fondateurs en 2018 (Recci, Eccentive, RSM, Exponens), rejoints par vagues successives lors de cinq levées de fonds entre 2019 et 2024, dont Drakarys en 2021."
+     ],
+     "typeActionnaire": "fonds_pe",
+     "financementRecent": "Cinq levées de fonds entre juillet 2019 et décembre 2024, la dernière faisant entrer HG Capital comme actionnaire majoritaire. Le capital social au registre s'élève à 7 804 250 €.",
+     "acquisitions": [
+      "Emersio, startup acquise en septembre 2024, à l'origine de l'offre MyUnisoft Predict",
+      "Sociétés éditrices des solutions Dayboard et Limpyd, acquises en mars 2025"
+     ],
+     "modeleTarifaire": "Aucun tarif public relevé : la commercialisation passe par la démonstration et le contrat cabinet.",
+     "tarifPublie": false,
+     "offreGratuite": false
+    },
+    "lectureConcurrentielle": "Le cas le plus singulier du lot : une plateforme agréée dont les clients sont les actionnaires. Cent vingt-cinq cabinets d'expertise comptable ont mis de l'argent dans l'outil qu'ils utilisent, avant qu'un fonds britannique n'en prenne la majorité fin 2024. Cette structure verrouille la base d'une manière qu'aucun argument commercial ne défait : un cabinet actionnaire ne migre pas. Pour l'offre portée par Fluxym, la conséquence n'est pas une confrontation directe — la cible reste la TPE et la PME servie par un cabinet — mais la disparition durable d'un vivier : plus de 200 000 dossiers comptables, dont les flux de facturation ont désormais une destination par défaut. À surveiller : l'arrivée d'un fonds majoritaire dans un actionnariat de praticiens crée une tension entre la logique de service à la profession et la logique de rendement, tension dont la résolution déterminera si cet acteur reste un outil de cabinets ou devient un éditeur comme les autres. Fluxym est un acteur du marché : ce référentiel est publié par un intégrateur qui distribue des solutions concurrentes, et cette lecture est une lecture de marché, pas une évaluation.",
+    "droitDeReponse": {
+     "signale": false,
+     "date": null,
+     "objet": null
+    }
+   }
   },
   {
    "nom": "MY-EDDY",
@@ -15970,7 +17252,7 @@
    "verticale": "generaliste",
    "logiquePositionnement": "Cohérent : Kinexo captait déjà les factures des clients du cabinet dans un coffre-fort documentaire ; l'agrément prolonge ce rôle de point d'entrée des factures reçues. Le suffixe « PDP » dans le nom d'inscription isole le service agréé au sein d'une gamme de portails, mais la distribution reste intégralement intermédiée par le cabinet d'expertise comptable. Aucune offre de socle pour éditeurs tiers publiée.",
    "anneeCreation": null,
-   "siren": null,
+   "siren": "834979387",
    "descriptionFiche": "MyKinexo est le « bureau digital » que Kinexo met à disposition des cabinets d'expertise comptable pour leurs clients : coffre-fort documentaire, dépôt de livrables avec approbation et signature électronique, conversations cabinet-client, suivi de l'avancement des missions, application mobile. Côté factures, la page produit met en avant des collecteurs automatiques de factures, la collecte email, des collecteurs sur les plateformes fournisseurs et une imprimante virtuelle mise à disposition du client, avec l'objectif affiché d'« anticiper la Factur-X et la digitalisation obligatoire des factures ». L'offre est vendue au cabinet, qui la déploie auprès de ses clients ; le nom d'inscription porte le suffixe PDP alors que le produit commercial est « myKinexo ».",
    "sourcesEnrichissement": [
     {
@@ -15996,31 +17278,83 @@
      "source": "https://www.kinexo.fr/mykinexo/",
      "dateReleve": "2026-08-20",
      "confiance": "faible"
+    },
+    {
+     "champ": "siren",
+     "source": "https://www.kinexo.fr/mentions-legales/",
+     "dateReleve": "2026-08-22",
+     "confiance": "haute",
+     "preuve": "Mentions légales de l’éditeur : « Le site kinexo.fr est édité par la société Nexcer SAS [...] 10 rue Alain Gerbault, 35000 Rennes, immatriculée au RCS de Rennes sous le numéro 834 979 387 ». Adresse concordante caractère pour caractère avec le siège INSEE ; ressort de Rennes cohérent (règle 61)."
+    },
+    {
+     "champ": "analyse360.poidsEconomique",
+     "source": "https://recherche-entreprises.api.gouv.fr/search?q=834979387",
+     "dateReleve": "2026-08-22",
+     "confiance": "haute",
+     "preuve": "Fiche ouverte du répertoire SIRENE : NEXCER, PME, code APE 58.29C, créée le 08/01/2018, un seul établissement, tranche d’effectif non renseignée. Comptes 2023 : chiffre d’affaires nul, résultat net de −662,7 k€."
+    },
+    {
+     "champ": "socleTechnique",
+     "source": "https://www.kinexo.fr/facture-electronique-mykinexo-rejoint-la-liste-officielle-des-pdp-immatriculees/",
+     "dateReleve": "2026-08-25",
+     "confiance": "non_qualifie"
     }
    ],
    "confiance": "partielle",
    "socleTechnique": {
-    "type": null,
+    "type": "inconnu",
     "operateurSocle": null,
-    "preuve": null,
-    "source": null,
+    "preuve": "Passage de non qualifié à inconnu. L'immatriculation est annoncée par Kinexo lui-même, éditeur à destination des cabinets d'expertise comptable, et relayée par des cabinets du réseau Cerfrance auprès de leurs clients : « MyKinexo a obtenu son immatriculation en tant que plateforme agréée dite PA ». Le communiqué décrit la portée réglementaire et la cible mais ne dit rien de l'origine du socle. Position dans la chaîne établie (canal cabinets), socle non établi.",
+    "source": "https://www.kinexo.fr/facture-electronique-mykinexo-rejoint-la-liste-officielle-des-pdp-immatriculees/",
     "confiance": "non_qualifie"
    },
    "fournisseurDeSocle": null,
    "modeDistributionSocle": [
     "via cabinet EC"
    ],
-   "groupeCapitalistique": null,
+   "groupeCapitalistique": "L’entité immatriculée est NEXCER (SIREN 834 979 387), qui exploite la marque MyKinexo. Son président inscrit au registre est la personne morale JFD CONSEIL ; la direction générale est assurée par Romain Passilly. Étage supérieur non ouvert à ce stade : le rattachement s’arrête au dernier niveau documenté (règle 42).",
    "relationCapitalistique": null,
    "partenariats": [],
    "lotsContributeurs": [
     "A",
-    "E6"
+    "E6",
+    "RECUP-SIREN-2",
+    "SOCLE-47"
    ],
    "natureEntite": "extension_demat",
    "perimetreFonctionnel": [
     "reception"
-   ]
+   ],
+   "raisonSociale": "NEXCER",
+   "dateCreation": "2018-01-08",
+   "categorieEntreprise": "PME",
+   "activitePrincipale": "58.29C",
+   "confianceIdentite": "haute",
+   "dirigeants": [
+    {
+     "nom": "JFD CONSEIL",
+     "qualite": "Président de SAS",
+     "type": "personne morale"
+    },
+    {
+     "nom": "PASSILLY ROMAIN NICOLAS",
+     "qualite": "Directeur Général",
+     "type": "personne physique"
+    }
+   ],
+   "analyse360": {
+    "poidsEconomique": {
+     "caEntiteFrancaise": {
+      "montantMEUR": 0,
+      "exercice": "2023",
+      "nature": "comptes_deposes",
+      "commentaire": "Comptes déposés par l’entité immatriculée NEXCER (SIREN 834 979 387) : la source ouverte restitue un chiffre d’affaires nul pour l’exercice 2023, avec un résultat net négatif. Aucune tranche d’effectif n’est renseignée au répertoire.",
+      "source": "https://recherche-entreprises.api.gouv.fr/search?q=834979387",
+      "dateReleve": "2026-08-22"
+     },
+     "resultatNet": -662728
+    }
+   }
   },
   {
    "nom": "MySupply Aps",
@@ -16112,7 +17446,8 @@
      "source": "Liste DGFiP ; https://www.chaintrust.io/ (« plateforme agréée du groupe Visma ») ; communiqué Visma de janvier 2024 sur l'acquisition de Chaintrust ; comptes danois de mySupply ApS (CVR 25894375) rattachés à VISMA DANMARK HOLDING A/S",
      "dateReleve": "2026-08-22",
      "confiance": "haute"
-    }
+    },
+    "https://www.visma.com/newsroom/visma-acquires-majority-stake-in-chaintrust"
    ],
    "confiance": "qualifiee",
    "socleTechnique": {
@@ -16132,6 +17467,7 @@
     "D",
     "E11",
     "G-MYSUPPLY",
+    "H2-88-CONTROLE-ETRANGER",
     "H2-LIAISONS"
    ],
    "reseaux": [
@@ -16278,15 +17614,15 @@
     }
    },
    "immatriculationsLiees": {
-    "groupe": "VISMA (fonds Hg)",
+    "groupe": "Visma",
     "entrees": [
      "CHAINTRUST by Visma",
      "MySupply Aps"
     ],
     "type": "deux_offres_deux_cibles",
-    "lecture": "Le groupe adresse les deux extrémités du marché avec deux agréments distincts : Chaintrust par les cabinets d'expertise comptable et leurs clients très petites et petites entreprises, MySupply par les acheteurs publics et grandes organisations nordiques. Visma détient par ailleurs l'éditeur comptable français Inqom, non immatriculé.",
-    "source": "Liste DGFiP ; https://www.chaintrust.io/ (« plateforme agréée du groupe Visma ») ; communiqué Visma de janvier 2024 sur l'acquisition de Chaintrust ; comptes danois de mySupply ApS (CVR 25894375) rattachés à VISMA DANMARK HOLDING A/S",
-    "dateReleve": "2026-08-22"
+    "lecture": "Seconde immatriculation du groupe norvégien Visma au référentiel, sur une cible et un pays différents de ceux de CHAINTRUST by Visma : le domaine des achats au Danemark d'un côté, le canal du cabinet d'expertise comptable en France de l'autre. Le groupe a annoncé le regroupement de cette entité avec Inexchange, Maventa et efacto sous la marque Inexchange à compter du 01/10/2026 : la dénomination portée au référentiel est donc susceptible de ne plus correspondre à la marque commerciale après cette date, ce qui devra être vérifié au relevé DGFiP suivant.",
+    "source": "Communiqués du groupe Visma",
+    "dateReleve": "2026-08-25"
    }
   },
   {
@@ -16473,6 +17809,13 @@
      "source": "https://neotimo.com/",
      "dateReleve": "2026-08-20",
      "confiance": "non_qualifie"
+    },
+    {
+     "champ": "siren",
+     "source": "https://neotimo.com/",
+     "dateReleve": "2026-08-22",
+     "confiance": "non_qualifie",
+     "preuve": "Site inaccessible à toute lecture automatisée : la racine et les chemins /mentions-legales, /legal et www.neotimo.com renvoient une erreur serveur 500 à chaque requête du 22/08/2026, et l’archive publique disponible ne contient pas de page légale. Le SIREN reste à établir : il n’est pas déduit du nom commercial (règle 24)."
     }
    ],
    "confiance": "amorcee",
@@ -16490,7 +17833,8 @@
    "partenariats": [],
    "lotsContributeurs": [
     "A",
-    "E6"
+    "E6",
+    "RECUP-SIREN-2"
    ]
   },
   {
@@ -19356,15 +20700,21 @@
      "url": "https://www.pappers.fr/entreprise/seven-topco-888803988",
      "libelle": "Fiche registre et comptes sociaux et consolidés de SEVEN TOPCO (RCS Montpellier), republiés par Pappers",
      "dateReleve": "2026-08-22"
+    },
+    {
+     "champ": "socleTechnique",
+     "source": "https://www.teogest.com/ ; https://www.septeo.com/fr/articles/plateforme-agreee-facturation-electronique-septeo",
+     "dateReleve": "2026-08-25",
+     "confiance": "moyenne"
     }
    ],
    "confiance": "partielle",
    "socleTechnique": {
-    "type": "inconnu",
-    "operateurSocle": null,
-    "preuve": "La page 'PA SEPTEO' decrit l'offre et ses fonctions mais ne precise pas si le socle d'echange est developpe par Septeo ou opere par un tiers.",
-    "source": "https://www.ingeneo.septeo.com/plateforme-agreee-facturation-electronique",
-    "confiance": "non_qualifie"
+    "type": "propre",
+    "operateurSocle": "Groupe Septeo",
+    "preuve": "Preuve par un tiers interne au groupe : Teogest, solution Septeo destinée aux experts-comptables, déclare « En tant que solution du groupe Septeo, Teogest s'appuie sur la Plateforme Agréée de facturation électronique du groupe ». Le groupe est par ailleurs Certified Access Point Peppol en propre. Le socle est donc mutualisé entre les marques du groupe et opéré par lui, ce qui fait de Septeo un fournisseur de socle interne pour son propre portefeuille de logiciels métier.",
+    "source": "https://www.teogest.com/ ; https://www.septeo.com/fr/articles/plateforme-agreee-facturation-electronique-septeo",
+    "confiance": "moyenne"
    },
    "fournisseurDeSocle": null,
    "modeDistributionSocle": [
@@ -19380,7 +20730,8 @@
     "D",
     "E7",
     "H1-LOT1C",
-    "H1-LOT1D"
+    "H1-LOT1D",
+    "SOCLE-47"
    ],
    "raisonSociale": "SEPTEO",
    "dateCreation": "2012-12-19",
@@ -20123,15 +21474,21 @@
      "source": "https://www.shine.fr/facturation-electronique",
      "dateReleve": "2026-08-20",
      "confiance": "faible"
+    },
+    {
+     "champ": "socleTechnique",
+     "source": "https://shine.co/fr/legal/terms (conditions d'utilisation, art. 1, 4 et 8.9)",
+     "dateReleve": "2026-08-25",
+     "confiance": "moyenne"
     }
    ],
    "confiance": "partielle",
    "socleTechnique": {
-    "type": "inconnu",
-    "operateurSocle": null,
-    "preuve": "Shine revendique le statut de Plateforme Agreee et indique que « notre Plateforme Agreee est deja integree a Shine », sans documenter l'operateur du socle d'echange. Aucun element public ne permet de trancher entre socle propre et socle tiers.",
-    "source": "https://www.shine.fr/facturation-electronique",
-    "confiance": "faible"
+    "type": "propre",
+    "operateurSocle": "Shine Denmark ApS",
+    "preuve": "Les conditions générales d'utilisation, document contractuel opposable, nomment l'entité qui opère la plateforme : « des fonctionnalités de facturation électronique fournies par Shine Denmark ApS en qualité de Plateforme Agréée (PA) immatriculée auprès de l'administration fiscale française sous le numéro 0147 ». Réserve : les CGU établissent l'entité porteuse et opératrice de l'immatriculation, elles n'établissent pas l'origine du code du socle d'échange. L'entité porteuse est danoise alors que le service est commercialisé sous une marque française.",
+    "source": "https://shine.co/fr/legal/terms (conditions d'utilisation, art. 1, 4 et 8.9)",
+    "confiance": "moyenne"
    },
    "fournisseurDeSocle": null,
    "modeDistributionSocle": [],
@@ -20140,7 +21497,8 @@
    "partenariats": [],
    "lotsContributeurs": [
     "A",
-    "E12"
+    "E12",
+    "SOCLE-47"
    ],
    "natureEntite": "diversification",
    "perimetreFonctionnel": [
@@ -20861,7 +22219,7 @@
    "verticale": "generaliste",
    "logiquePositionnement": "Pure-player technique de la reforme : aucune activite anterieure de gestion ou de comptabilite, l'offre est un service d'infrastructure vendu au volume. La double distribution, compte en libre-service pour les petites structures et tarif de gros pour les editeurs integrateurs, en fait un fournisseur de socle assume, meme si son nom reste visible a l'inscription du client final.",
    "anneeCreation": null,
-   "siren": null,
+   "siren": "853322915",
    "descriptionFiche": "SUPER PDP est une Plateforme Agreee francaise dont l'offre se resume a un compte en ligne et a une API : positionnement affiche de 'plateforme agreee la plus simple et la moins chere', gratuite jusqu'a 1 000 factures par mois puis facturee a la facture avec des paliers degressifs. Le perimetre couvre emission, reception, statuts du cycle de vie, e-reporting de facturation et de transactions et paiements, annuaire, archivage dix ans et interconnexion Peppol. La plateforme est developpee en interne, hebergee en France, certifiee ISO 27001 (LNE, aout 2025), Peppol AP et SMP (fevrier 2025), avec une immatriculation definitive obtenue le 22 decembre 2025. La FAQ tarifaire indique que les editeurs de logiciels de facturation, d'ERP ou de caisse peuvent integrer les services en marque grise au tarif de gros, la marque blanche etant proposee sur demande.",
    "sourcesEnrichissement": [
     {
@@ -20924,6 +22282,20 @@
      "source": "https://www.superpdp.tech/",
      "dateReleve": "2026-08-20",
      "confiance": "haute"
+    },
+    {
+     "champ": "siren",
+     "source": "https://www.superpdp.tech/legal/16",
+     "dateReleve": "2026-08-22",
+     "confiance": "haute",
+     "preuve": "Informations légales de l’éditeur : « SUPER G, SAS au capital de 50 000 €, dont le siège social est situé 6 rue de la Dhuis, 75020 Paris, immatriculée au RCS de Paris sous le numéro 853 322 915 ». Adresse concordante caractère pour caractère avec le siège INSEE ; ressort de Paris cohérent (règle 61)."
+    },
+    {
+     "champ": "trancheEffectif",
+     "source": "https://recherche-entreprises.api.gouv.fr/search?q=853322915",
+     "dateReleve": "2026-08-22",
+     "confiance": "haute",
+     "preuve": "Fiche ouverte du répertoire SIRENE : SUPER G, PME, code APE 62.01Z, créée le 01/09/2019, 3 à 5 salariés (millésime 2023), un seul établissement. Aucun compte n’est restitué par la source ouverte."
     }
    ],
    "confiance": "qualifiee",
@@ -20946,7 +22318,8 @@
    "lotsContributeurs": [
     "A",
     "D",
-    "E7"
+    "E7",
+    "RECUP-SIREN-2"
    ],
    "reseaux": [
     "peppol_ap"
@@ -20956,6 +22329,24 @@
     "emission",
     "reception",
     "ereporting"
+   ],
+   "raisonSociale": "SUPER G",
+   "dateCreation": "2019-09-01",
+   "trancheEffectif": "3-5",
+   "categorieEntreprise": "PME",
+   "activitePrincipale": "62.01Z",
+   "confianceIdentite": "haute",
+   "dirigeants": [
+    {
+     "nom": "OTTENWAELTER MARTIN",
+     "qualite": "Président de SAS",
+     "type": "personne physique"
+    },
+    {
+     "nom": "PONTET TRISTAN PHILIPPE",
+     "qualite": "Directeur Général",
+     "type": "personne physique"
+    }
    ]
   },
   {
@@ -21550,7 +22941,16 @@
      "source": "https://go.sellsy.com/partenaires",
      "dateReleve": "2026-08-20",
      "confiance": "moyenne"
-    }
+    },
+    "https://annuaire-entreprises.data.gouv.fr/entreprise/509961074",
+    "https://annuaire-entreprises.data.gouv.fr/donnees-financieres/509961074",
+    "https://www.teamsystem.com/il-gruppo/",
+    "https://cosasposta.substack.com/p/teamsystem-ha-un-sacco-di-debito",
+    "https://www.anitec-assinform.it/i-nostri-associati/aggiornamenti/comunicati/teamsystem-accelera-su-ai-e-internazionalizzazione-e-spinge-i-ricavi-a-1-15-miliardi.kl",
+    "https://www.teamsystem.com/press/teamsystem-acquisisce-il-controllo-di-acd-groupe/",
+    "https://www.confindustria.it/pubblicazioni/nota-metodologica-rtt-index-un-nuovo-indicatore-real-time-di-attivita-basato-sul-fatturato",
+    "https://www.acd-groupe.fr/facture-electronique/",
+    "https://annuaire-entreprises.data.gouv.fr/entreprise/528553654"
    ],
    "confiance": "qualifiee",
    "socleTechnique": {
@@ -21569,6 +22969,8 @@
    "relationCapitalistique": null,
    "partenariats": [],
    "lotsContributeurs": [
+    "360-TEAMSYSTEM",
+    "360-VILLAGE-CONNECTE",
     "A",
     "B2",
     "E8"
@@ -21587,7 +22989,157 @@
    ],
    "solutionsCompatiblesPartenaires": [
     "TeamSystem Facture (TeamSystem France) — « TeamSystem Facture est relié à la PA de Sellsy »"
-   ]
+   ],
+   "analyse360": {
+    "metierPrincipal": "Édition de logiciels de gestion pour petites et moyennes entreprises et pour cabinets libéraux, avec extension revendiquée vers les services financiers. L'entité immatriculée est SELLSY (SIREN 509 961 074), SAS créée le 16/01/2009, siège 22 rue Fleming à La Rochelle, APE 58.29C, 100 à 199 salariés. Elle appartient au groupe italien TeamSystem, fondé le 30/07/1979 à l'initiative de Giovanni Ranocchi, qui déclare 1,15 Md€ de chiffre d'affaires en 2025, plus de 3 millions de clients et plus de 5 000 salariés. TeamSystem n'est pas un éditeur qui se met en conformité : c'est l'acteur qui s'est construit sur la réforme italienne de la facturation électronique et qui applique en France le même schéma.",
+    "activites": [
+     {
+      "libelle": "Logiciels de gestion pour très petites entreprises et indépendants (division Micro / Small Business), 302 M€ de chiffre d'affaires en 2024 selon les comptes rendus aux porteurs obligataires, en croissance de 67 % dont 24,5 % en organique, marge brute d'environ 85 %",
+      "poids": "majeur",
+      "source": "https://cosasposta.substack.com/p/teamsystem-ha-un-sacco-di-debito"
+     },
+     {
+      "libelle": "Logiciels pour cabinets libéraux — experts-comptables, conseils du travail, avocats — cœur historique du groupe en Italie et cible de son développement français",
+      "poids": "majeur",
+      "source": "https://www.teamsystem.com/il-gruppo/"
+     },
+     {
+      "libelle": "Solutions de gestion pour entreprises de taille moyenne et grande (division Enterprise), 191 M€ en 2024, croissance organique de 5,3 %",
+      "poids": "significatif",
+      "source": "https://cosasposta.substack.com/p/teamsystem-ha-un-sacco-di-debito"
+     },
+     {
+      "libelle": "Services fintech adossés aux flux de facturation : notation des PME, financement, moyens de paiement — extension explicitement présentée comme une monétisation de la donnée de facturation",
+      "poids": "significatif",
+      "source": "https://www.teamsystem.com/il-gruppo/"
+     },
+     {
+      "libelle": "Verticaux et briques périphériques : ressources humaines, e-commerce, cybersécurité, restitution de données (ClicData en France)",
+      "poids": "significatif",
+      "source": "https://www.teamsystem.com/il-gruppo/"
+     },
+     {
+      "libelle": "Sellsy — suite française de gestion commerciale et de facturation (CRM, devis, facturation, trésorerie, précomptabilité), plateforme agréée pour la réforme française",
+      "poids": "significatif",
+      "source": "https://annuaire-entreprises.data.gouv.fr/entreprise/509961074"
+     }
+    ],
+    "poidsEconomique": {
+     "caGroupe": {
+      "montantMEUR": 1150,
+      "exercice": "2025",
+      "nature": "communique_financier",
+      "commentaire": "Chiffre d'affaires du groupe TeamSystem : 1,15 Md€ en 2025, en croissance de 12 % en organique, après 1 Md€ en 2024 (+19 %) — le groupe a franchi le milliard en 2024. EBITDA normalisé de 579 M€ en 2025, soit une marge de 50,2 %, après 468,8 M€ et 46,5 % en 2024. Revenu récurrent annuel supérieur à 1 Md€, part récurrente d'environ 88 %. Contrepartie de ce profil : un endettement de l'ordre de 3,4 Md€ relevé en juillet 2025, soit près de trois fois le chiffre d'affaires et environ six fois l'EBITDA, alimenté par des émissions obligataires dont une partie a financé une distribution aux actionnaires. Ces éléments proviennent d'un communiqué relayé par la presse professionnelle et d'une analyse indépendante citant les rapports adressés aux porteurs obligataires : le groupe n'étant pas coté, il n'existe pas de comptes consolidés publiés en accès libre, et la donnée d'endettement est signalée comme de confiance moyenne.",
+      "source": "https://www.anitec-assinform.it/i-nostri-associati/aggiornamenti/comunicati/teamsystem-accelera-su-ai-e-internazionalizzazione-e-spinge-i-ricavi-a-1-15-miliardi.kl",
+      "dateReleve": "2026-08-25"
+     },
+     "caEntiteFrancaise": {
+      "montantMEUR": 16.72,
+      "exercice": "2024",
+      "nature": "comptes_deposes",
+      "commentaire": "Comptes de SELLSY clos le 30/12/2024 : 16,72 M€ de chiffre d'affaires contre 8,42 M€ l'exercice précédent, soit un quasi-doublement, pour une marge brute de 11,77 M€ et un résultat net négatif de 826,3 k€ (contre −553,8 k€). Deux réserves. D'une part le portail public d'annuaire des entreprises ne restitue aucun indicateur financier pour cette entité : les montants proviennent de republieurs de comptes déposés, relevés le 25/08/2026. D'autre part une progression de 98,5 % en un exercice ne s'explique pas par la seule croissance commerciale : elle suggère une opération de périmètre, non documentée dans cette passe, et le rapprochement avec le fait que l'établissement siège a été recréé le 05/12/2025 pour 9 établissements dont 2 seulement en activité renforce cette hypothèse sans l'établir. Le chiffre est publié tel quel, avec sa réserve.",
+      "source": "https://annuaire-entreprises.data.gouv.fr/donnees-financieres/509961074",
+      "dateReleve": "2026-08-25"
+     },
+     "resultatNet": -826300,
+     "effectifGroupe": "Plus de 5 000 salariés, dont plus de 1 000 ingénieurs logiciels travaillant en mode agile dans 80 % des cas (site du groupe, relevé le 25/08/2026). Un plan d'investissement de 1 Md€ en recherche et développement sur cinq ans a été annoncé en 2023.",
+     "effectifEntite": "100 à 199 salariés (INSEE, millésime 2023) pour SELLSY, 9 établissements dont 2 en activité, capital social 50 532 €. L'INSEE classe l'entité en « Petite ou Moyenne Entreprise » : cette catégorie n'est consolidée qu'au niveau des groupes français, si bien qu'une filiale de groupe étranger apparaît à sa taille propre. Le contraste avec FIDUCIAL CLOUD, classée « Grande Entreprise » pour 20 à 49 salariés, illustre la limite de cet indicateur.",
+     "ventilationParActivite": {
+      "disponible": true,
+      "motif": "Ventilation partielle et indirecte. Le groupe ne publie pas de compte de résultat par division, mais des chiffres par division circulent via les rapports adressés aux porteurs obligataires, repris par une analyse indépendante : division Micro 302 M€ et division Enterprise 191 M€ en 2024, sur un total d'environ 1 Md€. Cette ventilation n'isole pas l'activité de facturation électronique et n'isole pas la France : elle est retenue telle quelle, sans être complétée ni estimée (règles 25 et 74).",
+      "derniereVentilationConnue": "Exercice 2024 : division Micro 302 M€ (+67 % dont +24,5 % en organique, marge brute environ 85 %), division Enterprise 191 M€ (+5,3 % en organique). Le solde, non ventilé publiquement, correspond aux cabinets libéraux, à la fintech et aux verticaux. Source : analyse indépendante citant les rapports aux porteurs obligataires, relevée le 25/08/2026."
+     }
+    },
+    "centralitePA": {
+     "indice": 3,
+     "niveau": "axe_strategique",
+     "marqueProduitDediee": "Sellsy (aucune marque distincte n'est donnée à la fonction de plateforme agréée)",
+     "entiteJuridiqueDediee": false,
+     "faisceauIndices": [
+      {
+       "signal": "La facturation électronique n'est pas une fonction périphérique du groupe mais sa matière première : plus de 500 millions de factures électroniques transitent chaque année sur ses plateformes, pour plus de 1 100 milliards d'euros de transactions",
+       "sens": "+",
+       "preuve": "https://www.teamsystem.com/il-gruppo/"
+      },
+      {
+       "signal": "La densité de cette position est telle que Confindustria, la principale organisation patronale italienne, construit un indicateur d'activité économique en temps réel à partir des données de facturation de TeamSystem : c'est une preuve externe et institutionnelle de centralité, indépendante du discours de l'acteur",
+       "sens": "+",
+       "preuve": "https://www.confindustria.it/pubblicazioni/nota-metodologica-rtt-index-un-nuovo-indicatore-real-time-di-attivita-basato-sul-fatturato"
+      },
+      {
+       "signal": "Le groupe construit en France un ensemble cohérent par acquisitions successives — Sellsy pour la gestion commerciale, Clémentine pour l'expertise comptable en ligne, ClicData pour la donnée, ACD Groupe pour le logiciel de cabinet — dont l'assemblage recompose exactement le dispositif qui lui a réussi en Italie",
+       "sens": "+",
+       "preuve": "https://www.teamsystem.com/press/teamsystem-acquisisce-il-controllo-di-acd-groupe/"
+      },
+      {
+       "signal": "Les services fintech du groupe (notation, financement, paiement) sont adossés aux flux de facturation : la plateforme n'est pas une fin, c'est le capteur qui alimente une seconde ligne de revenu",
+       "sens": "+",
+       "preuve": "https://www.teamsystem.com/il-gruppo/"
+      },
+      {
+       "signal": "Aucune marque produit distincte n'est donnée à la plateforme agréée française, présentée comme une fonction de Sellsy et non comme une offre autonome, et l'entité immatriculée ne pèse que 16,72 M€ face à 1,15 Md€ de groupe",
+       "sens": "-",
+       "preuve": "https://annuaire-entreprises.data.gouv.fr/entreprise/509961074"
+      }
+     ],
+     "lecture": "Indice 3 : axe stratégique, avec une double lecture assumée (règle 11f). Au niveau de l'entité immatriculée, la plateforme agréée est l'extension réglementaire d'une suite de gestion commerciale française : lue seule, Sellsy justifierait un indice 2. Au niveau du groupe qui la détient, la facturation électronique est le socle du modèle — construit sur l'obligation italienne, prolongé en services financiers, et répliqué en France par un build-up dont le calendrier suit celui de la réforme. C'est cette seconde lecture qui détermine l'indice, parce que c'est elle qui détermine les moyens engagés. L'indice ne monte pas à 4 : le groupe reste un éditeur de gestion généraliste, dont la majorité du chiffre d'affaires provient de logiciels métier et non de la facturation.",
+     "confiance": "haute"
+    },
+    "postureCommerciale": {
+     "valeur": "conquete_directe",
+     "preuve": "Sellsy pratique une acquisition directe en ligne, en libre-service, avec des tarifs publiés à partir d'environ 29 € HT par utilisateur et par mois et une offre d'entrée plafonnée en nombre de factures. La base revendiquée varie selon les sources et les unités : plus de 50 000 utilisateurs sur le site de l'acteur, 18 000 entreprises clientes pour 48 000 utilisateurs selon une fiche de comparateur logiciel, plus de 65 000 entreprises selon un comparateur de plateformes agréées — trois chiffres relevés le 25/08/2026 et laissés côte à côte. Un basculement est toutefois engagé : l'acquisition du contrôle d'ACD Groupe en avril 2026 apporte au groupe 3 500 cabinets d'expertise comptable et environ 30 000 utilisateurs, soit un canal indirect de taille industrielle qui n'existait pas dans le périmètre français. La posture retenue qualifie l'entité immatriculée aujourd'hui ; elle est susceptible de changer.",
+     "confiance": "haute"
+    },
+    "referencesClients": {
+     "nbCiteesSurSite": null,
+     "parSecteur": {},
+     "grandsComptes": [],
+     "referencesPAConfirmees": [],
+     "source": "Aucun relevé de logos n'a pu être effectué sur le site de l'acteur : les pages de références et la page produit dédiée à la réforme sont rendues côté client et ne restituent aucun contenu exploitable par récupération directe. Des noms de clients circulent sur des sites tiers de comparaison logicielle, mais ils ne sont pas publiés par l'acteur lui-même et ne sont donc pas retenus ici (le référentiel ne compte que les références que l'acteur assume sur son propre site). Le relevé des logos par capture de la page rendue est identifié comme reste à faire. Aucune référence n'est présentée par l'acteur comme cliente de l'activité agréée française."
+    },
+    "reputation": {
+     "volumeAvis": 172,
+     "synthese": "Volume d'avis substantiel et note globalement favorable sur les plateformes d'avis grand public : environ 4,3 sur 5 pour 167 avis relevés en juin 2026 sur une plateforme d'avis vérifiés, 172 avis à la date du présent relevé, et un volume inférieur à cent avis sur un comparateur logiciel spécialisé. Ces agrégats portent sur la suite Sellsy dans son ensemble, pas sur la fonction de plateforme agréée, dont le déploiement est trop récent pour être évalué séparément. Aucun avis individuel n'est reproduit et aucune donnée personnelle n'est reprise.",
+     "confiance": "moyenne"
+    },
+    "capaciteDeFrappe": {
+     "actionnaires": [
+      "Hellman & Friedman, fonds d'investissement américain, actionnaire de contrôle du groupe TeamSystem depuis 2016, réinvesti en 2021 lors d'une opération entre ses propres fonds sur une valorisation d'environ 2,9 Md€",
+      "Silver Lake, entré en 2023 au capital comme actionnaire minoritaire pour environ 600 M€, sur une valorisation supérieure à 6 Md€",
+      "Investisseurs minoritaires additionnels cités par les analyses de place : le fonds souverain d'Abou Dhabi ADIA et CapitalG, véhicule d'investissement de croissance d'Alphabet",
+      "Actionnaires antérieurs, à titre historique : Bain Capital, puis HgCapital jusqu'à la reprise par Hellman & Friedman",
+      "Lecture complémentaire : l'entité française immatriculée est par ailleurs, structurellement, la filiale d'un groupe étranger — les deux lectures sont exactes, la valeur retenue qualifie la nature du contrôle ultime"
+     ],
+     "typeActionnaire": "fonds_pe",
+     "financementRecent": "Émissions obligataires de grande ampleur en juillet 2025, pour un endettement total de l'ordre de 3,4 Md€, dont une partie a financé une distribution aux actionnaires plafonnée à environ 700 M€. Notation de crédit B- avec perspective stable auprès d'une agence internationale. Des discussions de place font état d'une valorisation potentielle supérieure à 8 Md€. Ces éléments proviennent d'analyses de place et non d'une communication du groupe : confiance moyenne.",
+     "acquisitions": [
+      "Plus de soixante-dix acquisitions réalisées depuis le changement de gouvernance de 2000, dont Fatture in Cloud, Danea Soft, AliasLab et MBM Italia en Italie",
+      "France : Sellsy (gestion commerciale), Clémentine (expertise comptable en ligne), ClicData (restitution de données)",
+      "France : prise de contrôle d'ACD Groupe annoncée en avril 2026, apportant 3 500 cabinets d'expertise comptable, environ 30 000 utilisateurs et 37 M€ de chiffre d'affaires",
+      "International : Software del Sol en Espagne, Green Invoice en Israël, Mikrogrup et DIA Yazılım en Turquie"
+     ],
+     "modeleTarifaire": "Tarification publiée, en libre-service, par utilisateur et par mois, à partir d'environ 29 € HT, avec une offre d'entrée plafonnée en volume de factures. Modèle très majoritairement récurrent, environ 88 % du chiffre d'affaires du groupe, avec un revenu récurrent annuel dépassant le milliard d'euros. La capacité à consentir des prix bas est réelle sur le segment micro, où la marge brute déclarée approche 85 %, mais elle est encadrée par le service d'une dette de 3,4 Md€.",
+     "tarifPublie": true,
+     "offreGratuite": false
+    },
+    "lectureConcurrentielle": "C'est l'angle mort le plus important identifié depuis le début du chantier. Aucune des grilles de lecture habituelles ne fait apparaître TeamSystem : le référentiel ne le connaît que sous le nom d'une PME rochelaise de 16,72 M€ de chiffre d'affaires, classée PME par l'INSEE, et rien dans cette fiche ne laissait deviner un groupe de 1,15 Md€ appuyé sur 3 millions de clients et 500 millions de factures électroniques par an. La ressemblance avec le cas 74SOFTWARE est frappante — un poids lourd invisible parce que mal nommé au registre — mais la nature du risque est ici tout autre. TeamSystem est le seul acteur du référentiel qui a déjà fait, dans son pays, exactement ce que la réforme française rend possible : partir d'une obligation de facturation électronique, capter le flux de plusieurs millions d'entreprises, puis monétiser ce flux en services financiers. Il ne découvre pas le sujet, il le rejoue. Deux enseignements pour l'offre portée par Fluxym. Premier point, la confrontation frontale sur le segment ETI et grands comptes n'est pas immédiate : la division Enterprise ne pèse que 191 M€ sur 1 Md€ et croît lentement, 5,3 % en organique, alors que la division micro croît de 24,5 %. La menace de court terme est donc par le bas, sur la PME, avec des prix que 85 % de marge brute autorisent à comprimer. Second point, et c'est le plus structurant : la prise de contrôle d'ACD Groupe en avril 2026 branche ce groupe sur 3 500 cabinets d'expertise comptable français. Rapproché du lot précédent, cela signifie qu'un acteur d'un milliard d'euros vient de s'acheter l'accès au canal comptable français, celui-là même dont il a été établi qu'il tranche la question de la plateforme avant qu'elle ne soit posée. Le point de vigilance à surveiller est le levier : trois fois le chiffre d'affaires de dette, environ six fois l'EBITDA, et une distribution aux actionnaires financée par emprunt — une structure qui impose une discipline de prix et de croissance, et qui peut tout aussi bien pousser à l'agressivité commerciale qu'à la hausse des tarifs sur base installée. Fluxym est un acteur du marché : ce référentiel est publié par un intégrateur qui distribue des solutions concurrentes, et cette lecture est une lecture de marché, pas une évaluation.",
+    "droitDeReponse": {
+     "signale": false,
+     "date": null,
+     "objet": null
+    }
+   },
+   "immatriculationsLiees": {
+    "groupe": "TeamSystem — deux voies d'accès au marché français des plateformes agréées",
+    "type": "alliance_industrielle",
+    "entrees": [
+     "TeamSystem Sellsy",
+     "LE VILLAGE CONNECTE"
+    ],
+    "lecture": "Le groupe italien TeamSystem est présent deux fois dans le référentiel, par deux mécanismes différents. En direct : il détient SELLSY (SIREN 509 961 074), qui porte l'immatriculation sous l'entrée « TeamSystem Sellsy ». Indirectement : il a annoncé en avril 2026 avoir pris le contrôle d'ACD Groupe (SIREN 528 553 654), lequel est l'un des trois membres — avec RCA et COAXIS ASP — de l'alliance qui porte l'immatriculation du VILLAGE CONNECTÉ. ACD ne porte donc aucune immatriculation en propre, mais son acquisition fait entrer TeamSystem dans le tour de table d'une seconde plateforme agréée française. Le degré d'influence effectif de TeamSystem sur les décisions de cette alliance n'est pas établi et n'est pas supposé : seuls les deux faits qui composent la liaison sont documentés, la composition de l'alliance publiée par l'un de ses membres et la prise de contrôle publiée par l'acquéreur (règle 29).",
+    "source": "Communiqué de presse TeamSystem sur la prise de contrôle d'ACD Groupe ; page « facture électronique » d'ACD Groupe pour la composition de l'alliance LE VILLAGE CONNECTÉ",
+    "dateReleve": "2026-08-25"
+   }
   },
   {
    "nom": "TENOR",
@@ -23666,7 +25218,7 @@
    "verticale": "generaliste",
    "logiquePositionnement": "Cohérent sur le principe — un éditeur de facturation pour micro-entreprises et TPE ne peut pas laisser sortir le flux de son outil — mais le dossier technique est le moins documenté du lot : aucune page ne détaille l'architecture de la plateforme agréée, l'opérateur du socle, les certifications ou le calendrier d'immatriculation. La distribution par les cabinets comptables constitue en revanche un canal indirect clair, proche de la logique portail expert-comptable, sans pour autant constituer une revente de socle à des éditeurs tiers.",
    "anneeCreation": null,
-   "siren": null,
+   "siren": "880286232",
    "descriptionFiche": "Éditeur d'un logiciel de facturation en ligne orienté petites structures — « PME, TPE, auto-entrepreneurs » — avec devis, gestion de stock, application mobile et export des écritures comptables. Le logiciel est annoncé comme étant lui-même plateforme agréée, cette brique prenant en charge la conversion au format structuré, la transmission et l'e-reporting des ventes B2C et des transactions internationales. Second canal de distribution assumé : une offre réservée aux cabinets comptables, où le cabinet bénéficie d'un tarif préférentiel, accède aux pièces de ses clients et peut les refacturer — « rien ne vous empêche de facturer éventuellement vos clients ». Conformité à la loi anti-fraude à la TVA et compatibilité Chorus Pro mises en avant, avec une politique tarifaire promotionnelle visible.",
    "sourcesEnrichissement": [
     {
@@ -23698,27 +25250,55 @@
      "source": "https://vosfactures.fr/comptables",
      "dateReleve": "2026-08-20",
      "confiance": "haute"
+    },
+    {
+     "champ": "siren",
+     "source": "https://vosfactures.fr/traitement-donnees",
+     "dateReleve": "2026-08-22",
+     "confiance": "haute",
+     "preuve": "Aucune page de mentions légales ni de CGV n’est accessible sur le domaine — toutes les URL testées renvoient la même page de consentement. La page de traitement des données nomme l’entité responsable : « Vos données sont traitées, dans le respect de la réglementation en vigueur, par FACTUALI SAS ». Le répertoire ne contient qu’une seule entité de cette dénomination."
+    },
+    {
+     "champ": "dirigeants",
+     "source": "https://recherche-entreprises.api.gouv.fr/search?q=FACTUALI",
+     "dateReleve": "2026-08-22",
+     "confiance": "haute",
+     "preuve": "Recherche au répertoire SIRENE sur la dénomination nommée par l’éditeur : un seul résultat, FACTUALI (SIREN 880 286 232), PME, code APE 63.11Z (traitement de données, hébergement), créée le 18/11/2019, un établissement, 1 à 2 salariés, présidente Justine Chloé Ghelfi."
+    },
+    {
+     "champ": "socleTechnique",
+     "source": "https://www.infos-pa.com/plateformes/vosfactures",
+     "dateReleve": "2026-08-25",
+     "confiance": "faible"
+    },
+    {
+     "champ": "groupeCapitalistique",
+     "source": "https://www.infos-pa.com/plateformes/vosfactures (annuaire tiers, à corroborer)",
+     "dateReleve": "2026-08-25",
+     "confiance": "faible"
     }
    ],
    "confiance": "partielle",
    "socleTechnique": {
     "type": "inconnu",
     "operateurSocle": null,
-    "preuve": "Le site annonce que « le logiciel de facturation VosFactures est également Plateforme Agréée officielle » et décrit la conversion des factures par sa propre brique agréée, mais ne documente ni l'architecture, ni l'opérateur du socle, ni les certifications obtenues.",
-    "source": "https://vosfactures.fr/facturation-electronique-plateforme-agreee/",
-    "confiance": "non_qualifie"
+    "preuve": "Socle non établi. Piste de rattachement capitalistique relevée dans un annuaire tiers et non corroborée à ce jour : VosFactures serait édité par Factuali SAS, à Nice, filiale de l'éditeur polonais Fakturownia. Si elle se vérifie au registre, cette fiche fait entrer un dixième pays au référentiel par la voie d'une société française à marque française. Le même annuaire signale un hébergement AWS Dublin et affirme que l'immatriculation ne serait pas définitive, deux points en contradiction possible avec le référentiel : à trancher sur source primaire avant toute publication.",
+    "source": "https://www.infos-pa.com/plateformes/vosfactures (annuaire tiers, à corroborer)",
+    "confiance": "faible"
    },
    "fournisseurDeSocle": null,
    "modeDistributionSocle": [
     "direct",
     "via cabinet EC"
    ],
-   "groupeCapitalistique": null,
+   "groupeCapitalistique": "Piste non corroborée : Factuali SAS (Nice), présentée comme filiale de Fakturownia sp. z o.o. (Pologne). À vérifier au registre du commerce avant d'être tenue pour acquise.",
    "relationCapitalistique": null,
    "partenariats": [],
    "lotsContributeurs": [
     "A",
-    "E8"
+    "E8",
+    "RECUP-SIREN-2",
+    "SOCLE-47"
    ],
    "natureEntite": "extension_demat",
    "perimetreFonctionnel": [
@@ -23726,6 +25306,19 @@
     "reception",
     "ereporting",
     "suite_gestion"
+   ],
+   "raisonSociale": "FACTUALI",
+   "dateCreation": "2019-11-18",
+   "trancheEffectif": "1-2",
+   "categorieEntreprise": "PME",
+   "activitePrincipale": "63.11Z",
+   "confianceIdentite": "haute",
+   "dirigeants": [
+    {
+     "nom": "GHELFI JUSTINE CHLOE",
+     "qualite": "Président de SAS",
+     "type": "personne physique"
+    }
    ]
   },
   {
@@ -24311,15 +25904,21 @@
      "source": "https://www.ximi.fr/facturation-electronique/",
      "dateReleve": "2026-08-20",
      "confiance": "faible"
+    },
+    {
+     "champ": "socleTechnique",
+     "source": "https://themisia.paris/fonctionnalites/facturation-electronique ; https://www.ximi.fr/facturation-electronique/",
+     "dateReleve": "2026-08-25",
+     "confiance": "moyenne"
     }
    ],
    "confiance": "partielle",
    "socleTechnique": {
-    "type": "inconnu",
-    "operateurSocle": null,
-    "preuve": "Aucune page dediee a la Plateforme Agreee sur xelya.com ; la seule communication produit trouvee est portee par le site du logiciel Ximi, qui annonce une \"PA Xelya\" integree nativement, sans indiquer si le socle technique est developpe en interne ou fourni par un tiers.",
-    "source": "https://www.ximi.fr/facturation-electronique/",
-    "confiance": "faible"
+    "type": "propre",
+    "operateurSocle": "Xelya",
+    "preuve": "La preuve vient d'un tiers consommateur et non de l'opérateur : Themisia, logiciel de gestion de cabinet d'avocats, déclare que « Xelya est officiellement agréée par la DGFiP comme Plateforme Agréée et figure sur la liste officielle des plateformes agréées. Les utilisateurs de Themisia [en bénéficient] ». Xelya opère donc un socle qu'elle met à disposition d'au moins deux logiciels (Ximi, Themisia). Réserve : la mise à disposition est établie, l'origine interne du code ne l'est que par défaut d'indice contraire.",
+    "source": "https://themisia.paris/fonctionnalites/facturation-electronique ; https://www.ximi.fr/facturation-electronique/",
+    "confiance": "moyenne"
    },
    "fournisseurDeSocle": null,
    "modeDistributionSocle": [
@@ -24355,7 +25954,8 @@
     "A",
     "C",
     "D",
-    "E9"
+    "E9",
+    "SOCLE-47"
    ],
    "reseaux": [
     "peppol_ap"
