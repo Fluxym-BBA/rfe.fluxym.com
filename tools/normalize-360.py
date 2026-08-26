@@ -680,6 +680,13 @@ def recompute_couverture(data: dict) -> dict:
         "analyse360_reputation": sum(1 for p in a360 if has(p, "analyse360", "reputation", "avis") or has(p, "analyse360", "reputation", "synthese")),
         "analyse360_capaciteDeFrappe": sum(1 for p in a360 if has(p, "analyse360", "capaciteDeFrappe", "canal") or has(p, "analyse360", "capaciteDeFrappe", "lecture")),
         "analyse360_lectureConcurrentielle": sum(1 for p in a360 if has(p, "analyse360", "lectureConcurrentielle")),
+        # Une fiche 360 complète porte au minimum un métier principal et un
+        # poids économique. Une plateforme qualifiée sur une seule facette
+        # (par exemple `postureCommerciale: grossiste` relevée par le chantier
+        # « grossistes ») porte un bloc `analyse360` légitime mais n'est pas
+        # une fiche : les deux ne se comptent pas ensemble.
+        "analyse360_fichesCompletes": sum(1 for p in a360 if has(p, "analyse360", "metierPrincipal")
+                                          and has(p, "analyse360", "poidsEconomique")),
         # Compteurs de fond : un bloc existe sur toutes les fiches après
         # normalisation, on compte donc le renseignement effectif, pas la présence.
         "analyse360_dynamique": sum(1 for p in a360 if has(p, "analyse360", "dynamique", "offresEmploiOuvertes")

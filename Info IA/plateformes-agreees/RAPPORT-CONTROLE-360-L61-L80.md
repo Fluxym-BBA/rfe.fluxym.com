@@ -58,7 +58,8 @@ Les quatre points sont réparés par la normalisation, mais la fiche reste court
 
 ## 5. Points restant à l'arbitrage humain
 
-1. **AGENA 3000** porte un `analyse360` vide, hérité d'une passe d'enrichissement antérieure : seul `postureCommerciale.valeur = grossiste` est renseigné. Le compteur `analyse360_entamee = 110` en compte donc **109 réelles + une coquille**. À décider : produire la fiche, ou retirer le bloc.
+1. **AGENA 3000 — je me suis trompé en première lecture, correction.** J'avais qualifié son `analyse360` de coquille. Vérification faite sur ses sources : `postureCommerciale.valeur = grossiste` y est **sourcé** — programme partenaires de l'offre A3 E-INVOICING, relevé le 20/08/2026, confiance renseignée. C'est une qualification légitime du chantier « grossistes », pas un résidu. Rien à retirer.
+   En revanche les deux objets ne se comptent pas ensemble : `analyse360_entamee = 110` additionnait 109 fiches complètes et 1 plateforme qualifiée sur une seule facette. Le normaliseur produit désormais **`analyse360_fichesCompletes` = 109**, défini comme « porte un `metierPrincipal` et un `poidsEconomique` ». Les deux compteurs coexistent, chacun mesure ce qu'il dit.
 2. **FIDUCIAL CLOUD** et **MY UNISOFT** ont une `analyse360` sans aucune entrée `sourcesEnrichissement` dédiée.
 3. **169 entrées `sourcesEnrichissement` sans `confiance`** et 25 sources restées `champ: non_precise`.
 4. **Formulation publique.** Treize fiches du lot écrivent, dans une prose destinée au site, « le montant reste à null », « les compteurs sont laissés à null ». Le raisonnement est juste — un `null` motivé n'est pas un zéro — mais le mot est du jargon sur une page pédagogique. Le prompt demande désormais « non établi », « non publié », « constat d'absence au JJ/MM/AAAA ».
@@ -70,6 +71,26 @@ Les quatre points sont réparés par la normalisation, mais la fiche reste court
 - Harness sur le renderer réel, 163 plateformes : **0 exception**, 0 `undefined`, 0 `[object Object]`, 0 `NaN`. Les 30 occurrences de « null » dans le HTML sont toutes des mots de la prose, contrôlées une par une.
 - `node --check js/pa-detail.js` : OK.
 - JSON valide, 163 plateformes, 2 932 entrées de sourcing.
+
+## 8. `FORMAT-PATCH.md` et `REVISION-BAREME-10-FICHES.md`
+
+Les deux derniers documents du pipeline jamais ouverts, lus depuis `main` @ `767e4b7`.
+
+**`REVISION-BAREME-10-FICHES.md` (9 159 o) : rien à corriger, et je n'y touche pas.** C'est une note de décision datée du 21/08 qui crée la facette `postureCommerciale` pour sortir de l'indice de centralité une question qui ne lui appartenait pas — « comment cette entreprise vend-elle ? » n'est pas « quelle place l'activité agréée occupe-t-elle ? ». Elle ne contient **aucun exemple JSON**, donc aucun risque de contamination de schéma, et ses cinq valeurs (`grossiste`, `canal_indirect`, `conquete_directe`, `base_installee`, `non_qualifie`) sont écrites exactement comme dans `pa-taxonomie.json`, en ASCII. Réécrire une note de décision datée reviendrait à réécrire l'histoire du raisonnement ; sa règle « toute analyse produite se termine par un patch, sinon elle n'existe pas » reste la meilleure phrase du corpus.
+
+**`FORMAT-PATCH.md` (2 932 o) : aucune contamination non plus, mais un silence coûteux.** Son exemple est un patch de chantier E (qualification marché) : il ne montre pas `analyse360`, donc il n'a rien pu induire en erreur sur le schéma des fiches. Le problème est ailleurs — il ne dit rien du chantier G, qui est pourtant celui qui tourne en dix conversations parallèles :
+
+| Point non documenté | Conséquence possible sur L81+ |
+|---|---|
+| `_patch.reglesProposees` et `_patch.observationsTiers`, exigés par le prompt | une conversation qui suit `FORMAT-PATCH` à la lettre ne les produit pas |
+| convention `_patch.id = "360-L<N>"`, chantier G, une société par patch | identifiants hétérogènes dans `_meta.fusions` |
+| les tableaux **internes** à `analyse360` (`avis`, `faisceauIndices`, `naturesPostes`, `pointsContestables`, `referencesPAConfirmees`) sont remplacés, pas fusionnés | un patch correctif partiel efface silencieusement des entrées relevées |
+| `complements` fusionne clé par clé | risque d'écrasement d'un complément antérieur |
+| interdiction de toucher `_meta` | un patch pourrait écraser `couverture` ou `fusions` |
+| passage obligatoire par `normalize-360.py` puis `arbitrate-360.py` | le rédacteur croit son patch final |
+| règles 2 et 8 disaient deux fois la même chose | bruit dans une liste de huit règles impératives |
+
+Une section « Cas particulier du chantier G » a été ajoutée, les règles 2 et 8 fusionnées, et l'interdiction de `_meta` posée. Le reste du document — clé de fusion `nom` caractère pour caractère, champ absent ≠ champ à `null`, `sourcesEnrichissement` cumulatif avec sa correction du 21/08 — est inchangé et reste juste.
 
 ## 7. `cartographie-360-modele.md` — la source de la dérive, corrigée
 
