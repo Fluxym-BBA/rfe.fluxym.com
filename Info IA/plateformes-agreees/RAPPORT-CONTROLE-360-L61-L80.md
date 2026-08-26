@@ -70,3 +70,21 @@ Les quatre points sont réparés par la normalisation, mais la fiche reste court
 - Harness sur le renderer réel, 163 plateformes : **0 exception**, 0 `undefined`, 0 `[object Object]`, 0 `NaN`. Les 30 occurrences de « null » dans le HTML sont toutes des mots de la prose, contrôlées une par une.
 - `node --check js/pa-detail.js` : OK.
 - JSON valide, 163 plateformes, 2 932 entrées de sourcing.
+
+## 7. `cartographie-360-modele.md` — la source de la dérive, corrigée
+
+Document lu pour la première fois le 26/08/2026, depuis `main` @ `767e4b7` (15 666 octets, rédigé le 21/08). `BRIEF-G` impose sa lecture « avant de commencer, sans exception » : les fiches ont donc recopié son exemple JSON du § 3, qui portait trois écritures périmées. C'est **l'explication complète** de trois des cinq familles de défauts arbitrées ce matin :
+
+| Écriture de l'exemple § 3 | Fiches contaminées | Coût constaté |
+|---|---:|---|
+| `centralitePA.niveau` (avec `indice` avant `valeur`) | 47 | 26 pages amputées de leur section Centralité |
+| `capaciteDeFrappe.actionnaires` + `typeActionnaire` à la racine | 49 | regroupement a posteriori sous `actionnariat` |
+| `caEntiteFrancaise` sans `dateReleve` (seul `caGroupe` en portait une) | 32 | blocs financiers non rejouables |
+| `reputation.avis[].nbAvis` et `volumeAvis` à la racine | 35 clés distinctes | 28 clés à occurrence unique |
+| `droitDeReponse: { signale, date, objet }` sans `pointsContestables` ni `lecture` | 33 | bloc muet à l'affichage |
+| `dynamique` sans `naturesPostes`, `lecture`, `source`, `confiance` | 5 | bloc réduit à trois compteurs |
+| `postureCommerciale` **absent de l'exemple** | — | bloc rattrapé par le prompt seul |
+
+Le § 3 a été réécrit à la forme du schéma v1.1, sur les mêmes données Generix, et complété par un tableau « les six écritures qui coûtent une section de page » qui chiffre chaque erreur. Le § 4 précise que `indice` découle de `valeur`, que `non_qualifie` va avec `indice: null` et non `0`, et que les jetons s'écrivent en ASCII sans accent. Le § 5 gagne une ligne « Posture commerciale ». La règle 6 du § 6 renvoie désormais au champ `dynamique.commentaire` qui porte la réserve sur le turnover.
+
+**Le fond n'a pas été touché** : la finalité (§ 1), le tableau de disponibilité des données (§ 2), le barème de centralité (§ 4), les sources par bloc (§ 5), les neuf règles de publication (§ 6), la réorganisation des chantiers (§ 7), les effets sur le site (§ 8) et l'état de la concurrence (§ 9) sont inchangés — y compris les marqueurs de citation d'origine. Ce document reste la décision de fond ; `SCHEMA-360.md` reste la décision de forme. Le prompt passe en v2.1 et énonce ce partage des rôles.

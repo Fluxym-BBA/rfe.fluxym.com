@@ -2,7 +2,9 @@
 
 Copie tout ce qui suit la ligne de tirets, remplace **`__LIGNE__`** par le numéro de ligne, et colle dans un onglet neuf. Rien d'autre à changer.
 
-> **Version 2 — 26/08/2026.** Cette version impose le schéma `analyse360` v1.0. Les 60 premières fiches ont été produites avec la version 1, qui décrivait les blocs en prose : il en est sorti 5 graphies pour un même concept, 4 blocs typés tantôt objet tantôt chaîne, 13 fiches qui ne s'affichaient plus et 26 qui perdaient une section entière. Le contrat de données est désormais explicite. Référence complète : `Info IA/plateformes-agreees/SCHEMA-360.md`.
+> **Version 2.1 — 26/08/2026.** Cette version impose le schéma `analyse360` v1.1. Les 60 premières fiches ont été produites avec la version 1, qui décrivait les blocs en prose : il en est sorti 5 graphies pour un même concept, 4 blocs typés tantôt objet tantôt chaîne, 13 fiches qui ne s'affichaient plus et 26 qui perdaient une section entière. Le contrat de données est désormais explicite. Référence complète : `Info IA/plateformes-agreees/SCHEMA-360.md`.
+>
+> **Partage des rôles entre les documents.** `cartographie-360-modele.md` décide du **fond** : la finalité, le barème de centralité, les sources par bloc, les neuf règles de publication. Ce prompt et `SCHEMA-360.md` décident de la **forme**. Son exemple JSON du § 3 a été recopié tel quel par les 60 premières fiches alors qu'il portait trois écritures périmées (`centralitePA.niveau`, actionnariat à la racine, `caEntiteFrancaise` sans `dateReleve`) : il a été corrigé le 26/08/2026. Si tu lis une version antérieure, **la forme décrite ici l'emporte**.
 
 ---
 

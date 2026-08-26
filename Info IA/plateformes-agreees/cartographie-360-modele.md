@@ -2,8 +2,12 @@
 
 **Emplacement :** `Info IA/plateformes-agreees/cartographie-360-modele.md`
 **Rédigé le :** 21/08/2026 · **Décidé par :** Bruno BARTOLI
+**Révisé le :** 26/08/2026 — § 3 et § 4 alignés sur le schéma `analyse360` v1.1. Les § 1, 2, 5, 6, 7, 8 et 9 sont inchangés : la méthode et les règles de publication n'ont pas bougé, seule l'écriture du JSON est corrigée.
 **Remplace :** rien. **Réoriente :** la finalité du référentiel.
 **Périmètre :** les 163 entrées, françaises comme étrangères.
+
+> ⚠️ **Ce document décide du fond. `SCHEMA-360.md` décide de la forme.**
+> L'exemple JSON du § 3 a été recopié tel quel par les fiches produites entre le 21 et le 26/08/2026. Trois de ses écritures ne correspondaient pas au contrat de données réellement lu par `js/pa-detail.js` : `centralitePA.niveau` au lieu de `valeur` (47 fiches, 26 pages amputées de leur section Centralité), l'actionnariat à la racine de `capaciteDeFrappe` (49 regroupements a posteriori), et un `caEntiteFrancaise` sans `dateReleve` (32 blocs financiers non rejouables). L'exemple ci-dessous est corrigé. **En cas de doute, `SCHEMA-360.md` fait foi sur la forme, ce document sur le fond.**
 
 ---
 
@@ -50,7 +54,9 @@ Sur Generix, la seule ventilation jamais publiée l'a été à l'époque de la c
 
 ## 3. Le bloc `analyse360`
 
-Additif, à ajouter dans `data/pa-taxonomie.json` et alimenté par patch. Ne remplace aucun champ existant.
+Additif, porté par chaque plateforme dans `data/plateformes-agreees.json` et alimenté par patch. Ne remplace aucun champ existant. Le vocabulaire contrôlé, lui, vit dans `data/pa-taxonomie.json` : ce fichier ne contient pas de fiches, il contient les facettes et leurs valeurs autorisées.
+
+Exemple normatif, à la forme du schéma v1.1 — données Generix relevées le 21/08/2026 :
 
 ```json
 "analyse360": {
@@ -62,64 +68,103 @@ Additif, à ajouter dans `data/pa-taxonomie.json` et alimenté par patch. Ne rem
     { "libelle": "Facturation électronique / plateforme agréée", "poids": "significatif", "source": "…" }
   ],
   "poidsEconomique": {
-    "caGroupe": { "montantMEUR": 110, "exercice": null, "nature": "declare_site", "source": "…", "dateReleve": "…" },
-    "caEntiteFrancaise": { "montantMEUR": 60.4, "exercice": "2022", "nature": "comptes_deposes", "source": "…" },
+    "caGroupe": { "montantMEUR": 110.00, "exercice": null, "nature": "declare_site", "source": "…", "dateReleve": "2026-08-21" },
+    "caEntiteFrancaise": { "montantMEUR": 60.40, "exercice": "2022", "nature": "comptes_deposes", "source": "…", "dateReleve": "2026-08-21" },
     "resultatNet": null,
-    "effectifGroupe": 850,
+    "effectifGroupe": "850",
     "effectifEntite": "250-499",
     "ventilationParActivite": {
       "disponible": false,
       "motif": "société non cotée, aucune ventilation publiée depuis le retrait de la cote",
       "derniereVentilationConnue": null
-    }
+    },
+    "lecture": null, "source": "…", "dateReleve": "2026-08-21", "confiance": "haute",
+    "complements": {}
   },
   "centralitePA": {
+    "valeur": "extension_naturelle",
     "indice": 2,
-    "niveau": "extension_naturelle",
     "marqueProduitDediee": "GIS — Generix Invoice Services",
     "entiteJuridiqueDediee": false,
     "faisceauIndices": [
       { "signal": "marque produit dédiée", "sens": "+", "preuve": "…" },
       { "signal": "discours corporate centré supply chain", "sens": "−", "preuve": "…" }
     ],
-    "lecture": "…",
-    "confiance": "moyenne"
+    "lecture": "…", "source": "…", "dateReleve": "2026-08-21", "confiance": "moyenne",
+    "complements": {}
+  },
+  "postureCommerciale": {
+    "valeur": "canal_indirect",
+    "modeleTarifaire": null, "tarifPublie": null, "offreGratuite": false,
+    "preuve": "…", "lecture": "…", "source": "…", "dateReleve": "2026-08-21", "confiance": "moyenne",
+    "complements": {}
   },
   "dynamique": {
     "offresEmploiOuvertes": null,
     "offresLieesFacturationElectronique": null,
-    "dateReleveOffres": null,
+    "naturesPostes": [],
     "mixOffres": [],
     "signauxCroissance": [],
-    "signauxTension": []
+    "signauxTension": [],
+    "dateReleveOffres": "2026-08-21",
+    "lecture": "…", "commentaire": "…", "source": "…", "confiance": "non_qualifie",
+    "complements": {}
   },
   "reputation": {
-    "avis": [ { "plateforme": "G2", "note": null, "nbAvis": null, "dateReleve": null, "url": null } ],
-    "volumeAvis": "faible | moyen | eleve | inexistant",
-    "synthese": null,
-    "confiance": "non_qualifie"
+    "avis": [
+      { "plateforme": "G2", "note": null, "noteBrute": null, "nombreAvis": null, "nombreAvisBrut": null, "dateReleve": null, "source": null }
+    ],
+    "synthese": null, "distribution": null, "lecture": null,
+    "source": null, "dateReleve": null, "confiance": "non_qualifie",
+    "complements": {}
   },
   "referencesClients": {
     "nbCiteesSurSite": null,
+    "perimetre": "catalogue complet, non spécifique à l'activité PA",
     "parSecteur": { "retail": [], "industrie": [], "sante": [], "transport": [], "public": [], "services": [] },
+    "libellesSecteursEditeur": [],
     "grandsComptes": [],
     "referencesPAConfirmees": [],
     "attention": "références déclaratives, portant sur l'ensemble du catalogue et non sur l'activité PA",
-    "source": null
+    "lecture": null, "commentaire": null, "source": null, "dateReleve": null, "confiance": "non_qualifie",
+    "complements": {}
   },
   "capaciteDeFrappe": {
-    "actionnaires": [],
-    "typeActionnaire": "fonds_PE | industriel | fondateurs | cote | filiale",
-    "financementRecent": null,
+    "canal": null, "maillage": null, "effectifCommercial": null, "investissementsAnnonces": null,
     "acquisitions": [],
-    "modeleTarifaire": null,
-    "tarifPublie": null,
-    "offreGratuite": false
+    "financementRecent": null,
+    "actionnariat": {
+      "type": "fonds_PE",
+      "actionnaires": [],
+      "commentaire": null, "source": null, "dateReleve": null
+    },
+    "modeleTarifaire": null, "tarifPublie": null, "offreGratuite": false,
+    "lecture": null, "source": null, "dateReleve": null, "confiance": "non_qualifie",
+    "complements": {}
   },
   "lectureConcurrentielle": "…",
-  "droitDeReponse": { "signale": false, "date": null, "objet": null }
+  "droitDeReponse": {
+    "signale": false, "date": null, "objet": null,
+    "pointsContestables": [], "canal": null,
+    "lecture": null, "source": null, "confiance": "non_qualifie"
+  }
 }
 ```
+
+### Les six écritures qui coûtent une section de page
+
+| À écrire | Jamais | Ce que coûte l'erreur |
+|---|---|---|
+| `centralitePA.valeur` | `centralitePA.niveau` | 47 fiches concernées, 26 pages avaient perdu toute la section Centralité |
+| `valeur: "axe_strategique"` | `"axe_stratégique"` | jeton ASCII `snake_case` : accentué, il ne se rapproche plus de `pa-taxonomie.json` et la page perd libellé, définition et position sur l'échelle 0-4 |
+| `capaciteDeFrappe.actionnariat.{type, actionnaires}` | `actionnaires` et `typeActionnaire` à la racine du bloc | 49 regroupements a posteriori |
+| `dateReleve` sur chaque bloc financier, **même quand le montant est `null`** | un `caEntiteFrancaise` sans date | 32 blocs non rejouables : impossible de savoir si l'absence de chiffre datait de la veille ou d'un mois |
+| `reputation.avis[]`, tableau d'objets, `nombreAvis` | `note` / `nbAvis` / `volumeAvis` à la racine du bloc | 35 clés différentes pour un même concept, dont 28 uniques |
+| `droitDeReponse` objet, avec `pointsContestables` | le bloc livré en chaîne de caractères | 33 fiches, bloc muet à l'affichage |
+
+Un pseudo-énuméré du type `"typeActionnaire": "fonds_PE | industriel | fondateurs | cote | filiale"` est une **liste de choix pour le rédacteur**, jamais une valeur à recopier telle quelle dans une fiche. On en choisit une.
+
+**Et si la recherche ne rentre pas dans ce moule ?** Chaque bloc objet accepte une clé `complements`, objet libre, rendue sur la page sous « Autres éléments relevés ». Rien ne se perd, et le schéma reste typé. On n'invente jamais une clé à la racine d'un bloc.
 
 ---
 
@@ -127,7 +172,7 @@ Additif, à ajouter dans `data/pa-taxonomie.json` et alimenté par patch. Ne rem
 
 C'est le cœur du modèle. Cinq niveaux, évalués sur **indices observables uniquement**.
 
-| Indice | Niveau | Définition | Indices caractéristiques |
+| Indice (`centralitePA.indice`) | Valeur (`centralitePA.valeur`) | Définition | Indices caractéristiques |
 |---|---|---|---|
 | **4** | `coeur_de_metier` | La plateforme agréée **est** l'activité. Sans elle, l'entreprise n'a pas d'objet. | entité créée pour la réforme, ou éditeur mono-produit facturation ; homepage entièrement consacrée à la PA |
 | **3** | `axe_strategique` | Une des 2-3 lignes majeures, avec investissement visible. | marque produit dédiée + recrutements dédiés + communiqués réguliers + entité ou BU identifiée |
@@ -143,6 +188,10 @@ C'est le cœur du modèle. Cinq niveaux, évalués sur **indices observables uni
 
 **Interdit :** convertir cet indice en pourcentage de CA. L'indice mesure une intensité d'engagement observable, pas un poids économique.
 
+**L'indice n'est pas libre : il découle de la valeur.** Les six correspondances ci-dessus sont celles de `data/pa-taxonomie.json`, et toute incohérence entre les deux est corrigée en faveur de la taxonomie. Une plateforme non qualifiée se code `valeur: "non_qualifie"` et `indice: null` — jamais `indice: 0`, qui signifie « conformité défensive », c'est-à-dire une qualification, pas une absence de qualification.
+
+**Les valeurs s'écrivent en ASCII, sans accent, en `snake_case`** : `coeur_de_metier`, `axe_strategique`, `extension_naturelle`, `activite_annexe`, `conformite_defensive`, `non_qualifie`. Ce ne sont pas des libellés de lecture — le libellé affiché sur la page et sa définition viennent de la taxonomie.
+
 ---
 
 ## 5. Sources, par bloc
@@ -153,6 +202,7 @@ C'est le cœur du modèle. Cinq niveaux, évalués sur **indices observables uni
 | Poids économique | comptes déposés (annuaire-entreprises, Pappers, BODACC), communiqués de résultats, page « faits marquants » | presse économique, agrégateurs (à traiter comme indicatifs et à signaler comme tels) |
 | Centralité | site de l'éditeur, offres d'emploi, communiqués | interviews dirigeants, webinars |
 | Dynamique | site carrières de l'éditeur, job boards | LinkedIn (**agrégats uniquement**) |
+| Posture commerciale | site de l'éditeur : page partenaires, programme revendeurs, grille tarifaire | annuaires de partenaires, communiqués conjoints |
 | Réputation | G2, Capterra, Gartner Peer Insights, Trustpilot — **note et volume, avec date de relevé** | forums professionnels |
 | Références clients | pages « clients » / « témoignages » / logos, études de cas | communiqués conjoints |
 | Capacité de frappe | greffe (actionnariat, comptes), site, presse économique | bases d'investisseurs |
@@ -172,7 +222,7 @@ Ce choix engage Fluxym, qui est elle-même un acteur de ce marché. Il n'est ten
 3. **Aucun jugement de valeur, aucun superlatif, aucun comparatif entre deux plateformes nommées.** On décrit, on ne classe pas. Pas de « meilleur », pas de « faible », pas de « en difficulté ».
 4. **Réputation : uniquement des agrégats publics** — note moyenne, nombre d'avis, plateforme, date. **Jamais la citation d'un avis individuel**, jamais de reformulation d'un avis négatif, jamais de note calculée par nous.
 5. **Aucune donnée personnelle.** Les dirigeants ne sont mentionnés que dans leur fonction publique. Rien sur des salariés identifiables. Rien issu de profils individuels.
-6. **Turnover : on ne le publie pas.** Il n'est pas mesurable de l'extérieur. Un volume d'offres d'emploi n'est pas un turnover, et le présenter comme tel serait faux.
+6. **Turnover : on ne le publie pas.** Il n'est pas mesurable de l'extérieur. Un volume d'offres d'emploi n'est pas un turnover, et le présenter comme tel serait faux. Le bloc `dynamique` porte cette réserve par écrit, dans son champ `commentaire`, sur chaque fiche qui pose un compteur d'offres.
 7. **Droit de réponse ouvert et visible.** Une mention sur la page et un canal de contact. Toute demande de correction sourcée est appliquée, et tracée dans `analyse360.droitDeReponse`.
 8. **Fluxym se déclare.** La page indique explicitement que l'éditeur du site est un acteur du marché décrit. C'est la condition de la crédibilité : un lecteur informé du biais possible fait davantage confiance qu'un lecteur qui le découvre.
 9. **Aucune donnée sur Fluxym ou ses partenaires ne bénéficie d'un traitement de faveur.** Même barème, mêmes sources, même exigence.
