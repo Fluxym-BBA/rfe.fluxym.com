@@ -109,3 +109,51 @@ Document lu pour la première fois le 26/08/2026, depuis `main` @ `767e4b7` (15 
 Le § 3 a été réécrit à la forme du schéma v1.1, sur les mêmes données Generix, et complété par un tableau « les six écritures qui coûtent une section de page » qui chiffre chaque erreur. Le § 4 précise que `indice` découle de `valeur`, que `non_qualifie` va avec `indice: null` et non `0`, et que les jetons s'écrivent en ASCII sans accent. Le § 5 gagne une ligne « Posture commerciale ». La règle 6 du § 6 renvoie désormais au champ `dynamique.commentaire` qui porte la réserve sur le turnover.
 
 **Le fond n'a pas été touché** : la finalité (§ 1), le tableau de disponibilité des données (§ 2), le barème de centralité (§ 4), les sources par bloc (§ 5), les neuf règles de publication (§ 6), la réorganisation des chantiers (§ 7), les effets sur le site (§ 8) et l'état de la concurrence (§ 9) sont inchangés — y compris les marqueurs de citation d'origine. Ce document reste la décision de fond ; `SCHEMA-360.md` reste la décision de forme. Le prompt passe en v2.1 et énonce ce partage des rôles.
+
+## 9. Contrôle d'affichage : la page était mal construite
+
+Bruno a lu la fiche ABBY sur le site et a signalé une impression de redondance, « le mot Fluxym à quatre ou cinq endroits ». Le constat était juste et le problème n'était pas dans les données.
+
+**Mesures sur la fiche ABBY, même donnée, renderer commité contre renderer corrigé :**
+
+| | avant | après |
+|---|---:|---:|
+| lignes visibles à l'ouverture | 400 | **293** |
+| champs vides affichés | 33 | **0**, repliés dans 6 blocs |
+| mentions « Lecture Fluxym » | 5 | **1** |
+| section « registre étranger » | 11 champs vides | **masquée** |
+| « Modèle tarifaire » / « Tarif public » | 2 fois | **1 fois** |
+
+**Ce qui n'allait pas, dans l'ordre de gravité.**
+
+1. **La section « 🧭 Lecture Fluxym » ne contenait pas la lecture Fluxym** : elle contenait le canal de distribution, le maillage, l'effectif commercial, les investissements. Le titre mentait sur son contenu, et c'est ce titre qui figurait au sommaire. Renommée **« ⚙️ Capacité de frappe et distribution »**.
+2. **Le bloc « Identité (registre étranger) » s'affichait pour une société française**, avec onze champs vides et une note affirmant que l'entité n'est pas au répertoire SIRENE — quatre lignes après l'affichage de son SIREN. La donnée était pourtant impeccable : `applicable: false` avec un motif circonstancié. Le renderer ignorait le drapeau. Deux plateformes concernées, ABBY et ENERJ.
+3. **L'avertissement « interprétation, et non donnée relevée » était répété à l'identique cinq fois par page**, une fois par bloc portant une lecture. Il n'est plus écrit qu'une fois, sur la première lecture, avec la mention que les suivantes suivent la même règle.
+4. **Les champs vides étaient déroulés en pleine page.** Ils sont repliés par bloc, derrière un « N champs non renseignés sur ce bloc » : l'information reste accessible, elle ne noie plus le relevé. Au passage, l'étiquette « Non renseigné — qualification en cours » devient « Non renseigné » : sur ABBY, « en cours » était faux, le champ était sans objet.
+5. **Deux emplacements du schéma pour la même information.** Le triptyque tarifaire vit à la fois dans `postureCommerciale` et dans `capaciteDeFrappe` — 76 champs remplis aux deux endroits sur les 110 fiches. Il ne s'affiche plus qu'avec la posture qu'il documente. Un mécanisme général renvoie « Déjà indiqué plus haut, sous « … » » dès qu'un texte de plus de 60 caractères est réaffiché à l'identique.
+6. **`perimetre` affichait son jeton brut**, `références_pa`. La facette **n'existait pas dans `pa-taxonomie.json`** alors que les fiches en produisaient quatre valeurs depuis le début. Elle y est déclarée, avec libellés et définitions ; le normaliseur recale les valeurs et en a réparé six, accentuées par la passe du matin.
+7. **Quatorze libellés de la taxonomie s'affichaient sans accents** sur toutes les pages : « Activite annexe », « Base installee », « Immatriculation definitive », « Extension d'un metier demat existant ». **162 accents** ajoutés aux libellés, définitions et notes ; les jetons `v` et les `id` ont été vérifiés identiques au caractère près.
+
+Les trois composants nouveaux (`.pa-vides`, `.pa-doublon`, `.pa-lecture--suite`) sont dans un `<style>` de `pa-detail.html` et non dans `css/pages.css` : le fichier fait 126 Ko et n'a pas pu être récupéré sans troncature. À rebasculer dans la feuille commune quand elle sera lisible en entier.
+
+## 10. Deuxième passe d'accentuation : 563 formes tranchées
+
+La passe lexicale du matin, volontairement prudente, avait laissé **129 occurrences sans accent** sur les huit fiches rédigées sans diacritiques, dont 60 `releve`, 21 `marche` et 18 `declare` — trois homographes qu'elle refusait par construction. Un dictionnaire explicite a été ajouté à `tools/arbitrate-360.py`, avec une règle de contexte pour les mots réellement ambigus : un pronom sujet devant impose la forme conjuguée, sinon c'est le participe ou le nom. Les 129 contextes ont été lus un par un avant d'entrer dans le tableau.
+
+**563 formes corrigées, zéro texte perdu** — vérifié en comparant les 33 948 chaînes du corpus après suppression des accents : aucune différence.
+
+Cinq garde-fous, tous nés d'une erreur constatée pendant la mise au point :
+
+| Garde-fou | Erreur qu'il évite |
+|---|---|
+| adresses, domaines, chemins et noms de fichiers écartés | `avenir-numerique.fr` devenait `avenir-numérique.fr`, `cartographie-360-modele.md` devenait `…modèle.md` |
+| mot capitalisé en milieu de phrase jamais touché | `B2B Integration`, `Omnicom Media Group`, `Chief Customer Experience` étaient francisés |
+| énumération de slugs détectée | `conformite-hds`, `developpement` accentués dans un sitemap cité en source |
+| `publie`, `verifie`, `declare`, `immatricule`, `releve`, `marche` tranchés par contexte | « le RNE ne publie pas » devenait « ne publié pas » |
+| `estime` accentué seulement après `été`, `pas`, `jamais`, `non` | « l'entreprise estime que » devenait « estimé que » |
+
+Au passage, la passe **répare neuf verbes que ma propre passe du matin avait faussement accentués** : « aucun cas client ne documenté la PA », « la réputation se limité à », « le positionnement ne se croisé pas », « la question se posé », « l'entité ne publié aucune ventilation ». Sans auxiliaire entre le pronom et le verbe, c'est du présent.
+
+Le `a` / `à` n'est pas tranché sur le mot seul — « l'entité **a** une filiale » est un auxiliaire, « attribuable **à** la facturation » une préposition. Seules des tournures listées et les fourchettes chiffrées (« de 20 **à** 49 salariés ») sont corrigées.
+
+**Une régression évitée de justesse.** L'arbitrage des effectifs écartait la phrase « le patch H1 avait relevé une tranche antérieure de 10 à 19 salariés (millésime 2022) ; la valeur lue ce jour est 20 à 49 » comme un doublon de millésime. C'est la trace d'une correction, pas un chiffre redondant. Une garde protège désormais toute phrase mentionnant un patch, un chantier, un écart ou une contradiction.

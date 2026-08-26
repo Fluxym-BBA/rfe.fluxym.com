@@ -1,11 +1,11 @@
 {
  "_meta": {
-  "objet": "Definition des axes d'analyse des plateformes agreees. Deux couches : les facettes (filtrables) et la fiche (informative).",
+  "objet": "Définition des axes d'analyse des plateformes agréées. Deux couches : les facettes (filtrables) et la fiche (informative).",
   "dateReleve": "2026-08-21",
-  "avertissement": "Les axes familleOrigine, segmentCible, natureEntite et socleTechnique relevent d'une observation du marche, pas d'une categorie reglementaire. Confirme par RFE_Expert : l'administration ne distingue que PA immatriculee vs Solution Compatible non immatriculee ; les notions de marque blanche et marque grise n'existent pas dans les textes. Attention : trancheEffectif porte sur l'entite juridique immatriculee, qui peut etre une structure dediee de quelques salaries adossee a un groupe bien plus grand (cas YOOZ PDP). Le champ groupeCapitalistique porte la taille reelle du groupe.",
-  "finalite": "Analyse 360 des entreprises porteuses des plateformes agreees. La question structurante du referentiel est la centralite : l'activite de plateforme agreee est-elle le coeur du metier, un axe strategique, une extension naturelle, une activite annexe ou une conformite defensive ?",
-  "reglesDePublication": "Tout element publie porte sa source et sa date de releve. Le fait et la lecture sont separes : un champ lecture est une interpretation, redigee au conditionnel. Aucun jugement, aucun classement, aucun comparatif nominatif. Reputation : agregats publics uniquement, jamais un avis individuel. Aucune donnee personnelle hors dirigeant dans sa fonction publique. Le turnover n'est pas publie car non mesurable de l'exterieur. Voir methodologie-plateformes.html et Info IA/plateformes-agreees/cartographie-360-modele.md.",
-  "interditStructurant": "La part de chiffre d'affaires attribuable a l'activite de plateforme agreee n'est jamais estimee : elle n'est publique que pour les societes cotees. ventilationParActivite.disponible = false est une reponse valide et attendue. CA groupe et CA de l'entite francaise sont deux champs distincts et ne sont jamais confondus."
+  "avertissement": "Les axes familleOrigine, segmentCible, natureEntite et socleTechnique relèvent d'une observation du marche, pas d'une catégorie réglementaire. Confirmé par RFE_Expert : l'administration ne distingue que PA immatriculée vs Solution Compatible non immatriculée ; les notions de marque blanche et marque grise n'existent pas dans les textes. Attention : trancheEffectif porte sur l'entité juridique immatriculée, qui peut être une structure dédiée de quelques salariés adossée à un groupe bien plus grand (cas YOOZ PDP). Le champ groupeCapitalistique porte la taille réelle du groupe.",
+  "finalite": "Analyse 360 des entreprises porteuses des plateformes agréées. La question structurante du référentiel est la centralité : l'activité de plateforme agréée est-elle le coeur du métier, un axe stratégique, une extension naturelle, une activité annexe ou une conformité défensive ?",
+  "reglesDePublication": "Tout élément publie porte sa source et sa date de relevé. Le fait et la lecture sont séparés : un champ lecture est une interprétation, rédigée au conditionnel. Aucun jugement, aucun classement, aucun comparatif nominatif. Réputation : agrégats publics uniquement, jamais un avis individuel. Aucune donnée personnelle hors dirigeant dans sa fonction publique. Le turnover n'est pas publie car non mesurable de l'extérieur. Voir méthodologie-plateformes.html et Info IA/plateformes-agréées/cartographie-360-modèle.md.",
+  "interditStructurant": "La part de chiffre d'affaires attribuable à l'activité de plateforme agréée n'est jamais estimée : elle n'est publique que pour les sociétés cotées. ventilationParActivite.disponible = false est une réponse valide et attendue. CA groupe et CA de l'entité française sont deux champs distincts et ne sont jamais confondus."
  },
  "facettes": [
   {
@@ -16,12 +16,12 @@
    "valeurs": [
     {
      "v": "immatriculee_definitive",
-     "label": "Immatriculation definitive",
+     "label": "Immatriculation définitive",
      "couleur": "success"
     },
     {
      "v": "en_attente_tests_interoperabilite",
-     "label": "En attente des tests d'interoperabilite",
+     "label": "En attente des tests d'interopérabilité",
      "couleur": "warning"
     }
    ]
@@ -34,27 +34,27 @@
    "valeurs": [
     {
      "v": "V1 (déc. 2025 – janv. 2026)",
-     "label": "V1 - dec. 2025 / janv. 2026"
+     "label": "V1 - déc. 2025 / janv. 2026"
     },
     {
      "v": "V2 (févr. – avr. 2026)",
-     "label": "V2 - fevr. / avr. 2026"
+     "label": "V2 - févr. / avr. 2026"
     },
     {
      "v": "V3 (mai – août 2026)",
-     "label": "V3 - mai / aout 2026"
+     "label": "V3 - mai / août 2026"
     }
    ]
   },
   {
    "id": "pays",
-   "label": "Pays de l'etablissement principal",
+   "label": "Pays de l'établissement principal",
    "filtrable": true,
    "source": "DGFiP"
   },
   {
    "id": "trancheAnneeCreation",
-   "label": "Anciennete de l'entreprise",
+   "label": "Ancienneté de l'entreprise",
    "filtrable": true,
    "source": "INSEE/RNE",
    "valeurs": [
@@ -78,13 +78,13 @@
   },
   {
    "id": "trancheEffectif",
-   "label": "Effectif de l'entite immatriculee",
+   "label": "Effectif de l'entité immatriculée",
    "filtrable": true,
    "source": "INSEE"
   },
   {
    "id": "categorieEntreprise",
-   "label": "Categorie INSEE",
+   "label": "Catégorie INSEE",
    "filtrable": true,
    "source": "INSEE",
    "valeurs": [
@@ -107,7 +107,7 @@
    "label": "Famille d'origine",
    "filtrable": true,
    "multi": true,
-   "source": "qualification marche",
+   "source": "qualification marché",
    "valeurs": [
     {
      "v": "s2p",
@@ -119,7 +119,7 @@
     },
     {
      "v": "edi",
-     "label": "Operateur EDI historique"
+     "label": "Opérateur EDI historique"
     },
     {
      "v": "tax",
@@ -127,7 +127,7 @@
     },
     {
      "v": "facturation_compta",
-     "label": "Editeur facturation / comptabilite"
+     "label": "Éditeur facturation / comptabilité"
     },
     {
      "v": "portail_ec",
@@ -139,15 +139,15 @@
     },
     {
      "v": "fintech",
-     "label": "Neobanque / fintech / gestion de depenses"
+     "label": "Néobanque / fintech / gestion de dépenses"
     },
     {
      "v": "erp",
-     "label": "Editeur d'ERP"
+     "label": "Éditeur d'ERP"
     },
     {
      "v": "integrateur",
-     "label": "Integrateur / conseil"
+     "label": "Intégrateur / conseil"
     },
     {
      "v": "pure_player",
@@ -160,11 +160,11 @@
    "label": "Segment client cible",
    "filtrable": true,
    "multi": true,
-   "source": "qualification marche",
+   "source": "qualification marché",
    "valeurs": [
     {
      "v": "micro",
-     "label": "Independants / micro-entreprises"
+     "label": "Indépendants / micro-entreprises"
     },
     {
      "v": "tpe_pme",
@@ -192,11 +192,11 @@
    "valeurs": [
     {
      "v": "generaliste",
-     "label": "Generaliste"
+     "label": "Généraliste"
     },
     {
      "v": "sante_pharma",
-     "label": "Sante / pharmacie"
+     "label": "Santé / pharmacie"
     },
     {
      "v": "assurance",
@@ -236,19 +236,19 @@
    "id": "natureEntite",
    "label": "Logique du positionnement PA",
    "filtrable": true,
-   "source": "qualification marche",
+   "source": "qualification marché",
    "valeurs": [
     {
      "v": "creee_pour_rfe",
-     "label": "Entite creee pour la reforme"
+     "label": "Entité créée pour la réforme"
     },
     {
      "v": "extension_demat",
-     "label": "Extension d'un metier demat existant"
+     "label": "Extension d'un métier démat existant"
     },
     {
      "v": "diversification",
-     "label": "Diversification depuis un autre metier"
+     "label": "Diversification depuis un autre métier"
     }
    ]
   },
@@ -256,7 +256,7 @@
    "id": "socleTechnique.type",
    "label": "Socle technique",
    "filtrable": true,
-   "source": "qualification marche",
+   "source": "qualification marché",
    "valeurs": [
     {
      "v": "propre",
@@ -276,15 +276,15 @@
     },
     {
      "v": "inconnu",
-     "label": "Non determine"
+     "label": "Non détermine"
     }
    ]
   },
   {
    "id": "fournisseurDeSocle",
-   "label": "Fournit son socle a d'autres",
+   "label": "Fournit son socle à d'autres",
    "filtrable": true,
-   "source": "qualification marche"
+   "source": "qualification marché"
   },
   {
    "id": "relationCapitalistique",
@@ -294,7 +294,7 @@
    "valeurs": [
     {
      "v": "independante",
-     "label": "Independante, fondateurs identifies"
+     "label": "Indépendante, fondateurs identifiés"
     },
     {
      "v": "filiale_de_groupe",
@@ -310,15 +310,15 @@
     },
     {
      "v": "cotee",
-     "label": "Societe cotee"
+     "label": "Société cotée"
     },
     {
      "v": "fonds_PE",
-     "label": "Detenue par un fonds"
+     "label": "Détenue par un fonds"
     },
     {
      "v": "holding_non_transparente",
-     "label": "Holding a la chaine peu lisible"
+     "label": "Holding à la chaîne peu lisible"
     },
     {
      "v": "non_determinable",
@@ -328,18 +328,18 @@
   },
   {
    "id": "perimetreFonctionnel",
-   "label": "Perimetre fonctionnel",
+   "label": "Périmètre fonctionnel",
    "filtrable": true,
    "multi": true,
-   "source": "qualification marche",
+   "source": "qualification marché",
    "valeurs": [
     {
      "v": "emission",
-     "label": "Emission"
+     "label": "Émission"
     },
     {
      "v": "reception",
-     "label": "Reception"
+     "label": "Réception"
     },
     {
      "v": "ereporting",
@@ -357,43 +357,43 @@
   },
   {
    "id": "reseaux",
-   "label": "Reseaux",
+   "label": "Réseaux",
    "filtrable": true,
    "multi": true,
-   "source": "qualification marche",
+   "source": "qualification marché",
    "valeurs": [
     {
      "v": "peppol_ap",
-     "label": "Point d'acces Peppol"
+     "label": "Point d'accès Peppol"
     },
     {
      "v": "autre",
-     "label": "Autre reseau"
+     "label": "Autre réseau"
     }
    ]
   },
   {
    "id": "solutionsCompatiblesPartenaires",
-   "label": "Partenaires Solutions Compatibles publies",
+   "label": "Partenaires Solutions Compatibles publiés",
    "filtrable": false,
    "source": "sites des plateformes"
   },
   {
    "id": "centralitePA",
-   "label": "Place de l'activite plateforme agreee",
+   "label": "Place de l'activité plateforme agréée",
    "filtrable": true,
-   "source": "Lecture Fluxym sur faisceau d'indices observables (site, offres d'emploi, communiques, references, distribution). Jamais une part de chiffre d'affaires.",
+   "source": "Lecture Fluxym sur faisceau d'indices observables (site, offres d'emploi, communiqués, références, distribution). Jamais une part de chiffre d'affaires.",
    "valeurs": [
     {
      "v": "coeur_de_metier",
-     "label": "Coeur de metier",
+     "label": "Coeur de métier",
      "indice": 4,
      "couleur": "success",
-     "definition": "La plateforme agreee est l'activite. Sans elle, l'entreprise n'a pas d'objet."
+     "definition": "La plateforme agréée est l'activité. Sans elle, l'entreprise n'a pas d'objet."
     },
     {
      "v": "axe_strategique",
-     "label": "Axe strategique",
+     "label": "Axe stratégique",
      "indice": 3,
      "couleur": "cyan",
      "definition": "Une des deux ou trois lignes majeures, avec investissement visible."
@@ -403,74 +403,106 @@
      "label": "Extension naturelle",
      "indice": 2,
      "couleur": "purple",
-     "definition": "Prolongement d'un metier demat, EDI ou comptable existant. Offre parmi cinq a dix."
+     "definition": "Prolongement d'un métier démat, EDI ou comptable existant. Offre parmi cinq à dix."
     },
     {
      "v": "activite_annexe",
-     "label": "Activite annexe",
+     "label": "Activité annexe",
      "indice": 1,
      "couleur": "warning",
-     "definition": "Une ligne dans un catalogue large, peu portee commercialement."
+     "definition": "Une ligne dans un catalogue large, peu portée commercialement."
     },
     {
      "v": "conformite_defensive",
-     "label": "Conformite defensive",
+     "label": "Conformité défensive",
      "indice": 0,
      "couleur": "gray",
-     "definition": "Immatriculation pour ne pas perdre ses clients ou ses fournisseurs, sans offre commercialisee activement."
+     "definition": "Immatriculation pour ne pas perdre ses clients ou ses fournisseurs, sans offre commercialisée activement."
     },
     {
      "v": "non_qualifie",
-     "label": "Non qualifie",
+     "label": "Non qualifié",
      "indice": null,
      "couleur": "gray",
-     "definition": "Faisceau d'indices insuffisant. Aucune lecture publiee."
+     "definition": "Faisceau d'indices insuffisant. Aucune lecture publiée."
     }
    ]
   },
   {
    "id": "postureCommerciale",
-   "label": "Posture commerciale sur l'activite agreee",
+   "label": "Posture commerciale sur l'activité agréée",
    "filtrable": true,
-   "source": "Lecture Fluxym sur preuves observables : canal de distribution declare, existence d'un parcours partenaires ou editeurs, vitrine dediee, cible affichee. Introduite par la revision du bareme du 21/08/2026, orthogonale a la centralite.",
+   "source": "Lecture Fluxym sur preuves observables : canal de distribution déclaré, existence d'un parcours partenaires ou éditeurs, vitrine dédiée, cible affichée. Introduite par la révision du barème du 21/08/2026, orthogonale à la centralité.",
    "valeurs": [
     {
      "v": "grossiste",
      "label": "Grossiste de socle",
      "couleur": "purple",
-     "definition": "Le socle agree est distribue a des tiers qui le revendent sous leur propre marque. L'agrement est un produit de gros, et l'on peut affronter ce socle sans que le nom de son operateur apparaisse."
+     "definition": "Le socle agréé est distribué à des tiers qui le revendent sous leur propre marque. L'agrément est un produit de gros, et l'on peut affronter ce socle sans que le nom de son opérateur apparaisse."
     },
     {
      "v": "canal_indirect",
      "label": "Canal indirect sous sa marque",
      "couleur": "cyan",
-     "definition": "La vente passe par des partenaires, integrateurs ou cabinets de conseil, la marque de l'editeur etant conservee."
+     "definition": "La vente passe par des partenaires, intégrateurs ou cabinets de conseil, la marque de l'éditeur étant conservée."
     },
     {
      "v": "conquete_directe",
-     "label": "Conquete directe",
+     "label": "Conquête directe",
      "couleur": "success",
-     "definition": "Vente directe, avec vitrine et moyens propres destines a gagner des clients au-dela de la base installee."
+     "definition": "Vente directe, avec vitrine et moyens propres destinés à gagner des clients au-delà de la base installée."
     },
     {
      "v": "base_installee",
-     "label": "Base installee",
+     "label": "Base installée",
      "couleur": "warning",
-     "definition": "L'offre est proposee d'abord aux clients existants. Peu ou pas de dispositif de conquete observable."
+     "definition": "L'offre est proposée d'abord aux clients existants. Peu ou pas de dispositif de conquête observable."
     },
     {
      "v": "non_qualifie",
-     "label": "Non qualifie",
+     "label": "Non qualifié",
      "couleur": "gray",
-     "definition": "Preuves insuffisantes. Aucune lecture publiee."
+     "definition": "Preuves insuffisantes. Aucune lecture publiée."
+    }
+   ]
+  },
+  {
+   "id": "perimetreReferences",
+   "label": "Périmètre des références clients",
+   "filtrable": false,
+   "source": "Relevé sur le site de l'éditeur. Introduite le 26/08/2026 : les fiches produisaient déjà quatre valeurs pour ce champ, sans qu'elles soient déclarées ici, et la page affichait le jeton brut.",
+   "valeurs": [
+    {
+     "v": "references_pa",
+     "label": "Références propres à l'activité agréée",
+     "couleur": "success",
+     "definition": "Les clients cités le sont au titre de la plateforme agréée elle-même. C'est le seul cas où une référence prouve un usage de l'activité agréée."
+    },
+    {
+     "v": "references_groupe",
+     "label": "Références du catalogue",
+     "couleur": "warning",
+     "definition": "Les clients cités le sont au titre de l'ensemble du catalogue de l'éditeur ou du groupe. Rien n'indique qu'ils utilisent la plateforme agréée."
+    },
+    {
+     "v": "mixte",
+     "label": "Mixte",
+     "couleur": "cyan",
+     "definition": "Le site mêle des références de catalogue et des références explicitement rattachées à l'activité agréée, sans que le partage soit toujours établi."
+    },
+    {
+     "v": "aucune_publiee",
+     "label": "Aucune référence publiée",
+     "couleur": "gray",
+     "definition": "Aucun nom de client n'est publié. L'absence est un constat, pas une lacune de la fiche."
     }
    ]
   },
   {
    "id": "secteurReferences",
-   "label": "Secteurs des references clients",
+   "label": "Secteurs des références clients",
    "filtrable": true,
-   "source": "References declaratives publiees par la plateforme sur son propre site. Portent sur l'ensemble du catalogue, pas necessairement sur l'activite plateforme agreee.",
+   "source": "Références déclaratives publiées par la plateforme sur son propre site. Portent sur l'ensemble du catalogue, pas nécessairement sur l'activité plateforme agréée.",
    "valeurs": [
     {
      "v": "retail",
@@ -482,7 +514,7 @@
     },
     {
      "v": "sante",
-     "label": "Sante et pharmacie"
+     "label": "Santé et pharmacie"
     },
     {
      "v": "transport",
@@ -502,7 +534,7 @@
     },
     {
      "v": "energie",
-     "label": "Energie et utilities"
+     "label": "Énergie et utilities"
     },
     {
      "v": "btp",
@@ -518,7 +550,7 @@
    "id": "typeActionnaire",
    "label": "Type d'actionnaire",
    "filtrable": true,
-   "source": "Greffe, presse economique, site de la societe.",
+   "source": "Greffe, presse économique, site de la société.",
    "valeurs": [
     {
      "v": "fondateurs",
@@ -534,11 +566,11 @@
     },
     {
      "v": "cote",
-     "label": "Societe cotee"
+     "label": "Société cotée"
     },
     {
      "v": "filiale",
-     "label": "Filiale d'un groupe etranger"
+     "label": "Filiale d'un groupe étranger"
     },
     {
      "v": "public",
@@ -546,7 +578,7 @@
     },
     {
      "v": "non_qualifie",
-     "label": "Non qualifie"
+     "label": "Non qualifié"
     }
    ]
   },
@@ -595,7 +627,7 @@
   },
   {
    "id": "dateCreation",
-   "label": "Date de creation"
+   "label": "Date de création"
   },
   {
    "id": "activitePrincipale",
@@ -603,11 +635,11 @@
   },
   {
    "id": "adresse",
-   "label": "Etablissement principal declare a la DGFiP"
+   "label": "Établissement principal déclaré à la DGFiP"
   },
   {
    "id": "dateImmatriculation",
-   "label": "Date de delivrance du numero d'immatriculation"
+   "label": "Date de délivrance du numéro d'immatriculation"
   },
   {
    "id": "dirigeants",
@@ -627,7 +659,7 @@
   },
   {
    "id": "logiquePositionnement",
-   "label": "Coherence du positionnement PA avec le metier d'origine"
+   "label": "Cohérence du positionnement PA avec le métier d'origine"
   },
   {
    "id": "siteWeb",
@@ -635,62 +667,62 @@
   },
   {
    "id": "contact",
-   "label": "Contact facturation electronique"
+   "label": "Contact facturation électronique"
   },
   {
    "id": "sourcesEnrichissement",
-   "label": "Sources et date de releve"
+   "label": "Sources et date de relevé"
   },
   {
    "id": "solutionsCompatiblesPartenaires",
-   "label": "Solutions Compatibles partenaires declarees"
+   "label": "Solutions Compatibles partenaires déclarées"
   },
   {
    "id": "metierPrincipal",
-   "label": "Metier principal",
+   "label": "Métier principal",
    "bloc": "analyse360"
   },
   {
    "id": "activites",
-   "label": "Lignes d'activite",
+   "label": "Lignes d'activité",
    "bloc": "analyse360",
    "note": "Chaque ligne porte un poids majeur, significatif ou mineur, et sa source."
   },
   {
    "id": "poidsEconomique",
-   "label": "Poids economique",
+   "label": "Poids économique",
    "bloc": "analyse360",
-   "note": "CA groupe et CA de l'entite francaise sont deux champs distincts. La ventilation par activite n'est jamais estimee."
+   "note": "CA groupe et CA de l'entité française sont deux champs distincts. La ventilation par activité n'est jamais estimée."
   },
   {
    "id": "centralitePA",
-   "label": "Place de l'activite plateforme agreee",
+   "label": "Place de l'activité plateforme agréée",
    "bloc": "analyse360",
-   "note": "Indice de 0 a 4 justifie par au moins trois indices avec preuve, plus une lecture au conditionnel."
+   "note": "Indice de 0 à 4 justifié par au moins trois indices avec preuve, plus une lecture au conditionnel."
   },
   {
    "id": "postureCommerciale",
-   "label": "Posture commerciale sur l'activite agreee",
+   "label": "Posture commerciale sur l'activité agréée",
    "bloc": "analyse360",
-   "note": "Comment l'entreprise vend l'activite agreee. Independant de la place que cette activite occupe chez elle : une meme centralite peut se commercialiser de quatre facons differentes."
+   "note": "Comment l'entreprise vend l'activité agréée. Indépendant de la place que cette activité occupe chez elle : une même centralité peut se commercialiser de quatre façons différentes."
   },
   {
    "id": "dynamique",
    "label": "Dynamique de recrutement",
    "bloc": "analyse360",
-   "note": "Volume d'offres et part liee a la facturation electronique, a une date de releve. N'est jamais presente comme une mesure de turnover."
+   "note": "Volume d'offres et part liée à la facturation électronique, à une date de relevé. N'est jamais présentée comme une mesure de turnover."
   },
   {
    "id": "reputation",
    "label": "Avis publics",
    "bloc": "analyse360",
-   "note": "Agregats uniquement : plateforme, note, nombre d'avis, date, URL. Aucun avis individuel n'est cite."
+   "note": "Agrégats uniquement : plateforme, note, nombre d'avis, date, URL. Aucun avis individuel n'est cité."
   },
   {
    "id": "referencesClients",
-   "label": "References clients",
+   "label": "Références clients",
    "bloc": "analyse360",
-   "note": "Declaratives. Distinguer les references du catalogue global et celles de l'activite plateforme agreee."
+   "note": "Déclaratives. Distinguer les références du catalogue global et celles de l'activité plateforme agréée."
   },
   {
    "id": "capaciteDeFrappe",
@@ -701,19 +733,19 @@
    "id": "lectureConcurrentielle",
    "label": "Lecture Fluxym",
    "bloc": "analyse360",
-   "note": "Interpretation, au conditionnel, sourcee. Signalee comme telle a l'affichage."
+   "note": "Interprétation, au conditionnel, sourcée. Signalée comme telle à l'affichage."
   },
   {
    "id": "identiteInternationale",
-   "label": "Identite (registre etranger)",
+   "label": "Identité (registre étranger)",
    "bloc": "identiteInternationale",
-   "note": "Renseigne uniquement si pays different de France. Ancre : numero de TVA intracommunautaire verifie a VIES, EUID, LEI, registre national."
+   "note": "Renseigné uniquement si le pays est différent de France. Ancre : numéro de TVA intracommunautaire vérifié à VIES, EUID, LEI, registre national."
   },
   {
    "id": "droitDeReponse",
-   "label": "Droit de reponse",
+   "label": "Droit de réponse",
    "bloc": "analyse360",
-   "note": "Toute demande de correction sourcee est appliquee et tracee."
+   "note": "Toute demande de correction sourcée est appliquée et tracée."
   }
  ],
  "blocsStructures": {
@@ -775,7 +807,7 @@
     "parSecteur": "objet secteur vers tableau de noms",
     "grandsComptes": "tableau",
     "referencesPAConfirmees": "tableau",
-    "source": "chaine"
+    "source": "chaîne"
    },
    "capaciteDeFrappe": {
     "actionnaires": "tableau",

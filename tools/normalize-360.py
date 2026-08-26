@@ -174,6 +174,7 @@ VOCAB_POSTURE = {
     "base_installee", "conquete_directe", "canal_indirect", "grossiste", "non_qualifie",
 }
 VOCAB_CONFIANCE = {"haute", "moyenne", "faible", "non_qualifie"}
+VOCAB_PERIMETRE_REF = {"references_pa", "references_groupe", "mixte", "aucune_publiee"}
 
 
 def recaler_vocab(valeur: str, vocabulaire):
@@ -485,6 +486,18 @@ def normalize_block(bloc: str, raw, log: collections.Counter, nom: str, notes: l
             out["pointsContestables"] = [pts]
 
     if bloc == "referencesClients":
+        # `perimetre` est un vocabulaire fermé, déclaré dans pa-taxonomie.json
+        # depuis le 26/08/2026 : les fiches en produisaient déjà quatre valeurs
+        # sans qu'elles soient déclarées nulle part, et la page affichait le
+        # jeton brut faute de libellé.
+        if not is_empty(out.get("perimetre")):
+            recale, modifie = recaler_vocab(as_text(out["perimetre"]), VOCAB_PERIMETRE_REF)
+            if modifie:
+                log["referencesClients: perimetre recalé sur le vocabulaire"] += 1
+                notes.append((nom, bloc, f"perimetre {out['perimetre']!r} recalé sur {recale!r}"))
+                out["perimetre"] = recale
+            elif recale not in VOCAB_PERIMETRE_REF:
+                notes.append((nom, bloc, f"perimetre hors vocabulaire : {recale!r}"))
         for key in ("parSecteur", "libellesSecteursEditeur", "grandsComptes", "referencesPAConfirmees"):
             if not is_empty(out[key]) and not isinstance(out[key], (list, dict)):
                 out[key] = [out[key]]

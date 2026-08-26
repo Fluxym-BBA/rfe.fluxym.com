@@ -9,6 +9,37 @@
     <link rel="icon" href="./assets/favicon-Fluxym-V2.png" sizes="32x32" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./css/pages.css">
+    <style>
+    /* Styles propres à la fiche plateforme agréée.
+       Trois composants nés du contrôle d'affichage du 26/08/2026 :
+       - .pa-vides   : les champs non renseignés d'un bloc sont repliés. Une
+                       fiche en comptait 33 sur 306 lignes affichées.
+       - .pa-doublon : renvoi vers l'endroit où l'information a déjà été dite,
+                       le tarifaire et l'actionnariat vivant à deux endroits
+                       du schéma.
+       - .pa-lecture--suite : l'avertissement « interprétation, et non donnée
+                       relevée » n'est écrit qu'une fois par fiche ; les
+                       lectures suivantes gardent le seul repère 🧭. */
+    .pa-vides { margin: .5rem 0 0; }
+    .pa-vides > summary {
+        cursor: pointer;
+        font-size: .8125rem;
+        color: var(--gray-500);
+        padding: .375rem .75rem;
+        border-radius: var(--radius-full);
+        background: var(--gray-50);
+        display: inline-block;
+        list-style: none;
+    }
+    .pa-vides > summary::-webkit-details-marker { display: none; }
+    .pa-vides > summary::before { content: '▸ '; }
+    .pa-vides[open] > summary::before { content: '▾ '; }
+    .pa-vides > summary:hover { background: var(--gray-100); color: var(--gray-600); }
+    .pa-vides > .pa-dl { margin-top: .75rem; }
+    .pa-doublon { color: var(--gray-500); font-size: .875rem; }
+    .pa-lecture--suite { padding-top: .875rem; padding-bottom: .875rem; }
+    .pa-lecture--suite .callout-content > strong { color: var(--gray-600); font-weight: 600; }
+    </style>
 </head>
 <body>
     <nav id="main-nav"></nav>
@@ -43,7 +74,7 @@
                         <li><a href="#actionnariat" class="sidebar-link">🏛️ Actionnariat</a></li>
                         <li id="nav-marche" hidden><a href="#marche" class="sidebar-link">👥 Clients et dynamique</a></li>
                         <li><a href="#concurrents" class="sidebar-link">⚔️ Sur le même segment</a></li>
-                        <li id="nav-lecture" hidden><a href="#lecture" class="sidebar-link">🧭 Lecture Fluxym</a></li>
+                        <li id="nav-lecture" hidden><a href="#lecture" class="sidebar-link">⚙️ Capacité de frappe</a></li>
                         <li class="sidebar-sep"></li>
                         <li><a href="#sources" class="sidebar-link">🔍 Sources et relevé</a></li>
                     </ul>
@@ -106,7 +137,7 @@
                 </section>
 
                 <section class="content-section" id="sec-lecture" hidden>
-                    <h2 id="lecture">🧭 Lecture Fluxym</h2>
+                    <h2 id="lecture">⚙️ Capacité de frappe et distribution</h2>
                     <div id="pa-lecture-concurrentielle"></div>
                 </section>
 

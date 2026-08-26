@@ -11,7 +11,27 @@
   const slugify = (s) => s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
     .replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 
-  const TODO = '<span class="pa-todo">Non renseigné — qualification en cours</span>';
+  const TODO = '<span class="pa-todo">Non renseigné</span>';
+
+  /* ------------------------------------------------------------------ */
+  /* État de rendu, remis à zéro à chaque fiche par render().           */
+  /* nLectures : l'avertissement « interprétation, et non donnée        */
+  /*   relevée » est écrit une seule fois par page, sur la première     */
+  /*   lecture rencontrée. Les suivantes portent le seul repère 🧭.     */
+  /* dejaVu : un même texte long affiché deux fois dans la page est un  */
+  /*   doublon de schéma (le tarifaire vit dans postureCommerciale ET   */
+  /*   dans capaciteDeFrappe). On ne le réécrit pas, on renvoie à       */
+  /*   l'endroit où il a déjà été dit.                                  */
+  /* ------------------------------------------------------------------ */
+  let nLectures = 0;
+  const dejaVu = new Map();
+  const SEUIL_DOUBLON = 60;
+
+  const empreinte = (html) => String(html)
+    .replace(/<[^>]*>/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim()
+    .toLowerCase();
   const NON_RELEVE = '<span class="pa-todo">Non relevé à ce jour</span>';
 
   /* ------------------------------------------------------------------ */
@@ -59,9 +79,28 @@
   const oui = (v) => (v === null || v === undefined ? TODO : (v ? 'Oui' : 'Non'));
   const listeOf = (v) => (Array.isArray(v) ? v : (rempli(v) ? [v] : []));
 
-  const dl = (rows) => `<dl class="pa-dl">${rows
-    .filter(Boolean)
-    .map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join('')}</dl>`;
+  const dl = (rows) => {
+    const lignes = rows.filter(Boolean);
+    const pleines = [];
+    const vides = [];
+    for (const [k, v] of lignes) {
+      if (/pa-todo/.test(String(v))) { vides.push([k, v]); continue; }
+      const emp = empreinte(v);
+      if (emp.length >= SEUIL_DOUBLON && dejaVu.has(emp)) {
+        pleines.push([k, `<em class="pa-doublon">Déjà indiqué plus haut, sous « ${esc(dejaVu.get(emp))} ».</em>`]);
+        continue;
+      }
+      if (emp.length >= SEUIL_DOUBLON) dejaVu.set(emp, k);
+      pleines.push([k, v]);
+    }
+    const rendre = (l) => l.map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join('');
+    let out = pleines.length ? `<dl class="pa-dl">${rendre(pleines)}</dl>` : '';
+    if (vides.length) {
+      const n = vides.length;
+      out += `<details class="pa-vides"><summary>${n} champ${n > 1 ? 's' : ''} non renseigné${n > 1 ? 's' : ''} sur ce bloc</summary><dl class="pa-dl">${rendre(vides)}</dl></details>`;
+    }
+    return out;
+  };
 
   /** Ligne « Source » harmonisée : source + date de relevé + niveau de confiance. */
   const ligneSource = (o) => {
@@ -121,14 +160,16 @@
   const lectureBox = (texte, confianceNiveau) => {
     const rendu = txt(texte);
     if (!rendu) return '';
+    nLectures += 1;
+    const premiere = nLectures === 1;
     return `
-    <div class="callout callout--info">
+    <div class="callout callout--info pa-lecture${premiere ? '' : ' pa-lecture--suite'}">
       <div class="callout-icon">🧭</div>
       <div class="callout-content">
-        <strong>Lecture Fluxym — interprétation, et non donnée relevée.</strong>
+        <strong>${premiere ? 'Lecture Fluxym — interprétation, et non donnée relevée' : 'Lecture'}.</strong>
         ${rendu}
         ${confianceNiveau ? `<br><em>Niveau de confiance de cette lecture : ${esc(confianceNiveau)}.</em>` : ''}
-        <br><a href="./methodologie-plateformes.html">Comment cette lecture est établie</a>
+        ${premiere ? '<br><a href="./methodologie-plateformes.html">Comment les lectures Fluxym sont établies</a> — les autres lectures de cette fiche suivent la même règle.' : ''}
       </div>
     </div>`;
   };
@@ -142,6 +183,12 @@
   const renderInternational = (pa) => {
     const i = pa.identiteInternationale;
     if (!rempli(i)) return;
+    // `applicable: false` veut dire « sans objet » : l'entité immatriculée est
+    // française. Dérouler onze champs de registre étranger vides, puis annoncer
+    // qu'elle n'est pas au répertoire SIRENE alors que son SIREN est affiché
+    // quatre lignes plus haut, est une contradiction. Le motif est repris dans
+    // la carte d'identité, la section reste masquée.
+    if (i.applicable === false) return;
     const pf = i.presenceEnFrance || {};
     const typesFr = {
       filiale: 'Filiale française', succursale: 'Succursale française',
@@ -329,7 +376,9 @@
       || rempli(a.nombreAvis) || rempli(a.commentaire));
 
     document.getElementById('pa-marche').innerHTML = dl([
-      ['Périmètre des références', relev(rc.perimetre)],
+      ['Périmètre des références', rempli(rc.perimetre)
+        ? label(taxo, 'perimetreReferences', rc.perimetre)
+        : NON_RELEVE],
       ['Références clients par secteur', secteurs.length
         ? `<ul>${secteurs.map(([sec, l]) => `<li><strong>${label(taxo, 'secteurReferences', sec)}</strong> — ${txt(l)}</li>`).join('')}</ul>`
         : NON_RELEVE],
@@ -377,6 +426,12 @@
     if (!rempli(texte) && !rempli(cf) && !rempli(dr)) return;
     const act = cf.actionnariat || {};
     const pts = listeOf(dr.pointsContestables);
+    // Le triptyque tarifaire vit à deux endroits du schéma : postureCommerciale
+    // et capaciteDeFrappe. Il est affiché dans « Place de l'activité agréée »,
+    // avec la posture qu'il documente. On ne le répète ici que s'il y apporte
+    // une information que la posture ne portait pas.
+    const po = bloc(pa, 'postureCommerciale') || {};
+    const tarifAilleurs = (champ) => rempli(po[champ]);
 
     const html = dl([
       ['Canal de distribution', relev(cf.canal)],
@@ -389,9 +444,12 @@
       rempli(act.source) ? ['Source de l\u2019actionnariat', txt(act.source)] : null,
       ['Financement récent', val(cf.financementRecent)],
       ['Acquisitions', relev(cf.acquisitions)],
-      ['Modèle tarifaire', val(cf.modeleTarifaire)],
-      ['Tarif public', rempli(cf.tarifPublie) ? oui(cf.tarifPublie) : TODO],
-      rempli(cf.offreGratuite) ? ['Offre gratuite', txt(cf.offreGratuite)] : null,
+      (rempli(cf.modeleTarifaire) && !tarifAilleurs('modeleTarifaire'))
+        ? ['Modèle tarifaire', txt(cf.modeleTarifaire)] : null,
+      (rempli(cf.tarifPublie) && !tarifAilleurs('tarifPublie'))
+        ? ['Tarif public', oui(cf.tarifPublie)] : null,
+      (rempli(cf.offreGratuite) && !tarifAilleurs('offreGratuite'))
+        ? ['Offre gratuite', txt(cf.offreGratuite)] : null,
       ligneSource(cf),
       ligneComplements(cf)
     ]) + lectureBox(cf.lecture, cf.confiance) + lectureBox(texte, null)
@@ -413,6 +471,8 @@
   let all_meta = null;
 
   const render = (pa, taxo, all) => {
+    nLectures = 0;
+    dejaVu.clear();
     document.title = `${pa.nom} — plateforme agréée | Re·Form·E`;
     document.getElementById('pa-nom').textContent = pa.nom;
     document.getElementById('pa-bc').textContent = pa.nom;
@@ -435,7 +495,10 @@
       ['Établissement déclaré à la DGFiP', val(pa.adresse)],
       ['Pays', val(pa.pays)],
       ['Site web', pa.siteWeb ? lien(pa.siteWeb) : TODO],
-      ['Fiabilité de l\u2019identité juridique', confiance(pa.confianceIdentite)]
+      ['Fiabilité de l\u2019identité juridique', confiance(pa.confianceIdentite)],
+      (pa.identiteInternationale && pa.identiteInternationale.applicable === false)
+        ? ['Registre étranger', `<em>Sans objet.</em>${rempli(pa.identiteInternationale.motif) ? ` ${txt(pa.identiteInternationale.motif)}` : ''}`]
+        : null
     ]);
 
     document.getElementById('pa-positionnement').innerHTML = dl([
