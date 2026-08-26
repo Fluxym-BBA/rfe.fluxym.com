@@ -24,6 +24,7 @@ import argparse
 import collections
 import json
 import re
+import unicodedata
 import sys
 from datetime import date
 
@@ -40,6 +41,7 @@ BLOCS = [
     "referencesClients",
     "reputation",
     "capaciteDeFrappe",
+    "dynamique",
     "lectureConcurrentielle",
     "droitDeReponse",
 ]
@@ -71,6 +73,11 @@ SOCLE = {
     "droitDeReponse": [
         "signale", "date", "objet", "pointsContestables", "canal",
         "lecture", "source", "confiance",
+    ],
+    "dynamique": [
+        "offresEmploiOuvertes", "offresLieesFacturationElectronique", "naturesPostes",
+        "mixOffres", "signauxCroissance", "signauxTension", "dateReleveOffres",
+        "lecture", "commentaire", "motifBlocPartiel", "source", "dateReleve", "confiance",
     ],
 }
 
@@ -114,6 +121,17 @@ ALIAS = {
         "commentaire": "lecture",
         "essaiGratuit": "offreGratuite",
     },
+    "dynamique": {
+        "offres": "offresEmploiOuvertes",
+        "nbOffres": "offresEmploiOuvertes",
+        "offresOuvertes": "offresEmploiOuvertes",
+        "offresFacturationElectronique": "offresLieesFacturationElectronique",
+        "offresLieesFE": "offresLieesFacturationElectronique",
+        "typesPostes": "naturesPostes",
+        "naturePostes": "naturesPostes",
+        "postes": "naturesPostes",
+        "dateReleveOffresEmploi": "dateReleveOffres",
+    },
     "droitDeReponse": {
         "pointsLegitimementContestables": "pointsContestables",
         "elementsContestablesLegitimement": "pointsContestables",
@@ -140,6 +158,7 @@ STR_FALLBACK = {
     "reputation": "synthese",
     "capaciteDeFrappe": "lecture",
     "droitDeReponse": "lecture",
+    "dynamique": "lecture",
 }
 
 # Indices repris de data/pa-taxonomie.json, facette `centralitePA`.
@@ -155,6 +174,33 @@ VOCAB_POSTURE = {
     "base_installee", "conquete_directe", "canal_indirect", "grossiste", "non_qualifie",
 }
 VOCAB_CONFIANCE = {"haute", "moyenne", "faible", "non_qualifie"}
+
+
+def recaler_vocab(valeur: str, vocabulaire):
+    """Ramène une valeur de vocabulaire fermé sur son jeton canonique.
+
+    Le vocabulaire de `data/pa-taxonomie.json` est en ASCII sans accent et en
+    `snake_case`. Une fiche peut livrer « axe_stratégique », « Axe strategique »
+    ou « axe-strategique » : ce sont trois écritures du même jeton, et une
+    passe de réaccentuation de la prose peut aussi accentuer le jeton par
+    ricochet. On dé-accentue, on repasse en minuscules et on unifie les
+    séparateurs avant de confronter le résultat au vocabulaire.
+
+    Renvoie (jeton_canonique, a_ete_recale) ou (valeur, False) si aucun
+    rapprochement n'est possible — dans ce cas la valeur est laissée telle
+    quelle et signalée pour arbitrage humain.
+    """
+    if not isinstance(valeur, str):
+        return valeur, False
+    if valeur in vocabulaire:
+        return valeur, False
+    plat = unicodedata.normalize("NFD", valeur)
+    plat = "".join(c for c in plat if unicodedata.category(c) != "Mn")
+    plat = re.sub(r"[\s\-]+", "_", plat.strip().lower())
+    plat = re.sub(r"_+", "_", plat)
+    if plat in vocabulaire:
+        return plat, True
+    return valeur, False
 
 LOT_RE = re.compile(r"^360-L(\d+)$")
 
@@ -399,6 +445,11 @@ def normalize_block(bloc: str, raw, log: collections.Counter, nom: str, notes: l
     if bloc == "centralitePA":
         if not is_empty(out["valeur"]):
             out["valeur"] = as_text(out["valeur"])
+            recale, modifie = recaler_vocab(out["valeur"], VOCAB_CENTRALITE)
+            if modifie:
+                log["centralitePA: valeur recalée sur le vocabulaire de pa-taxonomie.json"] += 1
+                notes.append((nom, bloc, f"valeur {out['valeur']!r} recalée sur {recale!r} (vocabulaire fermé, ASCII sans accent)"))
+                out["valeur"] = recale
             if out["valeur"] not in VOCAB_CENTRALITE:
                 notes.append((nom, bloc, f"valeur hors vocabulaire : {out['valeur']!r}"))
         attendu = VOCAB_CENTRALITE.get(out["valeur"]) if out["valeur"] in VOCAB_CENTRALITE else None
@@ -417,6 +468,11 @@ def normalize_block(bloc: str, raw, log: collections.Counter, nom: str, notes: l
 
     if bloc == "postureCommerciale" and not is_empty(out["valeur"]):
         out["valeur"] = as_text(out["valeur"])
+        recale, modifie = recaler_vocab(out["valeur"], VOCAB_POSTURE)
+        if modifie:
+            log["postureCommerciale: valeur recalée sur le vocabulaire de pa-taxonomie.json"] += 1
+            notes.append((nom, bloc, f"valeur {out['valeur']!r} recalée sur {recale!r} (vocabulaire fermé, ASCII sans accent)"))
+            out["valeur"] = recale
         if out["valeur"] not in VOCAB_POSTURE:
             notes.append((nom, bloc, f"valeur hors vocabulaire : {out['valeur']!r}"))
 
@@ -624,6 +680,13 @@ def recompute_couverture(data: dict) -> dict:
         "analyse360_reputation": sum(1 for p in a360 if has(p, "analyse360", "reputation", "avis") or has(p, "analyse360", "reputation", "synthese")),
         "analyse360_capaciteDeFrappe": sum(1 for p in a360 if has(p, "analyse360", "capaciteDeFrappe", "canal") or has(p, "analyse360", "capaciteDeFrappe", "lecture")),
         "analyse360_lectureConcurrentielle": sum(1 for p in a360 if has(p, "analyse360", "lectureConcurrentielle")),
+        # Compteurs de fond : un bloc existe sur toutes les fiches après
+        # normalisation, on compte donc le renseignement effectif, pas la présence.
+        "analyse360_dynamique": sum(1 for p in a360 if has(p, "analyse360", "dynamique", "offresEmploiOuvertes")
+                                    or has(p, "analyse360", "dynamique", "naturesPostes")
+                                    or has(p, "analyse360", "dynamique", "lecture")),
+        "analyse360_droitDeReponse": sum(1 for p in a360 if has(p, "analyse360", "droitDeReponse", "lecture")
+                                         or has(p, "analyse360", "droitDeReponse", "pointsContestables")),
         "analyse360_caEntiteFrancaise": sum(1 for p in a360 if has(p, "analyse360", "poidsEconomique", "caEntiteFrancaise", "montantMEUR")),
         "analyse360_caGroupe": sum(1 for p in a360 if has(p, "analyse360", "poidsEconomique", "caGroupe", "montantMEUR")),
         "siteWeb_rempli": sum(1 for p in plateformes if not is_empty(p.get("siteWeb"))),

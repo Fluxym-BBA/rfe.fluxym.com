@@ -351,8 +351,17 @@
       ligneComplements(rep),
       ['Offres d\u2019emploi ouvertes', rempli(dyn.offresEmploiOuvertes)
         ? `${esc(dyn.offresEmploiOuvertes)}${rempli(dyn.offresLieesFacturationElectronique) ? `, dont ${esc(dyn.offresLieesFacturationElectronique)} liée(s) à la facturation électronique` : ''}${dyn.dateReleveOffres ? ` <span class="pa-conf pa-conf--ok">relevé le ${esc(dyn.dateReleveOffres)}</span>` : ''}`
-        : NON_RELEVE]
+        : NON_RELEVE],
+      rempli(dyn.naturesPostes) ? ['Natures de postes ouverts', txt(dyn.naturesPostes)] : null,
+      rempli(dyn.mixOffres) ? ['Répartition des offres', txt(dyn.mixOffres)] : null,
+      rempli(dyn.signauxCroissance) ? ['Signaux de croissance', txt(dyn.signauxCroissance)] : null,
+      rempli(dyn.signauxTension) ? ['Signaux de tension', txt(dyn.signauxTension)] : null,
+      rempli(dyn.commentaire) ? ['Réserve de méthode sur les offres', txt(dyn.commentaire)] : null,
+      rempli(dyn.motifBlocPartiel) ? ['Relevé incomplet — motif', txt(dyn.motifBlocPartiel)] : null,
+      ligneSource(dyn),
+      ligneComplements(dyn)
     ]) + lectureBox(rc.lecture, rc.confiance) + lectureBox(rep.lecture, rep.confiance)
+      + lectureBox(dyn.lecture, dyn.confiance)
       + `<div class="callout callout--warning"><div class="callout-icon">⚠️</div><div class="callout-content">Les références clients sont <strong>déclaratives</strong> : elles sont publiées par la plateforme elle-même et portent sur l\u2019ensemble de son catalogue, pas nécessairement sur son activité de plateforme agréée. Les avis ne sont repris qu\u2019en agrégat, jamais individuellement. Un volume d\u2019offres d\u2019emploi n\u2019est pas une mesure de rotation du personnel et n\u2019est pas présenté comme telle.</div></div>`;
     montrer('sec-marche', 'nav-marche');
   };

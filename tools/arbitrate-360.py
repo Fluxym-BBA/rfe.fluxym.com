@@ -186,12 +186,32 @@ def reaccentuer(texte: str, lexique: dict, stats: collections.Counter) -> str:
     return re.sub(r"[A-Za-z]{3,}", remplace, texte)
 
 
-def reaccentuer_arbre(o, lexique, stats):
+# Clés dont la valeur appartient à un vocabulaire fermé (data/pa-taxonomie.json)
+# ou à une nomenclature technique : jamais réaccentuées. Une passe de prose qui
+# transforme `axe_strategique` en `axe_stratégique` casse silencieusement le
+# rapprochement avec la taxonomie, et la page perd le libellé, la définition et
+# la position sur l'échelle.
+CLES_VOCABULAIRE = {
+    "valeur", "niveau", "indice", "confiance", "statut", "type", "typeActionnaire",
+    "nature", "champ", "slug", "id", "code", "codeNaf", "siren", "siret", "tva",
+    "lot", "version", "dateReleve", "dateReleveOffres", "dateReleveOrigine",
+}
+
+# Un jeton `snake_case` sans espace n'est jamais de la prose : c'est une valeur
+# de vocabulaire, une clé technique ou un identifiant.
+JETON_RE = re.compile(r"^[a-z0-9]+(?:_[a-z0-9]+)+$")
+
+
+def reaccentuer_arbre(o, lexique, stats, cle_parente=None):
     if isinstance(o, dict):
-        return {k: reaccentuer_arbre(v, lexique, stats) for k, v in o.items()}
+        return {k: reaccentuer_arbre(v, lexique, stats, k) for k, v in o.items()}
     if isinstance(o, list):
-        return [reaccentuer_arbre(v, lexique, stats) for v in o]
+        return [reaccentuer_arbre(v, lexique, stats, cle_parente) for v in o]
     if isinstance(o, str) and len(o) > 2 and not o.startswith("http"):
+        if cle_parente in CLES_VOCABULAIRE:
+            return o
+        if JETON_RE.match(o.strip()):
+            return o
         return reaccentuer(o, lexique, stats)
     return o
 

@@ -1,4 +1,4 @@
-# SCHÉMA `analyse360` — version 1.0
+# SCHÉMA `analyse360` — version 1.1
 
 **Contrat de données entre `data/plateformes-agreees.json` et `js/pa-detail.js`.**
 Toute nouvelle fiche 360 doit respecter ce schéma. Ce document complète `PROMPT-FICHE-360.md` : il ne dit pas *quoi* chercher, il dit *où le ranger*.
@@ -15,7 +15,7 @@ Le renderer ne devine pas. Si une information est rangée sous une clé qu'il ne
 
 ---
 
-## 2. Les 10 blocs et leur type
+## 2. Les 11 blocs et leur type
 
 | Bloc | Type imposé | Si vide |
 |---|---|---|
@@ -27,6 +27,7 @@ Le renderer ne devine pas. Si une information est rangée sous une clé qu'il ne
 | `referencesClients` | `object` | socle à `null` |
 | `reputation` | `object` | socle à `null` |
 | `capaciteDeFrappe` | `object` | socle à `null` |
+| `dynamique` | `object` | socle à `null` |
 | `lectureConcurrentielle` | `string` | `null` |
 | `droitDeReponse` | `object` | socle à `null` |
 
@@ -103,6 +104,23 @@ complements              object
 ```
 ⚠️ L'actionnariat est **regroupé** : plus de `typeActionnaire` / `actionnaires` / `detailActionnariat` à plat.
 
+### `dynamique`
+```
+offresEmploiOuvertes                number  — volume relevé à une date, jamais une estimation
+offresLieesFacturationElectronique  number  — 0 est une valeur licite ici : c'est un
+                                      décompte observé sur des intitulés, pas une absence
+                                      de donnée. Si le relevé n'a pas pu être fait : null.
+naturesPostes                       array de chaînes — familles de postes, une par entrée
+dateReleveOffres                    string  — AAAA-MM-JJ, OBLIGATOIRE dès qu'un compteur
+                                      est posé, y compris à null (la date atteste alors
+                                      du constat d'absence)
+lecture, commentaire, motifBlocPartiel
+source, dateReleve, confiance
+complements                         object
+```
+⚠️ Un volume d'offres d'emploi **n'est jamais** présenté comme une mesure de rotation du personnel, ni comme une part d'effort d'ingénierie consacrée à la plateforme agréée. Le renderer affiche systématiquement cet avertissement sous le bloc.
+⚠️ Graphies héritées tolérées en lecture et redirigées par le normaliseur : `offres`, `nbOffres`, `offresOuvertes`, `offresFacturationElectronique`, `typesPostes`, `postes`. Les clés `mixOffres`, `signauxCroissance` et `signauxTension` des cinq premières fiches ayant produit ce bloc sont conservées au socle et affichées.
+
 ### `droitDeReponse`
 ```
 signale             bool    — false par défaut, true seulement si un droit de réponse a été exercé
@@ -160,6 +178,8 @@ Jamais un tableau de chaînes : `slugify()` plante et la page entière ne s'affi
 ## 5. Vocabulaires fermés
 
 Toute valeur d'énumération doit exister dans `data/pa-taxonomie.json`, facette correspondante. Une valeur hors vocabulaire est signalée par le script de normalisation et s'affiche brute sur la page (dégradation contrôlée, pas de perte).
+
+⚠️ **Les jetons de vocabulaire sont en ASCII, sans accent, en `snake_case`** : `axe_strategique`, `coeur_de_metier`, `base_installee`, `conquete_directe`. Ce ne sont pas des libellés destinés à la lecture — le libellé affiché et sa définition viennent de `pa-taxonomie.json`. Écrire `axe_stratégique` casse le rapprochement : la page perd le libellé, la définition et la position sur l'échelle 0-4. `tools/normalize-360.py` dé-accente et recale automatiquement ces valeurs (10 occurrences recalées le 26/08/2026), et `tools/arbitrate-360.py` exclut désormais ces clés de la réaccentuation de la prose.
 
 `confiance` : `haute` | `moyenne` | `faible` | `non_qualifie`. Jamais `null`.
 
