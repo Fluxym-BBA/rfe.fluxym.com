@@ -192,8 +192,12 @@
       ? ca.montantMEUR
       : (typeof ca.valeur === 'number' ? Math.round((ca.valeur / 1e6) * 100) / 100 : null);
     const note = rempli(ca.commentaire) ? txt(ca.commentaire) : '';
+    // `dateReleveOrigine` signale une date reconstituée : elle n'est pas présentée
+    // comme un relevé, mais comme la date de production de la fiche.
     const releve = rempli(ca.dateReleve)
-      ? ` <span class="pa-conf pa-conf--ok">relevé le ${esc(ca.dateReleve)}</span>`
+      ? (ca.dateReleveOrigine === 'date_de_production_de_la_fiche'
+        ? ` <span class="pa-conf pa-conf--warn">constaté à la production de la fiche, le ${esc(ca.dateReleve)}</span>`
+        : ` <span class="pa-conf pa-conf--ok">relevé le ${esc(ca.dateReleve)}</span>`)
       : ' <span class="pa-conf pa-conf--warn">date de relevé non renseignée</span>';
     const src = rempli(ca.source) ? `<br>${txt(ca.source)}` : '';
     if (!rempli(montant)) {

@@ -124,6 +124,9 @@ caGroupe / caEntiteFrancaise / caEntiteImmatriculee : object
                          | declare_site | chiffre_declare_site | communique_financier
                          | non_publie | sans_objet
     dateReleve    string  — OBLIGATOIRE : une donnée financière sans date n'est pas rejouable
+    dateReleveOrigine  enum — présent uniquement si la date a été reconstituée.
+                       Seule valeur : "date_de_production_de_la_fiche". La page affiche
+                       alors « constaté à la production de la fiche » et non « relevé le ».
     source, commentaire
 resultatNet             number | string
 effectifEntite          string   ⚠️ clé unique, la clé `effectif` est supprimée
@@ -166,21 +169,24 @@ Toute valeur d'énumération doit exister dans `data/pa-taxonomie.json`, facette
 
 1. Rédaction du lot selon `PROMPT-FICHE-360.md` **et le présent schéma**.
 2. Fusion dans `data/plateformes-agreees.json`.
-3. `python3 tools/normalize-360.py data/plateformes-agreees.json --report Info\ IA/plateformes-agreees/RAPPORT-NORMALISATION-360.md`
-   Le script est **idempotent** et **non destructif** : rejouable autant de fois que nécessaire, il ne supprime aucune valeur.
-4. Lire la section « Points à arbitrer manuellement » du rapport : millésimes contradictoires, `dateReleve` absente, valeurs hors vocabulaire.
-5. Commit.
+3. **Fermeture du schéma** :
+   `python3 tools/normalize-360.py data/plateformes-agreees.json --report "Info IA/plateformes-agreees/RAPPORT-NORMALISATION-360.md"`
+   Idempotent et non destructif : aucune valeur supprimée, tout ce qui n'a pas de slot part dans `complements`.
+4. **Arbitrages de fond** :
+   `python3 tools/arbitrate-360.py data/plateformes-agreees.json --report "Info IA/plateformes-agreees/RAPPORT-ARBITRAGES-360.md"`
+   Tranche les millésimes périmés, reconstitue les `dateReleve` manquantes, requalifie les
+   `montantMEUR: 0` non exploitables, réaccentue la prose et rattache les sources à leur bloc.
+   Également idempotent. **Toujours dans cet ordre** : `normalize` puis `arbitrate`.
+5. Lire le journal des décisions du rapport d'arbitrages, puis commiter.
 
 Le script recalcule `_meta.couverture` et aligne `_meta.dateDerniereConsolidation` sur la dernière fusion. Ces compteurs ne doivent plus jamais être saisis à la main.
 
 ---
 
-## 7. Ce qui reste à arbitrer par un humain
+## 7. Ce qui reste hors de portée d'un script
 
-Le script ne tranche pas ce qui relève du jugement :
+`arbitrate-360.py` tranche tout ce qui peut l'être sans risque. Trois réserves subsistent, assumées :
 
-- **Millésimes contradictoires** entre `effectif` et `effectifEntite` (SYMTRAX, TX2 Concept…) : les deux textes sont fusionnés, l'arbitrage reste à faire.
-- **`dateReleve` absente** sur 32 blocs de chiffre d'affaires.
-- **`montantMEUR: 0`** à requalifier en `null` + `nature` quand le CA n'est pas connu.
-- **Accents manquants** sur 6 fiches rédigées sans diacritiques (AVALARA, DOCOON, DOCOON IMMO / FREEDZ, OPEN BEE, OPENTEXT, SAP). Le fichier est en UTF-8 NFC valide, sans mojibake : c'est un défaut de rédaction, pas d'encodage.
-- **`sourcesEnrichissement`** dont le `champ` ne référence aucun bloc 360 : la traçabilité par bloc reste à reconstituer.
+- **Réaccentuation partielle.** Le lexique est appris sur le corpus, avec trois garde-fous : homographes français exclus, formes à deux candidats concurrents non tranchées, et formes dont l'accent ne porte que sur la dernière lettre laissées en l'état (« rencontre » / « rencontré » est indécidable hors contexte). Les 8 fiches concernées passent d'un taux d'accentuation de 0 % à 19-23 %, contre 25 % de médiane sur le corpus. **Aucune erreur n'est introduite**, mais le reliquat — notamment « a » / « à » et « ou » / « où » — demande une relecture humaine.
+- **`sourcesEnrichissement` sans `champ` identifiable.** 25 entrées sur 143 ne correspondent à aucun motif de rattachement et restent à `non_precise`.
+- **`confiance` à `non_qualifie`.** Le script ne peut pas inventer un niveau de confiance : il le pose à `non_qualifie`, ce qui est honnête mais reste à qualifier à la lecture.
