@@ -1,0 +1,946 @@
+/* ==========================================================================
+   SAISIE-EVENTS.CSS — Cockpit BDR — lignes du cycle de vente
+
+   Les cinq compteurs du cycle de vente ne se tapent plus : ils sont le décompte
+   de lignes nommées (migration v10). Ce fichier habille ces lignes, le champ
+   d'ajout et sa liste de suggestions.
+
+   Pourquoi un fichier séparé de app.css : app.css est le fichier le plus
+   partagé du dépôt, et chaque livraison le réécrit en entier. Deux chantiers
+   menés en parallèle qui y touchent, et la seconde archive efface la première.
+   Ce fichier n'est chargé que par index.html et n'ajoute aucune règle sur les
+   sélecteurs existants, donc il ne peut rien casser ailleurs. Il n'utilise que
+   les variables de :root déclarées dans app.css et pourra y être fondu.
+
+   Deux règles d'ergonomie du projet sont tenues ici :
+     - aucun texte n'est tronqué : un nom d'entreprise long passe à la ligne,
+       jamais d'ellipse ;
+     - en mode carte (moins de 640 px), toute cible tactile fait au moins 44 px.
+   ========================================================================== */
+
+.metric--events { padding-bottom: 16px; }
+
+/* Le nombre de lignes, à la place du stepper. Même gabarit que .metric-input
+   pour que les deux sortes de lignes s'alignent dans une même carte. */
+.event-count {
+    flex-shrink: 0;
+    min-width: 68px;
+    text-align: center;
+    font-size: 19px;
+    font-weight: 800;
+    color: var(--navy);
+    padding: 7px 4px;
+    background: var(--gray-100);
+    border: 1.5px solid var(--gray-200);
+    border-radius: var(--radius-sm);
+    line-height: 1.15;
+}
+
+/* --- La liste de ce qui a été déclaré --- */
+
+.event-list {
+    list-style: none;
+    margin: 10px 0 0;
+    padding: 0;
+    display: grid;
+    gap: 6px;
+}
+
+.event-list:empty { margin: 0; }
+
+.event-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--gray-50);
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius-sm);
+    padding: 8px 8px 8px 12px;
+    min-height: 40px;
+}
+
+/* Ligne partie vers la base, réponse pas encore arrivée. */
+.event-item--pending { opacity: 0.55; }
+
+.event-name {
+    flex: 1;
+    min-width: 0;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--gray-900);
+    overflow-wrap: anywhere;   /* un nom long passe à la ligne, il ne se coupe pas */
+}
+
+.event-name--anon {
+    font-weight: 500;
+    font-style: italic;
+    color: var(--gray-400);
+}
+
+.event-del {
+    flex-shrink: 0;
+    width: 32px; height: 32px;
+    border-radius: var(--radius-sm);
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--gray-400);
+    background: transparent;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.16s ease, color 0.16s ease;
+}
+
+.event-del:hover:not(:disabled) { background: rgba(239, 68, 68, 0.1); color: var(--danger); }
+.event-del:disabled { opacity: 0.3; cursor: not-allowed; }
+
+/* --- Le champ d'ajout et ses suggestions --- */
+
+.event-add { margin-top: 10px; }
+
+.event-input {
+    width: 100%;
+    font-family: inherit;
+    font-size: 14.5px;
+    font-weight: 600;
+    color: var(--navy);
+    padding: 11px 14px;
+    border: 1.5px solid var(--gray-200);
+    border-radius: var(--radius-sm);
+    background: var(--white);
+}
+
+.event-input::placeholder { font-weight: 500; color: var(--gray-400); }
+
+.event-input:focus {
+    outline: none;
+    border-color: var(--cyan);
+    box-shadow: 0 0 0 3px var(--cyan-glow);
+}
+
+/* En flux normal, pas en position absolue : .card porte overflow: hidden, une
+   liste flottante serait coupée dès que le champ est en bas de carte. */
+.event-sugg {
+    margin-top: 6px;
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius-sm);
+    background: var(--white);
+    box-shadow: var(--shadow-sm);
+    max-height: 216px;
+    overflow-y: auto;
+}
+
+.event-sugg[hidden] { display: none; }
+
+.event-sugg-item {
+    padding: 10px 14px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--gray-600);
+    cursor: pointer;
+    border-bottom: 1px solid var(--gray-100);
+    overflow-wrap: anywhere;
+}
+
+.event-sugg-item:last-child { border-bottom: none; }
+.event-sugg-item:hover { background: var(--gray-50); }
+
+/* Suggestion désignée au clavier. Le fond suffit : une couleur de texte
+   différente rendrait la liste illisible sur un nom déjà long. */
+.event-sugg-item--on {
+    background: rgba(0, 167, 225, 0.12);
+    color: var(--navy);
+}
+
+/* Étiquette de la dernière ligne, celle qui créerait l'entreprise. Elle est
+   visuellement en retrait : le geste rapide doit aller vers ce qui existe. */
+.event-sugg-new {
+    display: inline-block;
+    font-size: 10.5px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: var(--gray-500);
+    background: var(--gray-100);
+    border-radius: var(--radius-full);
+    padding: 2px 8px;
+    margin-right: 6px;
+    vertical-align: 1px;
+}
+
+.event-help {
+    margin-top: 6px;
+    font-size: 11.5px;
+    font-weight: 500;
+    color: var(--gray-400);
+}
+
+.event-help b { font-weight: 700; color: var(--gray-500); }
+
+/* --------------------------------------------------------------------------
+   Mode carte : le pouce a besoin de 44 px, et le nom d'entreprise de toute la
+   largeur disponible.
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 639px) {
+    .event-item { padding: 6px 6px 6px 12px; min-height: 48px; }
+    .event-del { width: 44px; height: 44px; }
+    .event-input { padding: 13px 14px; font-size: 16px; }  /* 16 px : iOS ne zoome pas */
+    .event-sugg-item { padding: 13px 14px; min-height: 44px; }
+    .event-count { min-width: 60px; font-size: 18px; }
+}
+
+/* ==========================================================================
+   Avertissement de doublon (lot B)
+
+   Un bloc, sous le champ d'ajout du type concerné, qui reste jusqu'à ce qu'on
+   le masque ou qu'on change de jour. Volontairement pas un toast : une
+   information censée éveiller la vigilance ne doit pas s'évaporer au bout de
+   cinq secondes, et on doit pouvoir la relire en tapant la ligne suivante.
+
+   Couleur d'avertissement et non de danger : rien n'est cassé, rien n'est
+   refusé, la ligne est enregistrée. Le rouge dirait le contraire.
+   ========================================================================== */
+
+.event-warn {
+    position: relative;
+    margin-top: 10px;
+    padding: 11px 38px 11px 13px;
+    border: 1px solid rgba(245, 158, 11, 0.35);
+    border-left: 3px solid var(--warning);
+    border-radius: var(--radius-sm);
+    background: rgba(245, 158, 11, 0.07);
+}
+
+.event-warn[hidden] { display: none; }
+
+.event-warn-title {
+    font-size: 13px;
+    font-weight: 800;
+    color: var(--navy);
+    margin-bottom: 3px;
+    overflow-wrap: anywhere;
+}
+
+.event-warn-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 3px;
+}
+
+.event-warn-list li {
+    font-size: 12.5px;
+    font-weight: 500;
+    line-height: 1.45;
+    color: var(--gray-600);
+    overflow-wrap: anywhere;
+}
+
+.event-warn-close {
+    position: absolute;
+    top: 5px; right: 5px;
+    width: 28px; height: 28px;
+    border-radius: var(--radius-sm);
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--gray-400);
+    background: transparent;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.16s ease, color 0.16s ease;
+}
+
+.event-warn-close:hover { background: rgba(245, 158, 11, 0.16); color: var(--gray-600); }
+
+@media (max-width: 639px) {
+    .event-warn { padding: 12px 48px 12px 13px; }
+    .event-warn-close { width: 44px; height: 44px; top: 2px; right: 2px; }
+    .event-warn-list li { font-size: 13px; }
+}
+
+/* ==========================================================================
+   Question de ressemblance (v11)
+
+   « carefour » tapé alors que CARREFOUR existe. Le bloc prend la place de la
+   ligne qui n'a pas encore été créée : il faut répondre pour qu'elle le soit.
+
+   Il ressemble à l'avertissement de doublon, en plus affirmé : bordure sur les
+   quatre côtés et fond plus dense, parce que celui-ci attend une réponse alors
+   que l'autre se contente d'informer. Pas de croix de fermeture, pour la même
+   raison : les deux boutons sont les deux sorties, et les deux enregistrent la
+   ligne.
+   ========================================================================== */
+
+.event-ask {
+    margin-top: 10px;
+    padding: 12px 13px;
+    border: 1.5px solid rgba(245, 158, 11, 0.5);
+    border-radius: var(--radius-sm);
+    background: rgba(245, 158, 11, 0.11);
+}
+
+.event-ask[hidden] { display: none; }
+
+.event-ask-title {
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1.45;
+    color: var(--navy);
+    overflow-wrap: anywhere;
+}
+
+/* En colonne : les noms d'entreprise ont des longueurs très inégales, et des
+   boutons de largeurs différentes sur une même ligne se lisent mal. En colonne,
+   la cible est pleine largeur, donc facile à viser au pouce. */
+.event-ask-btns {
+    margin-top: 10px;
+    display: grid;
+    gap: 6px;
+}
+
+.event-ask-btn {
+    width: 100%;
+    text-align: left;
+    font-family: inherit;
+    font-size: 13.5px;
+    font-weight: 700;
+    padding: 10px 13px;
+    min-height: 40px;
+    border-radius: var(--radius-sm);
+    border: 1.5px solid transparent;
+    overflow-wrap: anywhere;
+    transition: background 0.16s ease, border-color 0.16s ease;
+}
+
+/* Le geste attendu dans la grande majorité des cas : rattacher au nom déjà
+   connu. Il est donc le seul en plein. */
+.event-ask-btn--use {
+    color: var(--white);
+    background: var(--navy);
+    border-color: var(--navy);
+}
+
+.event-ask-btn--use:hover { background: var(--navy-light); }
+
+.event-ask-btn--new {
+    color: var(--gray-600);
+    background: var(--white);
+    border-color: var(--gray-200);
+}
+
+.event-ask-btn--new:hover { background: var(--gray-50); border-color: var(--gray-400); }
+
+.event-ask-btn:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px var(--cyan-glow);
+}
+
+@media (max-width: 639px) {
+    .event-ask-title { font-size: 13.5px; }
+    .event-ask-btn { min-height: 44px; font-size: 14px; }
+}
+
+/* ==========================================================================
+   Objectifs en lecture (v12)
+
+   Le panneau « Mes objectifs journaliers » n'est plus un formulaire : les
+   objectifs sont fixés par le propriétaire. Trois colonnes par ligne, le
+   libellé, la valeur, et d'où elle vient. La provenance n'est pas un détail :
+   savoir que son objectif est celui de son métier ou un objectif personnel
+   change la conversation qu'on aura à son sujet.
+   ========================================================================== */
+
+.targets-read {
+    margin-top: 14px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+    gap: 8px;
+}
+
+.target-read {
+    padding: 10px 12px;
+    background: var(--gray-50);
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius-sm);
+}
+
+.target-read-lab {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--gray-600);
+    line-height: 1.3;
+}
+
+.target-read-val {
+    margin-top: 2px;
+    font-size: 20px;
+    font-weight: 900;
+    color: var(--navy);
+    font-variant-numeric: tabular-nums;
+}
+
+.target-read-src {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--gray-400);
+}
+
+.target-read-none,
+.targets-note {
+    margin-top: 14px;
+    font-size: 12.5px;
+    font-weight: 500;
+    line-height: 1.5;
+    color: var(--gray-500);
+}
+
+/* ==========================================================================
+   ÉCHELLE DE LECTURE DES JAUGES (v13)
+
+   Trois éléments seulement, et un seul mérite une explication.
+
+   .period-hint est la réponse au risque assumé de cette version : en vue
+   Semaine ou Mois, le champ affiche le chiffre du jour et la jauge celui de la
+   période. Deux chiffres, deux sens, et rien dans un « 12 » qui dise lequel on
+   regarde. La phrase nomme les deux dates, sous la barre, là où le regard passe
+   avant d'arriver aux cartes. Elle disparaît en vue Jour : il n'y a alors plus
+   rien à lever.
+   ========================================================================== */
+
+/* Le sélecteur reste solidaire de son libellé quand la barre s'enroule :
+   « Jauges » d'un côté et les trois boutons de l'autre, séparés par un saut de
+   ligne, ne se liraient plus comme un seul contrôle. */
+.scale-pick {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    flex: 0 0 auto;
+}
+
+.scale-pick .date-bar-label { margin: 0; }
+
+.period-hint {
+    margin: 12px 0 0;
+    padding: 11px 15px;
+    background: rgba(0, 167, 225, 0.07);
+    border-left: 3px solid var(--cyan);
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.5;
+    color: var(--gray-600);
+}
+
+.period-hint b { color: var(--navy); }
+
+/* La ligne « 12 sur 40 · reste 28 en 3 jours ouvrés ». Plus discrète que la
+   légende au-dessus : c'est un commentaire de la jauge, pas une deuxième
+   jauge. Elle n'existe qu'en vue Semaine ou Mois, l'attribut hidden s'en
+   charge, et le mode Jour retrouve exactement l'écran d'avant la v13. */
+.gauge-rest {
+    margin-top: 4px;
+    font-size: 11.5px;
+    font-weight: 600;
+    line-height: 1.45;
+    color: var(--cyan);
+}
+
+@media (max-width: 640px) {
+    /* Sur téléphone la barre de date passe en colonne : le sélecteur prend
+       toute la largeur plutôt que de laisser « Mois » seul sur une ligne. */
+    .scale-pick { width: 100%; justify-content: space-between; }
+    .scale-pick .seg { flex: 1; }
+    .scale-pick .seg button { flex: 1; padding: 8px 6px; }
+}
+
+/* ==========================================================================
+   L'ENTONNOIR EN GRILLE (v15, remplace l'escalier vertical de la v14)
+
+   La v14 empilait dix compteurs dans une colonne de 340 px : environ huit cents
+   pixels de haut, trois écrans de défilement sur un portable, et un
+   « Rendez-vous obtenus » qu'on ne voyait jamais sans faire défiler. La v15 garde
+   exactement les mêmes étages et le même modèle de données, et change seulement
+   la façon de les poser à l'écran :
+
+     la carte Prospection prend TOUTE LA LARGEUR et passe en premier
+     chaque étage devient UNE LIGNE
+     les compteurs d'un même étage se rangent EN COLONNES, une par catégorie
+     le total de l'étage vient DANS SON EN-TÊTE, à droite du titre
+
+   Ce qui n'a PAS été fait, volontairement : réduire les marges intérieures des
+   compteurs. Le gain de hauteur vient de la mise en colonnes, pas d'un
+   tassement. Chaque compteur doit rester assez large pour accueillir les
+   réglages à venir (échelle par compteur, jauge affichée ou non), sinon il
+   faudra tout redéfaire au lot suivant.
+
+   Les classes s'appellent « etage » et non « funnel-step » : app.css a déjà un
+   .funnel-step, l'entonnoir horizontal du tableau de bord, qui vaut
+   display:flex. Mes étages s'y seraient rangés côte à côte au lieu de s'empiler.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   La grille des cartes sur la page de saisie
+
+   Deux colonnes fixes au lieu de l'auto-fit de app.css, qui fabriquait quatre
+   colonnes de 340 px sur un grand écran : la carte pleine largeur aurait alors
+   laissé le CRM et le Résultat du jour serrés à gauche, avec deux colonnes de
+   blanc à droite.
+
+   La classe est posée sur le conteneur dans index.html plutôt que déduite de son
+   contenu : .cards-grid sert aussi au tableau de bord, qu'on ne touche pas ici.
+
+   Les points de rupture sont redéclarés ici parce que saisie-events.css est
+   chargé après app.css : sans eux, ma règle à deux colonnes écraserait le retour
+   à une colonne de app.css et le téléphone se retrouverait avec deux colonnes de
+   170 px.
+   -------------------------------------------------------------------------- */
+.cards-grid--saisie { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+/* Une carte qui traverse la grille. Nom distinct de .chart-card--wide, déjà pris
+   par les graphiques du tableau de bord. */
+.card--wide { grid-column: 1 / -1; }
+
+@media (max-width: 1020px) {
+    .cards-grid--saisie { grid-template-columns: 1fr; }
+}
+
+/* --------------------------------------------------------------------------
+   Les sous-cartes de la carte Prospection
+
+   Deux blocs encadrés, appels et e-mails, dans une carte qui fait désormais
+   1 200 px de large. Sans cadre, la ligne des e-mails se lirait comme un
+   quatrième étage de l'entonnoir téléphonique, ce qu'elle n'est pas.
+   -------------------------------------------------------------------------- */
+.card-body--pros { padding-bottom: 22px; }
+
+.subcard {
+    margin-top: 16px;
+    padding: 2px 18px 16px;
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius-lg);
+    background: var(--white);
+}
+
+/* Le titre de sous-carte vit dans app.css. Ici il est simplement recollé au bord
+   haut du cadre, sinon il flotte à dix-huit pixels du trait. */
+.subcard > .subcard-title { margin-top: 14px; }
+
+/* --------------------------------------------------------------------------
+   Un étage = une ligne
+   -------------------------------------------------------------------------- */
+.etage {
+    position: relative;
+    padding: 16px 0 4px 20px;
+    border-top: 1px dashed var(--gray-200);
+}
+
+/* Le premier étage n'a rien au-dessus de lui : un trait l'aurait séparé du titre
+   de la sous-carte, à laquelle il appartient. */
+.etage:first-child { border-top: none; padding-top: 8px; }
+
+/* Le trait vertical à gauche relie le numéro de l'étage à ses colonnes. Sans
+   lui, trois titres et trois grilles se lisent comme six blocs indépendants. */
+.etage::before {
+    content: '';
+    position: absolute;
+    left: 6px; top: 40px; bottom: 14px;
+    width: 2px;
+    background: var(--gray-200);
+    border-radius: 1px;
+}
+
+.etage:first-child::before { top: 32px; }
+
+.etage-head {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    margin-bottom: 12px;
+}
+
+.etage-num {
+    flex: 0 0 auto;
+    width: 22px; height: 22px;
+    margin-left: -20px;
+    border-radius: var(--radius-full);
+    background: var(--navy);
+    color: var(--white);
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 22px;
+    text-align: center;
+}
+
+/* Le titre prend la place qui reste, le total garde la sienne : c'est ce qui
+   aligne verticalement les deux totaux d'un étage à l'autre. */
+.etage-titre { flex: 1 1 auto; min-width: 0; }
+
+.etage-titre b {
+    display: block;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--navy);
+}
+
+.etage-titre span {
+    display: block;
+    font-size: 11.5px;
+    font-weight: 500;
+    color: var(--gray-400);
+    line-height: 1.4;
+}
+
+/* --------------------------------------------------------------------------
+   Le total de l'étage, dans l'en-tête
+
+   Pas de bouton, pas de champ : la base écrit ce chiffre
+   (trg_daily_activity_entonnoir) et metric_allowed() refuse qu'un client y
+   touche. Un stepper afficherait 20 pendant une seconde avant de retomber à 19.
+   Le cadre en pointillés dit « ce n'est pas à vous de le remplir » sans qu'il
+   faille l'écrire.
+   -------------------------------------------------------------------------- */
+.etage-tot {
+    flex: 0 0 auto;
+    width: 272px;
+    padding: 10px 14px 12px;
+    background: var(--gray-50);
+    border: 1px dashed var(--gray-300);
+    border-radius: var(--radius-md);
+}
+
+.etage-tot-num {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+}
+
+.etage-tot-num b {
+    font-size: 26px;
+    font-weight: 800;
+    line-height: 1;
+    color: var(--navy);
+    font-variant-numeric: tabular-nums;
+}
+
+.etage-tot-num span {
+    display: block;
+    font-size: 12.5px;
+    font-weight: 700;
+    color: var(--gray-600);
+    line-height: 1.3;
+}
+
+.etage-tot-num small {
+    display: block;
+    font-size: 10.5px;
+    font-weight: 600;
+    color: var(--gray-400);
+}
+
+.etage-tot .gauge { margin-top: 8px; }
+
+/* --------------------------------------------------------------------------
+   Les colonnes d'un étage
+
+   auto-fit et non un nombre fixe : le nombre de compteurs dépend du métier
+   affiché, et trois colonnes imposées à un commercial qui n'en a qu'une auraient
+   laissé deux trous. À trois compteurs et 1 200 px de large, cela donne bien les
+   trois colonnes demandées ; à 700 px, deux ; sur un téléphone, une.
+   -------------------------------------------------------------------------- */
+.etage-cols {
+    display: grid;
+    gap: 12px;
+    grid-template-columns: repeat(auto-fit, minmax(236px, 1fr));
+}
+
+/* Un seul compteur dans l'étage : il occupe la ligne entière plutôt que de
+   laisser 900 px de blanc à sa droite. */
+.etage-cols[data-cols="1"] { grid-template-columns: 1fr; }
+
+/* --------------------------------------------------------------------------
+   Un compteur en colonne
+
+   Le stepper passe sous le libellé et prend toute la largeur : le + devient une
+   cible de plus de deux cents pixels. Sur un téléphone tenu d'une main entre
+   deux appels, c'est ce geste-là qui décide si les chiffres sont saisis ou non.
+
+   .metric porte un border-bottom en pointillés dans app.css, qui doit être
+   neutralisé ici, sinon chaque carte affiche un trait sous elle.
+   -------------------------------------------------------------------------- */
+.metric--col {
+    display: flex;
+    flex-direction: column;
+    padding: 14px 16px 16px;
+    border: 1px solid var(--gray-200);
+    border-bottom: 1px solid var(--gray-200);
+    border-radius: var(--radius-md);
+    background: var(--white);
+}
+
+.metric--col:last-child { border-bottom: 1px solid var(--gray-200); }
+
+.metric--col .metric-top {
+    flex: 1 1 auto;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+}
+
+/* Le stepper est poussé en bas de la zone haute : les trois colonnes d'un étage
+   gardent leurs boutons alignés même quand un sous-titre tient sur deux lignes
+   et le voisin sur trois. */
+.metric--col .stepper {
+    width: 100%;
+    margin-top: auto;
+    justify-content: space-between;
+}
+
+.metric--col .metric-input { flex: 1 1 auto; min-width: 0; width: auto; }
+
+.metric--col .gauge { margin-top: 12px; }
+
+/* --------------------------------------------------------------------------
+   Un compteur en ligne large
+
+   Libellé, stepper et jauge côte à côte au lieu d'être empilés : trois fois
+   moins de hauteur pour la même information. Réservé aux compteurs seuls sur
+   leur ligne, les appels passés et les e-mails.
+   -------------------------------------------------------------------------- */
+.metric--wide {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(240px, 38%);
+    align-items: center;
+    gap: 24px;
+}
+
+.metric--wide .gauge { margin-top: 0; }
+
+/* Dans un étage, la ligne large reçoit le même cadre que les colonnes : les deux
+   présentations se suivent dans la même sous-carte, elles doivent se ressembler.
+   Hors étage — les e-mails — le cadre de la sous-carte suffit déjà. */
+.etage-cols .metric--wide {
+    padding: 14px 16px;
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius-md);
+}
+
+/* --------------------------------------------------------------------------
+   Un total resté en ligne
+
+   Aucun étage n'utilise plus cette présentation depuis la v15 ; elle sert de
+   filet à un total qui n'appartiendrait à aucun étage.
+   -------------------------------------------------------------------------- */
+.metric--total {
+    margin: 8px 0 2px;
+    padding: 12px 14px;
+    background: var(--gray-50);
+    border: 1px dashed var(--gray-300);
+    border-radius: var(--radius-md);
+}
+
+.metric--total .gauge { margin-top: 10px; }
+
+.metric-total-val {
+    flex: 0 0 auto;
+    text-align: right;
+    line-height: 1.2;
+}
+
+.metric-total-val b {
+    display: block;
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--navy);
+    font-variant-numeric: tabular-nums;
+}
+
+.metric-total-val small {
+    font-size: 10.5px;
+    font-weight: 600;
+    color: var(--gray-400);
+}
+
+/* --------------------------------------------------------------------------
+   Écrans étroits
+   -------------------------------------------------------------------------- */
+
+/* Sous 860 px, le total ne tient plus à droite du titre sans écraser les deux :
+   il passe sous l'intitulé de l'étage, sur toute la largeur. */
+@media (max-width: 860px) {
+    .etage-head { flex-wrap: wrap; }
+    .etage-tot { width: 100%; }
+    .metric--wide { grid-template-columns: 1fr; gap: 10px; }
+    .metric--wide .gauge { margin-top: 8px; }
+}
+
+@media (max-width: 560px) {
+    .subcard { padding: 2px 12px 14px; }
+    .etage { padding-left: 16px; }
+    .etage::before { left: 4px; }
+    .etage-num { margin-left: -16px; width: 20px; height: 20px; line-height: 20px; font-size: 11px; }
+    .etage-tot-num b { font-size: 22px; }
+    .metric-total-val b { font-size: 19px; }
+}
+
+/* ==========================================================================
+   MONTRER OU MASQUER UN OBJECTIF (v16)
+
+   Un œil par compteur pourvu d'un objectif. Il reste visible une fois
+   l'objectif masqué, barré d'un trait : c'est le seul chemin de retour, et un
+   réglage sans marche arrière n'est pas un réglage.
+
+   Discret au repos — gris clair, sans fond ni bordure — parce qu'il y en a
+   jusqu'à dix sur l'écran et qu'aucun ne doit disputer l'attention aux boutons
+   plus et moins, qui sont la raison d'être de la page.
+   ========================================================================== */
+
+.oeil {
+    order: 3;                 /* toujours en bout de ligne, après le stepper */
+    flex: 0 0 auto;
+    width: 30px;
+    height: 30px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: 1px solid transparent;
+    border-radius: var(--radius-sm);
+    background: transparent;
+    color: var(--gray-300);
+    cursor: pointer;
+    transition: color 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+}
+
+.oeil:hover {
+    color: var(--navy);
+    background: var(--gray-50);
+    border-color: var(--gray-200);
+}
+
+.oeil:focus-visible {
+    outline: 2px solid var(--cyan);
+    outline-offset: 2px;
+}
+
+.oeil svg {
+    width: 17px;
+    height: 17px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* La barre oblique est toujours dans le SVG, seulement rendue transparente :
+   basculer une opacité coûte moins qu'un second dessin, et la transition se
+   fait toute seule. */
+.oeil .oeil-barre { opacity: 0; transition: opacity 0.15s ease; }
+
+.oeil--off { color: var(--gray-400); }
+.oeil--off .oeil-barre { opacity: 1; }
+
+/* En colonne, le coin haut droit est libre : l'œil s'y pose sans toucher à la
+   pile libellé / stepper / jauge, qui reste un simple flex vertical. */
+.metric--col { position: relative; }
+.metric--col .oeil { position: absolute; top: 8px; right: 8px; }
+.metric--col .metric-label { padding-right: 26px; }
+
+/* Dans l'en-tête d'un étage, l'œil du total va au bout de la ligne du chiffre. */
+.etage-tot-num .oeil { margin-left: auto; align-self: center; }
+
+/* Un objectif masqué reste listé dans le volet du bas, en retrait : c'est le
+   rappel de ce que le propriétaire attend, qui ne dépend pas de ce qu'on a
+   choisi de voir sur les cartes. */
+.target-read--off { opacity: 0.55; }
+.target-read--off .target-read-src { font-style: italic; }
+
+/* ==========================================================================
+   LE REPÈRE DE RYTHME SUR LA JAUGE (v17)
+
+   Un trait vertical posé à la position du temps écoulé, en jours ouvrés. À
+   gauche du trait, on est en retard ; à droite, on est en avance. Il n'apparaît
+   qu'à partir de l'échelle Semaine et seulement quand un objectif est posé.
+
+   Sans lui, l'échelle Année afficherait 20 % en janvier et 90 % en septembre,
+   deux chiffres qui ne disent rien tant qu'on ignore où on devrait en être.
+   ========================================================================== */
+
+/* app.css pose overflow:hidden sur la piste, ce qui suffit à contenir le
+   repère ; il manquait seulement le référentiel de positionnement. */
+.gauge-track { position: relative; }
+
+.gauge-mark {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    margin-left: -1px;            /* centré sur sa position, pas décalé d'un pixel */
+    background: var(--navy);
+    opacity: 0.5;
+    border-radius: 1px;
+    pointer-events: none;         /* ne vole pas le survol de la barre */
+}
+
+/* ============================================================================
+   L'ÉCHELLE, COMPTEUR PAR COMPTEUR (v20)
+
+   Quatre lettres dans la légende de la jauge, à la place du « du mois » qui s'y
+   trouvait. Le texte n'a pas été conservé à côté : la légende porte déjà
+   l'objectif à gauche et le pourcentage à droite, et dans les colonnes étroites
+   de l'entonnoir il ne reste pas la place pour les deux. Chaque lettre porte
+   son intitulé complet en info-bulle.
+
+   Taille volontairement discrète. Ces boutons servent quelques fois par
+   semaine, alors que le « + » du compteur sert vingt fois par jour : ils ne
+   doivent pas lui disputer le regard. C'est aussi pourquoi la lettre allumée
+   est marquée par un fond plein plutôt que par une couleur vive.
+   ========================================================================== */
+
+.ech-seg {
+    display: inline-flex;
+    gap: 2px;
+    margin-left: 7px;
+    vertical-align: middle;
+}
+
+.ech-btn {
+    width: 17px;
+    height: 17px;
+    padding: 0;
+    font: inherit;
+    font-size: 9.5px;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--gray-400);
+    background: transparent;
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: background .12s, color .12s, border-color .12s;
+}
+
+.ech-btn:hover { color: var(--gray-600); border-color: var(--gray-300); }
+
+.ech-btn.is-on {
+    color: var(--white);
+    background: var(--gray-500);
+    border-color: var(--gray-500);
+}
+
+/* Un compteur qui s'écarte du défaut de la page. Le liseré remplace le mot
+   « à part » qu'on ne peut pas écrire ici faute de place, et il évite d'avoir
+   à comparer les quatre lettres avec le bandeau du haut pour comprendre
+   pourquoi cette jauge ne parle pas de la même période que sa voisine. */
+.ech-seg--part .ech-btn.is-on {
+    background: var(--navy);
+    border-color: var(--navy);
+}
+
+/* Colonnes étroites de l'entonnoir : la légende passe à la ligne plutôt que de
+   comprimer les lettres, qui deviendraient illisibles et intouchables au doigt. */
+.metric--col .gauge-legend {
+    flex-wrap: wrap;
+    row-gap: 2px;
+}
