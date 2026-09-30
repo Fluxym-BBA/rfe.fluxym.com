@@ -2,106 +2,681 @@
   "suppliers": [
     {
       "id": "acme_fr",
-      "name": "ACME FRANCE",
-      "legalName": "ACME FRANCE SAS",
-      "siren": "331518498",
-      "vatNumber": "FR53331518498",
+      "vendorNumber": "BTB00002",
+      "name": "ACME FR",
+      "legalName": "ACME FR SAS",
+      "siren": "235116159",
+      "nic": "00002",
+      "vatNumber": "FR88235116159",
       "address": {
-        "street": "12 rue de la République",
-        "city": "LYON",
+        "street": "12 Rue de la République",
+        "city": "Lyon",
         "zip": "69009",
         "country": "FR",
-        "street2": "Batiment A - 3e etage"
+        "street2": "Bâtiment A - 3e étage"
       },
-      "nic": "00018",
       "iban": "FR7630004170100001234567805",
       "bic": "BNPAFRPPXXX",
-      "legalForm": "SAS au capital de 250 000 euros - RCS Lyon 331 518 498",
+      "legalForm": "SAS au capital de 250 000 euros - RCS Lyon 235 116 159",
       "contact": {
         "name": "Service Facturation Clients",
-        "phone": "+33 4 72 85 31 20",
-        "email": "facturation@acme-france.fr"
+        "phone": "+33 1 02 08 57 45",
+        "email": "facturation@acme-fr.fr"
       }
     },
     {
-      "id": "fluxym_fr",
-      "name": "FLUXYM",
-      "legalName": "FLUXYM SAS",
-      "siren": "442654927",
-      "vatNumber": "FR67442654927",
+      "id": "acme_ulysses",
+      "vendorNumber": "BTB00003",
+      "name": "ACME",
+      "legalName": "ACME SAS",
+      "siren": "235116159",
+      "nic": "00001",
+      "vatNumber": "FR88235116159",
       "address": {
-        "street": "3 rue de la Faisanderie",
-        "city": "PARIS",
-        "zip": "75116",
-        "country": "FR",
-        "street2": "Immeuble Le Faisan - 2e etage"
+        "street": "15 rue les Ulysses",
+        "city": "Lyon",
+        "zip": "69009",
+        "country": "FR"
       },
-      "nic": "00007",
-      "iban": "FR7630002005500000765432174",
-      "bic": "CRLYFRPPXXX",
-      "legalForm": "SAS au capital de 100 000 euros - RCS Paris 442 654 927",
+      "iban": "FR7630004170100001234567805",
+      "bic": "BNPAFRPPXXX",
+      "legalForm": "SAS au capital de 100 000 euros - RCS Lyon 235 116 159",
+      "contact": {
+        "name": "Service Commercial",
+        "phone": "+33 1 02 08 57 45",
+        "email": "contact@acme.fr"
+      }
+    },
+    {
+      "id": "adecom_fr",
+      "vendorNumber": "Adecom45",
+      "name": "Adecom",
+      "legalName": "Adecom SAS",
+      "siren": "341612687",
+      "nic": "00045",
+      "vatNumber": "FR93341612687",
+      "address": {
+        "street": "ZI les Echarmeaux",
+        "city": "Montgeron",
+        "zip": "91230",
+        "country": "FR"
+      },
+      "iban": "FR7630006000111234567890136",
+      "bic": "AGRIFRPPXXX",
+      "legalForm": "SAS au capital de 150 000 euros - RCS Evry 341 612 687",
       "contact": {
         "name": "Service Administration des Ventes",
-        "phone": "+33 1 53 70 24 10",
-        "email": "adv@fluxym.com"
+        "phone": "+33 1 65 48 97 12",
+        "email": "adv@adecom.fr"
+      }
+    },
+    {
+      "id": "ecopack_fr",
+      "vendorNumber": "ECOFR80102",
+      "name": "EcoPack France",
+      "legalName": "EcoPack France SAS",
+      "siren": "801020009",
+      "nic": "00010",
+      "vatNumber": "FR81801020009",
+      "address": {
+        "street": "12, Avenue des Solutions Durables",
+        "city": "Paris",
+        "zip": "75011",
+        "country": "FR"
+      },
+      "iban": "FR7610907000529876543210943",
+      "bic": "CCBPFRPPBDX",
+      "legalForm": "SAS au capital de 80 000 euros - RCS Paris 801 020 009",
+      "contact": {
+        "name": "Service Facturation Clients",
+        "phone": "+33 1 42 78 90 13",
+        "email": "facturation@ecopack-france.fr"
+      }
+    },
+    {
+      "id": "xcelpro_fr",
+      "vendorNumber": "XCEL10001",
+      "name": "XcelPro – Formation",
+      "legalName": "XcelPro Formation SAS",
+      "siren": "138712093",
+      "nic": "00001",
+      "vatNumber": "FR69138712093",
+      "address": {
+        "street": "7 rue curie",
+        "city": "Lyon",
+        "zip": "69006",
+        "country": "FR"
+      },
+      "iban": "FR7630002005500000765432174",
+      "bic": "CRLYFRPPXXX",
+      "legalForm": "SAS au capital de 50 000 euros - RCS Lyon 138 712 093",
+      "contact": {
+        "name": "Service Formation Professionnelle",
+        "phone": "+33 4 71 34 55 55",
+        "email": "formation@xcelpro.fr"
+      }
+    },
+    {
+      "id": "jml_fr",
+      "vendorNumber": "JM0013",
+      "name": "JML Construction and Renovation Inc.",
+      "legalName": "JML Construction and Renovation Inc. (Succursale France)",
+      "siren": "800013000",
+      "nic": "00018",
+      "vatNumber": "FR77800013000",
+      "address": {
+        "street": "7 rue Simart",
+        "city": "Paris",
+        "zip": "75018",
+        "country": "FR"
+      },
+      "iban": "FR7630003036200005012345668",
+      "bic": "SOGEFRPPXXX",
+      "legalForm": "Succursale de société étrangère - RCS Paris 800 013 000",
+      "contact": {
+        "name": "Service Facturation Travaux",
+        "phone": "09 50 72 55 26",
+        "email": "travaux@jml-construction.fr"
+      }
+    },
+    {
+      "id": "lakeview_us",
+      "vendorNumber": "LOERO-486",
+      "name": "Lakeview Grand Conference Hotel - Event Services",
+      "legalName": "Lakeview Grand Conference Hotel Inc.",
+      "address": {
+        "street": "4550 North River Parkway",
+        "city": "Rosemont",
+        "zip": "60018",
+        "country": "US",
+        "state": "IL"
+      },
+      "endpointScheme": "0060",
+      "endpointId": "123456789",
+      "contact": {
+        "name": "Event Services & Billing",
+        "phone": "+1 555 312 4700",
+        "email": "billing@lakeview-grand.com"
+      }
+    },
+    {
+      "id": "north_shore_us",
+      "vendorNumber": "NORTH-457",
+      "name": "North Shore Culinary Services",
+      "legalName": "North Shore Culinary Services LLC",
+      "address": {
+        "street": "700 Lake Cook Road",
+        "city": "Deerfield",
+        "zip": "60015",
+        "country": "US",
+        "state": "IL"
+      },
+      "endpointScheme": "0060",
+      "endpointId": "987654321",
+      "contact": {
+        "name": "Accounts Receivable",
+        "phone": "+1 630 396 3030",
+        "email": "invoicing@northshore-culinary.com"
+      }
+    },
+    {
+      "id": "sunny_de",
+      "vendorNumber": "49494949",
+      "name": "Sunny Electronics GmbH (KKA)",
+      "legalName": "KKA Büromaschinen Gmbh",
+      "vatNumber": "DE456123985",
+      "endpointScheme": "9930",
+      "endpointId": "DE456123985",
+      "address": {
+        "street": "Immermannstraße 92",
+        "city": "Landsberg am Lech",
+        "zip": "86899",
+        "country": "DE"
+      },
+      "contact": {
+        "name": "Buchhaltung & Vertrieb",
+        "phone": "+49 89 4567 890",
+        "email": "buchhaltung@kka-sunny.de"
+      }
+    },
+    {
+      "id": "konsultime_us",
+      "vendorNumber": "K12589",
+      "name": "KonsulTime",
+      "legalName": "KonsulTime Inc.",
+      "taxRegistrationId": "491452485487",
+      "address": {
+        "street": "1423 Platt Springs Road",
+        "city": "Columbia",
+        "zip": "27136",
+        "country": "US",
+        "state": "SC"
+      },
+      "endpointScheme": "0060",
+      "endpointId": "491452485",
+      "contact": {
+        "name": "Finance & Consulting Billing",
+        "phone": "+1 239 715 3434",
+        "email": "billing@konsultime.com"
+      }
+    },
+    {
+      "id": "packitup_us",
+      "vendorNumber": "PACIT70102",
+      "name": "PackItUp",
+      "legalName": "PackItUp Inc.",
+      "address": {
+        "street": "195 Gabe Well",
+        "city": "Rochester",
+        "zip": "14623",
+        "country": "US",
+        "state": "NY"
+      },
+      "endpointScheme": "0060",
+      "endpointId": "555123456",
+      "contact": {
+        "name": "Customer Shipping Services",
+        "phone": "+1 585 555 1234",
+        "email": "billing@packitup.com"
+      }
+    },
+    {
+      "id": "windy_city_us",
+      "vendorNumber": "PEARLI-950",
+      "name": "Windy City Catering Group",
+      "legalName": "Windy City Catering Group Inc.",
+      "address": {
+        "street": "1200 W Fulton Market",
+        "city": "Chicago",
+        "zip": "60607",
+        "country": "US",
+        "state": "IL"
+      },
+      "endpointScheme": "0060",
+      "endpointId": "555773210",
+      "contact": {
+        "name": "Catering Billing Dept",
+        "phone": "+1 555 773 2100",
+        "email": "catering@windycity-group.com"
+      }
+    },
+    {
+      "id": "creative_exhibits_us",
+      "vendorNumber": "CREAT10001",
+      "name": "Creative Exhibits",
+      "legalName": "Creative Exhibits LLC",
+      "address": {
+        "street": "320 8th Ave Fl 12a",
+        "city": "New York",
+        "zip": "10001",
+        "country": "US",
+        "state": "NY"
+      },
+      "endpointScheme": "0060",
+      "endpointId": "631586460",
+      "contact": {
+        "name": "Accounts Receivable",
+        "phone": "+1 631 586 4600",
+        "email": "ar@creative-exhibits.com"
+      }
+    },
+    {
+      "id": "adam_materials_us",
+      "vendorNumber": "AdamMat60102",
+      "name": "Adam Materials",
+      "legalName": "Adam Materials Inc.",
+      "taxRegistrationId": "491452485487",
+      "address": {
+        "street": "195 Gabe Well",
+        "city": "Lake Delmerside",
+        "zip": "14862-5032",
+        "country": "US",
+        "state": "AR"
+      },
+      "endpointScheme": "0060",
+      "endpointId": "127485967",
+      "contact": {
+        "name": "Industrial Billing Dept",
+        "phone": "+1 127 485 9671",
+        "email": "billing@adam-materials.com"
+      }
+    },
+    {
+      "id": "mj_complete_au",
+      "vendorNumber": "12450123",
+      "name": "MJ Complete Office Supply",
+      "legalName": "MJ Complete Office Supply Pty Ltd",
+      "vatNumber": "47079529482",
+      "endpointScheme": "0151",
+      "endpointId": "47079529482",
+      "address": {
+        "street": "212/50 Macleay Street",
+        "city": "Elizabeth Bay",
+        "zip": "2011",
+        "country": "AU",
+        "state": "NSW"
+      },
+      "contact": {
+        "name": "Office Supplies Billing",
+        "phone": "+61 2 9357 1000",
+        "email": "accounts@mj-officesupply.com.au"
+      }
+    },
+    {
+      "id": "gears_motors_au",
+      "vendorNumber": "12450126",
+      "name": "Gears & Motors LTD",
+      "legalName": "Gears and Motors Pty Ltd",
+      "vatNumber": "47079482345",
+      "endpointScheme": "0151",
+      "endpointId": "47079482345",
+      "address": {
+        "street": "210 Huntingwood Road",
+        "city": "Huntingwood",
+        "zip": "2148",
+        "country": "AU",
+        "state": "NSW"
+      },
+      "contact": {
+        "name": "Parts Invoicing Dept",
+        "phone": "+61 2 9679 2811",
+        "email": "finance@gears-motors.com.au"
+      }
+    },
+    {
+      "id": "lakeshore_us",
+      "vendorNumber": "CORKAR-274",
+      "name": "Lakeshore Hospitality Catering",
+      "legalName": "Lakeshore Hospitality Catering Inc.",
+      "address": {
+        "street": "875 Lakeshore Drive",
+        "city": "Chicago",
+        "zip": "60611",
+        "country": "US",
+        "state": "IL"
+      },
+      "endpointScheme": "0060",
+      "endpointId": "630396303",
+      "contact": {
+        "name": "Hospitality Billing",
+        "phone": "+1 630 396 3030",
+        "email": "invoicing@lakeshore-hospitality.com"
+      }
+    },
+    {
+      "id": "worldwide_computer_us",
+      "vendorNumber": "01905777",
+      "name": "World Wide Computer Warehouse (OakvilleWorld)",
+      "legalName": "OakvilleWorld Inc.",
+      "address": {
+        "street": "2500 Winston Park Drive",
+        "city": "Oakville",
+        "zip": "L6H 5R7",
+        "country": "US",
+        "state": "ON"
+      },
+      "endpointScheme": "0060",
+      "endpointId": "650555019",
+      "contact": {
+        "name": "IT Hardware Accounts",
+        "phone": "+1 650 555 0199",
+        "email": "ar@worldwide-computer.com"
+      }
+    },
+    {
+      "id": "xcelpro_us",
+      "vendorNumber": "XCEL10002",
+      "name": "XcelPro – Training",
+      "legalName": "XcelPro Training Inc.",
+      "address": {
+        "street": "3 Stockton Street",
+        "city": "San Francisco",
+        "zip": "94108",
+        "country": "US",
+        "state": "CA"
+      },
+      "endpointScheme": "0060",
+      "endpointId": "415392003",
+      "contact": {
+        "name": "Corporate Training Billing",
+        "phone": "+1 415 392 0030",
+        "email": "billing@xcelpro-training.com"
+      }
+    },
+    {
+      "id": "parts_design_us",
+      "vendorNumber": "PartsDesign60122",
+      "name": "Parts Design",
+      "legalName": "Parts Design LLC",
+      "taxRegistrationId": "491452485487",
+      "address": {
+        "street": "11 Kelly St",
+        "city": "Hazlehurst",
+        "zip": "31539",
+        "country": "US",
+        "state": "GA"
+      },
+      "endpointScheme": "0060",
+      "endpointId": "127485972",
+      "contact": {
+        "name": "Design & Parts Billing",
+        "phone": "+1 127 485 9721",
+        "email": "invoicing@parts-design.com"
+      }
+    },
+    {
+      "id": "esker_supplier",
+      "vendorNumber": "ESK0054",
+      "name": "ESKER",
+      "legalName": "ESKER SAS",
+      "siren": "331518498",
+      "nic": "00001",
+      "vatNumber": "FR53331518498",
+      "address": {
+        "street": "10, rue des Emeraudes",
+        "city": "Lyon",
+        "zip": "69006",
+        "country": "FR"
+      },
+      "iban": "FR7630003036200005012345668",
+      "bic": "SOGEFRPPXXX",
+      "legalForm": "SAS au capital de 500 000 euros - RCS Lyon 331 518 498",
+      "contact": {
+        "name": "Service Facturation Clients",
+        "phone": "+33 4 72 83 46 46",
+        "email": "facturation@esker.fr"
       }
     }
   ],
   "buyers": [
     {
-      "id": "kreamob",
-      "name": "KREAMOB",
-      "legalName": "KREAMOB SA",
-      "siren": "333191120",
-      "nic": "28662",
-      "vatNumber": "FR12333191120",
+      "id": "esker_fr",
+      "vendorNumber": "ESK0054",
+      "name": "ESKER",
+      "legalName": "ESKER SAS",
+      "siren": "331518498",
+      "nic": "00001",
+      "vatNumber": "FR53331518498",
       "address": {
-        "street": "10 avenue du Maréchal Foch",
-        "city": "VILLEFRANCHE-SUR-MER",
-        "zip": "06230",
-        "country": "FR",
-        "street2": "Batiment Le Phare - 4e etage"
+        "street": "10, rue des Emeraudes",
+        "city": "Lyon",
+        "zip": "69006",
+        "country": "FR"
       },
-      "buyerReference": "REF-KREAMOB-2026",
-      "deliveryName": "KREAMOB – Entrepôt Logistique Sud",
+      "buyerReference": "REF-ESKER-2026",
+      "deliveryName": "ESKER – Siège & Centre Logistique",
       "deliveryAddress": {
-        "street": "ZI des Trois Moulins, 45 chemin des Cistes",
-        "city": "ANTIBES",
-        "zip": "06600",
-        "country": "FR",
-        "street2": "Quai 7 - Reception marchandises"
+        "street": "10, rue des Emeraudes",
+        "city": "Lyon",
+        "zip": "69006",
+        "country": "FR"
       },
       "contact": {
         "name": "Service Comptabilite Fournisseurs",
-        "phone": "+33 4 93 76 55 41",
-        "email": "compta.fournisseurs@kreamob.fr"
+        "phone": "+33 4 72 83 46 46",
+        "email": "compta.fournisseurs@esker.fr"
       },
-      "accountingCost": "CC-4521-ACHATS-GEN",
-      "contractRef": "CONTRAT-2025-KRE-0147",
-      "deliveryLocationId": "33319112000042"
+      "accountingCost": "CC-ESK-6000-ACHATS",
+      "contractRef": "CONTRAT-2026-ESK-001",
+      "deliveryLocationId": "33151849800001"
+    },
+    {
+      "id": "acme_fr_buyer",
+      "vendorNumber": "BTB00002",
+      "name": "ACME FR",
+      "legalName": "ACME FR SAS",
+      "siren": "235116159",
+      "nic": "00002",
+      "vatNumber": "FR88235116159",
+      "address": {
+        "street": "12 Rue de la République",
+        "city": "Lyon",
+        "zip": "69009",
+        "country": "FR",
+        "street2": "Bâtiment A - 3e étage"
+      },
+      "buyerReference": "REF-ACME-2026",
+      "deliveryName": "ACME FR – Site Lyon Nord",
+      "deliveryAddress": {
+        "street": "12 Rue de la République",
+        "city": "Lyon",
+        "zip": "69009",
+        "country": "FR"
+      },
+      "contact": {
+        "name": "Service Achats & Facturation",
+        "phone": "+33 1 02 08 57 45",
+        "email": "achats@acme-fr.fr"
+      },
+      "accountingCost": "CC-ACME-4000-GEN",
+      "contractRef": "CONTRAT-2026-ACM-001",
+      "deliveryLocationId": "23511615900002"
+    },
+    {
+      "id": "adecom_buyer",
+      "vendorNumber": "Adecom45",
+      "name": "ADECOM",
+      "legalName": "Adecom SAS",
+      "siren": "341612687",
+      "nic": "00045",
+      "vatNumber": "FR93341612687",
+      "address": {
+        "street": "ZI les Echarmeaux",
+        "city": "Montgeron",
+        "zip": "91230",
+        "country": "FR"
+      },
+      "buyerReference": "REF-ADECOM-2026",
+      "deliveryName": "ADECOM – Entrepôt Echarmeaux",
+      "deliveryAddress": {
+        "street": "ZI les Echarmeaux",
+        "city": "Montgeron",
+        "zip": "91230",
+        "country": "FR"
+      },
+      "contact": {
+        "name": "Service Comptabilite Achats",
+        "phone": "+33 1 65 48 97 12",
+        "email": "compta@adecom.fr"
+      },
+      "accountingCost": "CC-ADE-5000-ACHATS",
+      "contractRef": "CONTRAT-2026-ADE-01"
+    },
+    {
+      "id": "ecopack_buyer",
+      "vendorNumber": "ECOFR80102",
+      "name": "ECOPACK FRANCE",
+      "legalName": "EcoPack France SAS",
+      "siren": "801020009",
+      "nic": "00010",
+      "vatNumber": "FR81801020009",
+      "address": {
+        "street": "12, Avenue des Solutions Durables",
+        "city": "Paris",
+        "zip": "75011",
+        "country": "FR"
+      },
+      "buyerReference": "REF-ECOPACK-2026",
+      "deliveryName": "EcoPack – Hub Durable Paris",
+      "deliveryAddress": {
+        "street": "12, Avenue des Solutions Durables",
+        "city": "Paris",
+        "zip": "75011",
+        "country": "FR"
+      },
+      "contact": {
+        "name": "Service Achats Responsables",
+        "phone": "+33 1 42 78 90 13",
+        "email": "achats@ecopack-france.fr"
+      },
+      "accountingCost": "CC-ECO-3000-PARIS",
+      "contractRef": "CONTRAT-2026-ECO-001"
+    },
+    {
+      "id": "xcelpro_buyer",
+      "vendorNumber": "XCEL10001",
+      "name": "XCELPRO FORMATION",
+      "legalName": "XcelPro Formation SAS",
+      "siren": "138712093",
+      "nic": "00001",
+      "vatNumber": "FR69138712093",
+      "address": {
+        "street": "7 rue curie",
+        "city": "Lyon",
+        "zip": "69006",
+        "country": "FR"
+      },
+      "buyerReference": "REF-XCEL-2026",
+      "deliveryName": "XcelPro – Centre Formation Lyon",
+      "deliveryAddress": {
+        "street": "7 rue curie",
+        "city": "Lyon",
+        "zip": "69006",
+        "country": "FR"
+      },
+      "contact": {
+        "name": "Service Achats & Moyens Généraux",
+        "phone": "+33 4 71 34 55 55",
+        "email": "achats@xcelpro.fr"
+      },
+      "accountingCost": "CC-XCEL-2000-ACHATS",
+      "contractRef": "CONTRAT-2026-XCEL-01"
+    },
+    {
+      "id": "jml_buyer",
+      "vendorNumber": "JM0013",
+      "name": "JML CONSTRUCTION",
+      "legalName": "JML Construction and Renovation Inc.",
+      "siren": "800013000",
+      "nic": "00018",
+      "vatNumber": "FR77800013000",
+      "address": {
+        "street": "7 rue Simart",
+        "city": "Paris",
+        "zip": "75018",
+        "country": "FR"
+      },
+      "buyerReference": "REF-JML-2026",
+      "deliveryName": "JML – Chantier Paris Nord",
+      "deliveryAddress": {
+        "street": "7 rue Simart",
+        "city": "Paris",
+        "zip": "75018",
+        "country": "FR"
+      },
+      "contact": {
+        "name": "Service Achats Chantiers",
+        "phone": "09 50 72 55 26",
+        "email": "achats@jml-construction.fr"
+      },
+      "accountingCost": "CC-JML-7000-CHANTIERS",
+      "contractRef": "CONTRAT-2026-JML-01"
     }
   ],
   "factors": [
     {
       "id": "esker_factor",
+      "vendorNumber": "ESK0054",
       "name": "ESKER FACTOR",
-      "siren": "999999998",
+      "siren": "331518498",
       "nic": "00001",
       "iban": "FR7630003036200005012345668",
       "bic": "SOGEFRPPXXX",
-      "legalName": "ESKER FACTOR SAS",
+      "legalName": "ESKER SAS (DIVISION FACTORING)",
       "address": {
-        "street": "10 rue des Émeraudes",
-        "city": "LYON",
+        "street": "10, rue des Emeraudes",
+        "city": "Lyon",
         "zip": "69006",
         "country": "FR",
         "street2": "Immeuble Les Emeraudes - 5e etage"
       },
-      "legalForm": "SAS au capital de 500 000 euros - RCS Lyon 999 999 998",
+      "legalForm": "SAS au capital de 500 000 euros - RCS Lyon 331 518 498",
       "contact": {
-        "name": "Service Recouvrement",
-        "phone": "+33 4 26 68 71 30",
-        "email": "recouvrement@eskerfactor.fr"
+        "name": "Service Recouvrement & Affacturage",
+        "phone": "+33 4 72 83 46 46",
+        "email": "recouvrement@esker.fr"
+      }
+    },
+    {
+      "id": "acme_factor",
+      "vendorNumber": "BTB00002",
+      "name": "ACME FACTOR",
+      "siren": "235116159",
+      "nic": "00002",
+      "iban": "FR7630004170100001234567805",
+      "bic": "BNPAFRPPXXX",
+      "legalName": "ACME FR SAS (SERVICE FACTORING)",
+      "address": {
+        "street": "12 Rue de la République",
+        "city": "Lyon",
+        "zip": "69009",
+        "country": "FR"
+      },
+      "legalForm": "SAS au capital de 250 000 euros - RCS Lyon 235 116 159",
+      "contact": {
+        "name": "Service Affacturage",
+        "phone": "+33 1 02 08 57 45",
+        "email": "affacturage@acme-fr.fr"
       }
     }
   ],
@@ -109,251 +684,331 @@
     {
       "id": "opco_formation",
       "role": "payer",
-      "name": "OPCO FORMATION SUD",
-      "legalName": "OPCO FORMATION SUD - Association loi 1901",
-      "siren": "999999006",
-      "nic": "00003",
-      "vatNumber": "FR42999999006",
+      "vendorNumber": "XCEL10001",
+      "name": "XCELPRO FORMATION (TIERS PAYEUR OPCO)",
+      "legalName": "XcelPro Formation SAS",
+      "siren": "138712093",
+      "nic": "00001",
+      "vatNumber": "FR69138712093",
       "address": {
-        "street": "24 boulevard Vivier Merle",
-        "city": "LYON",
-        "zip": "69003",
-        "country": "FR",
-        "street2": "Tour Oxygene - 8e etage"
+        "street": "7 rue curie",
+        "city": "Lyon",
+        "zip": "69006",
+        "country": "FR"
       },
       "contact": {
-        "name": "Service Prise en Charge",
-        "phone": "+33 4 72 91 08 55",
-        "email": "prisencharge@opco-formation-sud.fr"
+        "name": "Service Financement & Prise en Charge",
+        "phone": "+33 4 71 34 55 55",
+        "email": "financement@xcelpro.fr"
       }
     },
     {
       "id": "marketplace_fr",
       "role": "facturant",
-      "name": "MARKETPLACE SERVICES",
-      "legalName": "MARKETPLACE SERVICES FRANCE SAS",
-      "siren": "999999014",
-      "nic": "00007",
-      "vatNumber": "FR66999999014",
+      "vendorNumber": "Adecom45",
+      "name": "ADECOM (MANDATAIRE DE FACTURATION)",
+      "legalName": "Adecom SAS",
+      "siren": "341612687",
+      "nic": "00045",
+      "vatNumber": "FR93341612687",
       "address": {
-        "street": "8 rue du Sentier",
-        "city": "PARIS",
-        "zip": "75002",
-        "country": "FR",
-        "street2": "Batiment Sentier - 3e etage"
+        "street": "ZI les Echarmeaux",
+        "city": "Montgeron",
+        "zip": "91230",
+        "country": "FR"
       },
       "contact": {
-        "name": "Service Vendeurs Partenaires",
-        "phone": "+33 1 84 25 63 10",
-        "email": "vendeurs@marketplace-services.fr"
+        "name": "Service Mandats de Facturation",
+        "phone": "+33 1 65 48 97 12",
+        "email": "mandats@adecom.fr"
       }
     },
     {
       "id": "criee_atlantique",
       "role": "facturant",
-      "name": "CRIEE ATLANTIQUE",
-      "legalName": "CRIEE ATLANTIQUE SA",
-      "siren": "999999030",
-      "nic": "00003",
-      "vatNumber": "FR17999999030",
+      "vendorNumber": "BTB00002",
+      "name": "ACME FR (MANDATAIRE DE VENTE)",
+      "legalName": "ACME FR SAS",
+      "siren": "235116159",
+      "nic": "00002",
+      "vatNumber": "FR88235116159",
       "address": {
-        "street": "Quai des Pecheurs - Port de peche",
-        "city": "LA TURBALLE",
-        "zip": "44420",
-        "country": "FR",
-        "street2": "Halle de vente - Bureau 12"
+        "street": "12 Rue de la République",
+        "city": "Lyon",
+        "zip": "69009",
+        "country": "FR"
       },
       "contact": {
-        "name": "Service Ventes Criee",
-        "phone": "+33 2 40 23 91 07",
-        "email": "ventes@criee-atlantique.fr"
+        "name": "Service Mandats & Enchères",
+        "phone": "+33 1 02 08 57 45",
+        "email": "mandats@acme-fr.fr"
       }
     },
     {
       "id": "seller_agent",
       "role": "agent",
-      "name": "ATLANTIQUE MANDATAIRE",
-      "legalName": "ATLANTIQUE MANDATAIRE SAS",
-      "siren": "999999022",
-      "nic": "00018",
-      "vatNumber": "FR90999999022",
+      "vendorNumber": "CREAT10001",
+      "name": "CREATIVE EXHIBITS (AGENT DE VENTE)",
+      "legalName": "Creative Exhibits LLC",
       "address": {
-        "street": "17 quai des Chartrons",
-        "city": "BORDEAUX",
-        "zip": "33300",
-        "country": "FR",
-        "street2": "Batiment Chartrons - 1er etage"
+        "street": "320 8th Ave Fl 12a",
+        "city": "New York",
+        "zip": "10001",
+        "country": "US",
+        "state": "NY"
       },
+      "endpointScheme": "0060",
+      "endpointId": "631586460",
       "contact": {
-        "name": "Service Mandats",
-        "phone": "+33 5 56 44 12 80",
-        "email": "mandats@atlantique-mandataire.fr"
+        "name": "Service Mandats Commerciaux",
+        "phone": "+1 631 586 4600",
+        "email": "mandats@creative-exhibits.com"
       }
     },
     {
       "id": "distri_logistique",
       "role": "payee",
-      "name": "DISTRI-LOGISTIQUE",
-      "legalName": "DISTRI-LOGISTIQUE SAS",
-      "siren": "999999048",
-      "nic": "00005",
-      "vatNumber": "FR71999999048",
+      "vendorNumber": "PACIT70102",
+      "name": "PACKITUP INC. (BÉNÉFICIAIRE LOGISTIQUE)",
+      "legalName": "PackItUp Inc.",
       "address": {
-        "street": "Parc d'activites de la Plaine, bat. C",
-        "city": "VITROLLES",
-        "zip": "13127",
-        "country": "FR",
-        "street2": "Batiment C - Quai 3"
+        "street": "195 Gabe Well",
+        "city": "Rochester",
+        "zip": "14623",
+        "country": "US",
+        "state": "NY"
       },
       "contact": {
-        "name": "Service Reglements",
-        "phone": "+33 4 42 89 30 55",
-        "email": "reglements@distri-logistique.fr"
+        "name": "Service Règlements Logistiques",
+        "phone": "+1 (585) 555-1234",
+        "email": "reglements@packitup.com"
       }
     },
     {
       "id": "st_batiment",
       "role": "supplier",
-      "name": "SOTRABAT",
-      "legalName": "SOTRABAT SARL",
-      "siren": "999999055",
+      "vendorNumber": "JM0013",
+      "name": "JML CONSTRUCTION (SOUS-TRAITANT BTP)",
+      "legalName": "JML Construction and Renovation Inc.",
+      "siren": "800013000",
       "nic": "00018",
-      "vatNumber": "FR92999999055",
+      "vatNumber": "FR77800013000",
       "address": {
-        "street": "14 rue des Compagnons",
-        "city": "BRUGES",
-        "zip": "33520",
-        "country": "FR",
-        "street2": "ZA de Bruges Nord - Lot 14"
+        "street": "7 rue Simart",
+        "city": "Paris",
+        "zip": "75018",
+        "country": "FR"
       },
       "iban": "FR7630006000111234567890136",
       "bic": "AGRIFRPPXXX",
-      "legalForm": "SARL au capital de 50 000 euros - RCS Bordeaux 999 999 055",
+      "legalForm": "Succursale en France - RCS Paris 800 013 000",
       "contact": {
-        "name": "Service Facturation",
-        "phone": "+33 5 56 11 47 22",
-        "email": "facturation@sotrabat.fr"
+        "name": "Service Facturation Travaux",
+        "phone": "09 50 72 55 26",
+        "email": "facturation@jml-construction.fr"
       }
     },
     {
       "id": "constructeur_general",
       "role": "buyer",
-      "name": "BATIGRAND",
-      "legalName": "BATIGRAND SA",
-      "siren": "999999063",
-      "nic": "00004",
-      "vatNumber": "FR19999999063",
+      "vendorNumber": "BTB00002",
+      "name": "ACME FR (ENTREPRISE GÉNÉRALE BTP)",
+      "legalName": "ACME FR SAS",
+      "siren": "235116159",
+      "nic": "00002",
+      "vatNumber": "FR88235116159",
       "address": {
-        "street": "8 avenue de l'Industrie",
-        "city": "MERIGNAC",
-        "zip": "33700",
-        "country": "FR",
-        "street2": "Parc Merignac Phare - Batiment D"
+        "street": "12 Rue de la République",
+        "city": "Lyon",
+        "zip": "69009",
+        "country": "FR"
       },
-      "buyerReference": "REF-BATIGRAND-2026",
-      "deliveryName": "BATIGRAND – Chantier Les Terrasses du Lac",
+      "buyerReference": "REF-ACME-BTP-2026",
+      "deliveryName": "ACME FR – Chantier BTP Lyon",
       "deliveryAddress": {
-        "street": "12 allée des Peupliers",
-        "city": "BORDEAUX",
-        "zip": "33300",
-        "country": "FR",
-        "street2": "Acces chantier - Portail Nord"
+        "street": "12 Rue de la République",
+        "city": "Lyon",
+        "zip": "69009",
+        "country": "FR"
       },
       "contact": {
-        "name": "Service Comptabilite Chantiers",
-        "phone": "+33 5 56 34 78 90",
-        "email": "compta.chantiers@batigrand.fr"
+        "name": "Direction des Chantiers",
+        "phone": "+33 1 02 08 57 45",
+        "email": "chantiers@acme-fr.fr"
       },
       "accountingCost": "CC-7700-CHANTIERS",
-      "contractRef": "MARCHE-2026-BTG-0088",
-      "deliveryLocationId": "99999906300019"
+      "contractRef": "MARCHE-2026-ACM-0088",
+      "deliveryLocationId": "23511615900002"
     },
     {
       "id": "micro_conseil",
       "role": "supplier",
-      "name": "AUDREY MERCIER CONSEIL",
-      "legalName": "MERCIER Audrey - Entrepreneur individuel",
-      "siren": "999999071",
-      "nic": "00007",
-      "taxRegistrationId": "99999907100007",
+      "vendorNumber": "ECOFR80102",
+      "name": "ECOPACK FRANCE (FRANCHISE EN BASE)",
+      "legalName": "EcoPack France",
+      "siren": "801020009",
+      "nic": "00010",
+      "taxRegistrationId": "80102000900010",
       "address": {
-        "street": "5 rue Sainte-Catherine",
-        "city": "BORDEAUX",
-        "zip": "33000",
-        "country": "FR",
-        "street2": "Residence Sainte-Catherine - Porte 3"
+        "street": "12, Avenue des Solutions Durables",
+        "city": "Paris",
+        "zip": "75011",
+        "country": "FR"
       },
       "iban": "FR7610907000529876543210943",
       "bic": "CCBPFRPPBDX",
-      "legalForm": "Entrepreneur individuel - RCS Bordeaux 999 999 071",
+      "legalForm": "RCS Paris 801 020 009",
       "contact": {
-        "name": "MERCIER Audrey",
-        "phone": "+33 6 12 45 78 96",
-        "email": "contact@audreymercier-conseil.fr"
+        "name": "Service Facturation Franchise",
+        "phone": "+33 1 42 78 90 13",
+        "email": "contact@ecopack-france.fr"
       }
     },
     {
       "id": "technik_gmbh",
       "role": "buyer",
-      "name": "TECHNIK NORD",
-      "legalName": "Technik Nord GmbH",
-      "vatNumber": "DE811234565",
+      "vendorNumber": "49494949",
+      "name": "KKA BÜROMASCHINEN GMBH (ACHETEUR INTRACOM)",
+      "legalName": "KKA Büromaschinen Gmbh",
+      "vatNumber": "DE456123985",
       "endpointScheme": "9930",
-      "endpointId": "DE811234565",
+      "endpointId": "DE456123985",
       "address": {
-        "street": "Hafenstrasse 42",
-        "city": "HAMBURG",
-        "zip": "20359",
-        "country": "DE",
-        "street2": "Gebaeude 3 - 2. OG"
+        "street": "Immermannstraße 92",
+        "city": "Landsberg am Lech",
+        "zip": "86899",
+        "country": "DE"
       },
-      "buyerReference": "BESTELL-2026-0442",
-      "deliveryName": "Technik Nord GmbH – Lager Altona",
+      "buyerReference": "BESTELL-2026-KKA",
+      "deliveryName": "KKA Büromaschinen Gmbh – Lager",
       "deliveryAddress": {
-        "street": "Hafenstrasse 42",
-        "city": "HAMBURG",
-        "zip": "20359",
-        "country": "DE",
-        "street2": "Lager Altona - Tor 2"
+        "street": "Immermannstraße 92",
+        "city": "Landsberg am Lech",
+        "zip": "86899",
+        "country": "DE"
       },
       "contact": {
         "name": "Buchhaltung Kreditoren",
-        "phone": "+49 40 55 12 34 60",
-        "email": "kreditoren@techniknord.de"
+        "phone": "+49 89 4567 890",
+        "email": "kreditoren@kka.de"
       },
       "accountingCost": "KST-4400-EINKAUF",
-      "contractRef": "RAHMENVERTRAG-2025-TN-311"
+      "contractRef": "VERTRAG-2025-KKA-01"
     },
     {
       "id": "helvetia_sa",
       "role": "buyer",
-      "name": "HELVETIA PRECISION",
-      "legalName": "Helvetia Precision SA",
+      "vendorNumber": "41483124",
+      "name": "MATTER TRANSPORTE (ACHETEUR HORS UE - CH)",
+      "legalName": "Matter Transporte AG",
+      "vatNumber": "CHE-321.456.789",
       "endpointScheme": "9927",
-      "endpointId": "CHE-112.287.412",
+      "endpointId": "CHE-321.456.789",
       "address": {
-        "street": "Industriestrasse 18",
-        "city": "WINTERTHUR",
-        "zip": "8404",
-        "country": "CH",
-        "street2": "Halle West - Buero 21"
+        "street": "Industrie",
+        "city": "Pratteln",
+        "zip": "4133",
+        "country": "CH"
       },
-      "buyerReference": "CMD-CH-2026-1187",
-      "deliveryName": "Helvetia Precision SA – Werk Winterthur",
+      "buyerReference": "CMD-CH-2026-MATTER",
+      "deliveryName": "Matter Transporte AG – Hub Pratteln",
       "deliveryAddress": {
-        "street": "Industriestrasse 18",
-        "city": "WINTERTHUR",
-        "zip": "8404",
-        "country": "CH",
-        "street2": "Werk Winterthur - Rampe 4"
+        "street": "Industrie",
+        "city": "Pratteln",
+        "zip": "4133",
+        "country": "CH"
       },
       "contact": {
         "name": "Service Comptabilite",
-        "phone": "+41 52 235 41 60",
-        "email": "comptabilite@helvetia-precision.ch"
+        "phone": "+41 61 825 25 25",
+        "email": "comptabilite@matter-transporte.ch"
       },
       "accountingCost": "CC-CH-3300-ACHATS",
-      "contractRef": "CONTRAT-CH-2025-0912"
+      "contractRef": "CONTRAT-CH-2025-MATTER"
+    },
+    {
+      "id": "adecom_thirdparty",
+      "role": "facturant",
+      "vendorNumber": "Adecom45",
+      "name": "Adecom",
+      "legalName": "Adecom SAS",
+      "siren": "341612687",
+      "nic": "00045",
+      "vatNumber": "FR93341612687",
+      "address": {
+        "street": "ZI les Echarmeaux",
+        "city": "Montgeron",
+        "zip": "91230",
+        "country": "FR"
+      },
+      "contact": {
+        "name": "Service Administration des Ventes",
+        "phone": "+33 1 65 48 97 12",
+        "email": "adv@adecom.fr"
+      }
+    },
+    {
+      "id": "ecopack_thirdparty",
+      "role": "payee",
+      "vendorNumber": "ECOFR80102",
+      "name": "EcoPack France",
+      "legalName": "EcoPack France SAS",
+      "siren": "801020009",
+      "nic": "00010",
+      "vatNumber": "FR81801020009",
+      "address": {
+        "street": "12, Avenue des Solutions Durables",
+        "city": "Paris",
+        "zip": "75011",
+        "country": "FR"
+      },
+      "contact": {
+        "name": "Service Règlements",
+        "phone": "+33 1 42 78 90 13",
+        "email": "reglements@ecopack-france.fr"
+      }
+    },
+    {
+      "id": "acme_thirdparty",
+      "role": "payer",
+      "vendorNumber": "BTB00002",
+      "name": "ACME FR",
+      "legalName": "ACME FR SAS",
+      "siren": "235116159",
+      "nic": "00002",
+      "vatNumber": "FR88235116159",
+      "address": {
+        "street": "12 Rue de la République",
+        "city": "Lyon",
+        "zip": "69009",
+        "country": "FR"
+      },
+      "contact": {
+        "name": "Service Facturation Clients",
+        "phone": "+33 1 02 08 57 45",
+        "email": "facturation@acme-fr.fr"
+      }
+    },
+    {
+      "id": "esker_thirdparty",
+      "role": "payee",
+      "vendorNumber": "ESK0054",
+      "name": "ESKER",
+      "legalName": "ESKER SAS",
+      "siren": "331518498",
+      "nic": "00001",
+      "vatNumber": "FR53331518498",
+      "address": {
+        "street": "10, rue des Emeraudes",
+        "city": "Lyon",
+        "zip": "69006",
+        "country": "FR"
+      },
+      "contact": {
+        "name": "Service Comptabilité Fournisseurs",
+        "phone": "+33 4 72 83 46 46",
+        "email": "compta.fournisseurs@esker.fr"
+      }
     }
   ]
 }

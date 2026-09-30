@@ -259,15 +259,18 @@ const GeneratorUI = {
             '<div class="gen-field">' +
                 '<label for="adv-supplier">Fournisseur (émetteur)</label>' +
                 '<select id="adv-supplier">' +
-                    data.companies.suppliers.map((s) => `<option value="${s.id}">${s.name} (${s.siren})</option>`).join('') +
+                    data.companies.suppliers.map((s) => {
+                        const ident = s.siren ? `SIREN ${s.siren}` : (s.vatNumber || s.vendorNumber || (s.address && s.address.country) || '');
+                        return `<option value="${s.id}">${s.name} (${ident})</option>`;
+                    }).join('') +
                 '</select>' +
             '</div>' +
             '<div class="gen-field">' +
                 '<label for="adv-buyer">Acheteur (récepteur)</label>' +
                 '<select id="adv-buyer">' +
                     data.companies.buyers.map((b) => {
-                        const siret = b.siren + (b.nic || '00001');
-                        return `<option value="${b.id}">${b.name} (SIRET ${siret})</option>`;
+                        const ident = b.siren ? `SIRET ${b.siren}${b.nic || '00001'}` : (b.endpointId || (b.address && b.address.country) || '');
+                        return `<option value="${b.id}">${b.name} (${ident})</option>`;
                     }).join('') +
                 '</select>' +
             '</div>';
