@@ -31,6 +31,9 @@ const SchematronEngine = (() => {
     const documentRegistry = new Map();
     /** Noms des fonctions custom déjà enregistrées auprès de fontoxpath. */
     const registeredFunctions = new Set();
+    /** Schéma et document en cours d'évaluation pour le routage des fonctions custom */
+    let currentActiveSchema = null;
+    let currentXmlDoc = null;
 
     /**
      * Sources du moteur XPath, essayées dans l'ordre.
@@ -195,10 +198,22 @@ const SchematronEngine = (() => {
         return compiled;
     };
 
-    /** Enregistre auprès de fontoxpath les fonctions compilées (une seule fois). */
-    const registerFunctions = (functions, nsResolver) => {
+    const atomizeValue = (val) => {
+        if (val === null || val === undefined) return '';
+        if (typeof val === 'object' && val.nodeType) return val.textContent || '';
+        if (Array.isArray(val) && val.length === 1 && val[0] && typeof val[0] === 'object' && val[0].nodeType) {
+            return val[0].textContent || '';
+        }
+        return val;
+    };
+
+    /** Enregistre auprès de fontoxpath les fonctions compilées avec routage par schéma actif. */
+    const registerFunctions = (functions, nsResolver, schema) => {
         const engine = fx();
         functions.forEach((f) => {
+            if (!schema.functionsMap) schema.functionsMap = new Map();
+            schema.functionsMap.set(f.key, f);
+
             if (registeredFunctions.has(f.key)) return;
             registeredFunctions.add(f.key);
 
@@ -208,20 +223,72 @@ const SchematronEngine = (() => {
                 argTypes,
                 f.ret.type,
                 (dynamicContext, ...args) => {
-                    const vars = {};
-                    f.params.forEach((p, i) => { vars[p.name] = args[i]; });
-                    const options = { namespaceResolver: nsResolver, language: engine.evaluateXPath.XPATH_3_1_LANGUAGE };
-                    f.variables.forEach((v) => {
-                        vars[v.name] = engine.evaluateXPath(v.select, null, null, vars, engine.evaluateXPath.ANY_TYPE, options);
-                    });
-                    switch (f.ret.kind) {
-                        case 'boolean': return engine.evaluateXPathToBoolean(f.body, null, null, vars, options);
-                        case 'string': return engine.evaluateXPathToString(f.body, null, null, vars, options);
-                        case 'number': return engine.evaluateXPathToNumber(f.body, null, null, vars, options);
-                        default: {
-                            const r = engine.evaluateXPath(f.body, null, null, vars, engine.evaluateXPath.ANY_TYPE, options);
-                            return Array.isArray(r) ? r : (r === null || r === undefined ? [] : [r]);
+                    // Spécialisation BR-FR-03 : validation contextuelle de la date (CII = AAAAMMJJ vs UBL = AAAA-MM-JJ)
+                    if (f.localName === 'is-valid-date-format' && f.namespaceURI === 'http://www.example.org/custom') {
+                        const raw = atomizeValue(args[0]);
+                        if (!raw) return false;
+                        const trimmed = String(raw).trim();
+                        
+                        const rootLocal = currentXmlDoc && currentXmlDoc.documentElement ? currentXmlDoc.documentElement.localName : '';
+                        const isCII = (currentActiveSchema && (currentActiveSchema.id.includes('cii') || currentActiveSchema.id.includes('facturx')))
+                            || rootLocal === 'CrossIndustryInvoice';
+
+                        if (isCII) {
+                            // En CII / Factur-X : strictement AAAAMMJJ (8 chiffres consécutifs sans tirets)
+                            const shortDate = trimmed.slice(0, 8);
+                            if (!/^20\d{2}(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])$/.test(shortDate)) {
+                                return false;
+                            }
+                            const year = parseInt(shortDate.slice(0, 4), 10);
+                            const month = parseInt(shortDate.slice(4, 6), 10);
+                            const day = parseInt(shortDate.slice(6, 8), 10);
+                            if (year < 2000 || year > 2099) return false;
+                            const isLeap = (year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0);
+                            const maxDays = [0, 31, isLeap ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+                            return day <= maxDays[month];
+                        } else {
+                            // En UBL 2.1 : strictement AAAA-MM-JJ (10 caractères avec tirets)
+                            if (!/^20\d{2}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/.test(trimmed)) {
+                                return false;
+                            }
+                            const year = parseInt(trimmed.slice(0, 4), 10);
+                            const month = parseInt(trimmed.slice(5, 7), 10);
+                            const day = parseInt(trimmed.slice(8, 10), 10);
+                            if (year < 2000 || year > 2099) return false;
+                            const isLeap = (year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0);
+                            const maxDays = [0, 31, isLeap ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+                            return day <= maxDays[month];
                         }
+                    }
+
+                    // Exécution dynamique de l'implémentation spécifique au schéma actif
+                    const fImpl = (currentActiveSchema && currentActiveSchema.functionsMap && currentActiveSchema.functionsMap.get(f.key)) || f;
+                    const vars = {};
+                    fImpl.params.forEach((p, i) => {
+                        vars[p.name] = atomizeValue(args[i]);
+                    });
+
+                    const options = { namespaceResolver: nsResolver, language: engine.evaluateXPath.XPATH_3_1_LANGUAGE };
+                    fImpl.variables.forEach((v) => {
+                        try {
+                            vars[v.name] = engine.evaluateXPath(v.select, null, null, vars, engine.evaluateXPath.ANY_TYPE, options);
+                        } catch (e) {
+                            vars[v.name] = null;
+                        }
+                    });
+
+                    try {
+                        switch (fImpl.ret.kind) {
+                            case 'boolean': return engine.evaluateXPathToBoolean(fImpl.body, null, null, vars, options);
+                            case 'string': return engine.evaluateXPathToString(fImpl.body, null, null, vars, options);
+                            case 'number': return engine.evaluateXPathToNumber(fImpl.body, null, null, vars, options);
+                            default: {
+                                const r = engine.evaluateXPath(fImpl.body, null, null, vars, engine.evaluateXPath.ANY_TYPE, options);
+                                return Array.isArray(r) ? r : (r === null || r === undefined ? [] : [r]);
+                            }
+                        }
+                    } catch (e) {
+                        return fImpl.ret.kind === 'boolean' ? false : null;
                     }
                 }
             );
@@ -494,13 +561,15 @@ const SchematronEngine = (() => {
         const stats = { rulesFired: 0, assertionsEvaluated: 0, schemas: [] };
         const startedAt = performance.now();
 
+        currentXmlDoc = xmlDoc;
         schemas.forEach((schema) => {
+            currentActiveSchema = schema;
             const nsResolver = (prefix) => schema.nsMap[prefix] || null;
             const options = {
                 namespaceResolver: nsResolver,
                 language: engine.evaluateXPath.XPATH_3_1_LANGUAGE,
             };
-            registerFunctions(schema.functions, nsResolver);
+            registerFunctions(schema.functions, nsResolver, schema);
 
             const schemaStats = { id: schema.id, label: schema.label, rulesFired: 0, assertionsEvaluated: 0, errors: 0, warnings: 0, skipped: 0 };
 
@@ -599,6 +668,8 @@ const SchematronEngine = (() => {
         });
 
         stats.durationMs = Math.round(performance.now() - startedAt);
+        currentActiveSchema = null;
+        currentXmlDoc = null;
         violations.sort((a, b) => (a.line - b.line) || a.id.localeCompare(b.id));
         return { violations, skipped, stats };
     };

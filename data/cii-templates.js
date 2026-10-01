@@ -27,8 +27,19 @@
 const CIITemplates = {
 
     // BT-2, BT-26, BT-72 : CII date une facture en AAAAMMJJ (format 102),
-    // la ou UBL emploie la date ISO AAAA-MM-JJ.
-    d8: (iso) => (iso ? String(iso).replace(/-/g, '') : ''),
+    // strictement 8 chiffres consécutifs sans séparateurs, là où UBL emploie AAAA-MM-JJ.
+    d8: (val) => {
+        if (!val) return '';
+        if (val instanceof Date) {
+            const y = val.getFullYear();
+            const m = String(val.getMonth() + 1).padStart(2, '0');
+            const d = String(val.getDate()).padStart(2, '0');
+            return `${y}${m}${d}`;
+        }
+        const str = String(val).trim().replace(/-/g, '');
+        const m = str.match(/^(\d{8})/);
+        return m ? m[1] : str.slice(0, 8);
+    },
 
     // Les notes internes portent un prefixe technique #XXX# qui code le sujet
     // de la mention. UBL le concatene au texte ; CII le porte dans un element
