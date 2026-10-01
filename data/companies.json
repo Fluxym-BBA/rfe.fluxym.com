@@ -454,7 +454,7 @@
       },
       "accountingCost": "CC-4521-ACHATS-GEN",
       "contractRef": "CONTRAT-2025-KRE-0147",
-      "deliveryLocationId": "33319112028663"
+      "deliveryLocationId": "33319112000018"
     },
     {
       "id": "esker_fr",
@@ -845,7 +845,7 @@
       },
       "accountingCost": "CC-7700-CHANTIERS",
       "contractRef": "MARCHE-2026-ACM-0088",
-      "deliveryLocationId": "33319112028663"
+      "deliveryLocationId": "33319112000018"
     },
     {
       "id": "micro_conseil",
