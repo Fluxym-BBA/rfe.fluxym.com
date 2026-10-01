@@ -3,48 +3,24 @@
     {
       "id": "acme_fr",
       "vendorNumber": "BTB00002",
-      "name": "ACME FR",
-      "legalName": "ACME FR SAS",
+      "name": "ACME FRANCE",
+      "legalName": "ACME FRANCE",
       "siren": "235116159",
       "nic": "00002",
       "vatNumber": "FR88235116159",
       "address": {
-        "street": "12 Rue de la République",
-        "city": "Lyon",
-        "zip": "69009",
-        "country": "FR",
-        "street2": "Bâtiment A - 3e étage"
+        "street": "15 rue les Ulysses",
+        "city": "LYON",
+        "zip": "69006",
+        "country": "FR"
       },
       "iban": "FR7630004170100001234567805",
       "bic": "BNPAFRPPXXX",
       "legalForm": "SAS au capital de 250 000 euros - RCS Lyon 235 116 159",
       "contact": {
-        "name": "Service Facturation Clients",
+        "name": "Service Clients (Customer Service)",
         "phone": "+33 1 02 08 57 45",
-        "email": "facturation@acme-fr.fr"
-      }
-    },
-    {
-      "id": "acme_ulysses",
-      "vendorNumber": "BTB00003",
-      "name": "ACME",
-      "legalName": "ACME SAS",
-      "siren": "235116159",
-      "nic": "00001",
-      "vatNumber": "FR88235116159",
-      "address": {
-        "street": "15 rue les Ulysses",
-        "city": "Lyon",
-        "zip": "69009",
-        "country": "FR"
-      },
-      "iban": "FR7630004170100001234567805",
-      "bic": "BNPAFRPPXXX",
-      "legalForm": "SAS au capital de 100 000 euros - RCS Lyon 235 116 159",
-      "contact": {
-        "name": "Service Commercial",
-        "phone": "+33 1 02 08 57 45",
-        "email": "contact@acme.fr"
+        "email": "service-client@acme-france.fr"
       }
     },
     {
@@ -450,6 +426,37 @@
   ],
   "buyers": [
     {
+      "id": "kreamob",
+      "name": "KREAMOB",
+      "legalName": "KREAMOB SA",
+      "siren": "333191120",
+      "nic": "28663",
+      "vatNumber": "FR12333191120",
+      "address": {
+        "street": "10 avenue du Marechal Foch",
+        "city": "VILLEFRANCHE-SUR-MER",
+        "zip": "06230",
+        "country": "FR"
+      },
+      "buyerReference": "REF-KREAMOB-2026",
+      "deliveryName": "KREAMOB – Entrepôt Logistique Sud",
+      "deliveryAddress": {
+        "street": "ZI des Trois Moulins, 45 chemin des Cistes",
+        "city": "ANTIBES",
+        "zip": "06600",
+        "country": "FR",
+        "street2": "Quai 7 - Reception marchandises"
+      },
+      "contact": {
+        "name": "Service Comptabilite Fournisseurs",
+        "phone": "+33 4 93 76 55 41",
+        "email": "compta.fournisseurs@kreamob.fr"
+      },
+      "accountingCost": "CC-4521-ACHATS-GEN",
+      "contractRef": "CONTRAT-2025-KRE-0147",
+      "deliveryLocationId": "33319112028663"
+    },
+    {
       "id": "esker_fr",
       "vendorNumber": "ESK0054",
       "name": "ESKER",
@@ -812,18 +819,18 @@
       "id": "constructeur_general",
       "role": "buyer",
       "vendorNumber": "BTB00002",
-      "name": "ACME FR (ENTREPRISE GÉNÉRALE BTP)",
-      "legalName": "ACME FR SAS",
-      "siren": "235116159",
-      "nic": "00002",
-      "vatNumber": "FR88235116159",
+      "name": "KREAMOB SA (ENTREPRISE GÉNÉRALE BTP)",
+      "legalName": "KREAMOB SA",
+      "siren": "333191120",
+      "nic": "28663",
+      "vatNumber": "FR12333191120",
       "address": {
-        "street": "12 Rue de la République",
-        "city": "Lyon",
-        "zip": "69009",
+        "street": "10 avenue du Marechal Foch",
+        "city": "VILLEFRANCHE-SUR-MER",
+        "zip": "06230",
         "country": "FR"
       },
-      "buyerReference": "REF-ACME-BTP-2026",
+      "buyerReference": "REF-KREAMOB-BTP-2026",
       "deliveryName": "ACME FR – Chantier BTP Lyon",
       "deliveryAddress": {
         "street": "12 Rue de la République",
@@ -838,7 +845,7 @@
       },
       "accountingCost": "CC-7700-CHANTIERS",
       "contractRef": "MARCHE-2026-ACM-0088",
-      "deliveryLocationId": "23511615900002"
+      "deliveryLocationId": "33319112028663"
     },
     {
       "id": "micro_conseil",
